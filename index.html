@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TN12 Covenant Vault Demo</title>
+  <meta name="description" content="Local Kaspa TN12 covenant vault policy designer and simulator.">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Kaspa testnet prototype</p>
+      <h1>TN12 covenant vault demo</h1>
+    </div>
+    <nav aria-label="Project links">
+      <a href="#designer">Designer</a>
+      <a href="#setup">TN12 setup</a>
+      <a href="#sources">Sources</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="status">Local simulation. No funds move.</p>
+        <h2>Design safe money rules before touching a wallet.</h2>
+        <p>A vault is a simple covenant-shaped app: funds can only leave through known paths, such as a delay, a daily limit, or recovery. This page turns that into a policy artifact builders can critique before real TN12 transaction work starts.</p>
+      </div>
+      <aside class="facts">
+        <span>Network lane</span>
+        <strong>TN12 / testnet</strong>
+        <p>Toccata and covenant work are not treated here as mainnet-live app rails.</p>
+      </aside>
+    </section>
+
+    <section id="designer" class="workspace">
+      <form id="policy-form" class="panel">
+        <div class="section-title">
+          <p class="eyebrow">Vault policy</p>
+          <h2>Inputs</h2>
+        </div>
+
+        <label>
+          Owner address
+          <input name="ownerAddress" spellcheck="false">
+        </label>
+
+        <label>
+          Recovery address
+          <input name="recoveryAddress" spellcheck="false">
+        </label>
+
+        <div class="two-col">
+          <label>
+            Withdrawal delay, hours
+            <input name="withdrawalDelayHours" type="number" min="1" max="720" step="1">
+          </label>
+
+          <label>
+            Daily limit, TKAS
+            <input name="dailyLimitTkas" type="number" min="0.01" step="0.01">
+          </label>
+        </div>
+
+        <div class="two-col">
+          <label>
+            Guardian threshold
+            <input name="guardianThreshold" type="number" min="1" max="15" step="1">
+          </label>
+
+          <label>
+            Guardian count
+            <input name="guardianCount" type="number" min="1" max="15" step="1">
+          </label>
+        </div>
+
+        <label>
+          Memo
+          <textarea name="memo" rows="3"></textarea>
+        </label>
+
+        <div class="actions">
+          <button type="button" id="reset-policy">Reset</button>
+          <button type="button" id="copy-artifact">Copy JSON</button>
+        </div>
+      </form>
+
+      <section class="panel output" aria-live="polite">
+        <div class="section-title">
+          <p class="eyebrow">Generated artifact</p>
+          <h2>Policy ID <code id="policy-id">...</code></h2>
+        </div>
+
+        <ul id="issues" class="issues"></ul>
+        <pre id="artifact"></pre>
+      </section>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <p class="eyebrow">How the vault should feel</p>
+        <h2>Lifecycle</h2>
+        <ol id="lifecycle" class="timeline"></ol>
+      </article>
+
+      <article id="setup" class="panel">
+        <p class="eyebrow">TN12 setup</p>
+        <h2>Get test tokens</h2>
+        <p>Use a browser for the faucet. From this shell, the faucet host returned a Cloudflare challenge, so token requests cannot be automated here.</p>
+        <pre>npm run address</pre>
+        <p>The command prints a `kaspatest:` address and stores testnet-only wallet material in `.local/tn12-wallet.json`. Paste that address into the faucet.</p>
+        <div class="link-list">
+          <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
+          <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">TN12 explorer</a>
+          <a href="https://github.com/kaspanet/rusty-kaspa/tree/tn12" target="_blank" rel="noreferrer">rusty-kaspa TN12</a>
+          <a href="https://github.com/kaspanet/silverscript" target="_blank" rel="noreferrer">Silverscript</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="sources" class="panel sources">
+      <p class="eyebrow">Source discipline</p>
+      <h2>What this demo is allowed to claim</h2>
+      <div class="claim-grid">
+        <article><strong>Can claim</strong><p>Local vault policy design, TN12/testnet intent, covenant-shaped UX, and exportable simulation artifacts.</p></article>
+        <article><strong>Cannot claim</strong><p>Mainnet covenant activation, live native DeFi, full vProgs, wallet safety, or real transaction enforcement.</p></article>
+        <article><strong>Next proof</strong><p>A signed TN12 transaction lifecycle, source-linked Silverscript template, and explorer-visible testnet outputs.</p></article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
