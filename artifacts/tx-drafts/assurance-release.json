@@ -1,0 +1,59 @@
+{
+  "schema": "tn12-transaction-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "draft-not-serialized-not-signed-not-broadcast",
+  "id": "assurance-release",
+  "lane": "assurance",
+  "purpose": "Release an individual pledge to the recipient when campaign rules say the target is met.",
+  "contract": "AssurancePledge",
+  "entrypoint": "release",
+  "source": {
+    "from": "funded AssurancePledge output",
+    "fundingOutpoint": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "outputIndex": 0,
+      "amountTkas": 10000,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "status": "exact-outpoint-entered"
+    }
+  },
+  "destination": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "expectedOutput": {
+      "type": "recipient-output",
+      "value": {
+        "sompi": "24999995000",
+        "tkas": "249.99995"
+      },
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    "expectedOutputs": null
+  },
+  "amount": {
+    "sompi": "24999995000",
+    "tkas": "249.99995"
+  },
+  "requiredInputs": [
+    "funded pledge outpoint",
+    "campaign target aggregation proof or app-side release authorization",
+    "exact recipient P2PK output",
+    "miner fee matching constructor value"
+  ],
+  "timing": {
+    "deadline": 1778229708,
+    "contractCurrentlyEnforcesReleaseBeforeDeadline": false
+  },
+  "caveats": [
+    "Current AssurancePledge.release does not itself prove total campaign funding or deadline success.",
+    "Use this only after the planner/app has decided the target condition is met."
+  ],
+  "nextProof": "Explorer should show each pledge output released to the recipient.",
+  "notYetImplemented": [
+    "SDK transaction object construction",
+    "contract output serialization",
+    "signature production",
+    "broadcast",
+    "explorer confirmation"
+  ]
+}

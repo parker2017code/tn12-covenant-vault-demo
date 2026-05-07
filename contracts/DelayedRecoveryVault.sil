@@ -1,0 +1,29 @@
+pragma silverscript ^0.1.0;
+
+contract DelayedRecoveryVault(
+    pubkey owner,
+    pubkey recovery,
+    int unlockTime,
+    int minerFee
+) {
+    entrypoint function withdraw(sig ownerSig) {
+        require(checkSig(ownerSig, owner));
+        require(tx.time >= unlockTime);
+
+        int amount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == amount);
+
+        byte[34] ownerLock = new ScriptPubKeyP2PK(owner);
+        require(tx.outputs[0].scriptPubKey == byte[](ownerLock));
+    }
+
+    entrypoint function recover(sig recoverySig) {
+        require(checkSig(recoverySig, recovery));
+
+        int amount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == amount);
+
+        byte[34] recoveryLock = new ScriptPubKeyP2PK(recovery);
+        require(tx.outputs[0].scriptPubKey == byte[](recoveryLock));
+    }
+}

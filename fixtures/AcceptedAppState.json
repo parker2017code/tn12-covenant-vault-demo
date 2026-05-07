@@ -1,0 +1,172 @@
+{
+  "schema": "tn12-accepted-app-state/v1",
+  "network": "kaspa-testnet-12",
+  "fetchedAt": "2026-05-07T09:20:06.925Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "summary": {
+    "total": 4,
+    "accepted": 4,
+    "matched": 4,
+    "mismatches": 0,
+    "receipts": 0,
+    "lanes": [
+      "assurance",
+      "vault"
+    ]
+  },
+  "records": [
+    {
+      "id": "vault:recover:b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "lane": "vault",
+      "label": "Vault recovery",
+      "entrypoint": "recover",
+      "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 5203140,
+      "acceptingBlockTime": 1778141640305,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "receipt": null,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391"
+    },
+    {
+      "id": "vault:withdraw:9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+      "lane": "vault",
+      "label": "Vault delayed withdrawal",
+      "entrypoint": "withdraw",
+      "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 5206191,
+      "acceptingBlockTime": 1778141939817,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "receipt": null,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710"
+    },
+    {
+      "id": "assurance:release:80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "lane": "assurance",
+      "label": "Assurance release",
+      "entrypoint": "release",
+      "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 5203224,
+      "acceptingBlockTime": 1778141647772,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "receipt": null,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f"
+    },
+    {
+      "id": "assurance:refund:faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+      "lane": "assurance",
+      "label": "Assurance refund",
+      "entrypoint": "refund",
+      "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 5206200,
+      "acceptingBlockTime": 1778141940609,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "receipt": null,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61"
+    }
+  ],
+  "appState": {
+    "vault": {
+      "status": "proofs-accepted",
+      "proofs": [
+        {
+          "label": "Vault recovery",
+          "entrypoint": "recover",
+          "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+          "status": "accepted-output-matched",
+          "amountSompi": "2499995000",
+          "acceptingBlockBlueScore": 5203140
+        },
+        {
+          "label": "Vault delayed withdrawal",
+          "entrypoint": "withdraw",
+          "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+          "status": "accepted-output-matched",
+          "amountSompi": "2499995000",
+          "acceptingBlockBlueScore": 5206191
+        }
+      ]
+    },
+    "assurance": {
+      "status": "proofs-accepted",
+      "proofs": [
+        {
+          "label": "Assurance release",
+          "entrypoint": "release",
+          "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+          "status": "accepted-output-matched",
+          "amountSompi": "24999995000",
+          "acceptingBlockBlueScore": 5203224
+        },
+        {
+          "label": "Assurance refund",
+          "entrypoint": "refund",
+          "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+          "status": "accepted-output-matched",
+          "amountSompi": "24999995000",
+          "acceptingBlockBlueScore": 5206200
+        }
+      ]
+    },
+    "receipts": {
+      "status": "payload-receipt-indexer-next",
+      "decoded": [],
+      "next": "Attach payload receipts to new transactions, then decode accepted transaction payloads into this state snapshot."
+    }
+  }
+}

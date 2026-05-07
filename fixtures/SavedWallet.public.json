@@ -1,0 +1,9 @@
+{
+  "schema": "tn12-saved-wallet-public/v1",
+  "network": "kaspa-testnet-12",
+  "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+  "publicKey": "03d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5",
+  "xOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5",
+  "userReportedBalanceTkas": 10000,
+  "warning": "Public metadata only. Private key remains in .local/tn12-wallet.json."
+}

@@ -1,0 +1,56 @@
+# Transaction API Notes
+
+Local `kaspa-wasm` exports useful transaction primitives:
+
+- `PrivateKey`
+- `Keypair`
+- `Address`
+- `PaymentOutput`
+- `Transaction`
+- `TransactionInput`
+- `TransactionOutpoint`
+- `TransactionOutput`
+- `ScriptPublicKey`
+- `UtxoEntry`
+- `createTransaction`
+- `signTransaction`
+
+The initial implementation path has moved beyond local construction: the repo now constructs, signs, submits, and verifies selected TN12 proof transactions. New submit attempts should still be explicit, reviewed, and gated behind `--submit`.
+
+## Resolved Notes
+
+- Exact JavaScript object shape expected by `createTransaction` for a manually supplied P2PK UTXO entry is proven by `npm run tx:p2pk` and split transactions.
+- Raw compiled Silverscript bytes are non-standard as outputs; use standard P2SH wrapper `OpBlake2b OpData32 blake2b32(redeemScript) OpEqual`.
+- P2SH spends use the Silverscript entrypoint sigscript plus a pushed redeem script.
+- `signScriptHash` signs the sighash returned by `SignableTransaction.getScriptHashes()`.
+- The public TN12 REST endpoint accepts submit payloads at `https://api-tn12.kaspa.org/transactions`.
+- Contract spend fee must be embedded high enough in the constructor. A 1000-sompi vault recovery failed because TN12 required 1784 sompi; 5000 sompi worked.
+- DAA-score lock times worked for delayed withdrawal and refund testing. Seconds-based lock times hit finalization ambiguity through the public submit route.
+- Official builder docs now include accepted-transaction ingestion patterns. This repo uses a lightweight REST verification command first: `npm run tx:verify`.
+- For a production-grade accepted transaction indexer, the official docs point to checkpointed `getVirtualChainFromBlockV2` with high data verbosity. Use that later through a node/RPC backend; do not reintroduce local node work in this repo unless the user asks.
+- Official transaction-payload docs use `new TextEncoder().encode(...)` payload bytes. Local `kaspa-wasm createTransaction(..., payload, ...)` preserves those bytes when the payload argument is a `Uint8Array`; a plain string produced an empty payload in local testing.
+- The TN12 REST OpenAPI `SubmitTxModel` checked on 2026-05-07 does not list a `payload` field, while fetched `TxModel` does expose `payload`. For that reason, `npm run tx:payload` builds a signed draft and submit payload candidate, but artifacts are guarded from accidental `--submit` until REST payload submission behavior is deliberately verified.
+
+## Working Public Wallet Metadata
+
+Use:
+
+```sh
+npm run wallet:public
+```
+
+It reads `.local/tn12-wallet.json`, derives the public key, prints public metadata, and does not print the private key.
+
+## Safe Spike Order
+
+1. Build a local P2PK transaction draft to the same saved address from a fetched outpoint. Done in `npm run tx:p2pk`.
+2. Add signing only after the transaction object can be created without broadcast. Done in `npm run tx:p2pk`.
+3. Add contract-output serialization after a normal P2PK draft works. Done in `npm run tx:contracts`.
+4. Add vault funding output. Done and accepted on TN12.
+5. Add recovery spend. Done and accepted on TN12.
+6. Add delayed withdrawal spend. Done and accepted on TN12 with DAA-score lock.
+7. Add assurance pledge output. Done and accepted on TN12.
+8. Add assurance refund spend. Done and accepted on TN12 with DAA-score deadline.
+9. Add assurance release spend. Done and accepted on TN12 for the individual pledge primitive.
+10. Add accepted transaction verification. Done in `npm run tx:verify`.
+11. Add signed payload receipt draft. Done in `npm run tx:payload`; broadcast remains gated pending REST payload submit verification.

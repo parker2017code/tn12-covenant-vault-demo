@@ -40,6 +40,8 @@ The hard part is the success proof. We should not fake it. Start with a local si
 - covenant ID / state transition proof: a campaign state output tracks total pledged amount;
 - later ZK proof: a proof verifies enough pledges without exposing or manually listing everything.
 
+The current dry-run transaction planner uses the first shape as an explicit boundary. It can plan individual pledge, release, and refund spends, but target aggregation still lives in the app/planner layer. That is intentional until we have one plain TN12 covenant lifecycle working end-to-end.
+
 ### 3. Silverscript Template
 
 Silverscript is the right next tool. It is experimental and TN12-only, but it is meant to make covenant scripts readable and LLM-friendly.
@@ -73,8 +75,9 @@ TN12 integration:
 
 - address generation,
 - faucet funding,
-- transaction plan,
-- local or public TN12 node RPC,
+- dry-run transaction plan,
+- manual explorer outpoint capture first,
+- later public RPC, wallet connector, or lightweight transaction service,
 - explorer link for resulting outputs.
 
 ### 5. What Not To Claim
@@ -87,7 +90,11 @@ TN12 integration:
 ## Suggested Milestone Order
 
 1. Add an assurance campaign simulator beside the vault simulator.
-2. Add a draft `AssurancePledge.sil` based on the timeout and escrow examples.
-3. Compile it with Silverscript locally.
-4. Add test vectors for refund and release paths.
-5. Only then wire TN12 transaction creation and broadcast.
+2. Compile `contracts/AssurancePledge.sil` with Silverscript locally.
+3. Use `npm run plan` to inspect the pledge, release, and refund transaction intents.
+4. Add manual outpoint fixtures from the funded TN12 address.
+5. Add test vectors for refund and release paths.
+6. Build one unsigned pledge transaction draft.
+7. Add signing with the saved testnet key or an explicit wallet connector.
+8. Broadcast one pledge, then test refund before adding target aggregation.
+9. Add target aggregation, either by consuming enough pledge outputs in one release transaction or by introducing explicit campaign state.

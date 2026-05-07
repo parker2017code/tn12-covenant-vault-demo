@@ -1,0 +1,22 @@
+{
+  "schema": "kaspa-signal-payload/v1",
+  "status": "payload-size-ok",
+  "lane": "transaction-payload",
+  "payload": {
+    "kind": "order-receipt",
+    "subject": "merchant-order-1337",
+    "value": "paid",
+    "note": "Demo payload for accepted-transaction indexing"
+  },
+  "encoded": {
+    "bytes": 127,
+    "transientMass": 508,
+    "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d"
+  },
+  "limits": {
+    "standardTxMassLimit": 100000,
+    "transientByteMass": 4,
+    "remainingMassBeforeInputsOutputsAndSignatures": 99492
+  },
+  "boundary": "This models user transaction payload data, not arbitrary miner header data."
+}

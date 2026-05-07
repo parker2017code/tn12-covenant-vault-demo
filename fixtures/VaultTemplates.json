@@ -1,0 +1,62 @@
+{
+  "schema": "tn12-vault-template-gallery/v1",
+  "network": "kaspa-testnet-12",
+  "templates": [
+    {
+      "id": "recovery-vault",
+      "name": "Recovery vault",
+      "status": "proven-on-tn12",
+      "summary": "Owner can recover funds to a known recovery key if normal control is compromised.",
+      "settings": {
+        "withdrawalDelayHours": 24,
+        "dailyLimitTkas": 100,
+        "guardianThreshold": 1,
+        "guardianCount": 1,
+        "memo": "TN12 recovery vault"
+      },
+      "nextBuild": "Split owner and recovery keys in the UI instead of using one saved test key for both."
+    },
+    {
+      "id": "delayed-withdrawal",
+      "name": "Delayed withdrawal vault",
+      "status": "proven-on-tn12",
+      "summary": "Owner withdrawals must wait until the covenant lock condition is satisfied.",
+      "settings": {
+        "withdrawalDelayHours": 48,
+        "dailyLimitTkas": 250,
+        "guardianThreshold": 1,
+        "guardianCount": 1,
+        "memo": "TN12 delayed withdrawal vault"
+      },
+      "nextBuild": "Add a visible request, waiting, release state machine around the spend draft."
+    },
+    {
+      "id": "spending-cap",
+      "name": "Spending cap vault",
+      "status": "design-next",
+      "summary": "Normal spending is capped while recovery can still sweep the full balance.",
+      "settings": {
+        "withdrawalDelayHours": 24,
+        "dailyLimitTkas": 50,
+        "guardianThreshold": 2,
+        "guardianCount": 3,
+        "memo": "TN12 capped spending vault"
+      },
+      "nextBuild": "Move the cap from planner intent into enforceable Silverscript output rules."
+    },
+    {
+      "id": "merchant-escrow",
+      "name": "Merchant escrow",
+      "status": "new-primitive",
+      "summary": "Buyer funds a conditional output; seller can release, buyer can refund after timeout.",
+      "settings": {
+        "withdrawalDelayHours": 72,
+        "dailyLimitTkas": 1000,
+        "guardianThreshold": 2,
+        "guardianCount": 2,
+        "memo": "TN12 escrow primitive"
+      },
+      "nextBuild": "Create a separate Escrow.sil contract with buyer, seller, release, refund, and cancel paths."
+    }
+  ]
+}

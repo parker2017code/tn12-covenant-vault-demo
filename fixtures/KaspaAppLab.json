@@ -1,0 +1,66 @@
+{
+  "schema": "kaspa-app-lab/v1",
+  "basis": [
+    "kaspa-explained application-layer.html",
+    "https://docs.kaspa.org/programmability",
+    "https://docs.kaspa.org/integrate/transaction-payload"
+  ],
+  "lanes": [
+    {
+      "id": "payments",
+      "name": "Payment UX",
+      "status": "live-foundation",
+      "buildNow": "Payment requests, invoices, confirmation-risk states, and merchant receipts.",
+      "baseWork": "Transaction payload receipts and accepted-transaction tracking."
+    },
+    {
+      "id": "vaults",
+      "name": "Vaults and wallet policy",
+      "status": "tn12-proven",
+      "buildNow": "Template gallery, proof dashboard, outpoint importer, request/release state machine.",
+      "baseWork": "Recovery, delayed withdrawal, capped spending, and separate owner/recovery keys."
+    },
+    {
+      "id": "escrow",
+      "name": "Escrow",
+      "status": "next-covenant-primitive",
+      "buildNow": "Buyer funds, seller release, timeout refund, mutual cancel.",
+      "baseWork": "Escrow.sil plus funding/release/refund proof transactions."
+    },
+    {
+      "id": "assurance",
+      "name": "Assurance campaigns",
+      "status": "individual-pledge-proven",
+      "buildNow": "Campaign page showing pledge outputs, target progress, refund/release state.",
+      "baseWork": "Indexer-backed campaign state before pooled aggregation."
+    },
+    {
+      "id": "assets",
+      "name": "Simple asset rules",
+      "status": "design-next",
+      "buildNow": "Issuer-controlled credits, access passes, event tickets, and redeemable claims.",
+      "baseWork": "Constrained mint, transfer, burn, issuer recovery, and metadata references."
+    },
+    {
+      "id": "miner-signals",
+      "name": "Miner signal markets",
+      "status": "research-lane",
+      "buildNow": "Model incentives and data channels before touching mining software.",
+      "baseWork": "Compare transaction payloads, coinbase payloads, pool policy, header limits, and later RTD-style designs."
+    },
+    {
+      "id": "accepted-indexer",
+      "name": "Accepted transaction indexer",
+      "status": "infrastructure-needed",
+      "buildNow": "Checkpoint accepted transactions and derive app state from outputs.",
+      "baseWork": "Pull-based proof tracker, reorg buffer, JSON state snapshots."
+    },
+    {
+      "id": "markets",
+      "name": "Proof-backed markets",
+      "status": "later",
+      "buildNow": "Data model, oracle assumptions, and dispute rules.",
+      "baseWork": "Do not build market claims until proof/oracle and composition assumptions are explicit."
+    }
+  ]
+}

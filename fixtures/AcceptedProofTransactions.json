@@ -1,0 +1,39 @@
+{
+  "schema": "tn12-accepted-proof-transactions/v1",
+  "network": "kaspa-testnet-12",
+  "source": "https://api-tn12.kaspa.org/transactions/{transaction-id}",
+  "transactions": [
+    {
+      "label": "Vault recovery",
+      "lane": "vault",
+      "entrypoint": "recover",
+      "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Vault delayed withdrawal",
+      "lane": "vault",
+      "entrypoint": "withdraw",
+      "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Assurance release",
+      "lane": "assurance",
+      "entrypoint": "release",
+      "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "amountSompi": "24999995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Assurance refund",
+      "lane": "assurance",
+      "entrypoint": "refund",
+      "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+      "amountSompi": "24999995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    }
+  ]
+}

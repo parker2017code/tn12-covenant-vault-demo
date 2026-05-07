@@ -1,0 +1,52 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "assurance-release",
+  "contract": "AssurancePledge",
+  "entrypoint": "release",
+  "warning": "This spends the assurance pledge P2SH output if submitted and accepted.",
+  "source": {
+    "txid": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+    "outputIndex": 0,
+    "amountTkas": 250,
+    "address": "kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj"
+  },
+  "destination": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "scriptType": "p2pk",
+    "amountSompi": "24999995000",
+    "amountTkas": "249.99995"
+  },
+  "contractFeeSompi": "5000",
+  "transactionId": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
+  "signatureScriptHex": "004caf6b6c76009c637500c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e8769516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac690320df50b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e87697551677500696868",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+            "index": 0
+          },
+          "signatureScript": "004caf6b6c76009c637500c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e8769516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac690320df50b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e87697551677500696868",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 24999995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "schema": "tn12-signed-split-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "warning": "This is the first sensible broadcast candidate. It only splits testnet funds back to the same saved address.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+    "outputIndex": 2,
+    "amountTkas": 1999.9998
+  },
+  "outputs": [
+    {
+      "label": "vault bucket",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": 100,
+      "amountSompi": "10000000000"
+    },
+    {
+      "label": "assurance bucket",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": 500,
+      "amountSompi": "50000000000"
+    },
+    {
+      "label": "change",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": "1399.99975",
+      "amountSompi": "139999975000"
+    }
+  ],
+  "minerFeeSompi": "5000",
+  "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+            "index": 2
+          },
+          "signatureScript": "41514828d96c1dbee02c36293c844f220303f2ad414bcd0edbd603d18a3dc0fe669efd751118d2f52a8a0726c89417d1f9aa15f39dc9319191d97184a6fb24592101",
+          "sequence": 0,
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 10000000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 50000000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 139999975000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "entries": [
+      {
+        "utxo": {
+          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "entry": {
+            "amount": 199999980000,
+            "blockDaaScore": 5306368,
+            "isCoinbase": false,
+            "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "outpoint": {
+            "inner": {
+              "index": 2,
+              "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571"
+            }
+          }
+        }
+      }
+    ],
+    "tx": {
+      "inner": {
+        "gas": 0,
+        "id": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+        "inputs": [
+          {
+            "inner": {
+              "previousOutpoint": {
+                "inner": {
+                  "index": 2,
+                  "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571"
+                }
+              },
+              "sequence": 0,
+              "sigOpCount": 1,
+              "signatureScript": [
+                65,
+                81,
+                72,
+                40,
+                217,
+                108,
+                29,
+                190,
+                224,
+                44,
+                54,
+                41,
+                60,
+                132,
+                79,
+                34,
+                3,
+                3,
+                242,
+                173,
+                65,
+                75,
+                205,
+                14,
+                219,
+                214,
+                3,
+                209,
+                138,
+                61,
+                192,
+                254,
+                102,
+                158,
+                253,
+                117,
+                17,
+                24,
+                210,
+                245,
+                42,
+                138,
+                7,
+                38,
+                200,
+                148,
+                23,
+                209,
+                249,
+                170,
+                21,
+                243,
+                157,
+                201,
+                49,
+                145,
+                145,
+                217,
+                113,
+                132,
+                166,
+                251,
+                36,
+                89,
+                33,
+                1
+              ]
+            }
+          }
+        ],
+        "lockTime": 0,
+        "outputs": [
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 10000000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 50000000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 139999975000
+            }
+          }
+        ],
+        "payload": [],
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "version": 0
+      }
+    }
+  }
+}

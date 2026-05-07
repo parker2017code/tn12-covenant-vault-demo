@@ -1,4 +1,11 @@
 import {
+  DEFAULT_ASSURANCE,
+  buildAssuranceArtifact,
+  buildAssuranceLifecycle,
+  normalizeAssurance,
+  validateAssurance
+} from "./src/assuranceContract.mjs";
+import {
   DEFAULT_POLICY,
   buildLifecycle,
   buildPolicyArtifact,
@@ -6,27 +13,106 @@ import {
   policyId,
   validatePolicy
 } from "./src/vaultPolicy.mjs";
+import {
+  DEFAULT_MANUAL_OUTPOINT,
+  buildManualOutpointArtifact,
+  normalizeManualOutpoint
+} from "./src/manualOutpoint.mjs";
+import {
+  DEFAULT_SIGNAL_PAYLOAD,
+  buildSignalPayloadArtifact
+} from "./src/signalPayload.mjs";
 
 const form = document.querySelector("#policy-form");
+const assuranceForm = document.querySelector("#assurance-form");
+const signalForm = document.querySelector("#signal-form");
 const policyIdNode = document.querySelector("#policy-id");
 const issuesNode = document.querySelector("#issues");
 const artifactNode = document.querySelector("#artifact");
 const lifecycleNode = document.querySelector("#lifecycle");
+const assuranceIssuesNode = document.querySelector("#assurance-issues");
+const assuranceArtifactNode = document.querySelector("#assurance-artifact");
+const assuranceLifecycleNode = document.querySelector("#assurance-lifecycle");
+const assuranceProgressNode = document.querySelector("#assurance-progress");
+const assuranceProgressTextNode = document.querySelector("#assurance-progress-text");
+const proofListNode = document.querySelector("#proof-list");
+const proofStatusNode = document.querySelector("#proof-status");
+const indexerSummaryNode = document.querySelector("#indexer-summary");
+const indexerRecordsNode = document.querySelector("#indexer-records");
+const receiptEventsNode = document.querySelector("#receipt-events");
+const buildQueueNode = document.querySelector("#build-queue");
+const vaultTemplatesNode = document.querySelector("#vault-templates");
+const appLanesNode = document.querySelector("#app-lanes");
+const signalChannelsNode = document.querySelector("#signal-channels");
+const signalArtifactNode = document.querySelector("#signal-artifact");
+const payloadDraftStatusNode = document.querySelector("#payload-draft-status");
+const manualFields = {
+  address: document.querySelector("#manual-address"),
+  txid: document.querySelector("#manual-txid"),
+  outputIndex: document.querySelector("#manual-output-index"),
+  amountTkas: document.querySelector("#manual-amount"),
+  explorerUrl: document.querySelector("#manual-explorer-url")
+};
+const manualIssuesNode = document.querySelector("#manual-issues");
+const manualArtifactNode = document.querySelector("#manual-artifact");
+const manualOutputPickerNode = document.querySelector("#manual-output-picker");
 const copyButton = document.querySelector("#copy-artifact");
+const copyAssuranceButton = document.querySelector("#copy-assurance");
+const copyManualButton = document.querySelector("#copy-manual-artifact");
+const copySignalButton = document.querySelector("#copy-signal");
+const fetchManualTxButton = document.querySelector("#fetch-manual-tx");
+const refreshProofsButton = document.querySelector("#refresh-proofs");
 const resetButton = document.querySelector("#reset-policy");
+const resetAssuranceButton = document.querySelector("#reset-assurance");
+const resetSignalButton = document.querySelector("#reset-signal");
 
 for (const [key, value] of Object.entries(DEFAULT_POLICY)) {
   const input = form.elements[key];
   if (input) input.value = value;
 }
 
-form.addEventListener("input", render);
+for (const [key, value] of Object.entries(DEFAULT_ASSURANCE)) {
+  const input = assuranceForm.elements[key];
+  if (input) input.value = value;
+}
+
+for (const [key, value] of Object.entries(DEFAULT_SIGNAL_PAYLOAD)) {
+  const input = signalForm.elements[key];
+  if (input) input.value = value;
+}
+
+manualFields.address.value = DEFAULT_MANUAL_OUTPOINT.address;
+manualFields.txid.value = DEFAULT_MANUAL_OUTPOINT.txid;
+manualFields.outputIndex.value = DEFAULT_MANUAL_OUTPOINT.outputIndex;
+manualFields.amountTkas.value = DEFAULT_MANUAL_OUTPOINT.amountTkas;
+manualFields.explorerUrl.value = DEFAULT_MANUAL_OUTPOINT.explorerUrl;
+
+form.addEventListener("input", renderVault);
+assuranceForm.addEventListener("input", renderAssurance);
+signalForm.addEventListener("input", renderSignalPayload);
+for (const input of Object.values(manualFields)) {
+  input.addEventListener("input", renderManualOutpoint);
+}
 resetButton.addEventListener("click", () => {
   for (const [key, value] of Object.entries(DEFAULT_POLICY)) {
     const input = form.elements[key];
     if (input) input.value = value;
   }
-  render();
+  renderVault();
+});
+resetAssuranceButton.addEventListener("click", () => {
+  for (const [key, value] of Object.entries(DEFAULT_ASSURANCE)) {
+    const input = assuranceForm.elements[key];
+    if (input) input.value = value;
+  }
+  renderAssurance();
+});
+resetSignalButton.addEventListener("click", () => {
+  for (const [key, value] of Object.entries(DEFAULT_SIGNAL_PAYLOAD)) {
+    const input = signalForm.elements[key];
+    if (input) input.value = value;
+  }
+  renderSignalPayload();
 });
 
 copyButton.addEventListener("click", async () => {
@@ -37,9 +123,46 @@ copyButton.addEventListener("click", async () => {
   }, 1200);
 });
 
-render();
+copyAssuranceButton.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(assuranceArtifactNode.textContent);
+  copyAssuranceButton.textContent = "Copied";
+  setTimeout(() => {
+    copyAssuranceButton.textContent = "Copy JSON";
+  }, 1200);
+});
 
-async function render() {
+copyManualButton.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(manualArtifactNode.textContent);
+  copyManualButton.textContent = "Copied";
+  setTimeout(() => {
+    copyManualButton.textContent = "Copy JSON";
+  }, 1200);
+});
+
+copySignalButton.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(signalArtifactNode.textContent);
+  copySignalButton.textContent = "Copied";
+  setTimeout(() => {
+    copySignalButton.textContent = "Copy JSON";
+  }, 1200);
+});
+
+fetchManualTxButton.addEventListener("click", fetchManualTransactionOutputs);
+refreshProofsButton.addEventListener("click", () => verifyProofTransactions({ forceRemote: true }));
+
+renderVault();
+renderAssurance();
+renderManualOutpoint();
+renderProofTransactions();
+renderAcceptedAppState();
+renderBuildQueue();
+renderVaultTemplates();
+renderAppLab();
+renderMinerSignalResearch();
+renderSignalPayload();
+renderPayloadDraftStatus();
+
+async function renderVault() {
   const data = Object.fromEntries(new FormData(form).entries());
   const policy = normalizePolicy(data);
   const id = await policyId(policy);
@@ -53,7 +176,7 @@ async function render() {
 
   const issueItems = issues.length
     ? issues
-    : ["Policy shape is valid for local simulation. Real TN12 signing and broadcast are not implemented yet."];
+    : ["Policy shape is valid. Repo scripts have TN12 proof spends; this browser form still only designs artifacts."];
 
   for (const issue of issueItems) {
     const item = document.createElement("li");
@@ -66,6 +189,384 @@ async function render() {
     item.innerHTML = `<strong>${escapeHtml(step.name)}</strong><span>${escapeHtml(step.actor)}</span><p>${escapeHtml(step.detail)}</p>`;
     lifecycleNode.append(item);
   }
+}
+
+function renderAssurance() {
+  const data = Object.fromEntries(new FormData(assuranceForm).entries());
+  const contract = normalizeAssurance(data);
+  const issues = validateAssurance(contract);
+  const artifact = buildAssuranceArtifact(contract);
+  const progressPercent = Math.min(Math.round(artifact.state.progress * 100), 100);
+
+  assuranceProgressNode.value = progressPercent;
+  assuranceProgressTextNode.textContent = `${progressPercent}% funded; ${artifact.state.remainingTkas} TKAS remaining`;
+  assuranceArtifactNode.textContent = JSON.stringify(artifact, null, 2);
+  assuranceIssuesNode.innerHTML = "";
+  assuranceLifecycleNode.innerHTML = "";
+
+  const issueItems = issues.length
+    ? issues
+    : ["Assurance shape is valid. Repo scripts have TN12 pledge release/refund proofs; campaign aggregation is still planner-side."];
+
+  for (const issue of issueItems) {
+    const item = document.createElement("li");
+    item.textContent = issue;
+    assuranceIssuesNode.append(item);
+  }
+
+  for (const step of buildAssuranceLifecycle(contract)) {
+    const item = document.createElement("li");
+    item.innerHTML = `<strong>${escapeHtml(step.name)}</strong><span>${escapeHtml(step.actor)}</span><p>${escapeHtml(step.detail)}</p>`;
+    assuranceLifecycleNode.append(item);
+  }
+}
+
+function renderManualOutpoint() {
+  const artifact = buildManualOutpointArtifact(normalizeManualOutpoint({
+    address: manualFields.address.value,
+    txid: manualFields.txid.value,
+    outputIndex: manualFields.outputIndex.value,
+    amountTkas: manualFields.amountTkas.value,
+    explorerUrl: manualFields.explorerUrl.value
+  }));
+  const issues = artifact.issues.length ? artifact.issues : [artifact.nextNeeded];
+
+  manualArtifactNode.textContent = JSON.stringify(artifact, null, 2);
+  manualIssuesNode.innerHTML = "";
+  for (const issue of issues) {
+    const item = document.createElement("li");
+    item.textContent = issue;
+    manualIssuesNode.append(item);
+  }
+}
+
+async function renderProofTransactions() {
+  if (!proofListNode) return;
+
+  try {
+    const response = await fetch("fixtures/AcceptedProofTransactions.json", { cache: "no-store" });
+    const data = await response.json();
+    proofListNode.innerHTML = "";
+
+    for (const proof of data.transactions) {
+      const article = document.createElement("article");
+      article.className = "proof-card";
+      article.innerHTML = `
+        <span>${escapeHtml(proof.lane)} / ${escapeHtml(proof.entrypoint)}</span>
+        <strong>${escapeHtml(proof.label)}</strong>
+        <a href="https://tn12.kaspa.stream/txs/${escapeHtml(proof.txid)}" target="_blank" rel="noreferrer">${escapeHtml(shortTxid(proof.txid))}</a>
+        <p>${escapeHtml(sompiToTkas(BigInt(proof.amountSompi)))} TKAS to saved address</p>
+        <small data-proof-status="${escapeHtml(proof.txid)}">Fixture loaded</small>
+      `;
+      proofListNode.append(article);
+    }
+    verifyProofTransactions({ forceRemote: false });
+  } catch (error) {
+    proofListNode.textContent = `Proof fixture unavailable: ${error.message}`;
+  }
+}
+
+async function verifyProofTransactions({ forceRemote }) {
+  if (!proofListNode) return;
+
+  try {
+    const response = await fetch("fixtures/AcceptedProofTransactions.json", { cache: "no-store" });
+    const data = await response.json();
+    if (proofStatusNode) {
+      proofStatusNode.textContent = forceRemote ? "Checking TN12 API..." : "Checking accepted status...";
+    }
+
+    for (const proof of data.transactions) {
+      const status = proofListNode.querySelector(`[data-proof-status="${cssEscape(proof.txid)}"]`);
+      if (status) status.textContent = "Checking...";
+      const tx = await fetchTn12Transaction(proof.txid);
+      const output = tx.outputs?.find((item) => Number(item.index) === 0);
+      const amountMatches = output && String(output.amount) === proof.amountSompi;
+      const addressMatches = output?.script_public_key_address === proof.destination;
+
+      if (status) {
+        status.textContent = tx.is_accepted && amountMatches && addressMatches
+          ? `Accepted at blue score ${tx.accepting_block_blue_score}`
+          : "Mismatch; inspect API response";
+        status.className = tx.is_accepted && amountMatches && addressMatches ? "ok" : "bad";
+      }
+    }
+
+    if (proofStatusNode) {
+      proofStatusNode.textContent = "All proof cards refreshed from TN12 API.";
+    }
+  } catch (error) {
+    if (proofStatusNode) {
+      proofStatusNode.textContent = `Remote verification unavailable: ${error.message}`;
+    }
+  }
+}
+
+async function renderAcceptedAppState() {
+  if (!indexerSummaryNode || !indexerRecordsNode || !receiptEventsNode) return;
+
+  try {
+    const response = await fetch("fixtures/AcceptedAppState.json", { cache: "no-store" });
+    const state = await response.json();
+    const summary = state.summary;
+    indexerSummaryNode.innerHTML = `
+      <article><span>Total</span><strong>${escapeHtml(summary.total)}</strong></article>
+      <article><span>Accepted</span><strong>${escapeHtml(summary.accepted)}</strong></article>
+      <article><span>Matched</span><strong>${escapeHtml(summary.matched)}</strong></article>
+      <article><span>Receipts</span><strong>${escapeHtml(summary.receipts ?? 0)}</strong></article>
+      <article><span>Lanes</span><strong>${escapeHtml(summary.lanes.join(", "))}</strong></article>
+    `;
+    indexerRecordsNode.innerHTML = "";
+
+    for (const record of state.records) {
+      const article = document.createElement("article");
+      article.className = "indexer-card";
+      article.innerHTML = `
+        <span>${escapeHtml(record.lane)} / ${escapeHtml(record.entrypoint)}</span>
+        <strong>${escapeHtml(record.label)}</strong>
+        <a href="${escapeHtml(record.explorerUrl)}" target="_blank" rel="noreferrer">${escapeHtml(shortTxid(record.txid))}</a>
+        <p>${escapeHtml(record.status)} at blue score ${escapeHtml(record.acceptingBlockBlueScore ?? "unknown")}</p>
+        <small>${escapeHtml(sompiToTkas(BigInt(record.expected.amountSompi)))} TKAS to ${escapeHtml(shortAddress(record.expected.destination))}</small>
+      `;
+      indexerRecordsNode.append(article);
+    }
+
+    const receipts = state.appState?.receipts?.decoded || [];
+    receiptEventsNode.innerHTML = "";
+    if (!receipts.length) {
+      receiptEventsNode.innerHTML = `
+        <article>
+          <span>${escapeHtml(state.appState?.receipts?.status || "payload-receipt-indexer-next")}</span>
+          <strong>No accepted payload receipts yet</strong>
+          <p>${escapeHtml(state.appState?.receipts?.next || "Submit and verify one payload transaction before claiming receipt events.")}</p>
+        </article>
+      `;
+      return;
+    }
+
+    for (const event of receipts) {
+      const article = document.createElement("article");
+      article.className = "receipt-card";
+      article.innerHTML = `
+        <span>${escapeHtml(event.lane)}</span>
+        <strong>${escapeHtml(event.receipt.payload.kind)} / ${escapeHtml(event.receipt.payload.value)}</strong>
+        <p>${escapeHtml(event.receipt.payload.subject)}</p>
+        <small>${escapeHtml(shortTxid(event.txid))}</small>
+      `;
+      receiptEventsNode.append(article);
+    }
+  } catch (error) {
+    indexerSummaryNode.textContent = `Indexer snapshot unavailable: ${error.message}`;
+  }
+}
+
+async function renderPayloadDraftStatus() {
+  if (!payloadDraftStatusNode) return;
+
+  try {
+    const response = await fetch("artifacts/signed-drafts/payload-receipt-self-send.json", { cache: "no-store" });
+    const draft = await response.json();
+    payloadDraftStatusNode.innerHTML = `
+      <article>
+        <span>${escapeHtml(draft.status)}</span>
+        <strong>${escapeHtml(shortTxid(draft.transactionId))}</strong>
+        <p>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; submit remains gated until REST payload support is verified.</p>
+        <small>${escapeHtml(draft.receipt.payload.kind)} / ${escapeHtml(draft.receipt.payload.subject)}</small>
+      </article>
+    `;
+  } catch (error) {
+    payloadDraftStatusNode.innerHTML = `
+      <article>
+        <span>draft-needed</span>
+        <strong>Run npm run tx:payload</strong>
+        <p>${escapeHtml(error.message)}</p>
+      </article>
+    `;
+  }
+}
+
+async function renderBuildQueue() {
+  if (!buildQueueNode) return;
+
+  try {
+    const response = await fetch("fixtures/EcosystemBuildQueue.json", { cache: "no-store" });
+    const data = await response.json();
+    buildQueueNode.innerHTML = "";
+
+    for (const item of data.items) {
+      const article = document.createElement("article");
+      article.className = "queue-card";
+      article.innerHTML = `
+        <span>${escapeHtml(item.lane)}</span>
+        <strong>${escapeHtml(item.title)}</strong>
+        <p>${escapeHtml(item.why)}</p>
+        <small>${escapeHtml(item.next)}</small>
+      `;
+      buildQueueNode.append(article);
+    }
+  } catch (error) {
+    buildQueueNode.textContent = `Build queue unavailable: ${error.message}`;
+  }
+}
+
+async function renderAppLab() {
+  if (!appLanesNode) return;
+
+  try {
+    const response = await fetch("fixtures/KaspaAppLab.json", { cache: "no-store" });
+    const data = await response.json();
+    appLanesNode.innerHTML = "";
+
+    for (const lane of data.lanes) {
+      const article = document.createElement("article");
+      article.className = "app-lane-card";
+      article.innerHTML = `
+        <span>${escapeHtml(lane.status)}</span>
+        <strong>${escapeHtml(lane.name)}</strong>
+        <p>${escapeHtml(lane.buildNow)}</p>
+        <small>${escapeHtml(lane.baseWork)}</small>
+      `;
+      appLanesNode.append(article);
+    }
+  } catch (error) {
+    appLanesNode.textContent = `App lab unavailable: ${error.message}`;
+  }
+}
+
+async function renderMinerSignalResearch() {
+  if (!signalChannelsNode) return;
+
+  try {
+    const response = await fetch("fixtures/MinerSignalResearch.json", { cache: "no-store" });
+    const data = await response.json();
+    signalChannelsNode.innerHTML = "";
+
+    for (const channel of data.channels) {
+      const article = document.createElement("article");
+      article.className = "signal-card";
+      article.innerHTML = `
+        <span>${escapeHtml(channel.status)}</span>
+        <strong>${escapeHtml(channel.name)}</strong>
+        <p>${escapeHtml(channel.whatItMeans)}</p>
+        <small>${escapeHtml(channel.constraint)}</small>
+      `;
+      signalChannelsNode.append(article);
+    }
+  } catch (error) {
+    signalChannelsNode.textContent = `Signal research unavailable: ${error.message}`;
+  }
+}
+
+function renderSignalPayload() {
+  if (!signalForm || !signalArtifactNode) return;
+  const data = Object.fromEntries(new FormData(signalForm).entries());
+  const artifact = buildSignalPayloadArtifact(data);
+  signalArtifactNode.textContent = JSON.stringify(artifact, null, 2);
+}
+
+async function renderVaultTemplates() {
+  if (!vaultTemplatesNode) return;
+
+  try {
+    const response = await fetch("fixtures/VaultTemplates.json", { cache: "no-store" });
+    const data = await response.json();
+    vaultTemplatesNode.innerHTML = "";
+
+    for (const template of data.templates) {
+      const article = document.createElement("article");
+      article.className = "template-card";
+      article.innerHTML = `
+        <span>${escapeHtml(template.status)}</span>
+        <strong>${escapeHtml(template.name)}</strong>
+        <p>${escapeHtml(template.summary)}</p>
+        <small>${escapeHtml(template.nextBuild)}</small>
+        <button type="button">Apply</button>
+      `;
+      article.querySelector("button").addEventListener("click", () => applyVaultTemplate(template));
+      vaultTemplatesNode.append(article);
+    }
+  } catch (error) {
+    vaultTemplatesNode.textContent = `Vault templates unavailable: ${error.message}`;
+  }
+}
+
+function applyVaultTemplate(template) {
+  for (const [key, value] of Object.entries(template.settings)) {
+    const input = form.elements[key];
+    if (input) input.value = value;
+  }
+  renderVault();
+  document.querySelector("#designer")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+async function fetchManualTransactionOutputs() {
+  const txid = manualFields.txid.value.trim();
+  manualOutputPickerNode.innerHTML = "";
+
+  if (!/^[a-fA-F0-9]{32,128}$/.test(txid)) {
+    manualOutputPickerNode.textContent = "Paste a TN12 transaction ID before fetching outputs.";
+    return;
+  }
+
+  fetchManualTxButton.disabled = true;
+  fetchManualTxButton.textContent = "Fetching...";
+
+  try {
+    const tx = await fetchTn12Transaction(txid);
+    const outputs = tx.outputs || [];
+    if (!outputs.length) {
+      manualOutputPickerNode.textContent = "No outputs returned for that transaction.";
+      return;
+    }
+
+    for (const output of outputs) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "output-choice";
+      button.textContent = `#${output.index} ${sompiToTkas(BigInt(output.amount))} TKAS ${output.script_public_key_type}`;
+      button.addEventListener("click", () => {
+        manualFields.outputIndex.value = output.index;
+        manualFields.amountTkas.value = sompiToTkas(BigInt(output.amount));
+        manualFields.address.value = output.script_public_key_address || manualFields.address.value;
+        manualFields.explorerUrl.value = `https://tn12.kaspa.stream/txs/${txid}`;
+        renderManualOutpoint();
+      });
+      manualOutputPickerNode.append(button);
+    }
+  } catch (error) {
+    manualOutputPickerNode.textContent = `Could not fetch transaction: ${error.message}`;
+  } finally {
+    fetchManualTxButton.disabled = false;
+    fetchManualTxButton.textContent = "Fetch outputs";
+  }
+}
+
+async function fetchTn12Transaction(txid) {
+  const response = await fetch(`https://api-tn12.kaspa.org/transactions/${txid}`);
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
+
+function shortTxid(txid) {
+  return `${txid.slice(0, 8)}...${txid.slice(-8)}`;
+}
+
+function shortAddress(address) {
+  return `${address.slice(0, 18)}...${address.slice(-8)}`;
+}
+
+function sompiToTkas(sompi) {
+  const whole = sompi / 100000000n;
+  const fraction = sompi % 100000000n;
+  if (fraction === 0n) return whole.toString();
+  return `${whole}.${fraction.toString().padStart(8, "0").replace(/0+$/, "")}`;
+}
+
+function cssEscape(value) {
+  if (globalThis.CSS?.escape) return CSS.escape(value);
+  return String(value).replaceAll('"', '\\"');
 }
 
 function escapeHtml(value) {

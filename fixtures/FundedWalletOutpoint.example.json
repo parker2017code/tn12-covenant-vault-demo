@@ -1,0 +1,12 @@
+{
+  "schema": "tn12-manual-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "label": "User-checked funded TN12 wallet",
+  "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+  "txid": "f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+  "outputIndex": 0,
+  "amountTkas": 10000,
+  "scriptType": "p2pk",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+  "note": "Exact UTXO fetched from https://api-tn12.kaspa.org/ on 2026-05-07."
+}

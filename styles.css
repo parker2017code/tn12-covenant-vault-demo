@@ -1,14 +1,18 @@
 :root {
   color-scheme: dark;
-  --bg: #101417;
-  --panel: #182027;
-  --panel-strong: #202b33;
-  --text: #eef5f2;
-  --muted: #a8b7b0;
-  --line: #314149;
-  --accent: #75d6b6;
-  --accent-strong: #ffcf66;
+  --bg: #070807;
+  --bg-2: #0f1110;
+  --panel: rgba(18, 20, 19, .78);
+  --panel-strong: rgba(19, 22, 21, .94);
+  --text: #f5f5f2;
+  --muted: #c8cbc6;
+  --faint: #8f948d;
+  --line: rgba(255, 255, 255, .11);
+  --line-bright: rgba(118, 167, 158, .34);
+  --accent: #76a79e;
+  --accent-strong: #b9b0df;
   --danger: #ff8d7a;
+  --shadow: 0 18px 46px rgba(0,0,0,.24);
 }
 
 * {
@@ -17,7 +21,12 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    linear-gradient(180deg, rgba(118, 167, 158, .10), transparent 340px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    var(--bg);
+  background-size: auto, 56px 56px, 56px 56px, auto;
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
@@ -33,13 +42,17 @@ a:hover {
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   gap: 24px;
   align-items: center;
   padding: 22px clamp(18px, 4vw, 56px);
   border-bottom: 1px solid var(--line);
-  background: #12191d;
+  background: rgba(7, 8, 7, .84);
+  backdrop-filter: blur(18px);
 }
 
 .topbar h1,
@@ -50,14 +63,27 @@ a:hover {
 }
 
 .topbar h1 {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .topbar nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 8px;
   font-size: 14px;
+}
+
+.topbar nav a {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--muted);
+  padding: 8px 10px;
+}
+
+.topbar nav a:hover {
+  border-color: var(--line-bright);
+  color: var(--text);
+  text-decoration: none;
 }
 
 main {
@@ -80,6 +106,7 @@ main {
   border: 1px solid var(--line);
   background: var(--panel);
   border-radius: 8px;
+  box-shadow: var(--shadow);
 }
 
 .hero > div {
@@ -140,6 +167,7 @@ main {
   grid-template-columns: 410px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
+  margin-top: 24px;
 }
 
 .grid {
@@ -175,7 +203,7 @@ input,
 textarea {
   width: 100%;
   color: var(--text);
-  background: #0f1519;
+  background: rgba(7, 8, 7, .64);
   border: 1px solid var(--line);
   border-radius: 7px;
   padding: 11px 12px;
@@ -205,7 +233,7 @@ button {
   border: 1px solid var(--line);
   background: var(--panel-strong);
   color: var(--text);
-  border-radius: 7px;
+  border-radius: 999px;
   padding: 10px 14px;
   cursor: pointer;
 }
@@ -224,10 +252,38 @@ pre {
   max-height: 520px;
   padding: 16px;
   border-radius: 7px;
-  background: #0b1013;
+  background: rgba(7, 8, 7, .72);
   border: 1px solid var(--line);
   color: #d8e8e1;
   font-size: 13px;
+}
+
+progress {
+  width: 100%;
+  height: 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #0b1013;
+}
+
+progress::-webkit-progress-bar {
+  background: #0b1013;
+  border-radius: 999px;
+}
+
+progress::-webkit-progress-value {
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+progress::-moz-progress-bar {
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.meter-label {
+  margin: 8px 0 16px;
+  font-size: 14px;
 }
 
 .issues {
@@ -275,6 +331,10 @@ pre {
   margin: 8px 0 0;
 }
 
+.timeline.compact {
+  margin-bottom: 16px;
+}
+
 .link-list {
   display: grid;
   gap: 10px;
@@ -291,6 +351,281 @@ pre {
 
 .sources {
   margin-top: 24px;
+}
+
+.proofs {
+  margin-top: 24px;
+}
+
+.indexer {
+  margin-top: 24px;
+}
+
+.stack {
+  margin-top: 24px;
+}
+
+.templates {
+  margin-top: 24px;
+}
+
+.proof-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.proof-toolbar span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.proof-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.indexer-summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.indexer-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.indexer-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.indexer-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.indexer-records {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.receipt-events,
+.payload-draft-status {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.proof-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.proof-card small.ok {
+  color: var(--accent);
+}
+
+.proof-card small.bad {
+  color: var(--danger);
+}
+
+.template-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.template-card {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.template-card span {
+  width: fit-content;
+  color: #07110e;
+  background: var(--accent-strong);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.template-card strong,
+.template-card p,
+.template-card small {
+  overflow-wrap: anywhere;
+}
+
+.template-card p {
+  margin: 0;
+}
+
+.template-card small {
+  color: var(--muted);
+}
+
+.build-queue {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.queue-card,
+.app-lane-card,
+.signal-card,
+.indexer-card,
+.receipt-card,
+.receipt-events article,
+.payload-draft-status article {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.queue-card span,
+.app-lane-card span,
+.signal-card span,
+.indexer-card span,
+.receipt-card span,
+.receipt-events article span,
+.payload-draft-status article span {
+  width: fit-content;
+  color: #07110e;
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.queue-card strong,
+.queue-card p,
+.queue-card small,
+.app-lane-card strong,
+.app-lane-card p,
+.app-lane-card small,
+.signal-card strong,
+.signal-card p,
+.signal-card small,
+.indexer-card strong,
+.indexer-card a,
+.indexer-card p,
+.indexer-card small,
+.receipt-card strong,
+.receipt-card p,
+.receipt-card small,
+.receipt-events article strong,
+.receipt-events article p,
+.receipt-events article small,
+.payload-draft-status article strong,
+.payload-draft-status article p,
+.payload-draft-status article small {
+  overflow-wrap: anywhere;
+}
+
+.queue-card p,
+.app-lane-card p,
+.signal-card p,
+.indexer-card p,
+.receipt-card p,
+.receipt-events article p,
+.payload-draft-status article p {
+  margin: 0;
+}
+
+.queue-card small,
+.app-lane-card small,
+.signal-card small,
+.indexer-card small,
+.receipt-card small,
+.receipt-events article small,
+.payload-draft-status article small {
+  color: var(--muted);
+}
+
+.app-lab,
+.signals {
+  margin-top: 24px;
+}
+
+.app-lanes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.signal-channels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.inline-actions {
+  justify-content: flex-start;
+  margin: -4px 0 15px;
+}
+
+.output-picker {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 15px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.output-choice {
+  width: 100%;
+  text-align: left;
+}
+
+.proof-card span {
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.proof-card strong,
+.proof-card a,
+.proof-card p {
+  overflow-wrap: anywhere;
+}
+
+.proof-card p {
+  margin: 0;
+  font-size: 14px;
 }
 
 .claim-grid {
@@ -316,6 +651,13 @@ pre {
   .hero,
   .workspace,
   .grid,
+  .proof-list,
+  .indexer-summary,
+  .indexer-records,
+  .template-list,
+  .build-queue,
+  .app-lanes,
+  .signal-channels,
   .claim-grid {
     grid-template-columns: 1fr;
   }

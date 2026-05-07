@@ -1,0 +1,29 @@
+{
+  "schema": "tn12-manual-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "fetchedAt": "2026-05-07T08:18:51.808Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+  "label": "Split bucket 83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac:1",
+  "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+  "txid": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+  "outputIndex": 1,
+  "amountTkas": 500,
+  "scriptType": "pubkey",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+  "note": "Fetched from the accepted split transaction, not from current wallet UTXO sorting.",
+  "raw": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "outpoint": {
+      "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+      "index": 1
+    },
+    "utxoEntry": {
+      "amount": "50000000000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+      },
+      "blockDaaScore": "5206040",
+      "isCoinbase": false
+    }
+  }
+}

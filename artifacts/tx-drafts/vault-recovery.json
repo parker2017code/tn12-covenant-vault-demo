@@ -1,0 +1,56 @@
+{
+  "schema": "tn12-transaction-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "draft-not-serialized-not-signed-not-broadcast",
+  "id": "vault-recovery",
+  "lane": "vault",
+  "purpose": "Move the full remaining vault value to the recovery key path.",
+  "contract": "DelayedRecoveryVault",
+  "entrypoint": "recover",
+  "source": {
+    "from": "funded DelayedRecoveryVault output",
+    "fundingOutpoint": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "outputIndex": 0,
+      "amountTkas": 10000,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "status": "exact-outpoint-entered"
+    }
+  },
+  "destination": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "expectedOutput": {
+      "type": "recovery-output",
+      "value": {
+        "sompi": "2499995000",
+        "tkas": "24.99995"
+      },
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    "expectedOutputs": null
+  },
+  "amount": {
+    "sompi": "2499995000",
+    "tkas": "24.99995"
+  },
+  "requiredInputs": [
+    "funded vault outpoint",
+    "recovery signature",
+    "exact recovery P2PK output",
+    "miner fee matching constructor value"
+  ],
+  "timing": {
+    "unlockTimeIncludedInConstructor": 1778229708,
+    "contractRequiresDelayForRecovery": false
+  },
+  "caveats": [],
+  "nextProof": "Explorer should show the vault output spent to the recovery lock.",
+  "notYetImplemented": [
+    "SDK transaction object construction",
+    "contract output serialization",
+    "signature production",
+    "broadcast",
+    "explorer confirmation"
+  ]
+}

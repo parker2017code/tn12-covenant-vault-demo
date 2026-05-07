@@ -1,0 +1,53 @@
+{
+  "schema": "tn12-transaction-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "draft-not-serialized-not-signed-not-broadcast",
+  "id": "assurance-pledge",
+  "lane": "assurance",
+  "purpose": "Create one contributor pledge output for a campaign.",
+  "contract": "AssurancePledge",
+  "entrypoint": null,
+  "source": {
+    "from": "contributor wallet UTXO",
+    "fundingOutpoint": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "outputIndex": 0,
+      "amountTkas": 10000,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "status": "exact-outpoint-entered"
+    }
+  },
+  "destination": {
+    "to": "AssurancePledge contract output",
+    "expectedOutput": {
+      "type": "contract-output",
+      "value": {
+        "sompi": "25000000000",
+        "tkas": "250"
+      },
+      "covenantIntent": "release to recipient or refund to contributor depending on campaign result/deadline handling"
+    },
+    "expectedOutputs": null
+  },
+  "amount": {
+    "sompi": "25000000000",
+    "tkas": "250"
+  },
+  "requiredInputs": [
+    "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "manually verified spendable contributor wallet output",
+    "compiled AssurancePledge artifact"
+  ],
+  "timing": null,
+  "caveats": [],
+  "nextProof": "Explorer should show one pledge output for the assurance contract.",
+  "notYetImplemented": [
+    "SDK transaction object construction",
+    "contract output serialization",
+    "signature production",
+    "broadcast",
+    "explorer confirmation"
+  ]
+}

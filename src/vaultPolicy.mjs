@@ -58,7 +58,7 @@ export function buildPolicyArtifact(policy, policyId) {
   return {
     schema: "tn12-covenant-vault-demo/v1",
     network: "kaspa-testnet-12",
-    status: "local-simulation-not-broadcast",
+    status: "tn12-configured-browser-artifact",
     policyId,
     policy,
     covenantIntent: [
@@ -67,11 +67,15 @@ export function buildPolicyArtifact(policy, policyId) {
       "A daily spend limit can cap normal withdrawals.",
       "A guardian threshold can approve emergency recovery or cancellation."
     ],
-    notImplemented: [
-      "No transaction construction yet.",
-      "No Silverscript compilation yet.",
-      "No wallet signing yet.",
-      "No TN12 broadcast yet."
+    repoProofs: [
+      "P2SH vault funding is implemented in repo scripts.",
+      "Recovery spend has been accepted on TN12.",
+      "Delayed withdrawal has been accepted on TN12 with a DAA-score lock."
+    ],
+    browserBoundary: [
+      "This form does not submit transactions from the browser.",
+      "Owner/recovery key separation still needs a wallet-facing UX.",
+      "Spending caps and guardian rules are planner/UI intent until enforced by a refined contract."
     ]
   };
 }

@@ -1,0 +1,82 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "vault",
+  "contract": "DelayedRecoveryVault",
+  "status": "accepted",
+  "fetchedAt": "2026-05-07T08:18:58.059Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+  "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+  "outputIndex": 0,
+  "amountSompi": "2500000000",
+  "amountTkas": 25,
+  "scriptType": "scripthash",
+  "scriptPublicKey": "aa20050a22009aaca7971ae46eb6963c20bac379bbf2e8759ba78b5f4f65597afb5087",
+  "scriptPublicKeyAddress": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn",
+  "redeemScriptHex": "6b6c76009c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac690320df50b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e87697551677500696868",
+  "redeemScriptBytes": 212,
+  "redeemScriptHash": "050a22009aaca7971ae46eb6963c20bac379bbf2e8759ba78b5f4f65597afb50",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+  "rawTransaction": {
+    "subnetwork_id": "0000000000000000000000000000000000000000",
+    "transaction_id": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+    "hash": "9a16a08cf4b4dcb131431f251241b3d53446c61ffa80b2430c1d38c053dcaf0c",
+    "mass": "2047",
+    "payload": null,
+    "block_hash": [
+      "1bc529ed14fbda57ce2452318264cd25d4fa12d200f64cadf69fcbdbe0eea703",
+      "3490ef0d40a13511342d5cbc069d9b35499b28acbc9cf04879db5904d6ae63a6"
+    ],
+    "block_time": 1778141933159,
+    "version": 0,
+    "is_accepted": true,
+    "accepting_block_hash": "ea6e0911868c2de55a26f4d0db9c576c41e7275e108c70d423c6ea35c2e616f4",
+    "accepting_block_blue_score": 5206120,
+    "accepting_block_time": 1778141933395,
+    "inputs": [
+      {
+        "transaction_id": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+        "index": 0,
+        "previous_outpoint_hash": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+        "previous_outpoint_index": "0",
+        "previous_outpoint_address": null,
+        "previous_outpoint_amount": null,
+        "signature_script": "41efc477c25284a051a1beb0abe7e6e8fcab1f8961c16344cead90642293c3d5184ce595a9f1ef72825a33d832857bb1db4eb7c93f881fa849b38c37a7148b88da01",
+        "sig_op_count": "1"
+      }
+    ],
+    "outputs": [
+      {
+        "transaction_id": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+        "index": 0,
+        "amount": 2500000000,
+        "script_public_key": "aa20050a22009aaca7971ae46eb6963c20bac379bbf2e8759ba78b5f4f65597afb5087",
+        "script_public_key_address": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn",
+        "script_public_key_type": "scripthash"
+      },
+      {
+        "transaction_id": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+        "index": 1,
+        "amount": 7499995000,
+        "script_public_key": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+        "script_public_key_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "script_public_key_type": "pubkey"
+      }
+    ]
+  },
+  "raw": {
+    "address": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn",
+    "outpoint": {
+      "transactionId": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "2500000000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20050a22009aaca7971ae46eb6963c20bac379bbf2e8759ba78b5f4f65597afb5087"
+      },
+      "blockDaaScore": "5206120",
+      "isCoinbase": false
+    }
+  }
+}

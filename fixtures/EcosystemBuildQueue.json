@@ -1,0 +1,58 @@
+{
+  "schema": "kaspa-ecosystem-build-queue/v1",
+  "basis": [
+    "kaspa-explained application-layer.html",
+    "kaspa.org/build",
+    "docs.kaspa.org/programmability"
+  ],
+  "items": [
+    {
+      "title": "Proof transaction dashboard",
+      "lane": "Now",
+      "why": "Every covenant demo needs a clear trail from intent to accepted transaction.",
+      "next": "Show signed, submitted, accepted, output amount, and explorer link for each path."
+    },
+    {
+      "title": "Manual outpoint importer",
+      "lane": "Now",
+      "why": "Builders need to paste explorer/API data without editing JSON by hand.",
+      "next": "Accept txid, index, amount, script type, and address; export fixture JSON."
+    },
+    {
+      "title": "Vault template gallery",
+      "lane": "Covenants",
+      "why": "Wallet safety is the easiest concrete covenant use case to understand.",
+      "next": "Add presets for recovery vault, delayed spend, spending cap, and emergency sweep."
+    },
+    {
+      "title": "Escrow primitive",
+      "lane": "Covenants",
+      "why": "Merchant and service flows need conditional release/refund before full DeFi.",
+      "next": "Build buyer, seller, timeout refund, and mutual release paths."
+    },
+    {
+      "title": "Assurance campaign page",
+      "lane": "Covenants",
+      "why": "Public funding rules are useful before pooled vProgs exist.",
+      "next": "Turn individual pledge outputs into a campaign view with release/refund status."
+    },
+    {
+      "title": "Accepted transaction indexer",
+      "lane": "Infrastructure",
+      "why": "Apps need durable state from accepted transactions, not just submitted txids.",
+      "next": "Poll or subscribe, store checkpoints, and handle near-tip reorg rollback."
+    },
+    {
+      "title": "Simple asset rule demo",
+      "lane": "Covenants",
+      "why": "Constrained assets are a natural next primitive after vaults and pledges.",
+      "next": "Prototype mint, transfer, burn, and issuer recovery rules as fixture-driven flows."
+    },
+    {
+      "title": "Proof-backed market skeleton",
+      "lane": "Later",
+      "why": "Markets need proof/oracle assumptions and are better after basic covenant rails are solid.",
+      "next": "Design the data model first; avoid pretending full vProgs are live."
+    }
+  ]
+}

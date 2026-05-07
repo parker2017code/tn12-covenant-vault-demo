@@ -1,0 +1,54 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "vault-withdrawal",
+  "contract": "DelayedRecoveryVault",
+  "entrypoint": "withdraw",
+  "warning": "This spends the vault P2SH output if submitted after unlockTime and accepted.",
+  "source": {
+    "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+    "outputIndex": 0,
+    "amountTkas": 25,
+    "address": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn"
+  },
+  "destination": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "scriptType": "p2pk",
+    "amountSompi": "2499995000",
+    "amountTkas": "24.99995"
+  },
+  "contractFeeSompi": "5000",
+  "lockTime": "1778143352",
+  "scriptHash": "5cc17995345c51ac84eeaf449c117d87ee50973ddb1708ca0828eee8a448cdbf",
+  "transactionId": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
+  "signatureScriptHex": "411246030667f38e7c0797a53c594d4a76311b016b5f5320c019e0bd82f5c7ebb516db34629673004a31678d9235ecfb84d756e1795cf28d11fc41e19a4b64058d01004cd46b6c76009c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac690320df50b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e87697551677500696868",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+            "index": 0
+          },
+          "signatureScript": "411246030667f38e7c0797a53c594d4a76311b016b5f5320c019e0bd82f5c7ebb516db34629673004a31678d9235ecfb84d756e1795cf28d11fc41e19a4b64058d01004cd46b6c76009c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac690320df50b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e87697551677500696868",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": 1778143352,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  }
+}

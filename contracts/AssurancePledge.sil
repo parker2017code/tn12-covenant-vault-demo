@@ -1,0 +1,30 @@
+pragma silverscript ^0.1.0;
+
+contract AssurancePledge(
+    pubkey contributor,
+    pubkey recipient,
+    int deadline,
+    int minerFee
+) {
+    entrypoint function release() {
+        // Target/deadline aggregation is enforced by the planner; this pledge
+        // primitive only carries the recipient release and contributor refund paths.
+
+        int amount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == amount);
+
+        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);
+        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));
+    }
+
+    entrypoint function refund(sig contributorSig) {
+        require(checkSig(contributorSig, contributor));
+        require(tx.time >= deadline);
+
+        int amount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == amount);
+
+        byte[34] contributorLock = new ScriptPubKeyP2PK(contributor);
+        require(tx.outputs[0].scriptPubKey == byte[](contributorLock));
+    }
+}

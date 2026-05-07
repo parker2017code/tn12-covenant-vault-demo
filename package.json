@@ -5,10 +5,33 @@
   "type": "module",
   "scripts": {
     "check": "node scripts/check.mjs",
+    "check:ui": "node scripts/check-ui.mjs",
+    "check:all": "npm run check && npm run check:ui",
     "address": "node scripts/create-testnet-address.mjs",
+    "wallet:public": "node scripts/wallet-public-info.mjs",
+    "utxos:fetch": "node scripts/fetch-funded-utxos.mjs",
+    "split:fetch": "node scripts/fetch-split-buckets.mjs",
+    "fixtures": "node scripts/generate-constructor-fixtures.mjs",
+    "compile:contracts": "node scripts/compile-silverscript.mjs",
+    "plan": "node scripts/plan-transactions.mjs",
+    "drafts": "node scripts/build-transaction-drafts.mjs",
+    "tx:p2pk": "node scripts/build-signed-p2pk-draft.mjs",
+    "tx:contracts": "node scripts/build-signed-contract-funding-drafts.mjs",
+    "tx:spends": "node scripts/build-signed-contract-spend-drafts.mjs",
+    "contracts:fetch": "node scripts/fetch-contract-outpoints.mjs",
+    "tx:split": "node scripts/build-signed-split-draft.mjs",
+    "tx:payload": "node scripts/build-signed-payload-receipt-draft.mjs",
+    "tx:verify": "node scripts/verify-accepted-txs.mjs",
+    "tx:submit:dry": "node scripts/submit-signed-draft.mjs",
+    "indexer:state": "node scripts/build-accepted-app-state.mjs",
+    "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },
   "dependencies": {
-    "kaspa": "^0.13.0"
+    "blakejs": "^1.2.1",
+    "kaspa-wasm": "^0.13.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
   }
 }

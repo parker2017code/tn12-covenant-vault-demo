@@ -1,0 +1,46 @@
+{
+  "schema": "kaspa-miner-signal-research/v1",
+  "question": "Can we incentivize miners to publish useful information as part of block production?",
+  "boundary": "Do not assume arbitrary app data can be added to the block header. Current header fields are consensus fields such as parent roots, merkle roots, UTXO commitment, timestamp, nonce, DAA score, blue work, blue score, and pruning point.",
+  "channels": [
+    {
+      "name": "Transaction payload",
+      "status": "available-for-app-data",
+      "whatItMeans": "Users can attach app data to transactions within standard mempool mass limits.",
+      "fit": "Receipts, order IDs, campaign metadata hashes, attestations from ordinary users or services.",
+      "constraint": "Not miner-specific unless miners voluntarily create those transactions."
+    },
+    {
+      "name": "Coinbase payload",
+      "status": "miner-controlled-protocol-surface",
+      "whatItMeans": "Block-producing miners/pools control coinbase transaction data within consensus size limits.",
+      "fit": "Pool identity, opt-in commitments, coarse miner signals, future research prototypes.",
+      "constraint": "Requires mining/pool software support and incentive design; not a browser-app feature."
+    },
+    {
+      "name": "Block header",
+      "status": "not-an-arbitrary-data-channel",
+      "whatItMeans": "Headers commit to consensus data. Adding new arbitrary fields would be protocol work, not an app-layer shortcut.",
+      "fit": "Use header-derived facts such as timestamp, DAA score, blue score, and merkle commitments.",
+      "constraint": "Do not claim app-specific header data without a KIP or implementation evidence."
+    },
+    {
+      "name": "RTD-style miner sampling",
+      "status": "research-later",
+      "whatItMeans": "A later design could reward fast reporters or miners for event signals, then aggregate confidence from many independent observations.",
+      "fit": "First-to-know terminals, event confidence dashboards, oracle research, service markets.",
+      "constraint": "Requires explicit anti-spam, anti-bribery, pool centralization, and MEV analysis."
+    }
+  ],
+  "nextExperiments": [
+    "Build a transaction-payload receipt demo first.",
+    "Build an accepted-transaction indexer that can read payloads and outputs.",
+    "Model a miner/pool signal registry off-chain before proposing any mining-software changes.",
+    "Only then explore coinbase payload commitments or RTD-style incentives."
+  ],
+  "localSourceNotes": [
+    "Rusty Kaspa Header struct does not expose arbitrary app fields.",
+    "Rusty Kaspa params include coinbase_payload_script_public_key_max_len 150 and max_coinbase_payload_len 204 in the checked source snapshot.",
+    "Kaspa docs describe transaction payloads as the standard app-data field, with practical standard mempool limit around 25 KB when payload dominates the transaction."
+  ]
+}

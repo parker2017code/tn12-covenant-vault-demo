@@ -1,0 +1,57 @@
+{
+  "schema": "tn12-transaction-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "draft-not-serialized-not-signed-not-broadcast",
+  "id": "assurance-refund",
+  "lane": "assurance",
+  "purpose": "Refund an individual pledge to the contributor after the deadline.",
+  "contract": "AssurancePledge",
+  "entrypoint": "refund",
+  "source": {
+    "from": "funded AssurancePledge output",
+    "fundingOutpoint": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "outputIndex": 0,
+      "amountTkas": 10000,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "status": "exact-outpoint-entered"
+    }
+  },
+  "destination": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "expectedOutput": {
+      "type": "contributor-refund-output",
+      "value": {
+        "sompi": "24999995000",
+        "tkas": "249.99995"
+      },
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    "expectedOutputs": null
+  },
+  "amount": {
+    "sompi": "24999995000",
+    "tkas": "249.99995"
+  },
+  "requiredInputs": [
+    "funded pledge outpoint",
+    "contributor signature",
+    "transaction time at or after deadline",
+    "exact contributor P2PK output",
+    "miner fee matching constructor value"
+  ],
+  "timing": {
+    "requiredTxTimeAtOrAfter": 1778229708,
+    "deadlineHours": 24
+  },
+  "caveats": [],
+  "nextProof": "Explorer should show the pledge output refunded after the deadline.",
+  "notYetImplemented": [
+    "SDK transaction object construction",
+    "contract output serialization",
+    "signature production",
+    "broadcast",
+    "explorer confirmation"
+  ]
+}

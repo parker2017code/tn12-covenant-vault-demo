@@ -1,0 +1,67 @@
+{
+  "schema": "tn12-transaction-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "draft-not-serialized-not-signed-not-broadcast",
+  "id": "vault-delayed-withdrawal",
+  "lane": "vault",
+  "purpose": "Spend from the vault after the configured delay.",
+  "contract": "DelayedRecoveryVault",
+  "entrypoint": "withdraw",
+  "source": {
+    "from": "funded DelayedRecoveryVault output",
+    "fundingOutpoint": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "outputIndex": 0,
+      "amountTkas": 10000,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "status": "exact-outpoint-entered"
+    }
+  },
+  "destination": {
+    "to": "owner-selected destination plus optional vault/change output",
+    "expectedOutput": null,
+    "expectedOutputs": [
+      {
+        "type": "recipient-output",
+        "value": {
+          "sompi": "500000000",
+          "tkas": "5"
+        }
+      },
+      {
+        "type": "remaining-vault-or-owner-change",
+        "value": {
+          "sompi": "1999995000",
+          "tkas": "19.99995"
+        }
+      }
+    ]
+  },
+  "amount": {
+    "sompi": "500000000",
+    "tkas": "5"
+  },
+  "requiredInputs": [
+    "funded vault outpoint",
+    "owner signature",
+    "destination address",
+    "transaction time at or after unlockTime"
+  ],
+  "timing": {
+    "requiredTxTimeAtOrAfter": 1778229708,
+    "delayHours": 24
+  },
+  "caveats": [
+    "The current Silverscript withdraw path checks owner signature and tx.time; amount/change policy still belongs in the transaction builder/planner layer.",
+    "A real builder should keep vault state explicit instead of relying on this JSON plan."
+  ],
+  "nextProof": "Explorer should show the delayed spend after the unlock time.",
+  "notYetImplemented": [
+    "SDK transaction object construction",
+    "contract output serialization",
+    "signature production",
+    "broadcast",
+    "explorer confirmation"
+  ]
+}

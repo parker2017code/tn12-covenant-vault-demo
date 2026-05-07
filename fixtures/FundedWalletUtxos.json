@@ -1,0 +1,305 @@
+{
+  "schema": "tn12-funded-wallet-utxos/v1",
+  "network": "kaspa-testnet-12",
+  "fetchedAt": "2026-05-07T08:18:44.485Z",
+  "endpoint": "https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+  "utxos": [
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO 3012b541bc10832e8440a16424cdefbdbe84e85f8e212fd40d595debfb3b87da:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "3012b541bc10832e8440a16424cdefbdbe84e85f8e212fd40d595debfb3b87da",
+      "outputIndex": 1,
+      "amountTkas": 749.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/3012b541bc10832e8440a16424cdefbdbe84e85f8e212fd40d595debfb3b87da",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "3012b541bc10832e8440a16424cdefbdbe84e85f8e212fd40d595debfb3b87da",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "74999995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5303615",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO 0b6bdc9daa3f1887a2ff288cfc153fa08e676e99f4f699153c13dc107e6c4e20:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "0b6bdc9daa3f1887a2ff288cfc153fa08e676e99f4f699153c13dc107e6c4e20",
+      "outputIndex": 1,
+      "amountTkas": 749.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/0b6bdc9daa3f1887a2ff288cfc153fa08e676e99f4f699153c13dc107e6c4e20",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "0b6bdc9daa3f1887a2ff288cfc153fa08e676e99f4f699153c13dc107e6c4e20",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "74999995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5298738",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO 4051184914011dd5399f4042fe5be0e5031b5f57e05b055ee676c36ad5a468b6:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "4051184914011dd5399f4042fe5be0e5031b5f57e05b055ee676c36ad5a468b6",
+      "outputIndex": 1,
+      "amountTkas": 974.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/4051184914011dd5399f4042fe5be0e5031b5f57e05b055ee676c36ad5a468b6",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "4051184914011dd5399f4042fe5be0e5031b5f57e05b055ee676c36ad5a468b6",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "97499995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5303615",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO a9a924d8d879b24cdbb4f0521c70b7206aebb811e2a5abbf80855401f91a5706:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "a9a924d8d879b24cdbb4f0521c70b7206aebb811e2a5abbf80855401f91a5706",
+      "outputIndex": 1,
+      "amountTkas": 749.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/a9a924d8d879b24cdbb4f0521c70b7206aebb811e2a5abbf80855401f91a5706",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "a9a924d8d879b24cdbb4f0521c70b7206aebb811e2a5abbf80855401f91a5706",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "74999995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5306425",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO 8f6ae53f2f53efd4eab109bc4b2b7aa4c1ae40e088e9476d39f6171316d1eeb6:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "8f6ae53f2f53efd4eab109bc4b2b7aa4c1ae40e088e9476d39f6171316d1eeb6",
+      "outputIndex": 1,
+      "amountTkas": 974.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/8f6ae53f2f53efd4eab109bc4b2b7aa4c1ae40e088e9476d39f6171316d1eeb6",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "8f6ae53f2f53efd4eab109bc4b2b7aa4c1ae40e088e9476d39f6171316d1eeb6",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "97499995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5304971",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
+      "outputIndex": 1,
+      "amountTkas": 974.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "97499995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5306418",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8",
+      "outputIndex": 1,
+      "amountTkas": 974.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "97499995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5298644",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO 80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f:0",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "outputIndex": 0,
+      "amountTkas": 249.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+          "index": 0
+        },
+        "utxoEntry": {
+          "amount": "24999995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5303954",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO 7f1033142440c3083295c7b085120c0148c09a60449001ec1e754af6f7daafbd:1",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "7f1033142440c3083295c7b085120c0148c09a60449001ec1e754af6f7daafbd",
+      "outputIndex": 1,
+      "amountTkas": 749.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/7f1033142440c3083295c7b085120c0148c09a60449001ec1e754af6f7daafbd",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "7f1033142440c3083295c7b085120c0148c09a60449001ec1e754af6f7daafbd",
+          "index": 1
+        },
+        "utxoEntry": {
+          "amount": "74999995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5304979",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391:0",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "outputIndex": 0,
+      "amountTkas": 24.99995,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+          "index": 0
+        },
+        "utxoEntry": {
+          "amount": "2499995000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5303870",
+          "isCoinbase": false
+        }
+      }
+    },
+    {
+      "schema": "tn12-manual-outpoint/v1",
+      "network": "kaspa-testnet-12",
+      "label": "Fetched TN12 UTXO 88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571:2",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+      "outputIndex": 2,
+      "amountTkas": 1999.9998,
+      "scriptType": "p2pk",
+      "explorerUrl": "https://tn12.kaspa.stream/txs/88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+      "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+      "raw": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "outpoint": {
+          "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+          "index": 2
+        },
+        "utxoEntry": {
+          "amount": "199999980000",
+          "scriptPublicKey": {
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "blockDaaScore": "5306368",
+          "isCoinbase": false
+        }
+      }
+    }
+  ]
+}

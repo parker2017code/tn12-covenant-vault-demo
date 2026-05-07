@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TN12 Covenant Vault Demo</title>
   <meta name="description" content="Local Kaspa TN12 covenant vault policy designer and simulator.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="app.js"></script>
 </head>
@@ -16,6 +17,13 @@
     </div>
     <nav aria-label="Project links">
       <a href="#designer">Designer</a>
+      <a href="#assurance">Assurance</a>
+      <a href="#funding">Funding</a>
+      <a href="#proofs">Proofs</a>
+      <a href="#indexer">Indexer</a>
+      <a href="#stack">Stack</a>
+      <a href="#app-lab">App lab</a>
+      <a href="#signals">Signals</a>
       <a href="#setup">TN12 setup</a>
       <a href="#sources">Sources</a>
     </nav>
@@ -24,14 +32,14 @@
   <main>
     <section class="hero">
       <div>
-        <p class="status">Local simulation. No funds move.</p>
-        <h2>Design safe money rules before touching a wallet.</h2>
-        <p>A vault is a simple covenant-shaped app: funds can only leave through known paths, such as a delay, a daily limit, or recovery. This page turns that into a policy artifact builders can critique before real TN12 transaction work starts.</p>
+        <p class="status">TN12 configured. Proof transactions accepted.</p>
+        <h2>Build vault and assurance rules against testnet, then verify them.</h2>
+        <p>A vault is a covenant-shaped app: funds can only leave through known paths, such as a delay, a daily limit, or recovery. Assurance contracts are the group-funding cousin: release funds only if a target is met, otherwise refund. This repo now has real TN12 funding, spend, submit, and verification scripts; the browser is the policy/control surface.</p>
       </div>
       <aside class="facts">
         <span>Network lane</span>
-        <strong>TN12 / testnet</strong>
-        <p>Toccata and covenant work are not treated here as mainnet-live app rails.</p>
+        <strong>TN12 / accepted proofs</strong>
+        <p>Vault recovery, vault delayed withdrawal, assurance release, and assurance refund all have accepted testnet transaction IDs.</p>
       </aside>
     </section>
 
@@ -105,18 +113,238 @@
         <ol id="lifecycle" class="timeline"></ol>
       </article>
 
+      <article class="panel">
+        <p class="eyebrow">Wallet interface</p>
+        <h2>Manual address check</h2>
+        <p>The saved TN12 address was funded with about 10,000 testnet KAS/TKAS and used for accepted proof transactions. Paste exact explorer outpoint data before signing new attempts.</p>
+        <pre>kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt</pre>
+        <p>Use the TN12 explorer for transaction IDs and output indexes.</p>
+      </article>
+    </section>
+
+    <section id="templates" class="panel templates">
+      <div class="section-title">
+        <p class="eyebrow">Vault templates</p>
+        <h2>Pick the next covenant-shaped product.</h2>
+      </div>
+      <div id="vault-templates" class="template-list" aria-live="polite"></div>
+    </section>
+
+    <section id="assurance" class="workspace">
+      <form id="assurance-form" class="panel">
+        <div class="section-title">
+          <p class="eyebrow">Assurance contract</p>
+          <h2>Inputs</h2>
+        </div>
+
+        <label>
+          Project name
+          <input name="projectName" spellcheck="false">
+        </label>
+
+        <label>
+          Recipient address
+          <input name="recipientAddress" spellcheck="false">
+        </label>
+
+        <label>
+          Refund address
+          <input name="refundAddress" spellcheck="false">
+        </label>
+
+        <div class="two-col">
+          <label>
+            Target, TKAS
+            <input name="targetTkas" type="number" min="1" step="1">
+          </label>
+
+          <label>
+            Pledged, TKAS
+            <input name="pledgedTkas" type="number" min="0" step="1">
+          </label>
+        </div>
+
+        <div class="two-col">
+          <label>
+            Minimum pledge, TKAS
+            <input name="minimumPledgeTkas" type="number" min="0.01" step="0.01">
+          </label>
+
+          <label>
+            Deadline, hours
+            <input name="deadlineHours" type="number" min="1" max="8760" step="1">
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="reset-assurance">Reset</button>
+          <button type="button" id="copy-assurance">Copy JSON</button>
+        </div>
+      </form>
+
+      <section class="panel output" aria-live="polite">
+        <div class="section-title">
+          <p class="eyebrow">Funding rule</p>
+          <h2>Release if funded, refund if not.</h2>
+        </div>
+
+        <progress id="assurance-progress" max="100" value="0"></progress>
+        <p id="assurance-progress-text" class="meter-label"></p>
+        <ul id="assurance-issues" class="issues"></ul>
+        <ol id="assurance-lifecycle" class="timeline compact"></ol>
+        <pre id="assurance-artifact"></pre>
+      </section>
+    </section>
+
+    <section id="proofs" class="panel proofs">
+      <div class="section-title">
+        <p class="eyebrow">Accepted TN12 proofs</p>
+        <h2>Vault and assurance paths verified on testnet.</h2>
+      </div>
+      <div class="proof-toolbar">
+        <button type="button" id="refresh-proofs">Refresh from TN12 API</button>
+        <span id="proof-status">Loaded from local fixture.</span>
+      </div>
+      <div id="proof-list" class="proof-list" aria-live="polite"></div>
+      <pre>npm run tx:verify</pre>
+    </section>
+
+    <section id="indexer" class="panel indexer">
+      <div class="section-title">
+        <p class="eyebrow">Accepted transaction indexer</p>
+        <h2>App state derived from TN12 proofs.</h2>
+        <p>This snapshot turns accepted transactions into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should all feed through this layer before the UI claims a state transition.</p>
+      </div>
+      <div id="indexer-summary" class="indexer-summary" aria-live="polite"></div>
+      <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
+      <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
+      <pre>npm run indexer:state</pre>
+    </section>
+
+    <section id="stack" class="panel stack">
+      <div class="section-title">
+        <p class="eyebrow">Kaspa app stack</p>
+        <h2>What this naturally grows into next.</h2>
+        <p>The queue starts with covenant products this repo can test on TN12, then moves outward to infrastructure and later proof-backed apps.</p>
+      </div>
+      <div id="build-queue" class="build-queue" aria-live="polite"></div>
+    </section>
+
+    <section id="app-lab" class="panel app-lab">
+      <div class="section-title">
+        <p class="eyebrow">Kaspa app lab</p>
+        <h2>Base work from the application layer map.</h2>
+        <p>These are the natural next lanes from the Kaspa Explained app-page framing: build what can be proved now, label TN12 covenant work clearly, and keep later RTD/vProgs ideas in the research lane.</p>
+      </div>
+      <div id="app-lanes" class="app-lanes" aria-live="polite"></div>
+    </section>
+
+    <section id="signals" class="workspace signals">
+      <form id="signal-form" class="panel">
+        <div class="section-title">
+          <p class="eyebrow">Signal payload</p>
+          <h2>Transaction payload receipt</h2>
+          <p>First buildable step for app data: put a compact receipt into a user transaction payload, then let an accepted-transaction indexer read it.</p>
+        </div>
+
+        <label>
+          Kind
+          <input name="kind" spellcheck="false">
+        </label>
+
+        <label>
+          Subject
+          <input name="subject" spellcheck="false">
+        </label>
+
+        <label>
+          Value
+          <input name="value" spellcheck="false">
+        </label>
+
+        <label>
+          Note
+          <textarea name="note" rows="3"></textarea>
+        </label>
+
+        <div class="actions">
+          <button type="button" id="reset-signal">Reset</button>
+          <button type="button" id="copy-signal">Copy JSON</button>
+        </div>
+      </form>
+
+      <section class="panel output" aria-live="polite">
+        <div class="section-title">
+          <p class="eyebrow">Miner signal research</p>
+          <h2>Do not overload block headers.</h2>
+          <p>Miner incentives can be explored, but app-specific data should start with transaction payloads and accepted transaction indexing. Coinbase payload and pool support are later mining-software research surfaces.</p>
+        </div>
+        <div id="signal-channels" class="signal-channels"></div>
+        <div id="payload-draft-status" class="payload-draft-status"></div>
+        <pre id="signal-artifact"></pre>
+      </section>
+    </section>
+
+    <section class="grid">
+      <article id="funding" class="panel">
+        <p class="eyebrow">Manual funding</p>
+        <h2>Explorer outpoint</h2>
+        <label>
+          Funded address
+          <input id="manual-address" spellcheck="false">
+        </label>
+        <label>
+          Transaction ID
+          <input id="manual-txid" spellcheck="false" placeholder="paste exact explorer txid before signing">
+        </label>
+        <div class="actions inline-actions">
+          <button type="button" id="fetch-manual-tx">Fetch outputs</button>
+          <button type="button" id="copy-manual-artifact">Copy JSON</button>
+        </div>
+        <div id="manual-output-picker" class="output-picker" aria-live="polite"></div>
+        <div class="two-col">
+          <label>
+            Output index
+            <input id="manual-output-index" type="number" min="0" step="1">
+          </label>
+          <label>
+            Amount, TKAS
+            <input id="manual-amount" type="number" min="0.00001" step="0.00001">
+          </label>
+        </div>
+        <label>
+          Explorer URL
+          <input id="manual-explorer-url" spellcheck="false">
+        </label>
+      </article>
+
+      <article class="panel output" aria-live="polite">
+        <p class="eyebrow">Funding artifact</p>
+        <h2>Ready for planner</h2>
+        <ul id="manual-issues" class="issues"></ul>
+        <pre id="manual-artifact"></pre>
+      </article>
+    </section>
+
+    <section class="grid">
       <article id="setup" class="panel">
         <p class="eyebrow">TN12 setup</p>
         <h2>Get test tokens</h2>
         <p>Use a browser for the faucet. From this shell, the faucet host returned a Cloudflare challenge, so token requests cannot be automated here.</p>
         <pre>npm run address</pre>
         <p>The command prints a `kaspatest:` address and stores testnet-only wallet material in `.local/tn12-wallet.json`. Paste that address into the faucet.</p>
+        <p>The current saved address has been manually checked by the user and should be used for the first vault and assurance attempts.</p>
         <div class="link-list">
           <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
           <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">TN12 explorer</a>
-          <a href="https://github.com/kaspanet/rusty-kaspa/tree/tn12" target="_blank" rel="noreferrer">rusty-kaspa TN12</a>
           <a href="https://github.com/kaspanet/silverscript" target="_blank" rel="noreferrer">Silverscript</a>
         </div>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Build plan</p>
+        <h2>Next build</h2>
+        <p>The first proof set is done on TN12. Next build work is wallet-facing UX, batch pledge aggregation, escrow proof paths, and an accepted-transaction payload indexer.</p>
+        <pre>docs/BUILD_PLAN.md</pre>
       </article>
     </section>
 
@@ -124,9 +352,9 @@
       <p class="eyebrow">Source discipline</p>
       <h2>What this demo is allowed to claim</h2>
       <div class="claim-grid">
-        <article><strong>Can claim</strong><p>Local vault policy design, TN12/testnet intent, covenant-shaped UX, and exportable simulation artifacts.</p></article>
-        <article><strong>Cannot claim</strong><p>Mainnet covenant activation, live native DeFi, full vProgs, wallet safety, or real transaction enforcement.</p></article>
-        <article><strong>Next proof</strong><p>A signed TN12 transaction lifecycle, source-linked Silverscript template, and explorer-visible testnet outputs.</p></article>
+        <article><strong>Can claim</strong><p>TN12 vault and assurance proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
+        <article><strong>Cannot claim</strong><p>Mainnet covenant activation, live native DeFi, full vProgs, wallet safety, arbitrary header data, or production wallet integration.</p></article>
+        <article><strong>Next build</strong><p>Batch assurance aggregation, escrow proofs, payload receipt indexing, wallet-facing key separation, and tighter vault templates.</p></article>
       </div>
     </section>
   </main>
