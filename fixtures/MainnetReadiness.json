@@ -76,8 +76,8 @@
       "lane": "escrow",
       "readiness": "tn12-toccata-only",
       "why": "Current escrow has accepted TN12 release and DAA-refund proofs, but remains TN12/Toccata-only and unaudited.",
-      "blockers": ["cancel path proof on a separate output", "negative tests", "mainnet Toccata", "audit", "wallet integration"],
-      "next": "Fund a separate escrow output for mutual-cancel proof, then add negative tests before discussing mainnet."
+      "blockers": ["mutual-cancel redesign after script-unit rejection", "negative tests", "mainnet Toccata", "audit", "wallet integration"],
+      "next": "Simplify or redesign mutual cancel, then add negative tests before discussing mainnet."
     },
     {
       "id": "coordination-markets",

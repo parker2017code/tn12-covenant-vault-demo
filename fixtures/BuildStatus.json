@@ -43,8 +43,8 @@
       "enforcement": "script",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-funding-release-and-refund-spends",
-      "builtSurface": ["contracts/Escrow.sil", "contracts/EscrowExpired.sil", "fixtures/EscrowContractOutpoint.json", "fixtures/EscrowDaaRefundContractOutpoint.json", "artifacts/signed-drafts/escrow-funding.json", "artifacts/signed-drafts/escrow-release.json", "artifacts/signed-drafts/escrow-daa-refund-funding.json", "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json", "artifacts/signed-drafts/escrow-cancel.json", "src/escrowPrimitive.mjs", "npm run escrow:registry"],
-      "next": "Fund a separate escrow output to prove mutual cancel; release and refund are already accepted on separate outputs."
+      "builtSurface": ["contracts/Escrow.sil", "contracts/EscrowExpired.sil", "fixtures/EscrowContractOutpoint.json", "fixtures/EscrowDaaRefundContractOutpoint.json", "fixtures/EscrowCancelContractOutpoint.json", "artifacts/signed-drafts/escrow-funding.json", "artifacts/signed-drafts/escrow-release.json", "artifacts/signed-drafts/escrow-daa-refund-funding.json", "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json", "artifacts/signed-drafts/escrow-cancel-funding.json", "artifacts/signed-drafts/escrow-cancel-proof-cancel.json", "artifacts/escrow-cancel-attempt.json", "src/escrowPrimitive.mjs", "npm run escrow:registry"],
+      "next": "Redesign or simplify mutual cancel; the current cancel draft is funded but rejected by TN12 script-unit limits."
     },
     {
       "order": 5,
@@ -163,7 +163,7 @@
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
-    "Fund a separate escrow output to prove the mutual-cancel spend path.",
+    "Redesign or simplify the mutual-cancel spend path after the script-unit rejection.",
     "Add a ZK/anchor design checklist before any bridge, oracle, solver, or vProg proof claim."
   ]
 }

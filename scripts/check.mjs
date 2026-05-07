@@ -133,7 +133,7 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 12);
+assert.equal(submitRegistry.summary.total, 14);
 assert.equal(submitRegistry.summary.payloadDrafts, 1);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 1);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
@@ -144,11 +144,16 @@ const escrowReleaseDraft = JSON.parse(await readFile(new URL("../artifacts/signe
 const escrowRefundDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-refund.json", import.meta.url), "utf8"));
 const escrowCancelDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel.json", import.meta.url), "utf8"));
 const escrowDaaRefundDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-daa-refund-proof-refund.json", import.meta.url), "utf8"));
+const escrowCancelProofDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel-proof-cancel.json", import.meta.url), "utf8"));
 assert.equal(escrowReleaseDraft.entrypoint, "release");
 assert.equal(escrowRefundDraft.entrypoint, "refund");
 assert.equal(escrowCancelDraft.entrypoint, "cancel");
 assert.equal(escrowDaaRefundDraft.entrypoint, "refund");
+assert.equal(escrowCancelProofDraft.entrypoint, "cancel");
 assert.ok(escrowCancelDraft.signatureScriptHex.length > escrowReleaseDraft.signatureScriptHex.length);
+const escrowCancelAttempt = JSON.parse(await readFile(new URL("../artifacts/escrow-cancel-attempt.json", import.meta.url), "utf8"));
+assert.equal(escrowCancelAttempt.status, "rejected-script-units-limit");
+assert.match(escrowCancelAttempt.submitResult.error, /script units exceeded/);
 const researchFixture = JSON.parse(await readFile(new URL("../fixtures/CrossChainResearchLibrary.json", import.meta.url), "utf8"));
 const researchLibrary = buildResearchLibrary(researchFixture);
 assert.equal(researchLibrary.status, "research-inputs-not-protocol-claims");
@@ -407,6 +412,9 @@ const files = [
   "artifacts/EscrowExpired.json",
   "artifacts/signed-drafts/escrow-daa-refund-funding.json",
   "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+  "artifacts/signed-drafts/escrow-cancel-funding.json",
+  "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+  "artifacts/escrow-cancel-attempt.json",
   "artifacts/signed-drafts/escrow-funding.json",
   "artifacts/signed-drafts/escrow-release.json",
   "artifacts/signed-drafts/escrow-refund.json",
@@ -451,6 +459,7 @@ const files = [
   "fixtures/BuildStatus.json",
   "fixtures/EscrowContractOutpoint.json",
   "fixtures/EscrowDaaRefundContractOutpoint.json",
+  "fixtures/EscrowCancelContractOutpoint.json",
   "fixtures/EscrowExpired.ctor.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",

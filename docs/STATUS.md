@@ -41,6 +41,8 @@
 - Escrow release spend: `825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d`.
 - DAA-expired escrow refund funding: `f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f`.
 - DAA-expired escrow refund spend: `6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d`.
+- Escrow cancel funding: `331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022`.
+- Escrow cancel spend attempt: `5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323`, rejected by TN12 script-unit limits (`used=200870`, `limit=109999`).
 
 Latest fetched contract output addresses before the timed spends were:
 

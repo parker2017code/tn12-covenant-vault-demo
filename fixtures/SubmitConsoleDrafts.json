@@ -73,6 +73,18 @@
       "priority": 12,
       "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
       "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
+    },
+    {
+      "label": "Escrow cancel funding",
+      "priority": 13,
+      "path": "artifacts/signed-drafts/escrow-cancel-funding.json",
+      "description": "Accepted funding output for the mutual-cancel attempt."
+    },
+    {
+      "label": "Escrow cancel attempt",
+      "priority": 14,
+      "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "description": "Rejected mutual-cancel attempt; current script shape exceeds TN12 script-unit limits."
     }
   ]
 }

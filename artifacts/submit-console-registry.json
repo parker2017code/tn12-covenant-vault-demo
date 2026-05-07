@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 12,
+    "total": 14,
     "payloadDrafts": 1,
-    "explicitSubmitRequired": 12,
+    "explicitSubmitRequired": 14,
     "payloadSubmitGated": 1
   },
   "drafts": [
@@ -652,6 +652,101 @@
       "label": "Escrow DAA refund",
       "priority": 12,
       "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-cancel-funding.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-cancel-funding",
+      "transactionId": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+      "warning": "This spends the fetched UTXO if broadcast. Do not broadcast multiple drafts that use the same source outpoint.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+        "outputIndex": 1,
+        "amountTkas": 1199.99955
+      },
+      "counts": {
+        "inputs": 0,
+        "outputs": 0,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "0",
+        "outputTkas": "0"
+      },
+      "inputs": [],
+      "outputs": [],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-funding.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-funding.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow cancel funding",
+      "priority": 13,
+      "description": "Accepted funding output for the mutual-cancel attempt."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-cancel",
+      "transactionId": "5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323",
+      "warning": "This spends the escrow P2SH output through mutual cancel if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+        "outputIndex": 0,
+        "amountTkas": 50,
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "4999995000",
+        "outputTkas": "49.99995"
+      },
+      "inputs": [
+        {
+          "txid": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "4999995000",
+          "amountTkas": "49.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-proof-cancel.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow cancel attempt",
+      "priority": 14,
+      "description": "Rejected mutual-cancel attempt; current script shape exceeds TN12 script-unit limits."
     }
   ],
   "boundaries": [

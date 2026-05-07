@@ -99,6 +99,7 @@ try {
   await expectText(page, "#submit-drafts", "Accepted seller-release proof");
   await expectText(page, "#submit-drafts", "Escrow DAA refund");
   await expectText(page, "#submit-drafts", "Escrow cancel");
+  await expectText(page, "#submit-drafts", "script-unit limits");
   await expectText(page, "#submit-drafts", "--submit");
   await expectText(page, "#research-summary", "Candidates");
   await expectText(page, "#research-candidates", "Uniswap-style AMM");

@@ -23,9 +23,10 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: base built.
-   - Enforcement: script for accepted release and DAA-refund paths; cancel remains signed review draft only.
+   - Enforcement: script for accepted release and DAA-refund paths; cancel remains blocked.
    - Proof: accepted escrow funding, accepted release spend, and accepted DAA-expired refund spend.
-   - Next proof: fund a separate escrow output to prove mutual cancel.
+   - Cancel status: funded separately but rejected by TN12 script-unit limits (`used=200870`, `limit=109999`).
+   - Next proof: simplify or redesign mutual cancel before another accepted proof attempt.
 
 5. Treasury / team vaults: spend caps, delayed large withdrawals, recovery, payroll templates.
    - Current status: base built.
@@ -91,7 +92,7 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
    - accepted funding outpoint: done;
    - accepted seller release: done;
    - DAA-score timeout refund: done;
-   - mutual cancel: needs separate funded escrow output and extra sig-op review.
+   - mutual cancel: separately funded attempt rejected by script-unit limits; redesign required.
 
 3. Continue the invoice vertical slice:
    - find or build a payload-preserving submit route;

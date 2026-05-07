@@ -137,9 +137,9 @@
       "lane": "escrow",
       "enforcement": "script",
       "currentSurface": "contracts/Escrow.sil, contracts/EscrowExpired.sil, fixtures/EscrowContractOutpoint.json, fixtures/EscrowDaaRefundContractOutpoint.json, signed escrow funding/release/refund/cancel drafts, and browser escrow panel",
-      "proof": "Accepted escrow release spend plus accepted DAA-expired escrow refund spend on separate P2SH outputs; cancel remains a signed-proof followup",
-      "risk": "Release, refund, and cancel are mutually exclusive spends of one escrow output, so each accepted path needs its own funded proof output.",
-      "nextHardeningStep": "Fund a separate escrow output to prove mutual cancel without double-spending release or refund outputs."
+      "proof": "Accepted escrow release spend plus accepted DAA-expired escrow refund spend on separate P2SH outputs; cancel funding exists but the cancel spend was rejected by script-unit limits",
+      "risk": "Release, refund, and cancel are mutually exclusive spends of one escrow output, and the current mutual-cancel script shape exceeds TN12 script-unit limits.",
+      "nextHardeningStep": "Redesign or simplify mutual cancel before another accepted proof attempt."
     },
     {
       "id": "treasury-payroll-caps",

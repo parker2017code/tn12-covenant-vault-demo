@@ -74,4 +74,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 46. Add LLM review guide: direct GitHub-connected reviewers to compare GitHub, Pages, local, and TN12 API state before making claims.
 47. Add accepted DAA-expired escrow refund proof: compile an expired escrow fixture with a past DAA-score refund time, fund a separate P2SH output, and spend it through the refund path.
 48. Add ZK/anchor roadmap lane: track future off-chain state proofs, solver proofs, bridge/source-chain anchors, oracle attestations, and vProg settlement without claiming ZK is used today.
-49. Next escrow proof is mutual cancel only; release and DAA-refund are already accepted on separate outputs.
+49. Attempt mutual cancel on a separate funded output; current draft is rejected by TN12 script-unit limits (`used=200870`, `limit=109999`), so the next work is cancel-path redesign.

@@ -1,0 +1,25 @@
+{
+  "schema": "tn12-rejected-submit-attempt/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "escrow-cancel",
+  "contract": "Escrow",
+  "entrypoint": "cancel",
+  "status": "rejected-script-units-limit",
+  "attemptedAt": "2026-05-07T12:20:00.000Z",
+  "fundingTxid": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+  "spendTxid": "5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323",
+  "source": {
+    "txid": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+    "outputIndex": 0,
+    "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
+    "amountSompi": "5000000000",
+    "amountTkas": 50,
+    "status": "accepted-funding-output"
+  },
+  "submitResult": {
+    "httpStatus": 400,
+    "error": "RPC Server (remote error) -> Rejected transaction 5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323: failed to verify the signature script: script units exceeded the allowed amount: used=200870, limit=109999"
+  },
+  "boundary": "This is not an accepted cancel proof. It is evidence that the current mutual-cancel script shape exceeds TN12 script-unit limits for this draft.",
+  "next": "Redesign or simplify the cancel path before another accepted proof attempt."
+}

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-accepted-app-state/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-07T12:09:09.195Z",
+  "fetchedAt": "2026-05-07T12:22:52.844Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "summary": {
     "total": 6,
