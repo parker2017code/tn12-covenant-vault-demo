@@ -213,6 +213,14 @@ Inspect the REST submit payload without broadcasting:
 npm run tx:submit:dry
 ```
 
+Build the signed-draft review registry for the browser submit console:
+
+```sh
+npm run submit:registry
+```
+
+The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. It does not read `.local/tn12-wallet.json` or expose private keys.
+
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 
 ```sh

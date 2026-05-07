@@ -1,0 +1,362 @@
+{
+  "schema": "tn12-submit-console-registry/v1",
+  "network": "kaspa-testnet-12",
+  "status": "review-only-not-broadcast",
+  "summary": {
+    "total": 6,
+    "payloadDrafts": 1,
+    "explicitSubmitRequired": 6,
+    "payloadSubmitGated": 1
+  },
+  "drafts": [
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "fb511eea8926cbcd9520591acdf5eddf1a0932fb6b3d61b900743ac7c0ee56d5",
+      "warning": "This signed draft carries transaction payload bytes. REST submit support for payload must be verified before broadcasting.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+        "outputIndex": 2,
+        "amountTkas": 1999.9998
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 127
+      },
+      "totals": {
+        "outputSompi": "100000000",
+        "outputTkas": "1"
+      },
+      "inputs": [
+        {
+          "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+          "index": 2,
+          "sigOpCount": 1,
+          "sequence": 0
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "previewHex": "7b226b696e64223a226f726465722d7265636569707422...2d7472616e73616374696f6e20696e646578696e67227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json",
+        "submitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit",
+        "boundary": "Payload REST submit support must be accepted manually before submit."
+      },
+      "label": "Payload receipt self-send",
+      "priority": 1,
+      "description": "Invoice/signal payload receipt candidate. Payload REST submit support remains gated."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/split-funding.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-split-draft/v1",
+      "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+      "warning": "This is the first sensible broadcast candidate. It only splits testnet funds back to the same saved address.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+        "outputIndex": 2,
+        "amountTkas": 1999.9998
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 3,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "199999975000",
+        "outputTkas": "1999.99975"
+      },
+      "inputs": [
+        {
+          "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+          "index": 2,
+          "sigOpCount": 1,
+          "sequence": 0
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "10000000000",
+          "amountTkas": "100",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "50000000000",
+          "amountTkas": "500",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 2,
+          "amountSompi": "139999975000",
+          "amountTkas": "1399.99975",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Split funding",
+      "priority": 2,
+      "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/vault-recovery.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "vault-recovery",
+      "transactionId": "6c3873c7374e6cd9cd1cdfdd5aab81222d3fb6090e3ec9ff512f42579a4f4c4c",
+      "warning": "This spends the vault P2SH output if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+        "outputIndex": 0,
+        "amountTkas": 25,
+        "address": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-recovery.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-recovery.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Vault recovery",
+      "priority": 3,
+      "description": "Accepted proof path for vault recovery."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/vault-withdrawal.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "vault-withdrawal",
+      "transactionId": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
+      "warning": "This spends the vault P2SH output if submitted after unlockTime and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+        "outputIndex": 0,
+        "amountTkas": 25,
+        "address": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-withdrawal.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-withdrawal.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Vault withdrawal",
+      "priority": 4,
+      "description": "Accepted proof path for delayed vault withdrawal."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/assurance-release.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "assurance-release",
+      "transactionId": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
+      "warning": "This spends the assurance pledge P2SH output if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+        "outputIndex": 0,
+        "amountTkas": 250,
+        "address": "kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "24999995000",
+        "outputTkas": "249.99995"
+      },
+      "inputs": [
+        {
+          "txid": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "24999995000",
+          "amountTkas": "249.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-release.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-release.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Assurance release",
+      "priority": 5,
+      "description": "Accepted proof path for individual pledge release."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/assurance-refund.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "assurance-refund",
+      "transactionId": "0ad367cea66c3c823cc9c23e1e874cedc0fb30e90c3deaa309cdcee2dc4f54aa",
+      "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+        "outputIndex": 0,
+        "amountTkas": 250,
+        "address": "kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "24999995000",
+        "outputTkas": "249.99995"
+      },
+      "inputs": [
+        {
+          "txid": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "24999995000",
+          "amountTkas": "249.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-refund.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-refund.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Assurance refund",
+      "priority": 6,
+      "description": "Accepted proof path for individual pledge refund."
+    }
+  ],
+  "boundaries": [
+    "The console reviews signed draft artifacts only; it does not read or expose private keys.",
+    "Dry-run commands are safe inspection commands.",
+    "Broadcast commands are explicit and testnet-only."
+  ]
+}

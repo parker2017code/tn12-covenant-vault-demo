@@ -37,6 +37,10 @@ import {
   buildInvoiceArtifact,
   buildInvoiceRegistry
 } from "../src/invoiceReceipt.mjs";
+import {
+  buildSubmitConsoleRegistry,
+  summarizeSignedDraft
+} from "../src/submitConsole.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -97,6 +101,20 @@ const invoiceFixture = JSON.parse(await readFile(new URL("../fixtures/InvoiceRec
 const invoiceRegistry = buildInvoiceRegistry(invoiceFixture);
 assert.equal(invoiceRegistry.summary.total, 2);
 assert.equal(invoiceRegistry.summary.paid, 0);
+const splitDraftArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/split-funding.json", import.meta.url), "utf8"));
+const splitDraftSummary = summarizeSignedDraft(splitDraftArtifact, "artifacts/signed-drafts/split-funding.json");
+assert.equal(splitDraftSummary.counts.inputs, 1);
+assert.equal(splitDraftSummary.counts.outputs, 3);
+assert.match(splitDraftSummary.submit.submitCommand, /--submit/);
+const submitManifest = JSON.parse(await readFile(new URL("../fixtures/SubmitConsoleDrafts.json", import.meta.url), "utf8"));
+const submitArtifacts = {};
+for (const draft of submitManifest.drafts) {
+  submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
+}
+const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
+assert.equal(submitRegistry.summary.total, 6);
+assert.equal(submitRegistry.summary.payloadDrafts, 1);
+assert.equal(submitRegistry.summary.payloadSubmitGated, 1);
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -178,11 +196,13 @@ const files = [
   "scripts/plan-transactions.mjs",
   "scripts/build-signal-payload.mjs",
   "scripts/build-invoice-registry.mjs",
+  "scripts/build-submit-console-registry.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
   "artifacts/AssurancePledge.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
+  "artifacts/submit-console-registry.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/SavedWallet.public.json",
@@ -195,11 +215,13 @@ const files = [
   "fixtures/AttestationSignals.json",
   "fixtures/MasterAppRoadmap.json",
   "fixtures/InvoiceReceipts.json",
+  "fixtures/SubmitConsoleDrafts.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",
+  "src/submitConsole.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -235,6 +257,7 @@ assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
 assert.match(readme, /npm run invoice:registry/);
+assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -249,6 +272,7 @@ assert.match(html, /Kaspa app lab/);
 assert.match(html, /Miner signal research/);
 assert.match(html, /Accepted transaction indexer/);
 assert.match(html, /Payload receipt app/);
+assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /receipt-events/);
 assert.match(html, /Master app plan/);
 assert.match(html, /Attestation registry/);

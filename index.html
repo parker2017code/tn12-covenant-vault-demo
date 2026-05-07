@@ -22,6 +22,7 @@
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
       <a href="#invoices">Invoices</a>
+      <a href="#submit">Submit</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#stack">Stack</a>
       <a href="#app-lab">App lab</a>
@@ -235,6 +236,18 @@
       <div id="invoice-draft" class="invoice-draft" aria-live="polite"></div>
       <pre>npm run invoice:registry
 npm run tx:payload</pre>
+    </section>
+
+    <section id="submit" class="panel submit-console">
+      <div class="section-title">
+        <p class="eyebrow">Wallet-facing submit console</p>
+        <h2>Review signed drafts before any testnet broadcast.</h2>
+        <p>This is lane 2: exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. The browser reviews signed artifacts only; actual network submission remains an explicit shell command.</p>
+      </div>
+      <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
+      <div id="submit-drafts" class="submit-drafts" aria-live="polite"></div>
+      <pre>npm run submit:registry
+node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json</pre>
     </section>
 
     <section id="roadmap" class="panel roadmap">

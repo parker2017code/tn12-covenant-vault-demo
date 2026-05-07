@@ -1,0 +1,42 @@
+{
+  "schema": "tn12-submit-console-drafts/v1",
+  "network": "kaspa-testnet-12",
+  "drafts": [
+    {
+      "label": "Payload receipt self-send",
+      "priority": 1,
+      "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "description": "Invoice/signal payload receipt candidate. Payload REST submit support remains gated."
+    },
+    {
+      "label": "Split funding",
+      "priority": 2,
+      "path": "artifacts/signed-drafts/split-funding.json",
+      "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
+    },
+    {
+      "label": "Vault recovery",
+      "priority": 3,
+      "path": "artifacts/signed-drafts/vault-recovery.json",
+      "description": "Accepted proof path for vault recovery."
+    },
+    {
+      "label": "Vault withdrawal",
+      "priority": 4,
+      "path": "artifacts/signed-drafts/vault-withdrawal.json",
+      "description": "Accepted proof path for delayed vault withdrawal."
+    },
+    {
+      "label": "Assurance release",
+      "priority": 5,
+      "path": "artifacts/signed-drafts/assurance-release.json",
+      "description": "Accepted proof path for individual pledge release."
+    },
+    {
+      "label": "Assurance refund",
+      "priority": 6,
+      "path": "artifacts/signed-drafts/assurance-refund.json",
+      "description": "Accepted proof path for individual pledge refund."
+    }
+  ]
+}

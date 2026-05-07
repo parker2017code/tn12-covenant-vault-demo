@@ -365,6 +365,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.submit-console {
+  margin-top: 24px;
+}
+
 .stack {
   margin-top: 24px;
 }
@@ -522,6 +526,46 @@ progress::-moz-progress-bar {
   font-size: 24px;
 }
 
+.submit-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.submit-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.submit-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.submit-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+}
+
+.submit-drafts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.submit-card pre {
+  max-height: 180px;
+  margin: 0;
+  font-size: 12px;
+}
+
 .invoice-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -636,6 +680,7 @@ progress::-moz-progress-bar {
 .signal-card,
 .invoice-card,
 .invoice-draft article,
+.submit-card,
 .attestation-card,
 .indexer-card,
 .receipt-card,
@@ -656,6 +701,7 @@ progress::-moz-progress-bar {
 .signal-card span,
 .invoice-card span,
 .invoice-draft article span,
+.submit-card span,
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
@@ -685,6 +731,9 @@ progress::-moz-progress-bar {
 .invoice-draft article strong,
 .invoice-draft article p,
 .invoice-draft article small,
+.submit-card strong,
+.submit-card p,
+.submit-card small,
 .attestation-card strong,
 .attestation-card p,
 .attestation-card small,
@@ -709,6 +758,7 @@ progress::-moz-progress-bar {
 .signal-card p,
 .invoice-card p,
 .invoice-draft article p,
+.submit-card p,
 .attestation-card p,
 .indexer-card p,
 .receipt-card p,
@@ -722,6 +772,7 @@ progress::-moz-progress-bar {
 .signal-card small,
 .invoice-card small,
 .invoice-draft article small,
+.submit-card small,
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
@@ -811,6 +862,8 @@ progress::-moz-progress-bar {
   .indexer-summary,
   .invoice-summary,
   .invoice-list,
+  .submit-summary,
+  .submit-drafts,
   .roadmap-list,
   .attestation-summary,
   .attestation-columns,

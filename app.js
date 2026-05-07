@@ -24,6 +24,7 @@ import {
 } from "./src/signalPayload.mjs";
 import { buildAttestationRegistry } from "./src/attestationSignal.mjs";
 import { buildInvoiceRegistry } from "./src/invoiceReceipt.mjs";
+import { buildSubmitConsoleRegistry } from "./src/submitConsole.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -45,6 +46,8 @@ const receiptEventsNode = document.querySelector("#receipt-events");
 const invoiceSummaryNode = document.querySelector("#invoice-summary");
 const invoiceListNode = document.querySelector("#invoice-list");
 const invoiceDraftNode = document.querySelector("#invoice-draft");
+const submitSummaryNode = document.querySelector("#submit-summary");
+const submitDraftsNode = document.querySelector("#submit-drafts");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -165,6 +168,7 @@ renderManualOutpoint();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
+renderSubmitConsole();
 renderMasterRoadmap();
 renderBuildQueue();
 renderVaultTemplates();
@@ -421,6 +425,45 @@ async function renderInvoiceApp() {
     }
   } catch (error) {
     invoiceSummaryNode.textContent = `Invoice registry unavailable: ${error.message}`;
+  }
+}
+
+async function renderSubmitConsole() {
+  if (!submitSummaryNode || !submitDraftsNode) return;
+
+  try {
+    const manifestResponse = await fetch("fixtures/SubmitConsoleDrafts.json", { cache: "no-store" });
+    const manifest = await manifestResponse.json();
+    const artifactsByPath = {};
+    await Promise.all((manifest.drafts || []).map(async (draft) => {
+      const response = await fetch(draft.path, { cache: "no-store" });
+      artifactsByPath[draft.path] = await response.json();
+    }));
+    const registry = buildSubmitConsoleRegistry(manifest, artifactsByPath);
+
+    submitSummaryNode.innerHTML = `
+      <article><span>Drafts</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
+      <article><span>Payload</span><strong>${escapeHtml(registry.summary.payloadDrafts)}</strong></article>
+      <article><span>Gated</span><strong>${escapeHtml(registry.summary.payloadSubmitGated)}</strong></article>
+      <article><span>Status</span><strong>review</strong></article>
+    `;
+
+    submitDraftsNode.innerHTML = "";
+    for (const draft of registry.drafts) {
+      const article = document.createElement("article");
+      article.className = "submit-card";
+      article.innerHTML = `
+        <span>${escapeHtml(draft.status)}</span>
+        <strong>${escapeHtml(draft.label)}</strong>
+        <p>${escapeHtml(shortTxid(draft.transactionId || "unknown00000000"))}</p>
+        <small>${escapeHtml(draft.counts.inputs)} input; ${escapeHtml(draft.counts.outputs)} outputs; ${escapeHtml(draft.counts.payloadBytes)} payload bytes; ${escapeHtml(draft.totals.outputTkas)} TKAS out</small>
+        <pre>${escapeHtml(draft.submit.dryRunCommand)}
+${escapeHtml(draft.submit.submitCommand)}</pre>
+      `;
+      submitDraftsNode.append(article);
+    }
+  } catch (error) {
+    submitSummaryNode.textContent = `Submit console unavailable: ${error.message}`;
   }
 }
 

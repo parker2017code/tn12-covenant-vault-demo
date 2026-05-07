@@ -25,6 +25,7 @@
     "tx:submit:dry": "node scripts/submit-signed-draft.mjs",
     "indexer:state": "node scripts/build-accepted-app-state.mjs",
     "invoice:registry": "node scripts/build-invoice-registry.mjs",
+    "submit:registry": "node scripts/build-submit-console-registry.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

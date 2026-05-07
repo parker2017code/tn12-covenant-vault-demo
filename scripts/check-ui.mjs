@@ -53,6 +53,9 @@ try {
   await expectText(page, "#invoice-summary", "Draft");
   await expectText(page, "#invoice-list", "merchant-order-1337");
   await expectText(page, "#invoice-draft", "signed-not-broadcast");
+  await expectText(page, "#submit-summary", "Drafts");
+  await expectText(page, "#submit-drafts", "Payload receipt self-send");
+  await expectText(page, "#submit-drafts", "--submit");
   await expectText(page, "#receipt-events", "No accepted payload receipts yet");
   await expectText(page, "#signal-artifact", "payload-size-ok");
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");
