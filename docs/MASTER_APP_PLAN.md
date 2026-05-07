@@ -45,6 +45,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
    - Coupons, memberships, tickets, redeemable claims.
    - Label clearly as ecosystem/indexer/issuer flows unless later covenant enforcement exists.
    - First success: pass artifact plus redemption state model.
+   - Current repo surface: `fixtures/AccessPassPlanner.json`, `src/accessPassPlanner.mjs`, `npm run access:passes`, and the browser access pass panel.
 
 7. Simple Asset Policy
    - Later covenant-native rules: mint, transfer, burn, recovery, redemption.

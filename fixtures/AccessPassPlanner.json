@@ -1,0 +1,65 @@
+{
+  "schema": "kaspa-access-pass-planner-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "passes": [
+    {
+      "passId": "pass-dev-workshop-001",
+      "name": "Kaspa dev workshop ticket",
+      "issuer": "Kaspa App Lab",
+      "category": "ticket",
+      "claim": "Entry to a developer workshop after accepted redemption.",
+      "supplyIssued": 40,
+      "validFromIso": "2026-05-14T00:00:00.000Z",
+      "validUntilIso": "2026-06-14T00:00:00.000Z",
+      "metadataHash": "sha256:dev-workshop-ticket-placeholder",
+      "status": "active",
+      "enforcement": "issuer-indexer"
+    },
+    {
+      "passId": "pass-merchant-coupon-002",
+      "name": "Merchant checkout coupon",
+      "issuer": "Demo merchant",
+      "category": "coupon",
+      "claim": "Redeemable checkout discount if issuer honors the accepted redemption record.",
+      "supplyIssued": 100,
+      "validFromIso": "2026-05-07T00:00:00.000Z",
+      "validUntilIso": "2026-07-07T00:00:00.000Z",
+      "metadataHash": "sha256:merchant-coupon-placeholder",
+      "status": "active",
+      "enforcement": "issuer-indexer"
+    },
+    {
+      "passId": "pass-research-membership-003",
+      "name": "Research membership",
+      "issuer": "Coordination market study group",
+      "category": "membership",
+      "claim": "Membership list entry for research calls and attestations.",
+      "supplyIssued": 25,
+      "validFromIso": "2026-05-07T00:00:00.000Z",
+      "validUntilIso": "2026-12-31T00:00:00.000Z",
+      "metadataHash": "sha256:research-membership-placeholder",
+      "status": "draft",
+      "enforcement": "issuer-indexer"
+    }
+  ],
+  "redemptions": [
+    {
+      "redemptionId": "redeem-workshop-alpha",
+      "passId": "pass-dev-workshop-001",
+      "holder": "holder-alpha",
+      "acceptedTxid": "fixture-accepted-txid-needed",
+      "payloadKind": "access-pass-redemption",
+      "redeemedAtIso": "2026-05-07T00:00:00.000Z",
+      "status": "accepted-redemption"
+    },
+    {
+      "redemptionId": "redeem-coupon-beta",
+      "passId": "pass-merchant-coupon-002",
+      "holder": "holder-beta",
+      "acceptedTxid": "",
+      "payloadKind": "access-pass-redemption",
+      "redeemedAtIso": "",
+      "status": "draft-redemption"
+    }
+  ]
+}

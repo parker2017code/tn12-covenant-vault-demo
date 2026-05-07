@@ -70,6 +70,9 @@ try {
   await expectText(page, "#coordination-summary", "Intendos");
   await expectText(page, "#coordination-packs", "pack-stag-docs-sprint");
   await expectText(page, "#coordination-packs", "satisfiable-transparent-pack");
+  await expectText(page, "#access-summary", "Redeemed");
+  await expectText(page, "#access-list", "Kaspa dev workshop ticket");
+  await expectText(page, "#access-list", "issuer-indexer");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

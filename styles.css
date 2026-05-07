@@ -385,6 +385,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.access-passes {
+  margin-top: 24px;
+}
+
 .submit-console {
   margin-top: 24px;
 }
@@ -596,6 +600,34 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.access-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.access-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.access-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.access-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
 .coordination-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -796,6 +828,13 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.access-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .submit-card pre {
   max-height: 180px;
   margin: 0;
@@ -931,6 +970,7 @@ progress::-moz-progress-bar {
 .escrow-card,
 .treasury-card,
 .coordination-card,
+.access-card,
 .attestation-card,
 .indexer-card,
 .receipt-card,
@@ -960,6 +1000,7 @@ progress::-moz-progress-bar {
 .escrow-card span,
 .treasury-card span,
 .coordination-card span,
+.access-card span,
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
@@ -1017,6 +1058,9 @@ progress::-moz-progress-bar {
 .coordination-card strong,
 .coordination-card p,
 .coordination-card small,
+.access-card strong,
+.access-card p,
+.access-card small,
 .attestation-card strong,
 .attestation-card p,
 .attestation-card small,
@@ -1050,6 +1094,7 @@ progress::-moz-progress-bar {
 .escrow-card p,
 .treasury-card p,
 .coordination-card p,
+.access-card p,
 .attestation-card p,
 .indexer-card p,
 .receipt-card p,
@@ -1072,6 +1117,7 @@ progress::-moz-progress-bar {
 .escrow-card small,
 .treasury-card small,
 .coordination-card small,
+.access-card small,
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
@@ -1172,6 +1218,8 @@ progress::-moz-progress-bar {
   .treasury-list,
   .coordination-summary,
   .coordination-packs,
+  .access-summary,
+  .access-list,
   .submit-summary,
   .submit-drafts,
   .research-summary,

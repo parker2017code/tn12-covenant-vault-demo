@@ -32,6 +32,7 @@ import { buildEscrowPrimitive } from "./src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "./src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
+import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -69,6 +70,8 @@ const treasurySummaryNode = document.querySelector("#treasury-summary");
 const treasuryListNode = document.querySelector("#treasury-list");
 const coordinationSummaryNode = document.querySelector("#coordination-summary");
 const coordinationPacksNode = document.querySelector("#coordination-packs");
+const accessSummaryNode = document.querySelector("#access-summary");
+const accessListNode = document.querySelector("#access-list");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -191,6 +194,7 @@ renderEnforcementMatrix();
 renderEscrowPrimitive();
 renderTreasuryVaults();
 renderCoordinationMarket();
+renderAccessPassPlanner();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -477,6 +481,37 @@ async function renderCoordinationMarket() {
     }
   } catch (error) {
     coordinationSummaryNode.textContent = `Coordination market prototype unavailable: ${error.message}`;
+  }
+}
+
+async function renderAccessPassPlanner() {
+  if (!accessSummaryNode || !accessListNode) return;
+
+  try {
+    const response = await fetch("fixtures/AccessPassPlanner.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const planner = buildAccessPassPlanner(fixture);
+    accessSummaryNode.innerHTML = `
+      <article><span>Passes</span><strong>${escapeHtml(planner.summary.totalPasses)}</strong></article>
+      <article><span>Issued</span><strong>${escapeHtml(planner.summary.totalIssued)}</strong></article>
+      <article><span>Redeemed</span><strong>${escapeHtml(planner.summary.acceptedRedemptions)}</strong></article>
+      <article><span>Pending</span><strong>${escapeHtml(planner.summary.pendingRedemptions)}</strong></article>
+    `;
+
+    accessListNode.innerHTML = "";
+    for (const pass of planner.passes) {
+      const article = document.createElement("article");
+      article.className = "access-card";
+      article.innerHTML = `
+        <span>${escapeHtml(pass.state)} / ${escapeHtml(pass.category)}</span>
+        <strong>${escapeHtml(pass.name)}</strong>
+        <p>${escapeHtml(pass.claim)}</p>
+        <small>${escapeHtml(pass.redeemed)} redeemed; ${escapeHtml(pass.remaining)} remaining; ${escapeHtml(pass.enforcement)}.</small>
+      `;
+      accessListNode.append(article);
+    }
+  } catch (error) {
+    accessSummaryNode.textContent = `Access pass planner unavailable: ${error.message}`;
   }
 }
 

@@ -131,6 +131,16 @@
       "proof": "Generated transparent toy solver artifact only",
       "risk": "Transparent satisfiable packs are not opaque accumulation, capital multiplexing, composability, or coordinated atomic execution.",
       "nextHardeningStep": "Build exact settlement drafts for one satisfiable transparent pack before claiming any Hunt execution proof."
+    },
+    {
+      "id": "access-pass-redemption",
+      "name": "Access pass redemption",
+      "lane": "access-passes",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/AccessPassPlanner.json and browser access pass panel",
+      "proof": "Generated access pass planner artifact only",
+      "risk": "Issuer-backed redemption state can be useful, but it is not native ticket enforcement.",
+      "nextHardeningStep": "Tie one redemption to an accepted payload receipt and add duplicate redemption checks."
     }
   ]
 }

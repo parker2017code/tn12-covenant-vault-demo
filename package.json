@@ -33,6 +33,7 @@
     "treasury:registry": "node scripts/build-treasury-vaults.mjs",
     "payload:readiness": "node scripts/build-payload-submit-readiness.mjs",
     "coordination:market": "node scripts/build-coordination-market.mjs",
+    "access:passes": "node scripts/build-access-pass-planner.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

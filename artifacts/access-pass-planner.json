@@ -1,0 +1,93 @@
+{
+  "schema": "kaspa-access-pass-planner/v1",
+  "network": "kaspa-testnet-12",
+  "status": "issuer-indexer-flow-not-native-enforcement",
+  "summary": {
+    "totalPasses": 3,
+    "totalIssued": 165,
+    "acceptedRedemptions": 1,
+    "pendingRedemptions": 1
+  },
+  "passes": [
+    {
+      "passId": "pass-dev-workshop-001",
+      "name": "Kaspa dev workshop ticket",
+      "issuer": "Kaspa App Lab",
+      "category": "ticket",
+      "claim": "Entry to a developer workshop after accepted redemption.",
+      "supplyIssued": 40,
+      "validFromIso": "2026-05-14T00:00:00.000Z",
+      "validUntilIso": "2026-06-14T00:00:00.000Z",
+      "metadataHash": "sha256:dev-workshop-ticket-placeholder",
+      "status": "active",
+      "enforcement": "issuer-indexer",
+      "issued": 40,
+      "redeemed": 1,
+      "pending": 0,
+      "remaining": 39,
+      "state": "partially-redeemed"
+    },
+    {
+      "passId": "pass-merchant-coupon-002",
+      "name": "Merchant checkout coupon",
+      "issuer": "Demo merchant",
+      "category": "coupon",
+      "claim": "Redeemable checkout discount if issuer honors the accepted redemption record.",
+      "supplyIssued": 100,
+      "validFromIso": "2026-05-07T00:00:00.000Z",
+      "validUntilIso": "2026-07-07T00:00:00.000Z",
+      "metadataHash": "sha256:merchant-coupon-placeholder",
+      "status": "active",
+      "enforcement": "issuer-indexer",
+      "issued": 100,
+      "redeemed": 0,
+      "pending": 1,
+      "remaining": 100,
+      "state": "issued-not-redeemed"
+    },
+    {
+      "passId": "pass-research-membership-003",
+      "name": "Research membership",
+      "issuer": "Coordination market study group",
+      "category": "membership",
+      "claim": "Membership list entry for research calls and attestations.",
+      "supplyIssued": 25,
+      "validFromIso": "2026-05-07T00:00:00.000Z",
+      "validUntilIso": "2026-12-31T00:00:00.000Z",
+      "metadataHash": "sha256:research-membership-placeholder",
+      "status": "draft",
+      "enforcement": "issuer-indexer",
+      "issued": 25,
+      "redeemed": 0,
+      "pending": 0,
+      "remaining": 25,
+      "state": "not-active"
+    }
+  ],
+  "redemptions": [
+    {
+      "redemptionId": "redeem-workshop-alpha",
+      "passId": "pass-dev-workshop-001",
+      "holder": "holder-alpha",
+      "acceptedTxid": "fixture-accepted-txid-needed",
+      "payloadKind": "access-pass-redemption",
+      "redeemedAtIso": "2026-05-07T00:00:00.000Z",
+      "status": "accepted-redemption"
+    },
+    {
+      "redemptionId": "redeem-coupon-beta",
+      "passId": "pass-merchant-coupon-002",
+      "holder": "holder-beta",
+      "acceptedTxid": "",
+      "payloadKind": "access-pass-redemption",
+      "redeemedAtIso": "",
+      "status": "draft-redemption"
+    }
+  ],
+  "boundaries": [
+    "Access passes are issuer/indexer claims in this repo, not native covenant-enforced tickets.",
+    "Accepted redemption payloads can update app state, but the issuer must honor the claim off-chain unless a later enforcement path exists.",
+    "KRC-style ecosystem/indexer flows should stay clearly labeled until the repo integrates a specific indexer/API.",
+    "Duplicate redemption prevention is app/indexer responsibility in this planner."
+  ]
+}

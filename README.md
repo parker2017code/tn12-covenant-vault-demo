@@ -26,6 +26,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds an escrow primitive registry for buyer fund, seller release, timeout refund, and mutual cancel planning.
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
 - Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, and Hunt-plan artifacts.
+- Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
 
 ## What It Does Not Do Yet
 
@@ -282,6 +283,14 @@ npm run coordination:market
 ```
 
 This turns `fixtures/CoordinationMarketPrototype.json` into `artifacts/coordination-market-prototype.json`. It is not a Hashdag/Staghunt implementation; it is a transparent toy planner for Stag, Intendo, Pack, Solver, and Hunt before opacity, capital multiplexing, composability, and atomic execution exist.
+
+Build the access pass planner:
+
+```sh
+npm run access:passes
+```
+
+This turns `fixtures/AccessPassPlanner.json` into `artifacts/access-pass-planner.json`. Passes and redemptions are issuer/indexer flows, not native covenant-enforced tickets.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 
