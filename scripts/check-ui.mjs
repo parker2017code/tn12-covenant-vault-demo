@@ -52,9 +52,10 @@ try {
   await expectText(page, "#indexer-summary", "Matched");
   await expectText(page, "#invoice-summary", "Draft");
   await expectText(page, "#invoice-list", "merchant-order-1337");
+  await expectText(page, "#invoice-list", "accepted-receipt-indexed");
   await expectText(page, "#invoice-draft", "signed-not-broadcast");
   await expectText(page, "#payload-readiness", "Payload submit readiness");
-  await expectText(page, "#payload-readiness", "blocked-rest-submit-dropped-payload");
+  await expectText(page, "#payload-readiness", "accepted-wrpc-payload-receipt-rest-blocked");
   await expectText(page, "#campaign-summary", "release-not-ready");
   await expectText(page, "#campaign-plans", "Release plan");
   await expectText(page, "#campaign-pledges", "pledge-docs-004");
@@ -112,10 +113,11 @@ try {
   await expectText(page, "#research-summary", "Candidates");
   await expectText(page, "#research-candidates", "Uniswap-style AMM");
   await expectText(page, "#research-candidates", "Wallet API send route");
-  await expectText(page, "#receipt-events", "No accepted payload receipts yet");
+  await expectText(page, "#receipt-events", "order-receipt / paid");
+  await expectText(page, "#receipt-events", "merchant-order-1337");
   await expectText(page, "#signal-artifact", "payload-size-ok");
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");
-  await expectText(page, "#payload-draft-status", "submit remains gated");
+  await expectText(page, "#payload-draft-status", "accepted through TN12 JSON wRPC");
   await expectText(page, "#master-roadmap", "Payload Receipt / Invoice App");
   await expectText(page, "#master-roadmap", "AI-Agent Commitment Board");
   await expectText(page, "#attestation-summary", "Verified");

@@ -5,13 +5,19 @@ import {
 } from "../src/acceptedIndexer.mjs";
 
 const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
+const receiptFixture = JSON.parse(await readFile("fixtures/InvoiceReceipts.json", "utf8"));
 const transactions = {};
+const receiptTransactions = {};
 
 for (const proof of proofFixture.transactions) {
   transactions[proof.txid] = await fetchTransaction(proof.txid);
 }
 
-const state = buildAcceptedAppState({ proofFixture, transactions });
+for (const receipt of receiptFixture.acceptedReceipts || []) {
+  receiptTransactions[receipt.txid] = await fetchTransaction(receipt.txid);
+}
+
+const state = buildAcceptedAppState({ proofFixture, transactions, receiptFixture, receiptTransactions });
 await writeFile("fixtures/AcceptedAppState.json", `${JSON.stringify(state, null, 2)}\n`);
 
 if (state.summary.mismatches > 0) {

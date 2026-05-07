@@ -1,14 +1,14 @@
 {
   "schema": "tn12-accepted-app-state/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-07T16:52:35.592Z",
+  "fetchedAt": "2026-05-07T17:47:58.958Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "summary": {
     "total": 7,
     "accepted": 7,
     "matched": 7,
     "mismatches": 0,
-    "receipts": 0,
+    "receipts": 1,
     "lanes": [
       "assurance",
       "escrow",
@@ -272,9 +272,36 @@
       ]
     },
     "receipts": {
-      "status": "payload-receipt-indexer-next",
-      "decoded": [],
-      "next": "Attach payload receipts to new transactions, then decode accepted transaction payloads into this state snapshot."
+      "status": "payload-receipts-decoded",
+      "decoded": [
+        {
+          "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+          "lane": "receipt",
+          "label": "Invoice merchant-order-1337",
+          "invoiceId": "merchant-order-1337",
+          "status": "accepted-payload-receipt-matched",
+          "accepted": true,
+          "acceptingBlockBlueScore": 5541142,
+          "acceptingBlockTime": 1778175542196,
+          "receipt": {
+            "schema": "kaspa-signal-payload/v1",
+            "status": "decoded",
+            "payload": {
+              "kind": "order-receipt",
+              "subject": "merchant-order-1337",
+              "value": "paid",
+              "note": "Demo payload for accepted-transaction indexing"
+            },
+            "encoded": {
+              "bytes": 127,
+              "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d"
+            }
+          },
+          "evidencePath": "artifacts/payload-receipt-evidence.json",
+          "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+        }
+      ],
+      "next": "Keep invoice state tied to accepted payload receipts."
     }
   }
 }

@@ -924,7 +924,7 @@ async function renderInvoiceApp() {
           <span>${escapeHtml(draft.status)}</span>
           <strong>${escapeHtml(shortTxid(draft.transactionId))}</strong>
           <p>${escapeHtml(draft.receipt.payload.kind)} / ${escapeHtml(draft.receipt.payload.subject)}</p>
-          <small>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; submit remains gated until payload support is verified.</small>
+          <small>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; accepted through TN12 JSON wRPC, with REST submit kept blocked.</small>
         </article>
       `;
     } catch (error) {
@@ -1017,7 +1017,7 @@ async function renderPayloadDraftStatus() {
       <article>
         <span>${escapeHtml(draft.status)}</span>
         <strong>${escapeHtml(shortTxid(draft.transactionId))}</strong>
-        <p>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; submit remains gated until REST payload support is verified.</p>
+        <p>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; accepted through TN12 JSON wRPC. Do not use the public REST route for payload receipts.</p>
         <small>${escapeHtml(draft.receipt.payload.kind)} / ${escapeHtml(draft.receipt.payload.subject)}</small>
       </article>
     `;

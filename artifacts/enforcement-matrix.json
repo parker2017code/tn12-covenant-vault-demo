@@ -107,9 +107,9 @@
       "lane": "payload-invoice",
       "enforcement": "planner-indexer",
       "currentSurface": "fixtures/InvoiceReceipts.json and invoice registry",
-      "proof": "Receipt draft exists; accepted payload receipt still gated",
-      "risk": "Invoice must not become paid until an accepted transaction carries the matching payload.",
-      "nextHardeningStep": "Verify a wallet route that preserves payload bytes, then submit one accepted receipt."
+      "proof": "Accepted TN12 JSON wRPC payload receipt matched the signed draft payload",
+      "risk": "Invoice state depends on accepted transaction indexing and matching payload bytes, not on the public REST no-payload transaction.",
+      "nextHardeningStep": "Add duplicate-payment checks, wallet review, and refund handling before any merchant workflow."
     },
     {
       "id": "submit-console-private-key-separation",

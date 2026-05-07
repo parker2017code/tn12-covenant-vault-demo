@@ -1,7 +1,7 @@
 {
   "schema": "kaspa-invoice-receipts-fixture/v1",
   "network": "kaspa-testnet-12",
-  "next": "Find a Wallet API, RPC, or other payload-preserving route. The public TN12 REST submit route accepted a payment but dropped the payload, so no invoice is paid yet.",
+  "next": "Keep payload receipts tied to accepted transaction evidence before marking invoices paid.",
   "invoices": [
     {
       "invoiceId": "merchant-order-1337",
@@ -22,5 +22,15 @@
       "status": "draft"
     }
   ],
-  "acceptedReceipts": []
+  "acceptedReceipts": [
+    {
+      "invoiceId": "merchant-order-1337",
+      "accepted": true,
+      "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "payloadBytes": 127,
+      "acceptingBlockBlueScore": 5541142,
+      "evidencePath": "artifacts/payload-receipt-evidence.json",
+      "memo": "Accepted TN12 JSON wRPC payload receipt; payload matched the signed draft."
+    }
+  ]
 }

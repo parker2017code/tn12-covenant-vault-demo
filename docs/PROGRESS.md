@@ -8,10 +8,10 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
 
 ## Built Bases
 
-1. Payload receipt / invoice app: fixture, registry, UI panel, signed payload draft, readiness check.
-   - Current status: blocked on verified payload-preserving submit route.
+1. Payload receipt / invoice app: fixture, registry, UI panel, signed payload draft, readiness check, accepted receipt evidence, and decoded app state.
+   - Current status: accepted TN12 JSON wRPC vertical slice.
    - Evidence: forced public TN12 REST submit accepted tx `d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4`, but the fetched transaction has no payload; expected payload txid `ae807e8d81fd46ad5f0f9f77128851cb181a37e7b90105fb8e89f5595955a4d9` was not found.
-   - Next route: `npm run tx:submit:wrpc` reconstructs the payload-bearing transaction and requires `KASPA_WRPC_URL` before broadcast.
+   - Accepted route: JSON wRPC accepted tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`; `npm run payload:verify` confirms payload bytes and output match.
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
 
@@ -100,12 +100,12 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
    - DAA-score timeout refund: done;
    - mutual cancel: separately funded attempt is accepted; current version-1 `computeBudget=30` artifact was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, submitted over JSON wRPC, and verified accepted by the TN12 API.
 
-3. Continue the invoice vertical slice:
-   - find or build a payload-preserving submit route;
-   - submit one payload receipt;
-   - fetch accepted transaction;
-   - decode payload into paid invoice state;
-   - update UI only after accepted state proves it.
+3. Harden the invoice vertical slice:
+   - keep REST submit marked unsuitable for payload receipts;
+   - make JSON wRPC or wallet review repeatable;
+   - add duplicate-payment and stale-receipt checks;
+   - add refund/error state;
+   - keep invoice paid state tied to matched accepted payload bytes.
 
 4. Turn research lanes into safer prototypes:
    - prediction/hedge simulator using attestations and manual portfolio positions;

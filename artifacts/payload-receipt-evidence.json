@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T17:47:57.678Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5541142,
+  "acceptingBlockTime": 1778175542196,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+    "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+    "bytes": 127,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "order-receipt",
+        "subject": "merchant-order-1337",
+        "value": "paid",
+        "note": "Demo payload for accepted-transaction indexing"
+      },
+      "encoded": {
+        "bytes": 127,
+        "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "merchant-order-1337",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+}

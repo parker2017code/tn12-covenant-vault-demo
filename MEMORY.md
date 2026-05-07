@@ -36,7 +36,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - Do not reintroduce local `kaspad` or `/home/parker2017/kaspa-node` into this repo unless the user explicitly reverses that rule.
 - Keep actual broadcast behind explicit commands and testnet-only language.
 - Do not use the public TN12 REST submit route for payload receipts. It accepted a payment while dropping payload bytes.
-- Use public TN12 REST reads, local fixtures, local signing, explicit submit commands, and a verified payload-preserving wallet/wRPC route when one is available.
+- Use public TN12 REST reads, local fixtures, local signing, explicit submit commands, and the verified TN12 JSON wRPC route for payload receipts until wallet review replaces local signing.
 - When TN12, Silverscript, Rusty Kaspa, transaction signing, submit serialization, or covenant verification behavior remains unclear, first dig through the basic layers yourself: local artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK version/API shape, node/network id, and upstream Rusty Kaspa source/tests. Ask the user to get Michael's guidance only after those checks are exhausted or a precise external confirmation is genuinely needed. Include the exact txid, artifact path, endpoint response, source line, and smallest reproducer command.
 - Keep status lanes separate: live Kaspa mainnet, TN12/Toccata covenant work, roadmap vProgs/native app rails, and research-only ideas.
 - Do not edit or publish `/home/parker2017/kaspa-explained` from this repo unless explicitly asked.
@@ -44,8 +44,8 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 ## Current Next Work
 
 - Add more negative/adversarial checks around reducer and planner state.
-- Keep the invoice/payload receipt vertical slice blocked until a payload-preserving submit route is verified.
-- Continue escrow mutual cancel from the version-1 compute-budget path Michael pointed to. Preserve the old `sigOpCount=1` script-unit rejection as historical bad configuration only; the current blocker is submit/verification after the sigop fix.
+- The invoice/payload receipt vertical slice has one accepted TN12 JSON wRPC receipt: `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`. Keep invoice paid state tied to matched accepted payload bytes.
+- Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
 - Build real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
   - escrow/assurance app: TN12 covenant proof app,

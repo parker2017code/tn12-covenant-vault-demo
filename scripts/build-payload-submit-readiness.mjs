@@ -8,6 +8,7 @@ const outPath = process.env.OUT || "artifacts/payload-submit-readiness.json";
 const openapiUrl = process.env.OPENAPI_URL || "https://api-tn12.kaspa.org/openapi.json";
 const signedDraftPath = process.env.PAYLOAD_DRAFT || "artifacts/signed-drafts/payload-receipt-self-send.json";
 const observedAttemptPath = process.env.PAYLOAD_ATTEMPT || "fixtures/PayloadSubmitAttempt.json";
+const acceptedReceiptPath = process.env.PAYLOAD_RECEIPT_EVIDENCE || "artifacts/payload-receipt-evidence.json";
 
 const [openapiResponse, signedDraftText] = await Promise.all([
   fetch(openapiUrl),
@@ -21,12 +22,14 @@ if (!openapiResponse.ok) {
 const openapi = await openapiResponse.json();
 const signedDraft = JSON.parse(signedDraftText);
 const observedAttempt = await readOptionalJson(observedAttemptPath);
+const acceptedReceipt = await readOptionalJson(acceptedReceiptPath);
 const readiness = buildPayloadSubmitReadiness({
   network: "kaspa-testnet-12",
   checkedAt: new Date().toISOString(),
   source: openapiUrl,
   signedDraftHasPayload: Boolean(signedDraft.submitPayload?.transaction?.payload),
   observedAttempt,
+  acceptedReceipt,
   ...extractOpenApiPayloadProperties(openapi)
 });
 

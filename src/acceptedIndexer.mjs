@@ -2,7 +2,13 @@ import { decodeSignalPayload } from "./signalPayload.mjs";
 
 export const TN12_TRANSACTION_ENDPOINT = "https://api-tn12.kaspa.org/transactions";
 
-export function buildAcceptedAppState({ proofFixture, transactions, fetchedAt = new Date().toISOString() }) {
+export function buildAcceptedAppState({
+  proofFixture,
+  transactions,
+  receiptFixture = {},
+  receiptTransactions = {},
+  fetchedAt = new Date().toISOString()
+}) {
   const records = proofFixture.transactions.map((proof) => {
     const tx = transactions[proof.txid];
     const expectedOutput = tx?.outputs?.find((output) => Number(output.index) === 0);
@@ -43,28 +49,28 @@ export function buildAcceptedAppState({ proofFixture, transactions, fetchedAt = 
     };
   });
 
+  const receiptRecords = buildReceiptRecords({ receiptFixture, receiptTransactions });
+
   return {
     schema: "tn12-accepted-app-state/v1",
     network: proofFixture.network || "kaspa-testnet-12",
     fetchedAt,
     endpointBase: TN12_TRANSACTION_ENDPOINT,
-    summary: summarize(records),
+    summary: {
+      ...summarize(records),
+      receipts: receiptRecords.filter((record) => record.status === "accepted-payload-receipt-matched").length
+    },
     records,
     appState: {
       vault: laneState(records, "vault"),
       assurance: laneState(records, "assurance"),
       escrow: laneState(records, "escrow"),
       receipts: {
-        status: records.some((record) => record.receipt) ? "payload-receipts-decoded" : "payload-receipt-indexer-next",
-        decoded: records
-          .filter((record) => record.receipt)
-          .map((record) => ({
-            txid: record.txid,
-            lane: record.lane,
-            label: record.label,
-            receipt: record.receipt
-          })),
-        next: "Attach payload receipts to new transactions, then decode accepted transaction payloads into this state snapshot."
+        status: receiptRecords.length ? "payload-receipts-decoded" : "payload-receipt-indexer-next",
+        decoded: receiptRecords,
+        next: receiptRecords.length
+          ? "Keep invoice state tied to accepted payload receipts."
+          : "Attach payload receipts to new transactions, then decode accepted transaction payloads into this state snapshot."
       }
     }
   };
@@ -100,4 +106,31 @@ function laneState(records, lane) {
       acceptingBlockBlueScore: record.acceptingBlockBlueScore
     }))
   };
+}
+
+function buildReceiptRecords({ receiptFixture = {}, receiptTransactions = {} }) {
+  return (receiptFixture.acceptedReceipts || []).map((receipt) => {
+    const tx = receiptTransactions[receipt.txid];
+    const decoded = decodeSignalPayload(tx?.payload);
+    const accepted = Boolean(tx?.is_accepted);
+    const receiptMatches = Boolean(
+      decoded
+      && decoded.payload.subject === receipt.invoiceId
+      && decoded.payload.value === "paid"
+    );
+
+    return {
+      txid: receipt.txid,
+      lane: "receipt",
+      label: `Invoice ${receipt.invoiceId}`,
+      invoiceId: receipt.invoiceId,
+      status: accepted && receiptMatches ? "accepted-payload-receipt-matched" : "needs-review",
+      accepted,
+      acceptingBlockBlueScore: tx?.accepting_block_blue_score ?? receipt.acceptingBlockBlueScore ?? null,
+      acceptingBlockTime: tx?.accepting_block_time ?? null,
+      receipt: decoded,
+      evidencePath: receipt.evidencePath || null,
+      explorerUrl: `https://tn12.kaspa.stream/txs/${receipt.txid}`
+    };
+  });
 }

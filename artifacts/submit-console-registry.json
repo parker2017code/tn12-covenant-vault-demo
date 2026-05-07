@@ -16,7 +16,7 @@
       "status": "signed-not-broadcast",
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
-      "warning": "This signed draft carries transaction payload bytes. REST submit support for payload must be verified before broadcasting.",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
       "requiresPayloadSubmitSupport": true,
       "source": {
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
@@ -39,7 +39,7 @@
           "index": 1,
           "sigOpCount": 1,
           "computeBudget": null,
-          "sequence": 0
+          "sequence": "0"
         }
       ],
       "outputs": [
@@ -71,7 +71,7 @@
       },
       "label": "Payload receipt self-send",
       "priority": 1,
-      "description": "Invoice/signal payload receipt candidate. Payload REST submit support remains gated."
+      "description": "Accepted invoice payload receipt draft. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
     },
     {
       "schema": "tn12-submit-console-summary/v1",

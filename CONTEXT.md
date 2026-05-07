@@ -254,11 +254,21 @@ ae807e8d81fd46ad5f0f9f77128851cb181a37e7b90105fb8e89f5595955a4d9
 
 Use `npm run tx:submit:wrpc` to inspect the wRPC candidate. Actual broadcast requires `KASPA_WRPC_URL=<ws-or-wss-url>` and still must be verified by fetching the accepted transaction payload before invoice state changes.
 
+That wRPC path now has one accepted receipt:
+
+```txt
+Accepted payload receipt:
+34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e
+
+Verification:
+npm run payload:verify
+```
+
+`artifacts/payload-receipt-evidence.json` confirms the accepted transaction payload matches the signed draft, decodes to `order-receipt / merchant-order-1337 / paid`, and pays the expected 1 TKAS output.
+
 Next assurance work must add campaign-level state, multi-pledge fixtures, and batch release/refund planning before claiming a real campaign product.
 
-## Payload Receipt Work In Progress
-
-The user asked to continue into payload receipt decoding, then asked to update the plan/context before proceeding. Payload implementation was started conceptually but not completed.
+## Payload Receipt State
 
 Current payload state:
 
@@ -266,18 +276,19 @@ Current payload state:
 - `scripts/build-signal-payload.mjs` writes `artifacts/signal-payload.json`.
 - `npm run signal:payload` passes and reports payload byte/transient-mass details.
 - `npm run tx:payload` builds `artifacts/signed-drafts/payload-receipt-self-send.json` with payload bytes preserved in the signed transaction and submit payload candidate.
-- `src/acceptedIndexer.mjs` has a receipts placeholder in `appState.receipts`.
+- `npm run payload:verify` writes `artifacts/payload-receipt-evidence.json` for accepted tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`.
+- `src/acceptedIndexer.mjs` decodes accepted receipt payloads into `appState.receipts`.
 
 Next payload steps:
 
-1. Verify a payload-preserving submit route. Local testing showed `kaspa-wasm createTransaction(..., payload, ...)` needs a `Uint8Array`; a plain string created an empty payload.
-2. The TN12 REST OpenAPI submit model checked on 2026-05-07 does not list a payload field, so payload artifacts are guarded from accidental `--submit`.
-3. Add a fixture for a submitted/accepted payload txid only after a real TN12 payload transaction is broadcast and verified.
-4. Extend `src/acceptedIndexer.mjs` and the UI to show decoded receipts from accepted payload transactions.
+1. Keep JSON wRPC as the verified payload receipt route and REST submit as historical no-payload evidence.
+2. Replace local signing with wallet review before any production-style receipt flow.
+3. Add duplicate-payment, stale-receipt, and refund/error state checks.
+4. Move from REST txid pulls to checkpointed accepted-transaction indexing later.
 
 Official docs note: the long-term accepted-transaction indexer should use checkpointed `getVirtualChainFromBlockV2` with high data verbosity when running against a node or RPC backend, because that exposes full transaction data including payloads and supports rollback handling. This repo is currently using REST txid pulls only because the local node workflow was removed.
 
-Do not fake an accepted payload transaction. Keep it as a draft until submitted and verified.
+Do not use the old REST tx `d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4` as invoice evidence. It is a payment/self-send proof only.
 
 ## Miner Signal Research Boundary
 
@@ -316,7 +327,7 @@ docs/KASPA_DOCS_REVIEW.md
 Key implications:
 
 - Use Covenants for the current vault, assurance, treasury, escrow, and small state-machine work.
-- Use the high-level Wallet API or an RPC-backed route for the first accepted payload receipt if REST submit does not preserve payload.
+- Use the high-level Wallet API or the verified JSON wRPC route for payload receipts; REST submit did not preserve payload.
 - Use checkpointed `getVirtualChainFromBlockV2` later for production-style accepted transaction indexing.
 - Keep Based Apps, full vProgs, and Inline ZK out of current claims unless a later app actually needs shared-state concurrency, cross-app composition, or per-action proofs.
 
@@ -348,16 +359,13 @@ Current app build order:
 
 Recommended order from here:
 
-1. Finish payload receipt draft support without broadcasting.
-2. Build and inspect a signed self-send payload draft.
-3. If the payload draft shape is correct, submit one tiny TN12 payload transaction with explicit `--submit`.
-4. Add the accepted payload txid to fixtures after explorer/API verification.
-5. Decode payload receipts in `src/acceptedIndexer.mjs`.
-6. Surface decoded receipt events in the UI.
-7. Start assurance campaign batching: multiple pledge fixtures, campaign state, batch release/refund drafts.
-8. Start escrow primitive: `Escrow.sil`, funding draft, release draft, timeout refund draft, mutual cancel draft.
-9. Add wallet-facing submit UI that displays exact inputs, outputs, fees, payload, and submit command before broadcast.
-10. Add owner/recovery/recipient/refund key separation instead of using one saved test key for every role.
+1. Add duplicate/stale checks for invoice payload receipts.
+2. Add wallet-review flow for payload receipt submission.
+3. Add refund/error states for invoice receipts.
+4. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
+5. Start assurance campaign batching: multiple pledge fixtures, campaign state, batch release/refund drafts.
+6. Add wallet-facing submit UI that displays exact inputs, outputs, fees, payload, and submit command before broadcast.
+7. Add owner/recovery/recipient/refund key separation instead of using one saved test key for every role.
 
 ## Verification Before Handoff
 

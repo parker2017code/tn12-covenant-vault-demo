@@ -6,7 +6,7 @@
     "total": 14,
     "builtBases": 11,
     "proofBacked": 0,
-    "blocked": 1,
+    "blocked": 0,
     "nextBuilds": 0,
     "research": 2
   },
@@ -15,17 +15,19 @@
       "order": 1,
       "id": "payload-invoice",
       "name": "Payload Receipt / Invoice App",
-      "status": "blocked",
+      "status": "accepted-receipt-indexed",
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
-      "proof": "signed-draft-only",
+      "proof": "accepted-tn12-json-wrpc-payload-receipt",
       "builtSurface": [
         "fixtures/InvoiceReceipts.json",
         "src/invoiceReceipt.mjs",
         "npm run invoice:registry",
-        "npm run payload:readiness"
+        "npm run payload:readiness",
+        "npm run payload:verify",
+        "artifacts/payload-receipt-evidence.json"
       ],
-      "next": "Find or build a payload-preserving submit route, then verify one accepted payload receipt."
+      "next": "Turn the verified JSON wRPC receipt path into repeatable wallet review, duplicate-payment checks, and clearer refund handling."
     },
     {
       "order": 2,
@@ -244,7 +246,7 @@
     "Build explicit agent-task release/refund drafts for one task lifecycle.",
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
-    "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
+    "Replace local payload receipt signing with wallet review and keep the accepted JSON wRPC route documented.",
     "Add negative tests around version-1 computeBudget preservation and keep the local TN12 SDK route documented.",
     "Add a ZK/anchor design checklist before any bridge, oracle, solver, or vProg proof claim."
   ],

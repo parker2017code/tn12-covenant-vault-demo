@@ -197,12 +197,12 @@ Important finding:
 - Passing a plain string produced an empty payload.
 - TN12 REST OpenAPI submit model does not list `payload`, though fetched transactions expose a payload field.
 
-Still needed:
+Current state:
 
-- verify a payload-preserving submit route, likely Wallet API or RPC-backed route;
-- broadcast one tiny TN12 payload receipt transaction only after route is clear;
-- add accepted payload txid to fixtures;
-- decode accepted payload receipts in app-state UI.
+- JSON wRPC accepted one matched payload receipt.
+- `npm run payload:verify` fetches the accepted transaction, checks payload bytes, and writes receipt evidence.
+- The public REST submit route remains no-payload evidence only.
+- Wallet review is the next submit surface.
 
 ### App Lab / Research Lane
 
@@ -236,12 +236,12 @@ Build:
 
 1. Create invoice JSON: invoice ID, merchant address, amount, memo, expiry.
 2. Build signed self-send or merchant-send draft with payload receipt.
-3. Find payload-preserving submit route.
-4. Submit one tiny TN12 receipt tx.
-5. Verify accepted tx and payload.
-6. Add fixture.
-7. Decode receipt in indexer.
-8. Show invoice state: draft, signed, submitted, accepted, paid.
+3. Submit through the verified JSON wRPC route.
+4. Verify accepted tx and payload.
+5. Add fixture.
+6. Decode receipt in indexer.
+7. Show invoice state: draft, signed, submitted, accepted, paid.
+8. Add duplicate-payment, stale-receipt, and refund/error handling.
 
 Success:
 

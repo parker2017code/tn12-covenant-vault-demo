@@ -29,8 +29,9 @@ The initial implementation path has moved beyond local construction: the repo no
 - Official builder docs now include accepted-transaction ingestion patterns. This repo uses a lightweight REST verification command first: `npm run tx:verify`.
 - For a production-grade accepted transaction indexer, the official docs point to checkpointed `getVirtualChainFromBlockV2` with high data verbosity. Use that later through a node/RPC backend; do not reintroduce local node work in this repo unless the user asks.
 - Official transaction-payload docs use `new TextEncoder().encode(...)` payload bytes. Local `kaspa-wasm createTransaction(..., payload, ...)` preserves those bytes when the payload argument is a `Uint8Array`; a plain string produced an empty payload in local testing.
-- The TN12 REST OpenAPI `SubmitTxModel` checked on 2026-05-07 does not list a `payload` field, while fetched `TxModel` does expose `payload`. For that reason, `npm run tx:payload` builds a signed draft and submit payload candidate, but artifacts are guarded from accidental `--submit` until REST payload submission behavior is deliberately verified.
-- `npm run payload:readiness` records that OpenAPI check in `artifacts/payload-submit-readiness.json` so the browser can show the invoice vertical-slice blocker directly.
+- The TN12 REST OpenAPI `SubmitTxModel` checked on 2026-05-07 does not list a `payload` field, while fetched `TxModel` does expose `payload`. A forced REST submit accepted a payment while dropping payload bytes. Keep that result as historical no-payload evidence.
+- TN12 JSON wRPC accepted the matched payload receipt `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`. `npm run payload:verify` fetches it, checks payload bytes, decodes the receipt, and writes `artifacts/payload-receipt-evidence.json`.
+- `npm run payload:readiness` records the OpenAPI check, the REST no-payload attempt, and the accepted wRPC evidence in `artifacts/payload-submit-readiness.json`.
 
 ## Working Public Wallet Metadata
 
@@ -54,6 +55,7 @@ It reads `.local/tn12-wallet.json`, derives the public key, prints public metada
 8. Add assurance refund spend. Done and accepted on TN12 with DAA-score deadline.
 9. Add assurance release spend. Done and accepted on TN12 for the individual pledge primitive.
 10. Add accepted transaction verification. Done in `npm run tx:verify`.
-11. Add signed payload receipt draft. Done in `npm run tx:payload`; broadcast remains gated pending REST payload submit verification.
-12. Add payload submit readiness artifact. Done in `npm run payload:readiness`; the current public TN12 REST submit schema remains blocked for default payload receipt broadcast because it does not advertise a payload field.
+11. Add signed payload receipt draft. Done in `npm run tx:payload`; use JSON wRPC for payload-aware submit and keep REST blocked for this lane.
+12. Add payload submit readiness artifact. Done in `npm run payload:readiness`; it preserves the REST no-payload result and points to the accepted JSON wRPC receipt evidence.
 13. Add escrow mutual cancel on a separate funded output. Done and accepted on TN12 through local TN12 `kaspa-wasm 1.1.1-toc.1`, tx version 1, `computeBudget=30`, and JSON wRPC to `testnet-12`.
+14. Add accepted payload receipt verification. Done in `npm run payload:verify` for tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`.

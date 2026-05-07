@@ -15,7 +15,7 @@ Source root: https://docs.kaspa.org/
 ## Useful Additions From The Deeper Pass
 
 1. **Wallet API is the better long-term send path.**
-   The docs recommend the high-level Wallet API for JavaScript/Rust wallet creation, account activation, sending, events, and payload support. This matters because the TN12 REST submit schema currently omits a payload field, while the Wallet API explicitly supports payload bytes.
+   The docs recommend the high-level Wallet API for JavaScript/Rust wallet creation, account activation, sending, events, and payload support. This matters because the TN12 REST submit schema omits a payload field and dropped payload bytes in testing. JSON wRPC accepted one matched receipt, but wallet review is still the production direction.
 
 2. **Payload must be bytes.**
    The transaction-payload page uses `new TextEncoder().encode(...)`. Local testing matched that: passing `Uint8Array` to `kaspa-wasm createTransaction` preserved payload bytes; passing a plain string produced an empty payload.
@@ -34,8 +34,8 @@ Source root: https://docs.kaspa.org/
 
 ## Plan Changes
 
-- Keep `npm run tx:payload` as a signed draft only until a payload-preserving submit route is verified.
-- Investigate the high-level Wallet API or RPC-backed submission as the likely route for the first accepted payload receipt transaction.
+- Keep `npm run tx:payload` as a signed draft, submit payload receipts through the verified JSON wRPC route, and keep REST submit unsuitable for this lane.
+- Investigate the high-level Wallet API as the next replacement for local signing and shell submit commands.
 - Keep the accepted transaction indexer split into two tiers:
   - local tier: REST txid pulls from known fixtures,
   - later backend tier: checkpointed `getVirtualChainFromBlockV2` with rollback handling.

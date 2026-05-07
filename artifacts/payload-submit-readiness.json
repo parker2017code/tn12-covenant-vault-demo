@@ -1,16 +1,17 @@
 {
   "schema": "tn12-payload-submit-readiness/v1",
   "network": "kaspa-testnet-12",
-  "checkedAt": "2026-05-07T12:50:29.269Z",
+  "checkedAt": "2026-05-07T17:48:08.602Z",
   "source": "https://api-tn12.kaspa.org/openapi.json",
-  "status": "blocked-rest-submit-dropped-payload",
+  "status": "accepted-wrpc-payload-receipt-rest-blocked",
   "checks": {
     "submitTxModelHasPayload": false,
     "fetchedTxModelHasPayload": true,
     "signedDraftHasPayload": true,
     "restSubmitAttempted": true,
     "restSubmitPayloadPreserved": false,
-    "safeToSubmitPayloadReceiptByDefault": false
+    "acceptedWrpcPayloadReceiptMatched": true,
+    "safeToSubmitPayloadReceiptByDefault": true
   },
   "observedAttempt": {
     "schema": "tn12-payload-submit-attempt/v1",
@@ -45,6 +46,54 @@
     "result": "The public TN12 REST submit route accepted the spend but did not preserve the transaction payload. This is a payment/self-send proof, not an invoice receipt proof.",
     "next": "Use a wallet/RPC route that preserves transaction payload bytes before marking invoices paid from accepted payload receipts."
   },
-  "next": "Do not use this REST submit route for payload receipts. It accepted the spend but produced an accepted transaction with no payload.",
-  "boundary": "The accepted transaction is only a payment/self-send proof. It is not an invoice receipt because the payload was not preserved."
+  "acceptedReceipt": {
+    "schema": "tn12-payload-receipt-evidence/v1",
+    "network": "kaspa-testnet-12",
+    "verifiedAt": "2026-05-07T17:47:57.678Z",
+    "endpointBase": "https://api-tn12.kaspa.org/transactions",
+    "status": "accepted-payload-receipt-matched",
+    "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+    "accepted": true,
+    "acceptingBlockBlueScore": 5541142,
+    "acceptingBlockTime": 1778175542196,
+    "payload": {
+      "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+      "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+      "bytes": 127,
+      "matches": true,
+      "decoded": {
+        "schema": "kaspa-signal-payload/v1",
+        "status": "decoded",
+        "payload": {
+          "kind": "order-receipt",
+          "subject": "merchant-order-1337",
+          "value": "paid",
+          "note": "Demo payload for accepted-transaction indexing"
+        },
+        "encoded": {
+          "bytes": 127,
+          "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d"
+        }
+      }
+    },
+    "output": {
+      "expected": {
+        "index": 0,
+        "amountSompi": "100000000",
+        "scriptVersion": 0
+      },
+      "observed": {
+        "index": 0,
+        "amountSompi": "100000000",
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "matches": true
+    },
+    "receiptMatches": true,
+    "invoiceId": "merchant-order-1337",
+    "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+  },
+  "next": "Use the verified TN12 JSON wRPC route for payload receipts; keep the public REST submit failure as historical evidence only.",
+  "boundary": "The invoice receipt is accepted through JSON wRPC and matched by payload bytes. The REST no-payload transaction remains a payment/self-send proof, not invoice evidence."
 }

@@ -1,5 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import {
+import { getKaspaWasmRuntime } from "../src/kaspaWasmRuntime.mjs";
+
+const {
   Address,
   PrivateKey,
   ScriptPublicKey,
@@ -8,8 +10,9 @@ import {
   TransactionInput,
   TransactionOutput,
   UtxoEntries,
+  createInputSignature,
   signTransaction
-} from "kaspa-wasm";
+} = getKaspaWasmRuntime().module;
 import { buildSubmitPayload } from "../src/submitPayload.mjs";
 import {
   buildSignalPayloadArtifact,
@@ -57,16 +60,20 @@ const entries = new UtxoEntries([{
     isCoinbase: funding.raw.utxoEntry.isCoinbase
   }
 }]);
+const inputArgs = {
+  previousOutpoint: funding.raw.outpoint,
+  signatureScript: [],
+  sequence: 0n,
+  sigOpCount: 1
+};
+
+if (typeof SignableTransaction !== "function") {
+  inputArgs.utxo = entries.items[0];
+}
+
 const tx = new Transaction({
   version: 0,
-  inputs: [
-    new TransactionInput({
-      previousOutpoint: funding.raw.outpoint,
-      signatureScript: [],
-      sequence: 0n,
-      sigOpCount: 1
-    })
-  ],
+  inputs: [new TransactionInput(inputArgs)],
   outputs: [
     new TransactionOutput(amountSompi, sourceScript),
     new TransactionOutput(changeSompi, sourceScript)
@@ -78,9 +85,7 @@ const tx = new Transaction({
 });
 tx.finalize();
 
-const signable = new SignableTransaction(tx, entries);
-const signed = signTransaction(signable, [new PrivateKey(wallet.privateKey)], true);
-const signedTransaction = parsePossiblyNestedJson(signed.toString());
+const signedTransaction = signP2pkTransaction({ tx, entries, privateKey: wallet.privateKey });
 const submitPayload = buildSubmitPayload(signedTransaction);
 
 const artifact = {
@@ -88,7 +93,7 @@ const artifact = {
   network: "kaspa-testnet-12",
   status: "signed-not-broadcast",
   requiresPayloadSubmitSupport: true,
-  warning: "This signed draft carries transaction payload bytes. REST submit support for payload must be verified before broadcasting.",
+  warning: "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
   source: {
     address: funding.address,
     txid: funding.txid,
@@ -134,4 +139,53 @@ function parsePossiblyNestedJson(value) {
     parsed = JSON.parse(parsed);
   }
   return parsed;
+}
+
+function signP2pkTransaction({ tx, entries, privateKey }) {
+  if (typeof SignableTransaction === "function") {
+    const signable = new SignableTransaction(tx, entries);
+    const signed = signTransaction(signable, [new PrivateKey(privateKey)], true);
+    return parsePossiblyNestedJson(signed.toString());
+  }
+
+  const signature = createInputSignature(tx, 0, new PrivateKey(privateKey));
+  tx.inputs[0].signatureScript = hexToBytes(signature);
+  tx.finalize();
+  return { tx: normalizeRuntimeTransaction(tx) };
+}
+
+function normalizeRuntimeTransaction(tx) {
+  return {
+    version: Number(tx.version || 0),
+    inputs: tx.inputs.map((input) => {
+      const inputJson = input.toJSON();
+      return {
+        previousOutpoint: input.previousOutpoint.toJSON(),
+        signatureScript: inputJson.signatureScript,
+        sequence: normalizeNumber(inputJson.sequence),
+        sigOpCount: Number(inputJson.sigOpCount || 0)
+      };
+    }),
+    outputs: tx.outputs.map((output) => {
+      const outputJson = output.toJSON();
+      const scriptPublicKey = output.scriptPublicKey.toJSON();
+      return {
+        value: normalizeNumber(outputJson.value),
+        scriptPublicKey: `${Number(scriptPublicKey.version).toString(16).padStart(4, "0")}${scriptPublicKey.script}`
+      };
+    }),
+    lockTime: normalizeNumber(tx.lockTime),
+    subnetworkId: tx.subnetworkId,
+    gas: normalizeNumber(tx.gas),
+    payload: tx.payload,
+    id: tx.id
+  };
+}
+
+function normalizeNumber(value) {
+  return typeof value === "bigint" ? value.toString() : value;
+}
+
+function hexToBytes(hex) {
+  return Uint8Array.from(String(hex).match(/../g).map((chunk) => Number.parseInt(chunk, 16)));
 }

@@ -238,7 +238,7 @@ Build the invoice registry for the first payload receipt app:
 npm run invoice:registry
 ```
 
-This turns `fixtures/InvoiceReceipts.json` into `artifacts/invoice-registry.json`. An invoice stays draft/unpaid until an accepted TN12 transaction carries the matching receipt payload and the txid is added as an accepted receipt.
+This turns `fixtures/InvoiceReceipts.json` into `artifacts/invoice-registry.json`. An invoice stays draft/unpaid until an accepted TN12 transaction carries the matching receipt payload and the txid is added as an accepted receipt. The first accepted payload receipt is tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`.
 
 Check whether the public TN12 REST submit schema advertises payload submission:
 
@@ -246,7 +246,7 @@ Check whether the public TN12 REST submit schema advertises payload submission:
 npm run payload:readiness
 ```
 
-This turns the current TN12 OpenAPI schema, the signed payload draft, and the observed submit attempt into `artifacts/payload-submit-readiness.json`. The current public TN12 REST route accepted the spend but produced an accepted transaction with no payload, so this route must not be used for invoice receipts.
+This turns the current TN12 OpenAPI schema, the signed payload draft, the observed REST submit attempt, and the accepted wRPC receipt evidence into `artifacts/payload-submit-readiness.json`. The public TN12 REST route accepted a spend but produced an accepted transaction with no payload, so that route must not be used for invoice receipts.
 
 Build a signed self-send draft that carries that receipt as transaction payload:
 
@@ -254,7 +254,7 @@ Build a signed self-send draft that carries that receipt as transaction payload:
 npm run tx:payload
 ```
 
-This creates `artifacts/signed-drafts/payload-receipt-self-send.json`. It is intentionally marked as requiring payload-submit support verification before broadcast, because the TN12 REST OpenAPI submit model currently does not list a payload field even though fetched transactions expose payload data. The first forced REST submit proved the caution was correct: accepted tx `d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4` has no payload, while the expected payload-bearing txid was not found.
+This creates `artifacts/signed-drafts/payload-receipt-self-send.json`. It is marked for the payload-aware route because the TN12 REST OpenAPI submit model does not list a payload field even though fetched transactions expose payload data. The first forced REST submit proved the caution was correct: accepted tx `d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4` has no payload, while the JSON wRPC route accepted the matched payload-bearing tx.
 
 Inspect the REST submit payload without broadcasting:
 
@@ -268,13 +268,19 @@ Inspect the wRPC payload-preserving submit candidate without broadcasting:
 npm run tx:submit:wrpc
 ```
 
-This reconstructs the signed transaction through `kaspa-wasm` and checks that the reconstructed txid still matches the payload-bearing draft. Actual wRPC broadcast is still explicit and requires a trusted TN12 endpoint:
+This reconstructs the signed transaction through `kaspa-wasm` and checks that the reconstructed txid still matches the payload-bearing draft. Actual wRPC broadcast is explicit and requires a trusted TN12 endpoint:
 
 ```sh
 KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit
 ```
 
-The repo does not guess public wRPC endpoints. A successful submit must still be followed by fetching the accepted transaction and confirming the payload bytes survived before any invoice is marked paid.
+After broadcast, verify the accepted transaction payload with:
+
+```sh
+npm run payload:verify
+```
+
+This writes `artifacts/payload-receipt-evidence.json` and is the gate for marking invoice state paid.
 
 Build the signed-draft review registry for the browser submit console:
 
@@ -437,7 +443,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding, release, DAA-refund, and mutual cancel now have accepted TN12 evidence on separate funded outputs.
 
-5. Next: build an accepted-transaction indexer that reads outputs and payload receipts into app-state snapshots.
+5. Next: harden the accepted-transaction indexer with duplicate, stale, and rollback-aware payload receipt handling.
 
 6. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 

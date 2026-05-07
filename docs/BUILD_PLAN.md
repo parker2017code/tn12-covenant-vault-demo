@@ -22,7 +22,7 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 - Assurance refund proof: accepted on TN12.
 - Browser proof cards and TN12 API refresh: done.
 - Accepted-transaction app-state snapshot: done with `npm run indexer:state`.
-- Signed payload receipt draft: done with `npm run tx:payload`; broadcast remains gated until REST payload submit behavior is verified.
+- Signed payload receipt draft and accepted JSON wRPC payload receipt: done with `npm run tx:payload`, `npm run tx:submit:wrpc`, and `npm run payload:verify`. The public REST submit route remains unsuitable for payload receipts because it dropped payload bytes.
 
 ## Next 20 Build Tasks Before A Real Testnet App Run
 
@@ -30,9 +30,9 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 2. Add a "never print private key" guard around every script that reads `.local/tn12-wallet.json`.
 3. Add explorer links for every fixture, signed draft, and accepted proof transaction.
 4. Add a proof-state machine: planned, signed, submitted, accepted, mismatch, stale.
-5. Verify payload submission through a route that actually preserves payload bytes, then submit one tiny TN12 payload receipt transaction.
-6. Add the accepted payload txid to fixtures after API/explorer verification.
-7. Add a payload decoder in the browser so receipts become visible app events.
+5. Keep the verified JSON wRPC payload receipt route documented and make wallet review the next submit surface.
+6. Add duplicate/stale receipt checks around invoice paid state.
+7. Keep the browser decoder tied to accepted payload evidence.
 8. Add multi-pledge assurance fixtures with separate contributors and refund addresses.
 9. Add batch release transaction planning for enough pledge outputs to satisfy a target.
 10. Add batch refund transaction planning for expired campaigns.
@@ -56,7 +56,7 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 28. Add the enforcement matrix: claim each feature as script, planner/indexer, wallet-policy, documentation, or simulation-only before expanding product language.
 29. Add the escrow primitive registry: buyer fund, seller release, timeout refund, mutual cancel, browser panel, and generated escrow artifact before script proofs.
 30. Add the treasury/team vault registry: spend caps, delayed large withdrawals, recovery roles, payroll templates, browser panel, and generated treasury artifact before extra script paths.
-31. Add payload submit readiness: current TN12 OpenAPI submit schema, signed draft payload presence, browser readiness card, and an explicit no-broadcast gate until payload-preserving submit is verified.
+31. Add payload submit readiness: current TN12 OpenAPI submit schema, signed draft payload presence, accepted JSON wRPC receipt evidence, browser readiness card, and a preserved REST-submit warning.
 32. Add transparent coordination-market prototype: Stag, Intendo, Pack, toy Solver, Hunt-plan artifact, missing Hashdag/Staghunt property list, browser panel, and no claim of opacity or multiplexing.
 33. Add KRC/access pass planner: issuer-backed passes, redemption records, duplicate-risk boundary, browser panel, and generated access artifact.
 34. Add mainnet-readiness map: classify payment/indexer/payload paths, local-only wallet review, TN12/Toccata covenant work, and research-only coordination markets.
@@ -75,3 +75,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 47. Add accepted DAA-expired escrow refund proof: compile an expired escrow fixture with a past DAA-score refund time, fund a separate P2SH output, and spend it through the refund path.
 48. Add ZK/anchor roadmap lane: track future off-chain state proofs, solver proofs, bridge/source-chain anchors, oracle attestations, and vProg settlement without claiming ZK is used today.
 49. Accept mutual cancel on a separate funded output. The first submit used `sigOpCount=1` and hit `used=200870`, `limit=109999`; the old-SDK v1 attempt failed verification. Rusty Kaspa TN12 source confirms tx version 1 plus `computeBudget`; the accepted artifact was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1` using `computeBudget=30` and accepted as `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
+50. Accept one invoice payload receipt through TN12 JSON wRPC. The public REST submit route accepted a no-payload payment only; the matched payload receipt is `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e` and is verified by `npm run payload:verify`.

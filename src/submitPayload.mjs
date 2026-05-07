@@ -64,6 +64,12 @@ function splitScriptPublicKey(scriptPublicKey) {
 }
 
 function bytesToHex(bytes) {
+  if (typeof bytes === "string") {
+    const normalized = bytes.startsWith("0x") ? bytes.slice(2) : bytes;
+    if (/^[a-fA-F0-9]*$/.test(normalized) && normalized.length % 2 === 0) {
+      return normalized.toLowerCase();
+    }
+  }
   return Array.from(bytes)
     .map((byte) => Number(byte).toString(16).padStart(2, "0"))
     .join("");

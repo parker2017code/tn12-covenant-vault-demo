@@ -34,14 +34,14 @@
       "name": "Invoice / payload receipts",
       "lane": "payload-invoice",
       "readiness": "mainnet-capable-with-engineering",
-      "why": "Standard transactions can carry app payload data, but this repo still needs a verified payload-preserving submit route.",
+      "why": "Standard transactions can carry app payload data, and the TN12 JSON wRPC route has accepted one matched payload receipt.",
       "blockers": [
         "wallet integration",
-        "payload-preserving submit route",
+        "repeatable mainnet wallet submit route",
         "payment edge cases",
         "refund UX"
       ],
-      "next": "Finish the accepted payload receipt vertical slice before any real merchant workflow."
+      "next": "Replace local signing with wallet review and keep REST submit marked unsuitable for payload receipts."
     },
     {
       "id": "access-passes",

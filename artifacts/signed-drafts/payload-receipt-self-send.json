@@ -3,7 +3,7 @@
   "network": "kaspa-testnet-12",
   "status": "signed-not-broadcast",
   "requiresPayloadSubmitSupport": true,
-  "warning": "This signed draft carries transaction payload bytes. REST submit support for payload must be verified before broadcasting.",
+  "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
   "source": {
     "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
     "txid": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
@@ -50,8 +50,8 @@
             "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
             "index": 1
           },
-          "signatureScript": "41b78d9fa1dc43b42345df47becc595b59b1f4eaf3526650a7df9b505228818679845da22aa653a95cc02977234a83a286be350516db331cddf53bf93613eaec7801",
-          "sequence": 0,
+          "signatureScript": "41bdfe9e6cce3589b593184b8307afd9f315827a0750f351063e18fc4551e97ff438c73eb6489fc55fc7678c5e3b0638dabce14316da55f426a69e3efbc770850b01",
+          "sequence": "0",
           "sigOpCount": 1
         }
       ],
@@ -71,265 +71,41 @@
           }
         }
       ],
-      "lockTime": 0,
+      "lockTime": "0",
       "subnetworkId": "0000000000000000000000000000000000000000",
       "payload": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d"
     },
     "allowOrphan": false
   },
   "signedTransaction": {
-    "entries": [
-      {
-        "utxo": {
-          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-          "entry": {
-            "amount": 114899945000,
-            "blockDaaScore": 5467878,
-            "isCoinbase": false,
-            "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
-          },
-          "outpoint": {
-            "inner": {
-              "index": 1,
-              "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4"
-            }
-          }
-        }
-      }
-    ],
     "tx": {
-      "inner": {
-        "gas": 0,
-        "id": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
-        "inputs": [
-          {
-            "inner": {
-              "previousOutpoint": {
-                "inner": {
-                  "index": 1,
-                  "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4"
-                }
-              },
-              "sequence": 0,
-              "sigOpCount": 1,
-              "signatureScript": [
-                65,
-                183,
-                141,
-                159,
-                161,
-                220,
-                67,
-                180,
-                35,
-                69,
-                223,
-                71,
-                190,
-                204,
-                89,
-                91,
-                89,
-                177,
-                244,
-                234,
-                243,
-                82,
-                102,
-                80,
-                167,
-                223,
-                155,
-                80,
-                82,
-                40,
-                129,
-                134,
-                121,
-                132,
-                93,
-                162,
-                42,
-                166,
-                83,
-                169,
-                92,
-                192,
-                41,
-                119,
-                35,
-                74,
-                131,
-                162,
-                134,
-                190,
-                53,
-                5,
-                22,
-                219,
-                51,
-                28,
-                221,
-                245,
-                59,
-                249,
-                54,
-                19,
-                234,
-                236,
-                120,
-                1
-              ]
-            }
-          }
-        ],
-        "lockTime": 0,
-        "outputs": [
-          {
-            "inner": {
-              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
-              "value": 100000000
-            }
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+            "index": 1
           },
-          {
-            "inner": {
-              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
-              "value": 114799940000
-            }
-          }
-        ],
-        "payload": [
-          123,
-          34,
-          107,
-          105,
-          110,
-          100,
-          34,
-          58,
-          34,
-          111,
-          114,
-          100,
-          101,
-          114,
-          45,
-          114,
-          101,
-          99,
-          101,
-          105,
-          112,
-          116,
-          34,
-          44,
-          34,
-          115,
-          117,
-          98,
-          106,
-          101,
-          99,
-          116,
-          34,
-          58,
-          34,
-          109,
-          101,
-          114,
-          99,
-          104,
-          97,
-          110,
-          116,
-          45,
-          111,
-          114,
-          100,
-          101,
-          114,
-          45,
-          49,
-          51,
-          51,
-          55,
-          34,
-          44,
-          34,
-          118,
-          97,
-          108,
-          117,
-          101,
-          34,
-          58,
-          34,
-          112,
-          97,
-          105,
-          100,
-          34,
-          44,
-          34,
-          110,
-          111,
-          116,
-          101,
-          34,
-          58,
-          34,
-          68,
-          101,
-          109,
-          111,
-          32,
-          112,
-          97,
-          121,
-          108,
-          111,
-          97,
-          100,
-          32,
-          102,
-          111,
-          114,
-          32,
-          97,
-          99,
-          99,
-          101,
-          112,
-          116,
-          101,
-          100,
-          45,
-          116,
-          114,
-          97,
-          110,
-          115,
-          97,
-          99,
-          116,
-          105,
-          111,
-          110,
-          32,
-          105,
-          110,
-          100,
-          101,
-          120,
-          105,
-          110,
-          103,
-          34,
-          125
-        ],
-        "subnetworkId": "0000000000000000000000000000000000000000",
-        "version": 0
-      }
+          "signatureScript": "41bdfe9e6cce3589b593184b8307afd9f315827a0750f351063e18fc4551e97ff438c73eb6489fc55fc7678c5e3b0638dabce14316da55f426a69e3efbc770850b01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "value": "100000000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        },
+        {
+          "value": "114799940000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "gas": "0",
+      "payload": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+      "id": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
     }
   }
 }

@@ -14,11 +14,13 @@ Accepted TN12 contract-spend proofs:
 4. Individual assurance refund.
 5. Escrow release.
 6. Escrow DAA-score refund.
+7. Escrow mutual cancel on a separate funded output.
 
 Blocked or limited:
 
-- Escrow mutual cancel is accepted on a separate funded output. The old `sigOpCount=1` script-unit rejection and the later old-SDK verification failure are preserved as historical evidence only.
+- The old escrow cancel `sigOpCount=1` script-unit rejection and the later old-SDK verification failure are preserved as historical evidence only.
 - Rusty Kaspa TN12 source confirms the version-1 compute-budget route: v1 inputs carry `computeBudget`, not `sigOpCount`. The accepted cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, preserving `computeBudget=30`.
+- The public TN12 REST submit route is unsuitable for payload receipts. It accepted a payment while dropping payload bytes. The JSON wRPC route accepted a matched payload receipt as tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`.
 
 ## App Buckets
 
@@ -57,7 +59,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
-| 1. Payload invoice / receipt | Blocked, high priority | Fixtures, registry, signed payload draft, readiness check; public REST submit observed dropping payload; wRPC submit candidate added | Provide a trusted TN12 wRPC/wallet route, then get one accepted payload receipt |
+| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload draft, readiness check, accepted JSON wRPC receipt, decoded invoice state | Add wallet review, duplicate-payment checks, and refund handling |
 | 2. Submit console | Base built | Signed draft review, inputs/outputs/fees/commands | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Base built | Campaign planner with accepted vs signed-only progress | Real accepted pledge-output batch settlement drafts |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, and accepted mutual-cancel proofs on separate funded outputs | Add negative tests and keep SDK route documented |
@@ -84,11 +86,11 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 1. Keep public docs focused: accepted proofs first, planner/research second.
 2. Keep the accepted escrow cancel proof tied to the local TN12 SDK route and preserve old bad-config rejections as historical evidence only.
-3. Keep the payload invoice vertical slice blocked on a verified payload-preserving submit route; the public REST route accepted a no-payload transaction.
+3. Keep payload receipt claims tied to the accepted JSON wRPC transaction and keep the public REST no-payload transaction historical only.
 
 ### Coming days
 
-1. Provide a trusted TN12 wRPC/wallet route, then submit one accepted payload receipt and decode it into invoice paid state.
+1. Make the accepted JSON wRPC payload receipt path repeatable through wallet review instead of local signing.
 2. Tie one access pass or attestation to accepted payload state.
 3. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
 4. Turn escrow release/refund into a simple marketplace/freelance demo.

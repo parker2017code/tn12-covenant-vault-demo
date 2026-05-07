@@ -6,7 +6,7 @@
       "label": "Payload receipt self-send",
       "priority": 1,
       "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
-      "description": "Invoice/signal payload receipt candidate. Payload REST submit support remains gated."
+      "description": "Accepted invoice payload receipt draft. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
     },
     {
       "label": "Split funding",

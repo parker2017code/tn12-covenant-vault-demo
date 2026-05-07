@@ -90,7 +90,7 @@ For the current twenty-lane status map and time horizon, see `docs/ROADMAP_STATE
 
 ## Immediate Order
 
-1. Keep the payload receipt app gated by `npm run payload:readiness` until a payload-preserving submit route is verified.
+1. Keep the payload receipt app gated by `npm run payload:readiness` and `npm run payload:verify`; the accepted JSON wRPC receipt is current evidence, and the public REST route remains historical no-payload evidence.
 2. Use `npm run mainnet:readiness` to separate mainnet-capable payment/indexer work from TN12/Toccata covenant work.
 3. Continue filling base app artifacts for access passes, simple assets, auctions/intents, DeFi research, and AI-agent commitments.
 4. Harden vertical slices only after the enforcement and readiness maps agree on what is actually proved.

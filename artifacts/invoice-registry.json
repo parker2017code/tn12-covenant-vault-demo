@@ -1,18 +1,18 @@
 {
   "schema": "kaspa-invoice-registry/v1",
   "network": "kaspa-testnet-12",
-  "status": "drafts-ready-for-payload-submit",
+  "status": "has-accepted-receipts",
   "summary": {
     "total": 2,
-    "paid": 0,
-    "draft": 2,
+    "paid": 1,
+    "draft": 1,
     "totalTkas": 26
   },
   "invoices": [
     {
       "schema": "kaspa-invoice-receipt-app/v1",
       "network": "kaspa-testnet-12",
-      "status": "draft-needs-payload-submit",
+      "status": "accepted-receipt-indexed",
       "invoice": {
         "invoiceId": "merchant-order-1337",
         "merchant": "Kaspa App Lab",
@@ -50,8 +50,16 @@
         },
         "boundary": "This models user transaction payload data, not arbitrary miner header data."
       },
-      "acceptedReceipt": null,
-      "appState": "Invoice merchant-order-1337 is not paid until an accepted transaction carries this receipt payload.",
+      "acceptedReceipt": {
+        "invoiceId": "merchant-order-1337",
+        "accepted": true,
+        "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+        "payloadBytes": 127,
+        "acceptingBlockBlueScore": 5541142,
+        "evidencePath": "artifacts/payload-receipt-evidence.json",
+        "memo": "Accepted TN12 JSON wRPC payload receipt; payload matched the signed draft."
+      },
+      "appState": "Invoice merchant-order-1337 is paid by accepted payload receipt 34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e.",
       "boundaries": [
         "This is payment plus app data, not a smart-contract invoice settlement.",
         "Accepted transaction indexing is the source of app state.",
@@ -108,5 +116,5 @@
       ]
     }
   ],
-  "next": "Find a Wallet API, RPC, or other payload-preserving route. The public TN12 REST submit route accepted a payment but dropped the payload, so no invoice is paid yet."
+  "next": "Keep payload receipts tied to accepted transaction evidence before marking invoices paid."
 }
