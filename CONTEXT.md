@@ -1,6 +1,6 @@
 # TN12 Covenant Vault Demo Context
 
-Future agents should read this file before editing. It is the current handoff for the local Kaspa TN12 vault, assurance, and app-indexer prototype.
+Future agents should read `MEMORY.md` first, then this file before editing. `MEMORY.md` is the short routing layer; this file is the longer handoff for the local Kaspa TN12 vault, assurance, and app-indexer prototype.
 
 ## Repo And Preview
 

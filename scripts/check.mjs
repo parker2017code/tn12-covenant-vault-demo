@@ -230,6 +230,8 @@ const accessPassPlanner = buildAccessPassPlanner(accessPassFixture);
 assert.equal(accessPassPlanner.status, "issuer-indexer-flow-not-native-enforcement");
 assert.equal(accessPassPlanner.summary.totalPasses, 3);
 assert.equal(accessPassPlanner.summary.acceptedRedemptions, 1);
+assert.equal(accessPassPlanner.summary.duplicateRedemptions, 0);
+assert.equal(accessPassPlanner.summary.missingAcceptedTxids, 0);
 assert.ok(accessPassPlanner.passes.some((pass) => pass.passId === "pass-dev-workshop-001" && pass.state === "partially-redeemed"));
 const mainnetReadinessFixture = JSON.parse(await readFile(new URL("../fixtures/MainnetReadiness.json", import.meta.url), "utf8"));
 const mainnetReadiness = buildMainnetReadiness(mainnetReadinessFixture);

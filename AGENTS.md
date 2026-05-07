@@ -3,6 +3,7 @@
 ## Scope
 
 - This is a separate local repo for a Kaspa TN12 covenant vault demo.
+- Read `MEMORY.md` first on every resume. It points to the current handoff docs and should be updated after meaningful repo changes.
 - Keep this project clearly labeled as testnet / experimental.
 - Do not describe Toccata, TN12, vProgs, native DeFi, or cross-app atomic composition as live mainnet functionality.
 - Prefer simple browser-native code until a real Kaspa/Silverscript integration requires a build system.

@@ -4,11 +4,12 @@ Use this guide when reviewing the repo from GitHub, GitHub Pages, or a local che
 
 ## Start Here
 
-1. Check the latest pushed commit on `main`.
-2. Check whether GitHub Pages has deployed that commit.
-3. Compare the public README with the live artifacts under GitHub Pages.
-4. Verify the accepted TN12 txids through the TN12 API.
-5. Report any gap between local state, pushed GitHub state, live Pages state, and chain state.
+1. Read `MEMORY.md` for the current handoff and doc map.
+2. Check the latest pushed commit on `main`.
+3. Check whether GitHub Pages has deployed that commit.
+4. Compare the public README with the live artifacts under GitHub Pages.
+5. Verify the accepted TN12 txids through the TN12 API.
+6. Report any gap between local state, pushed GitHub state, live Pages state, and chain state.
 
 Useful public links:
 

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
+import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildInvoiceRegistry } from "../src/invoiceReceipt.mjs";
@@ -60,5 +61,31 @@ const disputedAcceptedProofBoard = buildAgentCommitmentBoard({
 const disputedTask = disputedAcceptedProofBoard.tasks.find((task) => task.taskId === "agent-task-escrow-001");
 assert.equal(disputedTask.state, "disputed");
 assert.equal(disputedTask.settlementPlan.status, "hold-during-dispute");
+
+const accessPassFixture = JSON.parse(await readFile(new URL("../fixtures/AccessPassPlanner.json", import.meta.url), "utf8"));
+const duplicateAccessPassPlanner = buildAccessPassPlanner({
+  ...accessPassFixture,
+  redemptions: [
+    ...accessPassFixture.redemptions,
+    {
+      ...accessPassFixture.redemptions[0],
+      redemptionId: "redeem-workshop-alpha-duplicate",
+      acceptedTxid: "duplicate-fixture-txid",
+      status: "accepted-redemption"
+    },
+    {
+      ...accessPassFixture.redemptions[0],
+      redemptionId: "redeem-workshop-alpha-missing-txid",
+      holder: "holder-without-txid",
+      acceptedTxid: "",
+      status: "accepted-redemption"
+    }
+  ]
+});
+const workshopPass = duplicateAccessPassPlanner.passes.find((pass) => pass.passId === "pass-dev-workshop-001");
+assert.equal(workshopPass.redeemed, 1);
+assert.equal(duplicateAccessPassPlanner.summary.acceptedRedemptions, 1);
+assert.equal(duplicateAccessPassPlanner.summary.duplicateRedemptions, 1);
+assert.equal(duplicateAccessPassPlanner.summary.missingAcceptedTxids, 1);
 
 console.log("Negative checks passed.");

@@ -519,7 +519,7 @@ async function renderAccessPassPlanner() {
       <article><span>Passes</span><strong>${escapeHtml(planner.summary.totalPasses)}</strong></article>
       <article><span>Issued</span><strong>${escapeHtml(planner.summary.totalIssued)}</strong></article>
       <article><span>Redeemed</span><strong>${escapeHtml(planner.summary.acceptedRedemptions)}</strong></article>
-      <article><span>Pending</span><strong>${escapeHtml(planner.summary.pendingRedemptions)}</strong></article>
+      <article><span>Review</span><strong>${escapeHtml(planner.summary.duplicateRedemptions + planner.summary.missingAcceptedTxids)}</strong></article>
     `;
 
     accessListNode.innerHTML = "";

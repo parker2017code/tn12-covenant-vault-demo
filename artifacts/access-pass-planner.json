@@ -6,7 +6,9 @@
     "totalPasses": 3,
     "totalIssued": 165,
     "acceptedRedemptions": 1,
-    "pendingRedemptions": 1
+    "pendingRedemptions": 1,
+    "duplicateRedemptions": 0,
+    "missingAcceptedTxids": 0
   },
   "passes": [
     {
@@ -72,7 +74,8 @@
       "acceptedTxid": "fixture-accepted-txid-needed",
       "payloadKind": "access-pass-redemption",
       "redeemedAtIso": "2026-05-07T00:00:00.000Z",
-      "status": "accepted-redemption"
+      "status": "accepted-redemption",
+      "review": "counted-accepted-redemption"
     },
     {
       "redemptionId": "redeem-coupon-beta",
@@ -81,7 +84,8 @@
       "acceptedTxid": "",
       "payloadKind": "access-pass-redemption",
       "redeemedAtIso": "",
-      "status": "draft-redemption"
+      "status": "draft-redemption",
+      "review": "not-accepted"
     }
   ],
   "boundaries": [

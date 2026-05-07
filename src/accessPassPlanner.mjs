@@ -1,14 +1,18 @@
 export function buildAccessPassPlanner(fixture = {}) {
   const passes = (fixture.passes || []).map(normalizePass);
   const redemptions = (fixture.redemptions || []).map(normalizeRedemption);
+  const redemptionReviews = reviewRedemptions(redemptions);
+  const countableRedemptions = redemptions.filter((redemption) => isCountableRedemption(redemption, redemptionReviews));
   const passesWithState = passes.map((pass) => {
-    const passRedemptions = redemptions.filter((redemption) => redemption.passId === pass.passId);
+    const passRedemptions = countableRedemptions.filter((redemption) => redemption.passId === pass.passId);
+    const pendingRedemptions = redemptions.filter((redemption) => redemption.passId === pass.passId && !passRedemptions.includes(redemption));
+    const acceptedCount = passRedemptions.length;
     return {
       ...pass,
       issued: pass.supplyIssued,
-      redeemed: passRedemptions.filter((redemption) => redemption.status === "accepted-redemption").length,
-      pending: passRedemptions.filter((redemption) => redemption.status !== "accepted-redemption").length,
-      remaining: Math.max(pass.supplyIssued - passRedemptions.filter((redemption) => redemption.status === "accepted-redemption").length, 0),
+      redeemed: acceptedCount,
+      pending: pendingRedemptions.length,
+      remaining: Math.max(pass.supplyIssued - acceptedCount, 0),
       state: passState(pass, passRedemptions)
     };
   });
@@ -20,11 +24,16 @@ export function buildAccessPassPlanner(fixture = {}) {
     summary: {
       totalPasses: passes.length,
       totalIssued: passes.reduce((total, pass) => total + pass.supplyIssued, 0),
-      acceptedRedemptions: redemptions.filter((redemption) => redemption.status === "accepted-redemption").length,
-      pendingRedemptions: redemptions.filter((redemption) => redemption.status !== "accepted-redemption").length
+      acceptedRedemptions: countableRedemptions.length,
+      pendingRedemptions: redemptions.length - countableRedemptions.length,
+      duplicateRedemptions: redemptionReviews.filter((review) => review.status === "duplicate-redemption").length,
+      missingAcceptedTxids: redemptionReviews.filter((review) => review.status === "missing-accepted-txid").length
     },
     passes: passesWithState,
-    redemptions,
+    redemptions: redemptions.map((redemption) => ({
+      ...redemption,
+      review: redemptionReviews.find((review) => review.redemptionId === redemption.redemptionId)?.status || "draft"
+    })),
     boundaries: [
       "Access passes are issuer/indexer claims in this repo, not native covenant-enforced tickets.",
       "Accepted redemption payloads can update app state, but the issuer must honor the claim off-chain unless a later enforcement path exists.",
@@ -62,10 +71,47 @@ function normalizeRedemption(redemption = {}) {
   };
 }
 
+function reviewRedemptions(redemptions) {
+  const seen = new Set();
+
+  return redemptions.map((redemption) => {
+    if (redemption.status !== "accepted-redemption") {
+      return {
+        redemptionId: redemption.redemptionId,
+        status: "not-accepted"
+      };
+    }
+
+    if (!redemption.acceptedTxid) {
+      return {
+        redemptionId: redemption.redemptionId,
+        status: "missing-accepted-txid"
+      };
+    }
+
+    const key = `${redemption.passId}:${redemption.holder}`;
+    if (seen.has(key)) {
+      return {
+        redemptionId: redemption.redemptionId,
+        status: "duplicate-redemption"
+      };
+    }
+    seen.add(key);
+
+    return {
+      redemptionId: redemption.redemptionId,
+      status: "counted-accepted-redemption"
+    };
+  });
+}
+
+function isCountableRedemption(redemption, reviews) {
+  return reviews.find((review) => review.redemptionId === redemption.redemptionId)?.status === "counted-accepted-redemption";
+}
+
 function passState(pass, redemptions) {
-  const accepted = redemptions.filter((redemption) => redemption.status === "accepted-redemption");
   if (pass.status !== "active") return "not-active";
-  if (accepted.length >= pass.supplyIssued) return "fully-redeemed";
-  if (accepted.length > 0) return "partially-redeemed";
+  if (redemptions.length >= pass.supplyIssued) return "fully-redeemed";
+  if (redemptions.length > 0) return "partially-redeemed";
   return "issued-not-redeemed";
 }

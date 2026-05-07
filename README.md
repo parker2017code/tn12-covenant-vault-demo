@@ -4,7 +4,7 @@ TN12-configured prototype for a Kaspa covenant vault and assurance-contract app.
 
 This is not a mainnet wallet, not investment advice, and not proof that Toccata or vProgs are live. The goal is to make covenant-style money rules understandable, compile Silverscript templates, build and submit TN12 proof transactions, and keep going without requiring this computer to run a full node.
 
-Reviewers and LLM agents should start with [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md).
+Reviewers and LLM agents should start with [`MEMORY.md`](MEMORY.md), then use [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md).
 
 ## Current Position
 

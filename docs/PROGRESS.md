@@ -91,6 +91,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
    - accepted pledge progress differs from signed-only progress;
    - agent disputes block release;
    - invoice paid state requires accepted matching payload.
+   - access-pass redemptions require a txid and duplicate holder/pass redemptions cannot inflate redeemed counts.
 
 2. Extend the escrow proof path:
    - accepted funding outpoint: done;
