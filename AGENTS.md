@@ -44,3 +44,4 @@
 
 - Run `node scripts/check.mjs` after edits.
 - For UI work, serve locally and confirm the page returns HTTP 200 before sharing a link.
+- When checking public state, follow `docs/LLM_REVIEW_GUIDE.md` before summarizing what is built, live, stale, or still in limbo.

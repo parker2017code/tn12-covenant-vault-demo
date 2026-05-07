@@ -925,6 +925,7 @@ async function renderSubmitConsole() {
         <span>${escapeHtml(draft.status)}</span>
         <strong>${escapeHtml(draft.label)}</strong>
         <p>${escapeHtml(shortTxid(draft.transactionId || "unknown00000000"))}</p>
+        <p>${escapeHtml(draft.description)}</p>
         <small>${escapeHtml(draft.counts.inputs)} input; ${escapeHtml(draft.counts.outputs)} outputs; ${escapeHtml(draft.counts.payloadBytes)} payload bytes; ${escapeHtml(draft.totals.outputTkas)} TKAS out</small>
         <pre>${escapeHtml(draft.submit.dryRunCommand)}
 ${escapeHtml(draft.submit.submitCommand)}</pre>

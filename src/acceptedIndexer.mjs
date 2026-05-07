@@ -53,6 +53,7 @@ export function buildAcceptedAppState({ proofFixture, transactions, fetchedAt = 
     appState: {
       vault: laneState(records, "vault"),
       assurance: laneState(records, "assurance"),
+      escrow: laneState(records, "escrow"),
       receipts: {
         status: records.some((record) => record.receipt) ? "payload-receipts-decoded" : "payload-receipt-indexer-next",
         decoded: records

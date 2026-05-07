@@ -34,6 +34,14 @@
       "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
       "amountSompi": "24999995000",
       "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Escrow release",
+      "lane": "escrow",
+      "entrypoint": "release",
+      "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "amountSompi": "4999995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
     }
   ]
 }

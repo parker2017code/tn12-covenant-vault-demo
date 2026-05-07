@@ -69,3 +69,6 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 41. Add first `Escrow.sil` template: buyer-approved release to seller, timeout refund to buyer, and mutual cancel refund before signed escrow drafts.
 42. Add proof evidence artifact: resolve proof-spend previous outputs, show P2SH input contract outputs, expected P2PK outputs, sig-op counts, and accepted status.
 43. Add signed escrow funding draft: use the existing contract funding builder, review in submit console, and keep escrow spends blocked until accepted funding outpoint exists.
+44. Add signed escrow spend drafts: release, refund, and cancel from accepted escrow funding, with mutual exclusivity clearly documented.
+45. Add accepted escrow release proof: escrow funding output is accepted on TN12 and consumed by the seller-release spend; refund/cancel need separate funded outputs.
+46. Add LLM review guide: direct GitHub-connected reviewers to compare GitHub, Pages, local, and TN12 API state before making claims.

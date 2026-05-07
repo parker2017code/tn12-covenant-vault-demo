@@ -1,16 +1,17 @@
 {
   "schema": "tn12-accepted-app-state/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-07T09:20:06.925Z",
+  "fetchedAt": "2026-05-07T11:48:23.647Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "summary": {
-    "total": 4,
-    "accepted": 4,
-    "matched": 4,
+    "total": 5,
+    "accepted": 5,
+    "matched": 5,
     "mismatches": 0,
     "receipts": 0,
     "lanes": [
       "assurance",
+      "escrow",
       "vault"
     ]
   },
@@ -118,6 +119,32 @@
       },
       "receipt": null,
       "explorerUrl": "https://tn12.kaspa.stream/txs/faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61"
+    },
+    {
+      "id": "escrow:release:825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "lane": "escrow",
+      "label": "Escrow release",
+      "entrypoint": "release",
+      "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 5328195,
+      "acceptingBlockTime": 1778154136843,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "receipt": null,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d"
     }
   ],
   "appState": {
@@ -160,6 +187,19 @@
           "status": "accepted-output-matched",
           "amountSompi": "24999995000",
           "acceptingBlockBlueScore": 5206200
+        }
+      ]
+    },
+    "escrow": {
+      "status": "proofs-accepted",
+      "proofs": [
+        {
+          "label": "Escrow release",
+          "entrypoint": "release",
+          "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+          "status": "accepted-output-matched",
+          "amountSompi": "4999995000",
+          "acceptingBlockBlueScore": 5328195
         }
       ]
     },

@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 7,
+    "total": 10,
     "payloadDrafts": 1,
-    "explicitSubmitRequired": 7,
+    "explicitSubmitRequired": 10,
     "payloadSubmitGated": 1
   },
   "drafts": [
@@ -391,7 +391,172 @@
       },
       "label": "Escrow funding",
       "priority": 7,
-      "description": "Signed funding draft for Escrow.sil. No accepted escrow spend proof yet."
+      "description": "Accepted funding path for Escrow.sil; created the P2SH output consumed by the release proof."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-release.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-release",
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "warning": "This spends the escrow P2SH output to the seller path if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "outputIndex": 0,
+        "amountTkas": 50,
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "4999995000",
+        "outputTkas": "49.99995"
+      },
+      "inputs": [
+        {
+          "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "4999995000",
+          "amountTkas": "49.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-release.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-release.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow release",
+      "priority": 8,
+      "description": "Accepted seller-release proof from the Escrow.sil funding output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-refund.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-refund",
+      "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+      "warning": "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "outputIndex": 0,
+        "amountTkas": 50,
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "4999995000",
+        "outputTkas": "49.99995"
+      },
+      "inputs": [
+        {
+          "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "4999995000",
+          "amountTkas": "49.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-refund.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-refund.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow refund",
+      "priority": 9,
+      "description": "Timeout-refund review draft for the original escrow output; not accepted after release consumed that output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-cancel.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-cancel",
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "warning": "This spends the escrow P2SH output through mutual cancel if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "outputIndex": 0,
+        "amountTkas": 50,
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "4999995000",
+        "outputTkas": "49.99995"
+      },
+      "inputs": [
+        {
+          "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "4999995000",
+          "amountTkas": "49.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow cancel",
+      "priority": 10,
+      "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
     }
   ],
   "boundaries": [

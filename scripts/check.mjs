@@ -133,13 +133,20 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 7);
+assert.equal(submitRegistry.summary.total, 10);
 assert.equal(submitRegistry.summary.payloadDrafts, 1);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 1);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
 assert.ok(submitRegistry.drafts.some((draft) => draft.lane === "escrow-funding" && draft.label === "Escrow funding"));
+const escrowReleaseDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-release.json", import.meta.url), "utf8"));
+const escrowRefundDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-refund.json", import.meta.url), "utf8"));
+const escrowCancelDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel.json", import.meta.url), "utf8"));
+assert.equal(escrowReleaseDraft.entrypoint, "release");
+assert.equal(escrowRefundDraft.entrypoint, "refund");
+assert.equal(escrowCancelDraft.entrypoint, "cancel");
+assert.ok(escrowCancelDraft.signatureScriptHex.length > escrowReleaseDraft.signatureScriptHex.length);
 const researchFixture = JSON.parse(await readFile(new URL("../fixtures/CrossChainResearchLibrary.json", import.meta.url), "utf8"));
 const researchLibrary = buildResearchLibrary(researchFixture);
 assert.equal(researchLibrary.status, "research-inputs-not-protocol-claims");
@@ -164,10 +171,10 @@ const enforcementFixture = JSON.parse(await readFile(new URL("../fixtures/Enforc
 const enforcementMatrix = buildEnforcementMatrix(enforcementFixture);
 assert.equal(enforcementMatrix.status, "claim-surface-audit");
 assert.equal(enforcementMatrix.summary.total, 18);
-assert.equal(enforcementMatrix.summary.contractEnforced, 4);
+assert.equal(enforcementMatrix.summary.contractEnforced, 5);
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "vault-daily-limit" && feature.enforcement === "simulation"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "assurance-target-progress" && feature.enforcement === "planner-indexer"));
-assert.ok(enforcementMatrix.features.some((feature) => feature.id === "escrow-spend-paths" && feature.enforcement === "script-planned"));
+assert.ok(enforcementMatrix.features.some((feature) => feature.id === "escrow-spend-paths" && feature.enforcement === "script"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "treasury-payroll-caps" && feature.enforcement === "wallet-policy"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "coordination-market-hunt" && feature.enforcement === "research"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "access-pass-redemption" && feature.enforcement === "planner-indexer"));
@@ -260,9 +267,10 @@ const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof
   }
 ]));
 const acceptedState = buildAcceptedAppState({ proofFixture, transactions: fakeTransactions, fetchedAt: "2026-05-07T00:00:00.000Z" });
-assert.equal(acceptedState.summary.total, 4);
-assert.equal(acceptedState.summary.matched, 4);
+assert.equal(acceptedState.summary.total, 5);
+assert.equal(acceptedState.summary.matched, 5);
 assert.equal(acceptedState.appState.vault.status, "proofs-accepted");
+assert.equal(acceptedState.appState.escrow.status, "proofs-accepted");
 const fakePreviousTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   `prev-${index}`,
   {
@@ -305,10 +313,10 @@ const proofEvidence = buildProofEvidence({
   previousTransactions: fakePreviousTransactions,
   verifiedAt: "2026-05-07T00:00:00.000Z"
 });
-assert.equal(proofEvidence.summary.accepted, 4);
-assert.equal(proofEvidence.summary.p2shInputs, 4);
-assert.equal(proofEvidence.summary.p2pkOutputs, 4);
-assert.equal(proofEvidence.summary.matchedOutputs, 4);
+assert.equal(proofEvidence.summary.accepted, 5);
+assert.equal(proofEvidence.summary.p2shInputs, 5);
+assert.equal(proofEvidence.summary.p2pkOutputs, 5);
+assert.equal(proofEvidence.summary.matchedOutputs, 5);
 
 const vaultContractArtifact = JSON.parse(await readFile(new URL("../artifacts/DelayedRecoveryVault.json", import.meta.url), "utf8"));
 const assuranceContractArtifact = JSON.parse(await readFile(new URL("../artifacts/AssurancePledge.json", import.meta.url), "utf8"));
@@ -358,6 +366,7 @@ const files = [
   "scripts/build-transaction-drafts.mjs",
   "scripts/build-signed-p2pk-draft.mjs",
   "scripts/build-signed-contract-funding-drafts.mjs",
+  "scripts/build-signed-escrow-spend-drafts.mjs",
   "scripts/build-signed-split-draft.mjs",
   "scripts/build-signed-contract-spend-drafts.mjs",
   "scripts/fetch-contract-outpoints.mjs",
@@ -390,6 +399,9 @@ const files = [
   "artifacts/AssurancePledge.json",
   "artifacts/Escrow.json",
   "artifacts/signed-drafts/escrow-funding.json",
+  "artifacts/signed-drafts/escrow-release.json",
+  "artifacts/signed-drafts/escrow-refund.json",
+  "artifacts/signed-drafts/escrow-cancel.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
   "artifacts/submit-console-registry.json",
   "artifacts/research-library.json",
@@ -427,6 +439,7 @@ const files = [
   "fixtures/MainnetReadiness.json",
   "fixtures/SimpleAssetPolicies.json",
   "fixtures/BuildStatus.json",
+  "fixtures/EscrowContractOutpoint.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
@@ -454,6 +467,7 @@ const files = [
   "docs/STATUS.md",
   "docs/SOURCES.md",
   "docs/BUILD_PLAN.md",
+  "docs/LLM_REVIEW_GUIDE.md",
   "docs/TRANSACTION_API_NOTES.md",
   "docs/ASSURANCE_CONTRACTS.md",
   "docs/KASPA_DOCS_REVIEW.md",

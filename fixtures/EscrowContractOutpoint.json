@@ -1,0 +1,81 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "escrow",
+  "contract": "Escrow",
+  "status": "accepted",
+  "fetchedAt": "2026-05-07T11:38:00.542Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+  "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+  "outputIndex": 0,
+  "amountSompi": "5000000000",
+  "amountTkas": 50,
+  "scriptType": "scripthash",
+  "scriptPublicKey": "aa20e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd187",
+  "scriptPublicKeyAddress": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
+  "redeemScriptHex": "6b6c76009c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac690453c7fd69b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776529c63757820d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975755167750069686868",
+  "redeemScriptBytes": 351,
+  "redeemScriptHash": "e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd1",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+  "rawTransaction": {
+    "subnetwork_id": "0000000000000000000000000000000000000000",
+    "transaction_id": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+    "hash": "91d93b6d1f5a4c7bf9183c7fa549fe9b546532a556481fcb15c48e8589e17d9d",
+    "mass": "2047",
+    "payload": null,
+    "block_hash": [
+      "4c4cb519291a4a585938520c67f4176fae4df3b9ca3190f2f31dff50b73de80b"
+    ],
+    "block_time": 1778153824354,
+    "version": 0,
+    "is_accepted": true,
+    "accepting_block_hash": "af150561393de24c74d1a09a597247a3c0b050ce5128eab81a2dc9405c5a5f8d",
+    "accepting_block_blue_score": 5325109,
+    "accepting_block_time": 1778153824451,
+    "inputs": [
+      {
+        "transaction_id": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "index": 0,
+        "previous_outpoint_hash": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+        "previous_outpoint_index": "2",
+        "previous_outpoint_address": null,
+        "previous_outpoint_amount": null,
+        "signature_script": "412560538eb55fdc10124a32a098067dd97de43cf3051c5d937e632cfeea36f431740d870378afebcd4f06eddb677eef677f4fa371551f3bfd8dd68bc49360ef0701",
+        "sig_op_count": "1"
+      }
+    ],
+    "outputs": [
+      {
+        "transaction_id": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "index": 0,
+        "amount": 5000000000,
+        "script_public_key": "aa20e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd187",
+        "script_public_key_address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
+        "script_public_key_type": "scripthash"
+      },
+      {
+        "transaction_id": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "index": 1,
+        "amount": 134999970000,
+        "script_public_key": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+        "script_public_key_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "script_public_key_type": "pubkey"
+      }
+    ]
+  },
+  "raw": {
+    "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
+    "outpoint": {
+      "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "5000000000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd187"
+      },
+      "blockDaaScore": "5325109",
+      "isCoinbase": false
+    }
+  }
+}

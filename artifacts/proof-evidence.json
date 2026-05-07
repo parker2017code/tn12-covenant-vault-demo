@@ -1,13 +1,13 @@
 {
   "schema": "tn12-contract-spend-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-07T11:33:48.736Z",
+  "verifiedAt": "2026-05-07T11:49:30.753Z",
   "summary": {
-    "total": 4,
-    "accepted": 4,
-    "p2shInputs": 4,
-    "p2pkOutputs": 4,
-    "matchedOutputs": 4
+    "total": 5,
+    "accepted": 5,
+    "p2shInputs": 5,
+    "p2pkOutputs": 5,
+    "matchedOutputs": 5
   },
   "proofs": [
     {
@@ -128,6 +128,38 @@
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
         "type": "pubkey",
         "amount": 24999995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Escrow release",
+      "lane": "escrow",
+      "entrypoint": "release",
+      "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "accepted": true,
+      "acceptingBlockBlueScore": 5328195,
+      "acceptingBlockTime": 1778154136843,
+      "input": {
+        "previousOutpointHash": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "previousOutpointIndex": "0",
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
+        "type": "scripthash",
+        "amount": 5000000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 4999995000,
         "prefix": "q"
       },
       "checks": {

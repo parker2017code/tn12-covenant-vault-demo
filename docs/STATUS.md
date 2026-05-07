@@ -17,7 +17,7 @@
 - Vault delayed withdrawal: submitted and accepted with a past DAA-score lock.
 - Assurance release: submitted and accepted for the individual pledge primitive.
 - Assurance refund: submitted and accepted with a past DAA-score deadline.
-- Proof evidence artifact: `npm run proof:evidence` confirms all four proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
+- Proof evidence artifact: `npm run proof:evidence` confirms all five proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
 - Wallet connector: not implemented.
 - Silverscript templates: drafted.
 - Silverscript compiler integration: helper added; artifacts depend on local `silverc`.
@@ -37,11 +37,14 @@
 - DAA-score assurance pledge funding: `f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7`.
 - Vault delayed withdrawal spend: `9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710`.
 - Assurance refund spend: `faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61`.
+- Escrow funding: `6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2`.
+- Escrow release spend: `825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d`.
 
 Latest fetched contract output addresses before the timed spends were:
 
 - Vault: `kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn`.
 - Assurance: `kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj`.
+- Escrow: `kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v`.
 
 Proof-spend input evidence:
 
@@ -49,6 +52,7 @@ Proof-spend input evidence:
 - Vault delayed withdrawal input: `kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn`, type `scripthash`, prefix `p`.
 - Assurance release input: `kaspatest:prfzsga33hgfsydw7vyn8grfctmh83cz7ux53wa33cznsc4fqtf359eej4ztg`, type `scripthash`, prefix `p`.
 - Assurance refund input: `kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj`, type `scripthash`, prefix `p`.
+- Escrow release input: `kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v`, type `scripthash`, prefix `p`.
 
 ## Transaction Planner Boundary
 

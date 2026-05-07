@@ -4,10 +4,10 @@
   "status": "active-build-map",
   "summary": {
     "total": 13,
-    "builtBases": 10,
+    "builtBases": 11,
     "proofBacked": 0,
     "blocked": 1,
-    "nextBuilds": 1,
+    "nextBuilds": 0,
     "research": 1
   },
   "lanes": [
@@ -61,18 +61,21 @@
       "order": 4,
       "id": "escrow",
       "name": "Escrow Primitive",
-      "status": "next-build",
-      "enforcement": "script-planned",
+      "status": "base-built",
+      "enforcement": "script",
       "readiness": "tn12-toccata-only",
-      "proof": "signed-funding-draft-no-spend-proof",
+      "proof": "accepted-funding-and-release-spend",
       "builtSurface": [
         "contracts/Escrow.sil",
+        "fixtures/EscrowContractOutpoint.json",
         "artifacts/signed-drafts/escrow-funding.json",
-        "fixtures/EscrowPrimitives.json",
+        "artifacts/signed-drafts/escrow-release.json",
+        "artifacts/signed-drafts/escrow-refund.json",
+        "artifacts/signed-drafts/escrow-cancel.json",
         "src/escrowPrimitive.mjs",
         "npm run escrow:registry"
       ],
-      "next": "Submit/fetch escrow funding only after review, then add release/refund/cancel drafts from accepted outpoint."
+      "next": "Fund separate escrow outputs to prove refund and cancel paths; the original escrow output was consumed by the accepted release proof."
     },
     {
       "order": 5,
@@ -216,7 +219,7 @@
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
-    "Add Escrow.sil proof path after the planner shape is stable."
+    "Fund separate escrow outputs to prove refund and mutual-cancel spend paths."
   ],
   "consistencyRules": [
     "Every lane must keep status, enforcement, readiness, and proof labels aligned.",

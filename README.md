@@ -4,6 +4,8 @@ TN12-configured prototype for a Kaspa covenant vault and assurance-contract app.
 
 This is not a mainnet wallet, not investment advice, and not proof that Toccata or vProgs are live. The goal is to make covenant-style money rules understandable, compile Silverscript templates, build and submit TN12 proof transactions, and keep going without requiring this computer to run a full node.
 
+Reviewers and LLM agents should start with [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries.
+
 ## What It Does Now
 
 - See `docs/PROGRESS.md` for the current lane-by-lane build state and next work.
@@ -156,7 +158,15 @@ Build signed local contract-funding drafts for the vault, assurance pledge, and 
 npm run tx:contracts
 ```
 
-These drafts consume separate split buckets when those fixtures are current. Escrow funding is still only a signed draft until it is explicitly submitted and accepted.
+These drafts consume separate split buckets when those fixtures are current. Escrow funding has an accepted TN12 proof in the current artifact set.
+
+Build signed escrow spend drafts after accepted escrow funding has been fetched:
+
+```sh
+npm run tx:escrow:spends
+```
+
+Escrow release, refund, and cancel drafts are mutually exclusive for a single escrow output. The current escrow output was consumed by the accepted release proof, so refund/cancel require separate funded outputs before they can be proven.
 
 Build the safer first broadcast candidate, a signed self-send split into separate vault and assurance buckets:
 
@@ -277,7 +287,7 @@ Build the escrow primitive registry:
 npm run escrow:registry
 ```
 
-This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil` and a signed escrow funding draft; accepted escrow release/refund/cancel proofs are the next hardening step.
+This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil`, accepted escrow funding, and an accepted escrow release proof. Refund and cancel remain followup proofs that need separate funded escrow outputs.
 
 Build the treasury/team vault registry:
 
@@ -382,7 +392,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 3. Next: build batch assurance aggregation around multiple pledge outputs before claiming a real campaign product.
 
-4. Next: add escrow as the next covenant primitive: buyer fund, seller release, timeout refund, mutual cancel.
+4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding and release now have accepted TN12 evidence; refund/cancel need separate funded outputs.
 
 5. Next: build an accepted-transaction indexer that reads outputs and payload receipts into app-state snapshots.
 

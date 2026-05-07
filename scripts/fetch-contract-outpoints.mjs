@@ -17,10 +17,22 @@ const contracts = [
     outputIndex: 0,
     artifactPath: "artifacts/AssurancePledge.json",
     outPath: "fixtures/AssuranceContractOutpoint.json"
+  },
+  {
+    lane: "escrow",
+    contract: "Escrow",
+    fundingDraftPath: "artifacts/signed-drafts/escrow-funding.json",
+    outputIndex: 0,
+    artifactPath: "artifacts/Escrow.json",
+    outPath: "fixtures/EscrowContractOutpoint.json"
   }
 ];
 
+const filter = process.env.CONTRACT_FILTER || "";
+
 for (const item of contracts) {
+  if (filter && item.lane !== filter && item.contract !== filter) continue;
+
   const artifact = JSON.parse(await readFile(item.artifactPath, "utf8"));
   const fundingDraft = JSON.parse(await readFile(item.fundingDraftPath, "utf8"));
   const txid = process.env[`${item.lane.toUpperCase()}_CONTRACT_TXID`] || fundingDraft.transactionId;

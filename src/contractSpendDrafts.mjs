@@ -13,6 +13,7 @@ import {
 const ZERO_SUBNETWORK_ID = "0000000000000000000000000000000000000000";
 const OP_0 = 0x00;
 const OP_1 = 0x51;
+const OP_2 = 0x52;
 const OP_PUSHDATA1 = 0x4c;
 const OP_PUSHDATA2 = 0x4d;
 const FINAL_SEQUENCE = 18446744073709551615n;
@@ -35,7 +36,8 @@ export function buildVaultRecoverySpendDraft({
   const unsigned = buildSingleInputContractSpend({
     contractOutpoint,
     outputSompi,
-    destinationScript
+    destinationScript,
+    sigOpCount: 2
   });
   const scriptHash = unsigned.signable.getScriptHashes()[0];
   const signatureScript = buildP2shSignatureScript({
@@ -279,12 +281,214 @@ export function buildAssuranceRefundSpendDraft({
   };
 }
 
-function buildSingleInputContractSpend({ contractOutpoint, outputSompi, destinationScript, lockTime = 0n }) {
+export function buildEscrowReleaseSpendDraft({
+  contractOutpoint,
+  wallet,
+  contractFeeSompi = 5000n
+}) {
+  const redeemScript = hexToBytes(contractOutpoint.redeemScriptHex);
+  const destinationScript = p2pkScript(wallet.xOnlyPublicKey);
+  const inputSompi = BigInt(contractOutpoint.amountSompi);
+  const outputSompi = inputSompi - contractFeeSompi;
+
+  if (outputSompi <= 0n) {
+    throw new Error("Escrow release output would be non-positive.");
+  }
+
+  const unsigned = buildSingleInputContractSpend({
+    contractOutpoint,
+    outputSompi,
+    destinationScript
+  });
+  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const signatureScript = buildP2shSignatureScript({
+    entrypointSigScript: [
+      ...hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey))),
+      OP_0
+    ],
+    redeemScript
+  });
+
+  unsigned.input.signatureScript = signatureScript;
+  unsigned.tx.finalize();
+
+  return buildSpendDraftArtifact({
+    lane: "escrow-release",
+    contract: "Escrow",
+    entrypoint: "release",
+    warning: "This spends the escrow P2SH output to the seller path if submitted and accepted.",
+    contractOutpoint,
+    wallet,
+    outputSompi,
+    contractFeeSompi,
+    scriptHash,
+    tx: unsigned.tx,
+    input: unsigned.input,
+    destinationScript,
+    signatureScript
+  });
+}
+
+export function buildEscrowRefundSpendDraft({
+  contractOutpoint,
+  wallet,
+  contractFeeSompi = 5000n,
+  lockTime = BigInt(Math.floor(Date.now() / 1000))
+}) {
+  const redeemScript = hexToBytes(contractOutpoint.redeemScriptHex);
+  const destinationScript = p2pkScript(wallet.xOnlyPublicKey);
+  const inputSompi = BigInt(contractOutpoint.amountSompi);
+  const outputSompi = inputSompi - contractFeeSompi;
+
+  if (outputSompi <= 0n) {
+    throw new Error("Escrow refund output would be non-positive.");
+  }
+
+  const unsigned = buildSingleInputContractSpend({
+    contractOutpoint,
+    outputSompi,
+    destinationScript,
+    lockTime
+  });
+  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const signatureScript = buildP2shSignatureScript({
+    entrypointSigScript: [
+      ...hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey))),
+      OP_1
+    ],
+    redeemScript
+  });
+
+  unsigned.input.signatureScript = signatureScript;
+  unsigned.tx.finalize();
+
+  return {
+    ...buildSpendDraftArtifact({
+      lane: "escrow-refund",
+      contract: "Escrow",
+      entrypoint: "refund",
+      warning: "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
+      contractOutpoint,
+      wallet,
+      outputSompi,
+      contractFeeSompi,
+      scriptHash,
+      tx: unsigned.tx,
+      input: unsigned.input,
+      destinationScript,
+      signatureScript
+    }),
+    lockTime: lockTime.toString()
+  };
+}
+
+export function buildEscrowCancelSpendDraft({
+  contractOutpoint,
+  wallet,
+  sellerWallet = wallet,
+  contractFeeSompi = 5000n
+}) {
+  const redeemScript = hexToBytes(contractOutpoint.redeemScriptHex);
+  const destinationScript = p2pkScript(wallet.xOnlyPublicKey);
+  const inputSompi = BigInt(contractOutpoint.amountSompi);
+  const outputSompi = inputSompi - contractFeeSompi;
+
+  if (outputSompi <= 0n) {
+    throw new Error("Escrow cancel output would be non-positive.");
+  }
+
+  const unsigned = buildSingleInputContractSpend({
+    contractOutpoint,
+    outputSompi,
+    destinationScript
+  });
+  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const buyerSignature = hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey)));
+  const sellerSignature = hexToBytes(signScriptHash(scriptHash, new PrivateKey(sellerWallet.privateKey)));
+  const signatureScript = buildP2shSignatureScript({
+    entrypointSigScript: [
+      ...buyerSignature,
+      ...sellerSignature,
+      OP_2
+    ],
+    redeemScript
+  });
+
+  unsigned.input.signatureScript = signatureScript;
+  unsigned.tx.finalize();
+
+  return buildSpendDraftArtifact({
+    lane: "escrow-cancel",
+    contract: "Escrow",
+    entrypoint: "cancel",
+    warning: "This spends the escrow P2SH output through mutual cancel if submitted and accepted.",
+    contractOutpoint,
+    wallet,
+    outputSompi,
+    contractFeeSompi,
+    scriptHash,
+    tx: unsigned.tx,
+    input: unsigned.input,
+    destinationScript,
+    signatureScript
+  });
+}
+
+function buildSpendDraftArtifact({
+  lane,
+  contract,
+  entrypoint,
+  warning,
+  contractOutpoint,
+  wallet,
+  outputSompi,
+  contractFeeSompi,
+  scriptHash,
+  tx,
+  input,
+  destinationScript,
+  signatureScript
+}) {
+  return {
+    schema: "tn12-signed-contract-spend-draft/v1",
+    network: "kaspa-testnet-12",
+    status: "signed-not-broadcast",
+    lane,
+    contract,
+    entrypoint,
+    warning,
+    source: {
+      txid: contractOutpoint.txid,
+      outputIndex: contractOutpoint.outputIndex,
+      amountTkas: contractOutpoint.amountTkas,
+      address: contractOutpoint.scriptPublicKeyAddress
+    },
+    destination: {
+      address: wallet.address,
+      scriptType: "p2pk",
+      amountSompi: outputSompi.toString(),
+      amountTkas: sompiToTkas(outputSompi)
+    },
+    contractFeeSompi: contractFeeSompi.toString(),
+    scriptHash,
+    transactionId: tx.id,
+    signatureScriptHex: bytesToHex(signatureScript),
+    submitPayload: buildSubmitPayload({
+      tx,
+      input,
+      outputSompi,
+      destinationScript,
+      signatureScript
+    })
+  };
+}
+
+function buildSingleInputContractSpend({ contractOutpoint, outputSompi, destinationScript, lockTime = 0n, sigOpCount = 1 }) {
   const input = new TransactionInput({
     previousOutpoint: contractOutpoint.raw.outpoint,
     signatureScript: [],
     sequence: lockTime > 0n ? NONFINAL_SEQUENCE : FINAL_SEQUENCE,
-    sigOpCount: 1
+    sigOpCount
   });
   const tx = new Transaction({
     version: 0,
@@ -352,7 +556,7 @@ function buildSubmitPayload({ tx, input, outputSompi, destinationScript, signatu
           },
           signatureScript: bytesToHex(signatureScript),
           sequence: String(input.sequence),
-          sigOpCount: 1
+          sigOpCount: input.sigOpCount
         }
       ],
       outputs: [

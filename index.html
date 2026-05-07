@@ -240,7 +240,7 @@
       <div class="section-title">
         <p class="eyebrow">Escrow primitive</p>
         <h2>Buyer fund, seller release, timeout refund, mutual cancel.</h2>
-        <p>This is lane 4: a commerce escrow planner before accepted covenant proof. It models exact spend paths and app state first, then later grows into signed TN12 escrow drafts and script proof.</p>
+        <p>This is lane 4: a commerce escrow primitive with accepted TN12 funding and release proof. Refund and cancel remain followup paths that need separate funded escrow outputs.</p>
       </div>
       <div id="escrow-summary" class="escrow-summary" aria-live="polite"></div>
       <div id="escrow-list" class="escrow-list" aria-live="polite"></div>
@@ -561,7 +561,7 @@ node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json<
       <article class="panel">
         <p class="eyebrow">Build plan</p>
         <h2>Next build</h2>
-        <p>The first proof set is done on TN12. Next build work is wallet-facing UX, batch pledge aggregation, escrow proof paths, and an accepted-transaction payload indexer.</p>
+        <p>The first vault, assurance, and escrow release proof paths are done on TN12. Next build work is wallet-facing UX, batch pledge aggregation, escrow refund/cancel proofs, and an accepted-transaction payload indexer.</p>
         <pre>docs/BUILD_PLAN.md</pre>
       </article>
     </section>
@@ -570,9 +570,9 @@ node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json<
       <p class="eyebrow">Source discipline</p>
       <h2>What this demo is allowed to claim</h2>
       <div class="claim-grid">
-        <article><strong>Can claim</strong><p>TN12 vault and assurance proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
+        <article><strong>Can claim</strong><p>TN12 vault, assurance, and escrow release proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
         <article><strong>Cannot claim</strong><p>Mainnet covenant activation, live native DeFi, full vProgs, wallet safety, arbitrary header data, or production wallet integration.</p></article>
-        <article><strong>Next build</strong><p>Batch assurance aggregation, escrow proofs, payload receipt indexing, wallet-facing key separation, and tighter vault templates.</p></article>
+        <article><strong>Next build</strong><p>Batch assurance aggregation, escrow refund/cancel proofs, payload receipt indexing, wallet-facing key separation, and tighter vault templates.</p></article>
       </div>
     </section>
   </main>

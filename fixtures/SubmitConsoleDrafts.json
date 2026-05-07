@@ -42,7 +42,25 @@
       "label": "Escrow funding",
       "priority": 7,
       "path": "artifacts/signed-drafts/escrow-funding.json",
-      "description": "Signed funding draft for Escrow.sil. No accepted escrow spend proof yet."
+      "description": "Accepted funding path for Escrow.sil; created the P2SH output consumed by the release proof."
+    },
+    {
+      "label": "Escrow release",
+      "priority": 8,
+      "path": "artifacts/signed-drafts/escrow-release.json",
+      "description": "Accepted seller-release proof from the Escrow.sil funding output."
+    },
+    {
+      "label": "Escrow refund",
+      "priority": 9,
+      "path": "artifacts/signed-drafts/escrow-refund.json",
+      "description": "Timeout-refund review draft for the original escrow output; not accepted after release consumed that output."
+    },
+    {
+      "label": "Escrow cancel",
+      "priority": 10,
+      "path": "artifacts/signed-drafts/escrow-cancel.json",
+      "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
     }
   ]
 }

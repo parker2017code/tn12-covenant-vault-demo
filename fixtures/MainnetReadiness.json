@@ -75,9 +75,9 @@
       "name": "Escrow primitive",
       "lane": "escrow",
       "readiness": "tn12-toccata-only",
-      "why": "Current escrow is planner/indexer state and has no accepted Escrow.sil proof yet.",
-      "blockers": ["Escrow.sil", "fund/release/refund drafts", "accepted TN12 proofs", "mainnet Toccata"],
-      "next": "Build Escrow.sil and accepted TN12 release/refund proof before discussing mainnet."
+      "why": "Current escrow has accepted TN12 funding and release proof, but remains TN12/Toccata-only and unaudited.",
+      "blockers": ["refund/cancel path proofs on separate outputs", "negative tests", "mainnet Toccata", "audit", "wallet integration"],
+      "next": "Fund separate escrow outputs for refund/cancel proofs, then add negative tests before discussing mainnet."
     },
     {
       "id": "coordination-markets",

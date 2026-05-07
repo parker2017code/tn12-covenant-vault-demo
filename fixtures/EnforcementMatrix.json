@@ -106,11 +106,11 @@
       "id": "escrow-spend-paths",
       "name": "Escrow spend paths",
       "lane": "escrow",
-      "enforcement": "script-planned",
-      "currentSurface": "contracts/Escrow.sil, artifacts/signed-drafts/escrow-funding.json, fixtures/EscrowPrimitives.json, and browser escrow panel",
-      "proof": "Compiled script artifact and signed funding draft; no accepted escrow spend proof yet",
-      "risk": "Buyer-approved release, timeout refund, and mutual cancel have script shape, but release/refund/cancel drafts still require an accepted escrow funding outpoint.",
-      "nextHardeningStep": "Submit/fetch escrow funding only after review, then build release/refund/cancel spend drafts and accepted TN12 proof transactions."
+      "enforcement": "script",
+      "currentSurface": "contracts/Escrow.sil, fixtures/EscrowContractOutpoint.json, signed escrow funding/release/refund/cancel drafts, and browser escrow panel",
+      "proof": "Accepted escrow funding output and accepted escrow release spend; refund/cancel remain unsigned-proof followups for separate outputs",
+      "risk": "Release, refund, and cancel are mutually exclusive spends of one escrow output; the accepted release consumed the original output, so refund/cancel drafts for that output are stale review artifacts.",
+      "nextHardeningStep": "Fund separate escrow outputs to prove timeout refund and mutual cancel paths without double-spending the accepted release output."
     },
     {
       "id": "treasury-payroll-caps",

@@ -22,9 +22,10 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
    - Covenant boundary: individual pledge script exists; pooled target aggregation is not script-enforced.
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
-   - Current status: next build.
-   - Enforcement: script-planned after `Escrow.sil`; signed funding draft exists; no spend proof yet.
-   - Next proof: accepted funding outpoint, then signed release/refund/cancel drafts and accepted TN12 proof paths.
+   - Current status: base built.
+   - Enforcement: script for the accepted release path; refund/cancel remain signed review drafts only.
+   - Proof: accepted escrow funding plus accepted escrow release spend.
+   - Next proof: fund separate escrow outputs to prove timeout refund and mutual cancel.
 
 5. Treasury / team vaults: spend caps, delayed large withdrawals, recovery, payroll templates.
    - Current status: base built.
@@ -80,15 +81,11 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
    - agent disputes block release;
    - invoice paid state requires accepted matching payload.
 
-2. Build the escrow proof path:
-   - `contracts/Escrow.sil`;
-   - constructor fixtures;
-   - funding draft;
-   - accepted funding outpoint;
-   - seller release draft;
-   - timeout refund draft;
-   - mutual cancel draft if the script/tooling supports it cleanly;
-   - accepted TN12 proof only after local draft checks pass.
+2. Extend the escrow proof path:
+   - accepted funding outpoint: done;
+   - accepted seller release: done;
+   - timeout refund: needs separate funded escrow output;
+   - mutual cancel: needs separate funded escrow output and extra sig-op review.
 
 3. Continue the invoice vertical slice:
    - find or build a payload-preserving submit route;
@@ -116,4 +113,4 @@ npm run tx:verify
 npm run proof:evidence
 ```
 
-`npm run proof:evidence` verifies the important proof shape: the four accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.
+`npm run proof:evidence` verifies the important proof shape: the five accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.
