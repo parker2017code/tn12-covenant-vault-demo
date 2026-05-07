@@ -31,6 +31,7 @@ export function summarizeSignedDraft(artifact, path = "") {
       txid: input.previousOutpoint?.transactionId || "",
       index: input.previousOutpoint?.index ?? null,
       sigOpCount: input.sigOpCount ?? null,
+      computeBudget: input.computeBudget ?? null,
       sequence: input.sequence ?? null
     })),
     outputs: outputs.map((output, index) => ({

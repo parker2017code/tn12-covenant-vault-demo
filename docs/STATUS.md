@@ -17,7 +17,7 @@
 - Vault delayed withdrawal: submitted and accepted with a past DAA-score lock.
 - Assurance release: submitted and accepted for the individual pledge primitive.
 - Assurance refund: submitted and accepted with a past DAA-score deadline.
-- Proof evidence artifact: `npm run proof:evidence` confirms all six proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
+- Proof evidence artifact: `npm run proof:evidence` confirms all seven proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
 - Wallet connector: not implemented.
 - Silverscript templates: drafted.
 - Silverscript compiler integration: helper added; artifacts depend on local `silverc`.
@@ -42,7 +42,9 @@
 - DAA-expired escrow refund funding: `f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f`.
 - DAA-expired escrow refund spend: `6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d`.
 - Escrow cancel funding: `331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022`.
-- Escrow cancel spend attempt: `5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323`, rejected by TN12 script-unit limits (`used=200870`, `limit=109999`).
+- Escrow mutual cancel accepted proof: `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`. Earlier failures remain historical: one wrong script budget, one old-SDK path that did not preserve tx v1 `computeBudget`.
+- Cancel-debugging rule: check artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and Rusty Kaspa source/tests before escalating.
+- Accepted cancel route after the sigop fix: local TN12 `kaspa-wasm 1.1.1-toc.1` with tx version 1, constructor fields `sigOpCount: 0` plus `computeBudget: 30`, submitted over JSON wRPC to `testnet-12`.
 
 Latest fetched contract output addresses before the timed spends were:
 
@@ -58,6 +60,7 @@ Proof-spend input evidence:
 - Assurance refund input: `kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj`, type `scripthash`, prefix `p`.
 - Escrow release input: `kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v`, type `scripthash`, prefix `p`.
 - Escrow DAA refund input: `kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx`, type `scripthash`, prefix `p`.
+- Escrow mutual cancel input: `kaspatest:pzqkhmevkrg87hph7dmk8keknjn7zkhw0x05d0yl4t43fcqvp6j3g728t6zmc`, type `scripthash`, prefix `p`.
 
 ## Transaction Planner Boundary
 

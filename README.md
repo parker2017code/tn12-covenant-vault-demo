@@ -2,14 +2,18 @@
 
 TN12-configured prototype for a Kaspa covenant vault and assurance-contract app.
 
-This is not a mainnet wallet, not investment advice, and not proof that Toccata or vProgs are live. The goal is to make covenant-style money rules understandable, compile Silverscript templates, build and submit TN12 proof transactions, and keep going without requiring this computer to run a full node.
+This repo is a TN12 learning and proof workspace. It makes covenant-style money rules understandable, compiles Silverscript templates, builds and submits TN12 proof transactions, and avoids mainnet-wallet claims.
 
 Reviewers and LLM agents should start with [`MEMORY.md`](MEMORY.md), then use [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md).
 
+Protocol-debugging rule: unclear TN12, Silverscript, Rusty Kaspa, signing, submit, serialization, or covenant behavior starts with local evidence: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and upstream source/tests. Escalation needs a txid, artifact path, endpoint response, source line, and smallest reproducer command.
+Resolved escalation notes are tracked in [`docs/MICHAEL_QUESTIONS.md`](docs/MICHAEL_QUESTIONS.md).
+General builder lessons from the escrow cancel debugging pass are tracked in [`docs/BUILDER_LESSONS.md`](docs/BUILDER_LESSONS.md).
+
 ## Current Position
 
-- Accepted proof core: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, and escrow DAA-refund.
-- Blocked proof path: escrow mutual cancel is funded/attempted, but rejected by TN12 script-unit limits and needs redesign.
+- Accepted proof core: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, escrow DAA-refund, and escrow mutual cancel.
+- Escrow mutual cancel is now accepted on TN12. The old script-unit rejection came from `sigOpCount=1` bad configuration; the accepted path is the corrected tx version 1 `computeBudget=30` draft rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`.
 - Near-term app priority: payload invoice/receipt vertical slice, because it is closest to mainnet-capable Kaspa behavior.
 - Toccata-oriented priority: keep vault, assurance, escrow, and treasury primitives clean so they are ready to adapt when covenant tooling stabilizes.
 - Research priority: keep ZK, anchors, vProgs, prediction markets, and coordination markets in roadmap lanes until the missing rails are explicit.
@@ -175,7 +179,7 @@ Build signed escrow spend drafts after accepted escrow funding has been fetched:
 npm run tx:escrow:spends
 ```
 
-Escrow release, refund, and cancel drafts are mutually exclusive for a single escrow output. The current release and DAA-refund proofs use separate funded escrow outputs; cancel still needs a separate funded output before it can be proven.
+Escrow release, refund, and cancel drafts are mutually exclusive for a single escrow output. The current release, DAA-refund, and mutual-cancel proofs use separate funded escrow outputs and are all accepted on TN12.
 
 Build the safer first broadcast candidate, a signed self-send split into separate vault and assurance buckets:
 
@@ -310,7 +314,7 @@ Build the escrow primitive registry:
 npm run escrow:registry
 ```
 
-This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil`, `contracts/EscrowExpired.sil`, accepted escrow funding, an accepted escrow release proof, and an accepted DAA-expired escrow refund proof. Cancel remains a followup proof that needs a separate funded escrow output.
+This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil`, `contracts/EscrowExpired.sil`, accepted escrow funding, an accepted escrow release proof, an accepted DAA-expired escrow refund proof, and an accepted mutual-cancel proof on a separate funded output.
 
 Build the treasury/team vault registry:
 
@@ -368,6 +372,22 @@ npm run defi:backlog
 
 This turns `fixtures/DefiResearchBacklog.json` into `artifacts/defi-backlog.json`. It keeps AMMs, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation in a research/missing-rails lane.
 
+Build the stable-value comparison brief:
+
+```sh
+npm run stable:value
+```
+
+This turns `fixtures/StableValuePaths.json` into `artifacts/stable-value-paths.json`. It compares issuer-backed, overcollateralized, synthetic, and external-stable paths without claiming a live native stablecoin.
+
+Build the issuer-backed stable-value redemption state:
+
+```sh
+npm run stable:issuer
+```
+
+This turns `fixtures/StableIssuerRedemptions.json` into `artifacts/stable-issuer-redemptions.json`. It tracks accepted issuance and accepted redemption receipts for a demo issuer credit; signed-only redemption requests do not reduce accepted outstanding balance.
+
 Build the AI-agent commitment board:
 
 ```sh
@@ -415,7 +435,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 3. Next: build batch assurance aggregation around multiple pledge outputs before claiming a real campaign product.
 
-4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding, release, and DAA-refund now have accepted TN12 evidence; cancel needs a separate funded output.
+4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding, release, DAA-refund, and mutual cancel now have accepted TN12 evidence on separate funded outputs.
 
 5. Next: build an accepted-transaction indexer that reads outputs and payload receipts into app-state snapshots.
 

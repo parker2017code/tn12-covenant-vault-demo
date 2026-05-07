@@ -81,7 +81,7 @@
         "src/escrowPrimitive.mjs",
         "npm run escrow:registry"
       ],
-      "next": "Redesign or simplify mutual cancel; the current cancel draft is funded but rejected by TN12 script-unit limits."
+      "next": "Add negative tests around v1 computeBudget preservation and keep release/refund/cancel proof paths tied to separate funded outputs."
     },
     {
       "order": 5,
@@ -153,10 +153,16 @@
       "proof": "generated-artifact",
       "builtSurface": [
         "fixtures/DefiResearchBacklog.json",
+        "fixtures/StableValuePaths.json",
+        "fixtures/StableIssuerRedemptions.json",
         "src/defiBacklog.mjs",
-        "npm run defi:backlog"
+        "src/stableValuePaths.mjs",
+        "src/stableIssuerRedemption.mjs",
+        "npm run defi:backlog",
+        "npm run stable:value",
+        "npm run stable:issuer"
       ],
-      "next": "Convert top briefs into simulation-only dashboards before any settlement claim."
+      "next": "Convert the stable-value and lending briefs into simulation-only dashboards before any settlement claim."
     },
     {
       "order": 10,
@@ -239,7 +245,7 @@
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
-    "Redesign or simplify the mutual-cancel spend path after the script-unit rejection.",
+    "Add negative tests around version-1 computeBudget preservation and keep the local TN12 SDK route documented.",
     "Add a ZK/anchor design checklist before any bridge, oracle, solver, or vProg proof claim."
   ],
   "consistencyRules": [

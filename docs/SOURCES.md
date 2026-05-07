@@ -14,6 +14,8 @@
 - Kaspa transaction payload guide: https://docs.kaspa.org/integrate/transaction-payload
 - Kaspa node guide: https://docs.kaspa.org/integrate/kaspa-node
 - Kaspa references: https://docs.kaspa.org/references
+- Aspectron Kaspa WASM SDK RpcClient docs: https://kaspa.aspectron.org/docs/classes/RpcClient.html
+- Aspectron Kaspa transaction signing guide: https://kaspa-mdbook.aspectron.com/transactions/signing.html
 - Rusty Kaspa TN12 branch: https://github.com/kaspanet/rusty-kaspa/tree/tn12
 - Rusty Kaspa Toccata branch: https://github.com/kaspanet/rusty-kaspa/tree/toccata
 - Silverscript: https://github.com/kaspanet/silverscript
@@ -39,6 +41,8 @@ The new official builder docs are useful to this repo in three ways:
 - The wallet guide matters for the payload route because it documents the high-level Wallet API as the normal JS/Rust send path, while the TN12 REST submit schema currently omits a payload field.
 - The covenants guide directly supports this repo's next app choices: vaults, treasury controls, escrow-like flows, and time/condition-based unlocks.
 - The Based Apps, full vProgs, and Inline ZK pages reinforce status boundaries: shared-state concurrency and app composition are later lanes, while ZK is specialized and not needed for the current vault/assurance/escrow path.
+- Aspectron's `RpcClient` docs confirmed the current object-style constructor and request-style submit wrapper: `new RpcClient({ url, networkId })` and `submitTransaction({ transaction, allowOrphan })`.
+- Aspectron's signing guide confirmed the same submit wrapper after SDK signing. TN12-specific `computeBudget` behavior still had to be verified against Rusty Kaspa TN12 source/tests and the local TN12 WASM build.
 
 ## Cross-Chain App Research Resources
 

@@ -27,10 +27,10 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: base built.
-   - Enforcement: script for accepted release and DAA-refund paths; cancel remains blocked.
+   - Enforcement: script for accepted release, DAA-refund, and mutual-cancel paths.
    - Proof: accepted escrow funding, accepted release spend, and accepted DAA-expired refund spend.
-   - Cancel status: funded separately but rejected by TN12 script-unit limits (`used=200870`, `limit=109999`).
-   - Next proof: simplify or redesign mutual cancel before another accepted proof attempt.
+   - Cancel status: accepted on a separate funded output. The first submit used `sigOpCount=1` and hit `used=200870`, `limit=109999`; the old-SDK v1 attempt failed verification; the corrected local TN12 SDK route accepted `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
+   - Latest route: Rusty Kaspa TN12 source confirms tx version 1 plus `computeBudget`; v1 malformed RPC transactions with non-zero `sig_op_count` are rejected. The accepted JS route uses local TN12 `kaspa-wasm 1.1.1-toc.1` with `sigOpCount: 0, computeBudget: 30`.
 
 5. Treasury / team vaults: spend caps, delayed large withdrawals, recovery, payroll templates.
    - Current status: base built.
@@ -56,6 +56,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
    - Current status: base built as research backlog.
    - Enforcement: documentation.
    - Boundary: not live DeFi.
+   - Stable-value detail: comparison brief added for issuer-backed, overcollateralized, synthetic, and external-stable paths; issuer-backed demo state now tracks accepted issuance/redemption while excluding signed-only requests. This is not a native stablecoin claim.
 
 10. Cross-chain app research library: PMF, reusable patterns, failure modes, Kaspa mapping.
     - Current status: base built.
@@ -97,7 +98,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
    - accepted funding outpoint: done;
    - accepted seller release: done;
    - DAA-score timeout refund: done;
-   - mutual cancel: separately funded attempt rejected by script-unit limits; redesign required.
+   - mutual cancel: separately funded attempt is accepted; current version-1 `computeBudget=30` artifact was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, submitted over JSON wRPC, and verified accepted by the TN12 API.
 
 3. Continue the invoice vertical slice:
    - find or build a payload-preserving submit route;
@@ -125,4 +126,4 @@ npm run tx:verify
 npm run proof:evidence
 ```
 
-`npm run proof:evidence` verifies the important proof shape: the six accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.
+`npm run proof:evidence` verifies the important proof shape: the seven accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.

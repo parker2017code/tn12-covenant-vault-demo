@@ -50,6 +50,14 @@
       "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
       "amountSompi": "4999995000",
       "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Escrow mutual cancel",
+      "lane": "escrow",
+      "entrypoint": "cancel",
+      "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "amountSompi": "4999995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
     }
   ]
 }

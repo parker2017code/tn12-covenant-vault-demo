@@ -4,8 +4,8 @@
   "lane": "escrow-cancel",
   "contract": "Escrow",
   "entrypoint": "cancel",
-  "status": "rejected-script-units-limit",
-  "attemptedAt": "2026-05-07T12:20:00.000Z",
+  "status": "accepted-version1-compute-budget-sdk-corrected",
+  "attemptedAt": "2026-05-07T13:46:20Z",
   "fundingTxid": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
   "spendTxid": "5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323",
   "source": {
@@ -16,10 +16,124 @@
     "amountTkas": 50,
     "status": "accepted-funding-output"
   },
+  "submitPayloadSigOpCount": 2,
   "submitResult": {
+    "httpStatus": 400,
+    "error": "RPC Server (remote error) -> Rejected transaction 5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323: failed to verify the signature script: script ran, but verification failed"
+  },
+  "previousRejectedDraft": {
+    "attemptedAt": "2026-05-07T12:20:00.000Z",
+    "submitPayloadSigOpCount": 1,
     "httpStatus": 400,
     "error": "RPC Server (remote error) -> Rejected transaction 5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323: failed to verify the signature script: script units exceeded the allowed amount: used=200870, limit=109999"
   },
-  "boundary": "This is not an accepted cancel proof. It is evidence that the current mutual-cancel script shape exceeds TN12 script-unit limits for this draft.",
-  "next": "Redesign or simplify the cancel path before another accepted proof attempt."
+  "boundary": "Accepted cancel proof. The original script-unit rejection came from sigOpCount=1 bad configuration. The later verification failure used old JS SDK signing/reconstruction that did not preserve tx v1 computeBudget. The corrected artifact was rebuilt with Rusty Kaspa TN12 kaspa-wasm 1.1.1-toc.1, submitted through JSON wRPC to testnet-12, and verified accepted by the TN12 transaction API.",
+  "next": "Keep the local TN12 SDK route documented, add negative tests around v1 computeBudget preservation, and preserve old rejection artifacts as historical bad-config evidence only.",
+  "latestDebuggedAt": "2026-05-07T18:55:00+02:00",
+  "acceptedResult": {
+    "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+    "accepted": true,
+    "acceptingBlockHash": "445975a9c68940241331bc425946626712983316168c0fb13a354f4393eacef6",
+    "output": {
+      "index": 0,
+      "amountSompi": "4999995000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "verifyCommand": "node scripts/verify-accepted-txs.mjs"
+  },
+  "version1ComputeBudgetAttempt": {
+    "artifactPath": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+    "spendTxid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+    "transactionVersion": 1,
+    "computeBudget": 30,
+    "source": "Rusty Kaspa TN12 source and integration tests use TX_VERSION_TOCCATA plus ComputeBudget mass for v1 inputs. The corrected JS build uses the local TN12 kaspa-wasm package at /home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa.",
+    "localWrpcDryRun": {
+      "status": "reconstructed-txid-matches",
+      "command": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "reconstructedTransactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "budgetMode": "computeBudget",
+      "caveat": "This dry run uses the locally built TN12 SDK, which preserves computeBudget in the runtime TransactionInput."
+    },
+    "oldSdkDraft": {
+      "spendTxid": "2614673cce2d3ce175d94d306e0f7870f28595aa060088835170e93ecdaf7ef7",
+      "status": "superseded-old-sdk-reconstruction",
+      "caveat": "This draft was generated through a JS SDK path that required sigOpCount and did not preserve computeBudget; do not use it as current evidence."
+    },
+    "localSdk": {
+      "package": "kaspa-wasm",
+      "installedVersion": "0.13.0",
+      "inputBudgetSupport": {
+        "acceptsComputeBudgetOnly": false,
+        "requiresSigOpCountProperty": true,
+        "acceptsSigOpCount": true,
+        "acceptsSigOpCountZeroPlusComputeBudget": true,
+        "preservesComputeBudget": false
+      },
+      "sourceBranchFinding": {
+        "rustyKaspaBranch": "tn12",
+        "rustyKaspaHead": "7b1e18cc6e7098d83927049781c91740b90e7754",
+        "wasmNpmPackageVersion": "0.13.5",
+        "consensusRule": "tx version 1 and higher inputs carry computeBudget, not sigOpCount"
+      }
+    },
+    "tn12Sdk": {
+      "package": "kaspa-wasm",
+      "version": "1.1.1-toc.1",
+      "source": "/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa",
+      "inputBudgetSupport": {
+        "acceptsComputeBudgetOnly": false,
+        "requiresSigOpCountProperty": true,
+        "acceptsSigOpCount": true,
+        "acceptsSigOpCountZeroPlusComputeBudget": true,
+        "preservesComputeBudget": true
+      },
+      "buildCommand": "cd /home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm && ./build-node"
+    },
+    "publicRestSubmit": {
+      "status": "schema-or-version-blocked",
+      "computeBudgetOnly": {
+        "httpStatus": 422,
+        "error": "body.transaction.inputs.0.sigOpCount: field required"
+      },
+      "sigOpCountCompatibilityField": {
+        "httpStatus": 400,
+        "error": "RpcTransactionInput.sig_op_count is inconsistent with transaction version 1"
+      }
+    },
+    "publicWrpcSubmit": {
+      "status": "not-accepted-from-public-peers-tested",
+      "testedPeers": [
+        "ws://66.23.234.250:17210",
+        "ws://23.118.8.168:17210",
+        "ws://86.48.24.208:17210",
+        "ws://65.108.107.30:17210",
+        "ws://207.180.249.228:17210",
+        "ws://79.99.46.67:17210"
+      ],
+      "borshError": "Kaspa RpcApi -> RPC Server (remote error) -> RPC response error NotFound",
+      "jsonError": "request deserialization error"
+    },
+    "publicWrpcProbe": {
+      "status": "submit-surface-still-unproven",
+      "borsh": {
+        "endpoint": "ws://66.23.234.250:17210",
+        "requestedNetworkId": "testnet-12",
+        "getServerInfo": "RPC response error NotFound"
+      },
+      "json": {
+        "endpoint": "ws://65.108.107.30:18210",
+        "requestedNetworkId": "testnet-12",
+        "getServerInfo": "RPC serde deserialization error: invalid type: integer 1, expected an array of length 4",
+        "getCurrentNetwork": {
+          "network": "testnet"
+        },
+        "getInfo": {
+          "serverVersion": "1.1.1-toc.1",
+          "isSynced": true,
+          "isUtxoIndexed": true
+        }
+      }
+    }
+  }
 }

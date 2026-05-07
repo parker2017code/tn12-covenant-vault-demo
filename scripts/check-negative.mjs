@@ -5,6 +5,7 @@ import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildInvoiceRegistry } from "../src/invoiceReceipt.mjs";
+import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 
 const auctionFixture = JSON.parse(await readFile(new URL("../fixtures/AuctionIntentPrototype.json", import.meta.url), "utf8"));
 const highSignedOnlyAuction = buildAuctionIntentPrototype({
@@ -87,5 +88,23 @@ assert.equal(workshopPass.redeemed, 1);
 assert.equal(duplicateAccessPassPlanner.summary.acceptedRedemptions, 1);
 assert.equal(duplicateAccessPassPlanner.summary.duplicateRedemptions, 1);
 assert.equal(duplicateAccessPassPlanner.summary.missingAcceptedTxids, 1);
+
+const stableIssuerFixture = JSON.parse(await readFile(new URL("../fixtures/StableIssuerRedemptions.json", import.meta.url), "utf8"));
+const signedOnlyFullRedemption = buildStableIssuerRedemptionState({
+  ...stableIssuerFixture,
+  redemptions: [
+    ...stableIssuerFixture.redemptions,
+    {
+      recordId: "redeem-signed-only-full-balance",
+      holder: "merchant-alpha",
+      amountUnits: 32500,
+      acceptedTxid: "",
+      issuerSignature: "demo-issuer-signature-negative",
+      memo: "Signed-only request attempting to consume the full accepted balance."
+    }
+  ]
+});
+assert.equal(signedOnlyFullRedemption.summary.acceptedOutstandingDisplay, "325.00");
+assert.equal(signedOnlyFullRedemption.summary.signedOnlyRedemptions, 2);
 
 console.log("Negative checks passed.");

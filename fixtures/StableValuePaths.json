@@ -1,0 +1,58 @@
+{
+  "schema": "kaspa-stable-value-paths-fixture/v1",
+  "reviewedAt": "2026-05-07",
+  "paths": [
+    {
+      "id": "issuer-backed-redeemable-unit",
+      "name": "Issuer-backed redeemable unit",
+      "status": "comparison-only",
+      "earliestKaspaLane": "issuer-indexer",
+      "userJob": "Let a known issuer sell and redeem a stable-value claim while Kaspa records payments and redemptions.",
+      "mechanism": "Issuer maintains reserves and honors redemption records.",
+      "custodyModel": "Issuer custody and legal redemption promise.",
+      "proofInputs": ["accepted payment receipt", "issuer signature", "redemption receipt", "reserve disclosure"],
+      "missingRails": ["issuer trust", "legal/compliance", "reserve reporting", "redemption operations", "wallet UX"],
+      "firstSafeArtifact": "Issuer/redemption state machine backed by accepted payload receipts, with no native-stablecoin claim.",
+      "next": "Tie one mock issuer redemption to accepted payload state before any product language."
+    },
+    {
+      "id": "overcollateralized-vault-unit",
+      "name": "Overcollateralized vault unit",
+      "status": "research-only",
+      "earliestKaspaLane": "toccata-vprogs-roadmap",
+      "userJob": "Borrow a stable unit against volatile collateral with visible health and liquidation risk.",
+      "mechanism": "Collateral vault plus mint/burn accounting and liquidation rules.",
+      "custodyModel": "Script/vProg-controlled collateral later; simulator only now.",
+      "proofInputs": ["collateral UTXO", "price oracle", "mint state", "repayment state", "liquidation proof"],
+      "missingRails": ["price oracle", "liquidation engine", "native asset model", "shared state", "risk parameters"],
+      "firstSafeArtifact": "Collateral health simulator with manual price inputs and no minting.",
+      "next": "Build a non-custodial risk calculator before any settlement design."
+    },
+    {
+      "id": "synthetic-index-unit",
+      "name": "Synthetic index unit",
+      "status": "research-only",
+      "earliestKaspaLane": "research",
+      "userJob": "Track a dollar-like value synthetically without promising redemption.",
+      "mechanism": "Oracle-indexed accounting or contract-for-difference style exposure.",
+      "custodyModel": "Counterparty or future programmable settlement; not safe as a payment unit yet.",
+      "proofInputs": ["price feed", "position record", "margin state", "settlement rule", "dispute path"],
+      "missingRails": ["oracle", "margin engine", "counterparty risk", "legal review", "liquidity"],
+      "firstSafeArtifact": "Simulation-only index dashboard that shows oracle and margin failure modes.",
+      "next": "Keep as research; do not position it as a stablecoin or merchant rail."
+    },
+    {
+      "id": "external-stablecoin-rail",
+      "name": "External stablecoin rail",
+      "status": "integration-research",
+      "earliestKaspaLane": "bridge-or-payment-integration",
+      "userJob": "Use an existing stablecoin elsewhere while Kaspa handles fast payment proofs or app receipts.",
+      "mechanism": "External asset remains on its source rail; Kaspa indexes payment intents, receipts, or claims.",
+      "custodyModel": "External chain/issuer/bridge risk, not Kaspa-native custody.",
+      "proofInputs": ["source-chain proof", "accepted Kaspa receipt", "bridge attestation", "redemption policy"],
+      "missingRails": ["canonical source-chain anchor", "bridge trust model", "wallet flow", "compliance", "rollback handling"],
+      "firstSafeArtifact": "Bridge/source-chain checklist and receipt mapper, without custody or wrapped-asset issuance.",
+      "next": "Add this to the ZK/anchor checklist before any bridge or wrapped-stable claim."
+    }
+  ]
+}

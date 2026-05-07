@@ -38,6 +38,7 @@
           "txid": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
           "index": 1,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": 0
         }
       ],
@@ -101,6 +102,7 @@
           "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
           "index": 2,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": 0
         }
       ],
@@ -171,6 +173,7 @@
           "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "18446744073709551615"
         }
       ],
@@ -227,6 +230,7 @@
           "txid": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "0"
         }
       ],
@@ -283,6 +287,7 @@
           "txid": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "18446744073709551615"
         }
       ],
@@ -339,6 +344,7 @@
           "txid": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "0"
         }
       ],
@@ -436,6 +442,7 @@
           "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "18446744073709551615"
         }
       ],
@@ -492,6 +499,7 @@
           "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "0"
         }
       ],
@@ -548,6 +556,7 @@
           "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "18446744073709551615"
         }
       ],
@@ -645,6 +654,7 @@
           "txid": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
           "index": 0,
           "sigOpCount": 1,
+          "computeBudget": null,
           "sequence": "0"
         }
       ],
@@ -719,7 +729,7 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "escrow-cancel",
-      "transactionId": "5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
       "warning": "This spends the escrow P2SH output through mutual cancel if submitted and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
@@ -741,7 +751,8 @@
         {
           "txid": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
           "index": 0,
-          "sigOpCount": 1,
+          "sigOpCount": null,
+          "computeBudget": 30,
           "sequence": "18446744073709551615"
         }
       ],
@@ -767,7 +778,7 @@
       },
       "label": "Escrow cancel attempt",
       "priority": 14,
-      "description": "Rejected mutual-cancel attempt; current script shape exceeds TN12 script-unit limits."
+      "description": "Accepted mutual-cancel spend; rebuilt as tx version 1 with computeBudget 30 using the local TN12 kaspa-wasm 1.1.1-toc.1 SDK."
     }
   ],
   "boundaries": [

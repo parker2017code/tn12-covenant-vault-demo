@@ -37,6 +37,8 @@ import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "./src/auctionIntent.mjs";
 import { buildDefiResearchBacklog } from "./src/defiBacklog.mjs";
+import { buildStableValuePathRegistry } from "./src/stableValuePaths.mjs";
+import { buildStableIssuerRedemptionState } from "./src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "./src/agentCommitments.mjs";
 import { buildProjectStatus } from "./src/buildStatus.mjs";
 
@@ -86,6 +88,10 @@ const auctionSummaryNode = document.querySelector("#auction-summary");
 const auctionListNode = document.querySelector("#auction-list");
 const defiSummaryNode = document.querySelector("#defi-summary");
 const defiListNode = document.querySelector("#defi-list");
+const stableSummaryNode = document.querySelector("#stable-summary");
+const stableListNode = document.querySelector("#stable-list");
+const stableIssuerSummaryNode = document.querySelector("#stable-issuer-summary");
+const stableIssuerListNode = document.querySelector("#stable-issuer-list");
 const agentSummaryNode = document.querySelector("#agent-summary");
 const agentListNode = document.querySelector("#agent-list");
 const buildStatusSummaryNode = document.querySelector("#build-status-summary");
@@ -217,6 +223,8 @@ renderMainnetReadiness();
 renderAssetPolicies();
 renderAuctionIntents();
 renderDefiBacklog();
+renderStableValuePaths();
+renderStableIssuerRedemptions();
 renderAgentCommitments();
 renderBuildStatus();
 renderProofTransactions();
@@ -691,6 +699,68 @@ async function renderDefiBacklog() {
     }
   } catch (error) {
     defiSummaryNode.textContent = `DeFi backlog unavailable: ${error.message}`;
+  }
+}
+
+async function renderStableValuePaths() {
+  if (!stableSummaryNode || !stableListNode) return;
+
+  try {
+    const response = await fetch("fixtures/StableValuePaths.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const registry = buildStableValuePathRegistry(fixture);
+    stableSummaryNode.innerHTML = `
+      <article><span>Paths</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
+      <article><span>Build now</span><strong>${escapeHtml(registry.summary.buildableNow)}</strong></article>
+      <article><span>Research</span><strong>${escapeHtml(registry.summary.researchOnly)}</strong></article>
+      <article><span>Missing rails</span><strong>${escapeHtml(registry.summary.missingRailCount)}</strong></article>
+    `;
+
+    stableListNode.innerHTML = "";
+    for (const path of registry.paths) {
+      const article = document.createElement("article");
+      article.className = "defi-card";
+      article.innerHTML = `
+        <span>${escapeHtml(path.status)} / ${escapeHtml(path.earliestKaspaLane)}</span>
+        <strong>${escapeHtml(path.name)}</strong>
+        <p>${escapeHtml(path.firstSafeArtifact)}</p>
+        <small>${escapeHtml(path.missingRails.slice(0, 4).join(", "))}</small>
+      `;
+      stableListNode.append(article);
+    }
+  } catch (error) {
+    stableSummaryNode.textContent = `Stable-value paths unavailable: ${error.message}`;
+  }
+}
+
+async function renderStableIssuerRedemptions() {
+  if (!stableIssuerSummaryNode || !stableIssuerListNode) return;
+
+  try {
+    const response = await fetch("fixtures/StableIssuerRedemptions.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const state = buildStableIssuerRedemptionState(fixture);
+    stableIssuerSummaryNode.innerHTML = `
+      <article><span>Issued</span><strong>${escapeHtml(state.summary.acceptedIssuedDisplay)}</strong></article>
+      <article><span>Redeemed</span><strong>${escapeHtml(state.summary.acceptedRedeemedDisplay)}</strong></article>
+      <article><span>Outstanding</span><strong>${escapeHtml(state.summary.acceptedOutstandingDisplay)}</strong></article>
+      <article><span>Signed-only</span><strong>${escapeHtml(state.summary.signedOnlyRedemptions)}</strong></article>
+    `;
+
+    stableIssuerListNode.innerHTML = "";
+    for (const redemption of state.redemptions) {
+      const article = document.createElement("article");
+      article.className = "defi-card";
+      article.innerHTML = `
+        <span>${escapeHtml(redemption.accepted ? "accepted" : "signed-only")} / ${escapeHtml(redemption.holder)}</span>
+        <strong>${escapeHtml(redemption.recordId)}</strong>
+        <p>${escapeHtml(redemption.memo)}</p>
+        <small>${escapeHtml(redemption.acceptedTxid || "missing accepted txid")}</small>
+      `;
+      stableIssuerListNode.append(article);
+    }
+  } catch (error) {
+    stableIssuerSummaryNode.textContent = `Stable issuer state unavailable: ${error.message}`;
   }
 }
 

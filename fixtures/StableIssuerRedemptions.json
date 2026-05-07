@@ -1,0 +1,48 @@
+{
+  "schema": "kaspa-stable-issuer-redemptions-fixture/v1",
+  "reviewedAt": "2026-05-07",
+  "unit": {
+    "unitId": "stable-demo-usd-credit",
+    "name": "Demo USD credit",
+    "issuer": "Demo issuer",
+    "peg": "USD",
+    "decimals": 2,
+    "status": "issuer-indexer-simulation"
+  },
+  "issuances": [
+    {
+      "recordId": "issue-001",
+      "holder": "merchant-alpha",
+      "amountUnits": 25000,
+      "acceptedTxid": "receipt-stable-issue-001",
+      "issuerSignature": "demo-issuer-signature-001",
+      "memo": "Mock accepted receipt for issued stable-value credit."
+    },
+    {
+      "recordId": "issue-002",
+      "holder": "contractor-beta",
+      "amountUnits": 12500,
+      "acceptedTxid": "receipt-stable-issue-002",
+      "issuerSignature": "demo-issuer-signature-002",
+      "memo": "Mock accepted receipt for issued stable-value credit."
+    }
+  ],
+  "redemptions": [
+    {
+      "recordId": "redeem-001",
+      "holder": "merchant-alpha",
+      "amountUnits": 5000,
+      "acceptedTxid": "receipt-stable-redeem-001",
+      "issuerSignature": "demo-issuer-signature-003",
+      "memo": "Mock accepted receipt for issuer redemption."
+    },
+    {
+      "recordId": "redeem-002",
+      "holder": "contractor-beta",
+      "amountUnits": 2500,
+      "acceptedTxid": "",
+      "issuerSignature": "demo-issuer-signature-004",
+      "memo": "Signed-only redemption request; must not reduce accepted outstanding balance."
+    }
+  ]
+}

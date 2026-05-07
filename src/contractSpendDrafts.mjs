@@ -1,4 +1,6 @@
-import {
+import { getKaspaWasmRuntime } from "./kaspaWasmRuntime.mjs";
+
+const {
   Address,
   PrivateKey,
   ScriptPublicKey,
@@ -7,8 +9,9 @@ import {
   TransactionInput,
   TransactionOutput,
   UtxoEntries,
+  createInputSignature,
   signScriptHash
-} from "kaspa-wasm";
+} = getKaspaWasmRuntime().module;
 
 const ZERO_SUBNETWORK_ID = "0000000000000000000000000000000000000000";
 const OP_0 = 0x00;
@@ -39,10 +42,10 @@ export function buildVaultRecoverySpendDraft({
     destinationScript,
     sigOpCount: 2
   });
-  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const scriptHash = getScriptHash(unsigned);
   const signatureScript = buildP2shSignatureScript({
     entrypointSigScript: [
-      ...hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey))),
+      ...signContractInput(unsigned, wallet.privateKey, scriptHash),
       OP_1
     ],
     redeemScript
@@ -106,10 +109,10 @@ export function buildVaultWithdrawalSpendDraft({
     destinationScript,
     lockTime
   });
-  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const scriptHash = getScriptHash(unsigned);
   const signatureScript = buildP2shSignatureScript({
     entrypointSigScript: [
-      ...hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey))),
+      ...signContractInput(unsigned, wallet.privateKey, scriptHash),
       OP_0
     ],
     redeemScript
@@ -234,10 +237,10 @@ export function buildAssuranceRefundSpendDraft({
     destinationScript,
     lockTime
   });
-  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const scriptHash = getScriptHash(unsigned);
   const signatureScript = buildP2shSignatureScript({
     entrypointSigScript: [
-      ...hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey))),
+      ...signContractInput(unsigned, wallet.privateKey, scriptHash),
       OP_1
     ],
     redeemScript
@@ -300,10 +303,10 @@ export function buildEscrowReleaseSpendDraft({
     outputSompi,
     destinationScript
   });
-  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const scriptHash = getScriptHash(unsigned);
   const signatureScript = buildP2shSignatureScript({
     entrypointSigScript: [
-      ...hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey))),
+      ...signContractInput(unsigned, wallet.privateKey, scriptHash),
       OP_0
     ],
     redeemScript
@@ -350,10 +353,10 @@ export function buildEscrowRefundSpendDraft({
     destinationScript,
     lockTime
   });
-  const scriptHash = unsigned.signable.getScriptHashes()[0];
+  const scriptHash = getScriptHash(unsigned);
   const signatureScript = buildP2shSignatureScript({
     entrypointSigScript: [
-      ...hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey))),
+      ...signContractInput(unsigned, wallet.privateKey, scriptHash),
       OP_1
     ],
     redeemScript
@@ -400,11 +403,13 @@ export function buildEscrowCancelSpendDraft({
   const unsigned = buildSingleInputContractSpend({
     contractOutpoint,
     outputSompi,
-    destinationScript
+    destinationScript,
+    version: 1,
+    computeBudget: 30
   });
-  const scriptHash = unsigned.signable.getScriptHashes()[0];
-  const buyerSignature = hexToBytes(signScriptHash(scriptHash, new PrivateKey(wallet.privateKey)));
-  const sellerSignature = hexToBytes(signScriptHash(scriptHash, new PrivateKey(sellerWallet.privateKey)));
+  const scriptHash = getScriptHash(unsigned);
+  const buyerSignature = signContractInput(unsigned, wallet.privateKey, scriptHash);
+  const sellerSignature = signContractInput(unsigned, sellerWallet.privateKey, scriptHash);
   const signatureScript = buildP2shSignatureScript({
     entrypointSigScript: [
       ...buyerSignature,
@@ -488,16 +493,20 @@ function buildSingleInputContractSpend({
   outputSompi,
   destinationScript,
   lockTime = 0n,
-  sigOpCount = 1
+  sigOpCount = 1,
+  version = 0,
+  computeBudget = null
 }) {
+  const entries = buildUtxoEntries(contractOutpoint);
   const input = new TransactionInput({
     previousOutpoint: contractOutpoint.raw.outpoint,
     signatureScript: [],
     sequence: lockTime > 0n ? NONFINAL_SEQUENCE : FINAL_SEQUENCE,
-    sigOpCount
+    ...buildInputUtxoField(entries),
+    ...buildInputMassFields({ version, sigOpCount, computeBudget })
   });
   const tx = new Transaction({
-    version: 0,
+    version,
     inputs: [input],
     outputs: [
       new TransactionOutput(outputSompi, new ScriptPublicKey(0, destinationScript))
@@ -509,7 +518,18 @@ function buildSingleInputContractSpend({
   });
   tx.finalize();
 
-  const entries = new UtxoEntries([{
+  return {
+    tx,
+    input,
+    version,
+    computeBudget,
+    runtimeInputMass: buildInputMassFields({ version, sigOpCount, computeBudget }),
+    signable: SignableTransaction ? new SignableTransaction(tx, entries) : null
+  };
+}
+
+function buildUtxoEntries(contractOutpoint) {
+  return new UtxoEntries([{
     address: new Address(contractOutpoint.scriptPublicKeyAddress),
     outpoint: contractOutpoint.raw.outpoint,
     utxoEntry: {
@@ -519,12 +539,54 @@ function buildSingleInputContractSpend({
       isCoinbase: contractOutpoint.raw.utxoEntry.isCoinbase
     }
   }]);
+}
 
-  return {
-    tx,
-    input,
-    signable: new SignableTransaction(tx, entries)
-  };
+function buildInputUtxoField(entries) {
+  return SignableTransaction ? {} : { utxo: entries.items[0] };
+}
+
+function getScriptHash(unsigned) {
+  if (unsigned.signable) return unsigned.signable.getScriptHashes()[0];
+  return null;
+}
+
+function signContractInput(unsigned, privateKey, scriptHash) {
+  if (unsigned.signable) {
+    return hexToBytes(signScriptHash(scriptHash, new PrivateKey(privateKey)));
+  }
+  return hexToBytes(createInputSignature(unsigned.tx, 0, new PrivateKey(privateKey)));
+}
+
+function buildInputMassFields({ version, sigOpCount, computeBudget }) {
+  if (Number(version || 0) >= 1 && computeBudget != null) {
+    return inputPreservesComputeBudget()
+      ? { sigOpCount: 0, computeBudget }
+      : { sigOpCount: computeBudget };
+  }
+  return { sigOpCount };
+}
+
+let cachedInputPreservesComputeBudget = null;
+
+function inputPreservesComputeBudget() {
+  if (cachedInputPreservesComputeBudget !== null) return cachedInputPreservesComputeBudget;
+  try {
+    const input = new TransactionInput({
+      previousOutpoint: {
+        transactionId: "0000000000000000000000000000000000000000000000000000000000000000",
+        index: 0
+      },
+      signatureScript: [],
+      sequence: 0n,
+      sigOpCount: 0,
+      computeBudget: 1
+    });
+    cachedInputPreservesComputeBudget = Number(input.toJSON?.()?.computeBudget || input.computeBudget || 0) === 1;
+    input.free?.();
+  } catch {
+    cachedInputPreservesComputeBudget = false;
+  }
+  return cachedInputPreservesComputeBudget;
 }
 
 function buildP2shSignatureScript({ entrypointSigScript, redeemScript }) {
@@ -550,21 +612,26 @@ function pushData(bytes) {
   throw new Error(`Cannot push ${bytes.length} bytes.`);
 }
 
-function buildSubmitPayload({ tx, input, outputSompi, destinationScript, signatureScript }) {
+function buildSubmitPayload({ tx, input, outputSompi, destinationScript, signatureScript, computeBudget = null }) {
+  const version = Number(tx.version ?? 0);
+  const submitInput = {
+    previousOutpoint: {
+      transactionId: input.previousOutpoint.transactionId,
+      index: input.previousOutpoint.index
+    },
+    signatureScript: bytesToHex(signatureScript),
+    sequence: String(input.sequence)
+  };
+  if (version >= 1) {
+    submitInput.computeBudget = computeBudget ?? input.computeBudget ?? input.sigOpCount;
+  } else {
+    submitInput.sigOpCount = input.sigOpCount;
+  }
+
   return {
     transaction: {
-      version: 0,
-      inputs: [
-        {
-          previousOutpoint: {
-            transactionId: input.previousOutpoint.transactionId,
-            index: input.previousOutpoint.index
-          },
-          signatureScript: bytesToHex(signatureScript),
-          sequence: String(input.sequence),
-          sigOpCount: input.sigOpCount
-        }
-      ],
+      version,
+      inputs: [submitInput],
       outputs: [
         {
           amount: Number(outputSompi),

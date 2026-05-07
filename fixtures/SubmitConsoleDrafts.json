@@ -84,7 +84,7 @@
       "label": "Escrow cancel attempt",
       "priority": 14,
       "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
-      "description": "Rejected mutual-cancel attempt; current script shape exceeds TN12 script-unit limits."
+      "description": "Accepted mutual-cancel spend; rebuilt as tx version 1 with computeBudget 30 using the local TN12 kaspa-wasm 1.1.1-toc.1 SDK."
     }
   ]
 }

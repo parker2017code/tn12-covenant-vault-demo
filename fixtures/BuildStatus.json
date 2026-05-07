@@ -10,7 +10,12 @@
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "signed-draft-only",
-      "builtSurface": ["fixtures/InvoiceReceipts.json", "src/invoiceReceipt.mjs", "npm run invoice:registry", "npm run payload:readiness"],
+      "builtSurface": [
+        "fixtures/InvoiceReceipts.json",
+        "src/invoiceReceipt.mjs",
+        "npm run invoice:registry",
+        "npm run payload:readiness"
+      ],
       "next": "Find or build a payload-preserving submit route, then verify one accepted payload receipt."
     },
     {
@@ -21,7 +26,11 @@
       "enforcement": "wallet-policy",
       "readiness": "local-only-not-production",
       "proof": "local-ui-check",
-      "builtSurface": ["fixtures/SubmitConsoleDrafts.json", "src/submitConsole.mjs", "npm run submit:registry"],
+      "builtSurface": [
+        "fixtures/SubmitConsoleDrafts.json",
+        "src/submitConsole.mjs",
+        "npm run submit:registry"
+      ],
       "next": "Move from local signed draft review to real wallet connector review."
     },
     {
@@ -32,7 +41,11 @@
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/BatchAssuranceCampaign.json", "src/batchAssurance.mjs", "npm run campaign:state"],
+      "builtSurface": [
+        "fixtures/BatchAssuranceCampaign.json",
+        "src/batchAssurance.mjs",
+        "npm run campaign:state"
+      ],
       "next": "Build exact release/refund settlement drafts for accepted pledge outputs."
     },
     {
@@ -43,8 +56,23 @@
       "enforcement": "script",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-funding-release-and-refund-spends",
-      "builtSurface": ["contracts/Escrow.sil", "contracts/EscrowExpired.sil", "fixtures/EscrowContractOutpoint.json", "fixtures/EscrowDaaRefundContractOutpoint.json", "fixtures/EscrowCancelContractOutpoint.json", "artifacts/signed-drafts/escrow-funding.json", "artifacts/signed-drafts/escrow-release.json", "artifacts/signed-drafts/escrow-daa-refund-funding.json", "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json", "artifacts/signed-drafts/escrow-cancel-funding.json", "artifacts/signed-drafts/escrow-cancel-proof-cancel.json", "artifacts/escrow-cancel-attempt.json", "src/escrowPrimitive.mjs", "npm run escrow:registry"],
-      "next": "Redesign or simplify mutual cancel; the current cancel draft is funded but rejected by TN12 script-unit limits."
+      "builtSurface": [
+        "contracts/Escrow.sil",
+        "contracts/EscrowExpired.sil",
+        "fixtures/EscrowContractOutpoint.json",
+        "fixtures/EscrowDaaRefundContractOutpoint.json",
+        "fixtures/EscrowCancelContractOutpoint.json",
+        "artifacts/signed-drafts/escrow-funding.json",
+        "artifacts/signed-drafts/escrow-release.json",
+        "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+        "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+        "artifacts/signed-drafts/escrow-cancel-funding.json",
+        "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+        "artifacts/escrow-cancel-attempt.json",
+        "src/escrowPrimitive.mjs",
+        "npm run escrow:registry"
+      ],
+      "next": "Add negative tests around v1 computeBudget preservation and keep release/refund/cancel proof paths tied to separate funded outputs."
     },
     {
       "order": 5,
@@ -54,7 +82,11 @@
       "enforcement": "wallet-policy",
       "readiness": "tn12-toccata-only",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/TreasuryVaults.json", "src/treasuryVault.mjs", "npm run treasury:registry"],
+      "builtSurface": [
+        "fixtures/TreasuryVaults.json",
+        "src/treasuryVault.mjs",
+        "npm run treasury:registry"
+      ],
       "next": "Add exact UTXO provenance and constrained spend draft planning."
     },
     {
@@ -65,7 +97,11 @@
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/AccessPassPlanner.json", "src/accessPassPlanner.mjs", "npm run access:passes"],
+      "builtSurface": [
+        "fixtures/AccessPassPlanner.json",
+        "src/accessPassPlanner.mjs",
+        "npm run access:passes"
+      ],
       "next": "Tie one redemption to accepted payload receipt state."
     },
     {
@@ -76,7 +112,11 @@
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/SimpleAssetPolicies.json", "src/assetPolicy.mjs", "npm run asset:policies"],
+      "builtSurface": [
+        "fixtures/SimpleAssetPolicies.json",
+        "src/assetPolicy.mjs",
+        "npm run asset:policies"
+      ],
       "next": "Keep issuer-indexed and future covenant-native asset rules visibly separate."
     },
     {
@@ -87,7 +127,11 @@
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/AuctionIntentPrototype.json", "src/auctionIntent.mjs", "npm run auction:intents"],
+      "builtSurface": [
+        "fixtures/AuctionIntentPrototype.json",
+        "src/auctionIntent.mjs",
+        "npm run auction:intents"
+      ],
       "next": "Build explicit settlement/refund drafts and keep MEV caveat visible."
     },
     {
@@ -98,8 +142,18 @@
       "enforcement": "documentation",
       "readiness": "research-only",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/DefiResearchBacklog.json", "src/defiBacklog.mjs", "npm run defi:backlog"],
-      "next": "Convert top briefs into simulation-only dashboards before any settlement claim."
+      "builtSurface": [
+        "fixtures/DefiResearchBacklog.json",
+        "fixtures/StableValuePaths.json",
+        "fixtures/StableIssuerRedemptions.json",
+        "src/defiBacklog.mjs",
+        "src/stableValuePaths.mjs",
+        "src/stableIssuerRedemption.mjs",
+        "npm run defi:backlog",
+        "npm run stable:value",
+        "npm run stable:issuer"
+      ],
+      "next": "Convert the stable-value and lending briefs into simulation-only dashboards before any settlement claim."
     },
     {
       "order": 10,
@@ -109,7 +163,11 @@
       "enforcement": "documentation",
       "readiness": "already-usable",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/CrossChainResearchLibrary.json", "src/appResearch.mjs", "npm run research:library"],
+      "builtSurface": [
+        "fixtures/CrossChainResearchLibrary.json",
+        "src/appResearch.mjs",
+        "npm run research:library"
+      ],
       "next": "Turn top candidates into one-page app briefs before copying code."
     },
     {
@@ -120,7 +178,11 @@
       "enforcement": "research",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/AttestationSignals.json", "src/attestationSignal.mjs", "npm run signal:payload"],
+      "builtSurface": [
+        "fixtures/AttestationSignals.json",
+        "src/attestationSignal.mjs",
+        "npm run signal:payload"
+      ],
       "next": "Add signature verification and accepted payload receipt for one signal."
     },
     {
@@ -131,7 +193,11 @@
       "enforcement": "planner-indexer",
       "readiness": "research-only",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/AgentCommitments.json", "src/agentCommitments.mjs", "npm run agent:commitments"],
+      "builtSurface": [
+        "fixtures/AgentCommitments.json",
+        "src/agentCommitments.mjs",
+        "npm run agent:commitments"
+      ],
       "next": "Build explicit release/refund drafts and accepted payload receipts for one task lifecycle."
     },
     {
@@ -142,7 +208,11 @@
       "enforcement": "research",
       "readiness": "research-only",
       "proof": "generated-artifact",
-      "builtSurface": ["fixtures/CoordinationMarketPrototype.json", "src/coordinationMarket.mjs", "npm run coordination:market"],
+      "builtSurface": [
+        "fixtures/CoordinationMarketPrototype.json",
+        "src/coordinationMarket.mjs",
+        "npm run coordination:market"
+      ],
       "next": "Build exact settlement drafts for one satisfiable transparent pack."
     },
     {
@@ -153,7 +223,10 @@
       "enforcement": "documentation",
       "readiness": "research-only",
       "proof": "roadmap-only",
-      "builtSurface": ["docs/MASTER_APP_PLAN.md", "docs/LLM_REVIEW_GUIDE.md"],
+      "builtSurface": [
+        "docs/MASTER_APP_PLAN.md",
+        "docs/LLM_REVIEW_GUIDE.md"
+      ],
       "next": "Map which future app claims need off-chain state proofs, solver proofs, source-chain anchors, oracle attestation proofs, or vProg settlement."
     }
   ],
@@ -163,7 +236,7 @@
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
-    "Redesign or simplify the mutual-cancel spend path after the script-unit rejection.",
+    "Add negative tests around version-1 computeBudget preservation and keep the local TN12 SDK route documented.",
     "Add a ZK/anchor design checklist before any bridge, oracle, solver, or vProg proof claim."
   ]
 }

@@ -54,6 +54,8 @@ import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildDefiResearchBacklog } from "../src/defiBacklog.mjs";
+import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
+import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
@@ -165,10 +167,25 @@ assert.equal(escrowRefundDraft.entrypoint, "refund");
 assert.equal(escrowCancelDraft.entrypoint, "cancel");
 assert.equal(escrowDaaRefundDraft.entrypoint, "refund");
 assert.equal(escrowCancelProofDraft.entrypoint, "cancel");
+assert.equal(escrowCancelProofDraft.transactionId, "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c");
+assert.equal(escrowCancelProofDraft.submitPayload.transaction.version, 1);
+assert.equal(escrowCancelProofDraft.submitPayload.transaction.inputs[0].computeBudget, 30);
+assert.equal(escrowCancelProofDraft.submitPayload.transaction.inputs[0].sigOpCount, undefined);
 assert.ok(escrowCancelDraft.signatureScriptHex.length > escrowReleaseDraft.signatureScriptHex.length);
 const escrowCancelAttempt = JSON.parse(await readFile(new URL("../artifacts/escrow-cancel-attempt.json", import.meta.url), "utf8"));
-assert.equal(escrowCancelAttempt.status, "rejected-script-units-limit");
-assert.match(escrowCancelAttempt.submitResult.error, /script units exceeded/);
+assert.equal(escrowCancelAttempt.status, "accepted-version1-compute-budget-sdk-corrected");
+assert.equal(escrowCancelAttempt.submitPayloadSigOpCount, 2);
+assert.match(escrowCancelAttempt.submitResult.error, /verification failed/);
+assert.match(escrowCancelAttempt.previousRejectedDraft.error, /script units exceeded/);
+assert.equal(escrowCancelAttempt.version1ComputeBudgetAttempt.spendTxid, escrowCancelProofDraft.transactionId);
+assert.equal(escrowCancelAttempt.version1ComputeBudgetAttempt.computeBudget, 30);
+assert.match(escrowCancelAttempt.version1ComputeBudgetAttempt.publicRestSubmit.computeBudgetOnly.error, /sigOpCount/);
+assert.equal(escrowCancelAttempt.version1ComputeBudgetAttempt.localSdk.installedVersion, "0.13.0");
+assert.equal(escrowCancelAttempt.version1ComputeBudgetAttempt.tn12Sdk.version, "1.1.1-toc.1");
+assert.equal(escrowCancelAttempt.version1ComputeBudgetAttempt.tn12Sdk.inputBudgetSupport.preservesComputeBudget, true);
+assert.equal(escrowCancelAttempt.version1ComputeBudgetAttempt.localSdk.inputBudgetSupport.acceptsComputeBudgetOnly, false);
+assert.equal(escrowCancelAttempt.version1ComputeBudgetAttempt.localSdk.inputBudgetSupport.requiresSigOpCountProperty, true);
+assert.match(escrowCancelAttempt.boundary, /rebuilt with Rusty Kaspa TN12 kaspa-wasm 1\.1\.1-toc\.1/);
 const researchFixture = JSON.parse(await readFile(new URL("../fixtures/CrossChainResearchLibrary.json", import.meta.url), "utf8"));
 const researchLibrary = buildResearchLibrary(researchFixture);
 assert.equal(researchLibrary.status, "research-inputs-not-protocol-claims");
@@ -260,6 +277,21 @@ assert.equal(defiBacklog.summary.total, 8);
 assert.equal(defiBacklog.summary.researchOnly, 4);
 assert.ok(defiBacklog.missingRails.includes("price oracle"));
 assert.ok(defiBacklog.briefs.some((brief) => brief.id === "prediction-hedge-simulator" && brief.status === "prototype-later"));
+const stableValueFixture = JSON.parse(await readFile(new URL("../fixtures/StableValuePaths.json", import.meta.url), "utf8"));
+const stableValuePaths = buildStableValuePathRegistry(stableValueFixture);
+assert.equal(stableValuePaths.status, "comparison-brief-not-native-stablecoin");
+assert.equal(stableValuePaths.summary.total, 4);
+assert.equal(stableValuePaths.summary.buildableNow, 1);
+assert.ok(stableValuePaths.paths.some((path) => path.id === "issuer-backed-redeemable-unit" && path.earliestKaspaLane === "issuer-indexer"));
+assert.ok(stableValuePaths.boundaries.some((boundary) => /not a live stablecoin/.test(boundary)));
+const stableIssuerFixture = JSON.parse(await readFile(new URL("../fixtures/StableIssuerRedemptions.json", import.meta.url), "utf8"));
+const stableIssuerState = buildStableIssuerRedemptionState(stableIssuerFixture);
+assert.equal(stableIssuerState.status, "issuer-indexer-state-not-native-stablecoin");
+assert.equal(stableIssuerState.summary.acceptedIssuedDisplay, "375.00");
+assert.equal(stableIssuerState.summary.acceptedRedeemedDisplay, "50.00");
+assert.equal(stableIssuerState.summary.acceptedOutstandingDisplay, "325.00");
+assert.equal(stableIssuerState.summary.signedOnlyRedemptions, 1);
+assert.ok(stableIssuerState.boundaries.some((boundary) => /not a native Kaspa stablecoin/.test(boundary)));
 const agentFixture = JSON.parse(await readFile(new URL("../fixtures/AgentCommitments.json", import.meta.url), "utf8"));
 const agentBoard = buildAgentCommitmentBoard(agentFixture);
 assert.equal(agentBoard.status, "payload-indexed-agent-commitments-not-autonomous-payouts");
@@ -292,10 +324,15 @@ const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof
   }
 ]));
 const acceptedState = buildAcceptedAppState({ proofFixture, transactions: fakeTransactions, fetchedAt: "2026-05-07T00:00:00.000Z" });
-assert.equal(acceptedState.summary.total, 6);
-assert.equal(acceptedState.summary.matched, 6);
+assert.equal(acceptedState.summary.total, 7);
+assert.equal(acceptedState.summary.matched, 7);
 assert.equal(acceptedState.appState.vault.status, "proofs-accepted");
 assert.equal(acceptedState.appState.escrow.status, "proofs-accepted");
+assert.ok(acceptedState.records.some((record) =>
+  record.entrypoint === "cancel"
+  && record.accepted === true
+  && record.txid === "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
+));
 const fakePreviousTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   `prev-${index}`,
   {
@@ -338,10 +375,10 @@ const proofEvidence = buildProofEvidence({
   previousTransactions: fakePreviousTransactions,
   verifiedAt: "2026-05-07T00:00:00.000Z"
 });
-assert.equal(proofEvidence.summary.accepted, 6);
-assert.equal(proofEvidence.summary.p2shInputs, 6);
-assert.equal(proofEvidence.summary.p2pkOutputs, 6);
-assert.equal(proofEvidence.summary.matchedOutputs, 6);
+assert.equal(proofEvidence.summary.accepted, 7);
+assert.equal(proofEvidence.summary.p2shInputs, 7);
+assert.equal(proofEvidence.summary.p2pkOutputs, 7);
+assert.equal(proofEvidence.summary.matchedOutputs, 7);
 
 const vaultContractArtifact = JSON.parse(await readFile(new URL("../artifacts/DelayedRecoveryVault.json", import.meta.url), "utf8"));
 const assuranceContractArtifact = JSON.parse(await readFile(new URL("../artifacts/AssurancePledge.json", import.meta.url), "utf8"));
@@ -418,6 +455,8 @@ const files = [
   "scripts/build-access-pass-planner.mjs",
   "scripts/build-mainnet-readiness.mjs",
   "scripts/build-asset-policies.mjs",
+  "scripts/build-stable-value-paths.mjs",
+  "scripts/build-stable-issuer-redemptions.mjs",
   "scripts/build-status.mjs",
   "scripts/check-negative.mjs",
   "contracts/DelayedRecoveryVault.sil",
@@ -450,6 +489,8 @@ const files = [
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
   "artifacts/simple-asset-policies.json",
+  "artifacts/stable-value-paths.json",
+  "artifacts/stable-issuer-redemptions.json",
   "artifacts/build-status.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
@@ -475,6 +516,8 @@ const files = [
   "fixtures/AccessPassPlanner.json",
   "fixtures/MainnetReadiness.json",
   "fixtures/SimpleAssetPolicies.json",
+  "fixtures/StableValuePaths.json",
+  "fixtures/StableIssuerRedemptions.json",
   "fixtures/BuildStatus.json",
   "fixtures/EscrowContractOutpoint.json",
   "fixtures/EscrowDaaRefundContractOutpoint.json",
@@ -497,6 +540,8 @@ const files = [
   "src/accessPassPlanner.mjs",
   "src/mainnetReadiness.mjs",
   "src/assetPolicy.mjs",
+  "src/stableValuePaths.mjs",
+  "src/stableIssuerRedemption.mjs",
   "src/buildStatus.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
@@ -509,6 +554,7 @@ const files = [
   "docs/SOURCES.md",
   "docs/BUILD_PLAN.md",
   "docs/LLM_REVIEW_GUIDE.md",
+  "docs/MICHAEL_QUESTIONS.md",
   "docs/ROADMAP_STATE.md",
   "docs/TRANSACTION_API_NOTES.md",
   "docs/ASSURANCE_CONTRACTS.md",
@@ -525,7 +571,8 @@ for (const file of files) {
 
 const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
 assert.match(readme, /faucet-tn12\.kaspanet\.io/);
-assert.match(readme, /not a mainnet wallet/i);
+assert.match(readme, /avoids mainnet-wallet claims/i);
+assert.match(readme, /starts with local evidence/i);
 assert.match(readme, /npm run address/);
 assert.match(readme, /npm run fixtures/);
 assert.match(readme, /npm run wallet:public/);
@@ -546,6 +593,8 @@ assert.match(readme, /npm run coordination:market/);
 assert.match(readme, /npm run access:passes/);
 assert.match(readme, /npm run mainnet:readiness/);
 assert.match(readme, /npm run asset:policies/);
+assert.match(readme, /npm run stable:value/);
+assert.match(readme, /npm run stable:issuer/);
 assert.match(readme, /npm run build:status/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
@@ -570,6 +619,8 @@ assert.match(html, /Transparent coordination-market prototype/);
 assert.match(html, /KRC \/ access pass planner/);
 assert.match(html, /Mainnet readiness map/);
 assert.match(html, /Simple asset policy/);
+assert.match(html, /Stable-value paths/);
+assert.match(html, /Issuer redemption state/);
 assert.match(html, /Build status/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
@@ -586,6 +637,22 @@ const buildPlan = await readFile(new URL("../docs/BUILD_PLAN.md", import.meta.ur
 assert.match(buildPlan, /Completed Proof Path/);
 assert.match(buildPlan, /Next 20 Build Tasks/);
 assert.match(buildPlan, /Accepted-transaction app-state snapshot/);
+
+const michaelQuestions = await readFile(new URL("../docs/MICHAEL_QUESTIONS.md", import.meta.url), "utf8");
+assert.match(michaelQuestions, /14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c/);
+assert.match(michaelQuestions, /computeBudget: 30/);
+assert.match(michaelQuestions, /local debugging has checked the basic layers/);
+assert.match(michaelQuestions, /kaspa-wasm@0\.13\.0/);
+assert.match(michaelQuestions, /1\.1\.1-toc\.1/);
+assert.match(michaelQuestions, /RpcTransactionInput\.sig_op_count is inconsistent/);
+assert.match(michaelQuestions, /RPC response error NotFound/);
+
+const builderLessons = await readFile(new URL("../docs/BUILDER_LESSONS.md", import.meta.url), "utf8");
+assert.match(builderLessons, /Accepted State Beats Local Confidence/);
+assert.match(builderLessons, /sigOpCount: 0/);
+assert.match(builderLessons, /computeBudget: 30/);
+assert.match(builderLessons, /Aspectron/);
+assert.match(builderLessons, /stale tooling/);
 
 const kaspaDocsReview = await readFile(new URL("../docs/KASPA_DOCS_REVIEW.md", import.meta.url), "utf8");
 assert.match(kaspaDocsReview, /Wallet API is the better long-term send path/);

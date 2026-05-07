@@ -28,6 +28,12 @@ Use cache-busted URLs when checking Pages after a fresh push:
 https://parker2017code.github.io/tn12-covenant-vault-demo/artifacts/proof-evidence.json?v={commit}
 ```
 
+## Escalation Rule
+
+Unclear TN12, Silverscript, Rusty Kaspa, transaction signing, submit serialization, or covenant verification behavior needs local evidence first: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and upstream source/tests. Escalation needs a txid, artifact path, endpoint response, source line, and smallest reproducer command.
+
+Use `docs/MICHAEL_QUESTIONS.md` for resolved and pending evidence bundles.
+
 ## What Is Worth Checking
 
 Primary proof state:
@@ -84,7 +90,8 @@ Escrow nuance:
 - DAA-expired escrow refund funding tx `f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f` created a separate P2SH output.
 - DAA-expired escrow refund tx `6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d` consumed that separate output.
 - Cancel funding tx `331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022` created a separate P2SH output.
-- Cancel spend attempt `5f033bdc06439a72e916885dfbc020cf5df1bf8c245c2b6190a7f567944c0323` was rejected by TN12 script-unit limits. Do not count it as an accepted proof.
+- Cancel tx `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c` consumed that separate output and is the accepted mutual-cancel proof.
+- Earlier cancel failures are historical evidence only: the first used the wrong script budget, and the later old-SDK route did not preserve the tx version 1 `computeBudget` field.
 
 ## Local Verification Commands
 
@@ -106,20 +113,20 @@ npm run enforcement:matrix
 npm run build:status
 ```
 
-## What Is In Limbo
+## Work In Progress
 
-Treat these as work in progress unless a new accepted txid and fixture says otherwise:
+Current incomplete lanes:
 
 - invoice/payment payload receipt: signed draft exists, accepted payload receipt does not;
 - pooled assurance target aggregation: planner/indexer only, not script-enforced;
-- escrow cancel: draft only until a separate funded output is proven;
+- escrow cancel: accepted on a separate funded output;
 - treasury caps/payroll: wallet-policy/planner only;
 - access passes/assets/auctions/agent commitments: planner/indexer artifacts unless tied to accepted payload receipts;
 - prediction markets, DeFi, RTD/miner-oracle, Hashdag/Staghunt: research/prototype lanes only.
 
-## Do Not Overclaim
+## Accurate Labels
 
-Do not describe this repo as:
+Avoid these labels:
 
 - a mainnet wallet;
 - proof that Toccata covenants are live on mainnet;
@@ -131,5 +138,5 @@ Do not describe this repo as:
 Accurate label:
 
 ```txt
-TN12 covenant/app primitive workshop with accepted vault, assurance, escrow-release, and escrow DAA-refund proof transactions.
+TN12 covenant/app primitive workshop with accepted vault, assurance, escrow release, escrow DAA refund, and escrow mutual-cancel proof transactions.
 ```

@@ -1,12 +1,12 @@
 {
   "schema": "tn12-accepted-app-state/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-07T12:22:52.844Z",
+  "fetchedAt": "2026-05-07T16:52:35.592Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "summary": {
-    "total": 6,
-    "accepted": 6,
-    "matched": 6,
+    "total": 7,
+    "accepted": 7,
+    "matched": 7,
     "mismatches": 0,
     "receipts": 0,
     "lanes": [
@@ -171,6 +171,32 @@
       },
       "receipt": null,
       "explorerUrl": "https://tn12.kaspa.stream/txs/6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d"
+    },
+    {
+      "id": "escrow:cancel:14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "lane": "escrow",
+      "label": "Escrow mutual cancel",
+      "entrypoint": "cancel",
+      "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 5511468,
+      "acceptingBlockTime": 1778172704032,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "receipt": null,
+      "explorerUrl": "https://tn12.kaspa.stream/txs/14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
     }
   ],
   "appState": {
@@ -234,6 +260,14 @@
           "status": "accepted-output-matched",
           "amountSompi": "4999995000",
           "acceptingBlockBlueScore": 5342066
+        },
+        {
+          "label": "Escrow mutual cancel",
+          "entrypoint": "cancel",
+          "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+          "status": "accepted-output-matched",
+          "amountSompi": "4999995000",
+          "acceptingBlockBlueScore": 5511468
         }
       ]
     },

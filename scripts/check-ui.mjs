@@ -46,7 +46,7 @@ try {
     return text.includes("All proof cards refreshed from TN12 API.");
   }, null, { timeout: 20_000 });
 
-  assert.equal(await page.locator("[data-proof-status].ok").count(), 6);
+  assert.equal(await page.locator("[data-proof-status].ok").count(), 7);
   await expectText(page, "body", "TN12 configured. Proof transactions accepted.");
   await expectText(page, "#assurance-issues", "Assurance shape is valid.");
   await expectText(page, "#indexer-summary", "Matched");
@@ -85,6 +85,12 @@ try {
   await expectText(page, "#defi-summary", "Missing rails");
   await expectText(page, "#defi-list", "Lending risk dashboard");
   await expectText(page, "#defi-list", "price oracle");
+  await expectText(page, "#stable-summary", "Build now");
+  await expectText(page, "#stable-list", "Issuer-backed redeemable unit");
+  await expectText(page, "#stable-list", "native asset model");
+  await expectText(page, "#stable-issuer-summary", "Outstanding");
+  await expectText(page, "#stable-issuer-summary", "325.00");
+  await expectText(page, "#stable-issuer-list", "signed-only");
   await expectText(page, "#agent-summary", "Accepted payloads");
   await expectText(page, "#agent-list", "Verify invoice payload receipt vertical slice");
   await expectText(page, "#agent-list", "do not release or refund automatically");
@@ -100,7 +106,8 @@ try {
   await expectText(page, "#submit-drafts", "Accepted seller-release proof");
   await expectText(page, "#submit-drafts", "Escrow DAA refund");
   await expectText(page, "#submit-drafts", "Escrow cancel");
-  await expectText(page, "#submit-drafts", "script-unit limits");
+  await expectText(page, "#submit-drafts", "computeBudget 30");
+  await expectText(page, "#submit-drafts", "local TN12 kaspa-wasm 1.1.1-toc.1 SDK");
   await expectText(page, "#submit-drafts", "--submit");
   await expectText(page, "#research-summary", "Candidates");
   await expectText(page, "#research-candidates", "Uniswap-style AMM");

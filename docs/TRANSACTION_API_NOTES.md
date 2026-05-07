@@ -22,7 +22,7 @@ The initial implementation path has moved beyond local construction: the repo no
 - Exact JavaScript object shape expected by `createTransaction` for a manually supplied P2PK UTXO entry is proven by `npm run tx:p2pk` and split transactions.
 - Raw compiled Silverscript bytes are non-standard as outputs; use standard P2SH wrapper `OpBlake2b OpData32 blake2b32(redeemScript) OpEqual`.
 - P2SH spends use the Silverscript entrypoint sigscript plus a pushed redeem script.
-- `signScriptHash` signs the sighash returned by `SignableTransaction.getScriptHashes()`.
+- Older SDK signing uses `signScriptHash` over the sighash from `SignableTransaction.getScriptHashes()`. The TN12 SDK path used for tx version 1 signs with `createInputSignature` against a `Transaction` that carries the input UTXO reference.
 - The public TN12 REST endpoint accepts submit payloads at `https://api-tn12.kaspa.org/transactions`.
 - Contract spend fee must be embedded high enough in the constructor. A 1000-sompi vault recovery failed because TN12 required 1784 sompi; 5000 sompi worked.
 - DAA-score lock times worked for delayed withdrawal and refund testing. Seconds-based lock times hit finalization ambiguity through the public submit route.
@@ -56,3 +56,4 @@ It reads `.local/tn12-wallet.json`, derives the public key, prints public metada
 10. Add accepted transaction verification. Done in `npm run tx:verify`.
 11. Add signed payload receipt draft. Done in `npm run tx:payload`; broadcast remains gated pending REST payload submit verification.
 12. Add payload submit readiness artifact. Done in `npm run payload:readiness`; the current public TN12 REST submit schema remains blocked for default payload receipt broadcast because it does not advertise a payload field.
+13. Add escrow mutual cancel on a separate funded output. Done and accepted on TN12 through local TN12 `kaspa-wasm 1.1.1-toc.1`, tx version 1, `computeBudget=30`, and JSON wRPC to `testnet-12`.

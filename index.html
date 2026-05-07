@@ -240,7 +240,7 @@
       <div class="section-title">
         <p class="eyebrow">Escrow primitive</p>
         <h2>Buyer fund, seller release, timeout refund, mutual cancel.</h2>
-        <p>This is lane 4: a commerce escrow primitive with accepted TN12 funding, release, and DAA-refund proof. Cancel is funded as a separate attempt but needs redesign after a TN12 script-unit rejection.</p>
+        <p>This is lane 4: a commerce escrow primitive with accepted TN12 funding, release, and DAA-refund proof. Cancel is funded as a separate attempt; the current version-1 compute-budget draft reconstructs locally but still needs the correct submit route.</p>
       </div>
       <div id="escrow-summary" class="escrow-summary" aria-live="polite"></div>
       <div id="escrow-list" class="escrow-list" aria-live="polite"></div>
@@ -333,6 +333,22 @@
       <div id="defi-summary" class="defi-summary" aria-live="polite"></div>
       <div id="defi-list" class="defi-list" aria-live="polite"></div>
       <pre>npm run defi:backlog</pre>
+      <div class="section-title compact-title">
+        <p class="eyebrow">Stable-value paths</p>
+        <h3>Issuer-backed, overcollateralized, synthetic, and external rails.</h3>
+        <p>This is a comparison brief only. It does not claim a live native stablecoin, wrapped stablecoin, or automated collateral system.</p>
+      </div>
+      <div id="stable-summary" class="defi-summary" aria-live="polite"></div>
+      <div id="stable-list" class="defi-list" aria-live="polite"></div>
+      <pre>npm run stable:value</pre>
+      <div class="section-title compact-title">
+        <p class="eyebrow">Issuer redemption state</p>
+        <h3>Accepted issuance, accepted redemption, and signed-only requests.</h3>
+        <p>This is issuer/indexer accounting for a demo stable-value credit. Signed-only redemptions do not change accepted outstanding balance.</p>
+      </div>
+      <div id="stable-issuer-summary" class="defi-summary" aria-live="polite"></div>
+      <div id="stable-issuer-list" class="defi-list" aria-live="polite"></div>
+      <pre>npm run stable:issuer</pre>
     </section>
 
     <section id="agent-commitments" class="panel agent-commitments">

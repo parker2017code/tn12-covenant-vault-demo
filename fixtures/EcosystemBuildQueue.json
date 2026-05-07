@@ -39,7 +39,7 @@
     {
       "title": "Accepted transaction indexer",
       "lane": "Infrastructure",
-      "why": "Apps need durable state from accepted transactions, not just submitted txids.",
+      "why": "Apps need durable state from accepted transactions. Submitted txids alone are not enough.",
       "next": "Poll or subscribe, store checkpoints, and handle near-tip reorg rollback."
     },
     {

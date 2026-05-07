@@ -41,13 +41,14 @@ The project no longer depends on a local full Kaspa node. It uses public TN12 RE
 
 ## Hard Boundaries
 
-- Plain operating rule: be proactive with tooling and environment setup; do the work, verify it, then report what changed.
-- This is testnet-only. Do not imply mainnet covenant activation.
-- Do not use or print private keys. `.local/tn12-wallet.json` may be read by signing scripts but must never be pasted into docs, source, UI, or chat.
+- Operating rule: do the work, verify it, then report what changed.
+- Testnet-only. Keep mainnet covenant activation out of the claims.
+- Keep private keys private. `.local/tn12-wallet.json` may be read by signing scripts but must never be pasted into docs, source, UI, or chat.
 - Mainnet addresses use `kaspa:`. TN12 addresses use `kaspatest:`.
-- Do not reintroduce local `kaspad` or `/home/parker2017/kaspa-node`; the user explicitly wanted node work removed.
-- Do not edit or publish `/home/parker2017/kaspa-explained` from this repo unless explicitly asked.
-- For miner-signal ideas, do not claim arbitrary app data can go into block headers. Use transaction payloads first; coinbase payload or pool policy is later mining-software research.
+- Public TN12 APIs, explorer data, and local fixtures are the default. Reintroduce local `kaspad` or `/home/parker2017/kaspa-node` only on direct request.
+- Edit or publish `/home/parker2017/kaspa-explained` only when the user asks for that repo.
+- For unclear protocol behavior, check artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and Rusty Kaspa source/tests before escalating. A good escalation includes the txid, artifact path, endpoint response, source line, and smallest reproducer command.
+- Miner-signal ideas start with transaction payloads. Coinbase payload or pool policy is later mining-software research.
 
 ## Design Direction
 
@@ -120,7 +121,7 @@ Escrow DAA-score refund:
 6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d
 ```
 
-Escrow mutual cancel is funded/attempted but not accepted. TN12 rejected the attempted spend because it exceeded the script-unit limit: `used=200870`, `limit=109999`. Treat that as design feedback, not as proof evidence.
+Escrow mutual cancel is now accepted on TN12. The original submit used `sigOpCount=1` and hit script-unit exhaustion (`used=200870`, `limit=109999`), but that is historical bad configuration only. A later submit used old JS SDK signing/reconstruction that did not preserve tx v1 `computeBudget`. The corrected cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, submitted through JSON wRPC to `testnet-12`, and accepted as `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
 
 Fixtures:
 
@@ -302,7 +303,7 @@ The app was aligned with Kaspa Explained framing:
 - vProgs: roadmap architecture,
 - RTD/miner signals/oracles: research lane.
 
-Use restrained, source-first language. Do not hype or overstate.
+Use restrained, source-first language. Concrete claim first, status label second. Cut filler contrast frames, dramatic adjective piles, faux-bold certainty, and polished LLM cadence words. Treat UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes as product surface that needs the same care as code.
 
 ## Kaspa Docs Review
 

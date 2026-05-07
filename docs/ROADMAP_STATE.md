@@ -17,8 +17,8 @@ Accepted TN12 contract-spend proofs:
 
 Blocked or limited:
 
-- Escrow mutual cancel was funded and attempted separately, but the spend was rejected by TN12 script-unit limits: `used=200870`, `limit=109999`.
-- It is not an accepted proof. Treat it as design feedback for a simpler cancel path.
+- Escrow mutual cancel is accepted on a separate funded output. The old `sigOpCount=1` script-unit rejection and the later old-SDK verification failure are preserved as historical evidence only.
+- Rusty Kaspa TN12 source confirms the version-1 compute-budget route: v1 inputs carry `computeBudget`, not `sigOpCount`. The accepted cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, preserving `computeBudget=30`.
 
 ## App Buckets
 
@@ -60,12 +60,12 @@ These are roadmap or research until the missing rails are explicit and tested.
 | 1. Payload invoice / receipt | Blocked, high priority | Fixtures, registry, signed payload draft, readiness check; public REST submit observed dropping payload; wRPC submit candidate added | Provide a trusted TN12 wRPC/wallet route, then get one accepted payload receipt |
 | 2. Submit console | Base built | Signed draft review, inputs/outputs/fees/commands | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Base built | Campaign planner with accepted vs signed-only progress | Real accepted pledge-output batch settlement drafts |
-| 4. Escrow | Strong TN12 lane | Accepted release and accepted DAA-refund proofs; cancel blocked by script units | Redesign/simplify cancel or proceed without cancel in commerce demo |
+| 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, and accepted mutual-cancel proofs on separate funded outputs | Add negative tests and keep SDK route documented |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |
 | 6. Access passes/coupons | Planner/indexer base | Issuer and redemption model | Tie one redemption to accepted payload transaction |
 | 7. Simple asset policy | Roadmap base | Mint, transfer, burn, recovery, redemption policy shapes | Keep issuer-indexed now, covenant-native later |
 | 8. Auction/intents | Planner/indexer base | Accepted bid payload model and winner rule | Settlement/refund drafts |
-| 9. DeFi backlog | Research | Missing rails listed for swaps/lending/stable-value/etc. | Simulation dashboards only |
+| 9. DeFi backlog | Research | Missing rails listed for swaps/lending/stable-value/etc.; stable-value comparison brief now separates issuer-backed, overcollateralized, synthetic, and external rails | Simulation dashboards only |
 | 10. Cross-chain research | Built as library | PMF/code/failure-mode mapping | Turn top ideas into one-page app briefs |
 | 11. Miner/pool signals | Research base | Attestation registry, payload-first framing | Signature verification plus accepted payload receipt |
 | 12. AI-agent commitments | Planner base | Task/deposit/proof/dispute model | Release/refund drafts plus accepted tx lifecycle |
@@ -83,7 +83,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 ### Coming hours
 
 1. Keep public docs focused: accepted proofs first, planner/research second.
-2. Park escrow cancel as a documented limit unless a simpler script design is chosen.
+2. Keep the accepted escrow cancel proof tied to the local TN12 SDK route and preserve old bad-config rejections as historical evidence only.
 3. Keep the payload invoice vertical slice blocked on a verified payload-preserving submit route; the public REST route accepted a no-payload transaction.
 
 ### Coming days

@@ -1,0 +1,75 @@
+{
+  "schema": "kaspa-stable-issuer-redemption-state/v1",
+  "reviewedAt": "2026-05-07",
+  "status": "issuer-indexer-state-not-native-stablecoin",
+  "unit": {
+    "unitId": "stable-demo-usd-credit",
+    "name": "Demo USD credit",
+    "issuer": "Demo issuer",
+    "peg": "USD",
+    "decimals": 2,
+    "status": "issuer-indexer-simulation"
+  },
+  "summary": {
+    "issuedRecords": 2,
+    "redemptionRecords": 2,
+    "acceptedIssuedUnits": 37500,
+    "acceptedRedeemedUnits": 5000,
+    "acceptedOutstandingUnits": 32500,
+    "acceptedIssuedDisplay": "375.00",
+    "acceptedRedeemedDisplay": "50.00",
+    "acceptedOutstandingDisplay": "325.00",
+    "signedOnlyRedemptions": 1,
+    "missingAcceptedTxids": 1
+  },
+  "issuances": [
+    {
+      "kind": "issuance",
+      "recordId": "issue-001",
+      "holder": "merchant-alpha",
+      "amountUnits": 25000,
+      "acceptedTxid": "receipt-stable-issue-001",
+      "accepted": true,
+      "issuerSignature": "demo-issuer-signature-001",
+      "memo": "Mock accepted receipt for issued stable-value credit."
+    },
+    {
+      "kind": "issuance",
+      "recordId": "issue-002",
+      "holder": "contractor-beta",
+      "amountUnits": 12500,
+      "acceptedTxid": "receipt-stable-issue-002",
+      "accepted": true,
+      "issuerSignature": "demo-issuer-signature-002",
+      "memo": "Mock accepted receipt for issued stable-value credit."
+    }
+  ],
+  "redemptions": [
+    {
+      "kind": "redemption",
+      "recordId": "redeem-001",
+      "holder": "merchant-alpha",
+      "amountUnits": 5000,
+      "acceptedTxid": "receipt-stable-redeem-001",
+      "accepted": true,
+      "issuerSignature": "demo-issuer-signature-003",
+      "memo": "Mock accepted receipt for issuer redemption."
+    },
+    {
+      "kind": "redemption",
+      "recordId": "redeem-002",
+      "holder": "contractor-beta",
+      "amountUnits": 2500,
+      "acceptedTxid": "",
+      "accepted": false,
+      "issuerSignature": "demo-issuer-signature-004",
+      "memo": "Signed-only redemption request; must not reduce accepted outstanding balance."
+    }
+  ],
+  "boundaries": [
+    "This is issuer/indexer accounting, not a native Kaspa stablecoin.",
+    "Signed-only redemptions do not reduce accepted outstanding balance.",
+    "Real issuer-backed value needs issuer reserves, legal redemption operations, compliance, wallet UX, and accepted transaction receipts.",
+    "Do not treat this as collateralized, synthetic, bridged, or covenant-native settlement."
+  ]
+}
