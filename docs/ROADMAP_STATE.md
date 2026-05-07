@@ -57,7 +57,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
-| 1. Payload invoice / receipt | Blocked, high priority | Fixtures, registry, signed payload draft, readiness check | Verify payload-preserving submit route and get one accepted payload receipt |
+| 1. Payload invoice / receipt | Blocked, high priority | Fixtures, registry, signed payload draft, readiness check; public REST submit observed dropping payload | Find a wallet/RPC route that preserves payload bytes, then get one accepted payload receipt |
 | 2. Submit console | Base built | Signed draft review, inputs/outputs/fees/commands | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Base built | Campaign planner with accepted vs signed-only progress | Real accepted pledge-output batch settlement drafts |
 | 4. Escrow | Strong TN12 lane | Accepted release and accepted DAA-refund proofs; cancel blocked by script units | Redesign/simplify cancel or proceed without cancel in commerce demo |
@@ -84,11 +84,11 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 1. Keep public docs focused: accepted proofs first, planner/research second.
 2. Park escrow cancel as a documented limit unless a simpler script design is chosen.
-3. Start the payload invoice vertical slice because it is closest to live/mainnet-capable Kaspa behavior.
+3. Keep the payload invoice vertical slice blocked on a verified payload-preserving submit route; the public REST route accepted a no-payload transaction.
 
 ### Coming days
 
-1. Build one accepted payload receipt and decode it into invoice paid state.
+1. Find or build a payload-preserving wallet/RPC route, then submit one accepted payload receipt and decode it into invoice paid state.
 2. Tie one access pass or attestation to accepted payload state.
 3. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
 4. Turn escrow release/refund into a simple marketplace/freelance demo.

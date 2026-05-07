@@ -54,7 +54,7 @@ try {
   await expectText(page, "#invoice-list", "merchant-order-1337");
   await expectText(page, "#invoice-draft", "signed-not-broadcast");
   await expectText(page, "#payload-readiness", "Payload submit readiness");
-  await expectText(page, "#payload-readiness", "blocked-rest-submit-schema-has-no-payload-field");
+  await expectText(page, "#payload-readiness", "blocked-rest-submit-dropped-payload");
   await expectText(page, "#campaign-summary", "release-not-ready");
   await expectText(page, "#campaign-plans", "Release plan");
   await expectText(page, "#campaign-pledges", "pledge-docs-004");

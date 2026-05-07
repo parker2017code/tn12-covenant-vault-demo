@@ -3,7 +3,11 @@ import {
   Address,
   PrivateKey,
   ScriptPublicKey,
-  createTransaction,
+  SignableTransaction,
+  Transaction,
+  TransactionInput,
+  TransactionOutput,
+  UtxoEntries,
   signTransaction
 } from "kaspa-wasm";
 
@@ -23,18 +27,46 @@ if (wallet.address !== funding.address || !wallet.address.startsWith("kaspatest:
 }
 
 const address = new Address(wallet.address);
-const source = [buildUtxoSource(funding)];
-const tx = createTransaction(
-  source,
-  [{ address: wallet.address, amount: amountSompi }],
+const fundingSompi = BigInt(funding.raw.utxoEntry.amount);
+const changeSompi = fundingSompi - amountSompi - minerFeeSompi;
+
+if (changeSompi <= 0n) {
+  throw new Error(`P2PK draft amount plus miner fee exceed the fetched UTXO. Current fixture has ${sompiToTkas(fundingSompi)} TKAS; requested ${amountTkas} TKAS plus ${minerFeeSompi} sompi fee.`);
+}
+
+const sourceScript = scriptPublicKeyFromHex(funding.raw.utxoEntry.scriptPublicKey.scriptPublicKey);
+const entries = new UtxoEntries([{
   address,
-  minerFeeSompi,
-  "",
-  1,
-  1
-);
-const scriptHashes = tx.getScriptHashes();
-const signed = signTransaction(tx, [new PrivateKey(wallet.privateKey)], true);
+  outpoint: funding.raw.outpoint,
+  utxoEntry: {
+    amount: fundingSompi,
+    scriptPublicKey: sourceScript,
+    blockDaaScore: BigInt(funding.raw.utxoEntry.blockDaaScore),
+    isCoinbase: funding.raw.utxoEntry.isCoinbase
+  }
+}]);
+const tx = new Transaction({
+  version: 0,
+  inputs: [
+    new TransactionInput({
+      previousOutpoint: funding.raw.outpoint,
+      signatureScript: [],
+      sequence: 0n,
+      sigOpCount: 1
+    })
+  ],
+  outputs: [
+    new TransactionOutput(amountSompi, sourceScript),
+    new TransactionOutput(changeSompi, sourceScript)
+  ],
+  lockTime: 0n,
+  subnetworkId: "0000000000000000000000000000000000000000",
+  gas: 0n,
+  payload: ""
+});
+tx.finalize();
+const signable = new SignableTransaction(tx, entries);
+const signed = signTransaction(signable, [new PrivateKey(wallet.privateKey)], true);
 const signedJson = parsePossiblyNestedJson(signed.toString());
 
 const artifact = {
@@ -52,9 +84,10 @@ const artifact = {
     to: wallet.address,
     amountTkas,
     amountSompi: amountSompi.toString(),
+    changeTkas: sompiToTkas(changeSompi),
+    changeSompi: changeSompi.toString(),
     minerFeeSompi: minerFeeSompi.toString()
   },
-  scriptHashes,
   transactionId: signedJson.tx?.id || signedJson.tx?.inner?.id || null,
   signedTransaction: signedJson
 };
@@ -64,24 +97,17 @@ await writeFile(outPath, `${JSON.stringify(artifact, null, 2)}\n`);
 console.log(outPath);
 console.log(`transactionId=${artifact.transactionId}`);
 
-function buildUtxoSource(funding) {
-  const raw = funding.raw;
-  const scriptHex = raw.utxoEntry.scriptPublicKey.scriptPublicKey;
-
-  return {
-    address: new Address(funding.address),
-    outpoint: raw.outpoint,
-    utxoEntry: {
-      amount: BigInt(raw.utxoEntry.amount),
-      scriptPublicKey: new ScriptPublicKey(0, hexToBytes(scriptHex)),
-      blockDaaScore: BigInt(raw.utxoEntry.blockDaaScore),
-      isCoinbase: raw.utxoEntry.isCoinbase
-    }
-  };
+function scriptPublicKeyFromHex(hex) {
+  return new ScriptPublicKey(0, Uint8Array.from(hex.match(/../g).map((chunk) => Number.parseInt(chunk, 16))));
 }
 
-function hexToBytes(hex) {
-  return Uint8Array.from(hex.match(/../g).map((chunk) => Number.parseInt(chunk, 16)));
+function sompiToTkas(sompi) {
+  const whole = sompi / SOMPI_PER_TKAS;
+  const fraction = sompi % SOMPI_PER_TKAS;
+  if (fraction === 0n) {
+    return whole.toString();
+  }
+  return `${whole}.${fraction.toString().padStart(8, "0").replace(/0+$/, "")}`;
 }
 
 function parsePossiblyNestedJson(value) {

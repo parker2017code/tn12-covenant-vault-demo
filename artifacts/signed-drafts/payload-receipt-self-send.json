@@ -6,14 +6,16 @@
   "warning": "This signed draft carries transaction payload bytes. REST submit support for payload must be verified before broadcasting.",
   "source": {
     "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-    "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
-    "outputIndex": 2,
-    "amountTkas": 1999.9998
+    "txid": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+    "outputIndex": 1,
+    "amountTkas": 1148.99945
   },
   "payment": {
     "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
     "amountTkas": 1,
     "amountSompi": "100000000",
+    "changeTkas": "1147.9994",
+    "changeSompi": "114799940000",
     "minerFeeSompi": "5000"
   },
   "receipt": {
@@ -38,20 +40,17 @@
     },
     "boundary": "This models user transaction payload data, not arbitrary miner header data."
   },
-  "scriptHashes": [
-    "fc5a060e400f436d01fd817fce34dc3732c2fe39b62f93bb3b72b1dd2f900312"
-  ],
-  "transactionId": "fb511eea8926cbcd9520591acdf5eddf1a0932fb6b3d61b900743ac7c0ee56d5",
+  "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
   "submitPayload": {
     "transaction": {
       "version": 0,
       "inputs": [
         {
           "previousOutpoint": {
-            "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
-            "index": 2
+            "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+            "index": 1
           },
-          "signatureScript": "4122820e770e467445d4a6d3bf5f8c9b99ed945184adb289067fa6d02cd81f934410a3a6f0dcc71db03d3cad9192e62bd86d4a8f3eb7741309b8eb36cfb8d0259701",
+          "signatureScript": "41b78d9fa1dc43b42345df47becc595b59b1f4eaf3526650a7df9b505228818679845da22aa653a95cc02977234a83a286be350516db331cddf53bf93613eaec7801",
           "sequence": 0,
           "sigOpCount": 1
         }
@@ -59,6 +58,13 @@
       "outputs": [
         {
           "amount": 100000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 114799940000,
           "scriptPublicKey": {
             "version": 0,
             "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
@@ -77,15 +83,15 @@
         "utxo": {
           "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
           "entry": {
-            "amount": 199999980000,
-            "blockDaaScore": 5306368,
+            "amount": 114899945000,
+            "blockDaaScore": 5467878,
             "isCoinbase": false,
             "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
           },
           "outpoint": {
             "inner": {
-              "index": 2,
-              "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571"
+              "index": 1,
+              "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4"
             }
           }
         }
@@ -94,84 +100,84 @@
     "tx": {
       "inner": {
         "gas": 0,
-        "id": "fb511eea8926cbcd9520591acdf5eddf1a0932fb6b3d61b900743ac7c0ee56d5",
+        "id": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
         "inputs": [
           {
             "inner": {
               "previousOutpoint": {
                 "inner": {
-                  "index": 2,
-                  "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571"
+                  "index": 1,
+                  "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4"
                 }
               },
               "sequence": 0,
               "sigOpCount": 1,
               "signatureScript": [
                 65,
-                34,
-                130,
-                14,
-                119,
-                14,
-                70,
-                116,
-                69,
-                212,
-                166,
-                211,
-                191,
-                95,
-                140,
-                155,
-                153,
-                237,
-                148,
-                81,
-                132,
-                173,
-                178,
-                137,
-                6,
-                127,
-                166,
-                208,
-                44,
-                216,
-                31,
-                147,
-                68,
-                16,
-                163,
-                166,
-                240,
-                220,
-                199,
-                29,
-                176,
-                61,
-                60,
-                173,
-                145,
-                146,
-                230,
-                43,
-                216,
-                109,
-                74,
-                143,
-                62,
                 183,
-                116,
-                19,
-                9,
-                184,
-                235,
+                141,
+                159,
+                161,
+                220,
+                67,
+                180,
+                35,
+                69,
+                223,
+                71,
+                190,
+                204,
+                89,
+                91,
+                89,
+                177,
+                244,
+                234,
+                243,
+                82,
+                102,
+                80,
+                167,
+                223,
+                155,
+                80,
+                82,
+                40,
+                129,
+                134,
+                121,
+                132,
+                93,
+                162,
+                42,
+                166,
+                83,
+                169,
+                92,
+                192,
+                41,
+                119,
+                35,
+                74,
+                131,
+                162,
+                134,
+                190,
+                53,
+                5,
+                22,
+                219,
+                51,
+                28,
+                221,
+                245,
+                59,
+                249,
                 54,
-                207,
-                184,
-                208,
-                37,
-                151,
+                19,
+                234,
+                236,
+                120,
                 1
               ]
             }
@@ -183,6 +189,12 @@
             "inner": {
               "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
               "value": 100000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 114799940000
             }
           }
         ],

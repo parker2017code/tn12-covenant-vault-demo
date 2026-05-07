@@ -15,28 +15,28 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "tn12-signed-payload-receipt-draft/v1",
-      "transactionId": "fb511eea8926cbcd9520591acdf5eddf1a0932fb6b3d61b900743ac7c0ee56d5",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
       "warning": "This signed draft carries transaction payload bytes. REST submit support for payload must be verified before broadcasting.",
       "requiresPayloadSubmitSupport": true,
       "source": {
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
-        "outputIndex": 2,
-        "amountTkas": 1999.9998
+        "txid": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+        "outputIndex": 1,
+        "amountTkas": 1148.99945
       },
       "counts": {
         "inputs": 1,
-        "outputs": 1,
+        "outputs": 2,
         "payloadBytes": 127
       },
       "totals": {
-        "outputSompi": "100000000",
-        "outputTkas": "1"
+        "outputSompi": "114899940000",
+        "outputTkas": "1148.9994"
       },
       "inputs": [
         {
-          "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
-          "index": 2,
+          "txid": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+          "index": 1,
           "sigOpCount": 1,
           "sequence": 0
         }
@@ -46,6 +46,13 @@
           "index": 0,
           "amountSompi": "100000000",
           "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "114799940000",
+          "amountTkas": "1147.9994",
           "scriptVersion": 0,
           "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
         }

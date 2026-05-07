@@ -10,6 +10,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
 
 1. Payload receipt / invoice app: fixture, registry, UI panel, signed payload draft, readiness check.
    - Current status: blocked on verified payload-preserving submit route.
+   - Evidence: forced public TN12 REST submit accepted tx `d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4`, but the fetched transaction has no payload; expected payload txid `ae807e8d81fd46ad5f0f9f77128851cb181a37e7b90105fb8e89f5595955a4d9` was not found.
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
 

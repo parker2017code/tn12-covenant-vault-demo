@@ -1,0 +1,33 @@
+{
+  "schema": "tn12-payload-submit-attempt/v1",
+  "network": "kaspa-testnet-12",
+  "attemptedAt": "2026-05-07T12:47:40Z",
+  "route": "https://api-tn12.kaspa.org/transactions",
+  "artifactPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+  "expectedPayloadTransactionId": "ae807e8d81fd46ad5f0f9f77128851cb181a37e7b90105fb8e89f5595955a4d9",
+  "acceptedTransactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+  "accepted": true,
+  "acceptingBlockTime": 1778158060162,
+  "acceptingBlockBlueScore": 5366586,
+  "expectedPayloadBytes": 127,
+  "acceptedPayloadBytes": 0,
+  "payloadPreserved": false,
+  "expectedPayloadHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+  "acceptedOutputs": [
+    {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    {
+      "index": 1,
+      "amountSompi": "114899945000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    }
+  ],
+  "explorerUrl": "https://tn12.kaspa.stream/txs/d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+  "result": "The public TN12 REST submit route accepted the spend but did not preserve the transaction payload. This is a payment/self-send proof, not an invoice receipt proof.",
+  "next": "Use a wallet/RPC route that preserves transaction payload bytes before marking invoices paid from accepted payload receipts."
+}

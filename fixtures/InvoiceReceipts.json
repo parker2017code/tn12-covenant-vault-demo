@@ -1,7 +1,7 @@
 {
   "schema": "kaspa-invoice-receipts-fixture/v1",
   "network": "kaspa-testnet-12",
-  "next": "Use Wallet API or another payload-preserving route to submit one tiny TN12 invoice receipt, then verify and add the accepted txid.",
+  "next": "Find a Wallet API, RPC, or other payload-preserving route. The public TN12 REST submit route accepted a payment but dropped the payload, so no invoice is paid yet.",
   "invoices": [
     {
       "invoiceId": "merchant-order-1337",

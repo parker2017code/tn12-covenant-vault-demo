@@ -5,35 +5,34 @@
   "warning": "This artifact is a local signed draft. It has not been submitted to TN12.",
   "source": {
     "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-    "txid": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
-    "outputIndex": 2,
-    "amountTkas": 1999.9998
+    "txid": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+    "outputIndex": 1,
+    "amountTkas": 1148.99945
   },
   "payment": {
     "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
     "amountTkas": 1,
     "amountSompi": "100000000",
+    "changeTkas": "1147.9994",
+    "changeSompi": "114799940000",
     "minerFeeSompi": "5000"
   },
-  "scriptHashes": [
-    "fc5a060e400f436d01fd817fce34dc3732c2fe39b62f93bb3b72b1dd2f900312"
-  ],
-  "transactionId": "4bbb4d2e750fd58be129b9572e56c9d74b2c0b25f708f4695992ac123337db33",
+  "transactionId": "9b6e909b2030796cefc8e5256ee7c4282b3a90cfe45b59eb680d8a89a7d59953",
   "signedTransaction": {
     "entries": [
       {
         "utxo": {
           "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
           "entry": {
-            "amount": 199999980000,
-            "blockDaaScore": 5306368,
+            "amount": 114899945000,
+            "blockDaaScore": 5467878,
             "isCoinbase": false,
             "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
           },
           "outpoint": {
             "inner": {
-              "index": 2,
-              "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571"
+              "index": 1,
+              "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4"
             }
           }
         }
@@ -42,84 +41,84 @@
     "tx": {
       "inner": {
         "gas": 0,
-        "id": "4bbb4d2e750fd58be129b9572e56c9d74b2c0b25f708f4695992ac123337db33",
+        "id": "9b6e909b2030796cefc8e5256ee7c4282b3a90cfe45b59eb680d8a89a7d59953",
         "inputs": [
           {
             "inner": {
               "previousOutpoint": {
                 "inner": {
-                  "index": 2,
-                  "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571"
+                  "index": 1,
+                  "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4"
                 }
               },
               "sequence": 0,
               "sigOpCount": 1,
               "signatureScript": [
                 65,
-                28,
-                153,
-                77,
-                154,
-                88,
-                228,
-                187,
-                143,
-                27,
-                6,
-                148,
-                136,
+                110,
+                85,
                 115,
-                209,
-                226,
-                48,
-                193,
-                190,
-                168,
-                144,
-                169,
-                22,
-                36,
-                250,
-                58,
-                24,
-                109,
-                242,
-                245,
-                244,
-                179,
-                41,
-                123,
-                79,
-                47,
-                114,
-                47,
-                215,
-                135,
-                251,
-                67,
-                34,
-                120,
-                22,
-                234,
-                145,
-                207,
-                53,
-                213,
-                178,
-                48,
-                192,
-                88,
+                105,
+                164,
+                104,
+                72,
+                161,
+                43,
+                76,
+                1,
+                150,
+                228,
+                240,
+                64,
+                172,
+                33,
+                191,
+                237,
+                102,
+                4,
+                189,
+                185,
+                25,
                 116,
-                222,
-                23,
-                117,
-                135,
-                8,
-                233,
-                122,
-                214,
+                188,
+                19,
+                169,
+                209,
+                246,
+                61,
+                98,
+                5,
+                191,
+                253,
+                227,
+                71,
+                35,
+                19,
+                133,
+                7,
                 42,
-                30,
+                255,
+                67,
+                95,
+                1,
+                150,
+                39,
+                236,
+                124,
+                68,
+                241,
+                103,
+                24,
+                121,
+                140,
+                95,
+                212,
+                49,
+                175,
+                246,
+                151,
+                254,
+                242,
                 1
               ]
             }
@@ -131,6 +130,12 @@
             "inner": {
               "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
               "value": 100000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 114799940000
             }
           }
         ],

@@ -118,10 +118,20 @@ assert.equal(invoiceRegistry.summary.total, 2);
 assert.equal(invoiceRegistry.summary.paid, 0);
 const payloadReadinessArtifact = JSON.parse(await readFile(new URL("../artifacts/payload-submit-readiness.json", import.meta.url), "utf8"));
 const payloadReadiness = buildPayloadSubmitReadiness(payloadReadinessArtifact);
-assert.equal(payloadReadiness.status, "blocked-rest-submit-schema-has-no-payload-field");
+assert.equal(payloadReadiness.status, "blocked-rest-submit-dropped-payload");
 assert.equal(payloadReadiness.checks.submitTxModelHasPayload, false);
 assert.equal(payloadReadiness.checks.fetchedTxModelHasPayload, true);
 assert.equal(payloadReadiness.checks.signedDraftHasPayload, true);
+assert.equal(payloadReadiness.checks.restSubmitAttempted, true);
+assert.equal(payloadReadiness.checks.restSubmitPayloadPreserved, false);
+assert.equal(payloadReadiness.checks.safeToSubmitPayloadReceiptByDefault, false);
+const payloadReceiptDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
+assert.equal(payloadReceiptDraft.submitPayload.transaction.outputs.length, 2);
+assert.equal(payloadReceiptDraft.submitPayload.transaction.outputs[0].amount, 100000000);
+assert.ok(payloadReceiptDraft.submitPayload.transaction.outputs[1].amount > 0);
+assert.equal(payloadReceiptDraft.payment.minerFeeSompi, "5000");
+const p2pkSelfSendDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/self-send-p2pk.json", import.meta.url), "utf8"));
+assert.ok(BigInt(p2pkSelfSendDraft.payment.changeSompi) > 0n);
 const splitDraftArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/split-funding.json", import.meta.url), "utf8"));
 const splitDraftSummary = summarizeSignedDraft(splitDraftArtifact, "artifacts/signed-drafts/split-funding.json");
 assert.equal(splitDraftSummary.counts.inputs, 1);
@@ -446,6 +456,7 @@ const files = [
   "fixtures/AttestationSignals.json",
   "fixtures/MasterAppRoadmap.json",
   "fixtures/InvoiceReceipts.json",
+  "fixtures/PayloadSubmitAttempt.json",
   "fixtures/SubmitConsoleDrafts.json",
   "fixtures/CrossChainResearchLibrary.json",
   "fixtures/BatchAssuranceCampaign.json",

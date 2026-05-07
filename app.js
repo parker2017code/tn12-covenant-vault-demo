@@ -883,7 +883,7 @@ async function renderPayloadSubmitReadiness() {
         <span>${escapeHtml(readiness.status)}</span>
         <strong>Payload submit readiness</strong>
         <p>${escapeHtml(readiness.next)}</p>
-        <small>submit payload field: ${escapeHtml(readiness.checks.submitTxModelHasPayload)}; fetched tx payload field: ${escapeHtml(readiness.checks.fetchedTxModelHasPayload)}</small>
+        <small>submit payload field: ${escapeHtml(readiness.checks.submitTxModelHasPayload)}; fetched tx payload field: ${escapeHtml(readiness.checks.fetchedTxModelHasPayload)}; observed preserve: ${escapeHtml(readiness.checks.restSubmitPayloadPreserved)}</small>
       </article>
     `;
   } catch (error) {

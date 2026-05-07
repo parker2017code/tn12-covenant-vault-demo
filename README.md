@@ -242,7 +242,7 @@ Check whether the public TN12 REST submit schema advertises payload submission:
 npm run payload:readiness
 ```
 
-This turns the current TN12 OpenAPI schema plus the signed payload draft into `artifacts/payload-submit-readiness.json`. If the submit model lacks a payload field, the invoice receipt must not be broadcast through that route by default.
+This turns the current TN12 OpenAPI schema, the signed payload draft, and the observed submit attempt into `artifacts/payload-submit-readiness.json`. The current public TN12 REST route accepted the spend but produced an accepted transaction with no payload, so this route must not be used for invoice receipts.
 
 Build a signed self-send draft that carries that receipt as transaction payload:
 
@@ -250,7 +250,7 @@ Build a signed self-send draft that carries that receipt as transaction payload:
 npm run tx:payload
 ```
 
-This creates `artifacts/signed-drafts/payload-receipt-self-send.json`. It is intentionally marked as requiring payload-submit support verification before broadcast, because the TN12 REST OpenAPI submit model currently does not list a payload field even though fetched transactions expose payload data.
+This creates `artifacts/signed-drafts/payload-receipt-self-send.json`. It is intentionally marked as requiring payload-submit support verification before broadcast, because the TN12 REST OpenAPI submit model currently does not list a payload field even though fetched transactions expose payload data. The first forced REST submit proved the caution was correct: accepted tx `d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4` has no payload, while the expected payload-bearing txid was not found.
 
 Inspect the REST submit payload without broadcasting:
 
