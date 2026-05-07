@@ -85,6 +85,9 @@ try {
   await expectText(page, "#defi-summary", "Missing rails");
   await expectText(page, "#defi-list", "Lending risk dashboard");
   await expectText(page, "#defi-list", "price oracle");
+  await expectText(page, "#agent-summary", "Accepted payloads");
+  await expectText(page, "#agent-list", "Verify invoice payload receipt vertical slice");
+  await expectText(page, "#agent-list", "do not release or refund automatically");
   await expectText(page, "#build-status-summary", "Bases");
   await expectText(page, "#build-status-lanes", "Auction / Intent Prototype");
   await expectText(page, "#build-status-lanes", "Payload Receipt / Invoice App");

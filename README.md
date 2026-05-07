@@ -31,6 +31,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds simple asset policy artifacts for issuer-indexed assets now and possible covenant-native assets later.
 - Builds an auction/intent prototype for accepted bid payloads, planner-side winner selection, and refund planning.
 - Builds a DeFi research backlog for swaps, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation.
+- Builds an AI-agent commitment board for task offers, deposits, completion proofs, disputes, release planning, and refund planning.
 - Builds a repo-level build-status map for what is built, blocked, naturally next, and research-only.
 
 ## What It Does Not Do Yet
@@ -328,6 +329,14 @@ npm run defi:backlog
 ```
 
 This turns `fixtures/DefiResearchBacklog.json` into `artifacts/defi-backlog.json`. It keeps AMMs, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation in a research/missing-rails lane.
+
+Build the AI-agent commitment board:
+
+```sh
+npm run agent:commitments
+```
+
+This turns `fixtures/AgentCommitments.json` into `artifacts/agent-commitments.json`. It tracks task offers, accepted proof payloads, disputes, release planning, and refund planning without claiming autonomous payouts.
 
 Build the repo status map:
 

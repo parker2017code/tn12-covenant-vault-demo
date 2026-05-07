@@ -37,6 +37,7 @@ import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "./src/auctionIntent.mjs";
 import { buildDefiResearchBacklog } from "./src/defiBacklog.mjs";
+import { buildAgentCommitmentBoard } from "./src/agentCommitments.mjs";
 import { buildProjectStatus } from "./src/buildStatus.mjs";
 
 const form = document.querySelector("#policy-form");
@@ -85,6 +86,8 @@ const auctionSummaryNode = document.querySelector("#auction-summary");
 const auctionListNode = document.querySelector("#auction-list");
 const defiSummaryNode = document.querySelector("#defi-summary");
 const defiListNode = document.querySelector("#defi-list");
+const agentSummaryNode = document.querySelector("#agent-summary");
+const agentListNode = document.querySelector("#agent-list");
 const buildStatusSummaryNode = document.querySelector("#build-status-summary");
 const buildStatusLanesNode = document.querySelector("#build-status-lanes");
 const buildQueueNode = document.querySelector("#build-queue");
@@ -214,6 +217,7 @@ renderMainnetReadiness();
 renderAssetPolicies();
 renderAuctionIntents();
 renderDefiBacklog();
+renderAgentCommitments();
 renderBuildStatus();
 renderProofTransactions();
 renderAcceptedAppState();
@@ -687,6 +691,37 @@ async function renderDefiBacklog() {
     }
   } catch (error) {
     defiSummaryNode.textContent = `DeFi backlog unavailable: ${error.message}`;
+  }
+}
+
+async function renderAgentCommitments() {
+  if (!agentSummaryNode || !agentListNode) return;
+
+  try {
+    const response = await fetch("fixtures/AgentCommitments.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const board = buildAgentCommitmentBoard(fixture);
+    agentSummaryNode.innerHTML = `
+      <article><span>Tasks</span><strong>${escapeHtml(board.summary.tasks)}</strong></article>
+      <article><span>Proofs</span><strong>${escapeHtml(board.summary.proofSubmitted)}</strong></article>
+      <article><span>Disputed</span><strong>${escapeHtml(board.summary.disputed)}</strong></article>
+      <article><span>Accepted payloads</span><strong>${escapeHtml(board.summary.acceptedPayloads)}</strong></article>
+    `;
+
+    agentListNode.innerHTML = "";
+    for (const task of board.tasks) {
+      const article = document.createElement("article");
+      article.className = "agent-card";
+      article.innerHTML = `
+        <span>${escapeHtml(task.state)}</span>
+        <strong>${escapeHtml(task.title)}</strong>
+        <p>${escapeHtml(task.rewardTkas)} TKAS reward for ${escapeHtml(task.agent)}</p>
+        <small>${escapeHtml(task.settlementPlan.next)}</small>
+      `;
+      agentListNode.append(article);
+    }
+  } catch (error) {
+    agentSummaryNode.textContent = `Agent commitment board unavailable: ${error.message}`;
   }
 }
 

@@ -4,10 +4,10 @@
   "status": "active-build-map",
   "summary": {
     "total": 13,
-    "builtBases": 9,
+    "builtBases": 10,
     "proofBacked": 0,
     "blocked": 1,
-    "nextBuilds": 2,
+    "nextBuilds": 1,
     "research": 1
   },
   "lanes": [
@@ -181,12 +181,16 @@
       "order": 12,
       "id": "ai-agent-commitments",
       "name": "AI-Agent Commitment Board",
-      "status": "next-build",
+      "status": "base-built",
       "enforcement": "planner-indexer",
       "readiness": "research-only",
-      "proof": "none",
-      "builtSurface": [],
-      "next": "Add task offers, deposits, completion proofs, disputes, and refund states."
+      "proof": "generated-artifact",
+      "builtSurface": [
+        "fixtures/AgentCommitments.json",
+        "src/agentCommitments.mjs",
+        "npm run agent:commitments"
+      ],
+      "next": "Build explicit release/refund drafts and accepted payload receipts for one task lifecycle."
     },
     {
       "order": 13,
@@ -205,8 +209,8 @@
     }
   ],
   "naturalNextSteps": [
-    "Build AI-agent commitment board as lane 12.",
     "Build prediction/hedge simulator from the DeFi backlog and attestation registry.",
+    "Build explicit agent-task release/refund drafts for one task lifecycle.",
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",

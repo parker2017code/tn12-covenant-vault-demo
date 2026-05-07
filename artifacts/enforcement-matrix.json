@@ -3,13 +3,13 @@
   "status": "claim-surface-audit",
   "reviewedAt": "2026-05-07",
   "summary": {
-    "total": 17,
+    "total": 18,
     "contractEnforced": 4,
-    "notScriptEnforced": 13,
+    "notScriptEnforced": 14,
     "byEnforcement": {
       "script": 4,
       "simulation": 2,
-      "planner-indexer": 6,
+      "planner-indexer": 7,
       "wallet-policy": 2,
       "documentation": 2,
       "research": 1
@@ -26,7 +26,8 @@
       "access-passes": 1,
       "simple-assets": 1,
       "auction-intents": 1,
-      "defi-research": 1
+      "defi-research": 1,
+      "ai-agent-commitments": 1
     }
   },
   "features": [
@@ -199,6 +200,16 @@
       "proof": "Generated DeFi backlog artifact only",
       "risk": "Research briefs can be mistaken for live swaps, lending, stable-value products, insurance, or derivatives.",
       "nextHardeningStep": "Build simulation-only dashboards and missing-rails checklists before any settlement prototype."
+    },
+    {
+      "id": "agent-commitment-settlement",
+      "name": "AI-agent commitment settlement",
+      "lane": "ai-agent-commitments",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/AgentCommitments.json and browser agent panel",
+      "proof": "Generated agent commitment artifact only",
+      "risk": "Accepted task/proof/dispute payloads are app state, not autonomous payout authorization or objective proof of completion.",
+      "nextHardeningStep": "Build exact release/refund drafts and require wallet review before any submit path."
     }
   ],
   "rules": [

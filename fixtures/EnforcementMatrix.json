@@ -171,6 +171,16 @@
       "proof": "Generated DeFi backlog artifact only",
       "risk": "Research briefs can be mistaken for live swaps, lending, stable-value products, insurance, or derivatives.",
       "nextHardeningStep": "Build simulation-only dashboards and missing-rails checklists before any settlement prototype."
+    },
+    {
+      "id": "agent-commitment-settlement",
+      "name": "AI-agent commitment settlement",
+      "lane": "ai-agent-commitments",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/AgentCommitments.json and browser agent panel",
+      "proof": "Generated agent commitment artifact only",
+      "risk": "Accepted task/proof/dispute payloads are app state, not autonomous payout authorization or objective proof of completion.",
+      "nextHardeningStep": "Build exact release/refund drafts and require wallet review before any submit path."
     }
   ]
 }
