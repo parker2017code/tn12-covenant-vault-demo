@@ -6,7 +6,7 @@ const silverc = process.env.SILVERC || "/home/parker2017/silverscript-tools/targ
 const contracts = process.argv.slice(2);
 const sources = contracts.length
   ? contracts
-  : ["contracts/DelayedRecoveryVault.sil", "contracts/AssurancePledge.sil"];
+  : ["contracts/DelayedRecoveryVault.sil", "contracts/AssurancePledge.sil", "contracts/Escrow.sil"];
 
 await access(silverc);
 await mkdir("artifacts", { recursive: true });

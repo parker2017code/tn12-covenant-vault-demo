@@ -9,9 +9,10 @@
     "byEnforcement": {
       "script": 4,
       "simulation": 2,
-      "planner-indexer": 7,
+      "planner-indexer": 6,
       "wallet-policy": 2,
       "documentation": 2,
+      "script-planned": 1,
       "research": 1
     },
     "byLane": {
@@ -135,11 +136,11 @@
       "id": "escrow-spend-paths",
       "name": "Escrow spend paths",
       "lane": "escrow",
-      "enforcement": "planner-indexer",
-      "currentSurface": "fixtures/EscrowPrimitives.json and browser escrow panel",
-      "proof": "Generated escrow registry artifact only",
-      "risk": "Buyer release, timeout refund, and mutual cancel are planned spend paths until Escrow.sil drafts are built and accepted.",
-      "nextHardeningStep": "Add Escrow.sil, compile fixtures, signed funding draft, and accepted release/refund proof transactions."
+      "enforcement": "script-planned",
+      "currentSurface": "contracts/Escrow.sil, fixtures/EscrowPrimitives.json, and browser escrow panel",
+      "proof": "Compiled script artifact after npm run compile:contracts; no accepted escrow spend proof yet",
+      "risk": "Buyer-approved release, timeout refund, and mutual cancel have script shape, but no signed funding/spend drafts or accepted proof transactions yet.",
+      "nextHardeningStep": "Build signed funding draft, release/refund/cancel spend drafts, then accepted TN12 proof transactions."
     },
     {
       "id": "treasury-payroll-caps",

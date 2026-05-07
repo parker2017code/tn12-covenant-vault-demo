@@ -23,8 +23,8 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: next build.
-   - Enforcement: planner/indexer.
-   - Next proof: add `Escrow.sil`, signed drafts, and accepted TN12 proof paths.
+   - Enforcement: script-planned after `Escrow.sil`; no spend proof yet.
+   - Next proof: add signed drafts and accepted TN12 proof paths.
 
 5. Treasury / team vaults: spend caps, delayed large withdrawals, recovery, payroll templates.
    - Current status: base built.

@@ -16,6 +16,7 @@ const publicKeyArg = hexToByteArrayArg(xOnlyPublicKey);
 const now = Math.floor(Date.now() / 1000);
 const unlockTime = Number(process.env.UNLOCK_TIME || now + Number(process.env.UNLOCK_DELAY_SECONDS || 24 * 3600));
 const deadline = Number(process.env.DEADLINE || now + Number(process.env.DEADLINE_DELAY_SECONDS || 24 * 3600));
+const refundTime = Number(process.env.REFUND_TIME || now + Number(process.env.REFUND_DELAY_SECONDS || 24 * 3600));
 const minerFee = Number(process.env.CONTRACT_FEE_SOMPI || "5000");
 
 await mkdir("fixtures", { recursive: true });
@@ -29,6 +30,12 @@ await writeFixture("fixtures/AssurancePledge.ctor.json", [
   publicKeyArg,
   publicKeyArg,
   intArg(deadline),
+  intArg(minerFee)
+]);
+await writeFixture("fixtures/Escrow.ctor.json", [
+  publicKeyArg,
+  publicKeyArg,
+  intArg(refundTime),
   intArg(minerFee)
 ]);
 await writeFixture("fixtures/SavedWallet.public.json", {

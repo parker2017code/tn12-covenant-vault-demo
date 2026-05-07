@@ -162,7 +162,7 @@ assert.equal(enforcementMatrix.summary.total, 18);
 assert.equal(enforcementMatrix.summary.contractEnforced, 4);
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "vault-daily-limit" && feature.enforcement === "simulation"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "assurance-target-progress" && feature.enforcement === "planner-indexer"));
-assert.ok(enforcementMatrix.features.some((feature) => feature.id === "escrow-spend-paths" && feature.enforcement === "planner-indexer"));
+assert.ok(enforcementMatrix.features.some((feature) => feature.id === "escrow-spend-paths" && feature.enforcement === "script-planned"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "treasury-payroll-caps" && feature.enforcement === "wallet-policy"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "coordination-market-hunt" && feature.enforcement === "research"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "access-pass-redemption" && feature.enforcement === "planner-indexer"));
@@ -330,10 +330,13 @@ const files = [
   "scripts/build-mainnet-readiness.mjs",
   "scripts/build-asset-policies.mjs",
   "scripts/build-status.mjs",
+  "scripts/check-negative.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
+  "contracts/Escrow.sil",
   "artifacts/DelayedRecoveryVault.json",
   "artifacts/AssurancePledge.json",
+  "artifacts/Escrow.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
   "artifacts/submit-console-registry.json",
   "artifacts/research-library.json",
@@ -516,5 +519,10 @@ assert.match(vaultContract, /entrypoint function recover/);
 const pledgeContract = await readFile(new URL("../contracts/AssurancePledge.sil", import.meta.url), "utf8");
 assert.match(pledgeContract, /contract AssurancePledge/);
 assert.match(pledgeContract, /entrypoint function refund/);
+
+const escrowContract = await readFile(new URL("../contracts/Escrow.sil", import.meta.url), "utf8");
+assert.match(escrowContract, /contract Escrow/);
+assert.match(escrowContract, /entrypoint function release/);
+assert.match(escrowContract, /entrypoint function cancel/);
 
 console.log("Checks passed.");

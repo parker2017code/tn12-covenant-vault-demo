@@ -40,11 +40,11 @@
       "id": "escrow",
       "name": "Escrow Primitive",
       "status": "next-build",
-      "enforcement": "planner-indexer",
+      "enforcement": "script-planned",
       "readiness": "tn12-toccata-only",
-      "proof": "generated-artifact",
-      "builtSurface": ["fixtures/EscrowPrimitives.json", "src/escrowPrimitive.mjs", "npm run escrow:registry"],
-      "next": "Add Escrow.sil, signed funding/release/refund drafts, and accepted TN12 proof."
+      "proof": "compiled-script-no-spend-proof",
+      "builtSurface": ["contracts/Escrow.sil", "fixtures/EscrowPrimitives.json", "src/escrowPrimitive.mjs", "npm run escrow:registry"],
+      "next": "Add signed funding/release/refund/cancel drafts and accepted TN12 proof."
     },
     {
       "order": 5,

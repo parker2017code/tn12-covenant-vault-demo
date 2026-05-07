@@ -1,0 +1,40 @@
+pragma silverscript ^0.1.0;
+
+contract Escrow(
+    pubkey buyer,
+    pubkey seller,
+    int refundTime,
+    int minerFee
+) {
+    entrypoint function release(sig buyerSig) {
+        require(checkSig(buyerSig, buyer));
+
+        int amount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == amount);
+
+        byte[34] sellerLock = new ScriptPubKeyP2PK(seller);
+        require(tx.outputs[0].scriptPubKey == byte[](sellerLock));
+    }
+
+    entrypoint function refund(sig buyerSig) {
+        require(checkSig(buyerSig, buyer));
+        require(tx.time >= refundTime);
+
+        int amount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == amount);
+
+        byte[34] buyerLock = new ScriptPubKeyP2PK(buyer);
+        require(tx.outputs[0].scriptPubKey == byte[](buyerLock));
+    }
+
+    entrypoint function cancel(sig buyerSig, sig sellerSig) {
+        require(checkSig(buyerSig, buyer));
+        require(checkSig(sellerSig, seller));
+
+        int amount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == amount);
+
+        byte[34] buyerLock = new ScriptPubKeyP2PK(buyer);
+        require(tx.outputs[0].scriptPubKey == byte[](buyerLock));
+    }
+}

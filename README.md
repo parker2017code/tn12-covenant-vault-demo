@@ -16,6 +16,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Includes first Silverscript templates:
   - `contracts/DelayedRecoveryVault.sil`
   - `contracts/AssurancePledge.sil`
+  - `contracts/Escrow.sil`
 - Compiles those templates into `artifacts/`.
 - Builds a dry-run transaction intent plan for vault funding, delayed withdrawal, recovery, assurance pledge, release, and refund.
 - Builds, signs, and submits TN12 split, P2SH contract-funding, and P2SH contract-spend transactions from local fixtures.
@@ -24,7 +25,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds a cross-chain research library that maps PMF, failure modes, and open-source code patterns into Kaspa status lanes.
 - Builds batch assurance campaign state from multiple pledge records without claiming pooled covenant enforcement.
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
-- Builds an escrow primitive registry for buyer fund, seller release, timeout refund, and mutual cancel planning.
+- Builds an escrow primitive registry and first escrow Silverscript template for buyer-approved release, timeout refund, and mutual cancel planning.
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
 - Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, and Hunt-plan artifacts.
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
