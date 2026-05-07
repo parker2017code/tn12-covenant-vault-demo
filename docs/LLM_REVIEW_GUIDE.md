@@ -102,6 +102,7 @@ npm run check:all
 npm run tx:verify
 npm run proof:evidence
 npm run wallet:review
+npm run indexer:persist
 git diff --check
 ```
 
@@ -111,6 +112,7 @@ Optional regeneration commands:
 npm run indexer:state
 npm run submit:registry
 npm run wallet:review
+npm run indexer:persist
 npm run enforcement:matrix
 npm run build:status
 ```

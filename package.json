@@ -31,6 +31,7 @@
     "tx:submit:wrpc": "node scripts/submit-signed-draft-wrpc.mjs",
     "indexer:state": "node scripts/build-accepted-app-state.mjs",
     "indexer:checkpoint": "node scripts/build-checkpointed-index.mjs",
+    "indexer:persist": "node scripts/build-persisted-checkpoint-guard.mjs",
     "invoice:registry": "node scripts/build-invoice-registry.mjs",
     "submit:registry": "node scripts/build-submit-console-registry.mjs",
     "wallet:review": "node scripts/build-wallet-review-readiness.mjs",

@@ -91,7 +91,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 ### Coming days
 
 1. Make the accepted JSON wRPC payload receipt path repeatable through wallet review instead of local signing.
-2. Move checkpointed indexing from known-txid public reads to a persisted node/RPC backend with rollback handling.
+2. Move checkpointed indexing from known-txid public reads plus rollback guard to durable node/RPC storage with virtual-chain replay.
 3. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
 4. Turn escrow release/refund into a simple marketplace/freelance demo.
 

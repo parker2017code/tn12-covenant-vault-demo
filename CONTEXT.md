@@ -13,6 +13,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Payload-event check command: `npm run payload:verify:events`
 - Accepted app-state snapshot command: `npm run indexer:state`
 - Checkpointed accepted-index command: `npm run indexer:checkpoint`
+- Persisted checkpoint guard command: `npm run indexer:persist`
 - Wallet-review readiness command: `npm run wallet:review`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - TN12 tested/not-tested map: `docs/TN12_TEST_MATRIX.md`
@@ -225,6 +226,7 @@ Scripts:
 - REST submit helper,
 - accepted transaction verifier,
 - accepted app-state builder,
+- persisted checkpoint guard,
 - wallet-review readiness builder,
 - signal payload artifact builder.
 

@@ -110,7 +110,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - duplicate-payment and stale-receipt checks: done in invoice registry state;
    - refund/error state: done with accepted TN12 payload events and invoice registry state;
    - keep invoice paid state tied to matched accepted payload bytes;
-   - checkpointed known-txid public-read index: done for current proof and payload records.
+   - checkpointed known-txid public-read index plus rollback guard: done for current proof and payload records.
 
 4. Turn research lanes into safer prototypes:
    - prediction/hedge simulator using attestations and manual portfolio positions;

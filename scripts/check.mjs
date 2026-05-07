@@ -62,6 +62,7 @@ import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
+import { buildPersistedCheckpointGuard } from "../src/indexerPersistence.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -359,6 +360,11 @@ assert.equal(checkpointFixture.summary.payloadEvents, 20);
 assert.equal(checkpointFixture.summary.mismatches, 0);
 assert.equal(checkpointFixture.status, "accepted-index-fully-matched");
 assert.ok(checkpointFixture.checkpoint.maxAcceptingBlockBlueScore > checkpointFixture.checkpoint.minAcceptingBlockBlueScore);
+const persistedCheckpointFixture = JSON.parse(await readFile(new URL("../artifacts/persisted-checkpoint-guard.json", import.meta.url), "utf8"));
+assert.equal(persistedCheckpointFixture.status, "persisted-checkpoint-ready");
+assert.equal(persistedCheckpointFixture.summary.recordCount, 27);
+assert.equal(persistedCheckpointFixture.summary.mismatches, 0);
+assert.equal(persistedCheckpointFixture.summary.rollbackDetected, false);
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -398,6 +404,34 @@ const checkpointState = buildCheckpointedAcceptedIndex({
 assert.equal(checkpointState.summary.total, 2);
 assert.equal(checkpointState.summary.matched, 2);
 assert.equal(checkpointState.checkpoint.maxAcceptingBlockBlueScore, 2000);
+const persistedCheckpoint = buildPersistedCheckpointGuard({
+  currentIndex: checkpointState,
+  previousSnapshot: {
+    current: {
+      recordCount: 2,
+      minBlueScore: 1000,
+      maxBlueScore: 2000,
+      txids: checkpointState.checkpoint.txids
+    }
+  },
+  persistedAt: "2026-05-07T00:00:00.000Z"
+});
+assert.equal(persistedCheckpoint.status, "persisted-checkpoint-ready");
+assert.equal(persistedCheckpoint.summary.rollbackDetected, false);
+const rollbackCheckpoint = buildPersistedCheckpointGuard({
+  currentIndex: checkpointState,
+  previousSnapshot: {
+    current: {
+      recordCount: 3,
+      minBlueScore: 1000,
+      maxBlueScore: 3000,
+      txids: [...checkpointState.checkpoint.txids, "missing-after-rollback"]
+    }
+  },
+  persistedAt: "2026-05-07T00:00:00.000Z"
+});
+assert.equal(rollbackCheckpoint.status, "rollback-review-required");
+assert.equal(rollbackCheckpoint.summary.rollbackDetected, true);
 const fakePreviousTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   `prev-${index}`,
   {
@@ -505,6 +539,7 @@ const files = [
   "scripts/build-proof-evidence.mjs",
   "scripts/build-accepted-app-state.mjs",
   "scripts/build-checkpointed-index.mjs",
+  "scripts/build-persisted-checkpoint-guard.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -561,6 +596,7 @@ const files = [
   "artifacts/payload-refund-evidence.json",
   "artifacts/payload-error-evidence.json",
   "artifacts/checkpointed-accepted-index.json",
+  "artifacts/persisted-checkpoint-guard.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -602,6 +638,7 @@ const files = [
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/checkpointedIndexer.mjs",
+  "src/indexerPersistence.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",
@@ -657,6 +694,7 @@ assert.match(readme, /npm run fixtures/);
 assert.match(readme, /npm run wallet:public/);
 assert.match(readme, /npm run plan/);
 assert.match(readme, /npm run drafts/);
+assert.match(readme, /npm run indexer:persist/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);

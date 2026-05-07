@@ -22,7 +22,9 @@
       "builtSurface": [
         "fixtures/InvoiceReceipts.json",
         "src/invoiceReceipt.mjs",
+        "src/indexerPersistence.mjs",
         "npm run invoice:registry",
+        "npm run indexer:persist",
         "npm run payload:readiness",
         "npm run payload:verify",
         "artifacts/payload-receipt-evidence.json"

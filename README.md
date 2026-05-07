@@ -231,9 +231,10 @@ Build the checkpointed accepted-index artifact from public TN12 reads:
 
 ```sh
 npm run indexer:checkpoint
+npm run indexer:persist
 ```
 
-This writes `artifacts/checkpointed-accepted-index.json`. It combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches before the UI treats a state transition as real.
+This writes `artifacts/checkpointed-accepted-index.json` and `artifacts/persisted-checkpoint-guard.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready.
 
 Build a compact transaction-payload receipt artifact for the accepted-transaction indexer lane:
 
@@ -453,7 +454,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding, release, DAA-refund, and mutual cancel now have accepted TN12 evidence on separate funded outputs.
 
-5. Done: checkpointed accepted-index artifact for 7 proof spends and 20 payload events, including auction settlement/refund planner events and agent release/hold planner events. Next: move from known-txid public reads to a node/RPC backend with persisted checkpoints and rollback handling.
+5. Done: checkpointed accepted-index artifact and persisted checkpoint guard for 7 proof spends and 20 payload events. Next: move from known-txid public reads to a node/RPC backend with durable storage and virtual-chain rollback replay.
 
 6. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 

@@ -57,6 +57,7 @@ const assuranceProgressTextNode = document.querySelector("#assurance-progress-te
 const proofListNode = document.querySelector("#proof-list");
 const proofStatusNode = document.querySelector("#proof-status");
 const indexerSummaryNode = document.querySelector("#indexer-summary");
+const indexerPersistenceNode = document.querySelector("#indexer-persistence");
 const indexerRecordsNode = document.querySelector("#indexer-records");
 const receiptEventsNode = document.querySelector("#receipt-events");
 const invoiceSummaryNode = document.querySelector("#invoice-summary");
@@ -839,12 +840,14 @@ async function renderAcceptedAppState() {
   if (!indexerSummaryNode || !indexerRecordsNode || !receiptEventsNode) return;
 
   try {
-    const [stateResponse, checkpointResponse] = await Promise.all([
+    const [stateResponse, checkpointResponse, persistenceResponse] = await Promise.all([
       fetch("fixtures/AcceptedAppState.json", { cache: "no-store" }),
-      fetch("artifacts/checkpointed-accepted-index.json", { cache: "no-store" })
+      fetch("artifacts/checkpointed-accepted-index.json", { cache: "no-store" }),
+      fetch("artifacts/persisted-checkpoint-guard.json", { cache: "no-store" })
     ]);
     const state = await stateResponse.json();
     const checkpoint = await checkpointResponse.json();
+    const persistence = await persistenceResponse.json();
     const summary = state.summary;
     const checkpointSummary = checkpoint.summary || {};
     indexerSummaryNode.innerHTML = `
@@ -854,6 +857,16 @@ async function renderAcceptedAppState() {
       <article><span>Payloads</span><strong>${escapeHtml(checkpointSummary.payloadEvents ?? summary.receipts ?? 0)}</strong></article>
       <article><span>Checkpoint</span><strong>${escapeHtml(checkpoint.checkpoint?.maxAcceptingBlockBlueScore ?? "pending")}</strong></article>
     `;
+    if (indexerPersistenceNode) {
+      indexerPersistenceNode.innerHTML = `
+        <article>
+          <span>${escapeHtml(persistence.status)}</span>
+          <strong>${escapeHtml(persistence.summary.recordCount)} persisted records</strong>
+          <p>Rollback detected: ${escapeHtml(persistence.summary.rollbackDetected)}</p>
+          <small>${escapeHtml(persistence.rollback.action)}</small>
+        </article>
+      `;
+    }
     indexerRecordsNode.innerHTML = "";
 
     const proofRecords = (checkpoint.records || []).filter((record) => record.kind === "proof-spend");

@@ -382,9 +382,11 @@
         <p>This checkpoint turns accepted proof spends and payload events into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should all feed through this layer before the UI claims a state transition.</p>
       </div>
       <div id="indexer-summary" class="indexer-summary" aria-live="polite"></div>
+      <div id="indexer-persistence" class="indexer-persistence" aria-live="polite"></div>
       <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
       <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
-      <pre>npm run indexer:checkpoint</pre>
+      <pre>npm run indexer:checkpoint
+npm run indexer:persist</pre>
     </section>
 
     <section id="invoices" class="panel invoices">

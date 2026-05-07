@@ -1119,6 +1119,7 @@ progress::-moz-progress-bar {
 }
 
 .wallet-review,
+.indexer-persistence,
 .receipt-events,
 .payload-draft-status {
   display: grid;
@@ -1215,6 +1216,7 @@ progress::-moz-progress-bar {
 .attestation-card,
 .indexer-card,
 .receipt-card,
+.indexer-persistence article,
 .wallet-review article,
 .receipt-events article,
 .payload-draft-status article {
@@ -1252,6 +1254,7 @@ progress::-moz-progress-bar {
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
+.indexer-persistence article span,
 .wallet-review article span,
 .receipt-events article span,
 .payload-draft-status article span {
@@ -1341,6 +1344,9 @@ progress::-moz-progress-bar {
 .receipt-events article strong,
 .receipt-events article p,
 .receipt-events article small,
+.indexer-persistence article strong,
+.indexer-persistence article p,
+.indexer-persistence article small,
 .wallet-review article strong,
 .wallet-review article p,
 .wallet-review article small,
@@ -1375,6 +1381,7 @@ progress::-moz-progress-bar {
 .indexer-card p,
 .receipt-card p,
 .receipt-events article p,
+.indexer-persistence article p,
 .wallet-review article p,
 .payload-draft-status article p {
   margin: 0;
@@ -1404,6 +1411,7 @@ progress::-moz-progress-bar {
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
+.indexer-persistence article small,
 .wallet-review article small,
 .receipt-events article small,
 .payload-draft-status article small {
