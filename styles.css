@@ -1118,6 +1118,7 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.wallet-review,
 .receipt-events,
 .payload-draft-status {
   display: grid;
@@ -1214,6 +1215,7 @@ progress::-moz-progress-bar {
 .attestation-card,
 .indexer-card,
 .receipt-card,
+.wallet-review article,
 .receipt-events article,
 .payload-draft-status article {
   display: grid;
@@ -1250,6 +1252,7 @@ progress::-moz-progress-bar {
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
+.wallet-review article span,
 .receipt-events article span,
 .payload-draft-status article span {
   width: fit-content;
@@ -1338,6 +1341,9 @@ progress::-moz-progress-bar {
 .receipt-events article strong,
 .receipt-events article p,
 .receipt-events article small,
+.wallet-review article strong,
+.wallet-review article p,
+.wallet-review article small,
 .payload-draft-status article strong,
 .payload-draft-status article p,
 .payload-draft-status article small {
@@ -1369,6 +1375,7 @@ progress::-moz-progress-bar {
 .indexer-card p,
 .receipt-card p,
 .receipt-events article p,
+.wallet-review article p,
 .payload-draft-status article p {
   margin: 0;
 }
@@ -1397,6 +1404,7 @@ progress::-moz-progress-bar {
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
+.wallet-review article small,
 .receipt-events article small,
 .payload-draft-status article small {
   color: var(--muted);

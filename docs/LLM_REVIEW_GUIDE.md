@@ -101,6 +101,7 @@ Run these from the repo root when local checkout access is available:
 npm run check:all
 npm run tx:verify
 npm run proof:evidence
+npm run wallet:review
 git diff --check
 ```
 
@@ -109,6 +110,7 @@ Optional regeneration commands:
 ```sh
 npm run indexer:state
 npm run submit:registry
+npm run wallet:review
 npm run enforcement:matrix
 npm run build:status
 ```

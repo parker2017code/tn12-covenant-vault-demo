@@ -65,6 +65,7 @@ const invoiceDraftNode = document.querySelector("#invoice-draft");
 const payloadReadinessNode = document.querySelector("#payload-readiness");
 const submitSummaryNode = document.querySelector("#submit-summary");
 const submitDraftsNode = document.querySelector("#submit-drafts");
+const walletReviewNode = document.querySelector("#wallet-review");
 const researchSummaryNode = document.querySelector("#research-summary");
 const researchCandidatesNode = document.querySelector("#research-candidates");
 const campaignSummaryNode = document.querySelector("#campaign-summary");
@@ -232,6 +233,7 @@ renderAcceptedAppState();
 renderInvoiceApp();
 renderPayloadSubmitReadiness();
 renderSubmitConsole();
+renderWalletReview();
 renderMasterRoadmap();
 renderResearchLibrary();
 renderBuildQueue();
@@ -1016,6 +1018,25 @@ ${escapeHtml(draft.submit.submitCommand)}</pre>
     }
   } catch (error) {
     submitSummaryNode.textContent = `Submit console unavailable: ${error.message}`;
+  }
+}
+
+async function renderWalletReview() {
+  if (!walletReviewNode) return;
+
+  try {
+    const response = await fetch("artifacts/wallet-review-readiness.json", { cache: "no-store" });
+    const review = await response.json();
+    walletReviewNode.innerHTML = `
+      <article>
+        <span>${escapeHtml(review.status)}</span>
+        <strong>${escapeHtml(review.summary.ready)} / ${escapeHtml(review.summary.total)} drafts ready</strong>
+        <p>${escapeHtml(review.summary.payloadRouteReady)} payload drafts require the payload-preserving route.</p>
+        <small>${escapeHtml(review.summary.registrySecretFields)} serialized secret fields in the published registry.</small>
+      </article>
+    `;
+  } catch (error) {
+    walletReviewNode.textContent = `Wallet review readiness unavailable: ${error.message}`;
   }
 }
 

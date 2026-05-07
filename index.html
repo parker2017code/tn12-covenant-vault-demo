@@ -409,8 +409,10 @@ npm run tx:payload</pre>
         <p>This is lane 2: exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. The browser reviews signed artifacts only; actual network submission remains an explicit shell command.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
+      <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
       <div id="submit-drafts" class="submit-drafts" aria-live="polite"></div>
       <pre>npm run submit:registry
+npm run wallet:review
 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json</pre>
     </section>
 

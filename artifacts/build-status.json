@@ -33,13 +33,15 @@
       "order": 2,
       "id": "submit-console",
       "name": "Wallet-Facing Submit Console",
-      "status": "base-built",
+      "status": "review-gate-built",
       "enforcement": "wallet-policy",
       "readiness": "local-only-not-production",
       "proof": "local-ui-check",
       "builtSurface": [
         "fixtures/SubmitConsoleDrafts.json",
         "src/submitConsole.mjs",
+        "src/walletReview.mjs",
+        "npm run wallet:review",
         "npm run submit:registry"
       ],
       "next": "Move from local signed draft review to real wallet connector review."

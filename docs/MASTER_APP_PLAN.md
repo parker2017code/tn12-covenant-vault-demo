@@ -25,7 +25,7 @@ For the current twenty-lane status map and time horizon, see `docs/ROADMAP_STATE
    - Show exact inputs, outputs, fees, payload, draft status, and submit command.
    - Never expose private keys.
    - First success: inspect a signed draft without opening raw JSON.
-   - Current repo surface: `fixtures/SubmitConsoleDrafts.json`, `src/submitConsole.mjs`, `npm run submit:registry`, and the browser submit console.
+   - Current repo surface: `fixtures/SubmitConsoleDrafts.json`, `src/submitConsole.mjs`, `src/walletReview.mjs`, `npm run submit:registry`, `npm run wallet:review`, and the browser submit console.
 
 3. Batch Assurance Campaigns
    - Move from one pledge proof to many pledge outputs.

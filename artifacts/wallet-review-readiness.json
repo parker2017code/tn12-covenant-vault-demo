@@ -1,0 +1,946 @@
+{
+  "schema": "tn12-wallet-review-readiness/v1",
+  "network": "kaspa-testnet-12",
+  "status": "wallet-review-ready",
+  "summary": {
+    "total": 33,
+    "ready": 33,
+    "payloadDrafts": 20,
+    "payloadRouteReady": 20,
+    "explicitSubmitCommands": 33,
+    "registrySecretFields": 0
+  },
+  "drafts": [
+    {
+      "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "label": "Payload receipt self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-refund-self-send.json",
+      "label": "Payload refund self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-refund-self-send.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-refund-self-send.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-refund-self-send.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-error-self-send.json",
+      "label": "Payload error self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 130,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-error-self-send.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-error-self-send.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-error-self-send.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "label": "Access pass redemption payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 159,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-access-pass-redemption.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-access-pass-redemption.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-access-pass-redemption.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "label": "Auction bid pass 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 122,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-bid-pass-001.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-bid-pass-001.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-auction-bid.json",
+      "label": "Auction bid pass 002 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 128,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-bid.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-bid.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-bid.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+      "label": "Auction bid voucher 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 160,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-bid-voucher-001.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-bid-voucher-001.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "label": "Auction settlement pass 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 195,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-settlement-pass-001.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-settlement-pass-001.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "label": "Auction refund pass 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 185,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-refund-pass-001.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-refund-pass-001.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-stable-issuance.json",
+      "label": "Stable issuance 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-stable-issuance.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-stable-issuance.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-stable-issuance.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-stable-issuance-002.json",
+      "label": "Stable issuance 002 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 138,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-stable-issuance-002.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-stable-issuance-002.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-stable-issuance-002.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-stable-redemption.json",
+      "label": "Stable redemption 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 140,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-stable-redemption.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-stable-redemption.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-stable-redemption.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-miner-attestation.json",
+      "label": "Miner attestation payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 156,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-miner-attestation.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-miner-attestation.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-miner-attestation.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-agent-task-invoice.json",
+      "label": "Agent task invoice payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 136,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-task-invoice.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-task-invoice.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-task-invoice.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-agent-task-escrow.json",
+      "label": "Agent task escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 139,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-task-escrow.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-task-escrow.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-task-escrow.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-agent-proof.json",
+      "label": "Agent proof invoice payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 133,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-proof.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-proof.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-proof.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-agent-proof-escrow.json",
+      "label": "Agent proof escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 148,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-proof-escrow.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-proof-escrow.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-proof-escrow.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+      "label": "Agent dispute escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-dispute-escrow.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-dispute-escrow.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+      "label": "Agent release invoice payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 207,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-release-invoice.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-release-invoice.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-release-invoice.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+      "label": "Agent hold escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-hold-escrow.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-hold-escrow.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-hold-escrow.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/split-funding.json",
+      "label": "Split funding",
+      "lane": "tn12-signed-split-draft/v1",
+      "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/vault-recovery.json",
+      "label": "Vault recovery",
+      "lane": "vault-recovery",
+      "transactionId": "6c3873c7374e6cd9cd1cdfdd5aab81222d3fb6090e3ec9ff512f42579a4f4c4c",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-recovery.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-recovery.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/vault-withdrawal.json",
+      "label": "Vault withdrawal",
+      "lane": "vault-withdrawal",
+      "transactionId": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-withdrawal.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-withdrawal.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/assurance-release.json",
+      "label": "Assurance release",
+      "lane": "assurance-release",
+      "transactionId": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-release.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-release.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/assurance-refund.json",
+      "label": "Assurance refund",
+      "lane": "assurance-refund",
+      "transactionId": "0ad367cea66c3c823cc9c23e1e874cedc0fb30e90c3deaa309cdcee2dc4f54aa",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-refund.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-refund.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-funding.json",
+      "label": "Escrow funding",
+      "lane": "escrow-funding",
+      "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-funding.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-funding.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": false,
+        "hasOutputs": false
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-release.json",
+      "label": "Escrow release",
+      "lane": "escrow-release",
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-release.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-release.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-refund.json",
+      "label": "Escrow refund",
+      "lane": "escrow-refund",
+      "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-refund.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-refund.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-cancel.json",
+      "label": "Escrow cancel",
+      "lane": "escrow-cancel",
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+      "label": "Escrow DAA refund funding",
+      "lane": "escrow-daa-refund-funding",
+      "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-funding.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-funding.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": false,
+        "hasOutputs": false
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+      "label": "Escrow DAA refund",
+      "lane": "escrow-refund",
+      "transactionId": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-proof-refund.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-cancel-funding.json",
+      "label": "Escrow cancel funding",
+      "lane": "escrow-cancel-funding",
+      "transactionId": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-funding.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-funding.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": false,
+        "hasOutputs": false
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "label": "Escrow cancel attempt",
+      "lane": "escrow-cancel",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-proof-cancel.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    }
+  ],
+  "registrySecretFields": [],
+  "boundaries": [
+    "This artifact reviews published signed draft summaries only.",
+    "It does not connect to a wallet, inspect private keys, or broadcast transactions.",
+    "Payload drafts must use the payload-preserving wRPC or wallet route; REST submit remains blocked for payload receipts.",
+    "A production wallet review should show exact inputs, outputs, fees, network, payload bytes, and route before asking the user to sign."
+  ]
+}

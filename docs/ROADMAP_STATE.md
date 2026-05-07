@@ -60,7 +60,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
 | 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state | Add wallet review and checkpointed indexing |
-| 2. Submit console | Base built | 33 signed draft reviews, including 20 accepted payload drafts | Real wallet connector and no-local-key UX |
+| 2. Submit console | Review gate built | 33 signed draft reviews, 20 payload drafts, wallet-review readiness artifact | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Base built | Campaign planner with accepted vs signed-only progress | Real accepted pledge-output batch settlement drafts |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, and accepted mutual-cancel proofs on separate funded outputs | Add negative tests and keep SDK route documented |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |

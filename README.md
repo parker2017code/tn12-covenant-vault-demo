@@ -295,9 +295,10 @@ Build the signed-draft review registry for the browser submit console:
 
 ```sh
 npm run submit:registry
+npm run wallet:review
 ```
 
-The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. It does not read `.local/tn12-wallet.json` or expose private keys.
+The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. It does not read `.local/tn12-wallet.json` or expose private keys.
 
 Build the cross-chain app research library:
 
@@ -446,7 +447,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 1. Done: manual funding, outpoint fixtures, Silverscript compile artifacts, signed drafts, split funding, contract funding, vault recovery, vault delayed withdrawal, assurance release, assurance refund, and TN12 API verification.
 
-2. Next: add wallet-facing UX that never exposes the private key, shows exact source outputs, and makes submit actions explicit.
+2. Done: wallet-review readiness artifact over the signed draft registry. Next: replace local signing with a real wallet connector while keeping exact input/output/payload review.
 
 3. Next: build batch assurance aggregation around multiple pledge outputs before claiming a real campaign product.
 

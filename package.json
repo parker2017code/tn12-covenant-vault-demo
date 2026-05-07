@@ -33,6 +33,7 @@
     "indexer:checkpoint": "node scripts/build-checkpointed-index.mjs",
     "invoice:registry": "node scripts/build-invoice-registry.mjs",
     "submit:registry": "node scripts/build-submit-console-registry.mjs",
+    "wallet:review": "node scripts/build-wallet-review-readiness.mjs",
     "research:library": "node scripts/build-research-library.mjs",
     "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",
     "enforcement:matrix": "node scripts/build-enforcement-matrix.mjs",

@@ -47,6 +47,7 @@ import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
+import { buildWalletReviewReadiness } from "../src/walletReview.mjs";
 import { summarizeWrpcCandidate } from "../src/wrpcSubmitCandidate.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
@@ -164,6 +165,11 @@ const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifact
 assert.equal(submitRegistry.summary.total, 33);
 assert.equal(submitRegistry.summary.payloadDrafts, 20);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 20);
+const walletReview = buildWalletReviewReadiness(submitRegistry);
+assert.equal(walletReview.status, "wallet-review-ready");
+assert.equal(walletReview.summary.ready, 33);
+assert.equal(walletReview.summary.payloadRouteReady, 20);
+assert.equal(walletReview.summary.registrySecretFields, 0);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -505,6 +511,7 @@ const files = [
   "scripts/build-signal-payload.mjs",
   "scripts/build-invoice-registry.mjs",
   "scripts/build-submit-console-registry.mjs",
+  "scripts/build-wallet-review-readiness.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-enforcement-matrix.mjs",
@@ -542,6 +549,7 @@ const files = [
   "artifacts/signed-drafts/payload-refund-self-send.json",
   "artifacts/signed-drafts/payload-error-self-send.json",
   "artifacts/submit-console-registry.json",
+  "artifacts/wallet-review-readiness.json",
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/enforcement-matrix.json",
@@ -598,6 +606,7 @@ const files = [
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",
   "src/submitConsole.mjs",
+  "src/walletReview.mjs",
   "src/appResearch.mjs",
   "src/batchAssurance.mjs",
   "src/enforcementMatrix.mjs",
@@ -653,6 +662,7 @@ assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
 assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
+assert.match(readme, /npm run wallet:review/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run enforcement:matrix/);
