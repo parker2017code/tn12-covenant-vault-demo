@@ -528,6 +528,8 @@ Success:
 12. Build miner-signal research prototype.
 13. Build AI-agent commitment board.
 
+The canonical condensed roadmap is now tracked in `docs/MASTER_APP_PLAN.md` and rendered from `fixtures/MasterAppRoadmap.json`.
+
 ## One-By-One Completion Standard
 
 Every app lane should have:

@@ -47,3 +47,5 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 19. Add a miner-signal research notebook that compares transaction payload, coinbase payload, pool policy, and header-derived facts.
 20. Keep Kaspa status labels aligned with Kaspa Explained: mainnet live, TN12 covenant testnet, Toccata path, vProgs roadmap, RTD research.
 21. Add a basic DeFi backlog covering lending/borrowing, swaps/AMMs, stable-value units, insurance/protection, derivatives, and portfolio automation with explicit oracle, collateral, liquidity, liquidation, and composition assumptions.
+22. Keep `docs/MASTER_APP_PLAN.md` as the canonical twelve-lane app roadmap: payload receipt/invoice, wallet submit console, batch assurance, escrow, treasury vaults, KRC/access passes, simple assets, auctions/intents, DeFi research, cross-chain research, miner/pool signals, and AI-agent commitments.
+23. Add the attestation signal registry as the first miner/pool signal foundation: signed signals, source reputation, market use, portfolio hedge use, and payload-receipt settlement next.

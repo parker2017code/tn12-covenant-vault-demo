@@ -1,0 +1,100 @@
+{
+  "schema": "tn12-attestation-signals-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "purpose": "Research fixture for RTD-style attestations, miner/pool signal incentives, simulated prediction markets, and portfolio hedge alerts.",
+  "nextSettlement": "Build a payload receipt for one signed attestation, verify the accepted transaction, then let the indexer derive signal state from accepted payloads.",
+  "incentiveRules": [
+    {
+      "name": "Useful early signal",
+      "reward": "Fee share or reputation gain when a signal arrives before public baseline sources and later resolves accurately.",
+      "guard": "Do not reward unverifiable claims or circular self-reported events."
+    },
+    {
+      "name": "Calibration",
+      "reward": "Higher reputation for confidence scores that match eventual outcomes.",
+      "guard": "Overconfident wrong claims reduce reputation."
+    },
+    {
+      "name": "Market consumption",
+      "reward": "Apps can pay sources whose signals are used in risk dashboards or simulated market updates.",
+      "guard": "Real-money settlement stays out of scope until legal, oracle, and dispute assumptions are explicit."
+    }
+  ],
+  "signals": [
+    {
+      "id": "sig-rtd-hashrate-001",
+      "eventId": "event-network-hashrate-shift",
+      "channel": "signed-watcher-attestation",
+      "source": "tn12-watcher-alpha",
+      "sourceType": "watcher",
+      "claim": "Observed a sharp short-window hashrate movement on TN12-like monitoring inputs.",
+      "observedAt": "2026-05-07T09:20:00.000Z",
+      "submittedAt": "2026-05-07T09:20:18.000Z",
+      "confidence": 82,
+      "evidence": {
+        "kind": "dashboard-snapshot-hash",
+        "hash": "sha256:example-hashrate-window",
+        "url": "local-research-note"
+      },
+      "status": "verified",
+      "marketUse": "Update simulated probability for a network-stress event.",
+      "portfolioUse": "Raise alert for portfolios concentrated in short-term miner revenue assumptions.",
+      "rewardHint": "Reward only if the signal beats baseline detection and later matches accepted network observations.",
+      "resolution": {
+        "status": "resolved",
+        "accuracy": 78,
+        "note": "Fixture assumes the direction was useful, but magnitude was imperfect."
+      }
+    },
+    {
+      "id": "sig-listing-rumor-001",
+      "eventId": "event-exchange-listing-window",
+      "channel": "signed-research-attestation",
+      "source": "market-research-beta",
+      "sourceType": "researcher",
+      "claim": "Public signals suggest a listing/event window, but evidence is weak and should not drive automatic trading.",
+      "observedAt": "2026-05-07T09:22:00.000Z",
+      "submittedAt": "2026-05-07T09:26:00.000Z",
+      "confidence": 46,
+      "evidence": {
+        "kind": "public-source-bundle",
+        "hash": "sha256:example-public-source-bundle",
+        "url": "local-research-note"
+      },
+      "status": "draft",
+      "marketUse": "Simulated prediction market input only.",
+      "portfolioUse": "Watchlist alert; no automatic position change.",
+      "rewardHint": "No reward until the claim is specific, sourced, and resolved.",
+      "resolution": {
+        "status": "unresolved",
+        "accuracy": null,
+        "note": "Needs a concrete resolution source and date."
+      }
+    },
+    {
+      "id": "sig-pool-policy-001",
+      "eventId": "event-pool-signal-support",
+      "channel": "pool-policy-research",
+      "source": "pool-operator-gamma",
+      "sourceType": "pool",
+      "claim": "Pool operator is willing to test a signed off-chain signal feed before any coinbase payload policy.",
+      "observedAt": "2026-05-07T09:30:00.000Z",
+      "submittedAt": "2026-05-07T09:31:00.000Z",
+      "confidence": 68,
+      "evidence": {
+        "kind": "signed-message-placeholder",
+        "hash": "sha256:example-pool-policy-message",
+        "url": "local-research-note"
+      },
+      "status": "verified",
+      "marketUse": "Infrastructure readiness signal, not a tradeable event.",
+      "portfolioUse": "No direct hedge action; improves confidence in future signal supply.",
+      "rewardHint": "Reward integration work after signed messages can be verified and anchored.",
+      "resolution": {
+        "status": "resolved",
+        "accuracy": 88,
+        "note": "Fixture marks willingness as verified, not production support."
+      }
+    }
+  ]
+}

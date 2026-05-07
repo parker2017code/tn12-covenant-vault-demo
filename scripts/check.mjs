@@ -31,6 +31,7 @@ import {
   buildSignalPayloadArtifact,
   decodeSignalPayload
 } from "../src/signalPayload.mjs";
+import { buildAttestationRegistry } from "../src/attestationSignal.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -77,6 +78,12 @@ assert.equal(signalArtifact.status, "payload-size-ok");
 assert.equal(signalArtifact.lane, "transaction-payload");
 assert.match(signalArtifact.boundary, /not arbitrary miner header data/);
 assert.equal(decodeSignalPayload(signalArtifact.encoded.hex).payload.subject, DEFAULT_SIGNAL_PAYLOAD.subject);
+const attestationFixture = JSON.parse(await readFile(new URL("../fixtures/AttestationSignals.json", import.meta.url), "utf8"));
+const attestationRegistry = buildAttestationRegistry(attestationFixture);
+assert.equal(attestationRegistry.status, "research-fixture-not-market-settlement");
+assert.equal(attestationRegistry.summary.total, 3);
+assert.ok(attestationRegistry.boundaries.some((boundary) => /block headers/.test(boundary)));
+assert.ok(attestationRegistry.sources.some((source) => source.source === "pool-operator-gamma"));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -171,9 +178,12 @@ const files = [
   "fixtures/VaultTemplates.json",
   "fixtures/KaspaAppLab.json",
   "fixtures/MinerSignalResearch.json",
+  "fixtures/AttestationSignals.json",
+  "fixtures/MasterAppRoadmap.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
+  "src/attestationSignal.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -188,7 +198,8 @@ const files = [
   "docs/ASSURANCE_CONTRACTS.md",
   "docs/KASPA_DOCS_REVIEW.md",
   "docs/ECOSYSTEM_BUILD_PLAN.md",
-  "docs/GITHUB_HOSTING.md"
+  "docs/GITHUB_HOSTING.md",
+  "docs/MASTER_APP_PLAN.md"
 ];
 
 for (const file of files) {
@@ -221,6 +232,8 @@ assert.match(html, /Kaspa app lab/);
 assert.match(html, /Miner signal research/);
 assert.match(html, /Accepted transaction indexer/);
 assert.match(html, /receipt-events/);
+assert.match(html, /Master app plan/);
+assert.match(html, /Attestation registry/);
 
 const assuranceDocs = await readFile(new URL("../docs/ASSURANCE_CONTRACTS.md", import.meta.url), "utf8");
 assert.match(assuranceDocs, /funding rule strangers can rely on/);
@@ -246,9 +259,19 @@ assert.match(ecosystemBuildPlan, /Miner \/ Pool Signal Research App/);
 const appLab = JSON.parse(await readFile(new URL("../fixtures/KaspaAppLab.json", import.meta.url), "utf8"));
 assert.ok(appLab.lanes.some((lane) => lane.id === "cross-chain-research"));
 
+const masterRoadmap = JSON.parse(await readFile(new URL("../fixtures/MasterAppRoadmap.json", import.meta.url), "utf8"));
+assert.equal(masterRoadmap.lanes.length, 12);
+assert.deepEqual(masterRoadmap.lanes.map((lane) => lane.order), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+assert.ok(masterRoadmap.lanes.some((lane) => lane.id === "miner-pool-signals"));
+
 const sources = await readFile(new URL("../docs/SOURCES.md", import.meta.url), "utf8");
 assert.match(sources, /Cross-Chain App Research Resources/);
 assert.match(sources, /PMF clues/);
+
+const masterPlan = await readFile(new URL("../docs/MASTER_APP_PLAN.md", import.meta.url), "utf8");
+assert.match(masterPlan, /Payload Receipt \/ Invoice App/);
+assert.match(masterPlan, /AI-Agent Commitment Board/);
+assert.match(masterPlan, /No fake block-header claims|arbitrary app data can be placed in block headers/);
 
 const githubHosting = await readFile(new URL("../docs/GITHUB_HOSTING.md", import.meta.url), "utf8");
 assert.match(githubHosting, /GitHub Pages/);

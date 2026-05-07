@@ -1,0 +1,106 @@
+{
+  "schema": "kaspa-ecosystem-master-app-roadmap/v1",
+  "basis": [
+    "kaspa-explained status and application-layer map",
+    "TN12 covenant proof app state",
+    "cross-chain PMF and failure-mode research"
+  ],
+  "lanes": [
+    {
+      "order": 1,
+      "id": "payload-invoice",
+      "name": "Payload Receipt / Invoice App",
+      "status": "next-build",
+      "summary": "Payment plus app data; the cleanest bridge from live Kaspa behavior into app state.",
+      "firstProof": "One accepted TN12 payload receipt decoded by the app-state indexer."
+    },
+    {
+      "order": 2,
+      "id": "submit-console",
+      "name": "Wallet-Facing Submit Console",
+      "status": "safety-layer",
+      "summary": "Show exact inputs, outputs, fees, payload, draft status, and submit command.",
+      "firstProof": "Inspect a signed draft without exposing private keys or opening raw JSON."
+    },
+    {
+      "order": 3,
+      "id": "batch-assurance",
+      "name": "Batch Assurance Campaigns",
+      "status": "tn12-next",
+      "summary": "Move from one pledge proof to many pledge outputs, target progress, release, and refund planning.",
+      "firstProof": "Campaign state derived from multiple accepted pledge outputs."
+    },
+    {
+      "order": 4,
+      "id": "escrow",
+      "name": "Escrow Primitive",
+      "status": "tn12-next",
+      "summary": "Buyer fund, seller release, timeout refund, mutual cancel.",
+      "firstProof": "Accepted TN12 fund and release or refund path."
+    },
+    {
+      "order": 5,
+      "id": "treasury-vaults",
+      "name": "Treasury / Team Vaults",
+      "status": "vault-extension",
+      "summary": "Spend caps, delayed large withdrawals, recovery, payroll templates.",
+      "firstProof": "One constrained team spend and one recovery or cancel path."
+    },
+    {
+      "order": 6,
+      "id": "krc-access-pass",
+      "name": "KRC / Access Pass Planner",
+      "status": "live-ecosystem-planner",
+      "summary": "Coupons, memberships, tickets, redeemable claims, labeled as ecosystem/indexer/issuer flows.",
+      "firstProof": "Pass artifact plus redemption state model."
+    },
+    {
+      "order": 7,
+      "id": "simple-asset-policy",
+      "name": "Simple Asset Policy",
+      "status": "toccata-roadmap",
+      "summary": "Later covenant-native asset rules: mint, transfer, burn, recovery, redemption.",
+      "firstProof": "Asset policy artifact and clear contrast with KRC ecosystem assets."
+    },
+    {
+      "order": 8,
+      "id": "auction-intent",
+      "name": "Auction / Intent Prototype",
+      "status": "payload-indexer-first",
+      "summary": "Accepted bid payloads, winner selection, refund/release rules, MEV caveats.",
+      "firstProof": "Auction state derived from accepted bid transactions."
+    },
+    {
+      "order": 9,
+      "id": "basic-defi-research",
+      "name": "Basic DeFi Research Backlog",
+      "status": "roadmap-research",
+      "summary": "Lending, swaps, AMMs, stable-value, insurance, derivatives, portfolio automation with explicit missing rails.",
+      "firstProof": "App briefs that do not claim mature native DeFi is live."
+    },
+    {
+      "order": 10,
+      "id": "cross-chain-research",
+      "name": "Cross-Chain App Research Library",
+      "status": "resource-lane",
+      "summary": "One note per proven or failed app category: PMF, code patterns, failure modes, Kaspa mapping.",
+      "firstProof": "Research notes that become app briefs before code is copied."
+    },
+    {
+      "order": 11,
+      "id": "miner-pool-signals",
+      "name": "Miner / Pool Signal Research",
+      "status": "research-lane",
+      "summary": "Transaction payload first; coinbase/pool policy later; no fake block-header claims.",
+      "firstProof": "Signed attestation registry, reputation summary, and one accepted payload receipt for a signal."
+    },
+    {
+      "order": 12,
+      "id": "ai-agent-commitments",
+      "name": "AI-Agent Commitment Board",
+      "status": "later-research",
+      "summary": "Task offers, deposits, completion proofs, disputes, refunds, accepted transaction indexing.",
+      "firstProof": "Task commitment artifact plus simulated dispute/refund state."
+    }
+  ]
+}

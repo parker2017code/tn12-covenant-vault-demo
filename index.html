@@ -21,8 +21,10 @@
       <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="#stack">Stack</a>
       <a href="#app-lab">App lab</a>
+      <a href="#attestations">Attestations</a>
       <a href="#signals">Signals</a>
       <a href="#setup">TN12 setup</a>
       <a href="#sources">Sources</a>
@@ -221,6 +223,16 @@
       <pre>npm run indexer:state</pre>
     </section>
 
+    <section id="roadmap" class="panel roadmap">
+      <div class="section-title">
+        <p class="eyebrow">Master app plan</p>
+        <h2>Twelve lanes from Kaspa Explained into buildable apps.</h2>
+        <p>Each lane stays status-labeled: live Kaspa, TN12/Toccata, roadmap, or research. Other-chain code informs PMF and failure modes, but Kaspa implementation must fit accepted transactions, payloads, UTXO flows, and TN12 covenant limits.</p>
+      </div>
+      <div id="master-roadmap" class="roadmap-list" aria-live="polite"></div>
+      <pre>docs/MASTER_APP_PLAN.md</pre>
+    </section>
+
     <section id="stack" class="panel stack">
       <div class="section-title">
         <p class="eyebrow">Kaspa app stack</p>
@@ -237,6 +249,26 @@
         <p>These are the natural next lanes from the Kaspa Explained app-page framing: build what can be proved now, label TN12 covenant work clearly, and keep later RTD/vProgs ideas in the research lane.</p>
       </div>
       <div id="app-lanes" class="app-lanes" aria-live="polite"></div>
+    </section>
+
+    <section id="attestations" class="panel attestations">
+      <div class="section-title">
+        <p class="eyebrow">Attestation registry</p>
+        <h2>Signal incentives before prediction markets.</h2>
+        <p>RTD-style products start with signed signals, source reputation, and accepted payload receipts. Prediction markets and portfolio hedges consume this layer later; real-money settlement remains out of scope until assumptions are explicit.</p>
+      </div>
+      <div id="attestation-summary" class="attestation-summary" aria-live="polite"></div>
+      <div class="attestation-columns">
+        <section>
+          <h3>Sources</h3>
+          <div id="attestation-sources" class="attestation-list" aria-live="polite"></div>
+        </section>
+        <section>
+          <h3>Signals</h3>
+          <div id="attestation-signals" class="attestation-list" aria-live="polite"></div>
+        </section>
+      </div>
+      <pre>fixtures/AttestationSignals.json</pre>
     </section>
 
     <section id="signals" class="workspace signals">

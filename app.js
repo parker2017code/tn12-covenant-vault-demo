@@ -22,6 +22,7 @@ import {
   DEFAULT_SIGNAL_PAYLOAD,
   buildSignalPayloadArtifact
 } from "./src/signalPayload.mjs";
+import { buildAttestationRegistry } from "./src/attestationSignal.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -41,8 +42,12 @@ const indexerSummaryNode = document.querySelector("#indexer-summary");
 const indexerRecordsNode = document.querySelector("#indexer-records");
 const receiptEventsNode = document.querySelector("#receipt-events");
 const buildQueueNode = document.querySelector("#build-queue");
+const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
 const appLanesNode = document.querySelector("#app-lanes");
+const attestationSummaryNode = document.querySelector("#attestation-summary");
+const attestationSourcesNode = document.querySelector("#attestation-sources");
+const attestationSignalsNode = document.querySelector("#attestation-signals");
 const signalChannelsNode = document.querySelector("#signal-channels");
 const signalArtifactNode = document.querySelector("#signal-artifact");
 const payloadDraftStatusNode = document.querySelector("#payload-draft-status");
@@ -155,9 +160,11 @@ renderAssurance();
 renderManualOutpoint();
 renderProofTransactions();
 renderAcceptedAppState();
+renderMasterRoadmap();
 renderBuildQueue();
 renderVaultTemplates();
 renderAppLab();
+renderAttestationRegistry();
 renderMinerSignalResearch();
 renderSignalPayload();
 renderPayloadDraftStatus();
@@ -409,6 +416,30 @@ async function renderBuildQueue() {
   }
 }
 
+async function renderMasterRoadmap() {
+  if (!masterRoadmapNode) return;
+
+  try {
+    const response = await fetch("fixtures/MasterAppRoadmap.json", { cache: "no-store" });
+    const data = await response.json();
+    masterRoadmapNode.innerHTML = "";
+
+    for (const lane of data.lanes) {
+      const article = document.createElement("article");
+      article.className = "roadmap-card";
+      article.innerHTML = `
+        <span>${escapeHtml(lane.order)} / ${escapeHtml(lane.status)}</span>
+        <strong>${escapeHtml(lane.name)}</strong>
+        <p>${escapeHtml(lane.summary)}</p>
+        <small>${escapeHtml(lane.firstProof)}</small>
+      `;
+      masterRoadmapNode.append(article);
+    }
+  } catch (error) {
+    masterRoadmapNode.textContent = `Master roadmap unavailable: ${error.message}`;
+  }
+}
+
 async function renderAppLab() {
   if (!appLanesNode) return;
 
@@ -454,6 +485,50 @@ async function renderMinerSignalResearch() {
     }
   } catch (error) {
     signalChannelsNode.textContent = `Signal research unavailable: ${error.message}`;
+  }
+}
+
+async function renderAttestationRegistry() {
+  if (!attestationSummaryNode || !attestationSourcesNode || !attestationSignalsNode) return;
+
+  try {
+    const response = await fetch("fixtures/AttestationSignals.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const registry = buildAttestationRegistry(fixture);
+    attestationSummaryNode.innerHTML = `
+      <article><span>Total</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
+      <article><span>Verified</span><strong>${escapeHtml(registry.summary.verified)}</strong></article>
+      <article><span>Disputed</span><strong>${escapeHtml(registry.summary.disputed)}</strong></article>
+      <article><span>Channels</span><strong>${escapeHtml(registry.summary.channels.length)}</strong></article>
+    `;
+
+    attestationSourcesNode.innerHTML = "";
+    for (const source of registry.sources) {
+      const article = document.createElement("article");
+      article.className = "attestation-card";
+      article.innerHTML = `
+        <span>${escapeHtml(source.sourceType)}</span>
+        <strong>${escapeHtml(source.source)}</strong>
+        <p>Reputation ${escapeHtml(source.reputationScore)}; verified ${escapeHtml(source.verified)} of ${escapeHtml(source.submitted)}.</p>
+        <small>Avg confidence ${escapeHtml(source.averageConfidence)}; avg accuracy ${escapeHtml(source.averageAccuracy ?? "unresolved")}.</small>
+      `;
+      attestationSourcesNode.append(article);
+    }
+
+    attestationSignalsNode.innerHTML = "";
+    for (const signal of registry.signals) {
+      const article = document.createElement("article");
+      article.className = "attestation-card";
+      article.innerHTML = `
+        <span>${escapeHtml(signal.status)} / ${escapeHtml(signal.channel)}</span>
+        <strong>${escapeHtml(signal.claim)}</strong>
+        <p>${escapeHtml(signal.marketUse)}</p>
+        <small>${escapeHtml(signal.portfolioUse)}</small>
+      `;
+      attestationSignalsNode.append(article);
+    }
+  } catch (error) {
+    attestationSummaryNode.textContent = `Attestation registry unavailable: ${error.message}`;
   }
 }
 

@@ -54,6 +54,11 @@ try {
   await expectText(page, "#signal-artifact", "payload-size-ok");
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");
   await expectText(page, "#payload-draft-status", "submit remains gated");
+  await expectText(page, "#master-roadmap", "Payload Receipt / Invoice App");
+  await expectText(page, "#master-roadmap", "AI-Agent Commitment Board");
+  await expectText(page, "#attestation-summary", "Verified");
+  await expectText(page, "#attestation-sources", "pool-operator-gamma");
+  await expectText(page, "#attestation-signals", "Simulated prediction market input only.");
 
   assert.deepEqual(pageErrors, []);
   assert.deepEqual(consoleErrors, []);

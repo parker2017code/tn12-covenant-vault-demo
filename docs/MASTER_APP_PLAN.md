@@ -1,0 +1,75 @@
+# Kaspa Ecosystem App Build Plan
+
+This repo uses Kaspa Explained as the status map and this TN12 demo as the app workshop. The plan is to build useful app primitives in order, while also studying open-source apps from other chains for PMF evidence, code patterns, and failure modes.
+
+## Operating Rules
+
+- Keep every feature in a status lane: live Kaspa, TN12/Toccata, roadmap, or research.
+- Use other-chain code as product research and engineering reference, not as proof that Kaspa supports the same execution model today.
+- Prefer accepted transaction indexing and payload receipts before richer settlement claims.
+- For miner or RTD-style data, start with signed attestations and transaction payload receipts. Do not claim arbitrary app data can be placed in block headers.
+- Do not expose private keys in UI, docs, logs, or chat.
+
+## Build Lanes
+
+1. Payload Receipt / Invoice App
+   - Payment plus app data.
+   - This is the cleanest bridge from live Kaspa behavior into app state.
+   - First success: one accepted TN12 payload receipt decoded by the app-state indexer.
+
+2. Wallet-Facing Submit Console
+   - Show exact inputs, outputs, fees, payload, draft status, and submit command.
+   - Never expose private keys.
+   - First success: inspect a signed draft without opening raw JSON.
+
+3. Batch Assurance Campaigns
+   - Move from one pledge proof to many pledge outputs.
+   - Show target progress, release planning, and refund planning.
+   - First success: campaign state derived from multiple accepted pledge outputs.
+
+4. Escrow Primitive
+   - Buyer fund, seller release, timeout refund, mutual cancel.
+   - First success: accepted TN12 fund and release/refund path.
+
+5. Treasury / Team Vaults
+   - Spend caps, delayed large withdrawals, recovery, payroll templates.
+   - First success: one constrained team spend and one recovery/cancel path.
+
+6. KRC / Access Pass Planner
+   - Coupons, memberships, tickets, redeemable claims.
+   - Label clearly as ecosystem/indexer/issuer flows unless later covenant enforcement exists.
+   - First success: pass artifact plus redemption state model.
+
+7. Simple Asset Policy
+   - Later covenant-native rules: mint, transfer, burn, recovery, redemption.
+   - First success: asset policy artifact and clear contrast with KRC ecosystem assets.
+
+8. Auction / Intent Prototype
+   - Accepted bid payloads, winner selection, refund/release rules, MEV caveats.
+   - First success: auction state derived from accepted bid transactions.
+
+9. Basic DeFi Research Backlog
+   - Lending, swaps, AMMs, stable-value, insurance, derivatives, portfolio automation.
+   - Keep missing rails explicit: oracle, liquidity, liquidation, MEV, wallet, indexing, composition.
+   - First success: app briefs that do not claim mature native DeFi is live.
+
+10. Cross-Chain App Research Library
+   - One note per proven or failed app category.
+   - Track PMF, code patterns, failure modes, and Kaspa mapping.
+   - First success: research notes that become app briefs before code is copied.
+
+11. Miner / Pool Signal Research
+   - Transaction payload first; coinbase/pool policy later.
+   - No fake block-header claims.
+   - First success: signed attestation registry, reputation summary, and one accepted payload receipt for a signal.
+
+12. AI-Agent Commitment Board
+   - Task offers, deposits, completion proofs, disputes, refunds, accepted transaction indexing.
+   - First success: task commitment artifact plus simulated dispute/refund state.
+
+## Immediate Order
+
+1. Finish Payload Receipt / Invoice App.
+2. Add Wallet-Facing Submit Console.
+3. Use the attestation registry as the research foundation for lane 11 while lane 1 payload work proves the transport.
+4. Move into Batch Assurance Campaigns and Escrow after the submit/review path is safe.

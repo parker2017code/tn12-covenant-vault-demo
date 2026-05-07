@@ -365,6 +365,11 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.roadmap,
+.attestations {
+  margin-top: 24px;
+}
+
 .templates {
   margin-top: 24px;
 }
@@ -415,6 +420,92 @@ progress::-moz-progress-bar {
   margin-top: 4px;
   font-size: 24px;
   overflow-wrap: anywhere;
+}
+
+.roadmap-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.roadmap-card {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.roadmap-card span {
+  width: fit-content;
+  color: #07110e;
+  background: var(--accent-strong);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.roadmap-card strong,
+.roadmap-card p,
+.roadmap-card small {
+  overflow-wrap: anywhere;
+}
+
+.roadmap-card p {
+  margin: 0;
+}
+
+.roadmap-card small {
+  color: var(--muted);
+}
+
+.attestation-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.attestation-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.attestation-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.attestation-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+}
+
+.attestation-columns {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.attestation-columns h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.attestation-list {
+  display: grid;
+  gap: 14px;
 }
 
 .indexer-records {
@@ -499,6 +590,7 @@ progress::-moz-progress-bar {
 .queue-card,
 .app-lane-card,
 .signal-card,
+.attestation-card,
 .indexer-card,
 .receipt-card,
 .receipt-events article,
@@ -516,6 +608,7 @@ progress::-moz-progress-bar {
 .queue-card span,
 .app-lane-card span,
 .signal-card span,
+.attestation-card span,
 .indexer-card span,
 .receipt-card span,
 .receipt-events article span,
@@ -538,6 +631,9 @@ progress::-moz-progress-bar {
 .signal-card strong,
 .signal-card p,
 .signal-card small,
+.attestation-card strong,
+.attestation-card p,
+.attestation-card small,
 .indexer-card strong,
 .indexer-card a,
 .indexer-card p,
@@ -557,6 +653,7 @@ progress::-moz-progress-bar {
 .queue-card p,
 .app-lane-card p,
 .signal-card p,
+.attestation-card p,
 .indexer-card p,
 .receipt-card p,
 .receipt-events article p,
@@ -567,6 +664,7 @@ progress::-moz-progress-bar {
 .queue-card small,
 .app-lane-card small,
 .signal-card small,
+.attestation-card small,
 .indexer-card small,
 .receipt-card small,
 .receipt-events article small,
@@ -653,6 +751,9 @@ progress::-moz-progress-bar {
   .grid,
   .proof-list,
   .indexer-summary,
+  .roadmap-list,
+  .attestation-summary,
+  .attestation-columns,
   .indexer-records,
   .template-list,
   .build-queue,

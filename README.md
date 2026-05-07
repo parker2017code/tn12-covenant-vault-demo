@@ -244,6 +244,8 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 7. Next: build a cross-chain app research library that studies open-source apps, PMF evidence, and failure modes from other ecosystems, then maps only the reusable patterns into Kaspa's live, TN12, roadmap, or research lanes.
 
+8. Next: use the master app plan in `docs/MASTER_APP_PLAN.md` as the operating build order for payload receipts, submit review, batch assurance, escrow, treasury vaults, access passes, assets, auctions, DeFi research, cross-chain research, miner/pool signals, and AI-agent commitments.
+
 ## Run Locally
 
 ```sh
