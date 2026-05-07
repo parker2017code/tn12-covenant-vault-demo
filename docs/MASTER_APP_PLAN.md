@@ -74,6 +74,11 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
    - Task offers, deposits, completion proofs, disputes, refunds, accepted transaction indexing.
    - First success: task commitment artifact plus simulated dispute/refund state.
 
+13. Transparent Coordination-Market Prototype
+   - Stag, Intendo, Pack, toy Solver, Hunt-plan artifact.
+   - Explicitly not a Hashdag/Staghunt implementation: no opacity, capital multiplexing, composability, RTD resolution, or coordinated atomic execution.
+   - Current repo surface: `fixtures/CoordinationMarketPrototype.json`, `src/coordinationMarket.mjs`, `npm run coordination:market`, and the browser coordination panel.
+
 ## Immediate Order
 
 1. Finish Payload Receipt / Invoice App.

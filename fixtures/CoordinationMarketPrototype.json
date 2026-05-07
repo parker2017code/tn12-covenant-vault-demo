@@ -1,0 +1,101 @@
+{
+  "schema": "kaspa-transparent-coordination-market-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "source": "https://hashd.ag/raw",
+  "stags": [
+    {
+      "stagId": "stag-docs-sprint",
+      "title": "Docs sprint coordination market",
+      "goal": "Fund a Kaspa developer docs sprint only if enough contributors join.",
+      "thresholdType": "count",
+      "thresholdValue": 3,
+      "executionTemplate": "batch-assurance-release",
+      "deadlineIso": "2026-05-21T00:00:00.000Z",
+      "settlementLane": "planner-indexer",
+      "status": "transparent-toy"
+    },
+    {
+      "stagId": "stag-liquidity-migration-research",
+      "title": "Liquidity migration research stag",
+      "goal": "Model LP migration commitments without claiming AMM or capital multiplexing support.",
+      "thresholdType": "amount",
+      "thresholdValue": 1000,
+      "executionTemplate": "research-only",
+      "deadlineIso": "2026-06-07T00:00:00.000Z",
+      "settlementLane": "research",
+      "status": "research-only"
+    }
+  ],
+  "intendos": [
+    {
+      "intendoId": "intendo-docs-alpha",
+      "stagId": "stag-docs-sprint",
+      "user": "docs-backer-alpha",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 25,
+      "capitalReference": "pledge-docs-001",
+      "expiryIso": "2026-05-21T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "batch-assurance-campaign"
+    },
+    {
+      "intendoId": "intendo-docs-beta",
+      "stagId": "stag-docs-sprint",
+      "user": "wallet-builder-beta",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 20,
+      "capitalReference": "pledge-docs-002",
+      "expiryIso": "2026-05-21T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "batch-assurance-campaign"
+    },
+    {
+      "intendoId": "intendo-docs-gamma",
+      "stagId": "stag-docs-sprint",
+      "user": "pool-tooling-gamma",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 30,
+      "capitalReference": "pledge-docs-003",
+      "expiryIso": "2026-05-21T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "batch-assurance-campaign"
+    },
+    {
+      "intendoId": "intendo-liquidity-alpha",
+      "stagId": "stag-liquidity-migration-research",
+      "user": "lp-alpha",
+      "committedAction": "research-liquidity-migration",
+      "thresholdCondition": 1000,
+      "amountTkas": 400,
+      "capitalReference": "research-only-capital-reference",
+      "expiryIso": "2026-06-07T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "research-only"
+    },
+    {
+      "intendoId": "intendo-liquidity-beta",
+      "stagId": "stag-liquidity-migration-research",
+      "user": "lp-beta",
+      "committedAction": "research-liquidity-migration",
+      "thresholdCondition": 1000,
+      "amountTkas": 350,
+      "capitalReference": "research-only-capital-reference",
+      "expiryIso": "2026-06-07T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "research-only"
+    }
+  ]
+}

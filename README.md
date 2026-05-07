@@ -25,6 +25,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
 - Builds an escrow primitive registry for buyer fund, seller release, timeout refund, and mutual cancel planning.
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
+- Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, and Hunt-plan artifacts.
 
 ## What It Does Not Do Yet
 
@@ -273,6 +274,14 @@ npm run treasury:registry
 ```
 
 This turns `fixtures/TreasuryVaults.json` into `artifacts/treasury-vaults.json`. Current script proof covers delayed withdrawal and recovery primitives; payroll and spend caps remain wallet-policy/planner state until hardened.
+
+Build the transparent coordination-market prototype:
+
+```sh
+npm run coordination:market
+```
+
+This turns `fixtures/CoordinationMarketPrototype.json` into `artifacts/coordination-market-prototype.json`. It is not a Hashdag/Staghunt implementation; it is a transparent toy planner for Stag, Intendo, Pack, Solver, and Hunt before opacity, capital multiplexing, composability, and atomic execution exist.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

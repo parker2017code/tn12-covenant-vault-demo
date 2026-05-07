@@ -3,15 +3,16 @@
   "status": "claim-surface-audit",
   "reviewedAt": "2026-05-07",
   "summary": {
-    "total": 12,
+    "total": 13,
     "contractEnforced": 4,
-    "notScriptEnforced": 8,
+    "notScriptEnforced": 9,
     "byEnforcement": {
       "script": 4,
       "simulation": 2,
       "planner-indexer": 3,
       "wallet-policy": 2,
-      "documentation": 1
+      "documentation": 1,
+      "research": 1
     },
     "byLane": {
       "vault": 4,
@@ -20,7 +21,8 @@
       "wallet-submit": 1,
       "research": 1,
       "escrow": 1,
-      "treasury-vaults": 1
+      "treasury-vaults": 1,
+      "coordination-markets": 1
     }
   },
   "features": [
@@ -143,6 +145,16 @@
       "proof": "Generated treasury registry artifact only",
       "risk": "Payroll templates and spend caps are review policy until script or indexer enforcement exists.",
       "nextHardeningStep": "Build constrained team spend drafts, add exact UTXO provenance, and separate role keys."
+    },
+    {
+      "id": "coordination-market-hunt",
+      "name": "Coordination-market Hunt execution",
+      "lane": "coordination-markets",
+      "enforcement": "research",
+      "currentSurface": "fixtures/CoordinationMarketPrototype.json and browser coordination panel",
+      "proof": "Generated transparent toy solver artifact only",
+      "risk": "Transparent satisfiable packs are not opaque accumulation, capital multiplexing, composability, or coordinated atomic execution.",
+      "nextHardeningStep": "Build exact settlement drafts for one satisfiable transparent pack before claiming any Hunt execution proof."
     }
   ],
   "rules": [

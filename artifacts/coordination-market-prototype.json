@@ -1,0 +1,168 @@
+{
+  "schema": "kaspa-transparent-coordination-market-prototype/v1",
+  "network": "kaspa-testnet-12",
+  "status": "transparent-toy-staghunt-preprototype",
+  "source": "https://hashd.ag/raw",
+  "summary": {
+    "stags": 2,
+    "intendos": 5,
+    "packs": 2,
+    "satisfiablePacks": 1
+  },
+  "stags": [
+    {
+      "stagId": "stag-docs-sprint",
+      "title": "Docs sprint coordination market",
+      "goal": "Fund a Kaspa developer docs sprint only if enough contributors join.",
+      "thresholdType": "count",
+      "thresholdValue": 3,
+      "executionTemplate": "batch-assurance-release",
+      "deadlineIso": "2026-05-21T00:00:00.000Z",
+      "settlementLane": "planner-indexer",
+      "status": "transparent-toy"
+    },
+    {
+      "stagId": "stag-liquidity-migration-research",
+      "title": "Liquidity migration research stag",
+      "goal": "Model LP migration commitments without claiming AMM or capital multiplexing support.",
+      "thresholdType": "amount",
+      "thresholdValue": 1000,
+      "executionTemplate": "research-only",
+      "deadlineIso": "2026-06-07T00:00:00.000Z",
+      "settlementLane": "research",
+      "status": "research-only"
+    }
+  ],
+  "intendos": [
+    {
+      "intendoId": "intendo-docs-alpha",
+      "stagId": "stag-docs-sprint",
+      "user": "docs-backer-alpha",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 25,
+      "capitalReference": "pledge-docs-001",
+      "expiryIso": "2026-05-21T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "batch-assurance-campaign"
+    },
+    {
+      "intendoId": "intendo-docs-beta",
+      "stagId": "stag-docs-sprint",
+      "user": "wallet-builder-beta",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 20,
+      "capitalReference": "pledge-docs-002",
+      "expiryIso": "2026-05-21T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "batch-assurance-campaign"
+    },
+    {
+      "intendoId": "intendo-docs-gamma",
+      "stagId": "stag-docs-sprint",
+      "user": "pool-tooling-gamma",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 30,
+      "capitalReference": "pledge-docs-003",
+      "expiryIso": "2026-05-21T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "batch-assurance-campaign"
+    },
+    {
+      "intendoId": "intendo-liquidity-alpha",
+      "stagId": "stag-liquidity-migration-research",
+      "user": "lp-alpha",
+      "committedAction": "research-liquidity-migration",
+      "thresholdCondition": 1000,
+      "amountTkas": 400,
+      "capitalReference": "research-only-capital-reference",
+      "expiryIso": "2026-06-07T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "research-only"
+    },
+    {
+      "intendoId": "intendo-liquidity-beta",
+      "stagId": "stag-liquidity-migration-research",
+      "user": "lp-beta",
+      "committedAction": "research-liquidity-migration",
+      "thresholdCondition": 1000,
+      "amountTkas": 350,
+      "capitalReference": "research-only-capital-reference",
+      "expiryIso": "2026-06-07T00:00:00.000Z",
+      "cancelRule": "cancel-before-hunt",
+      "signatureStatus": "signed",
+      "privacyMode": "transparent",
+      "executionTarget": "research-only"
+    }
+  ],
+  "packs": [
+    {
+      "packId": "pack-stag-docs-sprint",
+      "stagId": "stag-docs-sprint",
+      "status": "transparent-pack-not-opaque",
+      "intendoCount": 3,
+      "signedIntendoCount": 3,
+      "committedTkas": 75,
+      "solver": {
+        "status": "satisfiable-transparent-pack",
+        "algorithm": "transparent-count-threshold-filter",
+        "qualifyingIntendoIds": [
+          "intendo-docs-alpha",
+          "intendo-docs-beta",
+          "intendo-docs-gamma"
+        ],
+        "qualifyingCount": 3,
+        "qualifyingTkas": 75,
+        "note": "This toy solver handles transparent count thresholds only; it is not the monotone fixed-point solver described for full coordination markets."
+      },
+      "hunt": {
+        "status": "hunt-plan-ready-not-atomic-execution",
+        "executionTemplate": "batch-assurance-release",
+        "settlementLane": "planner-indexer",
+        "next": "Build settlement drafts for the qualifying subset; do not claim coordinated atomicity until the execution path consumes all qualified commitments together."
+      }
+    },
+    {
+      "packId": "pack-stag-liquidity-migration-research",
+      "stagId": "stag-liquidity-migration-research",
+      "status": "transparent-pack-not-opaque",
+      "intendoCount": 2,
+      "signedIntendoCount": 2,
+      "committedTkas": 750,
+      "solver": {
+        "status": "not-satisfiable",
+        "algorithm": "transparent-count-threshold-filter",
+        "qualifyingIntendoIds": [],
+        "qualifyingCount": 0,
+        "qualifyingTkas": 0,
+        "note": "This toy solver handles transparent count thresholds only; it is not the monotone fixed-point solver described for full coordination markets."
+      },
+      "hunt": {
+        "status": "hunt-not-ready",
+        "executionTemplate": "research-only",
+        "settlementLane": "research",
+        "next": "Keep accumulating signed intendos or adjust no thresholds without participant signatures."
+      }
+    }
+  ],
+  "missingProperties": [
+    "accumulation opacity",
+    "capital multiplexing",
+    "coordinated atomic execution across independent participants",
+    "composability across downstream markets",
+    "DVP/private propagation",
+    "thFHE or sMPC opacity",
+    "RTD/miner-oracle event resolution"
+  ],
+  "boundary": "This is not a Hashdag/Staghunt implementation. It is a transparent planner that maps Stag, Intendo, Pack, Solver, and Hunt into repo artifacts before any opaque or multiplexed protocol claims."
+}

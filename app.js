@@ -31,6 +31,7 @@ import { buildEnforcementMatrix } from "./src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "./src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "./src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
+import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -66,6 +67,8 @@ const escrowSummaryNode = document.querySelector("#escrow-summary");
 const escrowListNode = document.querySelector("#escrow-list");
 const treasurySummaryNode = document.querySelector("#treasury-summary");
 const treasuryListNode = document.querySelector("#treasury-list");
+const coordinationSummaryNode = document.querySelector("#coordination-summary");
+const coordinationPacksNode = document.querySelector("#coordination-packs");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -187,6 +190,7 @@ renderBatchAssuranceCampaign();
 renderEnforcementMatrix();
 renderEscrowPrimitive();
 renderTreasuryVaults();
+renderCoordinationMarket();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -442,6 +446,37 @@ async function renderTreasuryVaults() {
     }
   } catch (error) {
     treasurySummaryNode.textContent = `Treasury registry unavailable: ${error.message}`;
+  }
+}
+
+async function renderCoordinationMarket() {
+  if (!coordinationSummaryNode || !coordinationPacksNode) return;
+
+  try {
+    const response = await fetch("fixtures/CoordinationMarketPrototype.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const prototype = buildCoordinationMarketPrototype(fixture);
+    coordinationSummaryNode.innerHTML = `
+      <article><span>Stags</span><strong>${escapeHtml(prototype.summary.stags)}</strong></article>
+      <article><span>Intendos</span><strong>${escapeHtml(prototype.summary.intendos)}</strong></article>
+      <article><span>Packs</span><strong>${escapeHtml(prototype.summary.packs)}</strong></article>
+      <article><span>Satisfiable</span><strong>${escapeHtml(prototype.summary.satisfiablePacks)}</strong></article>
+    `;
+
+    coordinationPacksNode.innerHTML = "";
+    for (const pack of prototype.packs) {
+      const article = document.createElement("article");
+      article.className = "coordination-card";
+      article.innerHTML = `
+        <span>${escapeHtml(pack.solver.status)}</span>
+        <strong>${escapeHtml(pack.packId)}</strong>
+        <p>${escapeHtml(pack.signedIntendoCount)} signed intendos; ${escapeHtml(pack.committedTkas)} TKAS transparent committed amount.</p>
+        <small>${escapeHtml(pack.hunt.next)}</small>
+      `;
+      coordinationPacksNode.append(article);
+    }
+  } catch (error) {
+    coordinationSummaryNode.textContent = `Coordination market prototype unavailable: ${error.message}`;
   }
 }
 

@@ -32,6 +32,7 @@
     "escrow:registry": "node scripts/build-escrow-primitives.mjs",
     "treasury:registry": "node scripts/build-treasury-vaults.mjs",
     "payload:readiness": "node scripts/build-payload-submit-readiness.mjs",
+    "coordination:market": "node scripts/build-coordination-market.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

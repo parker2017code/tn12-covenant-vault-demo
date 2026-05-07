@@ -57,3 +57,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 29. Add the escrow primitive registry: buyer fund, seller release, timeout refund, mutual cancel, browser panel, and generated escrow artifact before script proofs.
 30. Add the treasury/team vault registry: spend caps, delayed large withdrawals, recovery roles, payroll templates, browser panel, and generated treasury artifact before extra script paths.
 31. Add payload submit readiness: current TN12 OpenAPI submit schema, signed draft payload presence, browser readiness card, and an explicit no-broadcast gate until payload-preserving submit is verified.
+32. Add transparent coordination-market prototype: Stag, Intendo, Pack, toy Solver, Hunt-plan artifact, missing Hashdag/Staghunt property list, browser panel, and no claim of opacity or multiplexing.

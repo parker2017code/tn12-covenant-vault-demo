@@ -121,6 +121,16 @@
       "proof": "Generated treasury registry artifact only",
       "risk": "Payroll templates and spend caps are review policy until script or indexer enforcement exists.",
       "nextHardeningStep": "Build constrained team spend drafts, add exact UTXO provenance, and separate role keys."
+    },
+    {
+      "id": "coordination-market-hunt",
+      "name": "Coordination-market Hunt execution",
+      "lane": "coordination-markets",
+      "enforcement": "research",
+      "currentSurface": "fixtures/CoordinationMarketPrototype.json and browser coordination panel",
+      "proof": "Generated transparent toy solver artifact only",
+      "risk": "Transparent satisfiable packs are not opaque accumulation, capital multiplexing, composability, or coordinated atomic execution.",
+      "nextHardeningStep": "Build exact settlement drafts for one satisfiable transparent pack before claiming any Hunt execution proof."
     }
   ]
 }
