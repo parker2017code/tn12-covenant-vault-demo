@@ -19,6 +19,7 @@
       <a href="#designer">Designer</a>
       <a href="#assurance">Assurance</a>
       <a href="#campaigns">Campaigns</a>
+      <a href="#enforcement">Enforcement</a>
       <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
@@ -212,6 +213,17 @@
       <div id="campaign-plans" class="campaign-plans" aria-live="polite"></div>
       <div id="campaign-pledges" class="campaign-pledges" aria-live="polite"></div>
       <pre>npm run campaign:state</pre>
+    </section>
+
+    <section id="enforcement" class="panel enforcement">
+      <div class="section-title">
+        <p class="eyebrow">Enforcement matrix</p>
+        <h2>What is script-enforced versus app-planned.</h2>
+        <p>This is the claim audit surface. A feature is not a covenant guarantee unless it is marked script-enforced; planner/indexer and wallet-policy lanes are useful but must stay labeled.</p>
+      </div>
+      <div id="enforcement-summary" class="enforcement-summary" aria-live="polite"></div>
+      <div id="enforcement-features" class="enforcement-features" aria-live="polite"></div>
+      <pre>npm run enforcement:matrix</pre>
     </section>
 
     <section id="proofs" class="panel proofs">

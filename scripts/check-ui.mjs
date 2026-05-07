@@ -56,6 +56,9 @@ try {
   await expectText(page, "#campaign-summary", "release-not-ready");
   await expectText(page, "#campaign-plans", "Release plan");
   await expectText(page, "#campaign-pledges", "pledge-docs-004");
+  await expectText(page, "#enforcement-summary", "Script");
+  await expectText(page, "#enforcement-features", "Vault daily limit");
+  await expectText(page, "#enforcement-features", "planner-indexer");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

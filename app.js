@@ -27,6 +27,7 @@ import { buildInvoiceRegistry } from "./src/invoiceReceipt.mjs";
 import { buildSubmitConsoleRegistry } from "./src/submitConsole.mjs";
 import { buildResearchLibrary } from "./src/appResearch.mjs";
 import { buildBatchAssuranceState } from "./src/batchAssurance.mjs";
+import { buildEnforcementMatrix } from "./src/enforcementMatrix.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -55,6 +56,8 @@ const researchCandidatesNode = document.querySelector("#research-candidates");
 const campaignSummaryNode = document.querySelector("#campaign-summary");
 const campaignPlansNode = document.querySelector("#campaign-plans");
 const campaignPledgesNode = document.querySelector("#campaign-pledges");
+const enforcementSummaryNode = document.querySelector("#enforcement-summary");
+const enforcementFeaturesNode = document.querySelector("#enforcement-features");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -173,6 +176,7 @@ renderVault();
 renderAssurance();
 renderManualOutpoint();
 renderBatchAssuranceCampaign();
+renderEnforcementMatrix();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -334,6 +338,37 @@ async function renderBatchAssuranceCampaign() {
     }
   } catch (error) {
     campaignSummaryNode.textContent = `Campaign state unavailable: ${error.message}`;
+  }
+}
+
+async function renderEnforcementMatrix() {
+  if (!enforcementSummaryNode || !enforcementFeaturesNode) return;
+
+  try {
+    const response = await fetch("fixtures/EnforcementMatrix.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const matrix = buildEnforcementMatrix(fixture);
+    enforcementSummaryNode.innerHTML = `
+      <article><span>Features</span><strong>${escapeHtml(matrix.summary.total)}</strong></article>
+      <article><span>Script</span><strong>${escapeHtml(matrix.summary.contractEnforced)}</strong></article>
+      <article><span>Not script</span><strong>${escapeHtml(matrix.summary.notScriptEnforced)}</strong></article>
+      <article><span>Status</span><strong>claim audit</strong></article>
+    `;
+
+    enforcementFeaturesNode.innerHTML = "";
+    for (const feature of matrix.features) {
+      const article = document.createElement("article");
+      article.className = "enforcement-card";
+      article.innerHTML = `
+        <span>${escapeHtml(feature.enforcement)} / ${escapeHtml(feature.lane)}</span>
+        <strong>${escapeHtml(feature.name)}</strong>
+        <p>${escapeHtml(feature.currentSurface)}</p>
+        <small>${escapeHtml(feature.nextHardeningStep)}</small>
+      `;
+      enforcementFeaturesNode.append(article);
+    }
+  } catch (error) {
+    enforcementSummaryNode.textContent = `Enforcement matrix unavailable: ${error.message}`;
   }
 }
 

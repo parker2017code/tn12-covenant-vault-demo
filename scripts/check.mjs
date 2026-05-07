@@ -43,6 +43,7 @@ import {
 } from "../src/submitConsole.mjs";
 import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
+import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -137,6 +138,13 @@ assert.equal(campaignState.summary.remainingAcceptedTkas, 25);
 assert.equal(campaignState.summary.releaseStatus, "release-not-ready");
 assert.equal(campaignState.releasePlan.acceptedInputCount, 3);
 assert.equal(campaignState.refundPlan.refundCount, 3);
+const enforcementFixture = JSON.parse(await readFile(new URL("../fixtures/EnforcementMatrix.json", import.meta.url), "utf8"));
+const enforcementMatrix = buildEnforcementMatrix(enforcementFixture);
+assert.equal(enforcementMatrix.status, "claim-surface-audit");
+assert.equal(enforcementMatrix.summary.total, 10);
+assert.equal(enforcementMatrix.summary.contractEnforced, 4);
+assert.ok(enforcementMatrix.features.some((feature) => feature.id === "vault-daily-limit" && feature.enforcement === "simulation"));
+assert.ok(enforcementMatrix.features.some((feature) => feature.id === "assurance-target-progress" && feature.enforcement === "planner-indexer"));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -221,6 +229,7 @@ const files = [
   "scripts/build-submit-console-registry.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
+  "scripts/build-enforcement-matrix.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
@@ -229,6 +238,7 @@ const files = [
   "artifacts/submit-console-registry.json",
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
+  "artifacts/enforcement-matrix.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/SavedWallet.public.json",
@@ -244,6 +254,7 @@ const files = [
   "fixtures/SubmitConsoleDrafts.json",
   "fixtures/CrossChainResearchLibrary.json",
   "fixtures/BatchAssuranceCampaign.json",
+  "fixtures/EnforcementMatrix.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
@@ -252,6 +263,7 @@ const files = [
   "src/submitConsole.mjs",
   "src/appResearch.mjs",
   "src/batchAssurance.mjs",
+  "src/enforcementMatrix.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -290,6 +302,7 @@ assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run campaign:state/);
+assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -305,6 +318,7 @@ assert.match(html, /Miner signal research/);
 assert.match(html, /Accepted transaction indexer/);
 assert.match(html, /Payload receipt app/);
 assert.match(html, /Batch assurance campaigns/);
+assert.match(html, /Enforcement matrix/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);

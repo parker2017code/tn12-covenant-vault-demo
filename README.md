@@ -22,6 +22,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds a transaction-payload signal artifact as the first step toward accepted-transaction app indexing.
 - Builds a cross-chain research library that maps PMF, failure modes, and open-source code patterns into Kaspa status lanes.
 - Builds batch assurance campaign state from multiple pledge records without claiming pooled covenant enforcement.
+- Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
 
 ## What It Does Not Do Yet
 
@@ -238,6 +239,14 @@ npm run campaign:state
 ```
 
 This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only.
+
+Build the enforcement matrix:
+
+```sh
+npm run enforcement:matrix
+```
+
+This turns `fixtures/EnforcementMatrix.json` into `artifacts/enforcement-matrix.json`. It is the claim audit: browser features are not covenant guarantees unless marked `script`.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

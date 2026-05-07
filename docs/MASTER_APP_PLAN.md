@@ -9,6 +9,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
 - Prefer accepted transaction indexing and payload receipts before richer settlement claims.
 - For miner or RTD-style data, start with signed attestations and transaction payload receipts. Do not claim arbitrary app data can be placed in block headers.
 - Do not expose private keys in UI, docs, logs, or chat.
+- Keep an enforcement matrix for every app surface: script, planner/indexer, wallet-policy, documentation, or simulation-only.
 
 ## Build Lanes
 

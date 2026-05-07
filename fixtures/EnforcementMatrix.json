@@ -1,0 +1,106 @@
+{
+  "schema": "tn12-enforcement-matrix-fixture/v1",
+  "reviewedAt": "2026-05-07",
+  "features": [
+    {
+      "id": "vault-owner-delayed-withdraw",
+      "name": "Vault owner delayed withdrawal",
+      "lane": "vault",
+      "enforcement": "script",
+      "currentSurface": "contracts/DelayedRecoveryVault.sil withdraw entrypoint",
+      "proof": "Accepted TN12 vault delayed withdrawal transaction",
+      "risk": "Only the delay, owner signature, output value, and owner output script are enforced.",
+      "nextHardeningStep": "Add negative tests for early withdrawal, wrong signer, wrong output, and wrong amount."
+    },
+    {
+      "id": "vault-recovery",
+      "name": "Vault recovery spend",
+      "lane": "vault",
+      "enforcement": "script",
+      "currentSurface": "contracts/DelayedRecoveryVault.sil recover entrypoint",
+      "proof": "Accepted TN12 vault recovery transaction",
+      "risk": "Recovery path is immediate in the current primitive.",
+      "nextHardeningStep": "Prototype optional recovery delay or guardian policy as separate explicit script logic."
+    },
+    {
+      "id": "vault-daily-limit",
+      "name": "Vault daily limit",
+      "lane": "vault",
+      "enforcement": "simulation",
+      "currentSurface": "Browser policy artifact only",
+      "proof": "No script proof yet",
+      "risk": "UI could imply a spend cap the contract does not enforce.",
+      "nextHardeningStep": "Either remove from enforced-language copy or add script/indexer design before product claims."
+    },
+    {
+      "id": "vault-guardian-threshold",
+      "name": "Vault guardian threshold",
+      "lane": "vault",
+      "enforcement": "simulation",
+      "currentSurface": "Browser policy artifact only",
+      "proof": "No script proof yet",
+      "risk": "Guardian counts are design intent, not active covenant logic.",
+      "nextHardeningStep": "Add a separate guardian vault template after key roles and script semantics are clear."
+    },
+    {
+      "id": "assurance-release",
+      "name": "Individual pledge release",
+      "lane": "assurance",
+      "enforcement": "script",
+      "currentSurface": "contracts/AssurancePledge.sil release entrypoint",
+      "proof": "Accepted TN12 assurance release transaction",
+      "risk": "The script releases a single pledge to the recipient; it does not verify campaign target reached.",
+      "nextHardeningStep": "Keep UI label as individual pledge primitive until target aggregation has stronger enforcement."
+    },
+    {
+      "id": "assurance-refund",
+      "name": "Individual pledge refund after deadline",
+      "lane": "assurance",
+      "enforcement": "script",
+      "currentSurface": "contracts/AssurancePledge.sil refund entrypoint",
+      "proof": "Accepted TN12 assurance refund transaction",
+      "risk": "Refund path is per pledge, not campaign-wide refund batching.",
+      "nextHardeningStep": "Add negative test for refund before deadline and wrong contributor signature."
+    },
+    {
+      "id": "assurance-target-progress",
+      "name": "Batch assurance target progress",
+      "lane": "assurance",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/BatchAssuranceCampaign.json and browser campaign panel",
+      "proof": "Generated campaign artifact only",
+      "risk": "Accepted progress is useful app state but not pooled covenant enforcement.",
+      "nextHardeningStep": "Import real accepted pledge outpoints and build release/refund draft planning."
+    },
+    {
+      "id": "invoice-paid-state",
+      "name": "Invoice paid state",
+      "lane": "payload-invoice",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/InvoiceReceipts.json and invoice registry",
+      "proof": "Receipt draft exists; accepted payload receipt still gated",
+      "risk": "Invoice must not become paid until an accepted transaction carries the matching payload.",
+      "nextHardeningStep": "Verify a wallet route that preserves payload bytes, then submit one accepted receipt."
+    },
+    {
+      "id": "submit-console-private-key-separation",
+      "name": "Submit console private-key separation",
+      "lane": "wallet-submit",
+      "enforcement": "wallet-policy",
+      "currentSurface": "fixtures/SubmitConsoleDrafts.json and browser submit console",
+      "proof": "UI reads signed draft artifacts only",
+      "risk": "The safety boundary depends on scripts and file hygiene, not consensus.",
+      "nextHardeningStep": "Add private-key string guards and explicit draft provenance metadata."
+    },
+    {
+      "id": "cross-chain-research-claims",
+      "name": "Cross-chain idea mapping",
+      "lane": "research",
+      "enforcement": "documentation",
+      "currentSurface": "fixtures/CrossChainResearchLibrary.json",
+      "proof": "Generated research library artifact",
+      "risk": "Open-source references can be mistaken for Kaspa feature availability.",
+      "nextHardeningStep": "Keep every app brief tied to live Kaspa, TN12/Toccata, roadmap, or research status."
+    }
+  ]
+}
