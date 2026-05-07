@@ -55,6 +55,7 @@ import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildDefiResearchBacklog } from "../src/defiBacklog.mjs";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
+import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -258,6 +259,52 @@ const acceptedState = buildAcceptedAppState({ proofFixture, transactions: fakeTr
 assert.equal(acceptedState.summary.total, 4);
 assert.equal(acceptedState.summary.matched, 4);
 assert.equal(acceptedState.appState.vault.status, "proofs-accepted");
+const fakePreviousTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
+  `prev-${index}`,
+  {
+    outputs: [
+      {
+        index: 0,
+        amount: index < 2 ? 2500000000 : 25000000000,
+        script_public_key_address: `kaspatest:pcontract${index}`,
+        script_public_key_type: "scripthash"
+      }
+    ]
+  }
+]));
+const fakeSpendTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
+  proof.txid,
+  {
+    is_accepted: true,
+    accepting_block_blue_score: 1000 + index,
+    accepting_block_time: 1778141640000 + index,
+    inputs: [
+      {
+        previous_outpoint_hash: `prev-${index}`,
+        previous_outpoint_index: "0",
+        sig_op_count: "1"
+      }
+    ],
+    outputs: [
+      {
+        index: 0,
+        amount: Number(proof.amountSompi),
+        script_public_key_address: proof.destination,
+        script_public_key_type: "pubkey"
+      }
+    ]
+  }
+]));
+const proofEvidence = buildProofEvidence({
+  proofFixture,
+  transactions: fakeSpendTransactions,
+  previousTransactions: fakePreviousTransactions,
+  verifiedAt: "2026-05-07T00:00:00.000Z"
+});
+assert.equal(proofEvidence.summary.accepted, 4);
+assert.equal(proofEvidence.summary.p2shInputs, 4);
+assert.equal(proofEvidence.summary.p2pkOutputs, 4);
+assert.equal(proofEvidence.summary.matchedOutputs, 4);
 
 const vaultContractArtifact = JSON.parse(await readFile(new URL("../artifacts/DelayedRecoveryVault.json", import.meta.url), "utf8"));
 const assuranceContractArtifact = JSON.parse(await readFile(new URL("../artifacts/AssurancePledge.json", import.meta.url), "utf8"));
@@ -313,6 +360,7 @@ const files = [
   "scripts/fetch-split-buckets.mjs",
   "scripts/build-signed-payload-receipt-draft.mjs",
   "scripts/verify-accepted-txs.mjs",
+  "scripts/build-proof-evidence.mjs",
   "scripts/build-accepted-app-state.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/plan-transactions.mjs",
@@ -342,6 +390,7 @@ const files = [
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/enforcement-matrix.json",
+  "artifacts/proof-evidence.json",
   "artifacts/escrow-primitives.json",
   "artifacts/treasury-vaults.json",
   "artifacts/payload-submit-readiness.json",

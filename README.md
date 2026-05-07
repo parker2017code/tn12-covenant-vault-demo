@@ -192,7 +192,10 @@ Verify the accepted proof transactions and expected outputs through the public T
 
 ```sh
 npm run tx:verify
+npm run proof:evidence
 ```
+
+`npm run proof:evidence` resolves each proof spend's previous output and checks the important shape: P2SH (`p...`) contract input to expected P2PK (`q...`) wallet output.
 
 Build the reusable accepted-transaction app-state snapshot:
 

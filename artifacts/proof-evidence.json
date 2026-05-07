@@ -1,0 +1,143 @@
+{
+  "schema": "tn12-contract-spend-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T11:28:38.111Z",
+  "summary": {
+    "total": 4,
+    "accepted": 4,
+    "p2shInputs": 4,
+    "p2pkOutputs": 4,
+    "matchedOutputs": 4
+  },
+  "proofs": [
+    {
+      "label": "Vault recovery",
+      "lane": "vault",
+      "entrypoint": "recover",
+      "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "accepted": true,
+      "acceptingBlockBlueScore": 5203140,
+      "acceptingBlockTime": 1778141640305,
+      "input": {
+        "previousOutpointHash": "4051184914011dd5399f4042fe5be0e5031b5f57e05b055ee676c36ad5a468b6",
+        "previousOutpointIndex": "0",
+        "address": "kaspatest:prk2u9cexve3qscnp3dug8r20qauql5ygyhlxyre63dn64vemz6qjwyktx9cw",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Vault delayed withdrawal",
+      "lane": "vault",
+      "entrypoint": "withdraw",
+      "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+      "accepted": true,
+      "acceptingBlockBlueScore": 5206191,
+      "acceptingBlockTime": 1778141939817,
+      "input": {
+        "previousOutpointHash": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+        "previousOutpointIndex": "0",
+        "address": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Assurance release",
+      "lane": "assurance",
+      "entrypoint": "release",
+      "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "accepted": true,
+      "acceptingBlockBlueScore": 5203224,
+      "acceptingBlockTime": 1778141647772,
+      "input": {
+        "previousOutpointHash": "3012b541bc10832e8440a16424cdefbdbe84e85f8e212fd40d595debfb3b87da",
+        "previousOutpointIndex": "0",
+        "address": "kaspatest:prfzsga33hgfsydw7vyn8grfctmh83cz7ux53wa33cznsc4fqtf359eej4ztg",
+        "type": "scripthash",
+        "amount": 25000000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 24999995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Assurance refund",
+      "lane": "assurance",
+      "entrypoint": "refund",
+      "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+      "accepted": true,
+      "acceptingBlockBlueScore": 5206200,
+      "acceptingBlockTime": 1778141940609,
+      "input": {
+        "previousOutpointHash": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+        "previousOutpointIndex": "0",
+        "address": "kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj",
+        "type": "scripthash",
+        "amount": 25000000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 24999995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    }
+  ],
+  "note": "Each proof spend resolves its input's previous output, then checks that the consumed output is a TN12 scripthash address and the spend pays the expected P2PK wallet output."
+}

@@ -106,3 +106,13 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
    - push to `main`;
    - verify GitHub Actions and Pages;
    - verify cache-busted live artifacts after deployment.
+
+## Current Verification Commands
+
+```sh
+npm run check:all
+npm run tx:verify
+npm run proof:evidence
+```
+
+`npm run proof:evidence` verifies the important proof shape: the four accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.

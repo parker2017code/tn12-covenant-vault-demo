@@ -23,6 +23,7 @@
     "tx:split": "node scripts/build-signed-split-draft.mjs",
     "tx:payload": "node scripts/build-signed-payload-receipt-draft.mjs",
     "tx:verify": "node scripts/verify-accepted-txs.mjs",
+    "proof:evidence": "node scripts/build-proof-evidence.mjs",
     "tx:submit:dry": "node scripts/submit-signed-draft.mjs",
     "indexer:state": "node scripts/build-accepted-app-state.mjs",
     "invoice:registry": "node scripts/build-invoice-registry.mjs",

@@ -17,6 +17,7 @@
 - Vault delayed withdrawal: submitted and accepted with a past DAA-score lock.
 - Assurance release: submitted and accepted for the individual pledge primitive.
 - Assurance refund: submitted and accepted with a past DAA-score deadline.
+- Proof evidence artifact: `npm run proof:evidence` confirms all four proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
 - Wallet connector: not implemented.
 - Silverscript templates: drafted.
 - Silverscript compiler integration: helper added; artifacts depend on local `silverc`.
@@ -41,6 +42,13 @@ Latest fetched contract output addresses before the timed spends were:
 
 - Vault: `kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn`.
 - Assurance: `kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj`.
+
+Proof-spend input evidence:
+
+- Vault recovery input: `kaspatest:prk2u9cexve3qscnp3dug8r20qauql5ygyhlxyre63dn64vemz6qjwyktx9cw`, type `scripthash`, prefix `p`.
+- Vault delayed withdrawal input: `kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn`, type `scripthash`, prefix `p`.
+- Assurance release input: `kaspatest:prfzsga33hgfsydw7vyn8grfctmh83cz7ux53wa33cznsc4fqtf359eej4ztg`, type `scripthash`, prefix `p`.
+- Assurance refund input: `kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj`, type `scripthash`, prefix `p`.
 
 ## Transaction Planner Boundary
 
