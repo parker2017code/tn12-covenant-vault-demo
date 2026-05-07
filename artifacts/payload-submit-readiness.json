@@ -1,0 +1,15 @@
+{
+  "schema": "tn12-payload-submit-readiness/v1",
+  "network": "kaspa-testnet-12",
+  "checkedAt": "2026-05-07T10:42:23.021Z",
+  "source": "https://api-tn12.kaspa.org/openapi.json",
+  "status": "blocked-rest-submit-schema-has-no-payload-field",
+  "checks": {
+    "submitTxModelHasPayload": false,
+    "fetchedTxModelHasPayload": true,
+    "signedDraftHasPayload": true,
+    "safeToSubmitPayloadReceiptByDefault": false
+  },
+  "next": "Do not submit the payload receipt through this REST route until a payload-preserving wallet/API route is verified.",
+  "boundary": "A signed transaction draft carrying payload bytes is not enough; the submit route must preserve those bytes before invoice state can become paid."
+}

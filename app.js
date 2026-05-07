@@ -29,6 +29,8 @@ import { buildResearchLibrary } from "./src/appResearch.mjs";
 import { buildBatchAssuranceState } from "./src/batchAssurance.mjs";
 import { buildEnforcementMatrix } from "./src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "./src/escrowPrimitive.mjs";
+import { buildTreasuryVaultRegistry } from "./src/treasuryVault.mjs";
+import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -50,6 +52,7 @@ const receiptEventsNode = document.querySelector("#receipt-events");
 const invoiceSummaryNode = document.querySelector("#invoice-summary");
 const invoiceListNode = document.querySelector("#invoice-list");
 const invoiceDraftNode = document.querySelector("#invoice-draft");
+const payloadReadinessNode = document.querySelector("#payload-readiness");
 const submitSummaryNode = document.querySelector("#submit-summary");
 const submitDraftsNode = document.querySelector("#submit-drafts");
 const researchSummaryNode = document.querySelector("#research-summary");
@@ -61,6 +64,8 @@ const enforcementSummaryNode = document.querySelector("#enforcement-summary");
 const enforcementFeaturesNode = document.querySelector("#enforcement-features");
 const escrowSummaryNode = document.querySelector("#escrow-summary");
 const escrowListNode = document.querySelector("#escrow-list");
+const treasurySummaryNode = document.querySelector("#treasury-summary");
+const treasuryListNode = document.querySelector("#treasury-list");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -181,9 +186,11 @@ renderManualOutpoint();
 renderBatchAssuranceCampaign();
 renderEnforcementMatrix();
 renderEscrowPrimitive();
+renderTreasuryVaults();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
+renderPayloadSubmitReadiness();
 renderSubmitConsole();
 renderMasterRoadmap();
 renderResearchLibrary();
@@ -407,6 +414,37 @@ async function renderEscrowPrimitive() {
   }
 }
 
+async function renderTreasuryVaults() {
+  if (!treasurySummaryNode || !treasuryListNode) return;
+
+  try {
+    const response = await fetch("fixtures/TreasuryVaults.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const registry = buildTreasuryVaultRegistry(fixture);
+    treasurySummaryNode.innerHTML = `
+      <article><span>Vaults</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
+      <article><span>Balance</span><strong>${escapeHtml(registry.summary.totalBalanceTkas)}</strong></article>
+      <article><span>Payroll</span><strong>${escapeHtml(registry.summary.plannedPayrollTkas)}</strong></article>
+      <article><span>Recovery</span><strong>${escapeHtml(registry.summary.recoveryReady)}</strong></article>
+    `;
+
+    treasuryListNode.innerHTML = "";
+    for (const vault of registry.vaults) {
+      const article = document.createElement("article");
+      article.className = "treasury-card";
+      article.innerHTML = `
+        <span>${escapeHtml(vault.status)}</span>
+        <strong>${escapeHtml(vault.name)}</strong>
+        <p>${escapeHtml(vault.balanceTkas)} TKAS balance; ${escapeHtml(vault.dailyCapTkas)} TKAS daily cap.</p>
+        <small>${escapeHtml(vault.nextAction)}</small>
+      `;
+      treasuryListNode.append(article);
+    }
+  } catch (error) {
+    treasurySummaryNode.textContent = `Treasury registry unavailable: ${error.message}`;
+  }
+}
+
 async function verifyProofTransactions({ forceRemote }) {
   if (!proofListNode) return;
 
@@ -550,6 +588,32 @@ async function renderInvoiceApp() {
     }
   } catch (error) {
     invoiceSummaryNode.textContent = `Invoice registry unavailable: ${error.message}`;
+  }
+}
+
+async function renderPayloadSubmitReadiness() {
+  if (!payloadReadinessNode) return;
+
+  try {
+    const response = await fetch("artifacts/payload-submit-readiness.json", { cache: "no-store" });
+    const artifact = await response.json();
+    const readiness = buildPayloadSubmitReadiness(artifact);
+    payloadReadinessNode.innerHTML = `
+      <article>
+        <span>${escapeHtml(readiness.status)}</span>
+        <strong>Payload submit readiness</strong>
+        <p>${escapeHtml(readiness.next)}</p>
+        <small>submit payload field: ${escapeHtml(readiness.checks.submitTxModelHasPayload)}; fetched tx payload field: ${escapeHtml(readiness.checks.fetchedTxModelHasPayload)}</small>
+      </article>
+    `;
+  } catch (error) {
+    payloadReadinessNode.innerHTML = `
+      <article>
+        <span>readiness-needed</span>
+        <strong>Run npm run payload:readiness</strong>
+        <p>${escapeHtml(error.message)}</p>
+      </article>
+    `;
   }
 }
 

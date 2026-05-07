@@ -21,6 +21,7 @@
       <a href="#campaigns">Campaigns</a>
       <a href="#enforcement">Enforcement</a>
       <a href="#escrow">Escrow</a>
+      <a href="#treasury">Treasury</a>
       <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
@@ -238,6 +239,17 @@
       <pre>npm run escrow:registry</pre>
     </section>
 
+    <section id="treasury" class="panel treasury">
+      <div class="section-title">
+        <p class="eyebrow">Treasury / team vaults</p>
+        <h2>Spend caps, delayed large withdrawals, recovery, payroll templates.</h2>
+        <p>This is lane 5: Safe-style treasury UX translated into Kaspa vault policy. Current script proof covers delayed withdrawal and recovery primitives; payroll and caps remain planner/wallet policy until hardened.</p>
+      </div>
+      <div id="treasury-summary" class="treasury-summary" aria-live="polite"></div>
+      <div id="treasury-list" class="treasury-list" aria-live="polite"></div>
+      <pre>npm run treasury:registry</pre>
+    </section>
+
     <section id="proofs" class="panel proofs">
       <div class="section-title">
         <p class="eyebrow">Accepted TN12 proofs</p>
@@ -271,8 +283,10 @@
       </div>
       <div id="invoice-summary" class="invoice-summary" aria-live="polite"></div>
       <div id="invoice-list" class="invoice-list" aria-live="polite"></div>
+      <div id="payload-readiness" class="payload-readiness" aria-live="polite"></div>
       <div id="invoice-draft" class="invoice-draft" aria-live="polite"></div>
       <pre>npm run invoice:registry
+npm run payload:readiness
 npm run tx:payload</pre>
     </section>
 

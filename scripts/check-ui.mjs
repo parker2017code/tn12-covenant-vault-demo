@@ -53,6 +53,8 @@ try {
   await expectText(page, "#invoice-summary", "Draft");
   await expectText(page, "#invoice-list", "merchant-order-1337");
   await expectText(page, "#invoice-draft", "signed-not-broadcast");
+  await expectText(page, "#payload-readiness", "Payload submit readiness");
+  await expectText(page, "#payload-readiness", "blocked-rest-submit-schema-has-no-payload-field");
   await expectText(page, "#campaign-summary", "release-not-ready");
   await expectText(page, "#campaign-plans", "Release plan");
   await expectText(page, "#campaign-pledges", "pledge-docs-004");
@@ -62,6 +64,9 @@ try {
   await expectText(page, "#escrow-summary", "Escrows");
   await expectText(page, "#escrow-list", "Freelance wallet integration review");
   await expectText(page, "#escrow-list", "Review seller-release");
+  await expectText(page, "#treasury-summary", "Payroll");
+  await expectText(page, "#treasury-list", "Core team operating vault");
+  await expectText(page, "#treasury-list", "Review delayed large withdrawal");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

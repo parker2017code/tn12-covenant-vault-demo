@@ -24,6 +24,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds batch assurance campaign state from multiple pledge records without claiming pooled covenant enforcement.
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
 - Builds an escrow primitive registry for buyer fund, seller release, timeout refund, and mutual cancel planning.
+- Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
 
 ## What It Does Not Do Yet
 
@@ -203,6 +204,14 @@ npm run invoice:registry
 
 This turns `fixtures/InvoiceReceipts.json` into `artifacts/invoice-registry.json`. An invoice stays draft/unpaid until an accepted TN12 transaction carries the matching receipt payload and the txid is added as an accepted receipt.
 
+Check whether the public TN12 REST submit schema advertises payload submission:
+
+```sh
+npm run payload:readiness
+```
+
+This turns the current TN12 OpenAPI schema plus the signed payload draft into `artifacts/payload-submit-readiness.json`. If the submit model lacks a payload field, the invoice receipt must not be broadcast through that route by default.
+
 Build a signed self-send draft that carries that receipt as transaction payload:
 
 ```sh
@@ -256,6 +265,14 @@ npm run escrow:registry
 ```
 
 This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. It is currently planner/indexer state only; accepted TN12 escrow covenant proofs are the next hardening step.
+
+Build the treasury/team vault registry:
+
+```sh
+npm run treasury:registry
+```
+
+This turns `fixtures/TreasuryVaults.json` into `artifacts/treasury-vaults.json`. Current script proof covers delayed withdrawal and recovery primitives; payroll and spend caps remain wallet-policy/planner state until hardened.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

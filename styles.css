@@ -377,6 +377,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.treasury {
+  margin-top: 24px;
+}
+
 .submit-console {
   margin-top: 24px;
 }
@@ -574,6 +578,34 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.treasury-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.treasury-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.treasury-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.treasury-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
 .escrow-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -718,6 +750,13 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.treasury-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .submit-card pre {
   max-height: 180px;
   margin: 0;
@@ -732,6 +771,12 @@ progress::-moz-progress-bar {
 }
 
 .invoice-draft {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.payload-readiness {
   display: grid;
   gap: 14px;
   margin-bottom: 16px;
@@ -838,12 +883,14 @@ progress::-moz-progress-bar {
 .signal-card,
 .invoice-card,
 .invoice-draft article,
+.payload-readiness article,
 .submit-card,
 .research-card,
 .campaign-card,
 .campaign-plans article,
 .enforcement-card,
 .escrow-card,
+.treasury-card,
 .attestation-card,
 .indexer-card,
 .receipt-card,
@@ -864,12 +911,14 @@ progress::-moz-progress-bar {
 .signal-card span,
 .invoice-card span,
 .invoice-draft article span,
+.payload-readiness article span,
 .submit-card span,
 .research-card span,
 .campaign-card span,
 .campaign-plans article span,
 .enforcement-card span,
 .escrow-card span,
+.treasury-card span,
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
@@ -899,6 +948,9 @@ progress::-moz-progress-bar {
 .invoice-draft article strong,
 .invoice-draft article p,
 .invoice-draft article small,
+.payload-readiness article strong,
+.payload-readiness article p,
+.payload-readiness article small,
 .submit-card strong,
 .submit-card p,
 .submit-card small,
@@ -918,6 +970,9 @@ progress::-moz-progress-bar {
 .escrow-card strong,
 .escrow-card p,
 .escrow-card small,
+.treasury-card strong,
+.treasury-card p,
+.treasury-card small,
 .attestation-card strong,
 .attestation-card p,
 .attestation-card small,
@@ -942,12 +997,14 @@ progress::-moz-progress-bar {
 .signal-card p,
 .invoice-card p,
 .invoice-draft article p,
+.payload-readiness article p,
 .submit-card p,
 .research-card p,
 .campaign-card p,
 .campaign-plans article p,
 .enforcement-card p,
 .escrow-card p,
+.treasury-card p,
 .attestation-card p,
 .indexer-card p,
 .receipt-card p,
@@ -961,12 +1018,14 @@ progress::-moz-progress-bar {
 .signal-card small,
 .invoice-card small,
 .invoice-draft article small,
+.payload-readiness article small,
 .submit-card small,
 .research-card small,
 .campaign-card small,
 .campaign-plans article small,
 .enforcement-card small,
 .escrow-card small,
+.treasury-card small,
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
@@ -1063,6 +1122,8 @@ progress::-moz-progress-bar {
   .enforcement-features,
   .escrow-summary,
   .escrow-list,
+  .treasury-summary,
+  .treasury-list,
   .submit-summary,
   .submit-drafts,
   .research-summary,

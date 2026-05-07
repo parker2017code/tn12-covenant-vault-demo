@@ -3,14 +3,14 @@
   "status": "claim-surface-audit",
   "reviewedAt": "2026-05-07",
   "summary": {
-    "total": 11,
+    "total": 12,
     "contractEnforced": 4,
-    "notScriptEnforced": 7,
+    "notScriptEnforced": 8,
     "byEnforcement": {
       "script": 4,
       "simulation": 2,
       "planner-indexer": 3,
-      "wallet-policy": 1,
+      "wallet-policy": 2,
       "documentation": 1
     },
     "byLane": {
@@ -19,7 +19,8 @@
       "payload-invoice": 1,
       "wallet-submit": 1,
       "research": 1,
-      "escrow": 1
+      "escrow": 1,
+      "treasury-vaults": 1
     }
   },
   "features": [
@@ -132,6 +133,16 @@
       "proof": "Generated escrow registry artifact only",
       "risk": "Buyer release, timeout refund, and mutual cancel are planned spend paths until Escrow.sil drafts are built and accepted.",
       "nextHardeningStep": "Add Escrow.sil, compile fixtures, signed funding draft, and accepted release/refund proof transactions."
+    },
+    {
+      "id": "treasury-payroll-caps",
+      "name": "Treasury payroll and spend caps",
+      "lane": "treasury-vaults",
+      "enforcement": "wallet-policy",
+      "currentSurface": "fixtures/TreasuryVaults.json and browser treasury panel",
+      "proof": "Generated treasury registry artifact only",
+      "risk": "Payroll templates and spend caps are review policy until script or indexer enforcement exists.",
+      "nextHardeningStep": "Build constrained team spend drafts, add exact UTXO provenance, and separate role keys."
     }
   ],
   "rules": [

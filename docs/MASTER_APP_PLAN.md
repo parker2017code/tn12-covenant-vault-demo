@@ -39,6 +39,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
 5. Treasury / Team Vaults
    - Spend caps, delayed large withdrawals, recovery, payroll templates.
    - First success: one constrained team spend and one recovery/cancel path.
+   - Current repo surface: `fixtures/TreasuryVaults.json`, `src/treasuryVault.mjs`, `npm run treasury:registry`, and the browser treasury panel.
 
 6. KRC / Access Pass Planner
    - Coupons, memberships, tickets, redeemable claims.

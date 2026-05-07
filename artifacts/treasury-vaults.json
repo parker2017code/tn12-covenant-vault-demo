@@ -1,0 +1,106 @@
+{
+  "schema": "tn12-treasury-vault-registry/v1",
+  "network": "kaspa-testnet-12",
+  "status": "planner-policy-before-extra-script-paths",
+  "summary": {
+    "total": 2,
+    "totalBalanceTkas": 1500,
+    "plannedPayrollTkas": 80,
+    "byStatus": {
+      "policy-ready": 1,
+      "draft": 1
+    },
+    "largeWithdrawalsPending": 1,
+    "recoveryReady": 2
+  },
+  "vaults": [
+    {
+      "vaultId": "treasury-core-team",
+      "name": "Core team operating vault",
+      "status": "policy-ready",
+      "balanceTkas": 1000,
+      "dailyCapTkas": 75,
+      "largeWithdrawalDelayHours": 48,
+      "recoveryAddress": "kaspatest:qcore-recovery-placeholder",
+      "roles": {
+        "owner": "ops-lead",
+        "reviewer": "finance-reviewer",
+        "recovery": "recovery-key-holder"
+      },
+      "payroll": [
+        {
+          "paymentId": "payroll-dev-001",
+          "recipient": "frontend-dev",
+          "amountTkas": 25,
+          "cadence": "monthly",
+          "status": "template"
+        },
+        {
+          "paymentId": "payroll-docs-002",
+          "recipient": "docs-maintainer",
+          "amountTkas": 15,
+          "cadence": "monthly",
+          "status": "template"
+        }
+      ],
+      "largeWithdrawals": [
+        {
+          "withdrawalId": "large-infra-001",
+          "recipient": "infrastructure-provider",
+          "amountTkas": 200,
+          "requestedAtIso": "2026-05-07T00:00:00.000Z",
+          "availableAfterIso": "2026-05-09T00:00:00.000Z",
+          "status": "delay-window"
+        }
+      ],
+      "notes": "Safe-style treasury UX mapped to Kaspa vault primitives without claiming account-abstraction multisig.",
+      "checks": {
+        "payrollTotal": 40,
+        "payrollWithinBalance": true,
+        "payrollWithinDailyCap": true,
+        "largeWithdrawalReviewRequired": true,
+        "recoveryAddressValidShape": true
+      },
+      "nextAction": "Review delayed large withdrawal drafts and recovery path before submit."
+    },
+    {
+      "vaultId": "treasury-grants-round",
+      "name": "Public goods grants vault",
+      "status": "draft",
+      "balanceTkas": 500,
+      "dailyCapTkas": 50,
+      "largeWithdrawalDelayHours": 72,
+      "recoveryAddress": "kaspatest:qgrants-recovery-placeholder",
+      "roles": {
+        "owner": "round-manager",
+        "reviewer": "review-committee",
+        "recovery": "fallback-custodian"
+      },
+      "payroll": [
+        {
+          "paymentId": "grant-milestone-001",
+          "recipient": "indexer-maintainer",
+          "amountTkas": 40,
+          "cadence": "milestone",
+          "status": "pending-review"
+        }
+      ],
+      "largeWithdrawals": [],
+      "notes": "Connects grant funding, assurance campaign state, and delayed payout policy.",
+      "checks": {
+        "payrollTotal": 40,
+        "payrollWithinBalance": true,
+        "payrollWithinDailyCap": true,
+        "largeWithdrawalReviewRequired": false,
+        "recoveryAddressValidShape": true
+      },
+      "nextAction": "Review treasury roles and funding source before signing."
+    }
+  ],
+  "boundaries": [
+    "This registry is treasury policy and wallet-review state.",
+    "The current TN12 script proof covers delayed withdrawal and recovery primitives, not full payroll governance.",
+    "Spend caps and payroll templates are planner/wallet policy until script or indexer enforcement is added.",
+    "Team roles here are labels for review UX, not multisig consensus enforcement."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "tn12-treasury-vault-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "vaults": [
+    {
+      "vaultId": "treasury-core-team",
+      "name": "Core team operating vault",
+      "status": "policy-ready",
+      "balanceTkas": 1000,
+      "dailyCapTkas": 75,
+      "largeWithdrawalDelayHours": 48,
+      "recoveryAddress": "kaspatest:qcore-recovery-placeholder",
+      "roles": {
+        "owner": "ops-lead",
+        "reviewer": "finance-reviewer",
+        "recovery": "recovery-key-holder"
+      },
+      "payroll": [
+        {
+          "paymentId": "payroll-dev-001",
+          "recipient": "frontend-dev",
+          "amountTkas": 25,
+          "cadence": "monthly",
+          "status": "template"
+        },
+        {
+          "paymentId": "payroll-docs-002",
+          "recipient": "docs-maintainer",
+          "amountTkas": 15,
+          "cadence": "monthly",
+          "status": "template"
+        }
+      ],
+      "largeWithdrawals": [
+        {
+          "withdrawalId": "large-infra-001",
+          "recipient": "infrastructure-provider",
+          "amountTkas": 200,
+          "requestedAtIso": "2026-05-07T00:00:00.000Z",
+          "availableAfterIso": "2026-05-09T00:00:00.000Z",
+          "status": "delay-window"
+        }
+      ],
+      "notes": "Safe-style treasury UX mapped to Kaspa vault primitives without claiming account-abstraction multisig."
+    },
+    {
+      "vaultId": "treasury-grants-round",
+      "name": "Public goods grants vault",
+      "status": "draft",
+      "balanceTkas": 500,
+      "dailyCapTkas": 50,
+      "largeWithdrawalDelayHours": 72,
+      "recoveryAddress": "kaspatest:qgrants-recovery-placeholder",
+      "roles": {
+        "owner": "round-manager",
+        "reviewer": "review-committee",
+        "recovery": "fallback-custodian"
+      },
+      "payroll": [
+        {
+          "paymentId": "grant-milestone-001",
+          "recipient": "indexer-maintainer",
+          "amountTkas": 40,
+          "cadence": "milestone",
+          "status": "pending-review"
+        }
+      ],
+      "largeWithdrawals": [],
+      "notes": "Connects grant funding, assurance campaign state, and delayed payout policy."
+    }
+  ]
+}
