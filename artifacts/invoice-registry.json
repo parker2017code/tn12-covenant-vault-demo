@@ -1,18 +1,19 @@
 {
   "schema": "kaspa-invoice-registry/v1",
   "network": "kaspa-testnet-12",
-  "status": "has-accepted-receipts",
+  "status": "has-accepted-invoice-events",
   "summary": {
-    "total": 2,
+    "total": 4,
     "paid": 1,
-    "refunded": 0,
+    "refunded": 1,
+    "errors": 1,
     "draft": 1,
     "review": 0,
     "duplicateReceipts": 0,
     "staleReceipts": 0,
     "refundReviews": 0,
     "errorReviews": 0,
-    "totalTkas": 26
+    "totalTkas": 28
   },
   "invoices": [
     {
@@ -70,6 +71,7 @@
       "refundRecord": null,
       "refundReviews": [],
       "receiptReviews": [],
+      "acceptedErrorRecord": null,
       "errorRecords": [],
       "appState": "Invoice merchant-order-1337 is paid by accepted payload receipt 34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e.",
       "boundaries": [
@@ -123,8 +125,138 @@
       "refundRecord": null,
       "refundReviews": [],
       "receiptReviews": [],
+      "acceptedErrorRecord": null,
       "errorRecords": [],
       "appState": "Invoice assurance-campaign-demo is not paid until an accepted transaction carries this receipt payload.",
+      "boundaries": [
+        "This is payment plus app data, not a smart-contract invoice settlement.",
+        "Accepted transaction indexing is the source of app state.",
+        "The existing signed draft proves local payload bytes; broadcast remains gated until payload submit support is verified."
+      ]
+    },
+    {
+      "schema": "kaspa-invoice-receipt-app/v1",
+      "network": "kaspa-testnet-12",
+      "status": "refunded-receipt-indexed",
+      "invoice": {
+        "invoiceId": "merchant-refund-demo",
+        "merchant": "Kaspa App Lab",
+        "payerLabel": "TN12 demo wallet",
+        "amountTkas": 1,
+        "memo": "Refund state test",
+        "dueHours": 24,
+        "status": "refunded"
+      },
+      "payment": {
+        "amountTkas": 1,
+        "amountSompi": "100000000",
+        "route": "TN12 transaction payload receipt",
+        "submitBoundary": "Create a signed transaction with this receipt payload, then verify the accepted tx before marking paid."
+      },
+      "receipt": {
+        "schema": "kaspa-signal-payload/v1",
+        "status": "payload-size-ok",
+        "lane": "transaction-payload",
+        "payload": {
+          "kind": "invoice-receipt",
+          "subject": "merchant-refund-demo",
+          "value": "refunded",
+          "note": "Kaspa App Lab: Refund state test"
+        },
+        "encoded": {
+          "bytes": 120,
+          "transientMass": 480,
+          "hex": "7b226b696e64223a22696e766f6963652d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a224b6173706120417070204c61623a20526566756e642073746174652074657374227d"
+        },
+        "limits": {
+          "standardTxMassLimit": 100000,
+          "transientByteMass": 4,
+          "remainingMassBeforeInputsOutputsAndSignatures": 99520
+        },
+        "boundary": "This models user transaction payload data, not arbitrary miner header data."
+      },
+      "acceptedReceipt": null,
+      "refundRecord": {
+        "invoiceId": "merchant-refund-demo",
+        "accepted": true,
+        "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+        "payloadBytes": 135,
+        "acceptingBlockBlueScore": 5586090,
+        "evidencePath": "artifacts/payload-refund-evidence.json",
+        "memo": "Accepted TN12 JSON wRPC refund payload; payload matched the signed draft.",
+        "status": "accepted-refund",
+        "reviewReason": null
+      },
+      "refundReviews": [],
+      "receiptReviews": [],
+      "acceptedErrorRecord": null,
+      "errorRecords": [],
+      "appState": "Invoice merchant-refund-demo is refunded by accepted transaction 4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13.",
+      "boundaries": [
+        "This is payment plus app data, not a smart-contract invoice settlement.",
+        "Accepted transaction indexing is the source of app state.",
+        "The existing signed draft proves local payload bytes; broadcast remains gated until payload submit support is verified."
+      ]
+    },
+    {
+      "schema": "kaspa-invoice-receipt-app/v1",
+      "network": "kaspa-testnet-12",
+      "status": "error-receipt-indexed",
+      "invoice": {
+        "invoiceId": "merchant-error-demo",
+        "merchant": "Kaspa App Lab",
+        "payerLabel": "TN12 demo wallet",
+        "amountTkas": 1,
+        "memo": "Error state test",
+        "dueHours": 24,
+        "status": "error"
+      },
+      "payment": {
+        "amountTkas": 1,
+        "amountSompi": "100000000",
+        "route": "TN12 transaction payload receipt",
+        "submitBoundary": "Create a signed transaction with this receipt payload, then verify the accepted tx before marking paid."
+      },
+      "receipt": {
+        "schema": "kaspa-signal-payload/v1",
+        "status": "payload-size-ok",
+        "lane": "transaction-payload",
+        "payload": {
+          "kind": "invoice-receipt",
+          "subject": "merchant-error-demo",
+          "value": "error",
+          "note": "Kaspa App Lab: Error state test"
+        },
+        "encoded": {
+          "bytes": 115,
+          "transientMass": 460,
+          "hex": "7b226b696e64223a22696e766f6963652d72656365697074222c227375626a656374223a226d65726368616e742d6572726f722d64656d6f222c2276616c7565223a226572726f72222c226e6f7465223a224b6173706120417070204c61623a204572726f722073746174652074657374227d"
+        },
+        "limits": {
+          "standardTxMassLimit": 100000,
+          "transientByteMass": 4,
+          "remainingMassBeforeInputsOutputsAndSignatures": 99540
+        },
+        "boundary": "This models user transaction payload data, not arbitrary miner header data."
+      },
+      "acceptedReceipt": null,
+      "refundRecord": null,
+      "refundReviews": [],
+      "receiptReviews": [],
+      "acceptedErrorRecord": {
+        "invoiceId": "merchant-error-demo",
+        "accepted": true,
+        "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+        "payloadBytes": 130,
+        "acceptingBlockBlueScore": 5586406,
+        "evidencePath": "artifacts/payload-error-evidence.json",
+        "reason": "payload-error-event",
+        "memo": "Accepted TN12 JSON wRPC error payload; payload matched the signed draft.",
+        "status": "accepted-error",
+        "reviewReason": null
+      },
+      "errorRecords": [],
+      "appState": "Invoice merchant-error-demo has an accepted error event 3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c.",
       "boundaries": [
         "This is payment plus app data, not a smart-contract invoice settlement.",
         "Accepted transaction indexing is the source of app state.",
@@ -145,7 +277,32 @@
       "reviewReason": null
     }
   ],
-  "refunds": [],
-  "errors": [],
+  "refunds": [
+    {
+      "invoiceId": "merchant-refund-demo",
+      "accepted": true,
+      "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "payloadBytes": 135,
+      "acceptingBlockBlueScore": 5586090,
+      "evidencePath": "artifacts/payload-refund-evidence.json",
+      "memo": "Accepted TN12 JSON wRPC refund payload; payload matched the signed draft.",
+      "status": "accepted-refund",
+      "reviewReason": null
+    }
+  ],
+  "errors": [
+    {
+      "invoiceId": "merchant-error-demo",
+      "accepted": true,
+      "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "payloadBytes": 130,
+      "acceptingBlockBlueScore": 5586406,
+      "evidencePath": "artifacts/payload-error-evidence.json",
+      "reason": "payload-error-event",
+      "memo": "Accepted TN12 JSON wRPC error payload; payload matched the signed draft.",
+      "status": "accepted-error",
+      "reviewReason": null
+    }
+  ],
   "next": "Keep payload receipts tied to accepted transaction evidence before marking invoices paid."
 }

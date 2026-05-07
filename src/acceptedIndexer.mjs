@@ -109,28 +109,49 @@ function laneState(records, lane) {
 }
 
 function buildReceiptRecords({ receiptFixture = {}, receiptTransactions = {} }) {
-  return (receiptFixture.acceptedReceipts || []).map((receipt) => {
-    const tx = receiptTransactions[receipt.txid];
+  return payloadRecords(receiptFixture).map((record) => {
+    const tx = receiptTransactions[record.txid];
     const decoded = decodeSignalPayload(tx?.payload);
     const accepted = Boolean(tx?.is_accepted);
     const receiptMatches = Boolean(
       decoded
-      && decoded.payload.subject === receipt.invoiceId
-      && decoded.payload.value === "paid"
+      && decoded.payload.subject === record.invoiceId
+      && decoded.payload.value === record.expectedValue
     );
 
     return {
-      txid: receipt.txid,
+      txid: record.txid,
       lane: "receipt",
-      label: `Invoice ${receipt.invoiceId}`,
-      invoiceId: receipt.invoiceId,
+      label: `Invoice ${record.invoiceId}`,
+      invoiceId: record.invoiceId,
+      event: record.event,
       status: accepted && receiptMatches ? "accepted-payload-receipt-matched" : "needs-review",
       accepted,
-      acceptingBlockBlueScore: tx?.accepting_block_blue_score ?? receipt.acceptingBlockBlueScore ?? null,
+      acceptingBlockBlueScore: tx?.accepting_block_blue_score ?? record.acceptingBlockBlueScore ?? null,
       acceptingBlockTime: tx?.accepting_block_time ?? null,
       receipt: decoded,
-      evidencePath: receipt.evidencePath || null,
-      explorerUrl: `https://tn12.kaspa.stream/txs/${receipt.txid}`
+      evidencePath: record.evidencePath || null,
+      explorerUrl: `https://tn12.kaspa.stream/txs/${record.txid}`
     };
   });
+}
+
+function payloadRecords(fixture = {}) {
+  return [
+    ...(fixture.acceptedReceipts || []).map((receipt) => ({
+      ...receipt,
+      event: "paid",
+      expectedValue: "paid"
+    })),
+    ...(fixture.refunds || []).filter((refund) => refund.accepted === true).map((refund) => ({
+      ...refund,
+      event: "refunded",
+      expectedValue: "refunded"
+    })),
+    ...(fixture.errors || []).filter((error) => error.accepted === true).map((error) => ({
+      ...error,
+      event: "error",
+      expectedValue: "error"
+    }))
+  ];
 }

@@ -117,9 +117,11 @@ assert.equal(invoiceArtifact.status, "draft-needs-payload-submit");
 assert.equal(invoiceArtifact.receipt.payload.kind, "invoice-receipt");
 const invoiceFixture = JSON.parse(await readFile(new URL("../fixtures/InvoiceReceipts.json", import.meta.url), "utf8"));
 const invoiceRegistry = buildInvoiceRegistry(invoiceFixture);
-assert.equal(invoiceRegistry.summary.total, 2);
+assert.equal(invoiceRegistry.status, "has-accepted-invoice-events");
+assert.equal(invoiceRegistry.summary.total, 4);
 assert.equal(invoiceRegistry.summary.paid, 1);
-assert.equal(invoiceRegistry.summary.refunded, 0);
+assert.equal(invoiceRegistry.summary.refunded, 1);
+assert.equal(invoiceRegistry.summary.errors, 1);
 assert.equal(invoiceRegistry.summary.draft, 1);
 assert.equal(invoiceRegistry.summary.review, 0);
 assert.equal(invoiceRegistry.summary.duplicateReceipts, 0);
@@ -158,9 +160,9 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 14);
-assert.equal(submitRegistry.summary.payloadDrafts, 1);
-assert.equal(submitRegistry.summary.payloadSubmitGated, 1);
+assert.equal(submitRegistry.summary.total, 16);
+assert.equal(submitRegistry.summary.payloadDrafts, 3);
+assert.equal(submitRegistry.summary.payloadSubmitGated, 3);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -459,6 +461,8 @@ const files = [
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-treasury-vaults.mjs",
   "scripts/build-payload-submit-readiness.mjs",
+  "scripts/verify-payload-receipt.mjs",
+  "scripts/verify-payload-events.mjs",
   "scripts/build-coordination-market.mjs",
   "scripts/build-access-pass-planner.mjs",
   "scripts/build-mainnet-readiness.mjs",
@@ -485,6 +489,8 @@ const files = [
   "artifacts/signed-drafts/escrow-refund.json",
   "artifacts/signed-drafts/escrow-cancel.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
+  "artifacts/signed-drafts/payload-refund-self-send.json",
+  "artifacts/signed-drafts/payload-error-self-send.json",
   "artifacts/submit-console-registry.json",
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
@@ -493,6 +499,9 @@ const files = [
   "artifacts/escrow-primitives.json",
   "artifacts/treasury-vaults.json",
   "artifacts/payload-submit-readiness.json",
+  "artifacts/payload-receipt-evidence.json",
+  "artifacts/payload-refund-evidence.json",
+  "artifacts/payload-error-evidence.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -564,6 +573,7 @@ const files = [
   "docs/LLM_REVIEW_GUIDE.md",
   "docs/MICHAEL_QUESTIONS.md",
   "docs/ROADMAP_STATE.md",
+  "docs/TN12_TEST_MATRIX.md",
   "docs/TRANSACTION_API_NOTES.md",
   "docs/ASSURANCE_CONTRACTS.md",
   "docs/KASPA_DOCS_REVIEW.md",

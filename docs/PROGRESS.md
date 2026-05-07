@@ -6,12 +6,14 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
 
 The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
 
+Standard: positive app-state transitions need accepted TN12 transaction evidence before they are marked done. Local reducer tests remain useful for duplicate, stale, malformed, or unsafe cases, but they do not replace a safe testnet transaction for real state changes. The running tested/not-tested map is `docs/TN12_TEST_MATRIX.md`.
+
 ## Built Bases
 
-1. Payload receipt / invoice app: fixture, registry, UI panel, signed payload draft, readiness check, accepted receipt evidence, and decoded app state.
+1. Payload receipt / invoice app: fixture, registry, UI panel, signed payload drafts, readiness check, accepted paid/refund/error payload evidence, and decoded app state.
    - Current status: accepted TN12 JSON wRPC vertical slice.
    - Evidence: forced public TN12 REST submit accepted tx `d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4`, but the fetched transaction has no payload; expected payload txid `ae807e8d81fd46ad5f0f9f77128851cb181a37e7b90105fb8e89f5595955a4d9` was not found.
-   - Accepted route: JSON wRPC accepted tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`; `npm run payload:verify` confirms payload bytes and output match.
+   - Accepted route: JSON wRPC accepted paid tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`, refund tx `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`, and error tx `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`; `npm run payload:verify` confirms payload bytes and output match for each evidence artifact.
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
 
@@ -104,7 +106,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
    - keep REST submit marked unsuitable for payload receipts;
    - make JSON wRPC or wallet review repeatable;
    - duplicate-payment and stale-receipt checks: done in invoice registry state;
-   - refund/error state: done in invoice registry state;
+   - refund/error state: done with accepted TN12 payload events and invoice registry state;
    - keep invoice paid state tied to matched accepted payload bytes.
 
 4. Turn research lanes into safer prototypes:
@@ -125,6 +127,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
 npm run check:all
 npm run tx:verify
 npm run proof:evidence
+npm run payload:verify:events
 ```
 
 `npm run proof:evidence` verifies the important proof shape: the seven accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.

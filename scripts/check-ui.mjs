@@ -53,8 +53,13 @@ try {
   await expectText(page, "#invoice-summary", "Draft");
   await expectText(page, "#invoice-summary", "Review");
   await expectText(page, "#invoice-summary", "Refunded");
+  await expectText(page, "#invoice-summary", "Errors");
   await expectText(page, "#invoice-list", "merchant-order-1337");
   await expectText(page, "#invoice-list", "accepted-receipt-indexed");
+  await expectText(page, "#invoice-list", "merchant-refund-demo");
+  await expectText(page, "#invoice-list", "refunded-receipt-indexed");
+  await expectText(page, "#invoice-list", "merchant-error-demo");
+  await expectText(page, "#invoice-list", "error-receipt-indexed");
   await expectText(page, "#invoice-draft", "signed-not-broadcast");
   await expectText(page, "#payload-readiness", "Payload submit readiness");
   await expectText(page, "#payload-readiness", "accepted-wrpc-payload-receipt-rest-blocked");
@@ -117,6 +122,10 @@ try {
   await expectText(page, "#research-candidates", "Wallet API send route");
   await expectText(page, "#receipt-events", "order-receipt / paid");
   await expectText(page, "#receipt-events", "merchant-order-1337");
+  await expectText(page, "#receipt-events", "order-receipt / refunded");
+  await expectText(page, "#receipt-events", "merchant-refund-demo");
+  await expectText(page, "#receipt-events", "order-receipt / error");
+  await expectText(page, "#receipt-events", "merchant-error-demo");
   await expectText(page, "#signal-artifact", "payload-size-ok");
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");
   await expectText(page, "#payload-draft-status", "accepted through TN12 JSON wRPC");

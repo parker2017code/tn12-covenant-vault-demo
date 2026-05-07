@@ -23,9 +23,10 @@ The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof t
 4. `docs/ROADMAP_STATE.md`: durable lane map and current next work.
 5. `docs/PROGRESS.md`: lane-by-lane build state and immediate task list.
 6. `docs/LLM_REVIEW_GUIDE.md`: how to verify GitHub, Pages, artifacts, and TN12 chain state before making claims.
-7. `docs/MICHAEL_QUESTIONS.md`: exact protocol/tooling questions to escalate through the user.
-8. `docs/STATUS.md`: human-readable proof/status list.
-9. `docs/BUILD_PLAN.md`: backlog history and next build tasks.
+7. `docs/TN12_TEST_MATRIX.md`: what is TN12 accepted, what is only local reducer-tested, and what still needs a safe testnet transaction.
+8. `docs/MICHAEL_QUESTIONS.md`: exact protocol/tooling questions to escalate through the user.
+9. `docs/STATUS.md`: human-readable proof/status list.
+10. `docs/BUILD_PLAN.md`: backlog history and next build tasks.
 
 Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source discipline or protocol claims. Use `docs/TRANSACTION_API_NOTES.md` before touching transaction creation, payloads, submit routes, or accepted-indexing code.
 
@@ -35,6 +36,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - Do not use mainnet keys or imply mainnet covenant activation.
 - Do not reintroduce local `kaspad` or `/home/parker2017/kaspa-node` into this repo unless the user explicitly reverses that rule.
 - Keep actual broadcast behind explicit commands and testnet-only language.
+- Positive app-state transitions should have accepted TN12 transaction evidence before they are marked done. Local reducer tests are still useful for adversarial, duplicate, stale, malformed, or unsafe cases, but they are not a substitute for a safe testnet transaction when the feature claims a real state change.
 - Do not use the public TN12 REST submit route for payload receipts. It accepted a payment while dropping payload bytes.
 - Use public TN12 REST reads, local fixtures, local signing, explicit submit commands, and the verified TN12 JSON wRPC route for payload receipts until wallet review replaces local signing.
 - When TN12, Silverscript, Rusty Kaspa, transaction signing, submit serialization, or covenant verification behavior remains unclear, first dig through the basic layers yourself: local artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK version/API shape, node/network id, and upstream Rusty Kaspa source/tests. Ask the user to get Michael's guidance only after those checks are exhausted or a precise external confirmation is genuinely needed. Include the exact txid, artifact path, endpoint response, source line, and smallest reproducer command.
@@ -53,19 +55,24 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Continuation Note
 
-The latest continuation added access-pass negative/reducer hardening: accepted redemptions now require an accepted txid, duplicate pass/holder redemptions are marked for review, and neither case can inflate redeemed counts. The UI summary now surfaces redemption review count. Regenerated `artifacts/access-pass-planner.json`.
+The latest continuation made the TN12 evidence rule explicit and added accepted invoice refund/error payload events:
+
+- paid receipt: `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`
+- refund event: `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`
+- error event: `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`
+
+`docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions.
 
 Validation run for this continuation:
 
 ```sh
-npm run access:passes
 npm run check:all
 npm run tx:verify
 npm run proof:evidence
-npm run compile:contracts
+npm run payload:verify:events
 ```
 
-Observed proof state remained accepted and matched: `6/6` accepted proof transactions, `6/6` P2SH inputs, `6/6` P2PK outputs.
+Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Invoice payload events verified: `3/3`.
 
 ## Update Rule
 

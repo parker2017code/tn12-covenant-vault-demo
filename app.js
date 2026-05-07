@@ -900,6 +900,7 @@ async function renderInvoiceApp() {
       <article><span>Total</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
       <article><span>Paid</span><strong>${escapeHtml(registry.summary.paid)}</strong></article>
       <article><span>Refunded</span><strong>${escapeHtml(registry.summary.refunded)}</strong></article>
+      <article><span>Errors</span><strong>${escapeHtml(registry.summary.errors)}</strong></article>
       <article><span>Draft</span><strong>${escapeHtml(registry.summary.draft)}</strong></article>
       <article><span>Review</span><strong>${escapeHtml(registry.summary.review)}</strong></article>
       <article><span>TKAS</span><strong>${escapeHtml(registry.summary.totalTkas)}</strong></article>

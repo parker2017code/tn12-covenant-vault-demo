@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:01:32.400Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5586090,
+  "acceptingBlockTime": 1778180039863,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a22416363657074656420726566756e64207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+    "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a22416363657074656420726566756e64207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+    "bytes": 135,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "order-receipt",
+        "subject": "merchant-refund-demo",
+        "value": "refunded",
+        "note": "Accepted refund payload for invoice state testing"
+      },
+      "encoded": {
+        "bytes": 135,
+        "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a22416363657074656420726566756e64207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "merchant-refund-demo",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13"
+}

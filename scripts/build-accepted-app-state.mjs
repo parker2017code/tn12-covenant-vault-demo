@@ -13,7 +13,7 @@ for (const proof of proofFixture.transactions) {
   transactions[proof.txid] = await fetchTransaction(proof.txid);
 }
 
-for (const receipt of receiptFixture.acceptedReceipts || []) {
+for (const receipt of acceptedPayloadRecords(receiptFixture)) {
   receiptTransactions[receipt.txid] = await fetchTransaction(receipt.txid);
 }
 
@@ -39,4 +39,12 @@ async function fetchTransaction(txid) {
     throw new Error(`Transaction fetch failed for ${txid}: ${response.status} ${response.statusText}`);
   }
   return response.json();
+}
+
+function acceptedPayloadRecords(fixture = {}) {
+  return [
+    ...(fixture.acceptedReceipts || []),
+    ...(fixture.refunds || []).filter((record) => record.accepted === true),
+    ...(fixture.errors || []).filter((record) => record.accepted === true)
+  ];
 }

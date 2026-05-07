@@ -20,6 +20,24 @@
       "memo": "Campaign pledge receipt candidate",
       "dueHours": 72,
       "status": "draft"
+    },
+    {
+      "invoiceId": "merchant-refund-demo",
+      "merchant": "Kaspa App Lab",
+      "payerLabel": "TN12 demo wallet",
+      "amountTkas": 1,
+      "memo": "Refund state test",
+      "dueHours": 24,
+      "status": "refunded"
+    },
+    {
+      "invoiceId": "merchant-error-demo",
+      "merchant": "Kaspa App Lab",
+      "payerLabel": "TN12 demo wallet",
+      "amountTkas": 1,
+      "memo": "Error state test",
+      "dueHours": 24,
+      "status": "error"
     }
   ],
   "acceptedReceipts": [
@@ -33,6 +51,27 @@
       "memo": "Accepted TN12 JSON wRPC payload receipt; payload matched the signed draft."
     }
   ],
-  "refunds": [],
-  "errors": []
+  "refunds": [
+    {
+      "invoiceId": "merchant-refund-demo",
+      "accepted": true,
+      "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "payloadBytes": 135,
+      "acceptingBlockBlueScore": 5586090,
+      "evidencePath": "artifacts/payload-refund-evidence.json",
+      "memo": "Accepted TN12 JSON wRPC refund payload; payload matched the signed draft."
+    }
+  ],
+  "errors": [
+    {
+      "invoiceId": "merchant-error-demo",
+      "accepted": true,
+      "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "payloadBytes": 130,
+      "acceptingBlockBlueScore": 5586406,
+      "evidencePath": "artifacts/payload-error-evidence.json",
+      "reason": "payload-error-event",
+      "memo": "Accepted TN12 JSON wRPC error payload; payload matched the signed draft."
+    }
+  ]
 }

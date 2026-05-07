@@ -10,8 +10,10 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Preview command: `npm run serve`
 - Main check command: `npm run check:all`
 - TN12 proof check command: `npm run tx:verify`
+- Invoice payload-event check command: `npm run payload:verify:events`
 - Accepted app-state snapshot command: `npm run indexer:state`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
+- TN12 tested/not-tested map: `docs/TN12_TEST_MATRIX.md`
 
 The local preview server has been running on port `4176`. If it is not running, start it from this repo with `npm run serve`.
 
@@ -42,6 +44,7 @@ The project no longer depends on a local full Kaspa node. It uses public TN12 RE
 ## Hard Boundaries
 
 - Operating rule: do the work, verify it, then report what changed.
+- TN12 evidence rule: positive app-state transitions need accepted TN12 transaction evidence before they are marked done. Local reducer tests are for adversarial, duplicate, stale, malformed, or unsafe cases; they do not replace a safe testnet transaction for real state changes.
 - Testnet-only. Keep mainnet covenant activation out of the claims.
 - Keep private keys private. `.local/tn12-wallet.json` may be read by signing scripts but must never be pasted into docs, source, UI, or chat.
 - Mainnet addresses use `kaspa:`. TN12 addresses use `kaspatest:`.

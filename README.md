@@ -4,7 +4,7 @@ TN12-configured prototype for a Kaspa covenant vault and assurance-contract app.
 
 This repo is a TN12 learning and proof workspace. It makes covenant-style money rules understandable, compiles Silverscript templates, builds and submits TN12 proof transactions, and avoids mainnet-wallet claims.
 
-Reviewers and LLM agents should start with [`MEMORY.md`](MEMORY.md), then use [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md).
+Reviewers and LLM agents should start with [`MEMORY.md`](MEMORY.md), then use [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md). The accepted/not-yet-tested TN12 evidence map lives in [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md).
 
 Protocol-debugging rule: unclear TN12, Silverscript, Rusty Kaspa, signing, submit, serialization, or covenant behavior starts with local evidence: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and upstream source/tests. Escalation needs a txid, artifact path, endpoint response, source line, and smallest reproducer command.
 Resolved escalation notes are tracked in [`docs/MICHAEL_QUESTIONS.md`](docs/MICHAEL_QUESTIONS.md).
@@ -13,6 +13,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 ## Current Position
 
 - Accepted proof core: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, escrow DAA-refund, and escrow mutual cancel.
+- Accepted invoice payload events: paid, refunded, and error states now have TN12 JSON wRPC transactions and evidence artifacts.
 - Escrow mutual cancel is now accepted on TN12. The old script-unit rejection came from `sigOpCount=1` bad configuration; the accepted path is the corrected tx version 1 `computeBudget=30` draft rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`.
 - Near-term app priority: payload invoice/receipt vertical slice, because it is closest to mainnet-capable Kaspa behavior.
 - Toccata-oriented priority: keep vault, assurance, escrow, and treasury primitives clean so they are ready to adapt when covenant tooling stabilizes.

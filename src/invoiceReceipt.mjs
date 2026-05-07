@@ -35,15 +35,19 @@ export function buildInvoiceArtifact(input = {}, options = {}) {
   const refundReviews = options.refundReviews || [];
   const receiptReviews = options.receiptReviews || [];
   const errorRecords = options.errorRecords || [];
+  const acceptedErrorRecord = options.acceptedErrorRecord || null;
   const refunded = Boolean(refundRecord?.accepted && refundRecord.status !== "needs-review");
-  const accepted = !refunded && Boolean(paidReceipt?.accepted && paidReceipt.status !== "needs-review");
-  const needsReview = !accepted && !refunded && (receiptReviews.length > 0 || refundReviews.length > 0 || errorRecords.length > 0);
+  const errored = !refunded && Boolean(acceptedErrorRecord?.accepted && acceptedErrorRecord.status !== "needs-review");
+  const accepted = !refunded && !errored && Boolean(paidReceipt?.accepted && paidReceipt.status !== "needs-review");
+  const needsReview = !accepted && !refunded && !errored && (receiptReviews.length > 0 || refundReviews.length > 0 || errorRecords.length > 0);
 
   return {
     schema: "kaspa-invoice-receipt-app/v1",
     network: "kaspa-testnet-12",
     status: refunded
       ? "refunded-receipt-indexed"
+      : errored
+      ? "error-receipt-indexed"
       : accepted
       ? "accepted-receipt-indexed"
       : needsReview
@@ -61,9 +65,12 @@ export function buildInvoiceArtifact(input = {}, options = {}) {
     refundRecord,
     refundReviews,
     receiptReviews,
+    acceptedErrorRecord,
     errorRecords,
     appState: refunded
       ? `Invoice ${invoice.invoiceId} is refunded by accepted transaction ${refundRecord.txid}.`
+      : errored
+      ? `Invoice ${invoice.invoiceId} has an accepted error event ${acceptedErrorRecord.txid}.`
       : accepted
       ? `Invoice ${invoice.invoiceId} is paid by accepted payload receipt ${paidReceipt.txid}.`
       : needsReview
@@ -87,8 +94,9 @@ export function buildInvoiceRegistry(fixture = {}) {
     const refundRecord = refundRecords.find((refund) => refund.invoiceId === invoice.invoiceId && refund.status === "accepted-refund") || null;
     const refundReviews = refundRecords.filter((refund) => refund.invoiceId === invoice.invoiceId && refund.status === "needs-review");
     const receiptReviews = matchingReceipts.filter((receipt) => receipt.status === "needs-review");
+    const acceptedErrorRecord = errorRecords.find((error) => error.invoiceId === invoice.invoiceId && error.status === "accepted-error") || null;
     const invoiceErrors = errorRecords.filter((error) => error.invoiceId === invoice.invoiceId && error.status === "needs-review");
-    return buildInvoiceArtifact(invoice, { paidReceipt, refundRecord, refundReviews, receiptReviews, errorRecords: invoiceErrors });
+    return buildInvoiceArtifact(invoice, { paidReceipt, refundRecord, refundReviews, receiptReviews, acceptedErrorRecord, errorRecords: invoiceErrors });
   });
   const reviewReceipts = receiptRecords.filter((record) => record.status === "needs-review");
   const reviewRefunds = refundRecords.filter((record) => record.status === "needs-review");
@@ -100,15 +108,18 @@ export function buildInvoiceRegistry(fixture = {}) {
     network: fixture.network || "kaspa-testnet-12",
     status: reviewRecords.length
       ? "receipt-review-needed"
-      : invoices.some((invoice) => invoice.status === "refunded-receipt-indexed")
-      ? "has-refunded-receipts"
-      : invoices.some((invoice) => invoice.status === "accepted-receipt-indexed")
-      ? "has-accepted-receipts"
+      : invoices.some((invoice) => [
+        "accepted-receipt-indexed",
+        "refunded-receipt-indexed",
+        "error-receipt-indexed"
+      ].includes(invoice.status))
+      ? "has-accepted-invoice-events"
       : "drafts-ready-for-payload-submit",
     summary: {
       total: invoices.length,
       paid: invoices.filter((invoice) => invoice.status === "accepted-receipt-indexed").length,
       refunded: invoices.filter((invoice) => invoice.status === "refunded-receipt-indexed").length,
+      errors: invoices.filter((invoice) => invoice.status === "error-receipt-indexed").length,
       draft: invoices.filter((invoice) => invoice.status === "draft-needs-payload-submit").length,
       review: reviewRecords.length,
       duplicateReceipts: reviewReceipts.filter((receipt) => receipt.reviewReason === "duplicate-receipt").length,
@@ -189,13 +200,31 @@ export function classifyRefundRecords(refunds = [], invoices = []) {
 
 export function classifyErrorRecords(errors = [], invoices = []) {
   const knownInvoiceIds = new Set(invoices.map((invoice) => invoice.invoiceId));
+  const seenAcceptedByInvoice = new Set();
 
   return errors.map((error) => {
     const invoiceKnown = knownInvoiceIds.has(error.invoiceId);
+    const accepted = error.accepted === true;
+    let status = accepted && invoiceKnown ? "accepted-error" : "needs-review";
+    let reviewReason = null;
+
+    if (!invoiceKnown) {
+      status = "needs-review";
+      reviewReason = "stale-or-unknown-invoice";
+    } else if (!accepted) {
+      status = "needs-review";
+      reviewReason = clean(error.reason || "invoice-error", 64);
+    } else if (seenAcceptedByInvoice.has(error.invoiceId)) {
+      status = "needs-review";
+      reviewReason = "duplicate-error";
+    } else {
+      seenAcceptedByInvoice.add(error.invoiceId);
+    }
+
     return {
       ...error,
-      status: "needs-review",
-      reviewReason: invoiceKnown ? clean(error.reason || "invoice-error", 64) : "stale-or-unknown-invoice"
+      status,
+      reviewReason
     };
   });
 }
