@@ -23,6 +23,7 @@ import {
   buildSignalPayloadArtifact
 } from "./src/signalPayload.mjs";
 import { buildAttestationRegistry } from "./src/attestationSignal.mjs";
+import { buildInvoiceRegistry } from "./src/invoiceReceipt.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -41,6 +42,9 @@ const proofStatusNode = document.querySelector("#proof-status");
 const indexerSummaryNode = document.querySelector("#indexer-summary");
 const indexerRecordsNode = document.querySelector("#indexer-records");
 const receiptEventsNode = document.querySelector("#receipt-events");
+const invoiceSummaryNode = document.querySelector("#invoice-summary");
+const invoiceListNode = document.querySelector("#invoice-list");
+const invoiceDraftNode = document.querySelector("#invoice-draft");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -160,6 +164,7 @@ renderAssurance();
 renderManualOutpoint();
 renderProofTransactions();
 renderAcceptedAppState();
+renderInvoiceApp();
 renderMasterRoadmap();
 renderBuildQueue();
 renderVaultTemplates();
@@ -364,6 +369,58 @@ async function renderAcceptedAppState() {
     }
   } catch (error) {
     indexerSummaryNode.textContent = `Indexer snapshot unavailable: ${error.message}`;
+  }
+}
+
+async function renderInvoiceApp() {
+  if (!invoiceSummaryNode || !invoiceListNode || !invoiceDraftNode) return;
+
+  try {
+    const response = await fetch("fixtures/InvoiceReceipts.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const registry = buildInvoiceRegistry(fixture);
+    invoiceSummaryNode.innerHTML = `
+      <article><span>Total</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
+      <article><span>Paid</span><strong>${escapeHtml(registry.summary.paid)}</strong></article>
+      <article><span>Draft</span><strong>${escapeHtml(registry.summary.draft)}</strong></article>
+      <article><span>TKAS</span><strong>${escapeHtml(registry.summary.totalTkas)}</strong></article>
+    `;
+
+    invoiceListNode.innerHTML = "";
+    for (const invoice of registry.invoices) {
+      const article = document.createElement("article");
+      article.className = "invoice-card";
+      article.innerHTML = `
+        <span>${escapeHtml(invoice.status)}</span>
+        <strong>${escapeHtml(invoice.invoice.invoiceId)}</strong>
+        <p>${escapeHtml(invoice.invoice.amountTkas)} TKAS to ${escapeHtml(invoice.invoice.merchant)}</p>
+        <small>${escapeHtml(invoice.appState)}</small>
+      `;
+      invoiceListNode.append(article);
+    }
+
+    try {
+      const draftResponse = await fetch("artifacts/signed-drafts/payload-receipt-self-send.json", { cache: "no-store" });
+      const draft = await draftResponse.json();
+      invoiceDraftNode.innerHTML = `
+        <article>
+          <span>${escapeHtml(draft.status)}</span>
+          <strong>${escapeHtml(shortTxid(draft.transactionId))}</strong>
+          <p>${escapeHtml(draft.receipt.payload.kind)} / ${escapeHtml(draft.receipt.payload.subject)}</p>
+          <small>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; submit remains gated until payload support is verified.</small>
+        </article>
+      `;
+    } catch (error) {
+      invoiceDraftNode.innerHTML = `
+        <article>
+          <span>draft-needed</span>
+          <strong>Run npm run tx:payload</strong>
+          <p>${escapeHtml(error.message)}</p>
+        </article>
+      `;
+    }
+  } catch (error) {
+    invoiceSummaryNode.textContent = `Invoice registry unavailable: ${error.message}`;
   }
 }
 

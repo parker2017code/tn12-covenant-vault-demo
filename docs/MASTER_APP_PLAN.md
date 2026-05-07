@@ -16,6 +16,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
    - Payment plus app data.
    - This is the cleanest bridge from live Kaspa behavior into app state.
    - First success: one accepted TN12 payload receipt decoded by the app-state indexer.
+   - Current repo surface: `fixtures/InvoiceReceipts.json`, `src/invoiceReceipt.mjs`, `npm run invoice:registry`, and the browser invoice panel.
 
 2. Wallet-Facing Submit Console
    - Show exact inputs, outputs, fees, payload, draft status, and submit command.

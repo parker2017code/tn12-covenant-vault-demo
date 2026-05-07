@@ -1,0 +1,112 @@
+{
+  "schema": "kaspa-invoice-registry/v1",
+  "network": "kaspa-testnet-12",
+  "status": "drafts-ready-for-payload-submit",
+  "summary": {
+    "total": 2,
+    "paid": 0,
+    "draft": 2,
+    "totalTkas": 26
+  },
+  "invoices": [
+    {
+      "schema": "kaspa-invoice-receipt-app/v1",
+      "network": "kaspa-testnet-12",
+      "status": "draft-needs-payload-submit",
+      "invoice": {
+        "invoiceId": "merchant-order-1337",
+        "merchant": "Kaspa App Lab",
+        "payerLabel": "TN12 demo wallet",
+        "amountTkas": 1,
+        "memo": "Payload receipt invoice demo",
+        "dueHours": 24,
+        "status": "paid"
+      },
+      "payment": {
+        "amountTkas": 1,
+        "amountSompi": "100000000",
+        "route": "TN12 transaction payload receipt",
+        "submitBoundary": "Create a signed transaction with this receipt payload, then verify the accepted tx before marking paid."
+      },
+      "receipt": {
+        "schema": "kaspa-signal-payload/v1",
+        "status": "payload-size-ok",
+        "lane": "transaction-payload",
+        "payload": {
+          "kind": "invoice-receipt",
+          "subject": "merchant-order-1337",
+          "value": "paid",
+          "note": "Kaspa App Lab: Payload receipt invoice demo"
+        },
+        "encoded": {
+          "bytes": 126,
+          "transientMass": 504,
+          "hex": "7b226b696e64223a22696e766f6963652d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a224b6173706120417070204c61623a205061796c6f6164207265636569707420696e766f6963652064656d6f227d"
+        },
+        "limits": {
+          "standardTxMassLimit": 100000,
+          "transientByteMass": 4,
+          "remainingMassBeforeInputsOutputsAndSignatures": 99496
+        },
+        "boundary": "This models user transaction payload data, not arbitrary miner header data."
+      },
+      "acceptedReceipt": null,
+      "appState": "Invoice merchant-order-1337 is not paid until an accepted transaction carries this receipt payload.",
+      "boundaries": [
+        "This is payment plus app data, not a smart-contract invoice settlement.",
+        "Accepted transaction indexing is the source of app state.",
+        "The existing signed draft proves local payload bytes; broadcast remains gated until payload submit support is verified."
+      ]
+    },
+    {
+      "schema": "kaspa-invoice-receipt-app/v1",
+      "network": "kaspa-testnet-12",
+      "status": "draft-needs-payload-submit",
+      "invoice": {
+        "invoiceId": "assurance-campaign-demo",
+        "merchant": "Public goods campaign",
+        "payerLabel": "Contributor wallet",
+        "amountTkas": 25,
+        "memo": "Campaign pledge receipt candidate",
+        "dueHours": 72,
+        "status": "draft"
+      },
+      "payment": {
+        "amountTkas": 25,
+        "amountSompi": "2500000000",
+        "route": "TN12 transaction payload receipt",
+        "submitBoundary": "Create a signed transaction with this receipt payload, then verify the accepted tx before marking paid."
+      },
+      "receipt": {
+        "schema": "kaspa-signal-payload/v1",
+        "status": "payload-size-ok",
+        "lane": "transaction-payload",
+        "payload": {
+          "kind": "invoice-receipt",
+          "subject": "assurance-campaign-demo",
+          "value": "draft",
+          "note": "Public goods campaign: Campaign pledge receipt candidate"
+        },
+        "encoded": {
+          "bytes": 144,
+          "transientMass": 576,
+          "hex": "7b226b696e64223a22696e766f6963652d72656365697074222c227375626a656374223a226173737572616e63652d63616d706169676e2d64656d6f222c2276616c7565223a226472616674222c226e6f7465223a225075626c696320676f6f64732063616d706169676e3a2043616d706169676e20706c6564676520726563656970742063616e646964617465227d"
+        },
+        "limits": {
+          "standardTxMassLimit": 100000,
+          "transientByteMass": 4,
+          "remainingMassBeforeInputsOutputsAndSignatures": 99424
+        },
+        "boundary": "This models user transaction payload data, not arbitrary miner header data."
+      },
+      "acceptedReceipt": null,
+      "appState": "Invoice assurance-campaign-demo is not paid until an accepted transaction carries this receipt payload.",
+      "boundaries": [
+        "This is payment plus app data, not a smart-contract invoice settlement.",
+        "Accepted transaction indexing is the source of app state.",
+        "The existing signed draft proves local payload bytes; broadcast remains gated until payload submit support is verified."
+      ]
+    }
+  ],
+  "next": "Use Wallet API or another payload-preserving route to submit one tiny TN12 invoice receipt, then verify and add the accepted txid."
+}

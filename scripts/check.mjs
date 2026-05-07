@@ -32,6 +32,11 @@ import {
   decodeSignalPayload
 } from "../src/signalPayload.mjs";
 import { buildAttestationRegistry } from "../src/attestationSignal.mjs";
+import {
+  DEFAULT_INVOICE,
+  buildInvoiceArtifact,
+  buildInvoiceRegistry
+} from "../src/invoiceReceipt.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -84,6 +89,14 @@ assert.equal(attestationRegistry.status, "research-fixture-not-market-settlement
 assert.equal(attestationRegistry.summary.total, 3);
 assert.ok(attestationRegistry.boundaries.some((boundary) => /block headers/.test(boundary)));
 assert.ok(attestationRegistry.sources.some((source) => source.source === "pool-operator-gamma"));
+const invoiceArtifact = buildInvoiceArtifact(DEFAULT_INVOICE);
+assert.equal(invoiceArtifact.schema, "kaspa-invoice-receipt-app/v1");
+assert.equal(invoiceArtifact.status, "draft-needs-payload-submit");
+assert.equal(invoiceArtifact.receipt.payload.kind, "invoice-receipt");
+const invoiceFixture = JSON.parse(await readFile(new URL("../fixtures/InvoiceReceipts.json", import.meta.url), "utf8"));
+const invoiceRegistry = buildInvoiceRegistry(invoiceFixture);
+assert.equal(invoiceRegistry.summary.total, 2);
+assert.equal(invoiceRegistry.summary.paid, 0);
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -164,6 +177,7 @@ const files = [
   "scripts/submit-signed-draft.mjs",
   "scripts/plan-transactions.mjs",
   "scripts/build-signal-payload.mjs",
+  "scripts/build-invoice-registry.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
@@ -180,10 +194,12 @@ const files = [
   "fixtures/MinerSignalResearch.json",
   "fixtures/AttestationSignals.json",
   "fixtures/MasterAppRoadmap.json",
+  "fixtures/InvoiceReceipts.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
+  "src/invoiceReceipt.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -218,6 +234,7 @@ assert.match(readme, /npm run drafts/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
+assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -231,6 +248,7 @@ assert.match(html, /Manual address check/);
 assert.match(html, /Kaspa app lab/);
 assert.match(html, /Miner signal research/);
 assert.match(html, /Accepted transaction indexer/);
+assert.match(html, /Payload receipt app/);
 assert.match(html, /receipt-events/);
 assert.match(html, /Master app plan/);
 assert.match(html, /Attestation registry/);

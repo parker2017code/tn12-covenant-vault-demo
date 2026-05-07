@@ -50,6 +50,9 @@ try {
   await expectText(page, "body", "TN12 configured. Proof transactions accepted.");
   await expectText(page, "#assurance-issues", "Assurance shape is valid.");
   await expectText(page, "#indexer-summary", "Matched");
+  await expectText(page, "#invoice-summary", "Draft");
+  await expectText(page, "#invoice-list", "merchant-order-1337");
+  await expectText(page, "#invoice-draft", "signed-not-broadcast");
   await expectText(page, "#receipt-events", "No accepted payload receipts yet");
   await expectText(page, "#signal-artifact", "payload-size-ok");
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");

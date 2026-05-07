@@ -191,6 +191,14 @@ Build a compact transaction-payload receipt artifact for the accepted-transactio
 npm run signal:payload
 ```
 
+Build the invoice registry for the first payload receipt app:
+
+```sh
+npm run invoice:registry
+```
+
+This turns `fixtures/InvoiceReceipts.json` into `artifacts/invoice-registry.json`. An invoice stays draft/unpaid until an accepted TN12 transaction carries the matching receipt payload and the txid is added as an accepted receipt.
+
 Build a signed self-send draft that carries that receipt as transaction payload:
 
 ```sh

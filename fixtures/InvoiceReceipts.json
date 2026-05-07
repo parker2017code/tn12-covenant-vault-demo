@@ -1,0 +1,26 @@
+{
+  "schema": "kaspa-invoice-receipts-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "next": "Use Wallet API or another payload-preserving route to submit one tiny TN12 invoice receipt, then verify and add the accepted txid.",
+  "invoices": [
+    {
+      "invoiceId": "merchant-order-1337",
+      "merchant": "Kaspa App Lab",
+      "payerLabel": "TN12 demo wallet",
+      "amountTkas": 1,
+      "memo": "Payload receipt invoice demo",
+      "dueHours": 24,
+      "status": "paid"
+    },
+    {
+      "invoiceId": "assurance-campaign-demo",
+      "merchant": "Public goods campaign",
+      "payerLabel": "Contributor wallet",
+      "amountTkas": 25,
+      "memo": "Campaign pledge receipt candidate",
+      "dueHours": 72,
+      "status": "draft"
+    }
+  ],
+  "acceptedReceipts": []
+}

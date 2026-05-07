@@ -21,6 +21,7 @@
       <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
+      <a href="#invoices">Invoices</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#stack">Stack</a>
       <a href="#app-lab">App lab</a>
@@ -221,6 +222,19 @@
       <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
       <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
       <pre>npm run indexer:state</pre>
+    </section>
+
+    <section id="invoices" class="panel invoices">
+      <div class="section-title">
+        <p class="eyebrow">Payload receipt app</p>
+        <h2>Invoices become app state after accepted payload receipts.</h2>
+        <p>This is lane 1: payment plus app data. The invoice is not considered paid by local JSON alone; it becomes app state only when an accepted TN12 transaction carries the matching payload receipt.</p>
+      </div>
+      <div id="invoice-summary" class="invoice-summary" aria-live="polite"></div>
+      <div id="invoice-list" class="invoice-list" aria-live="polite"></div>
+      <div id="invoice-draft" class="invoice-draft" aria-live="polite"></div>
+      <pre>npm run invoice:registry
+npm run tx:payload</pre>
     </section>
 
     <section id="roadmap" class="panel roadmap">

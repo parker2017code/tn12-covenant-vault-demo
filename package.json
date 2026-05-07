@@ -24,6 +24,7 @@
     "tx:verify": "node scripts/verify-accepted-txs.mjs",
     "tx:submit:dry": "node scripts/submit-signed-draft.mjs",
     "indexer:state": "node scripts/build-accepted-app-state.mjs",
+    "invoice:registry": "node scripts/build-invoice-registry.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },
