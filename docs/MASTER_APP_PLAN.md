@@ -82,7 +82,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
 
 ## Immediate Order
 
-1. Finish Payload Receipt / Invoice App.
-2. Add Wallet-Facing Submit Console.
-3. Use the attestation registry as the research foundation for lane 11 while lane 1 payload work proves the transport.
-4. Move into Batch Assurance Campaigns and Escrow after the submit/review path is safe.
+1. Keep the payload receipt app gated by `npm run payload:readiness` until a payload-preserving submit route is verified.
+2. Use `npm run mainnet:readiness` to separate mainnet-capable payment/indexer work from TN12/Toccata covenant work.
+3. Continue filling base app artifacts for access passes, simple assets, auctions/intents, DeFi research, and AI-agent commitments.
+4. Harden vertical slices only after the enforcement and readiness maps agree on what is actually proved.

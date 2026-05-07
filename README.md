@@ -27,6 +27,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
 - Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, and Hunt-plan artifacts.
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
+- Builds a mainnet-readiness map that separates payment/indexer paths from TN12/Toccata covenant paths.
 
 ## What It Does Not Do Yet
 
@@ -291,6 +292,14 @@ npm run access:passes
 ```
 
 This turns `fixtures/AccessPassPlanner.json` into `artifacts/access-pass-planner.json`. Passes and redemptions are issuer/indexer flows, not native covenant-enforced tickets.
+
+Build the mainnet-readiness map:
+
+```sh
+npm run mainnet:readiness
+```
+
+This turns `fixtures/MainnetReadiness.json` into `artifacts/mainnet-readiness.json`. It separates components that can become mainnet payment/indexer products from TN12/Toccata-only covenant work and research-only lanes.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

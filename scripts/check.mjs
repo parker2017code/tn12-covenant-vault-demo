@@ -49,6 +49,7 @@ import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
+import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -187,6 +188,13 @@ assert.equal(accessPassPlanner.status, "issuer-indexer-flow-not-native-enforceme
 assert.equal(accessPassPlanner.summary.totalPasses, 3);
 assert.equal(accessPassPlanner.summary.acceptedRedemptions, 1);
 assert.ok(accessPassPlanner.passes.some((pass) => pass.passId === "pass-dev-workshop-001" && pass.state === "partially-redeemed"));
+const mainnetReadinessFixture = JSON.parse(await readFile(new URL("../fixtures/MainnetReadiness.json", import.meta.url), "utf8"));
+const mainnetReadiness = buildMainnetReadiness(mainnetReadinessFixture);
+assert.equal(mainnetReadiness.status, "readiness-map-not-launch-approval");
+assert.equal(mainnetReadiness.summary.mainnetCapable, 4);
+assert.equal(mainnetReadiness.summary.tn12Only, 3);
+assert.equal(mainnetReadiness.summary.researchOnly, 1);
+assert.equal(mainnetReadiness.summary.localOnly, 1);
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -277,6 +285,7 @@ const files = [
   "scripts/build-payload-submit-readiness.mjs",
   "scripts/build-coordination-market.mjs",
   "scripts/build-access-pass-planner.mjs",
+  "scripts/build-mainnet-readiness.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
@@ -291,6 +300,7 @@ const files = [
   "artifacts/payload-submit-readiness.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
+  "artifacts/mainnet-readiness.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/SavedWallet.public.json",
@@ -311,6 +321,7 @@ const files = [
   "fixtures/TreasuryVaults.json",
   "fixtures/CoordinationMarketPrototype.json",
   "fixtures/AccessPassPlanner.json",
+  "fixtures/MainnetReadiness.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
@@ -325,6 +336,7 @@ const files = [
   "src/payloadSubmitReadiness.mjs",
   "src/coordinationMarket.mjs",
   "src/accessPassPlanner.mjs",
+  "src/mainnetReadiness.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -369,6 +381,7 @@ assert.match(readme, /npm run treasury:registry/);
 assert.match(readme, /npm run payload:readiness/);
 assert.match(readme, /npm run coordination:market/);
 assert.match(readme, /npm run access:passes/);
+assert.match(readme, /npm run mainnet:readiness/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -390,6 +403,7 @@ assert.match(html, /Escrow primitive/);
 assert.match(html, /Treasury \/ team vaults/);
 assert.match(html, /Transparent coordination-market prototype/);
 assert.match(html, /KRC \/ access pass planner/);
+assert.match(html, /Mainnet readiness map/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);

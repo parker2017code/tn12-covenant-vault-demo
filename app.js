@@ -33,6 +33,7 @@ import { buildTreasuryVaultRegistry } from "./src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
+import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -72,6 +73,8 @@ const coordinationSummaryNode = document.querySelector("#coordination-summary");
 const coordinationPacksNode = document.querySelector("#coordination-packs");
 const accessSummaryNode = document.querySelector("#access-summary");
 const accessListNode = document.querySelector("#access-list");
+const mainnetSummaryNode = document.querySelector("#mainnet-summary");
+const mainnetComponentsNode = document.querySelector("#mainnet-components");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -195,6 +198,7 @@ renderEscrowPrimitive();
 renderTreasuryVaults();
 renderCoordinationMarket();
 renderAccessPassPlanner();
+renderMainnetReadiness();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -512,6 +516,37 @@ async function renderAccessPassPlanner() {
     }
   } catch (error) {
     accessSummaryNode.textContent = `Access pass planner unavailable: ${error.message}`;
+  }
+}
+
+async function renderMainnetReadiness() {
+  if (!mainnetSummaryNode || !mainnetComponentsNode) return;
+
+  try {
+    const response = await fetch("fixtures/MainnetReadiness.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const readiness = buildMainnetReadiness(fixture);
+    mainnetSummaryNode.innerHTML = `
+      <article><span>Mainnet paths</span><strong>${escapeHtml(readiness.summary.mainnetCapable)}</strong></article>
+      <article><span>TN12/Toccata</span><strong>${escapeHtml(readiness.summary.tn12Only)}</strong></article>
+      <article><span>Research</span><strong>${escapeHtml(readiness.summary.researchOnly)}</strong></article>
+      <article><span>Local only</span><strong>${escapeHtml(readiness.summary.localOnly)}</strong></article>
+    `;
+
+    mainnetComponentsNode.innerHTML = "";
+    for (const component of readiness.components) {
+      const article = document.createElement("article");
+      article.className = "mainnet-card";
+      article.innerHTML = `
+        <span>${escapeHtml(component.readiness)}</span>
+        <strong>${escapeHtml(component.name)}</strong>
+        <p>${escapeHtml(component.why)}</p>
+        <small>${escapeHtml(component.next)}</small>
+      `;
+      mainnetComponentsNode.append(article);
+    }
+  } catch (error) {
+    mainnetSummaryNode.textContent = `Mainnet readiness unavailable: ${error.message}`;
   }
 }
 

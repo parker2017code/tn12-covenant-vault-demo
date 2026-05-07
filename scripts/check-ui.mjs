@@ -73,6 +73,9 @@ try {
   await expectText(page, "#access-summary", "Redeemed");
   await expectText(page, "#access-list", "Kaspa dev workshop ticket");
   await expectText(page, "#access-list", "issuer-indexer");
+  await expectText(page, "#mainnet-summary", "Mainnet paths");
+  await expectText(page, "#mainnet-components", "Invoice / payload receipts");
+  await expectText(page, "#mainnet-components", "tn12-toccata-only");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

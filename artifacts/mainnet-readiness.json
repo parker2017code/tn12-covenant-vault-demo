@@ -1,0 +1,153 @@
+{
+  "schema": "kaspa-app-mainnet-readiness/v1",
+  "reviewedAt": "2026-05-07",
+  "status": "readiness-map-not-launch-approval",
+  "sources": [
+    "https://docs.kaspa.org/",
+    "https://kaspa.org/build",
+    "https://kaspa.org/toccata-hard-fork-kaspa-covenants/"
+  ],
+  "summary": {
+    "total": 9,
+    "mainnetCapable": 4,
+    "tn12Only": 3,
+    "researchOnly": 1,
+    "localOnly": 1
+  },
+  "components": [
+    {
+      "id": "accepted-indexer",
+      "name": "Accepted transaction indexer",
+      "lane": "payload-indexer",
+      "readiness": "mainnet-capable-with-engineering",
+      "why": "Accepted transaction listening is a live builder surface and can derive app state from accepted mainnet payments.",
+      "blockers": [
+        "production node/RPC path",
+        "rollback handling",
+        "checkpointing",
+        "tests"
+      ],
+      "next": "Build a network-configurable indexer that can run against mainnet without TN12 fixtures."
+    },
+    {
+      "id": "invoice-payload-receipts",
+      "name": "Invoice / payload receipts",
+      "lane": "payload-invoice",
+      "readiness": "mainnet-capable-with-engineering",
+      "why": "Standard transactions can carry app payload data, but this repo still needs a verified payload-preserving submit route.",
+      "blockers": [
+        "wallet integration",
+        "payload-preserving submit route",
+        "payment edge cases",
+        "refund UX"
+      ],
+      "next": "Finish the accepted payload receipt vertical slice before any real merchant workflow."
+    },
+    {
+      "id": "access-passes",
+      "name": "Access passes / coupons",
+      "lane": "access-passes",
+      "readiness": "mainnet-capable-with-engineering",
+      "why": "Issuer/indexer-backed claims can work as app state without native covenant enforcement.",
+      "blockers": [
+        "issuer trust",
+        "duplicate redemption checks",
+        "payload receipt acceptance",
+        "metadata policy"
+      ],
+      "next": "Tie one redemption to an accepted payload receipt and keep issuer enforcement visible."
+    },
+    {
+      "id": "attestation-registry",
+      "name": "Attestation registry",
+      "lane": "attestations",
+      "readiness": "mainnet-capable-with-engineering",
+      "why": "Signed statements anchored to accepted transactions can be useful app-layer records.",
+      "blockers": [
+        "signature verification",
+        "reputation model",
+        "dispute handling",
+        "not financial advice labels"
+      ],
+      "next": "Add signature material and accepted payload receipts for one signal."
+    },
+    {
+      "id": "wallet-submit-console",
+      "name": "Wallet-facing submit console",
+      "lane": "wallet-submit",
+      "readiness": "local-only-not-production",
+      "why": "Reviewing signed drafts is useful, but local key files and shell submit commands are not a production wallet flow.",
+      "blockers": [
+        "hardware/software wallet integration",
+        "no browser private keys",
+        "network config",
+        "permissioned submit"
+      ],
+      "next": "Move from local draft review to wallet connector review without exposing private keys."
+    },
+    {
+      "id": "vault-covenants",
+      "name": "Vault covenant templates",
+      "lane": "vault",
+      "readiness": "tn12-toccata-only",
+      "why": "Silverscript/covenant proof transactions are TN12-only until Toccata is active on mainnet and tooling is final.",
+      "blockers": [
+        "Toccata mainnet activation",
+        "final compiler/tooling",
+        "negative tests",
+        "audit",
+        "wallet integration"
+      ],
+      "next": "Keep as TN12 proof and add adversarial tests for current script paths."
+    },
+    {
+      "id": "assurance-pledge",
+      "name": "Assurance pledge primitive",
+      "lane": "assurance",
+      "readiness": "tn12-toccata-only",
+      "why": "The current script is an individual TN12 pledge primitive and does not enforce campaign target aggregation.",
+      "blockers": [
+        "Toccata mainnet activation",
+        "pooled/verified target design",
+        "release/refund batch planning",
+        "audit"
+      ],
+      "next": "Continue from batch planner to exact settlement drafts without claiming full assurance contract enforcement."
+    },
+    {
+      "id": "escrow-primitive",
+      "name": "Escrow primitive",
+      "lane": "escrow",
+      "readiness": "tn12-toccata-only",
+      "why": "Current escrow is planner/indexer state and has no accepted Escrow.sil proof yet.",
+      "blockers": [
+        "Escrow.sil",
+        "fund/release/refund drafts",
+        "accepted TN12 proofs",
+        "mainnet Toccata"
+      ],
+      "next": "Build Escrow.sil and accepted TN12 release/refund proof before discussing mainnet."
+    },
+    {
+      "id": "coordination-markets",
+      "name": "Hashdag/Staghunt-style coordination markets",
+      "lane": "coordination-markets",
+      "readiness": "research-only",
+      "why": "The repo has a transparent toy Stag/Intendo/Pack/Solver/Hunt planner, not opacity, multiplexing, composability, or atomic execution.",
+      "blockers": [
+        "opaque accumulation",
+        "capital multiplexing",
+        "solver infrastructure",
+        "RTD/oracles",
+        "vProg/zk rails"
+      ],
+      "next": "Keep the toy solver transparent and build exact settlement drafts for one pack before stronger claims."
+    }
+  ],
+  "rules": [
+    "Mainnet-capable does not mean production-safe.",
+    "TN12 accepted proof transactions are not mainnet proof transactions.",
+    "Covenant and Silverscript flows stay TN12/Toccata-only until final mainnet activation and compatible tooling.",
+    "Payment, payload, and accepted-transaction indexer apps still need wallet integration, node/RPC reliability, rollback handling, and tests before launch."
+  ]
+}

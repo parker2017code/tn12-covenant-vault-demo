@@ -389,6 +389,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.mainnet-readiness {
+  margin-top: 24px;
+}
+
 .submit-console {
   margin-top: 24px;
 }
@@ -605,6 +609,34 @@ progress::-moz-progress-bar {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 16px;
+}
+
+.mainnet-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.mainnet-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.mainnet-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.mainnet-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
 }
 
 .access-summary article {
@@ -835,6 +867,13 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.mainnet-components {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .submit-card pre {
   max-height: 180px;
   margin: 0;
@@ -971,6 +1010,7 @@ progress::-moz-progress-bar {
 .treasury-card,
 .coordination-card,
 .access-card,
+.mainnet-card,
 .attestation-card,
 .indexer-card,
 .receipt-card,
@@ -1001,6 +1041,7 @@ progress::-moz-progress-bar {
 .treasury-card span,
 .coordination-card span,
 .access-card span,
+.mainnet-card span,
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
@@ -1061,6 +1102,9 @@ progress::-moz-progress-bar {
 .access-card strong,
 .access-card p,
 .access-card small,
+.mainnet-card strong,
+.mainnet-card p,
+.mainnet-card small,
 .attestation-card strong,
 .attestation-card p,
 .attestation-card small,
@@ -1095,6 +1139,7 @@ progress::-moz-progress-bar {
 .treasury-card p,
 .coordination-card p,
 .access-card p,
+.mainnet-card p,
 .attestation-card p,
 .indexer-card p,
 .receipt-card p,
@@ -1118,6 +1163,7 @@ progress::-moz-progress-bar {
 .treasury-card small,
 .coordination-card small,
 .access-card small,
+.mainnet-card small,
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
@@ -1220,6 +1266,8 @@ progress::-moz-progress-bar {
   .coordination-packs,
   .access-summary,
   .access-list,
+  .mainnet-summary,
+  .mainnet-components,
   .submit-summary,
   .submit-drafts,
   .research-summary,
