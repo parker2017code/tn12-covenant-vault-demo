@@ -68,6 +68,7 @@ The builder rule is concrete-first:
 - Native-feeling DeFi rails.
 - Cross-app atomic composition.
 - Apps that prove richer logic while sharing Kaspa ordering.
+- Familiar DeFi products such as lending, collateralized borrowing, swaps, stable-value units, derivatives, and portfolio automation after the lower-level rails are explicit.
 
 ### Research
 
@@ -395,7 +396,28 @@ Success:
 
 - UI can derive auction state from accepted bid transactions, even before covenant settlement is complete.
 
-### 9. Miner / Pool Signal Research App
+### 9. Basic DeFi Primitive Backlog
+
+Why later:
+
+- Kaspa Explained mentions native-feeling DeFi rails as roadmap architecture, not live infrastructure.
+- Existing-platform ideas like lending, borrowing, swaps, AMMs, stablecoins, insurance, perps, margin, and portfolio automation are useful to track, but they require more than fast settlement.
+
+Build:
+
+1. Lending/borrowing model: collateral, loan terms, interest, margin, liquidation trigger, oracle/source assumptions.
+2. Swap/AMM model: pool reserves, fees, slippage, LP accounting, accepted transaction indexing, and MEV/order caveats.
+3. Stable-value model: collateral policy, redemption, issuer/oracle role, failure modes, and legal/risk boundary.
+4. Insurance/protection model: covered event, proof source, payout rule, dispute/refund path.
+5. Portfolio automation model: if-this-then-that strategy, attestation source, execution limits, and user consent.
+6. Only then choose whether a prototype belongs in covenants, payload/indexer state, Based Apps, vProgs, or off-chain app logic.
+
+Success:
+
+- The repo has a status-labeled DeFi backlog that names the missing rails before building product UI.
+- No page claims mature lending, AMMs, stablecoins, derivatives, or native DeFi are live on Kaspa.
+
+### 10. Miner / Pool Signal Research App
 
 Why later:
 
@@ -415,7 +437,7 @@ Success:
 
 - Research artifact names exact assumptions and does not imply arbitrary block-header app data.
 
-### 10. AI-Agent Commitment Board
+### 11. AI-Agent Commitment Board
 
 Why later:
 
@@ -475,8 +497,9 @@ Success:
 7. Build KRC/access-pass planner.
 8. Build simple asset policy.
 9. Build auction/intent prototype.
-10. Build miner-signal research prototype.
-11. Build AI-agent commitment board.
+10. Build basic DeFi primitive backlog: lending, swaps, stable-value, insurance, derivatives, portfolio automation.
+11. Build miner-signal research prototype.
+12. Build AI-agent commitment board.
 
 ## One-By-One Completion Standard
 

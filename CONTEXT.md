@@ -304,8 +304,9 @@ Current app build order:
 6. treasury/team vault,
 7. simple asset/redeemable claim,
 8. auction/intent primitive,
-9. miner/pool signal research app,
-10. AI-agent commitment board.
+9. basic DeFi primitive backlog: lending, borrowing, swaps/AMMs, stable-value units, insurance/protection, derivatives, and portfolio automation,
+10. miner/pool signal research app,
+11. AI-agent commitment board.
 
 ## Next Build Plan
 

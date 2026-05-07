@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
+import { existsSync } from "node:fs";
 import { chromium } from "@playwright/test";
 
 const port = Number(process.env.UI_CHECK_PORT || 4186);
 const host = "127.0.0.1";
 const url = `http://${host}:${port}/`;
 const chromiumPath = process.env.CHROMIUM_PATH || "/usr/bin/chromium";
+let browser;
 
 const server = spawn("python3", ["-m", "http.server", String(port), "--bind", host], {
   stdio: ["ignore", "pipe", "pipe"]
@@ -19,10 +21,12 @@ server.stderr.on("data", (chunk) => serverOutput.push(String(chunk)));
 try {
   await waitForServer(url);
 
-  const browser = await chromium.launch({
-    executablePath: chromiumPath,
-    args: ["--no-sandbox"]
-  });
+  const launchOptions = { args: ["--no-sandbox"] };
+  if (existsSync(chromiumPath)) {
+    launchOptions.executablePath = chromiumPath;
+  }
+
+  browser = await chromium.launch(launchOptions);
   const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
   const consoleErrors = [];
   const pageErrors = [];
@@ -54,9 +58,9 @@ try {
   assert.deepEqual(pageErrors, []);
   assert.deepEqual(consoleErrors, []);
 
-  await browser.close();
   console.log("UI smoke check passed.");
 } finally {
+  await browser?.close().catch(() => {});
   server.kill("SIGTERM");
   await once(server, "exit").catch(() => {});
 }

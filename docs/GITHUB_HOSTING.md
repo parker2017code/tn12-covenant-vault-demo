@@ -57,23 +57,21 @@ Recommended Pages settings:
 Enable with GitHub CLI after the remote exists:
 
 ```sh
-gh api \
+printf '%s\n' '{"source":{"branch":"main","path":"/"}}' | gh api \
   --method POST \
   -H "Accept: application/vnd.github+json" \
   /repos/parker2017code/tn12-covenant-vault-demo/pages \
-  -f source.branch=main \
-  -f source.path=/
+  --input -
 ```
 
 If Pages already exists, update it:
 
 ```sh
-gh api \
+printf '%s\n' '{"source":{"branch":"main","path":"/"}}' | gh api \
   --method PUT \
   -H "Accept: application/vnd.github+json" \
   /repos/parker2017code/tn12-covenant-vault-demo/pages \
-  -f source.branch=main \
-  -f source.path=/
+  --input -
 ```
 
 Check Pages state:
@@ -174,7 +172,15 @@ jobs:
       - run: npm run check:all
 ```
 
-Keep `tx:verify` as a separate workflow step only if occasional public TN12 API downtime will not block ordinary docs/UI work.
+The current repo includes a second `tn12-verify` job that runs `npm run tx:verify`. Keep branch protection focused on the local `check` job unless public TN12 API downtime should block merges.
+
+If GitHub rejects a push containing `.github/workflows/check.yml` with a `workflow` scope error, refresh the local GitHub CLI token before pushing the workflow:
+
+```sh
+gh auth refresh -h github.com -s workflow
+```
+
+That command may require approving a browser device code. Do not bypass that credential step silently.
 
 ## Safety Rules
 

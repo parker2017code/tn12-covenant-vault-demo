@@ -61,6 +61,13 @@
       "status": "later",
       "buildNow": "Data model, oracle assumptions, and dispute rules.",
       "baseWork": "Do not build market claims until proof/oracle and composition assumptions are explicit."
+    },
+    {
+      "id": "basic-defi",
+      "name": "Basic DeFi primitives",
+      "status": "roadmap-backlog",
+      "buildNow": "Model lending, borrowing, swaps, AMMs, stable-value units, insurance, derivatives, and portfolio automation.",
+      "baseWork": "Collateral, liquidity, liquidation, oracle, indexing, MEV, and cross-app composition assumptions must be explicit before product claims."
     }
   ]
 }
