@@ -377,7 +377,7 @@ Recommended order from here:
 3. Start assurance campaign batching: multiple pledge fixtures, campaign state, batch release/refund drafts.
 4. Add wallet-facing submit UI that displays exact inputs, outputs, fees, payload, and submit command before broadcast.
 5. Add owner/recovery/recipient/refund key separation instead of using one saved test key for every role.
-6. Later CI maintenance: update GitHub Actions from Node 20-backed actions to stable Node 24-compatible actions, or opt into Node 24 early and verify.
+6. Keep the Node 24 GitHub Actions workflow verified after future action-version changes.
 
 ## Verification Before Handoff
 

@@ -122,7 +122,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - push to `main`;
    - verify GitHub Actions and Pages;
    - verify cache-busted live artifacts after deployment.
-   - Later maintenance: update GitHub Actions when `actions/checkout` and `actions/setup-node` have stable Node 24-compatible versions, or opt into Node 24 early and verify the workflow.
+   - GitHub Actions maintenance: Node 24-compatible action versions are now in use; verify `check` and `tn12-verify` after future workflow edits.
 
 ## Current Verification Commands
 
