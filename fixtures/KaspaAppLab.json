@@ -68,6 +68,13 @@
       "status": "roadmap-backlog",
       "buildNow": "Model lending, borrowing, swaps, AMMs, stable-value units, insurance, derivatives, and portfolio automation.",
       "baseWork": "Collateral, liquidity, liquidation, oracle, indexing, MEV, and cross-app composition assumptions must be explicit before product claims."
+    },
+    {
+      "id": "cross-chain-research",
+      "name": "Open app code research",
+      "status": "resource-lane",
+      "buildNow": "Study open-source apps from other chains for PMF signals, code patterns, and failure modes before choosing Kaspa prototypes.",
+      "baseWork": "Translate only reusable product structure: schemas, state machines, indexers, risk controls, wallet review UX, and dispute/refund flows."
     }
   ]
 }

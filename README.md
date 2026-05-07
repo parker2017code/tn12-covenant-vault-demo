@@ -242,6 +242,8 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 6. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 
+7. Next: build a cross-chain app research library that studies open-source apps, PMF evidence, and failure modes from other ecosystems, then maps only the reusable patterns into Kaspa's live, TN12, roadmap, or research lanes.
+
 ## Run Locally
 
 ```sh

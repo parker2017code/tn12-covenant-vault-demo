@@ -240,7 +240,15 @@ const ecosystemBuildPlan = await readFile(new URL("../docs/ECOSYSTEM_BUILD_PLAN.
 assert.match(ecosystemBuildPlan, /Payload Receipt \/ Invoice App/);
 assert.match(ecosystemBuildPlan, /Batch Assurance Campaign App/);
 assert.match(ecosystemBuildPlan, /Escrow Primitive/);
+assert.match(ecosystemBuildPlan, /Cross-Chain App Code And PMF Research/);
 assert.match(ecosystemBuildPlan, /Miner \/ Pool Signal Research App/);
+
+const appLab = JSON.parse(await readFile(new URL("../fixtures/KaspaAppLab.json", import.meta.url), "utf8"));
+assert.ok(appLab.lanes.some((lane) => lane.id === "cross-chain-research"));
+
+const sources = await readFile(new URL("../docs/SOURCES.md", import.meta.url), "utf8");
+assert.match(sources, /Cross-Chain App Research Resources/);
+assert.match(sources, /PMF clues/);
 
 const githubHosting = await readFile(new URL("../docs/GITHUB_HOSTING.md", import.meta.url), "utf8");
 assert.match(githubHosting, /GitHub Pages/);

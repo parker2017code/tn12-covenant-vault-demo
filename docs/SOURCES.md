@@ -40,6 +40,37 @@ The new official builder docs are useful to this repo in three ways:
 - The covenants guide directly supports this repo's next app choices: vaults, treasury controls, escrow-like flows, and time/condition-based unlocks.
 - The Based Apps, full vProgs, and Inline ZK pages reinforce status boundaries: shared-state concurrency and app composition are later lanes, while ZK is specialized and not needed for the current vault/assurance/escrow path.
 
+## Cross-Chain App Research Resources
+
+This repo should also keep a practical "what already worked elsewhere" resource lane.
+
+Use open-source apps from other chains as reference material for product shape, PMF clues, failure modes, and battle-tested UX patterns. Do not treat them as protocol evidence for Kaspa, and do not port claims faster than Kaspa/TN12 can actually support them.
+
+Research each candidate app in this order:
+
+1. What user job did it solve?
+2. What showed real demand: usage, revenue, liquidity, repeat behavior, developer adoption, or ecosystem dependence?
+3. What failed: oracle risk, liquidation design, bridge risk, governance capture, toxic MEV, liquidity fragmentation, regulatory exposure, UX/key-management mistakes, or unsustainable incentives?
+4. What code or architecture can be reused as a head start: artifact schemas, state machines, indexers, risk dashboards, admin controls, campaign flows, market models, or wallet review screens?
+5. What must be rebuilt for Kaspa: UTXO transaction shape, accepted-transaction indexing, TN12 covenant limits, payload receipts, wallet API, and status labeling.
+
+Good reference categories:
+
+- multisig and wallet policy apps;
+- vaults, treasuries, and guarded withdrawals;
+- escrow, arbitration, streaming payments, and subscriptions;
+- assurance/public-goods funding, grants, bounties, and campaign payout rules;
+- AMMs, lending, stable-value systems, insurance, derivatives, and liquidation monitors;
+- auctions, intent systems, prediction/oracle markets, and MEV-aware ordering tools;
+- access passes, tickets, coupons, memberships, and redeemable claims;
+- indexers, subgraphs, analytics dashboards, risk monitors, and explorer-style app state.
+
+Every copied idea must keep a Kaspa status lane:
+
+- live Kaspa lane for payments, wallets, KRC-aware tooling, payload receipts, and accepted-transaction indexing;
+- TN12/Toccata lane for covenant-shaped vaults, escrow, assurance, simple assets, and state-output experiments;
+- roadmap/research lane for Based Apps, full vProgs, cross-app composition, rich DeFi, RTD/oracle markets, and miner-attestation flows.
+
 ## Local Finding
 
 On 2026-05-06, `curl -I -L https://faucet-tn12.kaspanet.io/` returned HTTP 403 with a Cloudflare challenge. That does not mean the faucet is down for browsers; it means this shell cannot automate the request.

@@ -212,9 +212,11 @@ Built:
 - `fixtures/MinerSignalResearch.json`.
 - UI sections for app-lab and miner-signal research.
 - Boundary: transaction payload first, coinbase payload/pool policy later, block headers are not arbitrary app-data fields.
+- Cross-chain app research lane added in `docs/SOURCES.md` so proven products, open code, PMF signals, and failure modes can guide Kaspa app design without overclaiming protocol support.
 
 Still needed:
 
+- research notes for selected open-source apps from other chains: what had PMF, what failed, what code patterns are reusable, and what must be rebuilt for Kaspa/TN12;
 - miner/pool signal research notebook;
 - off-chain pool signal registry model;
 - event-attestation incentive model;
@@ -402,6 +404,7 @@ Why later:
 
 - Kaspa Explained mentions native-feeling DeFi rails as roadmap architecture, not live infrastructure.
 - Existing-platform ideas like lending, borrowing, swaps, AMMs, stablecoins, insurance, perps, margin, and portfolio automation are useful to track, but they require more than fast settlement.
+- Open-source DeFi apps from other chains are useful research inputs for code structure, PMF clues, and failure modes, but each idea must be re-mapped to Kaspa's UTXO model, accepted-transaction indexing, TN12 covenant limits, payload receipts, and wallet/API boundaries.
 
 Build:
 
@@ -417,7 +420,30 @@ Success:
 - The repo has a status-labeled DeFi backlog that names the missing rails before building product UI.
 - No page claims mature lending, AMMs, stablecoins, derivatives, or native DeFi are live on Kaspa.
 
-### 10. Miner / Pool Signal Research App
+### 10. Cross-Chain App Code And PMF Research
+
+Why:
+
+- Other ecosystems have years of open-source app code, usage history, and public failures.
+- That material can save time if it is used as product research, not copied as if Kaspa has the same execution model.
+- The useful output is a Kaspa-specific app brief: user job, PMF evidence to verify, failure modes, reusable code patterns, and the Kaspa/TN12 rebuild plan.
+
+Build:
+
+1. Create one research note per candidate app or category.
+2. Record repo links, docs, audits, incidents, usage signals, and the specific user job.
+3. Separate PMF signals from subsidy/liquidity mining artifacts.
+4. Extract reusable product/code patterns: state schema, indexer shape, risk controls, wallet review UX, admin controls, and dispute/refund flows.
+5. Map each pattern to Kaspa status lanes: live payments/indexing, TN12 covenant prototype, roadmap Based Apps/vProgs, or research.
+6. Turn the best candidates into app briefs before writing Kaspa code.
+
+Success:
+
+- The repo has a resource library for "what worked elsewhere" and "what failed elsewhere."
+- New Kaspa app work starts from real product evidence while keeping protocol claims restrained.
+- No copied app is treated as portable until the transaction model, indexing model, oracle assumptions, and wallet safety path are explicit.
+
+### 11. Miner / Pool Signal Research App
 
 Why later:
 
@@ -437,7 +463,7 @@ Success:
 
 - Research artifact names exact assumptions and does not imply arbitrary block-header app data.
 
-### 11. AI-Agent Commitment Board
+### 12. AI-Agent Commitment Board
 
 Why later:
 
@@ -498,8 +524,9 @@ Success:
 8. Build simple asset policy.
 9. Build auction/intent prototype.
 10. Build basic DeFi primitive backlog: lending, swaps, stable-value, insurance, derivatives, portfolio automation.
-11. Build miner-signal research prototype.
-12. Build AI-agent commitment board.
+11. Build cross-chain app code and PMF research library.
+12. Build miner-signal research prototype.
+13. Build AI-agent commitment board.
 
 ## One-By-One Completion Standard
 
