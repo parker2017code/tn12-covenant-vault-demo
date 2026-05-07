@@ -52,6 +52,7 @@ try {
   await expectText(page, "#indexer-summary", "Matched");
   await expectText(page, "#invoice-summary", "Draft");
   await expectText(page, "#invoice-summary", "Review");
+  await expectText(page, "#invoice-summary", "Refunded");
   await expectText(page, "#invoice-list", "merchant-order-1337");
   await expectText(page, "#invoice-list", "accepted-receipt-indexed");
   await expectText(page, "#invoice-draft", "signed-not-broadcast");

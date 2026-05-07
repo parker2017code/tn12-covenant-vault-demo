@@ -104,7 +104,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
    - keep REST submit marked unsuitable for payload receipts;
    - make JSON wRPC or wallet review repeatable;
    - duplicate-payment and stale-receipt checks: done in invoice registry state;
-   - add refund/error state;
+   - refund/error state: done in invoice registry state;
    - keep invoice paid state tied to matched accepted payload bytes.
 
 4. Turn research lanes into safer prototypes:

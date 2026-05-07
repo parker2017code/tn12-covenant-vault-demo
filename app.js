@@ -899,6 +899,7 @@ async function renderInvoiceApp() {
     invoiceSummaryNode.innerHTML = `
       <article><span>Total</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
       <article><span>Paid</span><strong>${escapeHtml(registry.summary.paid)}</strong></article>
+      <article><span>Refunded</span><strong>${escapeHtml(registry.summary.refunded)}</strong></article>
       <article><span>Draft</span><strong>${escapeHtml(registry.summary.draft)}</strong></article>
       <article><span>Review</span><strong>${escapeHtml(registry.summary.review)}</strong></article>
       <article><span>TKAS</span><strong>${escapeHtml(registry.summary.totalTkas)}</strong></article>
@@ -912,7 +913,7 @@ async function renderInvoiceApp() {
         <span>${escapeHtml(invoice.status)}</span>
         <strong>${escapeHtml(invoice.invoice.invoiceId)}</strong>
         <p>${escapeHtml(invoice.invoice.amountTkas)} TKAS to ${escapeHtml(invoice.invoice.merchant)}</p>
-        <small>${escapeHtml(invoice.appState)}${invoice.receiptReviews.length ? ` ${escapeHtml(invoice.receiptReviews.length)} receipt review.` : ""}</small>
+        <small>${escapeHtml(invoice.appState)}${invoice.receiptReviews.length ? ` ${escapeHtml(invoice.receiptReviews.length)} receipt review.` : ""}${invoice.refundReviews.length ? ` ${escapeHtml(invoice.refundReviews.length)} refund review.` : ""}${invoice.errorRecords.length ? ` ${escapeHtml(invoice.errorRecords.length)} error review.` : ""}</small>
       `;
       invoiceListNode.append(article);
     }

@@ -5,10 +5,13 @@
   "summary": {
     "total": 2,
     "paid": 1,
+    "refunded": 0,
     "draft": 1,
     "review": 0,
     "duplicateReceipts": 0,
     "staleReceipts": 0,
+    "refundReviews": 0,
+    "errorReviews": 0,
     "totalTkas": 26
   },
   "invoices": [
@@ -64,7 +67,10 @@
         "status": "accepted-receipt",
         "reviewReason": null
       },
+      "refundRecord": null,
+      "refundReviews": [],
       "receiptReviews": [],
+      "errorRecords": [],
       "appState": "Invoice merchant-order-1337 is paid by accepted payload receipt 34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e.",
       "boundaries": [
         "This is payment plus app data, not a smart-contract invoice settlement.",
@@ -114,7 +120,10 @@
         "boundary": "This models user transaction payload data, not arbitrary miner header data."
       },
       "acceptedReceipt": null,
+      "refundRecord": null,
+      "refundReviews": [],
       "receiptReviews": [],
+      "errorRecords": [],
       "appState": "Invoice assurance-campaign-demo is not paid until an accepted transaction carries this receipt payload.",
       "boundaries": [
         "This is payment plus app data, not a smart-contract invoice settlement.",
@@ -136,5 +145,7 @@
       "reviewReason": null
     }
   ],
+  "refunds": [],
+  "errors": [],
   "next": "Keep payload receipts tied to accepted transaction evidence before marking invoices paid."
 }

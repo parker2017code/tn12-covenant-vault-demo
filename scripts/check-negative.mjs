@@ -68,6 +68,45 @@ assert.equal(duplicateReceiptRegistry.status, "receipt-review-needed");
 assert.equal(duplicateReceiptRegistry.summary.duplicateReceipts, 1);
 assert.equal(duplicateReceiptRegistry.invoices[0].receiptReviews.length, 1);
 
+const unacceptedRefundRegistry = buildInvoiceRegistry({
+  ...invoiceFixture,
+  acceptedReceipts: [],
+  refunds: [{
+    invoiceId: "merchant-order-1337",
+    accepted: false,
+    txid: "signed-only-refund"
+  }]
+});
+assert.equal(unacceptedRefundRegistry.summary.paid, 0);
+assert.equal(unacceptedRefundRegistry.summary.refunded, 0);
+assert.equal(unacceptedRefundRegistry.summary.refundReviews, 1);
+assert.equal(unacceptedRefundRegistry.invoices[0].status, "invoice-review-needed");
+
+const acceptedRefundRegistry = buildInvoiceRegistry({
+  ...invoiceFixture,
+  refunds: [{
+    invoiceId: "merchant-order-1337",
+    accepted: true,
+    txid: "accepted-refund-txid"
+  }]
+});
+assert.equal(acceptedRefundRegistry.summary.paid, 0);
+assert.equal(acceptedRefundRegistry.summary.refunded, 1);
+assert.equal(acceptedRefundRegistry.invoices[0].status, "refunded-receipt-indexed");
+
+const errorRecordRegistry = buildInvoiceRegistry({
+  ...invoiceFixture,
+  acceptedReceipts: [],
+  errors: [{
+    invoiceId: "merchant-order-1337",
+    reason: "payload-mismatch",
+    txid: "bad-receipt-txid"
+  }]
+});
+assert.equal(errorRecordRegistry.summary.paid, 0);
+assert.equal(errorRecordRegistry.summary.errorReviews, 1);
+assert.equal(errorRecordRegistry.invoices[0].status, "invoice-review-needed");
+
 const agentFixture = JSON.parse(await readFile(new URL("../fixtures/AgentCommitments.json", import.meta.url), "utf8"));
 const disputedAcceptedProofBoard = buildAgentCommitmentBoard({
   ...agentFixture,

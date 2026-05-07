@@ -360,12 +360,11 @@ Current app build order:
 Recommended order from here:
 
 1. Add wallet-review flow for payload receipt submission.
-2. Add refund/error states for invoice receipts.
-3. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
-4. Start assurance campaign batching: multiple pledge fixtures, campaign state, batch release/refund drafts.
-5. Add wallet-facing submit UI that displays exact inputs, outputs, fees, payload, and submit command before broadcast.
-6. Add owner/recovery/recipient/refund key separation instead of using one saved test key for every role.
-7. Later CI maintenance: update GitHub Actions from Node 20-backed actions to stable Node 24-compatible actions, or opt into Node 24 early and verify.
+2. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
+3. Start assurance campaign batching: multiple pledge fixtures, campaign state, batch release/refund drafts.
+4. Add wallet-facing submit UI that displays exact inputs, outputs, fees, payload, and submit command before broadcast.
+5. Add owner/recovery/recipient/refund key separation instead of using one saved test key for every role.
+6. Later CI maintenance: update GitHub Actions from Node 20-backed actions to stable Node 24-compatible actions, or opt into Node 24 early and verify.
 
 ## Verification Before Handoff
 

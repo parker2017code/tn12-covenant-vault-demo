@@ -31,7 +31,7 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 3. Add explorer links for every fixture, signed draft, and accepted proof transaction.
 4. Add a proof-state machine: planned, signed, submitted, accepted, mismatch, stale.
 5. Keep the verified JSON wRPC payload receipt route documented and make wallet review the next submit surface.
-6. Add duplicate/stale receipt checks around invoice paid state.
+6. Add duplicate/stale receipt checks plus refund/error review state around invoice paid state.
 7. Keep the browser decoder tied to accepted payload evidence.
 8. Add multi-pledge assurance fixtures with separate contributors and refund addresses.
 9. Add batch release transaction planning for enough pledge outputs to satisfy a target.

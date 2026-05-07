@@ -119,9 +119,13 @@ const invoiceFixture = JSON.parse(await readFile(new URL("../fixtures/InvoiceRec
 const invoiceRegistry = buildInvoiceRegistry(invoiceFixture);
 assert.equal(invoiceRegistry.summary.total, 2);
 assert.equal(invoiceRegistry.summary.paid, 1);
+assert.equal(invoiceRegistry.summary.refunded, 0);
+assert.equal(invoiceRegistry.summary.draft, 1);
 assert.equal(invoiceRegistry.summary.review, 0);
 assert.equal(invoiceRegistry.summary.duplicateReceipts, 0);
 assert.equal(invoiceRegistry.summary.staleReceipts, 0);
+assert.equal(invoiceRegistry.summary.refundReviews, 0);
+assert.equal(invoiceRegistry.summary.errorReviews, 0);
 const payloadReadinessArtifact = JSON.parse(await readFile(new URL("../artifacts/payload-submit-readiness.json", import.meta.url), "utf8"));
 const payloadReadiness = buildPayloadSubmitReadiness(payloadReadinessArtifact);
 assert.equal(payloadReadiness.status, "accepted-wrpc-payload-receipt-rest-blocked");

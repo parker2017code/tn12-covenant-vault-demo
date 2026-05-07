@@ -32,5 +32,7 @@
       "evidencePath": "artifacts/payload-receipt-evidence.json",
       "memo": "Accepted TN12 JSON wRPC payload receipt; payload matched the signed draft."
     }
-  ]
+  ],
+  "refunds": [],
+  "errors": []
 }
