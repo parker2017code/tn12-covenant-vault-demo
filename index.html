@@ -378,13 +378,13 @@
     <section id="indexer" class="panel indexer">
       <div class="section-title">
         <p class="eyebrow">Accepted transaction indexer</p>
-        <h2>App state derived from TN12 proofs.</h2>
-        <p>This snapshot turns accepted transactions into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should all feed through this layer before the UI claims a state transition.</p>
+        <h2>App state derived from TN12 reads.</h2>
+        <p>This checkpoint turns accepted proof spends and payload events into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should all feed through this layer before the UI claims a state transition.</p>
       </div>
       <div id="indexer-summary" class="indexer-summary" aria-live="polite"></div>
       <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
       <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
-      <pre>npm run indexer:state</pre>
+      <pre>npm run indexer:checkpoint</pre>
     </section>
 
     <section id="invoices" class="panel invoices">

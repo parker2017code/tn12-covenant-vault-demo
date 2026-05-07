@@ -835,19 +835,25 @@ async function renderAcceptedAppState() {
   if (!indexerSummaryNode || !indexerRecordsNode || !receiptEventsNode) return;
 
   try {
-    const response = await fetch("fixtures/AcceptedAppState.json", { cache: "no-store" });
-    const state = await response.json();
+    const [stateResponse, checkpointResponse] = await Promise.all([
+      fetch("fixtures/AcceptedAppState.json", { cache: "no-store" }),
+      fetch("artifacts/checkpointed-accepted-index.json", { cache: "no-store" })
+    ]);
+    const state = await stateResponse.json();
+    const checkpoint = await checkpointResponse.json();
     const summary = state.summary;
+    const checkpointSummary = checkpoint.summary || {};
     indexerSummaryNode.innerHTML = `
-      <article><span>Total</span><strong>${escapeHtml(summary.total)}</strong></article>
-      <article><span>Accepted</span><strong>${escapeHtml(summary.accepted)}</strong></article>
-      <article><span>Matched</span><strong>${escapeHtml(summary.matched)}</strong></article>
-      <article><span>Receipts</span><strong>${escapeHtml(summary.receipts ?? 0)}</strong></article>
-      <article><span>Lanes</span><strong>${escapeHtml(summary.lanes.join(", "))}</strong></article>
+      <article><span>Indexed</span><strong>${escapeHtml(checkpointSummary.total ?? summary.total)}</strong></article>
+      <article><span>Accepted</span><strong>${escapeHtml(checkpointSummary.accepted ?? summary.accepted)}</strong></article>
+      <article><span>Matched</span><strong>${escapeHtml(checkpointSummary.matched ?? summary.matched)}</strong></article>
+      <article><span>Payloads</span><strong>${escapeHtml(checkpointSummary.payloadEvents ?? summary.receipts ?? 0)}</strong></article>
+      <article><span>Checkpoint</span><strong>${escapeHtml(checkpoint.checkpoint?.maxAcceptingBlockBlueScore ?? "pending")}</strong></article>
     `;
     indexerRecordsNode.innerHTML = "";
 
-    for (const record of state.records) {
+    const proofRecords = (checkpoint.records || []).filter((record) => record.kind === "proof-spend");
+    for (const record of proofRecords.length ? proofRecords : state.records) {
       const article = document.createElement("article");
       article.className = "indexer-card";
       article.innerHTML = `
@@ -860,7 +866,7 @@ async function renderAcceptedAppState() {
       indexerRecordsNode.append(article);
     }
 
-    const receipts = state.appState?.receipts?.decoded || [];
+    const receipts = (checkpoint.records || []).filter((record) => record.kind === "payload-event");
     receiptEventsNode.innerHTML = "";
     if (!receipts.length) {
       receiptEventsNode.innerHTML = `
@@ -876,10 +882,11 @@ async function renderAcceptedAppState() {
     for (const event of receipts) {
       const article = document.createElement("article");
       article.className = "receipt-card";
+      const payload = event.payload?.decoded?.payload || event.receipt?.payload || {};
       article.innerHTML = `
         <span>${escapeHtml(event.lane)}</span>
-        <strong>${escapeHtml(event.receipt.payload.kind)} / ${escapeHtml(event.receipt.payload.value)}</strong>
-        <p>${escapeHtml(event.receipt.payload.subject)}</p>
+        <strong>${escapeHtml(payload.kind || event.lane)} / ${escapeHtml(payload.value || event.status)}</strong>
+        <p>${escapeHtml(payload.subject || event.label)}</p>
         <small>${escapeHtml(shortTxid(event.txid))}</small>
       `;
       receiptEventsNode.append(article);

@@ -12,6 +12,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - TN12 proof check command: `npm run tx:verify`
 - Payload-event check command: `npm run payload:verify:events`
 - Accepted app-state snapshot command: `npm run indexer:state`
+- Checkpointed accepted-index command: `npm run indexer:checkpoint`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - TN12 tested/not-tested map: `docs/TN12_TEST_MATRIX.md`
 
@@ -128,12 +129,15 @@ Escrow mutual cancel is now accepted on TN12. The original submit used `sigOpCou
 
 Accepted payload events are listed in `fixtures/PayloadEventEvidence.json` and verified by `npm run payload:verify:events`. The current set covers invoice paid/refund/error, access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, and agent task/proof/dispute state.
 
+`npm run indexer:checkpoint` rebuilds `artifacts/checkpointed-accepted-index.json` from public TN12 transaction reads. It currently tracks 23 accepted records: 7 proof spends and 16 payload events.
+
 Fixtures:
 
 - `fixtures/AcceptedProofTransactions.json`
 - `fixtures/AcceptedAppState.json`
+- `artifacts/checkpointed-accepted-index.json`
 
-The accepted proof set currently has 6 records, 6 accepted, and 6 output-matched contract spends.
+The accepted proof set currently has 7 records, 7 accepted, and 7 output-matched contract spends.
 
 ## Implemented Commands
 

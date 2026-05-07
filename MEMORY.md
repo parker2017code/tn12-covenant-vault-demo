@@ -13,6 +13,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Chain proof gate: `npm run tx:verify`
 - Proof evidence gate: `npm run proof:evidence`
 - Payload event gate: `npm run payload:verify:events`
+- Checkpointed index gate: `npm run indexer:checkpoint`
 
 The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has 16 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, and agent commitment state.
 
@@ -63,7 +64,7 @@ The latest continuation replaced fake accepted payload fixture txids with real T
 - error event: `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`
 - access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, and agent task/proof/dispute events are listed in `fixtures/PayloadEventEvidence.json`.
 
-`docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 29 reviewable drafts, including all 16 accepted payload drafts.
+`docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 29 reviewable drafts, including all 16 accepted payload drafts. `artifacts/checkpointed-accepted-index.json` indexes 23 public TN12 reads: 7 proof spends plus 16 payload events.
 
 Validation run for this continuation:
 
@@ -72,9 +73,10 @@ npm run check:all
 npm run tx:verify
 npm run proof:evidence
 npm run payload:verify:events
+npm run indexer:checkpoint
 ```
 
-Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Payload events verified: `16/16`.
+Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Payload events verified: `16/16`. Checkpointed index matched: `23/23`.
 
 ## Update Rule
 

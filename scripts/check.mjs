@@ -60,6 +60,7 @@ import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
+import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -343,6 +344,52 @@ assert.ok(acceptedState.records.some((record) =>
   && record.accepted === true
   && record.txid === "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
 ));
+const checkpointFixture = JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8"));
+assert.equal(checkpointFixture.summary.total, 23);
+assert.equal(checkpointFixture.summary.proofs, 7);
+assert.equal(checkpointFixture.summary.payloadEvents, 16);
+assert.equal(checkpointFixture.summary.mismatches, 0);
+assert.equal(checkpointFixture.status, "accepted-index-fully-matched");
+assert.ok(checkpointFixture.checkpoint.maxAcceptingBlockBlueScore > checkpointFixture.checkpoint.minAcceptingBlockBlueScore);
+const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
+const samplePayloadTx = {
+  is_accepted: true,
+  accepting_block_blue_score: 2000,
+  accepting_block_time: 1778141640000,
+  payload: samplePayloadArtifact.submitPayload.transaction.payload,
+  outputs: [
+    {
+      index: 0,
+      amount: samplePayloadArtifact.submitPayload.transaction.outputs[0].amount,
+      script_public_key_address: samplePayloadArtifact.payment.destination,
+      script_public_key_type: "pubkey"
+    }
+  ]
+};
+const checkpointState = buildCheckpointedAcceptedIndex({
+  proofFixture: { network: "kaspa-testnet-12", transactions: [proofFixture.transactions[0]] },
+  proofTransactions: { [proofFixture.transactions[0].txid]: fakeTransactions[proofFixture.transactions[0].txid] },
+  payloadManifest: {
+    network: "kaspa-testnet-12",
+    events: [
+      {
+        label: "Invoice paid",
+        draftPath: "artifacts/signed-drafts/payload-receipt-self-send.json",
+        outPath: "artifacts/payload-receipt-evidence.json"
+      }
+    ]
+  },
+  payloadArtifacts: {
+    "artifacts/signed-drafts/payload-receipt-self-send.json": samplePayloadArtifact
+  },
+  payloadTransactions: {
+    [samplePayloadArtifact.transactionId]: samplePayloadTx
+  },
+  fetchedAt: "2026-05-07T00:00:00.000Z"
+});
+assert.equal(checkpointState.summary.total, 2);
+assert.equal(checkpointState.summary.matched, 2);
+assert.equal(checkpointState.checkpoint.maxAcceptingBlockBlueScore, 2000);
 const fakePreviousTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   `prev-${index}`,
   {
@@ -449,6 +496,7 @@ const files = [
   "scripts/verify-accepted-txs.mjs",
   "scripts/build-proof-evidence.mjs",
   "scripts/build-accepted-app-state.mjs",
+  "scripts/build-checkpointed-index.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -502,6 +550,7 @@ const files = [
   "artifacts/payload-receipt-evidence.json",
   "artifacts/payload-refund-evidence.json",
   "artifacts/payload-error-evidence.json",
+  "artifacts/checkpointed-accepted-index.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -542,6 +591,7 @@ const files = [
   "fixtures/EscrowExpired.ctor.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
+  "src/checkpointedIndexer.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",

@@ -56,7 +56,7 @@ These are intentionally local because they model bad or duplicate input:
 These should not be called complete until a safe TN12 transaction or accepted proof exists:
 
 - wallet-review flow replacing local signing and shell submit,
-- checkpointed accepted-transaction ingestion from RPC/node state,
+- persisted node/RPC checkpoint ingestion with rollback handling,
 - batch assurance release from multiple pledge outputs,
 - batch assurance refund from multiple pledge outputs,
 - auction settlement/refund draft,
@@ -67,7 +67,7 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 ## Next Build Order
 
 1. Wallet-review flow for payload receipt submission.
-2. Checkpointed accepted indexing.
+2. Persisted node/RPC checkpoint ingestion with rollback handling.
 3. Batch assurance release/refund planning with accepted pledge outputs.
 4. Auction settlement/refund drafts.
 5. Agent task release/refund drafts.

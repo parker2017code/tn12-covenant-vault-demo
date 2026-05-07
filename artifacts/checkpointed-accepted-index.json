@@ -1,0 +1,1085 @@
+{
+  "schema": "tn12-checkpointed-accepted-index/v1",
+  "network": "kaspa-testnet-12",
+  "fetchedAt": "2026-05-07T19:32:20.210Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "sourceManifests": {
+    "proofs": "fixtures/AcceptedProofTransactions.json",
+    "payloadEvents": "fixtures/PayloadEventEvidence.json"
+  },
+  "status": "accepted-index-fully-matched",
+  "checkpoint": {
+    "kind": "known-txid-public-read-checkpoint",
+    "recordCount": 23,
+    "minAcceptingBlockBlueScore": 5203140,
+    "maxAcceptingBlockBlueScore": 5595354,
+    "txids": [
+      "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+      "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+      "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+      "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+      "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+      "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+      "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+      "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+      "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+      "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+      "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0"
+    ],
+    "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
+  },
+  "summary": {
+    "total": 23,
+    "proofs": 7,
+    "payloadEvents": 16,
+    "accepted": 23,
+    "matched": 23,
+    "mismatches": 0,
+    "lanes": [
+      {
+        "lane": "access-pass-redemption",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "agent-dispute",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "agent-proof",
+        "total": 2,
+        "accepted": 2,
+        "matched": 2
+      },
+      {
+        "lane": "agent-task",
+        "total": 2,
+        "accepted": 2,
+        "matched": 2
+      },
+      {
+        "lane": "assurance",
+        "total": 2,
+        "accepted": 2,
+        "matched": 2
+      },
+      {
+        "lane": "auction-bid",
+        "total": 3,
+        "accepted": 3,
+        "matched": 3
+      },
+      {
+        "lane": "escrow",
+        "total": 3,
+        "accepted": 3,
+        "matched": 3
+      },
+      {
+        "lane": "miner-attestation",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "order-receipt",
+        "total": 3,
+        "accepted": 3,
+        "matched": 3
+      },
+      {
+        "lane": "stable-issuer-event",
+        "total": 3,
+        "accepted": 3,
+        "matched": 3
+      },
+      {
+        "lane": "vault",
+        "total": 2,
+        "accepted": 2,
+        "matched": 2
+      }
+    ]
+  },
+  "records": [
+    {
+      "kind": "proof-spend",
+      "lane": "vault",
+      "label": "Vault recovery",
+      "entrypoint": "recover",
+      "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5203140,
+      "acceptingBlockTime": 1778141640305,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391"
+    },
+    {
+      "kind": "proof-spend",
+      "lane": "vault",
+      "label": "Vault delayed withdrawal",
+      "entrypoint": "withdraw",
+      "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5206191,
+      "acceptingBlockTime": 1778141939817,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "2499995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710"
+    },
+    {
+      "kind": "proof-spend",
+      "lane": "assurance",
+      "label": "Assurance release",
+      "entrypoint": "release",
+      "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5203224,
+      "acceptingBlockTime": 1778141647772,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f"
+    },
+    {
+      "kind": "proof-spend",
+      "lane": "assurance",
+      "label": "Assurance refund",
+      "entrypoint": "refund",
+      "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5206200,
+      "acceptingBlockTime": 1778141940609,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "24999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61"
+    },
+    {
+      "kind": "proof-spend",
+      "lane": "escrow",
+      "label": "Escrow release",
+      "entrypoint": "release",
+      "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5328195,
+      "acceptingBlockTime": 1778154136843,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d"
+    },
+    {
+      "kind": "proof-spend",
+      "lane": "escrow",
+      "label": "Escrow DAA refund",
+      "entrypoint": "refund",
+      "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5342066,
+      "acceptingBlockTime": 1778155520353,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d"
+    },
+    {
+      "kind": "proof-spend",
+      "lane": "escrow",
+      "label": "Escrow mutual cancel",
+      "entrypoint": "cancel",
+      "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5511468,
+      "acceptingBlockTime": 1778172704032,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "4999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "order-receipt",
+      "label": "Invoice paid",
+      "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5541142,
+      "acceptingBlockTime": 1778175542196,
+      "draftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "evidencePath": "artifacts/payload-receipt-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+        "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+        "matches": true,
+        "bytes": 127,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "order-receipt",
+            "subject": "merchant-order-1337",
+            "value": "paid",
+            "note": "Demo payload for accepted-transaction indexing"
+          },
+          "encoded": {
+            "bytes": 127,
+            "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "order-receipt",
+      "label": "Invoice refunded",
+      "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5586090,
+      "acceptingBlockTime": 1778180039863,
+      "draftPath": "artifacts/signed-drafts/payload-refund-self-send.json",
+      "evidencePath": "artifacts/payload-refund-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a22416363657074656420726566756e64207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+        "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a22416363657074656420726566756e64207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+        "matches": true,
+        "bytes": 135,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "order-receipt",
+            "subject": "merchant-refund-demo",
+            "value": "refunded",
+            "note": "Accepted refund payload for invoice state testing"
+          },
+          "encoded": {
+            "bytes": 135,
+            "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a22416363657074656420726566756e64207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "order-receipt",
+      "label": "Invoice error",
+      "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5586406,
+      "acceptingBlockTime": 1778180072392,
+      "draftPath": "artifacts/signed-drafts/payload-error-self-send.json",
+      "evidencePath": "artifacts/payload-error-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6572726f722d64656d6f222c2276616c7565223a226572726f72222c226e6f7465223a224163636570746564206572726f72207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+        "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6572726f722d64656d6f222c2276616c7565223a226572726f72222c226e6f7465223a224163636570746564206572726f72207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+        "matches": true,
+        "bytes": 130,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "order-receipt",
+            "subject": "merchant-error-demo",
+            "value": "error",
+            "note": "Accepted error payload for invoice state testing"
+          },
+          "encoded": {
+            "bytes": 130,
+            "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6572726f722d64656d6f222c2276616c7565223a226572726f72222c226e6f7465223a224163636570746564206572726f72207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "access-pass-redemption",
+      "label": "Access pass redemption",
+      "txid": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5592475,
+      "acceptingBlockTime": 1778180666089,
+      "draftPath": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "evidencePath": "artifacts/payload-access-pass-redemption-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226163636573732d706173732d726564656d7074696f6e222c227375626a656374223a2272656465656d2d776f726b73686f702d616c706861222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206163636573732d7061737320726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "observedHex": "7b226b696e64223a226163636573732d706173732d726564656d7074696f6e222c227375626a656374223a2272656465656d2d776f726b73686f702d616c706861222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206163636573732d7061737320726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "matches": true,
+        "bytes": 159,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "access-pass-redemption",
+            "subject": "redeem-workshop-alpha",
+            "value": "accepted",
+            "note": "Accepted access-pass redemption payload for TN12 evidence sweep"
+          },
+          "encoded": {
+            "bytes": 159,
+            "hex": "7b226b696e64223a226163636573732d706173732d726564656d7074696f6e222c227375626a656374223a2272656465656d2d776f726b73686f702d616c706861222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206163636573732d7061737320726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "auction-bid",
+      "label": "Auction bid pass 001",
+      "txid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5594833,
+      "acceptingBlockTime": 1778180894104,
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "evidencePath": "artifacts/payload-auction-bid-pass-001-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d",
+        "observedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d",
+        "matches": true,
+        "bytes": 122,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "auction-bid",
+            "subject": "bid-pass-001",
+            "value": "accepted",
+            "note": "Accepted auction bid payload for pass auction."
+          },
+          "encoded": {
+            "bytes": 122,
+            "hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "auction-bid",
+      "label": "Auction bid pass 002",
+      "txid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5592946,
+      "acceptingBlockTime": 1778180711151,
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid.json",
+      "evidencePath": "artifacts/payload-auction-bid-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "observedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "matches": true,
+        "bytes": 128,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "auction-bid",
+            "subject": "bid-pass-002",
+            "value": "accepted",
+            "note": "Accepted auction bid payload for TN12 evidence sweep"
+          },
+          "encoded": {
+            "bytes": 128,
+            "hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "auction-bid",
+      "label": "Auction bid voucher 001",
+      "txid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5594917,
+      "acceptingBlockTime": 1778180902903,
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+      "evidencePath": "artifacts/payload-auction-bid-voucher-001-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d766f75636865722d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220766f75636865722061756374696f6e3b2062656c6f77207265736572766520696e20706c616e6e65722073746174652e227d",
+        "observedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d766f75636865722d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220766f75636865722061756374696f6e3b2062656c6f77207265736572766520696e20706c616e6e65722073746174652e227d",
+        "matches": true,
+        "bytes": 160,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "auction-bid",
+            "subject": "bid-voucher-001",
+            "value": "accepted",
+            "note": "Accepted auction bid payload for voucher auction; below reserve in planner state."
+          },
+          "encoded": {
+            "bytes": 160,
+            "hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d766f75636865722d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220766f75636865722061756374696f6e3b2062656c6f77207265736572766520696e20706c616e6e65722073746174652e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "stable-issuer-event",
+      "label": "Stable issuance 001",
+      "txid": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5593032,
+      "acceptingBlockTime": 1778180718780,
+      "draftPath": "artifacts/signed-drafts/payload-stable-issuance.json",
+      "evidencePath": "artifacts/payload-stable-issuance-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303031222c2276616c7565223a22697373756564222c226e6f7465223a224163636570746564206973737565722069737375616e6365207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "observedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303031222c2276616c7565223a22697373756564222c226e6f7465223a224163636570746564206973737565722069737375616e6365207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "matches": true,
+        "bytes": 135,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "stable-issuer-event",
+            "subject": "issue-001",
+            "value": "issued",
+            "note": "Accepted issuer issuance payload for TN12 evidence sweep"
+          },
+          "encoded": {
+            "bytes": 135,
+            "hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303031222c2276616c7565223a22697373756564222c226e6f7465223a224163636570746564206973737565722069737375616e6365207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "stable-issuer-event",
+      "label": "Stable issuance 002",
+      "txid": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5595001,
+      "acceptingBlockTime": 1778180910575,
+      "draftPath": "artifacts/signed-drafts/payload-stable-issuance-002.json",
+      "evidencePath": "artifacts/payload-stable-issuance-002-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303032222c2276616c7565223a22697373756564222c226e6f7465223a22416363657074656420737461626c652d76616c75652069737375616e6365207265636569707420666f7220636f6e74726163746f722d626574612e227d",
+        "observedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303032222c2276616c7565223a22697373756564222c226e6f7465223a22416363657074656420737461626c652d76616c75652069737375616e6365207265636569707420666f7220636f6e74726163746f722d626574612e227d",
+        "matches": true,
+        "bytes": 138,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "stable-issuer-event",
+            "subject": "issue-002",
+            "value": "issued",
+            "note": "Accepted stable-value issuance receipt for contractor-beta."
+          },
+          "encoded": {
+            "bytes": 138,
+            "hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303032222c2276616c7565223a22697373756564222c226e6f7465223a22416363657074656420737461626c652d76616c75652069737375616e6365207265636569707420666f7220636f6e74726163746f722d626574612e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "stable-issuer-event",
+      "label": "Stable redemption 001",
+      "txid": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5593133,
+      "acceptingBlockTime": 1778180726950,
+      "draftPath": "artifacts/signed-drafts/payload-stable-redemption.json",
+      "evidencePath": "artifacts/payload-stable-redemption-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2272656465656d2d303031222c2276616c7565223a2272656465656d6564222c226e6f7465223a2241636365707465642069737375657220726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "observedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2272656465656d2d303031222c2276616c7565223a2272656465656d6564222c226e6f7465223a2241636365707465642069737375657220726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "matches": true,
+        "bytes": 140,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "stable-issuer-event",
+            "subject": "redeem-001",
+            "value": "redeemed",
+            "note": "Accepted issuer redemption payload for TN12 evidence sweep"
+          },
+          "encoded": {
+            "bytes": 140,
+            "hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2272656465656d2d303031222c2276616c7565223a2272656465656d6564222c226e6f7465223a2241636365707465642069737375657220726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "miner-attestation",
+      "label": "Miner attestation",
+      "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5593225,
+      "acceptingBlockTime": 1778180735563,
+      "draftPath": "artifacts/signed-drafts/payload-miner-attestation.json",
+      "evidencePath": "artifacts/payload-miner-attestation-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226d696e65722d6174746573746174696f6e222c227375626a656374223a227369672d7274642d68617368726174652d303031222c2276616c7565223a227665726966696564222c226e6f7465223a224163636570746564206d696e65722f77617463686572206174746573746174696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "observedHex": "7b226b696e64223a226d696e65722d6174746573746174696f6e222c227375626a656374223a227369672d7274642d68617368726174652d303031222c2276616c7565223a227665726966696564222c226e6f7465223a224163636570746564206d696e65722f77617463686572206174746573746174696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "matches": true,
+        "bytes": 156,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "miner-attestation",
+            "subject": "sig-rtd-hashrate-001",
+            "value": "verified",
+            "note": "Accepted miner/watcher attestation payload for TN12 evidence sweep"
+          },
+          "encoded": {
+            "bytes": 156,
+            "hex": "7b226b696e64223a226d696e65722d6174746573746174696f6e222c227375626a656374223a227369672d7274642d68617368726174652d303031222c2276616c7565223a227665726966696564222c226e6f7465223a224163636570746564206d696e65722f77617463686572206174746573746174696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "agent-task",
+      "label": "Agent task invoice",
+      "txid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5595080,
+      "acceptingBlockTime": 1778180918764,
+      "draftPath": "artifacts/signed-drafts/payload-agent-task-invoice.json",
+      "evidencePath": "artifacts/payload-agent-task-invoice-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220696e766f696365206175646974207461736b2e227d",
+        "observedHex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220696e766f696365206175646974207461736b2e227d",
+        "matches": true,
+        "bytes": 136,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "agent-task",
+            "subject": "agent-task-invoice-001",
+            "value": "accepted",
+            "note": "Accepted agent task payload for invoice audit task."
+          },
+          "encoded": {
+            "bytes": 136,
+            "hex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220696e766f696365206175646974207461736b2e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "agent-task",
+      "label": "Agent task escrow",
+      "txid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5595177,
+      "acceptingBlockTime": 1778180926737,
+      "draftPath": "artifacts/signed-drafts/payload-agent-task-escrow.json",
+      "evidencePath": "artifacts/payload-agent-task-escrow-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220657363726f77207370656e642d70617468207461736b2e227d",
+        "observedHex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220657363726f77207370656e642d70617468207461736b2e227d",
+        "matches": true,
+        "bytes": 139,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "agent-task",
+            "subject": "agent-task-escrow-001",
+            "value": "accepted",
+            "note": "Accepted agent task payload for escrow spend-path task."
+          },
+          "encoded": {
+            "bytes": 139,
+            "hex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220657363726f77207370656e642d70617468207461736b2e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "agent-proof",
+      "label": "Agent proof invoice",
+      "txid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5593302,
+      "acceptingBlockTime": 1778180743020,
+      "draftPath": "artifacts/signed-drafts/payload-agent-proof.json",
+      "evidencePath": "artifacts/payload-agent-proof-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "observedHex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "matches": true,
+        "bytes": 133,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "agent-proof",
+            "subject": "proof-invoice-001",
+            "value": "accepted",
+            "note": "Accepted agent proof payload for TN12 evidence sweep"
+          },
+          "encoded": {
+            "bytes": 133,
+            "hex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "agent-proof",
+      "label": "Agent proof escrow",
+      "txid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5595262,
+      "acceptingBlockTime": 1778180934800,
+      "draftPath": "artifacts/signed-drafts/payload-agent-proof-escrow.json",
+      "evidencePath": "artifacts/payload-agent-proof-escrow-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d657363726f772d303031222c2276616c7565223a2270656e64696e672d726576696577222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f61643b207265766965776572207374617475732072656d61696e732070656e64696e672e227d",
+        "observedHex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d657363726f772d303031222c2276616c7565223a2270656e64696e672d726576696577222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f61643b207265766965776572207374617475732072656d61696e732070656e64696e672e227d",
+        "matches": true,
+        "bytes": 148,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "agent-proof",
+            "subject": "proof-escrow-001",
+            "value": "pending-review",
+            "note": "Accepted agent proof payload; reviewer status remains pending."
+          },
+          "encoded": {
+            "bytes": 148,
+            "hex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d657363726f772d303031222c2276616c7565223a2270656e64696e672d726576696577222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f61643b207265766965776572207374617475732072656d61696e732070656e64696e672e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "agent-dispute",
+      "label": "Agent dispute escrow",
+      "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5595354,
+      "acceptingBlockTime": 1778180943560,
+      "draftPath": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+      "evidencePath": "artifacts/payload-agent-dispute-escrow-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226167656e742d64697370757465222c227375626a656374223a22646973707574652d657363726f772d303031222c2276616c7565223a226f70656e222c226e6f7465223a224163636570746564206167656e742064697370757465207061796c6f616420666f7220657363726f77207461736b2e227d",
+        "observedHex": "7b226b696e64223a226167656e742d64697370757465222c227375626a656374223a22646973707574652d657363726f772d303031222c2276616c7565223a226f70656e222c226e6f7465223a224163636570746564206167656e742064697370757465207061796c6f616420666f7220657363726f77207461736b2e227d",
+        "matches": true,
+        "bytes": 127,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "agent-dispute",
+            "subject": "dispute-escrow-001",
+            "value": "open",
+            "note": "Accepted agent dispute payload for escrow task."
+          },
+          "encoded": {
+            "bytes": 127,
+            "hex": "7b226b696e64223a226167656e742d64697370757465222c227375626a656374223a22646973707574652d657363726f772d303031222c2276616c7565223a226f70656e222c226e6f7465223a224163636570746564206167656e742064697370757465207061796c6f616420666f7220657363726f77207461736b2e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0"
+    }
+  ],
+  "boundaries": [
+    "This checkpoint is rebuilt from known TN12 txids and public transaction reads.",
+    "It is rollback-aware metadata, not a full virtual-chain subscription.",
+    "A production indexer should persist checkpoints from node/RPC virtual-chain reads before serving app state."
+  ]
+}
