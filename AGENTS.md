@@ -30,6 +30,7 @@
 - Treat the current version as a TN12-configured proof app. The browser builds policy/control artifacts, while scripts compile, sign, submit, verify, and index accepted testnet transactions.
 - Do not reintroduce the local node workflow. Use public TN12 APIs, manual explorer data, and local fixtures unless the user explicitly reverses that decision.
 - For payload/miner-signal work, start with transaction payload receipts and accepted-transaction indexing. Do not claim arbitrary app data can be placed in block headers.
+- Do not use the public TN12 REST submit route for payload receipts; it accepted a payment while dropping payload bytes. Use a verified wallet/wRPC route and then fetch the accepted transaction before marking receipt state paid.
 
 ## Sources
 

@@ -64,8 +64,9 @@
       },
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json",
-        "submitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit",
-        "boundary": "Payload REST submit support must be accepted manually before submit."
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Payload receipt self-send",
       "priority": 1,
@@ -134,6 +135,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Split funding",
@@ -189,6 +191,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-recovery.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-recovery.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault recovery",
@@ -244,6 +247,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-withdrawal.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/vault-withdrawal.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault withdrawal",
@@ -299,6 +303,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-release.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-release.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance release",
@@ -354,6 +359,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-refund.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/assurance-refund.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance refund",
@@ -394,6 +400,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-funding.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-funding.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow funding",
@@ -449,6 +456,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-release.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-release.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow release",
@@ -504,6 +512,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-refund.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-refund.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow refund",
@@ -559,6 +568,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel",
@@ -599,6 +609,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-funding.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-funding.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund funding",
@@ -654,6 +665,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-proof-refund.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund",
@@ -694,6 +706,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-funding.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-funding.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel funding",
@@ -749,6 +762,7 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
         "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-cancel-proof-cancel.json --submit",
+        "restSubmitCommand": null,
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel attempt",

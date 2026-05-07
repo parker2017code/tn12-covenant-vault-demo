@@ -138,6 +138,7 @@ npm run check
 npm run serve
 npm run address
 npm run wallet:public
+npm run tx:submit:wrpc
 ```
 
 Fixtures and contracts:
@@ -237,6 +238,20 @@ Current proof scope:
 - individual pledge release works,
 - individual pledge refund works,
 - target aggregation is not yet enforced by the contract.
+
+## Payload Receipt Caveat
+
+The public TN12 REST submit route must not be used for payload receipts. On 2026-05-07 it accepted a self-send payment but dropped the payload:
+
+```txt
+Accepted no-payload tx:
+d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4
+
+Expected payload txid:
+ae807e8d81fd46ad5f0f9f77128851cb181a37e7b90105fb8e89f5595955a4d9
+```
+
+Use `npm run tx:submit:wrpc` to inspect the wRPC candidate. Actual broadcast requires `KASPA_WRPC_URL=<ws-or-wss-url>` and still must be verified by fetching the accepted transaction payload before invoice state changes.
 
 Next assurance work must add campaign-level state, multi-pledge fixtures, and batch release/refund planning before claiming a real campaign product.
 

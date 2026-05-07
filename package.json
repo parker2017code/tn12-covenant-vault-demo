@@ -28,6 +28,7 @@
     "tx:verify": "node scripts/verify-accepted-txs.mjs",
     "proof:evidence": "node scripts/build-proof-evidence.mjs",
     "tx:submit:dry": "node scripts/submit-signed-draft.mjs",
+    "tx:submit:wrpc": "node scripts/submit-signed-draft-wrpc.mjs",
     "indexer:state": "node scripts/build-accepted-app-state.mjs",
     "invoice:registry": "node scripts/build-invoice-registry.mjs",
     "submit:registry": "node scripts/build-submit-console-registry.mjs",
@@ -50,6 +51,7 @@
   },
   "dependencies": {
     "blakejs": "^1.2.1",
+    "isomorphic-ws": "^5.0.0",
     "kaspa-wasm": "^0.13.0"
   },
   "devDependencies": {

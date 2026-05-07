@@ -94,6 +94,7 @@ try {
   await expectText(page, "#build-status-lanes", "ZK / Anchor Readiness");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
+  await expectText(page, "#submit-drafts", "KASPA_WRPC_URL");
   await expectText(page, "#submit-drafts", "Escrow funding");
   await expectText(page, "#submit-drafts", "Escrow release");
   await expectText(page, "#submit-drafts", "Accepted seller-release proof");

@@ -258,6 +258,20 @@ Inspect the REST submit payload without broadcasting:
 npm run tx:submit:dry
 ```
 
+Inspect the wRPC payload-preserving submit candidate without broadcasting:
+
+```sh
+npm run tx:submit:wrpc
+```
+
+This reconstructs the signed transaction through `kaspa-wasm` and checks that the reconstructed txid still matches the payload-bearing draft. Actual wRPC broadcast is still explicit and requires a trusted TN12 endpoint:
+
+```sh
+KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit
+```
+
+The repo does not guess public wRPC endpoints. A successful submit must still be followed by fetching the accepted transaction and confirming the payload bytes survived before any invoice is marked paid.
+
 Build the signed-draft review registry for the browser submit console:
 
 ```sh

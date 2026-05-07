@@ -47,6 +47,7 @@ import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
+import { summarizeWrpcCandidate } from "../src/wrpcSubmitCandidate.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
@@ -130,6 +131,10 @@ assert.equal(payloadReceiptDraft.submitPayload.transaction.outputs.length, 2);
 assert.equal(payloadReceiptDraft.submitPayload.transaction.outputs[0].amount, 100000000);
 assert.ok(payloadReceiptDraft.submitPayload.transaction.outputs[1].amount > 0);
 assert.equal(payloadReceiptDraft.payment.minerFeeSompi, "5000");
+const wrpcCandidate = summarizeWrpcCandidate(payloadReceiptDraft, { artifactPath: "artifacts/signed-drafts/payload-receipt-self-send.json" });
+assert.equal(wrpcCandidate.status, "needs-kaspa-wrpc-url");
+assert.equal(wrpcCandidate.txidMatches, true);
+assert.equal(wrpcCandidate.payloadBytes, 127);
 const p2pkSelfSendDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/self-send-p2pk.json", import.meta.url), "utf8"));
 assert.ok(BigInt(p2pkSelfSendDraft.payment.changeSompi) > 0n);
 const splitDraftArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/split-funding.json", import.meta.url), "utf8"));
@@ -396,6 +401,7 @@ const files = [
   "scripts/build-proof-evidence.mjs",
   "scripts/build-accepted-app-state.mjs",
   "scripts/submit-signed-draft.mjs",
+  "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
   "scripts/build-signal-payload.mjs",
   "scripts/build-invoice-registry.mjs",
@@ -484,6 +490,7 @@ const files = [
   "src/escrowPrimitive.mjs",
   "src/treasuryVault.mjs",
   "src/payloadSubmitReadiness.mjs",
+  "src/wrpcSubmitCandidate.mjs",
   "src/coordinationMarket.mjs",
   "src/accessPassPlanner.mjs",
   "src/mainnetReadiness.mjs",

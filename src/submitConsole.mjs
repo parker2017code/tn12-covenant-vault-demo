@@ -48,10 +48,13 @@ export function summarizeSignedDraft(artifact, path = "") {
     submit: {
       dryRunCommand: `node scripts/submit-signed-draft.mjs ${path}`,
       submitCommand: artifact.requiresPayloadSubmitSupport
-        ? `ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs ${path} --submit`
+        ? `KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs ${path} --submit`
         : `node scripts/submit-signed-draft.mjs ${path} --submit`,
+      restSubmitCommand: artifact.requiresPayloadSubmitSupport
+        ? `ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs ${path} --submit`
+        : null,
       boundary: artifact.requiresPayloadSubmitSupport
-        ? "Payload REST submit support must be accepted manually before submit."
+        ? "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
         : "Actual broadcast requires explicit --submit."
     }
   };
