@@ -44,6 +44,7 @@ import {
 import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
+import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -141,10 +142,18 @@ assert.equal(campaignState.refundPlan.refundCount, 3);
 const enforcementFixture = JSON.parse(await readFile(new URL("../fixtures/EnforcementMatrix.json", import.meta.url), "utf8"));
 const enforcementMatrix = buildEnforcementMatrix(enforcementFixture);
 assert.equal(enforcementMatrix.status, "claim-surface-audit");
-assert.equal(enforcementMatrix.summary.total, 10);
+assert.equal(enforcementMatrix.summary.total, 11);
 assert.equal(enforcementMatrix.summary.contractEnforced, 4);
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "vault-daily-limit" && feature.enforcement === "simulation"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "assurance-target-progress" && feature.enforcement === "planner-indexer"));
+assert.ok(enforcementMatrix.features.some((feature) => feature.id === "escrow-spend-paths" && feature.enforcement === "planner-indexer"));
+const escrowFixture = JSON.parse(await readFile(new URL("../fixtures/EscrowPrimitives.json", import.meta.url), "utf8"));
+const escrowRegistry = buildEscrowPrimitive(escrowFixture);
+assert.equal(escrowRegistry.status, "planner-fixture-not-script-proof");
+assert.equal(escrowRegistry.summary.total, 3);
+assert.equal(escrowRegistry.summary.funded, 1);
+assert.equal(escrowRegistry.summary.needsAction, 2);
+assert.ok(escrowRegistry.escrows.some((escrow) => escrow.escrowId === "escrow-freelance-001" && escrow.spendPaths.length === 3));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -230,6 +239,7 @@ const files = [
   "scripts/build-research-library.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-enforcement-matrix.mjs",
+  "scripts/build-escrow-primitives.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
@@ -239,6 +249,7 @@ const files = [
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/enforcement-matrix.json",
+  "artifacts/escrow-primitives.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/SavedWallet.public.json",
@@ -255,6 +266,7 @@ const files = [
   "fixtures/CrossChainResearchLibrary.json",
   "fixtures/BatchAssuranceCampaign.json",
   "fixtures/EnforcementMatrix.json",
+  "fixtures/EscrowPrimitives.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
@@ -264,6 +276,7 @@ const files = [
   "src/appResearch.mjs",
   "src/batchAssurance.mjs",
   "src/enforcementMatrix.mjs",
+  "src/escrowPrimitive.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -303,6 +316,7 @@ assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run enforcement:matrix/);
+assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -319,6 +333,7 @@ assert.match(html, /Accepted transaction indexer/);
 assert.match(html, /Payload receipt app/);
 assert.match(html, /Batch assurance campaigns/);
 assert.match(html, /Enforcement matrix/);
+assert.match(html, /Escrow primitive/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);

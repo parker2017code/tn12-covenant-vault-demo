@@ -101,6 +101,16 @@
       "proof": "Generated research library artifact",
       "risk": "Open-source references can be mistaken for Kaspa feature availability.",
       "nextHardeningStep": "Keep every app brief tied to live Kaspa, TN12/Toccata, roadmap, or research status."
+    },
+    {
+      "id": "escrow-spend-paths",
+      "name": "Escrow spend paths",
+      "lane": "escrow",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/EscrowPrimitives.json and browser escrow panel",
+      "proof": "Generated escrow registry artifact only",
+      "risk": "Buyer release, timeout refund, and mutual cancel are planned spend paths until Escrow.sil drafts are built and accepted.",
+      "nextHardeningStep": "Add Escrow.sil, compile fixtures, signed funding draft, and accepted release/refund proof transactions."
     }
   ]
 }

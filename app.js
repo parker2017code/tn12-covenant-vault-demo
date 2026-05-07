@@ -28,6 +28,7 @@ import { buildSubmitConsoleRegistry } from "./src/submitConsole.mjs";
 import { buildResearchLibrary } from "./src/appResearch.mjs";
 import { buildBatchAssuranceState } from "./src/batchAssurance.mjs";
 import { buildEnforcementMatrix } from "./src/enforcementMatrix.mjs";
+import { buildEscrowPrimitive } from "./src/escrowPrimitive.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -58,6 +59,8 @@ const campaignPlansNode = document.querySelector("#campaign-plans");
 const campaignPledgesNode = document.querySelector("#campaign-pledges");
 const enforcementSummaryNode = document.querySelector("#enforcement-summary");
 const enforcementFeaturesNode = document.querySelector("#enforcement-features");
+const escrowSummaryNode = document.querySelector("#escrow-summary");
+const escrowListNode = document.querySelector("#escrow-list");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -177,6 +180,7 @@ renderAssurance();
 renderManualOutpoint();
 renderBatchAssuranceCampaign();
 renderEnforcementMatrix();
+renderEscrowPrimitive();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -369,6 +373,37 @@ async function renderEnforcementMatrix() {
     }
   } catch (error) {
     enforcementSummaryNode.textContent = `Enforcement matrix unavailable: ${error.message}`;
+  }
+}
+
+async function renderEscrowPrimitive() {
+  if (!escrowSummaryNode || !escrowListNode) return;
+
+  try {
+    const response = await fetch("fixtures/EscrowPrimitives.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const registry = buildEscrowPrimitive(fixture);
+    escrowSummaryNode.innerHTML = `
+      <article><span>Escrows</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
+      <article><span>TKAS</span><strong>${escapeHtml(registry.summary.totalTkas)}</strong></article>
+      <article><span>Funded</span><strong>${escapeHtml(registry.summary.funded)}</strong></article>
+      <article><span>Action</span><strong>${escapeHtml(registry.summary.needsAction)}</strong></article>
+    `;
+
+    escrowListNode.innerHTML = "";
+    for (const escrow of registry.escrows) {
+      const article = document.createElement("article");
+      article.className = "escrow-card";
+      article.innerHTML = `
+        <span>${escapeHtml(escrow.status)}</span>
+        <strong>${escapeHtml(escrow.title)}</strong>
+        <p>${escapeHtml(escrow.amountTkas)} TKAS from ${escapeHtml(escrow.buyer)} to ${escapeHtml(escrow.seller)}</p>
+        <small>${escapeHtml(escrow.nextAction)}</small>
+      `;
+      escrowListNode.append(article);
+    }
+  } catch (error) {
+    escrowSummaryNode.textContent = `Escrow registry unavailable: ${error.message}`;
   }
 }
 

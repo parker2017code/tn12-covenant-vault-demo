@@ -23,6 +23,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds a cross-chain research library that maps PMF, failure modes, and open-source code patterns into Kaspa status lanes.
 - Builds batch assurance campaign state from multiple pledge records without claiming pooled covenant enforcement.
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
+- Builds an escrow primitive registry for buyer fund, seller release, timeout refund, and mutual cancel planning.
 
 ## What It Does Not Do Yet
 
@@ -247,6 +248,14 @@ npm run enforcement:matrix
 ```
 
 This turns `fixtures/EnforcementMatrix.json` into `artifacts/enforcement-matrix.json`. It is the claim audit: browser features are not covenant guarantees unless marked `script`.
+
+Build the escrow primitive registry:
+
+```sh
+npm run escrow:registry
+```
+
+This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. It is currently planner/indexer state only; accepted TN12 escrow covenant proofs are the next hardening step.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

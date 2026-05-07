@@ -59,6 +59,9 @@ try {
   await expectText(page, "#enforcement-summary", "Script");
   await expectText(page, "#enforcement-features", "Vault daily limit");
   await expectText(page, "#enforcement-features", "planner-indexer");
+  await expectText(page, "#escrow-summary", "Escrows");
+  await expectText(page, "#escrow-list", "Freelance wallet integration review");
+  await expectText(page, "#escrow-list", "Review seller-release");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

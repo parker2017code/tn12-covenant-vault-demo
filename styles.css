@@ -373,6 +373,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.escrow {
+  margin-top: 24px;
+}
+
 .submit-console {
   margin-top: 24px;
 }
@@ -563,6 +567,34 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.escrow-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.escrow-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.escrow-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.escrow-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
 .enforcement-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -675,6 +707,13 @@ progress::-moz-progress-bar {
 .enforcement-features {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.escrow-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 16px;
 }
@@ -804,6 +843,7 @@ progress::-moz-progress-bar {
 .campaign-card,
 .campaign-plans article,
 .enforcement-card,
+.escrow-card,
 .attestation-card,
 .indexer-card,
 .receipt-card,
@@ -829,6 +869,7 @@ progress::-moz-progress-bar {
 .campaign-card span,
 .campaign-plans article span,
 .enforcement-card span,
+.escrow-card span,
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
@@ -874,6 +915,9 @@ progress::-moz-progress-bar {
 .enforcement-card strong,
 .enforcement-card p,
 .enforcement-card small,
+.escrow-card strong,
+.escrow-card p,
+.escrow-card small,
 .attestation-card strong,
 .attestation-card p,
 .attestation-card small,
@@ -903,6 +947,7 @@ progress::-moz-progress-bar {
 .campaign-card p,
 .campaign-plans article p,
 .enforcement-card p,
+.escrow-card p,
 .attestation-card p,
 .indexer-card p,
 .receipt-card p,
@@ -921,6 +966,7 @@ progress::-moz-progress-bar {
 .campaign-card small,
 .campaign-plans article small,
 .enforcement-card small,
+.escrow-card small,
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
@@ -1015,6 +1061,8 @@ progress::-moz-progress-bar {
   .campaign-pledges,
   .enforcement-summary,
   .enforcement-features,
+  .escrow-summary,
+  .escrow-list,
   .submit-summary,
   .submit-drafts,
   .research-summary,

@@ -34,6 +34,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
 4. Escrow Primitive
    - Buyer fund, seller release, timeout refund, mutual cancel.
    - First success: accepted TN12 fund and release/refund path.
+   - Current repo surface: `fixtures/EscrowPrimitives.json`, `src/escrowPrimitive.mjs`, `npm run escrow:registry`, and the browser escrow panel.
 
 5. Treasury / Team Vaults
    - Spend caps, delayed large withdrawals, recovery, payroll templates.

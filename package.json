@@ -29,6 +29,7 @@
     "research:library": "node scripts/build-research-library.mjs",
     "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",
     "enforcement:matrix": "node scripts/build-enforcement-matrix.mjs",
+    "escrow:registry": "node scripts/build-escrow-primitives.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

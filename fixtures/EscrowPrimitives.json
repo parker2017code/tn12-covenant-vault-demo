@@ -1,0 +1,51 @@
+{
+  "schema": "tn12-escrow-primitive-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "escrows": [
+    {
+      "escrowId": "escrow-freelance-001",
+      "title": "Freelance wallet integration review",
+      "buyer": "merchant-alpha",
+      "seller": "wallet-dev-beta",
+      "buyerRefundAddress": "kaspatest:qbuyer-alpha-refund-placeholder",
+      "sellerPayoutAddress": "kaspatest:qseller-beta-payout-placeholder",
+      "amountTkas": 50,
+      "feeTkas": 0.00005,
+      "timeoutIso": "2026-05-21T00:00:00.000Z",
+      "status": "funded",
+      "proof": "fixture-only-outpoint-needed",
+      "deliveryHash": "sha256:review-report-placeholder",
+      "notes": "First useful escrow shape: buyer funds, seller releases after approval, timeout refunds buyer."
+    },
+    {
+      "escrowId": "escrow-pass-redemption-002",
+      "title": "Access pass redemption batch",
+      "buyer": "event-issuer-gamma",
+      "seller": "venue-delta",
+      "buyerRefundAddress": "kaspatest:qissuer-gamma-refund-placeholder",
+      "sellerPayoutAddress": "kaspatest:qvenue-delta-payout-placeholder",
+      "amountTkas": 15,
+      "feeTkas": 0.00005,
+      "timeoutIso": "2026-05-28T00:00:00.000Z",
+      "status": "draft",
+      "proof": "not-funded",
+      "deliveryHash": "sha256:redemption-list-placeholder",
+      "notes": "Shows how access-pass and escrow lanes can meet without pretending native ticket enforcement is live."
+    },
+    {
+      "escrowId": "escrow-docs-grant-003",
+      "title": "Docs grant milestone payout",
+      "buyer": "grant-round",
+      "seller": "docs-maintainer",
+      "buyerRefundAddress": "kaspatest:qgrant-round-refund-placeholder",
+      "sellerPayoutAddress": "kaspatest:qdocs-maintainer-payout-placeholder",
+      "amountTkas": 100,
+      "feeTkas": 0.00005,
+      "timeoutIso": "2026-06-07T00:00:00.000Z",
+      "status": "delivery-disputed",
+      "proof": "fixture-only-outpoint-needed",
+      "deliveryHash": "sha256:milestone-proof-placeholder",
+      "notes": "Dispute state is app-layer context until an arbiter path exists."
+    }
+  ]
+}

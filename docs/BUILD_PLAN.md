@@ -54,3 +54,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 26. Add the cross-chain research library: PMF evidence, reusable code patterns, failure modes, Kaspa status lanes, browser panel, and generated research artifact.
 27. Add the batch assurance campaign planner: multiple pledge records, accepted progress, release readiness, refund planning, browser panel, and generated campaign artifact.
 28. Add the enforcement matrix: claim each feature as script, planner/indexer, wallet-policy, documentation, or simulation-only before expanding product language.
+29. Add the escrow primitive registry: buyer fund, seller release, timeout refund, mutual cancel, browser panel, and generated escrow artifact before script proofs.

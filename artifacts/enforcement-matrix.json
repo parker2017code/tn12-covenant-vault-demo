@@ -3,13 +3,13 @@
   "status": "claim-surface-audit",
   "reviewedAt": "2026-05-07",
   "summary": {
-    "total": 10,
+    "total": 11,
     "contractEnforced": 4,
-    "notScriptEnforced": 6,
+    "notScriptEnforced": 7,
     "byEnforcement": {
       "script": 4,
       "simulation": 2,
-      "planner-indexer": 2,
+      "planner-indexer": 3,
       "wallet-policy": 1,
       "documentation": 1
     },
@@ -18,7 +18,8 @@
       "assurance": 3,
       "payload-invoice": 1,
       "wallet-submit": 1,
-      "research": 1
+      "research": 1,
+      "escrow": 1
     }
   },
   "features": [
@@ -121,6 +122,16 @@
       "proof": "Generated research library artifact",
       "risk": "Open-source references can be mistaken for Kaspa feature availability.",
       "nextHardeningStep": "Keep every app brief tied to live Kaspa, TN12/Toccata, roadmap, or research status."
+    },
+    {
+      "id": "escrow-spend-paths",
+      "name": "Escrow spend paths",
+      "lane": "escrow",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/EscrowPrimitives.json and browser escrow panel",
+      "proof": "Generated escrow registry artifact only",
+      "risk": "Buyer release, timeout refund, and mutual cancel are planned spend paths until Escrow.sil drafts are built and accepted.",
+      "nextHardeningStep": "Add Escrow.sil, compile fixtures, signed funding draft, and accepted release/refund proof transactions."
     }
   ],
   "rules": [
