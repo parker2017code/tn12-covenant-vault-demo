@@ -65,3 +65,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 37. Add auction/intent prototype: accepted bid payloads, winner rule, refund list, MEV caveat, browser panel, and generated auction artifact.
 38. Add DeFi research backlog: swaps, lending, stable-value, insurance, derivatives, prediction hedges, portfolio automation, missing rails, browser panel, and generated backlog artifact.
 39. Add AI-agent commitment board: task offers, deposits, completion proofs, disputes, release/refund planning, browser panel, and generated commitment artifact.
+40. Add negative planner/reducer checks: signed-only bids cannot win, pending pledges cannot release, mismatched receipts cannot mark paid, and disputes block agent release.

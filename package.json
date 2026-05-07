@@ -6,7 +6,8 @@
   "scripts": {
     "check": "node scripts/check.mjs",
     "check:ui": "node scripts/check-ui.mjs",
-    "check:all": "npm run check && npm run check:ui",
+    "check:negative": "node scripts/check-negative.mjs",
+    "check:all": "npm run check && npm run check:negative && npm run check:ui",
     "address": "node scripts/create-testnet-address.mjs",
     "wallet:public": "node scripts/wallet-public-info.mjs",
     "utxos:fetch": "node scripts/fetch-funded-utxos.mjs",

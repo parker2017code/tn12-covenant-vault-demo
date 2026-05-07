@@ -404,6 +404,8 @@ http://127.0.0.1:4176/
 
 ```sh
 npm run check
+npm run check:negative
+npm run check:all
 ```
 
 ## Assurance Contracts
