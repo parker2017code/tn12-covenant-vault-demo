@@ -150,13 +150,13 @@ npm run tx:p2pk
 
 This command proves local transaction construction and signing against the funded TN12 UTXO. It writes `artifacts/signed-drafts/self-send-p2pk.json` and does not submit anything to the network.
 
-Build signed local contract-funding drafts for the vault and assurance pledge without broadcasting:
+Build signed local contract-funding drafts for the vault, assurance pledge, and escrow without broadcasting:
 
 ```sh
 npm run tx:contracts
 ```
 
-Those drafts both reference the same fetched UTXO. They are mutually exclusive unless the source funding is split first; broadcasting one would spend the source outpoint and invalidate the other.
+These drafts consume separate split buckets when those fixtures are current. Escrow funding is still only a signed draft until it is explicitly submitted and accepted.
 
 Build the safer first broadcast candidate, a signed self-send split into separate vault and assurance buckets:
 
@@ -277,7 +277,7 @@ Build the escrow primitive registry:
 npm run escrow:registry
 ```
 
-This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. It is currently planner/indexer state only; accepted TN12 escrow covenant proofs are the next hardening step.
+This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil` and a signed escrow funding draft; accepted escrow release/refund/cancel proofs are the next hardening step.
 
 Build the treasury/team vault registry:
 

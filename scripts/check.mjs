@@ -133,9 +133,13 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 6);
+assert.equal(submitRegistry.summary.total, 7);
 assert.equal(submitRegistry.summary.payloadDrafts, 1);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 1);
+const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
+assert.equal(escrowFundingDraft.contract, "Escrow");
+assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
+assert.ok(submitRegistry.drafts.some((draft) => draft.lane === "escrow-funding" && draft.label === "Escrow funding"));
 const researchFixture = JSON.parse(await readFile(new URL("../fixtures/CrossChainResearchLibrary.json", import.meta.url), "utf8"));
 const researchLibrary = buildResearchLibrary(researchFixture);
 assert.equal(researchLibrary.status, "research-inputs-not-protocol-claims");
@@ -385,6 +389,7 @@ const files = [
   "artifacts/DelayedRecoveryVault.json",
   "artifacts/AssurancePledge.json",
   "artifacts/Escrow.json",
+  "artifacts/signed-drafts/escrow-funding.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
   "artifacts/submit-console-registry.json",
   "artifacts/research-library.json",

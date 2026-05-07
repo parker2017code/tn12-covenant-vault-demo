@@ -37,6 +37,12 @@
       "priority": 6,
       "path": "artifacts/signed-drafts/assurance-refund.json",
       "description": "Accepted proof path for individual pledge refund."
+    },
+    {
+      "label": "Escrow funding",
+      "priority": 7,
+      "path": "artifacts/signed-drafts/escrow-funding.json",
+      "description": "Signed funding draft for Escrow.sil. No accepted escrow spend proof yet."
     }
   ]
 }

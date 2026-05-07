@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 6,
+    "total": 7,
     "payloadDrafts": 1,
-    "explicitSubmitRequired": 6,
+    "explicitSubmitRequired": 7,
     "payloadSubmitGated": 1
   },
   "drafts": [
@@ -352,6 +352,46 @@
       "label": "Assurance refund",
       "priority": 6,
       "description": "Accepted proof path for individual pledge refund."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-funding.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-funding",
+      "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+      "warning": "This spends the fetched UTXO if broadcast. Do not broadcast multiple drafts that use the same source outpoint.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+        "outputIndex": 2,
+        "amountTkas": 1399.99975
+      },
+      "counts": {
+        "inputs": 0,
+        "outputs": 0,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "0",
+        "outputTkas": "0"
+      },
+      "inputs": [],
+      "outputs": [],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-funding.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-funding.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow funding",
+      "priority": 7,
+      "description": "Signed funding draft for Escrow.sil. No accepted escrow spend proof yet."
     }
   ],
   "boundaries": [

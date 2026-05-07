@@ -93,6 +93,7 @@ try {
   await expectText(page, "#build-status-lanes", "Payload Receipt / Invoice App");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
+  await expectText(page, "#submit-drafts", "Escrow funding");
   await expectText(page, "#submit-drafts", "--submit");
   await expectText(page, "#research-summary", "Candidates");
   await expectText(page, "#research-candidates", "Uniswap-style AMM");

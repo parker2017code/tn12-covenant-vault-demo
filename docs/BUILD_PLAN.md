@@ -68,3 +68,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 40. Add negative planner/reducer checks: signed-only bids cannot win, pending pledges cannot release, mismatched receipts cannot mark paid, and disputes block agent release.
 41. Add first `Escrow.sil` template: buyer-approved release to seller, timeout refund to buyer, and mutual cancel refund before signed escrow drafts.
 42. Add proof evidence artifact: resolve proof-spend previous outputs, show P2SH input contract outputs, expected P2PK outputs, sig-op counts, and accepted status.
+43. Add signed escrow funding draft: use the existing contract funding builder, review in submit console, and keep escrow spends blocked until accepted funding outpoint exists.

@@ -3,9 +3,11 @@ import { buildSignedContractFundingDraft } from "../src/signedContractDrafts.mjs
 
 const vaultFunding = await readJson("fixtures/VaultBucketOutpoint.json");
 const assuranceFunding = await readJson("fixtures/AssuranceBucketOutpoint.json");
+const escrowFunding = await readJson("fixtures/ChangeBucketOutpoint.json");
 const wallet = await readJson(".local/tn12-wallet.json");
 const vaultContract = await readJson("artifacts/DelayedRecoveryVault.json");
 const assuranceContract = await readJson("artifacts/AssurancePledge.json");
+const escrowContract = await readJson("artifacts/Escrow.json");
 const minerFeeSompi = BigInt(process.env.MINER_FEE_SOMPI || "5000");
 
 const drafts = [
@@ -28,6 +30,17 @@ const drafts = [
       contractArtifact: assuranceContract,
       lane: "assurance-pledge",
       amountTkas: Number(process.env.ASSURANCE_PLEDGE_TKAS || "250"),
+      minerFeeSompi
+    })
+  },
+  {
+    path: "artifacts/signed-drafts/escrow-funding.json",
+    draft: buildSignedContractFundingDraft({
+      funding: escrowFunding,
+      wallet,
+      contractArtifact: escrowContract,
+      lane: "escrow-funding",
+      amountTkas: Number(process.env.ESCROW_FUNDING_TKAS || "50"),
       minerFeeSompi
     })
   }
