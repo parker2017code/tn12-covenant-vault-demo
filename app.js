@@ -651,6 +651,7 @@ async function renderAuctionIntents() {
       <article><span>Auctions</span><strong>${escapeHtml(prototype.summary.auctions)}</strong></article>
       <article><span>Bids</span><strong>${escapeHtml(prototype.summary.bids)}</strong></article>
       <article><span>Accepted</span><strong>${escapeHtml(prototype.summary.acceptedBidPayloads)}</strong></article>
+      <article><span>Settlement events</span><strong>${escapeHtml(prototype.summary.acceptedSettlementEvents || 0)}</strong></article>
       <article><span>Winners</span><strong>${escapeHtml(prototype.summary.auctionsWithWinner)}</strong></article>
     `;
 
@@ -662,7 +663,7 @@ async function renderAuctionIntents() {
         <span>${escapeHtml(auction.settlement)} / ${escapeHtml(auction.status)}</span>
         <strong>${escapeHtml(auction.title)}</strong>
         <p>${escapeHtml(auction.winner ? `${auction.winner.bidder} wins at ${auction.winner.amountTkas} TKAS` : "No accepted bid meets reserve yet.")}</p>
-        <small>${escapeHtml(auction.settlementPlan.next)}</small>
+        <small>${escapeHtml(`${auction.settlementPlan.next} Accepted planner events: ${auction.settlementEvents?.length || 0}.`)}</small>
       `;
       auctionListNode.append(article);
     }

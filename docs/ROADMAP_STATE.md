@@ -20,7 +20,7 @@ Blocked or limited:
 
 - The old escrow cancel `sigOpCount=1` script-unit rejection and the later old-SDK verification failure are preserved as historical evidence only.
 - Rusty Kaspa TN12 source confirms the version-1 compute-budget route: v1 inputs carry `computeBudget`, not `sigOpCount`. The accepted cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, preserving `computeBudget=30`.
-- The public TN12 REST submit route is unsuitable for payload receipts. It accepted a payment while dropping payload bytes. The JSON wRPC route has accepted 16 matched payload events across invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, and agent commitment state.
+- The public TN12 REST submit route is unsuitable for payload receipts. It accepted a payment while dropping payload bytes. The JSON wRPC route has accepted 18 matched payload events across invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, and agent commitment state.
 
 ## App Buckets
 
@@ -60,7 +60,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
 | 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state | Add wallet review and checkpointed indexing |
-| 2. Submit console | Base built | 29 signed draft reviews, including 16 accepted payload drafts | Real wallet connector and no-local-key UX |
+| 2. Submit console | Base built | 31 signed draft reviews, including 18 accepted payload drafts | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Base built | Campaign planner with accepted vs signed-only progress | Real accepted pledge-output batch settlement drafts |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, and accepted mutual-cancel proofs on separate funded outputs | Add negative tests and keep SDK route documented |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |

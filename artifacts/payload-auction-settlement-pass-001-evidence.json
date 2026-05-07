@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:38:54.345Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5610796,
+  "acceptingBlockTime": 1778182505737,
+  "payload": {
+    "expectedHex": "7b226b696e64223a2261756374696f6e2d736574746c656d656e74222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303032222c2276616c7565223a2277696e6e65722d73656c6563746564222c226e6f7465223a22506c616e6e65722073656c6563746564206269642d706173732d3030322066726f6d20616363657074656420626964207061796c6f6164733b206e6f742061746f6d696320637573746f647920736574746c656d656e742e227d",
+    "observedHex": "7b226b696e64223a2261756374696f6e2d736574746c656d656e74222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303032222c2276616c7565223a2277696e6e65722d73656c6563746564222c226e6f7465223a22506c616e6e65722073656c6563746564206269642d706173732d3030322066726f6d20616363657074656420626964207061796c6f6164733b206e6f742061746f6d696320637573746f647920736574746c656d656e742e227d",
+    "bytes": 195,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "auction-settlement",
+        "subject": "auction-pass-001:bid-pass-002",
+        "value": "winner-selected",
+        "note": "Planner selected bid-pass-002 from accepted bid payloads; not atomic custody settlement."
+      },
+      "encoded": {
+        "bytes": 195,
+        "hex": "7b226b696e64223a2261756374696f6e2d736574746c656d656e74222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303032222c2276616c7565223a2277696e6e65722d73656c6563746564222c226e6f7465223a22506c616e6e65722073656c6563746564206269642d706173732d3030322066726f6d20616363657074656420626964207061796c6f6164733b206e6f742061746f6d696320637573746f647920736574746c656d656e742e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "auction-pass-001:bid-pass-002",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e"
+}

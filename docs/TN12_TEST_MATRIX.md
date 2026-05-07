@@ -26,6 +26,8 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Auction | Bid pass 001 payload | `e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d` |
 | Auction | Bid pass 002 payload | `512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f` |
 | Auction | Bid voucher 001 payload | `e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861` |
+| Auction | Settlement planner event | `3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e` |
+| Auction | Refund planner event | `d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9` |
 | Stable-value issuer | Issuance 001 payload | `95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b` |
 | Stable-value issuer | Issuance 002 payload | `f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162` |
 | Stable-value issuer | Redemption 001 payload | `3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663` |
@@ -59,7 +61,7 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 - persisted node/RPC checkpoint ingestion with rollback handling,
 - batch assurance release from multiple pledge outputs,
 - batch assurance refund from multiple pledge outputs,
-- auction settlement/refund draft,
+- auction custody settlement/refund transaction, atomic exchange, and asset delivery,
 - agent task release/refund transaction lifecycle,
 - treasury/team-vault constrained spend drafts,
 - prediction/hedge simulator event payloads.

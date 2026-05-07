@@ -38,6 +38,16 @@
       "outPath": "artifacts/payload-auction-bid-voucher-001-evidence.json"
     },
     {
+      "label": "Auction settlement pass 001",
+      "draftPath": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "outPath": "artifacts/payload-auction-settlement-pass-001-evidence.json"
+    },
+    {
+      "label": "Auction refund pass 001",
+      "draftPath": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "outPath": "artifacts/payload-auction-refund-pass-001-evidence.json"
+    },
+    {
       "label": "Stable issuance 001",
       "draftPath": "artifacts/signed-drafts/payload-stable-issuance.json",
       "outPath": "artifacts/payload-stable-issuance-evidence.json"

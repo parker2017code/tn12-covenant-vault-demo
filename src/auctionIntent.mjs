@@ -1,17 +1,20 @@
 export function buildAuctionIntentPrototype(fixture = {}) {
   const auctions = (fixture.auctions || []).map(normalizeAuction);
   const bids = (fixture.bids || []).map(normalizeBid);
+  const settlementEvents = (fixture.settlementEvents || []).map(normalizeSettlementEvent);
   const auctionsWithState = auctions.map((auction) => {
     const auctionBids = bids.filter((bid) => bid.auctionId === auction.auctionId);
     const acceptedBids = auctionBids.filter((bid) => bid.payloadStatus === "accepted-bid-payload");
     const winner = selectWinner(auction, acceptedBids);
+    const auctionSettlementEvents = settlementEvents.filter((event) => event.auctionId === auction.auctionId);
     const refunds = acceptedBids
       .filter((bid) => bid.bidId !== winner?.bidId)
       .map((bid) => ({
         bidId: bid.bidId,
         bidder: bid.bidder,
         amountTkas: bid.amountTkas,
-        status: winner ? "refund-planned-after-winner-selection" : "no-winner-yet"
+        status: winner ? "refund-planned-after-winner-selection" : "no-winner-yet",
+        event: auctionSettlementEvents.find((event) => event.bidId === bid.bidId && event.kind === "auction-refund") || null
       }));
 
     return {
@@ -24,6 +27,7 @@ export function buildAuctionIntentPrototype(fixture = {}) {
       },
       winner,
       refunds,
+      settlementEvents: auctionSettlementEvents,
       settlementPlan: buildSettlementPlan(auction, winner, refunds)
     };
   });
@@ -36,16 +40,18 @@ export function buildAuctionIntentPrototype(fixture = {}) {
       auctions: auctions.length,
       bids: bids.length,
       acceptedBidPayloads: bids.filter((bid) => bid.payloadStatus === "accepted-bid-payload").length,
+      acceptedSettlementEvents: settlementEvents.filter((event) => event.status === "accepted-planner-event").length,
       signedOnlyBids: bids.filter((bid) => bid.payloadStatus !== "accepted-bid-payload").length,
       auctionsWithWinner: auctionsWithState.filter((auction) => auction.winner).length
     },
     auctions: auctionsWithState,
     bids,
+    settlementEvents,
     boundaries: [
       "This prototype indexes accepted bid payloads and derives planner-side winner/refund state.",
       "Winner selection is not covenant enforcement and is not MEV resistant.",
       "No asset delivery, bid custody, or atomic exchange is enforced by this lane yet.",
-      "Refund and release transactions remain settlement plans until explicit signed drafts or covenant paths exist."
+      "Accepted settlement/refund payload events are planner records, not proof of custody transfer."
     ]
   };
 }
@@ -75,6 +81,21 @@ function normalizeBid(bid = {}) {
     evidencePath: String(bid.evidencePath || ""),
     submittedAtIso: String(bid.submittedAtIso || ""),
     note: String(bid.note || "")
+  };
+}
+
+function normalizeSettlementEvent(event = {}) {
+  return {
+    eventId: String(event.eventId || ""),
+    auctionId: String(event.auctionId || ""),
+    bidId: String(event.bidId || ""),
+    kind: String(event.kind || "auction-settlement"),
+    value: String(event.value || "planned"),
+    acceptedTxid: String(event.acceptedTxid || ""),
+    evidencePath: String(event.evidencePath || ""),
+    draftPath: String(event.draftPath || ""),
+    status: String(event.status || "draft"),
+    note: String(event.note || "")
   };
 }
 

@@ -6,6 +6,7 @@
     "auctions": 2,
     "bids": 5,
     "acceptedBidPayloads": 3,
+    "acceptedSettlementEvents": 2,
     "signedOnlyBids": 2,
     "auctionsWithWinner": 1
   },
@@ -40,7 +41,45 @@
           "bidId": "bid-pass-001",
           "bidder": "kaspatest:bidder-alpha",
           "amountTkas": 130,
-          "status": "refund-planned-after-winner-selection"
+          "status": "refund-planned-after-winner-selection",
+          "event": {
+            "eventId": "auction-pass-001-refund",
+            "auctionId": "auction-pass-001",
+            "bidId": "bid-pass-001",
+            "kind": "auction-refund",
+            "value": "refund-planned",
+            "acceptedTxid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+            "evidencePath": "artifacts/payload-auction-refund-pass-001-evidence.json",
+            "draftPath": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+            "status": "accepted-planner-event",
+            "note": "Planner marked bid-pass-001 for refund after winner selection; this is not custody release."
+          }
+        }
+      ],
+      "settlementEvents": [
+        {
+          "eventId": "auction-pass-001-settlement",
+          "auctionId": "auction-pass-001",
+          "bidId": "bid-pass-002",
+          "kind": "auction-settlement",
+          "value": "winner-selected",
+          "acceptedTxid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+          "evidencePath": "artifacts/payload-auction-settlement-pass-001-evidence.json",
+          "draftPath": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+          "status": "accepted-planner-event",
+          "note": "Planner selected bid-pass-002 from accepted bid payloads; this is not atomic custody settlement."
+        },
+        {
+          "eventId": "auction-pass-001-refund",
+          "auctionId": "auction-pass-001",
+          "bidId": "bid-pass-001",
+          "kind": "auction-refund",
+          "value": "refund-planned",
+          "acceptedTxid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+          "evidencePath": "artifacts/payload-auction-refund-pass-001-evidence.json",
+          "draftPath": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+          "status": "accepted-planner-event",
+          "note": "Planner marked bid-pass-001 for refund after winner selection; this is not custody release."
         }
       ],
       "settlementPlan": {
@@ -72,9 +111,11 @@
           "bidId": "bid-voucher-001",
           "bidder": "kaspatest:bidder-delta",
           "amountTkas": 220,
-          "status": "no-winner-yet"
+          "status": "no-winner-yet",
+          "event": null
         }
       ],
+      "settlementEvents": [],
       "settlementPlan": {
         "status": "no-release-yet",
         "release": "No accepted bid meets reserve.",
@@ -140,10 +181,36 @@
       "note": "Above reserve but not accepted, so it stays out of app state."
     }
   ],
+  "settlementEvents": [
+    {
+      "eventId": "auction-pass-001-settlement",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-002",
+      "kind": "auction-settlement",
+      "value": "winner-selected",
+      "acceptedTxid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+      "evidencePath": "artifacts/payload-auction-settlement-pass-001-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "status": "accepted-planner-event",
+      "note": "Planner selected bid-pass-002 from accepted bid payloads; this is not atomic custody settlement."
+    },
+    {
+      "eventId": "auction-pass-001-refund",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-001",
+      "kind": "auction-refund",
+      "value": "refund-planned",
+      "acceptedTxid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+      "evidencePath": "artifacts/payload-auction-refund-pass-001-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "status": "accepted-planner-event",
+      "note": "Planner marked bid-pass-001 for refund after winner selection; this is not custody release."
+    }
+  ],
   "boundaries": [
     "This prototype indexes accepted bid payloads and derives planner-side winner/refund state.",
     "Winner selection is not covenant enforcement and is not MEV resistant.",
     "No asset delivery, bid custody, or atomic exchange is enforced by this lane yet.",
-    "Refund and release transactions remain settlement plans until explicit signed drafts or covenant paths exist."
+    "Accepted settlement/refund payload events are planner records, not proof of custody transfer."
   ]
 }

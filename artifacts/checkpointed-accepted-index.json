@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-07T19:32:20.210Z",
+  "fetchedAt": "2026-05-07T19:39:03.258Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -10,9 +10,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 23,
+    "recordCount": 25,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 5595354,
+    "maxAcceptingBlockBlueScore": 5610880,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -28,6 +28,8 @@
       "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
       "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
       "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+      "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+      "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
       "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
       "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
       "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
@@ -41,11 +43,11 @@
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 23,
+    "total": 25,
     "proofs": 7,
-    "payloadEvents": 16,
-    "accepted": 23,
-    "matched": 23,
+    "payloadEvents": 18,
+    "accepted": 25,
+    "matched": 25,
     "mismatches": 0,
     "lanes": [
       {
@@ -83,6 +85,18 @@
         "total": 3,
         "accepted": 3,
         "matched": 3
+      },
+      {
+        "lane": "auction-refund",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "auction-settlement",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
       },
       {
         "lane": "escrow",
@@ -634,6 +648,104 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "auction-settlement",
+      "label": "Auction settlement pass 001",
+      "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5610796,
+      "acceptingBlockTime": 1778182505737,
+      "draftPath": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "evidencePath": "artifacts/payload-auction-settlement-pass-001-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2261756374696f6e2d736574746c656d656e74222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303032222c2276616c7565223a2277696e6e65722d73656c6563746564222c226e6f7465223a22506c616e6e65722073656c6563746564206269642d706173732d3030322066726f6d20616363657074656420626964207061796c6f6164733b206e6f742061746f6d696320637573746f647920736574746c656d656e742e227d",
+        "observedHex": "7b226b696e64223a2261756374696f6e2d736574746c656d656e74222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303032222c2276616c7565223a2277696e6e65722d73656c6563746564222c226e6f7465223a22506c616e6e65722073656c6563746564206269642d706173732d3030322066726f6d20616363657074656420626964207061796c6f6164733b206e6f742061746f6d696320637573746f647920736574746c656d656e742e227d",
+        "matches": true,
+        "bytes": 195,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "auction-settlement",
+            "subject": "auction-pass-001:bid-pass-002",
+            "value": "winner-selected",
+            "note": "Planner selected bid-pass-002 from accepted bid payloads; not atomic custody settlement."
+          },
+          "encoded": {
+            "bytes": 195,
+            "hex": "7b226b696e64223a2261756374696f6e2d736574746c656d656e74222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303032222c2276616c7565223a2277696e6e65722d73656c6563746564222c226e6f7465223a22506c616e6e65722073656c6563746564206269642d706173732d3030322066726f6d20616363657074656420626964207061796c6f6164733b206e6f742061746f6d696320637573746f647920736574746c656d656e742e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "auction-refund",
+      "label": "Auction refund pass 001",
+      "txid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5610880,
+      "acceptingBlockTime": 1778182514354,
+      "draftPath": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "evidencePath": "artifacts/payload-auction-refund-pass-001-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2261756374696f6e2d726566756e64222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303031222c2276616c7565223a22726566756e642d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b6564206269642d706173732d30303120666f7220726566756e642061667465722077696e6e65722073656c656374696f6e3b206e6f7420637573746f64792072656c656173652e227d",
+        "observedHex": "7b226b696e64223a2261756374696f6e2d726566756e64222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303031222c2276616c7565223a22726566756e642d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b6564206269642d706173732d30303120666f7220726566756e642061667465722077696e6e65722073656c656374696f6e3b206e6f7420637573746f64792072656c656173652e227d",
+        "matches": true,
+        "bytes": 185,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "auction-refund",
+            "subject": "auction-pass-001:bid-pass-001",
+            "value": "refund-planned",
+            "note": "Planner marked bid-pass-001 for refund after winner selection; not custody release."
+          },
+          "encoded": {
+            "bytes": 185,
+            "hex": "7b226b696e64223a2261756374696f6e2d726566756e64222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303031222c2276616c7565223a22726566756e642d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b6564206269642d706173732d30303120666f7220726566756e642061667465722077696e6e65722073656c656374696f6e3b206e6f7420637573746f64792072656c656173652e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9"
     },
     {
       "kind": "payload-event",

@@ -452,7 +452,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding, release, DAA-refund, and mutual cancel now have accepted TN12 evidence on separate funded outputs.
 
-5. Done: checkpointed accepted-index artifact for 7 proof spends and 16 payload events. Next: move from known-txid public reads to a node/RPC backend with persisted checkpoints and rollback handling.
+5. Done: checkpointed accepted-index artifact for 7 proof spends and 18 payload events, including auction settlement/refund planner events. Next: move from known-txid public reads to a node/RPC backend with persisted checkpoints and rollback handling.
 
 6. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 

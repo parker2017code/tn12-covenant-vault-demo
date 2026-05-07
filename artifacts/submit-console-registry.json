@@ -3,10 +3,10 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 29,
-    "payloadDrafts": 16,
-    "explicitSubmitRequired": 29,
-    "payloadSubmitGated": 16
+    "total": 31,
+    "payloadDrafts": 18,
+    "explicitSubmitRequired": 31,
+    "payloadSubmitGated": 18
   },
   "drafts": [
     {
@@ -459,6 +459,134 @@
     },
     {
       "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+        "outputIndex": 1,
+        "amountTkas": 1144.69865
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 195
+      },
+      "totals": {
+        "outputSompi": "114469860000",
+        "outputTkas": "1144.6986"
+      },
+      "inputs": [
+        {
+          "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "10000000",
+          "amountTkas": "0.1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "114459860000",
+          "amountTkas": "1144.5986",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 195,
+        "previewHex": "7b226b696e64223a2261756374696f6e2d736574746c65...6320637573746f647920736574746c656d656e742e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-settlement-pass-001.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-settlement-pass-001.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Auction settlement pass 001 payload",
+      "priority": 8,
+      "description": "Accepted auction settlement-planning payload draft for auction-pass-001."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+        "outputIndex": 1,
+        "amountTkas": 1144.5986
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 185
+      },
+      "totals": {
+        "outputSompi": "114459855000",
+        "outputTkas": "1144.59855"
+      },
+      "inputs": [
+        {
+          "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "10000000",
+          "amountTkas": "0.1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "114449855000",
+          "amountTkas": "1144.49855",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 185,
+        "previewHex": "7b226b696e64223a2261756374696f6e2d726566756e64...206e6f7420637573746f64792072656c656173652e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-refund-pass-001.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-refund-pass-001.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Auction refund pass 001 payload",
+      "priority": 9,
+      "description": "Accepted auction refund-planning payload draft for auction-pass-001."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
       "path": "artifacts/signed-drafts/payload-stable-issuance.json",
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
@@ -518,7 +646,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Stable issuance 001 payload",
-      "priority": 8,
+      "priority": 10,
       "description": "Accepted stable-value issuance payload draft for issue-001."
     },
     {
@@ -582,7 +710,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Stable issuance 002 payload",
-      "priority": 9,
+      "priority": 11,
       "description": "Accepted stable-value issuance payload draft for issue-002."
     },
     {
@@ -646,7 +774,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Stable redemption 001 payload",
-      "priority": 10,
+      "priority": 12,
       "description": "Accepted stable-value redemption payload draft for redeem-001."
     },
     {
@@ -710,7 +838,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Miner attestation payload",
-      "priority": 11,
+      "priority": 13,
       "description": "Accepted miner/watcher attestation payload draft for the signal registry."
     },
     {
@@ -774,7 +902,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Agent task invoice payload",
-      "priority": 12,
+      "priority": 14,
       "description": "Accepted agent task payload draft for the invoice audit task."
     },
     {
@@ -838,7 +966,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Agent task escrow payload",
-      "priority": 13,
+      "priority": 15,
       "description": "Accepted agent task payload draft for the escrow spend-path task."
     },
     {
@@ -902,7 +1030,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Agent proof invoice payload",
-      "priority": 14,
+      "priority": 16,
       "description": "Accepted agent proof payload draft for the invoice audit task."
     },
     {
@@ -966,7 +1094,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Agent proof escrow payload",
-      "priority": 15,
+      "priority": 17,
       "description": "Accepted agent proof payload draft for the escrow task pending review."
     },
     {
@@ -1030,7 +1158,7 @@
         "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
       },
       "label": "Agent dispute escrow payload",
-      "priority": 16,
+      "priority": 18,
       "description": "Accepted agent dispute payload draft for the escrow task."
     },
     {
@@ -1101,7 +1229,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Split funding",
-      "priority": 17,
+      "priority": 19,
       "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
     },
     {
@@ -1158,7 +1286,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault recovery",
-      "priority": 18,
+      "priority": 20,
       "description": "Accepted proof path for vault recovery."
     },
     {
@@ -1215,7 +1343,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault withdrawal",
-      "priority": 19,
+      "priority": 21,
       "description": "Accepted proof path for delayed vault withdrawal."
     },
     {
@@ -1272,7 +1400,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance release",
-      "priority": 20,
+      "priority": 22,
       "description": "Accepted proof path for individual pledge release."
     },
     {
@@ -1329,7 +1457,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance refund",
-      "priority": 21,
+      "priority": 23,
       "description": "Accepted proof path for individual pledge refund."
     },
     {
@@ -1370,7 +1498,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow funding",
-      "priority": 22,
+      "priority": 24,
       "description": "Accepted funding path for Escrow.sil; created the P2SH output consumed by the release proof."
     },
     {
@@ -1427,7 +1555,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow release",
-      "priority": 23,
+      "priority": 25,
       "description": "Accepted seller-release proof from the Escrow.sil funding output."
     },
     {
@@ -1484,7 +1612,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow refund",
-      "priority": 24,
+      "priority": 26,
       "description": "Timeout-refund review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
@@ -1541,7 +1669,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel",
-      "priority": 25,
+      "priority": 27,
       "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
@@ -1582,7 +1710,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund funding",
-      "priority": 26,
+      "priority": 28,
       "description": "Accepted funding path for a DAA-expired EscrowExpired refund proof."
     },
     {
@@ -1639,7 +1767,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund",
-      "priority": 27,
+      "priority": 29,
       "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
     },
     {
@@ -1680,7 +1808,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel funding",
-      "priority": 28,
+      "priority": 30,
       "description": "Accepted funding output for the mutual-cancel attempt."
     },
     {
@@ -1737,7 +1865,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel attempt",
-      "priority": 29,
+      "priority": 31,
       "description": "Accepted mutual-cancel spend; rebuilt as tx version 1 with computeBudget 30 using the local TN12 kaspa-wasm 1.1.1-toc.1 SDK."
     }
   ],

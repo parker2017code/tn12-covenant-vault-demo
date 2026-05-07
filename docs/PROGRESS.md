@@ -16,7 +16,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Accepted route: JSON wRPC accepted paid tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`, refund tx `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`, and error tx `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`; `npm run payload:verify` confirms payload bytes and output match for each evidence artifact.
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
-   - Indexer status: checkpointed known-txid public-read index covers 23 accepted TN12 records: 7 proof spends and 16 payload events.
+   - Indexer status: checkpointed known-txid public-read index covers 25 accepted TN12 records: 7 proof spends and 18 payload events.
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
    - Current status: base built.

@@ -134,7 +134,7 @@
         "src/auctionIntent.mjs",
         "npm run auction:intents"
       ],
-      "next": "Build explicit settlement/refund drafts and keep MEV caveat visible."
+      "next": "Keep planner events separate from custody settlement, atomic exchange, and asset delivery."
     },
     {
       "order": 9,
@@ -235,7 +235,7 @@
   "naturalNextSteps": [
     "Build prediction/hedge simulator from the DeFi backlog and attestation registry.",
     "Build explicit agent-task release/refund drafts for one task lifecycle.",
-    "Build explicit auction settlement/refund drafts for lane 8.",
+    "Build real auction custody settlement/refund transactions only after bid custody and asset delivery assumptions are explicit.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Replace local payload receipt signing with wallet review and keep the accepted JSON wRPC route documented.",
     "Update GitHub Actions once stable Node 24-compatible checkout/setup-node actions are available, or opt in early and verify.",

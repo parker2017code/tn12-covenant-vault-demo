@@ -15,7 +15,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Payload event gate: `npm run payload:verify:events`
 - Checkpointed index gate: `npm run indexer:checkpoint`
 
-The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has 16 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, and agent commitment state.
+The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has 18 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, and agent commitment state.
 
 ## First-Read Order
 
@@ -48,7 +48,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 ## Current Next Work
 
 - Add more negative/adversarial checks around reducer and planner state.
-- The payload vertical slice has 16 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
+- The payload vertical slice has 18 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
 - Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
 - Build real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
@@ -57,14 +57,14 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Continuation Note
 
-The latest continuation replaced fake accepted payload fixture txids with real TN12 evidence and expanded payload verification to 16 accepted events:
+The latest continuation replaced fake accepted payload fixture txids with real TN12 evidence and expanded payload verification to 18 accepted events:
 
 - paid receipt: `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`
 - refund event: `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`
 - error event: `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`
-- access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, and agent task/proof/dispute events are listed in `fixtures/PayloadEventEvidence.json`.
+- access-pass redemption, auction bids, auction settlement/refund planner events, stable-value issuer issuance/redemption, miner/watcher attestation, and agent task/proof/dispute events are listed in `fixtures/PayloadEventEvidence.json`.
 
-`docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 29 reviewable drafts, including all 16 accepted payload drafts. `artifacts/checkpointed-accepted-index.json` indexes 23 public TN12 reads: 7 proof spends plus 16 payload events.
+`docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 31 reviewable drafts, including all 18 accepted payload drafts. `artifacts/checkpointed-accepted-index.json` indexes 25 public TN12 reads: 7 proof spends plus 18 payload events.
 
 Validation run for this continuation:
 
@@ -76,7 +76,7 @@ npm run payload:verify:events
 npm run indexer:checkpoint
 ```
 
-Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Payload events verified: `16/16`. Checkpointed index matched: `23/23`.
+Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Payload events verified: `18/18`. Checkpointed index matched: `25/25`.
 
 ## Update Rule
 
