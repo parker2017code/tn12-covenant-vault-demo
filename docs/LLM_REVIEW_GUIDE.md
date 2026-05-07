@@ -62,6 +62,7 @@ The repo is allowed to claim accepted TN12 proof spends for:
 - individual assurance release;
 - individual assurance refund;
 - escrow release.
+- escrow DAA refund.
 
 Each accepted proof spend should satisfy:
 
@@ -78,8 +79,9 @@ Escrow nuance:
 
 - Escrow funding tx `6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2` created the P2SH escrow output.
 - Escrow release tx `825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d` consumed that output.
-- Refund and cancel drafts for that same output are expected not to be accepted after release consumed it.
-- Proving refund/cancel requires separate funded escrow outputs.
+- DAA-expired escrow refund funding tx `f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f` created a separate P2SH output.
+- DAA-expired escrow refund tx `6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d` consumed that separate output.
+- Cancel is still a followup proof and requires a separate funded escrow output.
 
 ## Local Verification Commands
 
@@ -107,7 +109,7 @@ Treat these as work in progress unless a new accepted txid and fixture says othe
 
 - invoice/payment payload receipt: signed draft exists, accepted payload receipt does not;
 - pooled assurance target aggregation: planner/indexer only, not script-enforced;
-- escrow refund/cancel: drafts only until separate funded outputs are proven;
+- escrow cancel: draft only until a separate funded output is proven;
 - treasury caps/payroll: wallet-policy/planner only;
 - access passes/assets/auctions/agent commitments: planner/indexer artifacts unless tied to accepted payload receipts;
 - prediction markets, DeFi, RTD/miner-oracle, Hashdag/Staghunt: research/prototype lanes only.
@@ -126,5 +128,5 @@ Do not describe this repo as:
 Accurate label:
 
 ```txt
-TN12 covenant/app primitive workshop with accepted vault, assurance, and escrow-release proof transactions.
+TN12 covenant/app primitive workshop with accepted vault, assurance, escrow-release, and escrow DAA-refund proof transactions.
 ```

@@ -1,0 +1,35 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "escrow-daa-refund",
+  "contract": "EscrowExpired",
+  "fetchedAt": "2026-05-07T12:05:18.731Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+  "txid": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+  "outputIndex": 0,
+  "amountTkas": 50,
+  "amountSompi": "5000000000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx",
+  "scriptPublicKey": "aa20b5e91dbe9dccc4ac129a52d9602732398037804fe319b4d0234d9ea28db6450a87",
+  "redeemScriptHex": "6b6c76009c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6903907351b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776529c63757820d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975755167750069686868",
+  "redeemScriptBytes": 350,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 5341732,
+  "explorerUrl": "https://tn12.kaspa.stream/txs/f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+  "raw": {
+    "address": "kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx",
+    "outpoint": {
+      "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "5000000000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20b5e91dbe9dccc4ac129a52d9602732398037804fe319b4d0234d9ea28db6450a87"
+      },
+      "blockDaaScore": "5341732",
+      "isCoinbase": false
+    }
+  }
+}

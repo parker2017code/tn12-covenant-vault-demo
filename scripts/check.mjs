@@ -133,7 +133,7 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 10);
+assert.equal(submitRegistry.summary.total, 12);
 assert.equal(submitRegistry.summary.payloadDrafts, 1);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 1);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
@@ -143,9 +143,11 @@ assert.ok(submitRegistry.drafts.some((draft) => draft.lane === "escrow-funding" 
 const escrowReleaseDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-release.json", import.meta.url), "utf8"));
 const escrowRefundDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-refund.json", import.meta.url), "utf8"));
 const escrowCancelDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel.json", import.meta.url), "utf8"));
+const escrowDaaRefundDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-daa-refund-proof-refund.json", import.meta.url), "utf8"));
 assert.equal(escrowReleaseDraft.entrypoint, "release");
 assert.equal(escrowRefundDraft.entrypoint, "refund");
 assert.equal(escrowCancelDraft.entrypoint, "cancel");
+assert.equal(escrowDaaRefundDraft.entrypoint, "refund");
 assert.ok(escrowCancelDraft.signatureScriptHex.length > escrowReleaseDraft.signatureScriptHex.length);
 const researchFixture = JSON.parse(await readFile(new URL("../fixtures/CrossChainResearchLibrary.json", import.meta.url), "utf8"));
 const researchLibrary = buildResearchLibrary(researchFixture);
@@ -246,9 +248,10 @@ assert.ok(agentBoard.tasks.some((task) => task.taskId === "agent-task-escrow-001
 const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
 const projectStatus = buildProjectStatus(buildStatusFixture);
 assert.equal(projectStatus.status, "active-build-map");
-assert.equal(projectStatus.summary.total, 13);
+assert.equal(projectStatus.summary.total, 14);
 assert.ok(projectStatus.summary.builtBases >= 10);
 assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)));
+assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -267,8 +270,8 @@ const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof
   }
 ]));
 const acceptedState = buildAcceptedAppState({ proofFixture, transactions: fakeTransactions, fetchedAt: "2026-05-07T00:00:00.000Z" });
-assert.equal(acceptedState.summary.total, 5);
-assert.equal(acceptedState.summary.matched, 5);
+assert.equal(acceptedState.summary.total, 6);
+assert.equal(acceptedState.summary.matched, 6);
 assert.equal(acceptedState.appState.vault.status, "proofs-accepted");
 assert.equal(acceptedState.appState.escrow.status, "proofs-accepted");
 const fakePreviousTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
@@ -313,10 +316,10 @@ const proofEvidence = buildProofEvidence({
   previousTransactions: fakePreviousTransactions,
   verifiedAt: "2026-05-07T00:00:00.000Z"
 });
-assert.equal(proofEvidence.summary.accepted, 5);
-assert.equal(proofEvidence.summary.p2shInputs, 5);
-assert.equal(proofEvidence.summary.p2pkOutputs, 5);
-assert.equal(proofEvidence.summary.matchedOutputs, 5);
+assert.equal(proofEvidence.summary.accepted, 6);
+assert.equal(proofEvidence.summary.p2shInputs, 6);
+assert.equal(proofEvidence.summary.p2pkOutputs, 6);
+assert.equal(proofEvidence.summary.matchedOutputs, 6);
 
 const vaultContractArtifact = JSON.parse(await readFile(new URL("../artifacts/DelayedRecoveryVault.json", import.meta.url), "utf8"));
 const assuranceContractArtifact = JSON.parse(await readFile(new URL("../artifacts/AssurancePledge.json", import.meta.url), "utf8"));
@@ -366,10 +369,12 @@ const files = [
   "scripts/build-transaction-drafts.mjs",
   "scripts/build-signed-p2pk-draft.mjs",
   "scripts/build-signed-contract-funding-drafts.mjs",
+  "scripts/build-signed-escrow-funding-draft.mjs",
   "scripts/build-signed-escrow-spend-drafts.mjs",
   "scripts/build-signed-split-draft.mjs",
   "scripts/build-signed-contract-spend-drafts.mjs",
   "scripts/fetch-contract-outpoints.mjs",
+  "scripts/fetch-contract-outpoint.mjs",
   "scripts/fetch-split-buckets.mjs",
   "scripts/build-signed-payload-receipt-draft.mjs",
   "scripts/verify-accepted-txs.mjs",
@@ -395,9 +400,13 @@ const files = [
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "contracts/Escrow.sil",
+  "contracts/EscrowExpired.sil",
   "artifacts/DelayedRecoveryVault.json",
   "artifacts/AssurancePledge.json",
   "artifacts/Escrow.json",
+  "artifacts/EscrowExpired.json",
+  "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+  "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
   "artifacts/signed-drafts/escrow-funding.json",
   "artifacts/signed-drafts/escrow-release.json",
   "artifacts/signed-drafts/escrow-refund.json",
@@ -418,6 +427,7 @@ const files = [
   "artifacts/build-status.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
+  "fixtures/FundedWalletUtxos.json",
   "fixtures/SavedWallet.public.json",
   "fixtures/AcceptedProofTransactions.json",
   "fixtures/AcceptedAppState.json",
@@ -440,6 +450,8 @@ const files = [
   "fixtures/SimpleAssetPolicies.json",
   "fixtures/BuildStatus.json",
   "fixtures/EscrowContractOutpoint.json",
+  "fixtures/EscrowDaaRefundContractOutpoint.json",
+  "fixtures/EscrowExpired.ctor.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",

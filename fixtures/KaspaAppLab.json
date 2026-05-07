@@ -25,7 +25,7 @@
       "name": "Escrow",
       "status": "next-covenant-primitive",
       "buildNow": "Buyer funds, seller release, timeout refund, mutual cancel.",
-      "baseWork": "Escrow.sil plus accepted funding and release proof transactions; refund/cancel need separate funded outputs."
+      "baseWork": "Escrow.sil plus accepted funding, release, and DAA-refund proof transactions; cancel needs a separate funded output."
     },
     {
       "id": "assurance",

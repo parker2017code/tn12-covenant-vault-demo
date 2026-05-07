@@ -1,13 +1,13 @@
 {
   "schema": "tn12-contract-spend-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-07T11:49:30.753Z",
+  "verifiedAt": "2026-05-07T12:11:24.869Z",
   "summary": {
-    "total": 5,
-    "accepted": 5,
-    "p2shInputs": 5,
-    "p2pkOutputs": 5,
-    "matchedOutputs": 5
+    "total": 6,
+    "accepted": 6,
+    "p2shInputs": 6,
+    "p2pkOutputs": 6,
+    "matchedOutputs": 6
   },
   "proofs": [
     {
@@ -150,6 +150,38 @@
         "previousOutpointHash": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
         "previousOutpointIndex": "0",
         "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
+        "type": "scripthash",
+        "amount": 5000000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 4999995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Escrow DAA refund",
+      "lane": "escrow",
+      "entrypoint": "refund",
+      "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "accepted": true,
+      "acceptingBlockBlueScore": 5342066,
+      "acceptingBlockTime": 1778155520353,
+      "input": {
+        "previousOutpointHash": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+        "previousOutpointIndex": "0",
+        "address": "kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx",
         "type": "scripthash",
         "amount": 5000000000,
         "prefix": "p",

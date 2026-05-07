@@ -19,6 +19,7 @@ Reviewers and LLM agents should start with [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM
   - `contracts/DelayedRecoveryVault.sil`
   - `contracts/AssurancePledge.sil`
   - `contracts/Escrow.sil`
+  - `contracts/EscrowExpired.sil`
 - Compiles those templates into `artifacts/`.
 - Builds a dry-run transaction intent plan for vault funding, delayed withdrawal, recovery, assurance pledge, release, and refund.
 - Builds, signs, and submits TN12 split, P2SH contract-funding, and P2SH contract-spend transactions from local fixtures.
@@ -27,7 +28,7 @@ Reviewers and LLM agents should start with [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM
 - Builds a cross-chain research library that maps PMF, failure modes, and open-source code patterns into Kaspa status lanes.
 - Builds batch assurance campaign state from multiple pledge records without claiming pooled covenant enforcement.
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
-- Builds an escrow primitive registry and first escrow Silverscript template for buyer-approved release, timeout refund, and mutual cancel planning.
+- Builds an escrow primitive registry and escrow Silverscript templates for buyer-approved release, DAA-score timeout refund, and mutual cancel planning.
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
 - Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, and Hunt-plan artifacts.
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
@@ -158,7 +159,7 @@ Build signed local contract-funding drafts for the vault, assurance pledge, and 
 npm run tx:contracts
 ```
 
-These drafts consume separate split buckets when those fixtures are current. Escrow funding has an accepted TN12 proof in the current artifact set.
+These drafts consume separate split buckets when those fixtures are current. Escrow funding and DAA-expired escrow refund funding have accepted TN12 proof in the current artifact set.
 
 Build signed escrow spend drafts after accepted escrow funding has been fetched:
 
@@ -166,7 +167,7 @@ Build signed escrow spend drafts after accepted escrow funding has been fetched:
 npm run tx:escrow:spends
 ```
 
-Escrow release, refund, and cancel drafts are mutually exclusive for a single escrow output. The current escrow output was consumed by the accepted release proof, so refund/cancel require separate funded outputs before they can be proven.
+Escrow release, refund, and cancel drafts are mutually exclusive for a single escrow output. The current release and DAA-refund proofs use separate funded escrow outputs; cancel still needs a separate funded output before it can be proven.
 
 Build the safer first broadcast candidate, a signed self-send split into separate vault and assurance buckets:
 
@@ -287,7 +288,7 @@ Build the escrow primitive registry:
 npm run escrow:registry
 ```
 
-This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil`, accepted escrow funding, and an accepted escrow release proof. Refund and cancel remain followup proofs that need separate funded escrow outputs.
+This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil`, `contracts/EscrowExpired.sil`, accepted escrow funding, an accepted escrow release proof, and an accepted DAA-expired escrow refund proof. Cancel remains a followup proof that needs a separate funded escrow output.
 
 Build the treasury/team vault registry:
 
@@ -392,7 +393,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 3. Next: build batch assurance aggregation around multiple pledge outputs before claiming a real campaign product.
 
-4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding and release now have accepted TN12 evidence; refund/cancel need separate funded outputs.
+4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding, release, and DAA-refund now have accepted TN12 evidence; cancel needs a separate funded output.
 
 5. Next: build an accepted-transaction indexer that reads outputs and payload receipts into app-state snapshots.
 

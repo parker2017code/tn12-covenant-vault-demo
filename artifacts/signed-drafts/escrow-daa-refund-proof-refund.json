@@ -1,0 +1,54 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "escrow-refund",
+  "contract": "Escrow",
+  "entrypoint": "refund",
+  "warning": "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
+  "source": {
+    "txid": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+    "outputIndex": 0,
+    "amountTkas": 50,
+    "address": "kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx"
+  },
+  "destination": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "scriptType": "p2pk",
+    "amountSompi": "4999995000",
+    "amountTkas": "49.99995"
+  },
+  "contractFeeSompi": "5000",
+  "scriptHash": "c079aea6ec6269bf4d6f60b87a8e1436cea565dd1668885b90910372411f1b4a",
+  "transactionId": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+  "signatureScriptHex": "4157ffaefee20d866da33ea2dd63f99bc3f5ccb508e42c09f78d1df79d4070069dac1a836820697802cdf447b24423a8513e010d403ced300015f4b3327e47a50101514d5e016b6c76009c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6903907351b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776529c63757820d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975755167750069686868",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+            "index": 0
+          },
+          "signatureScript": "4157ffaefee20d866da33ea2dd63f99bc3f5ccb508e42c09f78d1df79d4070069dac1a836820697802cdf447b24423a8513e010d403ced300015f4b3327e47a50101514d5e016b6c76009c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776519c63757620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6903907351b000c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975516776529c63757820d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac6900c2b9be028813949c6900c320d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5030000207c7e01ac7e876975755167750069686868",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 4999995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": 5341732,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "lockTime": "5341732"
+}

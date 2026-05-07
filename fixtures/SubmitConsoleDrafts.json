@@ -61,6 +61,18 @@
       "priority": 10,
       "path": "artifacts/signed-drafts/escrow-cancel.json",
       "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
+    },
+    {
+      "label": "Escrow DAA refund funding",
+      "priority": 11,
+      "path": "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+      "description": "Accepted funding path for a DAA-expired EscrowExpired refund proof."
+    },
+    {
+      "label": "Escrow DAA refund",
+      "priority": 12,
+      "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+      "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
     }
   ]
 }

@@ -46,7 +46,7 @@ try {
     return text.includes("All proof cards refreshed from TN12 API.");
   }, null, { timeout: 20_000 });
 
-  assert.equal(await page.locator("[data-proof-status].ok").count(), 5);
+  assert.equal(await page.locator("[data-proof-status].ok").count(), 6);
   await expectText(page, "body", "TN12 configured. Proof transactions accepted.");
   await expectText(page, "#assurance-issues", "Assurance shape is valid.");
   await expectText(page, "#indexer-summary", "Matched");
@@ -91,11 +91,13 @@ try {
   await expectText(page, "#build-status-summary", "Bases");
   await expectText(page, "#build-status-lanes", "Auction / Intent Prototype");
   await expectText(page, "#build-status-lanes", "Payload Receipt / Invoice App");
+  await expectText(page, "#build-status-lanes", "ZK / Anchor Readiness");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "Escrow funding");
   await expectText(page, "#submit-drafts", "Escrow release");
   await expectText(page, "#submit-drafts", "Accepted seller-release proof");
+  await expectText(page, "#submit-drafts", "Escrow DAA refund");
   await expectText(page, "#submit-drafts", "Escrow cancel");
   await expectText(page, "#submit-drafts", "--submit");
   await expectText(page, "#research-summary", "Candidates");

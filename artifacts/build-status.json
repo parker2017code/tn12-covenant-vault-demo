@@ -3,12 +3,12 @@
   "reviewedAt": "2026-05-07",
   "status": "active-build-map",
   "summary": {
-    "total": 13,
+    "total": 14,
     "builtBases": 11,
     "proofBacked": 0,
     "blocked": 1,
     "nextBuilds": 0,
-    "research": 1
+    "research": 2
   },
   "lanes": [
     {
@@ -64,18 +64,21 @@
       "status": "base-built",
       "enforcement": "script",
       "readiness": "tn12-toccata-only",
-      "proof": "accepted-funding-and-release-spend",
+      "proof": "accepted-funding-release-and-refund-spends",
       "builtSurface": [
         "contracts/Escrow.sil",
+        "contracts/EscrowExpired.sil",
         "fixtures/EscrowContractOutpoint.json",
+        "fixtures/EscrowDaaRefundContractOutpoint.json",
         "artifacts/signed-drafts/escrow-funding.json",
         "artifacts/signed-drafts/escrow-release.json",
-        "artifacts/signed-drafts/escrow-refund.json",
+        "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+        "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
         "artifacts/signed-drafts/escrow-cancel.json",
         "src/escrowPrimitive.mjs",
         "npm run escrow:registry"
       ],
-      "next": "Fund separate escrow outputs to prove refund and cancel paths; the original escrow output was consumed by the accepted release proof."
+      "next": "Fund a separate escrow output to prove mutual cancel; release and refund are already accepted on separate outputs."
     },
     {
       "order": 5,
@@ -211,6 +214,20 @@
         "npm run coordination:market"
       ],
       "next": "Build exact settlement drafts for one satisfiable transparent pack."
+    },
+    {
+      "order": 14,
+      "id": "zk-anchor-readiness",
+      "name": "ZK / Anchor Readiness",
+      "status": "research",
+      "enforcement": "documentation",
+      "readiness": "research-only",
+      "proof": "roadmap-only",
+      "builtSurface": [
+        "docs/MASTER_APP_PLAN.md",
+        "docs/LLM_REVIEW_GUIDE.md"
+      ],
+      "next": "Map which future app claims need off-chain state proofs, solver proofs, source-chain anchors, oracle attestation proofs, or vProg settlement."
     }
   ],
   "naturalNextSteps": [
@@ -219,7 +236,8 @@
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
-    "Fund separate escrow outputs to prove refund and mutual-cancel spend paths."
+    "Fund a separate escrow output to prove the mutual-cancel spend path.",
+    "Add a ZK/anchor design checklist before any bridge, oracle, solver, or vProg proof claim."
   ],
   "consistencyRules": [
     "Every lane must keep status, enforcement, readiness, and proof labels aligned.",

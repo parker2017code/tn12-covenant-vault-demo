@@ -136,10 +136,10 @@
       "name": "Escrow spend paths",
       "lane": "escrow",
       "enforcement": "script",
-      "currentSurface": "contracts/Escrow.sil, fixtures/EscrowContractOutpoint.json, signed escrow funding/release/refund/cancel drafts, and browser escrow panel",
-      "proof": "Accepted escrow funding output and accepted escrow release spend; refund/cancel remain unsigned-proof followups for separate outputs",
-      "risk": "Release, refund, and cancel are mutually exclusive spends of one escrow output; the accepted release consumed the original output, so refund/cancel drafts for that output are stale review artifacts.",
-      "nextHardeningStep": "Fund separate escrow outputs to prove timeout refund and mutual cancel paths without double-spending the accepted release output."
+      "currentSurface": "contracts/Escrow.sil, contracts/EscrowExpired.sil, fixtures/EscrowContractOutpoint.json, fixtures/EscrowDaaRefundContractOutpoint.json, signed escrow funding/release/refund/cancel drafts, and browser escrow panel",
+      "proof": "Accepted escrow release spend plus accepted DAA-expired escrow refund spend on separate P2SH outputs; cancel remains a signed-proof followup",
+      "risk": "Release, refund, and cancel are mutually exclusive spends of one escrow output, so each accepted path needs its own funded proof output.",
+      "nextHardeningStep": "Fund a separate escrow output to prove mutual cancel without double-spending release or refund outputs."
     },
     {
       "id": "treasury-payroll-caps",

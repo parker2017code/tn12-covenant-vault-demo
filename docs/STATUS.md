@@ -17,7 +17,7 @@
 - Vault delayed withdrawal: submitted and accepted with a past DAA-score lock.
 - Assurance release: submitted and accepted for the individual pledge primitive.
 - Assurance refund: submitted and accepted with a past DAA-score deadline.
-- Proof evidence artifact: `npm run proof:evidence` confirms all five proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
+- Proof evidence artifact: `npm run proof:evidence` confirms all six proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
 - Wallet connector: not implemented.
 - Silverscript templates: drafted.
 - Silverscript compiler integration: helper added; artifacts depend on local `silverc`.
@@ -39,6 +39,8 @@
 - Assurance refund spend: `faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61`.
 - Escrow funding: `6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2`.
 - Escrow release spend: `825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d`.
+- DAA-expired escrow refund funding: `f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f`.
+- DAA-expired escrow refund spend: `6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d`.
 
 Latest fetched contract output addresses before the timed spends were:
 
@@ -53,6 +55,7 @@ Proof-spend input evidence:
 - Assurance release input: `kaspatest:prfzsga33hgfsydw7vyn8grfctmh83cz7ux53wa33cznsc4fqtf359eej4ztg`, type `scripthash`, prefix `p`.
 - Assurance refund input: `kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj`, type `scripthash`, prefix `p`.
 - Escrow release input: `kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v`, type `scripthash`, prefix `p`.
+- Escrow DAA refund input: `kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx`, type `scripthash`, prefix `p`.
 
 ## Transaction Planner Boundary
 

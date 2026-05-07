@@ -23,9 +23,9 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: base built.
-   - Enforcement: script for the accepted release path; refund/cancel remain signed review drafts only.
-   - Proof: accepted escrow funding plus accepted escrow release spend.
-   - Next proof: fund separate escrow outputs to prove timeout refund and mutual cancel.
+   - Enforcement: script for accepted release and DAA-refund paths; cancel remains signed review draft only.
+   - Proof: accepted escrow funding, accepted release spend, and accepted DAA-expired refund spend.
+   - Next proof: fund a separate escrow output to prove mutual cancel.
 
 5. Treasury / team vaults: spend caps, delayed large withdrawals, recovery, payroll templates.
    - Current status: base built.
@@ -72,6 +72,12 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
     - Enforcement: research.
     - Boundary: not Hashdag/Staghunt implementation; missing opacity, capital multiplexing, composability, and atomic Hunt execution.
 
+14. ZK / anchor readiness: off-chain state proofs, solver proofs, source-chain anchors, oracle attestation proofs, and vProg settlement.
+    - Current status: research roadmap.
+    - Enforcement: documentation.
+    - Boundary: no ZK proof is used by the current vault, assurance, or escrow proofs.
+    - Rule: ZK proves math over selected inputs; builders still need an anchor/trust model for external roots, events, prices, and source-chain state.
+
 ## Immediate Next Work
 
 1. Add negative/adversarial tests for planner and reducer state:
@@ -84,7 +90,7 @@ This repo is now a TN12 covenant/app primitive workshop with a browser control s
 2. Extend the escrow proof path:
    - accepted funding outpoint: done;
    - accepted seller release: done;
-   - timeout refund: needs separate funded escrow output;
+   - DAA-score timeout refund: done;
    - mutual cancel: needs separate funded escrow output and extra sig-op review.
 
 3. Continue the invoice vertical slice:
@@ -113,4 +119,4 @@ npm run tx:verify
 npm run proof:evidence
 ```
 
-`npm run proof:evidence` verifies the important proof shape: the five accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.
+`npm run proof:evidence` verifies the important proof shape: the six accepted TN12 proof spends consume P2SH contract outputs and pay the expected P2PK wallet output.

@@ -81,9 +81,15 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
    - Explicitly not a Hashdag/Staghunt implementation: no opacity, capital multiplexing, composability, RTD resolution, or coordinated atomic execution.
    - Current repo surface: `fixtures/CoordinationMarketPrototype.json`, `src/coordinationMarket.mjs`, `npm run coordination:market`, and the browser coordination panel.
 
+14. ZK / Anchor Readiness
+   - Track where future apps may need compact proofs or canonical anchors: off-chain state, coordination solver results, source-chain state, oracle attestations, and vProg-style execution.
+   - Rule: a ZK proof verifies a statement about chosen public inputs; it is not itself an oracle or source-chain finality proof.
+   - First success: a checklist that says what is proved, what supplies the anchor/root/event, and which trust model remains.
+
 ## Immediate Order
 
 1. Keep the payload receipt app gated by `npm run payload:readiness` until a payload-preserving submit route is verified.
 2. Use `npm run mainnet:readiness` to separate mainnet-capable payment/indexer work from TN12/Toccata covenant work.
 3. Continue filling base app artifacts for access passes, simple assets, auctions/intents, DeFi research, and AI-agent commitments.
 4. Harden vertical slices only after the enforcement and readiness maps agree on what is actually proved.
+5. Add a ZK/anchor checklist before any bridge, oracle, solver, or vProg proof claim.

@@ -42,6 +42,14 @@
       "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
       "amountSompi": "4999995000",
       "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Escrow DAA refund",
+      "lane": "escrow",
+      "entrypoint": "refund",
+      "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "amountSompi": "4999995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
     }
   ]
 }

@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 10,
+    "total": 12,
     "payloadDrafts": 1,
-    "explicitSubmitRequired": 10,
+    "explicitSubmitRequired": 12,
     "payloadSubmitGated": 1
   },
   "drafts": [
@@ -557,6 +557,101 @@
       "label": "Escrow cancel",
       "priority": 10,
       "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-daa-refund-funding",
+      "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+      "warning": "This spends the fetched UTXO if broadcast. Do not broadcast multiple drafts that use the same source outpoint.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "9a7d72a93293307ad7dd0a32097ca62cffd17d45d0f75a2357c49ba73cacc430",
+        "outputIndex": 1,
+        "amountTkas": 1249.9996
+      },
+      "counts": {
+        "inputs": 0,
+        "outputs": 0,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "0",
+        "outputTkas": "0"
+      },
+      "inputs": [],
+      "outputs": [],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-funding.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-funding.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow DAA refund funding",
+      "priority": 11,
+      "description": "Accepted funding path for a DAA-expired EscrowExpired refund proof."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-refund",
+      "transactionId": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "warning": "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+        "outputIndex": 0,
+        "amountTkas": 50,
+        "address": "kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "4999995000",
+        "outputTkas": "49.99995"
+      },
+      "inputs": [
+        {
+          "txid": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+          "index": 0,
+          "sigOpCount": 1,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "4999995000",
+          "amountTkas": "49.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/escrow-daa-refund-proof-refund.json --submit",
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Escrow DAA refund",
+      "priority": 12,
+      "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
     }
   ],
   "boundaries": [

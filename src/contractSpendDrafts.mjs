@@ -483,7 +483,13 @@ function buildSpendDraftArtifact({
   };
 }
 
-function buildSingleInputContractSpend({ contractOutpoint, outputSompi, destinationScript, lockTime = 0n, sigOpCount = 1 }) {
+function buildSingleInputContractSpend({
+  contractOutpoint,
+  outputSompi,
+  destinationScript,
+  lockTime = 0n,
+  sigOpCount = 1
+}) {
   const input = new TransactionInput({
     previousOutpoint: contractOutpoint.raw.outpoint,
     signatureScript: [],

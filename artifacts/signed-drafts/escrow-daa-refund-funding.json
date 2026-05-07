@@ -1,0 +1,155 @@
+{
+  "schema": "tn12-signed-contract-funding-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "escrow-daa-refund-funding",
+  "contract": "EscrowExpired",
+  "warning": "This spends the fetched UTXO if broadcast. Do not broadcast multiple drafts that use the same source outpoint.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "9a7d72a93293307ad7dd0a32097ca62cffd17d45d0f75a2357c49ba73cacc430",
+    "outputIndex": 1,
+    "amountTkas": 1249.9996
+  },
+  "fundingOutput": {
+    "amountTkas": 50,
+    "amountSompi": "5000000000",
+    "scriptType": "p2sh",
+    "redeemScriptBytes": 350,
+    "redeemScriptHash": "b5e91dbe9dccc4ac129a52d9602732398037804fe319b4d0234d9ea28db6450a"
+  },
+  "changeOutput": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": "1199.99955",
+    "amountSompi": "119999955000"
+  },
+  "minerFeeSompi": "5000",
+  "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+  "signedTransaction": {
+    "entries": [
+      {
+        "utxo": {
+          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "entry": {
+            "amount": 124999960000,
+            "blockDaaScore": 5438951,
+            "isCoinbase": false,
+            "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "outpoint": {
+            "inner": {
+              "index": 1,
+              "transactionId": "9a7d72a93293307ad7dd0a32097ca62cffd17d45d0f75a2357c49ba73cacc430"
+            }
+          }
+        }
+      }
+    ],
+    "tx": {
+      "inner": {
+        "gas": 0,
+        "id": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+        "inputs": [
+          {
+            "inner": {
+              "previousOutpoint": {
+                "inner": {
+                  "index": 1,
+                  "transactionId": "9a7d72a93293307ad7dd0a32097ca62cffd17d45d0f75a2357c49ba73cacc430"
+                }
+              },
+              "sequence": 0,
+              "sigOpCount": 1,
+              "signatureScript": [
+                65,
+                249,
+                247,
+                29,
+                87,
+                104,
+                201,
+                103,
+                224,
+                87,
+                2,
+                213,
+                220,
+                233,
+                57,
+                108,
+                121,
+                9,
+                85,
+                242,
+                45,
+                222,
+                178,
+                146,
+                10,
+                80,
+                235,
+                174,
+                196,
+                186,
+                217,
+                181,
+                191,
+                78,
+                159,
+                6,
+                237,
+                51,
+                227,
+                156,
+                210,
+                250,
+                212,
+                193,
+                18,
+                33,
+                153,
+                154,
+                92,
+                83,
+                178,
+                89,
+                221,
+                139,
+                160,
+                120,
+                238,
+                152,
+                202,
+                106,
+                229,
+                212,
+                172,
+                93,
+                193,
+                1
+              ]
+            }
+          }
+        ],
+        "lockTime": 0,
+        "outputs": [
+          {
+            "inner": {
+              "scriptPublicKey": "0000aa20b5e91dbe9dccc4ac129a52d9602732398037804fe319b4d0234d9ea28db6450a87",
+              "value": 5000000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 119999955000
+            }
+          }
+        ],
+        "payload": [],
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "version": 0
+      }
+    }
+  }
+}
