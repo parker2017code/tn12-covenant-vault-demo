@@ -1,0 +1,40 @@
+{
+  "schema": "kaspa-simple-asset-policy-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "policies": [
+    {
+      "assetId": "asset-workshop-credit",
+      "name": "Workshop credit",
+      "issuer": "Kaspa App Lab",
+      "category": "redeemable-credit",
+      "enforcement": "issuer-indexer",
+      "supplyCap": 1000,
+      "decimals": 0,
+      "status": "issuer-indexer-planner",
+      "rules": {
+        "mint": { "mode": "issuer-only", "status": "planned" },
+        "transfer": { "mode": "holder-signed", "status": "planned" },
+        "burn": { "mode": "issuer-or-holder", "status": "planned" },
+        "recovery": { "enabled": false, "authority": "", "delayHours": 0 },
+        "redemption": { "enabled": true, "claim": "Redeem for workshop access or support credit if issuer honors it." }
+      }
+    },
+    {
+      "assetId": "asset-recoverable-voucher",
+      "name": "Recoverable voucher",
+      "issuer": "Demo merchant",
+      "category": "voucher",
+      "enforcement": "future-covenant-native",
+      "supplyCap": 500,
+      "decimals": 0,
+      "status": "toccata-roadmap",
+      "rules": {
+        "mint": { "mode": "issuer-only", "status": "future-covenant" },
+        "transfer": { "mode": "holder-signed", "status": "future-covenant" },
+        "burn": { "mode": "holder-signed", "status": "future-covenant" },
+        "recovery": { "enabled": true, "authority": "issuer-recovery-key", "delayHours": 72 },
+        "redemption": { "enabled": true, "claim": "Redeem for merchant goods after accepted burn/redemption state." }
+      }
+    }
+  ]
+}

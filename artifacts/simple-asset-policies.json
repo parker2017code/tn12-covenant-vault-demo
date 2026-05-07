@@ -1,0 +1,104 @@
+{
+  "schema": "kaspa-simple-asset-policy-registry/v1",
+  "network": "kaspa-testnet-12",
+  "status": "roadmap-policy-not-live-native-asset",
+  "summary": {
+    "total": 2,
+    "covenantNative": 1,
+    "issuerIndexed": 1,
+    "recoveryEnabled": 1
+  },
+  "policies": [
+    {
+      "assetId": "asset-workshop-credit",
+      "name": "Workshop credit",
+      "issuer": "Kaspa App Lab",
+      "category": "redeemable-credit",
+      "enforcement": "issuer-indexer",
+      "supplyCap": 1000,
+      "decimals": 0,
+      "rules": {
+        "mint": {
+          "mode": "issuer-only",
+          "status": "planned"
+        },
+        "transfer": {
+          "mode": "holder-signed",
+          "status": "planned"
+        },
+        "burn": {
+          "mode": "issuer-or-holder",
+          "status": "planned"
+        },
+        "recovery": {
+          "enabled": false,
+          "authority": "",
+          "delayHours": 0
+        },
+        "redemption": {
+          "enabled": true,
+          "claim": "Redeem for workshop access or support credit if issuer honors it."
+        }
+      },
+      "status": "issuer-indexer-planner",
+      "lifecycle": [
+        "define-policy",
+        "issue-state-record",
+        "mint",
+        "transfer",
+        "burn",
+        "redemption"
+      ],
+      "risk": "Issuer/indexer state must not be marketed as native covenant asset enforcement."
+    },
+    {
+      "assetId": "asset-recoverable-voucher",
+      "name": "Recoverable voucher",
+      "issuer": "Demo merchant",
+      "category": "voucher",
+      "enforcement": "future-covenant-native",
+      "supplyCap": 500,
+      "decimals": 0,
+      "rules": {
+        "mint": {
+          "mode": "issuer-only",
+          "status": "future-covenant"
+        },
+        "transfer": {
+          "mode": "holder-signed",
+          "status": "future-covenant"
+        },
+        "burn": {
+          "mode": "holder-signed",
+          "status": "future-covenant"
+        },
+        "recovery": {
+          "enabled": true,
+          "authority": "issuer-recovery-key",
+          "delayHours": 72
+        },
+        "redemption": {
+          "enabled": true,
+          "claim": "Redeem for merchant goods after accepted burn/redemption state."
+        }
+      },
+      "status": "toccata-roadmap",
+      "lifecycle": [
+        "define-policy",
+        "issue-state-record",
+        "mint",
+        "transfer",
+        "burn",
+        "delayed-recovery",
+        "redemption"
+      ],
+      "risk": "Depends on final Toccata/covenant tooling before native enforcement claims."
+    }
+  ],
+  "boundaries": [
+    "This is an asset policy planner, not a live native asset protocol.",
+    "Issuer/indexer policies can model claims now, but covenant-native mint/transfer/burn/recovery is roadmap/Toccata work.",
+    "KRC/ecosystem assets and future covenant-native assets must stay clearly separated in UI and docs.",
+    "Every recovery or redemption path needs exact accepted transaction/indexer proof before being treated as state."
+  ]
+}

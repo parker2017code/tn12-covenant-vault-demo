@@ -3,13 +3,13 @@
   "status": "claim-surface-audit",
   "reviewedAt": "2026-05-07",
   "summary": {
-    "total": 14,
+    "total": 15,
     "contractEnforced": 4,
-    "notScriptEnforced": 10,
+    "notScriptEnforced": 11,
     "byEnforcement": {
       "script": 4,
       "simulation": 2,
-      "planner-indexer": 4,
+      "planner-indexer": 5,
       "wallet-policy": 2,
       "documentation": 1,
       "research": 1
@@ -23,7 +23,8 @@
       "escrow": 1,
       "treasury-vaults": 1,
       "coordination-markets": 1,
-      "access-passes": 1
+      "access-passes": 1,
+      "simple-assets": 1
     }
   },
   "features": [
@@ -166,6 +167,16 @@
       "proof": "Generated access pass planner artifact only",
       "risk": "Issuer-backed redemption state can be useful, but it is not native ticket enforcement.",
       "nextHardeningStep": "Tie one redemption to an accepted payload receipt and add duplicate redemption checks."
+    },
+    {
+      "id": "simple-asset-policy",
+      "name": "Simple asset policy",
+      "lane": "simple-assets",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/SimpleAssetPolicies.json and browser asset policy panel",
+      "proof": "Generated asset policy artifact only",
+      "risk": "Issuer-indexed assets and future covenant-native assets can be confused if not labeled.",
+      "nextHardeningStep": "Tie issuer-indexed asset state to accepted payload receipts and keep covenant-native rules roadmap-only."
     }
   ],
   "rules": [

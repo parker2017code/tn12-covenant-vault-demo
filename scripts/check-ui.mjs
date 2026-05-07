@@ -76,6 +76,9 @@ try {
   await expectText(page, "#mainnet-summary", "Mainnet paths");
   await expectText(page, "#mainnet-components", "Invoice / payload receipts");
   await expectText(page, "#mainnet-components", "tn12-toccata-only");
+  await expectText(page, "#asset-summary", "Covenant");
+  await expectText(page, "#asset-list", "Recoverable voucher");
+  await expectText(page, "#asset-list", "future-covenant-native");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

@@ -141,6 +141,16 @@
       "proof": "Generated access pass planner artifact only",
       "risk": "Issuer-backed redemption state can be useful, but it is not native ticket enforcement.",
       "nextHardeningStep": "Tie one redemption to an accepted payload receipt and add duplicate redemption checks."
+    },
+    {
+      "id": "simple-asset-policy",
+      "name": "Simple asset policy",
+      "lane": "simple-assets",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/SimpleAssetPolicies.json and browser asset policy panel",
+      "proof": "Generated asset policy artifact only",
+      "risk": "Issuer-indexed assets and future covenant-native assets can be confused if not labeled.",
+      "nextHardeningStep": "Tie issuer-indexed asset state to accepted payload receipts and keep covenant-native rules roadmap-only."
     }
   ]
 }

@@ -35,6 +35,7 @@
     "coordination:market": "node scripts/build-coordination-market.mjs",
     "access:passes": "node scripts/build-access-pass-planner.mjs",
     "mainnet:readiness": "node scripts/build-mainnet-readiness.mjs",
+    "asset:policies": "node scripts/build-asset-policies.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

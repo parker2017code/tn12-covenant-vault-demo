@@ -50,6 +50,7 @@ import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
+import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -153,7 +154,7 @@ assert.equal(campaignState.refundPlan.refundCount, 3);
 const enforcementFixture = JSON.parse(await readFile(new URL("../fixtures/EnforcementMatrix.json", import.meta.url), "utf8"));
 const enforcementMatrix = buildEnforcementMatrix(enforcementFixture);
 assert.equal(enforcementMatrix.status, "claim-surface-audit");
-assert.equal(enforcementMatrix.summary.total, 14);
+assert.equal(enforcementMatrix.summary.total, 15);
 assert.equal(enforcementMatrix.summary.contractEnforced, 4);
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "vault-daily-limit" && feature.enforcement === "simulation"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "assurance-target-progress" && feature.enforcement === "planner-indexer"));
@@ -161,6 +162,7 @@ assert.ok(enforcementMatrix.features.some((feature) => feature.id === "escrow-sp
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "treasury-payroll-caps" && feature.enforcement === "wallet-policy"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "coordination-market-hunt" && feature.enforcement === "research"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "access-pass-redemption" && feature.enforcement === "planner-indexer"));
+assert.ok(enforcementMatrix.features.some((feature) => feature.id === "simple-asset-policy" && feature.enforcement === "planner-indexer"));
 const escrowFixture = JSON.parse(await readFile(new URL("../fixtures/EscrowPrimitives.json", import.meta.url), "utf8"));
 const escrowRegistry = buildEscrowPrimitive(escrowFixture);
 assert.equal(escrowRegistry.status, "planner-fixture-not-script-proof");
@@ -195,6 +197,12 @@ assert.equal(mainnetReadiness.summary.mainnetCapable, 4);
 assert.equal(mainnetReadiness.summary.tn12Only, 3);
 assert.equal(mainnetReadiness.summary.researchOnly, 1);
 assert.equal(mainnetReadiness.summary.localOnly, 1);
+const assetPolicyFixture = JSON.parse(await readFile(new URL("../fixtures/SimpleAssetPolicies.json", import.meta.url), "utf8"));
+const assetPolicies = buildAssetPolicyRegistry(assetPolicyFixture);
+assert.equal(assetPolicies.status, "roadmap-policy-not-live-native-asset");
+assert.equal(assetPolicies.summary.total, 2);
+assert.equal(assetPolicies.summary.covenantNative, 1);
+assert.ok(assetPolicies.policies.some((policy) => policy.assetId === "asset-recoverable-voucher" && policy.rules.recovery.enabled));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -286,6 +294,7 @@ const files = [
   "scripts/build-coordination-market.mjs",
   "scripts/build-access-pass-planner.mjs",
   "scripts/build-mainnet-readiness.mjs",
+  "scripts/build-asset-policies.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
@@ -301,6 +310,7 @@ const files = [
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
+  "artifacts/simple-asset-policies.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/SavedWallet.public.json",
@@ -322,6 +332,7 @@ const files = [
   "fixtures/CoordinationMarketPrototype.json",
   "fixtures/AccessPassPlanner.json",
   "fixtures/MainnetReadiness.json",
+  "fixtures/SimpleAssetPolicies.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
@@ -337,6 +348,7 @@ const files = [
   "src/coordinationMarket.mjs",
   "src/accessPassPlanner.mjs",
   "src/mainnetReadiness.mjs",
+  "src/assetPolicy.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -382,6 +394,7 @@ assert.match(readme, /npm run payload:readiness/);
 assert.match(readme, /npm run coordination:market/);
 assert.match(readme, /npm run access:passes/);
 assert.match(readme, /npm run mainnet:readiness/);
+assert.match(readme, /npm run asset:policies/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -404,6 +417,7 @@ assert.match(html, /Treasury \/ team vaults/);
 assert.match(html, /Transparent coordination-market prototype/);
 assert.match(html, /KRC \/ access pass planner/);
 assert.match(html, /Mainnet readiness map/);
+assert.match(html, /Simple asset policy/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);

@@ -50,6 +50,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
 7. Simple Asset Policy
    - Later covenant-native rules: mint, transfer, burn, recovery, redemption.
    - First success: asset policy artifact and clear contrast with KRC ecosystem assets.
+   - Current repo surface: `fixtures/SimpleAssetPolicies.json`, `src/assetPolicy.mjs`, `npm run asset:policies`, and the browser asset policy panel.
 
 8. Auction / Intent Prototype
    - Accepted bid payloads, winner selection, refund/release rules, MEV caveats.

@@ -28,6 +28,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, and Hunt-plan artifacts.
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
 - Builds a mainnet-readiness map that separates payment/indexer paths from TN12/Toccata covenant paths.
+- Builds simple asset policy artifacts for issuer-indexed assets now and possible covenant-native assets later.
 
 ## What It Does Not Do Yet
 
@@ -300,6 +301,14 @@ npm run mainnet:readiness
 ```
 
 This turns `fixtures/MainnetReadiness.json` into `artifacts/mainnet-readiness.json`. It separates components that can become mainnet payment/indexer products from TN12/Toccata-only covenant work and research-only lanes.
+
+Build the simple asset policy registry:
+
+```sh
+npm run asset:policies
+```
+
+This turns `fixtures/SimpleAssetPolicies.json` into `artifacts/simple-asset-policies.json`. It contrasts issuer-indexer asset state with future covenant-native asset rules; it is not a live native asset protocol.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

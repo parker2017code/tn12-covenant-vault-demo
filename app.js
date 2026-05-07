@@ -34,6 +34,7 @@ import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
+import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -75,6 +76,8 @@ const accessSummaryNode = document.querySelector("#access-summary");
 const accessListNode = document.querySelector("#access-list");
 const mainnetSummaryNode = document.querySelector("#mainnet-summary");
 const mainnetComponentsNode = document.querySelector("#mainnet-components");
+const assetSummaryNode = document.querySelector("#asset-summary");
+const assetListNode = document.querySelector("#asset-list");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -199,6 +202,7 @@ renderTreasuryVaults();
 renderCoordinationMarket();
 renderAccessPassPlanner();
 renderMainnetReadiness();
+renderAssetPolicies();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -547,6 +551,37 @@ async function renderMainnetReadiness() {
     }
   } catch (error) {
     mainnetSummaryNode.textContent = `Mainnet readiness unavailable: ${error.message}`;
+  }
+}
+
+async function renderAssetPolicies() {
+  if (!assetSummaryNode || !assetListNode) return;
+
+  try {
+    const response = await fetch("fixtures/SimpleAssetPolicies.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const registry = buildAssetPolicyRegistry(fixture);
+    assetSummaryNode.innerHTML = `
+      <article><span>Policies</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
+      <article><span>Covenant</span><strong>${escapeHtml(registry.summary.covenantNative)}</strong></article>
+      <article><span>Issuer</span><strong>${escapeHtml(registry.summary.issuerIndexed)}</strong></article>
+      <article><span>Recovery</span><strong>${escapeHtml(registry.summary.recoveryEnabled)}</strong></article>
+    `;
+
+    assetListNode.innerHTML = "";
+    for (const policy of registry.policies) {
+      const article = document.createElement("article");
+      article.className = "asset-card";
+      article.innerHTML = `
+        <span>${escapeHtml(policy.enforcement)}</span>
+        <strong>${escapeHtml(policy.name)}</strong>
+        <p>${escapeHtml(policy.supplyCap)} cap; lifecycle ${escapeHtml(policy.lifecycle.join(" -> "))}</p>
+        <small>${escapeHtml(policy.risk)}</small>
+      `;
+      assetListNode.append(article);
+    }
+  } catch (error) {
+    assetSummaryNode.textContent = `Asset policy registry unavailable: ${error.message}`;
   }
 }
 
