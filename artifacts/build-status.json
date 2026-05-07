@@ -4,10 +4,10 @@
   "status": "active-build-map",
   "summary": {
     "total": 13,
-    "builtBases": 8,
+    "builtBases": 9,
     "proofBacked": 0,
     "blocked": 1,
-    "nextBuilds": 3,
+    "nextBuilds": 2,
     "research": 1
   },
   "lanes": [
@@ -136,12 +136,16 @@
       "order": 9,
       "id": "defi-research",
       "name": "Basic DeFi Research Backlog",
-      "status": "next-build",
+      "status": "base-built",
       "enforcement": "documentation",
       "readiness": "research-only",
-      "proof": "none",
-      "builtSurface": [],
-      "next": "Add briefs for lending, swaps, stable-value, insurance, derivatives, and missing rails."
+      "proof": "generated-artifact",
+      "builtSurface": [
+        "fixtures/DefiResearchBacklog.json",
+        "src/defiBacklog.mjs",
+        "npm run defi:backlog"
+      ],
+      "next": "Convert top briefs into simulation-only dashboards before any settlement claim."
     },
     {
       "order": 10,
@@ -201,8 +205,8 @@
     }
   ],
   "naturalNextSteps": [
-    "Build DeFi research backlog as lane 9.",
     "Build AI-agent commitment board as lane 12.",
+    "Build prediction/hedge simulator from the DeFi backlog and attestation registry.",
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",

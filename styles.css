@@ -401,6 +401,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.defi-backlog {
+  margin-top: 24px;
+}
+
 .build-status {
   margin-top: 24px;
 }
@@ -644,6 +648,13 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.defi-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .build-status-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -659,6 +670,13 @@ progress::-moz-progress-bar {
 }
 
 .auction-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.defi-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
   background: #12191d;
@@ -686,7 +704,21 @@ progress::-moz-progress-bar {
   text-transform: uppercase;
 }
 
+.defi-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
 .auction-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.defi-summary strong {
   display: block;
   margin-top: 4px;
   font-size: 24px;
@@ -984,6 +1016,13 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.defi-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .build-status-lanes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1130,6 +1169,7 @@ progress::-moz-progress-bar {
 .mainnet-card,
 .asset-card,
 .auction-card,
+.defi-card,
 .build-status-card,
 .attestation-card,
 .indexer-card,
@@ -1164,6 +1204,7 @@ progress::-moz-progress-bar {
 .mainnet-card span,
 .asset-card span,
 .auction-card span,
+.defi-card span,
 .build-status-card span,
 .attestation-card span,
 .indexer-card span,
@@ -1234,6 +1275,9 @@ progress::-moz-progress-bar {
 .auction-card strong,
 .auction-card p,
 .auction-card small,
+.defi-card strong,
+.defi-card p,
+.defi-card small,
 .build-status-card strong,
 .build-status-card p,
 .build-status-card small,
@@ -1274,6 +1318,7 @@ progress::-moz-progress-bar {
 .mainnet-card p,
 .asset-card p,
 .auction-card p,
+.defi-card p,
 .build-status-card p,
 .attestation-card p,
 .indexer-card p,
@@ -1301,6 +1346,7 @@ progress::-moz-progress-bar {
 .mainnet-card small,
 .asset-card small,
 .auction-card small,
+.defi-card small,
 .build-status-card small,
 .attestation-card small,
 .indexer-card small,
@@ -1410,6 +1456,8 @@ progress::-moz-progress-bar {
   .asset-list,
   .auction-summary,
   .auction-list,
+  .defi-summary,
+  .defi-list,
   .build-status-summary,
   .build-status-lanes,
   .submit-summary,

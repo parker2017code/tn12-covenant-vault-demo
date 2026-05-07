@@ -161,6 +161,16 @@
       "proof": "Generated auction intent artifact only",
       "risk": "Accepted bid payload ranking is useful app state, but it is not atomic exchange, bid custody, or MEV-resistant settlement.",
       "nextHardeningStep": "Build explicit settlement/refund drafts and keep winner selection labeled as planner/indexer state."
+    },
+    {
+      "id": "defi-backlog",
+      "name": "DeFi research backlog",
+      "lane": "defi-research",
+      "enforcement": "documentation",
+      "currentSurface": "fixtures/DefiResearchBacklog.json and browser DeFi panel",
+      "proof": "Generated DeFi backlog artifact only",
+      "risk": "Research briefs can be mistaken for live swaps, lending, stable-value products, insurance, or derivatives.",
+      "nextHardeningStep": "Build simulation-only dashboards and missing-rails checklists before any settlement prototype."
     }
   ]
 }

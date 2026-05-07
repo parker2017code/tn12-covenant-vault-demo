@@ -63,3 +63,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 35. Add simple asset policy registry: mint, transfer, burn, recovery, redemption, issuer-indexer versus future covenant-native labels, browser panel, and generated asset artifact.
 36. Add build-status map: built bases, blocked verticals, natural next steps, enforcement/readiness/proof labels, browser panel, and generated status artifact.
 37. Add auction/intent prototype: accepted bid payloads, winner rule, refund list, MEV caveat, browser panel, and generated auction artifact.
+38. Add DeFi research backlog: swaps, lending, stable-value, insurance, derivatives, prediction hedges, portfolio automation, missing rails, browser panel, and generated backlog artifact.

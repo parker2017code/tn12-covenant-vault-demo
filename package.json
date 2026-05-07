@@ -37,6 +37,7 @@
     "mainnet:readiness": "node scripts/build-mainnet-readiness.mjs",
     "asset:policies": "node scripts/build-asset-policies.mjs",
     "auction:intents": "node scripts/build-auction-intents.mjs",
+    "defi:backlog": "node scripts/build-defi-backlog.mjs",
     "build:status": "node scripts/build-status.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"

@@ -1,0 +1,264 @@
+{
+  "schema": "kaspa-defi-research-backlog/v1",
+  "reviewedAt": "2026-05-07",
+  "status": "research-backlog-not-live-defi",
+  "summary": {
+    "total": 8,
+    "researchOnly": 4,
+    "prototypeLater": 4,
+    "missingRailCount": 34,
+    "byStatus": {
+      "prototype-later": 4,
+      "research-only": 4
+    },
+    "byEarliestLane": {
+      "live-kaspa": 1,
+      "roadmap": 1,
+      "research": 6
+    }
+  },
+  "missingRails": [
+    "MEV analysis",
+    "asset liquidity",
+    "atomic settlement",
+    "capital pool",
+    "claims oracle",
+    "collateral custody",
+    "collateral model",
+    "dispute process",
+    "execution venue",
+    "indexer",
+    "issuer/redemption model",
+    "legal review",
+    "legal wrapper",
+    "legal/compliance",
+    "liquidation engine",
+    "liquidations",
+    "liquidity",
+    "liquidity incentives",
+    "margin engine",
+    "market liquidity",
+    "native asset model",
+    "oracle",
+    "oracle resolution",
+    "oracle/routing",
+    "position accounting",
+    "price oracle",
+    "risk limits",
+    "risk parameters",
+    "shared pool state",
+    "strategy risk controls",
+    "underwriting model",
+    "user consent",
+    "wallet permissions",
+    "wallet route"
+  ],
+  "briefs": [
+    {
+      "id": "swap-intent-board",
+      "name": "Swap intent board",
+      "category": "swaps",
+      "oldWorldReference": "Uniswap routing UX and CoW-style intent matching",
+      "userJob": "Let users express desired swaps before a native AMM or shared-state settlement system exists.",
+      "kaspaEdge": "Accepted payloads can make intents visible quickly while settlement stays explicit.",
+      "earliestKaspaLane": "live-kaspa",
+      "status": "prototype-later",
+      "missingRails": [
+        "asset liquidity",
+        "atomic settlement",
+        "MEV analysis",
+        "wallet route",
+        "indexer"
+      ],
+      "firstSafeArtifact": "Accepted swap-intent payload registry with no custody.",
+      "failureModes": [
+        "front-running",
+        "stale quotes",
+        "fake liquidity",
+        "ambiguous fill rules"
+      ],
+      "next": "Build after auction/intent settlement drafts so bid/refund mechanics are clearer."
+    },
+    {
+      "id": "amm-pool-research",
+      "name": "AMM pool research",
+      "category": "swaps",
+      "oldWorldReference": "Uniswap v2/v3",
+      "userJob": "Provide continuous swap liquidity between assets.",
+      "kaspaEdge": "Fast PoW confirmation could improve user feedback once native asset and settlement rails exist.",
+      "earliestKaspaLane": "roadmap",
+      "status": "research-only",
+      "missingRails": [
+        "native asset model",
+        "shared pool state",
+        "oracle/routing",
+        "MEV analysis",
+        "liquidity incentives"
+      ],
+      "firstSafeArtifact": "Risk and UX brief for pool reserves, LP shares, price impact, and slippage.",
+      "failureModes": [
+        "impermanent loss",
+        "sandwiching",
+        "liquidity fragmentation",
+        "toxic flow"
+      ],
+      "next": "Keep as research until asset, settlement, and composition assumptions are explicit."
+    },
+    {
+      "id": "lending-risk-dashboard",
+      "name": "Lending risk dashboard",
+      "category": "lending",
+      "oldWorldReference": "Compound and Aave risk dashboards",
+      "userJob": "Show collateral, borrow capacity, health, and liquidation risk before automated lending exists.",
+      "kaspaEdge": "Accepted transaction receipts can audit deposits and repayments before richer covenant/vProg settlement.",
+      "earliestKaspaLane": "research",
+      "status": "prototype-later",
+      "missingRails": [
+        "price oracle",
+        "collateral custody",
+        "liquidation engine",
+        "risk parameters",
+        "liquidity"
+      ],
+      "firstSafeArtifact": "Manual position/risk calculator fed by accepted receipts and external prices.",
+      "failureModes": [
+        "oracle failure",
+        "bad collateral factors",
+        "liquidation cascade",
+        "governance capture"
+      ],
+      "next": "Build as a non-custodial simulator before any lending market claim."
+    },
+    {
+      "id": "stable-value-unit",
+      "name": "Stable-value unit research",
+      "category": "stable-value",
+      "oldWorldReference": "MakerDAO, Liquity, and fiat-backed stablecoins",
+      "userJob": "Hold or settle in a less volatile unit while using Kaspa payment rails.",
+      "kaspaEdge": "Fast settlement would matter for commerce if stable-value issuance and redemption are credible.",
+      "earliestKaspaLane": "research",
+      "status": "research-only",
+      "missingRails": [
+        "issuer/redemption model",
+        "collateral model",
+        "oracle",
+        "legal/compliance",
+        "liquidity"
+      ],
+      "firstSafeArtifact": "Comparison brief: issuer-backed, overcollateralized, synthetic, and external stablecoin paths.",
+      "failureModes": [
+        "depeg",
+        "redemption halt",
+        "oracle manipulation",
+        "regulatory shutdown"
+      ],
+      "next": "Keep as research and do not imply a native stablecoin exists."
+    },
+    {
+      "id": "prediction-hedge-simulator",
+      "name": "Prediction hedge simulator",
+      "category": "prediction-markets",
+      "oldWorldReference": "Augur, Gnosis Conditional Tokens, and portfolio hedge dashboards",
+      "userJob": "Use event probabilities to think about portfolio exposure and hedges.",
+      "kaspaEdge": "Signed attestations and accepted payload receipts can create an auditable signal history.",
+      "earliestKaspaLane": "research",
+      "status": "prototype-later",
+      "missingRails": [
+        "oracle resolution",
+        "market liquidity",
+        "legal review",
+        "position accounting",
+        "dispute process"
+      ],
+      "firstSafeArtifact": "Simulation-only market board linked to attestation signals and manual portfolio positions.",
+      "failureModes": [
+        "ambiguous markets",
+        "bad oracle",
+        "thin liquidity",
+        "financial advice overreach"
+      ],
+      "next": "Build only as a simulator with explicit no-trading/no-advice labels."
+    },
+    {
+      "id": "insurance-protection",
+      "name": "Insurance and protection pools",
+      "category": "insurance",
+      "oldWorldReference": "Nexus Mutual-style coverage and parametric insurance",
+      "userJob": "Pool risk and pay claims when defined events occur.",
+      "kaspaEdge": "RTD-style attestations could eventually help event evidence, but this repo only has research signals.",
+      "earliestKaspaLane": "research",
+      "status": "research-only",
+      "missingRails": [
+        "claims oracle",
+        "capital pool",
+        "underwriting model",
+        "legal wrapper",
+        "dispute process"
+      ],
+      "firstSafeArtifact": "Parametric payout research note using simulated attestations.",
+      "failureModes": [
+        "underpriced risk",
+        "claim ambiguity",
+        "capital shortfall",
+        "regulatory exposure"
+      ],
+      "next": "Keep in backlog until oracle and capital pool assumptions are concrete."
+    },
+    {
+      "id": "derivatives-options",
+      "name": "Derivatives and options",
+      "category": "derivatives",
+      "oldWorldReference": "DLCs, options vaults, and perpetuals",
+      "userJob": "Hedge price movement or express leveraged exposure.",
+      "kaspaEdge": "UTXO-style conditional payout patterns may fit simple event contracts later.",
+      "earliestKaspaLane": "research",
+      "status": "research-only",
+      "missingRails": [
+        "price oracle",
+        "margin engine",
+        "liquidations",
+        "risk limits",
+        "legal review"
+      ],
+      "firstSafeArtifact": "DLC-style conditional payout design note with no real funds.",
+      "failureModes": [
+        "oracle manipulation",
+        "margin shortfall",
+        "auto-liquidation bugs",
+        "regulatory exposure"
+      ],
+      "next": "Research only until oracle and margin paths are available."
+    },
+    {
+      "id": "portfolio-automation",
+      "name": "Portfolio automation",
+      "category": "portfolio",
+      "oldWorldReference": "Yearn, vault strategies, and portfolio rebalancers",
+      "userJob": "Rebalance or hedge positions according to rules.",
+      "kaspaEdge": "Fast accepted receipts can make manual or agent-assisted actions auditable.",
+      "earliestKaspaLane": "research",
+      "status": "prototype-later",
+      "missingRails": [
+        "wallet permissions",
+        "strategy risk controls",
+        "oracle",
+        "execution venue",
+        "user consent"
+      ],
+      "firstSafeArtifact": "Manual checklist and simulation planner for suggested actions.",
+      "failureModes": [
+        "bad automation",
+        "blind signing",
+        "financial advice overreach",
+        "strategy drift"
+      ],
+      "next": "Keep automation disabled; show suggested actions and exact transaction review only."
+    }
+  ],
+  "rules": [
+    "Do not market AMMs, lending, stable-value products, derivatives, or insurance as live Kaspa apps from this backlog.",
+    "Start with risk dashboards, simulations, payload receipts, and intent registries before settlement claims.",
+    "Any real-money DeFi lane needs oracle, liquidity, liquidation, wallet, indexer, and security review plans.",
+    "Prediction and hedge workflows must stay advice-safe and simulation-first until settlement and resolution rails exist."
+  ]
+}

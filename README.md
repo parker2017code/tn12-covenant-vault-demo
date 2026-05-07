@@ -30,6 +30,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds a mainnet-readiness map that separates payment/indexer paths from TN12/Toccata covenant paths.
 - Builds simple asset policy artifacts for issuer-indexed assets now and possible covenant-native assets later.
 - Builds an auction/intent prototype for accepted bid payloads, planner-side winner selection, and refund planning.
+- Builds a DeFi research backlog for swaps, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation.
 - Builds a repo-level build-status map for what is built, blocked, naturally next, and research-only.
 
 ## What It Does Not Do Yet
@@ -319,6 +320,14 @@ npm run auction:intents
 ```
 
 This turns `fixtures/AuctionIntentPrototype.json` into `artifacts/auction-intents.json`. It ranks accepted bid payloads for planner-side winner/refund state, but it is not MEV-resistant and does not enforce atomic asset exchange.
+
+Build the DeFi research backlog:
+
+```sh
+npm run defi:backlog
+```
+
+This turns `fixtures/DefiResearchBacklog.json` into `artifacts/defi-backlog.json`. It keeps AMMs, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation in a research/missing-rails lane.
 
 Build the repo status map:
 

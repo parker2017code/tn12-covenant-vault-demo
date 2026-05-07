@@ -36,6 +36,7 @@ import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "./src/auctionIntent.mjs";
+import { buildDefiResearchBacklog } from "./src/defiBacklog.mjs";
 import { buildProjectStatus } from "./src/buildStatus.mjs";
 
 const form = document.querySelector("#policy-form");
@@ -82,6 +83,8 @@ const assetSummaryNode = document.querySelector("#asset-summary");
 const assetListNode = document.querySelector("#asset-list");
 const auctionSummaryNode = document.querySelector("#auction-summary");
 const auctionListNode = document.querySelector("#auction-list");
+const defiSummaryNode = document.querySelector("#defi-summary");
+const defiListNode = document.querySelector("#defi-list");
 const buildStatusSummaryNode = document.querySelector("#build-status-summary");
 const buildStatusLanesNode = document.querySelector("#build-status-lanes");
 const buildQueueNode = document.querySelector("#build-queue");
@@ -210,6 +213,7 @@ renderAccessPassPlanner();
 renderMainnetReadiness();
 renderAssetPolicies();
 renderAuctionIntents();
+renderDefiBacklog();
 renderBuildStatus();
 renderProofTransactions();
 renderAcceptedAppState();
@@ -652,6 +656,37 @@ async function renderAuctionIntents() {
     }
   } catch (error) {
     auctionSummaryNode.textContent = `Auction intent prototype unavailable: ${error.message}`;
+  }
+}
+
+async function renderDefiBacklog() {
+  if (!defiSummaryNode || !defiListNode) return;
+
+  try {
+    const response = await fetch("fixtures/DefiResearchBacklog.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const backlog = buildDefiResearchBacklog(fixture);
+    defiSummaryNode.innerHTML = `
+      <article><span>Briefs</span><strong>${escapeHtml(backlog.summary.total)}</strong></article>
+      <article><span>Research</span><strong>${escapeHtml(backlog.summary.researchOnly)}</strong></article>
+      <article><span>Later</span><strong>${escapeHtml(backlog.summary.prototypeLater)}</strong></article>
+      <article><span>Missing rails</span><strong>${escapeHtml(backlog.summary.missingRailCount)}</strong></article>
+    `;
+
+    defiListNode.innerHTML = "";
+    for (const brief of backlog.briefs) {
+      const article = document.createElement("article");
+      article.className = "defi-card";
+      article.innerHTML = `
+        <span>${escapeHtml(brief.status)} / ${escapeHtml(brief.earliestKaspaLane)}</span>
+        <strong>${escapeHtml(brief.name)}</strong>
+        <p>${escapeHtml(brief.firstSafeArtifact)}</p>
+        <small>${escapeHtml(brief.missingRails.slice(0, 4).join(", "))}</small>
+      `;
+      defiListNode.append(article);
+    }
+  } catch (error) {
+    defiSummaryNode.textContent = `DeFi backlog unavailable: ${error.message}`;
   }
 }
 
