@@ -91,6 +91,16 @@
       "label": "Agent dispute escrow",
       "draftPath": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
       "outPath": "artifacts/payload-agent-dispute-escrow-evidence.json"
+    },
+    {
+      "label": "Agent release invoice",
+      "draftPath": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+      "outPath": "artifacts/payload-agent-release-invoice-evidence.json"
+    },
+    {
+      "label": "Agent hold escrow",
+      "draftPath": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+      "outPath": "artifacts/payload-agent-hold-escrow-evidence.json"
     }
   ]
 }

@@ -1,0 +1,111 @@
+{
+  "schema": "tn12-signed-payload-receipt-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "requiresPayloadSubmitSupport": true,
+  "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+    "outputIndex": 1,
+    "amountTkas": 1144.3985
+  },
+  "payment": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": 0.1,
+    "amountSompi": "10000000",
+    "changeTkas": "1144.29845",
+    "changeSompi": "114429845000",
+    "minerFeeSompi": "5000"
+  },
+  "receipt": {
+    "schema": "kaspa-signal-payload/v1",
+    "status": "payload-size-ok",
+    "lane": "transaction-payload",
+    "payload": {
+      "kind": "agent-settlement",
+      "subject": "agent-task-escrow-001",
+      "value": "dispute-hold",
+      "note": "Planner kept escrow task funds on hold while dispute is open; not autonomous custody."
+    },
+    "encoded": {
+      "bytes": 179,
+      "transientMass": 716,
+      "hex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a22646973707574652d686f6c64222c226e6f7465223a22506c616e6e6572206b65707420657363726f77207461736b2066756e6473206f6e20686f6c64207768696c652064697370757465206973206f70656e3b206e6f74206175746f6e6f6d6f757320637573746f64792e227d"
+    },
+    "limits": {
+      "standardTxMassLimit": 100000,
+      "transientByteMass": 4,
+      "remainingMassBeforeInputsOutputsAndSignatures": 99284
+    },
+    "boundary": "This models user transaction payload data, not arbitrary miner header data."
+  },
+  "transactionId": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+            "index": 1
+          },
+          "signatureScript": "413b898dad882d2bdd548b42ba5f2a0246760dd01ec4c041000153a06ab1a271008073aab315e02d8b1cb094adef830f434da35fe267579c8b2eb8c74223b1caaf01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 10000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 114429845000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "payload": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a22646973707574652d686f6c64222c226e6f7465223a22506c616e6e6572206b65707420657363726f77207461736b2066756e6473206f6e20686f6c64207768696c652064697370757465206973206f70656e3b206e6f74206175746f6e6f6d6f757320637573746f64792e227d"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "tx": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+            "index": 1
+          },
+          "signatureScript": "413b898dad882d2bdd548b42ba5f2a0246760dd01ec4c041000153a06ab1a271008073aab315e02d8b1cb094adef830f434da35fe267579c8b2eb8c74223b1caaf01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "value": "10000000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        },
+        {
+          "value": "114429845000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "gas": "0",
+      "payload": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a22646973707574652d686f6c64222c226e6f7465223a22506c616e6e6572206b65707420657363726f77207461736b2066756e6473206f6e20686f6c64207768696c652064697370757465206973206f70656e3b206e6f74206175746f6e6f6d6f757320637573746f64792e227d",
+      "id": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382"
+    }
+  }
+}

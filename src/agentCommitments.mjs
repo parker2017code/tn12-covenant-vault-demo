@@ -2,13 +2,16 @@ export function buildAgentCommitmentBoard(fixture = {}) {
   const tasks = (fixture.tasks || []).map(normalizeTask);
   const proofs = (fixture.proofs || []).map(normalizeProof);
   const disputes = (fixture.disputes || []).map(normalizeDispute);
+  const lifecycleEvents = (fixture.lifecycleEvents || []).map(normalizeLifecycleEvent);
   const tasksWithState = tasks.map((task) => {
     const taskProofs = proofs.filter((proof) => proof.taskId === task.taskId);
     const taskDisputes = disputes.filter((dispute) => dispute.taskId === task.taskId);
+    const taskLifecycleEvents = lifecycleEvents.filter((event) => event.taskId === task.taskId);
     return {
       ...task,
       proofs: taskProofs,
       disputes: taskDisputes,
+      lifecycleEvents: taskLifecycleEvents,
       state: taskState(task, taskProofs, taskDisputes),
       settlementPlan: settlementPlan(task, taskProofs, taskDisputes)
     };
@@ -25,11 +28,13 @@ export function buildAgentCommitmentBoard(fixture = {}) {
       disputed: tasksWithState.filter((task) => task.state === "disputed").length,
       releaseReady: tasksWithState.filter((task) => task.state === "release-ready").length,
       refundReady: tasksWithState.filter((task) => task.state === "refund-ready").length,
-      acceptedPayloads: [...tasks, ...proofs, ...disputes].filter((item) => item.payloadStatus === "accepted-payload").length
+      acceptedPayloads: [...tasks, ...proofs, ...disputes].filter((item) => item.payloadStatus === "accepted-payload").length,
+      acceptedLifecycleEvents: lifecycleEvents.filter((event) => event.status === "accepted-planner-event").length
     },
     tasks: tasksWithState,
     proofs,
     disputes,
+    lifecycleEvents,
     boundaries: [
       "This board models accepted task, proof, and dispute payloads; it does not run autonomous agents.",
       "Deposit custody, release, and refund are planner state until exact signed drafts or covenant paths exist.",
@@ -80,6 +85,20 @@ function normalizeDispute(dispute = {}) {
     evidencePath: String(dispute.evidencePath || ""),
     payloadStatus: String(dispute.payloadStatus || "draft"),
     status: String(dispute.status || "open")
+  };
+}
+
+function normalizeLifecycleEvent(event = {}) {
+  return {
+    eventId: String(event.eventId || ""),
+    taskId: String(event.taskId || ""),
+    kind: String(event.kind || "agent-settlement"),
+    value: String(event.value || "planned"),
+    acceptedTxid: String(event.acceptedTxid || ""),
+    evidencePath: String(event.evidencePath || ""),
+    draftPath: String(event.draftPath || ""),
+    status: String(event.status || "draft"),
+    note: String(event.note || "")
   };
 }
 

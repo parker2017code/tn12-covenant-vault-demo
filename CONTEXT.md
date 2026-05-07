@@ -129,7 +129,7 @@ Escrow mutual cancel is now accepted on TN12. The original submit used `sigOpCou
 
 Accepted payload events are listed in `fixtures/PayloadEventEvidence.json` and verified by `npm run payload:verify:events`. The current set covers invoice paid/refund/error, access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, and agent task/proof/dispute state.
 
-`npm run indexer:checkpoint` rebuilds `artifacts/checkpointed-accepted-index.json` from public TN12 transaction reads. It currently tracks 25 accepted records: 7 proof spends and 18 payload events.
+`npm run indexer:checkpoint` rebuilds `artifacts/checkpointed-accepted-index.json` from public TN12 transaction reads. It currently tracks 27 accepted records: 7 proof spends and 20 payload events.
 
 Fixtures:
 

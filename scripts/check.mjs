@@ -161,9 +161,9 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 31);
-assert.equal(submitRegistry.summary.payloadDrafts, 18);
-assert.equal(submitRegistry.summary.payloadSubmitGated, 18);
+assert.equal(submitRegistry.summary.total, 33);
+assert.equal(submitRegistry.summary.payloadDrafts, 20);
+assert.equal(submitRegistry.summary.payloadSubmitGated, 20);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -310,6 +310,7 @@ assert.equal(agentBoard.status, "payload-indexed-agent-commitments-not-autonomou
 assert.equal(agentBoard.summary.tasks, 3);
 assert.equal(agentBoard.summary.releaseReady, 1);
 assert.equal(agentBoard.summary.disputed, 1);
+assert.equal(agentBoard.summary.acceptedLifecycleEvents, 2);
 assert.ok(agentBoard.tasks.some((task) => task.taskId === "agent-task-escrow-001" && task.state === "disputed"));
 const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
 const projectStatus = buildProjectStatus(buildStatusFixture);
@@ -346,9 +347,9 @@ assert.ok(acceptedState.records.some((record) =>
   && record.txid === "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
 ));
 const checkpointFixture = JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8"));
-assert.equal(checkpointFixture.summary.total, 25);
+assert.equal(checkpointFixture.summary.total, 27);
 assert.equal(checkpointFixture.summary.proofs, 7);
-assert.equal(checkpointFixture.summary.payloadEvents, 18);
+assert.equal(checkpointFixture.summary.payloadEvents, 20);
 assert.equal(checkpointFixture.summary.mismatches, 0);
 assert.equal(checkpointFixture.status, "accepted-index-fully-matched");
 assert.ok(checkpointFixture.checkpoint.maxAcceptingBlockBlueScore > checkpointFixture.checkpoint.minAcceptingBlockBlueScore);

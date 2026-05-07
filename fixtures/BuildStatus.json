@@ -200,7 +200,7 @@
         "src/agentCommitments.mjs",
         "npm run agent:commitments"
       ],
-      "next": "Build explicit release/refund drafts for one task lifecycle."
+      "next": "Keep planner events separate from custody release/refund transactions and autonomous payout."
     },
     {
       "order": 13,
@@ -234,7 +234,7 @@
   ],
   "naturalNextSteps": [
     "Build prediction/hedge simulator from the DeFi backlog and attestation registry.",
-    "Build explicit agent-task release/refund drafts for one task lifecycle.",
+    "Build real agent-task custody release/refund transactions only after funding custody and reviewer policy are explicit.",
     "Build real auction custody settlement/refund transactions only after bid custody and asset delivery assumptions are explicit.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Replace local payload receipt signing with wallet review and keep the accepted JSON wRPC route documented.",

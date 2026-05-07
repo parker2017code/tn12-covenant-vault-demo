@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-07T19:39:03.258Z",
+  "fetchedAt": "2026-05-07T19:43:42.807Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -10,9 +10,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 25,
+    "recordCount": 27,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 5610880,
+    "maxAcceptingBlockBlueScore": 5614688,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -38,16 +38,18 @@
       "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
       "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
       "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
-      "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0"
+      "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+      "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+      "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382"
     ],
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 25,
+    "total": 27,
     "proofs": 7,
-    "payloadEvents": 18,
-    "accepted": 25,
-    "matched": 25,
+    "payloadEvents": 20,
+    "accepted": 27,
+    "matched": 27,
     "mismatches": 0,
     "lanes": [
       {
@@ -64,6 +66,12 @@
       },
       {
         "lane": "agent-proof",
+        "total": 2,
+        "accepted": 2,
+        "matched": 2
+      },
+      {
+        "lane": "agent-settlement",
         "total": 2,
         "accepted": 2,
         "matched": 2
@@ -1187,6 +1195,104 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "agent-settlement",
+      "label": "Agent release invoice",
+      "txid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5614597,
+      "acceptingBlockTime": 1778182883043,
+      "draftPath": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+      "evidencePath": "artifacts/payload-agent-release-invoice-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a2272656c656173652d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b656420696e766f696365207461736b207265776172642072656c656173652061667465722061636365707465642070726f6f6620616e6420726576696577657220617070726f76616c3b206e6f74206175746f6e6f6d6f7573207061796f75742e227d",
+        "observedHex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a2272656c656173652d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b656420696e766f696365207461736b207265776172642072656c656173652061667465722061636365707465642070726f6f6620616e6420726576696577657220617070726f76616c3b206e6f74206175746f6e6f6d6f7573207061796f75742e227d",
+        "matches": true,
+        "bytes": 207,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "agent-settlement",
+            "subject": "agent-task-invoice-001",
+            "value": "release-planned",
+            "note": "Planner marked invoice task reward release after accepted proof and reviewer approval; not autonomous payout."
+          },
+          "encoded": {
+            "bytes": 207,
+            "hex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a2272656c656173652d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b656420696e766f696365207461736b207265776172642072656c656173652061667465722061636365707465642070726f6f6620616e6420726576696577657220617070726f76616c3b206e6f74206175746f6e6f6d6f7573207061796f75742e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "agent-settlement",
+      "label": "Agent hold escrow",
+      "txid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5614688,
+      "acceptingBlockTime": 1778182891710,
+      "draftPath": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+      "evidencePath": "artifacts/payload-agent-hold-escrow-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a22646973707574652d686f6c64222c226e6f7465223a22506c616e6e6572206b65707420657363726f77207461736b2066756e6473206f6e20686f6c64207768696c652064697370757465206973206f70656e3b206e6f74206175746f6e6f6d6f757320637573746f64792e227d",
+        "observedHex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a22646973707574652d686f6c64222c226e6f7465223a22506c616e6e6572206b65707420657363726f77207461736b2066756e6473206f6e20686f6c64207768696c652064697370757465206973206f70656e3b206e6f74206175746f6e6f6d6f757320637573746f64792e227d",
+        "matches": true,
+        "bytes": 179,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "agent-settlement",
+            "subject": "agent-task-escrow-001",
+            "value": "dispute-hold",
+            "note": "Planner kept escrow task funds on hold while dispute is open; not autonomous custody."
+          },
+          "encoded": {
+            "bytes": 179,
+            "hex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a22646973707574652d686f6c64222c226e6f7465223a22506c616e6e6572206b65707420657363726f77207461736b2066756e6473206f6e20686f6c64207768696c652064697370757465206973206f70656e3b206e6f74206175746f6e6f6d6f757320637573746f64792e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382"
     }
   ],
   "boundaries": [

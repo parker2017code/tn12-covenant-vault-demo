@@ -777,6 +777,7 @@ async function renderAgentCommitments() {
       <article><span>Proofs</span><strong>${escapeHtml(board.summary.proofSubmitted)}</strong></article>
       <article><span>Disputed</span><strong>${escapeHtml(board.summary.disputed)}</strong></article>
       <article><span>Accepted payloads</span><strong>${escapeHtml(board.summary.acceptedPayloads)}</strong></article>
+      <article><span>Lifecycle events</span><strong>${escapeHtml(board.summary.acceptedLifecycleEvents || 0)}</strong></article>
     `;
 
     agentListNode.innerHTML = "";
@@ -787,7 +788,7 @@ async function renderAgentCommitments() {
         <span>${escapeHtml(task.state)}</span>
         <strong>${escapeHtml(task.title)}</strong>
         <p>${escapeHtml(task.rewardTkas)} TKAS reward for ${escapeHtml(task.agent)}</p>
-        <small>${escapeHtml(task.settlementPlan.next)}</small>
+        <small>${escapeHtml(`${task.settlementPlan.next} Accepted lifecycle events: ${task.lifecycleEvents?.length || 0}.`)}</small>
       `;
       agentListNode.append(article);
     }

@@ -79,5 +79,29 @@
       "payloadStatus": "accepted-payload",
       "status": "open"
     }
+  ],
+  "lifecycleEvents": [
+    {
+      "eventId": "agent-release-invoice-001",
+      "taskId": "agent-task-invoice-001",
+      "kind": "agent-settlement",
+      "value": "release-planned",
+      "acceptedTxid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+      "evidencePath": "artifacts/payload-agent-release-invoice-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+      "status": "accepted-planner-event",
+      "note": "Planner marked invoice task reward release after accepted proof and reviewer approval; this is not autonomous payout."
+    },
+    {
+      "eventId": "agent-hold-escrow-001",
+      "taskId": "agent-task-escrow-001",
+      "kind": "agent-settlement",
+      "value": "dispute-hold",
+      "acceptedTxid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "evidencePath": "artifacts/payload-agent-hold-escrow-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+      "status": "accepted-planner-event",
+      "note": "Planner kept escrow task funds on hold while dispute is open; this is not autonomous custody."
+    }
   ]
 }
