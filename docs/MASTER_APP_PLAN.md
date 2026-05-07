@@ -2,6 +2,8 @@
 
 This repo uses Kaspa Explained as the status map and this TN12 demo as the app workshop. The plan is to build useful app primitives in order, while also studying open-source apps from other chains for PMF evidence, code patterns, and failure modes.
 
+For the current twenty-lane status map and time horizon, see `docs/ROADMAP_STATE.md`.
+
 ## Operating Rules
 
 - Keep every feature in a status lane: live Kaspa, TN12/Toccata, roadmap, or research.

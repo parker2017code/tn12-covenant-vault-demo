@@ -4,6 +4,8 @@ Reviewed: 2026-05-07
 
 This repo is now a TN12 covenant/app primitive workshop with a browser control surface, generated artifacts, local checks, GitHub Actions, and GitHub Pages deployment. It is not a mainnet wallet and does not claim live mainnet covenant support.
 
+The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
+
 ## Built Bases
 
 1. Payload receipt / invoice app: fixture, registry, UI panel, signed payload draft, readiness check.

@@ -8,22 +8,34 @@ Future agents should read this file before editing. It is the current handoff fo
 - Branch: `main`
 - Local preview URL: `http://127.0.0.1:4176/`
 - Preview command: `npm run serve`
-- Main check command: `npm run check`
+- Main check command: `npm run check:all`
 - TN12 proof check command: `npm run tx:verify`
 - Accepted app-state snapshot command: `npm run indexer:state`
+- Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 
 The local preview server has been running on port `4176`. If it is not running, start it from this repo with `npm run serve`.
 
 ## Current Goal
 
-Build a real TN12-configured Kaspa covenant app stack, starting with:
+Build a real TN12-configured Kaspa covenant app stack. The durable lane map is `docs/ROADMAP_STATE.md`; update it when proof status, roadmap status, or research boundaries change.
+
+The immediate build shape is three real verticals first:
+
+- invoice/receipt app: accepted-transaction app state,
+- escrow/assurance app: TN12 covenant proof app,
+- attestation/agent/prediction simulator: research-to-app bridge.
+
+Do not build twenty fake apps at the same depth. Keep the rest of the lanes attached to those rails or clearly marked as research.
+
+The current base includes:
 
 - delayed recovery vaults,
 - assurance contracts / public-funding rules,
+- escrow release/refund paths,
 - transaction planning and signing from manually verified TN12 outpoints,
 - accepted-transaction indexing,
 - payload receipts,
-- later escrow and campaign batching.
+- campaign batching and app-lane research.
 
 The project no longer depends on a local full Kaspa node. It uses public TN12 REST endpoints, local fixtures, local signing, and explicit submit commands.
 
@@ -100,14 +112,22 @@ Assurance release:
 
 Assurance refund:
 faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61
+
+Escrow release:
+825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d
+
+Escrow DAA-score refund:
+6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d
 ```
+
+Escrow mutual cancel is funded/attempted but not accepted. TN12 rejected the attempted spend because it exceeded the script-unit limit: `used=200870`, `limit=109999`. Treat that as design feedback, not as proof evidence.
 
 Fixtures:
 
 - `fixtures/AcceptedProofTransactions.json`
 - `fixtures/AcceptedAppState.json`
 
-The accepted app-state snapshot currently has 4 records, 4 accepted, 4 output-matched.
+The accepted proof set currently has 6 records, 6 accepted, and 6 output-matched contract spends.
 
 ## Implemented Commands
 

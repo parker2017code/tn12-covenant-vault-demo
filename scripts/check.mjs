@@ -489,6 +489,7 @@ const files = [
   "docs/SOURCES.md",
   "docs/BUILD_PLAN.md",
   "docs/LLM_REVIEW_GUIDE.md",
+  "docs/ROADMAP_STATE.md",
   "docs/TRANSACTION_API_NOTES.md",
   "docs/ASSURANCE_CONTRACTS.md",
   "docs/KASPA_DOCS_REVIEW.md",

@@ -4,7 +4,15 @@ TN12-configured prototype for a Kaspa covenant vault and assurance-contract app.
 
 This is not a mainnet wallet, not investment advice, and not proof that Toccata or vProgs are live. The goal is to make covenant-style money rules understandable, compile Silverscript templates, build and submit TN12 proof transactions, and keep going without requiring this computer to run a full node.
 
-Reviewers and LLM agents should start with [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries.
+Reviewers and LLM agents should start with [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md).
+
+## Current Position
+
+- Accepted proof core: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, and escrow DAA-refund.
+- Blocked proof path: escrow mutual cancel is funded/attempted, but rejected by TN12 script-unit limits and needs redesign.
+- Near-term app priority: payload invoice/receipt vertical slice, because it is closest to mainnet-capable Kaspa behavior.
+- Toccata-oriented priority: keep vault, assurance, escrow, and treasury primitives clean so they are ready to adapt when covenant tooling stabilizes.
+- Research priority: keep ZK, anchors, vProgs, prediction markets, and coordination markets in roadmap lanes until the missing rails are explicit.
 
 ## What It Does Now
 

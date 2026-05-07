@@ -44,6 +44,7 @@ Claim boundaries:
 - `artifacts/build-status.json`
 - `docs/PROGRESS.md`
 - `docs/BUILD_PLAN.md`
+- `docs/ROADMAP_STATE.md`
 
 Submit/draft review:
 

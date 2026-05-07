@@ -24,6 +24,7 @@
 
 ## Product Direction
 
+- Treat `docs/ROADMAP_STATE.md` as the durable "where we are / where we are going" map. Keep it aligned when app lanes, proof status, or research boundaries change.
 - Start with safe money rules users can understand: delayed withdrawal, recovery path, spend limit, escrow, bounty, and treasury controls.
 - Explain the action before the abstraction. Say "funds can only leave after a delay" before "covenant policy."
 - Treat the current version as a TN12-configured proof app. The browser builds policy/control artifacts, while scripts compile, sign, submit, verify, and index accepted testnet transactions.
