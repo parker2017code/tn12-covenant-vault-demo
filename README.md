@@ -29,6 +29,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
 - Builds a mainnet-readiness map that separates payment/indexer paths from TN12/Toccata covenant paths.
 - Builds simple asset policy artifacts for issuer-indexed assets now and possible covenant-native assets later.
+- Builds an auction/intent prototype for accepted bid payloads, planner-side winner selection, and refund planning.
 - Builds a repo-level build-status map for what is built, blocked, naturally next, and research-only.
 
 ## What It Does Not Do Yet
@@ -310,6 +311,14 @@ npm run asset:policies
 ```
 
 This turns `fixtures/SimpleAssetPolicies.json` into `artifacts/simple-asset-policies.json`. It contrasts issuer-indexer asset state with future covenant-native asset rules; it is not a live native asset protocol.
+
+Build the auction/intent prototype:
+
+```sh
+npm run auction:intents
+```
+
+This turns `fixtures/AuctionIntentPrototype.json` into `artifacts/auction-intents.json`. It ranks accepted bid payloads for planner-side winner/refund state, but it is not MEV-resistant and does not enforce atomic asset exchange.
 
 Build the repo status map:
 

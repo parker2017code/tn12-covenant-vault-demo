@@ -35,6 +35,7 @@ import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
+import { buildAuctionIntentPrototype } from "./src/auctionIntent.mjs";
 import { buildProjectStatus } from "./src/buildStatus.mjs";
 
 const form = document.querySelector("#policy-form");
@@ -79,6 +80,8 @@ const mainnetSummaryNode = document.querySelector("#mainnet-summary");
 const mainnetComponentsNode = document.querySelector("#mainnet-components");
 const assetSummaryNode = document.querySelector("#asset-summary");
 const assetListNode = document.querySelector("#asset-list");
+const auctionSummaryNode = document.querySelector("#auction-summary");
+const auctionListNode = document.querySelector("#auction-list");
 const buildStatusSummaryNode = document.querySelector("#build-status-summary");
 const buildStatusLanesNode = document.querySelector("#build-status-lanes");
 const buildQueueNode = document.querySelector("#build-queue");
@@ -206,6 +209,7 @@ renderCoordinationMarket();
 renderAccessPassPlanner();
 renderMainnetReadiness();
 renderAssetPolicies();
+renderAuctionIntents();
 renderBuildStatus();
 renderProofTransactions();
 renderAcceptedAppState();
@@ -617,6 +621,37 @@ async function renderBuildStatus() {
     }
   } catch (error) {
     buildStatusSummaryNode.textContent = `Build status unavailable: ${error.message}`;
+  }
+}
+
+async function renderAuctionIntents() {
+  if (!auctionSummaryNode || !auctionListNode) return;
+
+  try {
+    const response = await fetch("fixtures/AuctionIntentPrototype.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const prototype = buildAuctionIntentPrototype(fixture);
+    auctionSummaryNode.innerHTML = `
+      <article><span>Auctions</span><strong>${escapeHtml(prototype.summary.auctions)}</strong></article>
+      <article><span>Bids</span><strong>${escapeHtml(prototype.summary.bids)}</strong></article>
+      <article><span>Accepted</span><strong>${escapeHtml(prototype.summary.acceptedBidPayloads)}</strong></article>
+      <article><span>Winners</span><strong>${escapeHtml(prototype.summary.auctionsWithWinner)}</strong></article>
+    `;
+
+    auctionListNode.innerHTML = "";
+    for (const auction of prototype.auctions) {
+      const article = document.createElement("article");
+      article.className = "auction-card";
+      article.innerHTML = `
+        <span>${escapeHtml(auction.settlement)} / ${escapeHtml(auction.status)}</span>
+        <strong>${escapeHtml(auction.title)}</strong>
+        <p>${escapeHtml(auction.winner ? `${auction.winner.bidder} wins at ${auction.winner.amountTkas} TKAS` : "No accepted bid meets reserve yet.")}</p>
+        <small>${escapeHtml(auction.settlementPlan.next)}</small>
+      `;
+      auctionListNode.append(article);
+    }
+  } catch (error) {
+    auctionSummaryNode.textContent = `Auction intent prototype unavailable: ${error.message}`;
   }
 }
 

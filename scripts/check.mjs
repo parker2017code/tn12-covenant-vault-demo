@@ -51,6 +51,7 @@ import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs"
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
+import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
@@ -155,7 +156,7 @@ assert.equal(campaignState.refundPlan.refundCount, 3);
 const enforcementFixture = JSON.parse(await readFile(new URL("../fixtures/EnforcementMatrix.json", import.meta.url), "utf8"));
 const enforcementMatrix = buildEnforcementMatrix(enforcementFixture);
 assert.equal(enforcementMatrix.status, "claim-surface-audit");
-assert.equal(enforcementMatrix.summary.total, 15);
+assert.equal(enforcementMatrix.summary.total, 16);
 assert.equal(enforcementMatrix.summary.contractEnforced, 4);
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "vault-daily-limit" && feature.enforcement === "simulation"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "assurance-target-progress" && feature.enforcement === "planner-indexer"));
@@ -164,6 +165,7 @@ assert.ok(enforcementMatrix.features.some((feature) => feature.id === "treasury-
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "coordination-market-hunt" && feature.enforcement === "research"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "access-pass-redemption" && feature.enforcement === "planner-indexer"));
 assert.ok(enforcementMatrix.features.some((feature) => feature.id === "simple-asset-policy" && feature.enforcement === "planner-indexer"));
+assert.ok(enforcementMatrix.features.some((feature) => feature.id === "auction-intent-winner-selection" && feature.enforcement === "planner-indexer"));
 const escrowFixture = JSON.parse(await readFile(new URL("../fixtures/EscrowPrimitives.json", import.meta.url), "utf8"));
 const escrowRegistry = buildEscrowPrimitive(escrowFixture);
 assert.equal(escrowRegistry.status, "planner-fixture-not-script-proof");
@@ -204,6 +206,13 @@ assert.equal(assetPolicies.status, "roadmap-policy-not-live-native-asset");
 assert.equal(assetPolicies.summary.total, 2);
 assert.equal(assetPolicies.summary.covenantNative, 1);
 assert.ok(assetPolicies.policies.some((policy) => policy.assetId === "asset-recoverable-voucher" && policy.rules.recovery.enabled));
+const auctionFixture = JSON.parse(await readFile(new URL("../fixtures/AuctionIntentPrototype.json", import.meta.url), "utf8"));
+const auctionPrototype = buildAuctionIntentPrototype(auctionFixture);
+assert.equal(auctionPrototype.status, "accepted-payload-indexer-first-not-mev-resistant");
+assert.equal(auctionPrototype.summary.auctions, 2);
+assert.equal(auctionPrototype.summary.acceptedBidPayloads, 3);
+assert.equal(auctionPrototype.summary.auctionsWithWinner, 1);
+assert.ok(auctionPrototype.auctions.some((auction) => auction.auctionId === "auction-pass-001" && auction.winner?.bidId === "bid-pass-002"));
 const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
 const projectStatus = buildProjectStatus(buildStatusFixture);
 assert.equal(projectStatus.status, "active-build-map");

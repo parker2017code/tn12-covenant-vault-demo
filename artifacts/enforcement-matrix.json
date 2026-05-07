@@ -3,13 +3,13 @@
   "status": "claim-surface-audit",
   "reviewedAt": "2026-05-07",
   "summary": {
-    "total": 15,
+    "total": 16,
     "contractEnforced": 4,
-    "notScriptEnforced": 11,
+    "notScriptEnforced": 12,
     "byEnforcement": {
       "script": 4,
       "simulation": 2,
-      "planner-indexer": 5,
+      "planner-indexer": 6,
       "wallet-policy": 2,
       "documentation": 1,
       "research": 1
@@ -24,7 +24,8 @@
       "treasury-vaults": 1,
       "coordination-markets": 1,
       "access-passes": 1,
-      "simple-assets": 1
+      "simple-assets": 1,
+      "auction-intents": 1
     }
   },
   "features": [
@@ -177,6 +178,16 @@
       "proof": "Generated asset policy artifact only",
       "risk": "Issuer-indexed assets and future covenant-native assets can be confused if not labeled.",
       "nextHardeningStep": "Tie issuer-indexed asset state to accepted payload receipts and keep covenant-native rules roadmap-only."
+    },
+    {
+      "id": "auction-intent-winner-selection",
+      "name": "Auction intent winner selection",
+      "lane": "auction-intents",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/AuctionIntentPrototype.json and browser auction panel",
+      "proof": "Generated auction intent artifact only",
+      "risk": "Accepted bid payload ranking is useful app state, but it is not atomic exchange, bid custody, or MEV-resistant settlement.",
+      "nextHardeningStep": "Build explicit settlement/refund drafts and keep winner selection labeled as planner/indexer state."
     }
   ],
   "rules": [

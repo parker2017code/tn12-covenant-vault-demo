@@ -151,6 +151,16 @@
       "proof": "Generated asset policy artifact only",
       "risk": "Issuer-indexed assets and future covenant-native assets can be confused if not labeled.",
       "nextHardeningStep": "Tie issuer-indexed asset state to accepted payload receipts and keep covenant-native rules roadmap-only."
+    },
+    {
+      "id": "auction-intent-winner-selection",
+      "name": "Auction intent winner selection",
+      "lane": "auction-intents",
+      "enforcement": "planner-indexer",
+      "currentSurface": "fixtures/AuctionIntentPrototype.json and browser auction panel",
+      "proof": "Generated auction intent artifact only",
+      "risk": "Accepted bid payload ranking is useful app state, but it is not atomic exchange, bid custody, or MEV-resistant settlement.",
+      "nextHardeningStep": "Build explicit settlement/refund drafts and keep winner selection labeled as planner/indexer state."
     }
   ]
 }

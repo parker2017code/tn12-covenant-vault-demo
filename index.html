@@ -26,6 +26,7 @@
       <a href="#access-passes">Access</a>
       <a href="#mainnet-readiness">Mainnet?</a>
       <a href="#asset-policies">Assets</a>
+      <a href="#auction-intents">Auctions</a>
       <a href="#build-status">Status</a>
       <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
@@ -308,6 +309,17 @@
       <div id="build-status-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="build-status-lanes" class="build-status-lanes" aria-live="polite"></div>
       <pre>npm run build:status</pre>
+    </section>
+
+    <section id="auction-intents" class="panel auction-intents">
+      <div class="section-title">
+        <p class="eyebrow">Auction / intent prototype</p>
+        <h2>Accepted bid payloads, winner rule, refund planning.</h2>
+        <p>This is lane 8: accepted payload/indexer state for auctions and bid intents. It is not MEV resistant, does not enforce atomic asset exchange, and does not custody bids yet.</p>
+      </div>
+      <div id="auction-summary" class="auction-summary" aria-live="polite"></div>
+      <div id="auction-list" class="auction-list" aria-live="polite"></div>
+      <pre>npm run auction:intents</pre>
     </section>
 
     <section id="proofs" class="panel proofs">

@@ -1,0 +1,80 @@
+{
+  "schema": "kaspa-auction-intent-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "auctions": [
+    {
+      "auctionId": "auction-pass-001",
+      "title": "Kaspa dev workshop sponsor pass",
+      "seller": "kaspatest:seller-workshop",
+      "assetRef": "pass-dev-workshop-001",
+      "reserveTkas": 120,
+      "deadlineIso": "2026-05-14T18:00:00Z",
+      "winnerRule": "highest-accepted-bid-before-deadline",
+      "settlement": "planner-indexer",
+      "status": "open"
+    },
+    {
+      "auctionId": "auction-voucher-001",
+      "title": "Recoverable voucher launch allocation",
+      "seller": "kaspatest:seller-voucher",
+      "assetRef": "asset-recoverable-voucher",
+      "reserveTkas": 250,
+      "deadlineIso": "2026-05-16T18:00:00Z",
+      "winnerRule": "highest-accepted-bid-before-deadline",
+      "settlement": "planner-indexer",
+      "status": "open"
+    }
+  ],
+  "bids": [
+    {
+      "bidId": "bid-pass-001",
+      "auctionId": "auction-pass-001",
+      "bidder": "kaspatest:bidder-alpha",
+      "amountTkas": 130,
+      "payloadStatus": "accepted-bid-payload",
+      "acceptedTxid": "6c20b52b57cc4c2a59b7495dbd73449a6a97902b6b94c496d8e782359a1a4b54",
+      "submittedAtIso": "2026-05-07T10:01:00Z",
+      "note": "Accepted payload can count toward winner selection."
+    },
+    {
+      "bidId": "bid-pass-002",
+      "auctionId": "auction-pass-001",
+      "bidder": "kaspatest:bidder-beta",
+      "amountTkas": 155,
+      "payloadStatus": "accepted-bid-payload",
+      "acceptedTxid": "f8d54d69bd8e8c05e3db2fe218f7ed8ef1bb3a44ce2cb80020eab2d96e572caf",
+      "submittedAtIso": "2026-05-07T10:04:00Z",
+      "note": "Current planner winner because it is the highest accepted bid."
+    },
+    {
+      "bidId": "bid-pass-003",
+      "auctionId": "auction-pass-001",
+      "bidder": "kaspatest:bidder-gamma",
+      "amountTkas": 170,
+      "payloadStatus": "signed-not-submitted",
+      "acceptedTxid": "",
+      "submittedAtIso": "2026-05-07T10:05:00Z",
+      "note": "Signed-only drafts cannot win until accepted."
+    },
+    {
+      "bidId": "bid-voucher-001",
+      "auctionId": "auction-voucher-001",
+      "bidder": "kaspatest:bidder-delta",
+      "amountTkas": 220,
+      "payloadStatus": "accepted-bid-payload",
+      "acceptedTxid": "3b4dd32b7d95bc16211bf0b0242c49c2c9f77f827344d7a859f732bcefb6c9fd",
+      "submittedAtIso": "2026-05-07T10:08:00Z",
+      "note": "Accepted but below reserve, so no winner yet."
+    },
+    {
+      "bidId": "bid-voucher-002",
+      "auctionId": "auction-voucher-001",
+      "bidder": "kaspatest:bidder-epsilon",
+      "amountTkas": 260,
+      "payloadStatus": "signed-not-submitted",
+      "acceptedTxid": "",
+      "submittedAtIso": "2026-05-07T10:10:00Z",
+      "note": "Above reserve but not accepted, so it stays out of app state."
+    }
+  ]
+}

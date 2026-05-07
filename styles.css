@@ -397,6 +397,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.auction-intents {
+  margin-top: 24px;
+}
+
 .build-status {
   margin-top: 24px;
 }
@@ -633,6 +637,13 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.auction-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .build-status-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -647,6 +658,13 @@ progress::-moz-progress-bar {
   padding: 14px;
 }
 
+.auction-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
 .build-status-summary span {
   display: block;
   color: var(--muted);
@@ -655,6 +673,20 @@ progress::-moz-progress-bar {
 }
 
 .build-status-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.auction-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.auction-summary strong {
   display: block;
   margin-top: 4px;
   font-size: 24px;
@@ -945,6 +977,13 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.auction-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .build-status-lanes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1090,6 +1129,7 @@ progress::-moz-progress-bar {
 .access-card,
 .mainnet-card,
 .asset-card,
+.auction-card,
 .build-status-card,
 .attestation-card,
 .indexer-card,
@@ -1123,6 +1163,7 @@ progress::-moz-progress-bar {
 .access-card span,
 .mainnet-card span,
 .asset-card span,
+.auction-card span,
 .build-status-card span,
 .attestation-card span,
 .indexer-card span,
@@ -1190,6 +1231,9 @@ progress::-moz-progress-bar {
 .asset-card strong,
 .asset-card p,
 .asset-card small,
+.auction-card strong,
+.auction-card p,
+.auction-card small,
 .build-status-card strong,
 .build-status-card p,
 .build-status-card small,
@@ -1229,6 +1273,7 @@ progress::-moz-progress-bar {
 .access-card p,
 .mainnet-card p,
 .asset-card p,
+.auction-card p,
 .build-status-card p,
 .attestation-card p,
 .indexer-card p,
@@ -1255,6 +1300,7 @@ progress::-moz-progress-bar {
 .access-card small,
 .mainnet-card small,
 .asset-card small,
+.auction-card small,
 .build-status-card small,
 .attestation-card small,
 .indexer-card small,
@@ -1362,6 +1408,8 @@ progress::-moz-progress-bar {
   .mainnet-components,
   .asset-summary,
   .asset-list,
+  .auction-summary,
+  .auction-list,
   .build-status-summary,
   .build-status-lanes,
   .submit-summary,

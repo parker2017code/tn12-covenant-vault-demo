@@ -4,10 +4,10 @@
   "status": "active-build-map",
   "summary": {
     "total": 13,
-    "builtBases": 7,
+    "builtBases": 8,
     "proofBacked": 0,
     "blocked": 1,
-    "nextBuilds": 4,
+    "nextBuilds": 3,
     "research": 1
   },
   "lanes": [
@@ -121,12 +121,16 @@
       "order": 8,
       "id": "auction-intents",
       "name": "Auction / Intent Prototype",
-      "status": "next-build",
+      "status": "base-built",
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
-      "proof": "none",
-      "builtSurface": [],
-      "next": "Add accepted bid payload model, winner rule, refund list, and MEV caveat."
+      "proof": "generated-artifact",
+      "builtSurface": [
+        "fixtures/AuctionIntentPrototype.json",
+        "src/auctionIntent.mjs",
+        "npm run auction:intents"
+      ],
+      "next": "Build explicit settlement/refund drafts and keep MEV caveat visible."
     },
     {
       "order": 9,
@@ -197,9 +201,9 @@
     }
   ],
   "naturalNextSteps": [
-    "Build auction/intent prototype as lane 8.",
     "Build DeFi research backlog as lane 9.",
     "Build AI-agent commitment board as lane 12.",
+    "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
     "Add Escrow.sil proof path after the planner shape is stable."
