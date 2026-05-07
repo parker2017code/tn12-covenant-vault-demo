@@ -79,6 +79,9 @@ try {
   await expectText(page, "#asset-summary", "Covenant");
   await expectText(page, "#asset-list", "Recoverable voucher");
   await expectText(page, "#asset-list", "future-covenant-native");
+  await expectText(page, "#build-status-summary", "Bases");
+  await expectText(page, "#build-status-lanes", "Auction / Intent Prototype");
+  await expectText(page, "#build-status-lanes", "Payload Receipt / Invoice App");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

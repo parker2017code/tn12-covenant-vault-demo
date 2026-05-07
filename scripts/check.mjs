@@ -51,6 +51,7 @@ import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs"
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
+import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -203,6 +204,12 @@ assert.equal(assetPolicies.status, "roadmap-policy-not-live-native-asset");
 assert.equal(assetPolicies.summary.total, 2);
 assert.equal(assetPolicies.summary.covenantNative, 1);
 assert.ok(assetPolicies.policies.some((policy) => policy.assetId === "asset-recoverable-voucher" && policy.rules.recovery.enabled));
+const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
+const projectStatus = buildProjectStatus(buildStatusFixture);
+assert.equal(projectStatus.status, "active-build-map");
+assert.equal(projectStatus.summary.total, 13);
+assert.ok(projectStatus.summary.builtBases >= 7);
+assert.ok(projectStatus.naturalNextSteps.some((step) => /auction/i.test(step)));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -295,6 +302,7 @@ const files = [
   "scripts/build-access-pass-planner.mjs",
   "scripts/build-mainnet-readiness.mjs",
   "scripts/build-asset-policies.mjs",
+  "scripts/build-status.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
@@ -311,6 +319,7 @@ const files = [
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
   "artifacts/simple-asset-policies.json",
+  "artifacts/build-status.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/SavedWallet.public.json",
@@ -333,6 +342,7 @@ const files = [
   "fixtures/AccessPassPlanner.json",
   "fixtures/MainnetReadiness.json",
   "fixtures/SimpleAssetPolicies.json",
+  "fixtures/BuildStatus.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
@@ -349,6 +359,7 @@ const files = [
   "src/accessPassPlanner.mjs",
   "src/mainnetReadiness.mjs",
   "src/assetPolicy.mjs",
+  "src/buildStatus.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -395,6 +406,7 @@ assert.match(readme, /npm run coordination:market/);
 assert.match(readme, /npm run access:passes/);
 assert.match(readme, /npm run mainnet:readiness/);
 assert.match(readme, /npm run asset:policies/);
+assert.match(readme, /npm run build:status/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -418,6 +430,7 @@ assert.match(html, /Transparent coordination-market prototype/);
 assert.match(html, /KRC \/ access pass planner/);
 assert.match(html, /Mainnet readiness map/);
 assert.match(html, /Simple asset policy/);
+assert.match(html, /Build status/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);

@@ -61,3 +61,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 33. Add KRC/access pass planner: issuer-backed passes, redemption records, duplicate-risk boundary, browser panel, and generated access artifact.
 34. Add mainnet-readiness map: classify payment/indexer/payload paths, local-only wallet review, TN12/Toccata covenant work, and research-only coordination markets.
 35. Add simple asset policy registry: mint, transfer, burn, recovery, redemption, issuer-indexer versus future covenant-native labels, browser panel, and generated asset artifact.
+36. Add build-status map: built bases, blocked verticals, natural next steps, enforcement/readiness/proof labels, browser panel, and generated status artifact.

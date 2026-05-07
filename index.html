@@ -26,6 +26,7 @@
       <a href="#access-passes">Access</a>
       <a href="#mainnet-readiness">Mainnet?</a>
       <a href="#asset-policies">Assets</a>
+      <a href="#build-status">Status</a>
       <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
@@ -296,6 +297,17 @@
       <div id="asset-summary" class="asset-summary" aria-live="polite"></div>
       <div id="asset-list" class="asset-list" aria-live="polite"></div>
       <pre>npm run asset:policies</pre>
+    </section>
+
+    <section id="build-status" class="panel build-status">
+      <div class="section-title">
+        <p class="eyebrow">Build status</p>
+        <h2>What is built, blocked, and naturally next.</h2>
+        <p>This is the repo-level map that keeps the app lanes, enforcement labels, readiness labels, and proof status aligned.</p>
+      </div>
+      <div id="build-status-summary" class="build-status-summary" aria-live="polite"></div>
+      <div id="build-status-lanes" class="build-status-lanes" aria-live="polite"></div>
+      <pre>npm run build:status</pre>
     </section>
 
     <section id="proofs" class="panel proofs">

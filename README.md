@@ -29,6 +29,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
 - Builds a mainnet-readiness map that separates payment/indexer paths from TN12/Toccata covenant paths.
 - Builds simple asset policy artifacts for issuer-indexed assets now and possible covenant-native assets later.
+- Builds a repo-level build-status map for what is built, blocked, naturally next, and research-only.
 
 ## What It Does Not Do Yet
 
@@ -309,6 +310,14 @@ npm run asset:policies
 ```
 
 This turns `fixtures/SimpleAssetPolicies.json` into `artifacts/simple-asset-policies.json`. It contrasts issuer-indexer asset state with future covenant-native asset rules; it is not a live native asset protocol.
+
+Build the repo status map:
+
+```sh
+npm run build:status
+```
+
+This turns `fixtures/BuildStatus.json` into `artifacts/build-status.json`. It is the canonical local answer for what is built, what is blocked, what remains natural next, and which proof/readiness labels apply.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

@@ -35,6 +35,7 @@ import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
+import { buildProjectStatus } from "./src/buildStatus.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -78,6 +79,8 @@ const mainnetSummaryNode = document.querySelector("#mainnet-summary");
 const mainnetComponentsNode = document.querySelector("#mainnet-components");
 const assetSummaryNode = document.querySelector("#asset-summary");
 const assetListNode = document.querySelector("#asset-list");
+const buildStatusSummaryNode = document.querySelector("#build-status-summary");
+const buildStatusLanesNode = document.querySelector("#build-status-lanes");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -203,6 +206,7 @@ renderCoordinationMarket();
 renderAccessPassPlanner();
 renderMainnetReadiness();
 renderAssetPolicies();
+renderBuildStatus();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -582,6 +586,37 @@ async function renderAssetPolicies() {
     }
   } catch (error) {
     assetSummaryNode.textContent = `Asset policy registry unavailable: ${error.message}`;
+  }
+}
+
+async function renderBuildStatus() {
+  if (!buildStatusSummaryNode || !buildStatusLanesNode) return;
+
+  try {
+    const response = await fetch("fixtures/BuildStatus.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const status = buildProjectStatus(fixture);
+    buildStatusSummaryNode.innerHTML = `
+      <article><span>Bases</span><strong>${escapeHtml(status.summary.builtBases)}</strong></article>
+      <article><span>Next</span><strong>${escapeHtml(status.summary.nextBuilds)}</strong></article>
+      <article><span>Blocked</span><strong>${escapeHtml(status.summary.blocked)}</strong></article>
+      <article><span>Research</span><strong>${escapeHtml(status.summary.research)}</strong></article>
+    `;
+
+    buildStatusLanesNode.innerHTML = "";
+    for (const lane of status.lanes) {
+      const article = document.createElement("article");
+      article.className = "build-status-card";
+      article.innerHTML = `
+        <span>${escapeHtml(lane.order)} / ${escapeHtml(lane.status)}</span>
+        <strong>${escapeHtml(lane.name)}</strong>
+        <p>${escapeHtml(lane.enforcement)}; ${escapeHtml(lane.readiness)}; proof ${escapeHtml(lane.proof)}.</p>
+        <small>${escapeHtml(lane.next)}</small>
+      `;
+      buildStatusLanesNode.append(article);
+    }
+  } catch (error) {
+    buildStatusSummaryNode.textContent = `Build status unavailable: ${error.message}`;
   }
 }
 

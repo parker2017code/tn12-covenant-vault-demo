@@ -1,0 +1,157 @@
+{
+  "schema": "kaspa-app-build-status-fixture/v1",
+  "reviewedAt": "2026-05-07",
+  "lanes": [
+    {
+      "order": 1,
+      "id": "payload-invoice",
+      "name": "Payload Receipt / Invoice App",
+      "status": "blocked",
+      "enforcement": "planner-indexer",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "signed-draft-only",
+      "builtSurface": ["fixtures/InvoiceReceipts.json", "src/invoiceReceipt.mjs", "npm run invoice:registry", "npm run payload:readiness"],
+      "next": "Find or build a payload-preserving submit route, then verify one accepted payload receipt."
+    },
+    {
+      "order": 2,
+      "id": "submit-console",
+      "name": "Wallet-Facing Submit Console",
+      "status": "base-built",
+      "enforcement": "wallet-policy",
+      "readiness": "local-only-not-production",
+      "proof": "local-ui-check",
+      "builtSurface": ["fixtures/SubmitConsoleDrafts.json", "src/submitConsole.mjs", "npm run submit:registry"],
+      "next": "Move from local signed draft review to real wallet connector review."
+    },
+    {
+      "order": 3,
+      "id": "batch-assurance",
+      "name": "Batch Assurance Campaigns",
+      "status": "base-built",
+      "enforcement": "planner-indexer",
+      "readiness": "tn12-toccata-only",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/BatchAssuranceCampaign.json", "src/batchAssurance.mjs", "npm run campaign:state"],
+      "next": "Build exact release/refund settlement drafts for accepted pledge outputs."
+    },
+    {
+      "order": 4,
+      "id": "escrow",
+      "name": "Escrow Primitive",
+      "status": "next-build",
+      "enforcement": "planner-indexer",
+      "readiness": "tn12-toccata-only",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/EscrowPrimitives.json", "src/escrowPrimitive.mjs", "npm run escrow:registry"],
+      "next": "Add Escrow.sil, signed funding/release/refund drafts, and accepted TN12 proof."
+    },
+    {
+      "order": 5,
+      "id": "treasury-vaults",
+      "name": "Treasury / Team Vaults",
+      "status": "base-built",
+      "enforcement": "wallet-policy",
+      "readiness": "tn12-toccata-only",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/TreasuryVaults.json", "src/treasuryVault.mjs", "npm run treasury:registry"],
+      "next": "Add exact UTXO provenance and constrained spend draft planning."
+    },
+    {
+      "order": 6,
+      "id": "access-passes",
+      "name": "KRC / Access Pass Planner",
+      "status": "base-built",
+      "enforcement": "planner-indexer",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/AccessPassPlanner.json", "src/accessPassPlanner.mjs", "npm run access:passes"],
+      "next": "Tie one redemption to accepted payload receipt state."
+    },
+    {
+      "order": 7,
+      "id": "simple-assets",
+      "name": "Simple Asset Policy",
+      "status": "base-built",
+      "enforcement": "planner-indexer",
+      "readiness": "tn12-toccata-only",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/SimpleAssetPolicies.json", "src/assetPolicy.mjs", "npm run asset:policies"],
+      "next": "Keep issuer-indexed and future covenant-native asset rules visibly separate."
+    },
+    {
+      "order": 8,
+      "id": "auction-intents",
+      "name": "Auction / Intent Prototype",
+      "status": "next-build",
+      "enforcement": "planner-indexer",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "none",
+      "builtSurface": [],
+      "next": "Add accepted bid payload model, winner rule, refund list, and MEV caveat."
+    },
+    {
+      "order": 9,
+      "id": "defi-research",
+      "name": "Basic DeFi Research Backlog",
+      "status": "next-build",
+      "enforcement": "documentation",
+      "readiness": "research-only",
+      "proof": "none",
+      "builtSurface": [],
+      "next": "Add briefs for lending, swaps, stable-value, insurance, derivatives, and missing rails."
+    },
+    {
+      "order": 10,
+      "id": "cross-chain-research",
+      "name": "Cross-Chain App Research Library",
+      "status": "base-built",
+      "enforcement": "documentation",
+      "readiness": "already-usable",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/CrossChainResearchLibrary.json", "src/appResearch.mjs", "npm run research:library"],
+      "next": "Turn top candidates into one-page app briefs before copying code."
+    },
+    {
+      "order": 11,
+      "id": "miner-pool-signals",
+      "name": "Miner / Pool Signal Research",
+      "status": "base-built",
+      "enforcement": "research",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/AttestationSignals.json", "src/attestationSignal.mjs", "npm run signal:payload"],
+      "next": "Add signature verification and accepted payload receipt for one signal."
+    },
+    {
+      "order": 12,
+      "id": "ai-agent-commitments",
+      "name": "AI-Agent Commitment Board",
+      "status": "next-build",
+      "enforcement": "planner-indexer",
+      "readiness": "research-only",
+      "proof": "none",
+      "builtSurface": [],
+      "next": "Add task offers, deposits, completion proofs, disputes, and refund states."
+    },
+    {
+      "order": 13,
+      "id": "coordination-markets",
+      "name": "Transparent Coordination-Market Prototype",
+      "status": "research",
+      "enforcement": "research",
+      "readiness": "research-only",
+      "proof": "generated-artifact",
+      "builtSurface": ["fixtures/CoordinationMarketPrototype.json", "src/coordinationMarket.mjs", "npm run coordination:market"],
+      "next": "Build exact settlement drafts for one satisfiable transparent pack."
+    }
+  ],
+  "naturalNextSteps": [
+    "Build auction/intent prototype as lane 8.",
+    "Build DeFi research backlog as lane 9.",
+    "Build AI-agent commitment board as lane 12.",
+    "Add negative/adversarial tests for existing Silverscript paths.",
+    "Investigate wallet/API payload-preserving submit route for the invoice vertical slice.",
+    "Add Escrow.sil proof path after the planner shape is stable."
+  ]
+}
