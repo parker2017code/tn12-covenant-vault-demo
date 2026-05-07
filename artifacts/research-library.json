@@ -1,0 +1,441 @@
+{
+  "schema": "kaspa-cross-chain-research-library/v1",
+  "status": "research-inputs-not-protocol-claims",
+  "reviewedAt": "2026-05-07",
+  "summary": {
+    "total": 16,
+    "lanes": {
+      "live-kaspa": 5,
+      "tn12-toccata": 3,
+      "research": 4,
+      "roadmap": 4
+    },
+    "priorities": {
+      "build-now": 3,
+      "build-next": 4,
+      "research": 3,
+      "later": 5,
+      "build-later": 1
+    },
+    "buildNow": 3,
+    "researchOnly": 4
+  },
+  "candidates": [
+    {
+      "id": "kaspa-payload-invoices",
+      "name": "Payload receipt invoices",
+      "category": "payments",
+      "sourceChain": "kaspa",
+      "sourceUrl": "https://docs.kaspa.org/integrate/transaction-payload",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Invoices and receipts are a direct payment use case that can work before advanced programmability.",
+      "reusablePatterns": [
+        "invoice schema",
+        "payload receipt",
+        "accepted transaction indexer",
+        "merchant state"
+      ],
+      "failureModes": [
+        "marking paid before acceptance",
+        "oversized payloads",
+        "wallet route losing payload bytes"
+      ],
+      "kaspaLane": "live-kaspa",
+      "kaspaBuild": "Use transaction payloads and accepted transaction indexing for paid/unpaid invoice state.",
+      "priority": "build-now",
+      "firstArtifact": "fixtures/InvoiceReceipts.json"
+    },
+    {
+      "id": "safe-team-vaults",
+      "name": "Safe-style team custody",
+      "category": "wallet-policy",
+      "sourceChain": "ethereum",
+      "sourceUrl": "https://safefoundation.org/smart-contracts",
+      "sourceType": "product-contract-reference",
+      "pmfSignal": "Team custody and multisig are durable crypto workflows for treasuries and operations.",
+      "reusablePatterns": [
+        "role model",
+        "threshold approvals",
+        "transaction review UI",
+        "module/plugin surface"
+      ],
+      "failureModes": [
+        "signer loss",
+        "governance/admin capture",
+        "blind signing",
+        "bad module permissions"
+      ],
+      "kaspaLane": "tn12-toccata",
+      "kaspaBuild": "Treasury vault templates with spend caps, delayed large withdrawals, and recovery roles.",
+      "priority": "build-next",
+      "firstArtifact": "fixtures/VaultTemplates.json"
+    },
+    {
+      "id": "gnosis-conditional-markets",
+      "name": "Conditional token prediction markets",
+      "category": "prediction-markets",
+      "sourceChain": "ethereum",
+      "sourceUrl": "https://github.com/gnosis/conditional-tokens-market-makers",
+      "sourceType": "open-source-repo",
+      "pmfSignal": "Outcome-token markets have real usage when liquidity, resolution, and UX are strong.",
+      "reusablePatterns": [
+        "event schema",
+        "outcome tokens",
+        "market maker",
+        "resolution state",
+        "position accounting"
+      ],
+      "failureModes": [
+        "oracle disputes",
+        "thin liquidity",
+        "regulatory exposure",
+        "bad market wording",
+        "MEV"
+      ],
+      "kaspaLane": "research",
+      "kaspaBuild": "Start with simulated markets fed by signed attestations and accepted payload receipts.",
+      "priority": "research",
+      "firstArtifact": "fixtures/AttestationSignals.json"
+    },
+    {
+      "id": "augur-oracle-markets",
+      "name": "Augur-style oracle markets",
+      "category": "prediction-markets",
+      "sourceChain": "ethereum",
+      "sourceUrl": "https://github.com/AugurProject/augur",
+      "sourceType": "open-source-repo",
+      "pmfSignal": "Permissionless market creation proved demand for event markets but also exposed UX and resolution complexity.",
+      "reusablePatterns": [
+        "market lifecycle",
+        "dispute window",
+        "oracle reporting",
+        "client app",
+        "legal risk warnings"
+      ],
+      "failureModes": [
+        "slow resolution",
+        "low liquidity",
+        "ambiguous outcomes",
+        "jurisdiction risk"
+      ],
+      "kaspaLane": "research",
+      "kaspaBuild": "Use as warning material for attestation markets and portfolio hedge dashboards.",
+      "priority": "research",
+      "firstArtifact": "docs/MASTER_APP_PLAN.md"
+    },
+    {
+      "id": "uniswap-amm",
+      "name": "Uniswap-style AMM",
+      "category": "defi-swaps",
+      "sourceChain": "ethereum",
+      "sourceUrl": "https://github.com/uniswap/v2-core",
+      "sourceType": "open-source-repo",
+      "pmfSignal": "Constant-product pools proved strong PMF for permissionless token swaps.",
+      "reusablePatterns": [
+        "pool reserves",
+        "LP shares",
+        "swap fee",
+        "slippage display",
+        "price impact warnings"
+      ],
+      "failureModes": [
+        "impermanent loss",
+        "MEV/sandwiching",
+        "toxic flow",
+        "liquidity fragmentation"
+      ],
+      "kaspaLane": "roadmap",
+      "kaspaBuild": "Research AMM UX and risk dashboards before claiming native swaps on Kaspa.",
+      "priority": "later",
+      "firstArtifact": "docs/ECOSYSTEM_BUILD_PLAN.md"
+    },
+    {
+      "id": "compound-lending",
+      "name": "Compound-style lending markets",
+      "category": "defi-lending",
+      "sourceChain": "ethereum",
+      "sourceUrl": "https://github.com/compound-finance/compound-protocol",
+      "sourceType": "open-source-repo",
+      "pmfSignal": "Collateralized borrowing and supply yield are durable DeFi primitives.",
+      "reusablePatterns": [
+        "collateral factor",
+        "interest model",
+        "liquidation rule",
+        "risk parameters",
+        "market dashboard"
+      ],
+      "failureModes": [
+        "oracle failure",
+        "bad collateral factors",
+        "liquidation cascades",
+        "governance risk"
+      ],
+      "kaspaLane": "roadmap",
+      "kaspaBuild": "Build a lending brief and risk model before any settlement prototype.",
+      "priority": "later",
+      "firstArtifact": "docs/ECOSYSTEM_BUILD_PLAN.md"
+    },
+    {
+      "id": "aave-risk",
+      "name": "Aave-style risk-managed lending",
+      "category": "defi-lending",
+      "sourceChain": "ethereum",
+      "sourceUrl": "https://github.com/aave/protocol-v2",
+      "sourceType": "open-source-repo",
+      "pmfSignal": "Deep lending markets show PMF when risk teams, collateral controls, and integrations mature.",
+      "reusablePatterns": [
+        "reserve configuration",
+        "health factor",
+        "liquidation UI",
+        "risk provider workflow"
+      ],
+      "failureModes": [
+        "oracle risk",
+        "governance dependency",
+        "bad asset listings",
+        "liquidity crunch"
+      ],
+      "kaspaLane": "roadmap",
+      "kaspaBuild": "Use for DeFi risk-dashboard design, not immediate Kaspa lending claims.",
+      "priority": "later",
+      "firstArtifact": "fixtures/CrossChainResearchLibrary.json"
+    },
+    {
+      "id": "escrow-marketplaces",
+      "name": "Marketplace escrow flows",
+      "category": "escrow",
+      "sourceChain": "multi-chain",
+      "sourceUrl": "https://docs.kaspa.org/programmability/covenants",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Conditional release/refund is easy for normal users to understand.",
+      "reusablePatterns": [
+        "buyer fund",
+        "seller release",
+        "timeout refund",
+        "mutual cancel",
+        "dispute note"
+      ],
+      "failureModes": [
+        "arbiter trust",
+        "unclear delivery proof",
+        "timeout griefing",
+        "bad refund UX"
+      ],
+      "kaspaLane": "tn12-toccata",
+      "kaspaBuild": "Build Escrow.sil and signed fund/release/refund drafts.",
+      "priority": "build-next",
+      "firstArtifact": "contracts/Escrow.sil"
+    },
+    {
+      "id": "public-goods-assurance",
+      "name": "Assurance/public-goods funding",
+      "category": "funding",
+      "sourceChain": "multi-chain",
+      "sourceUrl": "https://github.com/levernetwork/Open-Grants-Program",
+      "sourceType": "open-source-process-reference",
+      "pmfSignal": "Transparent grants and public funding work when milestones, review, and payout rules are explicit.",
+      "reusablePatterns": [
+        "campaign state",
+        "milestone review",
+        "pledge outputs",
+        "refund path",
+        "public audit trail"
+      ],
+      "failureModes": [
+        "fake demand",
+        "milestone ambiguity",
+        "custodial treasury risk",
+        "unpaid maintainers"
+      ],
+      "kaspaLane": "tn12-toccata",
+      "kaspaBuild": "Batch assurance campaigns with multiple pledge outputs and accepted state.",
+      "priority": "build-next",
+      "firstArtifact": "fixtures/InvoiceReceipts.json"
+    },
+    {
+      "id": "access-passes",
+      "name": "Access passes and redeemable claims",
+      "category": "krc-tooling",
+      "sourceChain": "multi-chain",
+      "sourceUrl": "https://docs.kaspa.org/",
+      "sourceType": "kaspa-builder-docs",
+      "pmfSignal": "Tickets, memberships, coupons, and passes are simple issuer/user workflows.",
+      "reusablePatterns": [
+        "metadata schema",
+        "issuer registry",
+        "redemption log",
+        "wallet display",
+        "revocation note"
+      ],
+      "failureModes": [
+        "issuer does not honor claims",
+        "metadata rot",
+        "duplicate redemption",
+        "confusing enforcement claims"
+      ],
+      "kaspaLane": "live-kaspa",
+      "kaspaBuild": "KRC/access-pass planner with issuer-backed redemption state and no false native-contract claim.",
+      "priority": "build-next",
+      "firstArtifact": "fixtures/AccessPassPlanner.json"
+    },
+    {
+      "id": "auction-intents",
+      "name": "Auction and intent systems",
+      "category": "markets",
+      "sourceChain": "multi-chain",
+      "sourceUrl": "https://docs.kaspa.org/integrate/transaction-payload",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Auctions and intents become useful when bid data is auditable and settlement is clear.",
+      "reusablePatterns": [
+        "bid payload",
+        "winner rule",
+        "refund list",
+        "settlement proof",
+        "MEV caveat"
+      ],
+      "failureModes": [
+        "front-running",
+        "ambiguous winner selection",
+        "spam bids",
+        "oracle dependency"
+      ],
+      "kaspaLane": "live-kaspa",
+      "kaspaBuild": "Accepted bid payload indexer first, covenant settlement later.",
+      "priority": "build-later",
+      "firstArtifact": "fixtures/AuctionIntentResearch.json"
+    },
+    {
+      "id": "portfolio-hedge-dashboard",
+      "name": "Portfolio hedge dashboard",
+      "category": "portfolio-risk",
+      "sourceChain": "multi-chain",
+      "sourceUrl": "https://docs.kaspa.org/integrate/accepted-transactions",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Users need risk alerts before complex on-chain hedge products.",
+      "reusablePatterns": [
+        "manual positions",
+        "risk buckets",
+        "signal confidence",
+        "hedge suggestions",
+        "audit trail"
+      ],
+      "failureModes": [
+        "financial advice overreach",
+        "bad signal weighting",
+        "automatic trading risk",
+        "regulatory exposure"
+      ],
+      "kaspaLane": "research",
+      "kaspaBuild": "Simulated hedge dashboard fed by attestation registry and accepted payload receipts.",
+      "priority": "research",
+      "firstArtifact": "fixtures/AttestationSignals.json"
+    },
+    {
+      "id": "ai-agent-commitments",
+      "name": "AI-agent commitment board",
+      "category": "agent-commerce",
+      "sourceChain": "multi-chain",
+      "sourceUrl": "https://docs.kaspa.org/integrate/transaction-payload",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Agents need machine-readable offers, deposits, completion proofs, and dispute state.",
+      "reusablePatterns": [
+        "task offer",
+        "deposit",
+        "completion receipt",
+        "dispute window",
+        "refund rule"
+      ],
+      "failureModes": [
+        "fake proof",
+        "ambiguous completion",
+        "spam tasks",
+        "custodial bot risk"
+      ],
+      "kaspaLane": "research",
+      "kaspaBuild": "Task commitment artifact plus payload receipt indexer before any payout automation.",
+      "priority": "later",
+      "firstArtifact": "fixtures/AgentCommitments.json"
+    },
+    {
+      "id": "accepted-indexers",
+      "name": "Accepted transaction indexers",
+      "category": "infrastructure",
+      "sourceChain": "kaspa",
+      "sourceUrl": "https://docs.kaspa.org/integrate/accepted-transactions",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Every app needs reliable accepted state, rollback handling, and explorer-grade links.",
+      "reusablePatterns": [
+        "checkpoint",
+        "tx reducer",
+        "payload decoder",
+        "status cache",
+        "rollback note"
+      ],
+      "failureModes": [
+        "stale state",
+        "missed reorg",
+        "REST-only limitations",
+        "wrong output matching"
+      ],
+      "kaspaLane": "live-kaspa",
+      "kaspaBuild": "Grow current pull-based proof tracker into checkpointed accepted transaction ingestion.",
+      "priority": "build-now",
+      "firstArtifact": "src/acceptedIndexer.mjs"
+    },
+    {
+      "id": "wallet-api-send",
+      "name": "Wallet API send route",
+      "category": "wallet-infrastructure",
+      "sourceChain": "kaspa",
+      "sourceUrl": "https://docs.kaspa.org/integrate/wallet",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Payload apps need a wallet route that preserves bytes and user review.",
+      "reusablePatterns": [
+        "wallet review",
+        "payload-preserving send",
+        "fee display",
+        "address role separation"
+      ],
+      "failureModes": [
+        "payload dropped",
+        "private key exposure",
+        "blind signing",
+        "wrong network"
+      ],
+      "kaspaLane": "live-kaspa",
+      "kaspaBuild": "Find or build payload-preserving send route before accepted invoice receipt broadcast.",
+      "priority": "build-now",
+      "firstArtifact": "scripts/submit-signed-draft.mjs"
+    },
+    {
+      "id": "based-apps-shared-state",
+      "name": "Based Apps shared-state lane",
+      "category": "based-apps",
+      "sourceChain": "kaspa",
+      "sourceUrl": "https://docs.kaspa.org/programmability/based-apps",
+      "sourceType": "primary-kaspa-docs",
+      "pmfSignal": "Shared mutable app state needs a different lane than simple payload receipts or isolated covenants.",
+      "reusablePatterns": [
+        "shared state",
+        "sequencing assumption",
+        "app reducer",
+        "composition boundary"
+      ],
+      "failureModes": [
+        "premature vProgs claims",
+        "state race assumptions",
+        "unclear settlement model"
+      ],
+      "kaspaLane": "roadmap",
+      "kaspaBuild": "Keep rich shared-state products in roadmap until official rails are ready.",
+      "priority": "later",
+      "firstArtifact": "docs/ECOSYSTEM_BUILD_PLAN.md"
+    }
+  ],
+  "rules": [
+    "Use open-source code as design evidence and engineering reference, not as proof of Kaspa feature availability.",
+    "Map every idea to live Kaspa, TN12/Toccata, roadmap, or research before building UI.",
+    "Extract PMF, failure modes, state schemas, indexer patterns, wallet review UX, and risk controls before porting code.",
+    "Prefer payload receipts and accepted-transaction indexing as the first Kaspa app-state bridge."
+  ]
+}

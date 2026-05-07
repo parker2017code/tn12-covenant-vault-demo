@@ -25,6 +25,7 @@ import {
 import { buildAttestationRegistry } from "./src/attestationSignal.mjs";
 import { buildInvoiceRegistry } from "./src/invoiceReceipt.mjs";
 import { buildSubmitConsoleRegistry } from "./src/submitConsole.mjs";
+import { buildResearchLibrary } from "./src/appResearch.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -48,6 +49,8 @@ const invoiceListNode = document.querySelector("#invoice-list");
 const invoiceDraftNode = document.querySelector("#invoice-draft");
 const submitSummaryNode = document.querySelector("#submit-summary");
 const submitDraftsNode = document.querySelector("#submit-drafts");
+const researchSummaryNode = document.querySelector("#research-summary");
+const researchCandidatesNode = document.querySelector("#research-candidates");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -170,6 +173,7 @@ renderAcceptedAppState();
 renderInvoiceApp();
 renderSubmitConsole();
 renderMasterRoadmap();
+renderResearchLibrary();
 renderBuildQueue();
 renderVaultTemplates();
 renderAppLab();
@@ -537,6 +541,38 @@ async function renderMasterRoadmap() {
     }
   } catch (error) {
     masterRoadmapNode.textContent = `Master roadmap unavailable: ${error.message}`;
+  }
+}
+
+async function renderResearchLibrary() {
+  if (!researchSummaryNode || !researchCandidatesNode) return;
+
+  try {
+    const response = await fetch("fixtures/CrossChainResearchLibrary.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const library = buildResearchLibrary(fixture);
+    researchSummaryNode.innerHTML = `
+      <article><span>Candidates</span><strong>${escapeHtml(library.summary.total)}</strong></article>
+      <article><span>Build now</span><strong>${escapeHtml(library.summary.buildNow)}</strong></article>
+      <article><span>Research</span><strong>${escapeHtml(library.summary.researchOnly)}</strong></article>
+      <article><span>Status</span><strong>mapped</strong></article>
+    `;
+
+    researchCandidatesNode.innerHTML = "";
+    for (const candidate of library.candidates) {
+      const article = document.createElement("article");
+      article.className = "research-card";
+      article.innerHTML = `
+        <span>${escapeHtml(candidate.kaspaLane)} / ${escapeHtml(candidate.priority)}</span>
+        <strong>${escapeHtml(candidate.name)}</strong>
+        <p>${escapeHtml(candidate.pmfSignal)}</p>
+        <small>${escapeHtml(candidate.kaspaBuild)}</small>
+        <a href="${escapeHtml(candidate.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(candidate.category)}</a>
+      `;
+      researchCandidatesNode.append(article);
+    }
+  } catch (error) {
+    researchSummaryNode.textContent = `Research library unavailable: ${error.message}`;
   }
 }
 

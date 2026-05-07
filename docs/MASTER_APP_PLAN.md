@@ -59,6 +59,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
    - One note per proven or failed app category.
    - Track PMF, code patterns, failure modes, and Kaspa mapping.
    - First success: research notes that become app briefs before code is copied.
+   - Current repo surface: `fixtures/CrossChainResearchLibrary.json`, `src/appResearch.mjs`, `npm run research:library`, and the browser research panel.
 
 11. Miner / Pool Signal Research
    - Transaction payload first; coinbase/pool policy later.

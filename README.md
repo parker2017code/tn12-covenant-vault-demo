@@ -20,6 +20,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Builds, signs, and submits TN12 split, P2SH contract-funding, and P2SH contract-spend transactions from local fixtures.
 - Shows accepted proof transactions and a Kaspa ecosystem build queue in the local UI.
 - Builds a transaction-payload signal artifact as the first step toward accepted-transaction app indexing.
+- Builds a cross-chain research library that maps PMF, failure modes, and open-source code patterns into Kaspa status lanes.
 
 ## What It Does Not Do Yet
 
@@ -220,6 +221,14 @@ npm run submit:registry
 ```
 
 The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. It does not read `.local/tn12-wallet.json` or expose private keys.
+
+Build the cross-chain app research library:
+
+```sh
+npm run research:library
+```
+
+This turns `fixtures/CrossChainResearchLibrary.json` into `artifacts/research-library.json`. The library uses open-source apps and Kaspa docs as PMF/code-pattern research, then remaps every candidate to a live Kaspa, TN12/Toccata, roadmap, or research lane before any app claims are made.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

@@ -51,3 +51,4 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 23. Add the attestation signal registry as the first miner/pool signal foundation: signed signals, source reputation, market use, portfolio hedge use, and payload-receipt settlement next.
 24. Add the invoice receipt app lane: invoice fixture, invoice registry artifact, browser invoice panel, and explicit rule that invoice state becomes paid only after an accepted transaction carries the matching payload receipt.
 25. Add the wallet-facing submit console: signed draft manifest, review summaries, dry-run command, explicit submit command, and no private-key exposure.
+26. Add the cross-chain research library: PMF evidence, reusable code patterns, failure modes, Kaspa status lanes, browser panel, and generated research artifact.

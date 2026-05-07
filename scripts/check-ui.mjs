@@ -56,6 +56,9 @@ try {
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");
+  await expectText(page, "#research-summary", "Candidates");
+  await expectText(page, "#research-candidates", "Uniswap-style AMM");
+  await expectText(page, "#research-candidates", "Wallet API send route");
   await expectText(page, "#receipt-events", "No accepted payload receipts yet");
   await expectText(page, "#signal-artifact", "payload-size-ok");
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");

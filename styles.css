@@ -374,7 +374,8 @@ progress::-moz-progress-bar {
 }
 
 .roadmap,
-.attestations {
+.attestations,
+.research-library {
   margin-top: 24px;
 }
 
@@ -533,6 +534,34 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.research-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.research-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.research-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.research-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
 .submit-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -556,6 +585,13 @@ progress::-moz-progress-bar {
 .submit-drafts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.research-candidates {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 16px;
 }
@@ -681,6 +717,7 @@ progress::-moz-progress-bar {
 .invoice-card,
 .invoice-draft article,
 .submit-card,
+.research-card,
 .attestation-card,
 .indexer-card,
 .receipt-card,
@@ -702,6 +739,7 @@ progress::-moz-progress-bar {
 .invoice-card span,
 .invoice-draft article span,
 .submit-card span,
+.research-card span,
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
@@ -734,6 +772,10 @@ progress::-moz-progress-bar {
 .submit-card strong,
 .submit-card p,
 .submit-card small,
+.research-card strong,
+.research-card p,
+.research-card small,
+.research-card a,
 .attestation-card strong,
 .attestation-card p,
 .attestation-card small,
@@ -759,6 +801,7 @@ progress::-moz-progress-bar {
 .invoice-card p,
 .invoice-draft article p,
 .submit-card p,
+.research-card p,
 .attestation-card p,
 .indexer-card p,
 .receipt-card p,
@@ -773,6 +816,7 @@ progress::-moz-progress-bar {
 .invoice-card small,
 .invoice-draft article small,
 .submit-card small,
+.research-card small,
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
@@ -864,6 +908,8 @@ progress::-moz-progress-bar {
   .invoice-list,
   .submit-summary,
   .submit-drafts,
+  .research-summary,
+  .research-candidates,
   .roadmap-list,
   .attestation-summary,
   .attestation-columns,

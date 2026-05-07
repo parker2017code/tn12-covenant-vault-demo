@@ -41,6 +41,7 @@ import {
   buildSubmitConsoleRegistry,
   summarizeSignedDraft
 } from "../src/submitConsole.mjs";
+import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const policy = normalizePolicy({
@@ -115,6 +116,16 @@ const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifact
 assert.equal(submitRegistry.summary.total, 6);
 assert.equal(submitRegistry.summary.payloadDrafts, 1);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 1);
+const researchFixture = JSON.parse(await readFile(new URL("../fixtures/CrossChainResearchLibrary.json", import.meta.url), "utf8"));
+const researchLibrary = buildResearchLibrary(researchFixture);
+assert.equal(researchLibrary.status, "research-inputs-not-protocol-claims");
+assert.equal(researchLibrary.summary.total, 16);
+assert.equal(researchLibrary.summary.lanes["live-kaspa"], 5);
+assert.equal(researchLibrary.summary.lanes["tn12-toccata"], 3);
+assert.equal(researchLibrary.summary.lanes.roadmap, 4);
+assert.equal(researchLibrary.summary.lanes.research, 4);
+assert.ok(researchLibrary.candidates.some((candidate) => candidate.id === "uniswap-amm"));
+assert.ok(researchLibrary.candidates.some((candidate) => candidate.id === "wallet-api-send" && candidate.priority === "build-now"));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -197,12 +208,14 @@ const files = [
   "scripts/build-signal-payload.mjs",
   "scripts/build-invoice-registry.mjs",
   "scripts/build-submit-console-registry.mjs",
+  "scripts/build-research-library.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
   "artifacts/DelayedRecoveryVault.json",
   "artifacts/AssurancePledge.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
   "artifacts/submit-console-registry.json",
+  "artifacts/research-library.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/SavedWallet.public.json",
@@ -216,12 +229,14 @@ const files = [
   "fixtures/MasterAppRoadmap.json",
   "fixtures/InvoiceReceipts.json",
   "fixtures/SubmitConsoleDrafts.json",
+  "fixtures/CrossChainResearchLibrary.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",
   "src/submitConsole.mjs",
+  "src/appResearch.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -258,6 +273,7 @@ assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
 assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
+assert.match(readme, /npm run research:library/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
@@ -273,6 +289,7 @@ assert.match(html, /Miner signal research/);
 assert.match(html, /Accepted transaction indexer/);
 assert.match(html, /Payload receipt app/);
 assert.match(html, /Wallet-facing submit console/);
+assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);
 assert.match(html, /Master app plan/);
 assert.match(html, /Attestation registry/);
@@ -312,6 +329,7 @@ assert.match(sources, /PMF clues/);
 
 const masterPlan = await readFile(new URL("../docs/MASTER_APP_PLAN.md", import.meta.url), "utf8");
 assert.match(masterPlan, /Payload Receipt \/ Invoice App/);
+assert.match(masterPlan, /Cross-Chain App Research Library/);
 assert.match(masterPlan, /AI-Agent Commitment Board/);
 assert.match(masterPlan, /No fake block-header claims|arbitrary app data can be placed in block headers/);
 
