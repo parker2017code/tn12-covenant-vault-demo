@@ -10,7 +10,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Preview command: `npm run serve`
 - Main check command: `npm run check:all`
 - TN12 proof check command: `npm run tx:verify`
-- Invoice payload-event check command: `npm run payload:verify:events`
+- Payload-event check command: `npm run payload:verify:events`
 - Accepted app-state snapshot command: `npm run indexer:state`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - TN12 tested/not-tested map: `docs/TN12_TEST_MATRIX.md`
@@ -36,7 +36,7 @@ The current base includes:
 - escrow release/refund paths,
 - transaction planning and signing from manually verified TN12 outpoints,
 - accepted-transaction indexing,
-- payload receipts,
+- payload receipts and accepted payload events,
 - campaign batching and app-lane research.
 
 The project no longer depends on a local full Kaspa node. It uses public TN12 REST endpoints, local fixtures, local signing, and explicit submit commands.
@@ -125,6 +125,8 @@ Escrow DAA-score refund:
 ```
 
 Escrow mutual cancel is now accepted on TN12. The original submit used `sigOpCount=1` and hit script-unit exhaustion (`used=200870`, `limit=109999`), but that is historical bad configuration only. A later submit used old JS SDK signing/reconstruction that did not preserve tx v1 `computeBudget`. The corrected cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, submitted through JSON wRPC to `testnet-12`, and accepted as `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
+
+Accepted payload events are listed in `fixtures/PayloadEventEvidence.json` and verified by `npm run payload:verify:events`. The current set covers invoice paid/refund/error, access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, and agent task/proof/dispute state.
 
 Fixtures:
 

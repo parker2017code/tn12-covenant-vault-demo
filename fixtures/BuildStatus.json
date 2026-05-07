@@ -95,7 +95,7 @@
       "order": 6,
       "id": "access-passes",
       "name": "KRC / Access Pass Planner",
-      "status": "base-built",
+      "status": "accepted-tn12-payload-state",
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "generated-artifact",
@@ -104,7 +104,7 @@
         "src/accessPassPlanner.mjs",
         "npm run access:passes"
       ],
-      "next": "Tie one redemption to accepted payload receipt state."
+      "next": "Add duplicate, expiry, and issuer-review checks around accepted redemption state."
     },
     {
       "order": 7,
@@ -125,7 +125,7 @@
       "order": 8,
       "id": "auction-intents",
       "name": "Auction / Intent Prototype",
-      "status": "base-built",
+      "status": "accepted-tn12-payload-state",
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "generated-artifact",
@@ -140,7 +140,7 @@
       "order": 9,
       "id": "defi-research",
       "name": "Basic DeFi Research Backlog",
-      "status": "base-built",
+      "status": "stable-issuer-payload-state",
       "enforcement": "documentation",
       "readiness": "research-only",
       "proof": "generated-artifact",
@@ -176,7 +176,7 @@
       "order": 11,
       "id": "miner-pool-signals",
       "name": "Miner / Pool Signal Research",
-      "status": "base-built",
+      "status": "accepted-tn12-payload-state",
       "enforcement": "research",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "generated-artifact",
@@ -185,13 +185,13 @@
         "src/attestationSignal.mjs",
         "npm run signal:payload"
       ],
-      "next": "Add signature verification and accepted payload receipt for one signal."
+      "next": "Add signature verification and reputation hardening around the accepted watcher signal."
     },
     {
       "order": 12,
       "id": "ai-agent-commitments",
       "name": "AI-Agent Commitment Board",
-      "status": "base-built",
+      "status": "accepted-tn12-payload-state",
       "enforcement": "planner-indexer",
       "readiness": "research-only",
       "proof": "generated-artifact",
@@ -200,7 +200,7 @@
         "src/agentCommitments.mjs",
         "npm run agent:commitments"
       ],
-      "next": "Build explicit release/refund drafts and accepted payload receipts for one task lifecycle."
+      "next": "Build explicit release/refund drafts for one task lifecycle."
     },
     {
       "order": 13,

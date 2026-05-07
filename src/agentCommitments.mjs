@@ -49,6 +49,7 @@ function normalizeTask(task = {}) {
     rewardTkas: Number(task.rewardTkas || 0),
     deadlineIso: String(task.deadlineIso || ""),
     acceptedTxid: String(task.acceptedTxid || ""),
+    evidencePath: String(task.evidencePath || ""),
     payloadStatus: String(task.payloadStatus || "draft"),
     reviewWindowHours: Number(task.reviewWindowHours || 24),
     status: String(task.status || "open")
@@ -62,6 +63,7 @@ function normalizeProof(proof = {}) {
     submittedBy: String(proof.submittedBy || ""),
     artifactHash: String(proof.artifactHash || ""),
     acceptedTxid: String(proof.acceptedTxid || ""),
+    evidencePath: String(proof.evidencePath || ""),
     payloadStatus: String(proof.payloadStatus || "draft"),
     reviewerStatus: String(proof.reviewerStatus || "pending-review"),
     note: String(proof.note || "")
@@ -75,6 +77,7 @@ function normalizeDispute(dispute = {}) {
     openedBy: String(dispute.openedBy || ""),
     reason: String(dispute.reason || ""),
     acceptedTxid: String(dispute.acceptedTxid || ""),
+    evidencePath: String(dispute.evidencePath || ""),
     payloadStatus: String(dispute.payloadStatus || "draft"),
     status: String(dispute.status || "open")
   };

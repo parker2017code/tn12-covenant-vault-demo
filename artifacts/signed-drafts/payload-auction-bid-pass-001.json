@@ -1,0 +1,111 @@
+{
+  "schema": "tn12-signed-payload-receipt-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "requiresPayloadSubmitSupport": true,
+  "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+    "outputIndex": 1,
+    "amountTkas": 1145.399
+  },
+  "payment": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": 0.1,
+    "amountSompi": "10000000",
+    "changeTkas": "1145.29895",
+    "changeSompi": "114529895000",
+    "minerFeeSompi": "5000"
+  },
+  "receipt": {
+    "schema": "kaspa-signal-payload/v1",
+    "status": "payload-size-ok",
+    "lane": "transaction-payload",
+    "payload": {
+      "kind": "auction-bid",
+      "subject": "bid-pass-001",
+      "value": "accepted",
+      "note": "Accepted auction bid payload for pass auction."
+    },
+    "encoded": {
+      "bytes": 122,
+      "transientMass": 488,
+      "hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d"
+    },
+    "limits": {
+      "standardTxMassLimit": 100000,
+      "transientByteMass": 4,
+      "remainingMassBeforeInputsOutputsAndSignatures": 99512
+    },
+    "boundary": "This models user transaction payload data, not arbitrary miner header data."
+  },
+  "transactionId": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+            "index": 1
+          },
+          "signatureScript": "410db344ce031f5b247adba33fc4ac54bba8ff7499d40faf750f1b3441811522af1f4ad2bbe0d1d15227c7d8750cc3f6c90b7d36297970efc9764d15d3578f6f3c01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 10000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 114529895000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "payload": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "tx": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+            "index": 1
+          },
+          "signatureScript": "410db344ce031f5b247adba33fc4ac54bba8ff7499d40faf750f1b3441811522af1f4ad2bbe0d1d15227c7d8750cc3f6c90b7d36297970efc9764d15d3578f6f3c01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "value": "10000000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        },
+        {
+          "value": "114529895000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "gas": "0",
+      "payload": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d",
+      "id": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d"
+    }
+  }
+}

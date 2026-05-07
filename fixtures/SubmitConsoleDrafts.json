@@ -21,80 +21,158 @@
       "description": "Accepted invoice error payload draft. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
     },
     {
-      "label": "Split funding",
+      "label": "Access pass redemption payload",
       "priority": 4,
+      "path": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "description": "Accepted access-pass redemption payload draft. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
+    },
+    {
+      "label": "Auction bid pass 001 payload",
+      "priority": 5,
+      "path": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "description": "Accepted auction bid payload draft for bid-pass-001."
+    },
+    {
+      "label": "Auction bid pass 002 payload",
+      "priority": 6,
+      "path": "artifacts/signed-drafts/payload-auction-bid.json",
+      "description": "Accepted auction bid payload draft for bid-pass-002."
+    },
+    {
+      "label": "Auction bid voucher 001 payload",
+      "priority": 7,
+      "path": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+      "description": "Accepted auction bid payload draft for bid-voucher-001."
+    },
+    {
+      "label": "Stable issuance 001 payload",
+      "priority": 8,
+      "path": "artifacts/signed-drafts/payload-stable-issuance.json",
+      "description": "Accepted stable-value issuance payload draft for issue-001."
+    },
+    {
+      "label": "Stable issuance 002 payload",
+      "priority": 9,
+      "path": "artifacts/signed-drafts/payload-stable-issuance-002.json",
+      "description": "Accepted stable-value issuance payload draft for issue-002."
+    },
+    {
+      "label": "Stable redemption 001 payload",
+      "priority": 10,
+      "path": "artifacts/signed-drafts/payload-stable-redemption.json",
+      "description": "Accepted stable-value redemption payload draft for redeem-001."
+    },
+    {
+      "label": "Miner attestation payload",
+      "priority": 11,
+      "path": "artifacts/signed-drafts/payload-miner-attestation.json",
+      "description": "Accepted miner/watcher attestation payload draft for the signal registry."
+    },
+    {
+      "label": "Agent task invoice payload",
+      "priority": 12,
+      "path": "artifacts/signed-drafts/payload-agent-task-invoice.json",
+      "description": "Accepted agent task payload draft for the invoice audit task."
+    },
+    {
+      "label": "Agent task escrow payload",
+      "priority": 13,
+      "path": "artifacts/signed-drafts/payload-agent-task-escrow.json",
+      "description": "Accepted agent task payload draft for the escrow spend-path task."
+    },
+    {
+      "label": "Agent proof invoice payload",
+      "priority": 14,
+      "path": "artifacts/signed-drafts/payload-agent-proof.json",
+      "description": "Accepted agent proof payload draft for the invoice audit task."
+    },
+    {
+      "label": "Agent proof escrow payload",
+      "priority": 15,
+      "path": "artifacts/signed-drafts/payload-agent-proof-escrow.json",
+      "description": "Accepted agent proof payload draft for the escrow task pending review."
+    },
+    {
+      "label": "Agent dispute escrow payload",
+      "priority": 16,
+      "path": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+      "description": "Accepted agent dispute payload draft for the escrow task."
+    },
+    {
+      "label": "Split funding",
+      "priority": 17,
       "path": "artifacts/signed-drafts/split-funding.json",
       "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
     },
     {
       "label": "Vault recovery",
-      "priority": 5,
+      "priority": 18,
       "path": "artifacts/signed-drafts/vault-recovery.json",
       "description": "Accepted proof path for vault recovery."
     },
     {
       "label": "Vault withdrawal",
-      "priority": 6,
+      "priority": 19,
       "path": "artifacts/signed-drafts/vault-withdrawal.json",
       "description": "Accepted proof path for delayed vault withdrawal."
     },
     {
       "label": "Assurance release",
-      "priority": 7,
+      "priority": 20,
       "path": "artifacts/signed-drafts/assurance-release.json",
       "description": "Accepted proof path for individual pledge release."
     },
     {
       "label": "Assurance refund",
-      "priority": 8,
+      "priority": 21,
       "path": "artifacts/signed-drafts/assurance-refund.json",
       "description": "Accepted proof path for individual pledge refund."
     },
     {
       "label": "Escrow funding",
-      "priority": 9,
+      "priority": 22,
       "path": "artifacts/signed-drafts/escrow-funding.json",
       "description": "Accepted funding path for Escrow.sil; created the P2SH output consumed by the release proof."
     },
     {
       "label": "Escrow release",
-      "priority": 10,
+      "priority": 23,
       "path": "artifacts/signed-drafts/escrow-release.json",
       "description": "Accepted seller-release proof from the Escrow.sil funding output."
     },
     {
       "label": "Escrow refund",
-      "priority": 11,
+      "priority": 24,
       "path": "artifacts/signed-drafts/escrow-refund.json",
       "description": "Timeout-refund review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
       "label": "Escrow cancel",
-      "priority": 12,
+      "priority": 25,
       "path": "artifacts/signed-drafts/escrow-cancel.json",
       "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
       "label": "Escrow DAA refund funding",
-      "priority": 13,
+      "priority": 26,
       "path": "artifacts/signed-drafts/escrow-daa-refund-funding.json",
       "description": "Accepted funding path for a DAA-expired EscrowExpired refund proof."
     },
     {
       "label": "Escrow DAA refund",
-      "priority": 14,
+      "priority": 27,
       "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
       "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
     },
     {
       "label": "Escrow cancel funding",
-      "priority": 15,
+      "priority": 28,
       "path": "artifacts/signed-drafts/escrow-cancel-funding.json",
       "description": "Accepted funding output for the mutual-cancel attempt."
     },
     {
       "label": "Escrow cancel attempt",
-      "priority": 16,
+      "priority": 29,
       "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
       "description": "Accepted mutual-cancel spend; rebuilt as tx version 1 with computeBudget 30 using the local TN12 kaspa-wasm 1.1.1-toc.1 SDK."
     }

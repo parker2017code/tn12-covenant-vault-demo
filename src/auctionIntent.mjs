@@ -72,6 +72,7 @@ function normalizeBid(bid = {}) {
     amountTkas: Number(bid.amountTkas || 0),
     payloadStatus: String(bid.payloadStatus || "signed-not-submitted"),
     acceptedTxid: String(bid.acceptedTxid || ""),
+    evidencePath: String(bid.evidencePath || ""),
     submittedAtIso: String(bid.submittedAtIso || ""),
     note: String(bid.note || "")
   };
@@ -91,6 +92,7 @@ function selectWinner(auction, acceptedBids) {
     bidder: winner.bidder,
     amountTkas: winner.amountTkas,
     acceptedTxid: winner.acceptedTxid,
+    evidencePath: winner.evidencePath,
     rule: auction.winnerRule,
     status: "planner-selected-from-accepted-payloads"
   };

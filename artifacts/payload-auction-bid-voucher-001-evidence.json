@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:04.526Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5594917,
+  "acceptingBlockTime": 1778180902903,
+  "payload": {
+    "expectedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d766f75636865722d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220766f75636865722061756374696f6e3b2062656c6f77207265736572766520696e20706c616e6e65722073746174652e227d",
+    "observedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d766f75636865722d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220766f75636865722061756374696f6e3b2062656c6f77207265736572766520696e20706c616e6e65722073746174652e227d",
+    "bytes": 160,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "auction-bid",
+        "subject": "bid-voucher-001",
+        "value": "accepted",
+        "note": "Accepted auction bid payload for voucher auction; below reserve in planner state."
+      },
+      "encoded": {
+        "bytes": 160,
+        "hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d766f75636865722d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220766f75636865722061756374696f6e3b2062656c6f77207265736572766520696e20706c616e6e65722073746174652e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "bid-voucher-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861"
+}

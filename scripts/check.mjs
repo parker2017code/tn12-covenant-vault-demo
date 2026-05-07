@@ -160,9 +160,9 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 16);
-assert.equal(submitRegistry.summary.payloadDrafts, 3);
-assert.equal(submitRegistry.summary.payloadSubmitGated, 3);
+assert.equal(submitRegistry.summary.total, 29);
+assert.equal(submitRegistry.summary.payloadDrafts, 16);
+assert.equal(submitRegistry.summary.payloadSubmitGated, 16);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");

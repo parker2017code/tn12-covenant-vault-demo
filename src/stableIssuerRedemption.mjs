@@ -55,6 +55,7 @@ function normalizeRecord(record = {}, kind) {
     holder: String(record.holder || ""),
     amountUnits: Number(record.amountUnits || 0),
     acceptedTxid,
+    evidencePath: String(record.evidencePath || ""),
     accepted: acceptedTxid.length > 0,
     issuerSignature: String(record.issuerSignature || ""),
     memo: String(record.memo || "")

@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:04.332Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5592946,
+  "acceptingBlockTime": 1778180711151,
+  "payload": {
+    "expectedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "observedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "bytes": 128,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "auction-bid",
+        "subject": "bid-pass-002",
+        "value": "accepted",
+        "note": "Accepted auction bid payload for TN12 evidence sweep"
+      },
+      "encoded": {
+        "bytes": 128,
+        "hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "bid-pass-002",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f"
+}

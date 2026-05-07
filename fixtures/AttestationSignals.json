@@ -27,6 +27,8 @@
       "channel": "signed-watcher-attestation",
       "source": "tn12-watcher-alpha",
       "sourceType": "watcher",
+      "acceptedTxid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "evidencePath": "artifacts/payload-miner-attestation-evidence.json",
       "claim": "Observed a sharp short-window hashrate movement on TN12-like monitoring inputs.",
       "observedAt": "2026-05-07T09:20:00.000Z",
       "submittedAt": "2026-05-07T09:20:18.000Z",

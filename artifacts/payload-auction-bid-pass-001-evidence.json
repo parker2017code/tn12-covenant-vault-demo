@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:04.120Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5594833,
+  "acceptingBlockTime": 1778180894104,
+  "payload": {
+    "expectedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d",
+    "observedHex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d",
+    "bytes": 122,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "auction-bid",
+        "subject": "bid-pass-001",
+        "value": "accepted",
+        "note": "Accepted auction bid payload for pass auction."
+      },
+      "encoded": {
+        "bytes": 122,
+        "hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "bid-pass-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d"
+}

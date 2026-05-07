@@ -37,6 +37,8 @@ export function normalizeSignal(signal) {
     channel: String(signal.channel || "signed-attestation"),
     source: String(signal.source || "unknown-source"),
     sourceType: String(signal.sourceType || "watcher"),
+    acceptedTxid: String(signal.acceptedTxid || ""),
+    evidencePath: String(signal.evidencePath || ""),
     claim: String(signal.claim || ""),
     observedAt: String(signal.observedAt || ""),
     submittedAt: String(signal.submittedAt || ""),

@@ -6,7 +6,7 @@ export function buildProjectStatus(fixture = {}) {
     status: "active-build-map",
     summary: {
       total: lanes.length,
-      builtBases: lanes.filter((lane) => lane.status === "base-built").length,
+      builtBases: lanes.filter((lane) => isBuiltLane(lane.status)).length,
       proofBacked: lanes.filter((lane) => lane.proof === "accepted-tn12").length,
       blocked: lanes.filter((lane) => lane.status === "blocked").length,
       nextBuilds: lanes.filter((lane) => lane.status === "next-build").length,
@@ -21,6 +21,10 @@ export function buildProjectStatus(fixture = {}) {
       "Do not advance a vertical slice to paid/released/redeemed until accepted transaction state proves it."
     ]
   };
+}
+
+function isBuiltLane(status) {
+  return !["blocked", "next-build", "planned", "research"].includes(status);
 }
 
 function normalizeLane(lane = {}) {

@@ -40,7 +40,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Boundary: payroll/caps are not script-enforced yet.
 
 6. KRC / access pass planner: coupons, memberships, tickets, redeemable claims.
-   - Current status: base built.
+   - Current status: accepted TN12 redemption payload plus planner state.
    - Enforcement: issuer/indexer.
    - Mainnet potential: medium-high as accepted payload/indexer app state.
 
@@ -50,7 +50,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Boundary: no live native asset protocol claim.
 
 8. Auction / intent prototype: accepted bid payloads, winner rule, refund planning, MEV caveat.
-   - Current status: base built.
+   - Current status: accepted TN12 bid payloads plus planner state.
    - Enforcement: planner/indexer.
    - Boundary: no bid custody, no atomic exchange, no MEV resistance claim.
 
@@ -58,7 +58,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Current status: base built as research backlog.
    - Enforcement: documentation.
    - Boundary: not live DeFi.
-   - Stable-value detail: comparison brief added for issuer-backed, overcollateralized, synthetic, and external-stable paths; issuer-backed demo state now tracks accepted issuance/redemption while excluding signed-only requests. This is not a native stablecoin claim.
+   - Stable-value detail: comparison brief added for issuer-backed, overcollateralized, synthetic, and external-stable paths; issuer-backed demo state now tracks accepted TN12 issuance/redemption payloads while excluding signed-only requests. This is not a native stablecoin claim.
 
 10. Cross-chain app research library: PMF, reusable patterns, failure modes, Kaspa mapping.
     - Current status: base built.
@@ -66,12 +66,12 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
     - Use: source shelf before porting code or UX.
 
 11. Miner / pool signal research: signed attestations and transaction payload first.
-    - Current status: base built.
+    - Current status: accepted TN12 miner/watcher attestation payload plus research registry.
     - Enforcement: research.
     - Boundary: no fake block-header data claim.
 
 12. AI-agent commitment board: task offers, deposits, completion proofs, disputes, release/refund planning.
-    - Current status: base built.
+    - Current status: accepted TN12 task/proof/dispute payloads plus planner state.
     - Enforcement: planner/indexer.
     - Boundary: no autonomous payouts.
 

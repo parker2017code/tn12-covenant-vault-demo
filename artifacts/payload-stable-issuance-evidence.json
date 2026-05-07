@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:04.718Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5593032,
+  "acceptingBlockTime": 1778180718780,
+  "payload": {
+    "expectedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303031222c2276616c7565223a22697373756564222c226e6f7465223a224163636570746564206973737565722069737375616e6365207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "observedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303031222c2276616c7565223a22697373756564222c226e6f7465223a224163636570746564206973737565722069737375616e6365207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "bytes": 135,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "stable-issuer-event",
+        "subject": "issue-001",
+        "value": "issued",
+        "note": "Accepted issuer issuance payload for TN12 evidence sweep"
+      },
+      "encoded": {
+        "bytes": 135,
+        "hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303031222c2276616c7565223a22697373756564222c226e6f7465223a224163636570746564206973737565722069737375616e6365207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "issue-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b"
+}

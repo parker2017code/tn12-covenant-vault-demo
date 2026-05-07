@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:03.922Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5592475,
+  "acceptingBlockTime": 1778180666089,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226163636573732d706173732d726564656d7074696f6e222c227375626a656374223a2272656465656d2d776f726b73686f702d616c706861222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206163636573732d7061737320726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "observedHex": "7b226b696e64223a226163636573732d706173732d726564656d7074696f6e222c227375626a656374223a2272656465656d2d776f726b73686f702d616c706861222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206163636573732d7061737320726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "bytes": 159,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "access-pass-redemption",
+        "subject": "redeem-workshop-alpha",
+        "value": "accepted",
+        "note": "Accepted access-pass redemption payload for TN12 evidence sweep"
+      },
+      "encoded": {
+        "bytes": 159,
+        "hex": "7b226b696e64223a226163636573732d706173732d726564656d7074696f6e222c227375626a656374223a2272656465656d2d776f726b73686f702d616c706861222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206163636573732d7061737320726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "redeem-workshop-alpha",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90"
+}

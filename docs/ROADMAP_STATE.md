@@ -20,7 +20,7 @@ Blocked or limited:
 
 - The old escrow cancel `sigOpCount=1` script-unit rejection and the later old-SDK verification failure are preserved as historical evidence only.
 - Rusty Kaspa TN12 source confirms the version-1 compute-budget route: v1 inputs carry `computeBudget`, not `sigOpCount`. The accepted cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, preserving `computeBudget=30`.
-- The public TN12 REST submit route is unsuitable for payload receipts. It accepted a payment while dropping payload bytes. The JSON wRPC route accepted a matched payload receipt as tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`.
+- The public TN12 REST submit route is unsuitable for payload receipts. It accepted a payment while dropping payload bytes. The JSON wRPC route has accepted 16 matched payload events across invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, and agent commitment state.
 
 ## App Buckets
 
@@ -59,18 +59,18 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
-| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload draft, readiness check, accepted JSON wRPC receipt, decoded invoice state | Add wallet review, duplicate-payment checks, and refund handling |
-| 2. Submit console | Base built | Signed draft review, inputs/outputs/fees/commands | Real wallet connector and no-local-key UX |
+| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state | Add wallet review and checkpointed indexing |
+| 2. Submit console | Base built | 29 signed draft reviews, including 16 accepted payload drafts | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Base built | Campaign planner with accepted vs signed-only progress | Real accepted pledge-output batch settlement drafts |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, and accepted mutual-cancel proofs on separate funded outputs | Add negative tests and keep SDK route documented |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |
-| 6. Access passes/coupons | Planner/indexer base | Issuer and redemption model | Tie one redemption to accepted payload transaction |
+| 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |
 | 7. Simple asset policy | Roadmap base | Mint, transfer, burn, recovery, redemption policy shapes | Keep issuer-indexed now, covenant-native later |
-| 8. Auction/intents | Planner/indexer base | Accepted bid payload model and winner rule | Settlement/refund drafts |
+| 8. Auction/intents | Accepted TN12 payload state | Accepted bid payloads, winner rule, and below-reserve state | Settlement/refund drafts |
 | 9. DeFi backlog | Research | Missing rails listed for swaps/lending/stable-value/etc.; stable-value comparison brief now separates issuer-backed, overcollateralized, synthetic, and external rails | Simulation dashboards only |
 | 10. Cross-chain research | Built as library | PMF/code/failure-mode mapping | Turn top ideas into one-page app briefs |
-| 11. Miner/pool signals | Research base | Attestation registry, payload-first framing | Signature verification plus accepted payload receipt |
-| 12. AI-agent commitments | Planner base | Task/deposit/proof/dispute model | Release/refund drafts plus accepted tx lifecycle |
+| 11. Miner/pool signals | Accepted TN12 payload state | Attestation registry, payload-first framing, accepted watcher signal | Signature verification and reputation hardening |
+| 12. AI-agent commitments | Accepted TN12 payload state | Task/deposit/proof/dispute model with accepted payload events | Release/refund drafts plus accepted tx lifecycle |
 | 13. Coordination markets | Research prototype | Transparent Stag/Intendo/Pack/toy Solver | Transparent settlement draft; no Hashdag overclaim |
 | 14. ZK / anchor readiness | Roadmap added | Checklist lane | Define public inputs, anchors, oracle/source-chain trust |
 | 15. Prediction / hedge markets | Research only | In DeFi/attestation backlog | Simulator using attestations; no real settlement claim |
@@ -91,7 +91,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 ### Coming days
 
 1. Make the accepted JSON wRPC payload receipt path repeatable through wallet review instead of local signing.
-2. Tie one access pass or attestation to accepted payload state.
+2. Add checkpointed accepted indexing so payload state can refresh from chain reads.
 3. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
 4. Turn escrow release/refund into a simple marketplace/freelance demo.
 

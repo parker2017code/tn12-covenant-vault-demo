@@ -1,7 +1,7 @@
 {
   "schema": "tn12-contract-spend-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-07T19:01:34.877Z",
+  "verifiedAt": "2026-05-07T19:22:02.490Z",
   "summary": {
     "total": 7,
     "accepted": 7,

@@ -1,0 +1,86 @@
+{
+  "schema": "tn12-payload-event-evidence-manifest/v1",
+  "network": "kaspa-testnet-12",
+  "events": [
+    {
+      "label": "Invoice paid",
+      "draftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "outPath": "artifacts/payload-receipt-evidence.json"
+    },
+    {
+      "label": "Invoice refunded",
+      "draftPath": "artifacts/signed-drafts/payload-refund-self-send.json",
+      "outPath": "artifacts/payload-refund-evidence.json"
+    },
+    {
+      "label": "Invoice error",
+      "draftPath": "artifacts/signed-drafts/payload-error-self-send.json",
+      "outPath": "artifacts/payload-error-evidence.json"
+    },
+    {
+      "label": "Access pass redemption",
+      "draftPath": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "outPath": "artifacts/payload-access-pass-redemption-evidence.json"
+    },
+    {
+      "label": "Auction bid pass 001",
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "outPath": "artifacts/payload-auction-bid-pass-001-evidence.json"
+    },
+    {
+      "label": "Auction bid pass 002",
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid.json",
+      "outPath": "artifacts/payload-auction-bid-evidence.json"
+    },
+    {
+      "label": "Auction bid voucher 001",
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+      "outPath": "artifacts/payload-auction-bid-voucher-001-evidence.json"
+    },
+    {
+      "label": "Stable issuance 001",
+      "draftPath": "artifacts/signed-drafts/payload-stable-issuance.json",
+      "outPath": "artifacts/payload-stable-issuance-evidence.json"
+    },
+    {
+      "label": "Stable issuance 002",
+      "draftPath": "artifacts/signed-drafts/payload-stable-issuance-002.json",
+      "outPath": "artifacts/payload-stable-issuance-002-evidence.json"
+    },
+    {
+      "label": "Stable redemption 001",
+      "draftPath": "artifacts/signed-drafts/payload-stable-redemption.json",
+      "outPath": "artifacts/payload-stable-redemption-evidence.json"
+    },
+    {
+      "label": "Miner attestation",
+      "draftPath": "artifacts/signed-drafts/payload-miner-attestation.json",
+      "outPath": "artifacts/payload-miner-attestation-evidence.json"
+    },
+    {
+      "label": "Agent task invoice",
+      "draftPath": "artifacts/signed-drafts/payload-agent-task-invoice.json",
+      "outPath": "artifacts/payload-agent-task-invoice-evidence.json"
+    },
+    {
+      "label": "Agent task escrow",
+      "draftPath": "artifacts/signed-drafts/payload-agent-task-escrow.json",
+      "outPath": "artifacts/payload-agent-task-escrow-evidence.json"
+    },
+    {
+      "label": "Agent proof invoice",
+      "draftPath": "artifacts/signed-drafts/payload-agent-proof.json",
+      "outPath": "artifacts/payload-agent-proof-evidence.json"
+    },
+    {
+      "label": "Agent proof escrow",
+      "draftPath": "artifacts/signed-drafts/payload-agent-proof-escrow.json",
+      "outPath": "artifacts/payload-agent-proof-escrow-evidence.json"
+    },
+    {
+      "label": "Agent dispute escrow",
+      "draftPath": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+      "outPath": "artifacts/payload-agent-dispute-escrow-evidence.json"
+    }
+  ]
+}

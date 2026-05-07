@@ -14,17 +14,19 @@
       "recordId": "issue-001",
       "holder": "merchant-alpha",
       "amountUnits": 25000,
-      "acceptedTxid": "receipt-stable-issue-001",
+      "acceptedTxid": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+      "evidencePath": "artifacts/payload-stable-issuance-evidence.json",
       "issuerSignature": "demo-issuer-signature-001",
-      "memo": "Mock accepted receipt for issued stable-value credit."
+      "memo": "Accepted TN12 payload receipt for issued stable-value credit."
     },
     {
       "recordId": "issue-002",
       "holder": "contractor-beta",
       "amountUnits": 12500,
-      "acceptedTxid": "receipt-stable-issue-002",
+      "acceptedTxid": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+      "evidencePath": "artifacts/payload-stable-issuance-002-evidence.json",
       "issuerSignature": "demo-issuer-signature-002",
-      "memo": "Mock accepted receipt for issued stable-value credit."
+      "memo": "Accepted TN12 payload receipt for issued stable-value credit."
     }
   ],
   "redemptions": [
@@ -32,9 +34,10 @@
       "recordId": "redeem-001",
       "holder": "merchant-alpha",
       "amountUnits": 5000,
-      "acceptedTxid": "receipt-stable-redeem-001",
+      "acceptedTxid": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+      "evidencePath": "artifacts/payload-stable-redemption-evidence.json",
       "issuerSignature": "demo-issuer-signature-003",
-      "memo": "Mock accepted receipt for issuer redemption."
+      "memo": "Accepted TN12 payload receipt for issuer redemption."
     },
     {
       "recordId": "redeem-002",

@@ -32,7 +32,8 @@
       "bidder": "kaspatest:bidder-alpha",
       "amountTkas": 130,
       "payloadStatus": "accepted-bid-payload",
-      "acceptedTxid": "6c20b52b57cc4c2a59b7495dbd73449a6a97902b6b94c496d8e782359a1a4b54",
+      "acceptedTxid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+      "evidencePath": "artifacts/payload-auction-bid-pass-001-evidence.json",
       "submittedAtIso": "2026-05-07T10:01:00Z",
       "note": "Accepted payload can count toward winner selection."
     },
@@ -42,7 +43,8 @@
       "bidder": "kaspatest:bidder-beta",
       "amountTkas": 155,
       "payloadStatus": "accepted-bid-payload",
-      "acceptedTxid": "f8d54d69bd8e8c05e3db2fe218f7ed8ef1bb3a44ce2cb80020eab2d96e572caf",
+      "acceptedTxid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "evidencePath": "artifacts/payload-auction-bid-evidence.json",
       "submittedAtIso": "2026-05-07T10:04:00Z",
       "note": "Current planner winner because it is the highest accepted bid."
     },
@@ -62,7 +64,8 @@
       "bidder": "kaspatest:bidder-delta",
       "amountTkas": 220,
       "payloadStatus": "accepted-bid-payload",
-      "acceptedTxid": "3b4dd32b7d95bc16211bf0b0242c49c2c9f77f827344d7a859f732bcefb6c9fd",
+      "acceptedTxid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+      "evidencePath": "artifacts/payload-auction-bid-voucher-001-evidence.json",
       "submittedAtIso": "2026-05-07T10:08:00Z",
       "note": "Accepted but below reserve, so no winner yet."
     },

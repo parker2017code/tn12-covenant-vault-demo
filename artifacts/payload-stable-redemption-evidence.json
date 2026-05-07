@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:05.153Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5593133,
+  "acceptingBlockTime": 1778180726950,
+  "payload": {
+    "expectedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2272656465656d2d303031222c2276616c7565223a2272656465656d6564222c226e6f7465223a2241636365707465642069737375657220726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "observedHex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2272656465656d2d303031222c2276616c7565223a2272656465656d6564222c226e6f7465223a2241636365707465642069737375657220726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "bytes": 140,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "stable-issuer-event",
+        "subject": "redeem-001",
+        "value": "redeemed",
+        "note": "Accepted issuer redemption payload for TN12 evidence sweep"
+      },
+      "encoded": {
+        "bytes": 140,
+        "hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2272656465656d2d303031222c2276616c7565223a2272656465656d6564222c226e6f7465223a2241636365707465642069737375657220726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "redeem-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663"
+}

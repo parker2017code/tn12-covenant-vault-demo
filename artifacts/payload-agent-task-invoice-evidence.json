@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:05.655Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5595080,
+  "acceptingBlockTime": 1778180918764,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220696e766f696365206175646974207461736b2e227d",
+    "observedHex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220696e766f696365206175646974207461736b2e227d",
+    "bytes": 136,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "agent-task",
+        "subject": "agent-task-invoice-001",
+        "value": "accepted",
+        "note": "Accepted agent task payload for invoice audit task."
+      },
+      "encoded": {
+        "bytes": 136,
+        "hex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220696e766f696365206175646974207461736b2e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "agent-task-invoice-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8"
+}

@@ -4,20 +4,9 @@ import {
   buildPayloadReceiptEvidence
 } from "../src/payloadReceiptVerifier.mjs";
 
-const events = [
-  {
-    draftPath: "artifacts/signed-drafts/payload-receipt-self-send.json",
-    outPath: "artifacts/payload-receipt-evidence.json"
-  },
-  {
-    draftPath: "artifacts/signed-drafts/payload-refund-self-send.json",
-    outPath: "artifacts/payload-refund-evidence.json"
-  },
-  {
-    draftPath: "artifacts/signed-drafts/payload-error-self-send.json",
-    outPath: "artifacts/payload-error-evidence.json"
-  }
-];
+const manifestPath = process.env.PAYLOAD_EVENT_MANIFEST || "fixtures/PayloadEventEvidence.json";
+const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+const events = manifest.events || [];
 
 await mkdir("artifacts", { recursive: true });
 

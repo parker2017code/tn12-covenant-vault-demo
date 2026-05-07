@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:06.279Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5595262,
+  "acceptingBlockTime": 1778180934800,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d657363726f772d303031222c2276616c7565223a2270656e64696e672d726576696577222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f61643b207265766965776572207374617475732072656d61696e732070656e64696e672e227d",
+    "observedHex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d657363726f772d303031222c2276616c7565223a2270656e64696e672d726576696577222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f61643b207265766965776572207374617475732072656d61696e732070656e64696e672e227d",
+    "bytes": 148,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "agent-proof",
+        "subject": "proof-escrow-001",
+        "value": "pending-review",
+        "note": "Accepted agent proof payload; reviewer status remains pending."
+      },
+      "encoded": {
+        "bytes": 148,
+        "hex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d657363726f772d303031222c2276616c7565223a2270656e64696e672d726576696577222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f61643b207265766965776572207374617475732072656d61696e732070656e64696e672e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "proof-escrow-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a"
+}

@@ -20,7 +20,8 @@
       "depositTkas": 25,
       "rewardTkas": 75,
       "deadlineIso": "2026-05-12T18:00:00Z",
-      "acceptedTxid": "6c20b52b57cc4c2a59b7495dbd73449a6a97902b6b94c496d8e782359a1a4b54",
+      "acceptedTxid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "evidencePath": "artifacts/payload-agent-task-invoice-evidence.json",
       "payloadStatus": "accepted-payload",
       "reviewWindowHours": 24,
       "status": "in-review",
@@ -30,7 +31,8 @@
           "taskId": "agent-task-invoice-001",
           "submittedBy": "agent:indexer-auditor",
           "artifactHash": "sha256:0d1b2a3c4e5f66778899aabbccddeeff00112233445566778899aabbccddeeff",
-          "acceptedTxid": "3b4dd32b7d95bc16211bf0b0242c49c2c9f77f827344d7a859f732bcefb6c9fd",
+          "acceptedTxid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+          "evidencePath": "artifacts/payload-agent-proof-evidence.json",
           "payloadStatus": "accepted-payload",
           "reviewerStatus": "accepted",
           "note": "Release can be planned, but still needs explicit transaction review."
@@ -52,7 +54,8 @@
       "depositTkas": 40,
       "rewardTkas": 120,
       "deadlineIso": "2026-05-13T18:00:00Z",
-      "acceptedTxid": "f8d54d69bd8e8c05e3db2fe218f7ed8ef1bb3a44ce2cb80020eab2d96e572caf",
+      "acceptedTxid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "evidencePath": "artifacts/payload-agent-task-escrow-evidence.json",
       "payloadStatus": "accepted-payload",
       "reviewWindowHours": 48,
       "status": "open",
@@ -62,7 +65,8 @@
           "taskId": "agent-task-escrow-001",
           "submittedBy": "agent:contract-worker",
           "artifactHash": "sha256:111122223333444455556666777788889999aaaabbbbccccddddeeeeffff0000",
-          "acceptedTxid": "4d743caa8582a6d7f2e472c9da443746a9c1c58d0e13e821c3bc2e9a24bc3e6d",
+          "acceptedTxid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+          "evidencePath": "artifacts/payload-agent-proof-escrow-evidence.json",
           "payloadStatus": "accepted-payload",
           "reviewerStatus": "pending-review",
           "note": "Proof is visible but not accepted by reviewer."
@@ -74,7 +78,8 @@
           "taskId": "agent-task-escrow-001",
           "openedBy": "kaspatest:sponsor-contracts",
           "reason": "Test cases do not cover timeout refund path yet.",
-          "acceptedTxid": "5abf7f7c6fd6aa2c31a34efdf2b0575ff0df6e8c34d7c1be8a1fb223ce8b4c42",
+          "acceptedTxid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+          "evidencePath": "artifacts/payload-agent-dispute-escrow-evidence.json",
           "payloadStatus": "accepted-payload",
           "status": "open"
         }
@@ -95,6 +100,7 @@
       "rewardTkas": 30,
       "deadlineIso": "2026-05-06T18:00:00Z",
       "acceptedTxid": "",
+      "evidencePath": "",
       "payloadStatus": "signed-not-submitted",
       "reviewWindowHours": 24,
       "status": "expired",
@@ -114,7 +120,8 @@
       "taskId": "agent-task-invoice-001",
       "submittedBy": "agent:indexer-auditor",
       "artifactHash": "sha256:0d1b2a3c4e5f66778899aabbccddeeff00112233445566778899aabbccddeeff",
-      "acceptedTxid": "3b4dd32b7d95bc16211bf0b0242c49c2c9f77f827344d7a859f732bcefb6c9fd",
+      "acceptedTxid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+      "evidencePath": "artifacts/payload-agent-proof-evidence.json",
       "payloadStatus": "accepted-payload",
       "reviewerStatus": "accepted",
       "note": "Release can be planned, but still needs explicit transaction review."
@@ -124,7 +131,8 @@
       "taskId": "agent-task-escrow-001",
       "submittedBy": "agent:contract-worker",
       "artifactHash": "sha256:111122223333444455556666777788889999aaaabbbbccccddddeeeeffff0000",
-      "acceptedTxid": "4d743caa8582a6d7f2e472c9da443746a9c1c58d0e13e821c3bc2e9a24bc3e6d",
+      "acceptedTxid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+      "evidencePath": "artifacts/payload-agent-proof-escrow-evidence.json",
       "payloadStatus": "accepted-payload",
       "reviewerStatus": "pending-review",
       "note": "Proof is visible but not accepted by reviewer."
@@ -136,7 +144,8 @@
       "taskId": "agent-task-escrow-001",
       "openedBy": "kaspatest:sponsor-contracts",
       "reason": "Test cases do not cover timeout refund path yet.",
-      "acceptedTxid": "5abf7f7c6fd6aa2c31a34efdf2b0575ff0df6e8c34d7c1be8a1fb223ce8b4c42",
+      "acceptedTxid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+      "evidencePath": "artifacts/payload-agent-dispute-escrow-evidence.json",
       "payloadStatus": "accepted-payload",
       "status": "open"
     }

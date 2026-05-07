@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:05.461Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5593225,
+  "acceptingBlockTime": 1778180735563,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226d696e65722d6174746573746174696f6e222c227375626a656374223a227369672d7274642d68617368726174652d303031222c2276616c7565223a227665726966696564222c226e6f7465223a224163636570746564206d696e65722f77617463686572206174746573746174696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "observedHex": "7b226b696e64223a226d696e65722d6174746573746174696f6e222c227375626a656374223a227369672d7274642d68617368726174652d303031222c2276616c7565223a227665726966696564222c226e6f7465223a224163636570746564206d696e65722f77617463686572206174746573746174696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+    "bytes": 156,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "miner-attestation",
+        "subject": "sig-rtd-hashrate-001",
+        "value": "verified",
+        "note": "Accepted miner/watcher attestation payload for TN12 evidence sweep"
+      },
+      "encoded": {
+        "bytes": 156,
+        "hex": "7b226b696e64223a226d696e65722d6174746573746174696f6e222c227375626a656374223a227369672d7274642d68617368726174652d303031222c2276616c7565223a227665726966696564222c226e6f7465223a224163636570746564206d696e65722f77617463686572206174746573746174696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "sig-rtd-hashrate-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d"
+}

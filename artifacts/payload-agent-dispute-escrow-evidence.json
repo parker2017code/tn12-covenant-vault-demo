@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-07T19:22:06.590Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5595354,
+  "acceptingBlockTime": 1778180943560,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226167656e742d64697370757465222c227375626a656374223a22646973707574652d657363726f772d303031222c2276616c7565223a226f70656e222c226e6f7465223a224163636570746564206167656e742064697370757465207061796c6f616420666f7220657363726f77207461736b2e227d",
+    "observedHex": "7b226b696e64223a226167656e742d64697370757465222c227375626a656374223a22646973707574652d657363726f772d303031222c2276616c7565223a226f70656e222c226e6f7465223a224163636570746564206167656e742064697370757465207061796c6f616420666f7220657363726f77207461736b2e227d",
+    "bytes": 127,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "agent-dispute",
+        "subject": "dispute-escrow-001",
+        "value": "open",
+        "note": "Accepted agent dispute payload for escrow task."
+      },
+      "encoded": {
+        "bytes": 127,
+        "hex": "7b226b696e64223a226167656e742d64697370757465222c227375626a656374223a22646973707574652d657363726f772d303031222c2276616c7565223a226f70656e222c226e6f7465223a224163636570746564206167656e742064697370757465207061796c6f616420666f7220657363726f77207461736b2e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "dispute-escrow-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0"
+}

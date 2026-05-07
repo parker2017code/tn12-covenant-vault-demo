@@ -65,6 +65,7 @@ function normalizeRedemption(redemption = {}) {
     passId: String(redemption.passId || ""),
     holder: String(redemption.holder || ""),
     acceptedTxid: String(redemption.acceptedTxid || ""),
+    evidencePath: String(redemption.evidencePath || ""),
     payloadKind: String(redemption.payloadKind || "access-pass-redemption"),
     redeemedAtIso: String(redemption.redeemedAtIso || ""),
     status: String(redemption.status || "draft")
