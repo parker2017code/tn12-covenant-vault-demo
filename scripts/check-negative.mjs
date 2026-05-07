@@ -50,7 +50,23 @@ const mismatchedReceiptRegistry = buildInvoiceRegistry({
   }]
 });
 assert.equal(mismatchedReceiptRegistry.summary.paid, 0);
-assert.equal(mismatchedReceiptRegistry.status, "drafts-ready-for-payload-submit");
+assert.equal(mismatchedReceiptRegistry.status, "receipt-review-needed");
+assert.equal(mismatchedReceiptRegistry.summary.staleReceipts, 1);
+
+const duplicateReceiptRegistry = buildInvoiceRegistry({
+  ...invoiceFixture,
+  acceptedReceipts: [
+    ...invoiceFixture.acceptedReceipts,
+    {
+      ...invoiceFixture.acceptedReceipts[0],
+      txid: "duplicate-receipt-txid"
+    }
+  ]
+});
+assert.equal(duplicateReceiptRegistry.summary.paid, 1);
+assert.equal(duplicateReceiptRegistry.status, "receipt-review-needed");
+assert.equal(duplicateReceiptRegistry.summary.duplicateReceipts, 1);
+assert.equal(duplicateReceiptRegistry.invoices[0].receiptReviews.length, 1);
 
 const agentFixture = JSON.parse(await readFile(new URL("../fixtures/AgentCommitments.json", import.meta.url), "utf8"));
 const disputedAcceptedProofBoard = buildAgentCommitmentBoard({

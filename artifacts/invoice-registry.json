@@ -6,6 +6,9 @@
     "total": 2,
     "paid": 1,
     "draft": 1,
+    "review": 0,
+    "duplicateReceipts": 0,
+    "staleReceipts": 0,
     "totalTkas": 26
   },
   "invoices": [
@@ -57,8 +60,11 @@
         "payloadBytes": 127,
         "acceptingBlockBlueScore": 5541142,
         "evidencePath": "artifacts/payload-receipt-evidence.json",
-        "memo": "Accepted TN12 JSON wRPC payload receipt; payload matched the signed draft."
+        "memo": "Accepted TN12 JSON wRPC payload receipt; payload matched the signed draft.",
+        "status": "accepted-receipt",
+        "reviewReason": null
       },
+      "receiptReviews": [],
       "appState": "Invoice merchant-order-1337 is paid by accepted payload receipt 34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e.",
       "boundaries": [
         "This is payment plus app data, not a smart-contract invoice settlement.",
@@ -108,12 +114,26 @@
         "boundary": "This models user transaction payload data, not arbitrary miner header data."
       },
       "acceptedReceipt": null,
+      "receiptReviews": [],
       "appState": "Invoice assurance-campaign-demo is not paid until an accepted transaction carries this receipt payload.",
       "boundaries": [
         "This is payment plus app data, not a smart-contract invoice settlement.",
         "Accepted transaction indexing is the source of app state.",
         "The existing signed draft proves local payload bytes; broadcast remains gated until payload submit support is verified."
       ]
+    }
+  ],
+  "receipts": [
+    {
+      "invoiceId": "merchant-order-1337",
+      "accepted": true,
+      "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "payloadBytes": 127,
+      "acceptingBlockBlueScore": 5541142,
+      "evidencePath": "artifacts/payload-receipt-evidence.json",
+      "memo": "Accepted TN12 JSON wRPC payload receipt; payload matched the signed draft.",
+      "status": "accepted-receipt",
+      "reviewReason": null
     }
   ],
   "next": "Keep payload receipts tied to accepted transaction evidence before marking invoices paid."

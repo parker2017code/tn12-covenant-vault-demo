@@ -103,7 +103,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
 3. Harden the invoice vertical slice:
    - keep REST submit marked unsuitable for payload receipts;
    - make JSON wRPC or wallet review repeatable;
-   - add duplicate-payment and stale-receipt checks;
+   - duplicate-payment and stale-receipt checks: done in invoice registry state;
    - add refund/error state;
    - keep invoice paid state tied to matched accepted payload bytes.
 
@@ -117,6 +117,7 @@ The durable roadmap and twenty-lane status map are in `docs/ROADMAP_STATE.md`.
    - push to `main`;
    - verify GitHub Actions and Pages;
    - verify cache-busted live artifacts after deployment.
+   - Later maintenance: update GitHub Actions when `actions/checkout` and `actions/setup-node` have stable Node 24-compatible versions, or opt into Node 24 early and verify the workflow.
 
 ## Current Verification Commands
 

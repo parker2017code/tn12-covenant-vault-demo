@@ -238,6 +238,7 @@
     "Build explicit auction settlement/refund drafts for lane 8.",
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Replace local payload receipt signing with wallet review and keep the accepted JSON wRPC route documented.",
+    "Update GitHub Actions once stable Node 24-compatible checkout/setup-node actions are available, or opt in early and verify.",
     "Add negative tests around version-1 computeBudget preservation and keep the local TN12 SDK route documented.",
     "Add a ZK/anchor design checklist before any bridge, oracle, solver, or vProg proof claim."
   ]

@@ -31,7 +31,8 @@ export function buildInvoiceArtifact(input = {}, options = {}) {
     note: `${invoice.merchant}: ${invoice.memo}`
   });
   const paidReceipt = options.paidReceipt || null;
-  const accepted = Boolean(paidReceipt?.accepted);
+  const receiptReviews = options.receiptReviews || [];
+  const accepted = Boolean(paidReceipt?.accepted && paidReceipt.status !== "needs-review");
 
   return {
     schema: "kaspa-invoice-receipt-app/v1",
@@ -46,8 +47,11 @@ export function buildInvoiceArtifact(input = {}, options = {}) {
     },
     receipt,
     acceptedReceipt: paidReceipt,
+    receiptReviews,
     appState: accepted
       ? `Invoice ${invoice.invoiceId} is paid by accepted payload receipt ${paidReceipt.txid}.`
+      : receiptReviews.length
+      ? `Invoice ${invoice.invoiceId} has receipt records that need review before paid state.`
       : `Invoice ${invoice.invoiceId} is not paid until an accepted transaction carries this receipt payload.`,
     boundaries: [
       "This is payment plus app data, not a smart-contract invoice settlement.",
@@ -58,26 +62,67 @@ export function buildInvoiceArtifact(input = {}, options = {}) {
 }
 
 export function buildInvoiceRegistry(fixture = {}) {
+  const receiptRecords = classifyReceiptRecords(fixture.acceptedReceipts || [], fixture.invoices || []);
   const invoices = (fixture.invoices || []).map((invoice) => {
-    const paidReceipt = (fixture.acceptedReceipts || []).find((receipt) => receipt.invoiceId === invoice.invoiceId) || null;
-    return buildInvoiceArtifact(invoice, { paidReceipt });
+    const matchingReceipts = receiptRecords.filter((receipt) => receipt.invoiceId === invoice.invoiceId);
+    const paidReceipt = matchingReceipts.find((receipt) => receipt.status === "accepted-receipt") || null;
+    const receiptReviews = matchingReceipts.filter((receipt) => receipt.status === "needs-review");
+    return buildInvoiceArtifact(invoice, { paidReceipt, receiptReviews });
   });
+  const reviewReceipts = receiptRecords.filter((receipt) => receipt.status === "needs-review");
 
   return {
     schema: "kaspa-invoice-registry/v1",
     network: fixture.network || "kaspa-testnet-12",
-    status: invoices.some((invoice) => invoice.status === "accepted-receipt-indexed")
+    status: reviewReceipts.length
+      ? "receipt-review-needed"
+      : invoices.some((invoice) => invoice.status === "accepted-receipt-indexed")
       ? "has-accepted-receipts"
       : "drafts-ready-for-payload-submit",
     summary: {
       total: invoices.length,
       paid: invoices.filter((invoice) => invoice.status === "accepted-receipt-indexed").length,
       draft: invoices.filter((invoice) => invoice.status !== "accepted-receipt-indexed").length,
+      review: reviewReceipts.length,
+      duplicateReceipts: reviewReceipts.filter((receipt) => receipt.reviewReason === "duplicate-receipt").length,
+      staleReceipts: reviewReceipts.filter((receipt) => receipt.reviewReason === "stale-or-unknown-invoice").length,
       totalTkas: invoices.reduce((sum, invoice) => sum + invoice.invoice.amountTkas, 0)
     },
     invoices,
+    receipts: receiptRecords,
     next: fixture.next || "Submit and verify one tiny TN12 payload receipt transaction, then add its txid as an accepted receipt."
   };
+}
+
+export function classifyReceiptRecords(receipts = [], invoices = []) {
+  const knownInvoiceIds = new Set(invoices.map((invoice) => invoice.invoiceId));
+  const seenAcceptedByInvoice = new Set();
+
+  return receipts.map((receipt) => {
+    const invoiceKnown = knownInvoiceIds.has(receipt.invoiceId);
+    const accepted = receipt.accepted === true;
+    let status = accepted && invoiceKnown ? "accepted-receipt" : "needs-review";
+    let reviewReason = null;
+
+    if (!invoiceKnown) {
+      status = "needs-review";
+      reviewReason = "stale-or-unknown-invoice";
+    } else if (!accepted) {
+      status = "needs-review";
+      reviewReason = "not-accepted";
+    } else if (seenAcceptedByInvoice.has(receipt.invoiceId)) {
+      status = "needs-review";
+      reviewReason = "duplicate-receipt";
+    } else {
+      seenAcceptedByInvoice.add(receipt.invoiceId);
+    }
+
+    return {
+      ...receipt,
+      status,
+      reviewReason
+    };
+  });
 }
 
 function clean(value, maxLength) {

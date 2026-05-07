@@ -174,6 +174,8 @@ jobs:
 
 The current repo includes a second `tn12-verify` job that runs `npm run tx:verify`. Keep branch protection focused on the local `check` job unless public TN12 API downtime should block merges.
 
+Later maintenance: GitHub now warns that JavaScript actions using Node 20 will move to Node 24. Do not change the workflow blindly. When stable Node 24-compatible `actions/checkout` and `actions/setup-node` versions are available, update the workflow or opt into Node 24 early and verify `check` plus `tn12-verify`.
+
 If GitHub rejects a push containing `.github/workflows/check.yml` with a `workflow` scope error, refresh the local GitHub CLI token before pushing the workflow:
 
 ```sh
