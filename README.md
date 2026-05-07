@@ -21,6 +21,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 - Shows accepted proof transactions and a Kaspa ecosystem build queue in the local UI.
 - Builds a transaction-payload signal artifact as the first step toward accepted-transaction app indexing.
 - Builds a cross-chain research library that maps PMF, failure modes, and open-source code patterns into Kaspa status lanes.
+- Builds batch assurance campaign state from multiple pledge records without claiming pooled covenant enforcement.
 
 ## What It Does Not Do Yet
 
@@ -229,6 +230,14 @@ npm run research:library
 ```
 
 This turns `fixtures/CrossChainResearchLibrary.json` into `artifacts/research-library.json`. The library uses open-source apps and Kaspa docs as PMF/code-pattern research, then remaps every candidate to a live Kaspa, TN12/Toccata, roadmap, or research lane before any app claims are made.
+
+Build the batch assurance campaign planner state:
+
+```sh
+npm run campaign:state
+```
+
+This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

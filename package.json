@@ -27,6 +27,7 @@
     "invoice:registry": "node scripts/build-invoice-registry.mjs",
     "submit:registry": "node scripts/build-submit-console-registry.mjs",
     "research:library": "node scripts/build-research-library.mjs",
+    "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

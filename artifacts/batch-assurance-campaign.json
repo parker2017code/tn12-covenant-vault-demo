@@ -1,0 +1,129 @@
+{
+  "schema": "tn12-batch-assurance-campaign/v1",
+  "network": "kaspa-testnet-12",
+  "status": "app-layer-campaign-planner-not-pooled-covenant",
+  "campaign": {
+    "id": "kaspa-dev-docs-sprint",
+    "name": "Kaspa dev docs sprint",
+    "targetTkas": 100,
+    "minimumPledgeTkas": 10,
+    "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "deadlineIso": "2026-05-14T00:00:00.000Z",
+    "releaseMode": "batch-release-after-target",
+    "refundMode": "individual-refund-after-deadline"
+  },
+  "summary": {
+    "pledgeCount": 4,
+    "acceptedCount": 3,
+    "pendingCount": 1,
+    "acceptedTkas": 75,
+    "pendingTkas": 40,
+    "totalPlannedTkas": 115,
+    "targetTkas": 100,
+    "remainingAcceptedTkas": 25,
+    "acceptedProgress": 0.75,
+    "plannedProgress": 1.15,
+    "acceptedTargetMet": false,
+    "plannedTargetMet": true,
+    "releaseStatus": "release-not-ready",
+    "refundStatus": "refund-plan-needed-if-deadline-expires"
+  },
+  "pledges": [
+    {
+      "pledgeId": "pledge-docs-001",
+      "contributor": "docs-backer-alpha",
+      "refundAddress": "kaspatest:qalpha-refund-placeholder",
+      "amountTkas": 25,
+      "outpoint": {
+        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "index": 0
+      },
+      "status": "accepted-output-imported",
+      "note": "Fixture pledge record shaped like an accepted output; replace with explorer-verified outpoint before real campaign state."
+    },
+    {
+      "pledgeId": "pledge-docs-002",
+      "contributor": "wallet-builder-beta",
+      "refundAddress": "kaspatest:qbeta-refund-placeholder",
+      "amountTkas": 20,
+      "outpoint": {
+        "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+        "index": 1
+      },
+      "status": "accepted-output-imported",
+      "note": "Counts toward accepted progress in this planner fixture."
+    },
+    {
+      "pledgeId": "pledge-docs-003",
+      "contributor": "pool-tooling-gamma",
+      "refundAddress": "kaspatest:qgamma-refund-placeholder",
+      "amountTkas": 30,
+      "outpoint": {
+        "txid": "3333333333333333333333333333333333333333333333333333333333333333",
+        "index": 0
+      },
+      "status": "accepted-output-imported",
+      "note": "Counts toward accepted progress in this planner fixture."
+    },
+    {
+      "pledgeId": "pledge-docs-004",
+      "contributor": "merchant-delta",
+      "refundAddress": "kaspatest:qdelta-refund-placeholder",
+      "amountTkas": 40,
+      "outpoint": {
+        "txid": "4444444444444444444444444444444444444444444444444444444444444444",
+        "index": 2
+      },
+      "status": "signed-not-submitted",
+      "note": "Shows planned progress only; it cannot make release ready until accepted."
+    }
+  ],
+  "releasePlan": {
+    "status": "wait-for-more-accepted-pledges",
+    "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "acceptedInputCount": 3,
+    "acceptedInputTkas": 75,
+    "remainingAcceptedTkas": 25,
+    "next": "Do not release yet; import more accepted pledge outputs before target status changes."
+  },
+  "refundPlan": {
+    "status": "available-after-deadline-if-target-not-met",
+    "deadlineIso": "2026-05-14T00:00:00.000Z",
+    "refundCount": 3,
+    "refunds": [
+      {
+        "pledgeId": "pledge-docs-001",
+        "refundAddress": "kaspatest:qalpha-refund-placeholder",
+        "amountTkas": 25,
+        "sourceOutpoint": {
+          "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+          "index": 0
+        }
+      },
+      {
+        "pledgeId": "pledge-docs-002",
+        "refundAddress": "kaspatest:qbeta-refund-placeholder",
+        "amountTkas": 20,
+        "sourceOutpoint": {
+          "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+          "index": 1
+        }
+      },
+      {
+        "pledgeId": "pledge-docs-003",
+        "refundAddress": "kaspatest:qgamma-refund-placeholder",
+        "amountTkas": 30,
+        "sourceOutpoint": {
+          "txid": "3333333333333333333333333333333333333333333333333333333333333333",
+          "index": 0
+        }
+      }
+    ]
+  },
+  "boundaries": [
+    "This state is planner/indexer-side aggregation over pledge records.",
+    "It does not prove pooled assurance target enforcement in one covenant output.",
+    "Only accepted pledge outputs should count toward release readiness.",
+    "Pending or signed-only pledge drafts can show planned progress but cannot make the campaign releasable."
+  ]
+}

@@ -365,6 +365,10 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.campaigns {
+  margin-top: 24px;
+}
+
 .submit-console {
   margin-top: 24px;
 }
@@ -541,6 +545,34 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.campaign-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.campaign-summary article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.campaign-summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.campaign-summary strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
 .research-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -594,6 +626,18 @@ progress::-moz-progress-bar {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 16px;
+}
+
+.campaign-plans,
+.campaign-pledges {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.campaign-pledges {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .submit-card pre {
@@ -718,6 +762,8 @@ progress::-moz-progress-bar {
 .invoice-draft article,
 .submit-card,
 .research-card,
+.campaign-card,
+.campaign-plans article,
 .attestation-card,
 .indexer-card,
 .receipt-card,
@@ -740,6 +786,8 @@ progress::-moz-progress-bar {
 .invoice-draft article span,
 .submit-card span,
 .research-card span,
+.campaign-card span,
+.campaign-plans article span,
 .attestation-card span,
 .indexer-card span,
 .receipt-card span,
@@ -776,6 +824,12 @@ progress::-moz-progress-bar {
 .research-card p,
 .research-card small,
 .research-card a,
+.campaign-card strong,
+.campaign-card p,
+.campaign-card small,
+.campaign-plans article strong,
+.campaign-plans article p,
+.campaign-plans article small,
 .attestation-card strong,
 .attestation-card p,
 .attestation-card small,
@@ -802,6 +856,8 @@ progress::-moz-progress-bar {
 .invoice-draft article p,
 .submit-card p,
 .research-card p,
+.campaign-card p,
+.campaign-plans article p,
 .attestation-card p,
 .indexer-card p,
 .receipt-card p,
@@ -817,6 +873,8 @@ progress::-moz-progress-bar {
 .invoice-draft article small,
 .submit-card small,
 .research-card small,
+.campaign-card small,
+.campaign-plans article small,
 .attestation-card small,
 .indexer-card small,
 .receipt-card small,
@@ -906,6 +964,9 @@ progress::-moz-progress-bar {
   .indexer-summary,
   .invoice-summary,
   .invoice-list,
+  .campaign-summary,
+  .campaign-plans,
+  .campaign-pledges,
   .submit-summary,
   .submit-drafts,
   .research-summary,

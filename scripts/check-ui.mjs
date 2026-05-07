@@ -53,6 +53,9 @@ try {
   await expectText(page, "#invoice-summary", "Draft");
   await expectText(page, "#invoice-list", "merchant-order-1337");
   await expectText(page, "#invoice-draft", "signed-not-broadcast");
+  await expectText(page, "#campaign-summary", "release-not-ready");
+  await expectText(page, "#campaign-plans", "Release plan");
+  await expectText(page, "#campaign-pledges", "pledge-docs-004");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "--submit");

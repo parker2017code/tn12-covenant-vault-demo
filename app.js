@@ -26,6 +26,7 @@ import { buildAttestationRegistry } from "./src/attestationSignal.mjs";
 import { buildInvoiceRegistry } from "./src/invoiceReceipt.mjs";
 import { buildSubmitConsoleRegistry } from "./src/submitConsole.mjs";
 import { buildResearchLibrary } from "./src/appResearch.mjs";
+import { buildBatchAssuranceState } from "./src/batchAssurance.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -51,6 +52,9 @@ const submitSummaryNode = document.querySelector("#submit-summary");
 const submitDraftsNode = document.querySelector("#submit-drafts");
 const researchSummaryNode = document.querySelector("#research-summary");
 const researchCandidatesNode = document.querySelector("#research-candidates");
+const campaignSummaryNode = document.querySelector("#campaign-summary");
+const campaignPlansNode = document.querySelector("#campaign-plans");
+const campaignPledgesNode = document.querySelector("#campaign-pledges");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -168,6 +172,7 @@ refreshProofsButton.addEventListener("click", () => verifyProofTransactions({ fo
 renderVault();
 renderAssurance();
 renderManualOutpoint();
+renderBatchAssuranceCampaign();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -283,6 +288,52 @@ async function renderProofTransactions() {
     verifyProofTransactions({ forceRemote: false });
   } catch (error) {
     proofListNode.textContent = `Proof fixture unavailable: ${error.message}`;
+  }
+}
+
+async function renderBatchAssuranceCampaign() {
+  if (!campaignSummaryNode || !campaignPlansNode || !campaignPledgesNode) return;
+
+  try {
+    const response = await fetch("fixtures/BatchAssuranceCampaign.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const campaign = buildBatchAssuranceState(fixture);
+    campaignSummaryNode.innerHTML = `
+      <article><span>Accepted</span><strong>${escapeHtml(campaign.summary.acceptedTkas)} / ${escapeHtml(campaign.summary.targetTkas)}</strong></article>
+      <article><span>Progress</span><strong>${escapeHtml(Math.round(campaign.summary.acceptedProgress * 100))}%</strong></article>
+      <article><span>Pledges</span><strong>${escapeHtml(campaign.summary.acceptedCount)} / ${escapeHtml(campaign.summary.pledgeCount)}</strong></article>
+      <article><span>Release</span><strong>${escapeHtml(campaign.summary.releaseStatus)}</strong></article>
+    `;
+
+    campaignPlansNode.innerHTML = `
+      <article>
+        <span>${escapeHtml(campaign.releasePlan.status)}</span>
+        <strong>Release plan</strong>
+        <p>${escapeHtml(campaign.releasePlan.next)}</p>
+        <small>${escapeHtml(campaign.releasePlan.acceptedInputCount)} accepted inputs; ${escapeHtml(campaign.releasePlan.remainingAcceptedTkas)} TKAS remaining.</small>
+      </article>
+      <article>
+        <span>${escapeHtml(campaign.refundPlan.status)}</span>
+        <strong>Refund plan</strong>
+        <p>${escapeHtml(campaign.refundPlan.refundCount)} accepted pledge refunds can be planned after ${escapeHtml(campaign.refundPlan.deadlineIso)} if the target is not met.</p>
+        <small>Refunds stay per contributor until a pooled design is explicit.</small>
+      </article>
+    `;
+
+    campaignPledgesNode.innerHTML = "";
+    for (const pledge of campaign.pledges) {
+      const article = document.createElement("article");
+      article.className = "campaign-card";
+      article.innerHTML = `
+        <span>${escapeHtml(pledge.status)}</span>
+        <strong>${escapeHtml(pledge.pledgeId)}</strong>
+        <p>${escapeHtml(pledge.amountTkas)} TKAS from ${escapeHtml(pledge.contributor)}</p>
+        <small>${escapeHtml(pledge.note)}</small>
+      `;
+      campaignPledgesNode.append(article);
+    }
+  } catch (error) {
+    campaignSummaryNode.textContent = `Campaign state unavailable: ${error.message}`;
   }
 }
 

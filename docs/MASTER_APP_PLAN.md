@@ -28,6 +28,7 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
    - Move from one pledge proof to many pledge outputs.
    - Show target progress, release planning, and refund planning.
    - First success: campaign state derived from multiple accepted pledge outputs.
+   - Current repo surface: `fixtures/BatchAssuranceCampaign.json`, `src/batchAssurance.mjs`, `npm run campaign:state`, and the browser campaign panel.
 
 4. Escrow Primitive
    - Buyer fund, seller release, timeout refund, mutual cancel.
