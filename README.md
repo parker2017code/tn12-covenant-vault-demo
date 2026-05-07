@@ -6,6 +6,7 @@ This is not a mainnet wallet, not investment advice, and not proof that Toccata 
 
 ## What It Does Now
 
+- See `docs/PROGRESS.md` for the current lane-by-lane build state and next work.
 - Designs a vault policy with owner, recovery, withdrawal delay, daily limit, guardian count, and memo fields.
 - Produces a deterministic policy ID in the browser.
 - Simulates vault funding, delayed withdrawal, cancel, and recovery paths.
