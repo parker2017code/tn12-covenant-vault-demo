@@ -809,6 +809,9 @@ assert.match(html, /Master app plan/);
 assert.match(html, /Attestation registry/);
 assert.match(html, /Prediction hedge simulator/);
 assert.match(html, /npm run prediction:hedge/);
+assert.match(html, /escrow mutual-cancel proof transactions/);
+assert.match(html, /accepted pledge-output custody drafts/);
+assert.doesNotMatch(html, /escrow cancel redesign/);
 
 const assuranceDocs = await readFile(new URL("../docs/ASSURANCE_CONTRACTS.md", import.meta.url), "utf8");
 assert.match(assuranceDocs, /funding rule strangers can rely on/);
