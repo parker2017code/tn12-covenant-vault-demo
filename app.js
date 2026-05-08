@@ -27,6 +27,7 @@ import { buildInvoiceRegistry } from "./src/invoiceReceipt.mjs";
 import { buildSubmitConsoleRegistry } from "./src/submitConsole.mjs";
 import { buildResearchLibrary } from "./src/appResearch.mjs";
 import { buildBatchAssuranceState } from "./src/batchAssurance.mjs";
+import { buildBatchAssuranceCustodyDrafts } from "./src/batchAssuranceCustodyDrafts.mjs";
 import { buildEnforcementMatrix } from "./src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "./src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "./src/treasuryVault.mjs";
@@ -71,6 +72,7 @@ const researchSummaryNode = document.querySelector("#research-summary");
 const researchCandidatesNode = document.querySelector("#research-candidates");
 const campaignSummaryNode = document.querySelector("#campaign-summary");
 const campaignPlansNode = document.querySelector("#campaign-plans");
+const campaignCustodyNode = document.querySelector("#campaign-custody");
 const campaignPledgesNode = document.querySelector("#campaign-pledges");
 const enforcementSummaryNode = document.querySelector("#enforcement-summary");
 const enforcementFeaturesNode = document.querySelector("#enforcement-features");
@@ -356,6 +358,8 @@ async function renderBatchAssuranceCampaign() {
     const response = await fetch("fixtures/BatchAssuranceCampaign.json", { cache: "no-store" });
     const fixture = await response.json();
     const campaign = buildBatchAssuranceState(fixture);
+    const custodyResponse = await fetch("artifacts/batch-assurance-custody-drafts.json", { cache: "no-store" });
+    const custodyDrafts = await custodyResponse.json();
     campaignSummaryNode.innerHTML = `
       <article><span>Accepted</span><strong>${escapeHtml(campaign.summary.acceptedTkas)} / ${escapeHtml(campaign.summary.targetTkas)}</strong></article>
       <article><span>Progress</span><strong>${escapeHtml(Math.round(campaign.summary.acceptedProgress * 100))}%</strong></article>
@@ -378,6 +382,17 @@ async function renderBatchAssuranceCampaign() {
         <small>Refunds stay per contributor until a pooled design is explicit.</small>
       </article>
     `;
+
+    if (campaignCustodyNode) {
+      campaignCustodyNode.innerHTML = `
+        <article>
+          <span>${escapeHtml(custodyDrafts.status)}</span>
+          <strong>${escapeHtml(custodyDrafts.summary.eligibleInputCount)} custody inputs ready</strong>
+          <p>${escapeHtml(custodyDrafts.summary.blockedInputCount)} planner inputs are blocked from custody settlement.</p>
+          <small>${escapeHtml(custodyDrafts.releaseDraft.status)}</small>
+        </article>
+      `;
+    }
 
     campaignPledgesNode.innerHTML = "";
     for (const pledge of campaign.pledges) {

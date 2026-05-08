@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
+import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildInvoiceRegistry } from "../src/invoiceReceipt.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
@@ -51,6 +52,24 @@ const belowMinimumCampaign = buildBatchAssuranceState({
 assert.equal(belowMinimumCampaign.summary.acceptedTkas, 0);
 assert.equal(belowMinimumCampaign.summary.rejectedCount, campaignFixture.pledgeOutputs.length);
 assert.equal(belowMinimumCampaign.summary.releaseStatus, "release-not-ready");
+
+const payloadOnlyCustodyDrafts = buildBatchAssuranceCustodyDrafts({
+  campaignState: buildBatchAssuranceState(campaignFixture),
+  checkpointIndex: {
+    records: campaignFixture.pledgeOutputs.map((pledge) => ({
+      txid: pledge.acceptedTxid,
+      matched: true,
+      output: {
+        observed: {
+          amountSompi: "100000000"
+        }
+      }
+    }))
+  }
+});
+assert.equal(payloadOnlyCustodyDrafts.status, "custody-draft-blocked");
+assert.equal(payloadOnlyCustodyDrafts.summary.eligibleInputCount, 0);
+assert.equal(payloadOnlyCustodyDrafts.releaseDraft.status, "blocked-until-custody-inputs-match");
 
 const invoiceFixture = JSON.parse(await readFile(new URL("../fixtures/InvoiceReceipts.json", import.meta.url), "utf8"));
 const mismatchedReceiptRegistry = buildInvoiceRegistry({

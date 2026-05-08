@@ -37,6 +37,7 @@
     "wallet:review": "node scripts/build-wallet-review-readiness.mjs",
     "research:library": "node scripts/build-research-library.mjs",
     "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",
+    "campaign:custody": "node scripts/build-batch-assurance-custody-drafts.mjs",
     "enforcement:matrix": "node scripts/build-enforcement-matrix.mjs",
     "escrow:registry": "node scripts/build-escrow-primitives.mjs",
     "treasury:registry": "node scripts/build-treasury-vaults.mjs",

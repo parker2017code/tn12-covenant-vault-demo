@@ -981,6 +981,7 @@ progress::-moz-progress-bar {
 }
 
 .campaign-plans,
+.campaign-custody,
 .campaign-pledges {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1201,6 +1202,7 @@ progress::-moz-progress-bar {
 .submit-card,
 .research-card,
 .campaign-card,
+.campaign-custody article,
 .campaign-plans article,
 .enforcement-card,
 .escrow-card,
@@ -1239,6 +1241,7 @@ progress::-moz-progress-bar {
 .submit-card span,
 .research-card span,
 .campaign-card span,
+.campaign-custody article span,
 .campaign-plans article span,
 .enforcement-card span,
 .escrow-card span,
@@ -1295,6 +1298,9 @@ progress::-moz-progress-bar {
 .campaign-card strong,
 .campaign-card p,
 .campaign-card small,
+.campaign-custody article strong,
+.campaign-custody article p,
+.campaign-custody article small,
 .campaign-plans article strong,
 .campaign-plans article p,
 .campaign-plans article small,
@@ -1365,6 +1371,7 @@ progress::-moz-progress-bar {
 .submit-card p,
 .research-card p,
 .campaign-card p,
+.campaign-custody article p,
 .campaign-plans article p,
 .enforcement-card p,
 .escrow-card p,
@@ -1396,6 +1403,7 @@ progress::-moz-progress-bar {
 .submit-card small,
 .research-card small,
 .campaign-card small,
+.campaign-custody article small,
 .campaign-plans article small,
 .enforcement-card small,
 .escrow-card small,
@@ -1501,6 +1509,7 @@ progress::-moz-progress-bar {
   .invoice-list,
   .campaign-summary,
   .campaign-plans,
+  .campaign-custody,
   .campaign-pledges,
   .enforcement-summary,
   .enforcement-features,

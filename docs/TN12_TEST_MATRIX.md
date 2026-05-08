@@ -65,8 +65,8 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 
 - wallet-review flow replacing local signing and shell submit,
 - durable node/RPC checkpoint ingestion with virtual-chain rollback replay,
-- batch assurance custody release from multiple pledge outputs,
-- batch assurance custody refund from multiple pledge outputs,
+- batch assurance custody release from multiple amount-matched pledge outputs,
+- batch assurance custody refund from multiple amount-matched pledge outputs,
 - auction custody settlement/refund transaction, atomic exchange, and asset delivery,
 - agent task custody release/refund transactions and autonomous payout lifecycle,
 - treasury/team-vault constrained spend drafts,
@@ -76,6 +76,6 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 
 1. Wallet-review flow for payload receipt submission.
 2. Durable node/RPC checkpoint ingestion with virtual-chain rollback replay.
-3. Batch assurance custody release/refund drafts.
+3. Batch assurance amount-matched custody release/refund drafts.
 4. Auction settlement/refund drafts.
 5. Agent task release/refund drafts.

@@ -279,7 +279,7 @@ npm run payload:verify
 
 `artifacts/payload-receipt-evidence.json` confirms the accepted transaction payload matches the signed draft, decodes to `order-receipt / merchant-order-1337 / paid`, and pays the expected 1 TKAS output.
 
-Next assurance work must add campaign-level state, multi-pledge fixtures, and batch release/refund planning before claiming a real campaign product.
+Next assurance work must replace planner payload references with amount-matched pledge custody outputs before claiming release/refund settlement.
 
 ## Payload Receipt State
 

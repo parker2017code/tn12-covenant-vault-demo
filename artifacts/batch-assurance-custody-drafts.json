@@ -1,0 +1,116 @@
+{
+  "schema": "tn12-batch-assurance-custody-drafts/v1",
+  "network": "kaspa-testnet-12",
+  "status": "custody-draft-blocked",
+  "campaign": {
+    "id": "kaspa-dev-docs-sprint",
+    "name": "Kaspa dev docs sprint",
+    "targetTkas": 100,
+    "minimumPledgeTkas": 10,
+    "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "deadlineIso": "2026-05-14T00:00:00.000Z",
+    "releaseMode": "batch-release-after-target",
+    "refundMode": "individual-refund-after-deadline"
+  },
+  "summary": {
+    "requestedReleaseTkas": "100",
+    "eligibleInputTkas": "0",
+    "blockedInputCount": 3,
+    "eligibleInputCount": 0,
+    "minerFeeSompi": "5000",
+    "releaseOutputTkas": "0",
+    "targetMet": true,
+    "custodyReady": false
+  },
+  "releaseDraft": {
+    "status": "blocked-until-custody-inputs-match",
+    "inputs": [],
+    "output": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountSompi": "0",
+      "amountTkas": "0"
+    },
+    "blockers": [
+      {
+        "pledgeId": "pledge-docs-001",
+        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "expectedAmountTkas": "45",
+        "observedAmountTkas": "1",
+        "reason": "Referenced accepted output amount does not match the pledge amount."
+      },
+      {
+        "pledgeId": "pledge-docs-002",
+        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "expectedAmountTkas": "35",
+        "observedAmountTkas": "1",
+        "reason": "Referenced accepted output amount does not match the pledge amount."
+      },
+      {
+        "pledgeId": "pledge-docs-003",
+        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+        "expectedAmountTkas": "20",
+        "observedAmountTkas": "1",
+        "reason": "Referenced accepted output amount does not match the pledge amount."
+      }
+    ]
+  },
+  "refundDrafts": [
+    {
+      "pledgeId": "pledge-docs-001",
+      "status": "blocked-until-custody-input-matches",
+      "input": {
+        "pledgeId": "pledge-docs-001",
+        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "outputIndex": 0,
+        "amountSompi": "100000000",
+        "amountTkas": "1"
+      },
+      "output": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amountSompi": "0",
+        "amountTkas": "0"
+      },
+      "blocker": "Referenced accepted output amount does not match the pledge amount."
+    },
+    {
+      "pledgeId": "pledge-docs-002",
+      "status": "blocked-until-custody-input-matches",
+      "input": {
+        "pledgeId": "pledge-docs-002",
+        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "outputIndex": 0,
+        "amountSompi": "100000000",
+        "amountTkas": "1"
+      },
+      "output": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amountSompi": "0",
+        "amountTkas": "0"
+      },
+      "blocker": "Referenced accepted output amount does not match the pledge amount."
+    },
+    {
+      "pledgeId": "pledge-docs-003",
+      "status": "blocked-until-custody-input-matches",
+      "input": {
+        "pledgeId": "pledge-docs-003",
+        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+        "outputIndex": 0,
+        "amountSompi": "100000000",
+        "amountTkas": "1"
+      },
+      "output": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amountSompi": "0",
+        "amountTkas": "0"
+      },
+      "blocker": "Referenced accepted output amount does not match the pledge amount."
+    }
+  ],
+  "boundaries": [
+    "This artifact is a custody draft review, not a signed transaction.",
+    "Accepted payload planner records do not become custody inputs unless the referenced output amount and txid match the pledge record.",
+    "Current batch planner payloads prove app-state intent, not pooled covenant settlement.",
+    "A production batch-assurance settlement must spend actual pledge outputs or script-enforced covenant outputs."
+  ]
+}

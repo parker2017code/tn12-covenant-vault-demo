@@ -59,11 +59,13 @@
       "builtSurface": [
         "fixtures/BatchAssuranceCampaign.json",
         "src/batchAssurance.mjs",
+        "src/batchAssuranceCustodyDrafts.mjs",
         "npm run campaign:state",
+        "npm run campaign:custody",
         "artifacts/payload-batch-pledge-docs-001-evidence.json",
         "artifacts/payload-batch-release-plan-evidence.json"
       ],
-      "next": "Build exact custody release/refund settlement drafts for accepted pledge outputs."
+      "next": "Replace planner payload references with actual custody pledge outputs before settlement."
     },
     {
       "order": 4,

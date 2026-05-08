@@ -313,9 +313,10 @@ Build the batch assurance campaign planner state:
 
 ```sh
 npm run campaign:state
+npm run campaign:custody
 ```
 
-This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. Current batch-assurance pledge and release-ready records have accepted TN12 payload evidence, but they do not prove custody settlement or pooled covenant enforcement.
+This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json` and `artifacts/batch-assurance-custody-drafts.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. The custody draft review blocks planner payloads unless the referenced output amount matches the pledge amount. Current batch-assurance pledge and release-ready records have accepted TN12 payload evidence, but they do not prove custody settlement or pooled covenant enforcement.
 
 Build the enforcement matrix:
 
