@@ -66,12 +66,15 @@
         "fixtures/BatchAssuranceCampaign.json",
         "src/batchAssurance.mjs",
         "src/batchAssuranceCustodyDrafts.mjs",
+        "src/batchAssuranceCustodyRequirements.mjs",
         "npm run campaign:state",
         "npm run campaign:custody",
+        "npm run campaign:custody-requirements",
+        "artifacts/batch-assurance-custody-requirements.json",
         "artifacts/payload-batch-pledge-docs-001-evidence.json",
         "artifacts/payload-batch-release-plan-evidence.json"
       ],
-      "next": "Replace planner payload references with actual custody pledge outputs before settlement."
+      "next": "Build accepted TN12 pledge outputs for the exact campaign amounts, then import those outpoints before settlement."
     },
     {
       "order": 4,

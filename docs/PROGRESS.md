@@ -29,7 +29,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Enforcement: planner/indexer.
    - Covenant boundary: individual pledge script exists; pooled target aggregation is not script-enforced.
    - Evidence: three accepted pledge planner payloads and one accepted release-ready planner payload. These are not custody-settlement proofs.
-   - Custody review: `npm run campaign:custody` blocks settlement drafts until referenced outputs match pledge amounts.
+   - Custody review: `npm run campaign:custody` blocks settlement drafts until referenced outputs match pledge amounts. `npm run campaign:custody-requirements` lists the exact accepted pledge outputs still needed on TN12.
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: base built.

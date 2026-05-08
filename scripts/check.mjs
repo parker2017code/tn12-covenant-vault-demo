@@ -44,6 +44,7 @@ import {
 import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
+import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
 import { buildWalletConnectorReadiness } from "../src/walletConnectorReadiness.mjs";
 import { buildWalletSubmitPackage } from "../src/walletSubmitPackage.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
@@ -257,6 +258,18 @@ assert.equal(custodyDraftFixture.status, "custody-draft-blocked");
 assert.equal(custodyDraftFixture.summary.blockedInputCount, 3);
 assert.equal(custodyDraftFixture.summary.eligibleInputCount, 0);
 assert.match(custodyDraftFixture.releaseDraft.blockers[0].reason, /amount does not match/);
+const custodyRequirementsFixture = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-custody-requirements.json", import.meta.url), "utf8"));
+assert.equal(custodyRequirementsFixture.status, "custody-requirements-open");
+assert.equal(custodyRequirementsFixture.summary.pledgeOutputCount, 3);
+assert.equal(custodyRequirementsFixture.summary.readyCount, 0);
+assert.equal(custodyRequirementsFixture.summary.blockedCount, 3);
+assert.equal(custodyRequirementsFixture.summary.requiredTkas, "100");
+assert.equal(custodyRequirementsFixture.summary.observedReferencedTkas, "3");
+assert.equal(custodyRequirementsFixture.summary.missingMatchedTkas, "100");
+assert.ok(custodyRequirementsFixture.requirements.every((requirement) =>
+  requirement.required.sourceKind === "accepted-pledge-output"
+  && requirement.currentReference.amountMatches === false
+));
 const syntheticCustodyCheckpoint = {
   network: "kaspa-testnet-12",
   records: campaignState.releasePlan.inputs.map((input) => ({
@@ -277,6 +290,15 @@ const readyCustodyDrafts = buildBatchAssuranceCustodyDrafts({
 assert.equal(readyCustodyDrafts.status, "custody-release-draft-ready");
 assert.equal(readyCustodyDrafts.summary.eligibleInputCount, 3);
 assert.equal(readyCustodyDrafts.summary.blockedInputCount, 0);
+const readyCustodyRequirements = buildBatchAssuranceCustodyRequirements({
+  campaignState,
+  checkpointIndex: syntheticCustodyCheckpoint,
+  custodyDrafts: readyCustodyDrafts
+});
+assert.equal(readyCustodyRequirements.status, "custody-requirements-satisfied");
+assert.equal(readyCustodyRequirements.summary.readyCount, 3);
+assert.equal(readyCustodyRequirements.summary.blockedCount, 0);
+assert.equal(readyCustodyRequirements.summary.missingMatchedTkas, "0");
 const enforcementFixture = JSON.parse(await readFile(new URL("../fixtures/EnforcementMatrix.json", import.meta.url), "utf8"));
 const enforcementMatrix = buildEnforcementMatrix(enforcementFixture);
 assert.equal(enforcementMatrix.status, "claim-surface-audit");
@@ -623,6 +645,7 @@ const files = [
   "scripts/build-research-library.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
+  "scripts/build-batch-assurance-custody-requirements.mjs",
   "scripts/build-enforcement-matrix.mjs",
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-treasury-vaults.mjs",
@@ -666,6 +689,7 @@ const files = [
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
+  "artifacts/batch-assurance-custody-requirements.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/proof-evidence.json",
   "artifacts/escrow-primitives.json",
@@ -791,6 +815,7 @@ assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);
+assert.match(readme, /npm run campaign:custody-requirements/);
 assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /npm run treasury:registry/);

@@ -94,8 +94,8 @@
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-tn12-json-wrpc-payload-events",
-      "detail": "Move from accepted planner payloads to accepted pledge-output custody drafts.",
-      "next": "Replace planner payload references with actual custody pledge outputs before settlement."
+      "detail": "Custody requirements now identify the exact accepted pledge outputs needed before settlement drafts.",
+      "next": "Build accepted TN12 pledge outputs for the exact campaign amounts, then import those outpoints before settlement."
     },
     {
       "laneId": "miner-pool-signals",
@@ -127,7 +127,7 @@
     {
       "id": "pledge-output-custody",
       "laneId": "batch-assurance",
-      "detail": "Create custody settlement drafts only from amount-matched pledge outputs."
+      "detail": "Build and submit amount-matched pledge outputs, then import those outpoints into custody drafts."
     },
     {
       "id": "durable-indexer",

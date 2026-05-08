@@ -41,6 +41,7 @@
     "research:library": "node scripts/build-research-library.mjs",
     "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",
     "campaign:custody": "node scripts/build-batch-assurance-custody-drafts.mjs",
+    "campaign:custody-requirements": "node scripts/build-batch-assurance-custody-requirements.mjs",
     "enforcement:matrix": "node scripts/build-enforcement-matrix.mjs",
     "escrow:registry": "node scripts/build-escrow-primitives.mjs",
     "treasury:registry": "node scripts/build-treasury-vaults.mjs",

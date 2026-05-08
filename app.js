@@ -371,6 +371,8 @@ async function renderBatchAssuranceCampaign() {
     const campaign = buildBatchAssuranceState(fixture);
     const custodyResponse = await fetch("artifacts/batch-assurance-custody-drafts.json", { cache: "no-store" });
     const custodyDrafts = await custodyResponse.json();
+    const requirementsResponse = await fetch("artifacts/batch-assurance-custody-requirements.json", { cache: "no-store" });
+    const custodyRequirements = await requirementsResponse.json();
     campaignSummaryNode.innerHTML = `
       <article><span>Accepted</span><strong>${escapeHtml(campaign.summary.acceptedTkas)} / ${escapeHtml(campaign.summary.targetTkas)}</strong></article>
       <article><span>Progress</span><strong>${escapeHtml(Math.round(campaign.summary.acceptedProgress * 100))}%</strong></article>
@@ -401,6 +403,12 @@ async function renderBatchAssuranceCampaign() {
           <strong>${escapeHtml(custodyDrafts.summary.eligibleInputCount)} custody inputs ready</strong>
           <p>${escapeHtml(custodyDrafts.summary.blockedInputCount)} planner inputs are blocked from custody settlement.</p>
           <small>${escapeHtml(custodyDrafts.releaseDraft.status)}</small>
+        </article>
+        <article>
+          <span>${escapeHtml(custodyRequirements.status)}</span>
+          <strong>${escapeHtml(custodyRequirements.summary.missingMatchedTkas)} TKAS still needs matched custody</strong>
+          <p>${escapeHtml(custodyRequirements.summary.blockedCount)} accepted pledge-output references must be replaced before release.</p>
+          <small>${escapeHtml(custodyRequirements.nextBuilds[0]?.detail || "Build amount-matched pledge outputs next.")}</small>
         </article>
       `;
     }
