@@ -389,6 +389,14 @@ Current app build order:
 
 ## Next Build Plan
 
+Pause note, 2026-05-08:
+
+- Latest pushed commit at pause: `7bfd10c Refresh TN12 evidence artifacts`.
+- Remote check and Pages deployment were green after `7bfd10c`.
+- Local WIP file: `src/roleSeparatedInvalidCandidates.mjs`.
+- That WIP is not wired into scripts, artifacts, checks, or docs yet.
+- Resume by finishing the local invalid-candidate artifact for role-separated wrong signer, selector, output, amount, and lock-shape cases. Do not submit invalid TN12 transactions until the candidate is explicit, reviewed, and backed by a fresh expendable output.
+
 Recommended order from here:
 
 1. Add wallet-review and wallet-connector flow for payload receipt submission.
