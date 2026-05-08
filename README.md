@@ -137,10 +137,14 @@ cd /home/parker2017/silverscript-tools
 cargo build --release -p silverscript-lang --bin silverc
 cd /home/parker2017/tn12-covenant-vault-demo
 npm run fixtures
+npm run fixtures:roles
 npm run compile:contracts
+npm run compile:roles
 ```
 
 `npm run fixtures` derives public constructor args from the saved testnet wallet and writes public metadata to `fixtures/SavedWallet.public.json`. The private key stays in `.local/tn12-wallet.json`.
+
+`npm run fixtures:roles` creates role-separated testnet keys for the next proof pass and writes only public metadata plus constructor args to `fixtures/RoleSeparatedWallets.public.json` and `fixtures/role-separated/`. Private role keys stay in `.local/tn12-role-wallets.json`. `npm run compile:roles` compiles those role-separated constructor fixtures to `artifacts/role-separated/` without changing the historical accepted-proof artifacts.
 
 The compiled artifacts are written to `artifacts/`. The current assurance template is an individual pledge primitive: it can release a pledge to the recipient path or refund the contributor after the deadline. Campaign target aggregation still belongs in the app/planner layer until a pooled covenant or proof-backed design is added.
 

@@ -437,19 +437,25 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 10);
+assert.equal(projectPlan.summary.done, 11);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 6);
 assert.equal(projectPlan.summary.later, 6);
 assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
 assert.ok(projectPlan.done.some((item) => item.id === "based-rollup-scout"));
 assert.ok(projectPlan.done.some((item) => item.id === "covenant-adversarial-map"));
+assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures"));
 assert.ok(projectPlan.next.some((item) => item.id === "role-separated-negative-proofs"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
 assert.ok(projectPlan.longTermVision.some((item) => /wallet-reviewed Kaspa app console/.test(item)));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
+const roleWalletsPublic = JSON.parse(await readFile(new URL("../fixtures/RoleSeparatedWallets.public.json", import.meta.url), "utf8"));
+assert.equal(roleWalletsPublic.schema, "tn12-role-separated-wallets-public/v1");
+assert.equal(Object.keys(roleWalletsPublic.roles).length, 6);
+assert.equal(new Set(Object.values(roleWalletsPublic.roles).map((role) => role.xOnlyPublicKey)).size, 6);
+assert.equal(roleWalletsPublic.constructorFixtures.Escrow, "fixtures/role-separated/Escrow.ctor.json");
 const covenantCoverage = buildCovenantAdversarialCoverage({
   proofFixture,
   constructorArgs: {
@@ -696,7 +702,9 @@ const files = [
   "scripts/wallet-public-info.mjs",
   "scripts/fetch-funded-utxos.mjs",
   "scripts/generate-constructor-fixtures.mjs",
+  "scripts/generate-role-separated-fixtures.mjs",
   "scripts/compile-silverscript.mjs",
+  "scripts/compile-role-separated-contracts.mjs",
   "scripts/build-transaction-drafts.mjs",
   "scripts/build-signed-p2pk-draft.mjs",
   "scripts/build-signed-contract-funding-drafts.mjs",
@@ -753,6 +761,9 @@ const files = [
   "artifacts/AssurancePledge.json",
   "artifacts/Escrow.json",
   "artifacts/EscrowExpired.json",
+  "artifacts/role-separated/DelayedRecoveryVault.json",
+  "artifacts/role-separated/AssurancePledge.json",
+  "artifacts/role-separated/Escrow.json",
   "artifacts/signed-drafts/escrow-daa-refund-funding.json",
   "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
   "artifacts/signed-drafts/escrow-cancel-funding.json",
@@ -799,6 +810,7 @@ const files = [
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/FundedWalletUtxos.json",
   "fixtures/SavedWallet.public.json",
+  "fixtures/RoleSeparatedWallets.public.json",
   "fixtures/AcceptedProofTransactions.json",
   "fixtures/AcceptedAppState.json",
   "fixtures/EcosystemBuildQueue.json",
@@ -827,6 +839,9 @@ const files = [
   "fixtures/EscrowDaaRefundContractOutpoint.json",
   "fixtures/EscrowCancelContractOutpoint.json",
   "fixtures/EscrowExpired.ctor.json",
+  "fixtures/role-separated/DelayedRecoveryVault.ctor.json",
+  "fixtures/role-separated/AssurancePledge.ctor.json",
+  "fixtures/role-separated/Escrow.ctor.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/checkpointedIndexer.mjs",
@@ -891,6 +906,8 @@ assert.match(readme, /avoids mainnet-wallet claims/i);
 assert.match(readme, /starts with local evidence/i);
 assert.match(readme, /npm run address/);
 assert.match(readme, /npm run fixtures/);
+assert.match(readme, /npm run fixtures:roles/);
+assert.match(readme, /npm run compile:roles/);
 assert.match(readme, /npm run wallet:public/);
 assert.match(readme, /npm run plan/);
 assert.match(readme, /npm run drafts/);

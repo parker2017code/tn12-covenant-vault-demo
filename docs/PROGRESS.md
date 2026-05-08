@@ -100,6 +100,7 @@ Done now:
 - Browser/repo control surface: submit registry, wallet-review readiness, wallet-connector spec, checkpointed accepted index, and operator plan.
 - Based-rollup scouting: `npm run rollup:scout` tracks Maxim's TN12 PoC, Hans' vProgs/runtime lane, Michael's covenant++ roadmap, and next endpoint/bridge/app scouting tasks.
 - Covenant adversarial map: `npm run covenant:adversarial` records local selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and script-mapping checks for the seven accepted proof paths.
+- Role-separated fixture lane: `npm run fixtures:roles` and `npm run compile:roles` create the clean constructor/script base for the next accepted-proof pass without mutating historical proof artifacts.
 - Prediction/hedge: accepted review payloads plus a simulator; no settlement, odds, custody, or advice.
 
 WIP now:
@@ -113,7 +114,7 @@ Next actions:
 
 1. Wire the wallet-submit package into a live wallet connector.
 2. Create custody settlement drafts only from matched pledge outputs.
-3. Build role-separated fixtures and exact wrong-signer/wrong-script-argument candidates for accepted proof lanes.
+3. Fund role-separated contract outputs and build exact wrong-signer/wrong-script-argument candidates for accepted proof lanes.
 4. Implement the durable indexer replay plan: storage schema, node/RPC virtual-chain reader, reducers, rollback replay, and UI health.
 5. Add reputation thresholds and signer provenance before signals affect more app lanes.
 

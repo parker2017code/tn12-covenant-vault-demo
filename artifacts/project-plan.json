@@ -3,7 +3,7 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 10,
+    "done": 11,
     "wip": 4,
     "next": 6,
     "later": 6
@@ -94,6 +94,11 @@
       "id": "covenant-adversarial-map",
       "laneId": "escrow",
       "detail": "Local adversarial coverage now maps selector, output lock, amount, time-lock, input-mass, role-separation, and script-mapping gaps for seven proof paths."
+    },
+    {
+      "id": "role-separated-fixtures",
+      "laneId": "escrow",
+      "detail": "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts."
     }
   ],
   "wip": [
@@ -152,7 +157,7 @@
     {
       "id": "role-separated-negative-proofs",
       "laneId": "escrow",
-      "detail": "Generate role-separated fixtures, fund fresh outputs, and build exact wrong-signer/wrong-argument candidates before TN12 rejection attempts."
+      "detail": "Fund fresh role-separated outputs and build exact wrong-signer/wrong-argument candidates before TN12 rejection attempts."
     },
     {
       "id": "attestation-reputation",

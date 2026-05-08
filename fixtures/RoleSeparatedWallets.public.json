@@ -1,0 +1,43 @@
+{
+  "schema": "tn12-role-separated-wallets-public/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-08T08:18:20.471Z",
+  "roles": {
+    "vaultOwner": {
+      "address": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg",
+      "publicKey": "03d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185",
+      "xOnlyPublicKey": "d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185"
+    },
+    "vaultRecovery": {
+      "address": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+      "publicKey": "03e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9",
+      "xOnlyPublicKey": "e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9"
+    },
+    "pledgeContributor": {
+      "address": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "publicKey": "0398228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f",
+      "xOnlyPublicKey": "98228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f"
+    },
+    "pledgeRecipient": {
+      "address": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex",
+      "publicKey": "024e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b",
+      "xOnlyPublicKey": "4e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b"
+    },
+    "escrowBuyer": {
+      "address": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "publicKey": "030674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede",
+      "xOnlyPublicKey": "0674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede"
+    },
+    "escrowSeller": {
+      "address": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "publicKey": "0254c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+      "xOnlyPublicKey": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669"
+    }
+  },
+  "constructorFixtures": {
+    "DelayedRecoveryVault": "fixtures/role-separated/DelayedRecoveryVault.ctor.json",
+    "AssurancePledge": "fixtures/role-separated/AssurancePledge.ctor.json",
+    "Escrow": "fixtures/role-separated/Escrow.ctor.json"
+  },
+  "warning": "Public role metadata only. Private role keys remain in .local/tn12-role-wallets.json."
+}
