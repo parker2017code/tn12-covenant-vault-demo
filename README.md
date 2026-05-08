@@ -279,9 +279,10 @@ npm run indexer:checkpoint
 npm run indexer:persist
 npm run indexer:replay-plan
 npm run indexer:schema
+npm run indexer:replay
 ```
 
-This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, and `artifacts/indexer-storage-schema.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready. The replay plan turns the current known-txid checkpoint into the backend build order. The storage schema defines checkpoint, transaction, payload-event, proof-spend, and rollback tables before any node/RPC replay implementation.
+This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, and `artifacts/indexer-replay-run.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready. The replay plan turns the current known-txid checkpoint into the backend build order. The storage schema defines checkpoint, transaction, payload-event, proof-spend, and rollback tables. The replay run materializes the current checkpoint into those table-shaped rows before any node/RPC ingestion is added.
 
 Build a compact transaction-payload receipt artifact for the accepted-transaction indexer lane:
 

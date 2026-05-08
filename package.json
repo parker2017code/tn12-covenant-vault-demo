@@ -45,6 +45,7 @@
     "indexer:persist": "node scripts/build-persisted-checkpoint-guard.mjs",
     "indexer:replay-plan": "node scripts/build-indexer-replay-plan.mjs",
     "indexer:schema": "node scripts/build-indexer-storage-schema.mjs",
+    "indexer:replay": "node scripts/build-indexer-replay-run.mjs",
     "invoice:registry": "node scripts/build-invoice-registry.mjs",
     "submit:registry": "node scripts/build-submit-console-registry.mjs",
     "wallet:review": "node scripts/build-wallet-review-readiness.mjs",

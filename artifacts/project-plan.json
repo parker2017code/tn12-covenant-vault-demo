@@ -3,7 +3,7 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 16,
+    "done": 17,
     "wip": 4,
     "next": 5,
     "later": 6
@@ -91,6 +91,11 @@
       "detail": "The durable indexer storage contract now defines checkpoint, transaction, payload event, proof spend, and rollback tables."
     },
     {
+      "id": "indexer-fixture-replay",
+      "laneId": "payload-invoice",
+      "detail": "The fixture-backed replay run now materializes checkpoint, accepted transaction, payload event, proof spend, and rollback rows from the current checkpoint."
+    },
+    {
       "id": "based-rollup-scout",
       "laneId": "defi-research",
       "detail": "The scout artifact records that current TN12 work does not use an L2, while core-migratable based rollups remain worth tracking for later."
@@ -175,9 +180,9 @@
       "detail": "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS."
     },
     {
-      "id": "indexer-replay-runner",
+      "id": "indexer-virtual-chain-reader",
       "laneId": "payload-invoice",
-      "detail": "Create the first fixture-backed replay runner against the durable indexer storage schema."
+      "detail": "Replace known-txid checkpoint input with a node/RPC virtual-chain reader feeding the replay tables."
     },
     {
       "id": "attestation-reputation",

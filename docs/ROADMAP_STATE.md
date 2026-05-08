@@ -61,7 +61,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
-| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, replay plan, and storage schema | Implement fixture-backed replay runner, then node/RPC replay |
+| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, replay plan, storage schema, and fixture-backed replay rows | Implement node/RPC virtual-chain replay |
 | 2. Submit console | Review gate built | 39 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, and exact pledge-output requirements | Build accepted pledge outputs for the required amounts, then import those outpoints |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, accepted mutual-cancel proofs, and local role-separated invalid-candidate map | Fund fresh expendable outputs before any TN12 rejection submissions |
@@ -96,7 +96,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 1. Make the accepted JSON wRPC payload path repeatable through wallet review instead of local signing.
 2. Build custody settlement drafts only from amount-matched pledge outputs.
-3. Implement a fixture-backed replay runner from `artifacts/indexer-storage-schema.json`, then connect it to node/RPC virtual-chain reads.
+3. Connect the fixture-backed replay tables to node/RPC virtual-chain reads.
 4. Turn local invalid-candidate maps into safe TN12 rejection attempts only after fresh expendable outputs exist.
 5. Add reputation thresholds and signer provenance before signals influence more app lanes.
 6. Add based-rollup scouting: available endpoints, bridge model, execution environment, wallet path, and one tiny app target.

@@ -75,6 +75,7 @@ import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
 import { buildPersistedCheckpointGuard } from "../src/indexerPersistence.mjs";
 import { buildIndexerStorageSchema } from "../src/indexerStorageSchema.mjs";
+import { buildIndexerReplayRun } from "../src/indexerReplayRun.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -458,7 +459,7 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 16);
+assert.equal(projectPlan.summary.done, 17);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 5);
 assert.equal(projectPlan.summary.later, 6);
@@ -471,7 +472,8 @@ assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-draf
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-invalid-candidates"));
 assert.ok(projectPlan.done.some((item) => item.id === "indexer-storage-schema"));
-assert.ok(projectPlan.next.some((item) => item.id === "indexer-replay-runner"));
+assert.ok(projectPlan.done.some((item) => item.id === "indexer-fixture-replay"));
+assert.ok(projectPlan.next.some((item) => item.id === "indexer-virtual-chain-reader"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
@@ -624,6 +626,23 @@ const rebuiltIndexerStorage = buildIndexerStorageSchema({
 });
 assert.equal(rebuiltIndexerStorage.status, "storage-schema-ready");
 assert.equal(rebuiltIndexerStorage.sourceCheckpoint.payloadEvents, 26);
+const indexerReplayRunFixture = JSON.parse(await readFile(new URL("../artifacts/indexer-replay-run.json", import.meta.url), "utf8"));
+assert.equal(indexerReplayRunFixture.status, "fixture-replay-ready");
+assert.equal(indexerReplayRunFixture.summary.records, 33);
+assert.equal(indexerReplayRunFixture.summary.payloadEvents, 26);
+assert.equal(indexerReplayRunFixture.summary.proofSpends, 7);
+assert.equal(indexerReplayRunFixture.summary.appStateReady, true);
+assert.equal(indexerReplayRunFixture.tableCounts.accepted_transactions, 33);
+assert.equal(indexerReplayRunFixture.tableCounts.rollback_segments, 0);
+const rebuiltReplayRun = buildIndexerReplayRun({
+  checkpointIndex: checkpointFixture,
+  storageSchema: indexerStorageFixture,
+  runAt: "2026-05-08T00:00:00.000Z"
+});
+assert.equal(rebuiltReplayRun.status, "fixture-replay-ready");
+assert.ok(rebuiltReplayRun.reducerReadiness.some((item) =>
+  item.lane === "invoice" && item.status === "ready-from-fixture-replay"
+));
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -817,6 +836,7 @@ const files = [
   "scripts/build-persisted-checkpoint-guard.mjs",
   "scripts/build-indexer-replay-plan.mjs",
   "scripts/build-indexer-storage-schema.mjs",
+  "scripts/build-indexer-replay-run.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -926,6 +946,7 @@ const files = [
   "artifacts/persisted-checkpoint-guard.json",
   "artifacts/indexer-replay-plan.json",
   "artifacts/indexer-storage-schema.json",
+  "artifacts/indexer-replay-run.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -993,6 +1014,7 @@ const files = [
   "src/checkpointedIndexer.mjs",
   "src/indexerPersistence.mjs",
   "src/indexerStorageSchema.mjs",
+  "src/indexerReplayRun.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",
@@ -1065,6 +1087,7 @@ assert.match(readme, /npm run drafts/);
 assert.match(readme, /npm run indexer:persist/);
 assert.match(readme, /npm run indexer:replay-plan/);
 assert.match(readme, /npm run indexer:schema/);
+assert.match(readme, /npm run indexer:replay/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);

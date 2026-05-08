@@ -12,6 +12,7 @@ export function buildProjectPlan(fixture = {}) {
     action("custody-requirements", "Batch assurance now names the exact amount-matched pledge outputs needed before custody settlement.", "batch-assurance"),
     action("indexer-replay-plan", "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface.", "payload-invoice"),
     action("indexer-storage-schema", "The durable indexer storage contract now defines checkpoint, transaction, payload event, proof spend, and rollback tables.", "payload-invoice"),
+    action("indexer-fixture-replay", "The fixture-backed replay run now materializes checkpoint, accepted transaction, payload event, proof spend, and rollback rows from the current checkpoint.", "payload-invoice"),
     action("based-rollup-scout", "The scout artifact records that current TN12 work does not use an L2, while core-migratable based rollups remain worth tracking for later.", "defi-research"),
     action("covenant-adversarial-map", "Local adversarial coverage now maps selector, output lock, amount, time-lock, input-mass, role-separation, and script-mapping gaps for seven proof paths.", "escrow"),
     action("role-separated-fixtures", "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts.", "escrow"),
@@ -30,7 +31,7 @@ export function buildProjectPlan(fixture = {}) {
 
   const next = [
     action("pledge-output-drafts", "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS.", "batch-assurance"),
-    action("indexer-replay-runner", "Create the first fixture-backed replay runner against the durable indexer storage schema.", "payload-invoice"),
+    action("indexer-virtual-chain-reader", "Replace known-txid checkpoint input with a node/RPC virtual-chain reader feeding the replay tables.", "payload-invoice"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
     action("rollup-bridge-brief", "Map entry, transfer, exit, claim, proof, and state-root responsibilities from core and core-adjacent references.", "defi-research")

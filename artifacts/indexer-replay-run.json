@@ -1,0 +1,1385 @@
+{
+  "schema": "tn12-indexer-replay-run/v1",
+  "network": "kaspa-testnet-12",
+  "runAt": "2026-05-08T09:57:26.138Z",
+  "status": "fixture-replay-ready",
+  "source": {
+    "checkpointKind": "known-txid-public-read-checkpoint",
+    "storageSchema": "tn12-indexer-storage-schema/v1",
+    "storageSchemaStatus": "storage-schema-ready"
+  },
+  "summary": {
+    "records": 33,
+    "acceptedTransactions": 33,
+    "payloadEvents": 26,
+    "proofSpends": 7,
+    "rollbackSegments": 0,
+    "mismatches": 0,
+    "appStateReady": true
+  },
+  "tableCounts": {
+    "checkpoint_watermarks": 1,
+    "accepted_transactions": 33,
+    "accepted_payload_events": 26,
+    "proof_spend_outputs": 7,
+    "rollback_segments": 0
+  },
+  "tables": {
+    "checkpoint_watermarks": [
+      {
+        "id": "kaspa-testnet-12:5203140-5961425",
+        "network": "kaspa-testnet-12",
+        "min_blue_score": 5203140,
+        "max_blue_score": 5961425,
+        "record_count": 33,
+        "payload_event_count": 26,
+        "proof_spend_count": 7,
+        "mismatch_count": 0,
+        "created_at": "2026-05-08T09:57:26.138Z"
+      }
+    ],
+    "accepted_transactions": [
+      {
+        "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5203140,
+        "accepting_block_time": 1778141640305,
+        "payload_hex": null,
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "2499995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "2499995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          }
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5206191,
+        "accepting_block_time": 1778141939817,
+        "payload_hex": null,
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "2499995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "2499995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          }
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5203224,
+        "accepting_block_time": 1778141647772,
+        "payload_hex": null,
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "24999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "24999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          }
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5206200,
+        "accepting_block_time": 1778141940609,
+        "payload_hex": null,
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "24999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "24999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          }
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5328195,
+        "accepting_block_time": 1778154136843,
+        "payload_hex": null,
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "4999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "4999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          }
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5342066,
+        "accepting_block_time": 1778155520353,
+        "payload_hex": null,
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "4999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "4999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          }
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5511468,
+        "accepting_block_time": 1778172704032,
+        "payload_hex": null,
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "4999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "4999995000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          }
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5541142,
+        "accepting_block_time": 1778175542196,
+        "payload_hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6f726465722d31333337222c2276616c7565223a2270616964222c226e6f7465223a2244656d6f207061796c6f616420666f722061636365707465642d7472616e73616374696f6e20696e646578696e67227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5586090,
+        "accepting_block_time": 1778180039863,
+        "payload_hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d726566756e642d64656d6f222c2276616c7565223a22726566756e646564222c226e6f7465223a22416363657074656420726566756e64207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5586406,
+        "accepting_block_time": 1778180072392,
+        "payload_hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a226d65726368616e742d6572726f722d64656d6f222c2276616c7565223a226572726f72222c226e6f7465223a224163636570746564206572726f72207061796c6f616420666f7220696e766f6963652073746174652074657374696e67227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5592475,
+        "accepting_block_time": 1778180666089,
+        "payload_hex": "7b226b696e64223a226163636573732d706173732d726564656d7074696f6e222c227375626a656374223a2272656465656d2d776f726b73686f702d616c706861222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206163636573732d7061737320726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5594833,
+        "accepting_block_time": 1778180894104,
+        "payload_hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220706173732061756374696f6e2e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5592946,
+        "accepting_block_time": 1778180711151,
+        "payload_hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d706173732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5594917,
+        "accepting_block_time": 1778180902903,
+        "payload_hex": "7b226b696e64223a2261756374696f6e2d626964222c227375626a656374223a226269642d766f75636865722d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642061756374696f6e20626964207061796c6f616420666f7220766f75636865722061756374696f6e3b2062656c6f77207265736572766520696e20706c616e6e65722073746174652e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5610796,
+        "accepting_block_time": 1778182505737,
+        "payload_hex": "7b226b696e64223a2261756374696f6e2d736574746c656d656e74222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303032222c2276616c7565223a2277696e6e65722d73656c6563746564222c226e6f7465223a22506c616e6e65722073656c6563746564206269642d706173732d3030322066726f6d20616363657074656420626964207061796c6f6164733b206e6f742061746f6d696320637573746f647920736574746c656d656e742e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5610880,
+        "accepting_block_time": 1778182514354,
+        "payload_hex": "7b226b696e64223a2261756374696f6e2d726566756e64222c227375626a656374223a2261756374696f6e2d706173732d3030313a6269642d706173732d303031222c2276616c7565223a22726566756e642d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b6564206269642d706173732d30303120666f7220726566756e642061667465722077696e6e65722073656c656374696f6e3b206e6f7420637573746f64792072656c656173652e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5593032,
+        "accepting_block_time": 1778180718780,
+        "payload_hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303031222c2276616c7565223a22697373756564222c226e6f7465223a224163636570746564206973737565722069737375616e6365207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5595001,
+        "accepting_block_time": 1778180910575,
+        "payload_hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2269737375652d303032222c2276616c7565223a22697373756564222c226e6f7465223a22416363657074656420737461626c652d76616c75652069737375616e6365207265636569707420666f7220636f6e74726163746f722d626574612e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5593133,
+        "accepting_block_time": 1778180726950,
+        "payload_hex": "7b226b696e64223a22737461626c652d6973737565722d6576656e74222c227375626a656374223a2272656465656d2d303031222c2276616c7565223a2272656465656d6564222c226e6f7465223a2241636365707465642069737375657220726564656d7074696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5593225,
+        "accepting_block_time": 1778180735563,
+        "payload_hex": "7b226b696e64223a226d696e65722d6174746573746174696f6e222c227375626a656374223a227369672d7274642d68617368726174652d303031222c2276616c7565223a227665726966696564222c226e6f7465223a224163636570746564206d696e65722f77617463686572206174746573746174696f6e207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5961077,
+        "accepting_block_time": 1778217794150,
+        "payload_hex": "7b226b696e64223a2270726564696374696f6e2d757064617465222c227375626a656374223a226d61726b65742d6e6574776f726b2d737472657373222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a224163636570746564206174746573746174696f6e206d6f766564207468652073696d756c61746f722e20526576696577206f6e6c793b206e6f2074726164696e67206f7220736574746c656d656e742e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5961425,
+        "accepting_block_time": 1778217829975,
+        "payload_hex": "7b226b696e64223a2268656467652d726576696577222c227375626a656374223a22706f736974696f6e2d6d696e65722d726576656e7565222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a225265766965772070726f6d70742066726f6d206d61726b65742d6e6574776f726b2d7374726573732e204e6f206175746f6d6174696320616374696f6e2c2074726164696e672c20637573746f64792c206f7220736574746c656d656e742e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5595080,
+        "accepting_block_time": 1778180918764,
+        "payload_hex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220696e766f696365206175646974207461736b2e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5595177,
+        "accepting_block_time": 1778180926737,
+        "payload_hex": "7b226b696e64223a226167656e742d7461736b222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e74207461736b207061796c6f616420666f7220657363726f77207370656e642d70617468207461736b2e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5593302,
+        "accepting_block_time": 1778180743020,
+        "payload_hex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d696e766f6963652d303031222c2276616c7565223a226163636570746564222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f616420666f7220544e31322065766964656e6365207377656570227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5595262,
+        "accepting_block_time": 1778180934800,
+        "payload_hex": "7b226b696e64223a226167656e742d70726f6f66222c227375626a656374223a2270726f6f662d657363726f772d303031222c2276616c7565223a2270656e64696e672d726576696577222c226e6f7465223a224163636570746564206167656e742070726f6f66207061796c6f61643b207265766965776572207374617475732072656d61696e732070656e64696e672e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5595354,
+        "accepting_block_time": 1778180943560,
+        "payload_hex": "7b226b696e64223a226167656e742d64697370757465222c227375626a656374223a22646973707574652d657363726f772d303031222c2276616c7565223a226f70656e222c226e6f7465223a224163636570746564206167656e742064697370757465207061796c6f616420666f7220657363726f77207461736b2e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5614597,
+        "accepting_block_time": 1778182883043,
+        "payload_hex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d303031222c2276616c7565223a2272656c656173652d706c616e6e6564222c226e6f7465223a22506c616e6e6572206d61726b656420696e766f696365207461736b207265776172642072656c656173652061667465722061636365707465642070726f6f6620616e6420726576696577657220617070726f76616c3b206e6f74206175746f6e6f6d6f7573207061796f75742e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5614688,
+        "accepting_block_time": 1778182891710,
+        "payload_hex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d657363726f772d303031222c2276616c7565223a22646973707574652d686f6c64222c226e6f7465223a22506c616e6e6572206b65707420657363726f77207461736b2066756e6473206f6e20686f6c64207768696c652064697370757465206973206f70656e3b206e6f74206175746f6e6f6d6f757320637573746f64792e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "10000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5650135,
+        "accepting_block_time": 1778186448992,
+        "payload_hex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5650315,
+        "accepting_block_time": 1778186466514,
+        "payload_hex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5650440,
+        "accepting_block_time": 1778186477529,
+        "payload_hex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303033222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b20636f6d706c657465732074617267657420696e20706c616e6e65722073746174652e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      },
+      {
+        "txid": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+        "network": "kaspa-testnet-12",
+        "accepting_block_blue_score": 5650588,
+        "accepting_block_time": 1778186491403,
+        "payload_hex": "7b226b696e64223a2262617463682d6173737572616e63652d72656c65617365222c227375626a656374223a226b617370612d6465762d646f63732d737072696e74222c2276616c7565223a2272656c656173652d7265616479222c226e6f7465223a2242617463682d6173737572616e636520706c616e6e65722072656c656173652d7265616479206576656e743b206e6f7420706f6f6c656420636f76656e616e7420637573746f647920736574746c656d656e742e227d",
+        "input_json": null,
+        "output_json": {
+          "expected": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "type": "pubkey"
+          },
+          "observed": {
+            "outputIndex": 0,
+            "amountSompi": "100000000",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "type": "pubkey"
+          },
+          "matches": true
+        },
+        "source": "known-txid-public-read-checkpoint",
+        "seen_at": "2026-05-08T09:57:26.138Z"
+      }
+    ],
+    "accepted_payload_events": [
+      {
+        "event_id": "order-receipt:merchant-order-1337:paid",
+        "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+        "lane": "order-receipt",
+        "payload_kind": "order-receipt",
+        "app_id": "merchant-order-1337",
+        "state": "paid",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Invoice paid",
+          "evidencePath": "artifacts/payload-receipt-evidence.json",
+          "payloadBytes": 127,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "order-receipt:merchant-refund-demo:refunded",
+        "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+        "lane": "order-receipt",
+        "payload_kind": "order-receipt",
+        "app_id": "merchant-refund-demo",
+        "state": "refunded",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Invoice refunded",
+          "evidencePath": "artifacts/payload-refund-evidence.json",
+          "payloadBytes": 135,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "order-receipt:merchant-error-demo:error",
+        "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+        "lane": "order-receipt",
+        "payload_kind": "order-receipt",
+        "app_id": "merchant-error-demo",
+        "state": "error",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Invoice error",
+          "evidencePath": "artifacts/payload-error-evidence.json",
+          "payloadBytes": 130,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "access-pass-redemption:redeem-workshop-alpha:accepted",
+        "txid": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+        "lane": "access-pass-redemption",
+        "payload_kind": "access-pass-redemption",
+        "app_id": "redeem-workshop-alpha",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Access pass redemption",
+          "evidencePath": "artifacts/payload-access-pass-redemption-evidence.json",
+          "payloadBytes": 159,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "auction-bid:bid-pass-001:accepted",
+        "txid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+        "lane": "auction-bid",
+        "payload_kind": "auction-bid",
+        "app_id": "bid-pass-001",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Auction bid pass 001",
+          "evidencePath": "artifacts/payload-auction-bid-pass-001-evidence.json",
+          "payloadBytes": 122,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "auction-bid:bid-pass-002:accepted",
+        "txid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+        "lane": "auction-bid",
+        "payload_kind": "auction-bid",
+        "app_id": "bid-pass-002",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Auction bid pass 002",
+          "evidencePath": "artifacts/payload-auction-bid-evidence.json",
+          "payloadBytes": 128,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "auction-bid:bid-voucher-001:accepted",
+        "txid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+        "lane": "auction-bid",
+        "payload_kind": "auction-bid",
+        "app_id": "bid-voucher-001",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Auction bid voucher 001",
+          "evidencePath": "artifacts/payload-auction-bid-voucher-001-evidence.json",
+          "payloadBytes": 160,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "auction-settlement:auction-pass-001:bid-pass-002:winner-selected",
+        "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+        "lane": "auction-settlement",
+        "payload_kind": "auction-settlement",
+        "app_id": "auction-pass-001:bid-pass-002",
+        "state": "winner-selected",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Auction settlement pass 001",
+          "evidencePath": "artifacts/payload-auction-settlement-pass-001-evidence.json",
+          "payloadBytes": 195,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "auction-refund:auction-pass-001:bid-pass-001:refund-planned",
+        "txid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+        "lane": "auction-refund",
+        "payload_kind": "auction-refund",
+        "app_id": "auction-pass-001:bid-pass-001",
+        "state": "refund-planned",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Auction refund pass 001",
+          "evidencePath": "artifacts/payload-auction-refund-pass-001-evidence.json",
+          "payloadBytes": 185,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "stable-issuer-event:issue-001:issued",
+        "txid": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+        "lane": "stable-issuer-event",
+        "payload_kind": "stable-issuer-event",
+        "app_id": "issue-001",
+        "state": "issued",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Stable issuance 001",
+          "evidencePath": "artifacts/payload-stable-issuance-evidence.json",
+          "payloadBytes": 135,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "stable-issuer-event:issue-002:issued",
+        "txid": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+        "lane": "stable-issuer-event",
+        "payload_kind": "stable-issuer-event",
+        "app_id": "issue-002",
+        "state": "issued",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Stable issuance 002",
+          "evidencePath": "artifacts/payload-stable-issuance-002-evidence.json",
+          "payloadBytes": 138,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "stable-issuer-event:redeem-001:redeemed",
+        "txid": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+        "lane": "stable-issuer-event",
+        "payload_kind": "stable-issuer-event",
+        "app_id": "redeem-001",
+        "state": "redeemed",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Stable redemption 001",
+          "evidencePath": "artifacts/payload-stable-redemption-evidence.json",
+          "payloadBytes": 140,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "miner-attestation:sig-rtd-hashrate-001:verified",
+        "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+        "lane": "miner-attestation",
+        "payload_kind": "miner-attestation",
+        "app_id": "sig-rtd-hashrate-001",
+        "state": "verified",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Miner attestation",
+          "evidencePath": "artifacts/payload-miner-attestation-evidence.json",
+          "payloadBytes": 156,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "prediction-update:market-network-stress:review-suggested",
+        "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "lane": "prediction-update",
+        "payload_kind": "prediction-update",
+        "app_id": "market-network-stress",
+        "state": "review-suggested",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Prediction market network stress",
+          "evidencePath": "artifacts/payload-prediction-market-network-stress-evidence.json",
+          "payloadBytes": 179,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "hedge-review:position-miner-revenue:review-suggested",
+        "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "lane": "hedge-review",
+        "payload_kind": "hedge-review",
+        "app_id": "position-miner-revenue",
+        "state": "review-suggested",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Prediction hedge miner revenue",
+          "evidencePath": "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json",
+          "payloadBytes": 190,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "agent-task:agent-task-invoice-001:accepted",
+        "txid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+        "lane": "agent-task",
+        "payload_kind": "agent-task",
+        "app_id": "agent-task-invoice-001",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Agent task invoice",
+          "evidencePath": "artifacts/payload-agent-task-invoice-evidence.json",
+          "payloadBytes": 136,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "agent-task:agent-task-escrow-001:accepted",
+        "txid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+        "lane": "agent-task",
+        "payload_kind": "agent-task",
+        "app_id": "agent-task-escrow-001",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Agent task escrow",
+          "evidencePath": "artifacts/payload-agent-task-escrow-evidence.json",
+          "payloadBytes": 139,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "agent-proof:proof-invoice-001:accepted",
+        "txid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+        "lane": "agent-proof",
+        "payload_kind": "agent-proof",
+        "app_id": "proof-invoice-001",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Agent proof invoice",
+          "evidencePath": "artifacts/payload-agent-proof-evidence.json",
+          "payloadBytes": 133,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "agent-proof:proof-escrow-001:pending-review",
+        "txid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+        "lane": "agent-proof",
+        "payload_kind": "agent-proof",
+        "app_id": "proof-escrow-001",
+        "state": "pending-review",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Agent proof escrow",
+          "evidencePath": "artifacts/payload-agent-proof-escrow-evidence.json",
+          "payloadBytes": 148,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "agent-dispute:dispute-escrow-001:open",
+        "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+        "lane": "agent-dispute",
+        "payload_kind": "agent-dispute",
+        "app_id": "dispute-escrow-001",
+        "state": "open",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Agent dispute escrow",
+          "evidencePath": "artifacts/payload-agent-dispute-escrow-evidence.json",
+          "payloadBytes": 127,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "agent-settlement:agent-task-invoice-001:release-planned",
+        "txid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+        "lane": "agent-settlement",
+        "payload_kind": "agent-settlement",
+        "app_id": "agent-task-invoice-001",
+        "state": "release-planned",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Agent release invoice",
+          "evidencePath": "artifacts/payload-agent-release-invoice-evidence.json",
+          "payloadBytes": 207,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "agent-settlement:agent-task-escrow-001:dispute-hold",
+        "txid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+        "lane": "agent-settlement",
+        "payload_kind": "agent-settlement",
+        "app_id": "agent-task-escrow-001",
+        "state": "dispute-hold",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Agent hold escrow",
+          "evidencePath": "artifacts/payload-agent-hold-escrow-evidence.json",
+          "payloadBytes": 179,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "batch-assurance-pledge:kaspa-dev-docs-sprint:pledge-docs-001:accepted",
+        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "lane": "batch-assurance-pledge",
+        "payload_kind": "batch-assurance-pledge",
+        "app_id": "kaspa-dev-docs-sprint:pledge-docs-001",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Batch assurance pledge docs 001",
+          "evidencePath": "artifacts/payload-batch-pledge-docs-001-evidence.json",
+          "payloadBytes": 183,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "batch-assurance-pledge:kaspa-dev-docs-sprint:pledge-docs-002:accepted",
+        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "lane": "batch-assurance-pledge",
+        "payload_kind": "batch-assurance-pledge",
+        "app_id": "kaspa-dev-docs-sprint:pledge-docs-002",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Batch assurance pledge docs 002",
+          "evidencePath": "artifacts/payload-batch-pledge-docs-002-evidence.json",
+          "payloadBytes": 183,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "batch-assurance-pledge:kaspa-dev-docs-sprint:pledge-docs-003:accepted",
+        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+        "lane": "batch-assurance-pledge",
+        "payload_kind": "batch-assurance-pledge",
+        "app_id": "kaspa-dev-docs-sprint:pledge-docs-003",
+        "state": "accepted",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Batch assurance pledge docs 003",
+          "evidencePath": "artifacts/payload-batch-pledge-docs-003-evidence.json",
+          "payloadBytes": 194,
+          "receiptMatches": true
+        }
+      },
+      {
+        "event_id": "batch-assurance-release:kaspa-dev-docs-sprint:release-ready",
+        "txid": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+        "lane": "batch-assurance-release",
+        "payload_kind": "batch-assurance-release",
+        "app_id": "kaspa-dev-docs-sprint",
+        "state": "release-ready",
+        "matched": true,
+        "review_status": "ready",
+        "reducer_json": {
+          "label": "Batch assurance release plan",
+          "evidencePath": "artifacts/payload-batch-release-plan-evidence.json",
+          "payloadBytes": 186,
+          "receiptMatches": true
+        }
+      }
+    ],
+    "proof_spend_outputs": [
+      {
+        "proof_id": "vault:recover:b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+        "txid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+        "lane": "vault",
+        "entrypoint": "recover",
+        "source_txid": null,
+        "source_index": null,
+        "destination_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amount_sompi": "2499995000",
+        "matched_input": true,
+        "matched_output": true
+      },
+      {
+        "proof_id": "vault:withdraw:9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+        "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+        "lane": "vault",
+        "entrypoint": "withdraw",
+        "source_txid": null,
+        "source_index": null,
+        "destination_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amount_sompi": "2499995000",
+        "matched_input": true,
+        "matched_output": true
+      },
+      {
+        "proof_id": "assurance:release:80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+        "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+        "lane": "assurance",
+        "entrypoint": "release",
+        "source_txid": null,
+        "source_index": null,
+        "destination_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amount_sompi": "24999995000",
+        "matched_input": true,
+        "matched_output": true
+      },
+      {
+        "proof_id": "assurance:refund:faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+        "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+        "lane": "assurance",
+        "entrypoint": "refund",
+        "source_txid": null,
+        "source_index": null,
+        "destination_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amount_sompi": "24999995000",
+        "matched_input": true,
+        "matched_output": true
+      },
+      {
+        "proof_id": "escrow:release:825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+        "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+        "lane": "escrow",
+        "entrypoint": "release",
+        "source_txid": null,
+        "source_index": null,
+        "destination_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amount_sompi": "4999995000",
+        "matched_input": true,
+        "matched_output": true
+      },
+      {
+        "proof_id": "escrow:refund:6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+        "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+        "lane": "escrow",
+        "entrypoint": "refund",
+        "source_txid": null,
+        "source_index": null,
+        "destination_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amount_sompi": "4999995000",
+        "matched_input": true,
+        "matched_output": true
+      },
+      {
+        "proof_id": "escrow:cancel:14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+        "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+        "lane": "escrow",
+        "entrypoint": "cancel",
+        "source_txid": null,
+        "source_index": null,
+        "destination_address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amount_sompi": "4999995000",
+        "matched_input": true,
+        "matched_output": true
+      }
+    ],
+    "rollback_segments": []
+  },
+  "reducerReadiness": [
+    {
+      "lane": "invoice",
+      "status": "ready-from-fixture-replay"
+    },
+    {
+      "lane": "access-pass",
+      "status": "not-present-in-current-checkpoint"
+    },
+    {
+      "lane": "auction",
+      "status": "not-present-in-current-checkpoint"
+    },
+    {
+      "lane": "stable-issuer",
+      "status": "not-present-in-current-checkpoint"
+    },
+    {
+      "lane": "attestation",
+      "status": "not-present-in-current-checkpoint"
+    },
+    {
+      "lane": "agent",
+      "status": "not-present-in-current-checkpoint"
+    },
+    {
+      "lane": "batch-assurance",
+      "status": "not-present-in-current-checkpoint"
+    },
+    {
+      "lane": "proof-spends",
+      "status": "ready-from-fixture-replay"
+    }
+  ],
+  "next": [
+    "Persist these table rows to a local durable store.",
+    "Replace known-txid input with a node/RPC virtual-chain reader.",
+    "Add UI health around appStateReady, mismatches, and rollback segment count."
+  ],
+  "boundaries": [
+    "This is a fixture-backed replay run over the current public-read checkpoint.",
+    "It proves reducer/storage shape, not live virtual-chain ingestion.",
+    "User-facing state remains blocked if mismatches or rollback segments appear."
+  ]
+}
