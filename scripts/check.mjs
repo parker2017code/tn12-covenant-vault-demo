@@ -473,12 +473,12 @@ const rollbackCheckpoint = buildPersistedCheckpointGuard({
 assert.equal(rollbackCheckpoint.status, "rollback-review-required");
 assert.equal(rollbackCheckpoint.summary.rollbackDetected, true);
 const fakePreviousTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
-  `prev-${index}`,
+  proof.source?.txid || `prev-${index}`,
   {
     outputs: [
       {
-        index: 0,
-        amount: index < 2 ? 2500000000 : 25000000000,
+        index: proof.source?.outputIndex ?? 0,
+        amount: Number(proof.source?.amountSompi || (index < 2 ? 2500000000 : 25000000000)),
         script_public_key_address: `kaspatest:pcontract${index}`,
         script_public_key_type: "scripthash"
       }
@@ -493,8 +493,8 @@ const fakeSpendTransactions = Object.fromEntries(proofFixture.transactions.map((
     accepting_block_time: 1778141640000 + index,
     inputs: [
       {
-        previous_outpoint_hash: `prev-${index}`,
-        previous_outpoint_index: "0",
+        previous_outpoint_hash: proof.source?.txid || `prev-${index}`,
+        previous_outpoint_index: String(proof.source?.outputIndex ?? 0),
         sig_op_count: "1"
       }
     ],
@@ -516,6 +516,7 @@ const proofEvidence = buildProofEvidence({
 });
 assert.equal(proofEvidence.summary.accepted, 7);
 assert.equal(proofEvidence.summary.p2shInputs, 7);
+assert.equal(proofEvidence.summary.matchedInputs, 7);
 assert.equal(proofEvidence.summary.p2pkOutputs, 7);
 assert.equal(proofEvidence.summary.matchedOutputs, 7);
 

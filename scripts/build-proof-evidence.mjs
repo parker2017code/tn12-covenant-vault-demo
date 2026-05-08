@@ -25,6 +25,7 @@ await writeFile(outPath, `${JSON.stringify(evidence, null, 2)}\n`);
 console.log(outPath);
 console.log(`accepted=${evidence.summary.accepted}/${evidence.summary.total}`);
 console.log(`p2shInputs=${evidence.summary.p2shInputs}/${evidence.summary.total}`);
+console.log(`matchedInputs=${evidence.summary.matchedInputs}/${evidence.summary.total}`);
 console.log(`p2pkOutputs=${evidence.summary.p2pkOutputs}/${evidence.summary.total}`);
 
 async function fetchTransaction(txid) {

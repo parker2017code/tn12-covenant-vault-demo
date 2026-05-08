@@ -100,6 +100,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - invoice paid state requires accepted matching payload.
    - access-pass redemptions require a txid and duplicate holder/pass redemptions cannot inflate redeemed counts.
    - escrow mutual cancel v1 budget shape requires `computeBudget` and rejects non-zero `sigOpCount`.
+   - accepted proof evidence requires the expected funding outpoint and catches wrong-source attachment.
 
 2. Extend the escrow proof path:
    - accepted funding outpoint: done;

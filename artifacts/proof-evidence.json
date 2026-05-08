@@ -1,11 +1,12 @@
 {
   "schema": "tn12-contract-spend-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-08T04:59:30.931Z",
+  "verifiedAt": "2026-05-08T05:06:50.810Z",
   "summary": {
     "total": 7,
     "accepted": 7,
     "p2shInputs": 7,
+    "matchedInputs": 7,
     "p2pkOutputs": 7,
     "matchedOutputs": 7
   },
@@ -21,9 +22,12 @@
       "input": {
         "previousOutpointHash": "4051184914011dd5399f4042fe5be0e5031b5f57e05b055ee676c36ad5a468b6",
         "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "4051184914011dd5399f4042fe5be0e5031b5f57e05b055ee676c36ad5a468b6",
+        "expectedPreviousOutpointIndex": 0,
         "address": "kaspatest:prk2u9cexve3qscnp3dug8r20qauql5ygyhlxyre63dn64vemz6qjwyktx9cw",
         "type": "scripthash",
         "amount": 2500000000,
+        "expectedAmount": 2500000000,
         "prefix": "p",
         "sigOpCount": 1
       },
@@ -37,6 +41,8 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
@@ -53,9 +59,12 @@
       "input": {
         "previousOutpointHash": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
         "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+        "expectedPreviousOutpointIndex": 0,
         "address": "kaspatest:pqzs5gsqn2k209c6u3htd93uyzavx7dm7t58txa83d057e2e0ta4qn8nly5sn",
         "type": "scripthash",
         "amount": 2500000000,
+        "expectedAmount": 2500000000,
         "prefix": "p",
         "sigOpCount": 1
       },
@@ -69,6 +78,8 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
@@ -85,9 +96,12 @@
       "input": {
         "previousOutpointHash": "3012b541bc10832e8440a16424cdefbdbe84e85f8e212fd40d595debfb3b87da",
         "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "3012b541bc10832e8440a16424cdefbdbe84e85f8e212fd40d595debfb3b87da",
+        "expectedPreviousOutpointIndex": 0,
         "address": "kaspatest:prfzsga33hgfsydw7vyn8grfctmh83cz7ux53wa33cznsc4fqtf359eej4ztg",
         "type": "scripthash",
         "amount": 25000000000,
+        "expectedAmount": 25000000000,
         "prefix": "p",
         "sigOpCount": 1
       },
@@ -101,6 +115,8 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
@@ -117,9 +133,12 @@
       "input": {
         "previousOutpointHash": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
         "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+        "expectedPreviousOutpointIndex": 0,
         "address": "kaspatest:pqug9en8x39e44hevz8pdc5tjmd2ns3nc93une2yn6s65934dkvlzgakg8ajj",
         "type": "scripthash",
         "amount": 25000000000,
+        "expectedAmount": 25000000000,
         "prefix": "p",
         "sigOpCount": 1
       },
@@ -133,6 +152,8 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
@@ -149,9 +170,12 @@
       "input": {
         "previousOutpointHash": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
         "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "expectedPreviousOutpointIndex": 0,
         "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
         "type": "scripthash",
         "amount": 5000000000,
+        "expectedAmount": 5000000000,
         "prefix": "p",
         "sigOpCount": 1
       },
@@ -165,6 +189,8 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
@@ -181,9 +207,12 @@
       "input": {
         "previousOutpointHash": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
         "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+        "expectedPreviousOutpointIndex": 0,
         "address": "kaspatest:pz67j8d7nhxvftqjnffdjcp8xgucqduqfl33ndxsydxeag5dkezs56cs3fuvx",
         "type": "scripthash",
         "amount": 5000000000,
+        "expectedAmount": 5000000000,
         "prefix": "p",
         "sigOpCount": 1
       },
@@ -197,6 +226,8 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
@@ -213,9 +244,12 @@
       "input": {
         "previousOutpointHash": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
         "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+        "expectedPreviousOutpointIndex": 0,
         "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
         "type": "scripthash",
         "amount": 5000000000,
+        "expectedAmount": 5000000000,
         "prefix": "p",
         "sigOpCount": 0
       },
@@ -229,11 +263,13 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
       }
     }
   ],
-  "note": "Each proof spend resolves its input's previous output, then checks that the consumed output is a TN12 scripthash address and the spend pays the expected P2PK wallet output."
+  "note": "Each proof spend resolves its input's previous output, checks the expected funding outpoint, then checks that the consumed output is a TN12 scripthash address and the spend pays the expected P2PK wallet output."
 }

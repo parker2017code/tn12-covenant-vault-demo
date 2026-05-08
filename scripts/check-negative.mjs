@@ -6,6 +6,7 @@ import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildInvoiceRegistry } from "../src/invoiceReceipt.mjs";
+import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 
 const escrowCancelProofDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel-proof-cancel.json", import.meta.url), "utf8"));
@@ -21,6 +22,59 @@ assert.equal(isMalformedInputBudget(1, { ...cancelInput, sigOpCount: 1 }), true)
 assert.equal(isMalformedInputBudget(1, { ...cancelInput, computeBudget: undefined }), true);
 assert.equal(isMalformedInputBudget(0, { ...releaseInput, sigOpCount: undefined }), true);
 assert.equal(isMalformedInputBudget(0, { ...releaseInput, computeBudget: 30 }), true);
+
+const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
+const firstProof = proofFixture.transactions[0];
+const wrongSourceProofEvidence = buildProofEvidence({
+  proofFixture: {
+    ...proofFixture,
+    transactions: [{
+      ...firstProof,
+      source: {
+        ...firstProof.source,
+        txid: "wrong-source-txid"
+      }
+    }]
+  },
+  transactions: {
+    [firstProof.txid]: {
+      is_accepted: true,
+      accepting_block_blue_score: 1,
+      accepting_block_time: 1,
+      inputs: [
+        {
+          previous_outpoint_hash: firstProof.source.txid,
+          previous_outpoint_index: String(firstProof.source.outputIndex),
+          sig_op_count: "1"
+        }
+      ],
+      outputs: [
+        {
+          index: 0,
+          amount: Number(firstProof.amountSompi),
+          script_public_key_address: firstProof.destination,
+          script_public_key_type: "pubkey"
+        }
+      ]
+    }
+  },
+  previousTransactions: {
+    [firstProof.source.txid]: {
+      outputs: [
+        {
+          index: firstProof.source.outputIndex,
+          amount: Number(firstProof.source.amountSompi),
+          script_public_key_address: "kaspatest:pwrongsourceguard",
+          script_public_key_type: "scripthash"
+        }
+      ]
+    }
+  },
+  verifiedAt: "2026-05-07T00:00:00.000Z"
+});
+assert.equal(wrongSourceProofEvidence.summary.accepted, 1);
+assert.equal(wrongSourceProofEvidence.summary.matchedInputs, 0);
+assert.equal(wrongSourceProofEvidence.proofs[0].checks.sourceOutpointMatchesExpected, false);
 
 const auctionFixture = JSON.parse(await readFile(new URL("../fixtures/AuctionIntentPrototype.json", import.meta.url), "utf8"));
 const highSignedOnlyAuction = buildAuctionIntentPrototype({
