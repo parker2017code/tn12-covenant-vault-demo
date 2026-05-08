@@ -1,0 +1,180 @@
+{
+  "schema": "tn12-escrow-marketplace-demo/v1",
+  "network": "kaspa-testnet-12",
+  "status": "marketplace-demo-plan-ready",
+  "summary": {
+    "listings": 3,
+    "actionable": 2,
+    "needsFunding": 1,
+    "disputed": 1,
+    "acceptedEscrowProofs": 3,
+    "walletConnectorRequestsReady": true,
+    "walletConnectorRequestCount": 47
+  },
+  "listings": [
+    {
+      "escrowId": "escrow-freelance-001",
+      "title": "Freelance wallet integration review",
+      "buyer": "merchant-alpha",
+      "seller": "wallet-dev-beta",
+      "amountTkas": 50,
+      "feeTkas": 0.00005,
+      "marketState": "funded-awaiting-action",
+      "actionState": "wallet-review-needed",
+      "deliveryHash": "sha256:review-report-placeholder",
+      "timeoutIso": "2026-05-21T00:00:00.000Z",
+      "primaryActions": [
+        {
+          "action": "release",
+          "enabled": true,
+          "outputAddress": "kaspatest:qseller-beta-payout-placeholder",
+          "outputTkas": 49.99995
+        },
+        {
+          "action": "timeout-refund",
+          "enabled": true,
+          "outputAddress": "kaspatest:qbuyer-alpha-refund-placeholder",
+          "outputTkas": 49.99995
+        },
+        {
+          "action": "mutual-cancel",
+          "enabled": true,
+          "outputAddress": "kaspatest:qbuyer-alpha-refund-placeholder",
+          "outputTkas": 49.99995
+        }
+      ],
+      "acceptedProofBackdrop": "release-refund-cancel-paths-accepted",
+      "next": "Review seller-release, timeout-refund, and mutual-cancel drafts."
+    },
+    {
+      "escrowId": "escrow-pass-redemption-002",
+      "title": "Access pass redemption batch",
+      "buyer": "event-issuer-gamma",
+      "seller": "venue-delta",
+      "amountTkas": 15,
+      "feeTkas": 0.00005,
+      "marketState": "draft",
+      "actionState": "needs-funding",
+      "deliveryHash": "sha256:redemption-list-placeholder",
+      "timeoutIso": "2026-05-28T00:00:00.000Z",
+      "primaryActions": [
+        {
+          "action": "release",
+          "enabled": false,
+          "outputAddress": "kaspatest:qvenue-delta-payout-placeholder",
+          "outputTkas": 14.99995
+        },
+        {
+          "action": "timeout-refund",
+          "enabled": false,
+          "outputAddress": "kaspatest:qissuer-gamma-refund-placeholder",
+          "outputTkas": 14.99995
+        },
+        {
+          "action": "mutual-cancel",
+          "enabled": true,
+          "outputAddress": "kaspatest:qissuer-gamma-refund-placeholder",
+          "outputTkas": 14.99995
+        }
+      ],
+      "acceptedProofBackdrop": "release-refund-cancel-paths-accepted",
+      "next": "Build and review funding draft."
+    },
+    {
+      "escrowId": "escrow-docs-grant-003",
+      "title": "Docs grant milestone payout",
+      "buyer": "grant-round",
+      "seller": "docs-maintainer",
+      "amountTkas": 100,
+      "feeTkas": 0.00005,
+      "marketState": "disputed",
+      "actionState": "wallet-review-needed",
+      "deliveryHash": "sha256:milestone-proof-placeholder",
+      "timeoutIso": "2026-06-07T00:00:00.000Z",
+      "primaryActions": [
+        {
+          "action": "release",
+          "enabled": false,
+          "outputAddress": "kaspatest:qdocs-maintainer-payout-placeholder",
+          "outputTkas": 99.99995
+        },
+        {
+          "action": "timeout-refund",
+          "enabled": false,
+          "outputAddress": "kaspatest:qgrant-round-refund-placeholder",
+          "outputTkas": 99.99995
+        },
+        {
+          "action": "mutual-cancel",
+          "enabled": true,
+          "outputAddress": "kaspatest:qgrant-round-refund-placeholder",
+          "outputTkas": 99.99995
+        }
+      ],
+      "acceptedProofBackdrop": "release-refund-cancel-paths-accepted",
+      "next": "Keep funds locked until cancel/refund/release path is agreed."
+    }
+  ],
+  "appSurfaces": [
+    {
+      "surface": "buyer-dashboard",
+      "actions": [
+        "fund",
+        "approve-release",
+        "request-refund",
+        "mutual-cancel"
+      ],
+      "requiredRail": "wallet connector exact transaction review"
+    },
+    {
+      "surface": "seller-dashboard",
+      "actions": [
+        "submit-delivery-hash",
+        "request-release",
+        "accept-cancel"
+      ],
+      "requiredRail": "accepted payload or signed message evidence"
+    },
+    {
+      "surface": "public-proof-page",
+      "actions": [
+        "show-funded-status",
+        "show-accepted-release-or-refund",
+        "show-dispute-boundary"
+      ],
+      "requiredRail": "durable indexer replay and proof evidence"
+    }
+  ],
+  "proofModel": {
+    "currentAcceptedProofs": [
+      "Escrow release",
+      "Escrow DAA refund",
+      "Escrow mutual cancel"
+    ],
+    "claimAllowed": "The repo has accepted TN12 escrow release, timeout refund, and mutual-cancel proof paths.",
+    "claimNotAllowed": "The marketplace fixture itself is not a live escrow marketplace and does not custody user funds."
+  },
+  "nextBuilds": [
+    {
+      "id": "escrow-marketplace-ui-panel",
+      "status": "ready",
+      "detail": "Render these listings and action states in the existing app shell without changing proof claims."
+    },
+    {
+      "id": "fresh-escrow-funding-output",
+      "status": "needed-before-submit",
+      "detail": "Fund a fresh expendable TN12 escrow output before any new rejection or marketplace spend tests."
+    },
+    {
+      "id": "wallet-connector-spend-review",
+      "status": "blocked-on-wallet-adapter",
+      "detail": "Move release/refund/cancel review from local signed drafts into no-local-key wallet requests."
+    }
+  ],
+  "boundaries": [
+    "This artifact is a marketplace demo contract between app state, wallet review, and proof evidence.",
+    "It does not submit or sign any transaction.",
+    "Dispute handling is app-layer state until an arbiter path or explicit mutual-cancel path is selected.",
+    "Mainnet use requires wallet integration, production indexing, audits, and mainnet-compatible covenant tooling."
+  ]
+}

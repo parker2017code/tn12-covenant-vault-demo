@@ -289,7 +289,10 @@ Build a compact transaction-payload receipt artifact for the accepted-transactio
 
 ```sh
 npm run signal:payload
+npm run attestation:reputation
 ```
+
+`npm run attestation:reputation` writes `artifacts/attestation-reputation-thresholds.json`, the app-level source/signal gate for watcher, researcher, and pool attestations. It allows dashboard influence only after accepted payload evidence, verified signatures, resolved accuracy, and source thresholds; unresolved or unsigned signals remain review-only.
 
 Build the invoice registry for the first payload receipt app:
 
@@ -390,9 +393,10 @@ Build the escrow primitive registry:
 
 ```sh
 npm run escrow:registry
+npm run escrow:marketplace
 ```
 
-This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`. The repo also has `contracts/Escrow.sil`, `contracts/EscrowExpired.sil`, accepted escrow funding, an accepted escrow release proof, an accepted DAA-expired escrow refund proof, and an accepted mutual-cancel proof on a separate funded output.
+This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json` and `artifacts/escrow-marketplace-demo.json`. The marketplace artifact maps buyer/seller listings, release/refund/cancel actions, accepted escrow proof backdrop, wallet connector dependency, and dispute boundaries. The repo also has `contracts/Escrow.sil`, `contracts/EscrowExpired.sil`, accepted escrow funding, an accepted escrow release proof, an accepted DAA-expired escrow refund proof, and an accepted mutual-cancel proof on a separate funded output.
 
 Build the treasury/team vault registry:
 

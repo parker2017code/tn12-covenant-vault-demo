@@ -1,0 +1,126 @@
+{
+  "schema": "tn12-attestation-reputation-thresholds/v1",
+  "network": "kaspa-testnet-12",
+  "status": "attestation-thresholds-ready",
+  "summary": {
+    "sources": 3,
+    "signals": 3,
+    "influenceAllowedSources": 1,
+    "reviewOnlySources": 2,
+    "influenceAllowedSignals": 1,
+    "staleOrUnresolvedSignals": 1
+  },
+  "thresholds": {
+    "sourceReputationMinimum": 70,
+    "signatureVerifiedMinimum": 1,
+    "influenceReadyMinimum": 1,
+    "resolvedAccuracyMinimum": 70,
+    "stalePolicy": "Unresolved or unsigned signals can create review prompts only.",
+    "conflictPolicy": "Conflicting sources must be shown side by side until quorum and dispute rules are implemented."
+  },
+  "sources": [
+    {
+      "source": "pool-operator-gamma",
+      "sourceType": "pool",
+      "reputationScore": 86,
+      "averageAccuracy": 88,
+      "signatureVerified": 0,
+      "influenceReady": 0,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "no verified signature",
+        "no influence-ready accepted signal"
+      ]
+    },
+    {
+      "source": "tn12-watcher-alpha",
+      "sourceType": "watcher",
+      "reputationScore": 82,
+      "averageAccuracy": 78,
+      "signatureVerified": 1,
+      "influenceReady": 1,
+      "influenceAllowed": true,
+      "lane": "dashboard-input",
+      "reviewReasons": []
+    },
+    {
+      "source": "market-research-beta",
+      "sourceType": "researcher",
+      "reputationScore": 0,
+      "averageAccuracy": 0,
+      "signatureVerified": 0,
+      "influenceReady": 0,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "reputation below threshold",
+        "no verified signature",
+        "no influence-ready accepted signal",
+        "resolved accuracy below threshold"
+      ]
+    }
+  ],
+  "signals": [
+    {
+      "id": "sig-rtd-hashrate-001",
+      "source": "tn12-watcher-alpha",
+      "eventId": "event-network-hashrate-shift",
+      "acceptedTxid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "influenceReady": true,
+      "influenceAllowed": true,
+      "lane": "dashboard-input",
+      "reviewReasons": []
+    },
+    {
+      "id": "sig-listing-rumor-001",
+      "source": "market-research-beta",
+      "eventId": "event-exchange-listing-window",
+      "acceptedTxid": "",
+      "influenceReady": false,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "source review only",
+        "signal not influence-ready",
+        "unresolved signal"
+      ]
+    },
+    {
+      "id": "sig-pool-policy-001",
+      "source": "pool-operator-gamma",
+      "eventId": "event-pool-signal-support",
+      "acceptedTxid": "",
+      "influenceReady": false,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "source review only",
+        "signal not influence-ready"
+      ]
+    }
+  ],
+  "consumerPolicy": [
+    {
+      "consumer": "oracle-risk-dashboard",
+      "allowedInput": "influenceAllowed signal summaries",
+      "blockedInput": "draft, unsigned, unresolved, or source-review-only signals"
+    },
+    {
+      "consumer": "prediction-hedge-simulator",
+      "allowedInput": "review-weighted signals only; no money settlement",
+      "blockedInput": "automatic settlement or liquidation"
+    },
+    {
+      "consumer": "miner-rtd-sampling",
+      "allowedInput": "signed watcher/pool messages after provenance review",
+      "blockedInput": "coinbase or miner policy claims without source-specific evidence"
+    }
+  ],
+  "boundaries": [
+    "This is an app-level gating policy, not an oracle protocol.",
+    "A high reputation score does not make a claim true.",
+    "Signals can influence dashboards only after accepted payload evidence, verified signature, resolved accuracy, and source threshold checks pass.",
+    "Custody, liquidation, and market settlement remain out of scope until oracle failure modes and dispute paths are explicit."
+  ]
+}

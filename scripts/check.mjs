@@ -32,6 +32,7 @@ import {
   decodeSignalPayload
 } from "../src/signalPayload.mjs";
 import { buildAttestationRegistry } from "../src/attestationSignal.mjs";
+import { buildAttestationReputationThresholds } from "../src/attestationReputationThresholds.mjs";
 import {
   DEFAULT_INVOICE,
   buildInvoiceArtifact,
@@ -56,6 +57,7 @@ import { buildWalletConnectorReadiness } from "../src/walletConnectorReadiness.m
 import { buildWalletSubmitPackage } from "../src/walletSubmitPackage.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
+import { buildEscrowMarketplaceDemo } from "../src/escrowMarketplaceDemo.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
 import { buildWalletReviewReadiness } from "../src/walletReview.mjs";
@@ -138,6 +140,23 @@ assert.ok(attestationRegistry.boundaries.some((boundary) => /block headers/.test
 assert.ok(attestationRegistry.sources.some((source) => source.source === "pool-operator-gamma"));
 assert.ok(attestationRegistry.signals.some((signal) => signal.id === "sig-rtd-hashrate-001" && signal.influenceReady));
 assert.ok(attestationRegistry.signals.some((signal) => signal.id === "sig-pool-policy-001" && signal.signatureReview.status === "pending-review"));
+const attestationThresholds = buildAttestationReputationThresholds({ attestationRegistry });
+assert.equal(attestationThresholds.status, "attestation-thresholds-ready");
+assert.equal(attestationThresholds.summary.sources, 3);
+assert.equal(attestationThresholds.summary.signals, 3);
+assert.equal(attestationThresholds.summary.influenceAllowedSources, 1);
+assert.equal(attestationThresholds.summary.influenceAllowedSignals, 1);
+assert.ok(attestationThresholds.signals.some((signal) =>
+  signal.id === "sig-rtd-hashrate-001"
+  && signal.influenceAllowed
+));
+assert.ok(attestationThresholds.signals.some((signal) =>
+  signal.id === "sig-listing-rumor-001"
+  && signal.lane === "review-only"
+));
+const attestationThresholdArtifact = JSON.parse(await readFile(new URL("../artifacts/attestation-reputation-thresholds.json", import.meta.url), "utf8"));
+assert.equal(attestationThresholdArtifact.status, "attestation-thresholds-ready");
+assert.equal(attestationThresholdArtifact.summary.influenceAllowedSignals, 1);
 const invoiceArtifact = buildInvoiceArtifact(DEFAULT_INVOICE);
 assert.equal(invoiceArtifact.schema, "kaspa-invoice-receipt-app/v1");
 assert.equal(invoiceArtifact.status, "draft-needs-payload-submit");
@@ -477,6 +496,23 @@ assert.equal(escrowRegistry.summary.total, 3);
 assert.equal(escrowRegistry.summary.funded, 1);
 assert.equal(escrowRegistry.summary.needsAction, 2);
 assert.ok(escrowRegistry.escrows.some((escrow) => escrow.escrowId === "escrow-freelance-001" && escrow.spendPaths.length === 3));
+const proofEvidenceArtifact = JSON.parse(await readFile(new URL("../artifacts/proof-evidence.json", import.meta.url), "utf8"));
+const escrowMarketplace = buildEscrowMarketplaceDemo({
+  escrowRegistry,
+  walletConnectorRequests: walletConnectorRequestsArtifact,
+  proofEvidence: proofEvidenceArtifact
+});
+assert.equal(escrowMarketplace.status, "marketplace-demo-plan-ready");
+assert.equal(escrowMarketplace.summary.listings, 3);
+assert.equal(escrowMarketplace.summary.acceptedEscrowProofs, 3);
+assert.equal(escrowMarketplace.summary.walletConnectorRequestsReady, true);
+assert.ok(escrowMarketplace.listings.some((listing) =>
+  listing.escrowId === "escrow-freelance-001"
+  && listing.acceptedProofBackdrop === "release-refund-cancel-paths-accepted"
+));
+const escrowMarketplaceArtifact = JSON.parse(await readFile(new URL("../artifacts/escrow-marketplace-demo.json", import.meta.url), "utf8"));
+assert.equal(escrowMarketplaceArtifact.status, "marketplace-demo-plan-ready");
+assert.equal(escrowMarketplaceArtifact.summary.listings, 3);
 const treasuryFixture = JSON.parse(await readFile(new URL("../fixtures/TreasuryVaults.json", import.meta.url), "utf8"));
 const treasuryRegistry = buildTreasuryVaultRegistry(treasuryFixture);
 assert.equal(treasuryRegistry.status, "planner-policy-before-extra-script-paths");
@@ -952,6 +988,7 @@ const files = [
   "scripts/build-proof-evidence.mjs",
   "scripts/build-covenant-adversarial-coverage.mjs",
   "scripts/build-role-separated-invalid-candidates.mjs",
+  "scripts/build-attestation-reputation-thresholds.mjs",
   "scripts/build-accepted-app-state.mjs",
   "scripts/build-checkpointed-index.mjs",
   "scripts/build-persisted-checkpoint-guard.mjs",
@@ -982,6 +1019,7 @@ const files = [
   "scripts/build-batch-assurance-pledge-output-plan.mjs",
   "scripts/build-enforcement-matrix.mjs",
   "scripts/build-escrow-primitives.mjs",
+  "scripts/build-escrow-marketplace-demo.mjs",
   "scripts/build-treasury-vaults.mjs",
   "scripts/build-payload-submit-readiness.mjs",
   "scripts/verify-payload-receipt.mjs",
@@ -1054,6 +1092,7 @@ const files = [
   "artifacts/wallet-connector-readiness.json",
   "artifacts/wallet-submit-package.json",
   "artifacts/wallet-connector-submit-requests.json",
+  "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
   "artifacts/mainstream-app-direction.json",
@@ -1066,6 +1105,7 @@ const files = [
   "artifacts/batch-assurance-custody-requirements.json",
   "artifacts/batch-assurance-pledge-output-plan.json",
   "artifacts/enforcement-matrix.json",
+  "artifacts/escrow-marketplace-demo.json",
   "artifacts/proof-evidence.json",
   "artifacts/role-separated-proof-evidence.json",
   "artifacts/covenant-adversarial-coverage.json",
@@ -1157,6 +1197,7 @@ const files = [
   "src/virtualChainIngestion.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
+  "src/attestationReputationThresholds.mjs",
   "src/invoiceReceipt.mjs",
   "src/submitConsole.mjs",
   "src/walletReview.mjs",
@@ -1176,6 +1217,7 @@ const files = [
   "src/batchAssurancePledgeOutputs.mjs",
   "src/enforcementMatrix.mjs",
   "src/escrowPrimitive.mjs",
+  "src/escrowMarketplaceDemo.mjs",
   "src/treasuryVault.mjs",
   "src/payloadSubmitReadiness.mjs",
   "src/wrpcSubmitCandidate.mjs",
@@ -1245,12 +1287,14 @@ assert.match(readme, /npm run tx:roles:spends/);
 assert.match(readme, /npm run tx:roles:verify/);
 assert.match(readme, /npm run roles:proof:evidence/);
 assert.match(readme, /npm run roles:invalid-candidates/);
+assert.match(readme, /npm run attestation:reputation/);
 assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);
 assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run wallet:connector-requests/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
+assert.match(readme, /npm run escrow:marketplace/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run mainstream:direction/);

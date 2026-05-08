@@ -32,9 +32,10 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Custody review: `npm run campaign:custody` blocks settlement drafts until referenced outputs match pledge amounts. `npm run campaign:custody-requirements` lists the exact accepted pledge outputs still needed on TN12. `npm run campaign:pledge-outputs` turns the open requirements into wallet-reviewable output requirements and an import workflow.
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
-   - Current status: base built.
+   - Current status: base built plus marketplace demo plan.
    - Enforcement: script for accepted release, DAA-refund, and mutual-cancel paths.
    - Proof: accepted escrow funding, accepted release spend, and accepted DAA-expired refund spend.
+   - App surface: `npm run escrow:marketplace` maps buyer/seller listings, release/refund/cancel actions, wallet connector dependency, proof backdrop, and dispute boundaries.
    - Cancel status: accepted on a separate funded output. The first submit used `sigOpCount=1` and hit `used=200870`, `limit=109999`; the old-SDK v1 attempt failed verification; the corrected local TN12 SDK route accepted `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
    - Latest route: Rusty Kaspa TN12 source confirms tx version 1 plus `computeBudget`; v1 malformed RPC transactions with non-zero `sig_op_count` are rejected. The accepted JS route uses local TN12 `kaspa-wasm 1.1.1-toc.1` with `sigOpCount: 0, computeBudget: 30`.
 
@@ -71,8 +72,9 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
     - Use: source shelf before porting code or UX.
 
 11. Miner / pool signal research: signed attestations and transaction payload first.
-    - Current status: accepted TN12 miner/watcher attestation payload plus research registry.
+    - Current status: accepted TN12 miner/watcher attestation payload plus research registry and reputation threshold artifact.
     - Enforcement: research.
+    - Gate: `npm run attestation:reputation` allows dashboard influence only after accepted payload evidence, verified signatures, resolved accuracy, and source thresholds; unresolved or unsigned signals stay review-only.
     - Boundary: no fake block-header data claim.
 
 12. AI-agent commitment board: task offers, deposits, completion proofs, disputes, release/refund planning.
@@ -118,14 +120,14 @@ WIP now:
 - Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package and connector request bundle are built; a real wallet adapter still needs to consume them.
 - Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone.
 - Durable indexer node/RPC replay beyond the generated fixture-backed replay. The reader/rollback contract exists; the live endpoint adapter still needs implementation.
-- Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review now gates prediction influence.
+- Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review and `npm run attestation:reputation` now gate prediction/dashboard influence.
 
 Next actions:
 
 1. Wire the wallet-submit package into a live wallet connector.
 2. Create custody settlement drafts only from matched pledge outputs.
 3. Implement the durable indexer node/RPC virtual-chain reader, then wire reducer replay and UI health to the generated replay rows.
-4. Add reputation thresholds and signer provenance before signals affect more app lanes.
+4. Add stronger signer provenance and conflict/quorum handling before signals affect more app lanes.
 5. Fund fresh expendable role-separated outputs before any invalid-candidate TN12 rejection submission.
 
 Longer term:
