@@ -116,8 +116,12 @@ const attestationFixture = JSON.parse(await readFile(new URL("../fixtures/Attest
 const attestationRegistry = buildAttestationRegistry(attestationFixture);
 assert.equal(attestationRegistry.status, "research-fixture-not-market-settlement");
 assert.equal(attestationRegistry.summary.total, 3);
+assert.equal(attestationRegistry.summary.signatureVerified, 1);
+assert.equal(attestationRegistry.summary.influenceReady, 1);
 assert.ok(attestationRegistry.boundaries.some((boundary) => /block headers/.test(boundary)));
 assert.ok(attestationRegistry.sources.some((source) => source.source === "pool-operator-gamma"));
+assert.ok(attestationRegistry.signals.some((signal) => signal.id === "sig-rtd-hashrate-001" && signal.influenceReady));
+assert.ok(attestationRegistry.signals.some((signal) => signal.id === "sig-pool-policy-001" && signal.signatureReview.status === "pending-review"));
 const invoiceArtifact = buildInvoiceArtifact(DEFAULT_INVOICE);
 assert.equal(invoiceArtifact.schema, "kaspa-invoice-receipt-app/v1");
 assert.equal(invoiceArtifact.status, "draft-needs-payload-submit");

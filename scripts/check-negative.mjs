@@ -244,6 +244,28 @@ assert.equal(listingMarket.simulatedProbability, 35);
 assert.equal(listingMarket.ignoredSignals, 1);
 assert.equal(listingSuggestion.status, "watch");
 
+const badSignatureAttestation = buildAttestationRegistry({
+  ...attestationFixture,
+  signals: attestationFixture.signals.map((signal) => signal.id === "sig-rtd-hashrate-001"
+    ? {
+        ...signal,
+        signature: {
+          ...signal.signature,
+          status: "verified",
+          messageHash: "sha256:wrong-message"
+        }
+      }
+    : signal)
+});
+const badSignatureSimulator = buildPredictionHedgeSimulator({
+  fixture: predictionFixture,
+  attestationRegistry: badSignatureAttestation
+});
+const networkStressMarket = badSignatureSimulator.markets.find((market) => market.eventId === "event-network-hashrate-shift");
+assert.equal(badSignatureAttestation.summary.influenceReady, 0);
+assert.equal(networkStressMarket.simulatedProbability, 42);
+assert.equal(networkStressMarket.ignoredSignals, 1);
+
 const agentFixture = JSON.parse(await readFile(new URL("../fixtures/AgentCommitments.json", import.meta.url), "utf8"));
 const disputedAcceptedProofBoard = buildAgentCommitmentBoard({
   ...agentFixture,

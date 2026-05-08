@@ -33,6 +33,7 @@ function buildMarket(market, signals) {
     signal.status === "verified"
     && signal.acceptedTxid
     && signal.evidencePath
+    && signal.signatureReview?.status === "verified"
   ));
   const signalAdjustment = verifiedSignals.reduce((total, signal) => {
     const accuracy = signal.resolution?.accuracy ?? signal.confidence;

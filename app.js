@@ -1290,7 +1290,8 @@ async function renderAttestationRegistry() {
     attestationSummaryNode.innerHTML = `
       <article><span>Total</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
       <article><span>Verified</span><strong>${escapeHtml(registry.summary.verified)}</strong></article>
-      <article><span>Disputed</span><strong>${escapeHtml(registry.summary.disputed)}</strong></article>
+      <article><span>Signatures</span><strong>${escapeHtml(registry.summary.signatureVerified)}</strong></article>
+      <article><span>Influence</span><strong>${escapeHtml(registry.summary.influenceReady)}</strong></article>
       <article><span>Channels</span><strong>${escapeHtml(registry.summary.channels.length)}</strong></article>
     `;
 
@@ -1302,7 +1303,7 @@ async function renderAttestationRegistry() {
         <span>${escapeHtml(source.sourceType)}</span>
         <strong>${escapeHtml(source.source)}</strong>
         <p>Reputation ${escapeHtml(source.reputationScore)}; verified ${escapeHtml(source.verified)} of ${escapeHtml(source.submitted)}.</p>
-        <small>Avg confidence ${escapeHtml(source.averageConfidence)}; avg accuracy ${escapeHtml(source.averageAccuracy ?? "unresolved")}.</small>
+        <small>${escapeHtml(source.signatureVerified)} signature verified; ${escapeHtml(source.influenceReady)} influence-ready.</small>
       `;
       attestationSourcesNode.append(article);
     }
@@ -1315,7 +1316,7 @@ async function renderAttestationRegistry() {
         <span>${escapeHtml(signal.status)} / ${escapeHtml(signal.channel)}</span>
         <strong>${escapeHtml(signal.claim)}</strong>
         <p>${escapeHtml(signal.marketUse)}</p>
-        <small>${escapeHtml(signal.portfolioUse)}</small>
+        <small>${escapeHtml(signal.portfolioUse)} Signature ${escapeHtml(signal.signatureReview.status)}; influence ${escapeHtml(signal.influenceReady ? "ready" : "blocked")}.</small>
       `;
       attestationSignalsNode.append(article);
     }

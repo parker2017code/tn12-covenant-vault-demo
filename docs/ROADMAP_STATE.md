@@ -69,7 +69,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 | 8. Auction/intents | Accepted TN12 payload state | Accepted bid payloads, winner rule, and below-reserve state | Settlement/refund drafts |
 | 9. DeFi backlog | Research | Missing rails listed for swaps/lending/stable-value/etc.; stable-value comparison brief and prediction-hedge simulator built | More simulation dashboards only |
 | 10. Cross-chain research | Built as library | PMF/code/failure-mode mapping | Turn top ideas into one-page app briefs |
-| 11. Miner/pool signals | Accepted TN12 payload state | Attestation registry, payload-first framing, accepted watcher signal | Signature verification and reputation hardening |
+| 11. Miner/pool signals | Accepted TN12 payload state | Attestation registry, payload-first framing, accepted watcher signal, and signature-gated influence | Reputation thresholds and signer provenance |
 | 12. AI-agent commitments | Accepted TN12 payload state | Task/deposit/proof/dispute model with accepted payload events | Release/refund drafts plus accepted tx lifecycle |
 | 13. Coordination markets | Research prototype | Transparent Stag/Intendo/Pack/toy Solver | Transparent settlement draft; no Hashdag overclaim |
 | 14. ZK / anchor readiness | Roadmap added | Checklist lane | Define public inputs, anchors, oracle/source-chain trust |
@@ -95,7 +95,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 2. Build custody settlement drafts only from amount-matched pledge outputs.
 3. Move checkpointed indexing from known-txid public reads plus rollback guard to durable node/RPC storage with virtual-chain replay.
 4. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
-5. Verify signal source signatures before they influence prediction/hedge review prompts.
+5. Add reputation thresholds and signer provenance before signals influence more app lanes.
 
 ### Coming weeks
 

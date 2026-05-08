@@ -213,7 +213,7 @@
         "src/attestationSignal.mjs",
         "npm run signal:payload"
       ],
-      "next": "Add signature verification and reputation hardening around the accepted watcher signal."
+      "next": "Harden signature provenance, source reputation thresholds, and accepted-payload evidence around watcher signals."
     },
     {
       "order": 12,

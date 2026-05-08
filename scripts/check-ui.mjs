@@ -137,8 +137,11 @@ try {
   await expectText(page, "#master-roadmap", "Payload Receipt / Invoice App");
   await expectText(page, "#master-roadmap", "AI-Agent Commitment Board");
   await expectText(page, "#attestation-summary", "Verified");
+  await expectText(page, "#attestation-summary", "Signatures");
+  await expectText(page, "#attestation-summary", "Influence");
   await expectText(page, "#attestation-sources", "pool-operator-gamma");
   await expectText(page, "#attestation-signals", "Simulated prediction market input only.");
+  await expectText(page, "#attestation-signals", "Signature verified; influence ready.");
   await expectText(page, "#prediction-summary", "Reviews");
   await expectText(page, "#prediction-markets", "Network stress watch");
   await expectText(page, "#prediction-markets", "Accepted event 9f976656...9c0daca7.");

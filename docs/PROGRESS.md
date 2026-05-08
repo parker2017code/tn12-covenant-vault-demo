@@ -105,7 +105,7 @@ WIP now:
 - Wallet submit path that preserves payload bytes and exact tx fields without local private keys.
 - Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone.
 - Durable indexer storage and replay beyond known-txid fixture reads.
-- Source-signature and reputation hardening for attestation-fed flows.
+- Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review now gates prediction influence.
 
 Next actions:
 
@@ -113,7 +113,7 @@ Next actions:
 2. Create custody settlement drafts only from matched pledge outputs.
 3. Add wrong-signer and wrong-script-argument negative tests for accepted proof lanes.
 4. Move checkpointing toward replayable node/RPC storage.
-5. Verify signal source signatures before they influence review prompts.
+5. Add reputation thresholds and signer provenance before signals affect more app lanes.
 
 Longer term:
 

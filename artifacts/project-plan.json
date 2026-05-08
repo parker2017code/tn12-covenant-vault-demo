@@ -104,8 +104,8 @@
       "enforcement": "research",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "generated-artifact",
-      "detail": "Add source signatures and reputation checks around accepted watcher signals.",
-      "next": "Add signature verification and reputation hardening around the accepted watcher signal."
+      "detail": "Source signature review now gates influence; reputation thresholds still need hardening.",
+      "next": "Harden signature provenance, source reputation thresholds, and accepted-payload evidence around watcher signals."
     },
     {
       "laneId": "treasury-vaults",
@@ -140,9 +140,9 @@
       "detail": "Add wrong-signer and wrong-script-argument checks for accepted proof lanes."
     },
     {
-      "id": "attestation-signatures",
+      "id": "attestation-reputation",
       "laneId": "miner-pool-signals",
-      "detail": "Verify signal source signatures before they influence review prompts."
+      "detail": "Add reputation thresholds and signer provenance before signals affect more app lanes."
     }
   ],
   "later": [

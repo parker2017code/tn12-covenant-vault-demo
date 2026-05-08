@@ -38,6 +38,13 @@
         "hash": "sha256:example-hashrate-window",
         "url": "local-research-note"
       },
+      "signature": {
+        "status": "verified",
+        "scheme": "demo-ed25519-message",
+        "publicKey": "tn12-watcher-alpha-demo-key",
+        "messageHash": "sha256:example-hashrate-window",
+        "signature": "demo-signature-rtd-hashrate-001"
+      },
       "status": "verified",
       "marketUse": "Update simulated probability for a network-stress event.",
       "portfolioUse": "Raise alert for portfolios concentrated in short-term miner revenue assumptions.",
@@ -63,6 +70,13 @@
         "hash": "sha256:example-public-source-bundle",
         "url": "local-research-note"
       },
+      "signature": {
+        "status": "missing",
+        "scheme": "demo-ed25519-message",
+        "publicKey": "",
+        "messageHash": "sha256:example-public-source-bundle",
+        "signature": ""
+      },
       "status": "draft",
       "marketUse": "Simulated prediction market input only.",
       "portfolioUse": "Watchlist alert; no automatic position change.",
@@ -87,6 +101,13 @@
         "kind": "signed-message-placeholder",
         "hash": "sha256:example-pool-policy-message",
         "url": "local-research-note"
+      },
+      "signature": {
+        "status": "pending-review",
+        "scheme": "demo-ed25519-message",
+        "publicKey": "pool-operator-gamma-demo-key",
+        "messageHash": "sha256:example-pool-policy-message",
+        "signature": "demo-signature-pool-policy-001"
       },
       "status": "verified",
       "marketUse": "Infrastructure readiness signal, not a tradeable event.",

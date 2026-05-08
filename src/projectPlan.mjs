@@ -14,7 +14,7 @@ export function buildProjectPlan(fixture = {}) {
   const wip = [
     laneItem(byId, "submit-console", "Replace local signing with wallet review that preserves exact tx fields and payload bytes."),
     laneItem(byId, "batch-assurance", "Move from accepted planner payloads to accepted pledge-output custody drafts."),
-    laneItem(byId, "miner-pool-signals", "Add source signatures and reputation checks around accepted watcher signals."),
+    laneItem(byId, "miner-pool-signals", "Source signature review now gates influence; reputation thresholds still need hardening."),
     laneItem(byId, "treasury-vaults", "Turn policy templates into constrained spend drafts with role separation.")
   ];
 
@@ -23,7 +23,7 @@ export function buildProjectPlan(fixture = {}) {
     action("pledge-output-custody", "Create custody settlement drafts only from amount-matched pledge outputs.", "batch-assurance"),
     action("durable-indexer", "Move known-txid checkpointing toward replayable node/RPC storage.", "payload-invoice"),
     action("covenant-negative-tests", "Add wrong-signer and wrong-script-argument checks for accepted proof lanes.", "escrow"),
-    action("attestation-signatures", "Verify signal source signatures before they influence review prompts.", "miner-pool-signals")
+    action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals")
   ];
 
   const later = [
