@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-07T19:54:15.327Z",
+  "fetchedAt": "2026-05-08T04:48:26.128Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -10,9 +10,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 27,
+    "recordCount": 31,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 5614688,
+    "maxAcceptingBlockBlueScore": 5650588,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -40,16 +40,20 @@
       "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
       "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
       "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
-      "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382"
+      "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12"
     ],
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 27,
+    "total": 31,
     "proofs": 7,
-    "payloadEvents": 20,
-    "accepted": 27,
-    "matched": 27,
+    "payloadEvents": 24,
+    "accepted": 31,
+    "matched": 31,
     "mismatches": 0,
     "lanes": [
       {
@@ -102,6 +106,18 @@
       },
       {
         "lane": "auction-settlement",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "batch-assurance-pledge",
+        "total": 3,
+        "accepted": 3,
+        "matched": 3
+      },
+      {
+        "lane": "batch-assurance-release",
         "total": 1,
         "accepted": 1,
         "matched": 1
@@ -1293,6 +1309,202 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "batch-assurance-pledge",
+      "label": "Batch assurance pledge docs 001",
+      "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5650135,
+      "acceptingBlockTime": 1778186448992,
+      "draftPath": "artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+      "evidencePath": "artifacts/payload-batch-pledge-docs-001-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d",
+        "observedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d",
+        "matches": true,
+        "bytes": 183,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "batch-assurance-pledge",
+            "subject": "kaspa-dev-docs-sprint:pledge-docs-001",
+            "value": "accepted",
+            "note": "Accepted batch-assurance planner pledge record; not custody settlement."
+          },
+          "encoded": {
+            "bytes": 183,
+            "hex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303031222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "batch-assurance-pledge",
+      "label": "Batch assurance pledge docs 002",
+      "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5650315,
+      "acceptingBlockTime": 1778186466514,
+      "draftPath": "artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+      "evidencePath": "artifacts/payload-batch-pledge-docs-002-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d",
+        "observedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d",
+        "matches": true,
+        "bytes": 183,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "batch-assurance-pledge",
+            "subject": "kaspa-dev-docs-sprint:pledge-docs-002",
+            "value": "accepted",
+            "note": "Accepted batch-assurance planner pledge record; not custody settlement."
+          },
+          "encoded": {
+            "bytes": 183,
+            "hex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303032222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b206e6f7420637573746f647920736574746c656d656e742e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "batch-assurance-pledge",
+      "label": "Batch assurance pledge docs 003",
+      "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5650440,
+      "acceptingBlockTime": 1778186477529,
+      "draftPath": "artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+      "evidencePath": "artifacts/payload-batch-pledge-docs-003-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303033222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b20636f6d706c657465732074617267657420696e20706c616e6e65722073746174652e227d",
+        "observedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303033222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b20636f6d706c657465732074617267657420696e20706c616e6e65722073746174652e227d",
+        "matches": true,
+        "bytes": 194,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "batch-assurance-pledge",
+            "subject": "kaspa-dev-docs-sprint:pledge-docs-003",
+            "value": "accepted",
+            "note": "Accepted batch-assurance planner pledge record; completes target in planner state."
+          },
+          "encoded": {
+            "bytes": 194,
+            "hex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303033222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b20636f6d706c657465732074617267657420696e20706c616e6e65722073746174652e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "batch-assurance-release",
+      "label": "Batch assurance release plan",
+      "txid": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5650588,
+      "acceptingBlockTime": 1778186491403,
+      "draftPath": "artifacts/signed-drafts/payload-batch-release-plan.json",
+      "evidencePath": "artifacts/payload-batch-release-plan-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2262617463682d6173737572616e63652d72656c65617365222c227375626a656374223a226b617370612d6465762d646f63732d737072696e74222c2276616c7565223a2272656c656173652d7265616479222c226e6f7465223a2242617463682d6173737572616e636520706c616e6e65722072656c656173652d7265616479206576656e743b206e6f7420706f6f6c656420636f76656e616e7420637573746f647920736574746c656d656e742e227d",
+        "observedHex": "7b226b696e64223a2262617463682d6173737572616e63652d72656c65617365222c227375626a656374223a226b617370612d6465762d646f63732d737072696e74222c2276616c7565223a2272656c656173652d7265616479222c226e6f7465223a2242617463682d6173737572616e636520706c616e6e65722072656c656173652d7265616479206576656e743b206e6f7420706f6f6c656420636f76656e616e7420637573746f647920736574746c656d656e742e227d",
+        "matches": true,
+        "bytes": 186,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "batch-assurance-release",
+            "subject": "kaspa-dev-docs-sprint",
+            "value": "release-ready",
+            "note": "Batch-assurance planner release-ready event; not pooled covenant custody settlement."
+          },
+          "encoded": {
+            "bytes": 186,
+            "hex": "7b226b696e64223a2262617463682d6173737572616e63652d72656c65617365222c227375626a656374223a226b617370612d6465762d646f63732d737072696e74222c2276616c7565223a2272656c656173652d7265616479222c226e6f7465223a2242617463682d6173737572616e636520706c616e6e65722072656c656173652d7265616479206576656e743b206e6f7420706f6f6c656420636f76656e616e7420637573746f647920736574746c656d656e742e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12"
     }
   ],
   "boundaries": [

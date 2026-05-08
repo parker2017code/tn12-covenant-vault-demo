@@ -315,7 +315,7 @@ Build the batch assurance campaign planner state:
 npm run campaign:state
 ```
 
-This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only.
+This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. Current batch-assurance pledge and release-ready records have accepted TN12 payload evidence, but they do not prove custody settlement or pooled covenant enforcement.
 
 Build the enforcement matrix:
 
@@ -450,11 +450,11 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 2. Done: wallet-review readiness artifact over the signed draft registry. Next: replace local signing with a real wallet connector while keeping exact input/output/payload review.
 
-3. Next: build batch assurance aggregation around multiple pledge outputs before claiming a real campaign product.
+3. Done: batch assurance planner aggregation has accepted TN12 payload records for three pledges and a release-ready event. Next: build real custody release/refund drafts from pledge outputs before claiming settlement.
 
 4. Escrow primitive added: buyer fund, seller release, timeout refund, mutual cancel. Funding, release, DAA-refund, and mutual cancel now have accepted TN12 evidence on separate funded outputs.
 
-5. Done: checkpointed accepted-index artifact and persisted checkpoint guard for 7 proof spends and 20 payload events. Next: move from known-txid public reads to a node/RPC backend with durable storage and virtual-chain rollback replay.
+5. Done: checkpointed accepted-index artifact and persisted checkpoint guard for 7 proof spends and 24 payload events. Next: move from known-txid public reads to a node/RPC backend with durable storage and virtual-chain rollback replay.
 
 6. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 

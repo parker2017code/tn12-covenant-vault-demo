@@ -1,0 +1,111 @@
+{
+  "schema": "tn12-signed-payload-receipt-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "requiresPayloadSubmitSupport": true,
+  "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+    "outputIndex": 1,
+    "amountTkas": 1141.2983
+  },
+  "payment": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": 1,
+    "amountSompi": "100000000",
+    "changeTkas": "1140.29825",
+    "changeSompi": "114029825000",
+    "minerFeeSompi": "5000"
+  },
+  "receipt": {
+    "schema": "kaspa-signal-payload/v1",
+    "status": "payload-size-ok",
+    "lane": "transaction-payload",
+    "payload": {
+      "kind": "batch-assurance-release",
+      "subject": "kaspa-dev-docs-sprint",
+      "value": "release-ready",
+      "note": "Batch-assurance planner release-ready event; not pooled covenant custody settlement."
+    },
+    "encoded": {
+      "bytes": 186,
+      "transientMass": 744,
+      "hex": "7b226b696e64223a2262617463682d6173737572616e63652d72656c65617365222c227375626a656374223a226b617370612d6465762d646f63732d737072696e74222c2276616c7565223a2272656c656173652d7265616479222c226e6f7465223a2242617463682d6173737572616e636520706c616e6e65722072656c656173652d7265616479206576656e743b206e6f7420706f6f6c656420636f76656e616e7420637573746f647920736574746c656d656e742e227d"
+    },
+    "limits": {
+      "standardTxMassLimit": 100000,
+      "transientByteMass": 4,
+      "remainingMassBeforeInputsOutputsAndSignatures": 99256
+    },
+    "boundary": "This models user transaction payload data, not arbitrary miner header data."
+  },
+  "transactionId": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+            "index": 1
+          },
+          "signatureScript": "419fb8eef2eb388b63910894461f85ed5dcbc1d4d81d9eebb6dec0d6d6ff741d9d34a4a5c5d307fd78fb0b8095708f92af6722a0b1766a846e47693576353b1c1e01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 100000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 114029825000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "payload": "7b226b696e64223a2262617463682d6173737572616e63652d72656c65617365222c227375626a656374223a226b617370612d6465762d646f63732d737072696e74222c2276616c7565223a2272656c656173652d7265616479222c226e6f7465223a2242617463682d6173737572616e636520706c616e6e65722072656c656173652d7265616479206576656e743b206e6f7420706f6f6c656420636f76656e616e7420637573746f647920736574746c656d656e742e227d"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "tx": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+            "index": 1
+          },
+          "signatureScript": "419fb8eef2eb388b63910894461f85ed5dcbc1d4d81d9eebb6dec0d6d6ff741d9d34a4a5c5d307fd78fb0b8095708f92af6722a0b1766a846e47693576353b1c1e01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "value": "100000000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        },
+        {
+          "value": "114029825000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "gas": "0",
+      "payload": "7b226b696e64223a2262617463682d6173737572616e63652d72656c65617365222c227375626a656374223a226b617370612d6465762d646f63732d737072696e74222c2276616c7565223a2272656c656173652d7265616479222c226e6f7465223a2242617463682d6173737572616e636520706c616e6e65722072656c656173652d7265616479206576656e743b206e6f7420706f6f6c656420636f76656e616e7420637573746f647920736574746c656d656e742e227d",
+      "id": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12"
+    }
+  }
+}

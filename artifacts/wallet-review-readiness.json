@@ -3,11 +3,11 @@
   "network": "kaspa-testnet-12",
   "status": "wallet-review-ready",
   "summary": {
-    "total": 33,
-    "ready": 33,
-    "payloadDrafts": 20,
-    "payloadRouteReady": 20,
-    "explicitSubmitCommands": 33,
+    "total": 37,
+    "ready": 37,
+    "payloadDrafts": 24,
+    "payloadRouteReady": 24,
+    "explicitSubmitCommands": 37,
     "registrySecretFields": 0
   },
   "drafts": [
@@ -564,6 +564,118 @@
         "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-agent-hold-escrow.json --submit",
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-hold-escrow.json",
         "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-agent-hold-escrow.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+      "label": "Batch assurance pledge 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-pledge-docs-001.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-001.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+      "label": "Batch assurance pledge 002 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-pledge-docs-002.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-002.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+      "label": "Batch assurance pledge 003 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 194,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-pledge-docs-003.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-003.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-batch-release-plan.json",
+      "label": "Batch assurance release plan payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 186,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-release-plan.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-release-plan.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-release-plan.json --submit"
       },
       "checks": {
         "hasTransactionId": true,

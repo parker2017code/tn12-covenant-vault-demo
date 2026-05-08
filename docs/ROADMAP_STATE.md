@@ -20,7 +20,7 @@ Blocked or limited:
 
 - The old escrow cancel `sigOpCount=1` script-unit rejection and the later old-SDK verification failure are preserved as historical evidence only.
 - Rusty Kaspa TN12 source confirms the version-1 compute-budget route: v1 inputs carry `computeBudget`, not `sigOpCount`. The accepted cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, preserving `computeBudget=30`.
-- The public TN12 REST submit route is unsuitable for payload receipts. It accepted a payment while dropping payload bytes. The JSON wRPC route has accepted 20 matched payload events across invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, and agent commitment state.
+- The public TN12 REST submit route is unsuitable for payload receipts. It accepted a payment while dropping payload bytes. The JSON wRPC route has accepted 24 matched payload events across invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, agent commitment, and batch-assurance planner state.
 
 ## App Buckets
 
@@ -60,8 +60,8 @@ These are roadmap or research until the missing rails are explicit and tested.
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
 | 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state | Add wallet review and checkpointed indexing |
-| 2. Submit console | Review gate built | 33 signed draft reviews, 20 payload drafts, wallet-review readiness artifact | Real wallet connector and no-local-key UX |
-| 3. Batch assurance | Base built | Campaign planner with accepted vs signed-only progress | Real accepted pledge-output batch settlement drafts |
+| 2. Submit console | Review gate built | 37 signed draft reviews, 24 payload drafts, wallet-review readiness artifact | Real wallet connector and no-local-key UX |
+| 3. Batch assurance | Accepted TN12 payload state | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, and release-ready planner event | Real accepted pledge-output custody settlement drafts |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, and accepted mutual-cancel proofs on separate funded outputs | Add negative tests and keep SDK route documented |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |
 | 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |

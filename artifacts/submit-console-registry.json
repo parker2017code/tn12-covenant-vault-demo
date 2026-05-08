@@ -3,10 +3,10 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 33,
-    "payloadDrafts": 20,
-    "explicitSubmitRequired": 33,
-    "payloadSubmitGated": 20
+    "total": 37,
+    "payloadDrafts": 24,
+    "explicitSubmitRequired": 37,
+    "payloadSubmitGated": 24
   },
   "drafts": [
     {
@@ -1291,6 +1291,262 @@
     },
     {
       "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+        "outputIndex": 1,
+        "amountTkas": 1144.29845
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 183
+      },
+      "totals": {
+        "outputSompi": "114429840000",
+        "outputTkas": "1144.2984"
+      },
+      "inputs": [
+        {
+          "txid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "114329840000",
+          "amountTkas": "1143.2984",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "previewHex": "7b226b696e64223a2262617463682d6173737572616e63...7420637573746f647920736574746c656d656e742e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-pledge-docs-001.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-001.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Batch assurance pledge 001 payload",
+      "priority": 21,
+      "description": "Accepted batch-assurance pledge planner payload for pledge-docs-001."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "outputIndex": 1,
+        "amountTkas": 1143.2984
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 183
+      },
+      "totals": {
+        "outputSompi": "114329835000",
+        "outputTkas": "1143.29835"
+      },
+      "inputs": [
+        {
+          "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "114229835000",
+          "amountTkas": "1142.29835",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "previewHex": "7b226b696e64223a2262617463682d6173737572616e63...7420637573746f647920736574746c656d656e742e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-pledge-docs-002.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-002.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Batch assurance pledge 002 payload",
+      "priority": 22,
+      "description": "Accepted batch-assurance pledge planner payload for pledge-docs-002."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "outputIndex": 1,
+        "amountTkas": 1142.29835
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 194
+      },
+      "totals": {
+        "outputSompi": "114229830000",
+        "outputTkas": "1142.2983"
+      },
+      "inputs": [
+        {
+          "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "114129830000",
+          "amountTkas": "1141.2983",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 194,
+        "previewHex": "7b226b696e64223a2262617463682d6173737572616e63...67657420696e20706c616e6e65722073746174652e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-pledge-docs-003.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-pledge-docs-003.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Batch assurance pledge 003 payload",
+      "priority": 23,
+      "description": "Accepted batch-assurance pledge planner payload for pledge-docs-003."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-batch-release-plan.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+        "outputIndex": 1,
+        "amountTkas": 1141.2983
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 186
+      },
+      "totals": {
+        "outputSompi": "114129825000",
+        "outputTkas": "1141.29825"
+      },
+      "inputs": [
+        {
+          "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "114029825000",
+          "amountTkas": "1140.29825",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 186,
+        "previewHex": "7b226b696e64223a2262617463682d6173737572616e63...7420637573746f647920736574746c656d656e742e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-release-plan.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-release-plan.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-release-plan.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Batch assurance release plan payload",
+      "priority": 24,
+      "description": "Accepted batch-assurance release-ready planner payload. It is not custody settlement."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
       "path": "artifacts/signed-drafts/split-funding.json",
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
@@ -1357,7 +1613,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Split funding",
-      "priority": 21,
+      "priority": 25,
       "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
     },
     {
@@ -1414,7 +1670,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault recovery",
-      "priority": 22,
+      "priority": 26,
       "description": "Accepted proof path for vault recovery."
     },
     {
@@ -1471,7 +1727,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault withdrawal",
-      "priority": 23,
+      "priority": 27,
       "description": "Accepted proof path for delayed vault withdrawal."
     },
     {
@@ -1528,7 +1784,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance release",
-      "priority": 24,
+      "priority": 28,
       "description": "Accepted proof path for individual pledge release."
     },
     {
@@ -1585,7 +1841,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance refund",
-      "priority": 25,
+      "priority": 29,
       "description": "Accepted proof path for individual pledge refund."
     },
     {
@@ -1626,7 +1882,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow funding",
-      "priority": 26,
+      "priority": 30,
       "description": "Accepted funding path for Escrow.sil; created the P2SH output consumed by the release proof."
     },
     {
@@ -1683,7 +1939,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow release",
-      "priority": 27,
+      "priority": 31,
       "description": "Accepted seller-release proof from the Escrow.sil funding output."
     },
     {
@@ -1740,7 +1996,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow refund",
-      "priority": 28,
+      "priority": 32,
       "description": "Timeout-refund review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
@@ -1797,7 +2053,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel",
-      "priority": 29,
+      "priority": 33,
       "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
@@ -1838,7 +2094,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund funding",
-      "priority": 30,
+      "priority": 34,
       "description": "Accepted funding path for a DAA-expired EscrowExpired refund proof."
     },
     {
@@ -1895,7 +2151,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund",
-      "priority": 31,
+      "priority": 35,
       "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
     },
     {
@@ -1936,7 +2192,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel funding",
-      "priority": 32,
+      "priority": 36,
       "description": "Accepted funding output for the mutual-cancel attempt."
     },
     {
@@ -1993,7 +2249,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel attempt",
-      "priority": 33,
+      "priority": 37,
       "description": "Accepted mutual-cancel spend; rebuilt as tx version 1 with computeBudget 30 using the local TN12 kaspa-wasm 1.1.1-toc.1 SDK."
     }
   ],

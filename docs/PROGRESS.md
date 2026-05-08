@@ -16,7 +16,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Accepted route: JSON wRPC accepted paid tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`, refund tx `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`, and error tx `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`; `npm run payload:verify` confirms payload bytes and output match for each evidence artifact.
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
-   - Indexer status: checkpointed known-txid public-read index covers 27 accepted TN12 records: 7 proof spends and 20 payload events.
+   - Indexer status: checkpointed known-txid public-read index covers 31 accepted TN12 records: 7 proof spends and 24 payload events.
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
    - Current status: base built with wallet-review readiness artifact.
@@ -25,9 +25,10 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields.
 
 3. Batch assurance campaigns: multi-pledge accepted progress, pending progress, release/refund planning.
-   - Current status: base built.
+   - Current status: accepted TN12 planner payload records.
    - Enforcement: planner/indexer.
    - Covenant boundary: individual pledge script exists; pooled target aggregation is not script-enforced.
+   - Evidence: three accepted pledge planner payloads and one accepted release-ready planner payload. These are not custody-settlement proofs.
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: base built.

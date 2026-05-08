@@ -101,6 +101,26 @@
       "label": "Agent hold escrow",
       "draftPath": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
       "outPath": "artifacts/payload-agent-hold-escrow-evidence.json"
+    },
+    {
+      "label": "Batch assurance pledge docs 001",
+      "draftPath": "artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+      "outPath": "artifacts/payload-batch-pledge-docs-001-evidence.json"
+    },
+    {
+      "label": "Batch assurance pledge docs 002",
+      "draftPath": "artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+      "outPath": "artifacts/payload-batch-pledge-docs-002-evidence.json"
+    },
+    {
+      "label": "Batch assurance pledge docs 003",
+      "draftPath": "artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+      "outPath": "artifacts/payload-batch-pledge-docs-003-evidence.json"
+    },
+    {
+      "label": "Batch assurance release plan",
+      "draftPath": "artifacts/signed-drafts/payload-batch-release-plan.json",
+      "outPath": "artifacts/payload-batch-release-plan-evidence.json"
     }
   ]
 }

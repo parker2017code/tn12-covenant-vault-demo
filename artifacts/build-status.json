@@ -52,16 +52,18 @@
       "order": 3,
       "id": "batch-assurance",
       "name": "Batch Assurance Campaigns",
-      "status": "base-built",
+      "status": "accepted-planner-payloads",
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
-      "proof": "generated-artifact",
+      "proof": "accepted-tn12-json-wrpc-payload-events",
       "builtSurface": [
         "fixtures/BatchAssuranceCampaign.json",
         "src/batchAssurance.mjs",
-        "npm run campaign:state"
+        "npm run campaign:state",
+        "artifacts/payload-batch-pledge-docs-001-evidence.json",
+        "artifacts/payload-batch-release-plan-evidence.json"
       ],
-      "next": "Build exact release/refund settlement drafts for accepted pledge outputs."
+      "next": "Build exact custody release/refund settlement drafts for accepted pledge outputs."
     },
     {
       "order": 4,

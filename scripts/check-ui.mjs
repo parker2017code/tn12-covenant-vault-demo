@@ -63,9 +63,11 @@ try {
   await expectText(page, "#invoice-draft", "signed-not-broadcast");
   await expectText(page, "#payload-readiness", "Payload submit readiness");
   await expectText(page, "#payload-readiness", "accepted-wrpc-payload-receipt-rest-blocked");
-  await expectText(page, "#campaign-summary", "release-not-ready");
+  await expectText(page, "#campaign-summary", "release-ready-from-accepted-pledges");
   await expectText(page, "#campaign-plans", "Release plan");
+  await expectText(page, "#campaign-plans", "ready-to-draft-batch-release");
   await expectText(page, "#campaign-pledges", "pledge-docs-004");
+  await expectText(page, "#campaign-pledges", "pledge-docs-005");
   await expectText(page, "#enforcement-summary", "Script");
   await expectText(page, "#enforcement-features", "Vault daily limit");
   await expectText(page, "#enforcement-features", "planner-indexer");

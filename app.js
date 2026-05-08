@@ -360,6 +360,7 @@ async function renderBatchAssuranceCampaign() {
       <article><span>Accepted</span><strong>${escapeHtml(campaign.summary.acceptedTkas)} / ${escapeHtml(campaign.summary.targetTkas)}</strong></article>
       <article><span>Progress</span><strong>${escapeHtml(Math.round(campaign.summary.acceptedProgress * 100))}%</strong></article>
       <article><span>Pledges</span><strong>${escapeHtml(campaign.summary.acceptedCount)} / ${escapeHtml(campaign.summary.pledgeCount)}</strong></article>
+      <article><span>Review</span><strong>${escapeHtml(campaign.summary.rejectedCount)} held</strong></article>
       <article><span>Release</span><strong>${escapeHtml(campaign.summary.releaseStatus)}</strong></article>
     `;
 
@@ -386,7 +387,7 @@ async function renderBatchAssuranceCampaign() {
         <span>${escapeHtml(pledge.status)}</span>
         <strong>${escapeHtml(pledge.pledgeId)}</strong>
         <p>${escapeHtml(pledge.amountTkas)} TKAS from ${escapeHtml(pledge.contributor)}</p>
-        <small>${escapeHtml(pledge.note)}</small>
+        <small>${escapeHtml(pledge.review.status)}; ${escapeHtml(pledge.note)}</small>
       `;
       campaignPledgesNode.append(article);
     }

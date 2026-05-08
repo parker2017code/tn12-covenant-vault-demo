@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-08T04:47:29.920Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5650440,
+  "acceptingBlockTime": 1778186477529,
+  "payload": {
+    "expectedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303033222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b20636f6d706c657465732074617267657420696e20706c616e6e65722073746174652e227d",
+    "observedHex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303033222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b20636f6d706c657465732074617267657420696e20706c616e6e65722073746174652e227d",
+    "bytes": 194,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "batch-assurance-pledge",
+        "subject": "kaspa-dev-docs-sprint:pledge-docs-003",
+        "value": "accepted",
+        "note": "Accepted batch-assurance planner pledge record; completes target in planner state."
+      },
+      "encoded": {
+        "bytes": 194,
+        "hex": "7b226b696e64223a2262617463682d6173737572616e63652d706c65646765222c227375626a656374223a226b617370612d6465762d646f63732d737072696e743a706c656467652d646f63732d303033222c2276616c7565223a226163636570746564222c226e6f7465223a2241636365707465642062617463682d6173737572616e636520706c616e6e657220706c65646765207265636f72643b20636f6d706c657465732074617267657420696e20706c616e6e65722073746174652e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "kaspa-dev-docs-sprint:pledge-docs-003",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d"
+}

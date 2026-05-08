@@ -1,8 +1,10 @@
 export function buildBatchAssuranceState(fixture = {}) {
   const campaign = normalizeCampaign(fixture.campaign || {});
   const pledges = (fixture.pledgeOutputs || []).map(normalizePledge);
-  const acceptedPledges = pledges.filter((pledge) => pledge.status === "accepted-output-imported");
-  const pendingPledges = pledges.filter((pledge) => pledge.status !== "accepted-output-imported");
+  const reviewedPledges = pledges.map((pledge) => reviewPledge({ pledge, campaign }));
+  const acceptedPledges = reviewedPledges.filter((pledge) => pledge.review.countsTowardRelease);
+  const pendingPledges = reviewedPledges.filter((pledge) => pledge.review.countsTowardPlanned && !pledge.review.countsTowardRelease);
+  const rejectedPledges = reviewedPledges.filter((pledge) => pledge.review.status !== "eligible" && !pledge.review.countsTowardPlanned);
   const acceptedTkas = sumTkas(acceptedPledges);
   const pendingTkas = sumTkas(pendingPledges);
   const totalPlannedTkas = Number((acceptedTkas + pendingTkas).toFixed(8));
@@ -21,6 +23,7 @@ export function buildBatchAssuranceState(fixture = {}) {
       pledgeCount: pledges.length,
       acceptedCount: acceptedPledges.length,
       pendingCount: pendingPledges.length,
+      rejectedCount: rejectedPledges.length,
       acceptedTkas,
       pendingTkas,
       totalPlannedTkas,
@@ -33,14 +36,15 @@ export function buildBatchAssuranceState(fixture = {}) {
       releaseStatus: acceptedTargetMet ? "release-ready-from-accepted-pledges" : "release-not-ready",
       refundStatus: acceptedTargetMet ? "refund-not-primary-path" : "refund-plan-needed-if-deadline-expires"
     },
-    pledges,
+    pledges: reviewedPledges,
     releasePlan: buildReleasePlan({ campaign, acceptedPledges, acceptedTargetMet, remainingAcceptedTkas }),
-    refundPlan: buildRefundPlan({ campaign, acceptedPledges }),
+    refundPlan: buildRefundPlan({ campaign, acceptedPledges, acceptedTargetMet }),
     boundaries: [
       "This state is planner/indexer-side aggregation over pledge records.",
       "It does not prove pooled assurance target enforcement in one covenant output.",
-      "Only accepted pledge outputs should count toward release readiness.",
-      "Pending or signed-only pledge drafts can show planned progress but cannot make the campaign releasable."
+      "Only accepted pledge records with valid source outpoints and minimum pledge amounts count toward release readiness.",
+      "Pending or signed-only pledge drafts can show planned progress but cannot make the campaign releasable.",
+      "Accepted payload pledge records are app-state evidence, not custody of pledge funds."
     ]
   };
 }
@@ -64,6 +68,7 @@ function normalizePledge(pledge) {
     contributor: String(pledge.contributor || ""),
     refundAddress: String(pledge.refundAddress || ""),
     amountTkas: clampNumber(Number(pledge.amountTkas), 0, 100000000),
+    acceptedTxid: String(pledge.acceptedTxid || ""),
     outpoint: {
       txid: String(pledge.outpoint?.txid || ""),
       index: Number.isInteger(Number(pledge.outpoint?.index)) ? Number(pledge.outpoint.index) : 0
@@ -73,22 +78,61 @@ function normalizePledge(pledge) {
   };
 }
 
+function reviewPledge({ pledge, campaign }) {
+  const hasOutpoint = isHex64(pledge.outpoint.txid);
+  const hasAcceptedTxid = isHex64(pledge.acceptedTxid);
+  const acceptedStatus = pledge.status === "accepted-output-imported" || pledge.status === "accepted-payload-indexed";
+  const signedOnlyStatus = pledge.status === "signed-not-submitted" || pledge.status === "draft";
+  const meetsMinimum = pledge.amountTkas >= campaign.minimumPledgeTkas;
+  const countsTowardRelease = acceptedStatus && hasOutpoint && meetsMinimum;
+  const countsTowardPlanned = countsTowardRelease || (signedOnlyStatus && meetsMinimum);
+  const problems = [
+    !meetsMinimum ? `below minimum pledge of ${campaign.minimumPledgeTkas} TKAS` : "",
+    acceptedStatus && !hasOutpoint ? "accepted pledge is missing a valid source outpoint" : "",
+    pledge.status === "accepted-payload-indexed" && !hasAcceptedTxid ? "accepted payload pledge is missing accepted txid" : ""
+  ].filter(Boolean);
+
+  return {
+    ...pledge,
+    review: {
+      status: problems.length ? "review-needed" : "eligible",
+      countsTowardRelease,
+      countsTowardPlanned,
+      hasOutpoint,
+      hasAcceptedTxid,
+      meetsMinimum,
+      problems
+    }
+  };
+}
+
 function buildReleasePlan({ campaign, acceptedPledges, acceptedTargetMet, remainingAcceptedTkas }) {
   return {
-    status: acceptedTargetMet ? "ready-to-plan-batch-release" : "wait-for-more-accepted-pledges",
+    status: acceptedTargetMet ? "ready-to-draft-batch-release" : "wait-for-more-accepted-pledges",
     recipientAddress: campaign.recipientAddress,
     acceptedInputCount: acceptedPledges.length,
     acceptedInputTkas: sumTkas(acceptedPledges),
     remainingAcceptedTkas,
+    inputs: acceptedPledges.map((pledge) => ({
+      pledgeId: pledge.pledgeId,
+      contributor: pledge.contributor,
+      amountTkas: pledge.amountTkas,
+      sourceOutpoint: pledge.outpoint,
+      acceptedTxid: pledge.acceptedTxid || null
+    })),
+    output: {
+      address: campaign.recipientAddress,
+      amountTkas: sumTkas(acceptedPledges)
+    },
     next: acceptedTargetMet
       ? "Build release drafts from accepted pledge outpoints and verify recipient output amount before submit."
       : "Do not release yet; import more accepted pledge outputs before target status changes."
   };
 }
 
-function buildRefundPlan({ campaign, acceptedPledges }) {
+function buildRefundPlan({ campaign, acceptedPledges, acceptedTargetMet }) {
   return {
-    status: "available-after-deadline-if-target-not-met",
+    status: acceptedTargetMet ? "not-primary-path-target-met" : "available-after-deadline-if-target-not-met",
     deadlineIso: campaign.deadlineIso,
     refundCount: acceptedPledges.length,
     refunds: acceptedPledges.map((pledge) => ({
@@ -107,4 +151,8 @@ function sumTkas(pledges) {
 function clampNumber(value, min, max) {
   const number = Number.isFinite(value) ? value : min;
   return Math.min(Math.max(number, min), max);
+}
+
+function isHex64(value) {
+  return /^[0-9a-f]{64}$/i.test(String(value || ""));
 }

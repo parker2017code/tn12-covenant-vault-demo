@@ -163,13 +163,13 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 33);
-assert.equal(submitRegistry.summary.payloadDrafts, 20);
-assert.equal(submitRegistry.summary.payloadSubmitGated, 20);
+assert.equal(submitRegistry.summary.total, 37);
+assert.equal(submitRegistry.summary.payloadDrafts, 24);
+assert.equal(submitRegistry.summary.payloadSubmitGated, 24);
 const walletReview = buildWalletReviewReadiness(submitRegistry);
 assert.equal(walletReview.status, "wallet-review-ready");
-assert.equal(walletReview.summary.ready, 33);
-assert.equal(walletReview.summary.payloadRouteReady, 20);
+assert.equal(walletReview.summary.ready, 37);
+assert.equal(walletReview.summary.payloadRouteReady, 24);
 assert.equal(walletReview.summary.registrySecretFields, 0);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
@@ -217,13 +217,20 @@ assert.ok(researchLibrary.candidates.some((candidate) => candidate.id === "walle
 const campaignFixture = JSON.parse(await readFile(new URL("../fixtures/BatchAssuranceCampaign.json", import.meta.url), "utf8"));
 const campaignState = buildBatchAssuranceState(campaignFixture);
 assert.equal(campaignState.status, "app-layer-campaign-planner-not-pooled-covenant");
-assert.equal(campaignState.summary.pledgeCount, 4);
-assert.equal(campaignState.summary.acceptedTkas, 75);
+assert.equal(campaignState.summary.pledgeCount, 5);
+assert.equal(campaignState.summary.acceptedTkas, 100);
 assert.equal(campaignState.summary.pendingTkas, 40);
-assert.equal(campaignState.summary.remainingAcceptedTkas, 25);
-assert.equal(campaignState.summary.releaseStatus, "release-not-ready");
+assert.equal(campaignState.summary.rejectedCount, 1);
+assert.equal(campaignState.summary.remainingAcceptedTkas, 0);
+assert.equal(campaignState.summary.releaseStatus, "release-ready-from-accepted-pledges");
 assert.equal(campaignState.releasePlan.acceptedInputCount, 3);
+assert.equal(campaignState.releasePlan.output.amountTkas, 100);
 assert.equal(campaignState.refundPlan.refundCount, 3);
+assert.ok(campaignState.pledges.some((pledge) =>
+  pledge.pledgeId === "pledge-docs-005"
+  && pledge.review.status === "review-needed"
+  && pledge.review.countsTowardRelease === false
+));
 const enforcementFixture = JSON.parse(await readFile(new URL("../fixtures/EnforcementMatrix.json", import.meta.url), "utf8"));
 const enforcementMatrix = buildEnforcementMatrix(enforcementFixture);
 assert.equal(enforcementMatrix.status, "claim-surface-audit");
@@ -354,15 +361,15 @@ assert.ok(acceptedState.records.some((record) =>
   && record.txid === "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
 ));
 const checkpointFixture = JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8"));
-assert.equal(checkpointFixture.summary.total, 27);
+assert.equal(checkpointFixture.summary.total, 31);
 assert.equal(checkpointFixture.summary.proofs, 7);
-assert.equal(checkpointFixture.summary.payloadEvents, 20);
+assert.equal(checkpointFixture.summary.payloadEvents, 24);
 assert.equal(checkpointFixture.summary.mismatches, 0);
 assert.equal(checkpointFixture.status, "accepted-index-fully-matched");
 assert.ok(checkpointFixture.checkpoint.maxAcceptingBlockBlueScore > checkpointFixture.checkpoint.minAcceptingBlockBlueScore);
 const persistedCheckpointFixture = JSON.parse(await readFile(new URL("../artifacts/persisted-checkpoint-guard.json", import.meta.url), "utf8"));
 assert.equal(persistedCheckpointFixture.status, "persisted-checkpoint-ready");
-assert.equal(persistedCheckpointFixture.summary.recordCount, 27);
+assert.equal(persistedCheckpointFixture.summary.recordCount, 31);
 assert.equal(persistedCheckpointFixture.summary.mismatches, 0);
 assert.equal(persistedCheckpointFixture.summary.rollbackDetected, false);
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));

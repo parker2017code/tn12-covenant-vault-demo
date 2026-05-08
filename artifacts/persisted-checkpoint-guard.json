@@ -3,10 +3,10 @@
   "network": "kaspa-testnet-12",
   "status": "persisted-checkpoint-ready",
   "sourcePath": "artifacts/checkpointed-accepted-index.json",
-  "persistedAt": "2026-05-07T19:54:15.327Z",
+  "persistedAt": "2026-05-08T04:48:26.128Z",
   "summary": {
-    "recordCount": 27,
-    "matched": 27,
+    "recordCount": 31,
+    "matched": 31,
     "mismatches": 0,
     "addedTxids": 0,
     "missingTxids": 0,
@@ -15,9 +15,9 @@
   },
   "current": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 27,
+    "recordCount": 31,
     "minBlueScore": 5203140,
-    "maxBlueScore": 5614688,
+    "maxBlueScore": 5650588,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -45,14 +45,18 @@
       "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
       "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
       "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
-      "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382"
+      "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12"
     ]
   },
   "previous": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 27,
+    "recordCount": 31,
     "minBlueScore": 5203140,
-    "maxBlueScore": 5614688,
+    "maxBlueScore": 5650588,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -80,7 +84,11 @@
       "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
       "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
       "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
-      "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382"
+      "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12"
     ]
   },
   "rollback": {

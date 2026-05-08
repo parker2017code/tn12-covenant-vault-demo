@@ -13,108 +13,209 @@
     "refundMode": "individual-refund-after-deadline"
   },
   "summary": {
-    "pledgeCount": 4,
+    "pledgeCount": 5,
     "acceptedCount": 3,
     "pendingCount": 1,
-    "acceptedTkas": 75,
+    "rejectedCount": 1,
+    "acceptedTkas": 100,
     "pendingTkas": 40,
-    "totalPlannedTkas": 115,
+    "totalPlannedTkas": 140,
     "targetTkas": 100,
-    "remainingAcceptedTkas": 25,
-    "acceptedProgress": 0.75,
-    "plannedProgress": 1.15,
-    "acceptedTargetMet": false,
+    "remainingAcceptedTkas": 0,
+    "acceptedProgress": 1,
+    "plannedProgress": 1.4,
+    "acceptedTargetMet": true,
     "plannedTargetMet": true,
-    "releaseStatus": "release-not-ready",
-    "refundStatus": "refund-plan-needed-if-deadline-expires"
+    "releaseStatus": "release-ready-from-accepted-pledges",
+    "refundStatus": "refund-not-primary-path"
   },
   "pledges": [
     {
       "pledgeId": "pledge-docs-001",
       "contributor": "docs-backer-alpha",
-      "refundAddress": "kaspatest:qalpha-refund-placeholder",
-      "amountTkas": 25,
+      "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": 45,
+      "acceptedTxid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
       "outpoint": {
-        "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
         "index": 0
       },
-      "status": "accepted-output-imported",
-      "note": "Fixture pledge record shaped like an accepted output; replace with explorer-verified outpoint before real campaign state."
+      "status": "accepted-payload-indexed",
+      "note": "Accepted planner record. It counts toward app-state release readiness, not custody settlement.",
+      "review": {
+        "status": "eligible",
+        "countsTowardRelease": true,
+        "countsTowardPlanned": true,
+        "hasOutpoint": true,
+        "hasAcceptedTxid": true,
+        "meetsMinimum": true,
+        "problems": []
+      }
     },
     {
       "pledgeId": "pledge-docs-002",
       "contributor": "wallet-builder-beta",
-      "refundAddress": "kaspatest:qbeta-refund-placeholder",
-      "amountTkas": 20,
+      "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": 35,
+      "acceptedTxid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
       "outpoint": {
-        "txid": "2222222222222222222222222222222222222222222222222222222222222222",
-        "index": 1
+        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "index": 0
       },
-      "status": "accepted-output-imported",
-      "note": "Counts toward accepted progress in this planner fixture."
+      "status": "accepted-payload-indexed",
+      "note": "Accepted planner record. It counts toward app-state release readiness, not custody settlement.",
+      "review": {
+        "status": "eligible",
+        "countsTowardRelease": true,
+        "countsTowardPlanned": true,
+        "hasOutpoint": true,
+        "hasAcceptedTxid": true,
+        "meetsMinimum": true,
+        "problems": []
+      }
     },
     {
       "pledgeId": "pledge-docs-003",
       "contributor": "pool-tooling-gamma",
-      "refundAddress": "kaspatest:qgamma-refund-placeholder",
-      "amountTkas": 30,
+      "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": 20,
+      "acceptedTxid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
       "outpoint": {
-        "txid": "3333333333333333333333333333333333333333333333333333333333333333",
+        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
         "index": 0
       },
-      "status": "accepted-output-imported",
-      "note": "Counts toward accepted progress in this planner fixture."
+      "status": "accepted-payload-indexed",
+      "note": "Accepted planner record. It completes the target in planner/indexer state.",
+      "review": {
+        "status": "eligible",
+        "countsTowardRelease": true,
+        "countsTowardPlanned": true,
+        "hasOutpoint": true,
+        "hasAcceptedTxid": true,
+        "meetsMinimum": true,
+        "problems": []
+      }
     },
     {
       "pledgeId": "pledge-docs-004",
       "contributor": "merchant-delta",
-      "refundAddress": "kaspatest:qdelta-refund-placeholder",
+      "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
       "amountTkas": 40,
+      "acceptedTxid": "",
       "outpoint": {
         "txid": "4444444444444444444444444444444444444444444444444444444444444444",
         "index": 2
       },
       "status": "signed-not-submitted",
-      "note": "Shows planned progress only; it cannot make release ready until accepted."
+      "note": "Shows planned progress only; it cannot make release ready until accepted.",
+      "review": {
+        "status": "eligible",
+        "countsTowardRelease": false,
+        "countsTowardPlanned": true,
+        "hasOutpoint": true,
+        "hasAcceptedTxid": false,
+        "meetsMinimum": true,
+        "problems": []
+      }
+    },
+    {
+      "pledgeId": "pledge-docs-005",
+      "contributor": "below-minimum-epsilon",
+      "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": 5,
+      "acceptedTxid": "",
+      "outpoint": {
+        "txid": "5555555555555555555555555555555555555555555555555555555555555555",
+        "index": 0
+      },
+      "status": "accepted-output-imported",
+      "note": "Accepted-looking but below minimum; it must not count toward release readiness.",
+      "review": {
+        "status": "review-needed",
+        "countsTowardRelease": false,
+        "countsTowardPlanned": false,
+        "hasOutpoint": true,
+        "hasAcceptedTxid": false,
+        "meetsMinimum": false,
+        "problems": [
+          "below minimum pledge of 10 TKAS"
+        ]
+      }
     }
   ],
   "releasePlan": {
-    "status": "wait-for-more-accepted-pledges",
+    "status": "ready-to-draft-batch-release",
     "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
     "acceptedInputCount": 3,
-    "acceptedInputTkas": 75,
-    "remainingAcceptedTkas": 25,
-    "next": "Do not release yet; import more accepted pledge outputs before target status changes."
+    "acceptedInputTkas": 100,
+    "remainingAcceptedTkas": 0,
+    "inputs": [
+      {
+        "pledgeId": "pledge-docs-001",
+        "contributor": "docs-backer-alpha",
+        "amountTkas": 45,
+        "sourceOutpoint": {
+          "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+          "index": 0
+        },
+        "acceptedTxid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1"
+      },
+      {
+        "pledgeId": "pledge-docs-002",
+        "contributor": "wallet-builder-beta",
+        "amountTkas": 35,
+        "sourceOutpoint": {
+          "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+          "index": 0
+        },
+        "acceptedTxid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86"
+      },
+      {
+        "pledgeId": "pledge-docs-003",
+        "contributor": "pool-tooling-gamma",
+        "amountTkas": 20,
+        "sourceOutpoint": {
+          "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+          "index": 0
+        },
+        "acceptedTxid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d"
+      }
+    ],
+    "output": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": 100
+    },
+    "next": "Build release drafts from accepted pledge outpoints and verify recipient output amount before submit."
   },
   "refundPlan": {
-    "status": "available-after-deadline-if-target-not-met",
+    "status": "not-primary-path-target-met",
     "deadlineIso": "2026-05-14T00:00:00.000Z",
     "refundCount": 3,
     "refunds": [
       {
         "pledgeId": "pledge-docs-001",
-        "refundAddress": "kaspatest:qalpha-refund-placeholder",
-        "amountTkas": 25,
+        "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amountTkas": 45,
         "sourceOutpoint": {
-          "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+          "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
           "index": 0
         }
       },
       {
         "pledgeId": "pledge-docs-002",
-        "refundAddress": "kaspatest:qbeta-refund-placeholder",
-        "amountTkas": 20,
+        "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amountTkas": 35,
         "sourceOutpoint": {
-          "txid": "2222222222222222222222222222222222222222222222222222222222222222",
-          "index": 1
+          "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+          "index": 0
         }
       },
       {
         "pledgeId": "pledge-docs-003",
-        "refundAddress": "kaspatest:qgamma-refund-placeholder",
-        "amountTkas": 30,
+        "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "amountTkas": 20,
         "sourceOutpoint": {
-          "txid": "3333333333333333333333333333333333333333333333333333333333333333",
+          "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
           "index": 0
         }
       }
@@ -123,7 +224,8 @@
   "boundaries": [
     "This state is planner/indexer-side aggregation over pledge records.",
     "It does not prove pooled assurance target enforcement in one covenant output.",
-    "Only accepted pledge outputs should count toward release readiness.",
-    "Pending or signed-only pledge drafts can show planned progress but cannot make the campaign releasable."
+    "Only accepted pledge records with valid source outpoints and minimum pledge amounts count toward release readiness.",
+    "Pending or signed-only pledge drafts can show planned progress but cannot make the campaign releasable.",
+    "Accepted payload pledge records are app-state evidence, not custody of pledge funds."
   ]
 }

@@ -39,6 +39,10 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Agent commitments | Dispute escrow payload | `807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0` |
 | Agent commitments | Release planner event | `3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4` |
 | Agent commitments | Dispute-hold planner event | `82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382` |
+| Batch assurance | Pledge docs 001 planner payload | `10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1` |
+| Batch assurance | Pledge docs 002 planner payload | `9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86` |
+| Batch assurance | Pledge docs 003 planner payload | `fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d` |
+| Batch assurance | Release-ready planner payload | `2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12` |
 
 ## Local Reducer Tests
 
@@ -61,8 +65,8 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 
 - wallet-review flow replacing local signing and shell submit,
 - durable node/RPC checkpoint ingestion with virtual-chain rollback replay,
-- batch assurance release from multiple pledge outputs,
-- batch assurance refund from multiple pledge outputs,
+- batch assurance custody release from multiple pledge outputs,
+- batch assurance custody refund from multiple pledge outputs,
 - auction custody settlement/refund transaction, atomic exchange, and asset delivery,
 - agent task custody release/refund transactions and autonomous payout lifecycle,
 - treasury/team-vault constrained spend drafts,
@@ -72,6 +76,6 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 
 1. Wallet-review flow for payload receipt submission.
 2. Durable node/RPC checkpoint ingestion with virtual-chain rollback replay.
-3. Batch assurance release/refund planning with accepted pledge outputs.
+3. Batch assurance custody release/refund drafts.
 4. Auction settlement/refund drafts.
 5. Agent task release/refund drafts.

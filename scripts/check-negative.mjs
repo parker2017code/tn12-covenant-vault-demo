@@ -40,6 +40,18 @@ assert.equal(signedOnlyTargetCampaign.summary.plannedTargetMet, true);
 assert.equal(signedOnlyTargetCampaign.summary.acceptedTargetMet, false);
 assert.equal(signedOnlyTargetCampaign.summary.releaseStatus, "release-not-ready");
 
+const belowMinimumCampaign = buildBatchAssuranceState({
+  ...campaignFixture,
+  pledgeOutputs: campaignFixture.pledgeOutputs.map((pledge) => ({
+    ...pledge,
+    amountTkas: 1,
+    status: "accepted-output-imported"
+  }))
+});
+assert.equal(belowMinimumCampaign.summary.acceptedTkas, 0);
+assert.equal(belowMinimumCampaign.summary.rejectedCount, campaignFixture.pledgeOutputs.length);
+assert.equal(belowMinimumCampaign.summary.releaseStatus, "release-not-ready");
+
 const invoiceFixture = JSON.parse(await readFile(new URL("../fixtures/InvoiceReceipts.json", import.meta.url), "utf8"));
 const mismatchedReceiptRegistry = buildInvoiceRegistry({
   ...invoiceFixture,
