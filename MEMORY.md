@@ -50,6 +50,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - Use `npm run rollup:scout` / `artifacts/based-rollup-scout.json` for based-rollup planning. It treats Maxim's TN12 PoC as bridge/proof reference, Hans' work as runtime/proving direction, and ecosystem rollups as possible future app surfaces.
 - Use `npm run covenant:adversarial` / `artifacts/covenant-adversarial-coverage.json` before claiming hardened covenant coverage. It is local adversarial mapping, not TN12 rejection evidence. Current gaps include reused role keys in constructor fixtures and exact accepted-script preservation for older vault/assurance proof drafts.
 - Use `npm run fixtures:roles` and `npm run compile:roles` for the role-separated proof lane. Public role metadata is committed; private role keys remain in `.local/tn12-role-wallets.json`.
+- Use `npm run tx:roles:fund` to build the reviewable role-separated funding transaction. It creates fresh role-separated vault, assurance, and escrow P2SH outputs in one draft; submit remains explicit.
 - Do not edit or publish `/home/parker2017/kaspa-explained` from this repo unless explicitly asked.
 
 ## Current Next Work

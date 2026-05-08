@@ -1,0 +1,253 @@
+{
+  "schema": "tn12-role-separated-funding-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "role-separated-funding",
+  "warning": "This funds fresh role-separated contract outputs for the next proof pass. Do not submit if the source outpoint has already been spent.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+    "outputIndex": 1,
+    "amountTkas": 1138.29815
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "label": "role-separated vault",
+      "lane": "role-vault-funding",
+      "contract": "DelayedRecoveryVault",
+      "amountTkas": 25,
+      "amountSompi": "2500000000",
+      "scriptType": "p2sh",
+      "redeemScriptHash": "ce13ef81e079c118749a2307ffdc3bfd56cedb4aa22366415ab322671de51861",
+      "redeemScriptBytes": 213
+    },
+    {
+      "index": 1,
+      "label": "role-separated assurance",
+      "lane": "role-assurance-funding",
+      "contract": "AssurancePledge",
+      "amountTkas": 25,
+      "amountSompi": "2500000000",
+      "scriptType": "p2sh",
+      "redeemScriptHash": "bd9096d1ef2d25514d2d5a608db6ee7d8aa866fa08bdc93ee43b401dcd80b2f3",
+      "redeemScriptBytes": 176
+    },
+    {
+      "index": 2,
+      "label": "role-separated escrow",
+      "lane": "role-escrow-funding",
+      "contract": "Escrow",
+      "amountTkas": 25,
+      "amountSompi": "2500000000",
+      "scriptType": "p2sh",
+      "redeemScriptHash": "275822281faf40aaa22233df25b76df03a05e16e3bdc613f692800409c0e8aaf",
+      "redeemScriptBytes": 351
+    },
+    {
+      "index": 3,
+      "label": "change",
+      "lane": "change",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": "1063.2981",
+      "amountSompi": "106329810000",
+      "scriptType": "p2pk"
+    }
+  ],
+  "minerFeeSompi": "5000",
+  "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+            "index": 1
+          },
+          "signatureScript": "41f66f4bcb57e408db66be3b14254063979a227afb7ec710dc0ef0e554183abc5e90ac86e15e230034253884a513bb90e8f228c97540fb2dd43b7cd74c5b3ccd4901",
+          "sequence": 0,
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "aa20ce13ef81e079c118749a2307ffdc3bfd56cedb4aa22366415ab322671de5186187"
+          }
+        },
+        {
+          "amount": 2500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "aa20bd9096d1ef2d25514d2d5a608db6ee7d8aa866fa08bdc93ee43b401dcd80b2f387"
+          }
+        },
+        {
+          "amount": 2500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "aa20275822281faf40aaa22233df25b76df03a05e16e3bdc613f692800409c0e8aaf87"
+          }
+        },
+        {
+          "amount": 106329810000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "entries": [
+      {
+        "utxo": {
+          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "entry": {
+            "amount": 113829815000,
+            "blockDaaScore": 6064981,
+            "isCoinbase": false,
+            "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "outpoint": {
+            "inner": {
+              "index": 1,
+              "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d"
+            }
+          }
+        }
+      }
+    ],
+    "tx": {
+      "inner": {
+        "gas": 0,
+        "id": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "inputs": [
+          {
+            "inner": {
+              "previousOutpoint": {
+                "inner": {
+                  "index": 1,
+                  "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d"
+                }
+              },
+              "sequence": 0,
+              "sigOpCount": 1,
+              "signatureScript": [
+                65,
+                246,
+                111,
+                75,
+                203,
+                87,
+                228,
+                8,
+                219,
+                102,
+                190,
+                59,
+                20,
+                37,
+                64,
+                99,
+                151,
+                154,
+                34,
+                122,
+                251,
+                126,
+                199,
+                16,
+                220,
+                14,
+                240,
+                229,
+                84,
+                24,
+                58,
+                188,
+                94,
+                144,
+                172,
+                134,
+                225,
+                94,
+                35,
+                0,
+                52,
+                37,
+                56,
+                132,
+                165,
+                19,
+                187,
+                144,
+                232,
+                242,
+                40,
+                201,
+                117,
+                64,
+                251,
+                45,
+                212,
+                59,
+                124,
+                215,
+                76,
+                91,
+                60,
+                205,
+                73,
+                1
+              ]
+            }
+          }
+        ],
+        "lockTime": 0,
+        "outputs": [
+          {
+            "inner": {
+              "scriptPublicKey": "0000aa20ce13ef81e079c118749a2307ffdc3bfd56cedb4aa22366415ab322671de5186187",
+              "value": 2500000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "0000aa20bd9096d1ef2d25514d2d5a608db6ee7d8aa866fa08bdc93ee43b401dcd80b2f387",
+              "value": 2500000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "0000aa20275822281faf40aaa22233df25b76df03a05e16e3bdc613f692800409c0e8aaf87",
+              "value": 2500000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 106329810000
+            }
+          }
+        ],
+        "payload": [],
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "version": 0
+      }
+    }
+  },
+  "nextAfterAccepted": [
+    "Fetch output 0 as the role-separated vault contract outpoint.",
+    "Fetch output 1 as the role-separated assurance contract outpoint.",
+    "Fetch output 2 as the role-separated escrow contract outpoint.",
+    "Build accepted spends and invalid candidates from those fresh outpoints."
+  ]
+}

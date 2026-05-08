@@ -3,7 +3,7 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 11,
+    "done": 12,
     "wip": 4,
     "next": 6,
     "later": 6
@@ -99,6 +99,11 @@
       "id": "role-separated-fixtures",
       "laneId": "escrow",
       "detail": "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts."
+    },
+    {
+      "id": "role-separated-funding-draft",
+      "laneId": "escrow",
+      "detail": "A wallet-reviewable draft now funds fresh role-separated vault, assurance, and escrow P2SH outputs in one transaction."
     }
   ],
   "wip": [
@@ -155,9 +160,9 @@
       "detail": "Create the first durable replay storage schema and fixture-backed replay runner."
     },
     {
-      "id": "role-separated-negative-proofs",
+      "id": "role-separated-output-fetch",
       "laneId": "escrow",
-      "detail": "Fund fresh role-separated outputs and build exact wrong-signer/wrong-argument candidates before TN12 rejection attempts."
+      "detail": "Submit the role-separated funding draft after review, then fetch its vault, assurance, and escrow contract outputs."
     },
     {
       "id": "attestation-reputation",

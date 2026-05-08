@@ -13,7 +13,8 @@ export function buildProjectPlan(fixture = {}) {
     action("indexer-replay-plan", "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface.", "payload-invoice"),
     action("based-rollup-scout", "The scout artifact records that current TN12 work does not use an L2, while core-migratable based rollups remain worth tracking for later.", "defi-research"),
     action("covenant-adversarial-map", "Local adversarial coverage now maps selector, output lock, amount, time-lock, input-mass, role-separation, and script-mapping gaps for seven proof paths.", "escrow"),
-    action("role-separated-fixtures", "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts.", "escrow")
+    action("role-separated-fixtures", "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts.", "escrow"),
+    action("role-separated-funding-draft", "A wallet-reviewable draft now funds fresh role-separated vault, assurance, and escrow P2SH outputs in one transaction.", "escrow")
   ];
 
   const wip = [
@@ -26,7 +27,7 @@ export function buildProjectPlan(fixture = {}) {
   const next = [
     action("pledge-output-drafts", "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS.", "batch-assurance"),
     action("indexer-storage-schema", "Create the first durable replay storage schema and fixture-backed replay runner.", "payload-invoice"),
-    action("role-separated-negative-proofs", "Fund fresh role-separated outputs and build exact wrong-signer/wrong-argument candidates before TN12 rejection attempts.", "escrow"),
+    action("role-separated-output-fetch", "Submit the role-separated funding draft after review, then fetch its vault, assurance, and escrow contract outputs.", "escrow"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
     action("rollup-bridge-brief", "Map entry, transfer, exit, claim, proof, and state-root responsibilities from core and core-adjacent references.", "defi-research")

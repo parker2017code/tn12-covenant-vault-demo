@@ -165,6 +165,12 @@
       "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
     },
     {
+      "label": "Role-separated proof funding",
+      "priority": 27.5,
+      "path": "artifacts/signed-drafts/role-separated-funding.json",
+      "description": "Funds fresh role-separated vault, assurance, and escrow P2SH outputs for the next proof pass."
+    },
+    {
       "label": "Vault recovery",
       "priority": 28,
       "path": "artifacts/signed-drafts/vault-recovery.json",

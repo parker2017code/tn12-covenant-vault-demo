@@ -27,6 +27,7 @@
     "contract:fetch": "node scripts/fetch-contract-outpoint.mjs",
     "contracts:fetch": "node scripts/fetch-contract-outpoints.mjs",
     "tx:split": "node scripts/build-signed-split-draft.mjs",
+    "tx:roles:fund": "node scripts/build-role-separated-funding-draft.mjs",
     "tx:payload": "node scripts/build-signed-payload-receipt-draft.mjs",
     "tx:verify": "node scripts/verify-accepted-txs.mjs",
     "proof:evidence": "node scripts/build-proof-evidence.mjs",

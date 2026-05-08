@@ -190,6 +190,7 @@ Build the safer first broadcast candidate, a signed self-send split into separat
 
 ```sh
 npm run tx:split
+npm run tx:roles:fund
 ```
 
 The default split sizes are small enough for the current post-proof wallet fixture. Override them only when the fetched UTXO is large enough:
@@ -199,6 +200,8 @@ VAULT_BUCKET_TKAS=100 ASSURANCE_BUCKET_TKAS=500 npm run tx:split
 ```
 
 Fetch accepted split outputs into bucket fixtures:
+
+`npm run tx:roles:fund` builds `artifacts/signed-drafts/role-separated-funding.json`, a single reviewable transaction with role-separated vault, assurance, and escrow P2SH outputs. It is the next proof-pass funding draft; submit is still explicit and should only happen after reviewing the source outpoint and outputs.
 
 ```sh
 npm run split:fetch

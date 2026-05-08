@@ -176,23 +176,27 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 39);
+assert.equal(submitRegistry.summary.total, 40);
 assert.equal(submitRegistry.summary.payloadDrafts, 26);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 26);
+assert.ok(submitRegistry.drafts.some((draft) =>
+  draft.path === "artifacts/signed-drafts/role-separated-funding.json"
+  && draft.counts.outputs === 4
+));
 const walletReview = buildWalletReviewReadiness(submitRegistry);
 assert.equal(walletReview.status, "wallet-review-ready");
-assert.equal(walletReview.summary.ready, 39);
+assert.equal(walletReview.summary.ready, 40);
 assert.equal(walletReview.summary.payloadRouteReady, 26);
 assert.equal(walletReview.summary.registrySecretFields, 0);
 const walletConnector = buildWalletConnectorReadiness(walletReview);
 assert.equal(walletConnector.status, "wallet-connector-spec-ready");
-assert.equal(walletConnector.summary.drafts, 39);
+assert.equal(walletConnector.summary.drafts, 40);
 assert.equal(walletConnector.summary.payloadDrafts, 26);
 assert.equal(walletConnector.summary.registrySecretFields, 0);
 assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "payload-preserving-submit"));
 const walletSubmitPackage = buildWalletSubmitPackage({ walletReview, walletConnector });
 assert.equal(walletSubmitPackage.status, "wallet-submit-package-ready");
-assert.equal(walletSubmitPackage.summary.total, 39);
+assert.equal(walletSubmitPackage.summary.total, 40);
 assert.equal(walletSubmitPackage.summary.payloadDrafts, 26);
 assert.equal(walletSubmitPackage.summary.contractDrafts, 12);
 assert.ok(walletSubmitPackage.firstPayloadIntents.every((intent) => intent.requiredWalletChecks.includes("Reject public REST payload submit.")));
@@ -437,7 +441,7 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 11);
+assert.equal(projectPlan.summary.done, 12);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 6);
 assert.equal(projectPlan.summary.later, 6);
@@ -445,7 +449,8 @@ assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit")
 assert.ok(projectPlan.done.some((item) => item.id === "based-rollup-scout"));
 assert.ok(projectPlan.done.some((item) => item.id === "covenant-adversarial-map"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures"));
-assert.ok(projectPlan.next.some((item) => item.id === "role-separated-negative-proofs"));
+assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding-draft"));
+assert.ok(projectPlan.next.some((item) => item.id === "role-separated-output-fetch"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
@@ -711,6 +716,7 @@ const files = [
   "scripts/build-signed-escrow-funding-draft.mjs",
   "scripts/build-signed-escrow-spend-drafts.mjs",
   "scripts/build-signed-split-draft.mjs",
+  "scripts/build-role-separated-funding-draft.mjs",
   "scripts/build-signed-contract-spend-drafts.mjs",
   "scripts/fetch-contract-outpoints.mjs",
   "scripts/fetch-contract-outpoint.mjs",
@@ -773,6 +779,7 @@ const files = [
   "artifacts/signed-drafts/escrow-release.json",
   "artifacts/signed-drafts/escrow-refund.json",
   "artifacts/signed-drafts/escrow-cancel.json",
+  "artifacts/signed-drafts/role-separated-funding.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
   "artifacts/signed-drafts/payload-refund-self-send.json",
   "artifacts/signed-drafts/payload-error-self-send.json",
@@ -916,6 +923,7 @@ assert.match(readme, /npm run indexer:replay-plan/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
+assert.match(readme, /npm run tx:roles:fund/);
 assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);

@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 39,
+    "total": 40,
     "payloadDrafts": 26,
-    "explicitSubmitRequired": 39,
+    "explicitSubmitRequired": 40,
     "payloadSubmitGated": 26
   },
   "drafts": [
@@ -1743,6 +1743,84 @@
       "label": "Split funding",
       "priority": 27,
       "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-separated-funding.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "role-separated-funding",
+      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "warning": "This funds fresh role-separated contract outputs for the next proof pass. Do not submit if the source outpoint has already been spent.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "outputIndex": 1,
+        "amountTkas": 1138.29815
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 4,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "113829810000",
+        "outputTkas": "1138.2981"
+      },
+      "inputs": [
+        {
+          "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": 0
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2500000000",
+          "amountTkas": "25",
+          "scriptVersion": 0,
+          "scriptPreview": "aa20ce13ef81e079...b322671de5186187"
+        },
+        {
+          "index": 1,
+          "amountSompi": "2500000000",
+          "amountTkas": "25",
+          "scriptVersion": 0,
+          "scriptPreview": "aa20bd9096d1ef2d...3b401dcd80b2f387"
+        },
+        {
+          "index": 2,
+          "amountSompi": "2500000000",
+          "amountTkas": "25",
+          "scriptVersion": 0,
+          "scriptPreview": "aa20275822281faf...2800409c0e8aaf87"
+        },
+        {
+          "index": 3,
+          "amountSompi": "106329810000",
+          "amountTkas": "1063.2981",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-separated-funding.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-separated-funding.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated proof funding",
+      "priority": 27.5,
+      "description": "Funds fresh role-separated vault, assurance, and escrow P2SH outputs for the next proof pass."
     },
     {
       "schema": "tn12-submit-console-summary/v1",

@@ -3,11 +3,11 @@
   "network": "kaspa-testnet-12",
   "status": "wallet-submit-package-ready",
   "summary": {
-    "total": 39,
+    "total": 40,
     "payloadDrafts": 26,
     "contractDrafts": 12,
     "localSecretFields": 0,
-    "ready": 39
+    "ready": 40
   },
   "routePolicy": {
     "payload": "Use payload-preserving JSON wRPC or wallet submit. Do not use public REST submit for payload drafts.",
@@ -667,6 +667,29 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json",
         "reviewedSubmitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json --submit"
+      },
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action."
+      ]
+    },
+    {
+      "path": "artifacts/signed-drafts/role-separated-funding.json",
+      "label": "Role-separated proof funding",
+      "lane": "role-separated-funding",
+      "class": "funding",
+      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "status": "wallet-submit-ready",
+      "route": "exact-transaction-wallet",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeReady": true
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-separated-funding.json",
+        "reviewedSubmitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-separated-funding.json --submit"
       },
       "requiredWalletChecks": [
         "Confirm kaspa-testnet-12.",
