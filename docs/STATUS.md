@@ -11,13 +11,14 @@
 - Initial UTXO fetched from `api-tn12.kaspa.org`: `f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee:0`, amount `10000` TKAS.
 - Dry-run transaction planner: implemented for vault funding, delayed withdrawal, recovery, assurance pledge, release, and refund.
 - Real transaction builder: implemented for P2PK self-send, split funding, P2SH contract funding, and P2SH contract spends.
-- Real signing, serialization, and broadcast: implemented through the TN12 public REST API.
-- Accepted-transaction app-state indexer: implemented for the current proof fixture with `npm run indexer:state`.
+- Real signing and serialization: implemented for local testnet drafts. Broadcast is route-specific: contract proof spends and payload events use the documented TN12 submit scripts, while payload receipts must use JSON wRPC because public REST dropped payload bytes.
+- Accepted-transaction app-state indexer: implemented for the current proof and payload fixtures with `npm run indexer:state`, `npm run indexer:checkpoint`, and `npm run check:tn12`.
 - Vault recovery: submitted and accepted with a 5000-sompi embedded fee.
 - Vault delayed withdrawal: submitted and accepted with a past DAA-score lock.
 - Assurance release: submitted and accepted for the individual pledge primitive.
 - Assurance refund: submitted and accepted with a past DAA-score deadline.
 - Proof evidence artifact: `npm run proof:evidence` confirms all seven proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
+- Payload evidence artifacts: `npm run payload:verify:events` confirms 26 accepted payload events with matched payload bytes.
 - Wallet connector: not implemented.
 - Silverscript templates: drafted.
 - Silverscript compiler integration: helper added; artifacts depend on local `silverc`.

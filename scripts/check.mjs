@@ -833,6 +833,11 @@ assert.match(michaelQuestions, /1\.1\.1-toc\.1/);
 assert.match(michaelQuestions, /RpcTransactionInput\.sig_op_count is inconsistent/);
 assert.match(michaelQuestions, /RPC response error NotFound/);
 
+const statusDocs = await readFile(new URL("../docs/STATUS.md", import.meta.url), "utf8");
+assert.match(statusDocs, /payload receipts must use JSON wRPC/);
+assert.match(statusDocs, /26 accepted payload events/);
+assert.doesNotMatch(statusDocs, /broadcast: implemented through the TN12 public REST API/);
+
 const builderLessons = await readFile(new URL("../docs/BUILDER_LESSONS.md", import.meta.url), "utf8");
 assert.match(builderLessons, /Accepted State Beats Local Confidence/);
 assert.match(builderLessons, /sigOpCount: 0/);

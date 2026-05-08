@@ -124,7 +124,7 @@ npm run build:status
 
 Current incomplete lanes:
 
-- invoice/payment payload receipt: one TN12 JSON wRPC payload receipt is accepted and decoded; the public REST no-payload submit result is historical only;
+- invoice/payment payload receipts and related app events: TN12 JSON wRPC payload receipts are accepted and decoded through the fixture set; the public REST no-payload submit result is historical only;
 - pooled assurance target aggregation: planner/indexer only, not script-enforced;
 - escrow cancel: accepted on a separate funded output;
 - treasury caps/payroll: wallet-policy/planner only;
