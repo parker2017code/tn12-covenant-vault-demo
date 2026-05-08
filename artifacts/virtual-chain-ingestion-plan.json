@@ -1,0 +1,84 @@
+{
+  "schema": "tn12-virtual-chain-ingestion-plan/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-08T11:54:21.632Z",
+  "status": "virtual-chain-ingestion-contract-ready",
+  "sourceCheckpoint": {
+    "recordCount": 33,
+    "payloadEvents": 26,
+    "proofSpends": 7,
+    "minAcceptingBlockBlueScore": 5203140,
+    "maxAcceptingBlockBlueScore": 5961425
+  },
+  "readerContract": {
+    "source": "getVirtualChainFromBlockV2 or equivalent node/RPC virtual-chain feed",
+    "dataVerbosity": "High",
+    "cursor": {
+      "type": "blue-score-watermark",
+      "startFrom": 5961425,
+      "persistTo": "checkpoint_watermarks.max_blue_score"
+    },
+    "requiredTransactionFields": [
+      "txid",
+      "is_accepted",
+      "accepting_block_blue_score",
+      "accepting_block_time",
+      "payload",
+      "inputs",
+      "outputs"
+    ],
+    "optionalWalletSubmitFeed": "Wallet connector submit results can be inserted as candidate txids, but app state still waits for accepted virtual-chain confirmation."
+  },
+  "storageWrites": [
+    {
+      "table": "accepted_transactions",
+      "detail": "Insert accepted tx rows with payload, inputs, outputs, blue score, and source=virtual-chain-reader."
+    },
+    {
+      "table": "accepted_payload_events",
+      "detail": "Decode payload bytes only after accepted transaction storage succeeds."
+    },
+    {
+      "table": "proof_spend_outputs",
+      "detail": "Resolve proof spends against previous outputs and expected destination/amount rules."
+    },
+    {
+      "table": "checkpoint_watermarks",
+      "detail": "Commit a new watermark only after reducers report zero mismatches."
+    },
+    {
+      "table": "rollback_segments",
+      "detail": "Open a segment if the feed reports removed txids, lower blue-score watermarks, or missing previous checkpoint txids."
+    }
+  ],
+  "rollbackPolicy": {
+    "openWhen": [
+      "new max blue score is lower than the persisted max",
+      "previous checkpoint txids disappear from the virtual-chain window",
+      "accepted tx payload bytes differ from stored payload bytes",
+      "proof spend previous output no longer resolves"
+    ],
+    "whileOpen": [
+      "mark affected app events review_status=stale",
+      "block user-facing ready state for affected lanes",
+      "replay from the previous trusted checkpoint",
+      "resolve only after mismatch_count is zero"
+    ]
+  },
+  "acceptanceCriteria": [
+    "A virtual-chain replay can reproduce the current 33-record fixture replay.",
+    "Wallet-submitted txids do not become app state until seen as accepted by the reader.",
+    "Rollback segments block affected lane readiness.",
+    "Payload and proof reducers reuse the existing matched-byte and matched-output rules."
+  ],
+  "nextImplementationFiles": [
+    "src/virtualChainReader.mjs",
+    "scripts/run-virtual-chain-indexer.mjs",
+    "artifacts/virtual-chain-ingestion-run.json"
+  ],
+  "boundaries": [
+    "This is the durable ingestion contract and adapter shape, not a live node subscription.",
+    "It does not require local kaspad and does not change accepted proof or payload counts.",
+    "The next code step is implementing a reader against a configured public or hosted TN12 node/RPC endpoint."
+  ]
+}

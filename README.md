@@ -280,9 +280,10 @@ npm run indexer:persist
 npm run indexer:replay-plan
 npm run indexer:schema
 npm run indexer:replay
+npm run indexer:virtual-chain-plan
 ```
 
-This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, and `artifacts/indexer-replay-run.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready. The replay plan turns the current known-txid checkpoint into the backend build order. The storage schema defines checkpoint, transaction, payload-event, proof-spend, and rollback tables. The replay run materializes the current checkpoint into those table-shaped rows before any node/RPC ingestion is added.
+This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, `artifacts/indexer-replay-run.json`, and `artifacts/virtual-chain-ingestion-plan.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready. The replay plan turns the current known-txid checkpoint into the backend build order. The storage schema defines checkpoint, transaction, payload-event, proof-spend, and rollback tables. The replay run materializes the current checkpoint into those table-shaped rows. The virtual-chain ingestion plan defines the node/RPC reader contract, rollback policy, and wallet-submit handoff boundary before a live node subscription is added.
 
 Build a compact transaction-payload receipt artifact for the accepted-transaction indexer lane:
 
@@ -347,9 +348,10 @@ npm run submit:registry
 npm run wallet:review
 npm run wallet:connector
 npm run wallet:submit-package
+npm run wallet:connector-requests
 ```
 
-The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact. `npm run wallet:submit-package` writes the wallet handoff package for exact transaction review, payload-preserving submit, no local keys, and explicit user action. It does not read `.local/tn12-wallet.json` or expose private keys.
+The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact. `npm run wallet:submit-package` writes the wallet handoff package for exact transaction review, payload-preserving submit, no local keys, and explicit user action. `npm run wallet:connector-requests` writes `artifacts/wallet-connector-submit-requests.json`, the exact request bundle a no-local-key connector should review and submit. It does not read `.local/tn12-wallet.json` or expose private keys.
 
 Build the cross-chain app research library:
 
@@ -371,9 +373,10 @@ Build the batch assurance campaign planner state:
 npm run campaign:state
 npm run campaign:custody
 npm run campaign:custody-requirements
+npm run campaign:pledge-outputs
 ```
 
-This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json`, `artifacts/batch-assurance-custody-drafts.json`, and `artifacts/batch-assurance-custody-requirements.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. The custody draft review blocks planner payloads unless the referenced output amount matches the pledge amount. The requirements artifact lists the exact amount-matched pledge outputs that must be accepted on TN12 before release or refund custody drafts can be treated as spendable settlement work. Current batch-assurance pledge and release-ready records have accepted TN12 payload evidence, but they do not prove custody settlement or pooled covenant enforcement.
+This turns `fixtures/BatchAssuranceCampaign.json` into `artifacts/batch-assurance-campaign.json`, `artifacts/batch-assurance-custody-drafts.json`, `artifacts/batch-assurance-custody-requirements.json`, and `artifacts/batch-assurance-pledge-output-plan.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. The custody draft review blocks planner payloads unless the referenced output amount matches the pledge amount. The requirements artifact lists the exact amount-matched pledge outputs that must be accepted on TN12 before release or refund custody drafts can be treated as spendable settlement work. The pledge-output plan turns that gap into wallet-reviewable output requirements and an import workflow; it is not a signed transaction or settlement proof. Current batch-assurance pledge and release-ready records have accepted TN12 payload evidence, but they do not prove custody settlement or pooled covenant enforcement.
 
 Build the enforcement matrix:
 

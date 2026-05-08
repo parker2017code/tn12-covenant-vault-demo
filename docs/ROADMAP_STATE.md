@@ -69,9 +69,9 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
-| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, replay plan, storage schema, and fixture-backed replay rows | Implement node/RPC virtual-chain replay |
-| 2. Submit console | Review gate built | 39 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package | Real wallet connector and no-local-key UX |
-| 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, and exact pledge-output requirements | Build accepted pledge outputs for the required amounts, then import those outpoints |
+| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, replay plan, storage schema, fixture-backed replay rows, and virtual-chain ingestion contract | Implement live node/RPC reader adapter |
+| 2. Submit console | Review gate built | 47 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package, and connector request bundle | Real wallet adapter consuming the request bundle |
+| 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, exact pledge-output requirements, and wallet-reviewable pledge-output funding/import plan | Build accepted pledge outputs for the required amounts, then import those outpoints |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, accepted mutual-cancel proofs, and local role-separated invalid-candidate map | Fund fresh expendable outputs before any TN12 rejection submissions |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |
 | 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |

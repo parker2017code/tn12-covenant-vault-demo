@@ -25,6 +25,8 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Oracle source matrix gate: `npm run oracle:matrix`
 - Project next-work queue gate: `npm run project:queue`
 - Durable indexer schema/replay gates: `npm run indexer:schema` and `npm run indexer:replay`
+- Wallet connector request gate: `npm run wallet:connector-requests`
+- Batch-assurance pledge-output plan gate: `npm run campaign:pledge-outputs`
 
 The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has accepted role-separated positive proofs for all seven vault, assurance, and escrow paths: recovery/withdrawal, release/refund, and release/refund/cancel. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
 
@@ -66,7 +68,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 ## Current Next Work
 
 - Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order. Use `npm run project:plan` / `artifacts/project-plan.json` for the older done/WIP/next/later grouping.
-- WIP lanes: live wallet connector submit without local keys, batch-assurance custody requirements and matched pledge outputs, durable indexer replay implementation, and attestation reputation/provenance hardening.
+- WIP lanes: live wallet connector submit without local keys, batch-assurance pledge-output funding/import, durable indexer replay implementation, and attestation reputation/provenance hardening.
 - Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant rejection attempts from fresh expendable outputs, and attestation reputation thresholds.
 - Keep real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,

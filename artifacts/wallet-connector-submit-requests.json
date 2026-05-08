@@ -1,0 +1,3562 @@
+{
+  "schema": "tn12-wallet-connector-submit-requests/v1",
+  "network": "kaspa-testnet-12",
+  "status": "connector-submit-requests-ready",
+  "summary": {
+    "requests": 47,
+    "payloadRequests": 26,
+    "computeBudgetRequests": 2,
+    "missingArtifacts": 0,
+    "secretFields": 0
+  },
+  "adapterContract": {
+    "name": "tn12ConnectorSubmit",
+    "version": "v1",
+    "requiredMethods": [
+      {
+        "name": "reviewTransaction",
+        "purpose": "Display network, draft path, txid, inputs, outputs, fees, version, lock time, payload bytes, and route before any user action."
+      },
+      {
+        "name": "submitReviewedTransaction",
+        "purpose": "Submit the reviewed transaction without changing payload bytes, lock time, input fields, or version-1 computeBudget values."
+      },
+      {
+        "name": "recordSubmitResult",
+        "purpose": "Return txid, submitted route, timestamp, and accepted/rejected/error state for indexer ingestion."
+      }
+    ],
+    "forbiddenInputs": [
+      ".local/tn12-wallet.json",
+      "privateKey",
+      "mnemonic",
+      "seed",
+      "secret"
+    ],
+    "userActionRequired": true
+  },
+  "routePolicy": {
+    "payload": "Use payload-preserving JSON wRPC or wallet submit. Do not use public REST submit for payload drafts.",
+    "contract": "Preserve exact transaction version, inputs, outputs, lock time, and computeBudget fields.",
+    "standard": "Require user review before signing or broadcasting."
+  },
+  "requests": [
+    {
+      "requestId": "wreq-6cfe79da",
+      "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "label": "Payload receipt self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114799940000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-0d276be0",
+      "path": "artifacts/signed-drafts/payload-refund-self-send.json",
+      "label": "Payload refund self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114699935000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-c3d8c6a4",
+      "path": "artifacts/signed-drafts/payload-error-self-send.json",
+      "label": "Payload error self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114599930000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 130,
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-68feaa92",
+      "path": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "label": "Access pass redemption payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114589925000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 159,
+        "hexPreview": "7b226b696e64223a226163636573732d706173732d726564...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-9e1d350b",
+      "path": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "label": "Auction bid pass 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114529895000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 122,
+        "hexPreview": "7b226b696e64223a2261756374696f6e2d626964222c2273...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-f924ff6d",
+      "path": "artifacts/signed-drafts/payload-auction-bid.json",
+      "label": "Auction bid pass 002 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114579920000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 128,
+        "hexPreview": "7b226b696e64223a2261756374696f6e2d626964222c2273...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-1e636be2",
+      "path": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+      "label": "Auction bid voucher 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114519890000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 160,
+        "hexPreview": "7b226b696e64223a2261756374696f6e2d626964222c2273...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-77ff1bf3",
+      "path": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "label": "Auction settlement pass 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114459860000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 195,
+        "hexPreview": "7b226b696e64223a2261756374696f6e2d736574746c656d...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-ac38755e",
+      "path": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "label": "Auction refund pass 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114449855000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 185,
+        "hexPreview": "7b226b696e64223a2261756374696f6e2d726566756e6422...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-136eca53",
+      "path": "artifacts/signed-drafts/payload-stable-issuance.json",
+      "label": "Stable issuance 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114569915000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "hexPreview": "7b226b696e64223a22737461626c652d6973737565722d65...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-c3b0416e",
+      "path": "artifacts/signed-drafts/payload-stable-issuance-002.json",
+      "label": "Stable issuance 002 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114509885000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 138,
+        "hexPreview": "7b226b696e64223a22737461626c652d6973737565722d65...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-254ced6d",
+      "path": "artifacts/signed-drafts/payload-stable-redemption.json",
+      "label": "Stable redemption 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114559910000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 140,
+        "hexPreview": "7b226b696e64223a22737461626c652d6973737565722d65...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-fc5f0adc",
+      "path": "artifacts/signed-drafts/payload-miner-attestation.json",
+      "label": "Miner attestation payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114549905000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 156,
+        "hexPreview": "7b226b696e64223a226d696e65722d617474657374617469...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-f5479471",
+      "path": "artifacts/signed-drafts/payload-agent-task-invoice.json",
+      "label": "Agent task invoice payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114499880000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 136,
+        "hexPreview": "7b226b696e64223a226167656e742d7461736b222c227375...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-93d91369",
+      "path": "artifacts/signed-drafts/payload-agent-task-escrow.json",
+      "label": "Agent task escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114489875000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 139,
+        "hexPreview": "7b226b696e64223a226167656e742d7461736b222c227375...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-a1a412a6",
+      "path": "artifacts/signed-drafts/payload-agent-proof.json",
+      "label": "Agent proof invoice payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114539900000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 133,
+        "hexPreview": "7b226b696e64223a226167656e742d70726f6f66222c2273...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-e419fdce",
+      "path": "artifacts/signed-drafts/payload-agent-proof-escrow.json",
+      "label": "Agent proof escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114479870000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 148,
+        "hexPreview": "7b226b696e64223a226167656e742d70726f6f66222c2273...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-e9f4aad0",
+      "path": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+      "label": "Agent dispute escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114469865000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "hexPreview": "7b226b696e64223a226167656e742d64697370757465222c...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-0da38349",
+      "path": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+      "label": "Agent release invoice payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114439850000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 207,
+        "hexPreview": "7b226b696e64223a226167656e742d736574746c656d656e...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-882fdf01",
+      "path": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+      "label": "Agent hold escrow payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114429845000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "hexPreview": "7b226b696e64223a226167656e742d736574746c656d656e...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-b45afbcc",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+      "label": "Batch assurance pledge 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114329840000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "hexPreview": "7b226b696e64223a2262617463682d6173737572616e6365...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-4a2e00eb",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+      "label": "Batch assurance pledge 002 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114229835000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "hexPreview": "7b226b696e64223a2262617463682d6173737572616e6365...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-33f32c32",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+      "label": "Batch assurance pledge 003 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114129830000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 194,
+        "hexPreview": "7b226b696e64223a2262617463682d6173737572616e6365...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-e79aee58",
+      "path": "artifacts/signed-drafts/payload-batch-release-plan.json",
+      "label": "Batch assurance release plan payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114029825000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 186,
+        "hexPreview": "7b226b696e64223a2262617463682d6173737572616e6365...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-4ea6bf46",
+      "path": "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+      "label": "Prediction market network stress payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "113929820000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "hexPreview": "7b226b696e64223a2270726564696374696f6e2d75706461...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-fb286440",
+      "path": "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+      "label": "Prediction hedge miner revenue payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "113829815000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 190,
+        "hexPreview": "7b226b696e64223a2268656467652d726576696577222c22...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-ade32cd1",
+      "path": "artifacts/signed-drafts/split-funding.json",
+      "label": "Split funding",
+      "lane": "tn12-signed-split-draft/v1",
+      "class": "funding",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "88e6bd66e6d05e2c296b4ba3d8b2794ebb64ac6ff971cdaedd6fdbbb70778571",
+              "index": 2
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "50000000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 2,
+            "amount": "139999975000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-42682575",
+      "path": "artifacts/signed-drafts/role-separated-funding.json",
+      "label": "Role-separated proof funding",
+      "lane": "role-separated-funding",
+      "class": "funding",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2500000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 35
+          },
+          {
+            "index": 1,
+            "amount": "2500000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 35
+          },
+          {
+            "index": 2,
+            "amount": "2500000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 35
+          },
+          {
+            "index": 3,
+            "amount": "106329810000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-700a182c",
+      "path": "artifacts/signed-drafts/role-vault-withdrawal.json",
+      "label": "Role-separated vault withdrawal",
+      "lane": "vault-withdrawal",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+        "version": 0,
+        "lockTime": "1778229191",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "index": 0
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 282
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-1ffef490",
+      "path": "artifacts/signed-drafts/role-vault-recovery.json",
+      "label": "Role-separated vault recovery",
+      "lane": "vault-recovery",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "index": 0
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 282
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-6080546b",
+      "path": "artifacts/signed-drafts/role-assurance-release.json",
+      "label": "Role-separated assurance release",
+      "lane": "assurance-release",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "index": 1
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 179
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-a4f739ba",
+      "path": "artifacts/signed-drafts/role-assurance-refund.json",
+      "label": "Role-separated assurance refund",
+      "lane": "assurance-refund",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+        "version": 0,
+        "lockTime": "1778229191",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 245
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-fda320a9",
+      "path": "artifacts/signed-drafts/role-escrow-release.json",
+      "label": "Role-separated escrow release",
+      "lane": "escrow-release",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "index": 2
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 421
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-f5845e00",
+      "path": "artifacts/signed-drafts/role-escrow-refund.json",
+      "label": "Role-separated escrow refund",
+      "lane": "escrow-refund",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+        "version": 0,
+        "lockTime": "1778229191",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "index": 2
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 421
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-d12412d8",
+      "path": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "label": "Role-separated escrow cancel",
+      "lane": "escrow-cancel",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+        "version": 1,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "index": 2
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": null,
+            "computeBudget": 30,
+            "signatureScriptBytes": 487
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-bfe853f3",
+      "path": "artifacts/signed-drafts/vault-recovery.json",
+      "label": "Vault recovery",
+      "lane": "vault-recovery",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "6c3873c7374e6cd9cd1cdfdd5aab81222d3fb6090e3ec9ff512f42579a4f4c4c",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+              "index": 0
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 281
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-484c1de3",
+      "path": "artifacts/signed-drafts/vault-withdrawal.json",
+      "label": "Vault withdrawal",
+      "lane": "vault-withdrawal",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
+        "version": 0,
+        "lockTime": "1778143352",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "19061b314fa11cc075a078e0bcaa5f381e493f9810ae2aefa8c3aa814a14bcaa",
+              "index": 0
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 281
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "2499995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-cb883b9e",
+      "path": "artifacts/signed-drafts/assurance-release.json",
+      "label": "Assurance release",
+      "lane": "assurance-release",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+              "index": 0
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 178
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "24999995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-11c831ed",
+      "path": "artifacts/signed-drafts/assurance-refund.json",
+      "label": "Assurance refund",
+      "lane": "assurance-refund",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "0ad367cea66c3c823cc9c23e1e874cedc0fb30e90c3deaa309cdcee2dc4f54aa",
+        "version": 0,
+        "lockTime": "1778143352",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f479eac4e3b1e0abde679bdf31c8203c0d3d151997a74da2444ae75ae49157e7",
+              "index": 0
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 244
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "24999995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-782b16c6",
+      "path": "artifacts/signed-drafts/escrow-funding.json",
+      "label": "Escrow funding",
+      "lane": "escrow-funding",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+              "index": 2
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "5000000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 74
+          },
+          {
+            "index": 1,
+            "amount": "134999970000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 72
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-9532d7b2",
+      "path": "artifacts/signed-drafts/escrow-release.json",
+      "label": "Escrow release",
+      "lane": "escrow-release",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+              "index": 0
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 421
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "4999995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-b94a10a1",
+      "path": "artifacts/signed-drafts/escrow-refund.json",
+      "label": "Escrow refund",
+      "lane": "escrow-refund",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+        "version": 0,
+        "lockTime": "1778153976",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+              "index": 0
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 421
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "4999995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-e83f441d",
+      "path": "artifacts/signed-drafts/escrow-cancel.json",
+      "label": "Escrow cancel",
+      "lane": "escrow-cancel",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+              "index": 0
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 487
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "4999995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-eecfa326",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+      "label": "Escrow DAA refund funding",
+      "lane": "escrow-daa-refund-funding",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "9a7d72a93293307ad7dd0a32097ca62cffd17d45d0f75a2357c49ba73cacc430",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "5000000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 74
+          },
+          {
+            "index": 1,
+            "amount": "119999955000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 72
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-cd98a52a",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+      "label": "Escrow DAA refund",
+      "lane": "escrow-refund",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+        "version": 0,
+        "lockTime": "5341732",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+              "index": 0
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 420
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "4999995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-a097c871",
+      "path": "artifacts/signed-drafts/escrow-cancel-funding.json",
+      "label": "Escrow cancel funding",
+      "lane": "escrow-cancel-funding",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "5000000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 74
+          },
+          {
+            "index": 1,
+            "amount": "114999950000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 72
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-5dd4b1ef",
+      "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "label": "Escrow cancel attempt",
+      "lane": "escrow-cancel",
+      "class": "contract-proof",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+        "version": 1,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+              "index": 0
+            },
+            "sequence": "18446744073709551615",
+            "sigOpCount": null,
+            "computeBudget": 30,
+            "signatureScriptBytes": 487
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "4999995000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "hexPreview": "",
+        "routeRequired": false
+      },
+      "route": "wallet-exact-transaction-submit",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      }
+    }
+  ],
+  "firstPayloadRequests": [
+    {
+      "requestId": "wreq-6cfe79da",
+      "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "label": "Payload receipt self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114799940000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-0d276be0",
+      "path": "artifacts/signed-drafts/payload-refund-self-send.json",
+      "label": "Payload refund self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114699935000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-c3d8c6a4",
+      "path": "artifacts/signed-drafts/payload-error-self-send.json",
+      "label": "Payload error self-send",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114599930000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 130,
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-68feaa92",
+      "path": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "label": "Access pass redemption payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114589925000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 159,
+        "hexPreview": "7b226b696e64223a226163636573732d706173732d726564...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    },
+    {
+      "requestId": "wreq-9e1d350b",
+      "path": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "label": "Auction bid pass 001 payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "status": "connector-request-ready",
+      "artifactPresent": true,
+      "blockers": [],
+      "transaction": {
+        "id": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScriptBytes": 66
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "10000000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          },
+          {
+            "index": 1,
+            "amount": "114529895000",
+            "scriptVersion": 0,
+            "scriptPublicKeyBytes": 34
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 122,
+        "hexPreview": "7b226b696e64223a2261756374696f6e2d626964222c2273...",
+        "routeRequired": true
+      },
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "userReview": {
+        "required": true,
+        "fields": [
+          "network",
+          "path",
+          "transaction.id",
+          "transaction.version",
+          "transaction.inputs",
+          "transaction.outputs",
+          "transaction.lockTime",
+          "payload.bytes",
+          "route"
+        ],
+        "warnings": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      }
+    }
+  ],
+  "boundaries": [
+    "This is the connector request bundle the browser/wallet should exchange, not a browser-held private-key flow.",
+    "Existing artifacts are already signed local drafts; this bundle is the exact-review and submit contract for replacing local shell submission.",
+    "Payload requests must reject REST submit routes that drop payload bytes.",
+    "Version-1 contract requests must preserve computeBudget and must not rewrite it to sigOpCount."
+  ],
+  "secretFields": []
+}

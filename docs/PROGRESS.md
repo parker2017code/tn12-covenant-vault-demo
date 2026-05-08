@@ -16,20 +16,20 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Accepted route: JSON wRPC accepted paid tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`, refund tx `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`, and error tx `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`; `npm run payload:verify` confirms payload bytes and output match for each evidence artifact.
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
-   - Indexer status: checkpointed known-txid public-read index covers 33 accepted TN12 records: 7 proof spends and 26 payload events. `npm run indexer:replay-plan` defines the durable node/RPC replay build order, `npm run indexer:schema` defines the storage contract, and `npm run indexer:replay` materializes the current checkpoint into table-shaped rows.
+   - Indexer status: checkpointed known-txid public-read index covers 33 accepted TN12 records: 7 proof spends and 26 payload events. `npm run indexer:replay-plan` defines the durable node/RPC replay build order, `npm run indexer:schema` defines the storage contract, `npm run indexer:replay` materializes the current checkpoint into table-shaped rows, and `npm run indexer:virtual-chain-plan` defines the live reader/rollback contract.
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
-   - Current status: base built with wallet-review readiness, wallet-connector spec, and wallet-submit package artifacts.
+   - Current status: base built with wallet-review readiness, wallet-connector spec, wallet-submit package, and connector submit request artifacts.
    - Enforcement: wallet policy.
    - Mainnet potential: useful only after real wallet integration replaces local keys.
-   - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` records connector requirements without reading local keys. `npm run wallet:submit-package` creates the no-local-key handoff package for wallet integration.
+   - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` records connector requirements without reading local keys. `npm run wallet:submit-package` creates the no-local-key handoff package for wallet integration. `npm run wallet:connector-requests` creates the exact transaction request bundle for connector review and submit.
 
 3. Batch assurance campaigns: multi-pledge accepted progress, pending progress, release/refund planning.
    - Current status: accepted TN12 planner payload records.
    - Enforcement: planner/indexer.
    - Covenant boundary: individual pledge script exists; pooled target aggregation is not script-enforced.
    - Evidence: three accepted pledge planner payloads and one accepted release-ready planner payload. These are not custody-settlement proofs.
-   - Custody review: `npm run campaign:custody` blocks settlement drafts until referenced outputs match pledge amounts. `npm run campaign:custody-requirements` lists the exact accepted pledge outputs still needed on TN12.
+   - Custody review: `npm run campaign:custody` blocks settlement drafts until referenced outputs match pledge amounts. `npm run campaign:custody-requirements` lists the exact accepted pledge outputs still needed on TN12. `npm run campaign:pledge-outputs` turns the open requirements into wallet-reviewable output requirements and an import workflow.
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: base built.
@@ -100,8 +100,10 @@ Done now:
 - Browser/repo control surface: submit registry, wallet-review readiness, wallet-connector spec, checkpointed accepted index, and operator plan.
 - Durable indexer storage schema: `npm run indexer:schema` writes `artifacts/indexer-storage-schema.json`.
 - Fixture-backed indexer replay: `npm run indexer:replay` writes `artifacts/indexer-replay-run.json` and marks app state ready only when mismatches and rollback segments are zero.
+- Virtual-chain ingestion contract: `npm run indexer:virtual-chain-plan` writes `artifacts/virtual-chain-ingestion-plan.json`, connecting the replay schema, wallet submit results, and future node/RPC feed without requiring local `kaspad`.
 - Based-rollup scouting: `npm run rollup:scout` tracks Maxim's TN12 PoC, Hans' vProgs/runtime lane, Michael's covenant++ roadmap, and next endpoint/bridge/app scouting tasks.
 - Oracle source matrix: `npm run oracle:matrix` compares Kaskad/Eliott Mea-inspired oracle source models and keeps all custody/liquidation claims research-only until stale/wrong-data and trust assumptions are explicit.
+- Batch-assurance pledge-output plan: `npm run campaign:pledge-outputs` writes `artifacts/batch-assurance-pledge-output-plan.json`, naming the three required 45/35/20 TKAS amount-matched outputs and the fixture import workflow. It is a funding/import plan, not a signed transaction.
 - Next-work queue: `npm run project:queue` records the ordered next 30 tasks; the top five are wallet connector submit, durable virtual-chain indexer, accepted pledge outputs, batch-assurance release/refund drafts, and escrow marketplace demo.
 - Covenant adversarial map: `npm run covenant:adversarial` records local selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and script-mapping checks for the seven accepted proof paths.
 - Role-separated fixture lane: `npm run fixtures:roles` and `npm run compile:roles` create the clean constructor/script base for the next accepted-proof pass without mutating historical proof artifacts.
@@ -113,9 +115,9 @@ Done now:
 
 WIP now:
 
-- Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package is built.
+- Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package and connector request bundle are built; a real wallet adapter still needs to consume them.
 - Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone.
-- Durable indexer node/RPC replay beyond the generated fixture-backed replay.
+- Durable indexer node/RPC replay beyond the generated fixture-backed replay. The reader/rollback contract exists; the live endpoint adapter still needs implementation.
 - Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review now gates prediction influence.
 
 Next actions:

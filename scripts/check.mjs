@@ -42,6 +42,7 @@ import {
   summarizeSignedDraft
 } from "../src/submitConsole.mjs";
 import { buildResearchLibrary } from "../src/appResearch.mjs";
+import { buildWalletConnectorSubmitRequests } from "../src/walletConnectorSubmitRequests.mjs";
 import { buildMainstreamAppDirection } from "../src/mainstreamAppDirection.mjs";
 import { buildMissingRailsMatrix } from "../src/missingRailsMatrix.mjs";
 import { buildRailResearchTriggers } from "../src/railResearchTriggers.mjs";
@@ -50,6 +51,7 @@ import { buildNextWorkQueue } from "../src/nextWorkQueue.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
+import { buildBatchAssurancePledgeOutputPlan } from "../src/batchAssurancePledgeOutputs.mjs";
 import { buildWalletConnectorReadiness } from "../src/walletConnectorReadiness.mjs";
 import { buildWalletSubmitPackage } from "../src/walletSubmitPackage.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
@@ -80,6 +82,7 @@ import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
 import { buildPersistedCheckpointGuard } from "../src/indexerPersistence.mjs";
 import { buildIndexerStorageSchema } from "../src/indexerStorageSchema.mjs";
 import { buildIndexerReplayRun } from "../src/indexerReplayRun.mjs";
+import { buildVirtualChainIngestionPlan } from "../src/virtualChainIngestion.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -212,6 +215,22 @@ assert.equal(walletSubmitPackage.summary.total, 47);
 assert.equal(walletSubmitPackage.summary.payloadDrafts, 26);
 assert.equal(walletSubmitPackage.summary.contractDrafts, 19);
 assert.ok(walletSubmitPackage.firstPayloadIntents.every((intent) => intent.requiredWalletChecks.includes("Reject public REST payload submit.")));
+const walletConnectorRequests = buildWalletConnectorSubmitRequests({
+  submitPackage: walletSubmitPackage,
+  draftArtifacts: submitArtifacts
+});
+assert.equal(walletConnectorRequests.status, "connector-submit-requests-ready");
+assert.equal(walletConnectorRequests.summary.requests, 47);
+assert.equal(walletConnectorRequests.summary.payloadRequests, 26);
+assert.ok(walletConnectorRequests.summary.computeBudgetRequests >= 1);
+assert.equal(walletConnectorRequests.summary.secretFields, 0);
+assert.ok(walletConnectorRequests.requests.some((request) =>
+  request.path === "artifacts/signed-drafts/role-escrow-cancel.json"
+  && request.transaction.inputs[0].computeBudget === 30
+));
+const walletConnectorRequestsArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-submit-requests.json", import.meta.url), "utf8"));
+assert.equal(walletConnectorRequestsArtifact.status, "connector-submit-requests-ready");
+assert.equal(walletConnectorRequestsArtifact.summary.requests, 47);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -390,6 +409,23 @@ assert.ok(custodyRequirementsFixture.requirements.every((requirement) =>
   requirement.required.sourceKind === "accepted-pledge-output"
   && requirement.currentReference.amountMatches === false
 ));
+const pledgeOutputPlan = buildBatchAssurancePledgeOutputPlan({
+  custodyRequirements: custodyRequirementsFixture,
+  walletConnectorRequests: walletConnectorRequestsArtifact
+});
+assert.equal(pledgeOutputPlan.status, "pledge-output-plan-ready");
+assert.equal(pledgeOutputPlan.summary.outputsToCreate, 3);
+assert.equal(pledgeOutputPlan.summary.totalRequiredTkas, "100");
+assert.equal(pledgeOutputPlan.summary.missingTkas, "100");
+assert.equal(pledgeOutputPlan.summary.walletConnectorRequestsReady, true);
+assert.ok(pledgeOutputPlan.outputsToCreate.some((output) =>
+  output.pledgeId === "pledge-docs-001"
+  && output.amountTkas === "45"
+  && output.importTarget.fixturePath === "fixtures/BatchAssuranceCampaign.json"
+));
+const pledgeOutputPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-pledge-output-plan.json", import.meta.url), "utf8"));
+assert.equal(pledgeOutputPlanArtifact.status, "pledge-output-plan-ready");
+assert.equal(pledgeOutputPlanArtifact.summary.outputsToCreate, 3);
 const syntheticCustodyCheckpoint = {
   network: "kaspa-testnet-12",
   records: campaignState.releasePlan.inputs.map((input) => ({
@@ -716,6 +752,18 @@ assert.equal(rebuiltReplayRun.status, "fixture-replay-ready");
 assert.ok(rebuiltReplayRun.reducerReadiness.some((item) =>
   item.lane === "invoice" && item.status === "ready-from-fixture-replay"
 ));
+const virtualChainIngestionPlan = buildVirtualChainIngestionPlan({
+  replayPlan: replayPlanFixture,
+  storageSchema: indexerStorageFixture,
+  submitRequests: walletConnectorRequestsArtifact,
+  generatedAt: "2026-05-08T00:00:00.000Z"
+});
+assert.equal(virtualChainIngestionPlan.status, "virtual-chain-ingestion-contract-ready");
+assert.equal(virtualChainIngestionPlan.sourceCheckpoint.recordCount, 33);
+assert.equal(virtualChainIngestionPlan.readerContract.dataVerbosity, "High");
+assert.ok(virtualChainIngestionPlan.rollbackPolicy.openWhen.some((item) => /lower than/.test(item)));
+const virtualChainIngestionArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-plan.json", import.meta.url), "utf8"));
+assert.equal(virtualChainIngestionArtifact.status, "virtual-chain-ingestion-contract-ready");
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -910,6 +958,7 @@ const files = [
   "scripts/build-indexer-replay-plan.mjs",
   "scripts/build-indexer-storage-schema.mjs",
   "scripts/build-indexer-replay-run.mjs",
+  "scripts/build-virtual-chain-ingestion-plan.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -919,6 +968,7 @@ const files = [
   "scripts/build-wallet-review-readiness.mjs",
   "scripts/build-wallet-connector-readiness.mjs",
   "scripts/build-wallet-submit-package.mjs",
+  "scripts/build-wallet-connector-submit-requests.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
@@ -929,6 +979,7 @@ const files = [
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
+  "scripts/build-batch-assurance-pledge-output-plan.mjs",
   "scripts/build-enforcement-matrix.mjs",
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-treasury-vaults.mjs",
@@ -1002,6 +1053,7 @@ const files = [
   "artifacts/wallet-review-readiness.json",
   "artifacts/wallet-connector-readiness.json",
   "artifacts/wallet-submit-package.json",
+  "artifacts/wallet-connector-submit-requests.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
   "artifacts/mainstream-app-direction.json",
@@ -1012,6 +1064,7 @@ const files = [
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
+  "artifacts/batch-assurance-pledge-output-plan.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/proof-evidence.json",
   "artifacts/role-separated-proof-evidence.json",
@@ -1028,6 +1081,7 @@ const files = [
   "artifacts/indexer-replay-plan.json",
   "artifacts/indexer-storage-schema.json",
   "artifacts/indexer-replay-run.json",
+  "artifacts/virtual-chain-ingestion-plan.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -1100,6 +1154,7 @@ const files = [
   "src/indexerPersistence.mjs",
   "src/indexerStorageSchema.mjs",
   "src/indexerReplayRun.mjs",
+  "src/virtualChainIngestion.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",
@@ -1107,6 +1162,7 @@ const files = [
   "src/walletReview.mjs",
   "src/walletConnectorReadiness.mjs",
   "src/walletSubmitPackage.mjs",
+  "src/walletConnectorSubmitRequests.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
@@ -1116,6 +1172,8 @@ const files = [
   "src/nextWorkQueue.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
+  "src/batchAssuranceCustodyRequirements.mjs",
+  "src/batchAssurancePledgeOutputs.mjs",
   "src/enforcementMatrix.mjs",
   "src/escrowPrimitive.mjs",
   "src/treasuryVault.mjs",
@@ -1178,6 +1236,7 @@ assert.match(readme, /npm run indexer:persist/);
 assert.match(readme, /npm run indexer:replay-plan/);
 assert.match(readme, /npm run indexer:schema/);
 assert.match(readme, /npm run indexer:replay/);
+assert.match(readme, /npm run indexer:virtual-chain-plan/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
@@ -1190,6 +1249,8 @@ assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);
 assert.match(readme, /npm run wallet:connector/);
+assert.match(readme, /npm run wallet:connector-requests/);
+assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run mainstream:direction/);
