@@ -19,6 +19,9 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Checkpointed accepted-index command: `npm run indexer:checkpoint`
 - Persisted checkpoint guard command: `npm run indexer:persist`
 - Wallet-review readiness command: `npm run wallet:review`
+- Mainstream app direction command: `npm run mainstream:direction`
+- Durable indexer schema command: `npm run indexer:schema`
+- Durable indexer fixture replay command: `npm run indexer:replay`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - High-impact mainstream app direction: `docs/MAINSTREAM_APP_DIRECTION.md`
 - TN12 tested/not-tested map: `docs/TN12_TEST_MATRIX.md`
@@ -400,12 +403,15 @@ Pause note, 2026-05-08:
 - `artifacts/role-separated-invalid-candidates.json` maps 32 local-review-only role-separated mutations across wrong signer, selector, output lock, amount, timed lock shape, and single-party cancel.
 - `npm run check:all` and `npm run check:tn12` passed after the invalid-candidate wiring.
 - `docs/MAINSTREAM_APP_DIRECTION.md` records the high-impact app direction and keeps mainstream crypto use cases in the pipeline without converting research ideas into proof claims.
+- `artifacts/mainstream-app-direction.json` is the generated version of the high-impact app direction.
+- `artifacts/indexer-storage-schema.json` defines the durable indexer storage contract.
+- `artifacts/indexer-replay-run.json` materializes the current 33 accepted records into table-shaped replay rows and keeps app state ready only when mismatches and rollback segments are zero.
 - Do not submit invalid TN12 transactions until a candidate is reviewed and backed by a fresh expendable output.
 
 Recommended order from here:
 
 1. Add wallet-review and wallet-connector flow for payload receipt submission.
-2. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
+2. Replace known-txid checkpoint input with node/RPC virtual-chain reads feeding the replay tables.
 3. Build accepted pledge-output custody transactions for batch assurance settlement.
 4. Fund fresh role-separated outputs before trying invalid spend submissions.
 5. Add reputation thresholds and signer provenance before signals affect more app lanes.
