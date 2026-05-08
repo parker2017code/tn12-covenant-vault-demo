@@ -413,11 +413,14 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 6);
+assert.equal(projectPlan.summary.done, 8);
 assert.equal(projectPlan.summary.wip, 4);
-assert.equal(projectPlan.summary.next, 5);
+assert.equal(projectPlan.summary.next, 6);
+assert.equal(projectPlan.summary.later, 6);
 assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
+assert.ok(projectPlan.next.some((item) => item.id === "based-rollup-scout"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
+assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
 assert.ok(projectPlan.longTermVision.some((item) => /wallet-reviewed Kaspa app console/.test(item)));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
@@ -807,7 +810,8 @@ const files = [
   "docs/KASPA_DOCS_REVIEW.md",
   "docs/ECOSYSTEM_BUILD_PLAN.md",
   "docs/GITHUB_HOSTING.md",
-  "docs/MASTER_APP_PLAN.md"
+  "docs/MASTER_APP_PLAN.md",
+  "docs/PROGRAMMABILITY_PATHS.md"
 ];
 
 for (const file of files) {
@@ -850,6 +854,7 @@ assert.match(readme, /npm run stable:issuer/);
 assert.match(readme, /npm run build:status/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
+assert.match(readme, /PROGRAMMABILITY_PATHS\.md/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
 assert.match(readme, /npm run check:tn12/);
 

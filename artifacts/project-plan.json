@@ -3,10 +3,10 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 6,
+    "done": 8,
     "wip": 4,
-    "next": 5,
-    "later": 5
+    "next": 6,
+    "later": 6
   },
   "currentPrinciple": "Positive app-state claims need accepted TN12 evidence; planner, wallet-policy, and research lanes stay labeled.",
   "focusVerticals": [
@@ -74,6 +74,16 @@
       "proof": "generated-artifact",
       "detail": "Prediction/hedge review payloads are accepted while settlement remains out of scope.",
       "next": "Add signature/reputation hardening and more TN12 review payloads while keeping settlement, odds, custody, and advice out of scope."
+    },
+    {
+      "id": "custody-requirements",
+      "laneId": "batch-assurance",
+      "detail": "Batch assurance now names the exact amount-matched pledge outputs needed before custody settlement."
+    },
+    {
+      "id": "indexer-replay-plan",
+      "laneId": "payload-invoice",
+      "detail": "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface."
     }
   ],
   "wip": [
@@ -94,7 +104,7 @@
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-tn12-json-wrpc-payload-events",
-      "detail": "Custody requirements now identify the exact accepted pledge outputs needed before settlement drafts.",
+      "detail": "Next work is real accepted pledge-output transactions for the amounts listed in the custody requirements.",
       "next": "Build accepted TN12 pledge outputs for the exact campaign amounts, then import those outpoints before settlement."
     },
     {
@@ -120,19 +130,14 @@
   ],
   "next": [
     {
-      "id": "wallet-connector-submit",
-      "laneId": "submit-console",
-      "detail": "Wire the wallet-submit package into a live no-local-key wallet flow."
-    },
-    {
-      "id": "pledge-output-custody",
+      "id": "pledge-output-drafts",
       "laneId": "batch-assurance",
-      "detail": "Build and submit amount-matched pledge outputs, then import those outpoints into custody drafts."
+      "detail": "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS."
     },
     {
-      "id": "durable-indexer",
+      "id": "indexer-storage-schema",
       "laneId": "payload-invoice",
-      "detail": "Implement replay storage around the accepted-index replay plan."
+      "detail": "Create the first durable replay storage schema and fixture-backed replay runner."
     },
     {
       "id": "covenant-negative-tests",
@@ -143,6 +148,16 @@
       "id": "attestation-reputation",
       "laneId": "miner-pool-signals",
       "detail": "Add reputation thresholds and signer provenance before signals affect more app lanes."
+    },
+    {
+      "id": "wallet-connector-submit",
+      "laneId": "submit-console",
+      "detail": "Wire the wallet-submit package into a live no-local-key wallet flow."
+    },
+    {
+      "id": "based-rollup-scout",
+      "laneId": "defi-research",
+      "detail": "Map available based-rollup endpoints, bridge model, tooling, and one tiny app target."
     }
   ],
   "later": [
@@ -182,6 +197,11 @@
       "detail": "Track stable-value and native-asset work as issuer/indexer or future protocol lanes until rails exist."
     },
     {
+      "id": "vprog-forward-compat",
+      "laneId": "defi-research",
+      "detail": "Keep L1 covenant, based-rollup, native-asset, ICC, and vProg assumptions separated until each interface is testable."
+    },
+    {
       "id": "marketplace-escrow",
       "laneId": "escrow",
       "detail": "Turn accepted escrow release/refund into a user-facing commerce workflow after wallet submit improves."
@@ -197,6 +217,6 @@
     "A wallet-reviewed Kaspa app console that can submit exact payload and covenant drafts without local keys.",
     "A durable accepted-transaction indexer with rollback replay instead of known-txid fixture reads.",
     "Covenant-backed escrow, vault, assurance, and treasury flows that remain TN12-labeled until mainnet tooling is ready.",
-    "Builder-facing examples for app-state payloads, attestations, issuer-indexed assets, and future native rails."
+    "Builder-facing examples for app-state payloads, attestations, issuer-indexed assets, based-rollup scouting, and future native rails."
   ]
 }

@@ -96,6 +96,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 3. Implement checkpoint replay storage from `artifacts/indexer-replay-plan.json`.
 4. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
 5. Add reputation thresholds and signer provenance before signals influence more app lanes.
+6. Add based-rollup scouting: available endpoints, bridge model, execution environment, wallet path, and one tiny app target.
 
 ### Coming weeks
 
@@ -104,6 +105,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 3. Build grants/public-goods workflow on top of assurance plus payout vault planning.
 4. Keep stable-value and native-asset work issuer/indexed or future-protocol labeled until actual rails exist.
 5. Add ZK/anchor design checklists before any bridge, oracle, solver, or vProg proof claim.
+6. When a usable based-rollup stack is available, test one app across both surfaces: L1 covenant settlement plus rollup execution state.
 
 ## Strategic Rule
 

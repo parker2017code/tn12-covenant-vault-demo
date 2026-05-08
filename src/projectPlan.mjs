@@ -8,22 +8,25 @@ export function buildProjectPlan(fixture = {}) {
     laneItem(byId, "access-passes", "Accepted redemption payload state is indexed with duplicate safeguards."),
     laneItem(byId, "auction-intents", "Accepted bid and planner payloads prove indexer-side auction state."),
     laneItem(byId, "ai-agent-commitments", "Accepted task, proof, dispute, release, and hold payloads prove lifecycle state."),
-    laneItem(byId, "defi-research", "Prediction/hedge review payloads are accepted while settlement remains out of scope.")
+    laneItem(byId, "defi-research", "Prediction/hedge review payloads are accepted while settlement remains out of scope."),
+    action("custody-requirements", "Batch assurance now names the exact amount-matched pledge outputs needed before custody settlement.", "batch-assurance"),
+    action("indexer-replay-plan", "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface.", "payload-invoice")
   ];
 
   const wip = [
     laneItem(byId, "submit-console", "Wallet submit package is built; the live no-local-key connector remains WIP."),
-    laneItem(byId, "batch-assurance", "Custody requirements now identify the exact accepted pledge outputs needed before settlement drafts."),
+    laneItem(byId, "batch-assurance", "Next work is real accepted pledge-output transactions for the amounts listed in the custody requirements."),
     laneItem(byId, "miner-pool-signals", "Source signature review now gates influence; reputation thresholds still need hardening."),
     laneItem(byId, "treasury-vaults", "Turn policy templates into constrained spend drafts with role separation.")
   ];
 
   const next = [
-    action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
-    action("pledge-output-custody", "Build and submit amount-matched pledge outputs, then import those outpoints into custody drafts.", "batch-assurance"),
-    action("durable-indexer", "Implement replay storage around the accepted-index replay plan.", "payload-invoice"),
+    action("pledge-output-drafts", "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS.", "batch-assurance"),
+    action("indexer-storage-schema", "Create the first durable replay storage schema and fixture-backed replay runner.", "payload-invoice"),
     action("covenant-negative-tests", "Add wrong-signer and wrong-script-argument checks for accepted proof lanes.", "escrow"),
-    action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals")
+    action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
+    action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
+    action("based-rollup-scout", "Map available based-rollup endpoints, bridge model, tooling, and one tiny app target.", "defi-research")
   ];
 
   const later = [
@@ -31,6 +34,7 @@ export function buildProjectPlan(fixture = {}) {
     laneItem(byId, "coordination-markets", "Transparent settlement drafts can come before opacity or capital multiplexing claims."),
     laneItem(byId, "zk-anchor-readiness", "Define public inputs, roots, anchors, and trust model before bridge/oracle/vProg claims."),
     action("native-assets-and-stables", "Track stable-value and native-asset work as issuer/indexer or future protocol lanes until rails exist.", "defi-research"),
+    action("vprog-forward-compat", "Keep L1 covenant, based-rollup, native-asset, ICC, and vProg assumptions separated until each interface is testable.", "defi-research"),
     action("marketplace-escrow", "Turn accepted escrow release/refund into a user-facing commerce workflow after wallet submit improves.", "escrow")
   ];
 
@@ -64,7 +68,7 @@ export function buildProjectPlan(fixture = {}) {
       "A wallet-reviewed Kaspa app console that can submit exact payload and covenant drafts without local keys.",
       "A durable accepted-transaction indexer with rollback replay instead of known-txid fixture reads.",
       "Covenant-backed escrow, vault, assurance, and treasury flows that remain TN12-labeled until mainnet tooling is ready.",
-      "Builder-facing examples for app-state payloads, attestations, issuer-indexed assets, and future native rails."
+      "Builder-facing examples for app-state payloads, attestations, issuer-indexed assets, based-rollup scouting, and future native rails."
     ]
   };
 }
