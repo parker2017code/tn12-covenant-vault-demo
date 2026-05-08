@@ -3,8 +3,8 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 12,
-    "wip": 4,
+    "done": 14,
+    "wip": 5,
     "next": 6,
     "later": 6
   },
@@ -101,9 +101,19 @@
       "detail": "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts."
     },
     {
-      "id": "role-separated-funding-draft",
+      "id": "role-separated-funding",
       "laneId": "escrow",
-      "detail": "A wallet-reviewable draft now funds fresh role-separated vault, assurance, and escrow P2SH outputs in one transaction."
+      "detail": "Accepted role-separated funding created fresh vault, assurance, and escrow P2SH outputs in one transaction."
+    },
+    {
+      "id": "role-separated-spend-drafts",
+      "laneId": "escrow",
+      "detail": "Role-separated spend drafts now use distinct owner/recovery, contributor/recipient, and buyer/seller keys from the accepted role-separated outputs."
+    },
+    {
+      "id": "role-separated-accepted-spends",
+      "laneId": "escrow",
+      "detail": "TN12 accepted role-separated vault recovery, assurance release, and escrow seller release from those distinct-role outputs."
     }
   ],
   "wip": [
@@ -146,6 +156,11 @@
       "proof": "generated-artifact",
       "detail": "Turn policy templates into constrained spend drafts with role separation.",
       "next": "Add exact UTXO provenance and constrained spend draft planning."
+    },
+    {
+      "id": "remaining-role-separated-paths",
+      "laneId": "escrow",
+      "detail": "Fresh role-separated outputs are needed for vault withdrawal, assurance refund, escrow refund, and escrow cancel because the first pass consumed one output per contract."
     }
   ],
   "next": [
@@ -160,9 +175,9 @@
       "detail": "Create the first durable replay storage schema and fixture-backed replay runner."
     },
     {
-      "id": "role-separated-output-fetch",
+      "id": "role-separated-second-funding",
       "laneId": "escrow",
-      "detail": "Submit the role-separated funding draft after review, then fetch its vault, assurance, and escrow contract outputs."
+      "detail": "Fund another role-separated batch for the mutually exclusive withdrawal, refund, and cancel paths."
     },
     {
       "id": "attestation-reputation",

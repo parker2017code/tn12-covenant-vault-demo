@@ -1,0 +1,56 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "escrow-refund",
+  "contract": "Escrow",
+  "entrypoint": "refund",
+  "warning": "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
+  "source": {
+    "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+    "outputIndex": 2,
+    "amountTkas": 25,
+    "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+  },
+  "destination": {
+    "address": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+    "scriptType": "p2pk",
+    "amountSompi": "2499995000",
+    "amountTkas": "24.99995"
+  },
+  "contractFeeSompi": "5000",
+  "scriptHash": "669f121a8ed29e05c7a7db509dcf1e1ca40a0a1260765df03509d770c92dad1f",
+  "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+  "signatureScriptHex": "41b881b3e36e3a38c9c7c49cf143d7e40697c24d1ce8ef94114e192992063dc4ffbe5b88780258652c996d73c595a7e7347ab57c73094775c46d7ffacc1a86b16f01514d5f016b6c76009c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6900c2b9be028813949c6900c32054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669030000207c7e01ac7e876975516776519c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6904ccedfe69b000c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975516776529c637578200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac69762054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac6900c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975755167750069686868",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+            "index": 2
+          },
+          "signatureScript": "41b881b3e36e3a38c9c7c49cf143d7e40697c24d1ce8ef94114e192992063dc4ffbe5b88780258652c996d73c595a7e7347ab57c73094775c46d7ffacc1a86b16f01514d5f016b6c76009c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6900c2b9be028813949c6900c32054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669030000207c7e01ac7e876975516776519c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6904ccedfe69b000c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975516776529c637578200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac69762054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac6900c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975755167750069686868",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
+          }
+        }
+      ],
+      "lockTime": 1778229191,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "lockTime": "1778229191",
+  "roleSeparated": true,
+  "mutualExclusionWarning": "The role-escrow release, refund, and cancel drafts spend the same role-separated escrow output; only one can be accepted."
+}

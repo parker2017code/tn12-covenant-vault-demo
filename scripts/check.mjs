@@ -176,29 +176,33 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 40);
+assert.equal(submitRegistry.summary.total, 47);
 assert.equal(submitRegistry.summary.payloadDrafts, 26);
 assert.equal(submitRegistry.summary.payloadSubmitGated, 26);
 assert.ok(submitRegistry.drafts.some((draft) =>
   draft.path === "artifacts/signed-drafts/role-separated-funding.json"
   && draft.counts.outputs === 4
 ));
+assert.ok(submitRegistry.drafts.some((draft) =>
+  draft.path === "artifacts/signed-drafts/role-escrow-cancel.json"
+  && draft.inputs[0].computeBudget === 30
+));
 const walletReview = buildWalletReviewReadiness(submitRegistry);
 assert.equal(walletReview.status, "wallet-review-ready");
-assert.equal(walletReview.summary.ready, 40);
+assert.equal(walletReview.summary.ready, 47);
 assert.equal(walletReview.summary.payloadRouteReady, 26);
 assert.equal(walletReview.summary.registrySecretFields, 0);
 const walletConnector = buildWalletConnectorReadiness(walletReview);
 assert.equal(walletConnector.status, "wallet-connector-spec-ready");
-assert.equal(walletConnector.summary.drafts, 40);
+assert.equal(walletConnector.summary.drafts, 47);
 assert.equal(walletConnector.summary.payloadDrafts, 26);
 assert.equal(walletConnector.summary.registrySecretFields, 0);
 assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "payload-preserving-submit"));
 const walletSubmitPackage = buildWalletSubmitPackage({ walletReview, walletConnector });
 assert.equal(walletSubmitPackage.status, "wallet-submit-package-ready");
-assert.equal(walletSubmitPackage.summary.total, 40);
+assert.equal(walletSubmitPackage.summary.total, 47);
 assert.equal(walletSubmitPackage.summary.payloadDrafts, 26);
-assert.equal(walletSubmitPackage.summary.contractDrafts, 12);
+assert.equal(walletSubmitPackage.summary.contractDrafts, 19);
 assert.ok(walletSubmitPackage.firstPayloadIntents.every((intent) => intent.requiredWalletChecks.includes("Reject public REST payload submit.")));
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
@@ -441,21 +445,35 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 12);
-assert.equal(projectPlan.summary.wip, 4);
+assert.equal(projectPlan.summary.done, 14);
+assert.equal(projectPlan.summary.wip, 5);
 assert.equal(projectPlan.summary.next, 6);
 assert.equal(projectPlan.summary.later, 6);
 assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
 assert.ok(projectPlan.done.some((item) => item.id === "based-rollup-scout"));
 assert.ok(projectPlan.done.some((item) => item.id === "covenant-adversarial-map"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures"));
-assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding-draft"));
-assert.ok(projectPlan.next.some((item) => item.id === "role-separated-output-fetch"));
+assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding"));
+assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-drafts"));
+assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
+assert.ok(projectPlan.wip.some((item) => item.id === "remaining-role-separated-paths"));
+assert.ok(projectPlan.next.some((item) => item.id === "role-separated-second-funding"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
 assert.ok(projectPlan.longTermVision.some((item) => /wallet-reviewed Kaspa app console/.test(item)));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
+const roleProofFixture = JSON.parse(await readFile(new URL("../fixtures/RoleSeparatedAcceptedProofTransactions.json", import.meta.url), "utf8"));
+const roleProofEvidence = JSON.parse(await readFile(new URL("../artifacts/role-separated-proof-evidence.json", import.meta.url), "utf8"));
+assert.equal(roleProofFixture.schema, "tn12-role-separated-accepted-proof-transactions/v1");
+assert.equal(roleProofFixture.transactions.length, 3);
+assert.equal(roleProofFixture.funding.txid, "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0");
+assert.ok(roleProofFixture.transactions.some((proof) => proof.txid === "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0"));
+assert.ok(/sigOpCount: 1/.test(roleProofFixture.historicalRejectedAttempt.correction));
+assert.equal(roleProofEvidence.summary.total, 3);
+assert.equal(roleProofEvidence.summary.accepted, 3);
+assert.equal(roleProofEvidence.summary.matchedInputs, 3);
+assert.equal(roleProofEvidence.summary.p2pkOutputs, 3);
 const roleWalletsPublic = JSON.parse(await readFile(new URL("../fixtures/RoleSeparatedWallets.public.json", import.meta.url), "utf8"));
 assert.equal(roleWalletsPublic.schema, "tn12-role-separated-wallets-public/v1");
 assert.equal(Object.keys(roleWalletsPublic.roles).length, 6);
@@ -717,6 +735,7 @@ const files = [
   "scripts/build-signed-escrow-spend-drafts.mjs",
   "scripts/build-signed-split-draft.mjs",
   "scripts/build-role-separated-funding-draft.mjs",
+  "scripts/build-role-separated-spend-drafts.mjs",
   "scripts/build-signed-contract-spend-drafts.mjs",
   "scripts/fetch-contract-outpoints.mjs",
   "scripts/fetch-contract-outpoint.mjs",
@@ -780,6 +799,13 @@ const files = [
   "artifacts/signed-drafts/escrow-refund.json",
   "artifacts/signed-drafts/escrow-cancel.json",
   "artifacts/signed-drafts/role-separated-funding.json",
+  "artifacts/signed-drafts/role-vault-withdrawal.json",
+  "artifacts/signed-drafts/role-vault-recovery.json",
+  "artifacts/signed-drafts/role-assurance-release.json",
+  "artifacts/signed-drafts/role-assurance-refund.json",
+  "artifacts/signed-drafts/role-escrow-release.json",
+  "artifacts/signed-drafts/role-escrow-refund.json",
+  "artifacts/signed-drafts/role-escrow-cancel.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
   "artifacts/signed-drafts/payload-refund-self-send.json",
   "artifacts/signed-drafts/payload-error-self-send.json",
@@ -794,6 +820,7 @@ const files = [
   "artifacts/batch-assurance-custody-requirements.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/proof-evidence.json",
+  "artifacts/role-separated-proof-evidence.json",
   "artifacts/covenant-adversarial-coverage.json",
   "artifacts/escrow-primitives.json",
   "artifacts/treasury-vaults.json",
@@ -819,6 +846,7 @@ const files = [
   "fixtures/SavedWallet.public.json",
   "fixtures/RoleSeparatedWallets.public.json",
   "fixtures/AcceptedProofTransactions.json",
+  "fixtures/RoleSeparatedAcceptedProofTransactions.json",
   "fixtures/AcceptedAppState.json",
   "fixtures/EcosystemBuildQueue.json",
   "fixtures/VaultTemplates.json",
@@ -845,6 +873,9 @@ const files = [
   "fixtures/EscrowContractOutpoint.json",
   "fixtures/EscrowDaaRefundContractOutpoint.json",
   "fixtures/EscrowCancelContractOutpoint.json",
+  "fixtures/RoleVaultContractOutpoint.json",
+  "fixtures/RoleAssuranceContractOutpoint.json",
+  "fixtures/RoleEscrowContractOutpoint.json",
   "fixtures/EscrowExpired.ctor.json",
   "fixtures/role-separated/DelayedRecoveryVault.ctor.json",
   "fixtures/role-separated/AssurancePledge.ctor.json",
@@ -886,6 +917,7 @@ const files = [
   "src/submitPayload.mjs",
   "README.md",
   "AGENTS.md",
+  "CONTEXT.md",
   "docs/STATUS.md",
   "docs/SOURCES.md",
   "docs/BUILD_PLAN.md",
@@ -924,6 +956,9 @@ assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
 assert.match(readme, /npm run tx:roles:fund/);
+assert.match(readme, /npm run tx:roles:spends/);
+assert.match(readme, /npm run tx:roles:verify/);
+assert.match(readme, /npm run roles:proof:evidence/);
 assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);

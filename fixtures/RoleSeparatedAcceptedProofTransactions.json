@@ -1,0 +1,87 @@
+{
+  "schema": "tn12-role-separated-accepted-proof-transactions/v1",
+  "network": "kaspa-testnet-12",
+  "source": "https://api-tn12.kaspa.org/transactions/{transaction-id}",
+  "note": "Role-separated proof pass. These transactions use distinct role keys and separate accepted contract outputs from the historical seven-proof fixture.",
+  "funding": {
+    "label": "Role-separated contract funding",
+    "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+    "acceptingBlockBlueScore": 6070948,
+    "outputs": [
+      {
+        "label": "role-separated vault",
+        "outputIndex": 0,
+        "amountSompi": "2500000000",
+        "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
+      },
+      {
+        "label": "role-separated assurance",
+        "outputIndex": 1,
+        "amountSompi": "2500000000",
+        "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r"
+      },
+      {
+        "label": "role-separated escrow",
+        "outputIndex": 2,
+        "amountSompi": "2500000000",
+        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+      }
+    ]
+  },
+  "transactions": [
+    {
+      "label": "Role-separated vault recovery",
+      "lane": "role-vault",
+      "entrypoint": "recover",
+      "txid": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 0,
+        "amountSompi": "2500000000"
+      },
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+      "roleCheck": "signed by vaultRecovery and paid to vaultRecovery"
+    },
+    {
+      "label": "Role-separated assurance release",
+      "lane": "role-assurance",
+      "entrypoint": "release",
+      "txid": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 1,
+        "amountSompi": "2500000000"
+      },
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex",
+      "roleCheck": "paid to pledgeRecipient from a contributor/recipient-separated constructor"
+    },
+    {
+      "label": "Role-separated escrow release",
+      "lane": "role-escrow",
+      "entrypoint": "release",
+      "txid": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 2,
+        "amountSompi": "2500000000"
+      },
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "roleCheck": "signed by escrowBuyer and paid to escrowSeller"
+    }
+  ],
+  "historicalRejectedAttempt": {
+    "label": "Role-separated vault recovery with two-sigop budget",
+    "txid": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+    "result": "rejected before correction",
+    "reason": "script ran, but verification failed",
+    "correction": "recover(sig recoverySig) has one checkSig; the accepted retry used sigOpCount: 1."
+  },
+  "remainingMutuallyExclusivePaths": [
+    "role-vault-withdrawal needs a fresh role-separated vault output because recovery consumed output 0.",
+    "role-assurance-refund needs a fresh role-separated assurance output because release consumed output 1.",
+    "role-escrow-refund and role-escrow-cancel need fresh role-separated escrow outputs because release consumed output 2."
+  ]
+}

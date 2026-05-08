@@ -13,12 +13,13 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Full public TN12 evidence gate: `npm run check:tn12`
 - Chain proof gate: `npm run tx:verify`
 - Proof evidence gate: `npm run proof:evidence`
+- Role-separated proof gate: `npm run tx:roles:verify` and `npm run roles:proof:evidence`
 - Payload event gate: `npm run payload:verify:events`
 - Checkpointed index gate: `npm run indexer:checkpoint`
 - Persisted checkpoint gate: `npm run indexer:persist`
 - Wallet-review gate: `npm run wallet:review`
 
-The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
+The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has an accepted role-separated proof pass: funding `ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0`, vault recovery `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0`, assurance release `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32`, and escrow release `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382`. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
 
 ## First-Read Order
 
@@ -48,16 +49,17 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - Keep status lanes separate: live Kaspa mainnet, TN12/Toccata covenant work, roadmap vProgs/native app rails, and research-only ideas.
 - Keep rollup/vProg claims separate: Toccata gives L1 covenants and zk/sequencing foundations; based-rollup work is a separate execution lane; full synchronously composable vProgs remain roadmap until the interfaces are testable.
 - Use `npm run rollup:scout` / `artifacts/based-rollup-scout.json` for based-rollup planning. It treats Maxim's TN12 PoC as bridge/proof reference, Hans' work as runtime/proving direction, and ecosystem rollups as possible future app surfaces.
-- Use `npm run covenant:adversarial` / `artifacts/covenant-adversarial-coverage.json` before claiming hardened covenant coverage. It is local adversarial mapping, not TN12 rejection evidence. Current gaps include reused role keys in constructor fixtures and exact accepted-script preservation for older vault/assurance proof drafts.
+- Use `npm run covenant:adversarial` / `artifacts/covenant-adversarial-coverage.json` before claiming hardened covenant coverage. It is local adversarial mapping, not TN12 rejection evidence. Current gaps include historical escrow cancel key reuse, fresh role-separated outputs for cancel/refund paths, and exact accepted-script preservation for older vault/assurance proof drafts.
 - Use `npm run fixtures:roles` and `npm run compile:roles` for the role-separated proof lane. Public role metadata is committed; private role keys remain in `.local/tn12-role-wallets.json`.
-- Use `npm run tx:roles:fund` to build the reviewable role-separated funding transaction. It creates fresh role-separated vault, assurance, and escrow P2SH outputs in one draft; submit remains explicit.
+- Use `npm run tx:roles:fund` to build the reviewable role-separated funding transaction. The current role-separated funding transaction is already accepted; build a new one before trying the remaining mutually exclusive role-separated paths.
+- Use `npm run tx:roles:spends` after accepted role-separated funding outputs are fetched. The drafts prove role-separated witness construction but are mutually exclusive per contract output. The first proof pass consumed one vault, assurance, and escrow output through recovery, release, and release.
 - Do not edit or publish `/home/parker2017/kaspa-explained` from this repo unless explicitly asked.
 
 ## Current Next Work
 
 - Use `npm run project:plan` / `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
 - WIP lanes: live wallet connector submit without local keys, batch-assurance custody requirements and matched pledge outputs, durable indexer replay implementation, and attestation reputation/provenance hardening.
-- Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant negative tests, and attestation reputation thresholds.
+- Next actions: wallet submit route, accepted pledge-output custody transactions, another role-separated funding batch for remaining withdrawal/refund/cancel paths, durable indexer, covenant negative tests, and attestation reputation thresholds.
 - Keep real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
   - escrow/assurance app: TN12 covenant proof app,

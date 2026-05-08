@@ -1,0 +1,127 @@
+{
+  "schema": "tn12-contract-spend-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-08T08:40:45.850Z",
+  "summary": {
+    "total": 3,
+    "accepted": 3,
+    "p2shInputs": 3,
+    "matchedInputs": 3,
+    "p2pkOutputs": 3,
+    "matchedOutputs": 3
+  },
+  "proofs": [
+    {
+      "label": "Role-separated vault recovery",
+      "lane": "role-vault",
+      "entrypoint": "recover",
+      "txid": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "accepted": true,
+      "acceptingBlockBlueScore": 6075081,
+      "acceptingBlockTime": 1778229195807,
+      "input": {
+        "previousOutpointHash": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "expectedPreviousOutpointIndex": 0,
+        "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "expectedAmount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Role-separated assurance release",
+      "lane": "role-assurance",
+      "entrypoint": "release",
+      "txid": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "accepted": true,
+      "acceptingBlockBlueScore": 6072881,
+      "acceptingBlockTime": 1778228978781,
+      "input": {
+        "previousOutpointHash": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "previousOutpointIndex": "1",
+        "expectedPreviousOutpointHash": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "expectedPreviousOutpointIndex": 1,
+        "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "expectedAmount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Role-separated escrow release",
+      "lane": "role-escrow",
+      "entrypoint": "release",
+      "txid": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "accepted": true,
+      "acceptingBlockBlueScore": 6072881,
+      "acceptingBlockTime": 1778228978781,
+      "input": {
+        "previousOutpointHash": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "previousOutpointIndex": "2",
+        "expectedPreviousOutpointHash": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "expectedPreviousOutpointIndex": 2,
+        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "expectedAmount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    }
+  ],
+  "note": "Each proof spend resolves its input's previous output, checks the expected funding outpoint, then checks that the consumed output is a TN12 scripthash address and the spend pays the expected P2PK wallet output."
+}

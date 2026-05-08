@@ -44,6 +44,10 @@
 - DAA-expired escrow refund spend: `6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d`.
 - Escrow cancel funding: `331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022`.
 - Escrow mutual cancel accepted proof: `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`. Earlier failures remain historical: one wrong script budget, one old-SDK path that did not preserve tx v1 `computeBudget`.
+- Role-separated funding: `ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0`.
+- Role-separated vault recovery: `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0`. Earlier `sigOpCount: 2` recovery rejection is historical; accepted retry uses `sigOpCount: 1`.
+- Role-separated assurance release: `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32`.
+- Role-separated escrow release: `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382`.
 - Cancel-debugging rule: check artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and Rusty Kaspa source/tests before escalating.
 - Accepted cancel route after the sigop fix: local TN12 `kaspa-wasm 1.1.1-toc.1` with tx version 1, constructor fields `sigOpCount: 0` plus `computeBudget: 30`, submitted over JSON wRPC to `testnet-12`.
 

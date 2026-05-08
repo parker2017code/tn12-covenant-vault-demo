@@ -1,0 +1,55 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "vault-recovery",
+  "contract": "DelayedRecoveryVault",
+  "entrypoint": "recover",
+  "warning": "This spends the vault P2SH output if submitted and accepted.",
+  "source": {
+    "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+    "outputIndex": 0,
+    "amountTkas": 25,
+    "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
+  },
+  "destination": {
+    "address": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+    "scriptType": "p2pk",
+    "amountSompi": "2499995000",
+    "amountTkas": "24.99995"
+  },
+  "contractFeeSompi": "5000",
+  "scriptHash": "a027c29398c8e0dec4b53e0f8e3de161e9d88eefe50e19f146449a1cb9a8f2f7",
+  "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+  "signatureScriptHex": "4141e139a6e335d154dfec49002124d44696a0a4c7847df7b94c2a96284ce81c3ea33ce657c97ea85edf400611162bebec8da313ab089658861f0cc7b4a0a7b19f01514cd56b6c76009c63757620d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185ac6904ccedfe69b000c2b9be028813949c6900c320d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185030000207c7e01ac7e876975516776519c63757620e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac6900c2b9be028813949c6900c320e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9030000207c7e01ac7e87697551677500696868",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+            "index": 0
+          },
+          "signatureScript": "4141e139a6e335d154dfec49002124d44696a0a4c7847df7b94c2a96284ce81c3ea33ce657c97ea85edf400611162bebec8da313ab089658861f0cc7b4a0a7b19f01514cd56b6c76009c63757620d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185ac6904ccedfe69b000c2b9be028813949c6900c320d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185030000207c7e01ac7e876975516776519c63757620e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac6900c2b9be028813949c6900c320e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9030000207c7e01ac7e87697551677500696868",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "roleSeparated": true,
+  "mutualExclusionWarning": "The role-vault withdrawal and recovery drafts spend the same role-separated vault output; only one can be accepted."
+}

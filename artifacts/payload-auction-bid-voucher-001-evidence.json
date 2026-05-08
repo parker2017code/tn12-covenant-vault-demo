@@ -1,7 +1,7 @@
 {
   "schema": "tn12-payload-receipt-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-08T08:24:58.998Z",
+  "verifiedAt": "2026-05-08T08:40:31.871Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "status": "accepted-payload-receipt-matched",
   "txid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",

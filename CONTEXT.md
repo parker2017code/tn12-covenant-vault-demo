@@ -11,6 +11,8 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Main check command: `npm run check:all`
 - Full public TN12 evidence command: `npm run check:tn12`
 - TN12 proof check command: `npm run tx:verify`
+- Role-separated proof check command: `npm run tx:roles:verify`
+- Role-separated proof evidence command: `npm run roles:proof:evidence`
 - Payload-event check command: `npm run payload:verify:events`
 - Accepted app-state snapshot command: `npm run indexer:state`
 - Checkpointed accepted-index command: `npm run indexer:checkpoint`
@@ -39,6 +41,7 @@ The current base includes:
 - assurance contracts / public-funding rules,
 - escrow release/refund paths,
 - transaction planning and signing from manually verified TN12 outpoints,
+- role-separated covenant proof fixtures and accepted role-separated spends,
 - accepted-transaction indexing,
 - payload receipts and accepted payload events,
 - campaign batching and app-lane research.
@@ -295,6 +298,15 @@ Current payload state:
 - `npm run payload:verify` writes `artifacts/payload-receipt-evidence.json` for accepted tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`.
 - `src/acceptedIndexer.mjs` decodes accepted receipt payloads into `appState.receipts`.
 
+Role-separated proof state:
+
+- Accepted role-separated funding: `ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0`.
+- Accepted role-separated vault recovery: `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0`.
+- Accepted role-separated assurance release: `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32`.
+- Accepted role-separated escrow release: `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382`.
+- The failed role-vault recovery attempt with `sigOpCount: 2` is historical. The accepted retry uses `sigOpCount: 1`, matching the single `checkSig` in `recover(sig recoverySig)`.
+- Fresh role-separated outputs are needed for vault withdrawal, assurance refund, escrow refund, and escrow cancel because the first accepted pass consumed one output per contract.
+
 Next payload steps:
 
 1. Keep JSON wRPC as the verified payload receipt route and REST submit as historical no-payload evidence.
@@ -376,10 +388,10 @@ Current app build order:
 Recommended order from here:
 
 1. Add wallet-review and wallet-connector flow for payload receipt submission.
-2. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
-3. Start assurance campaign batching: multiple pledge fixtures, campaign state, batch release/refund drafts.
-4. Add wallet-facing submit UI that displays exact inputs, outputs, fees, payload, and submit command before broadcast.
-5. Add owner/recovery/recipient/refund key separation instead of using one saved test key for every role.
+2. Fund another role-separated batch for vault withdrawal, assurance refund, escrow refund, and escrow cancel.
+3. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
+4. Build accepted pledge-output custody transactions for batch assurance settlement.
+5. Add explicit invalid spend candidates only after the positive role-separated paths have fresh outputs.
 6. Keep the Node 24 GitHub Actions workflow verified after future action-version changes.
 
 ## Verification Before Handoff
@@ -389,6 +401,8 @@ Run:
 ```sh
 npm run check
 npm run tx:verify
+npm run tx:roles:verify
+npm run roles:proof:evidence
 npm run indexer:state
 git diff --check
 ```

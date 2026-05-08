@@ -13,6 +13,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 ## Current Position
 
 - Accepted proof core: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, escrow DAA-refund, and escrow mutual cancel.
+- Accepted role-separated proof pass: funding created distinct-role vault, assurance, and escrow outputs; TN12 accepted vault recovery, assurance release, and escrow release from those outputs.
 - Accepted invoice payload events: paid, refunded, and error states now have TN12 JSON wRPC transactions and evidence artifacts.
 - Escrow mutual cancel is now accepted on TN12. The old script-unit rejection came from `sigOpCount=1` bad configuration; the accepted path is the corrected tx version 1 `computeBudget=30` draft rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`.
 - Near-term app priority: payload invoice/receipt vertical slice, because it is closest to mainnet-capable Kaspa behavior.
@@ -201,7 +202,11 @@ VAULT_BUCKET_TKAS=100 ASSURANCE_BUCKET_TKAS=500 npm run tx:split
 
 Fetch accepted split outputs into bucket fixtures:
 
-`npm run tx:roles:fund` builds `artifacts/signed-drafts/role-separated-funding.json`, a single reviewable transaction with role-separated vault, assurance, and escrow P2SH outputs. It is the next proof-pass funding draft; submit is still explicit and should only happen after reviewing the source outpoint and outputs.
+`npm run tx:roles:fund` builds `artifacts/signed-drafts/role-separated-funding.json`, a single reviewable transaction with role-separated vault, assurance, and escrow P2SH outputs. The current role-separated funding transaction is accepted on TN12:
+
+```txt
+ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0
+```
 
 ```sh
 npm run split:fetch
@@ -212,6 +217,24 @@ Fetch accepted P2SH contract outputs:
 ```sh
 npm run contracts:fetch
 ```
+
+After accepted role-separated funding, build role-separated spend drafts:
+
+```sh
+npm run tx:roles:spends
+```
+
+These drafts use distinct owner/recovery, contributor/recipient, and buyer/seller keys. The vault, assurance, and escrow role-separated drafts are mutually exclusive within each fresh contract output unless more role-separated outputs are funded.
+
+The first role-separated proof pass is accepted on TN12:
+
+```txt
+role-separated vault recovery:     dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0
+role-separated assurance release:  fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32
+role-separated escrow release:     4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382
+```
+
+The rejected role-vault recovery attempt with `sigOpCount: 2` is historical evidence only. The accepted retry uses `sigOpCount: 1`, matching the single `checkSig` in `recover(sig recoverySig)`. Fresh role-separated outputs are still needed for vault withdrawal, assurance refund, escrow refund, and escrow cancel because the accepted proof pass consumed one output per contract.
 
 Build signed P2SH spend drafts for vault withdraw/recover and assurance release/refund:
 
@@ -224,13 +247,15 @@ Verify the accepted proof transactions and expected outputs through the public T
 ```sh
 npm run check:tn12
 npm run tx:verify
+npm run tx:roles:verify
 npm run proof:evidence
+npm run roles:proof:evidence
 npm run covenant:adversarial
 ```
 
-`npm run check:tn12` runs the full public TN12 evidence gate: proof transaction verification, proof-shape evidence, payload-event verification, checkpoint rebuild, and persisted checkpoint guard. `npm run proof:evidence` resolves each proof spend's previous output and checks the important shape: P2SH (`p...`) contract input to expected P2PK (`q...`) wallet output.
+`npm run check:tn12` runs the full public TN12 evidence gate: historical proof transaction verification, role-separated proof verification, proof-shape evidence, payload-event verification, checkpoint rebuild, and persisted checkpoint guard. `npm run proof:evidence` and `npm run roles:proof:evidence` resolve each proof spend's previous output and check the important shape: P2SH (`p...`) contract input to expected P2PK (`q...`) wallet output.
 
-`npm run covenant:adversarial` builds `artifacts/covenant-adversarial-coverage.json`. It is local coverage, not TN12 rejection evidence. It maps selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and Silverscript-to-redeem-script checks for the seven accepted proof paths. It also keeps the current gaps visible: role fixtures still reuse the same public key, and older vault/assurance accepted drafts need exact accepted-script preservation before they can be treated as clean script-mapping examples.
+`npm run covenant:adversarial` builds `artifacts/covenant-adversarial-coverage.json`. It is local coverage, not TN12 rejection evidence. It maps selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and Silverscript-to-redeem-script checks for the seven accepted proof paths. It also keeps the current gaps visible: historical escrow cancel reused buyer/seller keys, the role-separated lane still needs fresh outputs for cancel/refund paths, and older vault/assurance accepted drafts need exact accepted-script preservation before they can be treated as clean script-mapping examples.
 
 Build the reusable accepted-transaction app-state snapshot:
 
@@ -476,7 +501,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 5. Done: checkpointed accepted-index artifact and persisted checkpoint guard for 7 proof spends and 26 payload events. Next: move from known-txid public reads to a node/RPC backend with durable storage and virtual-chain rollback replay.
 
-6. Done: local covenant adversarial map for seven accepted proof paths. Next: build role-separated fixtures and exact invalid candidates before attempting any TN12 rejection proofs.
+6. Done: local covenant adversarial map for seven accepted proof paths. Done: role-separated funding plus accepted vault recovery, assurance release, and escrow release. Next: fund more role-separated outputs for the mutually exclusive withdrawal, refund, and cancel paths before attempting TN12 rejection proofs.
 
 7. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 

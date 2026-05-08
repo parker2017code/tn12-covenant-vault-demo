@@ -3,11 +3,11 @@
   "network": "kaspa-testnet-12",
   "status": "wallet-review-ready",
   "summary": {
-    "total": 40,
-    "ready": 40,
+    "total": 47,
+    "ready": 47,
     "payloadDrafts": 26,
     "payloadRouteReady": 26,
-    "explicitSubmitCommands": 40,
+    "explicitSubmitCommands": 47,
     "registrySecretFields": 0
   },
   "drafts": [
@@ -787,6 +787,202 @@
         "explicitSubmit": true,
         "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-separated-funding.json --submit",
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-separated-funding.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/role-vault-withdrawal.json",
+      "label": "Role-separated vault withdrawal",
+      "lane": "vault-withdrawal",
+      "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-withdrawal.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-withdrawal.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/role-vault-recovery.json",
+      "label": "Role-separated vault recovery",
+      "lane": "vault-recovery",
+      "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-recovery.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-recovery.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/role-assurance-release.json",
+      "label": "Role-separated assurance release",
+      "lane": "assurance-release",
+      "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-release.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-release.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/role-assurance-refund.json",
+      "label": "Role-separated assurance refund",
+      "lane": "assurance-refund",
+      "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-refund.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-refund.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/role-escrow-release.json",
+      "label": "Role-separated escrow release",
+      "lane": "escrow-release",
+      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-release.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-release.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/role-escrow-refund.json",
+      "label": "Role-separated escrow refund",
+      "lane": "escrow-refund",
+      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-refund.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-refund.json",
+        "restSubmitCommand": null
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "label": "Role-separated escrow cancel",
+      "lane": "escrow-cancel",
+      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "standard-submit",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-cancel.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-cancel.json",
         "restSubmitCommand": null
       },
       "checks": {

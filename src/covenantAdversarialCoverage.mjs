@@ -116,11 +116,11 @@ export function buildCovenantAdversarialCoverage({
     nextActions: [
       {
         id: "role-separated-fixtures",
-        detail: "Generate separate buyer/seller, owner/recovery, and contributor/recipient constructor fixtures."
+        detail: "Keep separate buyer/seller, owner/recovery, and contributor/recipient constructor fixtures current."
       },
       {
         id: "role-separated-tn12-proofs",
-        detail: "Fund fresh role-separated contract outputs and submit accepted release/refund/cancel spends."
+        detail: "Fund fresh role-separated contract outputs for the remaining mutually exclusive withdrawal, refund, and cancel spends."
       },
       {
         id: "invalid-submit-candidates",
@@ -162,7 +162,7 @@ function buildCase({ draftRecord, proofFixture, compiledContracts }) {
     .filter(([, value]) => !value)
     .map(([key]) => key);
   const roleGap = draft.contract === "Escrow" && draft.entrypoint === "cancel"
-    ? ["Escrow cancel currently has two signature arguments, but the fixture buyer and seller keys are not role-separated."]
+    ? ["The historical escrow cancel proof has two signature arguments but reused buyer/seller keys; the role-separated lane now covers release and still needs fresh outputs for cancel."]
     : [];
 
   return {

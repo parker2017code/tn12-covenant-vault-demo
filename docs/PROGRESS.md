@@ -101,7 +101,9 @@ Done now:
 - Based-rollup scouting: `npm run rollup:scout` tracks Maxim's TN12 PoC, Hans' vProgs/runtime lane, Michael's covenant++ roadmap, and next endpoint/bridge/app scouting tasks.
 - Covenant adversarial map: `npm run covenant:adversarial` records local selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and script-mapping checks for the seven accepted proof paths.
 - Role-separated fixture lane: `npm run fixtures:roles` and `npm run compile:roles` create the clean constructor/script base for the next accepted-proof pass without mutating historical proof artifacts.
-- Role-separated funding draft: `npm run tx:roles:fund` builds the reviewable transaction that creates fresh role-separated vault, assurance, and escrow P2SH outputs.
+- Role-separated funding: accepted TN12 transaction `ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0` created fresh role-separated vault, assurance, and escrow P2SH outputs.
+- Role-separated spend drafts: `npm run tx:roles:spends` builds mutually exclusive withdrawal/recovery, release/refund, and release/refund/cancel drafts from the accepted role-separated outputs.
+- Role-separated accepted proof pass: TN12 accepted vault recovery `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0`, assurance release `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32`, and escrow release `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382`. The earlier role-vault recovery rejection with `sigOpCount: 2` is historical; the accepted retry uses `sigOpCount: 1`.
 - Prediction/hedge: accepted review payloads plus a simulator; no settlement, odds, custody, or advice.
 
 WIP now:
@@ -110,12 +112,13 @@ WIP now:
 - Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone.
 - Durable indexer storage and replay beyond known-txid fixture reads.
 - Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review now gates prediction influence.
+- Remaining role-separated paths need fresh funded outputs: vault withdrawal, assurance refund, escrow refund, and escrow cancel are mutually exclusive with the accepted spends above.
 
 Next actions:
 
 1. Wire the wallet-submit package into a live wallet connector.
 2. Create custody settlement drafts only from matched pledge outputs.
-3. Review and submit the role-separated funding draft, then fetch its three contract outputs.
+3. Fund another role-separated batch for the remaining mutually exclusive withdrawal, refund, and cancel paths.
 4. Implement the durable indexer replay plan: storage schema, node/RPC virtual-chain reader, reducers, rollback replay, and UI health.
 5. Add reputation thresholds and signer provenance before signals affect more app lanes.
 

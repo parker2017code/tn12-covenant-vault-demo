@@ -1,6 +1,6 @@
 # TN12 Test Matrix
 
-Reviewed: 2026-05-07
+Reviewed: 2026-05-08
 
 ## Standard
 
@@ -19,6 +19,10 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Escrow | Seller release | `825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d` |
 | Escrow | DAA refund | `6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d` |
 | Escrow | Mutual cancel | `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c` |
+| Role-separated funding | Vault, assurance, escrow P2SH outputs | `ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0` |
+| Role-separated vault | Recovery | `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0` |
+| Role-separated assurance | Release | `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32` |
+| Role-separated escrow | Seller release | `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382` |
 | Invoice | Paid payload receipt | `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e` |
 | Invoice | Refund payload event | `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13` |
 | Invoice | Error payload event | `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c` |

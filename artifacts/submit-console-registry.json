@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 40,
+    "total": 47,
     "payloadDrafts": 26,
-    "explicitSubmitRequired": 40,
+    "explicitSubmitRequired": 47,
     "payloadSubmitGated": 26
   },
   "drafts": [
@@ -1821,6 +1821,405 @@
       "label": "Role-separated proof funding",
       "priority": 27.5,
       "description": "Funds fresh role-separated vault, assurance, and escrow P2SH outputs for the next proof pass."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-vault-withdrawal.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "vault-withdrawal",
+      "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+      "warning": "This spends the vault P2SH output if submitted after unlockTime and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 0,
+        "amountTkas": 25,
+        "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "index": 0,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20d35da2e9157275...2cf77b06ac6185ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-withdrawal.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-withdrawal.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated vault withdrawal",
+      "priority": 27.6,
+      "description": "Role-separated owner withdrawal draft. Mutually exclusive with role-separated vault recovery for this output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-vault-recovery.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "vault-recovery",
+      "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "warning": "This spends the vault P2SH output if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 0,
+        "amountTkas": 25,
+        "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "index": 0,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20e0c9836d5112bf...bd70e0f98010b9ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-recovery.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-vault-recovery.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated vault recovery",
+      "priority": 27.7,
+      "description": "Role-separated recovery-key draft. Mutually exclusive with role-separated vault withdrawal for this output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-assurance-release.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "assurance-release",
+      "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "warning": "This spends the assurance pledge P2SH output if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 1,
+        "amountTkas": 25,
+        "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "204e55165e3e0985...cf6142ca10a67bac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-release.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-release.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated assurance release",
+      "priority": 27.8,
+      "description": "Role-separated recipient release draft. Mutually exclusive with role-separated assurance refund for this output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-assurance-refund.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "assurance-refund",
+      "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+      "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 1,
+        "amountTkas": 25,
+        "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "2098228ca22c95e6...f7a34429b3880fac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-refund.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-assurance-refund.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated assurance refund",
+      "priority": 27.9,
+      "description": "Role-separated contributor refund draft. Mutually exclusive with role-separated assurance release for this output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-escrow-release.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-release",
+      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "warning": "This spends the escrow P2SH output to the seller path if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 2,
+        "amountTkas": 25,
+        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "index": 2,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "2054c30da88e06a7...07fdedc1b1c669ac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-release.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-release.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated escrow release",
+      "priority": 27.91,
+      "description": "Role-separated buyer-approved seller release draft. Mutually exclusive with role-separated escrow refund and cancel for this output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-escrow-refund.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-refund",
+      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "warning": "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 2,
+        "amountTkas": 25,
+        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "index": 2,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "200674fd46e3b854...4d985d3373aedeac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-refund.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-refund.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated escrow refund",
+      "priority": 27.92,
+      "description": "Role-separated buyer refund draft. Mutually exclusive with role-separated escrow release and cancel for this output."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "escrow-cancel",
+      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "warning": "This spends the escrow P2SH output through mutual cancel if submitted and accepted.",
+      "requiresPayloadSubmitSupport": false,
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 2,
+        "amountTkas": 25,
+        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "payloadBytes": 0
+      },
+      "totals": {
+        "outputSompi": "2499995000",
+        "outputTkas": "24.99995"
+      },
+      "inputs": [
+        {
+          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "index": 2,
+          "sigOpCount": null,
+          "computeBudget": 30,
+          "sequence": "18446744073709551615"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "2499995000",
+          "amountTkas": "24.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "200674fd46e3b854...4d985d3373aedeac"
+        }
+      ],
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "previewHex": ""
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-cancel.json",
+        "submitCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/role-escrow-cancel.json --submit",
+        "restSubmitCommand": null,
+        "boundary": "Actual broadcast requires explicit --submit."
+      },
+      "label": "Role-separated escrow cancel",
+      "priority": 27.93,
+      "description": "Role-separated mutual cancel draft requiring buyer and seller signatures. Mutually exclusive with role-separated escrow release and refund for this output."
     },
     {
       "schema": "tn12-submit-console-summary/v1",

@@ -39,8 +39,7 @@ export function buildVaultRecoverySpendDraft({
   const unsigned = buildSingleInputContractSpend({
     contractOutpoint,
     outputSompi,
-    destinationScript,
-    sigOpCount: 2
+    destinationScript
   });
   const scriptHash = getScriptHash(unsigned);
   const signatureScript = buildP2shSignatureScript({
@@ -287,10 +286,11 @@ export function buildAssuranceRefundSpendDraft({
 export function buildEscrowReleaseSpendDraft({
   contractOutpoint,
   wallet,
+  destinationWallet = wallet,
   contractFeeSompi = 5000n
 }) {
   const redeemScript = hexToBytes(contractOutpoint.redeemScriptHex);
-  const destinationScript = p2pkScript(wallet.xOnlyPublicKey);
+  const destinationScript = p2pkScript(destinationWallet.xOnlyPublicKey);
   const inputSompi = BigInt(contractOutpoint.amountSompi);
   const outputSompi = inputSompi - contractFeeSompi;
 
@@ -321,7 +321,7 @@ export function buildEscrowReleaseSpendDraft({
     entrypoint: "release",
     warning: "This spends the escrow P2SH output to the seller path if submitted and accepted.",
     contractOutpoint,
-    wallet,
+    wallet: destinationWallet,
     outputSompi,
     contractFeeSompi,
     scriptHash,

@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
-const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
+const fixturePath = process.env.PROOF_FIXTURE || "fixtures/AcceptedProofTransactions.json";
+const proofFixture = JSON.parse(await readFile(fixturePath, "utf8"));
 const proofTransactions = proofFixture.transactions.map((item) => ({
   label: item.label,
   txid: item.txid,
@@ -47,6 +48,7 @@ console.log(JSON.stringify({
   schema: "tn12-proof-transaction-verification/v1",
   network: "kaspa-testnet-12",
   verifiedAt: new Date().toISOString(),
+  fixture: fixturePath,
   endpointBase: "https://api-tn12.kaspa.org/transactions",
   summary: state.summary,
   results: state.records.map((record) => ({

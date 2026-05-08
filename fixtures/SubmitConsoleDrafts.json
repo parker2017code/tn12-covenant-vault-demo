@@ -171,6 +171,48 @@
       "description": "Funds fresh role-separated vault, assurance, and escrow P2SH outputs for the next proof pass."
     },
     {
+      "label": "Role-separated vault withdrawal",
+      "priority": 27.6,
+      "path": "artifacts/signed-drafts/role-vault-withdrawal.json",
+      "description": "Role-separated owner withdrawal draft. Mutually exclusive with role-separated vault recovery for this output."
+    },
+    {
+      "label": "Role-separated vault recovery",
+      "priority": 27.7,
+      "path": "artifacts/signed-drafts/role-vault-recovery.json",
+      "description": "Role-separated recovery-key draft. Mutually exclusive with role-separated vault withdrawal for this output."
+    },
+    {
+      "label": "Role-separated assurance release",
+      "priority": 27.8,
+      "path": "artifacts/signed-drafts/role-assurance-release.json",
+      "description": "Role-separated recipient release draft. Mutually exclusive with role-separated assurance refund for this output."
+    },
+    {
+      "label": "Role-separated assurance refund",
+      "priority": 27.9,
+      "path": "artifacts/signed-drafts/role-assurance-refund.json",
+      "description": "Role-separated contributor refund draft. Mutually exclusive with role-separated assurance release for this output."
+    },
+    {
+      "label": "Role-separated escrow release",
+      "priority": 27.91,
+      "path": "artifacts/signed-drafts/role-escrow-release.json",
+      "description": "Role-separated buyer-approved seller release draft. Mutually exclusive with role-separated escrow refund and cancel for this output."
+    },
+    {
+      "label": "Role-separated escrow refund",
+      "priority": 27.92,
+      "path": "artifacts/signed-drafts/role-escrow-refund.json",
+      "description": "Role-separated buyer refund draft. Mutually exclusive with role-separated escrow release and cancel for this output."
+    },
+    {
+      "label": "Role-separated escrow cancel",
+      "priority": 27.93,
+      "path": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "description": "Role-separated mutual cancel draft requiring buyer and seller signatures. Mutually exclusive with role-separated escrow release and refund for this output."
+    },
+    {
       "label": "Vault recovery",
       "priority": 28,
       "path": "artifacts/signed-drafts/vault-recovery.json",
