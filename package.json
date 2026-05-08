@@ -51,6 +51,7 @@
     "asset:policies": "node scripts/build-asset-policies.mjs",
     "auction:intents": "node scripts/build-auction-intents.mjs",
     "defi:backlog": "node scripts/build-defi-backlog.mjs",
+    "prediction:hedge": "node scripts/build-prediction-hedge-simulator.mjs",
     "stable:value": "node scripts/build-stable-value-paths.mjs",
     "stable:issuer": "node scripts/build-stable-issuer-redemptions.mjs",
     "agent:commitments": "node scripts/build-agent-commitments.mjs",

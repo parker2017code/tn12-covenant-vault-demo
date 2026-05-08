@@ -652,7 +652,8 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
-.defi-summary {
+.defi-summary,
+.prediction-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
@@ -1049,7 +1050,8 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
-.defi-list {
+.defi-list,
+.prediction-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
@@ -1214,6 +1216,7 @@ progress::-moz-progress-bar {
 .asset-card,
 .auction-card,
 .defi-card,
+.prediction-card,
 .agent-card,
 .build-status-card,
 .attestation-card,
@@ -1254,6 +1257,7 @@ progress::-moz-progress-bar {
 .asset-card span,
 .auction-card span,
 .defi-card span,
+.prediction-card span,
 .agent-card span,
 .build-status-card span,
 .attestation-card span,
@@ -1334,6 +1338,9 @@ progress::-moz-progress-bar {
 .defi-card strong,
 .defi-card p,
 .defi-card small,
+.prediction-card strong,
+.prediction-card p,
+.prediction-card small,
 .agent-card strong,
 .agent-card p,
 .agent-card small,
@@ -1388,6 +1395,7 @@ progress::-moz-progress-bar {
 .asset-card p,
 .auction-card p,
 .defi-card p,
+.prediction-card p,
 .agent-card p,
 .build-status-card p,
 .attestation-card p,
@@ -1421,6 +1429,7 @@ progress::-moz-progress-bar {
 .asset-card small,
 .auction-card small,
 .defi-card small,
+.prediction-card small,
 .agent-card small,
 .build-status-card small,
 .attestation-card small,
@@ -1537,6 +1546,8 @@ progress::-moz-progress-bar {
   .auction-list,
   .defi-summary,
   .defi-list,
+  .prediction-summary,
+  .prediction-list,
   .agent-summary,
   .agent-list,
   .build-status-summary,

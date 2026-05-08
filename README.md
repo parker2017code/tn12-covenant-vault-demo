@@ -387,9 +387,10 @@ Build the DeFi research backlog:
 
 ```sh
 npm run defi:backlog
+npm run prediction:hedge
 ```
 
-This turns `fixtures/DefiResearchBacklog.json` into `artifacts/defi-backlog.json`. It keeps AMMs, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation in a research/missing-rails lane.
+This turns `fixtures/DefiResearchBacklog.json` into `artifacts/defi-backlog.json`. `npm run prediction:hedge` turns accepted attestation signals plus manual positions into `artifacts/prediction-hedge-simulator.json`. It keeps AMMs, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation in a research/missing-rails lane.
 
 Build the stable-value comparison brief:
 

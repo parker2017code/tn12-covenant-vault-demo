@@ -1,0 +1,64 @@
+{
+  "schema": "tn12-prediction-hedge-simulator-fixture/v1",
+  "reviewedAt": "2026-05-08",
+  "markets": [
+    {
+      "id": "market-network-stress",
+      "eventId": "event-network-hashrate-shift",
+      "name": "Network stress watch",
+      "baseProbability": 42,
+      "exposureTag": "miner-revenue",
+      "resolutionSource": "accepted attestation plus later public network observation",
+      "userQuestion": "Should a miner-revenue-heavy plan be reviewed if stress probability rises?"
+    },
+    {
+      "id": "market-listing-window",
+      "eventId": "event-exchange-listing-window",
+      "name": "Listing window rumor",
+      "baseProbability": 35,
+      "exposureTag": "liquidity-event",
+      "resolutionSource": "public exchange announcement",
+      "userQuestion": "Should a weak event rumor affect a portfolio plan?"
+    },
+    {
+      "id": "market-signal-supply",
+      "eventId": "event-pool-signal-support",
+      "name": "Signal supply readiness",
+      "baseProbability": 50,
+      "exposureTag": "builder-roadmap",
+      "resolutionSource": "signed pool/operator message plus integration test",
+      "userQuestion": "Is there enough signal supply to keep building the attestation lane?"
+    }
+  ],
+  "positions": [
+    {
+      "id": "position-miner-revenue",
+      "label": "Miner revenue research basket",
+      "exposureTag": "miner-revenue",
+      "notionalTkas": 1200,
+      "sensitivity": 70,
+      "reviewThreshold": 58
+    },
+    {
+      "id": "position-liquidity-event",
+      "label": "Liquidity-event watchlist",
+      "exposureTag": "liquidity-event",
+      "notionalTkas": 400,
+      "sensitivity": 45,
+      "reviewThreshold": 65
+    },
+    {
+      "id": "position-builder-roadmap",
+      "label": "Builder roadmap allocation",
+      "exposureTag": "builder-roadmap",
+      "notionalTkas": 800,
+      "sensitivity": 55,
+      "reviewThreshold": 58
+    }
+  ],
+  "rules": [
+    "Only verified signals with accepted payload evidence can move a market probability.",
+    "Draft or unresolved signals can be displayed as context, but they cannot trigger a hedge review.",
+    "The output is a simulator and must not sign, trade, settle, or present financial advice."
+  ]
+}

@@ -6,6 +6,8 @@ import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildInvoiceRegistry } from "../src/invoiceReceipt.mjs";
+import { buildAttestationRegistry } from "../src/attestationSignal.mjs";
+import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 
@@ -223,6 +225,24 @@ const errorRecordRegistry = buildInvoiceRegistry({
 assert.equal(errorRecordRegistry.summary.paid, 0);
 assert.equal(errorRecordRegistry.summary.errorReviews, 1);
 assert.equal(errorRecordRegistry.invoices[0].status, "invoice-review-needed");
+
+const attestationFixture = JSON.parse(await readFile(new URL("../fixtures/AttestationSignals.json", import.meta.url), "utf8"));
+const predictionFixture = JSON.parse(await readFile(new URL("../fixtures/PredictionHedgeSimulator.json", import.meta.url), "utf8"));
+const highConfidenceDraftAttestation = buildAttestationRegistry({
+  ...attestationFixture,
+  signals: attestationFixture.signals.map((signal) => signal.id === "sig-listing-rumor-001"
+    ? { ...signal, confidence: 99, status: "draft", acceptedTxid: "" }
+    : signal)
+});
+const draftDrivenSimulator = buildPredictionHedgeSimulator({
+  fixture: predictionFixture,
+  attestationRegistry: highConfidenceDraftAttestation
+});
+const listingMarket = draftDrivenSimulator.markets.find((market) => market.eventId === "event-exchange-listing-window");
+const listingSuggestion = draftDrivenSimulator.suggestions.find((suggestion) => suggestion.marketId === "market-listing-window");
+assert.equal(listingMarket.simulatedProbability, 35);
+assert.equal(listingMarket.ignoredSignals, 1);
+assert.equal(listingSuggestion.status, "watch");
 
 const agentFixture = JSON.parse(await readFile(new URL("../fixtures/AgentCommitments.json", import.meta.url), "utf8"));
 const disputedAcceptedProofBoard = buildAgentCommitmentBoard({

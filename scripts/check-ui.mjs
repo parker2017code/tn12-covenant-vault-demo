@@ -136,6 +136,9 @@ try {
   await expectText(page, "#attestation-summary", "Verified");
   await expectText(page, "#attestation-sources", "pool-operator-gamma");
   await expectText(page, "#attestation-signals", "Simulated prediction market input only.");
+  await expectText(page, "#prediction-summary", "Reviews");
+  await expectText(page, "#prediction-markets", "Network stress watch");
+  await expectText(page, "#prediction-suggestions", "Review exposure");
 
   assert.deepEqual(pageErrors, []);
   assert.deepEqual(consoleErrors, []);

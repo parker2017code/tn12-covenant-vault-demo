@@ -159,14 +159,18 @@
         "fixtures/DefiResearchBacklog.json",
         "fixtures/StableValuePaths.json",
         "fixtures/StableIssuerRedemptions.json",
+        "fixtures/PredictionHedgeSimulator.json",
         "src/defiBacklog.mjs",
         "src/stableValuePaths.mjs",
         "src/stableIssuerRedemption.mjs",
+        "src/predictionHedgeSimulator.mjs",
         "npm run defi:backlog",
+        "npm run prediction:hedge",
         "npm run stable:value",
-        "npm run stable:issuer"
+        "npm run stable:issuer",
+        "artifacts/prediction-hedge-simulator.json"
       ],
-      "next": "Convert the stable-value and lending briefs into simulation-only dashboards before any settlement claim."
+      "next": "Convert lending and portfolio automation briefs into simulation-only dashboards before any settlement claim."
     },
     {
       "order": 10,
@@ -244,7 +248,6 @@
     }
   ],
   "naturalNextSteps": [
-    "Build prediction/hedge simulator from the DeFi backlog and attestation registry.",
     "Build real agent-task custody release/refund transactions only after funding custody and reviewer policy are explicit.",
     "Build real auction custody settlement/refund transactions only after bid custody and asset delivery assumptions are explicit.",
     "Add negative/adversarial tests for existing Silverscript paths.",

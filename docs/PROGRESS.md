@@ -59,10 +59,11 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Boundary: no bid custody, no atomic exchange, no MEV resistance claim.
 
 9. DeFi research backlog: swaps, AMMs, lending, stable-value, insurance, derivatives, prediction hedges, portfolio automation.
-   - Current status: base built as research backlog.
+   - Current status: base built as research backlog, with stable-value and prediction-hedge simulator artifacts.
    - Enforcement: documentation.
    - Boundary: not live DeFi.
    - Stable-value detail: comparison brief added for issuer-backed, overcollateralized, synthetic, and external-stable paths; issuer-backed demo state now tracks accepted TN12 issuance/redemption payloads while excluding signed-only requests. This is not a native stablecoin claim.
+   - Prediction detail: simulator uses verified accepted attestation signals for review prompts. It does not trade, settle, price real markets, or provide advice.
 
 10. Cross-chain app research library: PMF, reusable patterns, failure modes, Kaspa mapping.
     - Current status: base built.
@@ -117,7 +118,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - checkpointed known-txid public-read index plus rollback guard: done for current proof and payload records.
 
 4. Turn research lanes into safer prototypes:
-   - prediction/hedge simulator using attestations and manual portfolio positions;
+   - prediction/hedge simulator using attestations and manual portfolio positions: done;
    - swap-intent registry with no custody;
    - agent-task release/refund drafts.
 

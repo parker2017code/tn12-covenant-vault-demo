@@ -57,6 +57,7 @@ import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildDefiResearchBacklog } from "../src/defiBacklog.mjs";
+import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.mjs";
 import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
@@ -336,6 +337,13 @@ assert.equal(defiBacklog.summary.total, 8);
 assert.equal(defiBacklog.summary.researchOnly, 4);
 assert.ok(defiBacklog.missingRails.includes("price oracle"));
 assert.ok(defiBacklog.briefs.some((brief) => brief.id === "prediction-hedge-simulator" && brief.status === "prototype-later"));
+const predictionFixture = JSON.parse(await readFile(new URL("../fixtures/PredictionHedgeSimulator.json", import.meta.url), "utf8"));
+const predictionSimulator = buildPredictionHedgeSimulator({ fixture: predictionFixture, attestationRegistry });
+assert.equal(predictionSimulator.status, "simulation-only");
+assert.equal(predictionSimulator.summary.markets, 3);
+assert.equal(predictionSimulator.summary.verifiedSignalInputs, 1);
+assert.ok(predictionSimulator.markets.some((market) => market.eventId === "event-exchange-listing-window" && market.ignoredSignals === 1));
+assert.ok(predictionSimulator.suggestions.some((suggestion) => suggestion.status === "review-suggested"));
 const stableValueFixture = JSON.parse(await readFile(new URL("../fixtures/StableValuePaths.json", import.meta.url), "utf8"));
 const stableValuePaths = buildStableValuePathRegistry(stableValueFixture);
 assert.equal(stableValuePaths.status, "comparison-brief-not-native-stablecoin");
@@ -602,6 +610,7 @@ const files = [
   "scripts/build-access-pass-planner.mjs",
   "scripts/build-mainnet-readiness.mjs",
   "scripts/build-asset-policies.mjs",
+  "scripts/build-prediction-hedge-simulator.mjs",
   "scripts/build-stable-value-paths.mjs",
   "scripts/build-stable-issuer-redemptions.mjs",
   "scripts/build-status.mjs",
@@ -646,6 +655,7 @@ const files = [
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
   "artifacts/simple-asset-policies.json",
+  "artifacts/prediction-hedge-simulator.json",
   "artifacts/stable-value-paths.json",
   "artifacts/stable-issuer-redemptions.json",
   "artifacts/build-status.json",
@@ -702,6 +712,7 @@ const files = [
   "src/accessPassPlanner.mjs",
   "src/mainnetReadiness.mjs",
   "src/assetPolicy.mjs",
+  "src/predictionHedgeSimulator.mjs",
   "src/stableValuePaths.mjs",
   "src/stableIssuerRedemption.mjs",
   "src/buildStatus.mjs",
@@ -794,6 +805,8 @@ assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);
 assert.match(html, /Master app plan/);
 assert.match(html, /Attestation registry/);
+assert.match(html, /Prediction hedge simulator/);
+assert.match(html, /npm run prediction:hedge/);
 
 const assuranceDocs = await readFile(new URL("../docs/ASSURANCE_CONTRACTS.md", import.meta.url), "utf8");
 assert.match(assuranceDocs, /funding rule strangers can rely on/);

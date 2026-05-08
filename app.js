@@ -38,6 +38,7 @@ import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "./src/auctionIntent.mjs";
 import { buildDefiResearchBacklog } from "./src/defiBacklog.mjs";
+import { buildPredictionHedgeSimulator } from "./src/predictionHedgeSimulator.mjs";
 import { buildStableValuePathRegistry } from "./src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "./src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "./src/agentCommitments.mjs";
@@ -108,6 +109,9 @@ const appLanesNode = document.querySelector("#app-lanes");
 const attestationSummaryNode = document.querySelector("#attestation-summary");
 const attestationSourcesNode = document.querySelector("#attestation-sources");
 const attestationSignalsNode = document.querySelector("#attestation-signals");
+const predictionSummaryNode = document.querySelector("#prediction-summary");
+const predictionMarketsNode = document.querySelector("#prediction-markets");
+const predictionSuggestionsNode = document.querySelector("#prediction-suggestions");
 const signalChannelsNode = document.querySelector("#signal-channels");
 const signalArtifactNode = document.querySelector("#signal-artifact");
 const payloadDraftStatusNode = document.querySelector("#payload-draft-status");
@@ -245,6 +249,7 @@ renderBuildQueue();
 renderVaultTemplates();
 renderAppLab();
 renderAttestationRegistry();
+renderPredictionHedgeSimulator();
 renderMinerSignalResearch();
 renderSignalPayload();
 renderPayloadDraftStatus();
@@ -1288,6 +1293,56 @@ async function renderAttestationRegistry() {
     }
   } catch (error) {
     attestationSummaryNode.textContent = `Attestation registry unavailable: ${error.message}`;
+  }
+}
+
+async function renderPredictionHedgeSimulator() {
+  if (!predictionSummaryNode || !predictionMarketsNode || !predictionSuggestionsNode) return;
+
+  try {
+    const [fixtureResponse, attestationResponse] = await Promise.all([
+      fetch("fixtures/PredictionHedgeSimulator.json", { cache: "no-store" }),
+      fetch("fixtures/AttestationSignals.json", { cache: "no-store" })
+    ]);
+    const fixture = await fixtureResponse.json();
+    const attestationFixture = await attestationResponse.json();
+    const attestationRegistry = buildAttestationRegistry(attestationFixture);
+    const simulator = buildPredictionHedgeSimulator({ fixture, attestationRegistry });
+
+    predictionSummaryNode.innerHTML = `
+      <article><span>Markets</span><strong>${escapeHtml(simulator.summary.markets)}</strong></article>
+      <article><span>Positions</span><strong>${escapeHtml(simulator.summary.positions)}</strong></article>
+      <article><span>Signals</span><strong>${escapeHtml(simulator.summary.verifiedSignalInputs)}</strong></article>
+      <article><span>Reviews</span><strong>${escapeHtml(simulator.summary.reviewSuggestions)}</strong></article>
+    `;
+
+    predictionMarketsNode.innerHTML = "";
+    for (const market of simulator.markets) {
+      const article = document.createElement("article");
+      article.className = "prediction-card";
+      article.innerHTML = `
+        <span>${escapeHtml(market.status)}</span>
+        <strong>${escapeHtml(market.name)}: ${escapeHtml(market.simulatedProbability)}%</strong>
+        <p>${escapeHtml(market.userQuestion)}</p>
+        <small>${escapeHtml(market.verifiedSignalInputs)} verified inputs; ${escapeHtml(market.ignoredSignals)} ignored draft inputs.</small>
+      `;
+      predictionMarketsNode.append(article);
+    }
+
+    predictionSuggestionsNode.innerHTML = "";
+    for (const suggestion of simulator.suggestions) {
+      const article = document.createElement("article");
+      article.className = "prediction-card";
+      article.innerHTML = `
+        <span>${escapeHtml(suggestion.status)}</span>
+        <strong>${escapeHtml(suggestion.positionId)}: risk ${escapeHtml(suggestion.riskScore)}</strong>
+        <p>${escapeHtml(suggestion.action)}</p>
+        <small>${escapeHtml(suggestion.reason || "No matching market.")}</small>
+      `;
+      predictionSuggestionsNode.append(article);
+    }
+  } catch (error) {
+    predictionSummaryNode.textContent = `Prediction hedge simulator unavailable: ${error.message}`;
   }
 }
 

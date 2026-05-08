@@ -67,13 +67,13 @@ These are roadmap or research until the missing rails are explicit and tested.
 | 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |
 | 7. Simple asset policy | Roadmap base | Mint, transfer, burn, recovery, redemption policy shapes | Keep issuer-indexed now, covenant-native later |
 | 8. Auction/intents | Accepted TN12 payload state | Accepted bid payloads, winner rule, and below-reserve state | Settlement/refund drafts |
-| 9. DeFi backlog | Research | Missing rails listed for swaps/lending/stable-value/etc.; stable-value comparison brief now separates issuer-backed, overcollateralized, synthetic, and external rails | Simulation dashboards only |
+| 9. DeFi backlog | Research | Missing rails listed for swaps/lending/stable-value/etc.; stable-value comparison brief and prediction-hedge simulator built | More simulation dashboards only |
 | 10. Cross-chain research | Built as library | PMF/code/failure-mode mapping | Turn top ideas into one-page app briefs |
 | 11. Miner/pool signals | Accepted TN12 payload state | Attestation registry, payload-first framing, accepted watcher signal | Signature verification and reputation hardening |
 | 12. AI-agent commitments | Accepted TN12 payload state | Task/deposit/proof/dispute model with accepted payload events | Release/refund drafts plus accepted tx lifecycle |
 | 13. Coordination markets | Research prototype | Transparent Stag/Intendo/Pack/toy Solver | Transparent settlement draft; no Hashdag overclaim |
 | 14. ZK / anchor readiness | Roadmap added | Checklist lane | Define public inputs, anchors, oracle/source-chain trust |
-| 15. Prediction / hedge markets | Research only | In DeFi/attestation backlog | Simulator using attestations; no real settlement claim |
+| 15. Prediction / hedge markets | Research simulator | Attestation-fed simulator with manual positions and no settlement | Add signature/reputation hardening before any stronger claim |
 | 16. Portfolio automation | Research only | In DeFi backlog | Rules engine/simulator first |
 | 17. Grants / public goods | Partly via assurance | Pledge/campaign primitives | Grants board plus payout vault |
 | 18. Marketplace escrow | Partly via escrow | Release/refund proven | Usable commerce demo, with cancel omitted or redesigned |

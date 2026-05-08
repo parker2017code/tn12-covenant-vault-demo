@@ -40,6 +40,7 @@
       <a href="#stack">Stack</a>
       <a href="#app-lab">App lab</a>
       <a href="#attestations">Attestations</a>
+      <a href="#prediction-hedge">Hedges</a>
       <a href="#signals">Signals</a>
       <a href="#setup">TN12 setup</a>
       <a href="#sources">Sources</a>
@@ -479,6 +480,18 @@ node scripts/submit-signed-draft.mjs artifacts/signed-drafts/split-funding.json<
         </section>
       </div>
       <pre>fixtures/AttestationSignals.json</pre>
+    </section>
+
+    <section id="prediction-hedge" class="panel prediction-hedge">
+      <div class="section-title">
+        <p class="eyebrow">Prediction hedge simulator</p>
+        <h2>Attestation-fed review prompts, no trading.</h2>
+        <p>Verified accepted payload signals can move simulated event probabilities. Draft signals remain context only. The output is a review prompt, not settlement, advice, or automated execution.</p>
+      </div>
+      <div id="prediction-summary" class="prediction-summary" aria-live="polite"></div>
+      <div id="prediction-markets" class="prediction-list" aria-live="polite"></div>
+      <div id="prediction-suggestions" class="prediction-list" aria-live="polite"></div>
+      <pre>npm run prediction:hedge</pre>
     </section>
 
     <section id="signals" class="workspace signals">

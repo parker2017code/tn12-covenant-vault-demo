@@ -64,15 +64,16 @@ User-reported balance: about 10,000 TN12 KAS/TKAS. The initial proof set has now
 36. Add build-status map: built bases, blocked verticals, natural next steps, enforcement/readiness/proof labels, browser panel, and generated status artifact.
 37. Add auction/intent prototype: accepted bid payloads, winner rule, refund list, MEV caveat, browser panel, and generated auction artifact.
 38. Add DeFi research backlog: swaps, lending, stable-value, insurance, derivatives, prediction hedges, portfolio automation, missing rails, browser panel, and generated backlog artifact.
-39. Add AI-agent commitment board: task offers, deposits, completion proofs, disputes, release/refund planning, browser panel, and generated commitment artifact.
-40. Add negative planner/reducer checks: signed-only bids cannot win, pending pledges cannot release, mismatched receipts cannot mark paid, disputes block agent release, and duplicate or txidless access-pass redemptions cannot count.
-41. Add first `Escrow.sil` template: buyer-approved release to seller, timeout refund to buyer, and mutual cancel refund before signed escrow drafts.
-42. Add proof evidence artifact: resolve proof-spend previous outputs, show P2SH input contract outputs, expected P2PK outputs, sig-op counts, and accepted status.
-43. Add signed escrow funding draft: use the existing contract funding builder, review in submit console, and keep escrow spends blocked until accepted funding outpoint exists.
-44. Add signed escrow spend drafts: release, refund, and cancel from accepted escrow funding, with mutual exclusivity clearly documented.
-45. Add accepted escrow release proof: escrow funding output is accepted on TN12 and consumed by the seller-release spend; refund/cancel need separate funded outputs.
-46. Add LLM review guide: direct GitHub-connected reviewers to compare GitHub, Pages, local, and TN12 API state before making claims.
-47. Add accepted DAA-expired escrow refund proof: compile an expired escrow fixture with a past DAA-score refund time, fund a separate P2SH output, and spend it through the refund path.
-48. Add ZK/anchor roadmap lane: track future off-chain state proofs, solver proofs, bridge/source-chain anchors, oracle attestations, and vProg settlement without claiming ZK is used today.
-49. Accept mutual cancel on a separate funded output. The first submit used `sigOpCount=1` and hit `used=200870`, `limit=109999`; the old-SDK v1 attempt failed verification. Rusty Kaspa TN12 source confirms tx version 1 plus `computeBudget`; the accepted artifact was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1` using `computeBudget=30` and accepted as `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
+39. Add prediction-hedge simulator: verified accepted attestation signals can move simulated probabilities; draft signals cannot trigger review suggestions.
+40. Add AI-agent commitment board: task offers, deposits, completion proofs, disputes, release/refund planning, browser panel, and generated commitment artifact.
+41. Add negative planner/reducer checks: signed-only bids cannot win, pending pledges cannot release, mismatched receipts cannot mark paid, disputes block agent release, and duplicate or txidless access-pass redemptions cannot count.
+42. Add first `Escrow.sil` template: buyer-approved release to seller, timeout refund to buyer, and mutual cancel refund before signed escrow drafts.
+43. Add proof evidence artifact: resolve proof-spend previous outputs, show P2SH input contract outputs, expected P2PK outputs, sig-op counts, and accepted status.
+44. Add signed escrow funding draft: use the existing contract funding builder, review in submit console, and keep escrow spends blocked until accepted funding outpoint exists.
+45. Add signed escrow spend drafts: release, refund, and cancel from accepted escrow funding, with mutual exclusivity clearly documented.
+46. Add accepted escrow release proof: escrow funding output is accepted on TN12 and consumed by the seller-release spend; refund/cancel need separate funded outputs.
+47. Add LLM review guide: direct GitHub-connected reviewers to compare GitHub, Pages, local, and TN12 API state before making claims.
+48. Add accepted DAA-expired escrow refund proof: compile an expired escrow fixture with a past DAA-score refund time, fund a separate P2SH output, and spend it through the refund path.
+49. Add ZK/anchor roadmap lane: track future off-chain state proofs, solver proofs, bridge/source-chain anchors, oracle attestations, and vProg settlement without claiming ZK is used today.
+50. Accept mutual cancel on a separate funded output. The first submit used `sigOpCount=1` and hit `used=200870`, `limit=109999`; the old-SDK v1 attempt failed verification. Rusty Kaspa TN12 source confirms tx version 1 plus `computeBudget`; the accepted artifact was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1` using `computeBudget=30` and accepted as `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
 50. Accept one invoice payload receipt through TN12 JSON wRPC. The public REST submit route accepted a no-payload payment only; the matched payload receipt is `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e` and is verified by `npm run payload:verify`.

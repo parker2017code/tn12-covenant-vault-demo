@@ -230,6 +230,7 @@ Scripts:
 - wallet-review readiness builder,
 - wallet-connector readiness builder,
 - signal payload artifact builder.
+- prediction-hedge simulator builder.
 
 UI sections now include:
 
@@ -365,7 +366,7 @@ Current app build order:
 6. treasury/team vault,
 7. simple asset/redeemable claim,
 8. auction/intent primitive,
-9. basic DeFi primitive backlog: lending, borrowing, swaps/AMMs, stable-value units, insurance/protection, derivatives, and portfolio automation,
+9. basic DeFi primitive backlog: lending, borrowing, swaps/AMMs, stable-value units, insurance/protection, derivatives, prediction hedge simulation, and portfolio automation,
 10. miner/pool signal research app,
 11. AI-agent commitment board.
 
