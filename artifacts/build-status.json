@@ -94,7 +94,7 @@
         "src/escrowPrimitive.mjs",
         "npm run escrow:registry"
       ],
-      "next": "Add negative tests around v1 computeBudget preservation and keep release/refund/cancel proof paths tied to separate funded outputs."
+      "next": "Add wrong-signer and wrong-output negative checks while keeping release/refund/cancel proof paths tied to separate funded outputs."
     },
     {
       "order": 5,
@@ -259,7 +259,7 @@
     "Add negative/adversarial tests for existing Silverscript paths.",
     "Replace local payload receipt signing with wallet review and keep the accepted JSON wRPC route documented.",
     "Update GitHub Actions once stable Node 24-compatible checkout/setup-node actions are available, or opt in early and verify.",
-    "Add negative tests around version-1 computeBudget preservation and keep the local TN12 SDK route documented.",
+    "Add wrong-signer and wrong-output negative checks for accepted covenant proof lanes.",
     "Add a ZK/anchor design checklist before any bridge, oracle, solver, or vProg proof claim."
   ],
   "consistencyRules": [

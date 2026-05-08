@@ -92,19 +92,20 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
 
 ## Immediate Next Work
 
-1. Add negative/adversarial tests for planner and reducer state:
+1. Add negative/adversarial tests for planner, reducer, and submit-shape state:
    - signed-only bids cannot win;
    - below-reserve accepted bids cannot win;
    - accepted pledge progress differs from signed-only progress;
    - agent disputes block release;
    - invoice paid state requires accepted matching payload.
    - access-pass redemptions require a txid and duplicate holder/pass redemptions cannot inflate redeemed counts.
+   - escrow mutual cancel v1 budget shape requires `computeBudget` and rejects non-zero `sigOpCount`.
 
 2. Extend the escrow proof path:
    - accepted funding outpoint: done;
    - accepted seller release: done;
    - DAA-score timeout refund: done;
-   - mutual cancel: separately funded attempt is accepted; current version-1 `computeBudget=30` artifact was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, submitted over JSON wRPC, and verified accepted by the TN12 API.
+   - mutual cancel: separately funded attempt is accepted; current version-1 `computeBudget=30` artifact was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, submitted over JSON wRPC, verified accepted by the TN12 API, and guarded by `npm run check:negative`.
 
 3. Harden the invoice vertical slice:
    - keep REST submit marked unsuitable for payload receipts;

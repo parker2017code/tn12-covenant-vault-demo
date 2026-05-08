@@ -8,6 +8,20 @@ import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildInvoiceRegistry } from "../src/invoiceReceipt.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 
+const escrowCancelProofDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel-proof-cancel.json", import.meta.url), "utf8"));
+const escrowReleaseDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-release.json", import.meta.url), "utf8"));
+const cancelTx = escrowCancelProofDraft.submitPayload.transaction;
+const cancelInput = cancelTx.inputs[0];
+const releaseTx = escrowReleaseDraft.submitPayload.transaction;
+const releaseInput = releaseTx.inputs[0];
+
+assert.equal(isMalformedInputBudget(cancelTx.version, cancelInput), false);
+assert.equal(isMalformedInputBudget(releaseTx.version, releaseInput), false);
+assert.equal(isMalformedInputBudget(1, { ...cancelInput, sigOpCount: 1 }), true);
+assert.equal(isMalformedInputBudget(1, { ...cancelInput, computeBudget: undefined }), true);
+assert.equal(isMalformedInputBudget(0, { ...releaseInput, sigOpCount: undefined }), true);
+assert.equal(isMalformedInputBudget(0, { ...releaseInput, computeBudget: 30 }), true);
+
 const auctionFixture = JSON.parse(await readFile(new URL("../fixtures/AuctionIntentPrototype.json", import.meta.url), "utf8"));
 const highSignedOnlyAuction = buildAuctionIntentPrototype({
   ...auctionFixture,
@@ -212,3 +226,10 @@ assert.equal(signedOnlyFullRedemption.summary.acceptedOutstandingDisplay, "325.0
 assert.equal(signedOnlyFullRedemption.summary.signedOnlyRedemptions, 2);
 
 console.log("Negative checks passed.");
+
+function isMalformedInputBudget(version, input) {
+  if (Number(version || 0) >= 1) {
+    return Number(input.computeBudget || 0) <= 0 || input.sigOpCount != null;
+  }
+  return Number(input.sigOpCount || 0) <= 0 || input.computeBudget != null;
+}
