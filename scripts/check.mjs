@@ -74,6 +74,7 @@ import { buildRoleSeparatedInvalidCandidates } from "../src/roleSeparatedInvalid
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
 import { buildPersistedCheckpointGuard } from "../src/indexerPersistence.mjs";
+import { buildIndexerStorageSchema } from "../src/indexerStorageSchema.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -457,7 +458,7 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 15);
+assert.equal(projectPlan.summary.done, 16);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 5);
 assert.equal(projectPlan.summary.later, 6);
@@ -469,6 +470,8 @@ assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding"))
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-drafts"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-invalid-candidates"));
+assert.ok(projectPlan.done.some((item) => item.id === "indexer-storage-schema"));
+assert.ok(projectPlan.next.some((item) => item.id === "indexer-replay-runner"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
@@ -609,6 +612,18 @@ assert.equal(replayPlanFixture.currentCheckpoint.rollbackDetected, false);
 assert.equal(replayPlanFixture.target.dataVerbosity, "High");
 assert.ok(replayPlanFixture.buildOrder.some((step) => step.id === "rollback-replay"));
 assert.ok(replayPlanFixture.acceptanceCriteria.some((criterion) => criterion.includes("matched accepted payload bytes")));
+const indexerStorageFixture = JSON.parse(await readFile(new URL("../artifacts/indexer-storage-schema.json", import.meta.url), "utf8"));
+assert.equal(indexerStorageFixture.status, "storage-schema-ready");
+assert.equal(indexerStorageFixture.tables.length, 5);
+assert.ok(indexerStorageFixture.tables.some((table) => table.name === "rollback_segments"));
+assert.equal(indexerStorageFixture.sourceCheckpoint.recordCount, 33);
+const rebuiltIndexerStorage = buildIndexerStorageSchema({
+  replayPlan: replayPlanFixture,
+  checkpointIndex: checkpointFixture,
+  generatedAt: "2026-05-08T00:00:00.000Z"
+});
+assert.equal(rebuiltIndexerStorage.status, "storage-schema-ready");
+assert.equal(rebuiltIndexerStorage.sourceCheckpoint.payloadEvents, 26);
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -801,6 +816,7 @@ const files = [
   "scripts/build-checkpointed-index.mjs",
   "scripts/build-persisted-checkpoint-guard.mjs",
   "scripts/build-indexer-replay-plan.mjs",
+  "scripts/build-indexer-storage-schema.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -909,6 +925,7 @@ const files = [
   "artifacts/checkpointed-accepted-index.json",
   "artifacts/persisted-checkpoint-guard.json",
   "artifacts/indexer-replay-plan.json",
+  "artifacts/indexer-storage-schema.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -975,6 +992,7 @@ const files = [
   "src/acceptedIndexer.mjs",
   "src/checkpointedIndexer.mjs",
   "src/indexerPersistence.mjs",
+  "src/indexerStorageSchema.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/invoiceReceipt.mjs",
@@ -1046,6 +1064,7 @@ assert.match(readme, /npm run plan/);
 assert.match(readme, /npm run drafts/);
 assert.match(readme, /npm run indexer:persist/);
 assert.match(readme, /npm run indexer:replay-plan/);
+assert.match(readme, /npm run indexer:schema/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);

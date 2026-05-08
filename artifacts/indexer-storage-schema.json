@@ -1,0 +1,319 @@
+{
+  "schema": "tn12-indexer-storage-schema/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-08T10:14:50.502Z",
+  "status": "storage-schema-ready",
+  "sourceCheckpoint": {
+    "recordCount": 33,
+    "payloadEvents": 26,
+    "proofSpends": 7,
+    "minAcceptingBlockBlueScore": 5203140,
+    "maxAcceptingBlockBlueScore": 5961425,
+    "replayPlanStatus": "durable-indexer-plan-ready"
+  },
+  "tables": [
+    {
+      "name": "checkpoint_watermarks",
+      "purpose": "One row per trusted replay boundary.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "text",
+          "purpose": "primary key, usually network plus blue-score range"
+        },
+        {
+          "name": "network",
+          "type": "text",
+          "purpose": "kaspa-testnet-12 for this repo"
+        },
+        {
+          "name": "min_blue_score",
+          "type": "integer",
+          "purpose": "lowest accepted record blue score in this checkpoint"
+        },
+        {
+          "name": "max_blue_score",
+          "type": "integer",
+          "purpose": "highest accepted record blue score in this checkpoint"
+        },
+        {
+          "name": "record_count",
+          "type": "integer",
+          "purpose": "accepted record count after reducer matching"
+        },
+        {
+          "name": "payload_event_count",
+          "type": "integer",
+          "purpose": "matched accepted payload events"
+        },
+        {
+          "name": "proof_spend_count",
+          "type": "integer",
+          "purpose": "matched accepted proof spends"
+        },
+        {
+          "name": "mismatch_count",
+          "type": "integer",
+          "purpose": "must be 0 before app state is ready"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "purpose": "when this checkpoint row was generated"
+        }
+      ],
+      "indexes": [
+        "network,max_blue_score"
+      ]
+    },
+    {
+      "name": "accepted_transactions",
+      "purpose": "Raw accepted transaction facts needed for replay.",
+      "fields": [
+        {
+          "name": "txid",
+          "type": "text",
+          "purpose": "primary key"
+        },
+        {
+          "name": "network",
+          "type": "text",
+          "purpose": "network id"
+        },
+        {
+          "name": "accepting_block_blue_score",
+          "type": "integer",
+          "purpose": "ordering and rollback watermark"
+        },
+        {
+          "name": "accepting_block_time",
+          "type": "integer",
+          "purpose": "node supplied accepted time"
+        },
+        {
+          "name": "payload_hex",
+          "type": "text nullable",
+          "purpose": "raw payload bytes when present"
+        },
+        {
+          "name": "input_json",
+          "type": "json",
+          "purpose": "inputs as fetched or normalized"
+        },
+        {
+          "name": "output_json",
+          "type": "json",
+          "purpose": "outputs as fetched or normalized"
+        },
+        {
+          "name": "source",
+          "type": "text",
+          "purpose": "known-txid fixture, virtual-chain reader, or wallet submit"
+        },
+        {
+          "name": "seen_at",
+          "type": "datetime",
+          "purpose": "first replay observation"
+        }
+      ],
+      "indexes": [
+        "network,accepting_block_blue_score",
+        "payload_hex"
+      ]
+    },
+    {
+      "name": "accepted_payload_events",
+      "purpose": "Decoded app events derived only from accepted transactions.",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "text",
+          "purpose": "primary key, stable app event id"
+        },
+        {
+          "name": "txid",
+          "type": "text",
+          "purpose": "foreign key accepted_transactions.txid"
+        },
+        {
+          "name": "lane",
+          "type": "text",
+          "purpose": "invoice, access-pass, auction, stable-issuer, attestation, agent, batch-assurance"
+        },
+        {
+          "name": "payload_kind",
+          "type": "text",
+          "purpose": "decoded payload kind"
+        },
+        {
+          "name": "app_id",
+          "type": "text",
+          "purpose": "invoice id, pass id, auction id, task id, or campaign id"
+        },
+        {
+          "name": "state",
+          "type": "text",
+          "purpose": "derived event state"
+        },
+        {
+          "name": "matched",
+          "type": "boolean",
+          "purpose": "payload bytes and expected output matched"
+        },
+        {
+          "name": "review_status",
+          "type": "text",
+          "purpose": "ready, review-needed, stale, duplicate, disputed"
+        },
+        {
+          "name": "reducer_json",
+          "type": "json",
+          "purpose": "lane-specific reducer result"
+        }
+      ],
+      "indexes": [
+        "lane,app_id",
+        "txid"
+      ]
+    },
+    {
+      "name": "proof_spend_outputs",
+      "purpose": "Accepted covenant proof spend evidence.",
+      "fields": [
+        {
+          "name": "proof_id",
+          "type": "text",
+          "purpose": "primary key, stable proof label or txid"
+        },
+        {
+          "name": "txid",
+          "type": "text",
+          "purpose": "foreign key accepted_transactions.txid"
+        },
+        {
+          "name": "lane",
+          "type": "text",
+          "purpose": "vault, assurance, escrow, role-vault, role-assurance, role-escrow"
+        },
+        {
+          "name": "entrypoint",
+          "type": "text",
+          "purpose": "contract entrypoint"
+        },
+        {
+          "name": "source_txid",
+          "type": "text",
+          "purpose": "spent contract outpoint txid"
+        },
+        {
+          "name": "source_index",
+          "type": "integer",
+          "purpose": "spent contract outpoint index"
+        },
+        {
+          "name": "destination_address",
+          "type": "text",
+          "purpose": "expected P2PK destination"
+        },
+        {
+          "name": "amount_sompi",
+          "type": "integer",
+          "purpose": "matched output amount"
+        },
+        {
+          "name": "matched_input",
+          "type": "boolean",
+          "purpose": "previous P2SH output matched expected source"
+        },
+        {
+          "name": "matched_output",
+          "type": "boolean",
+          "purpose": "expected destination and amount matched"
+        }
+      ],
+      "indexes": [
+        "lane,entrypoint",
+        "source_txid,source_index"
+      ]
+    },
+    {
+      "name": "rollback_segments",
+      "purpose": "Rollback/replay windows that stop stale app state from being served.",
+      "fields": [
+        {
+          "name": "segment_id",
+          "type": "text",
+          "purpose": "primary key"
+        },
+        {
+          "name": "network",
+          "type": "text",
+          "purpose": "network id"
+        },
+        {
+          "name": "from_blue_score",
+          "type": "integer",
+          "purpose": "first affected blue score"
+        },
+        {
+          "name": "to_blue_score",
+          "type": "integer",
+          "purpose": "last affected blue score"
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "purpose": "blue-score regression, missing txid, or virtual-chain reorg"
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "purpose": "open, replaying, resolved"
+        },
+        {
+          "name": "affected_txids_json",
+          "type": "json",
+          "purpose": "txids marked stale before replay"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "purpose": "when rollback was detected"
+        },
+        {
+          "name": "resolved_at",
+          "type": "datetime nullable",
+          "purpose": "when replay restored matched app state"
+        }
+      ],
+      "indexes": [
+        "network,status",
+        "from_blue_score,to_blue_score"
+      ]
+    }
+  ],
+  "reducerOrder": [
+    "Load accepted transactions into append-only storage.",
+    "Decode payload events from stored payload bytes.",
+    "Match proof spends against previous outputs and expected destinations.",
+    "Apply lane reducers for invoice, access-pass, auction, stable-issuer, attestation, agent, and batch-assurance state.",
+    "Publish app state only when checkpoint mismatch count is zero and rollback_segments has no open rows."
+  ],
+  "invariants": [
+    "Derived app state never depends on submitted txids alone.",
+    "Payload state requires accepted transaction payload bytes and matched expected output.",
+    "Proof state requires accepted spend, matched P2SH input, and matched P2PK output.",
+    "A lower blue-score watermark or missing prior txid opens a rollback segment.",
+    "Open rollback segments block user-facing ready state for affected lanes."
+  ],
+  "nextImplementationSteps": [
+    "Write a fixture-backed replay runner against this schema.",
+    "Add a virtual-chain reader adapter after the storage/reducer contract is stable.",
+    "Expose checkpoint lag, mismatch count, and rollback status in the browser control surface."
+  ],
+  "boundaries": [
+    "This is the storage contract for the durable indexer, not a database migration that has been applied.",
+    "It does not require a local full node.",
+    "It preserves the current public TN12 evidence counts while preparing for replay."
+  ]
+}

@@ -3,7 +3,7 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 15,
+    "done": 16,
     "wip": 4,
     "next": 5,
     "later": 6
@@ -84,6 +84,11 @@
       "id": "indexer-replay-plan",
       "laneId": "payload-invoice",
       "detail": "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface."
+    },
+    {
+      "id": "indexer-storage-schema",
+      "laneId": "payload-invoice",
+      "detail": "The durable indexer storage contract now defines checkpoint, transaction, payload event, proof spend, and rollback tables."
     },
     {
       "id": "based-rollup-scout",
@@ -170,9 +175,9 @@
       "detail": "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS."
     },
     {
-      "id": "indexer-storage-schema",
+      "id": "indexer-replay-runner",
       "laneId": "payload-invoice",
-      "detail": "Create the first durable replay storage schema and fixture-backed replay runner."
+      "detail": "Create the first fixture-backed replay runner against the durable indexer storage schema."
     },
     {
       "id": "attestation-reputation",
