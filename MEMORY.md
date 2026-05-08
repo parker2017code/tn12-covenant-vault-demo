@@ -17,7 +17,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Persisted checkpoint gate: `npm run indexer:persist`
 - Wallet-review gate: `npm run wallet:review`
 
-The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has 24 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, agent commitment, and batch-assurance planner state.
+The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
 
 ## First-Read Order
 
@@ -50,7 +50,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 ## Current Next Work
 
 - Add more negative/adversarial checks around reducer and planner state.
-- The payload vertical slice has 24 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
+- The payload vertical slice has 26 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
 - Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
 - Build real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
@@ -59,16 +59,18 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Continuation Note
 
-The latest continuation added four accepted batch-assurance planner payloads, bringing payload verification to 24 accepted events:
+The latest continuation added two accepted prediction/hedge review payloads, bringing payload verification to 26 accepted events:
 
 - paid receipt: `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`
 - refund event: `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`
 - error event: `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`
 - batch-assurance pledge planner events: `10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1`, `9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86`, `fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d`
 - batch-assurance release planner event: `2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12`
+- prediction market-update event: `9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7`
+- prediction hedge-review event: `1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d`
 - access-pass redemption, auction bids, auction settlement/refund planner events, stable-value issuer issuance/redemption, miner/watcher attestation, and agent task/proof/dispute/release/hold events are listed in `fixtures/PayloadEventEvidence.json`.
 
-`docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 37 reviewable drafts, including all 24 accepted payload drafts. `artifacts/checkpointed-accepted-index.json` indexes 31 public TN12 reads: 7 proof spends plus 24 payload events. `artifacts/persisted-checkpoint-guard.json` checks the checkpoint for rollback or missing-txid regressions. `artifacts/wallet-review-readiness.json` marks all 37 published draft summaries review-ready, with 24 payload drafts gated to the payload-preserving route. `artifacts/wallet-connector-readiness.json` records connector requirements without reading local keys. `npm run check:negative` covers malformed escrow cancel v1 budget shape and wrong proof source attachment. `artifacts/prediction-hedge-simulator.json` is a simulation-only attestation/position review artifact. `artifacts/batch-assurance-custody-drafts.json` blocks custody settlement because the current accepted planner payload outputs do not amount-match the pledge amounts.
+`docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 39 reviewable drafts, including all 26 accepted payload drafts. `artifacts/checkpointed-accepted-index.json` indexes 33 public TN12 reads: 7 proof spends plus 26 payload events. `artifacts/persisted-checkpoint-guard.json` checks the checkpoint for rollback or missing-txid regressions. `artifacts/wallet-review-readiness.json` marks all 39 published draft summaries review-ready, with 26 payload drafts gated to the payload-preserving route. `artifacts/wallet-connector-readiness.json` records connector requirements without reading local keys. `npm run check:negative` covers malformed escrow cancel v1 budget shape and wrong proof source attachment. `artifacts/prediction-hedge-simulator.json` is a simulation-only attestation/position review artifact with two accepted TN12 review payloads. `artifacts/batch-assurance-custody-drafts.json` blocks custody settlement because the current accepted planner payload outputs do not amount-match the pledge amounts.
 
 Validation run for this continuation:
 
@@ -81,9 +83,11 @@ npm run indexer:checkpoint
 npm run indexer:persist
 npm run wallet:review
 npm run campaign:custody
+npm run wallet:connector
+npm run prediction:hedge
 ```
 
-Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Payload events verified: `24/24`. Checkpointed index matched: `31/31`, and the persisted checkpoint guard reported no rollback.
+Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Payload events verified: `26/26`. Checkpointed index matched: `33/33`, and the persisted checkpoint guard reported no rollback.
 
 ## Update Rule
 

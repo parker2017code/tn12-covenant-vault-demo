@@ -9,7 +9,11 @@
       "baseProbability": 42,
       "exposureTag": "miner-revenue",
       "resolutionSource": "accepted attestation plus later public network observation",
-      "userQuestion": "Should a miner-revenue-heavy plan be reviewed if stress probability rises?"
+      "userQuestion": "Should a miner-revenue-heavy plan be reviewed if stress probability rises?",
+      "acceptedEvent": {
+        "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "evidencePath": "artifacts/payload-prediction-market-network-stress-evidence.json"
+      }
     },
     {
       "id": "market-listing-window",
@@ -37,7 +41,11 @@
       "exposureTag": "miner-revenue",
       "notionalTkas": 1200,
       "sensitivity": 70,
-      "reviewThreshold": 58
+      "reviewThreshold": 58,
+      "acceptedReview": {
+        "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "evidencePath": "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json"
+      }
     },
     {
       "id": "position-liquidity-event",

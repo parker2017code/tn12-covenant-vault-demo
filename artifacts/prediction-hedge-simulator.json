@@ -23,6 +23,10 @@
       "signalIds": [
         "sig-rtd-hashrate-001"
       ],
+      "acceptedEvent": {
+        "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "evidencePath": "artifacts/payload-prediction-market-network-stress-evidence.json"
+      },
       "status": "signal-adjusted"
     },
     {
@@ -37,6 +41,7 @@
       "verifiedSignalInputs": 0,
       "ignoredSignals": 1,
       "signalIds": [],
+      "acceptedEvent": null,
       "status": "baseline-only"
     },
     {
@@ -51,6 +56,7 @@
       "verifiedSignalInputs": 0,
       "ignoredSignals": 1,
       "signalIds": [],
+      "acceptedEvent": null,
       "status": "baseline-only"
     }
   ],
@@ -61,7 +67,11 @@
       "exposureTag": "miner-revenue",
       "notionalTkas": 1200,
       "sensitivity": 70,
-      "reviewThreshold": 58
+      "reviewThreshold": 58,
+      "acceptedReview": {
+        "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "evidencePath": "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json"
+      }
     },
     {
       "id": "position-liquidity-event",
@@ -69,7 +79,8 @@
       "exposureTag": "liquidity-event",
       "notionalTkas": 400,
       "sensitivity": 45,
-      "reviewThreshold": 65
+      "reviewThreshold": 65,
+      "acceptedReview": null
     },
     {
       "id": "position-builder-roadmap",
@@ -77,7 +88,8 @@
       "exposureTag": "builder-roadmap",
       "notionalTkas": 800,
       "sensitivity": 55,
-      "reviewThreshold": 58
+      "reviewThreshold": 58,
+      "acceptedReview": null
     }
   ],
   "suggestions": [
@@ -86,6 +98,10 @@
       "marketId": "market-network-stress",
       "status": "review-suggested",
       "riskScore": 41,
+      "acceptedReview": {
+        "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "evidencePath": "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json"
+      },
       "action": "Review exposure and require explicit wallet review before any action.",
       "reason": "59% simulated probability, 58% review threshold."
     },
@@ -94,6 +110,7 @@
       "marketId": "market-listing-window",
       "status": "watch",
       "riskScore": 16,
+      "acceptedReview": null,
       "action": "Watch only; no action suggested.",
       "reason": "35% simulated probability, 65% review threshold."
     },
@@ -102,6 +119,7 @@
       "marketId": "market-signal-supply",
       "status": "watch",
       "riskScore": 28,
+      "acceptedReview": null,
       "action": "Watch only; no action suggested.",
       "reason": "50% simulated probability, 58% review threshold."
     }

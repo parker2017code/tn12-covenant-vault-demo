@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-08T04:59:46.792Z",
+  "fetchedAt": "2026-05-08T05:29:26.977Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -10,9 +10,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 31,
+    "recordCount": 33,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 5650588,
+    "maxAcceptingBlockBlueScore": 5961425,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -34,6 +34,8 @@
       "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
       "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
       "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+      "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
       "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
       "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
       "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
@@ -49,11 +51,11 @@
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 31,
+    "total": 33,
     "proofs": 7,
-    "payloadEvents": 24,
-    "accepted": 31,
-    "matched": 31,
+    "payloadEvents": 26,
+    "accepted": 33,
+    "matched": 33,
     "mismatches": 0,
     "lanes": [
       {
@@ -129,6 +131,12 @@
         "matched": 3
       },
       {
+        "lane": "hedge-review",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
         "lane": "miner-attestation",
         "total": 1,
         "accepted": 1,
@@ -139,6 +147,12 @@
         "total": 3,
         "accepted": 3,
         "matched": 3
+      },
+      {
+        "lane": "prediction-update",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
       },
       {
         "lane": "stable-issuer-event",
@@ -966,6 +980,104 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "prediction-update",
+      "label": "Prediction market network stress",
+      "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5961077,
+      "acceptingBlockTime": 1778217794150,
+      "draftPath": "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+      "evidencePath": "artifacts/payload-prediction-market-network-stress-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2270726564696374696f6e2d757064617465222c227375626a656374223a226d61726b65742d6e6574776f726b2d737472657373222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a224163636570746564206174746573746174696f6e206d6f766564207468652073696d756c61746f722e20526576696577206f6e6c793b206e6f2074726164696e67206f7220736574746c656d656e742e227d",
+        "observedHex": "7b226b696e64223a2270726564696374696f6e2d757064617465222c227375626a656374223a226d61726b65742d6e6574776f726b2d737472657373222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a224163636570746564206174746573746174696f6e206d6f766564207468652073696d756c61746f722e20526576696577206f6e6c793b206e6f2074726164696e67206f7220736574746c656d656e742e227d",
+        "matches": true,
+        "bytes": 179,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "prediction-update",
+            "subject": "market-network-stress",
+            "value": "review-suggested",
+            "note": "Accepted attestation moved the simulator. Review only; no trading or settlement."
+          },
+          "encoded": {
+            "bytes": 179,
+            "hex": "7b226b696e64223a2270726564696374696f6e2d757064617465222c227375626a656374223a226d61726b65742d6e6574776f726b2d737472657373222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a224163636570746564206174746573746174696f6e206d6f766564207468652073696d756c61746f722e20526576696577206f6e6c793b206e6f2074726164696e67206f7220736574746c656d656e742e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "hedge-review",
+      "label": "Prediction hedge miner revenue",
+      "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 5961425,
+      "acceptingBlockTime": 1778217829975,
+      "draftPath": "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+      "evidencePath": "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a2268656467652d726576696577222c227375626a656374223a22706f736974696f6e2d6d696e65722d726576656e7565222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a225265766965772070726f6d70742066726f6d206d61726b65742d6e6574776f726b2d7374726573732e204e6f206175746f6d6174696320616374696f6e2c2074726164696e672c20637573746f64792c206f7220736574746c656d656e742e227d",
+        "observedHex": "7b226b696e64223a2268656467652d726576696577222c227375626a656374223a22706f736974696f6e2d6d696e65722d726576656e7565222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a225265766965772070726f6d70742066726f6d206d61726b65742d6e6574776f726b2d7374726573732e204e6f206175746f6d6174696320616374696f6e2c2074726164696e672c20637573746f64792c206f7220736574746c656d656e742e227d",
+        "matches": true,
+        "bytes": 190,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "hedge-review",
+            "subject": "position-miner-revenue",
+            "value": "review-suggested",
+            "note": "Review prompt from market-network-stress. No automatic action, trading, custody, or settlement."
+          },
+          "encoded": {
+            "bytes": 190,
+            "hex": "7b226b696e64223a2268656467652d726576696577222c227375626a656374223a22706f736974696f6e2d6d696e65722d726576656e7565222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a225265766965772070726f6d70742066726f6d206d61726b65742d6e6574776f726b2d7374726573732e204e6f206175746f6d6174696320616374696f6e2c2074726164696e672c20637573746f64792c206f7220736574746c656d656e742e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d"
     },
     {
       "kind": "payload-event",

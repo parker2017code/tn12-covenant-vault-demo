@@ -1,0 +1,111 @@
+{
+  "schema": "tn12-signed-payload-receipt-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "requiresPayloadSubmitSupport": true,
+  "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+    "outputIndex": 1,
+    "amountTkas": 1139.2982
+  },
+  "payment": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": 1,
+    "amountSompi": "100000000",
+    "changeTkas": "1138.29815",
+    "changeSompi": "113829815000",
+    "minerFeeSompi": "5000"
+  },
+  "receipt": {
+    "schema": "kaspa-signal-payload/v1",
+    "status": "payload-size-ok",
+    "lane": "transaction-payload",
+    "payload": {
+      "kind": "hedge-review",
+      "subject": "position-miner-revenue",
+      "value": "review-suggested",
+      "note": "Review prompt from market-network-stress. No automatic action, trading, custody, or settlement."
+    },
+    "encoded": {
+      "bytes": 190,
+      "transientMass": 760,
+      "hex": "7b226b696e64223a2268656467652d726576696577222c227375626a656374223a22706f736974696f6e2d6d696e65722d726576656e7565222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a225265766965772070726f6d70742066726f6d206d61726b65742d6e6574776f726b2d7374726573732e204e6f206175746f6d6174696320616374696f6e2c2074726164696e672c20637573746f64792c206f7220736574746c656d656e742e227d"
+    },
+    "limits": {
+      "standardTxMassLimit": 100000,
+      "transientByteMass": 4,
+      "remainingMassBeforeInputsOutputsAndSignatures": 99240
+    },
+    "boundary": "This models user transaction payload data, not arbitrary miner header data."
+  },
+  "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+            "index": 1
+          },
+          "signatureScript": "41b973e4326ff04f3a4e8c1469a4d4a36a04aff36b40670ffa7c5b4ea173afb7c8e5caea3068b4de840e38235ff81a3811425c9664c7dfdbbc8d16d79f22b7806001",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 100000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 113829815000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "payload": "7b226b696e64223a2268656467652d726576696577222c227375626a656374223a22706f736974696f6e2d6d696e65722d726576656e7565222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a225265766965772070726f6d70742066726f6d206d61726b65742d6e6574776f726b2d7374726573732e204e6f206175746f6d6174696320616374696f6e2c2074726164696e672c20637573746f64792c206f7220736574746c656d656e742e227d"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "tx": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+            "index": 1
+          },
+          "signatureScript": "41b973e4326ff04f3a4e8c1469a4d4a36a04aff36b40670ffa7c5b4ea173afb7c8e5caea3068b4de840e38235ff81a3811425c9664c7dfdbbc8d16d79f22b7806001",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "value": "100000000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        },
+        {
+          "value": "113829815000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "gas": "0",
+      "payload": "7b226b696e64223a2268656467652d726576696577222c227375626a656374223a22706f736974696f6e2d6d696e65722d726576656e7565222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a225265766965772070726f6d70742066726f6d206d61726b65742d6e6574776f726b2d7374726573732e204e6f206175746f6d6174696320616374696f6e2c2074726164696e672c20637573746f64792c206f7220736574746c656d656e742e227d",
+      "id": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d"
+    }
+  }
+}

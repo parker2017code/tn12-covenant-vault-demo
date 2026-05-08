@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-08T05:29:08.222Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+  "accepted": true,
+  "acceptingBlockBlueScore": 5961077,
+  "acceptingBlockTime": 1778217794150,
+  "payload": {
+    "expectedHex": "7b226b696e64223a2270726564696374696f6e2d757064617465222c227375626a656374223a226d61726b65742d6e6574776f726b2d737472657373222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a224163636570746564206174746573746174696f6e206d6f766564207468652073696d756c61746f722e20526576696577206f6e6c793b206e6f2074726164696e67206f7220736574746c656d656e742e227d",
+    "observedHex": "7b226b696e64223a2270726564696374696f6e2d757064617465222c227375626a656374223a226d61726b65742d6e6574776f726b2d737472657373222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a224163636570746564206174746573746174696f6e206d6f766564207468652073696d756c61746f722e20526576696577206f6e6c793b206e6f2074726164696e67206f7220736574746c656d656e742e227d",
+    "bytes": 179,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "prediction-update",
+        "subject": "market-network-stress",
+        "value": "review-suggested",
+        "note": "Accepted attestation moved the simulator. Review only; no trading or settlement."
+      },
+      "encoded": {
+        "bytes": 179,
+        "hex": "7b226b696e64223a2270726564696374696f6e2d757064617465222c227375626a656374223a226d61726b65742d6e6574776f726b2d737472657373222c2276616c7565223a227265766965772d737567676573746564222c226e6f7465223a224163636570746564206174746573746174696f6e206d6f766564207468652073696d756c61746f722e20526576696577206f6e6c793b206e6f2074726164696e67206f7220736574746c656d656e742e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "market-network-stress",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7"
+}

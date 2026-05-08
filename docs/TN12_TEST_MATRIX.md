@@ -32,6 +32,8 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Stable-value issuer | Issuance 002 payload | `f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162` |
 | Stable-value issuer | Redemption 001 payload | `3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663` |
 | Miner/watcher signal | Attestation payload | `a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d` |
+| Prediction / hedge | Network stress market-update payload | `9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7` |
+| Prediction / hedge | Miner revenue review prompt payload | `1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d` |
 | Agent commitments | Task invoice payload | `78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8` |
 | Agent commitments | Task escrow payload | `040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755` |
 | Agent commitments | Proof invoice payload | `f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e` |
@@ -70,7 +72,7 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 - auction custody settlement/refund transaction, atomic exchange, and asset delivery,
 - agent task custody release/refund transactions and autonomous payout lifecycle,
 - treasury/team-vault constrained spend drafts,
-- prediction/hedge simulator event payloads.
+- prediction/hedge settlement, real odds, custody, or automatic execution.
 
 ## Next Build Order
 

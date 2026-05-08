@@ -68,6 +68,16 @@
       "outPath": "artifacts/payload-miner-attestation-evidence.json"
     },
     {
+      "label": "Prediction market network stress",
+      "draftPath": "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+      "outPath": "artifacts/payload-prediction-market-network-stress-evidence.json"
+    },
+    {
+      "label": "Prediction hedge miner revenue",
+      "draftPath": "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+      "outPath": "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json"
+    },
+    {
       "label": "Agent task invoice",
       "draftPath": "artifacts/signed-drafts/payload-agent-task-invoice.json",
       "outPath": "artifacts/payload-agent-task-invoice-evidence.json"

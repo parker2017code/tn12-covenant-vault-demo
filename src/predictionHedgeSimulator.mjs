@@ -52,6 +52,7 @@ function buildMarket(market, signals) {
     verifiedSignalInputs: verifiedSignals.length,
     ignoredSignals: relatedSignals.length - verifiedSignals.length,
     signalIds: verifiedSignals.map((signal) => signal.id),
+    acceptedEvent: market.acceptedEvent || null,
     status: verifiedSignals.length > 0 ? "signal-adjusted" : "baseline-only"
   };
 }
@@ -78,6 +79,7 @@ function buildSuggestion(position, markets) {
     marketId: market.id,
     status,
     riskScore,
+    acceptedReview: normalized.acceptedReview,
     action: status === "review-suggested"
       ? "Review exposure and require explicit wallet review before any action."
       : "Watch only; no action suggested.",
@@ -92,7 +94,8 @@ function normalizePosition(position) {
     exposureTag: String(position.exposureTag || ""),
     notionalTkas: Number(position.notionalTkas || 0),
     sensitivity: clampPercent(position.sensitivity),
-    reviewThreshold: clampPercent(position.reviewThreshold)
+    reviewThreshold: clampPercent(position.reviewThreshold),
+    acceptedReview: position.acceptedReview || null
   };
 }
 

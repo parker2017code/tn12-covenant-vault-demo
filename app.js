@@ -1320,11 +1320,14 @@ async function renderPredictionHedgeSimulator() {
     for (const market of simulator.markets) {
       const article = document.createElement("article");
       article.className = "prediction-card";
+      const acceptedEventText = market.acceptedEvent?.txid
+        ? `Accepted event ${shortTxid(market.acceptedEvent.txid)}.`
+        : "No accepted event payload.";
       article.innerHTML = `
         <span>${escapeHtml(market.status)}</span>
         <strong>${escapeHtml(market.name)}: ${escapeHtml(market.simulatedProbability)}%</strong>
         <p>${escapeHtml(market.userQuestion)}</p>
-        <small>${escapeHtml(market.verifiedSignalInputs)} verified inputs; ${escapeHtml(market.ignoredSignals)} ignored draft inputs.</small>
+        <small>${escapeHtml(market.verifiedSignalInputs)} verified inputs; ${escapeHtml(market.ignoredSignals)} ignored draft inputs. ${escapeHtml(acceptedEventText)}</small>
       `;
       predictionMarketsNode.append(article);
     }
@@ -1333,11 +1336,14 @@ async function renderPredictionHedgeSimulator() {
     for (const suggestion of simulator.suggestions) {
       const article = document.createElement("article");
       article.className = "prediction-card";
+      const acceptedReviewText = suggestion.acceptedReview?.txid
+        ? `Accepted review ${shortTxid(suggestion.acceptedReview.txid)}.`
+        : "No accepted review payload.";
       article.innerHTML = `
         <span>${escapeHtml(suggestion.status)}</span>
         <strong>${escapeHtml(suggestion.positionId)}: risk ${escapeHtml(suggestion.riskScore)}</strong>
         <p>${escapeHtml(suggestion.action)}</p>
-        <small>${escapeHtml(suggestion.reason || "No matching market.")}</small>
+        <small>${escapeHtml(suggestion.reason || "No matching market.")} ${escapeHtml(acceptedReviewText)}</small>
       `;
       predictionSuggestionsNode.append(article);
     }

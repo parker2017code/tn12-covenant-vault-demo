@@ -129,9 +129,9 @@ Escrow DAA-score refund:
 
 Escrow mutual cancel is now accepted on TN12. The original submit used `sigOpCount=1` and hit script-unit exhaustion (`used=200870`, `limit=109999`), but that is historical bad configuration only. A later submit used old JS SDK signing/reconstruction that did not preserve tx v1 `computeBudget`. The corrected cancel was rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`, submitted through JSON wRPC to `testnet-12`, and accepted as `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
 
-Accepted payload events are listed in `fixtures/PayloadEventEvidence.json` and verified by `npm run payload:verify:events`. The current set covers invoice paid/refund/error, access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, agent task/proof/dispute state, and batch-assurance pledge/release planner state.
+Accepted payload events are listed in `fixtures/PayloadEventEvidence.json` and verified by `npm run payload:verify:events`. The current set covers invoice paid/refund/error, access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, prediction/hedge review state, agent task/proof/dispute state, and batch-assurance pledge/release planner state.
 
-`npm run indexer:checkpoint` rebuilds `artifacts/checkpointed-accepted-index.json` from public TN12 transaction reads. It currently tracks 31 accepted records: 7 proof spends and 24 payload events.
+`npm run indexer:checkpoint` rebuilds `artifacts/checkpointed-accepted-index.json` from public TN12 transaction reads. It currently tracks 33 accepted records: 7 proof spends and 26 payload events.
 
 Fixtures:
 

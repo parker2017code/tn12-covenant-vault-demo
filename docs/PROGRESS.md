@@ -16,7 +16,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Accepted route: JSON wRPC accepted paid tx `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`, refund tx `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13`, and error tx `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c`; `npm run payload:verify` confirms payload bytes and output match for each evidence artifact.
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
-   - Indexer status: checkpointed known-txid public-read index covers 31 accepted TN12 records: 7 proof spends and 24 payload events.
+   - Indexer status: checkpointed known-txid public-read index covers 33 accepted TN12 records: 7 proof spends and 26 payload events.
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
    - Current status: base built with wallet-review readiness and wallet-connector spec artifacts.
@@ -63,7 +63,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Enforcement: documentation.
    - Boundary: not live DeFi.
    - Stable-value detail: comparison brief added for issuer-backed, overcollateralized, synthetic, and external-stable paths; issuer-backed demo state now tracks accepted TN12 issuance/redemption payloads while excluding signed-only requests. This is not a native stablecoin claim.
-   - Prediction detail: simulator uses verified accepted attestation signals for review prompts. It does not trade, settle, price real markets, or provide advice.
+   - Prediction detail: simulator uses verified accepted attestation signals for review prompts. Two prediction/hedge payload events are accepted on TN12. It does not trade, settle, price real markets, or provide advice.
 
 10. Cross-chain app research library: PMF, reusable patterns, failure modes, Kaspa mapping.
     - Current status: base built.

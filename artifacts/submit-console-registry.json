@@ -3,10 +3,10 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 37,
-    "payloadDrafts": 24,
-    "explicitSubmitRequired": 37,
-    "payloadSubmitGated": 24
+    "total": 39,
+    "payloadDrafts": 26,
+    "explicitSubmitRequired": 39,
+    "payloadSubmitGated": 26
   },
   "drafts": [
     {
@@ -1547,6 +1547,134 @@
     },
     {
       "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+        "outputIndex": 1,
+        "amountTkas": 1140.29825
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 179
+      },
+      "totals": {
+        "outputSompi": "114029820000",
+        "outputTkas": "1140.2982"
+      },
+      "inputs": [
+        {
+          "txid": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "113929820000",
+          "amountTkas": "1139.2982",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "previewHex": "7b226b696e64223a2270726564696374696f6e2d757064...726164696e67206f7220736574746c656d656e742e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-prediction-market-network-stress.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-market-network-stress.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Prediction market network stress payload",
+      "priority": 25,
+      "description": "Accepted prediction simulator market-update payload. It is not trading or settlement."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "outputIndex": 1,
+        "amountTkas": 1139.2982
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 190
+      },
+      "totals": {
+        "outputSompi": "113929815000",
+        "outputTkas": "1139.29815"
+      },
+      "inputs": [
+        {
+          "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "113829815000",
+          "amountTkas": "1138.29815",
+          "scriptVersion": 0,
+          "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 190,
+        "previewHex": "7b226b696e64223a2268656467652d726576696577222c...73746f64792c206f7220736574746c656d656e742e227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "Prediction hedge miner revenue payload",
+      "priority": 26,
+      "description": "Accepted hedge-review prompt payload. It is not custody, trading, or advice."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
       "path": "artifacts/signed-drafts/split-funding.json",
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
@@ -1613,7 +1741,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Split funding",
-      "priority": 25,
+      "priority": 27,
       "description": "Splits one wallet UTXO into vault, assurance, and change buckets."
     },
     {
@@ -1670,7 +1798,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault recovery",
-      "priority": 26,
+      "priority": 28,
       "description": "Accepted proof path for vault recovery."
     },
     {
@@ -1727,7 +1855,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Vault withdrawal",
-      "priority": 27,
+      "priority": 29,
       "description": "Accepted proof path for delayed vault withdrawal."
     },
     {
@@ -1784,7 +1912,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance release",
-      "priority": 28,
+      "priority": 30,
       "description": "Accepted proof path for individual pledge release."
     },
     {
@@ -1841,7 +1969,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Assurance refund",
-      "priority": 29,
+      "priority": 31,
       "description": "Accepted proof path for individual pledge refund."
     },
     {
@@ -1882,7 +2010,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow funding",
-      "priority": 30,
+      "priority": 32,
       "description": "Accepted funding path for Escrow.sil; created the P2SH output consumed by the release proof."
     },
     {
@@ -1939,7 +2067,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow release",
-      "priority": 31,
+      "priority": 33,
       "description": "Accepted seller-release proof from the Escrow.sil funding output."
     },
     {
@@ -1996,7 +2124,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow refund",
-      "priority": 32,
+      "priority": 34,
       "description": "Timeout-refund review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
@@ -2053,7 +2181,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel",
-      "priority": 33,
+      "priority": 35,
       "description": "Mutual-cancel review draft for the original escrow output; not accepted after release consumed that output."
     },
     {
@@ -2094,7 +2222,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund funding",
-      "priority": 34,
+      "priority": 36,
       "description": "Accepted funding path for a DAA-expired EscrowExpired refund proof."
     },
     {
@@ -2151,7 +2279,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow DAA refund",
-      "priority": 35,
+      "priority": 37,
       "description": "Accepted refund proof from a separate DAA-expired escrow P2SH output."
     },
     {
@@ -2192,7 +2320,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel funding",
-      "priority": 36,
+      "priority": 38,
       "description": "Accepted funding output for the mutual-cancel attempt."
     },
     {
@@ -2249,7 +2377,7 @@
         "boundary": "Actual broadcast requires explicit --submit."
       },
       "label": "Escrow cancel attempt",
-      "priority": 37,
+      "priority": 39,
       "description": "Accepted mutual-cancel spend; rebuilt as tx version 1 with computeBudget 30 using the local TN12 kaspa-wasm 1.1.1-toc.1 SDK."
     }
   ],

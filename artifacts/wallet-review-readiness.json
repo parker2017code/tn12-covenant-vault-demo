@@ -3,11 +3,11 @@
   "network": "kaspa-testnet-12",
   "status": "wallet-review-ready",
   "summary": {
-    "total": 37,
-    "ready": 37,
-    "payloadDrafts": 24,
-    "payloadRouteReady": 24,
-    "explicitSubmitCommands": 37,
+    "total": 39,
+    "ready": 39,
+    "payloadDrafts": 26,
+    "payloadRouteReady": 26,
+    "explicitSubmitCommands": 39,
     "registrySecretFields": 0
   },
   "drafts": [
@@ -676,6 +676,62 @@
         "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-batch-release-plan.json --submit",
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-release-plan.json",
         "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-batch-release-plan.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+      "label": "Prediction market network stress payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-prediction-market-network-stress.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-market-network-stress.json --submit"
+      },
+      "checks": {
+        "hasTransactionId": true,
+        "hasInputs": true,
+        "hasOutputs": true
+      }
+    },
+    {
+      "path": "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+      "label": "Prediction hedge miner revenue payload",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+      "status": "review-ready",
+      "network": {
+        "value": "kaspa-testnet-12",
+        "ok": true
+      },
+      "payload": {
+        "present": true,
+        "bytes": 190,
+        "route": "wrpc-required",
+        "routeReady": true
+      },
+      "submit": {
+        "explicitSubmit": true,
+        "command": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json --submit",
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json --submit"
       },
       "checks": {
         "hasTransactionId": true,

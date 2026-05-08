@@ -151,7 +151,7 @@
       "order": 9,
       "id": "defi-research",
       "name": "Basic DeFi Research Backlog",
-      "status": "stable-issuer-payload-state",
+      "status": "accepted-payload-state-plus-research",
       "enforcement": "documentation",
       "readiness": "research-only",
       "proof": "generated-artifact",
@@ -160,6 +160,10 @@
         "fixtures/StableValuePaths.json",
         "fixtures/StableIssuerRedemptions.json",
         "fixtures/PredictionHedgeSimulator.json",
+        "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+        "artifacts/payload-prediction-market-network-stress-evidence.json",
+        "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+        "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json",
         "src/defiBacklog.mjs",
         "src/stableValuePaths.mjs",
         "src/stableIssuerRedemption.mjs",
@@ -170,7 +174,7 @@
         "npm run stable:issuer",
         "artifacts/prediction-hedge-simulator.json"
       ],
-      "next": "Convert lending and portfolio automation briefs into simulation-only dashboards before any settlement claim."
+      "next": "Add signature/reputation hardening and more TN12 review payloads while keeping settlement, odds, custody, and advice out of scope."
     },
     {
       "order": 10,
