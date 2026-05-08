@@ -230,6 +230,8 @@ Use `docs/MAINSTREAM_APP_DIRECTION.md` before adding a new app lane. High-liquid
 
 Use `npm run rails:missing` for the highest-risk mainstream categories. It turns the DEX/AMM, lending, perps/prediction, bridge/source-chain, and stable-value dependency questions into a checked artifact before product UI or settlement claims.
 
+Use `npm run rails:research` when a plan mentions oracle/price feeds, Kaskad/lending mechanics, miner/RTD signals, bridge/source-chain anchors, DEX/AMM liquidity, liquidations, collateral, or LP shares. It turns those phrases into a checked research route with local sources, external leads, first-principles questions, first artifact requirements, and do-not-claim boundaries.
+
 ### 1. Payload Receipt / Invoice App
 
 Why first:

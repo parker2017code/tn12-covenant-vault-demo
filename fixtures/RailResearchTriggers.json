@@ -1,0 +1,168 @@
+{
+  "schema": "kaspa-rail-research-triggers-fixture/v1",
+  "reviewedAt": "2026-05-08",
+  "purpose": "When a missing rail appears in app planning, route the agent to the right local docs, external sources, first-principles questions, and expected artifact before any product claim is upgraded.",
+  "triggers": [
+    {
+      "id": "oracle-price-rail",
+      "name": "Oracle / price-feed rail",
+      "triggerPhrases": ["oracle", "price feed", "ground truth price", "liquidation price", "Eliott Mea", "Kaskad oracle"],
+      "whyItMatters": "Lending, perps, stable-value, insurance, and prediction settlement all fail if price or event data can be stale, manipulated, or unchallengeable.",
+      "localSources": [
+        "fixtures/MissingRailsMatrix.json#lending",
+        "fixtures/MissingRailsMatrix.json#perps-prediction",
+        "fixtures/AttestationSignals.json",
+        "fixtures/StableValuePaths.json",
+        "docs/MAINSTREAM_APP_DIRECTION.md"
+      ],
+      "externalSources": [
+        {
+          "name": "Kaskad oracle article",
+          "url": "https://www.kaskad.app/oracle-kaspa",
+          "useFor": "V1 off-chain oracle and liquidation simulation, weighted-median feed, Eliott Mea / KEF research note."
+        },
+        {
+          "name": "KasMedia Eliott Mea oracle interview",
+          "url": "https://kasmedia.com/article/eliot-mea-and-oracles",
+          "useFor": "First-principles oracle risks, CEX price manipulation, median-oracle limits, no-arbitrage ground-truth framing."
+        },
+        {
+          "name": "Kaskad docs: roadmap",
+          "url": "https://docs.kaskad.app/docs/roadmap",
+          "useFor": "Oracle V1/V2 timing, L1 expansion conditions, vProg/covenant dependencies."
+        }
+      ],
+      "researchQuestions": [
+        "What is the data source: CEX book, DEX book, signed reporter set, miner/pool signal, or source-chain proof?",
+        "What is the manipulation model and who profits from skewing the feed?",
+        "Can stale or wrong data be detected deterministically, or only reviewed socially/economically?",
+        "What happens to app state when the feed is stale, split, or challenged?",
+        "Is the output used for display, warning, liquidation, settlement, or custody movement?"
+      ],
+      "firstArtifact": "oracle-source-matrix",
+      "doNotClaim": ["trustless oracle", "safe liquidation", "ground-truth price", "production oracle integration"]
+    },
+    {
+      "id": "kaskad-lending-rail",
+      "name": "Kaskad / lending mechanics rail",
+      "triggerPhrases": ["Kaskad", "Aave", "lending", "borrow", "health factor", "liquidation", "collateral"],
+      "whyItMatters": "Kaskad is the closest public Kaspa-ecosystem example for lending mechanics, but it runs through Igra/EVM and should be mapped carefully against this TN12 L1 covenant repo.",
+      "localSources": [
+        "fixtures/MissingRailsMatrix.json#lending",
+        "fixtures/DefiResearchBacklog.json#lending-risk-dashboard",
+        "docs/PROGRAMMABILITY_PATHS.md",
+        "docs/ROADMAP_STATE.md"
+      ],
+      "externalSources": [
+        {
+          "name": "Kaskad docs: architecture",
+          "url": "https://docs.kaskad.app/docs/architecture",
+          "useFor": "Igra EVM L2 execution, lending core, oracle integration, governance layer."
+        },
+        {
+          "name": "Kaskad docs: lending mechanics",
+          "url": "https://docs.kaskad.app/docs/lending-mechanics",
+          "useFor": "Supply, borrow, utilization, health factor, permissionless liquidations, risk parameters."
+        },
+        {
+          "name": "Kaskad FAQ",
+          "url": "https://www.kaskad.app/faq",
+          "useFor": "User-facing risk, wrapped assets, oracle errors, liquidation explanation, non-custodial claims."
+        }
+      ],
+      "researchQuestions": [
+        "Which parts are EVM/Igra-specific and which can migrate to Kaspa L1 covenants or vProgs later?",
+        "Where does collateral sit in this repo's model versus Kaskad's model?",
+        "What exactly triggers liquidation, and who can execute it?",
+        "Which risk parameters are hard-coded, bounded-governance, or manually configured?",
+        "What does this repo need before a lending dashboard becomes more than simulation?"
+      ],
+      "firstArtifact": "lending-rail-brief",
+      "doNotClaim": ["TN12 repo has live lending", "L1 Kaspa lending is solved", "Kaskad mechanics directly port to covenants"]
+    },
+    {
+      "id": "miner-rtd-signal-rail",
+      "name": "Miner / RTD signal rail",
+      "triggerPhrases": ["RTD", "miner signal", "sample miners", "pool signal", "attestation", "first-to-know"],
+      "whyItMatters": "Miner or pool signals may become useful for fast event awareness, but they are not block-header facts or production oracle feeds by default.",
+      "localSources": [
+        "fixtures/MinerSignalResearch.json",
+        "fixtures/AttestationSignals.json",
+        "src/attestationSignal.mjs",
+        "docs/PROGRESS.md",
+        "docs/ROADMAP_STATE.md"
+      ],
+      "externalSources": [
+        {
+          "name": "Kaspa Explained llms.txt RTD/oracle nuance",
+          "path": "/home/parker2017/kaspa-explained/llms.txt",
+          "useFor": "Local source discipline around RTD-derived attestations and oracle research boundaries."
+        }
+      ],
+      "researchQuestions": [
+        "What are miners or pools actually attesting to: local observation, price, latency, block data, mempool data, or external event?",
+        "Is sampling voluntary, rewarded, Sybil-resistant, and signed?",
+        "How are conflicting miner/pool reports handled?",
+        "Can the signal affect custody or only review prompts?",
+        "What anti-bribery, anti-spam, and reputation thresholds are required?"
+      ],
+      "firstArtifact": "miner-signal-thresholds",
+      "doNotClaim": ["arbitrary block-header data", "RTD oracle is live", "miner reports are objective prices", "safe custody automation"]
+    },
+    {
+      "id": "bridge-anchor-rail",
+      "name": "Bridge / source-chain anchor rail",
+      "triggerPhrases": ["bridge", "wrapped asset", "source-chain", "anchor", "light client", "Hyperlane", "ZK bridge"],
+      "whyItMatters": "ZK proofs and bridge attestations do not automatically establish source-chain canonicality or safe wrapped-asset custody.",
+      "localSources": [
+        "fixtures/MissingRailsMatrix.json#bridge-source-chain",
+        "docs/PROGRAMMABILITY_PATHS.md",
+        "docs/ROADMAP_STATE.md",
+        "/home/parker2017/kaspa-explained/CLAIMS.yml"
+      ],
+      "externalSources": [
+        {
+          "name": "Kaskad docs: roadmap",
+          "url": "https://docs.kaskad.app/docs/roadmap",
+          "useFor": "Hyperlane cross-chain support and L1 migration dependencies."
+        },
+        {
+          "name": "Kaskad FAQ",
+          "url": "https://www.kaskad.app/faq",
+          "useFor": "Wrapped-asset user-facing description and bridge/custody assumptions."
+        }
+      ],
+      "researchQuestions": [
+        "What object is anchored: block header, finality certificate, proof, reporter quorum, or wrapped-asset mint?",
+        "Who can challenge or revert a bad source-chain claim?",
+        "Where are locked source assets held and how can users exit?",
+        "Does the app need bridge custody, or only a receipt mapper?",
+        "What happens during source-chain reorgs or bridge outages?"
+      ],
+      "firstArtifact": "bridge-anchor-brief",
+      "doNotClaim": ["trustless bridge", "wrapped asset safety", "ZK proves canonical external state", "cross-chain atomicity"]
+    },
+    {
+      "id": "dex-amm-rail",
+      "name": "DEX / AMM / liquidity rail",
+      "triggerPhrases": ["DEX", "AMM", "swap", "LP", "pool reserves", "slippage", "MEV"],
+      "whyItMatters": "DEXs attract liquidity, but require enforceable reserve accounting, ordering rules, LP accounting, and user-safe settlement.",
+      "localSources": [
+        "fixtures/MissingRailsMatrix.json#dex-amm",
+        "fixtures/DefiResearchBacklog.json#amm-pool-research",
+        "fixtures/CrossChainResearchLibrary.json#uniswap-amm",
+        "docs/ECOSYSTEM_BUILD_PLAN.md"
+      ],
+      "externalSources": [],
+      "researchQuestions": [
+        "Are reserves covenant state, indexer state, rollup state, vProg state, or issuer records?",
+        "What enforces minimum output and slippage?",
+        "How are LP shares minted, burned, and redeemed?",
+        "How is ordering handled under fast blockDAG inclusion?",
+        "What can be built first as an accepted intent registry without custody?"
+      ],
+      "firstArtifact": "amm-rail-brief",
+      "doNotClaim": ["live DEX", "MEV resistance", "safe LP shares", "atomic settlement"]
+    }
+  ]
+}

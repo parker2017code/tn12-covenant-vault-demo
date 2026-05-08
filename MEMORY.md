@@ -21,6 +21,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Wallet-review gate: `npm run wallet:review`
 - Mainstream app direction gate: `npm run mainstream:direction`
 - Missing rails gate: `npm run rails:missing`
+- Rail research trigger gate: `npm run rails:research`
 - Durable indexer schema/replay gates: `npm run indexer:schema` and `npm run indexer:replay`
 
 The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has accepted role-separated positive proofs for all seven vault, assurance, and escrow paths: recovery/withdrawal, release/refund, and release/refund/cancel. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
@@ -83,6 +84,7 @@ Paused on 2026-05-08 after local invalid-candidate work:
 - `docs/MAINSTREAM_APP_DIRECTION.md` now documents high-impact mainstream app targets, with invoice/receipt, escrow/freelance, batch assurance, wallet submit, access passes, auctions, vault/treasury, assets, stable-value, and DEX/lending/perps mapped to the correct build/research lane.
 - `npm run mainstream:direction` now writes `artifacts/mainstream-app-direction.json` from `fixtures/MainstreamAppDirection.json`.
 - `npm run rails:missing` now writes `artifacts/missing-rails-matrix.json` from `fixtures/MissingRailsMatrix.json`, answering the DEX/AMM, lending, perps/prediction, bridge/source-chain, and stable-value rail questions from repo-local evidence and first principles.
+- `npm run rails:research` now writes `artifacts/rail-research-triggers.json` from `fixtures/RailResearchTriggers.json`, routing oracle/Kaskad/miner-RTD/bridge/DEX/lending terms to local evidence, external source leads, first questions, required first artifacts, and do-not-claim boundaries.
 - `npm run indexer:schema` now writes `artifacts/indexer-storage-schema.json`.
 - `npm run indexer:replay` now writes `artifacts/indexer-replay-run.json`, materializing the 33-record public-read checkpoint into checkpoint, accepted transaction, payload event, proof spend, and rollback rows.
 
@@ -100,7 +102,7 @@ Current WIP:
 - Invalid-candidate definitions are local-review-only, not signed invalid transactions and not TN12 rejection evidence.
 - Resume by running `npm run check:all` and `npm run check:tn12` after any follow-up edits; both passed after this change.
 - The next durable indexer step is replacing known-txid checkpoint input with a node/RPC virtual-chain reader feeding the replay tables.
-- The next high-impact app research step is turning the highest-priority missing-rails category into a one-page app brief only after the matrix names the rail gaps and do-not-claim boundary.
+- The next high-impact app research step is turning the highest-priority missing-rails or trigger lane into a one-page app brief only after the matrix and trigger registry name the rail gaps, research sources, first artifact, and do-not-claim boundary.
 - The next safe protocol step is funding fresh expendable role-separated outputs before attempting any TN12 rejection submissions.
 
 ## Update Rule

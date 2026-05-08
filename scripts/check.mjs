@@ -44,6 +44,7 @@ import {
 import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildMainstreamAppDirection } from "../src/mainstreamAppDirection.mjs";
 import { buildMissingRailsMatrix } from "../src/missingRailsMatrix.mjs";
+import { buildRailResearchTriggers } from "../src/railResearchTriggers.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
@@ -278,6 +279,24 @@ assert.ok(missingRailsMatrix.categories.some((category) =>
 ));
 const missingRailsArtifact = JSON.parse(await readFile(new URL("../artifacts/missing-rails-matrix.json", import.meta.url), "utf8"));
 assert.equal(missingRailsArtifact.summary.questions, 23);
+const railResearchFixture = JSON.parse(await readFile(new URL("../fixtures/RailResearchTriggers.json", import.meta.url), "utf8"));
+const railResearchTriggers = buildRailResearchTriggers(railResearchFixture);
+assert.equal(railResearchTriggers.status, "research-triggers-ready");
+assert.equal(railResearchTriggers.summary.triggers, 5);
+assert.ok(railResearchTriggers.summary.localSourceRefs >= 20);
+assert.ok(railResearchTriggers.summary.externalSourceRefs >= 9);
+assert.ok(railResearchTriggers.triggers.every((trigger) => trigger.status === "trigger-ready"));
+assert.ok(railResearchTriggers.triggers.some((trigger) =>
+  trigger.id === "oracle-price-rail"
+  && trigger.externalSources.some((source) => source.url === "https://www.kaskad.app/oracle-kaspa")
+));
+assert.ok(railResearchTriggers.triggers.some((trigger) =>
+  trigger.id === "miner-rtd-signal-rail"
+  && trigger.firstArtifact === "miner-signal-thresholds"
+));
+const railResearchArtifact = JSON.parse(await readFile(new URL("../artifacts/rail-research-triggers.json", import.meta.url), "utf8"));
+assert.equal(railResearchArtifact.summary.triggers, 5);
+assert.equal(railResearchArtifact.status, "research-triggers-ready");
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -867,6 +886,7 @@ const files = [
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
   "scripts/build-missing-rails-matrix.mjs",
+  "scripts/build-rail-research-triggers.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
@@ -947,6 +967,7 @@ const files = [
   "artifacts/based-rollup-scout.json",
   "artifacts/mainstream-app-direction.json",
   "artifacts/missing-rails-matrix.json",
+  "artifacts/rail-research-triggers.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
@@ -996,6 +1017,7 @@ const files = [
   "fixtures/BasedRollupScout.json",
   "fixtures/MainstreamAppDirection.json",
   "fixtures/MissingRailsMatrix.json",
+  "fixtures/RailResearchTriggers.json",
   "fixtures/BatchAssuranceCampaign.json",
   "fixtures/EnforcementMatrix.json",
   "fixtures/EscrowPrimitives.json",
@@ -1046,6 +1068,7 @@ const files = [
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
   "src/missingRailsMatrix.mjs",
+  "src/railResearchTriggers.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
   "src/enforcementMatrix.mjs",
@@ -1125,6 +1148,7 @@ assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run mainstream:direction/);
 assert.match(readme, /npm run rails:missing/);
+assert.match(readme, /npm run rails:research/);
 assert.match(readme, /npm run covenant:adversarial/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);

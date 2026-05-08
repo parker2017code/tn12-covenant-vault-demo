@@ -14,6 +14,10 @@ Missing-rails source: `fixtures/MissingRailsMatrix.json`.
 Generated missing-rails artifact: `artifacts/missing-rails-matrix.json`.
 Build command: `npm run rails:missing`.
 
+Research trigger source: `fixtures/RailResearchTriggers.json`.
+Generated research trigger artifact: `artifacts/rail-research-triggers.json`.
+Build command: `npm run rails:research`.
+
 ## Priority Rule
 
 Build the highest-impact user-facing apps first when they can be connected to existing proof:
@@ -73,6 +77,8 @@ For each, the repo should require a short app brief before code:
 7. what must not be claimed yet.
 
 `npm run rails:missing` records the first-principles questions and current answers for the highest-risk categories: DEX/AMM, lending, perps/prediction, bridge/source-chain apps, and stable-value units.
+
+`npm run rails:research` records the routes that should trigger deeper research before the repo upgrades claims. Current trigger lanes cover oracle/price feeds, Kaskad/lending mechanics, miner/RTD signals, bridge/source-chain anchors, and DEX/AMM liquidity mechanics. Each trigger names local repo evidence, external source leads, research questions, a first artifact, and do-not-claim boundaries.
 
 ## Done Standard
 

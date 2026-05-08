@@ -21,6 +21,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Wallet-review readiness command: `npm run wallet:review`
 - Mainstream app direction command: `npm run mainstream:direction`
 - Missing rails matrix command: `npm run rails:missing`
+- Rail research trigger command: `npm run rails:research`
 - Durable indexer schema command: `npm run indexer:schema`
 - Durable indexer fixture replay command: `npm run indexer:replay`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
@@ -65,6 +66,7 @@ The project no longer depends on a local full Kaspa node. It uses public TN12 RE
 - Edit or publish `/home/parker2017/kaspa-explained` only when the user asks for that repo.
 - For unclear protocol behavior, check artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and Rusty Kaspa source/tests before escalating. A good escalation includes the txid, artifact path, endpoint response, source line, and smallest reproducer command.
 - Miner-signal ideas start with transaction payloads. Coinbase payload or pool policy is later mining-software research.
+- Research-trigger rule: when plans mention oracle/price feeds, Kaskad, lending, liquidation, collateral, miner/RTD sampling, bridge anchors, DEX, AMM, LP shares, or MEV, run or inspect `npm run rails:research` and keep claims in research until the first artifact exists.
 
 ## Design Direction
 
