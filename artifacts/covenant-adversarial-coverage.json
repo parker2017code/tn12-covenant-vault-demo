@@ -1,0 +1,564 @@
+{
+  "schema": "tn12-covenant-adversarial-coverage/v1",
+  "network": "kaspa-testnet-12",
+  "status": "local-adversarial-coverage-with-open-gaps",
+  "summary": {
+    "acceptedProofSpends": 7,
+    "localDraftCases": 7,
+    "coveredCases": 2,
+    "adversarialMutations": 38,
+    "roleSeparatedContracts": 0,
+    "roleSeparationGaps": 3,
+    "openGaps": 11
+  },
+  "scope": [
+    "These are local adversarial checks over signed draft shape, compiled redeem script, branch selector, output lock, amount, and input mass fields.",
+    "They are not TN12 rejection submissions for intentionally invalid transactions.",
+    "Accepted proof spends remain the happy-path network evidence; role-separated negative submissions are the next stronger evidence layer."
+  ],
+  "roleSeparation": {
+    "status": "role-separation-gaps",
+    "contracts": [
+      {
+        "contract": "DelayedRecoveryVault",
+        "roles": [
+          {
+            "role": "owner",
+            "xOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5"
+          },
+          {
+            "role": "recovery",
+            "xOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5"
+          }
+        ],
+        "rolesAreDistinct": false
+      },
+      {
+        "contract": "AssurancePledge",
+        "roles": [
+          {
+            "role": "contributor",
+            "xOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5"
+          },
+          {
+            "role": "recipient",
+            "xOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5"
+          }
+        ],
+        "rolesAreDistinct": false
+      },
+      {
+        "contract": "Escrow",
+        "roles": [
+          {
+            "role": "buyer",
+            "xOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5"
+          },
+          {
+            "role": "seller",
+            "xOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5"
+          }
+        ],
+        "rolesAreDistinct": false
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "vault-recovery:recover",
+      "acceptedTxid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "representativeDraftTxid": "6c3873c7374e6cd9cd1cdfdd5aab81222d3fb6090e3ec9ff512f42579a4f4c4c",
+      "draftPath": "artifacts/signed-drafts/vault-recovery.json",
+      "contract": "DelayedRecoveryVault",
+      "entrypoint": "recover",
+      "sourceLines": "contracts/DelayedRecoveryVault.sil:19-26",
+      "status": "local-positive-shape-mismatch",
+      "positiveChecks": {
+        "acceptedProofMapped": true,
+        "sourceOutpointMatchesAcceptedProof": false,
+        "outputAmountMatchesInputMinusFee": true,
+        "destinationAmountMatchesOutput": true,
+        "outputScriptMatchesDestination": true,
+        "redeemScriptMatchesCompiledContract": false,
+        "signatureArgumentCountMatchesEntrypoint": true,
+        "selectorMatchesEntrypoint": true,
+        "inputMassMatchesTxVersion": true,
+        "timeLockShapeMatchesEntrypoint": true
+      },
+      "witnessShape": {
+        "selectorOpcode": "OP_1",
+        "signaturePushes": 1,
+        "expectedSignatures": [
+          "recoverySig"
+        ],
+        "redeemScriptBytes": 212
+      },
+      "scriptMapping": {
+        "compiledArtifact": "artifacts/DelayedRecoveryVault.json",
+        "compiledScriptBytes": 213,
+        "redeemScriptMatchesCompiledContract": false
+      },
+      "adversarialMutations": [
+        {
+          "id": "wrong-source-outpoint",
+          "localCheck": "sourceOutpointMatchesAcceptedProof",
+          "expectedFailure": "The spend would not consume the accepted contract instance."
+        },
+        {
+          "id": "wrong-output-amount",
+          "localCheck": "outputAmountMatchesInputMinusFee",
+          "expectedFailure": "The contract amount equality check would fail."
+        },
+        {
+          "id": "wrong-output-lock",
+          "localCheck": "outputScriptMatchesDestination",
+          "expectedFailure": "The contract output lock must pay the recovery P2PK script."
+        },
+        {
+          "id": "wrong-entrypoint-selector",
+          "localCheck": "selectorMatchesEntrypoint",
+          "expectedFailure": "The P2SH stack would dispatch to the wrong entrypoint branch."
+        },
+        {
+          "id": "missing-required-signature",
+          "localCheck": "signatureArgumentCountMatchesEntrypoint",
+          "expectedFailure": "The entrypoint expects recoverySig."
+        }
+      ],
+      "gaps": [
+        "sourceOutpointMatchesAcceptedProof",
+        "redeemScriptMatchesCompiledContract"
+      ]
+    },
+    {
+      "id": "vault-withdrawal:withdraw",
+      "acceptedTxid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
+      "representativeDraftTxid": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
+      "draftPath": "artifacts/signed-drafts/vault-withdrawal.json",
+      "contract": "DelayedRecoveryVault",
+      "entrypoint": "withdraw",
+      "sourceLines": "contracts/DelayedRecoveryVault.sil:9-17",
+      "status": "local-positive-shape-mismatch",
+      "positiveChecks": {
+        "acceptedProofMapped": true,
+        "sourceOutpointMatchesAcceptedProof": true,
+        "outputAmountMatchesInputMinusFee": true,
+        "destinationAmountMatchesOutput": true,
+        "outputScriptMatchesDestination": true,
+        "redeemScriptMatchesCompiledContract": false,
+        "signatureArgumentCountMatchesEntrypoint": true,
+        "selectorMatchesEntrypoint": true,
+        "inputMassMatchesTxVersion": true,
+        "timeLockShapeMatchesEntrypoint": true
+      },
+      "witnessShape": {
+        "selectorOpcode": "OP_0",
+        "signaturePushes": 1,
+        "expectedSignatures": [
+          "ownerSig"
+        ],
+        "redeemScriptBytes": 212
+      },
+      "scriptMapping": {
+        "compiledArtifact": "artifacts/DelayedRecoveryVault.json",
+        "compiledScriptBytes": 213,
+        "redeemScriptMatchesCompiledContract": false
+      },
+      "adversarialMutations": [
+        {
+          "id": "wrong-source-outpoint",
+          "localCheck": "sourceOutpointMatchesAcceptedProof",
+          "expectedFailure": "The spend would not consume the accepted contract instance."
+        },
+        {
+          "id": "wrong-output-amount",
+          "localCheck": "outputAmountMatchesInputMinusFee",
+          "expectedFailure": "The contract amount equality check would fail."
+        },
+        {
+          "id": "wrong-output-lock",
+          "localCheck": "outputScriptMatchesDestination",
+          "expectedFailure": "The contract output lock must pay the owner P2PK script."
+        },
+        {
+          "id": "wrong-entrypoint-selector",
+          "localCheck": "selectorMatchesEntrypoint",
+          "expectedFailure": "The P2SH stack would dispatch to the wrong entrypoint branch."
+        },
+        {
+          "id": "missing-required-signature",
+          "localCheck": "signatureArgumentCountMatchesEntrypoint",
+          "expectedFailure": "The entrypoint expects ownerSig."
+        },
+        {
+          "id": "missing-time-lock",
+          "localCheck": "timeLockShapeMatchesEntrypoint",
+          "expectedFailure": "The refund or withdrawal branch requires a nonzero lockTime and nonfinal sequence."
+        }
+      ],
+      "gaps": [
+        "redeemScriptMatchesCompiledContract"
+      ]
+    },
+    {
+      "id": "assurance-release:release",
+      "acceptedTxid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
+      "representativeDraftTxid": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
+      "draftPath": "artifacts/signed-drafts/assurance-release.json",
+      "contract": "AssurancePledge",
+      "entrypoint": "release",
+      "sourceLines": "contracts/AssurancePledge.sil:9-18",
+      "status": "local-positive-shape-mismatch",
+      "positiveChecks": {
+        "acceptedProofMapped": true,
+        "sourceOutpointMatchesAcceptedProof": false,
+        "outputAmountMatchesInputMinusFee": true,
+        "destinationAmountMatchesOutput": true,
+        "outputScriptMatchesDestination": true,
+        "redeemScriptMatchesCompiledContract": false,
+        "signatureArgumentCountMatchesEntrypoint": true,
+        "selectorMatchesEntrypoint": true,
+        "inputMassMatchesTxVersion": true,
+        "timeLockShapeMatchesEntrypoint": true
+      },
+      "witnessShape": {
+        "selectorOpcode": "OP_0",
+        "signaturePushes": 0,
+        "expectedSignatures": [],
+        "redeemScriptBytes": 175
+      },
+      "scriptMapping": {
+        "compiledArtifact": "artifacts/AssurancePledge.json",
+        "compiledScriptBytes": 176,
+        "redeemScriptMatchesCompiledContract": false
+      },
+      "adversarialMutations": [
+        {
+          "id": "wrong-source-outpoint",
+          "localCheck": "sourceOutpointMatchesAcceptedProof",
+          "expectedFailure": "The spend would not consume the accepted contract instance."
+        },
+        {
+          "id": "wrong-output-amount",
+          "localCheck": "outputAmountMatchesInputMinusFee",
+          "expectedFailure": "The contract amount equality check would fail."
+        },
+        {
+          "id": "wrong-output-lock",
+          "localCheck": "outputScriptMatchesDestination",
+          "expectedFailure": "The contract output lock must pay the recipient P2PK script."
+        },
+        {
+          "id": "wrong-entrypoint-selector",
+          "localCheck": "selectorMatchesEntrypoint",
+          "expectedFailure": "The P2SH stack would dispatch to the wrong entrypoint branch."
+        }
+      ],
+      "gaps": [
+        "sourceOutpointMatchesAcceptedProof",
+        "redeemScriptMatchesCompiledContract"
+      ]
+    },
+    {
+      "id": "assurance-refund:refund",
+      "acceptedTxid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
+      "representativeDraftTxid": "0ad367cea66c3c823cc9c23e1e874cedc0fb30e90c3deaa309cdcee2dc4f54aa",
+      "draftPath": "artifacts/signed-drafts/assurance-refund.json",
+      "contract": "AssurancePledge",
+      "entrypoint": "refund",
+      "sourceLines": "contracts/AssurancePledge.sil:20-28",
+      "status": "local-positive-shape-mismatch",
+      "positiveChecks": {
+        "acceptedProofMapped": true,
+        "sourceOutpointMatchesAcceptedProof": true,
+        "outputAmountMatchesInputMinusFee": true,
+        "destinationAmountMatchesOutput": true,
+        "outputScriptMatchesDestination": true,
+        "redeemScriptMatchesCompiledContract": false,
+        "signatureArgumentCountMatchesEntrypoint": true,
+        "selectorMatchesEntrypoint": true,
+        "inputMassMatchesTxVersion": true,
+        "timeLockShapeMatchesEntrypoint": true
+      },
+      "witnessShape": {
+        "selectorOpcode": "OP_1",
+        "signaturePushes": 1,
+        "expectedSignatures": [
+          "contributorSig"
+        ],
+        "redeemScriptBytes": 175
+      },
+      "scriptMapping": {
+        "compiledArtifact": "artifacts/AssurancePledge.json",
+        "compiledScriptBytes": 176,
+        "redeemScriptMatchesCompiledContract": false
+      },
+      "adversarialMutations": [
+        {
+          "id": "wrong-source-outpoint",
+          "localCheck": "sourceOutpointMatchesAcceptedProof",
+          "expectedFailure": "The spend would not consume the accepted contract instance."
+        },
+        {
+          "id": "wrong-output-amount",
+          "localCheck": "outputAmountMatchesInputMinusFee",
+          "expectedFailure": "The contract amount equality check would fail."
+        },
+        {
+          "id": "wrong-output-lock",
+          "localCheck": "outputScriptMatchesDestination",
+          "expectedFailure": "The contract output lock must pay the contributor P2PK script."
+        },
+        {
+          "id": "wrong-entrypoint-selector",
+          "localCheck": "selectorMatchesEntrypoint",
+          "expectedFailure": "The P2SH stack would dispatch to the wrong entrypoint branch."
+        },
+        {
+          "id": "missing-required-signature",
+          "localCheck": "signatureArgumentCountMatchesEntrypoint",
+          "expectedFailure": "The entrypoint expects contributorSig."
+        },
+        {
+          "id": "missing-time-lock",
+          "localCheck": "timeLockShapeMatchesEntrypoint",
+          "expectedFailure": "The refund or withdrawal branch requires a nonzero lockTime and nonfinal sequence."
+        }
+      ],
+      "gaps": [
+        "redeemScriptMatchesCompiledContract"
+      ]
+    },
+    {
+      "id": "escrow-release:release",
+      "acceptedTxid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "representativeDraftTxid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "draftPath": "artifacts/signed-drafts/escrow-release.json",
+      "contract": "Escrow",
+      "entrypoint": "release",
+      "sourceLines": "contracts/Escrow.sil:8-15",
+      "status": "local-adversarial-checks-covered",
+      "positiveChecks": {
+        "acceptedProofMapped": true,
+        "sourceOutpointMatchesAcceptedProof": true,
+        "outputAmountMatchesInputMinusFee": true,
+        "destinationAmountMatchesOutput": true,
+        "outputScriptMatchesDestination": true,
+        "redeemScriptMatchesCompiledContract": true,
+        "signatureArgumentCountMatchesEntrypoint": true,
+        "selectorMatchesEntrypoint": true,
+        "inputMassMatchesTxVersion": true,
+        "timeLockShapeMatchesEntrypoint": true
+      },
+      "witnessShape": {
+        "selectorOpcode": "OP_0",
+        "signaturePushes": 1,
+        "expectedSignatures": [
+          "buyerSig"
+        ],
+        "redeemScriptBytes": 351
+      },
+      "scriptMapping": {
+        "compiledArtifact": "artifacts/Escrow.json",
+        "compiledScriptBytes": 351,
+        "redeemScriptMatchesCompiledContract": true
+      },
+      "adversarialMutations": [
+        {
+          "id": "wrong-source-outpoint",
+          "localCheck": "sourceOutpointMatchesAcceptedProof",
+          "expectedFailure": "The spend would not consume the accepted contract instance."
+        },
+        {
+          "id": "wrong-output-amount",
+          "localCheck": "outputAmountMatchesInputMinusFee",
+          "expectedFailure": "The contract amount equality check would fail."
+        },
+        {
+          "id": "wrong-output-lock",
+          "localCheck": "outputScriptMatchesDestination",
+          "expectedFailure": "The contract output lock must pay the seller P2PK script."
+        },
+        {
+          "id": "wrong-entrypoint-selector",
+          "localCheck": "selectorMatchesEntrypoint",
+          "expectedFailure": "The P2SH stack would dispatch to the wrong entrypoint branch."
+        },
+        {
+          "id": "missing-required-signature",
+          "localCheck": "signatureArgumentCountMatchesEntrypoint",
+          "expectedFailure": "The entrypoint expects buyerSig."
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "id": "escrow-refund:refund",
+      "acceptedTxid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "representativeDraftTxid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "draftPath": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+      "contract": "Escrow",
+      "entrypoint": "refund",
+      "sourceLines": "contracts/Escrow.sil:17-25",
+      "status": "local-positive-shape-mismatch",
+      "positiveChecks": {
+        "acceptedProofMapped": true,
+        "sourceOutpointMatchesAcceptedProof": true,
+        "outputAmountMatchesInputMinusFee": true,
+        "destinationAmountMatchesOutput": true,
+        "outputScriptMatchesDestination": true,
+        "redeemScriptMatchesCompiledContract": false,
+        "signatureArgumentCountMatchesEntrypoint": true,
+        "selectorMatchesEntrypoint": true,
+        "inputMassMatchesTxVersion": true,
+        "timeLockShapeMatchesEntrypoint": true
+      },
+      "witnessShape": {
+        "selectorOpcode": "OP_1",
+        "signaturePushes": 1,
+        "expectedSignatures": [
+          "buyerSig"
+        ],
+        "redeemScriptBytes": 350
+      },
+      "scriptMapping": {
+        "compiledArtifact": "artifacts/Escrow.json",
+        "compiledScriptBytes": 351,
+        "redeemScriptMatchesCompiledContract": false
+      },
+      "adversarialMutations": [
+        {
+          "id": "wrong-source-outpoint",
+          "localCheck": "sourceOutpointMatchesAcceptedProof",
+          "expectedFailure": "The spend would not consume the accepted contract instance."
+        },
+        {
+          "id": "wrong-output-amount",
+          "localCheck": "outputAmountMatchesInputMinusFee",
+          "expectedFailure": "The contract amount equality check would fail."
+        },
+        {
+          "id": "wrong-output-lock",
+          "localCheck": "outputScriptMatchesDestination",
+          "expectedFailure": "The contract output lock must pay the buyer P2PK script."
+        },
+        {
+          "id": "wrong-entrypoint-selector",
+          "localCheck": "selectorMatchesEntrypoint",
+          "expectedFailure": "The P2SH stack would dispatch to the wrong entrypoint branch."
+        },
+        {
+          "id": "missing-required-signature",
+          "localCheck": "signatureArgumentCountMatchesEntrypoint",
+          "expectedFailure": "The entrypoint expects buyerSig."
+        },
+        {
+          "id": "missing-time-lock",
+          "localCheck": "timeLockShapeMatchesEntrypoint",
+          "expectedFailure": "The refund or withdrawal branch requires a nonzero lockTime and nonfinal sequence."
+        }
+      ],
+      "gaps": [
+        "redeemScriptMatchesCompiledContract"
+      ]
+    },
+    {
+      "id": "escrow-cancel:cancel",
+      "acceptedTxid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "representativeDraftTxid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "draftPath": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "contract": "Escrow",
+      "entrypoint": "cancel",
+      "sourceLines": "contracts/Escrow.sil:27-36",
+      "status": "local-adversarial-checks-covered",
+      "positiveChecks": {
+        "acceptedProofMapped": true,
+        "sourceOutpointMatchesAcceptedProof": true,
+        "outputAmountMatchesInputMinusFee": true,
+        "destinationAmountMatchesOutput": true,
+        "outputScriptMatchesDestination": true,
+        "redeemScriptMatchesCompiledContract": true,
+        "signatureArgumentCountMatchesEntrypoint": true,
+        "selectorMatchesEntrypoint": true,
+        "inputMassMatchesTxVersion": true,
+        "timeLockShapeMatchesEntrypoint": true
+      },
+      "witnessShape": {
+        "selectorOpcode": "OP_2",
+        "signaturePushes": 2,
+        "expectedSignatures": [
+          "buyerSig",
+          "sellerSig"
+        ],
+        "redeemScriptBytes": 351
+      },
+      "scriptMapping": {
+        "compiledArtifact": "artifacts/Escrow.json",
+        "compiledScriptBytes": 351,
+        "redeemScriptMatchesCompiledContract": true
+      },
+      "adversarialMutations": [
+        {
+          "id": "wrong-source-outpoint",
+          "localCheck": "sourceOutpointMatchesAcceptedProof",
+          "expectedFailure": "The spend would not consume the accepted contract instance."
+        },
+        {
+          "id": "wrong-output-amount",
+          "localCheck": "outputAmountMatchesInputMinusFee",
+          "expectedFailure": "The contract amount equality check would fail."
+        },
+        {
+          "id": "wrong-output-lock",
+          "localCheck": "outputScriptMatchesDestination",
+          "expectedFailure": "The contract output lock must pay the buyer P2PK script."
+        },
+        {
+          "id": "wrong-entrypoint-selector",
+          "localCheck": "selectorMatchesEntrypoint",
+          "expectedFailure": "The P2SH stack would dispatch to the wrong entrypoint branch."
+        },
+        {
+          "id": "missing-required-signature",
+          "localCheck": "signatureArgumentCountMatchesEntrypoint",
+          "expectedFailure": "The entrypoint expects buyerSig, sellerSig."
+        },
+        {
+          "id": "single-party-cancel",
+          "localCheck": "signatureArgumentCountMatchesEntrypoint",
+          "expectedFailure": "The cancel branch expects buyerSig and sellerSig."
+        }
+      ],
+      "gaps": [
+        "Escrow cancel currently has two signature arguments, but the fixture buyer and seller keys are not role-separated."
+      ]
+    }
+  ],
+  "gaps": [
+    "sourceOutpointMatchesAcceptedProof",
+    "redeemScriptMatchesCompiledContract",
+    "redeemScriptMatchesCompiledContract",
+    "sourceOutpointMatchesAcceptedProof",
+    "redeemScriptMatchesCompiledContract",
+    "redeemScriptMatchesCompiledContract",
+    "redeemScriptMatchesCompiledContract",
+    "Escrow cancel currently has two signature arguments, but the fixture buyer and seller keys are not role-separated.",
+    "DelayedRecoveryVault constructor roles reuse the same public key in current fixtures.",
+    "AssurancePledge constructor roles reuse the same public key in current fixtures.",
+    "Escrow constructor roles reuse the same public key in current fixtures."
+  ],
+  "nextActions": [
+    {
+      "id": "role-separated-fixtures",
+      "detail": "Generate separate buyer/seller, owner/recovery, and contributor/recipient constructor fixtures."
+    },
+    {
+      "id": "role-separated-tn12-proofs",
+      "detail": "Fund fresh role-separated contract outputs and submit accepted release/refund/cancel spends."
+    },
+    {
+      "id": "invalid-submit-candidates",
+      "detail": "Build explicit wrong-signer, wrong-selector, wrong-output, and wrong-amount drafts for local review before any TN12 rejection attempt."
+    }
+  ]
+}

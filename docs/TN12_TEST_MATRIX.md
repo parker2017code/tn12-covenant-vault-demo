@@ -67,6 +67,7 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 
 - wallet-review flow replacing local signing and shell submit,
 - durable node/RPC checkpoint ingestion with virtual-chain rollback replay,
+- role-separated covenant negative candidates and any later TN12 rejection attempts,
 - batch assurance custody release from multiple amount-matched pledge outputs,
 - batch assurance custody refund from multiple amount-matched pledge outputs,
 - auction custody settlement/refund transaction, atomic exchange, and asset delivery,

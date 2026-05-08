@@ -68,6 +68,7 @@ import { buildBasedRollupScout } from "../src/basedRollupScout.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProjectPlan } from "../src/projectPlan.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
+import { buildCovenantAdversarialCoverage } from "../src/covenantAdversarialCoverage.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
 import { buildPersistedCheckpointGuard } from "../src/indexerPersistence.mjs";
@@ -436,17 +437,51 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 9);
+assert.equal(projectPlan.summary.done, 10);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 6);
 assert.equal(projectPlan.summary.later, 6);
 assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
 assert.ok(projectPlan.done.some((item) => item.id === "based-rollup-scout"));
+assert.ok(projectPlan.done.some((item) => item.id === "covenant-adversarial-map"));
+assert.ok(projectPlan.next.some((item) => item.id === "role-separated-negative-proofs"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
 assert.ok(projectPlan.longTermVision.some((item) => /wallet-reviewed Kaspa app console/.test(item)));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
+const covenantCoverage = buildCovenantAdversarialCoverage({
+  proofFixture,
+  constructorArgs: {
+    DelayedRecoveryVault: JSON.parse(await readFile(new URL("../fixtures/DelayedRecoveryVault.ctor.json", import.meta.url), "utf8")),
+    AssurancePledge: JSON.parse(await readFile(new URL("../fixtures/AssurancePledge.ctor.json", import.meta.url), "utf8")),
+    Escrow: JSON.parse(await readFile(new URL("../fixtures/Escrow.ctor.json", import.meta.url), "utf8"))
+  },
+  compiledContracts: {
+    DelayedRecoveryVault: JSON.parse(await readFile(new URL("../artifacts/DelayedRecoveryVault.json", import.meta.url), "utf8")),
+    AssurancePledge: JSON.parse(await readFile(new URL("../artifacts/AssurancePledge.json", import.meta.url), "utf8")),
+    Escrow: JSON.parse(await readFile(new URL("../artifacts/Escrow.json", import.meta.url), "utf8"))
+  },
+  drafts: [
+    { path: "artifacts/signed-drafts/vault-recovery.json", acceptedTxid: "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391", draft: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/vault-recovery.json", import.meta.url), "utf8")) },
+    { path: "artifacts/signed-drafts/vault-withdrawal.json", acceptedTxid: "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710", draft: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/vault-withdrawal.json", import.meta.url), "utf8")) },
+    { path: "artifacts/signed-drafts/assurance-release.json", acceptedTxid: "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f", draft: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/assurance-release.json", import.meta.url), "utf8")) },
+    { path: "artifacts/signed-drafts/assurance-refund.json", acceptedTxid: "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61", draft: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/assurance-refund.json", import.meta.url), "utf8")) },
+    { path: "artifacts/signed-drafts/escrow-release.json", acceptedTxid: "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d", draft: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-release.json", import.meta.url), "utf8")) },
+    { path: "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json", acceptedTxid: "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d", draft: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-daa-refund-proof-refund.json", import.meta.url), "utf8")) },
+    { path: "artifacts/signed-drafts/escrow-cancel-proof-cancel.json", acceptedTxid: "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c", draft: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel-proof-cancel.json", import.meta.url), "utf8")) }
+  ]
+});
+assert.equal(covenantCoverage.status, "local-adversarial-coverage-with-open-gaps");
+assert.equal(covenantCoverage.summary.acceptedProofSpends, 7);
+assert.equal(covenantCoverage.summary.localDraftCases, 7);
+assert.equal(covenantCoverage.summary.adversarialMutations, 38);
+assert.equal(covenantCoverage.summary.roleSeparationGaps, 3);
+assert.ok(covenantCoverage.cases.some((item) =>
+  item.id === "escrow-cancel:cancel"
+  && item.positiveChecks.inputMassMatchesTxVersion
+));
+assert.ok(covenantCoverage.gaps.some((gap) => /constructor roles reuse/.test(gap)));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
   {
@@ -675,6 +710,7 @@ const files = [
   "scripts/build-signed-payload-receipt-draft.mjs",
   "scripts/verify-accepted-txs.mjs",
   "scripts/build-proof-evidence.mjs",
+  "scripts/build-covenant-adversarial-coverage.mjs",
   "scripts/build-accepted-app-state.mjs",
   "scripts/build-checkpointed-index.mjs",
   "scripts/build-persisted-checkpoint-guard.mjs",
@@ -740,6 +776,7 @@ const files = [
   "artifacts/batch-assurance-custody-requirements.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/proof-evidence.json",
+  "artifacts/covenant-adversarial-coverage.json",
   "artifacts/escrow-primitives.json",
   "artifacts/treasury-vaults.json",
   "artifacts/payload-submit-readiness.json",
@@ -819,6 +856,7 @@ const files = [
   "src/stableIssuerRedemption.mjs",
   "src/buildStatus.mjs",
   "src/projectPlan.mjs",
+  "src/covenantAdversarialCoverage.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -867,6 +905,7 @@ assert.match(readme, /npm run wallet:review/);
 assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
+assert.match(readme, /npm run covenant:adversarial/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);
 assert.match(readme, /npm run campaign:custody-requirements/);

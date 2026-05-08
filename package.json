@@ -28,6 +28,7 @@
     "tx:payload": "node scripts/build-signed-payload-receipt-draft.mjs",
     "tx:verify": "node scripts/verify-accepted-txs.mjs",
     "proof:evidence": "node scripts/build-proof-evidence.mjs",
+    "covenant:adversarial": "node scripts/build-covenant-adversarial-coverage.mjs",
     "tx:submit:dry": "node scripts/submit-signed-draft.mjs",
     "tx:submit:wrpc": "node scripts/submit-signed-draft-wrpc.mjs",
     "indexer:state": "node scripts/build-accepted-app-state.mjs",

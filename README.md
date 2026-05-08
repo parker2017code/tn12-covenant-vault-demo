@@ -218,9 +218,12 @@ Verify the accepted proof transactions and expected outputs through the public T
 npm run check:tn12
 npm run tx:verify
 npm run proof:evidence
+npm run covenant:adversarial
 ```
 
 `npm run check:tn12` runs the full public TN12 evidence gate: proof transaction verification, proof-shape evidence, payload-event verification, checkpoint rebuild, and persisted checkpoint guard. `npm run proof:evidence` resolves each proof spend's previous output and checks the important shape: P2SH (`p...`) contract input to expected P2PK (`q...`) wallet output.
+
+`npm run covenant:adversarial` builds `artifacts/covenant-adversarial-coverage.json`. It is local coverage, not TN12 rejection evidence. It maps selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and Silverscript-to-redeem-script checks for the seven accepted proof paths. It also keeps the current gaps visible: role fixtures still reuse the same public key, and older vault/assurance accepted drafts need exact accepted-script preservation before they can be treated as clean script-mapping examples.
 
 Build the reusable accepted-transaction app-state snapshot:
 
@@ -466,11 +469,13 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 5. Done: checkpointed accepted-index artifact and persisted checkpoint guard for 7 proof spends and 26 payload events. Next: move from known-txid public reads to a node/RPC backend with durable storage and virtual-chain rollback replay.
 
-6. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
+6. Done: local covenant adversarial map for seven accepted proof paths. Next: build role-separated fixtures and exact invalid candidates before attempting any TN12 rejection proofs.
 
-7. Next: build a cross-chain app research library that studies open-source apps, PMF evidence, and failure modes from other ecosystems, then maps only the reusable patterns into Kaspa's live, TN12, roadmap, or research lanes.
+7. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 
-8. Next: use the master app plan in `docs/MASTER_APP_PLAN.md` as the operating build order for payload receipts, submit review, batch assurance, escrow, treasury vaults, access passes, assets, auctions, DeFi research, cross-chain research, miner/pool signals, and AI-agent commitments.
+8. Next: build a cross-chain app research library that studies open-source apps, PMF evidence, and failure modes from other ecosystems, then maps only the reusable patterns into Kaspa's live, TN12, roadmap, or research lanes.
+
+9. Next: use the master app plan in `docs/MASTER_APP_PLAN.md` as the operating build order for payload receipts, submit review, batch assurance, escrow, treasury vaults, access passes, assets, auctions, DeFi research, cross-chain research, miner/pool signals, and AI-agent commitments.
 
 ## Run Locally
 
