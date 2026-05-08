@@ -53,6 +53,7 @@ import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
 import { buildWalletReviewReadiness } from "../src/walletReview.mjs";
 import { summarizeWrpcCandidate } from "../src/wrpcSubmitCandidate.mjs";
+import { buildIndexerReplayPlan } from "../src/indexerReplayPlan.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
@@ -457,6 +458,15 @@ assert.equal(persistedCheckpointFixture.status, "persisted-checkpoint-ready");
 assert.equal(persistedCheckpointFixture.summary.recordCount, 33);
 assert.equal(persistedCheckpointFixture.summary.mismatches, 0);
 assert.equal(persistedCheckpointFixture.summary.rollbackDetected, false);
+const replayPlanFixture = JSON.parse(await readFile(new URL("../artifacts/indexer-replay-plan.json", import.meta.url), "utf8"));
+assert.equal(replayPlanFixture.status, "durable-indexer-plan-ready");
+assert.equal(replayPlanFixture.currentCheckpoint.recordCount, 33);
+assert.equal(replayPlanFixture.currentCheckpoint.proofSpends, 7);
+assert.equal(replayPlanFixture.currentCheckpoint.payloadEvents, 26);
+assert.equal(replayPlanFixture.currentCheckpoint.rollbackDetected, false);
+assert.equal(replayPlanFixture.target.dataVerbosity, "High");
+assert.ok(replayPlanFixture.buildOrder.some((step) => step.id === "rollback-replay"));
+assert.ok(replayPlanFixture.acceptanceCriteria.some((criterion) => criterion.includes("matched accepted payload bytes")));
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -510,6 +520,14 @@ const persistedCheckpoint = buildPersistedCheckpointGuard({
 });
 assert.equal(persistedCheckpoint.status, "persisted-checkpoint-ready");
 assert.equal(persistedCheckpoint.summary.rollbackDetected, false);
+const replayPlan = buildIndexerReplayPlan({
+  checkpointIndex: checkpointState,
+  persistedCheckpoint
+});
+assert.equal(replayPlan.status, "durable-indexer-plan-ready");
+assert.equal(replayPlan.currentCheckpoint.recordCount, 2);
+assert.equal(replayPlan.currentCheckpoint.proofSpends, 1);
+assert.equal(replayPlan.currentCheckpoint.payloadEvents, 1);
 const rollbackCheckpoint = buildPersistedCheckpointGuard({
   currentIndex: checkpointState,
   previousSnapshot: {
@@ -633,6 +651,7 @@ const files = [
   "scripts/build-accepted-app-state.mjs",
   "scripts/build-checkpointed-index.mjs",
   "scripts/build-persisted-checkpoint-guard.mjs",
+  "scripts/build-indexer-replay-plan.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -700,6 +719,7 @@ const files = [
   "artifacts/payload-error-evidence.json",
   "artifacts/checkpointed-accepted-index.json",
   "artifacts/persisted-checkpoint-guard.json",
+  "artifacts/indexer-replay-plan.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -805,6 +825,7 @@ assert.match(readme, /npm run wallet:public/);
 assert.match(readme, /npm run plan/);
 assert.match(readme, /npm run drafts/);
 assert.match(readme, /npm run indexer:persist/);
+assert.match(readme, /npm run indexer:replay-plan/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);

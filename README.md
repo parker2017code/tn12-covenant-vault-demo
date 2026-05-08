@@ -233,9 +233,10 @@ Build the checkpointed accepted-index artifact from public TN12 reads:
 ```sh
 npm run indexer:checkpoint
 npm run indexer:persist
+npm run indexer:replay-plan
 ```
 
-This writes `artifacts/checkpointed-accepted-index.json` and `artifacts/persisted-checkpoint-guard.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready.
+This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, and `artifacts/indexer-replay-plan.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready. The replay plan turns the current known-txid checkpoint into the next backend build order: storage schema, node/RPC virtual-chain reader, payload/proof reducers, rollback replay, and health surface.
 
 Build a compact transaction-payload receipt artifact for the accepted-transaction indexer lane:
 

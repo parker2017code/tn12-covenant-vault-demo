@@ -1,0 +1,70 @@
+{
+  "schema": "tn12-indexer-replay-plan/v1",
+  "network": "kaspa-testnet-12",
+  "status": "durable-indexer-plan-ready",
+  "currentCheckpoint": {
+    "kind": "known-txid-public-read-checkpoint",
+    "recordCount": 33,
+    "proofSpends": 7,
+    "payloadEvents": 26,
+    "matched": 33,
+    "mismatches": 0,
+    "laneCount": 18,
+    "minAcceptingBlockBlueScore": 5203140,
+    "maxAcceptingBlockBlueScore": 5961425,
+    "persistedStatus": "persisted-checkpoint-ready",
+    "rollbackDetected": false
+  },
+  "target": {
+    "status": "node-rpc-replay-indexer-not-built",
+    "source": "getVirtualChainFromBlockV2 or equivalent node/RPC virtual-chain feed",
+    "dataVerbosity": "High",
+    "storage": [
+      "checkpoint_watermarks",
+      "accepted_transactions",
+      "accepted_payload_events",
+      "proof_spend_outputs",
+      "rollback_segments"
+    ],
+    "replayGuarantee": "Rebuild derived app state from the last trusted blue-score watermark after any rollback."
+  },
+  "buildOrder": [
+    {
+      "id": "storage-schema",
+      "status": "next",
+      "detail": "Define append-only checkpoint and transaction tables."
+    },
+    {
+      "id": "virtual-chain-reader",
+      "status": "next",
+      "detail": "Read accepted transaction ids and block blue scores from a node/RPC feed."
+    },
+    {
+      "id": "payload-proof-decoder",
+      "status": "next",
+      "detail": "Reuse the current payload and proof matching rules against stored transactions."
+    },
+    {
+      "id": "rollback-replay",
+      "status": "next",
+      "detail": "On rollback, mark affected rows stale and rebuild app state from the previous trusted checkpoint."
+    },
+    {
+      "id": "ui-health-surface",
+      "status": "later",
+      "detail": "Expose last checkpoint, lag, rollback status, and mismatch count in the app."
+    }
+  ],
+  "acceptanceCriteria": [
+    "A replay run can rebuild the same 33 accepted records now covered by `npm run check:tn12`.",
+    "The indexer stores the txid, accepting block blue score, payload bytes, output data, and matched reducer status.",
+    "A lower blue-score watermark or missing previous txid blocks derived app state until replay finishes.",
+    "Payload app state remains tied to matched accepted payload bytes, not submitted txids alone.",
+    "The current public-read checkpoint remains valid evidence while the node/RPC replay backend is not built."
+  ],
+  "boundaries": [
+    "This is an implementation plan for durable indexing, not a live node subscription.",
+    "It does not change accepted proof or payload counts.",
+    "It keeps local-node setup optional until a durable backend slice is explicitly built."
+  ]
+}

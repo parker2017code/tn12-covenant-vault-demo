@@ -899,14 +899,16 @@ async function renderAcceptedAppState() {
   if (!indexerSummaryNode || !indexerRecordsNode || !receiptEventsNode) return;
 
   try {
-    const [stateResponse, checkpointResponse, persistenceResponse] = await Promise.all([
+    const [stateResponse, checkpointResponse, persistenceResponse, replayPlanResponse] = await Promise.all([
       fetch("fixtures/AcceptedAppState.json", { cache: "no-store" }),
       fetch("artifacts/checkpointed-accepted-index.json", { cache: "no-store" }),
-      fetch("artifacts/persisted-checkpoint-guard.json", { cache: "no-store" })
+      fetch("artifacts/persisted-checkpoint-guard.json", { cache: "no-store" }),
+      fetch("artifacts/indexer-replay-plan.json", { cache: "no-store" })
     ]);
     const state = await stateResponse.json();
     const checkpoint = await checkpointResponse.json();
     const persistence = await persistenceResponse.json();
+    const replayPlan = await replayPlanResponse.json();
     const summary = state.summary;
     const checkpointSummary = checkpoint.summary || {};
     indexerSummaryNode.innerHTML = `
@@ -923,6 +925,12 @@ async function renderAcceptedAppState() {
           <strong>${escapeHtml(persistence.summary.recordCount)} persisted records</strong>
           <p>Rollback detected: ${escapeHtml(persistence.summary.rollbackDetected)}</p>
           <small>${escapeHtml(persistence.rollback.action)}</small>
+        </article>
+        <article>
+          <span>${escapeHtml(replayPlan.status)}</span>
+          <strong>${escapeHtml(replayPlan.target.status)}</strong>
+          <p>${escapeHtml(replayPlan.currentCheckpoint.recordCount)} records must replay from ${escapeHtml(replayPlan.target.source)}.</p>
+          <small>${escapeHtml(replayPlan.buildOrder[0]?.detail || "Define durable indexer storage next.")}</small>
         </article>
       `;
     }

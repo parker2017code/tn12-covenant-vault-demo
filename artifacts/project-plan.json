@@ -32,8 +32,8 @@
       "enforcement": "planner-indexer",
       "readiness": "mainnet-capable-with-engineering",
       "proof": "accepted-tn12-json-wrpc-payload-receipt",
-      "detail": "Accepted payload events prove paid, refund, and error state without REST payload loss.",
-      "next": "Turn the verified JSON wRPC receipt path into repeatable wallet review, duplicate-payment checks, and clearer refund handling."
+      "detail": "Accepted payload events prove paid, refund, and error state; the durable replay plan is defined.",
+      "next": "Turn the verified JSON wRPC receipt path and replay plan into durable node/RPC indexing with rollback replay."
     },
     {
       "laneId": "access-passes",
@@ -132,7 +132,7 @@
     {
       "id": "durable-indexer",
       "laneId": "payload-invoice",
-      "detail": "Move known-txid checkpointing toward replayable node/RPC storage."
+      "detail": "Implement replay storage around the accepted-index replay plan."
     },
     {
       "id": "covenant-negative-tests",

@@ -4,7 +4,7 @@ export function buildProjectPlan(fixture = {}) {
 
   const done = [
     laneItem(byId, "escrow", "Seven accepted covenant proof spends are verified through `npm run check:tn12`."),
-    laneItem(byId, "payload-invoice", "Accepted payload events prove paid, refund, and error state without REST payload loss."),
+    laneItem(byId, "payload-invoice", "Accepted payload events prove paid, refund, and error state; the durable replay plan is defined."),
     laneItem(byId, "access-passes", "Accepted redemption payload state is indexed with duplicate safeguards."),
     laneItem(byId, "auction-intents", "Accepted bid and planner payloads prove indexer-side auction state."),
     laneItem(byId, "ai-agent-commitments", "Accepted task, proof, dispute, release, and hold payloads prove lifecycle state."),
@@ -21,7 +21,7 @@ export function buildProjectPlan(fixture = {}) {
   const next = [
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
     action("pledge-output-custody", "Build and submit amount-matched pledge outputs, then import those outpoints into custody drafts.", "batch-assurance"),
-    action("durable-indexer", "Move known-txid checkpointing toward replayable node/RPC storage.", "payload-invoice"),
+    action("durable-indexer", "Implement replay storage around the accepted-index replay plan.", "payload-invoice"),
     action("covenant-negative-tests", "Add wrong-signer and wrong-script-argument checks for accepted proof lanes.", "escrow"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals")
   ];

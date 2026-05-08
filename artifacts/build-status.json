@@ -25,11 +25,13 @@
         "src/indexerPersistence.mjs",
         "npm run invoice:registry",
         "npm run indexer:persist",
+        "npm run indexer:replay-plan",
         "npm run payload:readiness",
         "npm run payload:verify",
+        "artifacts/indexer-replay-plan.json",
         "artifacts/payload-receipt-evidence.json"
       ],
-      "next": "Turn the verified JSON wRPC receipt path into repeatable wallet review, duplicate-payment checks, and clearer refund handling."
+      "next": "Turn the verified JSON wRPC receipt path and replay plan into durable node/RPC indexing with rollback replay."
     },
     {
       "order": 2,
