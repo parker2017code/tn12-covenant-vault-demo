@@ -26,6 +26,8 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Project next-work queue gate: `npm run project:queue`
 - Durable indexer schema/replay gates: `npm run indexer:schema` and `npm run indexer:replay`
 - Wallet connector request gate: `npm run wallet:connector-requests`
+- Wallet connector adapter dry-run gate: `npm run wallet:adapter-run`
+- Virtual-chain ingestion run gate: `npm run indexer:virtual-chain-run`
 - Batch-assurance pledge-output plan gate: `npm run campaign:pledge-outputs`
 - Escrow marketplace demo gate: `npm run escrow:marketplace`
 - Attestation reputation gate: `npm run attestation:reputation`

@@ -63,6 +63,7 @@ import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
 import { buildWalletReviewReadiness } from "../src/walletReview.mjs";
 import { summarizeWrpcCandidate } from "../src/wrpcSubmitCandidate.mjs";
 import { buildIndexerReplayPlan } from "../src/indexerReplayPlan.mjs";
+import { buildWalletConnectorAdapterRun } from "../src/walletConnectorAdapterRun.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
@@ -85,6 +86,7 @@ import { buildPersistedCheckpointGuard } from "../src/indexerPersistence.mjs";
 import { buildIndexerStorageSchema } from "../src/indexerStorageSchema.mjs";
 import { buildIndexerReplayRun } from "../src/indexerReplayRun.mjs";
 import { buildVirtualChainIngestionPlan } from "../src/virtualChainIngestion.mjs";
+import { buildVirtualChainIngestionRun } from "../src/virtualChainIngestionRun.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -250,6 +252,22 @@ assert.ok(walletConnectorRequests.requests.some((request) =>
 const walletConnectorRequestsArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-submit-requests.json", import.meta.url), "utf8"));
 assert.equal(walletConnectorRequestsArtifact.status, "connector-submit-requests-ready");
 assert.equal(walletConnectorRequestsArtifact.summary.requests, 47);
+const walletConnectorAdapterRun = buildWalletConnectorAdapterRun({
+  submitRequests: walletConnectorRequestsArtifact,
+  runAt: "2026-05-08T00:00:00.000Z"
+});
+assert.equal(walletConnectorAdapterRun.status, "adapter-dry-run-ready");
+assert.equal(walletConnectorAdapterRun.summary.reviewReady, 47);
+assert.equal(walletConnectorAdapterRun.summary.payloadRequests, 26);
+assert.equal(walletConnectorAdapterRun.summary.submitBroadcasts, 0);
+assert.equal(walletConnectorAdapterRun.summary.secretFields, 0);
+assert.ok(walletConnectorAdapterRun.reviewSessions.some((session) =>
+  session.path === "artifacts/signed-drafts/role-escrow-cancel.json"
+  && session.preservation.computeBudgetInputs === 1
+));
+const walletConnectorAdapterArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-adapter-run.json", import.meta.url), "utf8"));
+assert.equal(walletConnectorAdapterArtifact.status, "adapter-dry-run-ready");
+assert.equal(walletConnectorAdapterArtifact.summary.reviewReady, 47);
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -800,6 +818,21 @@ assert.equal(virtualChainIngestionPlan.readerContract.dataVerbosity, "High");
 assert.ok(virtualChainIngestionPlan.rollbackPolicy.openWhen.some((item) => /lower than/.test(item)));
 const virtualChainIngestionArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-plan.json", import.meta.url), "utf8"));
 assert.equal(virtualChainIngestionArtifact.status, "virtual-chain-ingestion-contract-ready");
+const virtualChainIngestionRun = buildVirtualChainIngestionRun({
+  ingestionPlan: virtualChainIngestionArtifact,
+  checkpointIndex: checkpointFixture,
+  submitRequests: walletConnectorRequestsArtifact,
+  runAt: "2026-05-08T00:00:00.000Z"
+});
+assert.equal(virtualChainIngestionRun.status, "fixture-virtual-chain-run-ready");
+assert.equal(virtualChainIngestionRun.summary.virtualChainRows, 33);
+assert.equal(virtualChainIngestionRun.summary.payloadRows, 26);
+assert.equal(virtualChainIngestionRun.summary.proofRows, 7);
+assert.equal(virtualChainIngestionRun.summary.rollbackRows, 0);
+assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 10);
+const virtualChainIngestionRunArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-run.json", import.meta.url), "utf8"));
+assert.equal(virtualChainIngestionRunArtifact.status, "fixture-virtual-chain-run-ready");
+assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, 33);
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -996,6 +1029,7 @@ const files = [
   "scripts/build-indexer-storage-schema.mjs",
   "scripts/build-indexer-replay-run.mjs",
   "scripts/build-virtual-chain-ingestion-plan.mjs",
+  "scripts/build-virtual-chain-ingestion-run.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -1006,6 +1040,7 @@ const files = [
   "scripts/build-wallet-connector-readiness.mjs",
   "scripts/build-wallet-submit-package.mjs",
   "scripts/build-wallet-connector-submit-requests.mjs",
+  "scripts/build-wallet-connector-adapter-run.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
@@ -1092,6 +1127,7 @@ const files = [
   "artifacts/wallet-connector-readiness.json",
   "artifacts/wallet-submit-package.json",
   "artifacts/wallet-connector-submit-requests.json",
+  "artifacts/wallet-connector-adapter-run.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
@@ -1122,6 +1158,7 @@ const files = [
   "artifacts/indexer-storage-schema.json",
   "artifacts/indexer-replay-run.json",
   "artifacts/virtual-chain-ingestion-plan.json",
+  "artifacts/virtual-chain-ingestion-run.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
@@ -1195,6 +1232,7 @@ const files = [
   "src/indexerStorageSchema.mjs",
   "src/indexerReplayRun.mjs",
   "src/virtualChainIngestion.mjs",
+  "src/virtualChainIngestionRun.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/attestationReputationThresholds.mjs",
@@ -1204,6 +1242,7 @@ const files = [
   "src/walletConnectorReadiness.mjs",
   "src/walletSubmitPackage.mjs",
   "src/walletConnectorSubmitRequests.mjs",
+  "src/walletConnectorAdapterRun.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
@@ -1279,6 +1318,7 @@ assert.match(readme, /npm run indexer:replay-plan/);
 assert.match(readme, /npm run indexer:schema/);
 assert.match(readme, /npm run indexer:replay/);
 assert.match(readme, /npm run indexer:virtual-chain-plan/);
+assert.match(readme, /npm run indexer:virtual-chain-run/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
@@ -1293,6 +1333,7 @@ assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);
 assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run wallet:connector-requests/);
+assert.match(readme, /npm run wallet:adapter-run/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run escrow:marketplace/);
 assert.match(readme, /npm run research:library/);

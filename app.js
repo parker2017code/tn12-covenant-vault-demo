@@ -947,16 +947,18 @@ async function renderAcceptedAppState() {
   if (!indexerSummaryNode || !indexerRecordsNode || !receiptEventsNode) return;
 
   try {
-    const [stateResponse, checkpointResponse, persistenceResponse, replayPlanResponse] = await Promise.all([
+    const [stateResponse, checkpointResponse, persistenceResponse, replayPlanResponse, virtualRunResponse] = await Promise.all([
       fetch("fixtures/AcceptedAppState.json", { cache: "no-store" }),
       fetch("artifacts/checkpointed-accepted-index.json", { cache: "no-store" }),
       fetch("artifacts/persisted-checkpoint-guard.json", { cache: "no-store" }),
-      fetch("artifacts/indexer-replay-plan.json", { cache: "no-store" })
+      fetch("artifacts/indexer-replay-plan.json", { cache: "no-store" }),
+      fetch("artifacts/virtual-chain-ingestion-run.json", { cache: "no-store" })
     ]);
     const state = await stateResponse.json();
     const checkpoint = await checkpointResponse.json();
     const persistence = await persistenceResponse.json();
     const replayPlan = await replayPlanResponse.json();
+    const virtualRun = await virtualRunResponse.json();
     const summary = state.summary;
     const checkpointSummary = checkpoint.summary || {};
     indexerSummaryNode.innerHTML = `
@@ -979,6 +981,12 @@ async function renderAcceptedAppState() {
           <strong>${escapeHtml(replayPlan.target.status)}</strong>
           <p>${escapeHtml(replayPlan.currentCheckpoint.recordCount)} records must replay from ${escapeHtml(replayPlan.target.source)}.</p>
           <small>${escapeHtml(replayPlan.buildOrder[0]?.detail || "Define durable indexer storage next.")}</small>
+        </article>
+        <article>
+          <span>${escapeHtml(virtualRun.status)}</span>
+          <strong>${escapeHtml(virtualRun.summary.virtualChainRows)} virtual-chain rows</strong>
+          <p>${escapeHtml(virtualRun.summary.walletCandidateRows)} wallet-submit candidates stay pending until accepted.</p>
+          <small>${escapeHtml(virtualRun.nextReaderAdapter.promoteRule)}</small>
         </article>
       `;
     }
@@ -1172,12 +1180,16 @@ async function renderWalletConnector() {
   if (!walletConnectorNode) return;
 
   try {
-    const [readinessResponse, packageResponse] = await Promise.all([
+    const [readinessResponse, packageResponse, requestResponse, adapterResponse] = await Promise.all([
       fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-submit-package.json", { cache: "no-store" })
+      fetch("artifacts/wallet-submit-package.json", { cache: "no-store" }),
+      fetch("artifacts/wallet-connector-submit-requests.json", { cache: "no-store" }),
+      fetch("artifacts/wallet-connector-adapter-run.json", { cache: "no-store" })
     ]);
     const readiness = await readinessResponse.json();
     const submitPackage = await packageResponse.json();
+    const requests = await requestResponse.json();
+    const adapterRun = await adapterResponse.json();
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
@@ -1188,6 +1200,12 @@ async function renderWalletConnector() {
         <strong>${escapeHtml(readiness.summary.drafts)} drafts, ${escapeHtml(readiness.summary.payloadDrafts)} payload drafts</strong>
         <p>${escapeHtml(submitPackage.status)}: ${escapeHtml(submitPackage.summary.ready)} wallet-submit intents ready.</p>
         <small>${escapeHtml(capabilities)}</small>
+      </article>
+      <article>
+        <span>${escapeHtml(adapterRun.status)}</span>
+        <strong>${escapeHtml(adapterRun.summary.reviewReady)} review sessions, ${escapeHtml(adapterRun.summary.submitBroadcasts)} broadcasts</strong>
+        <p>${escapeHtml(requests.summary.payloadRequests)} payload requests and ${escapeHtml(requests.summary.computeBudgetRequests)} compute-budget requests must preserve exact fields.</p>
+        <small>${escapeHtml(adapterRun.boundaries[1])}</small>
       </article>
     `;
   } catch (error) {

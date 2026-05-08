@@ -281,9 +281,10 @@ npm run indexer:replay-plan
 npm run indexer:schema
 npm run indexer:replay
 npm run indexer:virtual-chain-plan
+npm run indexer:virtual-chain-run
 ```
 
-This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, `artifacts/indexer-replay-run.json`, and `artifacts/virtual-chain-ingestion-plan.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready. The replay plan turns the current known-txid checkpoint into the backend build order. The storage schema defines checkpoint, transaction, payload-event, proof-spend, and rollback tables. The replay run materializes the current checkpoint into those table-shaped rows. The virtual-chain ingestion plan defines the node/RPC reader contract, rollback policy, and wallet-submit handoff boundary before a live node subscription is added.
+This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, `artifacts/indexer-replay-run.json`, `artifacts/virtual-chain-ingestion-plan.json`, and `artifacts/virtual-chain-ingestion-run.json`. The checkpoint combines accepted proof spends and accepted payload events, stores a blue-score watermark, and flags mismatches. The persistence guard compares against the previous checkpoint and blocks rollback or missing-txid regressions before the UI treats a state transition as ready. The replay plan turns the current known-txid checkpoint into the backend build order. The storage schema defines checkpoint, transaction, payload-event, proof-spend, and rollback tables. The replay run materializes the current checkpoint into those table-shaped rows. The virtual-chain ingestion plan defines the node/RPC reader contract, rollback policy, and wallet-submit handoff boundary before a live node subscription is added. The ingestion run reshapes the current checkpoint into virtual-chain window rows and wallet-submit candidate rows so the future live reader has an executable contract.
 
 Build a compact transaction-payload receipt artifact for the accepted-transaction indexer lane:
 
@@ -352,9 +353,10 @@ npm run wallet:review
 npm run wallet:connector
 npm run wallet:submit-package
 npm run wallet:connector-requests
+npm run wallet:adapter-run
 ```
 
-The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact. `npm run wallet:submit-package` writes the wallet handoff package for exact transaction review, payload-preserving submit, no local keys, and explicit user action. `npm run wallet:connector-requests` writes `artifacts/wallet-connector-submit-requests.json`, the exact request bundle a no-local-key connector should review and submit. It does not read `.local/tn12-wallet.json` or expose private keys.
+The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact. `npm run wallet:submit-package` writes the wallet handoff package for exact transaction review, payload-preserving submit, no local keys, and explicit user action. `npm run wallet:connector-requests` writes `artifacts/wallet-connector-submit-requests.json`, the exact request bundle a no-local-key connector should review and submit. `npm run wallet:adapter-run` consumes that bundle into review sessions, preservation fingerprints, and not-submitted result rows. It does not read `.local/tn12-wallet.json`, expose private keys, sign, or broadcast.
 
 Build the cross-chain app research library:
 
