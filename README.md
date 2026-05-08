@@ -421,9 +421,11 @@ Build the repo status map:
 
 ```sh
 npm run build:status
+npm run project:plan
 ```
 
 This turns `fixtures/BuildStatus.json` into `artifacts/build-status.json`. It is the canonical local answer for what is built, what is blocked, what remains natural next, and which proof/readiness labels apply.
+`npm run project:plan` writes `artifacts/project-plan.json`: the operator view of what is done, WIP, next, later, and long-term.
 
 Actual submission is intentionally not the default. The submit helper requires an explicit `--submit` argument:
 

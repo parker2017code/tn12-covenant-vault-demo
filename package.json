@@ -57,6 +57,7 @@
     "stable:issuer": "node scripts/build-stable-issuer-redemptions.mjs",
     "agent:commitments": "node scripts/build-agent-commitments.mjs",
     "build:status": "node scripts/build-status.mjs",
+    "project:plan": "node scripts/build-project-plan.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

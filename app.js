@@ -43,6 +43,7 @@ import { buildStableValuePathRegistry } from "./src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "./src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "./src/agentCommitments.mjs";
 import { buildProjectStatus } from "./src/buildStatus.mjs";
+import { buildProjectPlan } from "./src/projectPlan.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -102,6 +103,9 @@ const agentSummaryNode = document.querySelector("#agent-summary");
 const agentListNode = document.querySelector("#agent-list");
 const buildStatusSummaryNode = document.querySelector("#build-status-summary");
 const buildStatusLanesNode = document.querySelector("#build-status-lanes");
+const projectPlanSummaryNode = document.querySelector("#project-plan-summary");
+const projectPlanNextNode = document.querySelector("#project-plan-next");
+const projectPlanVisionNode = document.querySelector("#project-plan-vision");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -642,6 +646,7 @@ async function renderBuildStatus() {
     const response = await fetch("fixtures/BuildStatus.json", { cache: "no-store" });
     const fixture = await response.json();
     const status = buildProjectStatus(fixture);
+    const plan = buildProjectPlan(fixture);
     buildStatusSummaryNode.innerHTML = `
       <article><span>Bases</span><strong>${escapeHtml(status.summary.builtBases)}</strong></article>
       <article><span>Next</span><strong>${escapeHtml(status.summary.nextBuilds)}</strong></article>
@@ -660,6 +665,29 @@ async function renderBuildStatus() {
         <small>${escapeHtml(lane.next)}</small>
       `;
       buildStatusLanesNode.append(article);
+    }
+
+    if (projectPlanSummaryNode && projectPlanNextNode && projectPlanVisionNode) {
+      projectPlanSummaryNode.innerHTML = `
+        <article><span>Done</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
+        <article><span>WIP</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
+        <article><span>Next</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
+        <article><span>Later</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
+      `;
+      projectPlanNextNode.innerHTML = "";
+      for (const item of plan.next) {
+        const article = document.createElement("article");
+        article.className = "build-status-card";
+        article.innerHTML = `
+          <span>${escapeHtml(item.laneId)}</span>
+          <strong>${escapeHtml(item.id)}</strong>
+          <p>${escapeHtml(item.detail)}</p>
+        `;
+        projectPlanNextNode.append(article);
+      }
+      projectPlanVisionNode.innerHTML = plan.longTermVision
+        .map((item) => `<li>${escapeHtml(item)}</li>`)
+        .join("");
     }
   } catch (error) {
     buildStatusSummaryNode.textContent = `Build status unavailable: ${error.message}`;

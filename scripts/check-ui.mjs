@@ -108,6 +108,9 @@ try {
   await expectText(page, "#build-status-lanes", "Auction / Intent Prototype");
   await expectText(page, "#build-status-lanes", "Payload Receipt / Invoice App");
   await expectText(page, "#build-status-lanes", "ZK / Anchor Readiness");
+  await expectText(page, "#project-plan-summary", "Done");
+  await expectText(page, "#project-plan-next", "wallet-connector-submit");
+  await expectText(page, "#project-plan-vision", "wallet-reviewed Kaspa app console");
   await expectText(page, "#submit-summary", "Drafts");
   await expectText(page, "#submit-drafts", "Payload receipt self-send");
   await expectText(page, "#submit-drafts", "KASPA_WRPC_URL");

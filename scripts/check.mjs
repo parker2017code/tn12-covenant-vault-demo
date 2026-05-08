@@ -62,6 +62,7 @@ import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
+import { buildProjectPlan } from "../src/projectPlan.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
@@ -376,6 +377,14 @@ assert.equal(projectStatus.summary.total, 14);
 assert.ok(projectStatus.summary.builtBases >= 10);
 assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)));
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
+const projectPlan = buildProjectPlan(buildStatusFixture);
+assert.equal(projectPlan.status, "active-operator-plan");
+assert.equal(projectPlan.summary.done, 6);
+assert.equal(projectPlan.summary.wip, 4);
+assert.equal(projectPlan.summary.next, 5);
+assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
+assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
+assert.ok(projectPlan.longTermVision.some((item) => /wallet-reviewed Kaspa app console/.test(item)));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof, index) => [
   proof.txid,
@@ -616,6 +625,7 @@ const files = [
   "scripts/build-stable-value-paths.mjs",
   "scripts/build-stable-issuer-redemptions.mjs",
   "scripts/build-status.mjs",
+  "scripts/build-project-plan.mjs",
   "scripts/check-negative.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
@@ -661,6 +671,7 @@ const files = [
   "artifacts/stable-value-paths.json",
   "artifacts/stable-issuer-redemptions.json",
   "artifacts/build-status.json",
+  "artifacts/project-plan.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/FundedWalletUtxos.json",
@@ -718,6 +729,7 @@ const files = [
   "src/stableValuePaths.mjs",
   "src/stableIssuerRedemption.mjs",
   "src/buildStatus.mjs",
+  "src/projectPlan.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -803,6 +815,8 @@ assert.match(html, /Simple asset policy/);
 assert.match(html, /Stable-value paths/);
 assert.match(html, /Issuer redemption state/);
 assert.match(html, /Build status/);
+assert.match(html, /Operator plan/);
+assert.match(html, /npm run project:plan/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);

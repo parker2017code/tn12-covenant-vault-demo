@@ -1,0 +1,202 @@
+{
+  "schema": "tn12-project-plan/v1",
+  "reviewedAt": "2026-05-08",
+  "status": "active-operator-plan",
+  "summary": {
+    "done": 6,
+    "wip": 4,
+    "next": 5,
+    "later": 5
+  },
+  "currentPrinciple": "Positive app-state claims need accepted TN12 evidence; planner, wallet-policy, and research lanes stay labeled.",
+  "focusVerticals": [
+    "Invoice/receipt: accepted transaction app state.",
+    "Escrow/assurance: TN12 covenant proof app.",
+    "Attestation/agent/prediction: research-to-app bridge."
+  ],
+  "done": [
+    {
+      "laneId": "escrow",
+      "name": "Escrow Primitive",
+      "status": "base-built",
+      "enforcement": "script",
+      "readiness": "tn12-toccata-only",
+      "proof": "accepted-funding-release-and-refund-spends",
+      "detail": "Seven accepted covenant proof spends are verified through `npm run check:tn12`.",
+      "next": "Add wrong-signer and script-argument negative checks while keeping release/refund/cancel proof paths tied to separate funded outputs."
+    },
+    {
+      "laneId": "payload-invoice",
+      "name": "Payload Receipt / Invoice App",
+      "status": "accepted-receipt-indexed",
+      "enforcement": "planner-indexer",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "accepted-tn12-json-wrpc-payload-receipt",
+      "detail": "Accepted payload events prove paid, refund, and error state without REST payload loss.",
+      "next": "Turn the verified JSON wRPC receipt path into repeatable wallet review, duplicate-payment checks, and clearer refund handling."
+    },
+    {
+      "laneId": "access-passes",
+      "name": "KRC / Access Pass Planner",
+      "status": "accepted-tn12-payload-state",
+      "enforcement": "planner-indexer",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "generated-artifact",
+      "detail": "Accepted redemption payload state is indexed with duplicate safeguards.",
+      "next": "Add duplicate, expiry, and issuer-review checks around accepted redemption state."
+    },
+    {
+      "laneId": "auction-intents",
+      "name": "Auction / Intent Prototype",
+      "status": "accepted-tn12-payload-state",
+      "enforcement": "planner-indexer",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "generated-artifact",
+      "detail": "Accepted bid and planner payloads prove indexer-side auction state.",
+      "next": "Keep planner events separate from custody settlement, atomic exchange, and asset delivery."
+    },
+    {
+      "laneId": "ai-agent-commitments",
+      "name": "AI-Agent Commitment Board",
+      "status": "accepted-tn12-payload-state",
+      "enforcement": "planner-indexer",
+      "readiness": "research-only",
+      "proof": "generated-artifact",
+      "detail": "Accepted task, proof, dispute, release, and hold payloads prove lifecycle state.",
+      "next": "Keep planner events separate from custody release/refund transactions and autonomous payout."
+    },
+    {
+      "laneId": "defi-research",
+      "name": "Basic DeFi Research Backlog",
+      "status": "accepted-payload-state-plus-research",
+      "enforcement": "documentation",
+      "readiness": "research-only",
+      "proof": "generated-artifact",
+      "detail": "Prediction/hedge review payloads are accepted while settlement remains out of scope.",
+      "next": "Add signature/reputation hardening and more TN12 review payloads while keeping settlement, odds, custody, and advice out of scope."
+    }
+  ],
+  "wip": [
+    {
+      "laneId": "submit-console",
+      "name": "Wallet-Facing Submit Console",
+      "status": "review-gate-built",
+      "enforcement": "wallet-policy",
+      "readiness": "local-only-not-production",
+      "proof": "local-ui-check",
+      "detail": "Replace local signing with wallet review that preserves exact tx fields and payload bytes.",
+      "next": "Wire the connector spec to a real wallet flow that preserves exact transaction fields and payload bytes."
+    },
+    {
+      "laneId": "batch-assurance",
+      "name": "Batch Assurance Campaigns",
+      "status": "accepted-planner-payloads",
+      "enforcement": "planner-indexer",
+      "readiness": "tn12-toccata-only",
+      "proof": "accepted-tn12-json-wrpc-payload-events",
+      "detail": "Move from accepted planner payloads to accepted pledge-output custody drafts.",
+      "next": "Replace planner payload references with actual custody pledge outputs before settlement."
+    },
+    {
+      "laneId": "miner-pool-signals",
+      "name": "Miner / Pool Signal Research",
+      "status": "accepted-tn12-payload-state",
+      "enforcement": "research",
+      "readiness": "mainnet-capable-with-engineering",
+      "proof": "generated-artifact",
+      "detail": "Add source signatures and reputation checks around accepted watcher signals.",
+      "next": "Add signature verification and reputation hardening around the accepted watcher signal."
+    },
+    {
+      "laneId": "treasury-vaults",
+      "name": "Treasury / Team Vaults",
+      "status": "base-built",
+      "enforcement": "wallet-policy",
+      "readiness": "tn12-toccata-only",
+      "proof": "generated-artifact",
+      "detail": "Turn policy templates into constrained spend drafts with role separation.",
+      "next": "Add exact UTXO provenance and constrained spend draft planning."
+    }
+  ],
+  "next": [
+    {
+      "id": "wallet-connector-submit",
+      "laneId": "submit-console",
+      "detail": "Build a no-local-key wallet submit path for payload drafts."
+    },
+    {
+      "id": "pledge-output-custody",
+      "laneId": "batch-assurance",
+      "detail": "Create custody settlement drafts only from amount-matched pledge outputs."
+    },
+    {
+      "id": "durable-indexer",
+      "laneId": "payload-invoice",
+      "detail": "Move known-txid checkpointing toward replayable node/RPC storage."
+    },
+    {
+      "id": "covenant-negative-tests",
+      "laneId": "escrow",
+      "detail": "Add wrong-signer and wrong-script-argument checks for accepted proof lanes."
+    },
+    {
+      "id": "attestation-signatures",
+      "laneId": "miner-pool-signals",
+      "detail": "Verify signal source signatures before they influence review prompts."
+    }
+  ],
+  "later": [
+    {
+      "laneId": "simple-assets",
+      "name": "Simple Asset Policy",
+      "status": "base-built",
+      "enforcement": "planner-indexer",
+      "readiness": "tn12-toccata-only",
+      "proof": "generated-artifact",
+      "detail": "Keep issuer-indexed policy state separate from future covenant-native assets.",
+      "next": "Keep issuer-indexed and future covenant-native asset rules visibly separate."
+    },
+    {
+      "laneId": "coordination-markets",
+      "name": "Transparent Coordination-Market Prototype",
+      "status": "research",
+      "enforcement": "research",
+      "readiness": "research-only",
+      "proof": "generated-artifact",
+      "detail": "Transparent settlement drafts can come before opacity or capital multiplexing claims.",
+      "next": "Build exact settlement drafts for one satisfiable transparent pack."
+    },
+    {
+      "laneId": "zk-anchor-readiness",
+      "name": "ZK / Anchor Readiness",
+      "status": "research",
+      "enforcement": "documentation",
+      "readiness": "research-only",
+      "proof": "roadmap-only",
+      "detail": "Define public inputs, roots, anchors, and trust model before bridge/oracle/vProg claims.",
+      "next": "Map which future app claims need off-chain state proofs, solver proofs, source-chain anchors, oracle attestation proofs, or vProg settlement."
+    },
+    {
+      "id": "native-assets-and-stables",
+      "laneId": "defi-research",
+      "detail": "Track stable-value and native-asset work as issuer/indexer or future protocol lanes until rails exist."
+    },
+    {
+      "id": "marketplace-escrow",
+      "laneId": "escrow",
+      "detail": "Turn accepted escrow release/refund into a user-facing commerce workflow after wallet submit improves."
+    }
+  ],
+  "operatingChecks": [
+    "Run `npm run check:all` before committing code or UI changes.",
+    "Run `npm run check:tn12` before claiming accepted TN12 proof or payload state.",
+    "Keep REST submit no-payload results historical for payload receipts.",
+    "Do not expose `.local/tn12-wallet.json` or private key material."
+  ],
+  "longTermVision": [
+    "A wallet-reviewed Kaspa app console that can submit exact payload and covenant drafts without local keys.",
+    "A durable accepted-transaction indexer with rollback replay instead of known-txid fixture reads.",
+    "Covenant-backed escrow, vault, assurance, and treasury flows that remain TN12-labeled until mainnet tooling is ready.",
+    "Builder-facing examples for app-state payloads, attestations, issuer-indexed assets, and future native rails."
+  ]
+}

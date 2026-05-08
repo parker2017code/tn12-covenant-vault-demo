@@ -1,6 +1,6 @@
 # Roadmap State
 
-Reviewed: 2026-05-07
+Reviewed: 2026-05-08
 
 This repo is a Toccata-ready TN12 app primitive lab. The goal is to build and verify Kaspa-native app rails before mainnet covenant tooling is production-ready, while keeping every claim separated into accepted proof, planner/indexer state, wallet policy, documentation, or research.
 
@@ -84,23 +84,26 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 ### Coming hours
 
-1. Keep public docs focused: accepted proofs first, planner/research second.
-2. Keep the accepted escrow cancel proof tied to the local TN12 SDK route and preserve old bad-config rejections as historical evidence only.
-3. Keep payload receipt claims tied to the accepted JSON wRPC transaction and keep the public REST no-payload transaction historical only.
+1. Use `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
+2. Keep public docs focused: accepted proofs first, planner/research second.
+3. Keep payload receipt claims tied to accepted JSON wRPC transactions and keep the public REST no-payload transaction historical only.
+4. Keep accepted escrow cancel tied to the local TN12 SDK route and preserve old bad-config rejections as historical evidence only.
 
 ### Coming days
 
-1. Make the accepted JSON wRPC payload receipt path repeatable through wallet review instead of local signing.
-2. Move checkpointed indexing from known-txid public reads plus rollback guard to durable node/RPC storage with virtual-chain replay.
-3. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
-4. Turn escrow release/refund into a simple marketplace/freelance demo.
+1. Make the accepted JSON wRPC payload path repeatable through wallet review instead of local signing.
+2. Build custody settlement drafts only from amount-matched pledge outputs.
+3. Move checkpointed indexing from known-txid public reads plus rollback guard to durable node/RPC storage with virtual-chain replay.
+4. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
+5. Verify signal source signatures before they influence prediction/hedge review prompts.
 
 ### Coming weeks
 
-1. Harden treasury/team vault drafts.
-2. Build grants/public-goods workflow on top of assurance plus payout vault planning.
-3. Build attestation/prediction/agent simulators without settlement overclaims.
-4. Add ZK/anchor design checklists before any bridge, oracle, solver, or vProg proof claim.
+1. Turn escrow release/refund into a simple marketplace/freelance demo.
+2. Harden treasury/team vault drafts.
+3. Build grants/public-goods workflow on top of assurance plus payout vault planning.
+4. Keep stable-value and native-asset work issuer/indexed or future-protocol labeled until actual rails exist.
+5. Add ZK/anchor design checklists before any bridge, oracle, solver, or vProg proof claim.
 
 ## Strategic Rule
 

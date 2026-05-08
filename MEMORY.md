@@ -50,13 +50,15 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Current Next Work
 
-- Add more negative/adversarial checks around reducer and planner state.
-- The payload vertical slice has 26 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
-- Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
-- Build real depth in three verticals first:
+- Use `npm run project:plan` / `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
+- WIP lanes: wallet connector submit without local keys, batch-assurance custody drafts from matched pledge outputs, durable indexer replay, and attestation signature/reputation hardening.
+- Next actions: wallet submit route, pledge-output custody, durable indexer, covenant negative tests, and attestation signatures.
+- Keep real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
   - escrow/assurance app: TN12 covenant proof app,
   - attestation/agent/prediction simulator: research-to-app bridge.
+- The payload vertical slice has 26 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
+- Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
 
 ## Latest Continuation Note
 
@@ -73,6 +75,8 @@ The latest continuation added two accepted prediction/hedge review payloads, bri
 
 `docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 39 reviewable drafts, including all 26 accepted payload drafts. `artifacts/checkpointed-accepted-index.json` indexes 33 public TN12 reads: 7 proof spends plus 26 payload events. `artifacts/persisted-checkpoint-guard.json` checks the checkpoint for rollback or missing-txid regressions. `artifacts/wallet-review-readiness.json` marks all 39 published draft summaries review-ready, with 26 payload drafts gated to the payload-preserving route. `artifacts/wallet-connector-readiness.json` records connector requirements without reading local keys. `npm run check:negative` covers malformed escrow cancel v1 budget shape and wrong proof source attachment. `artifacts/prediction-hedge-simulator.json` is a simulation-only attestation/position review artifact with two accepted TN12 review payloads. `artifacts/batch-assurance-custody-drafts.json` blocks custody settlement because the current accepted planner payload outputs do not amount-match the pledge amounts.
 
+`artifacts/project-plan.json` now records the operator view: 6 done groups, 4 WIP groups, 5 next actions, and 5 later lanes. The browser shows this as the Operator plan panel.
+
 Validation run for this continuation:
 
 ```sh
@@ -87,6 +91,7 @@ npm run wallet:review
 npm run campaign:custody
 npm run wallet:connector
 npm run prediction:hedge
+npm run project:plan
 ```
 
 Observed proof state remained accepted and matched: `7/7` accepted proof transactions, `7/7` P2SH inputs, `7/7` P2PK outputs. Payload events verified: `26/26`. Checkpointed index matched: `33/33`, and the persisted checkpoint guard reported no rollback.
