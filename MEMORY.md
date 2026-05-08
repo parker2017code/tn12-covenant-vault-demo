@@ -31,6 +31,9 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Batch-assurance pledge-output plan gate: `npm run campaign:pledge-outputs`
 - Escrow marketplace demo gate: `npm run escrow:marketplace`
 - Attestation reputation gate: `npm run attestation:reputation`
+- Treasury constrained spend gate: `npm run treasury:spends`
+- Auction settlement draft gate: `npm run auction:settlement-drafts`
+- Agent settlement draft gate: `npm run agent:settlement-drafts`
 
 The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has accepted role-separated positive proofs for all seven vault, assurance, and escrow paths: recovery/withdrawal, release/refund, and release/refund/cancel. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
 

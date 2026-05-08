@@ -1,0 +1,86 @@
+{
+  "schema": "kaspa-auction-settlement-drafts/v1",
+  "network": "kaspa-testnet-12",
+  "status": "planner-settlement-drafts-ready-not-custody",
+  "summary": {
+    "auctions": 2,
+    "drafts": 3,
+    "winnerReleaseDrafts": 1,
+    "refundDrafts": 2,
+    "walletConnectorRequestsReady": true,
+    "custodyReadyDrafts": 0
+  },
+  "drafts": [
+    {
+      "id": "auction-pass-001:winner-release:bid-pass-002",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-002",
+      "kind": "winner-release",
+      "status": "wallet-review-needed-not-custody",
+      "fromState": "winner-selected-not-atomic-settlement",
+      "amountTkas": 155,
+      "recipient": "kaspatest:seller-workshop",
+      "assetRef": "pass-dev-workshop-001",
+      "acceptedBidTxid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "acceptedPlannerEvent": {
+        "eventId": "auction-pass-001-settlement",
+        "auctionId": "auction-pass-001",
+        "bidId": "bid-pass-002",
+        "kind": "auction-settlement",
+        "value": "winner-selected",
+        "acceptedTxid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+        "evidencePath": "artifacts/payload-auction-settlement-pass-001-evidence.json",
+        "draftPath": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+        "status": "accepted-planner-event",
+        "note": "Planner selected bid-pass-002 from accepted bid payloads; this is not atomic custody settlement."
+      },
+      "next": "Build explicit settlement transaction or payload draft after custody source is defined."
+    },
+    {
+      "id": "auction-pass-001:loser-refund:bid-pass-001",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-001",
+      "kind": "loser-refund",
+      "status": "accepted-planner-refund-needs-custody",
+      "fromState": "refund-planned-after-winner-selection",
+      "amountTkas": 130,
+      "recipient": "kaspatest:bidder-alpha",
+      "acceptedPlannerEvent": {
+        "eventId": "auction-pass-001-refund",
+        "auctionId": "auction-pass-001",
+        "bidId": "bid-pass-001",
+        "kind": "auction-refund",
+        "value": "refund-planned",
+        "acceptedTxid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+        "evidencePath": "artifacts/payload-auction-refund-pass-001-evidence.json",
+        "draftPath": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+        "status": "accepted-planner-event",
+        "note": "Planner marked bid-pass-001 for refund after winner selection; this is not custody release."
+      },
+      "next": "Refund only after a real custody source exists; current accepted event is planner/indexer state."
+    },
+    {
+      "id": "auction-voucher-001:loser-refund:bid-voucher-001",
+      "auctionId": "auction-voucher-001",
+      "bidId": "bid-voucher-001",
+      "kind": "loser-refund",
+      "status": "wallet-review-needed-not-custody",
+      "fromState": "no-winner-yet",
+      "amountTkas": 220,
+      "recipient": "kaspatest:bidder-delta",
+      "acceptedPlannerEvent": null,
+      "next": "Refund only after a real custody source exists; current accepted event is planner/indexer state."
+    }
+  ],
+  "acceptanceCriteria": [
+    "A winner release must be based on an accepted bid payload and explicit seller/asset review.",
+    "A loser refund must reference the losing accepted bid payload and show the exact refund amount.",
+    "No draft can claim custody until bid funds sit in amount-matched accepted outputs or a covenant/escrow path.",
+    "The wallet connector must show auction id, bid id, amount, recipient, payload/no-payload status, and route before submit."
+  ],
+  "boundaries": [
+    "These are settlement/refund planning records, not signed custody transactions.",
+    "Accepted auction payloads prove planner state only.",
+    "There is no MEV resistance, bid custody, or atomic asset exchange in this lane yet."
+  ]
+}

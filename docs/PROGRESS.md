@@ -40,8 +40,9 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Latest route: Rusty Kaspa TN12 source confirms tx version 1 plus `computeBudget`; v1 malformed RPC transactions with non-zero `sig_op_count` are rejected. The accepted JS route uses local TN12 `kaspa-wasm 1.1.1-toc.1` with `sigOpCount: 0, computeBudget: 30`.
 
 5. Treasury / team vaults: spend caps, delayed large withdrawals, recovery, payroll templates.
-   - Current status: base built.
+   - Current status: base built plus constrained spend drafts.
    - Enforcement: wallet policy plus existing vault primitives.
+   - Drafts: `npm run treasury:spends` lists payroll and delayed-withdrawal draft records with cap, balance, delay, recipient, and wallet-review checks.
    - Boundary: payroll/caps are not script-enforced yet.
 
 6. KRC / access pass planner: coupons, memberships, tickets, redeemable claims.
@@ -55,8 +56,9 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Boundary: no live native asset protocol claim.
 
 8. Auction / intent prototype: accepted bid payloads, winner rule, refund planning, MEV caveat.
-   - Current status: accepted TN12 bid payloads plus planner state.
+   - Current status: accepted TN12 bid payloads plus planner state and settlement/refund draft records.
    - Enforcement: planner/indexer.
+   - Drafts: `npm run auction:settlement-drafts` lists winner-release and loser-refund draft records while keeping custody and atomic exchange unclaimed.
    - Boundary: no bid custody, no atomic exchange, no MEV resistance claim.
 
 9. DeFi research backlog: swaps, AMMs, lending, stable-value, insurance, derivatives, prediction hedges, portfolio automation.
@@ -78,8 +80,9 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
     - Boundary: no fake block-header data claim.
 
 12. AI-agent commitment board: task offers, deposits, completion proofs, disputes, release/refund planning.
-    - Current status: accepted TN12 task/proof/dispute payloads plus planner state.
+    - Current status: accepted TN12 task/proof/dispute payloads plus planner state and settlement draft records.
     - Enforcement: planner/indexer.
+    - Drafts: `npm run agent:settlement-drafts` lists release, hold, and refund records while keeping autonomous payouts unclaimed.
     - Boundary: no autonomous payouts.
 
 13. Transparent coordination-market prototype: Stag, Intendo, Pack, toy Solver, Hunt plan.

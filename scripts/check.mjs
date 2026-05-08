@@ -59,6 +59,7 @@ import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildEscrowMarketplaceDemo } from "../src/escrowMarketplaceDemo.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
+import { buildTreasuryConstrainedSpends } from "../src/treasuryConstrainedSpends.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
 import { buildWalletReviewReadiness } from "../src/walletReview.mjs";
 import { summarizeWrpcCandidate } from "../src/wrpcSubmitCandidate.mjs";
@@ -69,11 +70,13 @@ import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
+import { buildAuctionSettlementDrafts } from "../src/auctionSettlementDrafts.mjs";
 import { buildDefiResearchBacklog } from "../src/defiBacklog.mjs";
 import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.mjs";
 import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
+import { buildAgentSettlementDrafts } from "../src/agentSettlementDrafts.mjs";
 import { buildBasedRollupScout } from "../src/basedRollupScout.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProjectPlan } from "../src/projectPlan.mjs";
@@ -538,6 +541,17 @@ assert.equal(treasuryRegistry.summary.total, 2);
 assert.equal(treasuryRegistry.summary.plannedPayrollTkas, 80);
 assert.equal(treasuryRegistry.summary.largeWithdrawalsPending, 1);
 assert.ok(treasuryRegistry.vaults.some((vault) => vault.vaultId === "treasury-core-team" && vault.checks.largeWithdrawalReviewRequired));
+const treasurySpends = buildTreasuryConstrainedSpends({
+  treasuryRegistry,
+  walletConnectorRequests: walletConnectorRequestsArtifact
+});
+assert.equal(treasurySpends.status, "treasury-spend-drafts-ready-wallet-policy");
+assert.equal(treasurySpends.summary.drafts, 4);
+assert.equal(treasurySpends.summary.payrollDrafts, 3);
+assert.equal(treasurySpends.summary.delayedWithdrawalDrafts, 1);
+assert.equal(treasurySpends.summary.blockedDrafts, 0);
+const treasurySpendsArtifact = JSON.parse(await readFile(new URL("../artifacts/treasury-constrained-spends.json", import.meta.url), "utf8"));
+assert.equal(treasurySpendsArtifact.summary.drafts, 4);
 const coordinationFixture = JSON.parse(await readFile(new URL("../fixtures/CoordinationMarketPrototype.json", import.meta.url), "utf8"));
 const coordinationPrototype = buildCoordinationMarketPrototype(coordinationFixture);
 assert.equal(coordinationPrototype.status, "transparent-toy-staghunt-preprototype");
@@ -574,6 +588,17 @@ assert.equal(auctionPrototype.summary.acceptedBidPayloads, 3);
 assert.equal(auctionPrototype.summary.acceptedSettlementEvents, 2);
 assert.equal(auctionPrototype.summary.auctionsWithWinner, 1);
 assert.ok(auctionPrototype.auctions.some((auction) => auction.auctionId === "auction-pass-001" && auction.winner?.bidId === "bid-pass-002"));
+const auctionSettlementDrafts = buildAuctionSettlementDrafts({
+  auctionState: auctionPrototype,
+  walletConnectorRequests: walletConnectorRequestsArtifact
+});
+assert.equal(auctionSettlementDrafts.status, "planner-settlement-drafts-ready-not-custody");
+assert.equal(auctionSettlementDrafts.summary.drafts, 3);
+assert.equal(auctionSettlementDrafts.summary.winnerReleaseDrafts, 1);
+assert.equal(auctionSettlementDrafts.summary.refundDrafts, 2);
+assert.equal(auctionSettlementDrafts.summary.custodyReadyDrafts, 0);
+const auctionSettlementDraftsArtifact = JSON.parse(await readFile(new URL("../artifacts/auction-settlement-drafts.json", import.meta.url), "utf8"));
+assert.equal(auctionSettlementDraftsArtifact.summary.drafts, 3);
 const defiFixture = JSON.parse(await readFile(new URL("../fixtures/DefiResearchBacklog.json", import.meta.url), "utf8"));
 const defiBacklog = buildDefiResearchBacklog(defiFixture);
 assert.equal(defiBacklog.status, "research-backlog-not-live-defi");
@@ -613,6 +638,18 @@ assert.equal(agentBoard.summary.releaseReady, 1);
 assert.equal(agentBoard.summary.disputed, 1);
 assert.equal(agentBoard.summary.acceptedLifecycleEvents, 2);
 assert.ok(agentBoard.tasks.some((task) => task.taskId === "agent-task-escrow-001" && task.state === "disputed"));
+const agentSettlementDrafts = buildAgentSettlementDrafts({
+  agentBoard,
+  walletConnectorRequests: walletConnectorRequestsArtifact
+});
+assert.equal(agentSettlementDrafts.status, "agent-settlement-drafts-ready-not-autonomous");
+assert.equal(agentSettlementDrafts.summary.drafts, 3);
+assert.equal(agentSettlementDrafts.summary.releaseDrafts, 1);
+assert.equal(agentSettlementDrafts.summary.refundDrafts, 1);
+assert.equal(agentSettlementDrafts.summary.holdDrafts, 1);
+assert.equal(agentSettlementDrafts.summary.autonomousPayouts, 0);
+const agentSettlementDraftsArtifact = JSON.parse(await readFile(new URL("../artifacts/agent-settlement-drafts.json", import.meta.url), "utf8"));
+assert.equal(agentSettlementDraftsArtifact.summary.drafts, 3);
 const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
 const projectStatus = buildProjectStatus(buildStatusFixture);
 assert.equal(projectStatus.status, "active-build-map");
@@ -1056,6 +1093,7 @@ const files = [
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-escrow-marketplace-demo.mjs",
   "scripts/build-treasury-vaults.mjs",
+  "scripts/build-treasury-constrained-spends.mjs",
   "scripts/build-payload-submit-readiness.mjs",
   "scripts/verify-payload-receipt.mjs",
   "scripts/verify-payload-events.mjs",
@@ -1063,11 +1101,13 @@ const files = [
   "scripts/build-access-pass-planner.mjs",
   "scripts/build-mainnet-readiness.mjs",
   "scripts/build-asset-policies.mjs",
+  "scripts/build-auction-settlement-drafts.mjs",
   "scripts/build-prediction-hedge-simulator.mjs",
   "scripts/build-stable-value-paths.mjs",
   "scripts/build-stable-issuer-redemptions.mjs",
   "scripts/build-status.mjs",
   "scripts/build-project-plan.mjs",
+  "scripts/build-agent-settlement-drafts.mjs",
   "scripts/check-negative.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
@@ -1148,6 +1188,7 @@ const files = [
   "artifacts/role-separated-invalid-candidates.json",
   "artifacts/escrow-primitives.json",
   "artifacts/treasury-vaults.json",
+  "artifacts/treasury-constrained-spends.json",
   "artifacts/payload-submit-readiness.json",
   "artifacts/payload-receipt-evidence.json",
   "artifacts/payload-refund-evidence.json",
@@ -1163,10 +1204,12 @@ const files = [
   "artifacts/access-pass-planner.json",
   "artifacts/mainnet-readiness.json",
   "artifacts/simple-asset-policies.json",
+  "artifacts/auction-settlement-drafts.json",
   "artifacts/prediction-hedge-simulator.json",
   "artifacts/stable-value-paths.json",
   "artifacts/stable-issuer-redemptions.json",
   "artifacts/build-status.json",
+  "artifacts/agent-settlement-drafts.json",
   "artifacts/project-plan.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
@@ -1258,15 +1301,18 @@ const files = [
   "src/escrowPrimitive.mjs",
   "src/escrowMarketplaceDemo.mjs",
   "src/treasuryVault.mjs",
+  "src/treasuryConstrainedSpends.mjs",
   "src/payloadSubmitReadiness.mjs",
   "src/wrpcSubmitCandidate.mjs",
   "src/coordinationMarket.mjs",
   "src/accessPassPlanner.mjs",
   "src/mainnetReadiness.mjs",
   "src/assetPolicy.mjs",
+  "src/auctionSettlementDrafts.mjs",
   "src/predictionHedgeSimulator.mjs",
   "src/stableValuePaths.mjs",
   "src/stableIssuerRedemption.mjs",
+  "src/agentSettlementDrafts.mjs",
   "src/buildStatus.mjs",
   "src/projectPlan.mjs",
   "src/covenantAdversarialCoverage.mjs",
@@ -1350,14 +1396,17 @@ assert.match(readme, /npm run campaign:custody-requirements/);
 assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /npm run treasury:registry/);
+assert.match(readme, /npm run treasury:spends/);
 assert.match(readme, /npm run payload:readiness/);
 assert.match(readme, /npm run coordination:market/);
 assert.match(readme, /npm run access:passes/);
 assert.match(readme, /npm run mainnet:readiness/);
 assert.match(readme, /npm run asset:policies/);
+assert.match(readme, /npm run auction:settlement-drafts/);
 assert.match(readme, /npm run stable:value/);
 assert.match(readme, /npm run stable:issuer/);
 assert.match(readme, /npm run build:status/);
+assert.match(readme, /npm run agent:settlement-drafts/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /PROGRAMMABILITY_PATHS\.md/);

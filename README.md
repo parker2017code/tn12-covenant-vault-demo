@@ -404,9 +404,10 @@ Build the treasury/team vault registry:
 
 ```sh
 npm run treasury:registry
+npm run treasury:spends
 ```
 
-This turns `fixtures/TreasuryVaults.json` into `artifacts/treasury-vaults.json`. Current script proof covers delayed withdrawal and recovery primitives; payroll and spend caps remain wallet-policy/planner state until hardened.
+This turns `fixtures/TreasuryVaults.json` into `artifacts/treasury-vaults.json` and `artifacts/treasury-constrained-spends.json`. Current script proof covers delayed withdrawal and recovery primitives; payroll and spend caps remain wallet-policy/planner state until hardened. The constrained-spends artifact lists payroll and delayed-withdrawal drafts with cap, balance, delay, recipient, and wallet-review checks; it is not full treasury governance enforcement.
 
 Build the transparent coordination-market prototype:
 
@@ -444,9 +445,10 @@ Build the auction/intent prototype:
 
 ```sh
 npm run auction:intents
+npm run auction:settlement-drafts
 ```
 
-This turns `fixtures/AuctionIntentPrototype.json` into `artifacts/auction-intents.json`. It ranks accepted bid payloads for planner-side winner/refund state, but it is not MEV-resistant and does not enforce atomic asset exchange.
+This turns `fixtures/AuctionIntentPrototype.json` into `artifacts/auction-intents.json` and `artifacts/auction-settlement-drafts.json`. It ranks accepted bid payloads for planner-side winner/refund state, then lists winner-release and loser-refund draft records. It is not MEV-resistant, does not prove bid custody, and does not enforce atomic asset exchange.
 
 Build the DeFi research backlog:
 
@@ -477,9 +479,10 @@ Build the AI-agent commitment board:
 
 ```sh
 npm run agent:commitments
+npm run agent:settlement-drafts
 ```
 
-This turns `fixtures/AgentCommitments.json` into `artifacts/agent-commitments.json`. It tracks task offers, accepted proof payloads, disputes, release planning, and refund planning without claiming autonomous payouts.
+This turns `fixtures/AgentCommitments.json` into `artifacts/agent-commitments.json` and `artifacts/agent-settlement-drafts.json`. It tracks task offers, accepted proof payloads, disputes, release planning, hold planning, and refund planning without claiming autonomous payouts.
 
 Build the repo status map:
 

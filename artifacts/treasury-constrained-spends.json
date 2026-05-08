@@ -1,0 +1,91 @@
+{
+  "schema": "tn12-treasury-constrained-spends/v1",
+  "network": "kaspa-testnet-12",
+  "status": "treasury-spend-drafts-ready-wallet-policy",
+  "summary": {
+    "vaults": 2,
+    "drafts": 4,
+    "payrollDrafts": 3,
+    "delayedWithdrawalDrafts": 1,
+    "blockedDrafts": 0,
+    "walletConnectorRequestsReady": true
+  },
+  "drafts": [
+    {
+      "id": "treasury-core-team:payroll:payroll-dev-001",
+      "vaultId": "treasury-core-team",
+      "kind": "payroll",
+      "status": "wallet-review-needed",
+      "paymentId": "payroll-dev-001",
+      "recipient": "frontend-dev",
+      "amountTkas": 25,
+      "cadence": "monthly",
+      "checks": {
+        "withinDailyCap": true,
+        "withinBalance": true,
+        "recoveryAddressValidShape": true
+      },
+      "next": "Build exact wallet-reviewed payment transaction."
+    },
+    {
+      "id": "treasury-core-team:payroll:payroll-docs-002",
+      "vaultId": "treasury-core-team",
+      "kind": "payroll",
+      "status": "wallet-review-needed",
+      "paymentId": "payroll-docs-002",
+      "recipient": "docs-maintainer",
+      "amountTkas": 15,
+      "cadence": "monthly",
+      "checks": {
+        "withinDailyCap": true,
+        "withinBalance": true,
+        "recoveryAddressValidShape": true
+      },
+      "next": "Build exact wallet-reviewed payment transaction."
+    },
+    {
+      "id": "treasury-core-team:large-withdrawal:large-infra-001",
+      "vaultId": "treasury-core-team",
+      "kind": "delayed-large-withdrawal",
+      "status": "delay-window-review",
+      "withdrawalId": "large-infra-001",
+      "recipient": "infrastructure-provider",
+      "amountTkas": 200,
+      "requestedAtIso": "2026-05-07T00:00:00.000Z",
+      "availableAfterIso": "2026-05-09T00:00:00.000Z",
+      "checks": {
+        "aboveDailyCap": true,
+        "withinBalance": true,
+        "delayRequired": true
+      },
+      "next": "Do not submit until delay state and accepted source output are reviewed."
+    },
+    {
+      "id": "treasury-grants-round:payroll:grant-milestone-001",
+      "vaultId": "treasury-grants-round",
+      "kind": "payroll",
+      "status": "wallet-review-needed",
+      "paymentId": "grant-milestone-001",
+      "recipient": "indexer-maintainer",
+      "amountTkas": 40,
+      "cadence": "milestone",
+      "checks": {
+        "withinDailyCap": true,
+        "withinBalance": true,
+        "recoveryAddressValidShape": true
+      },
+      "next": "Build exact wallet-reviewed payment transaction."
+    }
+  ],
+  "acceptanceCriteria": [
+    "Payroll drafts must fit within balance and per-payment daily cap.",
+    "Large withdrawals above daily cap must remain delayed until availableAfterIso.",
+    "Recovery addresses must be testnet-shaped before any draft leaves review.",
+    "Wallet review must show vault id, role labels, recipient, amount, delay state, and cap result."
+  ],
+  "boundaries": [
+    "These are wallet-policy spend drafts, not full treasury governance enforcement.",
+    "Current accepted TN12 vault proofs cover recovery and delayed withdrawal primitives only.",
+    "Team roles are review labels until role-separated script or multisig-like enforcement is added."
+  ]
+}

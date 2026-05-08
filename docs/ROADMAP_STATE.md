@@ -73,14 +73,14 @@ These are roadmap or research until the missing rails are explicit and tested.
 | 2. Submit console | Review gate built | 47 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package, connector request bundle, and dry-run adapter review sessions | Real wallet adapter signing/submitting externally |
 | 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, exact pledge-output requirements, and wallet-reviewable pledge-output funding/import plan | Build accepted pledge outputs for the required amounts, then import those outpoints |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, accepted mutual-cancel proofs, local role-separated invalid-candidate map, and marketplace demo plan | Fund fresh expendable outputs before any TN12 rejection submissions |
-| 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |
+| 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates, and constrained spend draft records | Role-key separation and accepted spend lifecycle |
 | 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |
 | 7. Simple asset policy | Roadmap base | Mint, transfer, burn, recovery, redemption policy shapes | Keep issuer-indexed now, covenant-native later |
-| 8. Auction/intents | Accepted TN12 payload state | Accepted bid payloads, winner rule, and below-reserve state | Settlement/refund drafts |
+| 8. Auction/intents | Accepted TN12 payload state | Accepted bid payloads, winner rule, below-reserve state, and settlement/refund draft records | Custody source and atomic exchange design |
 | 9. DeFi backlog | Research | Missing rails matrix, swaps/lending/stable-value briefs, stable-value comparison, and prediction-hedge simulator built | More simulation dashboards only |
 | 10. Cross-chain research | Built as library | PMF/code/failure-mode mapping | Turn top ideas into one-page app briefs |
 | 11. Miner/pool signals | Accepted TN12 payload state | Attestation registry, payload-first framing, accepted watcher signal, signature-gated influence, and reputation threshold artifact | Signer provenance, conflict, and quorum handling |
-| 12. AI-agent commitments | Accepted TN12 payload state | Task/deposit/proof/dispute model with accepted payload events | Release/refund drafts plus accepted tx lifecycle |
+| 12. AI-agent commitments | Accepted TN12 payload state | Task/deposit/proof/dispute model with accepted payload events plus release/hold/refund draft records | Custody source and accepted tx lifecycle |
 | 13. Coordination markets | Research prototype | Transparent Stag/Intendo/Pack/toy Solver | Transparent settlement draft; no Hashdag overclaim |
 | 14. ZK / anchor readiness | Roadmap added | Checklist lane | Define public inputs, anchors, oracle/source-chain trust |
 | 15. Prediction / hedge markets | Accepted TN12 payload state plus research simulator | Attestation-fed simulator with accepted market-update and review-prompt payloads; no settlement | Add signature/reputation hardening before any stronger claim |

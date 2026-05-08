@@ -1,0 +1,82 @@
+{
+  "schema": "kaspa-agent-settlement-drafts/v1",
+  "network": "kaspa-testnet-12",
+  "status": "agent-settlement-drafts-ready-not-autonomous",
+  "summary": {
+    "tasks": 3,
+    "drafts": 3,
+    "releaseDrafts": 1,
+    "refundDrafts": 1,
+    "holdDrafts": 1,
+    "walletConnectorRequestsReady": true,
+    "autonomousPayouts": 0
+  },
+  "drafts": [
+    {
+      "id": "agent-task-invoice-001:release",
+      "taskId": "agent-task-invoice-001",
+      "kind": "release",
+      "status": "wallet-review-needed-not-autonomous",
+      "amountTkas": 75,
+      "recipient": "agent:indexer-auditor",
+      "acceptedTaskTxid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "acceptedProofTxid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+      "acceptedPlannerEvent": {
+        "eventId": "agent-release-invoice-001",
+        "taskId": "agent-task-invoice-001",
+        "kind": "agent-settlement",
+        "value": "release-planned",
+        "acceptedTxid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+        "evidencePath": "artifacts/payload-agent-release-invoice-evidence.json",
+        "draftPath": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+        "status": "accepted-planner-event",
+        "note": "Planner marked invoice task reward release after accepted proof and reviewer approval; this is not autonomous payout."
+      },
+      "next": "Build explicit reward release draft after custody source is defined."
+    },
+    {
+      "id": "agent-task-escrow-001:hold",
+      "taskId": "agent-task-escrow-001",
+      "kind": "hold",
+      "status": "accepted-dispute-hold-review",
+      "amountTkas": 160,
+      "recipient": "",
+      "acceptedTaskTxid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "acceptedDisputeTxid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+      "acceptedPlannerEvent": {
+        "eventId": "agent-hold-escrow-001",
+        "taskId": "agent-task-escrow-001",
+        "kind": "agent-settlement",
+        "value": "dispute-hold",
+        "acceptedTxid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+        "evidencePath": "artifacts/payload-agent-hold-escrow-evidence.json",
+        "draftPath": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+        "status": "accepted-planner-event",
+        "note": "Planner kept escrow task funds on hold while dispute is open; this is not autonomous custody."
+      },
+      "next": "Keep funds held until accepted reviewer decision selects release, refund, or cancel."
+    },
+    {
+      "id": "agent-task-research-001:refund",
+      "taskId": "agent-task-research-001",
+      "kind": "refund",
+      "status": "blocked-no-accepted-task",
+      "amountTkas": 10,
+      "recipient": "kaspatest:sponsor-research",
+      "acceptedTaskTxid": "",
+      "acceptedPlannerEvent": null,
+      "next": "Build explicit sponsor refund draft only after accepted task/custody review."
+    }
+  ],
+  "acceptanceCriteria": [
+    "Release drafts require accepted task payload, accepted proof payload, and accepted reviewer state.",
+    "Refund drafts require expired or rejected task state and explicit sponsor review.",
+    "Dispute holds must not release or refund funds automatically.",
+    "Wallet review must show task id, agent, sponsor, amount, state source, and route before submit."
+  ],
+  "boundaries": [
+    "These are app-level settlement draft records, not autonomous agent payouts.",
+    "Completion quality is reviewer policy, not consensus truth.",
+    "Deposit and reward custody are not proven until amount-matched accepted outputs or covenant paths exist."
+  ]
+}
