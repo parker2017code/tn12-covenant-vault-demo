@@ -94,7 +94,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 ### Coming hours
 
-1. Use `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
+1. Use `artifacts/next-work-queue.json` as the all-in-one priority queue; use `artifacts/project-plan.json` for the older done/WIP/next/later grouping.
 2. Use `docs/MAINSTREAM_APP_DIRECTION.md` to keep the most liquid or attention-generating use cases in view without upgrading research lanes into proof claims.
 3. Keep public docs focused: accepted proofs first, planner/research second.
 4. Keep payload receipt claims tied to accepted JSON wRPC transactions and keep the public REST no-payload transaction historical only.

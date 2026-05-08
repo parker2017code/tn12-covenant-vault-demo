@@ -65,7 +65,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Current Next Work
 
-- Use `npm run project:plan` / `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
+- Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order. Use `npm run project:plan` / `artifacts/project-plan.json` for the older done/WIP/next/later grouping.
 - WIP lanes: live wallet connector submit without local keys, batch-assurance custody requirements and matched pledge outputs, durable indexer replay implementation, and attestation reputation/provenance hardening.
 - Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant rejection attempts from fresh expendable outputs, and attestation reputation thresholds.
 - Keep real depth in three verticals first:
