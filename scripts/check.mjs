@@ -45,6 +45,7 @@ import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildWalletConnectorReadiness } from "../src/walletConnectorReadiness.mjs";
+import { buildWalletSubmitPackage } from "../src/walletSubmitPackage.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
@@ -185,6 +186,12 @@ assert.equal(walletConnector.summary.drafts, 39);
 assert.equal(walletConnector.summary.payloadDrafts, 26);
 assert.equal(walletConnector.summary.registrySecretFields, 0);
 assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "payload-preserving-submit"));
+const walletSubmitPackage = buildWalletSubmitPackage({ walletReview, walletConnector });
+assert.equal(walletSubmitPackage.status, "wallet-submit-package-ready");
+assert.equal(walletSubmitPackage.summary.total, 39);
+assert.equal(walletSubmitPackage.summary.payloadDrafts, 26);
+assert.equal(walletSubmitPackage.summary.contractDrafts, 12);
+assert.ok(walletSubmitPackage.firstPayloadIntents.every((intent) => intent.requiredWalletChecks.includes("Reject public REST payload submit.")));
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -612,6 +619,7 @@ const files = [
   "scripts/build-submit-console-registry.mjs",
   "scripts/build-wallet-review-readiness.mjs",
   "scripts/build-wallet-connector-readiness.mjs",
+  "scripts/build-wallet-submit-package.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
@@ -654,6 +662,7 @@ const files = [
   "artifacts/submit-console-registry.json",
   "artifacts/wallet-review-readiness.json",
   "artifacts/wallet-connector-readiness.json",
+  "artifacts/wallet-submit-package.json",
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
@@ -717,6 +726,7 @@ const files = [
   "src/submitConsole.mjs",
   "src/walletReview.mjs",
   "src/walletConnectorReadiness.mjs",
+  "src/walletSubmitPackage.mjs",
   "src/appResearch.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",

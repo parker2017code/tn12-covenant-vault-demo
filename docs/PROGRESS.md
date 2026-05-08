@@ -19,10 +19,10 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Indexer status: checkpointed known-txid public-read index covers 33 accepted TN12 records: 7 proof spends and 26 payload events.
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
-   - Current status: base built with wallet-review readiness and wallet-connector spec artifacts.
+   - Current status: base built with wallet-review readiness, wallet-connector spec, and wallet-submit package artifacts.
    - Enforcement: wallet policy.
    - Mainnet potential: useful only after real wallet integration replaces local keys.
-   - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` records connector requirements without reading local keys.
+   - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` records connector requirements without reading local keys. `npm run wallet:submit-package` creates the no-local-key handoff package for wallet integration.
 
 3. Batch assurance campaigns: multi-pledge accepted progress, pending progress, release/refund planning.
    - Current status: accepted TN12 planner payload records.
@@ -102,14 +102,14 @@ Done now:
 
 WIP now:
 
-- Wallet submit path that preserves payload bytes and exact tx fields without local private keys.
+- Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package is built.
 - Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone.
 - Durable indexer storage and replay beyond known-txid fixture reads.
 - Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review now gates prediction influence.
 
 Next actions:
 
-1. Build the wallet-connector submit route around the existing review artifacts.
+1. Wire the wallet-submit package into a live wallet connector.
 2. Create custody settlement drafts only from matched pledge outputs.
 3. Add wrong-signer and wrong-script-argument negative tests for accepted proof lanes.
 4. Move checkpointing toward replayable node/RPC storage.

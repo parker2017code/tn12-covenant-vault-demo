@@ -37,6 +37,7 @@
     "submit:registry": "node scripts/build-submit-console-registry.mjs",
     "wallet:review": "node scripts/build-wallet-review-readiness.mjs",
     "wallet:connector": "node scripts/build-wallet-connector-readiness.mjs",
+    "wallet:submit-package": "node scripts/build-wallet-submit-package.mjs",
     "research:library": "node scripts/build-research-library.mjs",
     "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",
     "campaign:custody": "node scripts/build-batch-assurance-custody-drafts.mjs",

@@ -84,8 +84,8 @@
       "enforcement": "wallet-policy",
       "readiness": "local-only-not-production",
       "proof": "local-ui-check",
-      "detail": "Replace local signing with wallet review that preserves exact tx fields and payload bytes.",
-      "next": "Wire the connector spec to a real wallet flow that preserves exact transaction fields and payload bytes."
+      "detail": "Wallet submit package is built; the live no-local-key connector remains WIP.",
+      "next": "Use the wallet-submit package to wire a real wallet flow that preserves exact transaction fields and payload bytes."
     },
     {
       "laneId": "batch-assurance",
@@ -122,7 +122,7 @@
     {
       "id": "wallet-connector-submit",
       "laneId": "submit-console",
-      "detail": "Build a no-local-key wallet submit path for payload drafts."
+      "detail": "Wire the wallet-submit package into a live no-local-key wallet flow."
     },
     {
       "id": "pledge-output-custody",

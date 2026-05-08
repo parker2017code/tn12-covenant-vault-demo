@@ -134,6 +134,7 @@ try {
   await expectText(page, "#signal-artifact", "payload-size-ok");
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");
   await expectText(page, "#payload-draft-status", "accepted through TN12 JSON wRPC");
+  await expectText(page, "#wallet-connector", "wallet-submit-package-ready");
   await expectText(page, "#master-roadmap", "Payload Receipt / Invoice App");
   await expectText(page, "#master-roadmap", "AI-Agent Commitment Board");
   await expectText(page, "#attestation-summary", "Verified");

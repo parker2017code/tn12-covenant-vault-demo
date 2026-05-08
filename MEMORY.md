@@ -51,7 +51,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 ## Current Next Work
 
 - Use `npm run project:plan` / `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
-- WIP lanes: wallet connector submit without local keys, batch-assurance custody drafts from matched pledge outputs, durable indexer replay, and attestation reputation/provenance hardening.
+- WIP lanes: live wallet connector submit without local keys, batch-assurance custody drafts from matched pledge outputs, durable indexer replay, and attestation reputation/provenance hardening.
 - Next actions: wallet submit route, pledge-output custody, durable indexer, covenant negative tests, and attestation reputation thresholds.
 - Keep real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
@@ -75,7 +75,7 @@ The latest continuation added two accepted prediction/hedge review payloads, bri
 
 `docs/TN12_TEST_MATRIX.md` now tracks what is TN12 accepted, what is only local reducer-tested, and what still needs safe TN12 transactions. `fixtures/SubmitConsoleDrafts.json` now exposes 39 reviewable drafts, including all 26 accepted payload drafts. `artifacts/checkpointed-accepted-index.json` indexes 33 public TN12 reads: 7 proof spends plus 26 payload events. `artifacts/persisted-checkpoint-guard.json` checks the checkpoint for rollback or missing-txid regressions. `artifacts/wallet-review-readiness.json` marks all 39 published draft summaries review-ready, with 26 payload drafts gated to the payload-preserving route. `artifacts/wallet-connector-readiness.json` records connector requirements without reading local keys. `npm run check:negative` covers malformed escrow cancel v1 budget shape and wrong proof source attachment. `artifacts/prediction-hedge-simulator.json` is a simulation-only attestation/position review artifact with two accepted TN12 review payloads. `artifacts/batch-assurance-custody-drafts.json` blocks custody settlement because the current accepted planner payload outputs do not amount-match the pledge amounts.
 
-`artifacts/project-plan.json` now records the operator view: 6 done groups, 4 WIP groups, 5 next actions, and 5 later lanes. The browser shows this as the Operator plan panel.
+`artifacts/project-plan.json` now records the operator view: 6 done groups, 4 WIP groups, 5 next actions, and 5 later lanes. The browser shows this as the Operator plan panel. `artifacts/wallet-submit-package.json` is the current wallet handoff artifact for 39 review-ready signed drafts, including 26 payload-preserving submit intents.
 
 Validation run for this continuation:
 
@@ -90,6 +90,7 @@ npm run indexer:persist
 npm run wallet:review
 npm run campaign:custody
 npm run wallet:connector
+npm run wallet:submit-package
 npm run prediction:hedge
 npm run project:plan
 ```

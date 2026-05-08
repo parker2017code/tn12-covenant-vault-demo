@@ -1108,8 +1108,12 @@ async function renderWalletConnector() {
   if (!walletConnectorNode) return;
 
   try {
-    const response = await fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" });
-    const readiness = await response.json();
+    const [readinessResponse, packageResponse] = await Promise.all([
+      fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" }),
+      fetch("artifacts/wallet-submit-package.json", { cache: "no-store" })
+    ]);
+    const readiness = await readinessResponse.json();
+    const submitPackage = await packageResponse.json();
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
@@ -1118,7 +1122,7 @@ async function renderWalletConnector() {
       <article>
         <span>${escapeHtml(readiness.status)}</span>
         <strong>${escapeHtml(readiness.summary.drafts)} drafts, ${escapeHtml(readiness.summary.payloadDrafts)} payload drafts</strong>
-        <p>Connector spec requires network confirmation, exact transaction review, payload-preserving submit, no local keys, and explicit user action.</p>
+        <p>${escapeHtml(submitPackage.status)}: ${escapeHtml(submitPackage.summary.ready)} wallet-submit intents ready.</p>
         <small>${escapeHtml(capabilities)}</small>
       </article>
     `;

@@ -299,9 +299,10 @@ Build the signed-draft review registry for the browser submit console:
 npm run submit:registry
 npm run wallet:review
 npm run wallet:connector
+npm run wallet:submit-package
 ```
 
-The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact: network confirmation, exact transaction review, payload-preserving submit, no local keys, and explicit user action. It does not read `.local/tn12-wallet.json` or expose private keys.
+The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact. `npm run wallet:submit-package` writes the wallet handoff package for exact transaction review, payload-preserving submit, no local keys, and explicit user action. It does not read `.local/tn12-wallet.json` or expose private keys.
 
 Build the cross-chain app research library:
 

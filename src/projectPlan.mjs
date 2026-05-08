@@ -12,14 +12,14 @@ export function buildProjectPlan(fixture = {}) {
   ];
 
   const wip = [
-    laneItem(byId, "submit-console", "Replace local signing with wallet review that preserves exact tx fields and payload bytes."),
+    laneItem(byId, "submit-console", "Wallet submit package is built; the live no-local-key connector remains WIP."),
     laneItem(byId, "batch-assurance", "Move from accepted planner payloads to accepted pledge-output custody drafts."),
     laneItem(byId, "miner-pool-signals", "Source signature review now gates influence; reputation thresholds still need hardening."),
     laneItem(byId, "treasury-vaults", "Turn policy templates into constrained spend drafts with role separation.")
   ];
 
   const next = [
-    action("wallet-connector-submit", "Build a no-local-key wallet submit path for payload drafts.", "submit-console"),
+    action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
     action("pledge-output-custody", "Create custody settlement drafts only from amount-matched pledge outputs.", "batch-assurance"),
     action("durable-indexer", "Move known-txid checkpointing toward replayable node/RPC storage.", "payload-invoice"),
     action("covenant-negative-tests", "Add wrong-signer and wrong-script-argument checks for accepted proof lanes.", "escrow"),
