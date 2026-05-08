@@ -20,6 +20,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Persisted checkpoint guard command: `npm run indexer:persist`
 - Wallet-review readiness command: `npm run wallet:review`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
+- High-impact mainstream app direction: `docs/MAINSTREAM_APP_DIRECTION.md`
 - TN12 tested/not-tested map: `docs/TN12_TEST_MATRIX.md`
 
 The local preview server has been running on port `4176`. If it is not running, start it from this repo with `npm run serve`.
@@ -398,6 +399,7 @@ Pause note, 2026-05-08:
 - Local invalid-candidate artifact is wired through `npm run roles:invalid-candidates`.
 - `artifacts/role-separated-invalid-candidates.json` maps 32 local-review-only role-separated mutations across wrong signer, selector, output lock, amount, timed lock shape, and single-party cancel.
 - `npm run check:all` and `npm run check:tn12` passed after the invalid-candidate wiring.
+- `docs/MAINSTREAM_APP_DIRECTION.md` records the high-impact app direction and keeps mainstream crypto use cases in the pipeline without converting research ideas into proof claims.
 - Do not submit invalid TN12 transactions until a candidate is reviewed and backed by a fresh expendable output.
 
 Recommended order from here:

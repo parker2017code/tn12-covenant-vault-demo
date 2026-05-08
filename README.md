@@ -6,6 +6,8 @@ This repo is a TN12 learning and proof workspace. It makes covenant-style money 
 
 Reviewers and LLM agents should start with [`MEMORY.md`](MEMORY.md), then use [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md). The accepted/not-yet-tested TN12 evidence map lives in [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md). The L1 covenant, based-rollup, and vProg boundary lives in [`docs/PROGRAMMABILITY_PATHS.md`](docs/PROGRAMMABILITY_PATHS.md).
 
+High-impact mainstream app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md). It keeps invoice/receipt, escrow, assurance, wallet submit, access passes, auctions, vault/treasury, assets, stable-value, DEX/AMM, lending, perps, bridge, ZK, and vProg use cases in the pipeline while separating build-now work from research.
+
 Protocol-debugging rule: unclear TN12, Silverscript, Rusty Kaspa, signing, submit, serialization, or covenant behavior starts with local evidence: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and upstream source/tests. Escalation needs a txid, artifact path, endpoint response, source line, and smallest reproducer command.
 Resolved escalation notes are tracked in [`docs/MICHAEL_QUESTIONS.md`](docs/MICHAEL_QUESTIONS.md).
 General builder lessons from the escrow cancel debugging pass are tracked in [`docs/BUILDER_LESSONS.md`](docs/BUILDER_LESSONS.md).

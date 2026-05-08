@@ -1009,7 +1009,8 @@ const files = [
   "docs/ECOSYSTEM_BUILD_PLAN.md",
   "docs/GITHUB_HOSTING.md",
   "docs/MASTER_APP_PLAN.md",
-  "docs/PROGRAMMABILITY_PATHS.md"
+  "docs/PROGRAMMABILITY_PATHS.md",
+  "docs/MAINSTREAM_APP_DIRECTION.md"
 ];
 
 for (const file of files) {
@@ -1062,6 +1063,7 @@ assert.match(readme, /npm run build:status/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /PROGRAMMABILITY_PATHS\.md/);
+assert.match(readme, /MAINSTREAM_APP_DIRECTION\.md/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
 assert.match(readme, /npm run check:tn12/);
 
@@ -1160,6 +1162,13 @@ assert.match(masterPlan, /Batch Assurance Campaigns/);
 assert.match(masterPlan, /Cross-Chain App Research Library/);
 assert.match(masterPlan, /AI-Agent Commitment Board/);
 assert.match(masterPlan, /No fake block-header claims|arbitrary app data can be placed in block headers/);
+
+const mainstreamDirection = await readFile(new URL("../docs/MAINSTREAM_APP_DIRECTION.md", import.meta.url), "utf8");
+assert.match(mainstreamDirection, /Mainstream App Direction/);
+assert.match(mainstreamDirection, /Invoice \/ receipt app/);
+assert.match(mainstreamDirection, /Escrow \/ freelance \/ marketplace/);
+assert.match(mainstreamDirection, /DEX \/ AMM \/ lending \/ perps/);
+assert.match(mainstreamDirection, /Build-Now Focus/);
 
 const githubHosting = await readFile(new URL("../docs/GITHUB_HOSTING.md", import.meta.url), "utf8");
 assert.match(githubHosting, /GitHub Pages/);

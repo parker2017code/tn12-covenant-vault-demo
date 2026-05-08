@@ -2,6 +2,8 @@
 
 This document translates the Kaspa Explained resource map into the build plan for this local TN12 builder repo.
 
+The mainstream crypto app direction is tracked in `docs/MAINSTREAM_APP_DIRECTION.md`. That file is the priority map for high-impact use cases from other chains, including which ones are build-now and which stay in research.
+
 Source repo reviewed:
 
 ```txt
@@ -223,6 +225,8 @@ Still needed:
 - anti-spam, anti-bribery, MEV, and centralization analysis before any mining-software proposal.
 
 ## Apps To Build One By One
+
+Use `docs/MAINSTREAM_APP_DIRECTION.md` before adding a new app lane. High-liquidity categories from other chains belong in the pipeline, but the repo should first ask whether the use case can be expressed as accepted payment/indexer state, TN12/Toccata covenant proof, wallet policy, or research.
 
 ### 1. Payload Receipt / Invoice App
 

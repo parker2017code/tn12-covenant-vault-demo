@@ -31,9 +31,10 @@ The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof t
 5. `docs/PROGRESS.md`: lane-by-lane build state and immediate task list.
 6. `docs/LLM_REVIEW_GUIDE.md`: how to verify GitHub, Pages, artifacts, and TN12 chain state before making claims.
 7. `docs/TN12_TEST_MATRIX.md`: what is TN12 accepted, what is only local reducer-tested, and what still needs a safe testnet transaction.
-8. `docs/MICHAEL_QUESTIONS.md`: exact protocol/tooling questions to escalate through the user.
-9. `docs/STATUS.md`: human-readable proof/status list.
-10. `docs/BUILD_PLAN.md`: backlog history and next build tasks.
+8. `docs/MAINSTREAM_APP_DIRECTION.md`: high-impact user-facing app direction and which mainstream crypto use cases are build-now, later, or research.
+9. `docs/MICHAEL_QUESTIONS.md`: exact protocol/tooling questions to escalate through the user.
+10. `docs/STATUS.md`: human-readable proof/status list.
+11. `docs/BUILD_PLAN.md`: backlog history and next build tasks.
 
 Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source discipline or protocol claims. Use `docs/TRANSACTION_API_NOTES.md` before touching transaction creation, payloads, submit routes, or accepted-indexing code.
 
@@ -76,6 +77,7 @@ Paused on 2026-05-08 after local invalid-candidate work:
 - `npm run roles:invalid-candidates` writes `artifacts/role-separated-invalid-candidates.json`.
 - The artifact maps 32 local review candidates across seven accepted role-separated proof paths.
 - Verified locally with `npm run check:all` and `npm run check:tn12`.
+- `docs/MAINSTREAM_APP_DIRECTION.md` now documents high-impact mainstream app targets, with invoice/receipt, escrow/freelance, batch assurance, wallet submit, access passes, auctions, vault/treasury, assets, stable-value, and DEX/lending/perps mapped to the correct build/research lane.
 
 Remote status before this local change: GitHub Actions `check` and `tn12-verify` had passed; GitHub Pages had deployed successfully.
 

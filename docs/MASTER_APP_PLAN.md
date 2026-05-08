@@ -4,6 +4,8 @@ This repo uses Kaspa Explained as the status map and this TN12 demo as the app w
 
 For the current twenty-lane status map and time horizon, see `docs/ROADMAP_STATE.md`.
 
+For the high-impact mainstream app direction and why each use case is or is not build-now, see `docs/MAINSTREAM_APP_DIRECTION.md`.
+
 ## Operating Rules
 
 - Keep every feature in a status lane: live Kaspa, TN12/Toccata, roadmap, or research.
@@ -90,8 +92,9 @@ For the current twenty-lane status map and time horizon, see `docs/ROADMAP_STATE
 
 ## Immediate Order
 
-1. Keep the payload receipt app gated by `npm run payload:readiness` and `npm run payload:verify`; the accepted JSON wRPC receipt is current evidence, and the public REST route remains historical no-payload evidence.
-2. Use `npm run mainnet:readiness` to separate mainnet-capable payment/indexer work from TN12/Toccata covenant work.
-3. Continue filling base app artifacts for access passes, simple assets, auctions/intents, DeFi research, and AI-agent commitments.
-4. Harden vertical slices only after the enforcement and readiness maps agree on what is actually proved.
-5. Add a ZK/anchor checklist before any bridge, oracle, solver, or vProg proof claim.
+1. Prioritize the high-impact user-facing lanes: invoice/receipt, wallet submit, escrow/freelance marketplace, batch assurance, access passes, auctions/intents, and vault/treasury.
+2. Keep the payload receipt app gated by `npm run payload:readiness` and `npm run payload:verify`; the accepted JSON wRPC receipt is current evidence, and the public REST route remains historical no-payload evidence.
+3. Use `npm run mainnet:readiness` to separate mainnet-capable payment/indexer work from TN12/Toccata covenant work.
+4. Continue filling base app artifacts for access passes, simple assets, auctions/intents, DeFi research, and AI-agent commitments.
+5. Keep DEX/AMM, lending, perps, bridges, ZK, vProgs, and source-chain apps in documented pipeline lanes until their missing rails are explicit.
+6. Harden vertical slices only after the enforcement and readiness maps agree on what is actually proved.

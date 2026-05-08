@@ -4,6 +4,8 @@ Reviewed: 2026-05-08
 
 This repo is a Toccata-ready TN12 app primitive lab. The goal is to build and verify Kaspa-native app rails before mainnet covenant tooling is production-ready, while keeping every claim separated into accepted proof, planner/indexer state, wallet policy, documentation, or research.
 
+High-impact mainstream app direction is tracked in `docs/MAINSTREAM_APP_DIRECTION.md`. That document keeps DEX/AMM, lending, perps, bridges, stable-value, marketplace, access, payment, escrow, and assurance use cases visible while preserving the current proof boundaries.
+
 ## Current Proof Core
 
 Accepted TN12 contract-spend proofs:
@@ -85,9 +87,10 @@ These are roadmap or research until the missing rails are explicit and tested.
 ### Coming hours
 
 1. Use `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
-2. Keep public docs focused: accepted proofs first, planner/research second.
-3. Keep payload receipt claims tied to accepted JSON wRPC transactions and keep the public REST no-payload transaction historical only.
-4. Keep accepted escrow cancel tied to the local TN12 SDK route and preserve old bad-config rejections as historical evidence only.
+2. Use `docs/MAINSTREAM_APP_DIRECTION.md` to keep the most liquid or attention-generating use cases in view without upgrading research lanes into proof claims.
+3. Keep public docs focused: accepted proofs first, planner/research second.
+4. Keep payload receipt claims tied to accepted JSON wRPC transactions and keep the public REST no-payload transaction historical only.
+5. Keep accepted escrow cancel tied to the local TN12 SDK route and preserve old bad-config rejections as historical evidence only.
 
 ### Coming days
 
