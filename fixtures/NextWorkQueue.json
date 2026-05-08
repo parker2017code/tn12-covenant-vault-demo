@@ -1,0 +1,429 @@
+{
+  "schema": "kaspa-next-work-queue-fixture/v1",
+  "reviewedAt": "2026-05-08",
+  "purpose": "One ordered task map for the whole project after reading the repo docs: what is done, what is WIP, what is roadmap, and the next 30 things to build.",
+  "sourceDocs": [
+    "MEMORY.md",
+    "CONTEXT.md",
+    "docs/ROADMAP_STATE.md",
+    "docs/PROGRESS.md",
+    "docs/TN12_TEST_MATRIX.md",
+    "docs/MASTER_APP_PLAN.md",
+    "docs/BUILD_PLAN.md",
+    "docs/MAINSTREAM_APP_DIRECTION.md",
+    "docs/ECOSYSTEM_BUILD_PLAN.md",
+    "docs/PROGRAMMABILITY_PATHS.md",
+    "docs/STATUS.md",
+    "docs/MICHAEL_QUESTIONS.md"
+  ],
+  "done": [
+    {
+      "id": "accepted-covenant-proof-core",
+      "label": "Accepted TN12 covenant proof core",
+      "evidence": "Vault recovery, vault delayed withdrawal, assurance release/refund, escrow release/refund/cancel, and all seven role-separated positive paths are accepted on TN12.",
+      "lane": "tn12-covenant"
+    },
+    {
+      "id": "payload-app-state-core",
+      "label": "Accepted payload app-state core",
+      "evidence": "26 accepted JSON wRPC payload events cover invoice, access-pass, auction, stable-value issuer, attestation, prediction/hedge, agent, and batch-assurance planner state.",
+      "lane": "payload-indexer"
+    },
+    {
+      "id": "wallet-review-package",
+      "label": "Wallet review and submit handoff package",
+      "evidence": "Submit registry, wallet-review readiness, wallet-connector spec, and wallet-submit package are built, checked, and documented.",
+      "lane": "wallet-policy"
+    },
+    {
+      "id": "checkpointed-indexer-fixture-replay",
+      "label": "Checkpointed indexer schema and fixture replay",
+      "evidence": "Current 33 accepted records are checkpointed, persisted, shaped into tables, and replayed from fixture data.",
+      "lane": "indexer"
+    },
+    {
+      "id": "research-boundary-system",
+      "label": "Research boundary system",
+      "evidence": "Mainstream direction, missing rails matrix, rail research triggers, and oracle source matrix keep high-impact app categories documented without overclaiming.",
+      "lane": "research"
+    }
+  ],
+  "wip": [
+    {
+      "id": "live-wallet-connector-submit",
+      "label": "Live wallet connector submit without local keys",
+      "whyFirst": "Everything user-facing depends on users reviewing and signing exact transactions without this repo holding keys.",
+      "blocking": ["wallet connector implementation", "payload-preserving submit", "exact tx field review"]
+    },
+    {
+      "id": "durable-node-rpc-indexer",
+      "label": "Durable node/RPC virtual-chain indexer",
+      "whyFirst": "Accepted app state must survive replay, rollback, and new events without hand-maintained txid fixtures.",
+      "blocking": ["virtual-chain read loop", "rollback replay", "persistent reducer state"]
+    },
+    {
+      "id": "batch-assurance-custody",
+      "label": "Batch-assurance custody from amount-matched pledge outputs",
+      "whyFirst": "Public-goods funding becomes real only when planner records map to spendable accepted outputs.",
+      "blocking": ["accepted pledge outputs", "release/refund draft construction", "custody evidence"]
+    },
+    {
+      "id": "attestation-reputation",
+      "label": "Attestation signer provenance and reputation thresholds",
+      "whyFirst": "Oracle, prediction, hedge, and miner-signal flows need this before signals influence anything beyond review prompts.",
+      "blocking": ["reporter registry", "quorum thresholds", "stale/conflict policy"]
+    }
+  ],
+  "roadmap": [
+    {
+      "id": "mainnet-payment-indexer-products",
+      "label": "Mainnet-capable payment/indexer products",
+      "examples": ["invoice receipts", "access passes", "auction/intents", "attestation records"],
+      "condition": "Wallet submit and durable indexing are production-ready."
+    },
+    {
+      "id": "tn12-toccata-covenant-products",
+      "label": "TN12/Toccata covenant products",
+      "examples": ["escrow marketplace", "vault wallet", "assurance/grants", "treasury controls"],
+      "condition": "Wallet support, audits, fresh outputs, and mainnet-compatible covenant tooling exist."
+    },
+    {
+      "id": "research-future-rails",
+      "label": "Research and future rails",
+      "examples": ["DEX/AMM", "lending", "perps", "bridges", "stable-value", "ZK anchors", "vProgs", "based rollups"],
+      "condition": "Missing rails, source models, custody, oracles, anchors, settlement, and composition are explicit and tested."
+    }
+  ],
+  "tasks": [
+    {
+      "rank": 1,
+      "id": "wallet-connector-submit",
+      "title": "Implement live wallet connector submit path",
+      "lane": "wallet-policy",
+      "importance": "critical",
+      "why": "This is the highest leverage blocker: every user-facing app needs no-local-key signing and exact transaction review.",
+      "definitionOfDone": "A user can review an exact draft, hand it to a wallet connector, preserve payload bytes and tx v1 fields, and record the submit result without exposing local private keys.",
+      "startWith": ["artifacts/wallet-submit-package.json", "src/walletConnectorReadiness.mjs", "fixtures/SubmitConsoleDrafts.json"],
+      "gates": ["npm run wallet:submit-package", "npm run check:all"]
+    },
+    {
+      "rank": 2,
+      "id": "durable-virtual-chain-indexer",
+      "title": "Replace fixture-only replay with virtual-chain node/RPC ingestion",
+      "lane": "indexer",
+      "importance": "critical",
+      "why": "The invoice/app-state vertical is only real if new accepted transactions can be discovered, replayed, and rolled back without manually curated txids.",
+      "definitionOfDone": "Indexer reads accepted transactions from node/RPC virtual-chain data, persists checkpoints, detects rollback, and feeds the existing reducer rows.",
+      "startWith": ["artifacts/indexer-replay-plan.json", "artifacts/indexer-storage-schema.json", "src/indexerReplayRun.mjs"],
+      "gates": ["npm run indexer:checkpoint", "npm run indexer:persist", "npm run indexer:replay", "npm run check:all"]
+    },
+    {
+      "rank": 3,
+      "id": "batch-assurance-pledge-outputs",
+      "title": "Create accepted pledge outputs matching batch-assurance custody requirements",
+      "lane": "payload-indexer",
+      "importance": "critical",
+      "why": "Batch assurance currently has accepted planner state, but custody settlement requires actual amount-matched accepted outputs.",
+      "definitionOfDone": "Required pledge outputs are accepted on TN12, imported into checkpoint state, and no longer blocked by amount mismatch.",
+      "startWith": ["artifacts/batch-assurance-custody-requirements.json", "fixtures/BatchAssuranceCampaign.json"],
+      "gates": ["npm run campaign:custody-requirements", "npm run check:tn12"]
+    },
+    {
+      "rank": 4,
+      "id": "batch-assurance-release-refund-drafts",
+      "title": "Build batch-assurance release and refund custody drafts from matched outputs",
+      "lane": "tn12-covenant",
+      "importance": "critical",
+      "why": "This converts batch assurance from planner progress into a settlement workflow.",
+      "definitionOfDone": "Release/refund drafts consume only matched accepted pledge outputs and produce reviewable wallet-submit artifacts.",
+      "startWith": ["src/batchAssuranceCustodyDrafts.mjs", "artifacts/batch-assurance-custody-drafts.json"],
+      "gates": ["npm run campaign:custody", "npm run wallet:review", "npm run check:all"]
+    },
+    {
+      "rank": 5,
+      "id": "escrow-marketplace-demo",
+      "title": "Turn escrow release/refund into a simple marketplace or freelance demo",
+      "lane": "tn12-covenant",
+      "importance": "high",
+      "why": "Escrow is the clearest user-facing covenant app already backed by accepted TN12 proofs.",
+      "definitionOfDone": "One buyer/seller/job flow shows funding, deliverable state, release, timeout refund, and cancel boundary through wallet-reviewed artifacts.",
+      "startWith": ["fixtures/EscrowPrimitives.json", "artifacts/escrow-primitives.json", "docs/TN12_TEST_MATRIX.md"],
+      "gates": ["npm run escrow:registry", "npm run wallet:review", "npm run check:all"]
+    },
+    {
+      "rank": 6,
+      "id": "attestation-reputation-thresholds",
+      "title": "Add signer provenance, reputation, quorum, and stale-signal thresholds",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "why": "Prediction, hedge, miner-signal, and oracle-adjacent flows cannot influence app state safely without signal quality controls.",
+      "definitionOfDone": "Attestation registry records reporter identity, provenance, quorum/conflict state, recency, and whether the signal can influence review prompts.",
+      "startWith": ["fixtures/AttestationSignals.json", "fixtures/RailResearchTriggers.json", "artifacts/oracle-source-matrix.json"],
+      "gates": ["npm run check:all"]
+    },
+    {
+      "rank": 7,
+      "id": "auction-settlement-refund-drafts",
+      "title": "Build auction settlement and refund drafts",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "why": "Auctions already have accepted bid and planner payloads; settlement/refund is the next user-facing gap.",
+      "definitionOfDone": "Winner settlement and loser refund drafts are reviewable, explicit about custody, and do not claim atomic exchange or MEV resistance.",
+      "startWith": ["fixtures/AuctionIntentPrototype.json", "artifacts/submit-console-registry.json"],
+      "gates": ["npm run auction:intents", "npm run wallet:review", "npm run check:all"]
+    },
+    {
+      "rank": 8,
+      "id": "agent-release-refund-drafts",
+      "title": "Build agent-task release and refund drafts",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "why": "Agent commitments have accepted task/proof/dispute payload state, but no payout lifecycle.",
+      "definitionOfDone": "Release, refund, and dispute-hold drafts are generated from accepted lifecycle state and gated by wallet review.",
+      "startWith": ["fixtures/AgentCommitments.json", "artifacts/project-plan.json"],
+      "gates": ["npm run agent:commitments", "npm run wallet:review", "npm run check:all"]
+    },
+    {
+      "rank": 9,
+      "id": "treasury-constrained-spend-drafts",
+      "title": "Build treasury/team-vault constrained spend drafts",
+      "lane": "wallet-policy",
+      "importance": "high",
+      "why": "Treasury controls are a practical business app and reuse the vault proof base.",
+      "definitionOfDone": "Payroll, large-withdrawal delay, approval, and recovery drafts exist with role separation and clear wallet-policy versus script boundaries.",
+      "startWith": ["fixtures/TreasuryVaults.json", "src/treasuryVault.mjs"],
+      "gates": ["npm run treasury:registry", "npm run wallet:review", "npm run check:all"]
+    },
+    {
+      "rank": 10,
+      "id": "invoice-mainnet-readiness-brief",
+      "title": "Turn invoice receipts into a mainnet-readiness brief",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "why": "Invoices are the shortest path to a real non-covenant app because they need payments, payloads, indexing, and wallet UX.",
+      "definitionOfDone": "Brief names the exact mainnet-safe pieces, TN12-only pieces, wallet/indexer requirements, failure states, and launch blockers.",
+      "startWith": ["artifacts/mainnet-readiness.json", "fixtures/InvoiceReceipts.json", "docs/TRANSACTION_API_NOTES.md"],
+      "gates": ["npm run mainnet:readiness", "npm run invoice:registry", "npm run check:all"]
+    },
+    {
+      "rank": 11,
+      "id": "access-pass-expiry-issuer-review",
+      "title": "Harden access-pass expiry and issuer review",
+      "lane": "payload-indexer",
+      "importance": "medium",
+      "why": "Access passes are simple user-facing apps, but duplicate/expired/issuer disputes must be explicit.",
+      "definitionOfDone": "Accepted redemption counting handles expiry, issuer revocation, duplicate holder/pass attempts, and missing txids.",
+      "startWith": ["fixtures/AccessPassPlanner.json", "src/accessPassPlanner.mjs"],
+      "gates": ["npm run access:passes", "npm run check:negative", "npm run check:all"]
+    },
+    {
+      "rank": 12,
+      "id": "stable-issuer-reserve-review",
+      "title": "Add stable-value issuer reserve and redemption review",
+      "lane": "payload-indexer",
+      "importance": "medium",
+      "why": "Issuer-backed stable-value receipts are buildable now only if reserve/redemption trust is visible.",
+      "definitionOfDone": "Issuer state tracks reserve attestations, redemption requests, accepted redemptions, signed-only exclusions, and not-native-stablecoin boundaries.",
+      "startWith": ["fixtures/StableIssuerRedemptions.json", "fixtures/StableValuePaths.json"],
+      "gates": ["npm run stable:value", "npm run stable:issuer", "npm run check:all"]
+    },
+    {
+      "rank": 13,
+      "id": "oracle-risk-dashboard",
+      "title": "Build oracle risk dashboard as simulation-only",
+      "lane": "research",
+      "importance": "medium",
+      "why": "Kaskad/Eliott oracle work is high-impact, but this repo must first show source models, stale data, and manipulation risks.",
+      "definitionOfDone": "Dashboard compares CEX median, arbitrage-simulated price, signed reporter, miner/RTD, DCLOB, and bridge-anchor source models without custody claims.",
+      "startWith": ["artifacts/oracle-source-matrix.json", "fixtures/OracleSourceMatrix.json"],
+      "gates": ["npm run oracle:matrix", "npm run check:all"]
+    },
+    {
+      "rank": 14,
+      "id": "lending-rail-brief",
+      "title": "Write lending rail brief from Kaskad and missing-rails evidence",
+      "lane": "research",
+      "importance": "medium",
+      "why": "Lending attracts liquidity, but needs collateral custody, oracle, liquidation, and risk parameter rails this repo does not have yet.",
+      "definitionOfDone": "Brief maps Kaskad/Igra assumptions to TN12 L1 covenant realities and states what the smallest honest lending simulation can be.",
+      "startWith": ["fixtures/RailResearchTriggers.json", "fixtures/MissingRailsMatrix.json", "artifacts/oracle-source-matrix.json"],
+      "gates": ["npm run rails:research", "npm run rails:missing", "npm run check:all"]
+    },
+    {
+      "rank": 15,
+      "id": "amm-rail-brief",
+      "title": "Write AMM/DEX rail brief before any swap UI",
+      "lane": "research",
+      "importance": "medium",
+      "why": "DEXs can bring liquidity, but reserve accounting, slippage, LP shares, ordering, and MEV are unsolved here.",
+      "definitionOfDone": "Brief names reserve model, updater authority, slippage enforcement, LP accounting, ordering, and first non-custodial intent prototype.",
+      "startWith": ["fixtures/MissingRailsMatrix.json", "fixtures/DefiResearchBacklog.json", "fixtures/CrossChainResearchLibrary.json"],
+      "gates": ["npm run rails:missing", "npm run defi:backlog", "npm run check:all"]
+    },
+    {
+      "rank": 16,
+      "id": "bridge-anchor-brief",
+      "title": "Write bridge/source-chain anchor brief",
+      "lane": "research",
+      "importance": "medium",
+      "why": "Bridge and ZK language can overclaim fastest unless the anchored object and custody/exit assumptions are explicit.",
+      "definitionOfDone": "Brief names block/header/proof/reporter object, finality, challenge, custody holder, exit path, and outage/reorg behavior.",
+      "startWith": ["fixtures/RailResearchTriggers.json", "docs/PROGRAMMABILITY_PATHS.md", "docs/ROADMAP_STATE.md"],
+      "gates": ["npm run rails:research", "npm run check:all"]
+    },
+    {
+      "rank": 17,
+      "id": "based-rollup-tiny-app-scout",
+      "title": "Scout one tiny app on a based-rollup surface",
+      "lane": "future-rails",
+      "importance": "medium",
+      "why": "Rollups may be the realistic near path for richer app state, but only if endpoint, bridge, wallet, and settlement assumptions are known.",
+      "definitionOfDone": "One tiny app target is mapped to available endpoints/tooling, bridge model, wallet path, and L1 settlement relationship.",
+      "startWith": ["artifacts/based-rollup-scout.json", "docs/PROGRAMMABILITY_PATHS.md"],
+      "gates": ["npm run rollup:scout", "npm run check:all"]
+    },
+    {
+      "rank": 18,
+      "id": "role-separated-rejection-tests",
+      "title": "Submit safe role-separated invalid candidates from fresh expendable outputs",
+      "lane": "tn12-covenant",
+      "importance": "medium",
+      "why": "The local invalid-candidate map is useful, but TN12 rejection evidence needs fresh outputs so accepted proofs are not disturbed.",
+      "definitionOfDone": "A selected set of wrong-signer/wrong-selector/wrong-output invalid attempts are submitted safely and recorded as rejection evidence.",
+      "startWith": ["artifacts/role-separated-invalid-candidates.json", "docs/TN12_TEST_MATRIX.md"],
+      "gates": ["npm run roles:invalid-candidates", "npm run check:tn12"]
+    },
+    {
+      "rank": 19,
+      "id": "vault-product-policy-templates",
+      "title": "Add user-facing vault product policy templates",
+      "lane": "tn12-covenant",
+      "importance": "medium",
+      "why": "Vaults are a strong business/user app if templates explain recovery, delay, daily limits, and signer roles clearly.",
+      "definitionOfDone": "Templates cover personal recovery, team treasury, payroll, and inheritance with exact enforcement labels.",
+      "startWith": ["fixtures/VaultTemplates.json", "src/vaultPolicy.mjs"],
+      "gates": ["npm run check:all"]
+    },
+    {
+      "rank": 20,
+      "id": "grants-public-goods-workflow",
+      "title": "Build grants/public-goods workflow on assurance plus payout vault planning",
+      "lane": "payload-indexer",
+      "importance": "medium",
+      "why": "This is a natural user-facing app that reuses assurance, batch pledge progress, and treasury payout planning.",
+      "definitionOfDone": "Grant proposal, pledge progress, release conditions, refund conditions, payout plan, and evidence links are represented.",
+      "startWith": ["fixtures/BatchAssuranceCampaign.json", "fixtures/TreasuryVaults.json"],
+      "gates": ["npm run campaign:state", "npm run treasury:registry", "npm run check:all"]
+    },
+    {
+      "rank": 21,
+      "id": "portfolio-automation-simulator",
+      "title": "Build portfolio automation simulator only after attestation thresholds",
+      "lane": "research",
+      "importance": "medium",
+      "why": "Rules automation is attractive, but it must not trade, custody, or advise without signal and wallet rails.",
+      "definitionOfDone": "Simulator records rule triggers, accepted signals, blocked custody actions, and review prompts only.",
+      "startWith": ["fixtures/DefiResearchBacklog.json", "fixtures/AttestationSignals.json"],
+      "gates": ["npm run defi:backlog", "npm run check:all"]
+    },
+    {
+      "rank": 22,
+      "id": "prediction-market-boundary-brief",
+      "title": "Write prediction/perps settlement boundary brief",
+      "lane": "research",
+      "importance": "medium",
+      "why": "Prediction and perps need oracle, margin, liquidation, matching, and settlement rules; current simulator is review-only.",
+      "definitionOfDone": "Brief names oracle source, margin custody, matching, close/liquidate authority, stale odds handling, and no-advice/no-settlement boundaries.",
+      "startWith": ["fixtures/PredictionHedgeSimulator.json", "fixtures/MissingRailsMatrix.json"],
+      "gates": ["npm run prediction:hedge", "npm run rails:missing", "npm run check:all"]
+    },
+    {
+      "rank": 23,
+      "id": "simple-asset-redemption-drafts",
+      "title": "Extend simple asset policy into redemption draft planning",
+      "lane": "payload-indexer",
+      "importance": "medium",
+      "why": "Redeemable claims can be useful without native asset overclaims if issuer/indexer boundaries are clear.",
+      "definitionOfDone": "Mint, transfer, burn, redemption, recovery, and issuer review are mapped to accepted payloads or wallet-reviewed drafts.",
+      "startWith": ["fixtures/SimpleAssetPolicies.json", "src/assetPolicy.mjs"],
+      "gates": ["npm run asset:policies", "npm run wallet:review", "npm run check:all"]
+    },
+    {
+      "rank": 24,
+      "id": "ui-priority-dashboard",
+      "title": "Add a project-priority dashboard panel",
+      "lane": "ui",
+      "importance": "medium",
+      "why": "The repo needs one user-facing place to show done, WIP, roadmap, and next work without reading every doc.",
+      "definitionOfDone": "Browser UI renders the generated next-work queue with clear status lanes and no hype.",
+      "startWith": ["artifacts/next-work-queue.json", "index.html", "app.js"],
+      "gates": ["npm run check:ui", "npm run check:all"]
+    },
+    {
+      "rank": 25,
+      "id": "source-doc-coverage-check",
+      "title": "Add a docs coverage check for priority queue source docs",
+      "lane": "docs",
+      "importance": "low",
+      "why": "The queue should fail checks if core docs disappear or stop carrying the key status concepts.",
+      "definitionOfDone": "Check asserts source docs exist and include done/WIP/roadmap/project-plan references.",
+      "startWith": ["fixtures/NextWorkQueue.json", "scripts/check.mjs"],
+      "gates": ["npm run check:all"]
+    },
+    {
+      "rank": 26,
+      "id": "transaction-api-notes-refresh",
+      "title": "Refresh transaction API notes around wallet/wRPC submit realities",
+      "lane": "docs",
+      "importance": "low",
+      "why": "Future submit bugs should not rediscover REST payload dropping or v1 compute-budget serialization boundaries.",
+      "definitionOfDone": "Notes point to the exact submit routes, payload-preservation rule, and tx v1 computeBudget requirements.",
+      "startWith": ["docs/TRANSACTION_API_NOTES.md", "docs/MICHAEL_QUESTIONS.md"],
+      "gates": ["npm run check:all"]
+    },
+    {
+      "rank": 27,
+      "id": "llm-review-guide-update",
+      "title": "Update LLM review guide for new priority queue and research gates",
+      "lane": "docs",
+      "importance": "low",
+      "why": "Reviewers need to know which artifacts answer status and which ones are research-only.",
+      "definitionOfDone": "Guide points reviewers to project plan, next-work queue, missing rails, research triggers, and oracle matrix before making claims.",
+      "startWith": ["docs/LLM_REVIEW_GUIDE.md", "artifacts/next-work-queue.json"],
+      "gates": ["npm run check:all"]
+    },
+    {
+      "rank": 28,
+      "id": "github-actions-node24-cleanup",
+      "title": "Clean up GitHub Actions Node 24 deprecation warning",
+      "lane": "infra",
+      "importance": "low",
+      "why": "Pages currently deploys, but the workflow warning should be cleared before it becomes noise or a deadline.",
+      "definitionOfDone": "Workflow uses current actions/runtime versions and Pages/check runs remain green.",
+      "startWith": [".github/workflows"],
+      "gates": ["GitHub Actions check", "GitHub Pages deploy"]
+    },
+    {
+      "rank": 29,
+      "id": "fresh-output-funding-runbook",
+      "title": "Write fresh expendable output funding runbook",
+      "lane": "tn12-covenant",
+      "importance": "low",
+      "why": "Several next TN12 tests need fresh outputs; the exact flow should be clear before any destructive or mutually exclusive spend.",
+      "definitionOfDone": "Runbook names funding scripts, expected outputs, safety rules, and how to import outpoints without touching accepted proof history.",
+      "startWith": ["docs/TN12_TEST_MATRIX.md", "scripts/build-role-separated-funding-draft.mjs"],
+      "gates": ["npm run tx:roles:fund", "npm run check:all"]
+    },
+    {
+      "rank": 30,
+      "id": "mainstream-app-brief-template",
+      "title": "Add a reusable mainstream app brief template",
+      "lane": "docs",
+      "importance": "low",
+      "why": "Every future app idea should answer user job, PMF, lane, missing rails, prototype, and do-not-claim before code.",
+      "definitionOfDone": "Template is referenced by the mainstream direction and research trigger docs.",
+      "startWith": ["docs/MAINSTREAM_APP_DIRECTION.md", "fixtures/RailResearchTriggers.json"],
+      "gates": ["npm run rails:research", "npm run check:all"]
+    }
+  ]
+}

@@ -30,6 +30,7 @@
       <a href="#defi-backlog">DeFi</a>
       <a href="#agent-commitments">Agents</a>
       <a href="#build-status">Status</a>
+      <a href="#next-queue">Queue</a>
       <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
@@ -326,6 +327,18 @@ npm run campaign:custody</pre>
       <div id="project-plan-next" class="build-status-lanes" aria-live="polite"></div>
       <ul id="project-plan-vision" class="issues"></ul>
       <pre>npm run project:plan</pre>
+    </section>
+
+    <section id="next-queue" class="panel build-status">
+      <div class="section-title">
+        <p class="eyebrow">Priority queue</p>
+        <h2>The next 5, 10, 20, and 30 tasks in one order.</h2>
+        <p>This is the all-in-one build order after the repo docs are reconciled. The highest-impact rails come first: wallet connector submit, durable indexing, accepted pledge outputs, batch-assurance settlement drafts, and escrow marketplace UX.</p>
+      </div>
+      <div id="next-queue-summary" class="build-status-summary" aria-live="polite"></div>
+      <div id="next-queue-top" class="build-status-lanes priority-grid" aria-live="polite"></div>
+      <div id="next-queue-tasks" class="build-status-lanes compact-grid" aria-live="polite"></div>
+      <pre>npm run project:queue</pre>
     </section>
 
     <section id="auction-intents" class="panel auction-intents">

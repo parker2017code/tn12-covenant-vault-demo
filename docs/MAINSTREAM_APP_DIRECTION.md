@@ -18,6 +18,12 @@ Research trigger source: `fixtures/RailResearchTriggers.json`.
 Generated research trigger artifact: `artifacts/rail-research-triggers.json`.
 Build command: `npm run rails:research`.
 
+Oracle source matrix: `artifacts/oracle-source-matrix.json`.
+Build command: `npm run oracle:matrix`.
+
+Single ordered project queue: `artifacts/next-work-queue.json`.
+Build command: `npm run project:queue`.
+
 ## Priority Rule
 
 Build the highest-impact user-facing apps first when they can be connected to existing proof:
@@ -79,6 +85,10 @@ For each, the repo should require a short app brief before code:
 `npm run rails:missing` records the first-principles questions and current answers for the highest-risk categories: DEX/AMM, lending, perps/prediction, bridge/source-chain apps, and stable-value units.
 
 `npm run rails:research` records the routes that should trigger deeper research before the repo upgrades claims. Current trigger lanes cover oracle/price feeds, Kaskad/lending mechanics, miner/RTD signals, bridge/source-chain anchors, and DEX/AMM liquidity mechanics. Each trigger names local repo evidence, external source leads, research questions, a first artifact, and do-not-claim boundaries.
+
+`npm run oracle:matrix` is the first artifact for the oracle trigger lane. It compares CEX weighted median feeds, arbitrage-simulated fair price, signed reporter sets, miner/RTD sampling, future on-chain DCLOB sources, and source-chain anchors. The current conclusion is that none are custody-ready in this repo.
+
+`npm run project:queue` is the operator order after reading the repo docs. The top five are wallet connector submit, durable virtual-chain indexer, accepted pledge outputs, batch-assurance release/refund drafts, and escrow marketplace demo.
 
 ## Done Standard
 

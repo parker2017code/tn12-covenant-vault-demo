@@ -1,0 +1,265 @@
+{
+  "schema": "kaspa-oracle-source-matrix/v1",
+  "reviewedAt": "2026-05-08",
+  "status": "oracle-source-matrix-ready",
+  "purpose": "Compare oracle and event-data source models before lending, liquidation, perps, stable-value, bridge, or prediction claims are upgraded.",
+  "summary": {
+    "models": 6,
+    "sourceReferences": 5,
+    "missingRails": 30,
+    "highRiskModels": 3,
+    "custodyReadyModels": 0,
+    "byLane": {
+      "research": 4,
+      "payload-indexer": 1,
+      "future-rails": 1
+    },
+    "byRisk": {
+      "high": 3,
+      "medium": 2,
+      "future": 1
+    }
+  },
+  "sourceReferences": [
+    {
+      "id": "kaskad-oracle-article",
+      "name": "Kaskad oracle article",
+      "url": "https://www.kaskad.app/oracle-kaspa",
+      "notes": "Kaskad describes an internal V1 off-chain oracle and liquidation engine, weighted median price feeds, exchange reliability weighting, and a later move toward an on-chain Kaspa L2 model."
+    },
+    {
+      "id": "eliott-mea-interview",
+      "name": "Eliott Mea oracle interview",
+      "url": "https://kasmedia.com/article/eliot-mea-and-oracles",
+      "notes": "Frames the oracle problem around CEX order-book falsifiability, median-oracle information loss, no-arbitrage ground truth, and why oracle dishonesty is not objectively slashable like invalid consensus behavior."
+    },
+    {
+      "id": "kaskad-roadmap",
+      "name": "Kaskad roadmap",
+      "url": "https://docs.kaskad.app/docs/roadmap",
+      "notes": "Tracks Kaskad's phased lending, oracle, cross-chain, L2, and eventual L1/covenant or vProg direction."
+    },
+    {
+      "id": "kaskad-architecture",
+      "name": "Kaskad architecture",
+      "url": "https://docs.kaskad.app/docs/architecture",
+      "notes": "Useful for separating Igra/EVM lending architecture from this repo's TN12 L1 covenant and payload/indexer model."
+    },
+    {
+      "id": "kaskad-lending-mechanics",
+      "name": "Kaskad lending mechanics",
+      "url": "https://docs.kaskad.app/docs/lending-mechanics",
+      "notes": "Useful for supply, borrow, health factor, risk parameter, and liquidation terminology."
+    }
+  ],
+  "models": [
+    {
+      "id": "cex-weighted-median",
+      "name": "CEX weighted median feed",
+      "dataSource": "Centralized exchange books and APIs",
+      "possibleUse": "Display prices, risk warnings, off-chain simulations, lending dashboard research",
+      "manipulationModel": "A source venue can publish false, frozen, or non-actionable quotes; a median can hide outliers but also lag or discard real market moves.",
+      "staleOrWrongHandling": "Flag stale venues, discount unreliable venues, pause custody-moving actions, and require human or governance review before liquidation claims.",
+      "determinism": "Not deterministic from Kaspa consensus; depends on off-chain observation and reporter policy.",
+      "currentKaspaLane": "research",
+      "repoUseNow": "Can inform a simulation-only oracle risk dashboard.",
+      "missingRails": [
+        "signed reporter set",
+        "challenge policy",
+        "liquidation custody model",
+        "accepted update lifecycle",
+        "stale-feed pause rule"
+      ],
+      "riskLevel": "high",
+      "references": [
+        "kaskad-oracle-article",
+        "eliott-mea-interview"
+      ],
+      "custodyReady": false,
+      "referenceCoverage": {
+        "total": 2,
+        "known": 2
+      }
+    },
+    {
+      "id": "arbitrage-simulated-fair-price",
+      "name": "Arbitrage-simulated fair price",
+      "dataSource": "Cross-venue order books plus modeled executable arbitrage paths",
+      "possibleUse": "Research target for fair-value computation and anomaly detection",
+      "manipulationModel": "The model can still inherit false venue data, latency, missing liquidity, fee assumptions, and non-executable routes.",
+      "staleOrWrongHandling": "Record model inputs, venues, fees, timestamps, and actionable-route assumptions; use for review prompts before settlement.",
+      "determinism": "Model-deterministic only if all inputs and route rules are fixed and archived.",
+      "currentKaspaLane": "research",
+      "repoUseNow": "Can become an archived oracle-update payload format, not an enforcement source.",
+      "missingRails": [
+        "input archive",
+        "route verifier",
+        "venue reliability model",
+        "timestamp policy",
+        "review challenge window"
+      ],
+      "riskLevel": "high",
+      "references": [
+        "eliott-mea-interview",
+        "kaskad-oracle-article"
+      ],
+      "custodyReady": false,
+      "referenceCoverage": {
+        "total": 2,
+        "known": 2
+      }
+    },
+    {
+      "id": "signed-reporter-attestation",
+      "name": "Signed reporter attestation set",
+      "dataSource": "Named reporters, watchers, pools, or services signing observations",
+      "possibleUse": "Accepted payload event stream, review prompts, prediction or hedge simulator inputs",
+      "manipulationModel": "Reporters can collude, go stale, copy the same upstream source, or sign self-serving observations.",
+      "staleOrWrongHandling": "Track signer provenance, quorum, recency, conflicts, reputation, and review-only status until penalties or challenge rules exist.",
+      "determinism": "Deterministic only for signature validity and accepted payload inclusion, not factual truth.",
+      "currentKaspaLane": "payload-indexer",
+      "repoUseNow": "Matches current attestation registry and prediction/hedge simulator boundaries.",
+      "missingRails": [
+        "reporter registry",
+        "quorum thresholds",
+        "anti-copy-source policy",
+        "reputation penalties",
+        "custody-action guard"
+      ],
+      "riskLevel": "medium",
+      "references": [
+        "eliott-mea-interview"
+      ],
+      "custodyReady": false,
+      "referenceCoverage": {
+        "total": 1,
+        "known": 1
+      }
+    },
+    {
+      "id": "miner-rtd-sampling",
+      "name": "Miner or RTD sampling",
+      "dataSource": "Miner, pool, or low-latency watcher observations",
+      "possibleUse": "Fast awareness, latency research, review prompts, pool-policy signals",
+      "manipulationModel": "Signals can be spammed, bribed, selectively withheld, centralized by pool share, or mistaken for objective block-header facts.",
+      "staleOrWrongHandling": "Require signed reports, pool identity, conflict sets, anti-spam thresholds, and review-only routing before any custody impact.",
+      "determinism": "Accepted payload inclusion is deterministic; the observed external event is not.",
+      "currentKaspaLane": "research",
+      "repoUseNow": "Can extend the miner-signal research fixture and attestation registry.",
+      "missingRails": [
+        "sampling design",
+        "pool identity model",
+        "anti-bribery rules",
+        "weighting thresholds",
+        "conflict resolution"
+      ],
+      "riskLevel": "medium",
+      "references": [],
+      "custodyReady": false,
+      "referenceCoverage": {
+        "total": 0,
+        "known": 0
+      }
+    },
+    {
+      "id": "onchain-dclob-ground-truth",
+      "name": "On-chain DCLOB or native market source",
+      "dataSource": "A liquid, on-chain order book or native market with executable quotes",
+      "possibleUse": "Long-term price source for lending and liquidation if liquidity is deep enough",
+      "manipulationModel": "Market manipulation remains possible, but quote falsification is reduced when orders are executable and settled on-chain.",
+      "staleOrWrongHandling": "Use executable order state, liquidity depth, batch or ordering rules, and circuit breakers.",
+      "determinism": "Potentially deterministic once execution, ordering, liquidity, and settlement rails exist.",
+      "currentKaspaLane": "future-rails",
+      "repoUseNow": "Do not build against this yet; use as a target dependency for DEX/AMM and lending briefs.",
+      "missingRails": [
+        "native market execution",
+        "liquidity depth",
+        "ordering/MEV policy",
+        "LP or order custody",
+        "composable settlement"
+      ],
+      "riskLevel": "future",
+      "references": [
+        "eliott-mea-interview"
+      ],
+      "custodyReady": false,
+      "referenceCoverage": {
+        "total": 1,
+        "known": 1
+      }
+    },
+    {
+      "id": "source-chain-anchor",
+      "name": "Source-chain or bridge anchor",
+      "dataSource": "External-chain headers, finality proofs, bridge reporter quorum, or ZK proof public inputs",
+      "possibleUse": "Bridge, wrapped-asset, source-chain settlement, cross-chain app proofs",
+      "manipulationModel": "A proof may verify computation without proving canonical source-chain truth, custody solvency, or safe exits.",
+      "staleOrWrongHandling": "Name the anchored object, finality rule, challenge path, custody holder, outage behavior, and user exit rule.",
+      "determinism": "Deterministic only for the proof/check being verified, not for every trust assumption around the bridge.",
+      "currentKaspaLane": "research",
+      "repoUseNow": "Can become a bridge-anchor brief only after the anchored object is explicit.",
+      "missingRails": [
+        "canonical anchor",
+        "challenge path",
+        "custody model",
+        "exit path",
+        "reorg/outage policy"
+      ],
+      "riskLevel": "high",
+      "references": [
+        "kaskad-roadmap"
+      ],
+      "custodyReady": false,
+      "referenceCoverage": {
+        "total": 1,
+        "known": 1
+      }
+    }
+  ],
+  "missingRails": [
+    "LP or order custody",
+    "accepted update lifecycle",
+    "anti-bribery rules",
+    "anti-copy-source policy",
+    "canonical anchor",
+    "challenge path",
+    "challenge policy",
+    "composable settlement",
+    "conflict resolution",
+    "custody model",
+    "custody-action guard",
+    "exit path",
+    "input archive",
+    "liquidation custody model",
+    "liquidity depth",
+    "native market execution",
+    "ordering/MEV policy",
+    "pool identity model",
+    "quorum thresholds",
+    "reorg/outage policy",
+    "reporter registry",
+    "reputation penalties",
+    "review challenge window",
+    "route verifier",
+    "sampling design",
+    "signed reporter set",
+    "stale-feed pause rule",
+    "timestamp policy",
+    "venue reliability model",
+    "weighting thresholds"
+  ],
+  "unresolvedReferences": [],
+  "claimRules": [
+    "Use oracle sources for display or review before using them for custody, liquidation, settlement, or automated payout.",
+    "Accepted Kaspa payload inclusion proves the report was recorded, not that the report is true.",
+    "Median or weighted feeds reduce some source risk but do not create deterministic ground truth.",
+    "Kaskad's work is a research and architecture reference here; do not imply this TN12 repo has Kaskad lending or oracle infrastructure.",
+    "A lending, perps, bridge, or stable-value app needs an explicit stale/wrong-data response before it can become user-facing."
+  ],
+  "boundaries": [
+    "This matrix is an oracle research artifact, not a live oracle integration.",
+    "It can justify review prompts, simulations, and app briefs, not automated liquidation or settlement.",
+    "Kaskad and Eliott Mea sources are treated as research leads until their assumptions are remapped to this repo's payload, indexer, wallet, and TN12 covenant rails.",
+    "No model here is custody-ready without stale-feed, challenge, signer, and settlement rules."
+  ]
+}

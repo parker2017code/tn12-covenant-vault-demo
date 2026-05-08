@@ -1072,6 +1072,31 @@ progress::-moz-progress-bar {
   margin-bottom: 16px;
 }
 
+.priority-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.compact-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.priority-card {
+  background: #13211f;
+}
+
+.compact-card {
+  gap: 7px;
+  padding: 12px;
+}
+
+.compact-card strong {
+  font-size: 14px;
+}
+
+.compact-card p {
+  font-size: 12px;
+}
+
 .submit-card pre {
   max-height: 180px;
   margin: 0;
@@ -1552,6 +1577,8 @@ progress::-moz-progress-bar {
   .agent-list,
   .build-status-summary,
   .build-status-lanes,
+  .priority-grid,
+  .compact-grid,
   .submit-summary,
   .submit-drafts,
   .research-summary,

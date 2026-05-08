@@ -45,6 +45,8 @@ import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildMainstreamAppDirection } from "../src/mainstreamAppDirection.mjs";
 import { buildMissingRailsMatrix } from "../src/missingRailsMatrix.mjs";
 import { buildRailResearchTriggers } from "../src/railResearchTriggers.mjs";
+import { buildOracleSourceMatrix } from "../src/oracleSourceMatrix.mjs";
+import { buildNextWorkQueue } from "../src/nextWorkQueue.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
@@ -297,6 +299,41 @@ assert.ok(railResearchTriggers.triggers.some((trigger) =>
 const railResearchArtifact = JSON.parse(await readFile(new URL("../artifacts/rail-research-triggers.json", import.meta.url), "utf8"));
 assert.equal(railResearchArtifact.summary.triggers, 5);
 assert.equal(railResearchArtifact.status, "research-triggers-ready");
+const oracleMatrixFixture = JSON.parse(await readFile(new URL("../fixtures/OracleSourceMatrix.json", import.meta.url), "utf8"));
+const oracleMatrix = buildOracleSourceMatrix(oracleMatrixFixture);
+assert.equal(oracleMatrix.status, "oracle-source-matrix-ready");
+assert.equal(oracleMatrix.summary.models, 6);
+assert.equal(oracleMatrix.summary.custodyReadyModels, 0);
+assert.ok(oracleMatrix.missingRails.includes("stale-feed pause rule"));
+assert.ok(oracleMatrix.models.some((model) =>
+  model.id === "cex-weighted-median"
+  && model.currentKaspaLane === "research"
+  && model.references.includes("kaskad-oracle-article")
+));
+const oracleMatrixArtifact = JSON.parse(await readFile(new URL("../artifacts/oracle-source-matrix.json", import.meta.url), "utf8"));
+assert.equal(oracleMatrixArtifact.status, "oracle-source-matrix-ready");
+assert.equal(oracleMatrixArtifact.summary.models, 6);
+const nextWorkQueueFixture = JSON.parse(await readFile(new URL("../fixtures/NextWorkQueue.json", import.meta.url), "utf8"));
+const nextWorkQueue = buildNextWorkQueue(nextWorkQueueFixture);
+assert.equal(nextWorkQueue.status, "ordered-project-queue-ready");
+assert.equal(nextWorkQueue.summary.tasks, 30);
+assert.equal(nextWorkQueue.summary.topPriority, "wallet-connector-submit");
+assert.ok(nextWorkQueue.sourceDocs.includes("docs/PROGRESS.md"));
+assert.ok(nextWorkQueue.sourceDocs.includes("docs/TN12_TEST_MATRIX.md"));
+assert.deepEqual(nextWorkQueue.next.five, [
+  "wallet-connector-submit",
+  "durable-virtual-chain-indexer",
+  "batch-assurance-pledge-outputs",
+  "batch-assurance-release-refund-drafts",
+  "escrow-marketplace-demo"
+]);
+assert.ok(nextWorkQueue.tasks.some((task) =>
+  task.id === "oracle-risk-dashboard"
+  && task.startWith.includes("artifacts/oracle-source-matrix.json")
+));
+const nextWorkQueueArtifact = JSON.parse(await readFile(new URL("../artifacts/next-work-queue.json", import.meta.url), "utf8"));
+assert.equal(nextWorkQueueArtifact.summary.tasks, 30);
+assert.equal(nextWorkQueueArtifact.status, "ordered-project-queue-ready");
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -887,6 +924,8 @@ const files = [
   "scripts/build-mainstream-app-direction.mjs",
   "scripts/build-missing-rails-matrix.mjs",
   "scripts/build-rail-research-triggers.mjs",
+  "scripts/build-oracle-source-matrix.mjs",
+  "scripts/build-next-work-queue.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
@@ -968,6 +1007,8 @@ const files = [
   "artifacts/mainstream-app-direction.json",
   "artifacts/missing-rails-matrix.json",
   "artifacts/rail-research-triggers.json",
+  "artifacts/oracle-source-matrix.json",
+  "artifacts/next-work-queue.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
@@ -1018,6 +1059,8 @@ const files = [
   "fixtures/MainstreamAppDirection.json",
   "fixtures/MissingRailsMatrix.json",
   "fixtures/RailResearchTriggers.json",
+  "fixtures/OracleSourceMatrix.json",
+  "fixtures/NextWorkQueue.json",
   "fixtures/BatchAssuranceCampaign.json",
   "fixtures/EnforcementMatrix.json",
   "fixtures/EscrowPrimitives.json",
@@ -1069,6 +1112,8 @@ const files = [
   "src/mainstreamAppDirection.mjs",
   "src/missingRailsMatrix.mjs",
   "src/railResearchTriggers.mjs",
+  "src/oracleSourceMatrix.mjs",
+  "src/nextWorkQueue.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
   "src/enforcementMatrix.mjs",
@@ -1096,6 +1141,7 @@ const files = [
   "AGENTS.md",
   "CONTEXT.md",
   "docs/STATUS.md",
+  "docs/PROGRESS.md",
   "docs/SOURCES.md",
   "docs/BUILD_PLAN.md",
   "docs/LLM_REVIEW_GUIDE.md",
@@ -1149,6 +1195,8 @@ assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run mainstream:direction/);
 assert.match(readme, /npm run rails:missing/);
 assert.match(readme, /npm run rails:research/);
+assert.match(readme, /npm run oracle:matrix/);
+assert.match(readme, /npm run project:queue/);
 assert.match(readme, /npm run covenant:adversarial/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);

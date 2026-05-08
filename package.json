@@ -75,6 +75,8 @@
     "mainstream:direction": "node scripts/build-mainstream-app-direction.mjs",
     "rails:missing": "node scripts/build-missing-rails-matrix.mjs",
     "rails:research": "node scripts/build-rail-research-triggers.mjs",
+    "oracle:matrix": "node scripts/build-oracle-source-matrix.mjs",
+    "project:queue": "node scripts/build-next-work-queue.mjs",
     "build:status": "node scripts/build-status.mjs",
     "project:plan": "node scripts/build-project-plan.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",

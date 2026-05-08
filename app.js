@@ -44,6 +44,7 @@ import { buildStableIssuerRedemptionState } from "./src/stableIssuerRedemption.m
 import { buildAgentCommitmentBoard } from "./src/agentCommitments.mjs";
 import { buildProjectStatus } from "./src/buildStatus.mjs";
 import { buildProjectPlan } from "./src/projectPlan.mjs";
+import { buildNextWorkQueue } from "./src/nextWorkQueue.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -106,6 +107,9 @@ const buildStatusLanesNode = document.querySelector("#build-status-lanes");
 const projectPlanSummaryNode = document.querySelector("#project-plan-summary");
 const projectPlanNextNode = document.querySelector("#project-plan-next");
 const projectPlanVisionNode = document.querySelector("#project-plan-vision");
+const nextQueueSummaryNode = document.querySelector("#next-queue-summary");
+const nextQueueTopNode = document.querySelector("#next-queue-top");
+const nextQueueTasksNode = document.querySelector("#next-queue-tasks");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -240,6 +244,7 @@ renderStableValuePaths();
 renderStableIssuerRedemptions();
 renderAgentCommitments();
 renderBuildStatus();
+renderNextWorkQueue();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -699,6 +704,49 @@ async function renderBuildStatus() {
     }
   } catch (error) {
     buildStatusSummaryNode.textContent = `Build status unavailable: ${error.message}`;
+  }
+}
+
+async function renderNextWorkQueue() {
+  if (!nextQueueSummaryNode || !nextQueueTopNode || !nextQueueTasksNode) return;
+
+  try {
+    const response = await fetch("fixtures/NextWorkQueue.json", { cache: "no-store" });
+    const fixture = await response.json();
+    const queue = buildNextWorkQueue(fixture);
+    nextQueueSummaryNode.innerHTML = `
+      <article><span>Done</span><strong>${escapeHtml(queue.summary.done)}</strong></article>
+      <article><span>WIP</span><strong>${escapeHtml(queue.summary.wip)}</strong></article>
+      <article><span>Roadmap</span><strong>${escapeHtml(queue.summary.roadmap)}</strong></article>
+      <article><span>Tasks</span><strong>${escapeHtml(queue.summary.tasks)}</strong></article>
+    `;
+
+    nextQueueTopNode.innerHTML = "";
+    for (const task of queue.tasks.slice(0, 5)) {
+      const article = document.createElement("article");
+      article.className = "build-status-card priority-card";
+      article.innerHTML = `
+        <span>${escapeHtml(task.rank)} / ${escapeHtml(task.importance)}</span>
+        <strong>${escapeHtml(task.title)}</strong>
+        <p>${escapeHtml(task.why)}</p>
+        <small>${escapeHtml(task.definitionOfDone)}</small>
+      `;
+      nextQueueTopNode.append(article);
+    }
+
+    nextQueueTasksNode.innerHTML = "";
+    for (const task of queue.tasks) {
+      const article = document.createElement("article");
+      article.className = "build-status-card compact-card";
+      article.innerHTML = `
+        <span>${escapeHtml(task.rank)} / ${escapeHtml(task.lane)}</span>
+        <strong>${escapeHtml(task.title)}</strong>
+        <p>${escapeHtml(task.startWith.slice(0, 2).join(" | "))}</p>
+      `;
+      nextQueueTasksNode.append(article);
+    }
+  } catch (error) {
+    nextQueueSummaryNode.textContent = `Next work queue unavailable: ${error.message}`;
   }
 }
 
