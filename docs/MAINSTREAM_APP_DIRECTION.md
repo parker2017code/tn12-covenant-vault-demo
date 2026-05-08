@@ -6,6 +6,10 @@ This repo should point toward high-impact crypto app categories that have alread
 
 The priority is not to clone every DeFi app. The priority is to choose app shapes that can bring liquidity, attention, and repeat usage while staying honest about what is proved.
 
+Machine-readable source: `fixtures/MainstreamAppDirection.json`.
+Generated artifact: `artifacts/mainstream-app-direction.json`.
+Build command: `npm run mainstream:direction`.
+
 ## Priority Rule
 
 Build the highest-impact user-facing apps first when they can be connected to existing proof:

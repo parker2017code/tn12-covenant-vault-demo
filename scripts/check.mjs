@@ -42,6 +42,7 @@ import {
   summarizeSignedDraft
 } from "../src/submitConsole.mjs";
 import { buildResearchLibrary } from "../src/appResearch.mjs";
+import { buildMainstreamAppDirection } from "../src/mainstreamAppDirection.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
@@ -248,6 +249,16 @@ assert.equal(researchLibrary.summary.lanes.roadmap, 4);
 assert.equal(researchLibrary.summary.lanes.research, 4);
 assert.ok(researchLibrary.candidates.some((candidate) => candidate.id === "uniswap-amm"));
 assert.ok(researchLibrary.candidates.some((candidate) => candidate.id === "wallet-api-send" && candidate.priority === "build-now"));
+const mainstreamFixture = JSON.parse(await readFile(new URL("../fixtures/MainstreamAppDirection.json", import.meta.url), "utf8"));
+const mainstreamApps = buildMainstreamAppDirection(mainstreamFixture);
+assert.equal(mainstreamApps.status, "high-impact-app-direction-documented");
+assert.equal(mainstreamApps.summary.total, 10);
+assert.equal(mainstreamApps.summary.buildNow, 7);
+assert.equal(mainstreamApps.summary.researchOrLater, 3);
+assert.equal(mainstreamApps.summary.topPriority, "invoice-receipts");
+assert.ok(mainstreamApps.buildNow.some((target) => target.id === "escrow-marketplace"));
+assert.ok(mainstreamApps.researchOrLater.some((target) => target.id === "defi-liquidity-stack"));
+assert.ok(mainstreamApps.targets.every((target) => target.doNotClaimYet.length > 20));
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -801,6 +812,7 @@ const files = [
   "scripts/build-wallet-submit-package.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
+  "scripts/build-mainstream-app-direction.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
@@ -879,6 +891,7 @@ const files = [
   "artifacts/wallet-submit-package.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
+  "artifacts/mainstream-app-direction.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
@@ -924,6 +937,7 @@ const files = [
   "fixtures/SubmitConsoleDrafts.json",
   "fixtures/CrossChainResearchLibrary.json",
   "fixtures/BasedRollupScout.json",
+  "fixtures/MainstreamAppDirection.json",
   "fixtures/BatchAssuranceCampaign.json",
   "fixtures/EnforcementMatrix.json",
   "fixtures/EscrowPrimitives.json",
@@ -970,6 +984,7 @@ const files = [
   "src/walletSubmitPackage.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
+  "src/mainstreamAppDirection.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
   "src/enforcementMatrix.mjs",
@@ -1045,6 +1060,7 @@ assert.match(readme, /npm run wallet:review/);
 assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
+assert.match(readme, /npm run mainstream:direction/);
 assert.match(readme, /npm run covenant:adversarial/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);

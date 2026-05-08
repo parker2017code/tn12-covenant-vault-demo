@@ -1,0 +1,247 @@
+{
+  "schema": "kaspa-mainstream-app-direction-fixture/v1",
+  "reviewedAt": "2026-05-08",
+  "targets": [
+    {
+      "id": "invoice-receipts",
+      "priority": 1,
+      "name": "Invoice / Receipt App",
+      "userUseCase": "A merchant or app gets a payment plus order, refund, or error state that can be indexed from accepted transaction payloads.",
+      "mainstreamReference": "Checkout, payment proof, and receipt APIs are common crypto entry points because they do not require users to understand DeFi.",
+      "kaspaLane": "live-style-payment-indexer",
+      "currentRepoStatus": "accepted-tn12-json-wrpc-payload-events",
+      "buildNow": true,
+      "liquidityOrAttentionReason": "Payments are the clearest path to repeat non-speculative usage and can become the state layer for later apps.",
+      "existingRails": [
+        "accepted transaction payloads",
+        "invoice registry",
+        "checkpointed accepted-index fixture",
+        "wallet review package"
+      ],
+      "missingRails": [
+        "durable node/RPC replay storage",
+        "live wallet connector",
+        "production merchant UX"
+      ],
+      "smallestHonestPrototype": "Durable invoice state that replays accepted paid, refund, and error payload transactions without local keys.",
+      "doNotClaimYet": "Do not claim production merchant payments or mainnet app guarantees."
+    },
+    {
+      "id": "escrow-marketplace",
+      "priority": 2,
+      "name": "Escrow / Freelance / Marketplace",
+      "userUseCase": "A buyer funds a job, the seller gets paid on release, and timeout refund or mutual cancel handles failure.",
+      "mainstreamReference": "Escrow, marketplaces, and freelance payouts are familiar user-facing crypto custody workflows.",
+      "kaspaLane": "tn12-toccata-covenant",
+      "currentRepoStatus": "accepted-release-refund-cancel-proofs",
+      "buildNow": true,
+      "liquidityOrAttentionReason": "A clear escrow app demonstrates why covenants matter in a way normal users understand.",
+      "existingRails": [
+        "Escrow.sil",
+        "accepted release proof",
+        "accepted DAA refund proof",
+        "accepted mutual cancel proof",
+        "role-separated positive proofs"
+      ],
+      "missingRails": [
+        "wallet submit UX",
+        "fresh expendable outputs for rejection tests",
+        "marketplace order UI"
+      ],
+      "smallestHonestPrototype": "A freelance escrow demo that imports accepted funding, release, refund, and cancel proof state.",
+      "doNotClaimYet": "Do not claim mainnet escrow or audited production custody."
+    },
+    {
+      "id": "batch-assurance",
+      "priority": 3,
+      "name": "Batch Assurance / Public-Goods Funding",
+      "userUseCase": "Many contributors pledge toward a target; release is planned only from accepted matched outputs and refunds remain explicit.",
+      "mainstreamReference": "Crowdfunding, grants, and public-goods funding have proven attention value across crypto ecosystems.",
+      "kaspaLane": "planner-indexer-now-covenant-assisted-later",
+      "currentRepoStatus": "accepted-planner-payloads-custody-requirements-open",
+      "buildNow": true,
+      "liquidityOrAttentionReason": "Visible funding targets can attract community participation and demonstrate group custody rules.",
+      "existingRails": [
+        "accepted pledge planner payloads",
+        "release-ready planner payload",
+        "custody requirements artifact",
+        "individual assurance pledge script"
+      ],
+      "missingRails": [
+        "accepted amount-matched pledge outputs",
+        "custody release and refund drafts",
+        "target aggregation proof boundary"
+      ],
+      "smallestHonestPrototype": "A campaign that settles only from imported accepted pledge outputs matching the required amounts.",
+      "doNotClaimYet": "Do not claim pooled covenant target enforcement until the script or proof model exists."
+    },
+    {
+      "id": "wallet-submit-console",
+      "priority": 4,
+      "name": "Wallet-Facing Submit Console",
+      "userUseCase": "A user reviews exact transaction fields, payload bytes, route, and risk before signing or submitting.",
+      "mainstreamReference": "Every successful crypto app eventually needs wallet-safe transaction review instead of shell scripts.",
+      "kaspaLane": "wallet-policy",
+      "currentRepoStatus": "review-package-built",
+      "buildNow": true,
+      "liquidityOrAttentionReason": "No app becomes usable until users can submit without local private keys.",
+      "existingRails": [
+        "submit draft registry",
+        "wallet review readiness",
+        "wallet connector requirements",
+        "wallet submit package"
+      ],
+      "missingRails": [
+        "live wallet connector",
+        "payload-preserving submit confirmation",
+        "browser signing integration"
+      ],
+      "smallestHonestPrototype": "A no-local-key review flow that refuses routes known to drop payload bytes.",
+      "doNotClaimYet": "Do not claim wallet integration until a real connector signs and submits the exact reviewed transaction."
+    },
+    {
+      "id": "access-passes",
+      "priority": 5,
+      "name": "Access Passes / Coupons / Tickets",
+      "userUseCase": "An issuer creates passes, tickets, coupons, or redeemable claims and the app tracks accepted redemptions.",
+      "mainstreamReference": "Token-gated access, tickets, coupons, and loyalty passes are familiar low-friction crypto products.",
+      "kaspaLane": "issuer-indexer",
+      "currentRepoStatus": "accepted-redemption-payload-state",
+      "buildNow": true,
+      "liquidityOrAttentionReason": "Consumer passes are understandable and can ship before deep DeFi rails.",
+      "existingRails": [
+        "access pass planner",
+        "accepted redemption payload",
+        "duplicate safeguards"
+      ],
+      "missingRails": [
+        "expiry checks",
+        "issuer review policy",
+        "merchant redemption UX"
+      ],
+      "smallestHonestPrototype": "A pass redemption dashboard tied to accepted payload bytes and duplicate review rules.",
+      "doNotClaimYet": "Do not claim protocol-native ticket enforcement."
+    },
+    {
+      "id": "auction-intents",
+      "priority": 6,
+      "name": "Auction / Intent Marketplace",
+      "userUseCase": "Users submit bids or intents, the app derives winner/refund planning from accepted payloads, and settlement remains explicit.",
+      "mainstreamReference": "NFT markets, intent markets, and auctions have repeatedly drawn users and volume on other chains.",
+      "kaspaLane": "planner-indexer-now-settlement-later",
+      "currentRepoStatus": "accepted-bid-and-planner-payloads",
+      "buildNow": true,
+      "liquidityOrAttentionReason": "Auctions can create visible activity, but custody and settlement must be disciplined.",
+      "existingRails": [
+        "accepted bid payloads",
+        "winner selection rules",
+        "refund planner events"
+      ],
+      "missingRails": [
+        "custody settlement drafts",
+        "asset delivery model",
+        "ordering and MEV boundary"
+      ],
+      "smallestHonestPrototype": "An accepted-payload auction board with winner/refund state and no atomic exchange claim.",
+      "doNotClaimYet": "Do not claim MEV resistance or atomic settlement."
+    },
+    {
+      "id": "vault-treasury",
+      "priority": 7,
+      "name": "Vault / Treasury / Team Wallet",
+      "userUseCase": "A user, family, DAO, or team can use delayed withdrawals, recovery, spend caps, and payroll templates.",
+      "mainstreamReference": "Wallet safety, multisig-like controls, and treasury operations are durable crypto use cases.",
+      "kaspaLane": "tn12-toccata-covenant-plus-wallet-policy",
+      "currentRepoStatus": "vault-proofs-accepted-treasury-planner-built",
+      "buildNow": true,
+      "liquidityOrAttentionReason": "Business custody and safer wallets can attract serious users even before speculative DeFi.",
+      "existingRails": [
+        "accepted vault recovery proof",
+        "accepted delayed withdrawal proof",
+        "treasury templates",
+        "role-separated fixtures"
+      ],
+      "missingRails": [
+        "constrained team spend drafts",
+        "role-policy UI",
+        "payroll cap enforcement boundary"
+      ],
+      "smallestHonestPrototype": "A team vault plan that shows which controls are script enforced and which are wallet policy.",
+      "doNotClaimYet": "Do not claim script-enforced payroll caps until drafts and proofs exist."
+    },
+    {
+      "id": "simple-assets",
+      "priority": 8,
+      "name": "Simple Assets / Redeemable Claims",
+      "userUseCase": "An issuer creates credits, vouchers, claims, or recoverable units and tracks redemption state.",
+      "mainstreamReference": "Tokens, vouchers, and redeemable assets are a major crypto onboarding pattern.",
+      "kaspaLane": "issuer-indexer-now-covenant-native-later",
+      "currentRepoStatus": "policy-artifacts-built",
+      "buildNow": false,
+      "liquidityOrAttentionReason": "Asset rails can attract users, but overclaiming native enforcement would damage trust.",
+      "existingRails": [
+        "simple asset policy artifact",
+        "stable issuer payload state",
+        "access pass redemption state"
+      ],
+      "missingRails": [
+        "native asset protocol boundary",
+        "covenant-native transfer rules",
+        "issuer reserve and redemption controls"
+      ],
+      "smallestHonestPrototype": "Issuer-indexed redeemable claims with accepted issuance/redemption payloads.",
+      "doNotClaimYet": "Do not claim native Kaspa assets or stablecoins."
+    },
+    {
+      "id": "stable-value",
+      "priority": 9,
+      "name": "Stable-Value Issuer App",
+      "userUseCase": "An issuer records issuance and redemption requests with reserve and redemption policy visible to users.",
+      "mainstreamReference": "Stablecoins and redeemable value units are among the strongest liquidity magnets in crypto.",
+      "kaspaLane": "issuer-indexer-and-research",
+      "currentRepoStatus": "accepted-issuance-redemption-payload-state",
+      "buildNow": false,
+      "liquidityOrAttentionReason": "Stable-value rails attract liquidity, but require strong issuer, reserve, legal, and risk boundaries.",
+      "existingRails": [
+        "stable-value comparison",
+        "issuer issuance payloads",
+        "issuer redemption payload"
+      ],
+      "missingRails": [
+        "reserve attestation model",
+        "legal and redemption policy",
+        "oracle or collateral model for non-issuer variants"
+      ],
+      "smallestHonestPrototype": "A transparent issuer redemption ledger with no native-stablecoin claim.",
+      "doNotClaimYet": "Do not claim decentralized stablecoin, overcollateralized lending, or native stable asset support."
+    },
+    {
+      "id": "defi-liquidity-stack",
+      "priority": 10,
+      "name": "DEX / AMM / Lending / Perps",
+      "userUseCase": "Users trade, provide liquidity, borrow, lend, hedge, or take leveraged positions.",
+      "mainstreamReference": "DEXs, lending markets, and perps are among the highest-liquidity app categories on mature chains.",
+      "kaspaLane": "research-future-rails",
+      "currentRepoStatus": "defi-backlog-and-prediction-simulator",
+      "buildNow": false,
+      "liquidityOrAttentionReason": "These categories bring liquidity and attention, but they require the most missing rails.",
+      "existingRails": [
+        "DeFi research backlog",
+        "stable-value paths",
+        "prediction hedge simulator",
+        "attestation registry"
+      ],
+      "missingRails": [
+        "pool reserve accounting",
+        "liquidity share accounting",
+        "oracle or price source trust model",
+        "liquidation and settlement rules",
+        "MEV/order handling",
+        "cross-app composition or rollup/vProg route",
+        "production wallet and indexer path"
+      ],
+      "smallestHonestPrototype": "One-page app briefs and simulations that name the rails before any trading/custody claim.",
+      "doNotClaimYet": "Do not claim live DEX, lending, perps, prediction settlement, or investment advice."
+    }
+  ]
+}

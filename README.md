@@ -354,9 +354,10 @@ Build the cross-chain app research library:
 ```sh
 npm run research:library
 npm run rollup:scout
+npm run mainstream:direction
 ```
 
-This turns `fixtures/CrossChainResearchLibrary.json` into `artifacts/research-library.json` and `fixtures/BasedRollupScout.json` into `artifacts/based-rollup-scout.json`. The research library uses open-source apps and Kaspa docs as PMF/code-pattern research, then remaps every candidate to a live Kaspa, TN12/Toccata, roadmap, or research lane before any app claims are made. The based-rollup scout tracks Maxim's TN12 based zk covenant rollup PoC, Hans' vProgs/runtime direction, Michael's covenant++ roadmap, and ecosystem rollup targets as planning inputs. It does not change current accepted TN12 proof claims.
+This turns `fixtures/CrossChainResearchLibrary.json` into `artifacts/research-library.json`, `fixtures/BasedRollupScout.json` into `artifacts/based-rollup-scout.json`, and `fixtures/MainstreamAppDirection.json` into `artifacts/mainstream-app-direction.json`. The research library uses open-source apps and Kaspa docs as PMF/code-pattern research, then remaps every candidate to a live Kaspa, TN12/Toccata, roadmap, or research lane before any app claims are made. The mainstream direction artifact keeps the high-impact user-facing app targets in priority order. The based-rollup scout tracks Maxim's TN12 based zk covenant rollup PoC, Hans' vProgs/runtime direction, Michael's covenant++ roadmap, and ecosystem rollup targets as planning inputs. It does not change current accepted TN12 proof claims.
 
 Build the batch assurance campaign planner state:
 
