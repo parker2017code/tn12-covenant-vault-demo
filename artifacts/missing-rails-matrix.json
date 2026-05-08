@@ -1,0 +1,348 @@
+{
+  "schema": "kaspa-missing-rails-matrix/v1",
+  "reviewedAt": "2026-05-08",
+  "status": "missing-rails-explicit",
+  "summary": {
+    "categories": 5,
+    "questions": 23,
+    "realRailsNow": 7,
+    "uniqueMissingRails": 23,
+    "topMissingRails": [
+      {
+        "name": "canonical source-chain anchor",
+        "count": 1
+      },
+      {
+        "name": "close, liquidation, and dispute authority",
+        "count": 1
+      },
+      {
+        "name": "collateral custody model for lending positions",
+        "count": 1
+      },
+      {
+        "name": "collateral vault, mint/burn, and liquidation rules",
+        "count": 1
+      },
+      {
+        "name": "cross-chain challenge and fraud handling",
+        "count": 1
+      },
+      {
+        "name": "custody, mint/burn, exit, and redemption policy",
+        "count": 1
+      },
+      {
+        "name": "finality verifier and trust model",
+        "count": 1
+      },
+      {
+        "name": "liquidation transaction path and authority model",
+        "count": 1
+      },
+      {
+        "name": "LP share asset/accounting model",
+        "count": 1
+      },
+      {
+        "name": "margin custody and withdrawal/liquidation rules",
+        "count": 1
+      }
+    ],
+    "buildNowClaimsAllowed": 0
+  },
+  "realRailsNow": [
+    "accepted payments",
+    "transaction payloads",
+    "indexer-derived app state",
+    "TN12 covenant proofs for vault, assurance, and escrow",
+    "local signed drafts",
+    "wallet-review artifacts",
+    "fixture-backed replay rows"
+  ],
+  "categories": [
+    {
+      "id": "dex-amm",
+      "name": "DEX / AMM",
+      "targetUseCase": "Users swap assets or provide liquidity to pools.",
+      "currentLane": "research-future-rails",
+      "repoPosition": "Do not build a live DEX claim yet. Build pool/risk briefs and, later, accepted intent or settlement drafts.",
+      "sourceAnchors": [
+        "docs/ECOSYSTEM_BUILD_PLAN.md:415-425",
+        "docs/PROGRAMMABILITY_PATHS.md:21-30",
+        "fixtures/DefiResearchBacklog.json#amm-pool-research",
+        "fixtures/CrossChainResearchLibrary.json#uniswap-amm"
+      ],
+      "questions": [
+        {
+          "question": "How are pool reserves represented?",
+          "currentAnswer": "No live shared pool state exists in this repo. Current work can represent intents or registry state through accepted payloads, but not a covenant-enforced AMM reserve pair.",
+          "existingRail": "accepted transaction payloads and indexer-derived app state",
+          "missingRail": "shared pool state or rollup/vProg execution state",
+          "nextArtifact": "Pool reserve brief with a fake-state simulator, not custody."
+        },
+        {
+          "question": "Who can update reserves?",
+          "currentAnswer": "No reserve update authority is implemented. A future design must decide whether updates are covenant spends, wallet-reviewed settlement transactions, rollup state transitions, or app-indexer records.",
+          "existingRail": "wallet-review artifacts",
+          "missingRail": "reserve update authority and enforcement model",
+          "nextArtifact": "Authority matrix: user swap, LP add/remove, admin pause, and invalid update cases."
+        },
+        {
+          "question": "How is swap price calculated?",
+          "currentAnswer": "Only research references exist. No constant-product, concentrated-liquidity, or order-book pricing engine is implemented for Kaspa settlement.",
+          "existingRail": "research backlog",
+          "missingRail": "pricing engine tied to enforceable reserves",
+          "nextArtifact": "Simulation-only constant-product calculator with price-impact warnings."
+        },
+        {
+          "question": "How is slippage enforced?",
+          "currentAnswer": "Not implemented. Slippage can be displayed in a simulator, but enforcement needs a transaction or state transition that fails when output is below minimum.",
+          "existingRail": "local signed drafts and wallet review",
+          "missingRail": "min-output enforcement in covenant, wallet, rollup, or vProg path",
+          "nextArtifact": "Draft-level min-output review field before any settlement claim."
+        },
+        {
+          "question": "How are LP shares tracked?",
+          "currentAnswer": "Not implemented. LP accounting needs native assets, issuer-indexed shares, or a future shared-state execution surface.",
+          "existingRail": "simple asset policy and issuer-indexer patterns",
+          "missingRail": "LP share asset/accounting model",
+          "nextArtifact": "LP-share accounting brief comparing issuer-indexed shares versus future native/covenant shares."
+        },
+        {
+          "question": "How is ordering or MEV handled?",
+          "currentAnswer": "Current auction/intent work names MEV caveats but does not solve ordering. Fast accepted payloads are not MEV protection.",
+          "existingRail": "accepted payload state and auction intent registry",
+          "missingRail": "ordering policy, batch auction, or sequencing commitment design",
+          "nextArtifact": "MEV/order caveat checklist for all swap and auction prototypes."
+        }
+      ],
+      "smallestHonestPrototype": "AMM risk and UX simulator plus accepted swap-intent payload registry with no custody or live swap claim.",
+      "doNotClaim": [
+        "live Kaspa DEX",
+        "enforced AMM reserves",
+        "MEV resistance",
+        "LP share safety"
+      ],
+      "status": "questions-answered-rails-named"
+    },
+    {
+      "id": "lending",
+      "name": "Lending / Borrowing",
+      "targetUseCase": "Users deposit collateral, borrow against it, repay, or get liquidated when health falls below threshold.",
+      "currentLane": "research-future-rails",
+      "repoPosition": "Build risk dashboards and accepted receipt accounting first. Do not claim a lending market.",
+      "sourceAnchors": [
+        "docs/ECOSYSTEM_BUILD_PLAN.md:415",
+        "fixtures/DefiResearchBacklog.json#lending-risk-dashboard",
+        "fixtures/CrossChainResearchLibrary.json#compound-lending",
+        "fixtures/CrossChainResearchLibrary.json#aave-risk"
+      ],
+      "questions": [
+        {
+          "question": "Where does collateral sit?",
+          "currentAnswer": "No lending collateral vault exists. Escrow/vault proofs show covenant custody patterns, but not multi-borrower collateral accounting.",
+          "existingRail": "TN12 vault and escrow covenant proofs",
+          "missingRail": "collateral custody model for lending positions",
+          "nextArtifact": "Collateral position schema that marks custody as simulated, wallet-policy, covenant, or future vProg."
+        },
+        {
+          "question": "Who can liquidate?",
+          "currentAnswer": "No liquidation role or transaction path exists. Any design must specify permissionless liquidators, keeper set, issuer/admin action, or manual review.",
+          "existingRail": "accepted proof spend patterns",
+          "missingRail": "liquidation transaction path and authority model",
+          "nextArtifact": "Liquidation role matrix with stale-price and bad-liquidation cases."
+        },
+        {
+          "question": "What oracle gives the price?",
+          "currentAnswer": "The repo has attestation research and stable-value comparisons, not a production price oracle.",
+          "existingRail": "attestation registry and accepted signal payloads",
+          "missingRail": "price oracle trust model and dispute process",
+          "nextArtifact": "Oracle-source checklist: issuer, reporter set, external feed, challenge window, stale-price rule."
+        },
+        {
+          "question": "What happens if the oracle is wrong or stale?",
+          "currentAnswer": "No automatic protection exists. Current docs require explicit oracle/source assumptions before product claims.",
+          "existingRail": "review-needed state patterns",
+          "missingRail": "stale-price guard, pause rule, dispute path, and bad-liquidation rollback policy",
+          "nextArtifact": "Stale-oracle failure-mode simulator."
+        },
+        {
+          "question": "How are interest and health factors tracked?",
+          "currentAnswer": "Not implemented. A non-custodial dashboard could calculate health from accepted receipts and manual prices before settlement.",
+          "existingRail": "accepted transaction receipts and indexer replay rows",
+          "missingRail": "position accounting and interest-rate model",
+          "nextArtifact": "Simulation-only health factor calculator."
+        }
+      ],
+      "smallestHonestPrototype": "Manual risk dashboard fed by accepted deposit/repay receipts and explicit external prices, with no borrowing custody.",
+      "doNotClaim": [
+        "live lending market",
+        "automatic liquidations",
+        "oracle safety",
+        "borrowable liquidity"
+      ],
+      "status": "questions-answered-rails-named"
+    },
+    {
+      "id": "perps-prediction",
+      "name": "Perps / Prediction / Hedge Markets",
+      "targetUseCase": "Users express event or price exposure, margin positions, or review hedge risk.",
+      "currentLane": "research-simulator",
+      "repoPosition": "The simulator may suggest review prompts from accepted attestations, but it must not trade, custody, settle, price real markets, or give advice.",
+      "sourceAnchors": [
+        "docs/PROGRESS.md:66",
+        "fixtures/PredictionHedgeSimulator.json",
+        "fixtures/AttestationSignals.json",
+        "docs/TN12_TEST_MATRIX.md:92"
+      ],
+      "questions": [
+        {
+          "question": "What oracle decides settlement?",
+          "currentAnswer": "No settlement oracle exists. Current markets use accepted attestation or public observation as simulation inputs only.",
+          "existingRail": "accepted attestation payloads",
+          "missingRail": "settlement oracle, dispute window, and final resolution rule",
+          "nextArtifact": "Resolution-source matrix per market."
+        },
+        {
+          "question": "Where is margin or collateral held?",
+          "currentAnswer": "Nowhere. Current positions are manual simulator entries with notional TKAS values, not locked funds.",
+          "existingRail": "manual simulator fixtures",
+          "missingRail": "margin custody and withdrawal/liquidation rules",
+          "nextArtifact": "No-funds position accounting model before custody."
+        },
+        {
+          "question": "How are positions matched?",
+          "currentAnswer": "Not implemented. There is no order book, AMM, counterparty matcher, or clearing engine.",
+          "existingRail": "accepted payload events",
+          "missingRail": "matching engine or market-making model",
+          "nextArtifact": "Paper-position matching simulator."
+        },
+        {
+          "question": "Who can close or liquidate?",
+          "currentAnswer": "No close/liquidate authority exists. Current output is only review suggested/watch state.",
+          "existingRail": "review prompt payloads",
+          "missingRail": "close, liquidation, and dispute authority",
+          "nextArtifact": "Authority and failure-mode brief."
+        },
+        {
+          "question": "What prevents fake odds or stale prices?",
+          "currentAnswer": "Only source signature review exists. Reputation thresholds still need hardening, and draft signals cannot move market probability.",
+          "existingRail": "signature-gated attestation registry",
+          "missingRail": "reputation thresholds, stale signal rules, market manipulation controls",
+          "nextArtifact": "Attestation reputation threshold artifact."
+        }
+      ],
+      "smallestHonestPrototype": "Simulation-only board with accepted signal history, stale-signal review, and no trading, custody, or advice.",
+      "doNotClaim": [
+        "perpetual futures",
+        "prediction market settlement",
+        "real odds",
+        "automated hedging",
+        "financial advice"
+      ],
+      "status": "questions-answered-rails-named"
+    },
+    {
+      "id": "bridge-source-chain",
+      "name": "Bridge / Source-Chain Apps",
+      "targetUseCase": "Users prove events or asset state from another chain and use Kaspa for receipts, settlement, or claims.",
+      "currentLane": "roadmap-research",
+      "repoPosition": "Do not claim trustless bridging. ZK proves a statement about selected inputs; it does not by itself prove source-chain canonicality.",
+      "sourceAnchors": [
+        "docs/PROGRAMMABILITY_PATHS.md:39-53",
+        "docs/ROADMAP_STATE.md:83",
+        "CLAIMS.yml#zk_anchor_boundary",
+        "llms.txt:34"
+      ],
+      "questions": [
+        {
+          "question": "What is the canonical source-chain anchor?",
+          "currentAnswer": "Not selected. Possible anchors include a light client, finality certificate, accumulated-work view, reporter set, or challenge process.",
+          "existingRail": "ZK/anchor checklist lane",
+          "missingRail": "canonical source-chain anchor",
+          "nextArtifact": "Anchor-choice matrix."
+        },
+        {
+          "question": "Who verifies source-chain finality?",
+          "currentAnswer": "No verifier is implemented. A future bridge must state whether finality is verified by script, ZK proof, reporter quorum, or manual review.",
+          "existingRail": "roadmap ZK verification framing",
+          "missingRail": "finality verifier and trust model",
+          "nextArtifact": "Finality trust-model checklist."
+        },
+        {
+          "question": "Where do bridged assets sit?",
+          "currentAnswer": "No wrapped asset or custody bridge exists. External stablecoin rail remains integration research.",
+          "existingRail": "stable-value external rail research",
+          "missingRail": "custody, mint/burn, exit, and redemption policy",
+          "nextArtifact": "Bridge custody and exit brief."
+        },
+        {
+          "question": "What happens during reorg, fraud, or challenge?",
+          "currentAnswer": "No challenge process exists. The indexer has rollback guards for Kaspa accepted-state reads, not cross-chain fraud proofs.",
+          "existingRail": "indexer rollback segments",
+          "missingRail": "cross-chain challenge and fraud handling",
+          "nextArtifact": "Challenge-period state machine."
+        }
+      ],
+      "smallestHonestPrototype": "Receipt mapper and anchor checklist that records source-chain proof assumptions without minting wrapped assets.",
+      "doNotClaim": [
+        "trustless bridge",
+        "wrapped asset issuance",
+        "automatic external-chain finality",
+        "ZK proves real-world facts"
+      ],
+      "status": "questions-answered-rails-named"
+    },
+    {
+      "id": "stable-value",
+      "name": "Stable-Value / Redeemable Units",
+      "targetUseCase": "Users hold or redeem a less volatile unit while using Kaspa payment and receipt rails.",
+      "currentLane": "issuer-indexer-and-research",
+      "repoPosition": "Issuer-backed redemption state can be modeled now. Native or overcollateralized stablecoins remain research.",
+      "sourceAnchors": [
+        "fixtures/StableValuePaths.json",
+        "fixtures/StableIssuerRedemptions.json",
+        "docs/PROGRESS.md:65",
+        "docs/MAINSTREAM_APP_DIRECTION.md:35"
+      ],
+      "questions": [
+        {
+          "question": "Who backs redemption?",
+          "currentAnswer": "For the buildable path, a known issuer backs redemption. Other paths need collateral, oracle, or external-chain assumptions.",
+          "existingRail": "issuer-indexed accepted issuance/redemption payloads",
+          "missingRail": "reserve attestation and legal redemption process",
+          "nextArtifact": "Issuer reserve and redemption policy fixture."
+        },
+        {
+          "question": "Where is collateral?",
+          "currentAnswer": "No collateral vault exists for a stable unit. Overcollateralized and synthetic designs are research only.",
+          "existingRail": "vault covenant proofs as primitive examples",
+          "missingRail": "collateral vault, mint/burn, and liquidation rules",
+          "nextArtifact": "Collateral health simulator with manual prices."
+        },
+        {
+          "question": "What oracle or reserve report is trusted?",
+          "currentAnswer": "No production reserve oracle exists. Accepted payloads can record issuer actions but cannot prove reserves by themselves.",
+          "existingRail": "accepted payload indexer",
+          "missingRail": "reserve report source and audit model",
+          "nextArtifact": "Reserve disclosure and stale-report review rules."
+        }
+      ],
+      "smallestHonestPrototype": "Issuer redemption ledger with accepted issuance/redemption payloads and explicit reserve-trust label.",
+      "doNotClaim": [
+        "native stablecoin",
+        "decentralized collateralized stablecoin",
+        "reserve proof",
+        "guaranteed redemption"
+      ],
+      "status": "questions-answered-rails-named"
+    }
+  ],
+  "rules": [
+    "Every high-impact app can stay in the pipeline, but product claims require the relevant rails to be real.",
+    "A simulator, brief, payload registry, or wallet-review artifact is useful only when labeled correctly.",
+    "Do not upgrade a research lane to a build-now app until custody, indexing, oracle, settlement, and wallet assumptions are explicit.",
+    "Each category must name what not to claim yet."
+  ]
+}

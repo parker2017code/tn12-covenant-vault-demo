@@ -228,6 +228,8 @@ Still needed:
 
 Use `docs/MAINSTREAM_APP_DIRECTION.md` before adding a new app lane. High-liquidity categories from other chains belong in the pipeline, but the repo should first ask whether the use case can be expressed as accepted payment/indexer state, TN12/Toccata covenant proof, wallet policy, or research.
 
+Use `npm run rails:missing` for the highest-risk mainstream categories. It turns the DEX/AMM, lending, perps/prediction, bridge/source-chain, and stable-value dependency questions into a checked artifact before product UI or settlement claims.
+
 ### 1. Payload Receipt / Invoice App
 
 Why first:
@@ -422,6 +424,7 @@ Build:
 Success:
 
 - The repo has a status-labeled DeFi backlog that names the missing rails before building product UI.
+- `artifacts/missing-rails-matrix.json` answers the reserve, collateral, oracle, liquidation, settlement, bridge-anchor, and stable-value trust questions before any build claim.
 - No page claims mature lending, AMMs, stablecoins, derivatives, or native DeFi are live on Kaspa.
 
 ### 10. Cross-Chain App Code And PMF Research

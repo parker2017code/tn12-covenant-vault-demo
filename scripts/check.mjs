@@ -43,6 +43,7 @@ import {
 } from "../src/submitConsole.mjs";
 import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildMainstreamAppDirection } from "../src/mainstreamAppDirection.mjs";
+import { buildMissingRailsMatrix } from "../src/missingRailsMatrix.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
@@ -261,6 +262,22 @@ assert.equal(mainstreamApps.summary.topPriority, "invoice-receipts");
 assert.ok(mainstreamApps.buildNow.some((target) => target.id === "escrow-marketplace"));
 assert.ok(mainstreamApps.researchOrLater.some((target) => target.id === "defi-liquidity-stack"));
 assert.ok(mainstreamApps.targets.every((target) => target.doNotClaimYet.length > 20));
+const missingRailsFixture = JSON.parse(await readFile(new URL("../fixtures/MissingRailsMatrix.json", import.meta.url), "utf8"));
+const missingRailsMatrix = buildMissingRailsMatrix(missingRailsFixture);
+assert.equal(missingRailsMatrix.status, "missing-rails-explicit");
+assert.equal(missingRailsMatrix.summary.categories, 5);
+assert.equal(missingRailsMatrix.summary.questions, 23);
+assert.equal(missingRailsMatrix.summary.buildNowClaimsAllowed, 0);
+assert.ok(missingRailsMatrix.categories.some((category) =>
+  category.id === "dex-amm"
+  && category.questions.some((question) => /pool reserves/.test(question.question))
+));
+assert.ok(missingRailsMatrix.categories.some((category) =>
+  category.id === "lending"
+  && category.questions.some((question) => /oracle/.test(question.question))
+));
+const missingRailsArtifact = JSON.parse(await readFile(new URL("../artifacts/missing-rails-matrix.json", import.meta.url), "utf8"));
+assert.equal(missingRailsArtifact.summary.questions, 23);
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -849,6 +866,7 @@ const files = [
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
+  "scripts/build-missing-rails-matrix.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
@@ -928,6 +946,7 @@ const files = [
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
   "artifacts/mainstream-app-direction.json",
+  "artifacts/missing-rails-matrix.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
@@ -976,6 +995,7 @@ const files = [
   "fixtures/CrossChainResearchLibrary.json",
   "fixtures/BasedRollupScout.json",
   "fixtures/MainstreamAppDirection.json",
+  "fixtures/MissingRailsMatrix.json",
   "fixtures/BatchAssuranceCampaign.json",
   "fixtures/EnforcementMatrix.json",
   "fixtures/EscrowPrimitives.json",
@@ -1025,6 +1045,7 @@ const files = [
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
+  "src/missingRailsMatrix.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
   "src/enforcementMatrix.mjs",
@@ -1103,6 +1124,7 @@ assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run mainstream:direction/);
+assert.match(readme, /npm run rails:missing/);
 assert.match(readme, /npm run covenant:adversarial/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);

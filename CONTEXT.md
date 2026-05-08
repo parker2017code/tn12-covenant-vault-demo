@@ -20,6 +20,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Persisted checkpoint guard command: `npm run indexer:persist`
 - Wallet-review readiness command: `npm run wallet:review`
 - Mainstream app direction command: `npm run mainstream:direction`
+- Missing rails matrix command: `npm run rails:missing`
 - Durable indexer schema command: `npm run indexer:schema`
 - Durable indexer fixture replay command: `npm run indexer:replay`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
@@ -404,6 +405,7 @@ Pause note, 2026-05-08:
 - `npm run check:all` and `npm run check:tn12` passed after the invalid-candidate wiring.
 - `docs/MAINSTREAM_APP_DIRECTION.md` records the high-impact app direction and keeps mainstream crypto use cases in the pipeline without converting research ideas into proof claims.
 - `artifacts/mainstream-app-direction.json` is the generated version of the high-impact app direction.
+- `artifacts/missing-rails-matrix.json` answers the first-principles rail questions for DEX/AMM, lending, perps/prediction, bridge/source-chain, and stable-value use cases before any product claims.
 - `artifacts/indexer-storage-schema.json` defines the durable indexer storage contract.
 - `artifacts/indexer-replay-run.json` materializes the current 33 accepted records into table-shaped replay rows and keeps app state ready only when mismatches and rollback segments are zero.
 - Do not submit invalid TN12 transactions until a candidate is reviewed and backed by a fresh expendable output.

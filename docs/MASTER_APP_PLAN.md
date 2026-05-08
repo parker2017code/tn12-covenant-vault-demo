@@ -63,6 +63,7 @@ For the high-impact mainstream app direction and why each use case is or is not 
 9. Basic DeFi Research Backlog
    - Lending, swaps, AMMs, stable-value, insurance, derivatives, portfolio automation.
    - Keep missing rails explicit: oracle, liquidity, liquidation, MEV, wallet, indexing, composition.
+   - Use `npm run rails:missing` before any DEX, lending, perps, bridge, or stable-value app claim.
    - First success: app briefs that do not claim mature native DeFi is live.
 
 10. Cross-Chain App Research Library

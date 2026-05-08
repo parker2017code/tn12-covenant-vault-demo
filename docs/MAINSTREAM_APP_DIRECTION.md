@@ -10,6 +10,10 @@ Machine-readable source: `fixtures/MainstreamAppDirection.json`.
 Generated artifact: `artifacts/mainstream-app-direction.json`.
 Build command: `npm run mainstream:direction`.
 
+Missing-rails source: `fixtures/MissingRailsMatrix.json`.
+Generated missing-rails artifact: `artifacts/missing-rails-matrix.json`.
+Build command: `npm run rails:missing`.
+
 ## Priority Rule
 
 Build the highest-impact user-facing apps first when they can be connected to existing proof:
@@ -67,6 +71,8 @@ For each, the repo should require a short app brief before code:
 5. missing rails,
 6. smallest honest prototype,
 7. what must not be claimed yet.
+
+`npm run rails:missing` records the first-principles questions and current answers for the highest-risk categories: DEX/AMM, lending, perps/prediction, bridge/source-chain apps, and stable-value units.
 
 ## Done Standard
 
