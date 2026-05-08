@@ -13,6 +13,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - TN12 proof check command: `npm run tx:verify`
 - Role-separated proof check command: `npm run tx:roles:verify`
 - Role-separated proof evidence command: `npm run roles:proof:evidence`
+- Role-separated invalid-candidate command: `npm run roles:invalid-candidates`
 - Payload-event check command: `npm run payload:verify:events`
 - Accepted app-state snapshot command: `npm run indexer:state`
 - Checkpointed accepted-index command: `npm run indexer:checkpoint`
@@ -216,6 +217,7 @@ Core modules:
 - `src/transactionDrafts.mjs`
 - `src/signedContractDrafts.mjs`
 - `src/contractSpendDrafts.mjs`
+- `src/roleSeparatedInvalidCandidates.mjs`
 - `src/submitPayload.mjs`
 - `src/acceptedIndexer.mjs`
 - `src/signalPayload.mjs`
@@ -393,17 +395,18 @@ Pause note, 2026-05-08:
 
 - Latest pushed commit at pause: `7bfd10c Refresh TN12 evidence artifacts`.
 - Remote check and Pages deployment were green after `7bfd10c`.
-- Local WIP file: `src/roleSeparatedInvalidCandidates.mjs`.
-- That WIP is not wired into scripts, artifacts, checks, or docs yet.
-- Resume by finishing the local invalid-candidate artifact for role-separated wrong signer, selector, output, amount, and lock-shape cases. Do not submit invalid TN12 transactions until the candidate is explicit, reviewed, and backed by a fresh expendable output.
+- Local invalid-candidate artifact is wired through `npm run roles:invalid-candidates`.
+- `artifacts/role-separated-invalid-candidates.json` maps 32 local-review-only role-separated mutations across wrong signer, selector, output lock, amount, timed lock shape, and single-party cancel.
+- `npm run check:all` and `npm run check:tn12` passed after the invalid-candidate wiring.
+- Do not submit invalid TN12 transactions until a candidate is reviewed and backed by a fresh expendable output.
 
 Recommended order from here:
 
 1. Add wallet-review and wallet-connector flow for payload receipt submission.
-2. Build exact role-separated invalid candidates for wrong signer, selector, output, amount, and lock shape.
-3. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
-4. Build accepted pledge-output custody transactions for batch assurance settlement.
-5. Add explicit invalid spend candidates only after the positive role-separated paths have fresh outputs.
+2. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
+3. Build accepted pledge-output custody transactions for batch assurance settlement.
+4. Fund fresh role-separated outputs before trying invalid spend submissions.
+5. Add reputation thresholds and signer provenance before signals affect more app lanes.
 6. Keep the Node 24 GitHub Actions workflow verified after future action-version changes.
 
 ## Verification Before Handoff

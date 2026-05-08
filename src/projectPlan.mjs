@@ -16,7 +16,8 @@ export function buildProjectPlan(fixture = {}) {
     action("role-separated-fixtures", "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts.", "escrow"),
     action("role-separated-funding", "Accepted role-separated funding created fresh vault, assurance, and escrow P2SH outputs in one transaction.", "escrow"),
     action("role-separated-spend-drafts", "Role-separated spend drafts now use distinct owner/recovery, contributor/recipient, and buyer/seller keys from the accepted role-separated outputs.", "escrow"),
-    action("role-separated-accepted-spends", "TN12 accepted all seven role-separated positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.", "escrow")
+    action("role-separated-accepted-spends", "TN12 accepted all seven role-separated positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.", "escrow"),
+    action("role-separated-invalid-candidates", "Local review candidates now map wrong signer, wrong selector, wrong output lock, wrong amount, bad lock shape, and single-party cancel mutations before any TN12 rejection attempt.", "escrow")
   ];
 
   const wip = [
@@ -29,7 +30,6 @@ export function buildProjectPlan(fixture = {}) {
   const next = [
     action("pledge-output-drafts", "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS.", "batch-assurance"),
     action("indexer-storage-schema", "Create the first durable replay storage schema and fixture-backed replay runner.", "payload-invoice"),
-    action("role-separated-invalid-candidates", "Build explicit wrong-signer, wrong-selector, wrong-output, and wrong-amount candidates before any TN12 rejection attempt.", "escrow"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
     action("rollup-bridge-brief", "Map entry, transfer, exit, claim, proof, and state-root responsibilities from core and core-adjacent references.", "defi-research")

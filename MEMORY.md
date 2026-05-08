@@ -14,6 +14,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Chain proof gate: `npm run tx:verify`
 - Proof evidence gate: `npm run proof:evidence`
 - Role-separated proof gate: `npm run tx:roles:verify` and `npm run roles:proof:evidence`
+- Role-separated invalid-candidate gate: `npm run roles:invalid-candidates`
 - Payload event gate: `npm run payload:verify:events`
 - Checkpointed index gate: `npm run indexer:checkpoint`
 - Persisted checkpoint gate: `npm run indexer:persist`
@@ -59,7 +60,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 - Use `npm run project:plan` / `artifacts/project-plan.json` as the operator map for done, WIP, next, later, and long-term work.
 - WIP lanes: live wallet connector submit without local keys, batch-assurance custody requirements and matched pledge outputs, durable indexer replay implementation, and attestation reputation/provenance hardening.
-- Next actions: wallet submit route, accepted pledge-output custody transactions, exact role-separated invalid candidates, durable indexer, covenant negative tests, and attestation reputation thresholds.
+- Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant rejection attempts from fresh expendable outputs, and attestation reputation thresholds.
 - Keep real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
   - escrow/assurance app: TN12 covenant proof app,
@@ -69,13 +70,14 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Pause Note
 
-Paused on 2026-05-08 after pushing and verifying:
+Paused on 2026-05-08 after local invalid-candidate work:
 
-- `7bfd10c Refresh TN12 evidence artifacts`
-- `aae7e23 Accept remaining role-separated proof paths`
-- `a05141b Add accepted role-separated proof pass`
+- `src/roleSeparatedInvalidCandidates.mjs` is now wired through `scripts/build-role-separated-invalid-candidates.mjs`.
+- `npm run roles:invalid-candidates` writes `artifacts/role-separated-invalid-candidates.json`.
+- The artifact maps 32 local review candidates across seven accepted role-separated proof paths.
+- Verified locally with `npm run check:all` and `npm run check:tn12`.
 
-Remote status at pause: GitHub Actions `check` and `tn12-verify` passed; GitHub Pages deployed successfully. Local `git status --short` had one uncommitted WIP file: `src/roleSeparatedInvalidCandidates.mjs`.
+Remote status before this local change: GitHub Actions `check` and `tn12-verify` had passed; GitHub Pages had deployed successfully.
 
 Accepted role-separated proof state:
 
@@ -86,9 +88,9 @@ Accepted role-separated proof state:
 
 Current WIP:
 
-- `src/roleSeparatedInvalidCandidates.mjs` was started but is not wired into scripts, artifacts, checks, docs, or commits.
-- Resume by finishing the invalid-candidate builder for wrong signer, wrong selector, wrong output lock, wrong amount, and bad lock shape.
-- Then add a script, npm command, generated artifact, checks, docs/status updates, run `npm run check:all` and `npm run check:tn12`, commit, push, and verify CI.
+- Invalid-candidate definitions are local-review-only, not signed invalid transactions and not TN12 rejection evidence.
+- Resume by running `npm run check:all` and `npm run check:tn12` after any follow-up edits; both passed after this change.
+- The next safe protocol step is funding fresh expendable role-separated outputs before attempting any TN12 rejection submissions.
 
 ## Update Rule
 

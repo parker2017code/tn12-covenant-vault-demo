@@ -69,6 +69,7 @@ import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProjectPlan } from "../src/projectPlan.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildCovenantAdversarialCoverage } from "../src/covenantAdversarialCoverage.mjs";
+import { buildRoleSeparatedInvalidCandidates } from "../src/roleSeparatedInvalidCandidates.mjs";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 import { buildCheckpointedAcceptedIndex } from "../src/checkpointedIndexer.mjs";
 import { buildPersistedCheckpointGuard } from "../src/indexerPersistence.mjs";
@@ -445,9 +446,9 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 14);
+assert.equal(projectPlan.summary.done, 15);
 assert.equal(projectPlan.summary.wip, 4);
-assert.equal(projectPlan.summary.next, 6);
+assert.equal(projectPlan.summary.next, 5);
 assert.equal(projectPlan.summary.later, 6);
 assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
 assert.ok(projectPlan.done.some((item) => item.id === "based-rollup-scout"));
@@ -456,7 +457,7 @@ assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures")
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-drafts"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
-assert.ok(projectPlan.next.some((item) => item.id === "role-separated-invalid-candidates"));
+assert.ok(projectPlan.done.some((item) => item.id === "role-separated-invalid-candidates"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
@@ -482,6 +483,42 @@ assert.equal(roleWalletsPublic.schema, "tn12-role-separated-wallets-public/v1");
 assert.equal(Object.keys(roleWalletsPublic.roles).length, 6);
 assert.equal(new Set(Object.values(roleWalletsPublic.roles).map((role) => role.xOnlyPublicKey)).size, 6);
 assert.equal(roleWalletsPublic.constructorFixtures.Escrow, "fixtures/role-separated/Escrow.ctor.json");
+const roleDraftPaths = [
+  "artifacts/signed-drafts/role-vault-recovery.json",
+  "artifacts/signed-drafts/role-daa-expired-vault-withdrawal.json",
+  "artifacts/signed-drafts/role-assurance-release.json",
+  "artifacts/signed-drafts/role-daa-expired-assurance-refund.json",
+  "artifacts/signed-drafts/role-escrow-release.json",
+  "artifacts/signed-drafts/role-daa-expired-escrow-refund.json",
+  "artifacts/signed-drafts/role-expired-escrow-cancel.json"
+];
+const roleDrafts = Object.fromEntries(await Promise.all(roleDraftPaths.map(async (path) => [
+  path,
+  JSON.parse(await readFile(new URL(`../${path}`, import.meta.url), "utf8"))
+])));
+const roleInvalidCandidates = buildRoleSeparatedInvalidCandidates({
+  proofFixture: roleProofFixture,
+  drafts: roleDrafts,
+  roleWallets: roleWalletsPublic,
+  generatedAt: "2026-05-08T00:00:00.000Z"
+});
+assert.equal(roleInvalidCandidates.status, "local-review-only-not-submitted");
+assert.equal(roleInvalidCandidates.summary.proofPaths, 7);
+assert.equal(roleInvalidCandidates.summary.candidates, 32);
+assert.equal(roleInvalidCandidates.summary.wrongSigner, 7);
+assert.equal(roleInvalidCandidates.summary.wrongSelector, 7);
+assert.equal(roleInvalidCandidates.summary.wrongOutputLock, 7);
+assert.equal(roleInvalidCandidates.summary.wrongOutputAmount, 7);
+assert.equal(roleInvalidCandidates.summary.badLockShape, 3);
+assert.equal(roleInvalidCandidates.summary.singlePartyCancel, 1);
+assert.equal(roleInvalidCandidates.summary.readyForSubmission, 0);
+assert.ok(roleInvalidCandidates.cases.some((item) =>
+  item.label === "Role-separated escrow cancel"
+  && item.candidates.some((candidate) => candidate.id === "single-party-cancel")
+));
+const roleInvalidArtifact = JSON.parse(await readFile(new URL("../artifacts/role-separated-invalid-candidates.json", import.meta.url), "utf8"));
+assert.equal(roleInvalidArtifact.summary.candidates, 32);
+assert.equal(roleInvalidArtifact.summary.readyForSubmission, 0);
 const covenantCoverage = buildCovenantAdversarialCoverage({
   proofFixture,
   constructorArgs: {
@@ -748,6 +785,7 @@ const files = [
   "scripts/verify-accepted-txs.mjs",
   "scripts/build-proof-evidence.mjs",
   "scripts/build-covenant-adversarial-coverage.mjs",
+  "scripts/build-role-separated-invalid-candidates.mjs",
   "scripts/build-accepted-app-state.mjs",
   "scripts/build-checkpointed-index.mjs",
   "scripts/build-persisted-checkpoint-guard.mjs",
@@ -848,6 +886,7 @@ const files = [
   "artifacts/proof-evidence.json",
   "artifacts/role-separated-proof-evidence.json",
   "artifacts/covenant-adversarial-coverage.json",
+  "artifacts/role-separated-invalid-candidates.json",
   "artifacts/escrow-primitives.json",
   "artifacts/treasury-vaults.json",
   "artifacts/payload-submit-readiness.json",
@@ -948,6 +987,7 @@ const files = [
   "src/buildStatus.mjs",
   "src/projectPlan.mjs",
   "src/covenantAdversarialCoverage.mjs",
+  "src/roleSeparatedInvalidCandidates.mjs",
   "src/transactionPlanner.mjs",
   "src/transactionDrafts.mjs",
   "src/signedContractDrafts.mjs",
@@ -997,6 +1037,7 @@ assert.match(readme, /npm run tx:roles:fund/);
 assert.match(readme, /npm run tx:roles:spends/);
 assert.match(readme, /npm run tx:roles:verify/);
 assert.match(readme, /npm run roles:proof:evidence/);
+assert.match(readme, /npm run roles:invalid-candidates/);
 assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);

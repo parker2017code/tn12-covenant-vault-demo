@@ -71,13 +71,19 @@ These are intentionally local because they model bad or duplicate input:
 - signed-only pledge progress,
 - disputed agent proof.
 
+## Local Invalid-Candidate Maps
+
+- `npm run roles:invalid-candidates` writes `artifacts/role-separated-invalid-candidates.json`.
+- The artifact maps 32 local review candidates across the seven accepted role-separated positive paths: wrong signer, wrong selector, wrong output lock, wrong amount, bad lock shape for timed branches, and single-party cancel.
+- These are not signed invalid transactions and are not TN12 rejection evidence. Fresh expendable outputs are required before any safe rejection submission.
+
 ## Not Yet TN12 Tested
 
 These should not be called complete until a safe TN12 transaction or accepted proof exists:
 
 - wallet-review flow replacing local signing and shell submit,
 - durable node/RPC checkpoint ingestion with virtual-chain rollback replay,
-- role-separated covenant negative candidates and any later TN12 rejection attempts,
+- role-separated covenant TN12 rejection attempts from fresh expendable outputs,
 - batch assurance custody release from multiple amount-matched pledge outputs,
 - batch assurance custody refund from multiple amount-matched pledge outputs,
 - auction custody settlement/refund transaction, atomic exchange, and asset delivery,

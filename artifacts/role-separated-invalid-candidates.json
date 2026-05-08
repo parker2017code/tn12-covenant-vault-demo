@@ -1,0 +1,522 @@
+{
+  "schema": "tn12-role-separated-invalid-candidates/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-08T09:54:12.011Z",
+  "status": "local-review-only-not-submitted",
+  "summary": {
+    "proofPaths": 7,
+    "candidates": 32,
+    "wrongSigner": 7,
+    "wrongSelector": 7,
+    "wrongOutputLock": 7,
+    "wrongOutputAmount": 7,
+    "badLockShape": 3,
+    "singlePartyCancel": 1,
+    "readyForSubmission": 0
+  },
+  "scope": [
+    "These are exact invalid-candidate definitions for local review.",
+    "They are not signed invalid transactions and must not be submitted until a fresh expendable output is funded for that specific rejection test.",
+    "Each candidate names the field to mutate, the expected protocol failure, and the accepted proof it is derived from."
+  ],
+  "cases": [
+    {
+      "label": "Role-separated vault recovery",
+      "txid": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 0,
+        "amountSompi": "2500000000"
+      },
+      "destination": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+      "draftPath": "artifacts/signed-drafts/role-vault-recovery.json",
+      "draftTransactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "entrypoint": "recover",
+      "lane": "role-vault",
+      "contract": "DelayedRecoveryVault",
+      "selector": "OP_1",
+      "role": "vaultRecovery",
+      "outputRole": "vaultRecovery",
+      "currentOutput": {
+        "amount": 2499995000,
+        "scriptPublicKey": {
+          "version": 0,
+          "scriptPublicKey": "20e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac"
+        },
+        "destination": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh"
+      },
+      "expectedRoleAddress": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+      "wrongRoleAddress": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg",
+      "candidates": [
+        {
+          "id": "wrong-signer",
+          "mutate": "signatureScript",
+          "from": "vaultRecovery",
+          "to": "vaultOwner",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "checkSig should fail for the role public key encoded in the constructor."
+        },
+        {
+          "id": "wrong-selector",
+          "mutate": "entrypoint selector",
+          "from": "OP_1",
+          "to": "OP_0",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript selector opcode",
+          "expectedFailure": "The witness should dispatch to a branch with different signature, time, or output rules."
+        },
+        {
+          "id": "wrong-output-lock",
+          "mutate": "transaction.outputs[0].scriptPublicKey",
+          "from": "vaultRecovery",
+          "to": "vaultOwner",
+          "exactField": "submitPayload.transaction.outputs[0].scriptPublicKey",
+          "wrongAddress": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg",
+          "wrongXOnlyPublicKey": "d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185",
+          "expectedFailure": "The covenant should reject because output 0 pays the wrong role."
+        },
+        {
+          "id": "wrong-output-amount",
+          "mutate": "transaction.outputs[0].amount",
+          "from": "2499995000",
+          "to": "2499994999",
+          "exactField": "submitPayload.transaction.outputs[0].amount",
+          "expectedFailure": "The covenant should reject because output 0 does not equal input value minus minerFee."
+        }
+      ]
+    },
+    {
+      "label": "Role-separated assurance release",
+      "txid": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 1,
+        "amountSompi": "2500000000"
+      },
+      "destination": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex",
+      "draftPath": "artifacts/signed-drafts/role-assurance-release.json",
+      "draftTransactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "entrypoint": "release",
+      "lane": "role-assurance",
+      "contract": "AssurancePledge",
+      "selector": "OP_0",
+      "role": "pledgeRecipient",
+      "outputRole": "pledgeRecipient",
+      "currentOutput": {
+        "amount": 2499995000,
+        "scriptPublicKey": {
+          "version": 0,
+          "scriptPublicKey": "204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67bac"
+        },
+        "destination": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex"
+      },
+      "expectedRoleAddress": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex",
+      "wrongRoleAddress": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "candidates": [
+        {
+          "id": "wrong-signer",
+          "mutate": "signatureScript",
+          "from": "pledgeRecipient",
+          "to": "pledgeContributor",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "checkSig should fail for the role public key encoded in the constructor."
+        },
+        {
+          "id": "wrong-selector",
+          "mutate": "entrypoint selector",
+          "from": "OP_0",
+          "to": "OP_1",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript selector opcode",
+          "expectedFailure": "The witness should dispatch to a branch with different signature, time, or output rules."
+        },
+        {
+          "id": "wrong-output-lock",
+          "mutate": "transaction.outputs[0].scriptPublicKey",
+          "from": "pledgeRecipient",
+          "to": "pledgeContributor",
+          "exactField": "submitPayload.transaction.outputs[0].scriptPublicKey",
+          "wrongAddress": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+          "wrongXOnlyPublicKey": "98228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f",
+          "expectedFailure": "The covenant should reject because output 0 pays the wrong role."
+        },
+        {
+          "id": "wrong-output-amount",
+          "mutate": "transaction.outputs[0].amount",
+          "from": "2499995000",
+          "to": "2499994999",
+          "exactField": "submitPayload.transaction.outputs[0].amount",
+          "expectedFailure": "The covenant should reject because output 0 does not equal input value minus minerFee."
+        }
+      ]
+    },
+    {
+      "label": "Role-separated escrow release",
+      "txid": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "source": {
+        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "outputIndex": 2,
+        "amountSompi": "2500000000"
+      },
+      "destination": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "draftPath": "artifacts/signed-drafts/role-escrow-release.json",
+      "draftTransactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "entrypoint": "release",
+      "lane": "role-escrow",
+      "contract": "Escrow",
+      "selector": "OP_0",
+      "role": "escrowBuyer",
+      "outputRole": "escrowSeller",
+      "currentOutput": {
+        "amount": 2499995000,
+        "scriptPublicKey": {
+          "version": 0,
+          "scriptPublicKey": "2054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac"
+        },
+        "destination": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y"
+      },
+      "expectedRoleAddress": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "wrongRoleAddress": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "candidates": [
+        {
+          "id": "wrong-signer",
+          "mutate": "signatureScript",
+          "from": "escrowBuyer",
+          "to": "escrowSeller",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "checkSig should fail for the role public key encoded in the constructor."
+        },
+        {
+          "id": "wrong-selector",
+          "mutate": "entrypoint selector",
+          "from": "OP_0",
+          "to": "OP_1",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript selector opcode",
+          "expectedFailure": "The witness should dispatch to a branch with different signature, time, or output rules."
+        },
+        {
+          "id": "wrong-output-lock",
+          "mutate": "transaction.outputs[0].scriptPublicKey",
+          "from": "escrowSeller",
+          "to": "escrowBuyer",
+          "exactField": "submitPayload.transaction.outputs[0].scriptPublicKey",
+          "wrongAddress": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+          "wrongXOnlyPublicKey": "0674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede",
+          "expectedFailure": "The covenant should reject because output 0 pays the wrong role."
+        },
+        {
+          "id": "wrong-output-amount",
+          "mutate": "transaction.outputs[0].amount",
+          "from": "2499995000",
+          "to": "2499994999",
+          "exactField": "submitPayload.transaction.outputs[0].amount",
+          "expectedFailure": "The covenant should reject because output 0 does not equal input value minus minerFee."
+        }
+      ]
+    },
+    {
+      "label": "Role-separated escrow cancel",
+      "txid": "677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa",
+      "source": {
+        "txid": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+        "outputIndex": 2,
+        "amountSompi": "2500000000"
+      },
+      "destination": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "draftPath": "artifacts/signed-drafts/role-expired-escrow-cancel.json",
+      "draftTransactionId": "677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa",
+      "entrypoint": "cancel",
+      "lane": "role-escrow",
+      "contract": "Escrow",
+      "selector": "OP_2",
+      "role": "escrowBuyer+escrowSeller",
+      "outputRole": "escrowBuyer",
+      "currentOutput": {
+        "amount": 2499995000,
+        "scriptPublicKey": {
+          "version": 0,
+          "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
+        },
+        "destination": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy"
+      },
+      "expectedRoleAddress": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "wrongRoleAddress": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "candidates": [
+        {
+          "id": "wrong-signer",
+          "mutate": "signatureScript",
+          "from": "escrowBuyer+escrowSeller",
+          "to": "escrowBuyer only",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "checkSig should fail for the role public key encoded in the constructor."
+        },
+        {
+          "id": "wrong-selector",
+          "mutate": "entrypoint selector",
+          "from": "OP_2",
+          "to": "OP_0",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript selector opcode",
+          "expectedFailure": "The witness should dispatch to a branch with different signature, time, or output rules."
+        },
+        {
+          "id": "wrong-output-lock",
+          "mutate": "transaction.outputs[0].scriptPublicKey",
+          "from": "escrowBuyer",
+          "to": "escrowSeller",
+          "exactField": "submitPayload.transaction.outputs[0].scriptPublicKey",
+          "wrongAddress": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+          "wrongXOnlyPublicKey": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+          "expectedFailure": "The covenant should reject because output 0 pays the wrong role."
+        },
+        {
+          "id": "wrong-output-amount",
+          "mutate": "transaction.outputs[0].amount",
+          "from": "2499995000",
+          "to": "2499994999",
+          "exactField": "submitPayload.transaction.outputs[0].amount",
+          "expectedFailure": "The covenant should reject because output 0 does not equal input value minus minerFee."
+        },
+        {
+          "id": "single-party-cancel",
+          "mutate": "signatureScript",
+          "from": "buyerSig + sellerSig",
+          "to": "buyerSig only",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "The cancel branch should reject without both buyer and seller signatures."
+        }
+      ]
+    },
+    {
+      "label": "Role-separated DAA vault withdrawal",
+      "txid": "cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11",
+      "source": {
+        "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "outputIndex": 0,
+        "amountSompi": "2500000000"
+      },
+      "destination": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg",
+      "draftPath": "artifacts/signed-drafts/role-daa-expired-vault-withdrawal.json",
+      "draftTransactionId": "cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11",
+      "entrypoint": "withdraw",
+      "lane": "role-vault",
+      "contract": "DelayedRecoveryVault",
+      "selector": "OP_0",
+      "role": "vaultOwner",
+      "outputRole": "vaultOwner",
+      "currentOutput": {
+        "amount": 2499995000,
+        "scriptPublicKey": {
+          "version": 0,
+          "scriptPublicKey": "20d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185ac"
+        },
+        "destination": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg"
+      },
+      "expectedRoleAddress": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg",
+      "wrongRoleAddress": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+      "candidates": [
+        {
+          "id": "wrong-signer",
+          "mutate": "signatureScript",
+          "from": "vaultOwner",
+          "to": "vaultRecovery",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "checkSig should fail for the role public key encoded in the constructor."
+        },
+        {
+          "id": "wrong-selector",
+          "mutate": "entrypoint selector",
+          "from": "OP_0",
+          "to": "OP_1",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript selector opcode",
+          "expectedFailure": "The witness should dispatch to a branch with different signature, time, or output rules."
+        },
+        {
+          "id": "wrong-output-lock",
+          "mutate": "transaction.outputs[0].scriptPublicKey",
+          "from": "vaultOwner",
+          "to": "vaultRecovery",
+          "exactField": "submitPayload.transaction.outputs[0].scriptPublicKey",
+          "wrongAddress": "kaspatest:qrsvnqmd2yft7nk5hjcfg9yefqmu4522q05gkm7mn77hpc8esqgtj088ultmh",
+          "wrongXOnlyPublicKey": "e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9",
+          "expectedFailure": "The covenant should reject because output 0 pays the wrong role."
+        },
+        {
+          "id": "wrong-output-amount",
+          "mutate": "transaction.outputs[0].amount",
+          "from": "2499995000",
+          "to": "2499994999",
+          "exactField": "submitPayload.transaction.outputs[0].amount",
+          "expectedFailure": "The covenant should reject because output 0 does not equal input value minus minerFee."
+        },
+        {
+          "id": "bad-lock-shape",
+          "mutate": "transaction.lockTime / input.sequence",
+          "from": {
+            "lockTime": 6180001,
+            "sequence": "0"
+          },
+          "to": {
+            "lockTime": 0,
+            "sequence": "18446744073709551615"
+          },
+          "exactField": "submitPayload.transaction.lockTime and inputs[0].sequence",
+          "expectedFailure": "The node or script should reject the timed branch before the required lock condition is met."
+        }
+      ]
+    },
+    {
+      "label": "Role-separated DAA assurance refund",
+      "txid": "a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa",
+      "source": {
+        "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "outputIndex": 1,
+        "amountSompi": "2500000000"
+      },
+      "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "draftPath": "artifacts/signed-drafts/role-daa-expired-assurance-refund.json",
+      "draftTransactionId": "a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa",
+      "entrypoint": "refund",
+      "lane": "role-assurance",
+      "contract": "AssurancePledge",
+      "selector": "OP_1",
+      "role": "pledgeContributor",
+      "outputRole": "pledgeContributor",
+      "currentOutput": {
+        "amount": 2499995000,
+        "scriptPublicKey": {
+          "version": 0,
+          "scriptPublicKey": "2098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac"
+        },
+        "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n"
+      },
+      "expectedRoleAddress": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "wrongRoleAddress": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex",
+      "candidates": [
+        {
+          "id": "wrong-signer",
+          "mutate": "signatureScript",
+          "from": "pledgeContributor",
+          "to": "pledgeRecipient",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "checkSig should fail for the role public key encoded in the constructor."
+        },
+        {
+          "id": "wrong-selector",
+          "mutate": "entrypoint selector",
+          "from": "OP_1",
+          "to": "OP_0",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript selector opcode",
+          "expectedFailure": "The witness should dispatch to a branch with different signature, time, or output rules."
+        },
+        {
+          "id": "wrong-output-lock",
+          "mutate": "transaction.outputs[0].scriptPublicKey",
+          "from": "pledgeContributor",
+          "to": "pledgeRecipient",
+          "exactField": "submitPayload.transaction.outputs[0].scriptPublicKey",
+          "wrongAddress": "kaspatest:qp8929j78cyc2uh56d8vpvt6fs350uugwqfctlud8h8kzsk2zzn8k0krgyhex",
+          "wrongXOnlyPublicKey": "4e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b",
+          "expectedFailure": "The covenant should reject because output 0 pays the wrong role."
+        },
+        {
+          "id": "wrong-output-amount",
+          "mutate": "transaction.outputs[0].amount",
+          "from": "2499995000",
+          "to": "2499994999",
+          "exactField": "submitPayload.transaction.outputs[0].amount",
+          "expectedFailure": "The covenant should reject because output 0 does not equal input value minus minerFee."
+        },
+        {
+          "id": "bad-lock-shape",
+          "mutate": "transaction.lockTime / input.sequence",
+          "from": {
+            "lockTime": 6180001,
+            "sequence": "0"
+          },
+          "to": {
+            "lockTime": 0,
+            "sequence": "18446744073709551615"
+          },
+          "exactField": "submitPayload.transaction.lockTime and inputs[0].sequence",
+          "expectedFailure": "The node or script should reject the timed branch before the required lock condition is met."
+        }
+      ]
+    },
+    {
+      "label": "Role-separated DAA escrow refund",
+      "txid": "7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0",
+      "source": {
+        "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "outputIndex": 2,
+        "amountSompi": "2500000000"
+      },
+      "destination": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "draftPath": "artifacts/signed-drafts/role-daa-expired-escrow-refund.json",
+      "draftTransactionId": "7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0",
+      "entrypoint": "refund",
+      "lane": "role-escrow",
+      "contract": "Escrow",
+      "selector": "OP_1",
+      "role": "escrowBuyer",
+      "outputRole": "escrowBuyer",
+      "currentOutput": {
+        "amount": 2499995000,
+        "scriptPublicKey": {
+          "version": 0,
+          "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
+        },
+        "destination": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy"
+      },
+      "expectedRoleAddress": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "wrongRoleAddress": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "candidates": [
+        {
+          "id": "wrong-signer",
+          "mutate": "signatureScript",
+          "from": "escrowBuyer",
+          "to": "escrowSeller",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript",
+          "expectedFailure": "checkSig should fail for the role public key encoded in the constructor."
+        },
+        {
+          "id": "wrong-selector",
+          "mutate": "entrypoint selector",
+          "from": "OP_1",
+          "to": "OP_0",
+          "exactField": "submitPayload.transaction.inputs[0].signatureScript selector opcode",
+          "expectedFailure": "The witness should dispatch to a branch with different signature, time, or output rules."
+        },
+        {
+          "id": "wrong-output-lock",
+          "mutate": "transaction.outputs[0].scriptPublicKey",
+          "from": "escrowBuyer",
+          "to": "escrowSeller",
+          "exactField": "submitPayload.transaction.outputs[0].scriptPublicKey",
+          "wrongAddress": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+          "wrongXOnlyPublicKey": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+          "expectedFailure": "The covenant should reject because output 0 pays the wrong role."
+        },
+        {
+          "id": "wrong-output-amount",
+          "mutate": "transaction.outputs[0].amount",
+          "from": "2499995000",
+          "to": "2499994999",
+          "exactField": "submitPayload.transaction.outputs[0].amount",
+          "expectedFailure": "The covenant should reject because output 0 does not equal input value minus minerFee."
+        },
+        {
+          "id": "bad-lock-shape",
+          "mutate": "transaction.lockTime / input.sequence",
+          "from": {
+            "lockTime": 6180001,
+            "sequence": "0"
+          },
+          "to": {
+            "lockTime": 0,
+            "sequence": "18446744073709551615"
+          },
+          "exactField": "submitPayload.transaction.lockTime and inputs[0].sequence",
+          "expectedFailure": "The node or script should reject the timed branch before the required lock condition is met."
+        }
+      ]
+    }
+  ]
+}

@@ -3,9 +3,9 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 14,
+    "done": 15,
     "wip": 4,
-    "next": 6,
+    "next": 5,
     "later": 6
   },
   "currentPrinciple": "Positive app-state claims need accepted TN12 evidence; planner, wallet-policy, and research lanes stay labeled.",
@@ -114,6 +114,11 @@
       "id": "role-separated-accepted-spends",
       "laneId": "escrow",
       "detail": "TN12 accepted all seven role-separated positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel."
+    },
+    {
+      "id": "role-separated-invalid-candidates",
+      "laneId": "escrow",
+      "detail": "Local review candidates now map wrong signer, wrong selector, wrong output lock, wrong amount, bad lock shape, and single-party cancel mutations before any TN12 rejection attempt."
     }
   ],
   "wip": [
@@ -168,11 +173,6 @@
       "id": "indexer-storage-schema",
       "laneId": "payload-invoice",
       "detail": "Create the first durable replay storage schema and fixture-backed replay runner."
-    },
-    {
-      "id": "role-separated-invalid-candidates",
-      "laneId": "escrow",
-      "detail": "Build explicit wrong-signer, wrong-selector, wrong-output, and wrong-amount candidates before any TN12 rejection attempt."
     },
     {
       "id": "attestation-reputation",

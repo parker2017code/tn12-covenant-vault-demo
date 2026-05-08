@@ -62,7 +62,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 | 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, and replay plan | Implement durable node/RPC replay storage |
 | 2. Submit console | Review gate built | 39 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package | Real wallet connector and no-local-key UX |
 | 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, and exact pledge-output requirements | Build accepted pledge outputs for the required amounts, then import those outpoints |
-| 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, and accepted mutual-cancel proofs on separate funded outputs | Add negative tests and keep SDK route documented |
+| 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, accepted mutual-cancel proofs, and local role-separated invalid-candidate map | Fund fresh expendable outputs before any TN12 rejection submissions |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates | Real constrained spend drafts and role-key separation |
 | 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |
 | 7. Simple asset policy | Roadmap base | Mint, transfer, burn, recovery, redemption policy shapes | Keep issuer-indexed now, covenant-native later |
@@ -94,7 +94,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 1. Make the accepted JSON wRPC payload path repeatable through wallet review instead of local signing.
 2. Build custody settlement drafts only from amount-matched pledge outputs.
 3. Implement checkpoint replay storage from `artifacts/indexer-replay-plan.json`.
-4. Add more negative checks for wrong signer, wrong output, stale draft, duplicate redemption, and signed-only state.
+4. Turn local invalid-candidate maps into safe TN12 rejection attempts only after fresh expendable outputs exist.
 5. Add reputation thresholds and signer provenance before signals influence more app lanes.
 6. Add based-rollup scouting: available endpoints, bridge model, execution environment, wallet path, and one tiny app target.
 

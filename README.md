@@ -255,11 +255,14 @@ npm run tx:roles:verify
 npm run proof:evidence
 npm run roles:proof:evidence
 npm run covenant:adversarial
+npm run roles:invalid-candidates
 ```
 
 `npm run check:tn12` runs the full public TN12 evidence gate: historical proof transaction verification, role-separated proof verification, proof-shape evidence, payload-event verification, checkpoint rebuild, and persisted checkpoint guard. `npm run proof:evidence` and `npm run roles:proof:evidence` resolve each proof spend's previous output and check the important shape: P2SH (`p...`) contract input to expected P2PK (`q...`) wallet output.
 
 `npm run covenant:adversarial` builds `artifacts/covenant-adversarial-coverage.json`. It is local coverage, not TN12 rejection evidence. It maps selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and Silverscript-to-redeem-script checks for the seven accepted proof paths. It also keeps the current gaps visible: historical escrow cancel reused buyer/seller keys, the role-separated lane still needs fresh outputs for cancel/refund paths, and older vault/assurance accepted drafts need exact accepted-script preservation before they can be treated as clean script-mapping examples.
+
+`npm run roles:invalid-candidates` builds `artifacts/role-separated-invalid-candidates.json`. It is local review material, not signed invalid transactions and not TN12 rejection evidence. The artifact maps 32 candidate mutations across the seven accepted role-separated proof paths: wrong signer, wrong selector, wrong output lock, wrong amount, bad lock shape for timed paths, and single-party cancel for mutual cancel. Fresh expendable outputs are still required before submitting any rejection proof.
 
 Build the reusable accepted-transaction app-state snapshot:
 
@@ -505,7 +508,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 5. Done: checkpointed accepted-index artifact and persisted checkpoint guard for 7 proof spends and 26 payload events. Next: move from known-txid public reads to a node/RPC backend with durable storage and virtual-chain rollback replay.
 
-6. Done: local covenant adversarial map for seven accepted proof paths. Done: role-separated positive proofs for all seven vault, assurance, and escrow paths. Next: build exact invalid candidates before attempting TN12 rejection proofs.
+6. Done: local covenant adversarial map for seven accepted proof paths. Done: role-separated positive proofs for all seven vault, assurance, and escrow paths. Done: exact local invalid-candidate map before any TN12 rejection attempt. Next: fund fresh expendable outputs before submitting invalid rejection proofs.
 
 7. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 

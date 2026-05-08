@@ -37,6 +37,7 @@
     "proof:evidence": "node scripts/build-proof-evidence.mjs",
     "roles:proof:evidence": "PROOF_FIXTURE=fixtures/RoleSeparatedAcceptedProofTransactions.json OUT=artifacts/role-separated-proof-evidence.json node scripts/build-proof-evidence.mjs",
     "covenant:adversarial": "node scripts/build-covenant-adversarial-coverage.mjs",
+    "roles:invalid-candidates": "node scripts/build-role-separated-invalid-candidates.mjs",
     "tx:submit:dry": "node scripts/submit-signed-draft.mjs",
     "tx:submit:wrpc": "node scripts/submit-signed-draft-wrpc.mjs",
     "indexer:state": "node scripts/build-accepted-app-state.mjs",
