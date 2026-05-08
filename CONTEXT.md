@@ -9,6 +9,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Local preview URL: `http://127.0.0.1:4176/`
 - Preview command: `npm run serve`
 - Main check command: `npm run check:all`
+- Full public TN12 evidence command: `npm run check:tn12`
 - TN12 proof check command: `npm run tx:verify`
 - Payload-event check command: `npm run payload:verify:events`
 - Accepted app-state snapshot command: `npm run indexer:state`

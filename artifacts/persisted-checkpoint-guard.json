@@ -3,7 +3,7 @@
   "network": "kaspa-testnet-12",
   "status": "persisted-checkpoint-ready",
   "sourcePath": "artifacts/checkpointed-accepted-index.json",
-  "persistedAt": "2026-05-08T05:29:26.977Z",
+  "persistedAt": "2026-05-08T05:36:17.180Z",
   "summary": {
     "recordCount": 33,
     "matched": 33,

@@ -215,11 +215,12 @@ npm run tx:spends
 Verify the accepted proof transactions and expected outputs through the public TN12 API:
 
 ```sh
+npm run check:tn12
 npm run tx:verify
 npm run proof:evidence
 ```
 
-`npm run proof:evidence` resolves each proof spend's previous output and checks the important shape: P2SH (`p...`) contract input to expected P2PK (`q...`) wallet output.
+`npm run check:tn12` runs the full public TN12 evidence gate: proof transaction verification, proof-shape evidence, payload-event verification, checkpoint rebuild, and persisted checkpoint guard. `npm run proof:evidence` resolves each proof spend's previous output and checks the important shape: P2SH (`p...`) contract input to expected P2PK (`q...`) wallet output.
 
 Build the reusable accepted-transaction app-state snapshot:
 
@@ -483,6 +484,7 @@ http://127.0.0.1:4176/
 npm run check
 npm run check:negative
 npm run check:all
+npm run check:tn12
 ```
 
 ## Assurance Contracts

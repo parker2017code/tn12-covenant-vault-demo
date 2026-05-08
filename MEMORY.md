@@ -10,6 +10,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Pages: `https://parker2017code.github.io/tn12-covenant-vault-demo/`
 - Local preview: `npm run serve` then `http://127.0.0.1:4176/`
 - Main gate: `npm run check:all`
+- Full public TN12 evidence gate: `npm run check:tn12`
 - Chain proof gate: `npm run tx:verify`
 - Proof evidence gate: `npm run proof:evidence`
 - Payload event gate: `npm run payload:verify:events`
@@ -76,6 +77,7 @@ Validation run for this continuation:
 
 ```sh
 npm run check:all
+npm run check:tn12
 npm run tx:verify
 npm run proof:evidence
 npm run payload:verify:events

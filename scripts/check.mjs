@@ -779,6 +779,7 @@ assert.match(readme, /npm run build:status/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
+assert.match(readme, /npm run check:tn12/);
 
 const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
 assert.match(html, /TN12 configured\. Proof transactions accepted\./);

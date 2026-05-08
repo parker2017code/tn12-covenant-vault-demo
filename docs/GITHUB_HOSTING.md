@@ -29,7 +29,7 @@ From this repo root:
 ```sh
 git status --short
 npm run check:all
-npm run tx:verify
+npm run check:tn12
 gh repo create parker2017code/tn12-covenant-vault-demo --public --source=. --remote=origin --push
 ```
 
@@ -87,7 +87,7 @@ Use normal local edits first, then push.
 ```sh
 npm install
 npm run check:all
-npm run tx:verify
+npm run check:tn12
 git status --short
 git diff --check
 git add <changed files>
@@ -143,7 +143,7 @@ After the first hosted version is stable, protect `main`:
 
 - require pull requests before merging;
 - require `npm run check:all`;
-- require `npm run tx:verify` only if CI has network access and TN12 API stability is acceptable;
+- require `npm run check:tn12` only if CI has network access and TN12 API stability is acceptable;
 - block force pushes;
 - allow admins to bypass only for emergency docs fixes.
 
@@ -172,7 +172,7 @@ jobs:
       - run: npm run check:all
 ```
 
-The current repo includes a second `tn12-verify` job that runs `npm run tx:verify`. Keep branch protection focused on the local `check` job unless public TN12 API downtime should block merges.
+The current repo includes a second `tn12-verify` job that runs `npm run check:tn12`. Keep branch protection focused on the local `check` job unless public TN12 API downtime should block merges.
 
 Maintenance note: the workflow now uses Node 24-compatible `actions/checkout@v5`, `actions/setup-node@v5`, and `node-version: 24`. Verify both `check` and `tn12-verify` after any future action-version change.
 
@@ -194,7 +194,7 @@ That command may require approving a browser device code. Do not bypass that cre
 
 ## Immediate Next Steps
 
-1. Run `npm run check:all`, `npm run tx:verify`, and `git diff --check`.
+1. Run `npm run check:all`, `npm run check:tn12`, and `git diff --check`.
 2. Commit the current TN12 proof-app work.
 3. Create `parker2017code/tn12-covenant-vault-demo` on GitHub and push `main`.
 4. Enable GitHub Pages from `main` root.

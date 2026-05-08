@@ -8,6 +8,7 @@
     "check:ui": "node scripts/check-ui.mjs",
     "check:negative": "node scripts/check-negative.mjs",
     "check:all": "npm run check && npm run check:negative && npm run check:ui",
+    "check:tn12": "npm run tx:verify && npm run proof:evidence && npm run payload:verify:events && npm run indexer:checkpoint && npm run indexer:persist",
     "address": "node scripts/create-testnet-address.mjs",
     "wallet:public": "node scripts/wallet-public-info.mjs",
     "utxos:fetch": "node scripts/fetch-funded-utxos.mjs",

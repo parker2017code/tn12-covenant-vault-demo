@@ -133,6 +133,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
 
 ```sh
 npm run check:all
+npm run check:tn12
 npm run tx:verify
 npm run proof:evidence
 npm run payload:verify:events
