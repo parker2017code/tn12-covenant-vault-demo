@@ -33,6 +33,16 @@ The initial implementation path has moved beyond local construction: the repo no
 - TN12 JSON wRPC accepted the matched payload receipt `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e`. `npm run payload:verify` fetches it, checks payload bytes, decodes the receipt, and writes `artifacts/payload-receipt-evidence.json`.
 - `npm run payload:readiness` records the OpenAPI check, the REST no-payload attempt, and the accepted wRPC evidence in `artifacts/payload-submit-readiness.json`.
 
+## Upstream Tooling Context
+
+Snapshot date: 2026-05-08.
+
+- The recent `rusty-kaspa` Toccata engine-flag work makes script construction fork-aware on the `toccata` branch. For post-activation Toccata script construction, builders may need an explicit post-activation flag path such as `ScriptBuilder::with_flags` rather than assuming the default builder emits post-activation-compatible scripts.
+- That fork-aware change was not merged to the `tn12` branch in the discussion snapshot. Treat TN12 as the post-activation-engine test surface, but do not assume the same default builder/API behavior when moving examples between `tn12`, `toccata`, and future master.
+- WASM exposure can lag Rust APIs. If a Rust API exists for fork-aware script construction but is not exposed through WASM yet, JavaScript examples should stay TN12-specific or carry a clear tooling caveat.
+- The open DAA-score keyed UTXO-index pagination work is relevant to the durable indexer plan. If it lands, the likely sync shape is: subscribe to UTXO changes, capture the first response DAA score, buffer later subscription messages, paginate UTXOs up to that DAA score, drain buffered adds/removes, then continue from live subscription messages.
+- Do not treat these upstream notes as activation evidence. They are builder/tooling context for script construction, UTXO sync, and indexer design.
+
 ## Working Public Wallet Metadata
 
 Use:

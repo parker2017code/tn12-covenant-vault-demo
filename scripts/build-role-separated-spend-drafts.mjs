@@ -11,9 +11,10 @@ import {
 
 const roleWallets = await readJson(".local/tn12-role-wallets.json");
 const publicRoles = await readJson("fixtures/RoleSeparatedWallets.public.json");
-const vaultOutpoint = await readJson("fixtures/RoleVaultContractOutpoint.json");
-const assuranceOutpoint = await readJson("fixtures/RoleAssuranceContractOutpoint.json");
-const escrowOutpoint = await readJson("fixtures/RoleEscrowContractOutpoint.json");
+const prefix = process.env.ROLE_SPEND_PREFIX || "role";
+const vaultOutpoint = await readJson(process.env.VAULT_OUTPOINT || "fixtures/RoleVaultContractOutpoint.json");
+const assuranceOutpoint = await readJson(process.env.ASSURANCE_OUTPOINT || "fixtures/RoleAssuranceContractOutpoint.json");
+const escrowOutpoint = await readJson(process.env.ESCROW_OUTPOINT || "fixtures/RoleEscrowContractOutpoint.json");
 const contractFeeSompi = BigInt(process.env.CONTRACT_FEE_SOMPI || "5000");
 const lockTime = BigInt(process.env.ROLE_SPEND_LOCK_TIME || Math.floor(Date.now() / 1000));
 
@@ -31,7 +32,7 @@ assertDistinct("escrow buyer/seller", wallets.escrowBuyer, wallets.escrowSeller)
 
 const drafts = [
   {
-    path: "artifacts/signed-drafts/role-vault-withdrawal.json",
+    path: draftPath("vault-withdrawal"),
     draft: buildVaultWithdrawalSpendDraft({
       contractOutpoint: vaultOutpoint,
       wallet: wallets.vaultOwner,
@@ -40,7 +41,7 @@ const drafts = [
     })
   },
   {
-    path: "artifacts/signed-drafts/role-vault-recovery.json",
+    path: draftPath("vault-recovery"),
     draft: buildVaultRecoverySpendDraft({
       contractOutpoint: vaultOutpoint,
       wallet: wallets.vaultRecovery,
@@ -48,7 +49,7 @@ const drafts = [
     })
   },
   {
-    path: "artifacts/signed-drafts/role-assurance-release.json",
+    path: draftPath("assurance-release"),
     draft: buildAssuranceReleaseSpendDraft({
       contractOutpoint: assuranceOutpoint,
       wallet: wallets.pledgeRecipient,
@@ -56,7 +57,7 @@ const drafts = [
     })
   },
   {
-    path: "artifacts/signed-drafts/role-assurance-refund.json",
+    path: draftPath("assurance-refund"),
     draft: buildAssuranceRefundSpendDraft({
       contractOutpoint: assuranceOutpoint,
       wallet: wallets.pledgeContributor,
@@ -65,7 +66,7 @@ const drafts = [
     })
   },
   {
-    path: "artifacts/signed-drafts/role-escrow-release.json",
+    path: draftPath("escrow-release"),
     draft: buildEscrowReleaseSpendDraft({
       contractOutpoint: escrowOutpoint,
       wallet: wallets.escrowBuyer,
@@ -74,7 +75,7 @@ const drafts = [
     })
   },
   {
-    path: "artifacts/signed-drafts/role-escrow-refund.json",
+    path: draftPath("escrow-refund"),
     draft: buildEscrowRefundSpendDraft({
       contractOutpoint: escrowOutpoint,
       wallet: wallets.escrowBuyer,
@@ -83,7 +84,7 @@ const drafts = [
     })
   },
   {
-    path: "artifacts/signed-drafts/role-escrow-cancel.json",
+    path: draftPath("escrow-cancel"),
     draft: buildEscrowCancelSpendDraft({
       contractOutpoint: escrowOutpoint,
       wallet: wallets.escrowBuyer,
@@ -124,4 +125,8 @@ function mutualExclusionWarning(contract) {
     return "The role-escrow release, refund, and cancel drafts spend the same role-separated escrow output; only one can be accepted.";
   }
   return "Review source outpoint reuse before submit.";
+}
+
+function draftPath(name) {
+  return `artifacts/signed-drafts/${prefix}-${name}.json`;
 }

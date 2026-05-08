@@ -16,21 +16,20 @@ export function buildProjectPlan(fixture = {}) {
     action("role-separated-fixtures", "Role-separated public constructor fixtures and compiled scripts are ready for the next proof pass without mutating historical accepted-proof artifacts.", "escrow"),
     action("role-separated-funding", "Accepted role-separated funding created fresh vault, assurance, and escrow P2SH outputs in one transaction.", "escrow"),
     action("role-separated-spend-drafts", "Role-separated spend drafts now use distinct owner/recovery, contributor/recipient, and buyer/seller keys from the accepted role-separated outputs.", "escrow"),
-    action("role-separated-accepted-spends", "TN12 accepted role-separated vault recovery, assurance release, and escrow seller release from those distinct-role outputs.", "escrow")
+    action("role-separated-accepted-spends", "TN12 accepted all seven role-separated positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.", "escrow")
   ];
 
   const wip = [
     laneItem(byId, "submit-console", "Wallet submit package is built; the live no-local-key connector remains WIP."),
     laneItem(byId, "batch-assurance", "Next work is real accepted pledge-output transactions for the amounts listed in the custody requirements."),
     laneItem(byId, "miner-pool-signals", "Source signature review now gates influence; reputation thresholds still need hardening."),
-    laneItem(byId, "treasury-vaults", "Turn policy templates into constrained spend drafts with role separation."),
-    action("remaining-role-separated-paths", "Fresh role-separated outputs are needed for vault withdrawal, assurance refund, escrow refund, and escrow cancel because the first pass consumed one output per contract.", "escrow")
+    laneItem(byId, "treasury-vaults", "Turn policy templates into constrained spend drafts with role separation.")
   ];
 
   const next = [
     action("pledge-output-drafts", "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS.", "batch-assurance"),
     action("indexer-storage-schema", "Create the first durable replay storage schema and fixture-backed replay runner.", "payload-invoice"),
-    action("role-separated-second-funding", "Fund another role-separated batch for the mutually exclusive withdrawal, refund, and cancel paths.", "escrow"),
+    action("role-separated-invalid-candidates", "Build explicit wrong-signer, wrong-selector, wrong-output, and wrong-amount candidates before any TN12 rejection attempt.", "escrow"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
     action("rollup-bridge-brief", "Map entry, transfer, exit, claim, proof, and state-root responsibilities from core and core-adjacent references.", "defi-research")

@@ -23,6 +23,8 @@ Source root: https://docs.kaspa.org/
 3. **Production accepted indexing should use checkpoints.**
    The accepted-transactions page points to checkpointed pulls with `getVirtualChainFromBlockV2`, `minConfirmationCount`, high data verbosity, rollback handling, and saved checkpoints. That is the future backend/indexer shape. This repo’s current REST txid snapshot is the light local version.
 
+   Related upstream context from the May 2026 builder discussion: DAA-score keyed UTXO pagination, if merged, may give wallet/indexer clients a cleaner way to sync UTXOs to a known DAA point and then apply subscription deltas. Keep this as an indexer-design input, not a current repo capability.
+
 4. **PNN/resolver can avoid local node setup for early integration.**
    The references page frames public node discovery as useful for development/testing, with self-hosted nodes reserved for production availability and indexing control.
 
@@ -38,7 +40,7 @@ Source root: https://docs.kaspa.org/
 - Investigate the high-level Wallet API as the next replacement for local signing and shell submit commands.
 - Keep the accepted transaction indexer split into two tiers:
   - local tier: REST txid pulls from known fixtures,
-  - later backend tier: checkpointed `getVirtualChainFromBlockV2` with rollback handling.
+  - later backend tier: checkpointed `getVirtualChainFromBlockV2` with rollback handling, plus DAA-score UTXO pagination if that upstream API lands and fits the wallet/indexer path.
 - Build escrow next in the covenant lane, not Based Apps.
 - Build campaign batching as explicit multi-output/campaign state before any shared-state app claim.
 

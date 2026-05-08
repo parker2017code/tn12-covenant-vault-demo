@@ -13,7 +13,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 ## Current Position
 
 - Accepted proof core: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, escrow DAA-refund, and escrow mutual cancel.
-- Accepted role-separated proof pass: funding created distinct-role vault, assurance, and escrow outputs; TN12 accepted vault recovery, assurance release, and escrow release from those outputs.
+- Accepted role-separated proof passes: TN12 accepted all seven distinct-key positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.
 - Accepted invoice payload events: paid, refunded, and error states now have TN12 JSON wRPC transactions and evidence artifacts.
 - Escrow mutual cancel is now accepted on TN12. The old script-unit rejection came from `sigOpCount=1` bad configuration; the accepted path is the corrected tx version 1 `computeBudget=30` draft rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`.
 - Near-term app priority: payload invoice/receipt vertical slice, because it is closest to mainnet-capable Kaspa behavior.
@@ -226,15 +226,19 @@ npm run tx:roles:spends
 
 These drafts use distinct owner/recovery, contributor/recipient, and buyer/seller keys. The vault, assurance, and escrow role-separated drafts are mutually exclusive within each fresh contract output unless more role-separated outputs are funded.
 
-The first role-separated proof pass is accepted on TN12:
+Role-separated positive paths are accepted on TN12:
 
 ```txt
-role-separated vault recovery:     dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0
-role-separated assurance release:  fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32
-role-separated escrow release:     4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382
+role-separated vault recovery:       dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0
+role-separated vault withdrawal:     cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11
+role-separated assurance release:    fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32
+role-separated assurance refund:     a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa
+role-separated escrow release:       4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382
+role-separated escrow refund:        7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0
+role-separated escrow cancel:        677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa
 ```
 
-The rejected role-vault recovery attempt with `sigOpCount: 2` is historical evidence only. The accepted retry uses `sigOpCount: 1`, matching the single `checkSig` in `recover(sig recoverySig)`. Fresh role-separated outputs are still needed for vault withdrawal, assurance refund, escrow refund, and escrow cancel because the accepted proof pass consumed one output per contract.
+Historical failed attempts are preserved as configuration evidence only. The rejected role-vault recovery attempt with `sigOpCount: 2` was corrected to `sigOpCount: 1`. The rejected timed-path attempts used Unix seconds for the lock value; the accepted timed proofs use DAA-style lock value `6180000` and spend lockTime `6180001`.
 
 Build signed P2SH spend drafts for vault withdraw/recover and assurance release/refund:
 
@@ -501,7 +505,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 5. Done: checkpointed accepted-index artifact and persisted checkpoint guard for 7 proof spends and 26 payload events. Next: move from known-txid public reads to a node/RPC backend with durable storage and virtual-chain rollback replay.
 
-6. Done: local covenant adversarial map for seven accepted proof paths. Done: role-separated funding plus accepted vault recovery, assurance release, and escrow release. Next: fund more role-separated outputs for the mutually exclusive withdrawal, refund, and cancel paths before attempting TN12 rejection proofs.
+6. Done: local covenant adversarial map for seven accepted proof paths. Done: role-separated positive proofs for all seven vault, assurance, and escrow paths. Next: build exact invalid candidates before attempting TN12 rejection proofs.
 
 7. Next: keep miner-signal ideas in research until a transaction-payload, coinbase-payload, or pool-policy design is explicit. Do not claim arbitrary block-header app data.
 

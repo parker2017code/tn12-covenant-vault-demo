@@ -1,0 +1,712 @@
+{
+  "contract_name": "DelayedRecoveryVault",
+  "script": [
+    107,
+    108,
+    118,
+    0,
+    156,
+    99,
+    117,
+    118,
+    32,
+    211,
+    93,
+    162,
+    233,
+    21,
+    114,
+    117,
+    136,
+    238,
+    40,
+    172,
+    198,
+    115,
+    230,
+    252,
+    86,
+    60,
+    128,
+    52,
+    254,
+    184,
+    108,
+    180,
+    123,
+    47,
+    44,
+    247,
+    123,
+    6,
+    172,
+    97,
+    133,
+    172,
+    105,
+    4,
+    79,
+    148,
+    253,
+    105,
+    176,
+    0,
+    194,
+    185,
+    190,
+    2,
+    136,
+    19,
+    148,
+    156,
+    105,
+    0,
+    195,
+    32,
+    211,
+    93,
+    162,
+    233,
+    21,
+    114,
+    117,
+    136,
+    238,
+    40,
+    172,
+    198,
+    115,
+    230,
+    252,
+    86,
+    60,
+    128,
+    52,
+    254,
+    184,
+    108,
+    180,
+    123,
+    47,
+    44,
+    247,
+    123,
+    6,
+    172,
+    97,
+    133,
+    3,
+    0,
+    0,
+    32,
+    124,
+    126,
+    1,
+    172,
+    126,
+    135,
+    105,
+    117,
+    81,
+    103,
+    118,
+    81,
+    156,
+    99,
+    117,
+    118,
+    32,
+    224,
+    201,
+    131,
+    109,
+    81,
+    18,
+    191,
+    78,
+    212,
+    188,
+    176,
+    148,
+    20,
+    153,
+    72,
+    55,
+    202,
+    209,
+    74,
+    3,
+    232,
+    139,
+    111,
+    219,
+    159,
+    189,
+    112,
+    224,
+    249,
+    128,
+    16,
+    185,
+    172,
+    105,
+    0,
+    194,
+    185,
+    190,
+    2,
+    136,
+    19,
+    148,
+    156,
+    105,
+    0,
+    195,
+    32,
+    224,
+    201,
+    131,
+    109,
+    81,
+    18,
+    191,
+    78,
+    212,
+    188,
+    176,
+    148,
+    20,
+    153,
+    72,
+    55,
+    202,
+    209,
+    74,
+    3,
+    232,
+    139,
+    111,
+    219,
+    159,
+    189,
+    112,
+    224,
+    249,
+    128,
+    16,
+    185,
+    3,
+    0,
+    0,
+    32,
+    124,
+    126,
+    1,
+    172,
+    126,
+    135,
+    105,
+    117,
+    81,
+    103,
+    117,
+    0,
+    105,
+    104,
+    104
+  ],
+  "ast": {
+    "pragma": {
+      "name": "silverscript",
+      "value": "^0.1.0",
+      "span": "pragma silverscript ^0.1.0;",
+      "name_span": "silverscript",
+      "value_span": "^0.1.0"
+    },
+    "name": "DelayedRecoveryVault",
+    "params": [
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "owner",
+        "span": "pubkey owner",
+        "type_span": "pubkey ",
+        "name_span": "owner"
+      },
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "recovery",
+        "span": "pubkey recovery",
+        "type_span": "pubkey ",
+        "name_span": "recovery"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "unlockTime",
+        "span": "int unlockTime",
+        "type_span": "int ",
+        "name_span": "unlockTime"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "minerFee",
+        "span": "int minerFee",
+        "type_span": "int ",
+        "name_span": "minerFee"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "withdraw",
+        "params": [
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "ownerSig",
+            "span": "sig ownerSig",
+            "type_span": "sig ",
+            "name_span": "ownerSig"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "checkSig",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "ownerSig",
+                      "span": "ownerSig"
+                    },
+                    {
+                      "kind": "identifier",
+                      "data": "owner",
+                      "span": "owner"
+                    }
+                  ],
+                  "name_span": "checkSig"
+                },
+                "span": "checkSig(ownerSig, owner)"
+              },
+              "message": null,
+              "span": "require(checkSig(ownerSig, owner));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "time_op",
+            "data": {
+              "tx_var": "tx_time",
+              "expr": {
+                "kind": "identifier",
+                "data": "unlockTime",
+                "span": "unlockTime"
+              },
+              "message": null,
+              "span": "require(tx.time >= unlockTime);",
+              "tx_var_span": "tx.time",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "amount",
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "sub",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "input_value",
+                      "index": {
+                        "kind": "nullary",
+                        "data": "active_input_index",
+                        "span": "this.activeInputIndex"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.inputs[this.activeInputIndex].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "minerFee",
+                    "span": "minerFee"
+                  }
+                },
+                "span": "tx.inputs[this.activeInputIndex].value - minerFee"
+              },
+              "span": "int amount = tx.inputs[this.activeInputIndex].value - minerFee;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "amount"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[0].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  }
+                },
+                "span": "tx.outputs[0].value == amount"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].value == amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 34
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "ownerLock",
+              "expr": {
+                "kind": "new",
+                "data": {
+                  "name": "ScriptPubKeyP2PK",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "owner",
+                      "span": "owner"
+                    }
+                  ],
+                  "name_span": "ScriptPubKeyP2PK"
+                },
+                "span": "new ScriptPubKeyP2PK(owner)"
+              },
+              "span": "byte[34] ownerLock = new ScriptPubKeyP2PK(owner);",
+              "type_span": "byte[34]",
+              "modifier_spans": [],
+              "name_span": "ownerLock"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_script_pub_key",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".scriptPubKey"
+                    },
+                    "span": "tx.outputs[0].scriptPubKey"
+                  },
+                  "right": {
+                    "kind": "call",
+                    "data": {
+                      "name": "byte[]",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "ownerLock",
+                          "span": "ownerLock"
+                        }
+                      ],
+                      "name_span": "byte[]"
+                    },
+                    "span": "byte[](ownerLock)"
+                  }
+                },
+                "span": "tx.outputs[0].scriptPubKey == byte[](ownerLock)"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].scriptPubKey == byte[](ownerLock));",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function withdraw(sig ownerSig) {\n        require(checkSig(ownerSig, owner));\n        require(tx.time >= unlockTime);\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] ownerLock = new ScriptPubKeyP2PK(owner);\n        require(tx.outputs[0].scriptPubKey == byte[](ownerLock));\n    }",
+        "name_span": "withdraw",
+        "body_span": "require(checkSig(ownerSig, owner));\n        require(tx.time >= unlockTime);\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] ownerLock = new ScriptPubKeyP2PK(owner);\n        require(tx.outputs[0].scriptPubKey == byte[](ownerLock));"
+      },
+      {
+        "name": "recover",
+        "params": [
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "recoverySig",
+            "span": "sig recoverySig",
+            "type_span": "sig ",
+            "name_span": "recoverySig"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "checkSig",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "recoverySig",
+                      "span": "recoverySig"
+                    },
+                    {
+                      "kind": "identifier",
+                      "data": "recovery",
+                      "span": "recovery"
+                    }
+                  ],
+                  "name_span": "checkSig"
+                },
+                "span": "checkSig(recoverySig, recovery)"
+              },
+              "message": null,
+              "span": "require(checkSig(recoverySig, recovery));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "amount",
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "sub",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "input_value",
+                      "index": {
+                        "kind": "nullary",
+                        "data": "active_input_index",
+                        "span": "this.activeInputIndex"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.inputs[this.activeInputIndex].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "minerFee",
+                    "span": "minerFee"
+                  }
+                },
+                "span": "tx.inputs[this.activeInputIndex].value - minerFee"
+              },
+              "span": "int amount = tx.inputs[this.activeInputIndex].value - minerFee;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "amount"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[0].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  }
+                },
+                "span": "tx.outputs[0].value == amount"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].value == amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 34
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "recoveryLock",
+              "expr": {
+                "kind": "new",
+                "data": {
+                  "name": "ScriptPubKeyP2PK",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "recovery",
+                      "span": "recovery"
+                    }
+                  ],
+                  "name_span": "ScriptPubKeyP2PK"
+                },
+                "span": "new ScriptPubKeyP2PK(recovery)"
+              },
+              "span": "byte[34] recoveryLock = new ScriptPubKeyP2PK(recovery);",
+              "type_span": "byte[34]",
+              "modifier_spans": [],
+              "name_span": "recoveryLock"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_script_pub_key",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".scriptPubKey"
+                    },
+                    "span": "tx.outputs[0].scriptPubKey"
+                  },
+                  "right": {
+                    "kind": "call",
+                    "data": {
+                      "name": "byte[]",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "recoveryLock",
+                          "span": "recoveryLock"
+                        }
+                      ],
+                      "name_span": "byte[]"
+                    },
+                    "span": "byte[](recoveryLock)"
+                  }
+                },
+                "span": "tx.outputs[0].scriptPubKey == byte[](recoveryLock)"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].scriptPubKey == byte[](recoveryLock));",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function recover(sig recoverySig) {\n        require(checkSig(recoverySig, recovery));\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] recoveryLock = new ScriptPubKeyP2PK(recovery);\n        require(tx.outputs[0].scriptPubKey == byte[](recoveryLock));\n    }",
+        "name_span": "recover",
+        "body_span": "require(checkSig(recoverySig, recovery));\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] recoveryLock = new ScriptPubKeyP2PK(recovery);\n        require(tx.outputs[0].scriptPubKey == byte[](recoveryLock));"
+      }
+    ],
+    "span": "contract DelayedRecoveryVault(\n    pubkey owner,\n    pubkey recovery,\n    int unlockTime,\n    int minerFee\n) {\n    entrypoint function withdraw(sig ownerSig) {\n        require(checkSig(ownerSig, owner));\n        require(tx.time >= unlockTime);\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] ownerLock = new ScriptPubKeyP2PK(owner);\n        require(tx.outputs[0].scriptPubKey == byte[](ownerLock));\n    }\n\n    entrypoint function recover(sig recoverySig) {\n        require(checkSig(recoverySig, recovery));\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] recoveryLock = new ScriptPubKeyP2PK(recovery);\n        require(tx.outputs[0].scriptPubKey == byte[](recoveryLock));\n    }\n}",
+    "name_span": "DelayedRecoveryVault"
+  },
+  "abi": [
+    {
+      "name": "withdraw",
+      "inputs": [
+        {
+          "name": "ownerSig",
+          "type_name": "sig"
+        }
+      ]
+    },
+    {
+      "name": "recover",
+      "inputs": [
+        {
+          "name": "recoverySig",
+          "type_name": "sig"
+        }
+      ]
+    }
+  ],
+  "without_selector": false,
+  "state_layout": {
+    "start": 1,
+    "len": 0
+  },
+  "debug_info": null
+}

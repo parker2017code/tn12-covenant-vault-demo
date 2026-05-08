@@ -16,6 +16,7 @@ import { buildSubmitPayload } from "../src/submitPayload.mjs";
 const SOMPI_PER_TKAS = 100000000n;
 const sourcePath = process.env.ROLE_FUNDING_SOURCE || "fixtures/FundedWalletOutpoint.json";
 const outPath = process.env.OUT || "artifacts/signed-drafts/role-separated-funding.json";
+const artifactDir = process.env.ROLE_CONTRACT_ARTIFACT_DIR || "artifacts/role-separated";
 const funding = await readJson(sourcePath);
 const wallet = await readJson(".local/tn12-wallet.json");
 const contracts = [
@@ -23,19 +24,19 @@ const contracts = [
     label: "role-separated vault",
     lane: "role-vault-funding",
     amountTkas: Number(process.env.ROLE_VAULT_FUNDING_TKAS || "25"),
-    artifact: await readJson("artifacts/role-separated/DelayedRecoveryVault.json")
+    artifact: await readJson(`${artifactDir}/DelayedRecoveryVault.json`)
   },
   {
     label: "role-separated assurance",
     lane: "role-assurance-funding",
     amountTkas: Number(process.env.ROLE_ASSURANCE_FUNDING_TKAS || "25"),
-    artifact: await readJson("artifacts/role-separated/AssurancePledge.json")
+    artifact: await readJson(`${artifactDir}/AssurancePledge.json`)
   },
   {
     label: "role-separated escrow",
     lane: "role-escrow-funding",
     amountTkas: Number(process.env.ROLE_ESCROW_FUNDING_TKAS || "25"),
-    artifact: await readJson("artifacts/role-separated/Escrow.json")
+    artifact: await readJson(`${artifactDir}/Escrow.json`)
   }
 ];
 const minerFeeSompi = BigInt(process.env.MINER_FEE_SOMPI || "5000");
@@ -113,6 +114,7 @@ const artifact = {
     outputIndex: funding.outputIndex,
     amountTkas: funding.amountTkas
   },
+  artifactDir,
   outputs: [
     ...outputSpecs.map((output, index) => ({
       index,

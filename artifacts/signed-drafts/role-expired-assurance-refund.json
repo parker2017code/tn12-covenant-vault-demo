@@ -1,0 +1,56 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "assurance-refund",
+  "contract": "AssurancePledge",
+  "entrypoint": "refund",
+  "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
+  "source": {
+    "txid": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+    "outputIndex": 1,
+    "amountTkas": 25,
+    "address": "kaspatest:pr33ceckm70tkfyd0csua5xh5rr6576enttrgenpkl7qqnx4x70sxhhuhw5la"
+  },
+  "destination": {
+    "address": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+    "scriptType": "p2pk",
+    "amountSompi": "2499995000",
+    "amountTkas": "24.99995"
+  },
+  "contractFeeSompi": "5000",
+  "lockTime": "1778229967",
+  "scriptHash": null,
+  "transactionId": "bcb04f2e6825b0a53752dfee603a8ab722834af8ae49404b6a044a0dfa71b7e8",
+  "signatureScriptHex": "41effb760f221d7f60a3b494ba1a0ce397bca1d4608e018898ffd7e29d1188f6858433c991e5c6d75be7339fb05dfc5c8ee92ce6b3cdca0bb5a0fc4aa3fb592f5001514cb06b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac69044f94fd69b000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+            "index": 1
+          },
+          "signatureScript": "41effb760f221d7f60a3b494ba1a0ce397bca1d4608e018898ffd7e29d1188f6858433c991e5c6d75be7339fb05dfc5c8ee92ce6b3cdca0bb5a0fc4aa3fb592f5001514cb06b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac69044f94fd69b000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "2098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac"
+          }
+        }
+      ],
+      "lockTime": 1778229967,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "roleSeparated": true,
+  "mutualExclusionWarning": "The role-assurance release and refund drafts spend the same role-separated assurance output; only one can be accepted."
+}

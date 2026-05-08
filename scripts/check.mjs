@@ -446,7 +446,7 @@ assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" &
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
 assert.equal(projectPlan.summary.done, 14);
-assert.equal(projectPlan.summary.wip, 5);
+assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 6);
 assert.equal(projectPlan.summary.later, 6);
 assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
@@ -456,8 +456,7 @@ assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures")
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-drafts"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
-assert.ok(projectPlan.wip.some((item) => item.id === "remaining-role-separated-paths"));
-assert.ok(projectPlan.next.some((item) => item.id === "role-separated-second-funding"));
+assert.ok(projectPlan.next.some((item) => item.id === "role-separated-invalid-candidates"));
 assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
@@ -466,14 +465,18 @@ const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProo
 const roleProofFixture = JSON.parse(await readFile(new URL("../fixtures/RoleSeparatedAcceptedProofTransactions.json", import.meta.url), "utf8"));
 const roleProofEvidence = JSON.parse(await readFile(new URL("../artifacts/role-separated-proof-evidence.json", import.meta.url), "utf8"));
 assert.equal(roleProofFixture.schema, "tn12-role-separated-accepted-proof-transactions/v1");
-assert.equal(roleProofFixture.transactions.length, 3);
-assert.equal(roleProofFixture.funding.txid, "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0");
+assert.equal(roleProofFixture.transactions.length, 7);
+assert.equal(roleProofFixture.fundingBatches.length, 3);
+assert.equal(roleProofFixture.fundingBatches[0].txid, "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0");
 assert.ok(roleProofFixture.transactions.some((proof) => proof.txid === "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0"));
-assert.ok(/sigOpCount: 1/.test(roleProofFixture.historicalRejectedAttempt.correction));
-assert.equal(roleProofEvidence.summary.total, 3);
-assert.equal(roleProofEvidence.summary.accepted, 3);
-assert.equal(roleProofEvidence.summary.matchedInputs, 3);
-assert.equal(roleProofEvidence.summary.p2pkOutputs, 3);
+assert.ok(roleProofFixture.transactions.some((proof) => proof.txid === "cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11"));
+assert.ok(roleProofFixture.transactions.some((proof) => proof.txid === "677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa"));
+assert.ok(roleProofFixture.historicalRejectedAttempts.some((attempt) => /sigOpCount: 1/.test(attempt.correction)));
+assert.ok(roleProofFixture.historicalRejectedAttempts.some((attempt) => /DAA-style/.test(attempt.correction)));
+assert.equal(roleProofEvidence.summary.total, 7);
+assert.equal(roleProofEvidence.summary.accepted, 7);
+assert.equal(roleProofEvidence.summary.matchedInputs, 7);
+assert.equal(roleProofEvidence.summary.p2pkOutputs, 7);
 const roleWalletsPublic = JSON.parse(await readFile(new URL("../fixtures/RoleSeparatedWallets.public.json", import.meta.url), "utf8"));
 assert.equal(roleWalletsPublic.schema, "tn12-role-separated-wallets-public/v1");
 assert.equal(Object.keys(roleWalletsPublic.roles).length, 6);
@@ -726,6 +729,7 @@ const files = [
   "scripts/fetch-funded-utxos.mjs",
   "scripts/generate-constructor-fixtures.mjs",
   "scripts/generate-role-separated-fixtures.mjs",
+  "scripts/generate-role-separated-expired-fixtures.mjs",
   "scripts/compile-silverscript.mjs",
   "scripts/compile-role-separated-contracts.mjs",
   "scripts/build-transaction-drafts.mjs",
@@ -789,6 +793,12 @@ const files = [
   "artifacts/role-separated/DelayedRecoveryVault.json",
   "artifacts/role-separated/AssurancePledge.json",
   "artifacts/role-separated/Escrow.json",
+  "artifacts/role-separated-expired/DelayedRecoveryVault.json",
+  "artifacts/role-separated-expired/AssurancePledge.json",
+  "artifacts/role-separated-expired/Escrow.json",
+  "artifacts/role-separated-daa-expired/DelayedRecoveryVault.json",
+  "artifacts/role-separated-daa-expired/AssurancePledge.json",
+  "artifacts/role-separated-daa-expired/Escrow.json",
   "artifacts/signed-drafts/escrow-daa-refund-funding.json",
   "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
   "artifacts/signed-drafts/escrow-cancel-funding.json",
@@ -806,6 +816,22 @@ const files = [
   "artifacts/signed-drafts/role-escrow-release.json",
   "artifacts/signed-drafts/role-escrow-refund.json",
   "artifacts/signed-drafts/role-escrow-cancel.json",
+  "artifacts/signed-drafts/role-expired-funding.json",
+  "artifacts/signed-drafts/role-expired-vault-withdrawal.json",
+  "artifacts/signed-drafts/role-expired-vault-recovery.json",
+  "artifacts/signed-drafts/role-expired-assurance-release.json",
+  "artifacts/signed-drafts/role-expired-assurance-refund.json",
+  "artifacts/signed-drafts/role-expired-escrow-release.json",
+  "artifacts/signed-drafts/role-expired-escrow-refund.json",
+  "artifacts/signed-drafts/role-expired-escrow-cancel.json",
+  "artifacts/signed-drafts/role-daa-expired-funding.json",
+  "artifacts/signed-drafts/role-daa-expired-vault-withdrawal.json",
+  "artifacts/signed-drafts/role-daa-expired-vault-recovery.json",
+  "artifacts/signed-drafts/role-daa-expired-assurance-release.json",
+  "artifacts/signed-drafts/role-daa-expired-assurance-refund.json",
+  "artifacts/signed-drafts/role-daa-expired-escrow-release.json",
+  "artifacts/signed-drafts/role-daa-expired-escrow-refund.json",
+  "artifacts/signed-drafts/role-daa-expired-escrow-cancel.json",
   "artifacts/signed-drafts/payload-receipt-self-send.json",
   "artifacts/signed-drafts/payload-refund-self-send.json",
   "artifacts/signed-drafts/payload-error-self-send.json",
@@ -876,10 +902,22 @@ const files = [
   "fixtures/RoleVaultContractOutpoint.json",
   "fixtures/RoleAssuranceContractOutpoint.json",
   "fixtures/RoleEscrowContractOutpoint.json",
+  "fixtures/RoleExpiredVaultContractOutpoint.json",
+  "fixtures/RoleExpiredAssuranceContractOutpoint.json",
+  "fixtures/RoleExpiredEscrowContractOutpoint.json",
+  "fixtures/RoleDaaExpiredVaultContractOutpoint.json",
+  "fixtures/RoleDaaExpiredAssuranceContractOutpoint.json",
+  "fixtures/RoleDaaExpiredEscrowContractOutpoint.json",
   "fixtures/EscrowExpired.ctor.json",
   "fixtures/role-separated/DelayedRecoveryVault.ctor.json",
   "fixtures/role-separated/AssurancePledge.ctor.json",
   "fixtures/role-separated/Escrow.ctor.json",
+  "fixtures/role-separated-expired/DelayedRecoveryVault.ctor.json",
+  "fixtures/role-separated-expired/AssurancePledge.ctor.json",
+  "fixtures/role-separated-expired/Escrow.ctor.json",
+  "fixtures/role-separated-daa-expired/DelayedRecoveryVault.ctor.json",
+  "fixtures/role-separated-daa-expired/AssurancePledge.ctor.json",
+  "fixtures/role-separated-daa-expired/Escrow.ctor.json",
   "src/manualOutpoint.mjs",
   "src/acceptedIndexer.mjs",
   "src/checkpointedIndexer.mjs",

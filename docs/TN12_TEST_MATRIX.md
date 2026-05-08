@@ -23,6 +23,12 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Role-separated vault | Recovery | `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0` |
 | Role-separated assurance | Release | `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32` |
 | Role-separated escrow | Seller release | `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382` |
+| Role-separated funding | Unix-time expired batch, historical bad-time attempt | `935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141` |
+| Role-separated escrow | Mutual cancel | `677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa` |
+| Role-separated funding | DAA-expired timed-path batch | `9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06` |
+| Role-separated vault | DAA delayed withdrawal | `cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11` |
+| Role-separated assurance | DAA refund | `a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa` |
+| Role-separated escrow | DAA refund | `7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0` |
 | Invoice | Paid payload receipt | `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e` |
 | Invoice | Refund payload event | `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13` |
 | Invoice | Error payload event | `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c` |

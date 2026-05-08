@@ -304,8 +304,12 @@ Role-separated proof state:
 - Accepted role-separated vault recovery: `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0`.
 - Accepted role-separated assurance release: `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32`.
 - Accepted role-separated escrow release: `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382`.
+- Accepted role-separated escrow cancel: `677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa`.
+- Accepted role-separated DAA vault withdrawal: `cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11`.
+- Accepted role-separated DAA assurance refund: `a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa`.
+- Accepted role-separated DAA escrow refund: `7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0`.
 - The failed role-vault recovery attempt with `sigOpCount: 2` is historical. The accepted retry uses `sigOpCount: 1`, matching the single `checkSig` in `recover(sig recoverySig)`.
-- Fresh role-separated outputs are needed for vault withdrawal, assurance refund, escrow refund, and escrow cancel because the first accepted pass consumed one output per contract.
+- The failed Unix-time expired spends are historical. The accepted timed proofs use DAA-style lock values, not Unix seconds.
 
 Next payload steps:
 
@@ -388,7 +392,7 @@ Current app build order:
 Recommended order from here:
 
 1. Add wallet-review and wallet-connector flow for payload receipt submission.
-2. Fund another role-separated batch for vault withdrawal, assurance refund, escrow refund, and escrow cancel.
+2. Build exact role-separated invalid candidates for wrong signer, selector, output, amount, and lock shape.
 3. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
 4. Build accepted pledge-output custody transactions for batch assurance settlement.
 5. Add explicit invalid spend candidates only after the positive role-separated paths have fresh outputs.

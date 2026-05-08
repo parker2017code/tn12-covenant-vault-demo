@@ -1,0 +1,632 @@
+{
+  "contract_name": "AssurancePledge",
+  "script": [
+    107,
+    108,
+    118,
+    0,
+    156,
+    99,
+    117,
+    0,
+    194,
+    185,
+    190,
+    2,
+    136,
+    19,
+    148,
+    156,
+    105,
+    0,
+    195,
+    32,
+    78,
+    85,
+    22,
+    94,
+    62,
+    9,
+    133,
+    114,
+    244,
+    211,
+    78,
+    192,
+    177,
+    122,
+    76,
+    35,
+    71,
+    243,
+    136,
+    112,
+    19,
+    133,
+    255,
+    141,
+    61,
+    207,
+    97,
+    66,
+    202,
+    16,
+    166,
+    123,
+    3,
+    0,
+    0,
+    32,
+    124,
+    126,
+    1,
+    172,
+    126,
+    135,
+    105,
+    81,
+    103,
+    118,
+    81,
+    156,
+    99,
+    117,
+    118,
+    32,
+    152,
+    34,
+    140,
+    162,
+    44,
+    149,
+    230,
+    133,
+    7,
+    164,
+    80,
+    207,
+    194,
+    77,
+    15,
+    144,
+    129,
+    86,
+    179,
+    56,
+    147,
+    161,
+    65,
+    240,
+    100,
+    247,
+    163,
+    68,
+    41,
+    179,
+    136,
+    15,
+    172,
+    105,
+    4,
+    79,
+    148,
+    253,
+    105,
+    176,
+    0,
+    194,
+    185,
+    190,
+    2,
+    136,
+    19,
+    148,
+    156,
+    105,
+    0,
+    195,
+    32,
+    152,
+    34,
+    140,
+    162,
+    44,
+    149,
+    230,
+    133,
+    7,
+    164,
+    80,
+    207,
+    194,
+    77,
+    15,
+    144,
+    129,
+    86,
+    179,
+    56,
+    147,
+    161,
+    65,
+    240,
+    100,
+    247,
+    163,
+    68,
+    41,
+    179,
+    136,
+    15,
+    3,
+    0,
+    0,
+    32,
+    124,
+    126,
+    1,
+    172,
+    126,
+    135,
+    105,
+    117,
+    81,
+    103,
+    117,
+    0,
+    105,
+    104,
+    104
+  ],
+  "ast": {
+    "pragma": {
+      "name": "silverscript",
+      "value": "^0.1.0",
+      "span": "pragma silverscript ^0.1.0;",
+      "name_span": "silverscript",
+      "value_span": "^0.1.0"
+    },
+    "name": "AssurancePledge",
+    "params": [
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "contributor",
+        "span": "pubkey contributor",
+        "type_span": "pubkey ",
+        "name_span": "contributor"
+      },
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "recipient",
+        "span": "pubkey recipient",
+        "type_span": "pubkey ",
+        "name_span": "recipient"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "deadline",
+        "span": "int deadline",
+        "type_span": "int ",
+        "name_span": "deadline"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "minerFee",
+        "span": "int minerFee",
+        "type_span": "int ",
+        "name_span": "minerFee"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "release",
+        "params": [],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "amount",
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "sub",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "input_value",
+                      "index": {
+                        "kind": "nullary",
+                        "data": "active_input_index",
+                        "span": "this.activeInputIndex"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.inputs[this.activeInputIndex].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "minerFee",
+                    "span": "minerFee"
+                  }
+                },
+                "span": "tx.inputs[this.activeInputIndex].value - minerFee"
+              },
+              "span": "int amount = tx.inputs[this.activeInputIndex].value - minerFee;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "amount"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[0].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  }
+                },
+                "span": "tx.outputs[0].value == amount"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].value == amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 34
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "recipientLock",
+              "expr": {
+                "kind": "new",
+                "data": {
+                  "name": "ScriptPubKeyP2PK",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "recipient",
+                      "span": "recipient"
+                    }
+                  ],
+                  "name_span": "ScriptPubKeyP2PK"
+                },
+                "span": "new ScriptPubKeyP2PK(recipient)"
+              },
+              "span": "byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);",
+              "type_span": "byte[34]",
+              "modifier_spans": [],
+              "name_span": "recipientLock"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_script_pub_key",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".scriptPubKey"
+                    },
+                    "span": "tx.outputs[0].scriptPubKey"
+                  },
+                  "right": {
+                    "kind": "call",
+                    "data": {
+                      "name": "byte[]",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "recipientLock",
+                          "span": "recipientLock"
+                        }
+                      ],
+                      "name_span": "byte[]"
+                    },
+                    "span": "byte[](recipientLock)"
+                  }
+                },
+                "span": "tx.outputs[0].scriptPubKey == byte[](recipientLock)"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].scriptPubKey == byte[](recipientLock));",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function release() {\n        // Target/deadline aggregation is enforced by the planner; this pledge\n        // primitive only carries the recipient release and contributor refund paths.\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);\n        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));\n    }",
+        "name_span": "release",
+        "body_span": "int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);\n        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));"
+      },
+      {
+        "name": "refund",
+        "params": [
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "contributorSig",
+            "span": "sig contributorSig",
+            "type_span": "sig ",
+            "name_span": "contributorSig"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "checkSig",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "contributorSig",
+                      "span": "contributorSig"
+                    },
+                    {
+                      "kind": "identifier",
+                      "data": "contributor",
+                      "span": "contributor"
+                    }
+                  ],
+                  "name_span": "checkSig"
+                },
+                "span": "checkSig(contributorSig, contributor)"
+              },
+              "message": null,
+              "span": "require(checkSig(contributorSig, contributor));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "time_op",
+            "data": {
+              "tx_var": "tx_time",
+              "expr": {
+                "kind": "identifier",
+                "data": "deadline",
+                "span": "deadline"
+              },
+              "message": null,
+              "span": "require(tx.time >= deadline);",
+              "tx_var_span": "tx.time",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "amount",
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "sub",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "input_value",
+                      "index": {
+                        "kind": "nullary",
+                        "data": "active_input_index",
+                        "span": "this.activeInputIndex"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.inputs[this.activeInputIndex].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "minerFee",
+                    "span": "minerFee"
+                  }
+                },
+                "span": "tx.inputs[this.activeInputIndex].value - minerFee"
+              },
+              "span": "int amount = tx.inputs[this.activeInputIndex].value - minerFee;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "amount"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[0].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  }
+                },
+                "span": "tx.outputs[0].value == amount"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].value == amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 34
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "contributorLock",
+              "expr": {
+                "kind": "new",
+                "data": {
+                  "name": "ScriptPubKeyP2PK",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "contributor",
+                      "span": "contributor"
+                    }
+                  ],
+                  "name_span": "ScriptPubKeyP2PK"
+                },
+                "span": "new ScriptPubKeyP2PK(contributor)"
+              },
+              "span": "byte[34] contributorLock = new ScriptPubKeyP2PK(contributor);",
+              "type_span": "byte[34]",
+              "modifier_spans": [],
+              "name_span": "contributorLock"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_script_pub_key",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".scriptPubKey"
+                    },
+                    "span": "tx.outputs[0].scriptPubKey"
+                  },
+                  "right": {
+                    "kind": "call",
+                    "data": {
+                      "name": "byte[]",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "contributorLock",
+                          "span": "contributorLock"
+                        }
+                      ],
+                      "name_span": "byte[]"
+                    },
+                    "span": "byte[](contributorLock)"
+                  }
+                },
+                "span": "tx.outputs[0].scriptPubKey == byte[](contributorLock)"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].scriptPubKey == byte[](contributorLock));",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function refund(sig contributorSig) {\n        require(checkSig(contributorSig, contributor));\n        require(tx.time >= deadline);\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] contributorLock = new ScriptPubKeyP2PK(contributor);\n        require(tx.outputs[0].scriptPubKey == byte[](contributorLock));\n    }",
+        "name_span": "refund",
+        "body_span": "require(checkSig(contributorSig, contributor));\n        require(tx.time >= deadline);\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] contributorLock = new ScriptPubKeyP2PK(contributor);\n        require(tx.outputs[0].scriptPubKey == byte[](contributorLock));"
+      }
+    ],
+    "span": "contract AssurancePledge(\n    pubkey contributor,\n    pubkey recipient,\n    int deadline,\n    int minerFee\n) {\n    entrypoint function release() {\n        // Target/deadline aggregation is enforced by the planner; this pledge\n        // primitive only carries the recipient release and contributor refund paths.\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);\n        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));\n    }\n\n    entrypoint function refund(sig contributorSig) {\n        require(checkSig(contributorSig, contributor));\n        require(tx.time >= deadline);\n\n        int amount = tx.inputs[this.activeInputIndex].value - minerFee;\n        require(tx.outputs[0].value == amount);\n\n        byte[34] contributorLock = new ScriptPubKeyP2PK(contributor);\n        require(tx.outputs[0].scriptPubKey == byte[](contributorLock));\n    }\n}",
+    "name_span": "AssurancePledge"
+  },
+  "abi": [
+    {
+      "name": "release",
+      "inputs": []
+    },
+    {
+      "name": "refund",
+      "inputs": [
+        {
+          "name": "contributorSig",
+          "type_name": "sig"
+        }
+      ]
+    }
+  ],
+  "without_selector": false,
+  "state_layout": {
+    "start": 1,
+    "len": 0
+  },
+  "debug_info": null
+}

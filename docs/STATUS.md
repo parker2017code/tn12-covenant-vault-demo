@@ -48,6 +48,12 @@
 - Role-separated vault recovery: `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0`. Earlier `sigOpCount: 2` recovery rejection is historical; accepted retry uses `sigOpCount: 1`.
 - Role-separated assurance release: `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32`.
 - Role-separated escrow release: `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382`.
+- Role-separated escrow mutual cancel: `677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa`, submitted over JSON wRPC with tx v1 `computeBudget`.
+- Role-separated DAA-expired funding: `9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06`.
+- Role-separated DAA vault withdrawal: `cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11`.
+- Role-separated DAA assurance refund: `a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa`.
+- Role-separated DAA escrow refund: `7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0`.
+- Historical role-separated timed-spend rejection: Unix-second lock values produced `transaction input #0 is not finalized`; accepted timed proofs use DAA-style lock values.
 - Cancel-debugging rule: check artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and Rusty Kaspa source/tests before escalating.
 - Accepted cancel route after the sigop fix: local TN12 `kaspa-wasm 1.1.1-toc.1` with tx version 1, constructor fields `sigOpCount: 0` plus `computeBudget: 30`, submitted over JSON wRPC to `testnet-12`.
 

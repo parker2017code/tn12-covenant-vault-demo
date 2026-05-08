@@ -1,14 +1,14 @@
 {
   "schema": "tn12-contract-spend-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-08T08:40:45.850Z",
+  "verifiedAt": "2026-05-08T08:51:52.361Z",
   "summary": {
-    "total": 3,
-    "accepted": 3,
-    "p2shInputs": 3,
-    "matchedInputs": 3,
-    "p2pkOutputs": 3,
-    "matchedOutputs": 3
+    "total": 7,
+    "accepted": 7,
+    "p2shInputs": 7,
+    "matchedInputs": 7,
+    "p2pkOutputs": 7,
+    "matchedOutputs": 7
   },
   "proofs": [
     {
@@ -108,6 +108,154 @@
       "output": {
         "index": 0,
         "address": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Role-separated escrow cancel",
+      "lane": "role-escrow",
+      "entrypoint": "cancel",
+      "txid": "677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa",
+      "accepted": true,
+      "acceptingBlockBlueScore": 6082885,
+      "acceptingBlockTime": 1778229968917,
+      "input": {
+        "previousOutpointHash": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+        "previousOutpointIndex": "2",
+        "expectedPreviousOutpointHash": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+        "expectedPreviousOutpointIndex": 2,
+        "address": "kaspatest:pzve3j6zyxv0jqcu8tug8kped3s7g6vlp4k73d8gkpa2wxnth0n0g2s0pvhne",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "expectedAmount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 0
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Role-separated DAA vault withdrawal",
+      "lane": "role-vault",
+      "entrypoint": "withdraw",
+      "txid": "cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11",
+      "accepted": true,
+      "acceptingBlockBlueScore": 6083482,
+      "acceptingBlockTime": 1778230028260,
+      "input": {
+        "previousOutpointHash": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "expectedPreviousOutpointIndex": 0,
+        "address": "kaspatest:ppt9cjpnxkmqgqelmm0qw0ezvxfna4dr3t4mrxx4mg4zjr42rp43ucmjuc4pu",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "expectedAmount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Role-separated DAA assurance refund",
+      "lane": "role-assurance",
+      "entrypoint": "refund",
+      "txid": "a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa",
+      "accepted": true,
+      "acceptingBlockBlueScore": 6083483,
+      "acceptingBlockTime": 1778230028363,
+      "input": {
+        "previousOutpointHash": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "previousOutpointIndex": "1",
+        "expectedPreviousOutpointHash": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "expectedPreviousOutpointIndex": 1,
+        "address": "kaspatest:pqpetf2gr8nz8cyfrqewaqna7gf67u6s8mwpk0cz6j4jd6uq7ejez0efrg8yx",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "expectedAmount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+        "type": "pubkey",
+        "amount": 2499995000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Role-separated DAA escrow refund",
+      "lane": "role-escrow",
+      "entrypoint": "refund",
+      "txid": "7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0",
+      "accepted": true,
+      "acceptingBlockBlueScore": 6083489,
+      "acceptingBlockTime": 1778230029028,
+      "input": {
+        "previousOutpointHash": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "previousOutpointIndex": "2",
+        "expectedPreviousOutpointHash": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "expectedPreviousOutpointIndex": 2,
+        "address": "kaspatest:preu326sv2t3l3vduv6eux3h25nqw84ytqp3rc8qu6n95qp2xk3nqc4andf69",
+        "type": "scripthash",
+        "amount": 2500000000,
+        "expectedAmount": 2500000000,
+        "prefix": "p",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
         "type": "pubkey",
         "amount": 2499995000,
         "prefix": "q"

@@ -1,0 +1,35 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "role-daa-expired-escrow",
+  "contract": "Escrow",
+  "fetchedAt": "2026-05-08T08:46:55.446Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+  "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+  "outputIndex": 2,
+  "amountTkas": 25,
+  "amountSompi": "2500000000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:preu326sv2t3l3vduv6eux3h25nqw84ytqp3rc8qu6n95qp2xk3nqc4andf69",
+  "scriptPublicKey": "aa20f3c8ab5062971fc58de3359e1a375526071ea4580311e0e0e6a65a002a35a33087",
+  "redeemScriptHex": "6b6c76009c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6900c2b9be028813949c6900c32054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669030000207c7e01ac7e876975516776519c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6903a04c5eb000c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975516776529c637578200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac69762054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac6900c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975755167750069686868",
+  "redeemScriptBytes": 350,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 6083195,
+  "explorerUrl": "https://tn12.kaspa.stream/txs/9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+  "raw": {
+    "address": "kaspatest:preu326sv2t3l3vduv6eux3h25nqw84ytqp3rc8qu6n95qp2xk3nqc4andf69",
+    "outpoint": {
+      "transactionId": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+      "index": 2
+    },
+    "utxoEntry": {
+      "amount": "2500000000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20f3c8ab5062971fc58de3359e1a375526071ea4580311e0e0e6a65a002a35a33087"
+      },
+      "blockDaaScore": "6083195",
+      "isCoinbase": false
+    }
+  }
+}

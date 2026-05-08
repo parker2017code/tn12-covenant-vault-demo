@@ -4,7 +4,7 @@
   "status": "active-operator-plan",
   "summary": {
     "done": 14,
-    "wip": 5,
+    "wip": 4,
     "next": 6,
     "later": 6
   },
@@ -113,7 +113,7 @@
     {
       "id": "role-separated-accepted-spends",
       "laneId": "escrow",
-      "detail": "TN12 accepted role-separated vault recovery, assurance release, and escrow seller release from those distinct-role outputs."
+      "detail": "TN12 accepted all seven role-separated positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel."
     }
   ],
   "wip": [
@@ -156,11 +156,6 @@
       "proof": "generated-artifact",
       "detail": "Turn policy templates into constrained spend drafts with role separation.",
       "next": "Add exact UTXO provenance and constrained spend draft planning."
-    },
-    {
-      "id": "remaining-role-separated-paths",
-      "laneId": "escrow",
-      "detail": "Fresh role-separated outputs are needed for vault withdrawal, assurance refund, escrow refund, and escrow cancel because the first pass consumed one output per contract."
     }
   ],
   "next": [
@@ -175,9 +170,9 @@
       "detail": "Create the first durable replay storage schema and fixture-backed replay runner."
     },
     {
-      "id": "role-separated-second-funding",
+      "id": "role-separated-invalid-candidates",
       "laneId": "escrow",
-      "detail": "Fund another role-separated batch for the mutually exclusive withdrawal, refund, and cancel paths."
+      "detail": "Build explicit wrong-signer, wrong-selector, wrong-output, and wrong-amount candidates before any TN12 rejection attempt."
     },
     {
       "id": "attestation-reputation",

@@ -1,0 +1,35 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "role-daa-expired-vault",
+  "contract": "DelayedRecoveryVault",
+  "fetchedAt": "2026-05-08T08:46:54.540Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+  "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+  "outputIndex": 0,
+  "amountTkas": 25,
+  "amountSompi": "2500000000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:ppt9cjpnxkmqgqelmm0qw0ezvxfna4dr3t4mrxx4mg4zjr42rp43ucmjuc4pu",
+  "scriptPublicKey": "aa20565c483335b604033fdede073f2261933ed5a38aebb198d5da2a290eaa186b1e87",
+  "redeemScriptHex": "6b6c76009c63757620d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185ac6903a04c5eb000c2b9be028813949c6900c320d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185030000207c7e01ac7e876975516776519c63757620e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac6900c2b9be028813949c6900c320e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9030000207c7e01ac7e87697551677500696868",
+  "redeemScriptBytes": 212,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 6083195,
+  "explorerUrl": "https://tn12.kaspa.stream/txs/9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+  "raw": {
+    "address": "kaspatest:ppt9cjpnxkmqgqelmm0qw0ezvxfna4dr3t4mrxx4mg4zjr42rp43ucmjuc4pu",
+    "outpoint": {
+      "transactionId": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "2500000000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20565c483335b604033fdede073f2261933ed5a38aebb198d5da2a290eaa186b1e87"
+      },
+      "blockDaaScore": "6083195",
+      "isCoinbase": false
+    }
+  }
+}

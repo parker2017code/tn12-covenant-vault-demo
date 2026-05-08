@@ -2,32 +2,7 @@
   "schema": "tn12-role-separated-accepted-proof-transactions/v1",
   "network": "kaspa-testnet-12",
   "source": "https://api-tn12.kaspa.org/transactions/{transaction-id}",
-  "note": "Role-separated proof pass. These transactions use distinct role keys and separate accepted contract outputs from the historical seven-proof fixture.",
-  "funding": {
-    "label": "Role-separated contract funding",
-    "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-    "acceptingBlockBlueScore": 6070948,
-    "outputs": [
-      {
-        "label": "role-separated vault",
-        "outputIndex": 0,
-        "amountSompi": "2500000000",
-        "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
-      },
-      {
-        "label": "role-separated assurance",
-        "outputIndex": 1,
-        "amountSompi": "2500000000",
-        "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r"
-      },
-      {
-        "label": "role-separated escrow",
-        "outputIndex": 2,
-        "amountSompi": "2500000000",
-        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
-      }
-    ]
-  },
+  "note": "Role-separated proof passes. These transactions use distinct role keys and separate accepted contract outputs from the historical seven-proof fixture.",
   "transactions": [
     {
       "label": "Role-separated vault recovery",
@@ -70,18 +45,169 @@
       "amountSompi": "2499995000",
       "destination": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
       "roleCheck": "signed by escrowBuyer and paid to escrowSeller"
+    },
+    {
+      "label": "Role-separated escrow cancel",
+      "lane": "role-escrow",
+      "entrypoint": "cancel",
+      "txid": "677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa",
+      "source": {
+        "txid": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+        "outputIndex": 2,
+        "amountSompi": "2500000000"
+      },
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "roleCheck": "signed by escrowBuyer and escrowSeller through JSON wRPC with tx v1 computeBudget"
+    },
+    {
+      "label": "Role-separated DAA vault withdrawal",
+      "lane": "role-vault",
+      "entrypoint": "withdraw",
+      "txid": "cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11",
+      "source": {
+        "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "outputIndex": 0,
+        "amountSompi": "2500000000"
+      },
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qrf4mghfz4e8tz8w9zkvvulxl3treqp5l6uxedrm9uk0w7cx43sc2eenqdzkg",
+      "roleCheck": "signed by vaultOwner and paid to vaultOwner with DAA lockTime 6180001"
+    },
+    {
+      "label": "Role-separated DAA assurance refund",
+      "lane": "role-assurance",
+      "entrypoint": "refund",
+      "txid": "a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa",
+      "source": {
+        "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "outputIndex": 1,
+        "amountSompi": "2500000000"
+      },
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "roleCheck": "signed by pledgeContributor and paid to pledgeContributor with DAA lockTime 6180001"
+    },
+    {
+      "label": "Role-separated DAA escrow refund",
+      "lane": "role-escrow",
+      "entrypoint": "refund",
+      "txid": "7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0",
+      "source": {
+        "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+        "outputIndex": 2,
+        "amountSompi": "2500000000"
+      },
+      "amountSompi": "2499995000",
+      "destination": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "roleCheck": "signed by escrowBuyer and paid to escrowBuyer with DAA lockTime 6180001"
     }
   ],
-  "historicalRejectedAttempt": {
-    "label": "Role-separated vault recovery with two-sigop budget",
-    "txid": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
-    "result": "rejected before correction",
-    "reason": "script ran, but verification failed",
-    "correction": "recover(sig recoverySig) has one checkSig; the accepted retry used sigOpCount: 1."
-  },
-  "remainingMutuallyExclusivePaths": [
-    "role-vault-withdrawal needs a fresh role-separated vault output because recovery consumed output 0.",
-    "role-assurance-refund needs a fresh role-separated assurance output because release consumed output 1.",
-    "role-escrow-refund and role-escrow-cancel need fresh role-separated escrow outputs because release consumed output 2."
+  "remainingMutuallyExclusivePaths": [],
+  "fundingBatches": [
+    {
+      "label": "Role-separated contract funding",
+      "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "acceptingBlockBlueScore": 6070948,
+      "outputs": [
+        {
+          "label": "role-separated vault",
+          "outputIndex": 0,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
+        },
+        {
+          "label": "role-separated assurance",
+          "outputIndex": 1,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r"
+        },
+        {
+          "label": "role-separated escrow",
+          "outputIndex": 2,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+        }
+      ]
+    },
+    {
+      "label": "Role-separated Unix-time expired funding",
+      "txid": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+      "acceptingBlockBlueScore": 6081823,
+      "purpose": "Accepted funding for a bad-time fixture attempt; timed spends were rejected as not finalized because the constructor used Unix seconds instead of a DAA-style lock value.",
+      "outputs": [
+        {
+          "label": "role-expired vault",
+          "outputIndex": 0,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:pzqgns9k6l7gl0kjwsw2ng8ulw5938yfqdgxw75fu6ahkhqa64mw243a9frqq"
+        },
+        {
+          "label": "role-expired assurance",
+          "outputIndex": 1,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:pr33ceckm70tkfyd0csua5xh5rr6576enttrgenpkl7qqnx4x70sxhhuhw5la"
+        },
+        {
+          "label": "role-expired escrow",
+          "outputIndex": 2,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:pzve3j6zyxv0jqcu8tug8kped3s7g6vlp4k73d8gkpa2wxnth0n0g2s0pvhne"
+        }
+      ]
+    },
+    {
+      "label": "Role-separated DAA-expired funding",
+      "txid": "9b4210c4afa75eda5c1200523706676bc0e442c597ee0f15200ad0fe8943cc06",
+      "acceptingBlockBlueScore": 6083195,
+      "purpose": "Accepted funding for DAA-expired timed-path spends.",
+      "outputs": [
+        {
+          "label": "role-daa-expired vault",
+          "outputIndex": 0,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:ppt9cjpnxkmqgqelmm0qw0ezvxfna4dr3t4mrxx4mg4zjr42rp43ucmjuc4pu"
+        },
+        {
+          "label": "role-daa-expired assurance",
+          "outputIndex": 1,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:pqpetf2gr8nz8cyfrqewaqna7gf67u6s8mwpk0cz6j4jd6uq7ejez0efrg8yx"
+        },
+        {
+          "label": "role-daa-expired escrow",
+          "outputIndex": 2,
+          "amountSompi": "2500000000",
+          "address": "kaspatest:preu326sv2t3l3vduv6eux3h25nqw84ytqp3rc8qu6n95qp2xk3nqc4andf69"
+        }
+      ]
+    }
+  ],
+  "historicalRejectedAttempts": [
+    {
+      "label": "Role-separated vault recovery with two-sigop budget",
+      "txid": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "result": "rejected before correction",
+      "reason": "script ran, but verification failed",
+      "correction": "recover(sig recoverySig) has one checkSig; the accepted retry used sigOpCount: 1."
+    },
+    {
+      "label": "Role-separated Unix-time expired timed spends",
+      "txids": [
+        "086c3f11e3b2188f03a6cd42130c9d3faf3ff4099bcb40f5004f0083aa5ba025",
+        "9e9f5cb3472033e703ec17153f725e3fe9dc7f2bcefcdc14d89912d45272ea16",
+        "d4274b05f9c88369efd010b0308f10f2fcbe79efbfc5f69f1957630294753b6a"
+      ],
+      "result": "rejected before DAA correction",
+      "reason": "transaction input #0 is not finalized",
+      "correction": "Use a DAA-style constructor lock value and a finalized DAA lockTime, not Unix seconds."
+    },
+    {
+      "label": "Role-separated escrow cancel over REST",
+      "txid": "d9ec0c83299df649d42acd482b7a685f34602db31a7554b14c260c35de1818c1",
+      "result": "REST schema rejected tx v1 input shape",
+      "reason": "sigOpCount field required by REST schema",
+      "correction": "Rebuild with local TN12 kaspa-wasm and submit tx v1 computeBudget over JSON wRPC."
+    }
   ]
 }
