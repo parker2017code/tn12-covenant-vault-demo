@@ -49,6 +49,8 @@
         "hasOutpoint": true,
         "hasAcceptedTxid": true,
         "meetsMinimum": true,
+        "duplicateOutpoint": false,
+        "duplicateAcceptedTxid": false,
         "problems": []
       }
     },
@@ -71,6 +73,8 @@
         "hasOutpoint": true,
         "hasAcceptedTxid": true,
         "meetsMinimum": true,
+        "duplicateOutpoint": false,
+        "duplicateAcceptedTxid": false,
         "problems": []
       }
     },
@@ -93,6 +97,8 @@
         "hasOutpoint": true,
         "hasAcceptedTxid": true,
         "meetsMinimum": true,
+        "duplicateOutpoint": false,
+        "duplicateAcceptedTxid": false,
         "problems": []
       }
     },
@@ -115,6 +121,8 @@
         "hasOutpoint": true,
         "hasAcceptedTxid": false,
         "meetsMinimum": true,
+        "duplicateOutpoint": false,
+        "duplicateAcceptedTxid": false,
         "problems": []
       }
     },
@@ -137,6 +145,8 @@
         "hasOutpoint": true,
         "hasAcceptedTxid": false,
         "meetsMinimum": false,
+        "duplicateOutpoint": false,
+        "duplicateAcceptedTxid": false,
         "problems": [
           "below minimum pledge of 10 TKAS"
         ]

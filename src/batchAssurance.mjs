@@ -1,7 +1,8 @@
 export function buildBatchAssuranceState(fixture = {}) {
   const campaign = normalizeCampaign(fixture.campaign || {});
   const pledges = (fixture.pledgeOutputs || []).map(normalizePledge);
-  const reviewedPledges = pledges.map((pledge) => reviewPledge({ pledge, campaign }));
+  const duplicateMap = buildDuplicateMap(pledges);
+  const reviewedPledges = pledges.map((pledge) => reviewPledge({ pledge, campaign, duplicateMap }));
   const acceptedPledges = reviewedPledges.filter((pledge) => pledge.review.countsTowardRelease);
   const pendingPledges = reviewedPledges.filter((pledge) => pledge.review.countsTowardPlanned && !pledge.review.countsTowardRelease);
   const rejectedPledges = reviewedPledges.filter((pledge) => pledge.review.status !== "eligible" && !pledge.review.countsTowardPlanned);
@@ -78,18 +79,23 @@ function normalizePledge(pledge) {
   };
 }
 
-function reviewPledge({ pledge, campaign }) {
+function reviewPledge({ pledge, campaign, duplicateMap }) {
   const hasOutpoint = isHex64(pledge.outpoint.txid);
   const hasAcceptedTxid = isHex64(pledge.acceptedTxid);
   const acceptedStatus = pledge.status === "accepted-output-imported" || pledge.status === "accepted-payload-indexed";
   const signedOnlyStatus = pledge.status === "signed-not-submitted" || pledge.status === "draft";
   const meetsMinimum = pledge.amountTkas >= campaign.minimumPledgeTkas;
-  const countsTowardRelease = acceptedStatus && hasOutpoint && meetsMinimum;
+  const duplicateOutpoint = hasOutpoint && duplicateMap.outpoints.get(outpointKey(pledge.outpoint)) > 1;
+  const duplicateAcceptedTxid = hasAcceptedTxid && duplicateMap.acceptedTxids.get(pledge.acceptedTxid) > 1;
+  const duplicateAcceptedSource = duplicateOutpoint || duplicateAcceptedTxid;
+  const countsTowardRelease = acceptedStatus && hasOutpoint && meetsMinimum && !duplicateAcceptedSource;
   const countsTowardPlanned = countsTowardRelease || (signedOnlyStatus && meetsMinimum);
   const problems = [
     !meetsMinimum ? `below minimum pledge of ${campaign.minimumPledgeTkas} TKAS` : "",
     acceptedStatus && !hasOutpoint ? "accepted pledge is missing a valid source outpoint" : "",
-    pledge.status === "accepted-payload-indexed" && !hasAcceptedTxid ? "accepted payload pledge is missing accepted txid" : ""
+    pledge.status === "accepted-payload-indexed" && !hasAcceptedTxid ? "accepted payload pledge is missing accepted txid" : "",
+    duplicateOutpoint ? "duplicate accepted source outpoint" : "",
+    duplicateAcceptedTxid ? "duplicate accepted txid" : ""
   ].filter(Boolean);
 
   return {
@@ -101,9 +107,33 @@ function reviewPledge({ pledge, campaign }) {
       hasOutpoint,
       hasAcceptedTxid,
       meetsMinimum,
+      duplicateOutpoint,
+      duplicateAcceptedTxid,
       problems
     }
   };
+}
+
+function buildDuplicateMap(pledges) {
+  const outpoints = new Map();
+  const acceptedTxids = new Map();
+  for (const pledge of pledges) {
+    if (isHex64(pledge.outpoint.txid)) {
+      increment(outpoints, outpointKey(pledge.outpoint));
+    }
+    if (isHex64(pledge.acceptedTxid)) {
+      increment(acceptedTxids, pledge.acceptedTxid);
+    }
+  }
+  return { outpoints, acceptedTxids };
+}
+
+function outpointKey(outpoint) {
+  return `${outpoint.txid}:${outpoint.index}`;
+}
+
+function increment(map, key) {
+  map.set(key, (map.get(key) || 0) + 1);
 }
 
 function buildReleasePlan({ campaign, acceptedPledges, acceptedTargetMet, remainingAcceptedTkas }) {

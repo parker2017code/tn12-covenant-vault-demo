@@ -71,6 +71,24 @@ assert.equal(payloadOnlyCustodyDrafts.status, "custody-draft-blocked");
 assert.equal(payloadOnlyCustodyDrafts.summary.eligibleInputCount, 0);
 assert.equal(payloadOnlyCustodyDrafts.releaseDraft.status, "blocked-until-custody-inputs-match");
 
+const duplicatePledgeCampaign = buildBatchAssuranceState({
+  ...campaignFixture,
+  pledgeOutputs: [
+    ...campaignFixture.pledgeOutputs,
+    {
+      ...campaignFixture.pledgeOutputs[0],
+      pledgeId: "pledge-docs-duplicate-source"
+    }
+  ]
+});
+assert.equal(duplicatePledgeCampaign.summary.acceptedTkas, 55);
+assert.equal(duplicatePledgeCampaign.summary.acceptedTargetMet, false);
+assert.equal(duplicatePledgeCampaign.summary.releaseStatus, "release-not-ready");
+assert.ok(duplicatePledgeCampaign.pledges.some((pledge) =>
+  pledge.pledgeId === "pledge-docs-duplicate-source"
+  && pledge.review.problems.includes("duplicate accepted source outpoint")
+));
+
 const invoiceFixture = JSON.parse(await readFile(new URL("../fixtures/InvoiceReceipts.json", import.meta.url), "utf8"));
 const mismatchedReceiptRegistry = buildInvoiceRegistry({
   ...invoiceFixture,
