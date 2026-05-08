@@ -3,7 +3,7 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 8,
+    "done": 9,
     "wip": 4,
     "next": 6,
     "later": 6
@@ -84,6 +84,11 @@
       "id": "indexer-replay-plan",
       "laneId": "payload-invoice",
       "detail": "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface."
+    },
+    {
+      "id": "based-rollup-scout",
+      "laneId": "defi-research",
+      "detail": "The scout artifact records that current TN12 work does not use an L2, while core-migratable based rollups remain worth tracking for later."
     }
   ],
   "wip": [
@@ -155,9 +160,9 @@
       "detail": "Wire the wallet-submit package into a live no-local-key wallet flow."
     },
     {
-      "id": "based-rollup-scout",
+      "id": "rollup-bridge-brief",
       "laneId": "defi-research",
-      "detail": "Map available based-rollup endpoints, bridge model, tooling, and one tiny app target."
+      "detail": "Map entry, transfer, exit, claim, proof, and state-root responsibilities from core and core-adjacent references."
     }
   ],
   "later": [

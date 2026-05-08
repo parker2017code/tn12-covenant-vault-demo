@@ -98,6 +98,7 @@ Done now:
 - Escrow, vault, and assurance proof spends: seven accepted TN12 proof spends, guarded by `npm run check:tn12`.
 - Payload app state: 26 accepted TN12 JSON wRPC payload events, with REST no-payload evidence preserved as historical.
 - Browser/repo control surface: submit registry, wallet-review readiness, wallet-connector spec, checkpointed accepted index, and operator plan.
+- Based-rollup scouting: `npm run rollup:scout` tracks Maxim's TN12 PoC, Hans' vProgs/runtime lane, Michael's covenant++ roadmap, and next endpoint/bridge/app scouting tasks.
 - Prediction/hedge: accepted review payloads plus a simulator; no settlement, odds, custody, or advice.
 
 WIP now:

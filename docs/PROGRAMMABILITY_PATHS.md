@@ -51,3 +51,13 @@ Build in this order:
 5. Add vProg readiness only as public inputs, state roots, bridge exits, native-asset assumptions, and inter-covenant assumptions.
 
 Do not call a planner, simulator, or rollup experiment a protocol guarantee. Label each surface by what is actually verified.
+
+## Current Repo Action
+
+Run:
+
+```sh
+npm run rollup:scout
+```
+
+This writes `artifacts/based-rollup-scout.json`. It is the current project map for Maxim's PoC, Hans' runtime work, Michael's roadmap framing, and the next scouting tasks.

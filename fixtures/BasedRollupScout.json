@@ -1,0 +1,116 @@
+{
+  "schema": "tn12-based-rollup-scout-fixture/v1",
+  "reviewedAt": "2026-05-08",
+  "status": "scouting-not-deployment",
+  "currentDecision": {
+    "needsProductionReadinessAnswerNow": false,
+    "usingIgra": false,
+    "usingKasplex": false,
+    "usingAnyL2Now": false,
+    "considerCoreMigratableRollup": true,
+    "whenItMatters": "After wallet submit, accepted pledge-output custody, and durable indexing are working, or when a specific app requires richer execution than direct L1 covenant flows."
+  },
+  "sources": [
+    {
+      "id": "michael-covpp-rnd",
+      "name": "Michael Sutton covenant++ / vProgs notes",
+      "url": "https://gist.github.com/michaelsutton/5bd9ab358f692ee4f54ce2842a0815d1",
+      "role": "staged roadmap for inline zk covenants, based zk covenants, canonical bridge, native assets / ICC, and vProgs"
+    },
+    {
+      "id": "kaspa-toccata-outlook",
+      "name": "Kaspa Toccata hard fork outlook",
+      "url": "https://kaspa.org/toccata-hard-fork-kaspa-covenants/",
+      "role": "public summary of Toccata L1 covenants, zk opcodes, sequencing commitments, and vProg boundary"
+    },
+    {
+      "id": "maxim-rollup-poc",
+      "name": "Maxim based zk covenant rollup coverage",
+      "url": "https://kasmedia.com/article/real-time-bitcoin",
+      "role": "reports the TN12 based zk covenant rollup PoC with canonical KAS bridge mechanics"
+    },
+    {
+      "id": "kaspa-research-based-rollups",
+      "name": "Based ZK rollups over Kaspa design thread",
+      "url": "https://research.kas.pa/t/on-the-design-of-based-zk-rollups-over-kaspas-utxo-based-dag-consensus/208",
+      "role": "design background for L1-sequenced payload actions and off-chain execution"
+    }
+  ],
+  "contributors": [
+    {
+      "id": "maxim-biryukov",
+      "name": "Maxim Biryukov",
+      "observedWork": "Concrete based zk covenant rollup PoC and canonical KAS bridge mechanics on TN12.",
+      "repoImpact": "Use as the closest reference for bridge, entry, transfer, exit, state-root, and proof-flow scouting.",
+      "status": "poc-reference"
+    },
+    {
+      "id": "hans-moog",
+      "name": "Hans Moog",
+      "observedWork": "vProgs runtime and proving direction rather than a finished production based rollup.",
+      "repoImpact": "Use as the reference lane for future runtime, proving, state, and composability assumptions.",
+      "status": "runtime-reference"
+    },
+    {
+      "id": "michael-sutton",
+      "name": "Michael Sutton",
+      "observedWork": "Covenant++ / vProgs roadmap, sequencing commitments, and based rollup design direction.",
+      "repoImpact": "Use as the boundary source for what is current Toccata, what is standalone zk app, and what remains vProg roadmap.",
+      "status": "roadmap-reference"
+    }
+  ],
+  "capabilityChanges": [
+    {
+      "id": "no-change-to-current-proofs",
+      "timeframe": "now",
+      "effect": "Does not change the accepted L1 covenant proof or payload state already in this repo."
+    },
+    {
+      "id": "new-scouting-lane",
+      "timeframe": "now",
+      "effect": "Adds a based-rollup scouting lane for endpoints, bridge model, tooling, wallet path, and one tiny app."
+    },
+    {
+      "id": "richer-execution",
+      "timeframe": "later",
+      "effect": "Can support richer state machines, EVM-style app logic, stable-value flows, and DeFi prototypes around L1 settlement."
+    },
+    {
+      "id": "not-our-first-infra-build",
+      "timeframe": "later",
+      "effect": "Building our own rollup stack is a separate infrastructure project; first build on or study an available stack."
+    }
+  ],
+  "nextActions": [
+    {
+      "id": "collect-rollup-repos",
+      "status": "next",
+      "detail": "Locate the public PoC branch/book, vProgs repo, and any available rollup endpoints or demos."
+    },
+    {
+      "id": "bridge-model-brief",
+      "status": "next",
+      "detail": "Map entry, transfer, exit, claim/outbox, proof verification, and state-root update responsibilities."
+    },
+    {
+      "id": "tiny-app-target",
+      "status": "next",
+      "detail": "Pick one small app that can compare L1 covenant settlement against rollup execution state."
+    },
+    {
+      "id": "do-not-block-tn12",
+      "status": "active-rule",
+      "detail": "Keep current TN12 L1 covenant work moving while rollup scouting stays separate."
+    },
+    {
+      "id": "no-l2-dependency",
+      "status": "active-rule",
+      "detail": "Do not depend on Igra, Kasplex, or any L2 for current repo proofs, custody work, wallet submit, or accepted-state indexing."
+    },
+    {
+      "id": "core-migratable-rollup-exception",
+      "status": "future-consideration",
+      "detail": "If core or core-adjacent work provides a based rollup path that is explicitly migratable to vProgs, evaluate it as a future deployment lane."
+    }
+  ]
+}

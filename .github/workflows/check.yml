@@ -18,7 +18,16 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+
       - run: npx playwright install --with-deps chromium
+        timeout-minutes: 10
       - run: npm run check:all
 
   tn12-verify:

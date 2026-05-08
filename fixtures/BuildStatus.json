@@ -194,10 +194,14 @@
       "proof": "generated-artifact",
       "builtSurface": [
         "fixtures/CrossChainResearchLibrary.json",
+        "fixtures/BasedRollupScout.json",
         "src/appResearch.mjs",
-        "npm run research:library"
+        "src/basedRollupScout.mjs",
+        "npm run research:library",
+        "npm run rollup:scout",
+        "artifacts/based-rollup-scout.json"
       ],
-      "next": "Turn top candidates into one-page app briefs before copying code."
+      "next": "Turn top candidates into one-page app briefs before copying code. Scout based-rollup endpoints, bridge mechanics, and one tiny app without blocking TN12 L1 covenant work."
     },
     {
       "order": 11,

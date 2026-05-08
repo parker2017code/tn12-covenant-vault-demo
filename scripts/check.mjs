@@ -64,6 +64,7 @@ import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.m
 import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
+import { buildBasedRollupScout } from "../src/basedRollupScout.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProjectPlan } from "../src/projectPlan.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
@@ -237,6 +238,28 @@ assert.equal(researchLibrary.summary.lanes.roadmap, 4);
 assert.equal(researchLibrary.summary.lanes.research, 4);
 assert.ok(researchLibrary.candidates.some((candidate) => candidate.id === "uniswap-amm"));
 assert.ok(researchLibrary.candidates.some((candidate) => candidate.id === "wallet-api-send" && candidate.priority === "build-now"));
+const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
+const rollupScout = buildBasedRollupScout(rollupScoutFixture);
+assert.equal(rollupScout.status, "scouting-not-deployment");
+assert.equal(rollupScout.summary.sourceCount, 4);
+assert.equal(rollupScout.summary.contributorCount, 3);
+assert.equal(rollupScout.summary.nextActions, 3);
+assert.equal(rollupScout.conclusion.changesCurrentTn12Work, false);
+assert.equal(rollupScout.conclusion.changesFuturePlan, true);
+assert.equal(rollupScout.conclusion.needsProductionReadinessAnswerNow, false);
+assert.equal(rollupScout.conclusion.usingIgra, false);
+assert.equal(rollupScout.conclusion.usingKasplex, false);
+assert.equal(rollupScout.conclusion.usingAnyL2Now, false);
+assert.equal(rollupScout.conclusion.considerCoreMigratableRollup, true);
+assert.match(rollupScout.conclusion.whenItMatters, /After wallet submit/);
+assert.ok(rollupScout.contributors.some((contributor) =>
+  contributor.id === "maxim-biryukov"
+  && contributor.status === "poc-reference"
+));
+assert.ok(rollupScout.contributors.some((contributor) =>
+  contributor.id === "hans-moog"
+  && contributor.status === "runtime-reference"
+));
 const campaignFixture = JSON.parse(await readFile(new URL("../fixtures/BatchAssuranceCampaign.json", import.meta.url), "utf8"));
 const campaignState = buildBatchAssuranceState(campaignFixture);
 assert.equal(campaignState.status, "app-layer-campaign-planner-not-pooled-covenant");
@@ -413,12 +436,13 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 8);
+assert.equal(projectPlan.summary.done, 9);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 6);
 assert.equal(projectPlan.summary.later, 6);
 assert.ok(projectPlan.next.some((item) => item.id === "wallet-connector-submit"));
-assert.ok(projectPlan.next.some((item) => item.id === "based-rollup-scout"));
+assert.ok(projectPlan.done.some((item) => item.id === "based-rollup-scout"));
+assert.ok(projectPlan.next.some((item) => item.id === "rollup-bridge-brief"));
 assert.ok(projectPlan.later.some((item) => item.id === "native-assets-and-stables"));
 assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
 assert.ok(projectPlan.longTermVision.some((item) => /wallet-reviewed Kaspa app console/.test(item)));
@@ -665,6 +689,7 @@ const files = [
   "scripts/build-wallet-connector-readiness.mjs",
   "scripts/build-wallet-submit-package.mjs",
   "scripts/build-research-library.mjs",
+  "scripts/build-based-rollup-scout.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
@@ -709,6 +734,7 @@ const files = [
   "artifacts/wallet-connector-readiness.json",
   "artifacts/wallet-submit-package.json",
   "artifacts/research-library.json",
+  "artifacts/based-rollup-scout.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
@@ -748,6 +774,7 @@ const files = [
   "fixtures/PayloadSubmitAttempt.json",
   "fixtures/SubmitConsoleDrafts.json",
   "fixtures/CrossChainResearchLibrary.json",
+  "fixtures/BasedRollupScout.json",
   "fixtures/BatchAssuranceCampaign.json",
   "fixtures/EnforcementMatrix.json",
   "fixtures/EscrowPrimitives.json",
@@ -775,6 +802,7 @@ const files = [
   "src/walletConnectorReadiness.mjs",
   "src/walletSubmitPackage.mjs",
   "src/appResearch.mjs",
+  "src/basedRollupScout.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
   "src/enforcementMatrix.mjs",
@@ -838,6 +866,7 @@ assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);
 assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run research:library/);
+assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);
 assert.match(readme, /npm run campaign:custody-requirements/);

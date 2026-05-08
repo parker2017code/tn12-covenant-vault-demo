@@ -59,6 +59,7 @@
     "stable:value": "node scripts/build-stable-value-paths.mjs",
     "stable:issuer": "node scripts/build-stable-issuer-redemptions.mjs",
     "agent:commitments": "node scripts/build-agent-commitments.mjs",
+    "rollup:scout": "node scripts/build-based-rollup-scout.mjs",
     "build:status": "node scripts/build-status.mjs",
     "project:plan": "node scripts/build-project-plan.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",

@@ -47,6 +47,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - When TN12, Silverscript, Rusty Kaspa, transaction signing, submit serialization, or covenant verification behavior remains unclear, first dig through the basic layers yourself: local artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK version/API shape, node/network id, and upstream Rusty Kaspa source/tests. Ask the user to get Michael's guidance only after those checks are exhausted or a precise external confirmation is genuinely needed. Include the exact txid, artifact path, endpoint response, source line, and smallest reproducer command.
 - Keep status lanes separate: live Kaspa mainnet, TN12/Toccata covenant work, roadmap vProgs/native app rails, and research-only ideas.
 - Keep rollup/vProg claims separate: Toccata gives L1 covenants and zk/sequencing foundations; based-rollup work is a separate execution lane; full synchronously composable vProgs remain roadmap until the interfaces are testable.
+- Use `npm run rollup:scout` / `artifacts/based-rollup-scout.json` for based-rollup planning. It treats Maxim's TN12 PoC as bridge/proof reference, Hans' work as runtime/proving direction, and ecosystem rollups as possible future app surfaces.
 - Do not edit or publish `/home/parker2017/kaspa-explained` from this repo unless explicitly asked.
 
 ## Current Next Work

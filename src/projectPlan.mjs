@@ -10,7 +10,8 @@ export function buildProjectPlan(fixture = {}) {
     laneItem(byId, "ai-agent-commitments", "Accepted task, proof, dispute, release, and hold payloads prove lifecycle state."),
     laneItem(byId, "defi-research", "Prediction/hedge review payloads are accepted while settlement remains out of scope."),
     action("custody-requirements", "Batch assurance now names the exact amount-matched pledge outputs needed before custody settlement.", "batch-assurance"),
-    action("indexer-replay-plan", "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface.", "payload-invoice")
+    action("indexer-replay-plan", "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface.", "payload-invoice"),
+    action("based-rollup-scout", "The scout artifact records that current TN12 work does not use an L2, while core-migratable based rollups remain worth tracking for later.", "defi-research")
   ];
 
   const wip = [
@@ -26,7 +27,7 @@ export function buildProjectPlan(fixture = {}) {
     action("covenant-negative-tests", "Add wrong-signer and wrong-script-argument checks for accepted proof lanes.", "escrow"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),
-    action("based-rollup-scout", "Map available based-rollup endpoints, bridge model, tooling, and one tiny app target.", "defi-research")
+    action("rollup-bridge-brief", "Map entry, transfer, exit, claim, proof, and state-root responsibilities from core and core-adjacent references.", "defi-research")
   ];
 
   const later = [
