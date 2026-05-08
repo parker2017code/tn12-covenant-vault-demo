@@ -228,6 +228,7 @@ Scripts:
 - accepted app-state builder,
 - persisted checkpoint guard,
 - wallet-review readiness builder,
+- wallet-connector readiness builder,
 - signal payload artifact builder.
 
 UI sections now include:
@@ -295,7 +296,7 @@ Current payload state:
 Next payload steps:
 
 1. Keep JSON wRPC as the verified payload receipt route and REST submit as historical no-payload evidence.
-2. Replace local signing with wallet review before any production-style receipt flow.
+2. Replace local signing with wallet review and the connector spec before any production-style receipt flow.
 3. Add duplicate-payment, stale-receipt, and refund/error state checks.
 4. Move from REST txid pulls to checkpointed accepted-transaction indexing later.
 
@@ -372,7 +373,7 @@ Current app build order:
 
 Recommended order from here:
 
-1. Add wallet-review flow for payload receipt submission.
+1. Add wallet-review and wallet-connector flow for payload receipt submission.
 2. Move accepted receipt indexing toward checkpointed node/RPC ingestion.
 3. Start assurance campaign batching: multiple pledge fixtures, campaign state, batch release/refund drafts.
 4. Add wallet-facing submit UI that displays exact inputs, outputs, fees, payload, and submit command before broadcast.

@@ -19,10 +19,10 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Indexer status: checkpointed known-txid public-read index covers 31 accepted TN12 records: 7 proof spends and 24 payload events.
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
-   - Current status: base built with wallet-review readiness artifact.
+   - Current status: base built with wallet-review readiness and wallet-connector spec artifacts.
    - Enforcement: wallet policy.
    - Mainnet potential: useful only after real wallet integration replaces local keys.
-   - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields.
+   - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` records connector requirements without reading local keys.
 
 3. Batch assurance campaigns: multi-pledge accepted progress, pending progress, release/refund planning.
    - Current status: accepted TN12 planner payload records.

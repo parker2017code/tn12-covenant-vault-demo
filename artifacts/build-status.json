@@ -43,10 +43,13 @@
         "fixtures/SubmitConsoleDrafts.json",
         "src/submitConsole.mjs",
         "src/walletReview.mjs",
+        "src/walletConnectorReadiness.mjs",
         "npm run wallet:review",
-        "npm run submit:registry"
+        "npm run wallet:connector",
+        "npm run submit:registry",
+        "artifacts/wallet-connector-readiness.json"
       ],
-      "next": "Move from local signed draft review to real wallet connector review."
+      "next": "Wire the connector spec to a real wallet flow that preserves exact transaction fields and payload bytes."
     },
     {
       "order": 3,

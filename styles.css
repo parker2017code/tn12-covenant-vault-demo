@@ -1120,6 +1120,7 @@ progress::-moz-progress-bar {
 }
 
 .wallet-review,
+.wallet-connector,
 .indexer-persistence,
 .receipt-events,
 .payload-draft-status {
@@ -1220,6 +1221,7 @@ progress::-moz-progress-bar {
 .receipt-card,
 .indexer-persistence article,
 .wallet-review article,
+.wallet-connector article,
 .receipt-events article,
 .payload-draft-status article {
   display: grid;
@@ -1259,6 +1261,7 @@ progress::-moz-progress-bar {
 .receipt-card span,
 .indexer-persistence article span,
 .wallet-review article span,
+.wallet-connector article span,
 .receipt-events article span,
 .payload-draft-status article span {
   width: fit-content;
@@ -1356,6 +1359,9 @@ progress::-moz-progress-bar {
 .wallet-review article strong,
 .wallet-review article p,
 .wallet-review article small,
+.wallet-connector article strong,
+.wallet-connector article p,
+.wallet-connector article small,
 .payload-draft-status article strong,
 .payload-draft-status article p,
 .payload-draft-status article small {
@@ -1390,6 +1396,7 @@ progress::-moz-progress-bar {
 .receipt-events article p,
 .indexer-persistence article p,
 .wallet-review article p,
+.wallet-connector article p,
 .payload-draft-status article p {
   margin: 0;
 }
@@ -1421,6 +1428,7 @@ progress::-moz-progress-bar {
 .receipt-card small,
 .indexer-persistence article small,
 .wallet-review article small,
+.wallet-connector article small,
 .receipt-events article small,
 .payload-draft-status article small {
   color: var(--muted);

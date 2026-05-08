@@ -297,9 +297,10 @@ Build the signed-draft review registry for the browser submit console:
 ```sh
 npm run submit:registry
 npm run wallet:review
+npm run wallet:connector
 ```
 
-The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. It does not read `.local/tn12-wallet.json` or expose private keys.
+The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact: network confirmation, exact transaction review, payload-preserving submit, no local keys, and explicit user action. It does not read `.local/tn12-wallet.json` or expose private keys.
 
 Build the cross-chain app research library:
 
@@ -449,7 +450,7 @@ It is intentionally not a broadcaster. It does not discover outputs, sign inputs
 
 1. Done: manual funding, outpoint fixtures, Silverscript compile artifacts, signed drafts, split funding, contract funding, vault recovery, vault delayed withdrawal, assurance release, assurance refund, and TN12 API verification.
 
-2. Done: wallet-review readiness artifact over the signed draft registry. Next: replace local signing with a real wallet connector while keeping exact input/output/payload review.
+2. Done: wallet-review readiness and wallet-connector spec artifacts over the signed draft registry. Next: replace local signing with a real wallet connector while keeping exact input/output/payload review.
 
 3. Done: batch assurance planner aggregation has accepted TN12 payload records for three pledges and a release-ready event. Next: build real custody release/refund drafts from pledge outputs before claiming settlement.
 

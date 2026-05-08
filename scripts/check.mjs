@@ -44,6 +44,7 @@ import {
 import { buildResearchLibrary } from "../src/appResearch.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
+import { buildWalletConnectorReadiness } from "../src/walletConnectorReadiness.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
@@ -172,6 +173,12 @@ assert.equal(walletReview.status, "wallet-review-ready");
 assert.equal(walletReview.summary.ready, 37);
 assert.equal(walletReview.summary.payloadRouteReady, 24);
 assert.equal(walletReview.summary.registrySecretFields, 0);
+const walletConnector = buildWalletConnectorReadiness(walletReview);
+assert.equal(walletConnector.status, "wallet-connector-spec-ready");
+assert.equal(walletConnector.summary.drafts, 37);
+assert.equal(walletConnector.summary.payloadDrafts, 24);
+assert.equal(walletConnector.summary.registrySecretFields, 0);
+assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "payload-preserving-submit"));
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -580,6 +587,7 @@ const files = [
   "scripts/build-invoice-registry.mjs",
   "scripts/build-submit-console-registry.mjs",
   "scripts/build-wallet-review-readiness.mjs",
+  "scripts/build-wallet-connector-readiness.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
@@ -619,6 +627,7 @@ const files = [
   "artifacts/signed-drafts/payload-error-self-send.json",
   "artifacts/submit-console-registry.json",
   "artifacts/wallet-review-readiness.json",
+  "artifacts/wallet-connector-readiness.json",
   "artifacts/research-library.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
@@ -679,6 +688,7 @@ const files = [
   "src/invoiceReceipt.mjs",
   "src/submitConsole.mjs",
   "src/walletReview.mjs",
+  "src/walletConnectorReadiness.mjs",
   "src/appResearch.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
@@ -737,6 +747,7 @@ assert.match(readme, /npm run tx:split/);
 assert.match(readme, /npm run invoice:registry/);
 assert.match(readme, /npm run submit:registry/);
 assert.match(readme, /npm run wallet:review/);
+assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);

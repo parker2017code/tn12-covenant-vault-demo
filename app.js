@@ -68,6 +68,7 @@ const payloadReadinessNode = document.querySelector("#payload-readiness");
 const submitSummaryNode = document.querySelector("#submit-summary");
 const submitDraftsNode = document.querySelector("#submit-drafts");
 const walletReviewNode = document.querySelector("#wallet-review");
+const walletConnectorNode = document.querySelector("#wallet-connector");
 const researchSummaryNode = document.querySelector("#research-summary");
 const researchCandidatesNode = document.querySelector("#research-candidates");
 const campaignSummaryNode = document.querySelector("#campaign-summary");
@@ -237,6 +238,7 @@ renderInvoiceApp();
 renderPayloadSubmitReadiness();
 renderSubmitConsole();
 renderWalletReview();
+renderWalletConnector();
 renderMasterRoadmap();
 renderResearchLibrary();
 renderBuildQueue();
@@ -1066,6 +1068,29 @@ async function renderWalletReview() {
     `;
   } catch (error) {
     walletReviewNode.textContent = `Wallet review readiness unavailable: ${error.message}`;
+  }
+}
+
+async function renderWalletConnector() {
+  if (!walletConnectorNode) return;
+
+  try {
+    const response = await fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" });
+    const readiness = await response.json();
+    const capabilities = (readiness.requiredWalletCapabilities || [])
+      .map((capability) => `${capability.id}: ${capability.status}`)
+      .join("; ");
+
+    walletConnectorNode.innerHTML = `
+      <article>
+        <span>${escapeHtml(readiness.status)}</span>
+        <strong>${escapeHtml(readiness.summary.drafts)} drafts, ${escapeHtml(readiness.summary.payloadDrafts)} payload drafts</strong>
+        <p>Connector spec requires network confirmation, exact transaction review, payload-preserving submit, no local keys, and explicit user action.</p>
+        <small>${escapeHtml(capabilities)}</small>
+      </article>
+    `;
+  } catch (error) {
+    walletConnectorNode.textContent = `Wallet connector readiness unavailable: ${error.message}`;
   }
 }
 

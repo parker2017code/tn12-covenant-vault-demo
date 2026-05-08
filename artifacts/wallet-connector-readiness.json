@@ -1,0 +1,67 @@
+{
+  "schema": "tn12-wallet-connector-readiness/v1",
+  "network": "kaspa-testnet-12",
+  "status": "wallet-connector-spec-ready",
+  "summary": {
+    "drafts": 37,
+    "payloadDrafts": 24,
+    "blockedDrafts": 0,
+    "registrySecretFields": 0,
+    "payloadRouteReady": true,
+    "specReady": true
+  },
+  "requiredWalletCapabilities": [
+    {
+      "id": "network-confirmation",
+      "status": "required",
+      "detail": "Display and enforce kaspa-testnet-12 before signing."
+    },
+    {
+      "id": "exact-transaction-review",
+      "status": "required",
+      "detail": "Show inputs, outputs, fees, lock time, transaction version, and payload bytes."
+    },
+    {
+      "id": "payload-preserving-submit",
+      "status": "required",
+      "detail": "Submit payload transactions through a route that preserves transaction payload bytes."
+    },
+    {
+      "id": "local-secret-exclusion",
+      "status": "ready",
+      "detail": "The published registry must not contain private keys, mnemonics, seeds, or secret fields."
+    },
+    {
+      "id": "explicit-user-action",
+      "status": "required",
+      "detail": "The wallet connector must require a user action before signing or broadcasting."
+    }
+  ],
+  "draftClasses": [
+    {
+      "class": "contract-proof",
+      "total": 12,
+      "payloadDrafts": 0,
+      "reviewReady": 12
+    },
+    {
+      "class": "funding",
+      "total": 1,
+      "payloadDrafts": 0,
+      "reviewReady": 1
+    },
+    {
+      "class": "payload-app-state",
+      "total": 24,
+      "payloadDrafts": 24,
+      "reviewReady": 24
+    }
+  ],
+  "blockedDrafts": [],
+  "boundaries": [
+    "This is a connector specification artifact, not a live wallet integration.",
+    "The browser must not read `.local/tn12-wallet.json` or any private key material.",
+    "Payload drafts need a wallet or wRPC submit path that preserves payload bytes; public REST submit remains blocked for payload receipts.",
+    "Contract spend drafts need the wallet to preserve exact transaction fields, including version 1 compute budget where present."
+  ]
+}

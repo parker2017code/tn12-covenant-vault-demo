@@ -57,6 +57,8 @@ Submit/draft review:
 
 - `fixtures/SubmitConsoleDrafts.json`
 - `artifacts/submit-console-registry.json`
+- `artifacts/wallet-review-readiness.json`
+- `artifacts/wallet-connector-readiness.json`
 - `artifacts/signed-drafts/*.json`
 
 Do not inspect or request `.local/tn12-wallet.json`. It is local testnet wallet material and is intentionally gitignored.
