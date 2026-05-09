@@ -126,8 +126,8 @@ The following are already done at the proof-lab level:
 These are active work items, not future fantasies:
 
 1. Live external wallet submit.
-   - Built: review package, request format, adapter dry-run, submit ledger, result validation, KasSigner/KasSee reference.
-   - Missing: real external adapter or wallet path that signs/submits without `.local` keys and preserves payload bytes plus tx v1 `computeBudget`.
+   - Built: review package, request format, adapter dry-run, submit ledger, result validation, external-signer gap artifact, KasSigner/KasSee reference.
+   - Missing: unsigned or partial transaction requests plus a real external adapter or wallet path that signs/submits without `.local` keys and preserves payload bytes plus tx v1 `computeBudget`.
    - Done when: a returned txid is validated against the original review fingerprint and accepted evidence promotes it from pending to accepted.
 
 2. Durable virtual-chain indexer.

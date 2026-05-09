@@ -59,6 +59,7 @@
     "wallet:adapter-run": "node scripts/build-wallet-connector-adapter-run.mjs",
     "wallet:submit-ledger": "node scripts/build-wallet-connector-submit-ledger.mjs",
     "wallet:result-validation": "node scripts/build-wallet-submit-result-validation.mjs",
+    "wallet:external-signer-gap": "node scripts/build-wallet-external-signer-gap.mjs",
     "research:library": "node scripts/build-research-library.mjs",
     "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",
     "campaign:custody": "node scripts/build-batch-assurance-custody-drafts.mjs",

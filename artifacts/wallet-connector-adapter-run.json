@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-connector-adapter-run/v1",
   "network": "kaspa-testnet-12",
-  "runAt": "2026-05-09T12:33:54.864Z",
+  "runAt": "2026-05-09T12:54:12.141Z",
   "status": "adapter-dry-run-ready",
   "summary": {
     "requests": 47,
@@ -36,7 +36,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -80,7 +80,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -124,7 +124,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -168,7 +168,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -212,7 +212,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -256,7 +256,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -300,7 +300,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -344,7 +344,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -388,7 +388,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -432,7 +432,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -476,7 +476,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -520,7 +520,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -564,7 +564,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -608,7 +608,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -652,7 +652,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -696,7 +696,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -740,7 +740,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -784,7 +784,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -828,7 +828,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -872,7 +872,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -916,7 +916,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -960,7 +960,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -1004,7 +1004,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -1048,7 +1048,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -1092,7 +1092,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -1136,7 +1136,7 @@
       "lane": "tn12-signed-payload-receipt-draft/v1",
       "class": "payload-app-state",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
       "route": "payload-preserving-wallet-or-json-wrpc",
       "payload": {
@@ -1180,7 +1180,7 @@
       "lane": "tn12-signed-split-draft/v1",
       "class": "funding",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1223,7 +1223,7 @@
       "lane": "role-separated-funding",
       "class": "funding",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1266,7 +1266,7 @@
       "lane": "vault-withdrawal",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1310,7 +1310,7 @@
       "lane": "vault-recovery",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1354,7 +1354,7 @@
       "lane": "assurance-release",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1398,7 +1398,7 @@
       "lane": "assurance-refund",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1442,7 +1442,7 @@
       "lane": "escrow-release",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1486,7 +1486,7 @@
       "lane": "escrow-refund",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1530,7 +1530,7 @@
       "lane": "escrow-cancel",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1574,7 +1574,7 @@
       "lane": "vault-recovery",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "6c3873c7374e6cd9cd1cdfdd5aab81222d3fb6090e3ec9ff512f42579a4f4c4c",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1618,7 +1618,7 @@
       "lane": "vault-withdrawal",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1662,7 +1662,7 @@
       "lane": "assurance-release",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1706,7 +1706,7 @@
       "lane": "assurance-refund",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "0ad367cea66c3c823cc9c23e1e874cedc0fb30e90c3deaa309cdcee2dc4f54aa",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1750,7 +1750,7 @@
       "lane": "escrow-funding",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1794,7 +1794,7 @@
       "lane": "escrow-release",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1838,7 +1838,7 @@
       "lane": "escrow-refund",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1882,7 +1882,7 @@
       "lane": "escrow-cancel",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1926,7 +1926,7 @@
       "lane": "escrow-daa-refund-funding",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -1970,7 +1970,7 @@
       "lane": "escrow-refund",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -2014,7 +2014,7 @@
       "lane": "escrow-cancel-funding",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
       "route": "wallet-exact-transaction-submit",
       "payload": {
@@ -2058,7 +2058,7 @@
       "lane": "escrow-cancel",
       "class": "contract-proof",
       "status": "adapter-review-ready",
-      "createdAt": "2026-05-09T12:33:54.864Z",
+      "createdAt": "2026-05-09T12:54:12.141Z",
       "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
       "route": "wallet-exact-transaction-submit",
       "payload": {

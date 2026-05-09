@@ -1,0 +1,1375 @@
+{
+  "schema": "tn12-wallet-external-signer-gap/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T12:54:34.511Z",
+  "status": "external-signer-gap-documented",
+  "liveNoLocalKeySigningReady": false,
+  "summary": {
+    "requests": 47,
+    "signedLocalDrafts": 47,
+    "unsignedWalletSignRequests": 0,
+    "submitOnlyCandidates": 47,
+    "signAndSubmitCandidates": 0,
+    "payloadPreservationNeeded": 26,
+    "computeBudgetPreservationNeeded": 2,
+    "blockedRows": 47,
+    "sensitiveFieldMatches": 0
+  },
+  "currentTruth": [
+    "The existing wallet-submit request bundle is useful for exact transaction review and submit-result validation.",
+    "The current artifacts are signed local drafts, so they can model external submit and promotion rules but not no-local-key signing.",
+    "No-local-key readiness requires unsigned wallet sign requests or a standard partial transaction handoff that an external signer can authorize."
+  ],
+  "rows": [
+    {
+      "requestId": "wreq-6cfe79da",
+      "sessionId": "review-wreq-6cfe79da",
+      "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "label": "Payload receipt self-send",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-7de55774"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-0d276be0",
+      "sessionId": "review-wreq-0d276be0",
+      "path": "artifacts/signed-drafts/payload-refund-self-send.json",
+      "label": "Payload refund self-send",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-fd173d58"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-c3d8c6a4",
+      "sessionId": "review-wreq-c3d8c6a4",
+      "path": "artifacts/signed-drafts/payload-error-self-send.json",
+      "label": "Payload error self-send",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "payload": {
+        "present": true,
+        "bytes": 130,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-074cd5d2"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-68feaa92",
+      "sessionId": "review-wreq-68feaa92",
+      "path": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "label": "Access pass redemption payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+      "payload": {
+        "present": true,
+        "bytes": 159,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-dc664430"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-9e1d350b",
+      "sessionId": "review-wreq-9e1d350b",
+      "path": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "label": "Auction bid pass 001 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+      "payload": {
+        "present": true,
+        "bytes": 122,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-89cdbcb1"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-f924ff6d",
+      "sessionId": "review-wreq-f924ff6d",
+      "path": "artifacts/signed-drafts/payload-auction-bid.json",
+      "label": "Auction bid pass 002 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "payload": {
+        "present": true,
+        "bytes": 128,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-6ff937a2"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-1e636be2",
+      "sessionId": "review-wreq-1e636be2",
+      "path": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+      "label": "Auction bid voucher 001 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+      "payload": {
+        "present": true,
+        "bytes": 160,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-02a784bc"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-77ff1bf3",
+      "sessionId": "review-wreq-77ff1bf3",
+      "path": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "label": "Auction settlement pass 001 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+      "payload": {
+        "present": true,
+        "bytes": 195,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-f5e58225"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-ac38755e",
+      "sessionId": "review-wreq-ac38755e",
+      "path": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "label": "Auction refund pass 001 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+      "payload": {
+        "present": true,
+        "bytes": 185,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-62ecc358"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-136eca53",
+      "sessionId": "review-wreq-136eca53",
+      "path": "artifacts/signed-drafts/payload-stable-issuance.json",
+      "label": "Stable issuance 001 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-39227da3"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-c3b0416e",
+      "sessionId": "review-wreq-c3b0416e",
+      "path": "artifacts/signed-drafts/payload-stable-issuance-002.json",
+      "label": "Stable issuance 002 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+      "payload": {
+        "present": true,
+        "bytes": 138,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-093b0fbe"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-254ced6d",
+      "sessionId": "review-wreq-254ced6d",
+      "path": "artifacts/signed-drafts/payload-stable-redemption.json",
+      "label": "Stable redemption 001 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+      "payload": {
+        "present": true,
+        "bytes": 140,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-a3edb170"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-fc5f0adc",
+      "sessionId": "review-wreq-fc5f0adc",
+      "path": "artifacts/signed-drafts/payload-miner-attestation.json",
+      "label": "Miner attestation payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "payload": {
+        "present": true,
+        "bytes": 156,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-9bc02089"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-f5479471",
+      "sessionId": "review-wreq-f5479471",
+      "path": "artifacts/signed-drafts/payload-agent-task-invoice.json",
+      "label": "Agent task invoice payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "payload": {
+        "present": true,
+        "bytes": 136,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-6b026884"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-93d91369",
+      "sessionId": "review-wreq-93d91369",
+      "path": "artifacts/signed-drafts/payload-agent-task-escrow.json",
+      "label": "Agent task escrow payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "payload": {
+        "present": true,
+        "bytes": 139,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-4049291e"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-a1a412a6",
+      "sessionId": "review-wreq-a1a412a6",
+      "path": "artifacts/signed-drafts/payload-agent-proof.json",
+      "label": "Agent proof invoice payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+      "payload": {
+        "present": true,
+        "bytes": 133,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-9f2a612f"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-e419fdce",
+      "sessionId": "review-wreq-e419fdce",
+      "path": "artifacts/signed-drafts/payload-agent-proof-escrow.json",
+      "label": "Agent proof escrow payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+      "payload": {
+        "present": true,
+        "bytes": 148,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-544a3327"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-e9f4aad0",
+      "sessionId": "review-wreq-e9f4aad0",
+      "path": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+      "label": "Agent dispute escrow payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-e8893632"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-0da38349",
+      "sessionId": "review-wreq-0da38349",
+      "path": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+      "label": "Agent release invoice payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+      "payload": {
+        "present": true,
+        "bytes": 207,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-efd801dd"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-882fdf01",
+      "sessionId": "review-wreq-882fdf01",
+      "path": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+      "label": "Agent hold escrow payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-b6b4fc8f"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-b45afbcc",
+      "sessionId": "review-wreq-b45afbcc",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+      "label": "Batch assurance pledge 001 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-4531ed82"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-4a2e00eb",
+      "sessionId": "review-wreq-4a2e00eb",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+      "label": "Batch assurance pledge 002 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-e9ca5275"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-33f32c32",
+      "sessionId": "review-wreq-33f32c32",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+      "label": "Batch assurance pledge 003 payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "payload": {
+        "present": true,
+        "bytes": 194,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-7a6b86ad"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-e79aee58",
+      "sessionId": "review-wreq-e79aee58",
+      "path": "artifacts/signed-drafts/payload-batch-release-plan.json",
+      "label": "Batch assurance release plan payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+      "payload": {
+        "present": true,
+        "bytes": 186,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-dffd7153"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-4ea6bf46",
+      "sessionId": "review-wreq-4ea6bf46",
+      "path": "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+      "label": "Prediction market network stress payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-05869549"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-fb286440",
+      "sessionId": "review-wreq-fb286440",
+      "path": "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+      "label": "Prediction hedge miner revenue payload",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+      "payload": {
+        "present": true,
+        "bytes": 190,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-f42b6718"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-ade32cd1",
+      "sessionId": "review-wreq-ade32cd1",
+      "path": "artifacts/signed-drafts/split-funding.json",
+      "label": "Split funding",
+      "class": "funding",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 3,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-ecb6957e"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-42682575",
+      "sessionId": "review-wreq-42682575",
+      "path": "artifacts/signed-drafts/role-separated-funding.json",
+      "label": "Role-separated proof funding",
+      "class": "funding",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 4,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-02d21f20"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-700a182c",
+      "sessionId": "review-wreq-700a182c",
+      "path": "artifacts/signed-drafts/role-vault-withdrawal.json",
+      "label": "Role-separated vault withdrawal",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 282,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-a18c167a"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-1ffef490",
+      "sessionId": "review-wreq-1ffef490",
+      "path": "artifacts/signed-drafts/role-vault-recovery.json",
+      "label": "Role-separated vault recovery",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 282,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-aef4e3f4"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-6080546b",
+      "sessionId": "review-wreq-6080546b",
+      "path": "artifacts/signed-drafts/role-assurance-release.json",
+      "label": "Role-separated assurance release",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 179,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-67d5284a"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-a4f739ba",
+      "sessionId": "review-wreq-a4f739ba",
+      "path": "artifacts/signed-drafts/role-assurance-refund.json",
+      "label": "Role-separated assurance refund",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 245,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-ad14340a"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-fda320a9",
+      "sessionId": "review-wreq-fda320a9",
+      "path": "artifacts/signed-drafts/role-escrow-release.json",
+      "label": "Role-separated escrow release",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 421,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-953779f6"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-f5845e00",
+      "sessionId": "review-wreq-f5845e00",
+      "path": "artifacts/signed-drafts/role-escrow-refund.json",
+      "label": "Role-separated escrow refund",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 421,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-15ad079e"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-d12412d8",
+      "sessionId": "review-wreq-d12412d8",
+      "path": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "label": "Role-separated escrow cancel",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 1,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 487,
+        "computeBudgetInputs": 1,
+        "fingerprint": "fp-c2b0fc42"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-bfe853f3",
+      "sessionId": "review-wreq-bfe853f3",
+      "path": "artifacts/signed-drafts/vault-recovery.json",
+      "label": "Vault recovery",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "6c3873c7374e6cd9cd1cdfdd5aab81222d3fb6090e3ec9ff512f42579a4f4c4c",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 281,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-3b05fc0b"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-484c1de3",
+      "sessionId": "review-wreq-484c1de3",
+      "path": "artifacts/signed-drafts/vault-withdrawal.json",
+      "label": "Vault withdrawal",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 281,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-abd0de0c"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-cb883b9e",
+      "sessionId": "review-wreq-cb883b9e",
+      "path": "artifacts/signed-drafts/assurance-release.json",
+      "label": "Assurance release",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 178,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-06cb1ef6"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-11c831ed",
+      "sessionId": "review-wreq-11c831ed",
+      "path": "artifacts/signed-drafts/assurance-refund.json",
+      "label": "Assurance refund",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "0ad367cea66c3c823cc9c23e1e874cedc0fb30e90c3deaa309cdcee2dc4f54aa",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 244,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-25253255"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-782b16c6",
+      "sessionId": "review-wreq-782b16c6",
+      "path": "artifacts/signed-drafts/escrow-funding.json",
+      "label": "Escrow funding",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-c526f6ab"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-9532d7b2",
+      "sessionId": "review-wreq-9532d7b2",
+      "path": "artifacts/signed-drafts/escrow-release.json",
+      "label": "Escrow release",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 421,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-c659ea65"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-b94a10a1",
+      "sessionId": "review-wreq-b94a10a1",
+      "path": "artifacts/signed-drafts/escrow-refund.json",
+      "label": "Escrow refund",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 421,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-0ae341ef"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-e83f441d",
+      "sessionId": "review-wreq-e83f441d",
+      "path": "artifacts/signed-drafts/escrow-cancel.json",
+      "label": "Escrow cancel",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 487,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-2e9eb12d"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-eecfa326",
+      "sessionId": "review-wreq-eecfa326",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+      "label": "Escrow DAA refund funding",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-854a094f"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-cd98a52a",
+      "sessionId": "review-wreq-cd98a52a",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+      "label": "Escrow DAA refund",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 420,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-b384b987"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-a097c871",
+      "sessionId": "review-wreq-a097c871",
+      "path": "artifacts/signed-drafts/escrow-cancel-funding.json",
+      "label": "Escrow cancel funding",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-06e980c8"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-5dd4b1ef",
+      "sessionId": "review-wreq-5dd4b1ef",
+      "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "label": "Escrow cancel attempt",
+      "class": "contract-proof",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "route": "wallet-exact-transaction-submit"
+      },
+      "preservation": {
+        "version": 1,
+        "inputs": 1,
+        "outputs": 1,
+        "signatureScriptBytes": 487,
+        "computeBudgetInputs": 1,
+        "fingerprint": "fp-7d1c3f9a"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    }
+  ],
+  "closeGapChecklist": [
+    {
+      "id": "unsigned-request-schema",
+      "requirement": "Create an unsigned transaction request schema that carries inputs, outputs, payload bytes, network, fee, lock time, version, and computeBudget without signature scripts."
+    },
+    {
+      "id": "ownership-and-derivation",
+      "requirement": "Tell the wallet which addresses, derivation paths, or public keys are expected to authorize each input without exposing private key material."
+    },
+    {
+      "id": "standard-handoff-format",
+      "requirement": "Map the request to a Kaspa wallet API, PSKB/PSKT, KSPT, or another documented partial-transaction format before claiming external signer support."
+    },
+    {
+      "id": "payload-preservation",
+      "requirement": "Prove payload byte count and payload hash survive wallet signing and network submit."
+    },
+    {
+      "id": "compute-budget-preservation",
+      "requirement": "Prove tx version 1 contract spends preserve computeBudget and do not rewrite the field into sigOpCount."
+    },
+    {
+      "id": "accepted-result-promotion",
+      "requirement": "Promote a wallet-submitted tx only after explicit user action, returned txid, accepted virtual-chain evidence, and matching accepted evidence artifact."
+    }
+  ],
+  "nextBuildStep": "Build one unsigned payload receipt request and one unsigned v1 contract request before claiming no-local-key wallet signing.",
+  "boundaries": [
+    "This artifact intentionally does not sign or broadcast.",
+    "Submit-only rows do not prove external wallet signing because the repo already contains signed local drafts.",
+    "KasSigner/KasSee remains a reference for air-gapped/watch-only handoff patterns, not an integrated signer in this repo.",
+    "The wallet connector can become real only when an external signer returns a transaction from an unsigned or partial request and the indexer confirms acceptance."
+  ],
+  "sensitiveFieldMatches": []
+}

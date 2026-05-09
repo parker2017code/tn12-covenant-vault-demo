@@ -7,7 +7,8 @@ export function buildVirtualChainIngestionRun({
   const records = Array.isArray(checkpointIndex.records) ? checkpointIndex.records : [];
   const checkpoint = checkpointIndex.checkpoint || {};
   const windowRows = records.map((record) => virtualChainRow({ record, checkpointIndex, runAt }));
-  const candidateRows = (submitRequests.requests || []).slice(0, 10).map(candidateSubmitRow);
+  const acceptedByTxid = new Map(windowRows.filter((row) => row.accepted).map((row) => [row.txid, row]));
+  const candidateRows = (submitRequests.requests || []).map((request) => candidateSubmitRow({ request, acceptedByTxid }));
   const rollbackRows = buildRollbackRows({ ingestionPlan, checkpointIndex, windowRows });
   const acceptedRows = windowRows.filter((row) => row.accepted);
   const payloadRows = acceptedRows.filter((row) => row.payloadBytes > 0);
@@ -71,14 +72,32 @@ function virtualChainRow({ record, checkpointIndex, runAt }) {
   };
 }
 
-function candidateSubmitRow(request) {
+function candidateSubmitRow({ request, acceptedByTxid }) {
+  const txid = request.transaction?.id || "";
+  const acceptedRow = acceptedByTxid.get(txid);
+  const payloadBytes = Number(request.payload?.bytes || 0);
+  const acceptedByVirtualChain = Boolean(acceptedRow);
+  const payloadMatches = !request.payload?.present || Boolean(acceptedRow && Number(acceptedRow.payloadBytes || 0) === payloadBytes);
+  const outputMatched = Boolean(acceptedRow?.outputMatched);
+  const promotionState = acceptedByVirtualChain && payloadMatches && outputMatched
+    ? "accepted-matched"
+    : acceptedByVirtualChain
+      ? "accepted-review"
+      : "candidate-only";
+
   return {
     requestId: request.requestId,
-    txid: request.transaction?.id || "",
+    txid,
     path: request.path,
     route: request.route,
-    payloadBytes: Number(request.payload?.bytes || 0),
-    state: "candidate-only",
+    payloadBytes,
+    acceptedByVirtualChain,
+    payloadMatches,
+    outputMatched,
+    promotionState,
+    state: promotionState,
+    acceptedLane: acceptedRow?.lane || "",
+    acceptedKind: acceptedRow?.kind || "",
     promoteWhen: "accepted virtual-chain row with matching txid and payload/output checks"
   };
 }

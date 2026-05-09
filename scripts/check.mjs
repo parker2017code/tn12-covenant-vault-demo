@@ -68,6 +68,7 @@ import { buildIndexerReplayPlan } from "../src/indexerReplayPlan.mjs";
 import { buildWalletConnectorAdapterRun } from "../src/walletConnectorAdapterRun.mjs";
 import { buildWalletConnectorSubmitLedger } from "../src/walletConnectorSubmitLedger.mjs";
 import { buildWalletSubmitResultValidation } from "../src/walletSubmitResultValidation.mjs";
+import { buildWalletExternalSignerGap } from "../src/walletExternalSignerGap.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "../src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
@@ -995,10 +996,22 @@ assert.equal(virtualChainIngestionRun.summary.virtualChainRows, 36);
 assert.equal(virtualChainIngestionRun.summary.payloadRows, 26);
 assert.equal(virtualChainIngestionRun.summary.proofRows, 7);
 assert.equal(virtualChainIngestionRun.summary.rollbackRows, 0);
-assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 10);
+assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 47);
+assert.equal(virtualChainIngestionRun.tables.wallet_submit_candidates.length, walletConnectorRequestsArtifact.requests.length);
+assert.ok(virtualChainIngestionRun.tables.wallet_submit_candidates.some((row) =>
+  row.txid === "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+  && row.acceptedByVirtualChain
+  && row.payloadMatches
+  && row.outputMatched
+  && row.promotionState === "accepted-matched"
+));
+assert.ok(virtualChainIngestionRun.tables.wallet_submit_candidates.some((row) =>
+  row.promotionState === "candidate-only"
+));
 const virtualChainIngestionRunArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-run.json", import.meta.url), "utf8"));
 assert.equal(virtualChainIngestionRunArtifact.status, "fixture-virtual-chain-run-ready");
 assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, 36);
+assert.equal(virtualChainIngestionRunArtifact.summary.walletCandidateRows, 47);
 const virtualChainReaderAdapterFixture = JSON.parse(await readFile(new URL("../fixtures/VirtualChainReaderAdapter.json", import.meta.url), "utf8"));
 const virtualChainReaderAdapter = buildVirtualChainReaderAdapter({
   fixture: virtualChainReaderAdapterFixture,
@@ -1072,6 +1085,24 @@ assert.equal(walletSubmitResultValidationArtifact.status, "wallet-submit-result-
 assert.equal(walletSubmitResultValidationArtifact.liveWalletConnectorExists, false);
 assert.equal(walletSubmitResultValidationArtifact.summary.validClaims, 3);
 assert.equal(walletSubmitResultValidationArtifact.summary.caughtNegativeCases, 6);
+const walletExternalSignerGap = buildWalletExternalSignerGap({
+  submitRequests: walletConnectorRequestsArtifact,
+  adapterRun: walletConnectorAdapterArtifact,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletExternalSignerGap.status, "external-signer-gap-documented");
+assert.equal(walletExternalSignerGap.liveNoLocalKeySigningReady, false);
+assert.equal(walletExternalSignerGap.summary.requests, 47);
+assert.equal(walletExternalSignerGap.summary.signedLocalDrafts, 47);
+assert.equal(walletExternalSignerGap.summary.unsignedWalletSignRequests, 0);
+assert.equal(walletExternalSignerGap.summary.payloadPreservationNeeded, 26);
+assert.equal(walletExternalSignerGap.summary.computeBudgetPreservationNeeded, 2);
+assert.ok(walletExternalSignerGap.currentTruth.some((line) => /signed local drafts/.test(line)));
+assert.ok(walletExternalSignerGap.closeGapChecklist.some((item) => item.id === "unsigned-request-schema"));
+const walletExternalSignerGapArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-gap.json", import.meta.url), "utf8"));
+assert.equal(walletExternalSignerGapArtifact.status, "external-signer-gap-documented");
+assert.equal(walletExternalSignerGapArtifact.liveNoLocalKeySigningReady, false);
+assert.equal(walletExternalSignerGapArtifact.summary.signedLocalDrafts, 47);
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -1283,6 +1314,7 @@ const files = [
   "scripts/build-wallet-connector-adapter-run.mjs",
   "scripts/build-wallet-connector-submit-ledger.mjs",
   "scripts/build-wallet-submit-result-validation.mjs",
+  "scripts/build-wallet-external-signer-gap.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
@@ -1378,6 +1410,7 @@ const files = [
   "artifacts/wallet-connector-adapter-run.json",
   "artifacts/wallet-connector-submit-ledger.json",
   "artifacts/wallet-submit-result-validation.json",
+  "artifacts/wallet-external-signer-gap.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
@@ -1516,6 +1549,7 @@ const files = [
   "src/walletConnectorAdapterRun.mjs",
   "src/walletConnectorSubmitLedger.mjs",
   "src/walletSubmitResultValidation.mjs",
+  "src/walletExternalSignerGap.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
@@ -1618,6 +1652,7 @@ assert.match(readme, /npm run wallet:connector-requests/);
 assert.match(readme, /npm run wallet:adapter-run/);
 assert.match(readme, /npm run wallet:submit-ledger/);
 assert.match(readme, /npm run wallet:result-validation/);
+assert.match(readme, /npm run wallet:external-signer-gap/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run escrow:marketplace/);
 assert.match(readme, /npm run research:library/);
