@@ -1,6 +1,7 @@
-export function buildPredictionHedgeSimulator({ fixture = {}, attestationRegistry = {} } = {}) {
+export function buildPredictionHedgeSimulator({ fixture = {}, attestationRegistry = {}, attestationThresholds = {} } = {}) {
   const signals = attestationRegistry.signals || [];
-  const markets = (fixture.markets || []).map((market) => buildMarket(market, signals));
+  const thresholdsBySignalId = new Map((attestationThresholds.signals || []).map((signal) => [signal.id, signal]));
+  const markets = (fixture.markets || []).map((market) => buildMarket(market, signals, thresholdsBySignalId));
   const positions = fixture.positions || [];
   const suggestions = positions.map((position) => buildSuggestion(position, markets));
   const reviewSuggestions = suggestions.filter((suggestion) => suggestion.status === "review-suggested").length;
@@ -13,6 +14,8 @@ export function buildPredictionHedgeSimulator({ fixture = {}, attestationRegistr
       markets: markets.length,
       positions: positions.length,
       verifiedSignalInputs: markets.reduce((total, market) => total + market.verifiedSignalInputs, 0),
+      thresholdAllowedSignalInputs: markets.reduce((total, market) => total + market.thresholdAllowedSignalInputs, 0),
+      thresholdBlockedSignalInputs: markets.reduce((total, market) => total + market.thresholdBlockedSignalInputs, 0),
       reviewSuggestions
     },
     markets,
@@ -21,21 +24,22 @@ export function buildPredictionHedgeSimulator({ fixture = {}, attestationRegistr
     rules: fixture.rules || [],
     boundaries: [
       "This simulator does not custody funds, execute trades, create odds, or settle markets.",
-      "Signals affect a probability only when they are verified and anchored by accepted payload evidence.",
+      "Signals affect a probability only when they are verified, anchored by accepted payload evidence, and allowed by the attestation threshold artifact.",
       "Suggestions are review prompts for a user-owned plan, not financial advice or automatic execution."
     ]
   };
 }
 
-function buildMarket(market, signals) {
+function buildMarket(market, signals, thresholdsBySignalId) {
   const relatedSignals = signals.filter((signal) => signal.eventId === market.eventId);
-  const verifiedSignals = relatedSignals.filter((signal) => (
+  const verifiedPayloadSignals = relatedSignals.filter((signal) => (
     signal.status === "verified"
     && signal.acceptedTxid
     && signal.evidencePath
     && signal.signatureReview?.status === "verified"
   ));
-  const signalAdjustment = verifiedSignals.reduce((total, signal) => {
+  const thresholdAllowedSignals = verifiedPayloadSignals.filter((signal) => thresholdsBySignalId.get(signal.id)?.influenceAllowed === true);
+  const signalAdjustment = thresholdAllowedSignals.reduce((total, signal) => {
     const accuracy = signal.resolution?.accuracy ?? signal.confidence;
     return total + Math.round(((signal.confidence - 50) * 0.35) + ((accuracy - 50) * 0.2));
   }, 0);
@@ -50,11 +54,17 @@ function buildMarket(market, signals) {
     resolutionSource: String(market.resolutionSource || ""),
     baseProbability: clampPercent(market.baseProbability),
     simulatedProbability: probability,
-    verifiedSignalInputs: verifiedSignals.length,
-    ignoredSignals: relatedSignals.length - verifiedSignals.length,
-    signalIds: verifiedSignals.map((signal) => signal.id),
+    verifiedSignalInputs: verifiedPayloadSignals.length,
+    thresholdAllowedSignalInputs: thresholdAllowedSignals.length,
+    thresholdBlockedSignalInputs: verifiedPayloadSignals.length - thresholdAllowedSignals.length,
+    ignoredSignals: relatedSignals.length - verifiedPayloadSignals.length,
+    signalIds: thresholdAllowedSignals.map((signal) => signal.id),
     acceptedEvent: market.acceptedEvent || null,
-    status: verifiedSignals.length > 0 ? "signal-adjusted" : "baseline-only"
+    status: thresholdAllowedSignals.length > 0
+      ? "signal-adjusted"
+      : verifiedPayloadSignals.length > 0
+      ? "threshold-blocked"
+      : "baseline-only"
   };
 }
 
@@ -71,7 +81,7 @@ function buildSuggestion(position, markets) {
   }
 
   const riskScore = clampPercent(Math.round((market.simulatedProbability * normalized.sensitivity) / 100));
-  const status = market.verifiedSignalInputs > 0 && market.simulatedProbability >= normalized.reviewThreshold
+  const status = market.thresholdAllowedSignalInputs > 0 && market.simulatedProbability >= normalized.reviewThreshold
     ? "review-suggested"
     : "watch";
 

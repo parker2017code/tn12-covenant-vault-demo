@@ -26,6 +26,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Ordered project queue command: `npm run project:queue`
 - Durable indexer schema command: `npm run indexer:schema`
 - Durable indexer fixture replay command: `npm run indexer:replay`
+- Durable virtual-chain reader adapter command: `npm run indexer:virtual-chain-adapter`
 - AI/source discipline command: `npm run ai:discipline`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - High-impact mainstream app direction: `docs/MAINSTREAM_APP_DIRECTION.md`
@@ -180,6 +181,7 @@ npm run check
 npm run serve
 npm run address
 npm run wallet:public
+npm run wallet:result-validation
 npm run tx:submit:wrpc
 ```
 
@@ -260,6 +262,7 @@ Scripts:
 - persisted checkpoint guard,
 - wallet-review readiness builder,
 - wallet-connector readiness builder,
+- wallet submit result validator,
 - signal payload artifact builder.
 - prediction-hedge simulator builder.
 
@@ -434,7 +437,7 @@ Pause note, 2026-05-08:
 Recommended order from here:
 
 1. Add wallet-review and wallet-connector flow for payload receipt submission.
-2. Replace known-txid checkpoint input with node/RPC virtual-chain reads feeding the replay tables.
+2. Test the bounded virtual-chain reader adapter against a configured hosted TN12 node/RPC endpoint, then feed live virtual-chain reads into the replay tables.
 3. Build accepted pledge-output custody transactions for batch assurance settlement.
 4. Fund fresh role-separated outputs before trying invalid spend submissions.
 5. Add reputation thresholds and signer provenance before signals affect more app lanes.

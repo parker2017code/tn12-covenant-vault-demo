@@ -71,7 +71,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 | Lane | Status | Current repo state | Natural next step |
 |---|---|---|---|
-| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, replay plan, storage schema, fixture-backed replay rows, virtual-chain ingestion contract, and fixture-backed virtual-chain run | Implement live node/RPC reader adapter; keep framed as a receipt/app-state rail |
+| 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, replay plan, storage schema, fixture-backed replay rows, virtual-chain ingestion contract, fixture-backed virtual-chain run, and bounded reader adapter contract | Test the adapter against a configured hosted TN12 node/RPC endpoint; keep framed as a receipt/app-state rail |
 | 2. Submit console | Review gate built | 47 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package, connector request bundle, dry-run adapter review sessions, and submit-result ledger | Real wallet adapter signing/submitting externally |
 | 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, exact pledge-output requirements, and wallet-reviewable pledge-output funding/import plan | Build accepted pledge outputs for the required amounts, then import those outpoints |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, accepted mutual-cancel proofs, local role-separated invalid-candidate map, and marketplace demo plan | Fund fresh expendable outputs before any TN12 rejection submissions |
@@ -81,11 +81,11 @@ These are roadmap or research until the missing rails are explicit and tested.
 | 8. Auction/intents | Accepted TN12 payload state | Accepted bid payloads, winner rule, below-reserve state, and settlement/refund draft records | Custody source and atomic exchange design |
 | 9. DeFi backlog | Research | Missing rails matrix, swaps/lending/stable-value briefs, stable-value comparison, and prediction-hedge simulator built | More simulation dashboards only |
 | 10. Cross-chain research | Built as library | PMF/code/failure-mode mapping | Turn top ideas into one-page app briefs |
-| 11. Miner/pool signals | Accepted TN12 payload state | Attestation registry, payload-first framing, accepted watcher signal, signature/provenance review, stale/revoked/conflict states, quorum thresholds, and reputation threshold artifact | Wire the hardened gate into future signal-consuming dashboards |
+| 11. Miner/pool signals | Accepted TN12 payload state | Attestation registry, payload-first framing, accepted watcher signal, signature/provenance review, stale/revoked/conflict states, quorum thresholds, reputation threshold artifact, and prediction/hedge threshold consumption | Reuse the hardened gate in future signal-consuming dashboards |
 | 12. AI-agent commitments | Accepted TN12 payload state | Task/deposit/proof/dispute model with accepted payload events plus release/hold/refund draft records | Custody source and accepted tx lifecycle |
 | 13. Coordination markets | Research prototype, higher strategic priority | Transparent Stag/Intendo/Pack/toy Solver plus settlement/app brief | Signed settlement draft only after custody, wallet review, opacity, capital multiplexing, atomic Hunt execution, and oracle/settlement rails are explicit |
 | 14. ZK / anchor readiness | Roadmap added | Checklist lane | Define public inputs, anchors, oracle/source-chain trust |
-| 15. Prediction / hedge markets | Accepted TN12 payload state plus research simulator | Attestation-fed simulator with accepted market-update and review-prompt payloads; no settlement | Add signature/reputation hardening before any stronger claim |
+| 15. Prediction / hedge markets | Accepted TN12 payload state plus research simulator | Attestation-fed simulator with accepted market-update and review-prompt payloads; threshold gate blocks current signals from influence; no settlement | Keep as review-only simulator until quorum/provenance thresholds pass |
 | 16. Portfolio automation | Research only | In DeFi backlog | Rules engine/simulator first |
 | 17. Grants / public goods | Partly via assurance | Pledge/campaign primitives | Grants board plus payout vault |
 | 18. Marketplace escrow | Partly via escrow | Release/refund proven | Usable commerce demo, with cancel omitted or redesigned |
@@ -108,9 +108,9 @@ These are roadmap or research until the missing rails are explicit and tested.
 
 ### Coming days
 
-1. Make the accepted JSON wRPC payload path repeatable through a real wallet adapter instead of local signing; keep the current submit ledger as evidence routing, not a broadcaster.
+1. Make the accepted JSON wRPC payload path repeatable through a real wallet adapter instead of local signing; keep the current submit ledger and result validator as evidence routing, not a broadcaster.
 2. Build custody settlement drafts only from amount-matched pledge outputs.
-3. Connect the fixture-backed replay tables to node/RPC virtual-chain reads.
+3. Test `artifacts/virtual-chain-reader-adapter.json` against a configured hosted TN12 node/RPC endpoint, then connect the replay tables to live virtual-chain reads.
 4. Turn local invalid-candidate maps into safe TN12 rejection attempts only after fresh expendable outputs exist.
 5. Wire the attestation provenance/quorum artifact into future signal-consuming dashboards before signals influence more app lanes.
 6. Add based-rollup scouting: available endpoints, bridge model, execution environment, wallet path, and one tiny app target.

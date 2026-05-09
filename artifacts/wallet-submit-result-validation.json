@@ -1,0 +1,331 @@
+{
+  "schema": "tn12-wallet-submit-result-validation/v1",
+  "network": "kaspa-testnet-12",
+  "runAt": "2026-05-09T11:08:42.102Z",
+  "status": "wallet-submit-result-validation-ready",
+  "liveWalletConnectorExists": false,
+  "summary": {
+    "claims": 3,
+    "validClaims": 3,
+    "invalidClaims": 0,
+    "negativeCases": 6,
+    "caughtNegativeCases": 6,
+    "uncaughtNegativeCases": 0,
+    "acceptedEvidencePromotions": 3,
+    "liveWalletPromotions": 0,
+    "payloadValidated": 3,
+    "computeBudgetSessions": 2,
+    "v1ComputeBudgetSessionsPreserved": 2,
+    "secretFields": 0
+  },
+  "policy": {
+    "requireExplicitUserActionForLiveWalletSubmit": true,
+    "promotionRequiresAcceptedEvidence": true,
+    "promotionRequiresVirtualChainAcceptance": true,
+    "forbiddenRoutes": [
+      "rest-submit",
+      "public-rest-submit",
+      "payload-dropping-rest"
+    ]
+  },
+  "actualRows": [
+    {
+      "id": "wreq-6cfe79da",
+      "negative": false,
+      "requestId": "wreq-6cfe79da",
+      "sessionId": "review-wreq-6cfe79da",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "json-wrpc",
+      "resultSource": "historical-json-wrpc-accepted",
+      "acceptedEvidencePath": "artifacts/payload-receipt-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": true,
+        "routeAllowed": true,
+        "payloadBytesPreserved": true,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": false,
+        "historicalEvidence": true,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "accepted-evidence-only",
+        "indexerReady": true
+      },
+      "problems": []
+    },
+    {
+      "id": "wreq-0d276be0",
+      "negative": false,
+      "requestId": "wreq-0d276be0",
+      "sessionId": "review-wreq-0d276be0",
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "json-wrpc",
+      "resultSource": "historical-json-wrpc-accepted",
+      "acceptedEvidencePath": "artifacts/payload-refund-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": true,
+        "routeAllowed": true,
+        "payloadBytesPreserved": true,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": false,
+        "historicalEvidence": true,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "accepted-evidence-only",
+        "indexerReady": true
+      },
+      "problems": []
+    },
+    {
+      "id": "wreq-c3d8c6a4",
+      "negative": false,
+      "requestId": "wreq-c3d8c6a4",
+      "sessionId": "review-wreq-c3d8c6a4",
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "json-wrpc",
+      "resultSource": "historical-json-wrpc-accepted",
+      "acceptedEvidencePath": "artifacts/payload-error-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": true,
+        "routeAllowed": true,
+        "payloadBytesPreserved": true,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": false,
+        "historicalEvidence": true,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "accepted-evidence-only",
+        "indexerReady": true
+      },
+      "problems": []
+    }
+  ],
+  "negativeRows": [
+    {
+      "id": "wrong-session-fingerprint",
+      "negative": true,
+      "requestId": "wreq-6cfe79da",
+      "sessionId": "review-wreq-6cfe79da",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "json-wrpc",
+      "resultSource": "fixture-claim",
+      "acceptedEvidencePath": "artifacts/payload-receipt-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": false,
+        "routeAllowed": true,
+        "payloadBytesPreserved": true,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": false,
+        "historicalEvidence": true,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "blocked-review",
+        "indexerReady": false
+      },
+      "problems": [
+        "session fingerprint mismatch"
+      ]
+    },
+    {
+      "id": "payload-byte-mismatch",
+      "negative": true,
+      "requestId": "wreq-0d276be0",
+      "sessionId": "review-wreq-0d276be0",
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "json-wrpc",
+      "resultSource": "fixture-claim",
+      "acceptedEvidencePath": "artifacts/payload-refund-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": true,
+        "routeAllowed": true,
+        "payloadBytesPreserved": false,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": false,
+        "historicalEvidence": true,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "blocked-review",
+        "indexerReady": false
+      },
+      "problems": [
+        "payload byte count mismatch"
+      ]
+    },
+    {
+      "id": "forbidden-rest-route",
+      "negative": true,
+      "requestId": "wreq-c3d8c6a4",
+      "sessionId": "review-wreq-c3d8c6a4",
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "rest-submit",
+      "resultSource": "fixture-claim",
+      "acceptedEvidencePath": "artifacts/payload-error-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": true,
+        "routeAllowed": false,
+        "payloadBytesPreserved": true,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": false,
+        "historicalEvidence": true,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "blocked-review",
+        "indexerReady": false
+      },
+      "problems": [
+        "forbidden submit route",
+        "payload route is not payload-preserving"
+      ]
+    },
+    {
+      "id": "compute-budget-lost",
+      "negative": true,
+      "requestId": "wreq-5dd4b1ef",
+      "sessionId": "review-wreq-5dd4b1ef",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "wallet-exact-transaction-submit",
+      "resultSource": "fixture-claim",
+      "acceptedEvidencePath": "artifacts/proof-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": true,
+        "routeAllowed": true,
+        "payloadBytesPreserved": true,
+        "versionPreserved": false,
+        "computeBudgetPreserved": false,
+        "explicitUserAction": true,
+        "historicalEvidence": false,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "blocked-review",
+        "indexerReady": false
+      },
+      "problems": [
+        "transaction version mismatch",
+        "computeBudget input count mismatch"
+      ]
+    },
+    {
+      "id": "missing-user-action",
+      "negative": true,
+      "requestId": "wreq-5dd4b1ef",
+      "sessionId": "review-wreq-5dd4b1ef",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "wallet-exact-transaction-submit",
+      "resultSource": "fixture-claim",
+      "acceptedEvidencePath": "artifacts/proof-evidence.json",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": true,
+        "routeAllowed": true,
+        "payloadBytesPreserved": true,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": false,
+        "historicalEvidence": false,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "blocked-review",
+        "indexerReady": false
+      },
+      "problems": [
+        "live wallet result missing explicit user action"
+      ]
+    },
+    {
+      "id": "promotion-without-accepted-evidence",
+      "negative": true,
+      "requestId": "wreq-68feaa92",
+      "sessionId": "review-wreq-68feaa92",
+      "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "payload-preserving-wallet",
+      "resultSource": "fixture-claim",
+      "acceptedEvidencePath": "",
+      "checks": {
+        "txidMatchesSession": true,
+        "fingerprintMatchesSession": false,
+        "routeAllowed": true,
+        "payloadBytesPreserved": false,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": true,
+        "historicalEvidence": false,
+        "acceptedByVirtualChain": true
+      },
+      "promotion": {
+        "state": "blocked-review",
+        "indexerReady": false
+      },
+      "problems": [
+        "session fingerprint mismatch",
+        "payload byte count mismatch",
+        "accepted result missing evidence artifact"
+      ]
+    }
+  ],
+  "computeBudgetRows": [
+    {
+      "requestId": "wreq-d12412d8",
+      "sessionId": "review-wreq-d12412d8",
+      "path": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "version": 1,
+      "computeBudgetInputs": 1,
+      "fingerprint": "fp-c2b0fc42",
+      "preserved": true
+    },
+    {
+      "requestId": "wreq-5dd4b1ef",
+      "sessionId": "review-wreq-5dd4b1ef",
+      "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "version": 1,
+      "computeBudgetInputs": 1,
+      "fingerprint": "fp-7d1c3f9a",
+      "preserved": true
+    }
+  ],
+  "promotionRules": [
+    "Result txid, route, request id, and session fingerprint must match the adapter review session.",
+    "Payload routes must preserve the reviewed payload byte count and must not use public REST submit.",
+    "Version-1 contract submits must preserve computeBudget inputs; rewriting to sigOpCount is invalid.",
+    "A live wallet result requires explicit user approval before submit.",
+    "Accepted app-state promotion requires accepted virtual-chain evidence and an accepted evidence artifact.",
+    "Historical JSON wRPC evidence remains accepted evidence only; it does not prove a live wallet connector exists."
+  ],
+  "boundaries": [
+    "This fixture validates result shape and promotion rules only.",
+    "No live wallet connector exists in this repo yet.",
+    "Historical JSON wRPC evidence can be accepted evidence without proving wallet-connector liveness.",
+    "Future wallet-submitted results must include explicit user action and accepted virtual-chain evidence before promotion."
+  ],
+  "secretFields": []
+}

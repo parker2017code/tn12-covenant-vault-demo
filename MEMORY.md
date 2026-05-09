@@ -27,7 +27,9 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Durable indexer schema/replay gates: `npm run indexer:schema` and `npm run indexer:replay`
 - Wallet connector request gate: `npm run wallet:connector-requests`
 - Wallet connector adapter dry-run gate: `npm run wallet:adapter-run`
+- Wallet submit result validation gate: `npm run wallet:result-validation`
 - Virtual-chain ingestion run gate: `npm run indexer:virtual-chain-run`
+- Virtual-chain reader adapter gate: `npm run indexer:virtual-chain-adapter`
 - Batch-assurance pledge-output plan gate: `npm run campaign:pledge-outputs`
 - Escrow marketplace demo gate: `npm run escrow:marketplace`
 - Attestation reputation gate: `npm run attestation:reputation`
@@ -91,6 +93,21 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Pause Note
 
+Paused on 2026-05-09 after bounded virtual-chain reader adapter artifact work:
+
+- `fixtures/VirtualChainReaderAdapter.json` defines the endpoint config, bounded window, checkpoint cursor, rollback rules, retry/backoff, payload matching, proof matching, and no-local-node boundaries.
+- `src/virtualChainReaderAdapter.mjs` and `scripts/build-virtual-chain-reader-adapter.mjs` generate `artifacts/virtual-chain-reader-adapter.json`.
+- `npm run indexer:virtual-chain-adapter`, `npm run check`, and `npm run check:all` passed.
+- The artifact is ready as a durable adapter contract, not a live subscription. `TN12_VIRTUAL_CHAIN_RPC_URL` is still unset, so no live endpoint read was attempted.
+- Next safe task in this lane: set a hosted TN12 virtual-chain RPC endpoint and compare live reader rows against the current 33-record fixture-backed replay before committing a new checkpoint.
+
+Paused on 2026-05-09 after bounded wallet submit result validation:
+
+- `fixtures/WalletSubmitResultValidation.json` defines the strict result policy and negative cases.
+- `src/walletSubmitResultValidation.mjs` validates returned txids/routes against adapter-session fingerprints, payload bytes, version-1 `computeBudget`, explicit user action, and accepted-evidence promotion rules.
+- `npm run wallet:result-validation` writes `artifacts/wallet-submit-result-validation.json`; the artifact currently has 3 valid historical accepted-evidence rows, 6 caught negative cases, 2/2 v1 computeBudget sessions preserved, and `liveWalletConnectorExists: false`.
+- This is still not a live wallet connector. It is the bounded validator future wallet results must pass before app-state promotion.
+
 Paused on 2026-05-09 after bounded attestation provenance/quorum hardening:
 
 - `fixtures/AttestationSignals.json` now includes signer-provenance records plus conflict, stale, and revoked-source review cases.
@@ -99,7 +116,7 @@ Paused on 2026-05-09 after bounded attestation provenance/quorum hardening:
 - `npm run attestation:reputation` regenerated the artifact successfully.
 - Follow-up integration fixed the README wallet-submit-ledger assertion and `npm run check` now passes with the attestation checks.
 - `npm run check:negative` passed after updating the extra conflicting-signal expectation.
-- Next safe task in this lane: make a future signal-consuming dashboard read `artifacts/attestation-reputation-thresholds.json` rather than raw registry influence flags.
+- Follow-up integration made `npm run prediction:hedge` read the attestation threshold artifact before accepted signals can influence simulated probabilities or review prompts.
 
 Paused on 2026-05-08 after local invalid-candidate work:
 
@@ -129,7 +146,7 @@ Current WIP:
 
 - Invalid-candidate definitions are local-review-only, not signed invalid transactions and not TN12 rejection evidence.
 - Resume by running `npm run check:all` and `npm run check:tn12` after any follow-up edits; both passed after this change.
-- The next durable indexer step is replacing known-txid checkpoint input with a node/RPC virtual-chain reader feeding the replay tables.
+- The next durable indexer step is testing the bounded virtual-chain reader adapter against a configured hosted TN12 RPC endpoint, then feeding live virtual-chain rows into the replay tables.
 - The next high-impact build step is the project queue top item: wallet connector submit without local keys. The next high-impact app research step is turning a trigger lane into a brief only after the missing-rails matrix, trigger registry, and oracle/source artifacts name the gaps and do-not-claim boundary.
 - The next safe protocol step is funding fresh expendable role-separated outputs before attempting any TN12 rejection submissions.
 

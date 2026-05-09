@@ -1,0 +1,105 @@
+{
+  "schema": "tn12-virtual-chain-reader-adapter-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "adapter": {
+    "name": "bounded-tn12-virtual-chain-reader",
+    "mode": "configured-rpc-adapter-contract",
+    "localNodeRequired": false,
+    "liveReadAttemptedByDefault": false,
+    "boundedWindow": {
+      "maxBlueScoreSpan": 250000,
+      "maxAcceptedTransactions": 5000,
+      "stopAfterEmptyWindows": 3
+    }
+  },
+  "endpoint": {
+    "configEnv": "TN12_VIRTUAL_CHAIN_RPC_URL",
+    "transport": "json-wrpc-or-rpc-client",
+    "networkId": "testnet-12",
+    "method": "getVirtualChainFromBlockV2",
+    "dataVerbosity": "High",
+    "minConfirmationCount": 0,
+    "requiredRequestFields": [
+      "startHash or checkpoint blue-score bridge",
+      "includeAcceptedTransactionIds",
+      "includeAcceptedTransactions",
+      "dataVerbosity"
+    ]
+  },
+  "cursor": {
+    "kind": "blue-score-checkpoint",
+    "bootstrapFrom": "artifacts/checkpointed-accepted-index.json",
+    "persistTable": "checkpoint_watermarks",
+    "persistFields": [
+      "network",
+      "min_blue_score",
+      "max_blue_score",
+      "record_count",
+      "payload_event_count",
+      "proof_spend_count",
+      "mismatch_count"
+    ],
+    "resumeRule": "Resume from the last trusted max_blue_score, then replay a bounded overlap before committing a new checkpoint."
+  },
+  "rollback": {
+    "detectWhen": [
+      "feed max blue score is lower than persisted max_blue_score",
+      "accepted txids from the trusted overlap disappear",
+      "previously matched payload bytes differ",
+      "previously matched proof-spend outpoint or output no longer resolves"
+    ],
+    "actions": [
+      "open rollback_segments row",
+      "mark affected derived app rows stale",
+      "block app-state-ready for affected lanes",
+      "replay from the previous trusted checkpoint overlap",
+      "close only after mismatch_count returns to zero"
+    ]
+  },
+  "retryBackoff": {
+    "maxAttempts": 5,
+    "initialDelayMs": 500,
+    "multiplier": 2,
+    "maxDelayMs": 8000,
+    "jitter": "bounded-random",
+    "retryOn": [
+      "timeout",
+      "connection-reset",
+      "429",
+      "5xx",
+      "stale-or-empty-window-before-stop-limit"
+    ],
+    "doNotRetryOn": [
+      "wrong-network",
+      "missing-high-verbosity-transaction-data",
+      "malformed-transaction-shape"
+    ]
+  },
+  "matching": {
+    "payload": {
+      "source": "fixtures/PayloadEventEvidence.json",
+      "required": [
+        "accepted txid",
+        "payload bytes preserved",
+        "expected output amount/address matched",
+        "decoded app event kind matched"
+      ]
+    },
+    "proof": {
+      "source": "fixtures/AcceptedProofTransactions.json",
+      "required": [
+        "accepted txid",
+        "previous P2SH outpoint resolved",
+        "expected P2PK output matched",
+        "entrypoint/lane mapped to proof fixture"
+      ]
+    }
+  },
+  "boundaries": [
+    "This artifact is an adapter contract, not a live node subscription.",
+    "It does not require local kaspad.",
+    "It does not read wallet keys, sign, submit, or broadcast transactions.",
+    "Wallet-submit candidates stay candidates until the virtual-chain reader reports accepted matching evidence.",
+    "Accepted proof and payload counts are inherited from existing evidence artifacts; this lane does not create new accepted evidence."
+  ]
+}

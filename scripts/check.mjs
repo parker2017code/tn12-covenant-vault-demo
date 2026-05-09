@@ -66,6 +66,7 @@ import { summarizeWrpcCandidate } from "../src/wrpcSubmitCandidate.mjs";
 import { buildIndexerReplayPlan } from "../src/indexerReplayPlan.mjs";
 import { buildWalletConnectorAdapterRun } from "../src/walletConnectorAdapterRun.mjs";
 import { buildWalletConnectorSubmitLedger } from "../src/walletConnectorSubmitLedger.mjs";
+import { buildWalletSubmitResultValidation } from "../src/walletSubmitResultValidation.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "../src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
@@ -93,6 +94,7 @@ import { buildIndexerStorageSchema } from "../src/indexerStorageSchema.mjs";
 import { buildIndexerReplayRun } from "../src/indexerReplayRun.mjs";
 import { buildVirtualChainIngestionPlan } from "../src/virtualChainIngestion.mjs";
 import { buildVirtualChainIngestionRun } from "../src/virtualChainIngestionRun.mjs";
+import { buildVirtualChainReaderAdapter } from "../src/virtualChainReaderAdapter.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -292,6 +294,7 @@ const walletConnectorAdapterArtifact = JSON.parse(await readFile(new URL("../art
 assert.equal(walletConnectorAdapterArtifact.status, "adapter-dry-run-ready");
 assert.equal(walletConnectorAdapterArtifact.summary.reviewReady, 47);
 const walletSubmitResultsFixture = JSON.parse(await readFile(new URL("../fixtures/WalletConnectorSubmitResults.json", import.meta.url), "utf8"));
+const walletSubmitValidationFixture = JSON.parse(await readFile(new URL("../fixtures/WalletSubmitResultValidation.json", import.meta.url), "utf8"));
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
 assert.equal(escrowFundingDraft.contract, "Escrow");
 assert.equal(escrowFundingDraft.status, "signed-not-broadcast");
@@ -656,13 +659,16 @@ assert.equal(defiBacklog.summary.researchOnly, 4);
 assert.ok(defiBacklog.missingRails.includes("price oracle"));
 assert.ok(defiBacklog.briefs.some((brief) => brief.id === "prediction-hedge-simulator" && brief.status === "prototype-later"));
 const predictionFixture = JSON.parse(await readFile(new URL("../fixtures/PredictionHedgeSimulator.json", import.meta.url), "utf8"));
-const predictionSimulator = buildPredictionHedgeSimulator({ fixture: predictionFixture, attestationRegistry });
+const predictionSimulator = buildPredictionHedgeSimulator({ fixture: predictionFixture, attestationRegistry, attestationThresholds });
 assert.equal(predictionSimulator.status, "simulation-only");
 assert.equal(predictionSimulator.summary.markets, 3);
 assert.equal(predictionSimulator.summary.verifiedSignalInputs, 1);
+assert.equal(predictionSimulator.summary.thresholdAllowedSignalInputs, 0);
+assert.equal(predictionSimulator.summary.thresholdBlockedSignalInputs, 1);
 assert.ok(predictionSimulator.markets.some((market) => market.eventId === "event-exchange-listing-window" && market.ignoredSignals === 1));
 assert.ok(predictionSimulator.markets.some((market) => market.acceptedEvent?.txid === "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7"));
-assert.ok(predictionSimulator.suggestions.some((suggestion) => suggestion.status === "review-suggested"));
+assert.ok(predictionSimulator.markets.some((market) => market.eventId === "event-network-hashrate-shift" && market.status === "threshold-blocked"));
+assert.equal(predictionSimulator.summary.reviewSuggestions, 0);
 assert.ok(predictionSimulator.suggestions.some((suggestion) => suggestion.acceptedReview?.txid === "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d"));
 const stableValueFixture = JSON.parse(await readFile(new URL("../fixtures/StableValuePaths.json", import.meta.url), "utf8"));
 const stableValuePaths = buildStableValuePathRegistry(stableValueFixture);
@@ -919,6 +925,32 @@ assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 10);
 const virtualChainIngestionRunArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-run.json", import.meta.url), "utf8"));
 assert.equal(virtualChainIngestionRunArtifact.status, "fixture-virtual-chain-run-ready");
 assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, 33);
+const virtualChainReaderAdapterFixture = JSON.parse(await readFile(new URL("../fixtures/VirtualChainReaderAdapter.json", import.meta.url), "utf8"));
+const virtualChainReaderAdapter = buildVirtualChainReaderAdapter({
+  fixture: virtualChainReaderAdapterFixture,
+  checkpointIndex: checkpointFixture,
+  ingestionRun: virtualChainIngestionRunArtifact,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(virtualChainReaderAdapter.status, "virtual-chain-reader-adapter-ready");
+assert.equal(virtualChainReaderAdapter.endpoint.configEnv, "TN12_VIRTUAL_CHAIN_RPC_URL");
+assert.equal(virtualChainReaderAdapter.endpoint.method, "getVirtualChainFromBlockV2");
+assert.equal(virtualChainReaderAdapter.endpoint.dataVerbosity, "High");
+assert.equal(virtualChainReaderAdapter.bounds.localNodeRequired, false);
+assert.equal(virtualChainReaderAdapter.bounds.liveReadAttempted, false);
+assert.equal(virtualChainReaderAdapter.cursor.persistTable, "checkpoint_watermarks");
+assert.equal(virtualChainReaderAdapter.cursor.startBlueScore, checkpointFixture.checkpoint.maxAcceptingBlockBlueScore);
+assert.ok(virtualChainReaderAdapter.rollbackHandling.detectWhen.some((item) => /disappear/.test(item)));
+assert.ok(virtualChainReaderAdapter.retryBackoff.retryOn.includes("timeout"));
+assert.ok(virtualChainReaderAdapter.retryBackoff.doNotRetryOn.includes("wrong-network"));
+assert.equal(virtualChainReaderAdapter.matching.payload.currentMatchedRows, 26);
+assert.equal(virtualChainReaderAdapter.matching.proof.currentMatchedRows, 7);
+assert.equal(virtualChainReaderAdapter.summary.acceptedCountsChanged, false);
+assert.equal(virtualChainReaderAdapter.readinessChecks.fixtureReplayCompatible, true);
+const virtualChainReaderAdapterArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-reader-adapter.json", import.meta.url), "utf8"));
+assert.equal(virtualChainReaderAdapterArtifact.status, "virtual-chain-reader-adapter-ready");
+assert.equal(virtualChainReaderAdapterArtifact.summary.virtualChainRows, 33);
+assert.equal(virtualChainReaderAdapterArtifact.summary.localNodeRequired, false);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -941,6 +973,31 @@ assert.equal(walletSubmitLedgerArtifact.summary.acceptedEvidence, 3);
 assert.ok(walletSubmitLedgerArtifact.ledgerRows
   .filter((row) => row.state === "pending-wallet-submit")
   .every((row) => row.acceptedByVirtualChain === false));
+const walletSubmitResultValidation = buildWalletSubmitResultValidation({
+  adapterRun: walletConnectorAdapterArtifact,
+  submitResults: walletSubmitResultsFixture,
+  virtualChainRun: virtualChainIngestionRunArtifact,
+  validationFixture: walletSubmitValidationFixture,
+  runAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletSubmitResultValidation.status, "wallet-submit-result-validation-ready");
+assert.equal(walletSubmitResultValidation.liveWalletConnectorExists, false);
+assert.equal(walletSubmitResultValidation.summary.claims, 3);
+assert.equal(walletSubmitResultValidation.summary.validClaims, 3);
+assert.equal(walletSubmitResultValidation.summary.liveWalletPromotions, 0);
+assert.equal(walletSubmitResultValidation.summary.acceptedEvidencePromotions, 3);
+assert.equal(walletSubmitResultValidation.summary.negativeCases, 6);
+assert.equal(walletSubmitResultValidation.summary.caughtNegativeCases, 6);
+assert.equal(walletSubmitResultValidation.summary.v1ComputeBudgetSessionsPreserved, walletSubmitResultValidation.summary.computeBudgetSessions);
+assert.ok(walletSubmitResultValidation.actualRows.every((row) => row.promotion.state === "accepted-evidence-only"));
+assert.ok(walletSubmitResultValidation.negativeRows.some((row) => row.id === "forbidden-rest-route" && row.problems.includes("forbidden submit route")));
+assert.ok(walletSubmitResultValidation.negativeRows.some((row) => row.id === "missing-user-action" && row.problems.includes("live wallet result missing explicit user action")));
+assert.ok(walletSubmitResultValidation.negativeRows.some((row) => row.id === "compute-budget-lost" && row.problems.includes("transaction version mismatch")));
+const walletSubmitResultValidationArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-submit-result-validation.json", import.meta.url), "utf8"));
+assert.equal(walletSubmitResultValidationArtifact.status, "wallet-submit-result-validation-ready");
+assert.equal(walletSubmitResultValidationArtifact.liveWalletConnectorExists, false);
+assert.equal(walletSubmitResultValidationArtifact.summary.validClaims, 3);
+assert.equal(walletSubmitResultValidationArtifact.summary.caughtNegativeCases, 6);
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -1138,6 +1195,7 @@ const files = [
   "scripts/build-indexer-replay-run.mjs",
   "scripts/build-virtual-chain-ingestion-plan.mjs",
   "scripts/build-virtual-chain-ingestion-run.mjs",
+  "scripts/build-virtual-chain-reader-adapter.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -1150,6 +1208,7 @@ const files = [
   "scripts/build-wallet-connector-submit-requests.mjs",
   "scripts/build-wallet-connector-adapter-run.mjs",
   "scripts/build-wallet-connector-submit-ledger.mjs",
+  "scripts/build-wallet-submit-result-validation.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
@@ -1243,6 +1302,7 @@ const files = [
   "artifacts/wallet-connector-submit-requests.json",
   "artifacts/wallet-connector-adapter-run.json",
   "artifacts/wallet-connector-submit-ledger.json",
+  "artifacts/wallet-submit-result-validation.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
@@ -1275,6 +1335,7 @@ const files = [
   "artifacts/indexer-replay-run.json",
   "artifacts/virtual-chain-ingestion-plan.json",
   "artifacts/virtual-chain-ingestion-run.json",
+  "artifacts/virtual-chain-reader-adapter.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
   "artifacts/access-pass-planner.json",
@@ -1326,6 +1387,8 @@ const files = [
   "fixtures/BuildStatus.json",
   "fixtures/AiCodingSourceDiscipline.json",
   "fixtures/WalletConnectorSubmitResults.json",
+  "fixtures/WalletSubmitResultValidation.json",
+  "fixtures/VirtualChainReaderAdapter.json",
   "fixtures/EscrowContractOutpoint.json",
   "fixtures/EscrowDaaRefundContractOutpoint.json",
   "fixtures/EscrowCancelContractOutpoint.json",
@@ -1356,6 +1419,7 @@ const files = [
   "src/indexerReplayRun.mjs",
   "src/virtualChainIngestion.mjs",
   "src/virtualChainIngestionRun.mjs",
+  "src/virtualChainReaderAdapter.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/attestationReputationThresholds.mjs",
@@ -1367,6 +1431,7 @@ const files = [
   "src/walletConnectorSubmitRequests.mjs",
   "src/walletConnectorAdapterRun.mjs",
   "src/walletConnectorSubmitLedger.mjs",
+  "src/walletSubmitResultValidation.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
@@ -1449,6 +1514,7 @@ assert.match(readme, /npm run indexer:schema/);
 assert.match(readme, /npm run indexer:replay/);
 assert.match(readme, /npm run indexer:virtual-chain-plan/);
 assert.match(readme, /npm run indexer:virtual-chain-run/);
+assert.match(readme, /npm run indexer:virtual-chain-adapter/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
@@ -1465,6 +1531,7 @@ assert.match(readme, /npm run wallet:connector/);
 assert.match(readme, /npm run wallet:connector-requests/);
 assert.match(readme, /npm run wallet:adapter-run/);
 assert.match(readme, /npm run wallet:submit-ledger/);
+assert.match(readme, /npm run wallet:result-validation/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run escrow:marketplace/);
 assert.match(readme, /npm run research:library/);

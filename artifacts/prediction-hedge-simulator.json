@@ -6,7 +6,9 @@
     "markets": 3,
     "positions": 3,
     "verifiedSignalInputs": 1,
-    "reviewSuggestions": 1
+    "thresholdAllowedSignalInputs": 0,
+    "thresholdBlockedSignalInputs": 1,
+    "reviewSuggestions": 0
   },
   "markets": [
     {
@@ -17,17 +19,17 @@
       "userQuestion": "Should a miner-revenue-heavy plan be reviewed if stress probability rises?",
       "resolutionSource": "accepted attestation plus later public network observation",
       "baseProbability": 42,
-      "simulatedProbability": 59,
+      "simulatedProbability": 42,
       "verifiedSignalInputs": 1,
-      "ignoredSignals": 0,
-      "signalIds": [
-        "sig-rtd-hashrate-001"
-      ],
+      "thresholdAllowedSignalInputs": 0,
+      "thresholdBlockedSignalInputs": 1,
+      "ignoredSignals": 1,
+      "signalIds": [],
       "acceptedEvent": {
         "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
         "evidencePath": "artifacts/payload-prediction-market-network-stress-evidence.json"
       },
-      "status": "signal-adjusted"
+      "status": "threshold-blocked"
     },
     {
       "id": "market-listing-window",
@@ -39,6 +41,8 @@
       "baseProbability": 35,
       "simulatedProbability": 35,
       "verifiedSignalInputs": 0,
+      "thresholdAllowedSignalInputs": 0,
+      "thresholdBlockedSignalInputs": 0,
       "ignoredSignals": 1,
       "signalIds": [],
       "acceptedEvent": null,
@@ -54,6 +58,8 @@
       "baseProbability": 50,
       "simulatedProbability": 50,
       "verifiedSignalInputs": 0,
+      "thresholdAllowedSignalInputs": 0,
+      "thresholdBlockedSignalInputs": 0,
       "ignoredSignals": 1,
       "signalIds": [],
       "acceptedEvent": null,
@@ -96,14 +102,14 @@
     {
       "positionId": "position-miner-revenue",
       "marketId": "market-network-stress",
-      "status": "review-suggested",
-      "riskScore": 41,
+      "status": "watch",
+      "riskScore": 29,
       "acceptedReview": {
         "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
         "evidencePath": "artifacts/payload-prediction-hedge-position-miner-revenue-evidence.json"
       },
-      "action": "Review exposure and require explicit wallet review before any action.",
-      "reason": "59% simulated probability, 58% review threshold."
+      "action": "Watch only; no action suggested.",
+      "reason": "42% simulated probability, 58% review threshold."
     },
     {
       "positionId": "position-liquidity-event",
@@ -131,7 +137,7 @@
   ],
   "boundaries": [
     "This simulator does not custody funds, execute trades, create odds, or settle markets.",
-    "Signals affect a probability only when they are verified and anchored by accepted payload evidence.",
+    "Signals affect a probability only when they are verified, anchored by accepted payload evidence, and allowed by the attestation threshold artifact.",
     "Suggestions are review prompts for a user-owned plan, not financial advice or automatic execution."
   ]
 }

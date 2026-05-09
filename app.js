@@ -23,6 +23,7 @@ import {
   buildSignalPayloadArtifact
 } from "./src/signalPayload.mjs";
 import { buildAttestationRegistry } from "./src/attestationSignal.mjs";
+import { buildAttestationReputationThresholds } from "./src/attestationReputationThresholds.mjs";
 import { buildInvoiceRegistry } from "./src/invoiceReceipt.mjs";
 import { buildSubmitConsoleRegistry } from "./src/submitConsole.mjs";
 import { buildResearchLibrary } from "./src/appResearch.mjs";
@@ -1446,7 +1447,8 @@ async function renderPredictionHedgeSimulator() {
     const fixture = await fixtureResponse.json();
     const attestationFixture = await attestationResponse.json();
     const attestationRegistry = buildAttestationRegistry(attestationFixture);
-    const simulator = buildPredictionHedgeSimulator({ fixture, attestationRegistry });
+    const attestationThresholds = buildAttestationReputationThresholds({ attestationRegistry });
+    const simulator = buildPredictionHedgeSimulator({ fixture, attestationRegistry, attestationThresholds });
 
     predictionSummaryNode.innerHTML = `
       <article><span>Markets</span><strong>${escapeHtml(simulator.summary.markets)}</strong></article>
@@ -1466,7 +1468,7 @@ async function renderPredictionHedgeSimulator() {
         <span>${escapeHtml(market.status)}</span>
         <strong>${escapeHtml(market.name)}: ${escapeHtml(market.simulatedProbability)}%</strong>
         <p>${escapeHtml(market.userQuestion)}</p>
-        <small>${escapeHtml(market.verifiedSignalInputs)} verified inputs; ${escapeHtml(market.ignoredSignals)} ignored draft inputs. ${escapeHtml(acceptedEventText)}</small>
+        <small>${escapeHtml(market.verifiedSignalInputs)} verified inputs; ${escapeHtml(market.thresholdAllowedSignalInputs)} threshold-allowed; ${escapeHtml(market.thresholdBlockedSignalInputs)} threshold-blocked. ${escapeHtml(acceptedEventText)}</small>
       `;
       predictionMarketsNode.append(article);
     }

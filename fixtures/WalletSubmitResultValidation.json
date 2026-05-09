@@ -1,0 +1,181 @@
+{
+  "schema": "tn12-wallet-submit-result-validation-fixture/v1",
+  "reviewedAt": "2026-05-09",
+  "liveWalletConnectorExists": false,
+  "policy": {
+    "acceptedEvidenceStatuses": [
+      "accepted-evidence-already-recorded"
+    ],
+    "submittedStatuses": [
+      "submitted"
+    ],
+    "errorStatuses": [
+      "rejected",
+      "error"
+    ],
+    "allowedPayloadRoutes": [
+      "json-wrpc",
+      "payload-preserving-wallet",
+      "payload-preserving-wallet-or-json-wrpc"
+    ],
+    "allowedExactRoutes": [
+      "wallet-exact-transaction-submit"
+    ],
+    "forbiddenRoutes": [
+      "rest-submit",
+      "public-rest-submit",
+      "payload-dropping-rest"
+    ],
+    "requireExplicitUserActionForLiveWalletSubmit": true,
+    "promotionRequiresAcceptedEvidence": true,
+    "promotionRequiresVirtualChainAcceptance": true
+  },
+  "claims": [
+    {
+      "requestId": "wreq-6cfe79da",
+      "sessionId": "review-wreq-6cfe79da",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "expectedFingerprint": "fp-7de55774",
+      "expectedRoute": "payload-preserving-wallet-or-json-wrpc",
+      "returnedRoute": "json-wrpc",
+      "expectedPayloadBytes": 127,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/payload-receipt-evidence.json",
+      "userAction": {
+        "explicit": false,
+        "kind": "historical-json-wrpc-evidence"
+      }
+    },
+    {
+      "requestId": "wreq-0d276be0",
+      "sessionId": "review-wreq-0d276be0",
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "expectedFingerprint": "fp-fd173d58",
+      "expectedRoute": "payload-preserving-wallet-or-json-wrpc",
+      "returnedRoute": "json-wrpc",
+      "expectedPayloadBytes": 135,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/payload-refund-evidence.json",
+      "userAction": {
+        "explicit": false,
+        "kind": "historical-json-wrpc-evidence"
+      }
+    },
+    {
+      "requestId": "wreq-c3d8c6a4",
+      "sessionId": "review-wreq-c3d8c6a4",
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "expectedFingerprint": "fp-074cd5d2",
+      "expectedRoute": "payload-preserving-wallet-or-json-wrpc",
+      "returnedRoute": "json-wrpc",
+      "expectedPayloadBytes": 130,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/payload-error-evidence.json",
+      "userAction": {
+        "explicit": false,
+        "kind": "historical-json-wrpc-evidence"
+      }
+    }
+  ],
+  "negativeCases": [
+    {
+      "id": "wrong-session-fingerprint",
+      "requestId": "wreq-6cfe79da",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "expectedFingerprint": "fp-deadbeef",
+      "returnedRoute": "json-wrpc",
+      "expectedPayloadBytes": 127,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/payload-receipt-evidence.json",
+      "userAction": {
+        "explicit": false,
+        "kind": "historical-json-wrpc-evidence"
+      }
+    },
+    {
+      "id": "payload-byte-mismatch",
+      "requestId": "wreq-0d276be0",
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "expectedFingerprint": "fp-fd173d58",
+      "returnedRoute": "json-wrpc",
+      "expectedPayloadBytes": 134,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/payload-refund-evidence.json",
+      "userAction": {
+        "explicit": false,
+        "kind": "historical-json-wrpc-evidence"
+      }
+    },
+    {
+      "id": "forbidden-rest-route",
+      "requestId": "wreq-c3d8c6a4",
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "expectedFingerprint": "fp-074cd5d2",
+      "returnedRoute": "rest-submit",
+      "expectedPayloadBytes": 130,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/payload-error-evidence.json",
+      "userAction": {
+        "explicit": false,
+        "kind": "historical-json-wrpc-evidence"
+      }
+    },
+    {
+      "id": "compute-budget-lost",
+      "requestId": "wreq-5dd4b1ef",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "expectedFingerprint": "fp-7d1c3f9a",
+      "returnedRoute": "wallet-exact-transaction-submit",
+      "expectedPayloadBytes": 0,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/proof-evidence.json",
+      "userAction": {
+        "explicit": true,
+        "kind": "wallet-user-approved-submit"
+      }
+    },
+    {
+      "id": "missing-user-action",
+      "requestId": "wreq-5dd4b1ef",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "expectedFingerprint": "fp-7d1c3f9a",
+      "returnedRoute": "wallet-exact-transaction-submit",
+      "expectedPayloadBytes": 0,
+      "expectedVersion": 1,
+      "expectedComputeBudgetInputs": 1,
+      "acceptedEvidencePath": "artifacts/proof-evidence.json",
+      "userAction": {
+        "explicit": false,
+        "kind": "wallet-user-approved-submit"
+      }
+    },
+    {
+      "id": "promotion-without-accepted-evidence",
+      "requestId": "wreq-68feaa92",
+      "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+      "expectedFingerprint": "fp-a1056169",
+      "returnedRoute": "payload-preserving-wallet",
+      "expectedPayloadBytes": 182,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "",
+      "userAction": {
+        "explicit": true,
+        "kind": "wallet-user-approved-submit"
+      }
+    }
+  ],
+  "boundaries": [
+    "This fixture validates result shape and promotion rules only.",
+    "No live wallet connector exists in this repo yet.",
+    "Historical JSON wRPC evidence can be accepted evidence without proving wallet-connector liveness.",
+    "Future wallet-submitted results must include explicit user action and accepted virtual-chain evidence before promotion."
+  ]
+}
