@@ -99,6 +99,9 @@ try {
   await expectText(page, "#auction-summary", "Accepted");
   await expectText(page, "#auction-list", "Kaspa dev workshop sponsor pass");
   await expectText(page, "#auction-list", "do not claim atomic exchange");
+  await expectText(page, "#auction-list", "Auction custody review");
+  await expectText(page, "#auction-list", "auction-custody-review-ready");
+  await expectText(page, "#auction-list", "0 custody-ready");
   await expectText(page, "#defi-summary", "Missing rails");
   await expectText(page, "#defi-list", "Lending risk dashboard");
   await expectText(page, "#defi-list", "price oracle");

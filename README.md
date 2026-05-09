@@ -493,7 +493,7 @@ npm run auction:settlement-drafts
 npm run auction:custody-review
 ```
 
-This turns `fixtures/AuctionIntentPrototype.json` into `artifacts/auction-intents.json` and `artifacts/auction-settlement-drafts.json`. It ranks accepted bid payloads for planner-side winner/refund state, then lists winner-release and loser-refund draft records. It is not MEV-resistant, does not prove bid custody, and does not enforce atomic asset exchange.
+This turns `fixtures/AuctionIntentPrototype.json` into `artifacts/auction-intents.json`, `artifacts/auction-settlement-drafts.json`, and `artifacts/auction-custody-review.json`. It ranks accepted bid payloads for planner-side winner/refund state, lists winner-release and loser-refund draft records, then records the custody sources still required before submit. It is not MEV-resistant, does not prove bid custody, and does not enforce atomic asset exchange.
 
 Build the DeFi research backlog:
 

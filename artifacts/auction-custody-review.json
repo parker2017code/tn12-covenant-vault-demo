@@ -1,7 +1,7 @@
 {
   "schema": "kaspa-auction-custody-review/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:21:06.724Z",
+  "generatedAt": "2026-05-09T21:11:27.416Z",
   "status": "auction-custody-review-ready",
   "summary": {
     "drafts": 3,

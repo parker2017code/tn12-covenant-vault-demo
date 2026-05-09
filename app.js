@@ -825,6 +825,20 @@ async function renderAuctionIntents() {
       `;
       auctionListNode.append(article);
     }
+
+    const custodyResponse = await fetch("artifacts/auction-custody-review.json", { cache: "no-store" });
+    if (custodyResponse.ok) {
+      const custody = await custodyResponse.json();
+      const article = document.createElement("article");
+      article.className = "auction-card";
+      article.innerHTML = `
+        <span>${escapeHtml(custody.status)}</span>
+        <strong>Auction custody review</strong>
+        <p>${escapeHtml(custody.summary.drafts)} settlement rows; ${escapeHtml(custody.summary.custodyReadyRows)} custody-ready.</p>
+        <small>${escapeHtml(custody.requiredBeforeSubmit.join(" | "))}</small>
+      `;
+      auctionListNode.append(article);
+    }
   } catch (error) {
     auctionSummaryNode.textContent = `Auction intent prototype unavailable: ${error.message}`;
   }
