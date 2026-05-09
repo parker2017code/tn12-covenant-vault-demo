@@ -3,9 +3,12 @@ import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRun
 
 const adapter = JSON.parse(await readFile(process.env.VIRTUAL_CHAIN_ADAPTER || "artifacts/virtual-chain-reader-adapter.json", "utf8"));
 const preflight = JSON.parse(await readFile(process.env.VIRTUAL_CHAIN_PREFLIGHT || "artifacts/virtual-chain-live-preflight.json", "utf8"));
+const endpointProbe = await readOptionalJson(process.env.TN12_WRPC_ENDPOINT_PROBE || "artifacts/tn12-wrpc-endpoint-probe.json");
+const liveWindow = await readOptionalJson(process.env.VIRTUAL_CHAIN_LIVE_WINDOW || "artifacts/virtual-chain-live-window.json");
+const checkpointComparison = await readOptionalJson(process.env.VIRTUAL_CHAIN_CHECKPOINT_COMPARISON || "artifacts/virtual-chain-checkpoint-comparison.json");
 const outPath = process.env.OUT || "artifacts/virtual-chain-endpoint-runbook.json";
 
-const runbook = buildVirtualChainEndpointRunbook({ adapter, preflight });
+const runbook = buildVirtualChainEndpointRunbook({ adapter, preflight, endpointProbe, liveWindow, checkpointComparison });
 
 await mkdir("artifacts", { recursive: true });
 await writeFile(outPath, `${JSON.stringify(runbook, null, 2)}\n`);
@@ -13,3 +16,11 @@ await writeFile(outPath, `${JSON.stringify(runbook, null, 2)}\n`);
 console.log(outPath);
 console.log(`status=${runbook.status}`);
 console.log(`blockingChecks=${runbook.summary.blockingChecks}`);
+
+async function readOptionalJson(path) {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return null;
+  }
+}

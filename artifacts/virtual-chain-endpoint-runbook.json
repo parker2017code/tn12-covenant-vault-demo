@@ -1,13 +1,17 @@
 {
   "schema": "tn12-virtual-chain-endpoint-runbook/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:30:07.343Z",
-  "status": "endpoint-runbook-needs-endpoint",
+  "generatedAt": "2026-05-09T21:20:30.689Z",
+  "status": "endpoint-runbook-live-tested-no-promotion",
   "summary": {
     "endpointConfigured": false,
     "blockingChecks": 1,
     "localNodeRequired": false,
-    "fixtureReplayCompatible": true
+    "fixtureReplayCompatible": true,
+    "probeReady": true,
+    "liveWindowReady": true,
+    "comparisonReady": true,
+    "appStatePromoted": false
   },
   "env": {
     "required": "TN12_VIRTUAL_CHAIN_RPC_URL",
@@ -24,6 +28,17 @@
     "Persist checkpoint only after rollback and payload/proof matching checks pass."
   ],
   "promotionRule": "A transaction becomes app state only after the virtual-chain window reports the accepted txid and the reducer matches payload or output rules.",
+  "latestLiveEvidence": {
+    "endpoint": "ws://65.108.107.30:18210",
+    "serverVersion": "1.1.1-toc.1",
+    "virtualDaaScore": "7509992",
+    "acceptedTransactions": 13,
+    "payloadTransactions": 3,
+    "computeBudgetInputs": 10,
+    "rollbackRows": 1,
+    "matchedCheckpointRows": 0,
+    "decision": "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it."
+  },
   "blocking": [
     {
       "id": "endpoint-configured",

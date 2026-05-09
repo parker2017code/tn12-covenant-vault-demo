@@ -1224,12 +1224,18 @@ assert.equal(virtualChainLivePreflightArtifact.status, "live-preflight-blocked")
 const virtualChainEndpointRunbook = buildVirtualChainEndpointRunbook({
   adapter: virtualChainReaderAdapterArtifact,
   preflight: virtualChainLivePreflightArtifact,
+  endpointProbe: JSON.parse(await readFile(new URL("../artifacts/tn12-wrpc-endpoint-probe.json", import.meta.url), "utf8")),
+  liveWindow: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-window.json", import.meta.url), "utf8")),
+  checkpointComparison: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-checkpoint-comparison.json", import.meta.url), "utf8")),
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
-assert.equal(virtualChainEndpointRunbook.status, "endpoint-runbook-needs-endpoint");
+assert.equal(virtualChainEndpointRunbook.status, "endpoint-runbook-live-tested-no-promotion");
 assert.equal(virtualChainEndpointRunbook.summary.blockingChecks, 1);
+assert.equal(virtualChainEndpointRunbook.summary.probeReady, true);
+assert.equal(virtualChainEndpointRunbook.summary.liveWindowReady, true);
+assert.equal(virtualChainEndpointRunbook.summary.appStatePromoted, false);
 const virtualChainEndpointRunbookArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-endpoint-runbook.json", import.meta.url), "utf8"));
-assert.equal(virtualChainEndpointRunbookArtifact.status, "endpoint-runbook-needs-endpoint");
+assert.equal(virtualChainEndpointRunbookArtifact.status, "endpoint-runbook-live-tested-no-promotion");
 const tn12WrpcEndpointProbeArtifact = JSON.parse(await readFile(new URL("../artifacts/tn12-wrpc-endpoint-probe.json", import.meta.url), "utf8"));
 assert.equal(tn12WrpcEndpointProbeArtifact.status, "tn12-wrpc-endpoint-probe-ready");
 assert.equal(tn12WrpcEndpointProbeArtifact.observed.dagNetwork, "testnet-12");
