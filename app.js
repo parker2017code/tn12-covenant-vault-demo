@@ -556,6 +556,20 @@ async function renderTreasuryVaults() {
       `;
       treasuryListNode.append(article);
     }
+
+    const reviewResponse = await fetch("artifacts/treasury-role-review.json", { cache: "no-store" });
+    if (reviewResponse.ok) {
+      const review = await reviewResponse.json();
+      const article = document.createElement("article");
+      article.className = "treasury-card";
+      article.innerHTML = `
+        <span>${escapeHtml(review.status)}</span>
+        <strong>Treasury role review</strong>
+        <p>${escapeHtml(review.summary.drafts)} spend rows; ${escapeHtml(review.summary.roleSeparatedRows)} role-separated; ${escapeHtml(review.summary.sourceUtxoRows)} source-UTXO rows.</p>
+        <small>${escapeHtml(review.boundaries.join(" | "))}</small>
+      `;
+      treasuryListNode.append(article);
+    }
   } catch (error) {
     treasurySummaryNode.textContent = `Treasury registry unavailable: ${error.message}`;
   }

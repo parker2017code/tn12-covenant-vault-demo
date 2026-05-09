@@ -82,6 +82,9 @@ try {
   await expectText(page, "#treasury-summary", "Payroll");
   await expectText(page, "#treasury-list", "Core team operating vault");
   await expectText(page, "#treasury-list", "Review delayed large withdrawal");
+  await expectText(page, "#treasury-list", "Treasury role review");
+  await expectText(page, "#treasury-list", "treasury-role-review-ready");
+  await expectText(page, "#treasury-list", "0 source-UTXO rows");
   await expectText(page, "#coordination-summary", "Intendos");
   await expectText(page, "#coordination-summary", "Routes");
   await expectText(page, "#coordination-packs", "pack-stag-docs-sprint");

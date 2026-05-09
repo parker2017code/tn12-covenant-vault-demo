@@ -440,7 +440,7 @@ npm run treasury:spends
 npm run treasury:role-review
 ```
 
-This turns `fixtures/TreasuryVaults.json` into `artifacts/treasury-vaults.json` and `artifacts/treasury-constrained-spends.json`. Current script proof covers delayed withdrawal and recovery primitives; payroll and spend caps remain wallet-policy/planner state until hardened. The constrained-spends artifact lists payroll and delayed-withdrawal drafts with cap, balance, delay, recipient, and wallet-review checks; it is not full treasury governance enforcement.
+This turns `fixtures/TreasuryVaults.json` into `artifacts/treasury-vaults.json`, `artifacts/treasury-constrained-spends.json`, and `artifacts/treasury-role-review.json`. Current script proof covers delayed withdrawal and recovery primitives; payroll and spend caps remain wallet-policy/planner state until hardened. The constrained-spends artifact lists payroll and delayed-withdrawal drafts with cap, balance, delay, recipient, and wallet-review checks. The role-review artifact keeps missing exact source UTXOs and role-separated treasury signers visible; it is not full treasury governance enforcement.
 
 Build the transparent coordination-market prototype:
 
