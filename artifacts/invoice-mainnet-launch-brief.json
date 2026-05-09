@@ -1,7 +1,7 @@
 {
   "schema": "kaspa-invoice-mainnet-launch-brief/v1",
   "network": "kaspa-mainnet-readiness-review",
-  "generatedAt": "2026-05-09T13:21:07.728Z",
+  "generatedAt": "2026-05-09T21:14:13.703Z",
   "status": "invoice-mainnet-brief-ready",
   "component": {
     "id": "invoice-payload-receipts",

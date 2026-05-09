@@ -647,6 +647,20 @@ async function renderAccessPassPlanner() {
       `;
       accessListNode.append(article);
     }
+
+    const issuerReviewResponse = await fetch("artifacts/access-pass-issuer-review.json", { cache: "no-store" });
+    if (issuerReviewResponse.ok) {
+      const review = await issuerReviewResponse.json();
+      const article = document.createElement("article");
+      article.className = "access-card";
+      article.innerHTML = `
+        <span>${escapeHtml(review.status)}</span>
+        <strong>Issuer review</strong>
+        <p>${escapeHtml(review.summary.countableRedemptions)} counted redemption; ${escapeHtml(review.summary.issuerReviewRequired)} passes require issuer review.</p>
+        <small>${escapeHtml(review.boundaries.join(" | "))}</small>
+      `;
+      accessListNode.append(article);
+    }
   } catch (error) {
     accessSummaryNode.textContent = `Access pass planner unavailable: ${error.message}`;
   }
@@ -675,6 +689,20 @@ async function renderMainnetReadiness() {
         <strong>${escapeHtml(component.name)}</strong>
         <p>${escapeHtml(component.why)}</p>
         <small>${escapeHtml(component.next)}</small>
+      `;
+      mainnetComponentsNode.append(article);
+    }
+
+    const invoiceBriefResponse = await fetch("artifacts/invoice-mainnet-launch-brief.json", { cache: "no-store" });
+    if (invoiceBriefResponse.ok) {
+      const brief = await invoiceBriefResponse.json();
+      const article = document.createElement("article");
+      article.className = "mainnet-card";
+      article.innerHTML = `
+        <span>${escapeHtml(brief.status)}</span>
+        <strong>Invoice mainnet launch brief</strong>
+        <p>${escapeHtml(brief.summary.paid)} paid; ${escapeHtml(brief.summary.refunded)} refunded; ${escapeHtml(brief.summary.blockers)} blockers.</p>
+        <small>${escapeHtml(brief.launchRule)}</small>
       `;
       mainnetComponentsNode.append(article);
     }

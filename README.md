@@ -466,7 +466,7 @@ npm run access:passes
 npm run access:issuer-review
 ```
 
-This turns `fixtures/AccessPassPlanner.json` into `artifacts/access-pass-planner.json`. Passes and redemptions are issuer/indexer flows, not native covenant-enforced tickets.
+This turns `fixtures/AccessPassPlanner.json` into `artifacts/access-pass-planner.json` and `artifacts/access-pass-issuer-review.json`. Passes and redemptions are issuer/indexer flows, not native covenant-enforced tickets. The issuer review artifact keeps expiry, issuer confirmation, duplicate, and accepted-txid checks visible before any off-chain access or discount is honored.
 
 Build the mainnet-readiness map:
 
@@ -475,7 +475,7 @@ npm run mainnet:readiness
 npm run invoice:mainnet-brief
 ```
 
-This turns `fixtures/MainnetReadiness.json` into `artifacts/mainnet-readiness.json`. It separates components that can become mainnet payment/indexer products from TN12/Toccata-only covenant work and research-only lanes.
+This turns `fixtures/MainnetReadiness.json` into `artifacts/mainnet-readiness.json` and `artifacts/invoice-mainnet-launch-brief.json`. It separates components that can become mainnet payment/indexer products from TN12/Toccata-only covenant work and research-only lanes. The invoice launch brief keeps wallet integration, durable replay, duplicate/refund policy, and monitoring blockers explicit before any mainnet product claim.
 
 Build the simple asset policy registry:
 

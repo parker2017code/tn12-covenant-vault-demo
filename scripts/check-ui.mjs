@@ -93,9 +93,13 @@ try {
   await expectText(page, "#access-summary", "Redeemed");
   await expectText(page, "#access-list", "Kaspa dev workshop ticket");
   await expectText(page, "#access-list", "issuer-indexer");
+  await expectText(page, "#access-list", "Issuer review");
+  await expectText(page, "#access-list", "access-pass-issuer-review-ready");
   await expectText(page, "#mainnet-summary", "Mainnet paths");
   await expectText(page, "#mainnet-components", "Invoice / payload receipts");
   await expectText(page, "#mainnet-components", "tn12-toccata-only");
+  await expectText(page, "#mainnet-components", "Invoice mainnet launch brief");
+  await expectText(page, "#mainnet-components", "invoice-mainnet-brief-ready");
   await expectText(page, "#asset-summary", "Covenant");
   await expectText(page, "#asset-list", "Recoverable voucher");
   await expectText(page, "#asset-list", "future-covenant-native");
