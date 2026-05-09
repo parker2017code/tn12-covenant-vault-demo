@@ -32,6 +32,7 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 ## Failure Modes To Avoid
 
 - Inflated surface area: many lanes and JSON artifacts can make a small proof kernel look like a product suite. Lead with accepted txids, scripts, and SDK lessons, not lane count.
+- Scaffolding outgrowing substance: repo memory, status dashboards, and AI guidance are useful only when they make the accepted TN12 proofs and wallet/indexer rails easier to verify or extend.
 - Fixture transformation as faux progress: a script that reads one JSON file and writes another is useful only if it catches a bug, tightens a claim, or drives the next transaction.
 - Roadmap language sounding like implementation: words such as app, market, DeFi, stable-value, agent, and coordination must stay research/planner-labeled until custody, settlement, wallet, indexer, and failure paths exist.
 - Repetitive boundary prose: restating every non-claim everywhere makes the repo read like machine output. Put boundaries once in the right artifact and keep public copy shorter.

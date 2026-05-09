@@ -1,0 +1,18 @@
+{
+  "schema": "tn12-batch-assurance-operator-decision-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "campaignId": "kaspa-dev-docs-sprint",
+  "decision": {
+    "selectedPath": "hold-review",
+    "reason": "Keep accepted pledge outputs unspent until wallet-standard signing and checkpoint-overlap replay are ready.",
+    "submitNow": false,
+    "decidedBy": "repo-operator",
+    "decidedAt": "2026-05-09"
+  },
+  "requiredBeforeSubmit": [
+    "external signer route or explicit local-testnet override",
+    "selected release/refund path reviewed against wallet-standard request validation",
+    "post-submit checkpoint and mutually exclusive alternate-path update plan",
+    "operator confirms release or refund consequences"
+  ]
+}

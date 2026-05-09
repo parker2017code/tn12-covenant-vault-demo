@@ -154,6 +154,7 @@ Accepted role-separated proof state:
 
 Current WIP:
 
+- Feedback to preserve: the real value is the accepted TN12 covenant proof work, role-separated repeats, payload preservation, wallet/indexer rails, and enforcement boundaries. The LLM-friendly scaffolding is useful only if it keeps that kernel verifiable and easier to extend; avoid letting docs/status surfaces inflate the project beyond the proof evidence.
 - Paused on 2026-05-09 at the user's request after continuing from commit `bd7b15d`.
   - Do not assume this work is committed yet. `git status --short` showed uncommitted TN12 edits in `AGENTS.md`, `CONTEXT.md`, `MEMORY.md`, `README.md`, `app.js`, AI discipline docs/fixtures/artifact, next-ten/progress/completion docs, `package.json`, `scripts/check-ui.mjs`, `scripts/check.mjs`, plus new virtual-chain live-window/replay-row and wallet-signer-validation files/artifacts.
   - Kaspa Explained also has one uncommitted edit in `AGENTS.md`: the continue-until-stop rule.

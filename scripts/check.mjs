@@ -81,8 +81,10 @@ import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRun
 import { summarizeTn12WrpcEndpointProbe } from "../src/tn12WrpcEndpointProbe.mjs";
 import { summarizeVirtualChainLiveWindow } from "../src/virtualChainLiveWindow.mjs";
 import { buildVirtualChainLiveReplayRows } from "../src/virtualChainLiveReplayRows.mjs";
+import { buildVirtualChainCheckpointComparison } from "../src/virtualChainCheckpointComparison.mjs";
 import { buildBatchAssuranceSettlementDecision } from "../src/batchAssuranceSettlementDecision.mjs";
 import { buildBatchAssuranceSubmitRunbook } from "../src/batchAssuranceSubmitRunbook.mjs";
+import { buildBatchAssuranceOperatorDecision } from "../src/batchAssuranceOperatorDecision.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "../src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
@@ -599,6 +601,23 @@ assert.equal(batchSubmitRunbook.status, "release-path-review-ready");
 assert.equal(batchSubmitRunbook.summary.readyImports, 3);
 const batchSubmitRunbookArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-submit-runbook.json", import.meta.url), "utf8"));
 assert.equal(batchSubmitRunbookArtifact.status, "release-path-review-ready");
+const batchOperatorDecisionFixture = JSON.parse(await readFile(new URL("../fixtures/BatchAssuranceOperatorDecision.json", import.meta.url), "utf8"));
+const batchOperatorDecision = buildBatchAssuranceOperatorDecision({
+  decisionFixture: batchOperatorDecisionFixture,
+  settlementDecision: batchSettlementDecisionArtifact,
+  settlementDrafts: batchSettlementDrafts,
+  walletSignerValidation: JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8")),
+  checkpointComparison: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-checkpoint-comparison.json", import.meta.url), "utf8")),
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(batchOperatorDecision.status, "operator-hold-review");
+assert.equal(batchOperatorDecision.selectedPath, "hold-review");
+assert.equal(batchOperatorDecision.submitNow, false);
+assert.ok(batchOperatorDecision.blockers.includes("external signer accepted result missing"));
+assert.ok(batchOperatorDecision.blockers.includes("live indexer checkpoint overlap missing"));
+const batchOperatorDecisionArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-operator-decision.json", import.meta.url), "utf8"));
+assert.equal(batchOperatorDecisionArtifact.status, "operator-hold-review");
+assert.equal(batchOperatorDecisionArtifact.submitNow, false);
 assert.equal(batchReleaseDraft.kind, "release");
 assert.equal(batchReleaseDraft.inputs.length, 3);
 assert.equal(batchReleaseDraft.submitPayload.transaction.inputs.length, 3);
@@ -1262,6 +1281,18 @@ const liveReplayRowsArtifact = JSON.parse(await readFile(new URL("../artifacts/v
 assert.equal(liveReplayRowsArtifact.status, "virtual-chain-live-replay-rows-ready");
 assert.equal(liveReplayRowsArtifact.appStatePromoted, false);
 assert.match(liveReplayRowsArtifact.promotionGate.join(" "), /trusted overlap/);
+const checkpointComparison = buildVirtualChainCheckpointComparison({
+  liveReplayRows: liveReplayRowsArtifact,
+  checkpointIndex: checkpointFixture,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(checkpointComparison.status, "live-window-near-tip-no-checkpoint-overlap");
+assert.equal(checkpointComparison.appStatePromoted, false);
+assert.equal(checkpointComparison.summary.overlapReady, false);
+assert.match(checkpointComparison.nextStep, /checkpoint-derived block hash/);
+const checkpointComparisonArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-checkpoint-comparison.json", import.meta.url), "utf8"));
+assert.equal(checkpointComparisonArtifact.status, "live-window-near-tip-no-checkpoint-overlap");
+assert.equal(checkpointComparisonArtifact.appStatePromoted, false);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -1627,6 +1658,7 @@ const files = [
   "scripts/probe-tn12-wrpc-endpoint.mjs",
   "scripts/read-virtual-chain-live-window.mjs",
   "scripts/build-virtual-chain-live-replay-rows.mjs",
+  "scripts/build-virtual-chain-checkpoint-comparison.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -1661,6 +1693,7 @@ const files = [
   "scripts/build-batch-assurance-custody-imports.mjs",
   "scripts/build-batch-assurance-settlement-decision.mjs",
   "scripts/build-batch-assurance-submit-runbook.mjs",
+  "scripts/build-batch-assurance-operator-decision.mjs",
   "scripts/build-enforcement-matrix.mjs",
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-escrow-marketplace-demo.mjs",
@@ -1773,6 +1806,7 @@ const files = [
   "artifacts/batch-assurance-settlement-drafts.json",
   "artifacts/batch-assurance-settlement-decision.json",
   "artifacts/batch-assurance-submit-runbook.json",
+  "artifacts/batch-assurance-operator-decision.json",
   "artifacts/signed-drafts/batch-assurance-pledge-funding.json",
   "artifacts/signed-drafts/batch-assurance-release.json",
   "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json",
@@ -1806,6 +1840,7 @@ const files = [
   "artifacts/tn12-wrpc-endpoint-probe.json",
   "artifacts/virtual-chain-live-window.json",
   "artifacts/virtual-chain-live-replay-rows.json",
+  "artifacts/virtual-chain-checkpoint-comparison.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
   "artifacts/access-pass-planner.json",
@@ -1901,6 +1936,7 @@ const files = [
   "src/tn12WrpcEndpointProbe.mjs",
   "src/virtualChainLiveWindow.mjs",
   "src/virtualChainLiveReplayRows.mjs",
+  "src/virtualChainCheckpointComparison.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/attestationReputationThresholds.mjs",
@@ -1934,6 +1970,7 @@ const files = [
   "src/batchAssuranceCustodyImports.mjs",
   "src/batchAssuranceSettlementDecision.mjs",
   "src/batchAssuranceSubmitRunbook.mjs",
+  "src/batchAssuranceOperatorDecision.mjs",
   "src/enforcementMatrix.mjs",
   "src/escrowPrimitive.mjs",
   "src/escrowMarketplaceDemo.mjs",

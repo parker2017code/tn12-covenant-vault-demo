@@ -1,0 +1,22 @@
+{
+  "schema": "tn12-virtual-chain-checkpoint-comparison/v1",
+  "network": "testnet-12",
+  "generatedAt": "2026-05-09T15:48:31.373Z",
+  "status": "live-window-near-tip-no-checkpoint-overlap",
+  "appStatePromoted": false,
+  "summary": {
+    "checkpointRecords": 36,
+    "checkpointTxids": 34,
+    "liveAcceptedRows": 8,
+    "matchedCheckpointRows": 0,
+    "liveRollbackRows": 0,
+    "overlapReady": false
+  },
+  "matchedRows": [],
+  "decision": "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it.",
+  "nextStep": "Start the live reader from a checkpoint-derived block hash or trusted overlap window, not from current sink only.",
+  "boundaries": [
+    "Endpoint and V2 response are working, but app-state promotion still needs overlap or deterministic reducer replay.",
+    "No checkpoint watermark is advanced by this artifact."
+  ]
+}

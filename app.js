@@ -380,6 +380,8 @@ async function renderBatchAssuranceCampaign() {
     const custodyDrafts = await custodyResponse.json();
     const requirementsResponse = await fetch("artifacts/batch-assurance-custody-requirements.json", { cache: "no-store" });
     const custodyRequirements = await requirementsResponse.json();
+    const operatorResponse = await fetch("artifacts/batch-assurance-operator-decision.json", { cache: "no-store" });
+    const operatorDecision = await operatorResponse.json();
     campaignSummaryNode.innerHTML = `
       <article><span>Accepted</span><strong>${escapeHtml(campaign.summary.acceptedTkas)} / ${escapeHtml(campaign.summary.targetTkas)}</strong></article>
       <article><span>Progress</span><strong>${escapeHtml(Math.round(campaign.summary.acceptedProgress * 100))}%</strong></article>
@@ -421,6 +423,12 @@ async function renderBatchAssuranceCampaign() {
             ? "Settlement drafts are signed-not-broadcast; choose release or refund explicitly before submit."
             : `${escapeHtml(custodyRequirements.summary.blockedCount)} accepted pledge-output references must be replaced before release.`}</p>
           <small>${escapeHtml(custodyRequirements.nextBuilds[0]?.detail || "Review the custody settlement path next.")}</small>
+        </article>
+        <article>
+          <span>${escapeHtml(operatorDecision.status)}</span>
+          <strong>${escapeHtml(operatorDecision.selectedPath)}</strong>
+          <p>${escapeHtml(operatorDecision.operatorReason)}</p>
+          <small>${escapeHtml(operatorDecision.blockers.join("; ") || operatorDecision.decisionRule)}</small>
         </article>
       `;
     }

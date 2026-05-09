@@ -66,6 +66,7 @@ try {
   await expectText(page, "#campaign-summary", "release-ready-from-accepted-pledges");
   await expectText(page, "#campaign-plans", "Release plan");
   await expectText(page, "#campaign-plans", "ready-to-draft-batch-release");
+  await expectText(page, "#campaign-custody", "operator-hold-review");
   await expectText(page, "#campaign-pledges", "pledge-docs-004");
   await expectText(page, "#campaign-pledges", "pledge-docs-005");
   await expectText(page, "#enforcement-summary", "Script");

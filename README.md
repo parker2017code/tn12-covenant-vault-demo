@@ -297,9 +297,10 @@ npm run indexer:live-preflight
 npm run indexer:endpoint-runbook
 TN12_VIRTUAL_CHAIN_RPC_URL=<ws-or-wrpc-endpoint> npm run indexer:wrpc-probe
 KASPA_WASM_MODULE=<tn12-sdk-path> TN12_VIRTUAL_CHAIN_RPC_URL=<ws-or-wrpc-endpoint> npm run indexer:live-window
+npm run indexer:checkpoint-compare
 ```
 
-This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, `artifacts/indexer-replay-run.json`, `artifacts/virtual-chain-ingestion-plan.json`, `artifacts/virtual-chain-ingestion-run.json`, `artifacts/virtual-chain-reader-adapter.json`, `artifacts/virtual-chain-live-preflight.json`, `artifacts/virtual-chain-endpoint-runbook.json`, and optionally `artifacts/tn12-wrpc-endpoint-probe.json` plus `artifacts/virtual-chain-live-window.json`. The endpoint runbook is the next live-indexer checklist: configure `TN12_VIRTUAL_CHAIN_RPC_URL`, run the endpoint probe, read a bounded V2 live window through a TN12 SDK that exposes `getVirtualChainFromBlockV2`, compare returned rows, and persist only after rollback and payload/proof matching pass.
+This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, `artifacts/indexer-replay-run.json`, `artifacts/virtual-chain-ingestion-plan.json`, `artifacts/virtual-chain-ingestion-run.json`, `artifacts/virtual-chain-reader-adapter.json`, `artifacts/virtual-chain-live-preflight.json`, `artifacts/virtual-chain-endpoint-runbook.json`, and optionally `artifacts/tn12-wrpc-endpoint-probe.json`, `artifacts/virtual-chain-live-window.json`, `artifacts/virtual-chain-live-replay-rows.json`, and `artifacts/virtual-chain-checkpoint-comparison.json`. The endpoint runbook is the next live-indexer checklist: configure `TN12_VIRTUAL_CHAIN_RPC_URL`, run the endpoint probe, read a bounded V2 live window through a TN12 SDK that exposes `getVirtualChainFromBlockV2`, compare returned rows, and persist only after rollback and payload/proof matching pass.
 
 Build a compact transaction-payload receipt artifact for the accepted-transaction indexer lane:
 
@@ -407,9 +408,10 @@ npm run campaign:pledge-funding-draft
 npm run campaign:settlement-drafts
 npm run campaign:settlement-decision
 npm run campaign:submit-runbook
+npm run campaign:operator-decision
 ```
 
-This turns `fixtures/BatchAssuranceCampaign.json` and `fixtures/BatchAssuranceCustodyImports.json` into the batch-assurance campaign, custody, funding, settlement, and submit-runbook artifacts. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. The pledge-funding draft created 45/35/20 TKAS P2PK outputs, with generated pledge private keys stored only in `.local/tn12-batch-pledge-wallets.json` and public metadata in `fixtures/BatchAssurancePledgeWallets.public.json`; the rebuilt draft was accepted as `0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a`. `npm run campaign:submit-runbook` records the release/refund operator checklist before any submit.
+This turns `fixtures/BatchAssuranceCampaign.json` and `fixtures/BatchAssuranceCustodyImports.json` into the batch-assurance campaign, custody, funding, settlement, submit-runbook, and operator-decision artifacts. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. The pledge-funding draft created 45/35/20 TKAS P2PK outputs, with generated pledge private keys stored only in `.local/tn12-batch-pledge-wallets.json` and public metadata in `fixtures/BatchAssurancePledgeWallets.public.json`; the rebuilt draft was accepted as `0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a`. `npm run campaign:operator-decision` currently holds the accepted pledge outputs unspent until external signer acceptance and checkpoint-overlap replay are ready.
 
 Build the enforcement matrix:
 

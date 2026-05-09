@@ -1,0 +1,35 @@
+{
+  "schema": "tn12-batch-assurance-operator-decision/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T15:50:08.033Z",
+  "campaignId": "kaspa-dev-docs-sprint",
+  "status": "operator-hold-review",
+  "selectedPath": "hold-review",
+  "submitNow": false,
+  "operatorReason": "Keep accepted pledge outputs unspent until wallet-standard signing and checkpoint-overlap replay are ready.",
+  "summary": {
+    "walletReady": false,
+    "checkpointOverlapReady": false,
+    "releaseReady": true,
+    "refundReady": true,
+    "mutuallyExclusiveInputs": true,
+    "blockers": 2
+  },
+  "selectedDrafts": [],
+  "blockers": [
+    "external signer accepted result missing",
+    "live indexer checkpoint overlap missing"
+  ],
+  "requiredBeforeSubmit": [
+    "external signer route or explicit local-testnet override",
+    "selected release/refund path reviewed against wallet-standard request validation",
+    "post-submit checkpoint and mutually exclusive alternate-path update plan",
+    "operator confirms release or refund consequences"
+  ],
+  "decisionRule": "Hold by default unless the selected path, external signer validation, checkpoint-overlap replay, and mutually exclusive post-submit update plan are all ready.",
+  "boundaries": [
+    "This is an operator decision artifact; it does not broadcast.",
+    "Holding accepted pledge outputs is a valid decision when wallet/indexer rails are still being hardened.",
+    "If a future submit happens, the alternate mutually exclusive path must be marked unavailable after accepted evidence."
+  ]
+}
