@@ -185,6 +185,37 @@ main {
   margin-bottom: 20px;
 }
 
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.stat-grid article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #12191d;
+  padding: 14px;
+}
+
+.stat-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.stat-grid strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.note {
+  margin: 16px 0 0;
+}
+
 label {
   display: grid;
   gap: 7px;
@@ -1591,6 +1622,7 @@ progress::-moz-progress-bar {
   .build-queue,
   .app-lanes,
   .signal-channels,
+  .stat-grid,
   .claim-grid {
     grid-template-columns: 1fr;
   }

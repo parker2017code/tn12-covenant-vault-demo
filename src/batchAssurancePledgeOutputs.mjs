@@ -14,6 +14,7 @@ export function buildBatchAssurancePledgeOutputPlan({
   const readySompi = sumSompi(ready.map((requirement) => requirement.required?.amountSompi));
   const missingSompi = sumSompi(outputsToCreate.map((output) => output.amountSompi));
   const connectorReady = walletConnectorRequests.status === "connector-submit-requests-ready";
+  const allMatched = outputsToCreate.length === 0 && requirements.length > 0;
 
   return {
     schema: "tn12-batch-assurance-pledge-output-plan/v1",
@@ -57,7 +58,9 @@ export function buildBatchAssurancePledgeOutputPlan({
       "Each imported outpoint amount must exactly equal the pledge amount.",
       "Each imported outpoint must be unique within the campaign.",
       "Wallet review must show destination, amount, fee, and payload/no-payload status before submit.",
-      "Release/refund custody drafts remain blocked until these outputs are accepted and imported."
+      allMatched
+        ? "Release/refund settlement drafts can be reviewed because every required pledge output is accepted and imported."
+        : "Release/refund custody drafts remain blocked until these outputs are accepted and imported."
     ],
     boundaries: [
       "This is a funding/import plan, not a signed transaction.",

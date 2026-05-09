@@ -28,7 +28,7 @@ This is the concise reading of the repo. The useful core is TN12 evidence and de
 
 ## Current next work
 
-1. Build signed batch-assurance release/refund drafts from the accepted 45/35/20 TKAS pledge outputs.
+1. Review one mutually exclusive batch-assurance settlement path from the signed release/refund drafts before any TN12 submit.
 2. Keep wallet-submit work focused on a real no-local-key connector, not more handoff prose.
 3. Keep durable indexing focused on live virtual-chain ingestion and rollback replay, not more fixture reshaping.
 4. Reduce public language that makes scaffolding sound like product surface.

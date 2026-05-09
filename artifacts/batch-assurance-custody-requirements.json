@@ -99,29 +99,19 @@
   ],
   "nextBuilds": [
     {
-      "id": "pledge-output-draft-builder",
-      "status": "needed",
-      "detail": "Create signed or wallet-reviewable pledge output drafts for the exact required amounts."
+      "id": "settlement-path-review",
+      "status": "ready",
+      "detail": "Choose either the signed release path or the individual refund path; the accepted pledge outputs cannot be spent twice."
     },
     {
-      "id": "pledge-output-tn12-submit",
-      "status": "needed",
-      "detail": "Submit the pledge output drafts on TN12 and record the accepted txids."
-    },
-    {
-      "id": "campaign-fixture-import",
-      "status": "needed",
-      "detail": "Replace planner payload outpoints with the accepted amount-matched pledge output outpoints."
-    },
-    {
-      "id": "custody-release-rebuild",
-      "status": "blocked",
-      "detail": "Rerun `npm run campaign:custody` only after the accepted pledge outputs match the campaign amounts."
+      "id": "wallet-submit-review",
+      "status": "ready",
+      "detail": "Review the signed-not-broadcast settlement drafts with the wallet-submit surface before any TN12 submit."
     }
   ],
   "boundaries": [
-    "This artifact is a checklist for the next TN12 custody transactions.",
-    "It is not a settlement proof and does not make the batch release spendable.",
-    "The current accepted pledge payloads remain valid app-state evidence only."
+    "The accepted pledge outputs are amount-matched custody inputs, but the release/refund spends are not broadcast.",
+    "Accepted pledge payloads remain app-state evidence; accepted pledge outputs are the spendable custody evidence.",
+    "A production batch-assurance design still needs wallet UX, failure-path review, and explicit pooled/covenant aggregation rules."
   ]
 }

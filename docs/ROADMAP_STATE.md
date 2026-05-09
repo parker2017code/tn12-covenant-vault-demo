@@ -109,7 +109,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 ### Coming days
 
 1. Make the accepted JSON wRPC payload path repeatable through a real wallet adapter instead of local signing; keep the current submit ledger and result validator as evidence routing, not a broadcaster.
-2. Build custody settlement drafts only from amount-matched pledge outputs that pass the custody-import validator.
+2. Review and, only if intended, submit one custody settlement path from the amount-matched batch-assurance pledge outputs.
 3. Test `artifacts/virtual-chain-reader-adapter.json` against a configured hosted TN12 node/RPC endpoint, then connect the replay tables to live virtual-chain reads.
 4. Turn local invalid-candidate maps into safe TN12 rejection attempts only after fresh expendable outputs exist.
 5. Wire the attestation provenance/quorum artifact into future signal-consuming dashboards before signals influence more app lanes.

@@ -16,10 +16,12 @@ export function buildBatchAssuranceCustodyRequirements({
   const amountMatchedSompi = readyRequirements.reduce((sum, requirement) => sum + BigInt(requirement.currentReference.observedAmountSompi), 0n);
   const missingSompi = requiredSompi > amountMatchedSompi ? requiredSompi - amountMatchedSompi : 0n;
 
+  const satisfied = blockedRequirements.length === 0 && requirements.length > 0;
+
   return {
     schema: "tn12-batch-assurance-custody-requirements/v1",
     network: campaignState.network || checkpointIndex.network || "kaspa-testnet-12",
-    status: blockedRequirements.length === 0 && requirements.length > 0
+    status: satisfied
       ? "custody-requirements-satisfied"
       : "custody-requirements-open",
     campaign: campaignState.campaign || {},
@@ -41,7 +43,18 @@ export function buildBatchAssuranceCustodyRequirements({
       "Payload-only planner transactions can prove campaign state, but they do not satisfy custody input requirements.",
       "Submit must use a payload-preserving TN12 route for payload events and a transaction route that preserves version-1 compute budget fields for covenant spends."
     ],
-    nextBuilds: [
+    nextBuilds: satisfied ? [
+      {
+        id: "settlement-path-review",
+        status: "ready",
+        detail: "Choose either the signed release path or the individual refund path; the accepted pledge outputs cannot be spent twice."
+      },
+      {
+        id: "wallet-submit-review",
+        status: "ready",
+        detail: "Review the signed-not-broadcast settlement drafts with the wallet-submit surface before any TN12 submit."
+      }
+    ] : [
       {
         id: "pledge-output-draft-builder",
         status: "needed",
@@ -64,9 +77,11 @@ export function buildBatchAssuranceCustodyRequirements({
       }
     ],
     boundaries: [
-      "This artifact is a checklist for the next TN12 custody transactions.",
-      "It is not a settlement proof and does not make the batch release spendable.",
-      "The current accepted pledge payloads remain valid app-state evidence only."
+      satisfied
+        ? "The accepted pledge outputs are amount-matched custody inputs, but the release/refund spends are not broadcast."
+        : "This artifact is a checklist for the next TN12 custody transactions.",
+      "Accepted pledge payloads remain app-state evidence; accepted pledge outputs are the spendable custody evidence.",
+      "A production batch-assurance design still needs wallet UX, failure-path review, and explicit pooled/covenant aggregation rules."
     ]
   };
 }

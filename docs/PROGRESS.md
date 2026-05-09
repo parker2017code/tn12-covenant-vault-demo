@@ -20,6 +20,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
    - Current status: base built with wallet-review readiness, wallet-connector spec, wallet-submit package, connector submit request artifacts, dry-run adapter sessions, a submit-result ledger, and bounded result validation.
+   - External-signer reference: `docs/WALLET_SIGNER_REFERENCES.md` now tracks KasSigner/KasSee as a public reference for watch-only construction, offline signing, PSKB/KSPT-style handoff, multisig conventions, and accepted-state promotion after broadcast.
    - Enforcement: wallet policy.
    - Mainnet potential: useful only after real wallet integration replaces local keys.
    - Review status: `npm run wallet:review` checks all published signed draft summaries for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` records connector requirements without reading local keys. `npm run wallet:submit-package` creates the no-local-key handoff package for wallet integration. `npm run wallet:connector-requests` creates the exact transaction request bundle for connector review and submit. `npm run wallet:adapter-run` turns that bundle into review-session fingerprints without signing or broadcasting. `npm run wallet:submit-ledger` records accepted-evidence rows separately from pending wallet-submit candidates. `npm run wallet:result-validation` validates returned txids/routes against fingerprints, payload bytes, v1 `computeBudget`, explicit user action, and accepted-evidence promotion rules. It still records that no live wallet connector exists.
@@ -119,7 +120,7 @@ Done now:
 - Batch-assurance custody-import validator: `npm run campaign:custody-imports` writes `artifacts/batch-assurance-custody-imports.json`. Current fixtures are `custody-imports-ready` with three ready imports from the accepted pledge funding transaction.
 - Batch-assurance pledge funding: `npm run campaign:pledge-funding-draft` writes `artifacts/signed-drafts/batch-assurance-pledge-funding.json` plus public pledge-wallet metadata. The rebuilt draft was submitted and accepted as `0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a`.
 - Batch-assurance settlement drafts: `npm run campaign:settlement-drafts` writes `artifacts/batch-assurance-settlement-drafts.json`, one signed release draft, and three signed refund drafts. These are mutually exclusive P2PK pledge-output spends and are not broadcast.
-- Next-work queue: `npm run project:queue` records the ordered next 30 tasks; the top five are wallet connector submit, durable virtual-chain indexer, accepted pledge outputs, batch-assurance release/refund drafts, and escrow marketplace demo.
+- Next-work queue: `npm run project:queue` records the ordered next 30 tasks; the top five now start with wallet connector submit, durable virtual-chain indexer, batch-assurance settlement-path review/submit, escrow marketplace demo, and attestation thresholds.
 - Covenant adversarial map: `npm run covenant:adversarial` records local selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and script-mapping checks for the seven accepted proof paths.
 - Role-separated fixture lane: `npm run fixtures:roles` and `npm run compile:roles` create the clean constructor/script base for the next accepted-proof pass without mutating historical proof artifacts.
 - Role-separated funding: accepted TN12 transaction `ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0` created fresh role-separated vault, assurance, and escrow P2SH outputs.
@@ -131,15 +132,15 @@ Done now:
 
 WIP now:
 
-- Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package, connector request bundle, dry-run adapter review sessions, and submit-result ledger are built; a real wallet adapter still needs to sign/submit externally.
-- Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone. The custody-import validator is built and currently blocks all fixture rows until real accepted custody outputs are imported.
+- Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package, connector request bundle, dry-run adapter review sessions, submit-result ledger, and KasSigner/KasSee reference boundary are built; a real wallet adapter still needs to sign/submit externally.
+- Batch-assurance settlement-path review from amount-matched pledge outputs. Accepted 45/35/20 TKAS pledge outputs are imported, release/refund drafts are signed, and the remaining decision is which mutually exclusive path to review/submit.
 - Durable indexer node/RPC replay beyond the generated fixture-backed replay. The reader/rollback contract and bounded adapter artifact exist; a configured hosted TN12 virtual-chain endpoint still needs to be tested live.
 - Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review, active provenance, stale/revoked/conflict states, and quorum checks are encoded in `npm run attestation:reputation`; `npm run prediction:hedge` now consumes that artifact and keeps current accepted signals threshold-blocked until the gate passes.
 
 Next actions:
 
 1. Wire the wallet-submit package into a live wallet connector.
-2. Create custody settlement drafts only from matched pledge outputs that pass the custody-import validator.
+2. Review one signed batch-assurance release/refund settlement path from matched pledge outputs and do not submit both mutually exclusive spends.
 3. Test the bounded durable virtual-chain reader adapter against a configured TN12 RPC endpoint, then wire reducer replay and UI health to the generated replay rows.
 4. Use the prediction/hedge threshold-consumer pattern for any future signal-consuming dashboard before signals affect more app lanes.
 5. Fund fresh expendable role-separated outputs before any invalid-candidate TN12 rejection submission.

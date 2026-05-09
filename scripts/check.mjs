@@ -256,6 +256,8 @@ assert.equal(walletConnector.summary.drafts, 47);
 assert.equal(walletConnector.summary.payloadDrafts, 26);
 assert.equal(walletConnector.summary.registrySecretFields, 0);
 assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "payload-preserving-submit"));
+assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "standard-partial-transaction-format"));
+assert.ok(walletConnector.referenceImplementations.some((reference) => reference.id === "kassigner"));
 const walletSubmitPackage = buildWalletSubmitPackage({ walletReview, walletConnector });
 assert.equal(walletSubmitPackage.status, "wallet-submit-package-ready");
 assert.equal(walletSubmitPackage.summary.total, 47);
@@ -407,9 +409,9 @@ assert.ok(nextWorkQueue.sourceDocs.includes("docs/TN12_TEST_MATRIX.md"));
 assert.deepEqual(nextWorkQueue.next.five, [
   "wallet-connector-submit",
   "durable-virtual-chain-indexer",
-  "batch-assurance-pledge-outputs",
-  "batch-assurance-release-refund-drafts",
-  "escrow-marketplace-demo"
+  "batch-assurance-settlement-path-review",
+  "escrow-marketplace-demo",
+  "attestation-reputation-thresholds"
 ]);
 assert.ok(nextWorkQueue.tasks.some((task) =>
   task.id === "oracle-risk-dashboard"
@@ -777,7 +779,7 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 18);
+assert.equal(projectPlan.summary.done, 19);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 5);
 assert.equal(projectPlan.summary.later, 6);
@@ -788,6 +790,7 @@ assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures")
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-drafts"));
 assert.ok(projectPlan.done.some((item) => item.id === "accepted-pledge-outputs"));
+assert.ok(projectPlan.done.some((item) => item.id === "batch-settlement-drafts"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-invalid-candidates"));
 assert.ok(projectPlan.done.some((item) => item.id === "indexer-storage-schema"));
@@ -1685,7 +1688,7 @@ assert.match(html, /Attestation registry/);
 assert.match(html, /Prediction hedge simulator/);
 assert.match(html, /npm run prediction:hedge/);
 assert.match(html, /escrow mutual-cancel proof transactions/);
-assert.match(html, /accepted pledge-output custody drafts/);
+assert.match(html, /reviewed batch-assurance settlement/);
 assert.doesNotMatch(html, /escrow cancel redesign/);
 
 const assuranceDocs = await readFile(new URL("../docs/ASSURANCE_CONTRACTS.md", import.meta.url), "utf8");
@@ -1741,6 +1744,11 @@ assert.ok(masterRoadmap.lanes.some((lane) => lane.id === "miner-pool-signals"));
 const sources = await readFile(new URL("../docs/SOURCES.md", import.meta.url), "utf8");
 assert.match(sources, /Cross-Chain App Research Resources/);
 assert.match(sources, /PMF clues/);
+assert.match(sources, /KasSigner\/KasSee/);
+
+const walletSignerReferences = await readFile(new URL("../docs/WALLET_SIGNER_REFERENCES.md", import.meta.url), "utf8");
+assert.match(walletSignerReferences, /PSKB\/KSPT/);
+assert.match(walletSignerReferences, /not a live external signer integration/);
 
 const masterPlan = await readFile(new URL("../docs/MASTER_APP_PLAN.md", import.meta.url), "utf8");
 assert.match(masterPlan, /Payload Receipt \/ Invoice App/);

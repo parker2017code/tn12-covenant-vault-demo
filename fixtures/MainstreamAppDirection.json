@@ -89,12 +89,14 @@
         "submit draft registry",
         "wallet review readiness",
         "wallet connector requirements",
-        "wallet submit package"
+        "wallet submit package",
+        "KasSigner/KasSee external-signer reference"
       ],
       "missingRails": [
         "live wallet connector",
         "payload-preserving submit confirmation",
-        "browser signing integration"
+        "browser signing integration",
+        "PSKB/PSKT/KSPT compatibility decision"
       ],
       "smallestHonestPrototype": "A no-local-key review flow that refuses routes known to drop payload bytes.",
       "doNotClaimYet": "Do not claim wallet integration until a real connector signs and submits the exact reviewed transaction."

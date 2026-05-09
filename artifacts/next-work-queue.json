@@ -22,15 +22,15 @@
     "wip": 4,
     "roadmap": 3,
     "tasks": 30,
-    "critical": 4,
+    "critical": 3,
     "high": 6,
-    "medium": 14,
+    "medium": 15,
     "low": 6,
     "byLane": {
       "wallet-policy": 2,
       "indexer": 1,
-      "payload-indexer": 9,
-      "tn12-covenant": 5,
+      "tn12-covenant": 6,
+      "payload-indexer": 8,
       "research": 6,
       "future-rails": 1,
       "ui": 1,
@@ -38,9 +38,9 @@
       "infra": 1
     },
     "byImportance": {
-      "critical": 4,
+      "critical": 3,
       "high": 6,
-      "medium": 14,
+      "medium": 15,
       "low": 6
     },
     "topPriority": "wallet-connector-submit"
@@ -103,9 +103,9 @@
       "label": "Batch-assurance custody from amount-matched pledge outputs",
       "whyFirst": "Public-goods funding becomes real only when planner records map to spendable accepted outputs.",
       "blocking": [
-        "accepted pledge outputs",
-        "release/refund draft construction",
-        "custody evidence"
+        "mutually exclusive settlement-path review",
+        "wallet submit review",
+        "explicit submit decision"
       ]
     },
     {
@@ -162,27 +162,26 @@
     "five": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-pledge-outputs",
-      "batch-assurance-release-refund-drafts",
-      "escrow-marketplace-demo"
+      "batch-assurance-settlement-path-review",
+      "escrow-marketplace-demo",
+      "attestation-reputation-thresholds"
     ],
     "ten": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-pledge-outputs",
-      "batch-assurance-release-refund-drafts",
+      "batch-assurance-settlement-path-review",
       "escrow-marketplace-demo",
       "attestation-reputation-thresholds",
       "auction-settlement-refund-drafts",
       "agent-release-refund-drafts",
       "treasury-constrained-spend-drafts",
-      "invoice-mainnet-readiness-brief"
+      "invoice-mainnet-readiness-brief",
+      "access-pass-expiry-issuer-review"
     ],
     "twenty": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-pledge-outputs",
-      "batch-assurance-release-refund-drafts",
+      "batch-assurance-settlement-path-review",
       "escrow-marketplace-demo",
       "attestation-reputation-thresholds",
       "auction-settlement-refund-drafts",
@@ -190,6 +189,7 @@
       "treasury-constrained-spend-drafts",
       "invoice-mainnet-readiness-brief",
       "access-pass-expiry-issuer-review",
+      "batch-assurance-post-submit-evidence",
       "stable-issuer-reserve-review",
       "oracle-risk-dashboard",
       "lending-rail-brief",
@@ -203,8 +203,7 @@
     "thirty": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-pledge-outputs",
-      "batch-assurance-release-refund-drafts",
+      "batch-assurance-settlement-path-review",
       "escrow-marketplace-demo",
       "attestation-reputation-thresholds",
       "auction-settlement-refund-drafts",
@@ -212,6 +211,7 @@
       "treasury-constrained-spend-drafts",
       "invoice-mainnet-readiness-brief",
       "access-pass-expiry-issuer-review",
+      "batch-assurance-post-submit-evidence",
       "stable-issuer-reserve-review",
       "oracle-risk-dashboard",
       "lending-rail-brief",
@@ -241,11 +241,12 @@
       "lane": "wallet-policy",
       "importance": "critical",
       "why": "This is the highest leverage blocker: every user-facing app needs no-local-key signing and exact transaction review.",
-      "definitionOfDone": "A user can review an exact draft, hand it to a wallet connector, preserve payload bytes and tx v1 fields, and record the submit result without exposing local private keys.",
+      "definitionOfDone": "A user can review an exact draft, hand it to a wallet connector or external signer, preserve payload bytes and tx v1 fields, and record the submit result without exposing local private keys.",
       "startWith": [
         "artifacts/wallet-submit-package.json",
         "src/walletConnectorReadiness.mjs",
-        "fixtures/SubmitConsoleDrafts.json"
+        "fixtures/SubmitConsoleDrafts.json",
+        "docs/WALLET_SIGNER_REFERENCES.md"
       ],
       "gates": [
         "npm run wallet:submit-package",
@@ -274,41 +275,25 @@
     },
     {
       "rank": 3,
-      "id": "batch-assurance-pledge-outputs",
-      "title": "Create accepted pledge outputs matching batch-assurance custody requirements",
-      "lane": "payload-indexer",
-      "importance": "critical",
-      "why": "Batch assurance currently has accepted planner state, but custody settlement requires actual amount-matched accepted outputs.",
-      "definitionOfDone": "Required pledge outputs are accepted on TN12, imported into checkpoint state, and no longer blocked by amount mismatch.",
-      "startWith": [
-        "artifacts/batch-assurance-custody-requirements.json",
-        "fixtures/BatchAssuranceCampaign.json"
-      ],
-      "gates": [
-        "npm run campaign:custody-requirements",
-        "npm run check:tn12"
-      ]
-    },
-    {
-      "rank": 4,
-      "id": "batch-assurance-release-refund-drafts",
-      "title": "Build batch-assurance release and refund custody drafts from matched outputs",
+      "id": "batch-assurance-settlement-path-review",
+      "title": "Review and optionally submit one batch-assurance settlement path",
       "lane": "tn12-covenant",
       "importance": "critical",
-      "why": "This converts batch assurance from planner progress into a settlement workflow.",
-      "definitionOfDone": "Release/refund drafts consume only matched accepted pledge outputs and produce reviewable wallet-submit artifacts.",
+      "why": "Batch assurance now has accepted planner state, accepted amount-matched pledge outputs, and signed-not-broadcast settlement drafts; the next risk is choosing exactly one spend path.",
+      "definitionOfDone": "The operator reviews release versus refund, selects one mutually exclusive path, submits only that path if intended, and records accepted or rejected TN12 evidence.",
       "startWith": [
-        "src/batchAssuranceCustodyDrafts.mjs",
-        "artifacts/batch-assurance-custody-drafts.json"
+        "artifacts/batch-assurance-settlement-drafts.json",
+        "artifacts/signed-drafts/batch-assurance-release.json",
+        "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json"
       ],
       "gates": [
-        "npm run campaign:custody",
+        "npm run campaign:settlement-drafts",
         "npm run wallet:review",
         "npm run check:all"
       ]
     },
     {
-      "rank": 5,
+      "rank": 4,
       "id": "escrow-marketplace-demo",
       "title": "Turn escrow release/refund into a simple marketplace or freelance demo",
       "lane": "tn12-covenant",
@@ -327,7 +312,7 @@
       ]
     },
     {
-      "rank": 6,
+      "rank": 5,
       "id": "attestation-reputation-thresholds",
       "title": "Add signer provenance, reputation, quorum, and stale-signal thresholds",
       "lane": "payload-indexer",
@@ -344,7 +329,7 @@
       ]
     },
     {
-      "rank": 7,
+      "rank": 6,
       "id": "auction-settlement-refund-drafts",
       "title": "Build auction settlement and refund drafts",
       "lane": "payload-indexer",
@@ -362,7 +347,7 @@
       ]
     },
     {
-      "rank": 8,
+      "rank": 7,
       "id": "agent-release-refund-drafts",
       "title": "Build agent-task release and refund drafts",
       "lane": "payload-indexer",
@@ -380,7 +365,7 @@
       ]
     },
     {
-      "rank": 9,
+      "rank": 8,
       "id": "treasury-constrained-spend-drafts",
       "title": "Build treasury/team-vault constrained spend drafts",
       "lane": "wallet-policy",
@@ -398,7 +383,7 @@
       ]
     },
     {
-      "rank": 10,
+      "rank": 9,
       "id": "invoice-mainnet-readiness-brief",
       "title": "Turn invoice receipts into a mainnet-readiness brief",
       "lane": "payload-indexer",
@@ -417,7 +402,7 @@
       ]
     },
     {
-      "rank": 11,
+      "rank": 10,
       "id": "access-pass-expiry-issuer-review",
       "title": "Harden access-pass expiry and issuer review",
       "lane": "payload-indexer",
@@ -431,6 +416,25 @@
       "gates": [
         "npm run access:passes",
         "npm run check:negative",
+        "npm run check:all"
+      ]
+    },
+    {
+      "rank": 11,
+      "id": "batch-assurance-post-submit-evidence",
+      "title": "Record batch-assurance settlement evidence after one path is submitted",
+      "lane": "tn12-covenant",
+      "importance": "medium",
+      "why": "If a release or refund settlement path is submitted, every downstream page must distinguish accepted evidence from the still-unspent mutually exclusive alternatives.",
+      "definitionOfDone": "Accepted or rejected TN12 evidence is recorded, checkpointed, and reflected in test matrix, status, submit registry, and UI copy without implying the alternate spend remains available.",
+      "startWith": [
+        "docs/TN12_TEST_MATRIX.md",
+        "fixtures/AcceptedOutputEvidence.json",
+        "artifacts/batch-assurance-settlement-drafts.json"
+      ],
+      "gates": [
+        "npm run indexer:checkpoint",
+        "npm run campaign:settlement-drafts",
         "npm run check:all"
       ]
     },

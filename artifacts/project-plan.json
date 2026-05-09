@@ -3,7 +3,7 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 18,
+    "done": 19,
     "wip": 4,
     "next": 5,
     "later": 6
@@ -134,6 +134,11 @@
       "id": "role-separated-invalid-candidates",
       "laneId": "escrow",
       "detail": "Local review candidates now map wrong signer, wrong selector, wrong output lock, wrong amount, bad lock shape, and single-party cancel mutations before any TN12 rejection attempt."
+    },
+    {
+      "id": "batch-settlement-drafts",
+      "laneId": "batch-assurance",
+      "detail": "Signed-not-broadcast batch-assurance release and refund drafts now spend only the accepted 45/35/20 TKAS pledge outputs."
     }
   ],
   "wip": [
@@ -154,8 +159,8 @@
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-tn12-json-wrpc-payload-events",
-      "detail": "Accepted amount-matched pledge outputs are imported; next work is signed release/refund drafts from those outputs.",
-      "next": "Build signed release/refund transaction drafts from the matched accepted pledge outputs."
+      "detail": "Accepted amount-matched pledge outputs and signed release/refund drafts are ready; next work is choosing and reviewing one mutually exclusive settlement path.",
+      "next": "Review release versus refund, then submit only one mutually exclusive settlement path if intended."
     },
     {
       "laneId": "miner-pool-signals",
@@ -180,9 +185,9 @@
   ],
   "next": [
     {
-      "id": "batch-release-refund-drafts",
+      "id": "batch-settlement-path-review",
       "laneId": "batch-assurance",
-      "detail": "Build wallet-reviewable batch assurance release/refund drafts from the accepted 45/35/20 TKAS pledge outputs."
+      "detail": "Review release versus refund, then submit only one mutually exclusive batch-assurance settlement path if intended."
     },
     {
       "id": "indexer-virtual-chain-reader",

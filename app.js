@@ -404,6 +404,7 @@ async function renderBatchAssuranceCampaign() {
     `;
 
     if (campaignCustodyNode) {
+      const custodySatisfied = custodyRequirements.status === "custody-requirements-satisfied";
       campaignCustodyNode.innerHTML = `
         <article>
           <span>${escapeHtml(custodyDrafts.status)}</span>
@@ -413,9 +414,13 @@ async function renderBatchAssuranceCampaign() {
         </article>
         <article>
           <span>${escapeHtml(custodyRequirements.status)}</span>
-          <strong>${escapeHtml(custodyRequirements.summary.missingMatchedTkas)} TKAS still needs matched custody</strong>
-          <p>${escapeHtml(custodyRequirements.summary.blockedCount)} accepted pledge-output references must be replaced before release.</p>
-          <small>${escapeHtml(custodyRequirements.nextBuilds[0]?.detail || "Build amount-matched pledge outputs next.")}</small>
+          <strong>${custodySatisfied
+            ? `${escapeHtml(custodyRequirements.summary.readyCount)} matched pledge outputs`
+            : `${escapeHtml(custodyRequirements.summary.missingMatchedTkas)} TKAS still needs matched custody`}</strong>
+          <p>${custodySatisfied
+            ? "Settlement drafts are signed-not-broadcast; choose release or refund explicitly before submit."
+            : `${escapeHtml(custodyRequirements.summary.blockedCount)} accepted pledge-output references must be replaced before release.`}</p>
+          <small>${escapeHtml(custodyRequirements.nextBuilds[0]?.detail || "Review the custody settlement path next.")}</small>
         </article>
       `;
     }

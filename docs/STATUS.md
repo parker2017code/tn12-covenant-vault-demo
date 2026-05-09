@@ -53,6 +53,7 @@
 - Role-separated DAA vault withdrawal: `cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11`.
 - Role-separated DAA assurance refund: `a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa`.
 - Role-separated DAA escrow refund: `7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0`.
+- Batch-assurance accepted pledge-output funding: `0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a`, creating the 45/35/20 TKAS P2PK pledge outputs used by the signed-not-broadcast settlement drafts.
 - Historical role-separated timed-spend rejection: Unix-second lock values produced `transaction input #0 is not finalized`; accepted timed proofs use DAA-style lock values.
 - Cancel-debugging rule: check artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and Rusty Kaspa source/tests before escalating.
 - Accepted cancel route after the sigop fix: local TN12 `kaspa-wasm 1.1.1-toc.1` with tx version 1, constructor fields `sigOpCount: 0` plus `computeBudget: 30`, submitted over JSON wRPC to `testnet-12`.

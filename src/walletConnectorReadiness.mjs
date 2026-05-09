@@ -46,6 +46,25 @@ export function buildWalletConnectorReadiness(walletReview = {}) {
         id: "explicit-user-action",
         status: "required",
         detail: "The wallet connector must require a user action before signing or broadcasting."
+      },
+      {
+        id: "standard-partial-transaction-format",
+        status: "research-required",
+        detail: "Research PSKB/PSKT/KSPT compatibility before inventing a custom draft transport."
+      }
+    ],
+    referenceImplementations: [
+      {
+        id: "kassigner",
+        lane: "external-signer-reference",
+        url: "https://github.com/InKasWeRust/KasSigner",
+        relevance: "Air-gapped signer reference for offline key custody, PSKB/KSPT-style signing, and multisig conventions."
+      },
+      {
+        id: "kassee",
+        lane: "watch-only-companion-reference",
+        url: "https://kassigner.org/",
+        relevance: "Watch-only companion reference for kpub import, UTXO tracking, unsigned transaction construction, signed transaction broadcast, and private-key exclusion."
       }
     ],
     draftClasses: summarizeDraftClasses(drafts),
@@ -58,7 +77,8 @@ export function buildWalletConnectorReadiness(walletReview = {}) {
       "This is a connector specification artifact, not a live wallet integration.",
       "The browser must not read `.local/tn12-wallet.json` or any private key material.",
       "Payload drafts need a wallet or wRPC submit path that preserves payload bytes; public REST submit remains blocked for payload receipts.",
-      "Contract spend drafts need the wallet to preserve exact transaction fields, including version 1 compute budget where present."
+      "Contract spend drafts need the wallet to preserve exact transaction fields, including version 1 compute budget where present.",
+      "KasSigner/KasSee is a reference boundary, not proof that this repo has a live external signer integration."
     ]
   };
 }

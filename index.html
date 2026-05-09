@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TN12 Covenant Vault Demo</title>
-  <meta name="description" content="Local Kaspa TN12 covenant vault policy designer and simulator.">
+  <title>TN12 Covenant Lab Notes</title>
+  <meta name="description" content="Kaspa TN12 covenant proof notes, accepted testnet transactions, and review-only app scaffolding.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="app.js"></script>
@@ -12,10 +12,11 @@
 <body>
   <header class="topbar">
     <div>
-      <p class="eyebrow">Kaspa testnet prototype</p>
-      <h1>TN12 covenant vault demo</h1>
+      <p class="eyebrow">Kaspa testnet lab</p>
+      <h1>TN12 covenant lab notes</h1>
     </div>
     <nav aria-label="Project links">
+      <a href="#core-notes">Core</a>
       <a href="#designer">Designer</a>
       <a href="#assurance">Assurance</a>
       <a href="#campaigns">Campaigns</a>
@@ -52,14 +53,39 @@
     <section class="hero">
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
-        <h2>Build vault and assurance rules against testnet, then verify them.</h2>
-        <p>A vault is a covenant-shaped app: funds can only leave through known paths, such as a delay, a daily limit, or recovery. Assurance contracts are the group-funding cousin: release funds only if a target is met, otherwise refund. This repo now has real TN12 funding, spend, submit, and verification scripts; the browser is the policy/control surface.</p>
+        <h2>Small proof core first, app scaffolding second.</h2>
+        <p>The real work here is accepted TN12 evidence: covenant spends, role-separated repeats, payload receipts, and batch-assurance pledge outputs. The larger app lanes are review scaffolding unless they point to accepted transaction evidence, signed drafts, or a checkable artifact.</p>
       </div>
       <aside class="facts">
-        <span>Network lane</span>
-        <strong>TN12 / accepted proofs</strong>
-        <p>Vault recovery, vault delayed withdrawal, assurance release, and assurance refund all have accepted testnet transaction IDs.</p>
+        <span>Proof core</span>
+        <strong>7 original + 7 role-separated + 36 indexed records</strong>
+        <p>Vault, assurance, escrow, payload receipts, and batch-assurance pledge outputs have accepted TN12 evidence. Mainnet covenant and product claims stay out of scope.</p>
       </aside>
+    </section>
+
+    <section id="core-notes" class="panel">
+      <div class="section-title">
+        <p class="eyebrow">Core lab notes</p>
+        <h2>What is actually worth reading first.</h2>
+      </div>
+      <div class="stat-grid">
+        <article>
+          <span>Accepted covenant spends</span>
+          <strong>14</strong>
+          <p>Seven original proof paths and seven role-separated repeats across vault, assurance, and escrow.</p>
+        </article>
+        <article>
+          <span>Accepted payload events</span>
+          <strong>26</strong>
+          <p>JSON wRPC payload receipts are indexed; the public REST route is kept as a no-payload negative result.</p>
+        </article>
+        <article>
+          <span>Batch assurance custody</span>
+          <strong>ready drafts</strong>
+          <p>One accepted funding transaction created 45/35/20 TKAS pledge outputs; release/refund drafts are signed but not broadcast.</p>
+        </article>
+      </div>
+      <p class="note">Read <code>docs/CORE_LAB_NOTES.md</code> before the roadmap pages. The DeFi, coordination, stable-value, and agent sections are research or fixture scaffolding until more rails are proved.</p>
     </section>
 
     <section id="designer" class="workspace">
@@ -144,7 +170,7 @@
     <section id="templates" class="panel templates">
       <div class="section-title">
         <p class="eyebrow">Vault templates</p>
-        <h2>Pick the next covenant-shaped product.</h2>
+        <h2>Pick the next covenant-shaped primitive.</h2>
       </div>
       <div id="vault-templates" class="template-list" aria-live="polite"></div>
     </section>
@@ -334,7 +360,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Priority queue</p>
         <h2>The next 5, 10, 20, and 30 tasks in one order.</h2>
-        <p>This is the all-in-one build order after the repo docs are reconciled. The highest-impact rails come first: wallet connector submit, durable indexing, accepted pledge outputs, batch-assurance settlement drafts, and escrow marketplace UX.</p>
+        <p>This is the all-in-one build order after the repo docs are reconciled. The highest-impact rails come first: wallet connector submit, durable indexing, batch-assurance settlement-path review, escrow marketplace UX, and attestation thresholds.</p>
       </div>
       <div id="next-queue-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="next-queue-top" class="build-status-lanes priority-grid" aria-live="polite"></div>
@@ -626,7 +652,7 @@ npm run wallet:adapter-run</pre>
       <article class="panel">
         <p class="eyebrow">Build plan</p>
         <h2>Next build</h2>
-        <p>The vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof paths are done on TN12. Next build work is wallet-facing UX, accepted pledge-output custody drafts, ZK/anchor checklists, and durable payload indexing.</p>
+        <p>The vault, assurance, escrow release, escrow DAA-refund, escrow mutual-cancel, and batch-assurance pledge-output paths have TN12 evidence. Next build work is wallet-facing UX, one reviewed batch-assurance settlement path, ZK/anchor checklists, and durable payload indexing.</p>
         <pre>docs/BUILD_PLAN.md</pre>
       </article>
     </section>
@@ -637,7 +663,7 @@ npm run wallet:adapter-run</pre>
       <div class="claim-grid">
         <article><strong>Can claim</strong><p>TN12 vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
         <article><strong>Cannot claim</strong><p>Mainnet covenant activation, live native DeFi, full vProgs, wallet safety, arbitrary header data, or production wallet integration.</p></article>
-        <article><strong>Next build</strong><p>Wallet-facing key separation, accepted pledge-output custody drafts, durable payload indexing, ZK/anchor checklists, and tighter vault templates.</p></article>
+        <article><strong>Next build</strong><p>Wallet-facing key separation, reviewed batch-assurance settlement, durable payload indexing, ZK/anchor checklists, and tighter vault templates.</p></article>
       </div>
     </section>
   </main>

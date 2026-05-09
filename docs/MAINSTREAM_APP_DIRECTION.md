@@ -42,8 +42,8 @@ Payment work remains high because every app needs accepted-value and receipt rai
 |---|---|---|---|---|---|
 | 1 | Invoice / receipt app | User or merchant gets a payment with attached receipt/order state | Payment rail plus indexer | Receipt proofs are the fastest rail to real app state because they do not need covenants; they are not the whole adoption thesis | Accepted TN12 JSON wRPC paid/refund/error payload events; durable indexer replay still WIP |
 | 2 | Escrow / freelance / marketplace | Buyer funds, seller completes, buyer releases or timeout/refund/cancel handles failure | TN12/Toccata covenant | Escrow is easy for normal users to understand and is a strong covenant showcase | Release, DAA refund, and mutual cancel accepted on TN12; wallet submit UX still WIP |
-| 3 | Batch assurance / public-goods funding | Contributors fund a target, release happens only if the target is met, otherwise refunds are planned | Planner/indexer now, covenant-assisted later | Public-goods funding and group purchases can create visible community use | Accepted planner payloads and custody requirements exist; matched pledge-output custody transactions still WIP |
-| 4 | Wallet-facing submit console | User reviews exact inputs, outputs, fees, payloads, and submit route before signing | Wallet policy | Every serious app needs safer signing and broadcast before it can face users | Review package and connector spec exist; live no-local-key connector is WIP |
+| 3 | Batch assurance / public-goods funding | Contributors fund a target, release happens only if the target is met, otherwise refunds are planned | Planner/indexer now, covenant-assisted later | Public-goods funding and group purchases can create visible community use | Accepted planner payloads, amount-matched 45/35/20 TKAS pledge outputs, and signed-not-broadcast release/refund drafts exist |
+| 4 | Wallet-facing submit console | User reviews exact inputs, outputs, fees, payloads, and submit route before signing | Wallet policy | Every serious app needs safer signing and broadcast before it can face users | Review package and connector spec exist; KasSigner/KasSee is tracked as the external-signer reference; live no-local-key connector is WIP |
 | 5 | Access passes / coupons / tickets | Memberships, event passes, coupons, proof-of-attendance, redeemable claims | Issuer/indexer | Simple consumer use cases can ship before deep DeFi rails | Accepted redemption payload and duplicate safeguards exist; expiry and issuer review still need hardening |
 | 6 | Auction / intent marketplace | Users place bids, app selects winners, refund/release planning is visible | Planner/indexer now, settlement later | Auctions and intents attract attention, but settlement must be explicit | Accepted bid and planner payloads exist; no atomic exchange or MEV resistance claim |
 | 7 | Vault / treasury / team wallet | Safer custody, delayed withdrawals, recovery, team spend controls, payroll templates | TN12/Toccata covenant plus wallet policy | Strong business and wallet-safety use case | Vault recovery and delayed withdrawal accepted on TN12; team caps/payroll still planner/wallet-policy |
@@ -59,7 +59,7 @@ The build-now direction is:
 1. make the invoice/receipt app durable through replayable indexing;
 2. make the wallet submit path usable without local private keys;
 3. turn escrow into a simple freelance or marketplace demo;
-4. turn batch assurance into accepted matched-output custody flow;
+4. review one mutually exclusive batch-assurance settlement path from accepted matched-output custody;
 5. harden access passes, auctions, and attestations as indexed app-state products;
 6. turn the transparent coordination-market prototype into a settlement/app brief before claiming stronger market infrastructure.
 
@@ -92,7 +92,7 @@ For each, the repo should require a short app brief before code:
 
 `npm run oracle:matrix` is the first artifact for the oracle trigger lane. It compares CEX weighted median feeds, arbitrage-simulated fair price, signed reporter sets, miner/RTD sampling, future on-chain DCLOB sources, and source-chain anchors. The current conclusion is that none are custody-ready in this repo.
 
-`npm run project:queue` is the operator order after reading the repo docs. The top five are wallet connector submit, durable virtual-chain indexer, accepted pledge outputs, batch-assurance release/refund drafts, and escrow marketplace demo.
+`npm run project:queue` is the operator order after reading the repo docs. The top five are wallet connector submit, durable virtual-chain indexer, batch-assurance settlement-path review/submit, escrow marketplace demo, and attestation thresholds.
 
 ## Done Standard
 

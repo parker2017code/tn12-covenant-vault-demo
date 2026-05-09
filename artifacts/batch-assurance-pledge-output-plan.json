@@ -47,7 +47,7 @@
     "Each imported outpoint amount must exactly equal the pledge amount.",
     "Each imported outpoint must be unique within the campaign.",
     "Wallet review must show destination, amount, fee, and payload/no-payload status before submit.",
-    "Release/refund custody drafts remain blocked until these outputs are accepted and imported."
+    "Release/refund settlement drafts can be reviewed because every required pledge output is accepted and imported."
   ],
   "boundaries": [
     "This is a funding/import plan, not a signed transaction.",

@@ -232,7 +232,7 @@ Use `npm run rails:missing` for the highest-risk mainstream categories. It turns
 
 Use `npm run rails:research` when a plan mentions oracle/price feeds, Kaskad/lending mechanics, miner/RTD signals, bridge/source-chain anchors, DEX/AMM liquidity, liquidations, collateral, or LP shares. It turns those phrases into a checked research route with local sources, external leads, first-principles questions, first artifact requirements, and do-not-claim boundaries.
 
-Use `npm run project:queue` when the question is "what should be built next overall?" It is the all-in-one priority queue across done, WIP, roadmap, and next 30 tasks. Current highest impact order: wallet connector submit, durable virtual-chain indexer, accepted pledge outputs, batch-assurance release/refund drafts, then escrow marketplace demo.
+Use `npm run project:queue` when the question is "what should be built next overall?" It is the all-in-one priority queue across done, WIP, roadmap, and next 30 tasks. Current highest impact order: wallet connector submit, durable virtual-chain indexer, batch-assurance settlement-path review/submit, escrow marketplace demo, then attestation thresholds.
 
 Use `npm run coordination:settlement-brief` for the current coordination-market lane. It turns the transparent Stag/Intendo/Pack prototype into an app brief with release/refund routes and wallet review checks, while explicitly leaving opacity, capital multiplexing, atomic Hunt execution, and oracle/settlement rails missing.
 

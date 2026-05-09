@@ -79,7 +79,7 @@
         "artifacts/payload-batch-pledge-docs-001-evidence.json",
         "artifacts/payload-batch-release-plan-evidence.json"
       ],
-      "next": "Build signed release/refund transaction drafts from the matched accepted pledge outputs."
+      "next": "Review release versus refund, then submit only one mutually exclusive settlement path if intended."
     },
     {
       "order": 4,

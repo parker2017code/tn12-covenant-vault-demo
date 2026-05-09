@@ -16,6 +16,8 @@
 - Kaspa references: https://docs.kaspa.org/references
 - Aspectron Kaspa WASM SDK RpcClient docs: https://kaspa.aspectron.org/docs/classes/RpcClient.html
 - Aspectron Kaspa transaction signing guide: https://kaspa-mdbook.aspectron.com/transactions/signing.html
+- KasSigner repository: https://github.com/InKasWeRust/KasSigner
+- KasSee watch-only companion: https://kassigner.org/
 - Rusty Kaspa TN12 branch: https://github.com/kaspanet/rusty-kaspa/tree/tn12
 - Rusty Kaspa Toccata branch: https://github.com/kaspanet/rusty-kaspa/tree/toccata
 - Silverscript: https://github.com/kaspanet/silverscript
@@ -44,6 +46,21 @@ The new official builder docs are useful to this repo in three ways:
 - The Based Apps, full vProgs, and Inline ZK pages reinforce status boundaries: shared-state concurrency and app composition are later lanes, while ZK is specialized and not needed for the current vault/assurance/escrow path.
 - Aspectron's `RpcClient` docs confirmed the current object-style constructor and request-style submit wrapper: `new RpcClient({ url, networkId })` and `submitTransaction({ transaction, allowOrphan })`.
 - Aspectron's signing guide confirmed the same submit wrapper after SDK signing. TN12-specific `computeBudget` behavior still had to be verified against Rusty Kaspa TN12 source/tests and the local TN12 WASM build.
+- KasSigner/KasSee is the best current public reference for this repo's missing external-signer boundary: watch-only transaction construction, offline signing, PSKB/KSPT-style handoff, and accepted-state promotion after broadcast. It is not evidence that this repo has a live wallet connector.
+
+## External Signer / Wallet-Submit References
+
+Use `docs/WALLET_SIGNER_REFERENCES.md` before changing wallet-submit direction.
+
+KasSigner is relevant because it shows a real Kaspa-native signing workflow with private keys kept away from the networked companion app. KasSee is especially relevant because it imports public wallet data, builds unsigned transactions, and broadcasts signed transactions without seeing private keys.
+
+This repo should learn from that boundary:
+
+- prefer standard or emerging Kaspa partial-transaction formats over inventing a custom wallet handoff;
+- keep exact transaction review mandatory before signing;
+- preserve payload bytes and tx v1 fields such as `computeBudget`;
+- treat signed/broadcast results as untrusted until accepted transaction evidence matches the reviewed draft;
+- keep local `.local` key signing as testnet plumbing, not product UX.
 
 ## Cross-Chain App Research Resources
 
