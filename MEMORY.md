@@ -93,7 +93,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Continuation Snapshot
 
-Updated 2026-05-09 after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca48e84`, and `b833234`.
+Updated 2026-05-09 after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca48e84`, `b833234`, `02ae416`, `e578689`, `c73bf02`, `eb0830d`, `9997bbb`, and `9df5a91`.
 
 - Escrow marketplace action map is now a first-class artifact:
   - `npm run escrow:action-map` writes `artifacts/escrow-marketplace-action-map.json`.
@@ -112,15 +112,26 @@ Updated 2026-05-09 after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca
   - treasury role review,
   - access-pass issuer review,
   - invoice mainnet launch brief.
+- Handoff docs were refreshed once in `02ae416`, then more wallet/indexer work landed after it.
+- README and queue wording now reflect four wallet-standard request candidates instead of the older two-request wording.
+- A hosted TN12 JSON wRPC endpoint was probed successfully:
+  - `artifacts/tn12-wrpc-endpoint-probe.json` records server `1.1.1-toc.1`.
+  - `artifacts/virtual-chain-live-window.json` records a bounded near-tip live window.
+  - `artifacts/virtual-chain-live-replay-rows.json` records live rows plus one rollback row.
+  - `artifacts/virtual-chain-checkpoint-comparison.json` records `live-window-near-tip-no-checkpoint-overlap`, so no app state should be promoted from that sample.
+  - `artifacts/virtual-chain-endpoint-runbook.json` records live-tested endpoint evidence without promotion.
+- `npm run wallet:external-signer-roundtrip` writes `artifacts/wallet-external-signer-roundtrip-plan.json`.
+  - It selects the payload receipt request and role-separated escrow cancel request as the first two external signer round trips.
+  - It is a runbook/checklist, not a live signer integration.
 - `npm run check:all` passed after each committed slice before push.
-- Current pushed head after this pass is `b833234` unless newer work has landed.
-- GitHub `check` and Pages were green through `ca48e84`; `b833234` was still running when this note was edited, so verify with `gh run list` on resume.
+- Current pushed head after this pass is `9df5a91` unless newer work has landed.
+- GitHub `check` and Pages were green for `9df5a91` when verified with `gh run list` on 2026-05-09.
 
 Immediate next tasks:
 
-1. Verify GitHub `check` and Pages for `b833234`.
+1. Verify `git status --short` and rerun `npm run check:all` before editing.
 2. Continue wallet connector submit: real external signer round trip is still the main blocker.
-3. Continue durable indexer: live endpoint replay remains unset/unpromoted.
+3. Continue durable indexer: live endpoint reads work, but the near-tip sample has zero checkpoint overlap and must not promote app state yet.
 4. Continue batch-assurance settlement review: pick one mutually exclusive path only after wallet/external signer hardening.
 5. Avoid adding new app lanes until one of those rails improves.
 

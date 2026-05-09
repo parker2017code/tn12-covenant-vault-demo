@@ -35,11 +35,13 @@ This is the working order after the first five rail tasks landed. The rule is pl
 - Tasks 6-10 now have review artifacts and checks.
 - Public wording uses accepted evidence, working rails, and next dependency language.
 - Escrow marketplace actions are mapped to unsigned and wallet-standard request coverage; the current blocker is external signer validation plus accepted replay.
+- The live TN12 endpoint probe and bounded virtual-chain window run are recorded, but the current sample has no checkpoint overlap and does not promote app state.
+- The wallet external-signer roundtrip plan is recorded; it names the first payload receipt and escrow cancel requests to try with a real signer.
 
 ## Next Commit Target
 
 The next substantial commit should pick one of:
 
-- wallet: run one external-signer round trip from `artifacts/wallet-standard-requests.json`;
-- indexer: convert the bounded V2 live-window response into replay rows with rollback overlap;
+- wallet: run one external-signer round trip from `artifacts/wallet-external-signer-roundtrip-plan.json`;
+- indexer: find or define a checkpoint-overlap cursor transition for live virtual-chain replay;
 - settlement: keep batch-assurance hold/release/refund decision aligned with wallet signer validation and checkpoint overlap.

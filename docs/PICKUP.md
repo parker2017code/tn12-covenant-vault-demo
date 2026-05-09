@@ -12,12 +12,26 @@ The latest continuation commits were committed and pushed on 2026-05-09:
 - `638b608 Surface agent settlement review`
 - `ca48e84 Surface treasury role review`
 - `b833234 Surface access and invoice readiness reviews`
+- `02ae416 Refresh TN12 continuation handoff`
+- `e578689 Sync wallet request count and escrow next steps`
+- `c73bf02 Refresh TN12 live virtual-chain sample`
+- `eb0830d Surface live indexer checkpoint comparison`
+- `9997bbb Record live endpoint evidence in indexer runbook`
+- `9df5a91 Add external signer roundtrip plan`
 
 Do not assume the worktree is clean on resume; verify with `git status --short`.
 
 ## What Was Being Done
 
 The proof-first cleanup is done. The latest pass made existing blocker/review artifacts visible in the app and docs instead of adding new lanes. Continue from `docs/PROJECT_COMPLETION_PLAN.md` and `artifacts/next-ten-execution-plan.json`: wallet submit, durable indexing, batch-assurance settlement review, and escrow marketplace UX stay ahead of new app ideas.
+
+The current head also adds live endpoint evidence and an external-signer roundtrip plan:
+
+- Hosted TN12 wRPC probe succeeded and reported server `1.1.1-toc.1`.
+- A bounded live virtual-chain window was read, then converted into replay rows.
+- The live sample had one rollback row and zero checkpoint overlap, so app state remains unpromoted.
+- `npm run wallet:external-signer-roundtrip` writes the first external-signer checklist for the payload receipt request and role-separated escrow cancel request.
+- The external-signer checklist is not a live no-local-key proof; it is the next operator/signer runbook.
 
 ## Recently Completed Before This WIP
 
@@ -39,10 +53,13 @@ Before this pickup note was refreshed, these passed after the latest local chang
 npm run check:all
 ```
 
+GitHub `check` and Pages were green for pushed head `9df5a91` when verified on 2026-05-09.
+
 On resume, rerun at least:
 
 ```sh
-npm run campaign:custody-requirements
+npm run wallet:external-signer-roundtrip
+npm run indexer:endpoint-runbook
 npm run check:all
 ```
 
@@ -65,6 +82,8 @@ If generated artifacts change, inspect them before committing.
 
 4. If clean, commit each coherent continuation chunk and push.
 5. Verify GitHub checks/pages after push.
+
+6. If continuing the indexer lane, do not promote live rows until a live window overlaps checkpointed accepted evidence or the replay plan explicitly explains the cursor transition.
 
 ## Important Boundaries
 
