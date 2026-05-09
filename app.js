@@ -1065,18 +1065,20 @@ async function renderAcceptedAppState() {
   if (!indexerSummaryNode || !indexerRecordsNode || !receiptEventsNode) return;
 
   try {
-    const [stateResponse, checkpointResponse, persistenceResponse, replayPlanResponse, virtualRunResponse] = await Promise.all([
+    const [stateResponse, checkpointResponse, persistenceResponse, replayPlanResponse, virtualRunResponse, checkpointCompareResponse] = await Promise.all([
       fetch("fixtures/AcceptedAppState.json", { cache: "no-store" }),
       fetch("artifacts/checkpointed-accepted-index.json", { cache: "no-store" }),
       fetch("artifacts/persisted-checkpoint-guard.json", { cache: "no-store" }),
       fetch("artifacts/indexer-replay-plan.json", { cache: "no-store" }),
-      fetch("artifacts/virtual-chain-ingestion-run.json", { cache: "no-store" })
+      fetch("artifacts/virtual-chain-ingestion-run.json", { cache: "no-store" }),
+      fetch("artifacts/virtual-chain-checkpoint-comparison.json", { cache: "no-store" })
     ]);
     const state = await stateResponse.json();
     const checkpoint = await checkpointResponse.json();
     const persistence = await persistenceResponse.json();
     const replayPlan = await replayPlanResponse.json();
     const virtualRun = await virtualRunResponse.json();
+    const checkpointCompare = await checkpointCompareResponse.json();
     const summary = state.summary;
     const checkpointSummary = checkpoint.summary || {};
     indexerSummaryNode.innerHTML = `
@@ -1105,6 +1107,12 @@ async function renderAcceptedAppState() {
           <strong>${escapeHtml(virtualRun.summary.virtualChainRows)} virtual-chain rows</strong>
           <p>${escapeHtml(virtualRun.summary.walletCandidateRows)} wallet-submit candidates stay pending until accepted.</p>
           <small>${escapeHtml(virtualRun.nextReaderAdapter.promoteRule)}</small>
+        </article>
+        <article>
+          <span>${escapeHtml(checkpointCompare.status)}</span>
+          <strong>${escapeHtml(checkpointCompare.summary.liveAcceptedRows)} live accepted rows</strong>
+          <p>${escapeHtml(checkpointCompare.summary.liveRollbackRows)} rollback rows; ${escapeHtml(checkpointCompare.summary.matchedCheckpointRows)} checkpoint overlaps.</p>
+          <small>${escapeHtml(checkpointCompare.decision)}</small>
         </article>
       `;
     }

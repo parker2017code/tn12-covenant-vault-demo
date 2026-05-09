@@ -50,6 +50,9 @@ try {
   await expectText(page, "body", "TN12 configured. Proof transactions accepted.");
   await expectText(page, "#assurance-issues", "Assurance shape is valid.");
   await expectText(page, "#indexer-summary", "Matched");
+  await expectText(page, "#indexer-persistence", "live-window-near-tip-no-checkpoint-overlap");
+  await expectText(page, "#indexer-persistence", "rollback rows");
+  await expectText(page, "#indexer-persistence", "checkpoint overlaps");
   await expectText(page, "#invoice-summary", "Draft");
   await expectText(page, "#invoice-summary", "Review");
   await expectText(page, "#invoice-summary", "Refunded");
