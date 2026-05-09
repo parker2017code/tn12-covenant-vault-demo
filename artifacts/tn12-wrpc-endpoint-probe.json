@@ -1,0 +1,62 @@
+{
+  "schema": "tn12-wrpc-endpoint-probe/v1",
+  "generatedAt": "2026-05-09T15:32:48.146Z",
+  "status": "tn12-wrpc-endpoint-probe-ready",
+  "endpoint": {
+    "url": "ws://65.108.107.30:18210",
+    "encoding": "json",
+    "requestedNetworkId": "testnet-12"
+  },
+  "checks": [
+    {
+      "id": "endpoint-reachable",
+      "pass": true,
+      "detail": "getInfo returned from the configured endpoint"
+    },
+    {
+      "id": "server-synced",
+      "pass": true,
+      "detail": "endpoint reports isSynced=true"
+    },
+    {
+      "id": "utxo-indexed",
+      "pass": true,
+      "detail": "endpoint reports isUtxoIndexed=true"
+    },
+    {
+      "id": "network-matches",
+      "pass": true,
+      "detail": "current network and DAG info match TN12"
+    },
+    {
+      "id": "virtual-chain-base-ready",
+      "pass": true,
+      "detail": "DAG info has virtual DAA score and virtual parents"
+    }
+  ],
+  "observed": {
+    "serverVersion": "1.1.1-toc.1",
+    "mempoolSize": "10",
+    "currentNetwork": "testnet",
+    "dagNetwork": "testnet-12",
+    "blockCount": "1145484",
+    "headerCount": "1145484",
+    "virtualDaaScore": "7297050",
+    "virtualParentHashes": [
+      "382819cb48d9be4f53bf89ba4ddd29a3e8f9919569d869f70864c4ea64f78471",
+      "60a8a82ac1fbefe867ff740420ab92acd5b1d53b1fd19b623c332021bace4d9b"
+    ],
+    "sink": "382819cb48d9be4f53bf89ba4ddd29a3e8f9919569d869f70864c4ea64f78471"
+  },
+  "rpcCaveats": {
+    "serverInfoOk": false,
+    "serverInfoError": "RPC Server (remote error) -> RPC serde deserialization error: invalid type: integer `1`, expected an array of length 4",
+    "note": "getServerInfo may fail against this public endpoint while getInfo, getCurrentNetwork, and getBlockDagInfo are still usable."
+  },
+  "nextIndexerStep": "Use this endpoint for a bounded getVirtualChainFromBlock read only after mapping the available RpcClient method shape and preserving rollback replay.",
+  "boundaries": [
+    "This proves endpoint reachability, not durable indexing.",
+    "It does not write checkpoints or promote app state.",
+    "Virtual-chain ingestion still needs bounded window reads, rollback handling, and payload/proof matching before product claims."
+  ]
+}

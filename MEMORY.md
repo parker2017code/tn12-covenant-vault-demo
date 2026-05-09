@@ -154,6 +154,15 @@ Accepted role-separated proof state:
 
 Current WIP:
 
+- On 2026-05-09, the wallet-standard lane moved past mapping-only:
+  - `npm run wallet:standard-requests` writes `artifacts/wallet-standard-requests.json`.
+  - The artifact contains two concrete candidate request objects: one payload receipt round trip and one v1 `computeBudget` covenant round trip.
+  - The objects are field-by-field candidate JSON envelopes, not official PSKB/PSKT binaries and not a live external signer integration.
+  - `npm run wallet:implementation-slice` now reads those request candidates and records the first payload and covenant round-trip request fingerprints.
+- Same pass added a reachable TN12 wRPC endpoint probe:
+  - `TN12_VIRTUAL_CHAIN_RPC_URL=<endpoint> npm run indexer:wrpc-probe` writes `artifacts/tn12-wrpc-endpoint-probe.json`.
+  - The committed probe shows `serverVersion=1.1.1-toc.1`, synced, UTXO-indexed, and TN12 DAG info reachable.
+  - This is endpoint reachability only. The next indexer task is mapping the available virtual-chain RPC method shape into a bounded live read with rollback replay.
 - Paused on 2026-05-09 after a minimal next-ten continuation pass:
   - Added next-ten execution artifacts for wallet, indexer, and batch-assurance settlement follow-through.
   - New commands: `npm run wallet:implementation-slice`, `npm run indexer:endpoint-runbook`, `npm run campaign:submit-runbook`, and `npm run project:next-ten`.

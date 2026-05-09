@@ -1,13 +1,14 @@
 {
   "schema": "tn12-wallet-connector-implementation-slice/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:30:07.036Z",
+  "generatedAt": "2026-05-09T15:34:03.371Z",
   "status": "wallet-connector-implementation-slice-ready",
   "selectedStandard": "pskb-pskt",
   "firstUserFlow": "payload-receipt-unsigned-sign",
   "secondUserFlow": "v1-compute-budget-contract-sign",
   "summary": {
     "unsignedTemplates": 47,
+    "standardRequests": 2,
     "payloadTemplates": 26,
     "computeBudgetTemplates": 2,
     "liveWalletIntegrationReady": false
@@ -15,7 +16,7 @@
   "implementationSteps": [
     {
       "id": "field-map",
-      "action": "Map repo unsigned-template fields into the selected partial transaction shape.",
+      "action": "Use the wallet-standard request candidates as the adapter input shape.",
       "output": "wallet-standard adapter"
     },
     {
@@ -34,6 +35,16 @@
       "output": "promotion or review row"
     }
   ],
+  "firstRoundTripRequest": {
+    "requestId": "ureq-6cfe79da-standard",
+    "sourceSignedDraftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+    "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3"
+  },
+  "covenantRoundTripRequest": {
+    "requestId": "ureq-d12412d8-standard",
+    "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
+    "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92"
+  },
   "requiredPreservation": [
     "network",
     "transaction.version",

@@ -1,6 +1,6 @@
 {
   "schema": "tn12-next-ten-execution-plan/v1",
-  "generatedAt": "2026-05-09T13:30:08.063Z",
+  "generatedAt": "2026-05-09T15:34:03.739Z",
   "status": "next-ten-execution-plan-ready",
   "summary": {
     "tasks": 10,
@@ -8,6 +8,7 @@
     "high": 6,
     "medium": 1,
     "walletMapped": true,
+    "walletStandardRequests": 2,
     "liveIndexerEndpointConfigured": false,
     "batchSettlementPath": "release-review"
   },

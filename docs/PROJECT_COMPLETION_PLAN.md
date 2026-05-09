@@ -126,13 +126,13 @@ The following are already done at the proof-lab level:
 These are active work items, not future fantasies:
 
 1. Live external wallet submit.
-   - Built: review package, request format, adapter dry-run, submit ledger, result validation, external-signer gap artifact, unsigned request templates, KasSigner/KasSee reference.
-   - Missing: wallet-standard mapping plus a real external adapter or wallet path that signs/submits without `.local` keys and preserves payload bytes plus tx v1 `computeBudget`.
+   - Built: review package, request format, adapter dry-run, submit ledger, result validation, external-signer gap artifact, unsigned request templates, KasSigner/KasSee reference, wallet-standard mapping, and two candidate request objects.
+   - Missing: a real external adapter or wallet path that signs/submits without `.local` keys and preserves payload bytes plus tx v1 `computeBudget`.
    - Done when: a returned txid is validated against the original review fingerprint and accepted evidence promotes it from pending to accepted.
 
 2. Durable virtual-chain indexer.
-   - Built: storage schema, replay plan, fixture replay, virtual-chain plan/run, bounded adapter contract.
-   - Missing: configured hosted TN12 node/RPC run with persistence and rollback replay from live virtual-chain data.
+   - Built: storage schema, replay plan, fixture replay, virtual-chain plan/run, bounded adapter contract, and reachable TN12 wRPC endpoint probe.
+   - Missing: mapped virtual-chain method call with persistence and rollback replay from live virtual-chain data.
    - Done when: new accepted transactions can be discovered and replayed without editing txid fixtures by hand.
 
 3. Batch-assurance settlement.

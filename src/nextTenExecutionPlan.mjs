@@ -1,6 +1,7 @@
 export function buildNextTenExecutionPlan({
   queue = {},
   walletMapping = {},
+  walletStandardRequests = {},
   livePreflight = {},
   settlementDecision = {},
   generatedAt = new Date().toISOString()
@@ -41,6 +42,7 @@ export function buildNextTenExecutionPlan({
       high: tasks.filter((task) => task.importance === "high").length,
       medium: tasks.filter((task) => task.importance === "medium").length,
       walletMapped: walletMapping.status === "wallet-standard-mapping-ready",
+      walletStandardRequests: Number(walletStandardRequests.summary?.mappedRequests || 0),
       liveIndexerEndpointConfigured: livePreflight.summary?.endpointConfigured === true,
       batchSettlementPath: settlementDecision.selectedPath || ""
     },

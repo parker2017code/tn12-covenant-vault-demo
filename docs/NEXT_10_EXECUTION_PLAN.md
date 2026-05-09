@@ -20,7 +20,9 @@ This is the working order after the first five rail tasks landed. The rule is pl
 ## Current Build Slices
 
 - Wallet slice: `npm run wallet:implementation-slice`.
+- Wallet request candidates: `npm run wallet:standard-requests`.
 - Indexer slice: `npm run indexer:endpoint-runbook`.
+- Endpoint probe: `TN12_VIRTUAL_CHAIN_RPC_URL=<ws-or-wrpc-endpoint> npm run indexer:wrpc-probe`.
 - Settlement slice: `npm run campaign:submit-runbook`.
 - Combined queue slice: `npm run project:next-ten`.
 
@@ -34,6 +36,6 @@ This is the working order after the first five rail tasks landed. The rule is pl
 
 The next substantial commit should pick one of:
 
-- wallet: map unsigned templates into a real PSKB/PSKT or wallet API object;
-- indexer: test a configured TN12 virtual-chain endpoint;
+- wallet: run one external-signer round trip from `artifacts/wallet-standard-requests.json`;
+- indexer: map the available virtual-chain RPC method shape from the probed TN12 endpoint;
 - settlement: choose release or refund for batch assurance and record the submit decision.

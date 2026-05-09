@@ -1,0 +1,226 @@
+{
+  "schema": "tn12-wallet-standard-requests/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T15:34:03.014Z",
+  "status": "wallet-standard-request-candidates-ready",
+  "selectedStandard": "pskb-pskt",
+  "liveWalletIntegrationReady": false,
+  "summary": {
+    "sourceTemplates": 47,
+    "mappedRequests": 2,
+    "payloadRequests": 1,
+    "computeBudgetRequests": 1,
+    "blocking": 0
+  },
+  "requests": [
+    {
+      "requestId": "ureq-6cfe79da-standard",
+      "sourceRequestId": "ureq-6cfe79da",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "label": "Payload receipt self-send",
+      "class": "payload-app-state",
+      "status": "wallet-standard-request-candidate-ready",
+      "blockers": [],
+      "body": {
+        "network": "kaspa-testnet-12",
+        "format": "pskb-pskt-candidate-json",
+        "version": 1,
+        "sourceRequestId": "ureq-6cfe79da",
+        "transaction": {
+          "version": 0,
+          "lockTime": "0",
+          "subnetworkId": "0000000000000000000000000000000000000000",
+          "inputs": [
+            {
+              "index": 0,
+              "previousOutpoint": {
+                "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+                "index": 1
+              },
+              "sequence": "0",
+              "sigOpCount": 1,
+              "computeBudget": null,
+              "signatureScript": ""
+            }
+          ],
+          "outputs": [
+            {
+              "index": 0,
+              "amount": "100000000",
+              "scriptPublicKey": {
+                "version": 0,
+                "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+              }
+            },
+            {
+              "index": 1,
+              "amount": "114799940000",
+              "scriptPublicKey": {
+                "version": 0,
+                "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+              }
+            }
+          ],
+          "payload": {
+            "present": true,
+            "bytes": 127,
+            "hash": "h-543ab76c",
+            "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c..."
+          }
+        }
+      },
+      "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3",
+      "preservation": {
+        "expectedTransactionIdAfterSigning": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+        "originalSignedDraftFingerprint": "h-98768c44",
+        "computeBudgetInputs": 0,
+        "mustPreserve": [
+          "network",
+          "version",
+          "lockTime",
+          "subnetworkId",
+          "previousOutpoints",
+          "sequences",
+          "sigOpCount fields when present",
+          "computeBudget fields when present",
+          "outputs",
+          "payload bytes"
+        ],
+        "requiredWalletChecks": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      },
+      "signerReturnContract": {
+        "required": [
+          "signedTransaction",
+          "transactionId",
+          "reviewFingerprint",
+          "payloadBytes",
+          "inputBudgetReport",
+          "signerName",
+          "signerVersion"
+        ],
+        "rejectWhen": [
+          "reviewFingerprint changes",
+          "payload bytes differ from request",
+          "output amount or script changes",
+          "previous outpoint changes",
+          "computeBudget is dropped or rewritten on v1 covenant inputs",
+          "network differs from request"
+        ]
+      }
+    },
+    {
+      "requestId": "ureq-d12412d8-standard",
+      "sourceRequestId": "ureq-d12412d8",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "label": "Role-separated escrow cancel",
+      "class": "contract-proof",
+      "status": "wallet-standard-request-candidate-ready",
+      "blockers": [],
+      "body": {
+        "network": "kaspa-testnet-12",
+        "format": "pskb-pskt-candidate-json",
+        "version": 1,
+        "sourceRequestId": "ureq-d12412d8",
+        "transaction": {
+          "version": 1,
+          "lockTime": "0",
+          "subnetworkId": "0000000000000000000000000000000000000000",
+          "inputs": [
+            {
+              "index": 0,
+              "previousOutpoint": {
+                "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+                "index": 2
+              },
+              "sequence": "18446744073709551615",
+              "sigOpCount": null,
+              "computeBudget": 30,
+              "signatureScript": ""
+            }
+          ],
+          "outputs": [
+            {
+              "index": 0,
+              "amount": "2499995000",
+              "scriptPublicKey": {
+                "version": 0,
+                "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
+              }
+            }
+          ],
+          "payload": {
+            "present": false,
+            "bytes": 0,
+            "hash": "",
+            "hexPreview": ""
+          }
+        }
+      },
+      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
+      "preservation": {
+        "expectedTransactionIdAfterSigning": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+        "originalSignedDraftFingerprint": "h-9b896fed",
+        "computeBudgetInputs": 1,
+        "mustPreserve": [
+          "network",
+          "version",
+          "lockTime",
+          "subnetworkId",
+          "previousOutpoints",
+          "sequences",
+          "sigOpCount fields when present",
+          "computeBudget fields when present",
+          "outputs",
+          "payload bytes"
+        ],
+        "requiredWalletChecks": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Preserve computeBudget and contract script arguments exactly."
+        ]
+      },
+      "signerReturnContract": {
+        "required": [
+          "signedTransaction",
+          "transactionId",
+          "reviewFingerprint",
+          "payloadBytes",
+          "inputBudgetReport",
+          "signerName",
+          "signerVersion"
+        ],
+        "rejectWhen": [
+          "reviewFingerprint changes",
+          "payload bytes differ from request",
+          "output amount or script changes",
+          "previous outpoint changes",
+          "computeBudget is dropped or rewritten on v1 covenant inputs",
+          "network differs from request"
+        ]
+      }
+    }
+  ],
+  "firstRoundTrip": {
+    "requestId": "ureq-6cfe79da-standard",
+    "sourceSignedDraftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+    "acceptance": "external signer returns signed transaction; submit through payload-preserving route; replay accepted txid and payload bytes"
+  },
+  "covenantRoundTrip": {
+    "requestId": "ureq-d12412d8-standard",
+    "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
+    "acceptance": "external signer preserves tx version 1, sigOpCount compatibility field, and computeBudget before submit"
+  },
+  "blocking": [],
+  "boundaries": [
+    "This is a repo-side wallet-standard candidate object, not an official PSKB/PSKT binary.",
+    "It is intentionally field-by-field so a wallet adapter can reject any mutation before signing.",
+    "No local private key, mnemonic, seed, or signature script is included.",
+    "No-local-key signing is not claimed until one external signer round trip is accepted and replayed."
+  ]
+}

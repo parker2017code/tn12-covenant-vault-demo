@@ -73,9 +73,11 @@ import { buildWalletSubmitResultValidation } from "../src/walletSubmitResultVali
 import { buildWalletExternalSignerGap } from "../src/walletExternalSignerGap.mjs";
 import { buildWalletUnsignedRequestTemplates } from "../src/walletUnsignedRequestTemplates.mjs";
 import { buildWalletStandardMapping } from "../src/walletStandardMapping.mjs";
+import { buildWalletStandardRequests } from "../src/walletStandardRequests.mjs";
 import { buildWalletConnectorImplementationSlice } from "../src/walletConnectorImplementationSlice.mjs";
 import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
 import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRunbook.mjs";
+import { summarizeTn12WrpcEndpointProbe } from "../src/tn12WrpcEndpointProbe.mjs";
 import { buildBatchAssuranceSettlementDecision } from "../src/batchAssuranceSettlementDecision.mjs";
 import { buildBatchAssuranceSubmitRunbook } from "../src/batchAssuranceSubmitRunbook.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
@@ -438,12 +440,14 @@ assert.equal(nextWorkQueueArtifact.status, "ordered-project-queue-ready");
 const nextTenExecutionPlan = buildNextTenExecutionPlan({
   queue: nextWorkQueueArtifact,
   walletMapping: JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8")),
+  walletStandardRequests: JSON.parse(await readFile(new URL("../artifacts/wallet-standard-requests.json", import.meta.url), "utf8")),
   livePreflight: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-preflight.json", import.meta.url), "utf8")),
   settlementDecision: JSON.parse(await readFile(new URL("../artifacts/batch-assurance-settlement-decision.json", import.meta.url), "utf8")),
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(nextTenExecutionPlan.status, "next-ten-execution-plan-ready");
 assert.equal(nextTenExecutionPlan.summary.tasks, 10);
+assert.equal(nextTenExecutionPlan.summary.walletStandardRequests, 2);
 assert.ok(nextTenExecutionPlan.slices.some((slice) => slice.id === "wallet-submit"));
 const nextTenExecutionPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/next-ten-execution-plan.json", import.meta.url), "utf8"));
 assert.equal(nextTenExecutionPlanArtifact.status, "next-ten-execution-plan-ready");
@@ -1165,6 +1169,41 @@ assert.equal(virtualChainEndpointRunbook.status, "endpoint-runbook-needs-endpoin
 assert.equal(virtualChainEndpointRunbook.summary.blockingChecks, 1);
 const virtualChainEndpointRunbookArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-endpoint-runbook.json", import.meta.url), "utf8"));
 assert.equal(virtualChainEndpointRunbookArtifact.status, "endpoint-runbook-needs-endpoint");
+const tn12WrpcEndpointProbeArtifact = JSON.parse(await readFile(new URL("../artifacts/tn12-wrpc-endpoint-probe.json", import.meta.url), "utf8"));
+assert.equal(tn12WrpcEndpointProbeArtifact.status, "tn12-wrpc-endpoint-probe-ready");
+assert.equal(tn12WrpcEndpointProbeArtifact.observed.dagNetwork, "testnet-12");
+assert.ok(tn12WrpcEndpointProbeArtifact.checks.every((item) => item.pass));
+const rebuiltEndpointProbe = summarizeTn12WrpcEndpointProbe({
+  url: "ws://65.108.107.30:18210",
+  encoding: "json",
+  networkId: "testnet-12",
+  probe: {
+    serverInfo: { ok: false, error: tn12WrpcEndpointProbeArtifact.rpcCaveats.serverInfoError },
+    currentNetwork: { ok: true, value: { network: tn12WrpcEndpointProbeArtifact.observed.currentNetwork } },
+    info: {
+      ok: true,
+      value: {
+        serverVersion: tn12WrpcEndpointProbeArtifact.observed.serverVersion,
+        mempoolSize: tn12WrpcEndpointProbeArtifact.observed.mempoolSize,
+        isSynced: true,
+        isUtxoIndexed: true
+      }
+    },
+    blockDagInfo: {
+      ok: true,
+      value: {
+        network: tn12WrpcEndpointProbeArtifact.observed.dagNetwork,
+        blockCount: tn12WrpcEndpointProbeArtifact.observed.blockCount,
+        headerCount: tn12WrpcEndpointProbeArtifact.observed.headerCount,
+        virtualDaaScore: tn12WrpcEndpointProbeArtifact.observed.virtualDaaScore,
+        virtualParentHashes: tn12WrpcEndpointProbeArtifact.observed.virtualParentHashes,
+        sink: tn12WrpcEndpointProbeArtifact.observed.sink
+      }
+    }
+  },
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(rebuiltEndpointProbe.status, "tn12-wrpc-endpoint-probe-ready");
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -1270,14 +1309,38 @@ assert.equal(walletStandardMapping.liveWalletIntegrationReady, false);
 const walletStandardMappingArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));
 assert.equal(walletStandardMappingArtifact.status, "wallet-standard-mapping-ready");
 assert.equal(walletStandardMappingArtifact.selectedCandidate, "pskb-pskt");
+const walletStandardRequests = buildWalletStandardRequests({
+  walletMapping: walletStandardMappingArtifact,
+  unsignedTemplates: walletUnsignedTemplatesArtifact,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletStandardRequests.status, "wallet-standard-request-candidates-ready");
+assert.equal(walletStandardRequests.summary.mappedRequests, 2);
+assert.equal(walletStandardRequests.summary.payloadRequests, 1);
+assert.equal(walletStandardRequests.summary.computeBudgetRequests, 1);
+assert.ok(walletStandardRequests.requests.every((request) =>
+  request.body.format === "pskb-pskt-candidate-json"
+  && request.reviewFingerprint.length === 64
+  && request.body.transaction.inputs.every((input) => input.signatureScript === "")
+));
+assert.ok(walletStandardRequests.requests.some((request) =>
+  request.preservation.computeBudgetInputs > 0
+  && request.signerReturnContract.rejectWhen.some((rule) => /computeBudget/.test(rule))
+));
+const walletStandardRequestsArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-requests.json", import.meta.url), "utf8"));
+assert.equal(walletStandardRequestsArtifact.status, "wallet-standard-request-candidates-ready");
+assert.equal(walletStandardRequestsArtifact.summary.mappedRequests, 2);
 const walletImplementationSlice = buildWalletConnectorImplementationSlice({
   walletMapping: walletStandardMappingArtifact,
   unsignedTemplates: walletUnsignedTemplatesArtifact,
+  standardRequests: walletStandardRequestsArtifact,
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(walletImplementationSlice.status, "wallet-connector-implementation-slice-ready");
 assert.equal(walletImplementationSlice.firstUserFlow, "payload-receipt-unsigned-sign");
 assert.equal(walletImplementationSlice.summary.payloadTemplates, 26);
+assert.equal(walletImplementationSlice.summary.standardRequests, 2);
+assert.ok(walletImplementationSlice.firstRoundTripRequest.reviewFingerprint);
 const walletImplementationSliceArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-implementation-slice.json", import.meta.url), "utf8"));
 assert.equal(walletImplementationSliceArtifact.status, "wallet-connector-implementation-slice-ready");
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
@@ -1480,6 +1543,7 @@ const files = [
   "scripts/build-virtual-chain-reader-adapter.mjs",
   "scripts/build-virtual-chain-live-preflight.mjs",
   "scripts/build-virtual-chain-endpoint-runbook.mjs",
+  "scripts/probe-tn12-wrpc-endpoint.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -1652,6 +1716,7 @@ const files = [
   "artifacts/virtual-chain-reader-adapter.json",
   "artifacts/virtual-chain-live-preflight.json",
   "artifacts/virtual-chain-endpoint-runbook.json",
+  "artifacts/tn12-wrpc-endpoint-probe.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
   "artifacts/access-pass-planner.json",
@@ -1744,6 +1809,7 @@ const files = [
   "src/virtualChainReaderAdapter.mjs",
   "src/virtualChainLivePreflight.mjs",
   "src/virtualChainEndpointRunbook.mjs",
+  "src/tn12WrpcEndpointProbe.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/attestationReputationThresholds.mjs",
@@ -1759,6 +1825,7 @@ const files = [
   "src/walletExternalSignerGap.mjs",
   "src/walletUnsignedRequestTemplates.mjs",
   "src/walletStandardMapping.mjs",
+  "src/walletStandardRequests.mjs",
   "src/walletConnectorImplementationSlice.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",

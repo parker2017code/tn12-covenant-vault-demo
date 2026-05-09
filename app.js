@@ -1202,18 +1202,20 @@ async function renderWalletConnector() {
   if (!walletConnectorNode) return;
 
   try {
-    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse] = await Promise.all([
+    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse, standardResponse] = await Promise.all([
       fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" }),
       fetch("artifacts/wallet-submit-package.json", { cache: "no-store" }),
       fetch("artifacts/wallet-connector-submit-requests.json", { cache: "no-store" }),
       fetch("artifacts/wallet-connector-adapter-run.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-connector-submit-ledger.json", { cache: "no-store" })
+      fetch("artifacts/wallet-connector-submit-ledger.json", { cache: "no-store" }),
+      fetch("artifacts/wallet-standard-requests.json", { cache: "no-store" })
     ]);
     const readiness = await readinessResponse.json();
     const submitPackage = await packageResponse.json();
     const requests = await requestResponse.json();
     const adapterRun = await adapterResponse.json();
     const ledger = await ledgerResponse.json();
+    const standard = await standardResponse.json();
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
@@ -1230,6 +1232,12 @@ async function renderWalletConnector() {
         <strong>${escapeHtml(adapterRun.summary.reviewReady)} review sessions, ${escapeHtml(adapterRun.summary.submitBroadcasts)} broadcasts</strong>
         <p>${escapeHtml(requests.summary.payloadRequests)} payload requests and ${escapeHtml(requests.summary.computeBudgetRequests)} compute-budget requests must preserve exact fields.</p>
         <small>${escapeHtml(adapterRun.boundaries[1])}</small>
+      </article>
+      <article>
+        <span>${escapeHtml(standard.status)}</span>
+        <strong>${escapeHtml(standard.summary.mappedRequests)} wallet-standard request candidates</strong>
+        <p>${escapeHtml(standard.summary.payloadRequests)} payload round trip and ${escapeHtml(standard.summary.computeBudgetRequests)} v1 compute-budget round trip are mapped for external signing.</p>
+        <small>${escapeHtml(standard.boundaries[0])}</small>
       </article>
       <article>
         <span>${escapeHtml(ledger.status)}</span>
