@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-standard-signer-validation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:10:04.148Z",
+  "generatedAt": "2026-05-09T21:37:32.223Z",
   "status": "wallet-standard-signer-validation-ready",
   "liveExternalSignerAccepted": false,
   "summary": {
@@ -48,8 +48,6 @@
       "validation": "rejected",
       "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
       "reasons": [
-        "review fingerprint mismatch",
-        "input 0 sigOpCount mismatch",
         "input 0 computeBudget mismatch"
       ]
     },

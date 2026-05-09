@@ -6,7 +6,7 @@
       "id": "payload-roundtrip-placeholder",
       "status": "pending-external-signer",
       "requestId": "ureq-6cfe79da-standard",
-      "reviewFingerprint": "2e8485a85a28940f6850ce0640dd6dc9bdfd27bf97077720b4faed5991100405",
+      "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3",
       "transactionId": "",
       "payloadBytes": 127,
       "inputBudgetReport": [
@@ -25,13 +25,13 @@
       "id": "covenant-roundtrip-placeholder",
       "status": "pending-external-signer",
       "requestId": "ureq-d12412d8-standard",
-      "reviewFingerprint": "02ab72d09870347af52a2b7394366d8670359e8c7b9ae6c26ad50b266c218f4c",
+      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
       "transactionId": "",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {
           "inputIndex": 0,
-          "sigOpCount": 0,
+          "sigOpCount": null,
           "computeBudget": 30
         }
       ],
@@ -63,13 +63,13 @@
       "id": "negative-dropped-compute-budget",
       "status": "returned",
       "requestId": "ureq-d12412d8-standard",
-      "reviewFingerprint": "02ab72d09870347af52a2b7394366d8670359e8c7b9ae6c26ad50b266c218f4c",
+      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
       "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {
           "inputIndex": 0,
-          "sigOpCount": 0,
+          "sigOpCount": null,
           "computeBudget": null
         }
       ],

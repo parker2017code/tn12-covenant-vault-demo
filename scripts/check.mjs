@@ -1510,6 +1510,11 @@ const walletSignerValidationArtifact = JSON.parse(await readFile(new URL("../art
 assert.equal(walletSignerValidationArtifact.status, "wallet-standard-signer-validation-ready");
 assert.equal(walletSignerValidationArtifact.summary.pending, 4);
 assert.equal(walletSignerValidationArtifact.summary.negativeCasesCaught, 2);
+assert.ok(walletSignerValidationArtifact.validations.some((row) =>
+  row.id === "negative-dropped-compute-budget"
+  && row.reasons.length === 1
+  && row.reasons[0] === "input 0 computeBudget mismatch"
+));
 const walletExternalSignerRoundtripPlan = buildWalletExternalSignerRoundtripPlan({
   standardRequests: walletStandardRequestsArtifact,
   signerValidation: walletSignerValidationArtifact,
