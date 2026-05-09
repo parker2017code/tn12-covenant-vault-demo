@@ -29,7 +29,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Enforcement: planner/indexer.
    - Covenant boundary: individual pledge script exists; pooled target aggregation is not script-enforced.
    - Evidence: three accepted pledge planner payloads and one accepted release-ready planner payload. These are not custody-settlement proofs.
-   - Custody review: `npm run campaign:custody` blocks settlement drafts until referenced outputs match pledge amounts. `npm run campaign:custody-requirements` lists the exact accepted pledge outputs still needed on TN12. `npm run campaign:pledge-outputs` turns the open requirements into wallet-reviewable output requirements and an import workflow.
+   - Custody review: `npm run campaign:custody` blocks settlement drafts until referenced outputs match pledge amounts. `npm run campaign:custody-requirements` lists the exact accepted pledge outputs still needed on TN12. `npm run campaign:pledge-outputs` turns the open requirements into wallet-reviewable output requirements and an import workflow. `npm run campaign:custody-imports` validates pasted/imported outpoints for pledge id, amount, txid/index, accepted evidence, duplicate outpoints, minimum pledge, and planner-payload-only promotion.
 
 4. Escrow primitive: buyer fund, seller release, timeout refund, mutual cancel planner.
    - Current status: base built plus marketplace demo plan.
@@ -116,6 +116,7 @@ Done now:
 - Based-rollup scouting: `npm run rollup:scout` tracks Maxim's TN12 PoC, Hans' vProgs/runtime lane, Michael's covenant++ roadmap, and next endpoint/bridge/app scouting tasks.
 - Oracle source matrix: `npm run oracle:matrix` compares Kaskad/Eliott Mea-inspired oracle source models and keeps all custody/liquidation claims research-only until stale/wrong-data and trust assumptions are explicit.
 - Batch-assurance pledge-output plan: `npm run campaign:pledge-outputs` writes `artifacts/batch-assurance-pledge-output-plan.json`, naming the three required 45/35/20 TKAS amount-matched outputs and the fixture import workflow. It is a funding/import plan, not a signed transaction.
+- Batch-assurance custody-import validator: `npm run campaign:custody-imports` writes `artifacts/batch-assurance-custody-imports.json`. Current fixtures stay `custody-imports-blocked-review` with zero ready imports because the repo has accepted planner payload records, not real matching custody outputs.
 - Next-work queue: `npm run project:queue` records the ordered next 30 tasks; the top five are wallet connector submit, durable virtual-chain indexer, accepted pledge outputs, batch-assurance release/refund drafts, and escrow marketplace demo.
 - Covenant adversarial map: `npm run covenant:adversarial` records local selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and script-mapping checks for the seven accepted proof paths.
 - Role-separated fixture lane: `npm run fixtures:roles` and `npm run compile:roles` create the clean constructor/script base for the next accepted-proof pass without mutating historical proof artifacts.
@@ -129,14 +130,14 @@ Done now:
 WIP now:
 
 - Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package, connector request bundle, dry-run adapter review sessions, and submit-result ledger are built; a real wallet adapter still needs to sign/submit externally.
-- Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone.
+- Batch-assurance custody drafts from amount-matched pledge outputs, not planner records alone. The custody-import validator is built and currently blocks all fixture rows until real accepted custody outputs are imported.
 - Durable indexer node/RPC replay beyond the generated fixture-backed replay. The reader/rollback contract and bounded adapter artifact exist; a configured hosted TN12 virtual-chain endpoint still needs to be tested live.
 - Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review, active provenance, stale/revoked/conflict states, and quorum checks are encoded in `npm run attestation:reputation`; `npm run prediction:hedge` now consumes that artifact and keeps current accepted signals threshold-blocked until the gate passes.
 
 Next actions:
 
 1. Wire the wallet-submit package into a live wallet connector.
-2. Create custody settlement drafts only from matched pledge outputs.
+2. Create custody settlement drafts only from matched pledge outputs that pass the custody-import validator.
 3. Test the bounded durable virtual-chain reader adapter against a configured TN12 RPC endpoint, then wire reducer replay and UI health to the generated replay rows.
 4. Use the prediction/hedge threshold-consumer pattern for any future signal-consuming dashboard before signals affect more app lanes.
 5. Fund fresh expendable role-separated outputs before any invalid-candidate TN12 rejection submission.

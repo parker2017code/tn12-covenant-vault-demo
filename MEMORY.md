@@ -93,6 +93,14 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Pause Note
 
+Paused on 2026-05-09 after bounded batch-assurance custody import validation:
+
+- `fixtures/BatchAssuranceCustodyImports.json` defines pasted/imported custody outpoint review rows for the current campaign.
+- `src/batchAssuranceCustodyImports.mjs` and `scripts/build-batch-assurance-custody-imports.mjs` generate `artifacts/batch-assurance-custody-imports.json`.
+- The validator checks pledge id, amount, txid/index presence, accepted evidence presence, duplicate outpoints, below-minimum rows, and planner-payload-only promotion.
+- Current status is intentionally `custody-imports-blocked-review`: zero ready imports, because existing matching rows are accepted planner payload records rather than real accepted custody outputs.
+- Next safe task in this lane: create accepted TN12 pledge outputs for 45/35/20 TKAS, paste those accepted outpoints into `fixtures/BatchAssuranceCustodyImports.json`, then rerun `npm run campaign:custody-imports`.
+
 Paused on 2026-05-09 after bounded virtual-chain reader adapter artifact work:
 
 - `fixtures/VirtualChainReaderAdapter.json` defines the endpoint config, bounded window, checkpoint cursor, rollback rules, retry/backoff, payload matching, proof matching, and no-local-node boundaries.

@@ -28,6 +28,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Durable indexer fixture replay command: `npm run indexer:replay`
 - Durable virtual-chain reader adapter command: `npm run indexer:virtual-chain-adapter`
 - AI/source discipline command: `npm run ai:discipline`
+- Batch-assurance custody import command: `npm run campaign:custody-imports`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - High-impact mainstream app direction: `docs/MAINSTREAM_APP_DIRECTION.md`
 - AI/source discipline: `docs/AI_CODING_SOURCE_DISCIPLINE.md`
@@ -171,6 +172,12 @@ Fixtures:
 - `artifacts/checkpointed-accepted-index.json`
 
 The accepted proof set currently has 7 records, 7 accepted, and 7 output-matched contract spends.
+
+Batch-assurance custody import state:
+
+- `npm run campaign:custody-imports` writes `artifacts/batch-assurance-custody-imports.json`.
+- It validates pasted/imported pledge outpoints against custody requirements: pledge id, amount, txid/index presence, accepted evidence presence, duplicate outpoint, below-minimum rows, and planner-payload-only promotion.
+- Current status remains `custody-imports-blocked-review` because the repo has accepted planner payload evidence, not real amount-matched accepted custody outputs for the 45/35/20 TKAS pledge requirements.
 
 ## Implemented Commands
 

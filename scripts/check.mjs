@@ -53,6 +53,7 @@ import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
 import { buildBatchAssurancePledgeOutputPlan } from "../src/batchAssurancePledgeOutputs.mjs";
+import { buildBatchAssuranceCustodyImports } from "../src/batchAssuranceCustodyImports.mjs";
 import { buildWalletConnectorReadiness } from "../src/walletConnectorReadiness.mjs";
 import { buildWalletSubmitPackage } from "../src/walletSubmitPackage.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
@@ -490,6 +491,42 @@ assert.ok(pledgeOutputPlan.outputsToCreate.some((output) =>
 const pledgeOutputPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-pledge-output-plan.json", import.meta.url), "utf8"));
 assert.equal(pledgeOutputPlanArtifact.status, "pledge-output-plan-ready");
 assert.equal(pledgeOutputPlanArtifact.summary.outputsToCreate, 3);
+const custodyImportsFixture = JSON.parse(await readFile(new URL("../fixtures/BatchAssuranceCustodyImports.json", import.meta.url), "utf8"));
+const custodyImportCheckpoint = JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8"));
+const custodyImports = buildBatchAssuranceCustodyImports({
+  importFixture: custodyImportsFixture,
+  campaignState,
+  custodyRequirements: custodyRequirementsFixture,
+  checkpointIndex: custodyImportCheckpoint
+});
+assert.equal(custodyImports.status, "custody-imports-blocked-review");
+assert.equal(custodyImports.summary.importCount, 5);
+assert.equal(custodyImports.summary.readyCount, 0);
+assert.equal(custodyImports.summary.blockedCount, 5);
+assert.equal(custodyImports.summary.requiredPledgeCount, 3);
+assert.equal(custodyImports.summary.missingRequiredImports, 3);
+assert.equal(custodyImports.summary.requirementsSatisfied, false);
+assert.ok(custodyImports.imports.some((row) =>
+  row.pledgeId === "pledge-docs-001"
+  && row.acceptedEvidence.kind === "payload-event"
+  && row.checks.plannerPayloadOnly
+  && row.problems.includes("accepted planner payload record is not a custody output")
+));
+assert.ok(custodyImports.imports.some((row) =>
+  row.pledgeId === "pledge-docs-002"
+  && row.checks.hasOutpointIndex === false
+));
+assert.ok(custodyImports.imports.some((row) =>
+  row.pledgeId === "pledge-docs-003"
+  && row.checks.duplicateOutpoint
+));
+assert.ok(custodyImports.imports.some((row) =>
+  row.pledgeId === "pledge-docs-005"
+  && row.checks.meetsMinimum === false
+));
+const custodyImportsArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-custody-imports.json", import.meta.url), "utf8"));
+assert.equal(custodyImportsArtifact.status, "custody-imports-blocked-review");
+assert.equal(custodyImportsArtifact.summary.readyCount, 0);
 const syntheticCustodyCheckpoint = {
   network: "kaspa-testnet-12",
   records: campaignState.releasePlan.inputs.map((input) => ({
@@ -1220,6 +1257,7 @@ const files = [
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
   "scripts/build-batch-assurance-pledge-output-plan.mjs",
+  "scripts/build-batch-assurance-custody-imports.mjs",
   "scripts/build-enforcement-matrix.mjs",
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-escrow-marketplace-demo.mjs",
@@ -1315,6 +1353,7 @@ const files = [
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
   "artifacts/batch-assurance-pledge-output-plan.json",
+  "artifacts/batch-assurance-custody-imports.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/escrow-marketplace-demo.json",
   "artifacts/proof-evidence.json",
@@ -1374,6 +1413,7 @@ const files = [
   "fixtures/OracleSourceMatrix.json",
   "fixtures/NextWorkQueue.json",
   "fixtures/BatchAssuranceCampaign.json",
+  "fixtures/BatchAssuranceCustodyImports.json",
   "fixtures/EnforcementMatrix.json",
   "fixtures/EscrowPrimitives.json",
   "fixtures/TreasuryVaults.json",
@@ -1443,6 +1483,7 @@ const files = [
   "src/batchAssuranceCustodyDrafts.mjs",
   "src/batchAssuranceCustodyRequirements.mjs",
   "src/batchAssurancePledgeOutputs.mjs",
+  "src/batchAssuranceCustodyImports.mjs",
   "src/enforcementMatrix.mjs",
   "src/escrowPrimitive.mjs",
   "src/escrowMarketplaceDemo.mjs",
@@ -1545,6 +1586,7 @@ assert.match(readme, /npm run covenant:adversarial/);
 assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);
 assert.match(readme, /npm run campaign:custody-requirements/);
+assert.match(readme, /npm run campaign:custody-imports/);
 assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /npm run treasury:registry/);

@@ -73,7 +73,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 |---|---|---|---|
 | 1. Payload invoice / receipt | Accepted TN12 vertical slice | Fixtures, registry, signed payload drafts, readiness check, accepted JSON wRPC paid/refund/error events, decoded invoice state, checkpoint guard, replay plan, storage schema, fixture-backed replay rows, virtual-chain ingestion contract, fixture-backed virtual-chain run, and bounded reader adapter contract | Test the adapter against a configured hosted TN12 node/RPC endpoint; keep framed as a receipt/app-state rail |
 | 2. Submit console | Review gate built | 47 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package, connector request bundle, dry-run adapter review sessions, and submit-result ledger | Real wallet adapter signing/submitting externally |
-| 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, exact pledge-output requirements, and wallet-reviewable pledge-output funding/import plan | Build accepted pledge outputs for the required amounts, then import those outpoints |
+| 3. Batch assurance | Accepted TN12 payload state plus custody gate | Campaign planner with accepted pledge planner records, signed-only progress, below-minimum review, release-ready planner event, blocked custody draft review, exact pledge-output requirements, wallet-reviewable pledge-output funding/import plan, and bounded custody-import validator | Build accepted pledge outputs for the required amounts, then import those outpoints |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, accepted mutual-cancel proofs, local role-separated invalid-candidate map, and marketplace demo plan | Fund fresh expendable outputs before any TN12 rejection submissions |
 | 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates, and constrained spend draft records | Role-key separation and accepted spend lifecycle |
 | 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |
@@ -109,7 +109,7 @@ These are roadmap or research until the missing rails are explicit and tested.
 ### Coming days
 
 1. Make the accepted JSON wRPC payload path repeatable through a real wallet adapter instead of local signing; keep the current submit ledger and result validator as evidence routing, not a broadcaster.
-2. Build custody settlement drafts only from amount-matched pledge outputs.
+2. Build custody settlement drafts only from amount-matched pledge outputs that pass the custody-import validator.
 3. Test `artifacts/virtual-chain-reader-adapter.json` against a configured hosted TN12 node/RPC endpoint, then connect the replay tables to live virtual-chain reads.
 4. Turn local invalid-candidate maps into safe TN12 rejection attempts only after fresh expendable outputs exist.
 5. Wire the attestation provenance/quorum artifact into future signal-consuming dashboards before signals influence more app lanes.
