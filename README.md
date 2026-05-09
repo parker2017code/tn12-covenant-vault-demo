@@ -528,7 +528,7 @@ npm run agent:settlement-drafts
 npm run agent:settlement-review
 ```
 
-This turns `fixtures/AgentCommitments.json` into `artifacts/agent-commitments.json` and `artifacts/agent-settlement-drafts.json`. It tracks task offers, accepted proof payloads, disputes, release planning, hold planning, and refund planning without claiming autonomous payouts.
+This turns `fixtures/AgentCommitments.json` into `artifacts/agent-commitments.json`, `artifacts/agent-settlement-drafts.json`, and `artifacts/agent-settlement-review.json`. It tracks task offers, accepted proof payloads, disputes, release planning, hold planning, refund planning, reviewer-decision rows, and custody blockers without claiming autonomous payouts.
 
 Build the repo status map:
 

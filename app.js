@@ -964,6 +964,20 @@ async function renderAgentCommitments() {
       `;
       agentListNode.append(article);
     }
+
+    const reviewResponse = await fetch("artifacts/agent-settlement-review.json", { cache: "no-store" });
+    if (reviewResponse.ok) {
+      const review = await reviewResponse.json();
+      const article = document.createElement("article");
+      article.className = "agent-card";
+      article.innerHTML = `
+        <span>${escapeHtml(review.status)}</span>
+        <strong>Agent settlement review</strong>
+        <p>${escapeHtml(review.summary.releaseRows)} release; ${escapeHtml(review.summary.refundRows)} refund; ${escapeHtml(review.summary.holdRows)} hold; ${escapeHtml(review.summary.custodyReadyRows)} custody-ready.</p>
+        <small>${escapeHtml(review.boundaries.join(" | "))}</small>
+      `;
+      agentListNode.append(article);
+    }
   } catch (error) {
     agentSummaryNode.textContent = `Agent commitment board unavailable: ${error.message}`;
   }

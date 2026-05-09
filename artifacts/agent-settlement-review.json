@@ -1,7 +1,7 @@
 {
   "schema": "kaspa-agent-settlement-review/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:21:07.035Z",
+  "generatedAt": "2026-05-09T21:12:24.034Z",
   "status": "agent-settlement-review-ready",
   "summary": {
     "drafts": 3,
