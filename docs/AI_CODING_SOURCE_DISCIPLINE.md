@@ -37,6 +37,18 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 - Planning before proof: when a lane has an obvious next transaction or negative test, build that before adding another matrix, queue, or status page.
 - Public copy over-explaining itself: external readers should see what landed, how to verify it, what broke, and what is next.
 
+## AI / Agent Coding Failure Modes
+
+Current research does not just say "LLMs hallucinate." The repo should assume these concrete failure classes:
+
+- Premise inheritance: agents keep extending nearby code even when the nearby code carries a bad assumption.
+- Missing corner cases: happy-path rows pass while duplicate txids, absent payloads, stale signals, wrong networks, rollbacks, or spent-output conflicts are uncovered.
+- Hallucinated local objects: agents name fields, methods, files, scripts, wallet APIs, or artifact rows that fit the pattern but are not actually present.
+- Prompt-biased code: agents satisfy the requested shape even when a safer answer is to stop, inspect, or shrink scope.
+- Security-by-green-check: generated code can pass functional tests while still weakening secret handling, parsing, shell execution, endpoint IO, replay safety, or wallet submit.
+
+Repo rule: before extending a pattern, inspect the adjacent artifact shape and the negative path. For TN12 that usually means full outpoints, accepted payload bytes, rollback state, wallet-result fingerprints, and exact route/network fields. For Kaspa Explained it means source lane, status label, and a concrete reader-visible claim.
+
 ## Current Source Watch
 
 - Kaspa Daily Yonatan Q&A Part 1 entry: https://x.com/DailyKaspa/status/2052716697262374936
@@ -51,6 +63,7 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 - Anthropic Claude Code best-practice docs: use for verification loops, context management, explore-plan-code sequencing, and failure pattern checks.
 - GitHub Copilot custom-instruction docs: track only if this repo needs cross-tool instruction files.
 - Empirical studies on AGENTS.md, failed agent PRs, and agent logging: use as warnings that bloat, large diffs, CI failures, and weak observability are real agent failure modes.
+- Empirical LLM-code studies: use bug taxonomies and secure-coding benchmarks as checklists for missing corner cases, hallucinated objects, prompt-biased code, buggy-context continuation, and security review gaps.
 
 ## Kaspa Daily Q&A Guardrails
 
