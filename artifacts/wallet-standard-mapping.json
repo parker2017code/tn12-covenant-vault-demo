@@ -1,0 +1,85 @@
+{
+  "schema": "tn12-wallet-standard-mapping/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:13:56.199Z",
+  "status": "wallet-standard-mapping-ready",
+  "selectedCandidate": "pskb-pskt",
+  "liveWalletIntegrationReady": false,
+  "summary": {
+    "unsignedTemplates": 47,
+    "payloadTemplates": 26,
+    "computeBudgetTemplates": 2,
+    "candidates": 4,
+    "signerReferenceMentions": 4
+  },
+  "candidates": [
+    {
+      "id": "kaspa-wallet-api",
+      "label": "Kaspa wallet API",
+      "status": "research-mapping-needed",
+      "notes": [
+        "Needs a documented method that accepts unsigned transaction fields plus payload bytes.",
+        "Must return a signed transaction without changing outputs, payload, lock time, or computeBudget."
+      ]
+    },
+    {
+      "id": "pskb-pskt",
+      "label": "PSKB/PSKT partial transaction",
+      "status": "best-standard-candidate",
+      "notes": [
+        "Closest public naming match for partial signed Kaspa transaction handoff.",
+        "Needs field-by-field mapping for payload bytes and tx version 1 computeBudget before integration."
+      ]
+    },
+    {
+      "id": "kspt",
+      "label": "KSPT compact transport",
+      "status": "reference-candidate",
+      "notes": [
+        "KasSigner/KasSee references KSPT for QR transport.",
+        "Useful for air-gapped review, but not proven compatible with these TN12 covenant drafts."
+      ]
+    },
+    {
+      "id": "json-wrpc-signed-submit",
+      "label": "JSON wRPC signed submit",
+      "status": "submit-only-currently-working",
+      "notes": [
+        "Known to preserve payload bytes for already signed drafts.",
+        "Does not solve external signing or no-local-key custody."
+      ]
+    }
+  ],
+  "requiredFieldMap": [
+    "network",
+    "transaction.version",
+    "transaction.lockTime",
+    "transaction.subnetworkId",
+    "inputs.previousOutpoint",
+    "inputs.sequence",
+    "inputs.sigOpCount",
+    "inputs.computeBudget",
+    "outputs.amount",
+    "outputs.scriptPublicKey",
+    "payload.bytes",
+    "payload.hash"
+  ],
+  "firstImplementationTarget": {
+    "id": "payload-receipt-unsigned-sign",
+    "templateClass": "payload-app-state",
+    "reason": "Payload receipt signing is the smallest useful no-local-key path before covenant spends.",
+    "requiredProof": "External signer returns a signed transaction whose txid, payload bytes, and outputs match the unsigned template, then virtual-chain ingestion reports accepted evidence."
+  },
+  "covenantImplementationTarget": {
+    "id": "v1-compute-budget-contract-sign",
+    "templateClass": "contract-proof",
+    "reason": "Escrow/vault/assurance spends need proof that tx version 1 computeBudget survives wallet signing.",
+    "requiredProof": "External signer returns a signed v1 transaction with computeBudget inputs preserved and no sigOpCount rewrite."
+  },
+  "boundaries": [
+    "This maps the next wallet standard target; it is not a live wallet connector.",
+    "Unsigned templates are repo-derived templates, not yet PSKB, PSKT, KSPT, or wallet-API objects.",
+    "JSON wRPC remains submit-only for already signed transactions.",
+    "Do not claim no-local-key signing until one external signer round trip is accepted and replayed."
+  ]
+}

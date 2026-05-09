@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-batch-assurance-settlement-decision/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:13:56.879Z",
+  "status": "settlement-decision-ready",
+  "selectedPath": "release-review",
+  "submitNow": false,
+  "summary": {
+    "custodyReady": true,
+    "releaseReady": true,
+    "refundReady": true,
+    "refundDrafts": 3,
+    "mutuallyExclusiveInputs": true
+  },
+  "releaseReview": {
+    "path": "artifacts/signed-drafts/batch-assurance-release.json",
+    "transactionId": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "inputCount": 3,
+    "outputTkas": [
+      "99.99995"
+    ],
+    "recommendation": "primary review path because target pledge outputs are amount-matched"
+  },
+  "refundReview": {
+    "paths": [
+      "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json",
+      "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-002.json",
+      "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-003.json"
+    ],
+    "transactionIds": [
+      "d3162da114013bfabf918f6f0f25091942cb8a87e3580af585399482a2397999",
+      "a5f07faab17cd16f8849a85c69c068bfe89e0ee77c5909aa0df4a9a842e08382",
+      "9bfc17c1ab73a7ed740f0f95220e65dff7930a1f499fa62b3bb7200b5ae1781c"
+    ],
+    "recommendation": "alternate path only if release is intentionally rejected or deadline/refund policy is selected"
+  },
+  "operatorDecision": [
+    "Review release and refund as mutually exclusive alternatives.",
+    "Do not submit both paths because they spend the same accepted pledge outputs.",
+    "If release is submitted, mark individual refunds unavailable after acceptance.",
+    "If refunds are submitted, submit all intended individual refunds and mark release unavailable after the first accepted spend."
+  ],
+  "boundaries": [
+    "This artifact chooses a review path; it does not broadcast.",
+    "The current scripts spend accepted P2PK pledge outputs, not pooled covenant aggregation.",
+    "A production assurance product still needs wallet UX, cancellation/refund policy, and pooled covenant rules."
+  ]
+}

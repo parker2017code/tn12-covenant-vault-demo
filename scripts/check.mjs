@@ -59,6 +59,7 @@ import { buildWalletSubmitPackage } from "../src/walletSubmitPackage.mjs";
 import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildEscrowMarketplaceDemo } from "../src/escrowMarketplaceDemo.mjs";
+import { buildEscrowMarketplaceFlow } from "../src/escrowMarketplaceFlow.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 import { buildTreasuryConstrainedSpends } from "../src/treasuryConstrainedSpends.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
@@ -70,6 +71,9 @@ import { buildWalletConnectorSubmitLedger } from "../src/walletConnectorSubmitLe
 import { buildWalletSubmitResultValidation } from "../src/walletSubmitResultValidation.mjs";
 import { buildWalletExternalSignerGap } from "../src/walletExternalSignerGap.mjs";
 import { buildWalletUnsignedRequestTemplates } from "../src/walletUnsignedRequestTemplates.mjs";
+import { buildWalletStandardMapping } from "../src/walletStandardMapping.mjs";
+import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
+import { buildBatchAssuranceSettlementDecision } from "../src/batchAssuranceSettlementDecision.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "../src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
@@ -546,6 +550,17 @@ assert.equal(batchSettlementDrafts.release.inputCount, 3);
 assert.equal(batchSettlementDrafts.release.outputTkas[0], "99.99995");
 assert.equal(batchSettlementDrafts.refunds.length, 3);
 assert.ok(batchSettlementDrafts.boundaries.some((boundary) => /mutually exclusive/.test(boundary)));
+const batchSettlementDecision = buildBatchAssuranceSettlementDecision({
+  settlementDrafts: batchSettlementDrafts,
+  custodyRequirements: custodyRequirementsFixture,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(batchSettlementDecision.status, "settlement-decision-ready");
+assert.equal(batchSettlementDecision.selectedPath, "release-review");
+assert.equal(batchSettlementDecision.submitNow, false);
+const batchSettlementDecisionArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-settlement-decision.json", import.meta.url), "utf8"));
+assert.equal(batchSettlementDecisionArtifact.status, "settlement-decision-ready");
+assert.equal(batchSettlementDecisionArtifact.selectedPath, "release-review");
 assert.equal(batchReleaseDraft.kind, "release");
 assert.equal(batchReleaseDraft.inputs.length, 3);
 assert.equal(batchReleaseDraft.submitPayload.transaction.inputs.length, 3);
@@ -625,6 +640,16 @@ assert.ok(escrowMarketplace.listings.some((listing) =>
 const escrowMarketplaceArtifact = JSON.parse(await readFile(new URL("../artifacts/escrow-marketplace-demo.json", import.meta.url), "utf8"));
 assert.equal(escrowMarketplaceArtifact.status, "marketplace-demo-plan-ready");
 assert.equal(escrowMarketplaceArtifact.summary.listings, 3);
+const escrowMarketplaceFlow = buildEscrowMarketplaceFlow({
+  marketplaceDemo: escrowMarketplaceArtifact,
+  unsignedTemplates: JSON.parse(await readFile(new URL("../artifacts/wallet-unsigned-request-templates.json", import.meta.url), "utf8")),
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(escrowMarketplaceFlow.status, "escrow-marketplace-flow-ready");
+assert.equal(escrowMarketplaceFlow.summary.flows, 3);
+assert.equal(escrowMarketplaceFlow.summary.blockedOnWalletStandard, 3);
+const escrowMarketplaceFlowArtifact = JSON.parse(await readFile(new URL("../artifacts/escrow-marketplace-flow.json", import.meta.url), "utf8"));
+assert.equal(escrowMarketplaceFlowArtifact.status, "escrow-marketplace-flow-ready");
 const treasuryFixture = JSON.parse(await readFile(new URL("../fixtures/TreasuryVaults.json", import.meta.url), "utf8"));
 const treasuryRegistry = buildTreasuryVaultRegistry(treasuryFixture);
 assert.equal(treasuryRegistry.status, "planner-policy-before-extra-script-paths");
@@ -1039,6 +1064,15 @@ const virtualChainReaderAdapterArtifact = JSON.parse(await readFile(new URL("../
 assert.equal(virtualChainReaderAdapterArtifact.status, "virtual-chain-reader-adapter-ready");
 assert.equal(virtualChainReaderAdapterArtifact.summary.virtualChainRows, 36);
 assert.equal(virtualChainReaderAdapterArtifact.summary.localNodeRequired, false);
+const virtualChainLivePreflight = buildVirtualChainLivePreflight({
+  readerAdapter: virtualChainReaderAdapterArtifact,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(virtualChainLivePreflight.status, "live-preflight-blocked");
+assert.equal(virtualChainLivePreflight.summary.blocking, 1);
+assert.ok(virtualChainLivePreflight.checks.some((item) => item.id === "endpoint-configured" && !item.pass));
+const virtualChainLivePreflightArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-preflight.json", import.meta.url), "utf8"));
+assert.equal(virtualChainLivePreflightArtifact.status, "live-preflight-blocked");
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -1132,6 +1166,18 @@ const walletUnsignedTemplatesArtifact = JSON.parse(await readFile(new URL("../ar
 assert.equal(walletUnsignedTemplatesArtifact.status, "unsigned-request-templates-ready");
 assert.equal(walletUnsignedTemplatesArtifact.summary.templates, 47);
 assert.equal(walletUnsignedTemplatesArtifact.standardMapped, false);
+const signerReferences = await readFile(new URL("../docs/WALLET_SIGNER_REFERENCES.md", import.meta.url), "utf8");
+const walletStandardMapping = buildWalletStandardMapping({
+  unsignedTemplates: walletUnsignedTemplatesArtifact,
+  signerReferences,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletStandardMapping.status, "wallet-standard-mapping-ready");
+assert.equal(walletStandardMapping.selectedCandidate, "pskb-pskt");
+assert.equal(walletStandardMapping.liveWalletIntegrationReady, false);
+const walletStandardMappingArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));
+assert.equal(walletStandardMappingArtifact.status, "wallet-standard-mapping-ready");
+assert.equal(walletStandardMappingArtifact.selectedCandidate, "pskb-pskt");
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -1330,6 +1376,7 @@ const files = [
   "scripts/build-virtual-chain-ingestion-plan.mjs",
   "scripts/build-virtual-chain-ingestion-run.mjs",
   "scripts/build-virtual-chain-reader-adapter.mjs",
+  "scripts/build-virtual-chain-live-preflight.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -1345,6 +1392,7 @@ const files = [
   "scripts/build-wallet-submit-result-validation.mjs",
   "scripts/build-wallet-external-signer-gap.mjs",
   "scripts/build-wallet-unsigned-request-templates.mjs",
+  "scripts/build-wallet-standard-mapping.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
@@ -1357,9 +1405,11 @@ const files = [
   "scripts/build-batch-assurance-custody-requirements.mjs",
   "scripts/build-batch-assurance-pledge-output-plan.mjs",
   "scripts/build-batch-assurance-custody-imports.mjs",
+  "scripts/build-batch-assurance-settlement-decision.mjs",
   "scripts/build-enforcement-matrix.mjs",
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-escrow-marketplace-demo.mjs",
+  "scripts/build-escrow-marketplace-flow.mjs",
   "scripts/build-treasury-vaults.mjs",
   "scripts/build-treasury-constrained-spends.mjs",
   "scripts/build-payload-submit-readiness.mjs",
@@ -1442,6 +1492,7 @@ const files = [
   "artifacts/wallet-submit-result-validation.json",
   "artifacts/wallet-external-signer-gap.json",
   "artifacts/wallet-unsigned-request-templates.json",
+  "artifacts/wallet-standard-mapping.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
@@ -1456,6 +1507,7 @@ const files = [
   "artifacts/batch-assurance-pledge-output-plan.json",
   "artifacts/batch-assurance-custody-imports.json",
   "artifacts/batch-assurance-settlement-drafts.json",
+  "artifacts/batch-assurance-settlement-decision.json",
   "artifacts/signed-drafts/batch-assurance-pledge-funding.json",
   "artifacts/signed-drafts/batch-assurance-release.json",
   "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json",
@@ -1463,6 +1515,7 @@ const files = [
   "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-003.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/escrow-marketplace-demo.json",
+  "artifacts/escrow-marketplace-flow.json",
   "artifacts/proof-evidence.json",
   "artifacts/role-separated-proof-evidence.json",
   "artifacts/covenant-adversarial-coverage.json",
@@ -1482,6 +1535,7 @@ const files = [
   "artifacts/virtual-chain-ingestion-plan.json",
   "artifacts/virtual-chain-ingestion-run.json",
   "artifacts/virtual-chain-reader-adapter.json",
+  "artifacts/virtual-chain-live-preflight.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
   "artifacts/access-pass-planner.json",
@@ -1568,6 +1622,7 @@ const files = [
   "src/virtualChainIngestion.mjs",
   "src/virtualChainIngestionRun.mjs",
   "src/virtualChainReaderAdapter.mjs",
+  "src/virtualChainLivePreflight.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/attestationReputationThresholds.mjs",
@@ -1582,6 +1637,7 @@ const files = [
   "src/walletSubmitResultValidation.mjs",
   "src/walletExternalSignerGap.mjs",
   "src/walletUnsignedRequestTemplates.mjs",
+  "src/walletStandardMapping.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
@@ -1594,9 +1650,11 @@ const files = [
   "src/batchAssuranceCustodyRequirements.mjs",
   "src/batchAssurancePledgeOutputs.mjs",
   "src/batchAssuranceCustodyImports.mjs",
+  "src/batchAssuranceSettlementDecision.mjs",
   "src/enforcementMatrix.mjs",
   "src/escrowPrimitive.mjs",
   "src/escrowMarketplaceDemo.mjs",
+  "src/escrowMarketplaceFlow.mjs",
   "src/treasuryVault.mjs",
   "src/treasuryConstrainedSpends.mjs",
   "src/payloadSubmitReadiness.mjs",
@@ -1667,6 +1725,7 @@ assert.match(readme, /npm run indexer:replay/);
 assert.match(readme, /npm run indexer:virtual-chain-plan/);
 assert.match(readme, /npm run indexer:virtual-chain-run/);
 assert.match(readme, /npm run indexer:virtual-chain-adapter/);
+assert.match(readme, /npm run indexer:live-preflight/);
 assert.match(readme, /npm run tx:p2pk/);
 assert.match(readme, /npm run tx:contracts/);
 assert.match(readme, /npm run tx:split/);
@@ -1686,8 +1745,10 @@ assert.match(readme, /npm run wallet:submit-ledger/);
 assert.match(readme, /npm run wallet:result-validation/);
 assert.match(readme, /npm run wallet:external-signer-gap/);
 assert.match(readme, /npm run wallet:unsigned-requests/);
+assert.match(readme, /npm run wallet:standard-map/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run escrow:marketplace/);
+assert.match(readme, /npm run escrow:flow/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run mainstream:direction/);
@@ -1702,6 +1763,7 @@ assert.match(readme, /npm run campaign:custody-requirements/);
 assert.match(readme, /npm run campaign:custody-imports/);
 assert.match(readme, /npm run campaign:pledge-funding-draft/);
 assert.match(readme, /npm run campaign:settlement-drafts/);
+assert.match(readme, /npm run campaign:settlement-decision/);
 assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /npm run treasury:registry/);

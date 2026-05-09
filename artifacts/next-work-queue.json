@@ -61,13 +61,13 @@
     {
       "id": "wallet-review-package",
       "label": "Wallet review and submit handoff package",
-      "evidence": "Submit registry, wallet-review readiness, wallet-connector spec, and wallet-submit package are built, checked, and documented.",
+      "evidence": "Submit registry, wallet-review readiness, wallet-connector spec, wallet-submit package, unsigned request templates, external signer gap, and wallet-standard mapping are built, checked, and documented.",
       "lane": "wallet-policy"
     },
     {
       "id": "checkpointed-indexer-fixture-replay",
       "label": "Checkpointed indexer schema and fixture replay",
-      "evidence": "Current 36 accepted records are checkpointed, persisted, shaped into tables, and replayed from fixture data.",
+      "evidence": "Current 36 accepted records are checkpointed, persisted, shaped into tables, replayed from fixture data, joined with 47 wallet-submit candidates, and preflighted for a future live endpoint.",
       "lane": "indexer"
     },
     {
@@ -237,57 +237,55 @@
     {
       "rank": 1,
       "id": "wallet-connector-submit",
-      "title": "Implement live wallet connector submit path",
+      "title": "Map unsigned wallet templates to a real wallet standard",
       "lane": "wallet-policy",
       "importance": "critical",
       "why": "This is the highest leverage blocker: every user-facing app needs no-local-key signing and exact transaction review.",
-      "definitionOfDone": "A user can review an exact draft, hand it to a wallet connector or external signer, preserve payload bytes and tx v1 fields, and record the submit result without exposing local private keys.",
+      "definitionOfDone": "One payload receipt and one v1 contract template are represented in a documented wallet/PSKB/PSKT/KSPT-compatible format with explicit preservation checks.",
       "startWith": [
-        "artifacts/wallet-submit-package.json",
-        "src/walletConnectorReadiness.mjs",
-        "fixtures/SubmitConsoleDrafts.json",
+        "artifacts/wallet-unsigned-request-templates.json",
+        "artifacts/wallet-standard-mapping.json",
         "docs/WALLET_SIGNER_REFERENCES.md"
       ],
       "gates": [
-        "npm run wallet:submit-package",
+        "npm run wallet:unsigned-requests",
+        "npm run wallet:standard-map",
         "npm run check:all"
       ]
     },
     {
       "rank": 2,
       "id": "durable-virtual-chain-indexer",
-      "title": "Replace fixture-only replay with virtual-chain node/RPC ingestion",
+      "title": "Run live virtual-chain endpoint preflight and adapter test",
       "lane": "indexer",
       "importance": "critical",
       "why": "The invoice/app-state vertical is only real if new accepted transactions can be discovered, replayed, and rolled back without manually curated txids.",
-      "definitionOfDone": "Indexer reads accepted transactions from node/RPC virtual-chain data, persists checkpoints, detects rollback, and feeds the existing reducer rows.",
+      "definitionOfDone": "A configured hosted TN12 endpoint returns a bounded virtual-chain window that matches checkpointed payload/proof rows or records an explicit endpoint failure.",
       "startWith": [
-        "artifacts/indexer-replay-plan.json",
-        "artifacts/indexer-storage-schema.json",
-        "src/indexerReplayRun.mjs"
+        "artifacts/virtual-chain-reader-adapter.json",
+        "artifacts/virtual-chain-live-preflight.json",
+        "src/virtualChainReaderAdapter.mjs"
       ],
       "gates": [
-        "npm run indexer:checkpoint",
-        "npm run indexer:persist",
-        "npm run indexer:replay",
+        "npm run indexer:live-preflight",
+        "npm run indexer:virtual-chain-adapter",
         "npm run check:all"
       ]
     },
     {
       "rank": 3,
       "id": "batch-assurance-settlement-path-review",
-      "title": "Review and optionally submit one batch-assurance settlement path",
+      "title": "Operator review for one batch-assurance settlement path",
       "lane": "tn12-covenant",
       "importance": "critical",
       "why": "Batch assurance now has accepted planner state, accepted amount-matched pledge outputs, and signed-not-broadcast settlement drafts; the next risk is choosing exactly one spend path.",
-      "definitionOfDone": "The operator reviews release versus refund, selects one mutually exclusive path, submits only that path if intended, and records accepted or rejected TN12 evidence.",
+      "definitionOfDone": "The release-review decision is confirmed or changed by the operator; if a submit is chosen, only that mutually exclusive path is submitted and evidence is recorded.",
       "startWith": [
-        "artifacts/batch-assurance-settlement-drafts.json",
-        "artifacts/signed-drafts/batch-assurance-release.json",
-        "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json"
+        "artifacts/batch-assurance-settlement-decision.json",
+        "artifacts/batch-assurance-settlement-drafts.json"
       ],
       "gates": [
-        "npm run campaign:settlement-drafts",
+        "npm run campaign:settlement-decision",
         "npm run wallet:review",
         "npm run check:all"
       ]
@@ -299,15 +297,15 @@
       "lane": "tn12-covenant",
       "importance": "high",
       "why": "Escrow is the clearest user-facing covenant app already backed by accepted TN12 proofs.",
-      "definitionOfDone": "One buyer/seller/job flow shows funding, deliverable state, release, timeout refund, and cancel boundary through wallet-reviewed artifacts.",
+      "definitionOfDone": "One buyer/seller/job flow shows listing review, selected action, unsigned wallet template handoff, external-signing gap, and accepted replay gate.",
       "startWith": [
-        "fixtures/EscrowPrimitives.json",
-        "artifacts/escrow-primitives.json",
+        "artifacts/escrow-marketplace-demo.json",
+        "artifacts/escrow-marketplace-flow.json",
         "docs/TN12_TEST_MATRIX.md"
       ],
       "gates": [
-        "npm run escrow:registry",
-        "npm run wallet:review",
+        "npm run escrow:marketplace",
+        "npm run escrow:flow",
         "npm run check:all"
       ]
     },

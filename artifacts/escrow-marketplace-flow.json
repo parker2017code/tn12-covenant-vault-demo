@@ -1,0 +1,130 @@
+{
+  "schema": "tn12-escrow-marketplace-flow/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:13:57.185Z",
+  "status": "escrow-marketplace-flow-ready",
+  "summary": {
+    "flows": 3,
+    "actionable": 2,
+    "blockedOnWalletStandard": 3,
+    "acceptedEscrowProofs": 3
+  },
+  "flows": [
+    {
+      "escrowId": "escrow-freelance-001",
+      "title": "Freelance wallet integration review",
+      "state": "wallet-review-needed",
+      "marketState": "funded-awaiting-action",
+      "proofBackdrop": "release-refund-cancel-paths-accepted",
+      "steps": [
+        {
+          "id": "review-listing",
+          "detail": "Show buyer, seller, amount, timeout, delivery hash, and proof backdrop.",
+          "ready": true
+        },
+        {
+          "id": "select-action",
+          "detail": "Available actions: release, timeout-refund, mutual-cancel.",
+          "ready": true
+        },
+        {
+          "id": "wallet-template",
+          "detail": "Map the selected action to an unsigned wallet request template.",
+          "ready": true
+        },
+        {
+          "id": "external-sign",
+          "detail": "External signer reviews and signs without repo local keys.",
+          "ready": false
+        },
+        {
+          "id": "accepted-replay",
+          "detail": "Virtual-chain indexer confirms accepted txid before settlement state changes.",
+          "ready": false
+        }
+      ],
+      "next": "Map one enabled action to the wallet-standard handoff after standard mapping is implemented."
+    },
+    {
+      "escrowId": "escrow-pass-redemption-002",
+      "title": "Access pass redemption batch",
+      "state": "needs-funding",
+      "marketState": "draft",
+      "proofBackdrop": "release-refund-cancel-paths-accepted",
+      "steps": [
+        {
+          "id": "review-listing",
+          "detail": "Show buyer, seller, amount, timeout, delivery hash, and proof backdrop.",
+          "ready": true
+        },
+        {
+          "id": "select-action",
+          "detail": "Available actions: mutual-cancel.",
+          "ready": true
+        },
+        {
+          "id": "wallet-template",
+          "detail": "Map the selected action to an unsigned wallet request template.",
+          "ready": true
+        },
+        {
+          "id": "external-sign",
+          "detail": "External signer reviews and signs without repo local keys.",
+          "ready": false
+        },
+        {
+          "id": "accepted-replay",
+          "detail": "Virtual-chain indexer confirms accepted txid before settlement state changes.",
+          "ready": false
+        }
+      ],
+      "next": "Build funding template before release/refund/cancel review."
+    },
+    {
+      "escrowId": "escrow-docs-grant-003",
+      "title": "Docs grant milestone payout",
+      "state": "wallet-review-needed",
+      "marketState": "disputed",
+      "proofBackdrop": "release-refund-cancel-paths-accepted",
+      "steps": [
+        {
+          "id": "review-listing",
+          "detail": "Show buyer, seller, amount, timeout, delivery hash, and proof backdrop.",
+          "ready": true
+        },
+        {
+          "id": "select-action",
+          "detail": "Available actions: mutual-cancel.",
+          "ready": true
+        },
+        {
+          "id": "wallet-template",
+          "detail": "Map the selected action to an unsigned wallet request template.",
+          "ready": true
+        },
+        {
+          "id": "external-sign",
+          "detail": "External signer reviews and signs without repo local keys.",
+          "ready": false
+        },
+        {
+          "id": "accepted-replay",
+          "detail": "Virtual-chain indexer confirms accepted txid before settlement state changes.",
+          "ready": false
+        }
+      ],
+      "next": "Map one enabled action to the wallet-standard handoff after standard mapping is implemented."
+    }
+  ],
+  "globalGates": [
+    "Render listing state and proof backdrop before any action button.",
+    "Route every action through unsigned wallet request templates once standard mapping exists.",
+    "Require accepted virtual-chain evidence before changing marketplace settlement state.",
+    "Keep dispute handling as app-layer context unless an arbiter or mutual-cancel path is selected."
+  ],
+  "boundaries": [
+    "This is a marketplace workflow artifact, not a live marketplace.",
+    "It uses accepted escrow proof paths as backdrop evidence, not fresh user custody.",
+    "No transaction is signed or broadcast by this artifact."
+  ]
+}
