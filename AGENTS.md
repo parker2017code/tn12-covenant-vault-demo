@@ -34,6 +34,7 @@
 - Keep writing concrete and necessary. Avoid repeated "not X but Y" frames, "if this then that" filler, and polished LLM cadence words such as "seamless," "robust," "unlock," "empower," "transform," or "game-changing."
 - Avoid clever authority voice: no dramatic adjective piles, faux-bold certainty, invented slogans, or lines that sound written to impress the writer rather than help the builder.
 - Use one clear status label or source link instead of long defensive caveat stacks.
+- Prefer plain build language: built, working, needs wallet, needs custody, needs indexer, research, roadmap, next rail. Avoid over-negative repetition when the useful point is simply what must be built next.
 - Treat text as part of the product. UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes should be scanned with the same care as code: necessary, specific, clean, and defensible.
 - Treat invoice, payload, receipt, and wallet work as rails, not as a generic merchant-payment adoption thesis. Current strategic framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
 - Treat the current version as a TN12-configured proof app. The browser builds policy/control artifacts, while scripts compile, sign, submit, verify, and index accepted testnet transactions.

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TN12 Covenant Lab Notes</title>
-  <meta name="description" content="Kaspa TN12 covenant proof notes, accepted testnet transactions, and review-only app scaffolding.">
+  <meta name="description" content="Kaspa TN12 covenant proof notes, accepted testnet transactions, and app-rail build status.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="app.js"></script>
@@ -53,20 +53,20 @@
     <section class="hero">
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
-        <h2>Small proof core first, app scaffolding second.</h2>
-        <p>The real work here is accepted TN12 evidence: covenant spends, role-separated repeats, payload receipts, and batch-assurance pledge outputs. The larger app lanes are review scaffolding unless they point to accepted transaction evidence, signed drafts, or a checkable artifact.</p>
+        <h2>Accepted proof rails, then app rails.</h2>
+        <p>The core is accepted TN12 evidence: covenant spends, role-separated repeats, payload receipts, and batch-assurance pledge outputs. The app lanes turn that evidence into fixtures, checks, wallet review flows, and the next build tasks.</p>
       </div>
       <aside class="facts">
         <span>Proof core</span>
         <strong>7 original + 7 role-separated + 36 indexed records</strong>
-        <p>Vault, assurance, escrow, payload receipts, and batch-assurance pledge outputs have accepted TN12 evidence. Mainnet covenant and product claims stay out of scope.</p>
+        <p>Vault, assurance, escrow, payload receipts, and batch-assurance pledge outputs have accepted TN12 evidence. Wallet, indexer, custody, and settlement rails come next.</p>
       </aside>
     </section>
 
     <section id="core-notes" class="panel">
       <div class="section-title">
         <p class="eyebrow">Core lab notes</p>
-        <h2>What is actually worth reading first.</h2>
+        <h2>What to read first.</h2>
       </div>
       <div class="stat-grid">
         <article>
@@ -85,7 +85,7 @@
           <p>One accepted funding transaction created 45/35/20 TKAS pledge outputs; release/refund drafts are signed but not broadcast.</p>
         </article>
       </div>
-      <p class="note">Read <code>docs/CORE_LAB_NOTES.md</code> before the roadmap pages. The DeFi, coordination, stable-value, and agent sections are research or fixture scaffolding until more rails are proved.</p>
+      <p class="note">Read <code>docs/CORE_LAB_NOTES.md</code> before the roadmap pages. DeFi, coordination, stable-value, and agent sections stay attached to wallet, indexer, custody, and settlement rails.</p>
     </section>
 
     <section id="designer" class="workspace">
@@ -659,10 +659,10 @@ npm run wallet:adapter-run</pre>
 
     <section id="sources" class="panel sources">
       <p class="eyebrow">Source discipline</p>
-      <h2>What this demo is allowed to claim</h2>
+      <h2>Status labels</h2>
       <div class="claim-grid">
-        <article><strong>Can claim</strong><p>TN12 vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
-        <article><strong>Cannot claim</strong><p>Mainnet covenant activation, live native DeFi, full vProgs, wallet safety, arbitrary header data, or production wallet integration.</p></article>
+        <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
+        <article><strong>Next rails</strong><p>Mainnet covenant tooling, native DeFi rails, full vProgs, wallet safety, miner/header data, and production wallet integration stay in their build lanes.</p></article>
         <article><strong>Next build</strong><p>Wallet-facing key separation, reviewed batch-assurance settlement, durable payload indexing, ZK/anchor checklists, and tighter vault templates.</p></article>
       </div>
     </section>

@@ -2,9 +2,9 @@
 
 Reviewed: 2026-05-09
 
-This is the concise reading of the repo. The useful core is TN12 evidence and debugging notes. The rest is scaffolding unless it leads to another accepted transaction, a stricter check, or a clearer boundary.
+This is the concise reading of the repo. The useful core is TN12 evidence, debugging notes, and the app rails that lead to another accepted transaction, a stricter check, or a clearer next dependency.
 
-## What is real
+## Accepted Evidence
 
 - Seven original TN12 covenant spends were accepted: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel.
 - Seven role-separated positive paths were accepted after the repo stopped using one saved wallet for every role: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.
@@ -20,10 +20,10 @@ This is the concise reading of the repo. The useful core is TN12 evidence and de
 - The public TN12 REST submit route is unsuitable for payload receipt proofs because it accepted a transaction while dropping payload bytes. JSON wRPC preserved payload bytes.
 - Custody checks must key by full outpoint, not txid alone. One accepted transaction can carry several distinct pledge outputs.
 
-## What is scaffolding
+## App Rails
 
-- The app lanes, priority queue, research library, DeFi backlog, prediction simulator, stable-value paths, AI-agent board, and coordination-market toy model are not products.
-- Most of those artifacts are JSON fixture transforms. They are useful only when they keep language honest, expose a missing rail, or drive the next concrete TN12 transaction.
+- The app lanes, priority queue, research library, DeFi backlog, prediction simulator, stable-value paths, AI-agent board, and coordination-market toy model are planning surfaces.
+- Most of those artifacts are JSON fixture transforms. They are useful when they tighten a claim, expose a missing rail, or drive the next concrete TN12 transaction.
 - Public-facing copy should lead with accepted txids and SDK lessons. Roadmap material should stay short and secondary.
 
 ## Current next work
@@ -31,4 +31,4 @@ This is the concise reading of the repo. The useful core is TN12 evidence and de
 1. Review one mutually exclusive batch-assurance settlement path from the signed release/refund drafts before any TN12 submit.
 2. Keep wallet-submit work focused on a real no-local-key connector, not more handoff prose.
 3. Keep durable indexing focused on live virtual-chain ingestion and rollback replay, not more fixture reshaping.
-4. Reduce public language that makes scaffolding sound like product surface.
+4. Keep public language centered on accepted evidence, working rails, and the next dependency.

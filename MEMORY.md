@@ -154,6 +154,13 @@ Accepted role-separated proof state:
 
 Current WIP:
 
+- On 2026-05-09, the next-five pass added review artifacts for auction custody, agent settlement, treasury role/source checks, invoice mainnet readiness, and access-pass issuer review:
+  - `npm run auction:custody-review` writes `artifacts/auction-custody-review.json`;
+  - `npm run agent:settlement-review` writes `artifacts/agent-settlement-review.json`;
+  - `npm run treasury:role-review` writes `artifacts/treasury-role-review.json`;
+  - `npm run invoice:mainnet-brief` writes `artifacts/invoice-mainnet-launch-brief.json`;
+  - `npm run access:issuer-review` writes `artifacts/access-pass-issuer-review.json`.
+- Same pass updated public and agent-facing wording to use plain build language: built, working, needs wallet, needs custody, needs indexer, research, roadmap, next rail. Avoid over-negative repetition; name the next dependency.
 - Invalid-candidate definitions are local-review-only, not signed invalid transactions and not TN12 rejection evidence.
 - Resume by running `npm run check:all` and `npm run check:tn12` after any follow-up edits; both passed after this change.
 - The next durable indexer step is testing the bounded virtual-chain reader adapter against a configured hosted TN12 RPC endpoint, then feeding live virtual-chain rows into the replay tables.

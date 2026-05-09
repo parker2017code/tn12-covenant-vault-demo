@@ -388,7 +388,7 @@ The app was aligned with Kaspa Explained framing:
 - vProgs: roadmap architecture,
 - RTD/miner signals/oracles: research lane.
 
-Use restrained, source-first language. Concrete claim first, status label second. Cut filler contrast frames, dramatic adjective piles, faux-bold certainty, and polished LLM cadence words. Treat UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes as product surface that needs the same care as code.
+Use restrained, source-first language. Concrete claim first, status label second. Cut filler contrast frames, dramatic adjective piles, faux-bold certainty, and polished LLM cadence words. Prefer plain build language: built, working, needs wallet, needs custody, needs indexer, research, roadmap, next rail. Avoid over-negative repetition when the useful point is what must be built next. Treat UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes as product surface that needs the same care as code.
 
 ## Kaspa Docs Review
 

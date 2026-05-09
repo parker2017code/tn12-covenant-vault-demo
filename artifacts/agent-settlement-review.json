@@ -1,0 +1,60 @@
+{
+  "schema": "kaspa-agent-settlement-review/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:21:07.035Z",
+  "status": "agent-settlement-review-ready",
+  "summary": {
+    "drafts": 3,
+    "releaseRows": 1,
+    "refundRows": 1,
+    "holdRows": 1,
+    "custodyReadyRows": 0,
+    "reviewerDecisionRows": 2
+  },
+  "rows": [
+    {
+      "id": "agent-task-invoice-001:release",
+      "taskId": "agent-task-invoice-001",
+      "kind": "release",
+      "amountTkas": 75,
+      "recipient": "agent:indexer-auditor",
+      "acceptedTaskEvidence": true,
+      "reviewerDecisionNeeded": true,
+      "custodyReady": false,
+      "walletStandardMapped": false,
+      "status": "needs-custody-source",
+      "next": "Attach accepted reward/deposit custody output before release/refund review."
+    },
+    {
+      "id": "agent-task-escrow-001:hold",
+      "taskId": "agent-task-escrow-001",
+      "kind": "hold",
+      "amountTkas": 160,
+      "recipient": "",
+      "acceptedTaskEvidence": true,
+      "reviewerDecisionNeeded": true,
+      "custodyReady": false,
+      "walletStandardMapped": false,
+      "status": "needs-custody-source",
+      "next": "Attach accepted reward/deposit custody output before release/refund review."
+    },
+    {
+      "id": "agent-task-research-001:refund",
+      "taskId": "agent-task-research-001",
+      "kind": "refund",
+      "amountTkas": 10,
+      "recipient": "kaspatest:sponsor-research",
+      "acceptedTaskEvidence": false,
+      "reviewerDecisionNeeded": false,
+      "custodyReady": false,
+      "walletStandardMapped": false,
+      "status": "needs-custody-source",
+      "next": "Attach accepted reward/deposit custody output before release/refund review."
+    }
+  ],
+  "boundaries": [
+    "Reviewer policy scores proof quality.",
+    "Settlement review needs custody source, reviewer decision, wallet standard, and accepted replay.",
+    "Dispute holds stay held until reviewed."
+  ]
+}

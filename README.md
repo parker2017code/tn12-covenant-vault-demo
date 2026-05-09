@@ -2,15 +2,15 @@
 
 Small Kaspa TN12 proof workspace for covenant scripts, payload receipts, and the debugging notes needed to reproduce them.
 
-The real core is narrow: accepted TN12 covenant spends, accepted payload receipts, role-separated repeat proofs, and the gotchas found while making them land. The larger app-lane material is scaffolding for tests, fixtures, and future work. Treat it as planning unless it points to accepted transaction evidence or an executable artifact.
+The core is accepted TN12 covenant spends, accepted payload receipts, role-separated repeat proofs, and the debugging notes needed to reproduce them. The app-lane material turns those rails into fixtures, checks, and next build tasks.
 
-It avoids mainnet-wallet claims. All local keys and funds in this repo are testnet-only.
+All local keys and funds in this repo are testnet-only.
 
-Start with [`docs/CORE_LAB_NOTES.md`](docs/CORE_LAB_NOTES.md) for the short version: what actually landed on TN12, what broke, and what is still just scaffolding. Then use [`docs/PROJECT_COMPLETION_PLAN.md`](docs/PROJECT_COMPLETION_PLAN.md), [`MEMORY.md`](MEMORY.md), [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md), [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md), and [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md) to verify done/WIP/future state, GitHub state, Pages artifacts, txids, and claim boundaries.
+Start with [`docs/CORE_LAB_NOTES.md`](docs/CORE_LAB_NOTES.md) for accepted TN12 evidence, debugging notes, and the shortest current status. Then use [`docs/PROJECT_COMPLETION_PLAN.md`](docs/PROJECT_COMPLETION_PLAN.md), [`MEMORY.md`](MEMORY.md), [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md), [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md), and [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md) to verify done/WIP/future state, GitHub state, Pages artifacts, txids, and status labels.
 The L1 covenant, based-rollup, and vProg boundary lives in [`docs/PROGRAMMABILITY_PATHS.md`](docs/PROGRAMMABILITY_PATHS.md).
 
-High-impact app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md), but it is not proof that those apps exist. It is a research queue for what would be useful after wallet, indexer, custody, and settlement rails are real.
-AI/source discipline lives in [`docs/AI_CODING_SOURCE_DISCIPLINE.md`](docs/AI_CODING_SOURCE_DISCIPLINE.md). It is a guardrail against stale or inflated claims, not a product feature.
+High-impact app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md). It is the research queue for the next useful wallet, indexer, custody, and settlement rails.
+AI/source discipline lives in [`docs/AI_CODING_SOURCE_DISCIPLINE.md`](docs/AI_CODING_SOURCE_DISCIPLINE.md). It keeps source checks, current Kaspa context, and coding-agent rules in one place.
 
 Protocol-debugging rule: unclear TN12, Silverscript, Rusty Kaspa, signing, submit, serialization, or covenant behavior starts with local evidence: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and upstream source/tests. Escalation needs a txid, artifact path, endpoint response, source line, and smallest reproducer command.
 Resolved escalation notes are tracked in [`docs/MICHAEL_QUESTIONS.md`](docs/MICHAEL_QUESTIONS.md).
@@ -63,15 +63,15 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 - Builds an AI-agent commitment board for task offers, deposits, completion proofs, disputes, release planning, and refund planning.
 - Builds a repo-level build-status map for what is built, blocked, naturally next, and research-only.
 
-## What It Does Not Do Yet
+## Next Rails
 
-- It does not connect to an external wallet UI.
-- It does not broadcast from the wallet connector artifacts; they are review and state-ledger surfaces until a real wallet adapter is wired.
-- It does not run a local Kaspa full node.
-- It does not implement pooled assurance target aggregation yet.
-- It does not submit the batch-assurance release/refund spends yet; the current artifacts are signed, mutually exclusive, and not broadcast.
-- It does not claim mainnet covenant support.
-- It does not implement full vProgs, mature native DeFi, or cross-app atomic composition.
+- Wire an external wallet UI for no-local-key signing.
+- Keep wallet connector artifacts as review and state-ledger surfaces until the adapter is wired.
+- Use public TN12 APIs and fixtures by default; bring back local node work only when needed.
+- Build pooled assurance target aggregation after the current matched-output path is reviewed.
+- Review one batch-assurance release or refund path; the current artifacts are signed and mutually exclusive.
+- Keep mainnet covenant work in the Toccata/mainnet tooling lane.
+- Track vProgs, mature native DeFi, and cross-app atomic composition as later rails.
 
 ## Manual Address Checks
 
@@ -427,6 +427,7 @@ Build the treasury/team vault registry:
 ```sh
 npm run treasury:registry
 npm run treasury:spends
+npm run treasury:role-review
 ```
 
 This turns `fixtures/TreasuryVaults.json` into `artifacts/treasury-vaults.json` and `artifacts/treasury-constrained-spends.json`. Current script proof covers delayed withdrawal and recovery primitives; payroll and spend caps remain wallet-policy/planner state until hardened. The constrained-spends artifact lists payroll and delayed-withdrawal drafts with cap, balance, delay, recipient, and wallet-review checks; it is not full treasury governance enforcement.
@@ -452,6 +453,7 @@ Build the access pass planner:
 
 ```sh
 npm run access:passes
+npm run access:issuer-review
 ```
 
 This turns `fixtures/AccessPassPlanner.json` into `artifacts/access-pass-planner.json`. Passes and redemptions are issuer/indexer flows, not native covenant-enforced tickets.
@@ -460,6 +462,7 @@ Build the mainnet-readiness map:
 
 ```sh
 npm run mainnet:readiness
+npm run invoice:mainnet-brief
 ```
 
 This turns `fixtures/MainnetReadiness.json` into `artifacts/mainnet-readiness.json`. It separates components that can become mainnet payment/indexer products from TN12/Toccata-only covenant work and research-only lanes.
@@ -477,6 +480,7 @@ Build the auction/intent prototype:
 ```sh
 npm run auction:intents
 npm run auction:settlement-drafts
+npm run auction:custody-review
 ```
 
 This turns `fixtures/AuctionIntentPrototype.json` into `artifacts/auction-intents.json` and `artifacts/auction-settlement-drafts.json`. It ranks accepted bid payloads for planner-side winner/refund state, then lists winner-release and loser-refund draft records. It is not MEV-resistant, does not prove bid custody, and does not enforce atomic asset exchange.
@@ -511,6 +515,7 @@ Build the AI-agent commitment board:
 ```sh
 npm run agent:commitments
 npm run agent:settlement-drafts
+npm run agent:settlement-review
 ```
 
 This turns `fixtures/AgentCommitments.json` into `artifacts/agent-commitments.json` and `artifacts/agent-settlement-drafts.json`. It tracks task offers, accepted proof payloads, disputes, release planning, hold planning, and refund planning without claiming autonomous payouts.

@@ -66,5 +66,5 @@ If generated artifacts change, inspect them before committing.
 - Do not submit both batch-assurance release and refund spends. They consume the same accepted pledge outputs.
 - Do not reveal or commit private wallet material from `.local/`.
 - The remaining reusable TN12 funds are controlled through change/output lineage, not by reusing an already spent original UTXO.
-- Public copy should lead with accepted txids, SDK gotchas, and checkable artifacts. Broad app lanes should be secondary and clearly labeled as scaffolding, research, planner/indexer, or wallet-policy.
+- Public copy should lead with accepted txids, SDK gotchas, and checkable artifacts. Broad app lanes should be secondary and clearly labeled as research, planner/indexer, wallet-policy, or next rail.
 - Use `docs/PROJECT_COMPLETION_PLAN.md` before adding a new lane; if a task does not improve wallet, indexer, settlement, or proof evidence, write the missing rail down instead.

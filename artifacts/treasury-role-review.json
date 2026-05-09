@@ -1,0 +1,68 @@
+{
+  "schema": "tn12-treasury-role-review/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:21:07.399Z",
+  "status": "treasury-role-review-ready",
+  "summary": {
+    "drafts": 4,
+    "payrollDrafts": 3,
+    "delayedWithdrawalDrafts": 1,
+    "roleSeparatedRows": 0,
+    "sourceUtxoRows": 0
+  },
+  "rows": [
+    {
+      "id": "treasury-core-team:payroll:payroll-dev-001",
+      "vaultId": "treasury-core-team",
+      "kind": "payroll",
+      "amountTkas": 25,
+      "recipient": "frontend-dev",
+      "policyStatus": "wallet-review-needed",
+      "roleKeySeparated": false,
+      "sourceUtxoAttached": false,
+      "readyForSubmit": false,
+      "next": "Attach exact source UTXO, role signer, and wallet-standard request."
+    },
+    {
+      "id": "treasury-core-team:payroll:payroll-docs-002",
+      "vaultId": "treasury-core-team",
+      "kind": "payroll",
+      "amountTkas": 15,
+      "recipient": "docs-maintainer",
+      "policyStatus": "wallet-review-needed",
+      "roleKeySeparated": false,
+      "sourceUtxoAttached": false,
+      "readyForSubmit": false,
+      "next": "Attach exact source UTXO, role signer, and wallet-standard request."
+    },
+    {
+      "id": "treasury-core-team:large-withdrawal:large-infra-001",
+      "vaultId": "treasury-core-team",
+      "kind": "delayed-large-withdrawal",
+      "amountTkas": 200,
+      "recipient": "infrastructure-provider",
+      "policyStatus": "delay-window-review",
+      "roleKeySeparated": false,
+      "sourceUtxoAttached": false,
+      "readyForSubmit": false,
+      "next": "Attach exact source UTXO, role signer, and wallet-standard request."
+    },
+    {
+      "id": "treasury-grants-round:payroll:grant-milestone-001",
+      "vaultId": "treasury-grants-round",
+      "kind": "payroll",
+      "amountTkas": 40,
+      "recipient": "indexer-maintainer",
+      "policyStatus": "wallet-review-needed",
+      "roleKeySeparated": false,
+      "sourceUtxoAttached": false,
+      "readyForSubmit": false,
+      "next": "Attach exact source UTXO, role signer, and wallet-standard request."
+    }
+  ],
+  "boundaries": [
+    "Treasury payroll/caps currently run as wallet-policy planning.",
+    "Delayed withdrawal and recovery have TN12 proof primitives; team governance is the next layer.",
+    "Submit after role keys and exact source UTXOs are attached."
+  ]
+}

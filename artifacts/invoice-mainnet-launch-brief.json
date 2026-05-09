@@ -1,0 +1,45 @@
+{
+  "schema": "kaspa-invoice-mainnet-launch-brief/v1",
+  "network": "kaspa-mainnet-readiness-review",
+  "generatedAt": "2026-05-09T13:21:07.728Z",
+  "status": "invoice-mainnet-brief-ready",
+  "component": {
+    "id": "invoice-payload-receipts",
+    "name": "Invoice / payload receipts",
+    "lane": "payload-invoice",
+    "readiness": "mainnet-capable-with-engineering",
+    "why": "Standard transactions can carry app payload data, and the TN12 JSON wRPC route has accepted one matched payload receipt.",
+    "blockers": [
+      "wallet integration",
+      "repeatable mainnet wallet submit route",
+      "payment edge cases",
+      "refund UX"
+    ],
+    "next": "Replace local signing with wallet review and keep REST submit marked unsuitable for payload receipts."
+  },
+  "summary": {
+    "invoices": 4,
+    "paid": 1,
+    "refunded": 1,
+    "errors": 1,
+    "blockers": 4
+  },
+  "buildNow": [
+    "accepted payment payload schema",
+    "paid/refund/error reducer",
+    "wallet review fields",
+    "rollback-aware indexer contract"
+  ],
+  "blockers": [
+    "wire live wallet integration for the mapped standard",
+    "configure durable virtual-chain endpoint preflight",
+    "production duplicate/refund/error policy review",
+    "operator monitoring and incident procedure"
+  ],
+  "launchRule": "Mainnet launch path: wallet integration, live indexer replay, duplicate/refund policy, monitoring, and source drift review.",
+  "boundaries": [
+    "This is a readiness brief.",
+    "TN12 accepted payload evidence covers the app-state pattern.",
+    "Invoice state comes from accepted replay."
+  ]
+}

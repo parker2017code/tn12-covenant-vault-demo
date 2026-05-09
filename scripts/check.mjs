@@ -77,16 +77,21 @@ import { buildBatchAssuranceSettlementDecision } from "../src/batchAssuranceSett
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "../src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
+import { buildAccessPassIssuerReview } from "../src/accessPassIssuerReview.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
+import { buildInvoiceMainnetLaunchBrief } from "../src/invoiceMainnetLaunchBrief.mjs";
 import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildAuctionSettlementDrafts } from "../src/auctionSettlementDrafts.mjs";
+import { buildAuctionCustodyReview } from "../src/auctionCustodyReview.mjs";
 import { buildDefiResearchBacklog } from "../src/defiBacklog.mjs";
 import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.mjs";
 import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "../src/agentCommitments.mjs";
 import { buildAgentSettlementDrafts } from "../src/agentSettlementDrafts.mjs";
+import { buildAgentSettlementReview } from "../src/agentSettlementReview.mjs";
+import { buildTreasuryRoleReview } from "../src/treasuryRoleReview.mjs";
 import { buildBasedRollupScout } from "../src/basedRollupScout.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProjectPlan } from "../src/projectPlan.mjs";
@@ -668,6 +673,15 @@ assert.equal(treasurySpends.summary.delayedWithdrawalDrafts, 1);
 assert.equal(treasurySpends.summary.blockedDrafts, 0);
 const treasurySpendsArtifact = JSON.parse(await readFile(new URL("../artifacts/treasury-constrained-spends.json", import.meta.url), "utf8"));
 assert.equal(treasurySpendsArtifact.summary.drafts, 4);
+const treasuryRoleReview = buildTreasuryRoleReview({
+  constrainedSpends: treasurySpendsArtifact,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(treasuryRoleReview.status, "treasury-role-review-ready");
+assert.equal(treasuryRoleReview.summary.drafts, 4);
+assert.equal(treasuryRoleReview.summary.roleSeparatedRows, 0);
+const treasuryRoleReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/treasury-role-review.json", import.meta.url), "utf8"));
+assert.equal(treasuryRoleReviewArtifact.status, "treasury-role-review-ready");
 const coordinationFixture = JSON.parse(await readFile(new URL("../fixtures/CoordinationMarketPrototype.json", import.meta.url), "utf8"));
 const coordinationPrototype = buildCoordinationMarketPrototype(coordinationFixture);
 assert.equal(coordinationPrototype.status, "transparent-toy-staghunt-preprototype");
@@ -711,6 +725,15 @@ assert.equal(accessPassPlanner.summary.acceptedRedemptions, 1);
 assert.equal(accessPassPlanner.summary.duplicateRedemptions, 0);
 assert.equal(accessPassPlanner.summary.missingAcceptedTxids, 0);
 assert.ok(accessPassPlanner.passes.some((pass) => pass.passId === "pass-dev-workshop-001" && pass.state === "partially-redeemed"));
+const accessIssuerReview = buildAccessPassIssuerReview({
+  accessPassState: accessPassPlanner,
+  reviewedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(accessIssuerReview.status, "access-pass-issuer-review-ready");
+assert.equal(accessIssuerReview.summary.issuerReviewRequired, 3);
+assert.equal(accessIssuerReview.summary.countableRedemptions, 1);
+const accessIssuerReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/access-pass-issuer-review.json", import.meta.url), "utf8"));
+assert.equal(accessIssuerReviewArtifact.status, "access-pass-issuer-review-ready");
 const mainnetReadinessFixture = JSON.parse(await readFile(new URL("../fixtures/MainnetReadiness.json", import.meta.url), "utf8"));
 const mainnetReadiness = buildMainnetReadiness(mainnetReadinessFixture);
 assert.equal(mainnetReadiness.status, "readiness-map-not-launch-approval");
@@ -718,6 +741,20 @@ assert.equal(mainnetReadiness.summary.mainnetCapable, 4);
 assert.equal(mainnetReadiness.summary.tn12Only, 3);
 assert.equal(mainnetReadiness.summary.researchOnly, 1);
 assert.equal(mainnetReadiness.summary.localOnly, 1);
+const invoiceRegistryForMainnetBrief = JSON.parse(await readFile(new URL("../artifacts/invoice-registry.json", import.meta.url), "utf8"));
+const livePreflightForMainnetBrief = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-preflight.json", import.meta.url), "utf8"));
+const walletStandardForMainnetBrief = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));
+const invoiceMainnetBrief = buildInvoiceMainnetLaunchBrief({
+  mainnetReadiness,
+  invoiceRegistry: invoiceRegistryForMainnetBrief,
+  livePreflight: livePreflightForMainnetBrief,
+  walletStandardMapping: walletStandardForMainnetBrief,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(invoiceMainnetBrief.status, "invoice-mainnet-brief-ready");
+assert.ok(invoiceMainnetBrief.summary.blockers >= 1);
+const invoiceMainnetBriefArtifact = JSON.parse(await readFile(new URL("../artifacts/invoice-mainnet-launch-brief.json", import.meta.url), "utf8"));
+assert.equal(invoiceMainnetBriefArtifact.status, "invoice-mainnet-brief-ready");
 const assetPolicyFixture = JSON.parse(await readFile(new URL("../fixtures/SimpleAssetPolicies.json", import.meta.url), "utf8"));
 const assetPolicies = buildAssetPolicyRegistry(assetPolicyFixture);
 assert.equal(assetPolicies.status, "roadmap-policy-not-live-native-asset");
@@ -743,6 +780,16 @@ assert.equal(auctionSettlementDrafts.summary.refundDrafts, 2);
 assert.equal(auctionSettlementDrafts.summary.custodyReadyDrafts, 0);
 const auctionSettlementDraftsArtifact = JSON.parse(await readFile(new URL("../artifacts/auction-settlement-drafts.json", import.meta.url), "utf8"));
 assert.equal(auctionSettlementDraftsArtifact.summary.drafts, 3);
+const walletStandardForAuctionReview = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));
+const auctionCustodyReview = buildAuctionCustodyReview({
+  settlementDrafts: auctionSettlementDraftsArtifact,
+  walletStandardMapping: walletStandardForAuctionReview,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(auctionCustodyReview.status, "auction-custody-review-ready");
+assert.equal(auctionCustodyReview.summary.custodyReadyRows, 0);
+const auctionCustodyReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/auction-custody-review.json", import.meta.url), "utf8"));
+assert.equal(auctionCustodyReviewArtifact.status, "auction-custody-review-ready");
 const defiFixture = JSON.parse(await readFile(new URL("../fixtures/DefiResearchBacklog.json", import.meta.url), "utf8"));
 const defiBacklog = buildDefiResearchBacklog(defiFixture);
 assert.equal(defiBacklog.status, "research-backlog-not-live-defi");
@@ -797,6 +844,16 @@ assert.equal(agentSettlementDrafts.summary.holdDrafts, 1);
 assert.equal(agentSettlementDrafts.summary.autonomousPayouts, 0);
 const agentSettlementDraftsArtifact = JSON.parse(await readFile(new URL("../artifacts/agent-settlement-drafts.json", import.meta.url), "utf8"));
 assert.equal(agentSettlementDraftsArtifact.summary.drafts, 3);
+const walletStandardForAgentReview = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));
+const agentSettlementReview = buildAgentSettlementReview({
+  settlementDrafts: agentSettlementDraftsArtifact,
+  walletStandardMapping: walletStandardForAgentReview,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(agentSettlementReview.status, "agent-settlement-review-ready");
+assert.equal(agentSettlementReview.summary.custodyReadyRows, 0);
+const agentSettlementReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/agent-settlement-review.json", import.meta.url), "utf8"));
+assert.equal(agentSettlementReviewArtifact.status, "agent-settlement-review-ready");
 const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
 const projectStatus = buildProjectStatus(buildStatusFixture);
 assert.equal(projectStatus.status, "active-build-map");
@@ -1412,15 +1469,19 @@ const files = [
   "scripts/build-escrow-marketplace-flow.mjs",
   "scripts/build-treasury-vaults.mjs",
   "scripts/build-treasury-constrained-spends.mjs",
+  "scripts/build-treasury-role-review.mjs",
   "scripts/build-payload-submit-readiness.mjs",
   "scripts/verify-payload-receipt.mjs",
   "scripts/verify-payload-events.mjs",
   "scripts/build-coordination-market.mjs",
   "scripts/build-coordination-market-settlement-brief.mjs",
   "scripts/build-access-pass-planner.mjs",
+  "scripts/build-access-pass-issuer-review.mjs",
   "scripts/build-mainnet-readiness.mjs",
+  "scripts/build-invoice-mainnet-launch-brief.mjs",
   "scripts/build-asset-policies.mjs",
   "scripts/build-auction-settlement-drafts.mjs",
+  "scripts/build-auction-custody-review.mjs",
   "scripts/build-prediction-hedge-simulator.mjs",
   "scripts/build-stable-value-paths.mjs",
   "scripts/build-stable-issuer-redemptions.mjs",
@@ -1428,6 +1489,7 @@ const files = [
   "scripts/build-project-plan.mjs",
   "scripts/build-ai-coding-source-discipline.mjs",
   "scripts/build-agent-settlement-drafts.mjs",
+  "scripts/build-agent-settlement-review.mjs",
   "scripts/check-negative.mjs",
   "contracts/DelayedRecoveryVault.sil",
   "contracts/AssurancePledge.sil",
@@ -1523,6 +1585,7 @@ const files = [
   "artifacts/escrow-primitives.json",
   "artifacts/treasury-vaults.json",
   "artifacts/treasury-constrained-spends.json",
+  "artifacts/treasury-role-review.json",
   "artifacts/payload-submit-readiness.json",
   "artifacts/payload-receipt-evidence.json",
   "artifacts/payload-refund-evidence.json",
@@ -1539,14 +1602,18 @@ const files = [
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
   "artifacts/access-pass-planner.json",
+  "artifacts/access-pass-issuer-review.json",
   "artifacts/mainnet-readiness.json",
+  "artifacts/invoice-mainnet-launch-brief.json",
   "artifacts/simple-asset-policies.json",
   "artifacts/auction-settlement-drafts.json",
+  "artifacts/auction-custody-review.json",
   "artifacts/prediction-hedge-simulator.json",
   "artifacts/stable-value-paths.json",
   "artifacts/stable-issuer-redemptions.json",
   "artifacts/build-status.json",
   "artifacts/agent-settlement-drafts.json",
+  "artifacts/agent-settlement-review.json",
   "artifacts/project-plan.json",
   "artifacts/ai-coding-source-discipline.json",
   "fixtures/FundedWalletOutpoint.example.json",
@@ -1657,18 +1724,23 @@ const files = [
   "src/escrowMarketplaceFlow.mjs",
   "src/treasuryVault.mjs",
   "src/treasuryConstrainedSpends.mjs",
+  "src/treasuryRoleReview.mjs",
   "src/payloadSubmitReadiness.mjs",
   "src/wrpcSubmitCandidate.mjs",
   "src/coordinationMarket.mjs",
   "src/coordinationMarketSettlementBrief.mjs",
   "src/accessPassPlanner.mjs",
+  "src/accessPassIssuerReview.mjs",
   "src/mainnetReadiness.mjs",
+  "src/invoiceMainnetLaunchBrief.mjs",
   "src/assetPolicy.mjs",
   "src/auctionSettlementDrafts.mjs",
+  "src/auctionCustodyReview.mjs",
   "src/predictionHedgeSimulator.mjs",
   "src/stableValuePaths.mjs",
   "src/stableIssuerRedemption.mjs",
   "src/agentSettlementDrafts.mjs",
+  "src/agentSettlementReview.mjs",
   "src/buildStatus.mjs",
   "src/projectPlan.mjs",
   "src/aiCodingSourceDiscipline.mjs",
@@ -1709,7 +1781,7 @@ for (const file of files) {
 
 const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
 assert.match(readme, /faucet-tn12\.kaspanet\.io/);
-assert.match(readme, /avoids mainnet-wallet claims/i);
+assert.match(readme, /testnet-only/i);
 assert.match(readme, /starts with local evidence/i);
 assert.match(readme, /npm run address/);
 assert.match(readme, /npm run fixtures/);
@@ -1768,17 +1840,22 @@ assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /npm run treasury:registry/);
 assert.match(readme, /npm run treasury:spends/);
+assert.match(readme, /npm run treasury:role-review/);
 assert.match(readme, /npm run payload:readiness/);
 assert.match(readme, /npm run coordination:market/);
 assert.match(readme, /npm run coordination:settlement-brief/);
 assert.match(readme, /npm run access:passes/);
+assert.match(readme, /npm run access:issuer-review/);
 assert.match(readme, /npm run mainnet:readiness/);
+assert.match(readme, /npm run invoice:mainnet-brief/);
 assert.match(readme, /npm run asset:policies/);
 assert.match(readme, /npm run auction:settlement-drafts/);
+assert.match(readme, /npm run auction:custody-review/);
 assert.match(readme, /npm run stable:value/);
 assert.match(readme, /npm run stable:issuer/);
 assert.match(readme, /npm run build:status/);
 assert.match(readme, /npm run agent:settlement-drafts/);
+assert.match(readme, /npm run agent:settlement-review/);
 assert.match(readme, /npm run ai:discipline/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
@@ -1907,7 +1984,7 @@ assert.match(projectCompletionPlan, /wallet path is no-local-key/);
 assert.match(projectCompletionPlan, /Durable virtual-chain indexer/);
 assert.match(projectCompletionPlan, /Batch-assurance settlement/);
 assert.match(projectCompletionPlan, /Stop Rules/);
-assert.match(projectCompletionPlan, /not a reason to keep inflating this phase/);
+assert.match(projectCompletionPlan, /Later work becomes a new phase with a new scope/);
 assert.match(projectCompletionPlan, /Differentiation Thesis/);
 assert.match(projectCompletionPlan, /How We Know It Is Real/);
 assert.match(projectCompletionPlan, /How Everything Stays Tethered/);

@@ -4,7 +4,7 @@ Reviewed: 2026-05-09
 
 This document is the stop/go map for the repo. It answers what is done, what is WIP, what continues next, what stays future, and when the project is complete enough to stop expanding it.
 
-The short version: this repo is done when it is a credible TN12 proof lab plus a small app-stack prototype. It is not done by turning every research lane into a product. It is done when the real rails are reproducible, externally reviewable, and honestly documented.
+The short version: this repo is done when it is a credible TN12 proof lab plus a small app-stack prototype. It is done when the rails are reproducible, externally reviewable, and documented well enough for another builder to continue.
 
 ## Definition Of Done
 
@@ -16,15 +16,15 @@ The project is complete at the current intended scope when all of these are true
 4. The batch-assurance path has one explicit settlement outcome: either the accepted pledge outputs are released or refunded through one reviewed path, or the repo records why settlement was intentionally deferred. The mutually exclusive alternatives must not both be submitted.
 5. The escrow app surface is usable as a testnet marketplace or freelance flow: buyer funding, seller release, timeout refund, mutual cancel, dispute text, wallet review, and accepted-proof evidence are visible without mainnet or production-wallet claims.
 6. The public copy is proof-first: accepted txids, artifacts, commands, and SDK gotchas lead; app-lane plans remain secondary and status-labeled.
-7. Kaspa Explained only receives stable lessons from this repo as testnet or builder guidance. It should not inherit unfinished TN12 scaffolding as public adoption claims.
+7. Kaspa Explained only receives stable lessons from this repo as testnet or builder guidance, with app-lane planning kept separate from public adoption language.
 8. Future rails are gated: DEX, AMM, lending, perps, bridges, stable-value, coordination markets, vProgs, ZK, and oracle work each have explicit missing-rail briefs before product copy or settlement code claims.
 9. Local and CI gates pass: `npm run check:all` is green, GitHub Actions are green after push, and Pages deploys the current public artifact.
 
-If those are true, the repo can be called complete for the TN12 lab phase. Later work becomes a new phase, not a reason to keep inflating this phase.
+If those are true, the repo can be called complete for the TN12 lab phase. Later work becomes a new phase with a new scope.
 
 ## Differentiation Thesis
 
-The repo is not differentiated by having many app names. Anyone can write a DEX, lending, market, bridge, or agent-board fixture. The hard-to-duplicate part is the tight loop between new Kaspa rails and accepted testnet evidence:
+The repo is differentiated by the tight loop between new Kaspa rails and accepted testnet evidence:
 
 - covenant scripts that actually spend on TN12;
 - role-separated repeats that catch fake single-wallet success;
@@ -218,7 +218,7 @@ Current status: not complete.
 
 ### Public-Explainer Complete
 
-The related Kaspa Explained work is complete when it points to stable TN12 lessons as testnet/builder evidence, keeps all source/status claims current, and does not copy unfinished app-lane scaffolding into public adoption language.
+The related Kaspa Explained work is complete when it points to stable TN12 lessons as testnet/builder evidence, keeps all source/status claims current, and keeps app-lane planning out of public adoption language.
 
 Current status: stable, but source drift must be watched.
 

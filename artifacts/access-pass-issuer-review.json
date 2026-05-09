@@ -1,0 +1,68 @@
+{
+  "schema": "kaspa-access-pass-issuer-review/v1",
+  "network": "kaspa-testnet-12",
+  "reviewedAt": "2026-05-09T00:00:00.000Z",
+  "status": "access-pass-issuer-review-ready",
+  "summary": {
+    "passes": 3,
+    "issuerReviewRequired": 3,
+    "expiredPasses": 0,
+    "redemptions": 2,
+    "expiredRedemptions": 0,
+    "countableRedemptions": 1
+  },
+  "passRows": [
+    {
+      "passId": "pass-dev-workshop-001",
+      "issuer": "Kaspa App Lab",
+      "state": "partially-redeemed",
+      "expired": false,
+      "activeWindow": true,
+      "issuerReviewRequired": true,
+      "remaining": 39
+    },
+    {
+      "passId": "pass-merchant-coupon-002",
+      "issuer": "Demo merchant",
+      "state": "issued-not-redeemed",
+      "expired": false,
+      "activeWindow": true,
+      "issuerReviewRequired": true,
+      "remaining": 100
+    },
+    {
+      "passId": "pass-research-membership-003",
+      "issuer": "Coordination market study group",
+      "state": "not-active",
+      "expired": false,
+      "activeWindow": false,
+      "issuerReviewRequired": true,
+      "remaining": 25
+    }
+  ],
+  "redemptionRows": [
+    {
+      "redemptionId": "redeem-workshop-alpha",
+      "passId": "pass-dev-workshop-001",
+      "holder": "holder-alpha",
+      "review": "counted-accepted-redemption",
+      "expiredAtRedemption": false,
+      "issuerMustHonorOffchain": true,
+      "status": "counted-accepted-redemption"
+    },
+    {
+      "redemptionId": "redeem-coupon-beta",
+      "passId": "pass-merchant-coupon-002",
+      "holder": "holder-beta",
+      "review": "not-accepted",
+      "expiredAtRedemption": false,
+      "issuerMustHonorOffchain": false,
+      "status": "not-accepted"
+    }
+  ],
+  "boundaries": [
+    "Access passes are issuer/indexer claims.",
+    "Issuer review is required before off-chain access, discount, or membership is granted.",
+    "Count accepted redemptions after expiry, duplicate, and txid checks."
+  ]
+}

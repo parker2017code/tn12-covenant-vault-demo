@@ -333,14 +333,15 @@
       "lane": "payload-indexer",
       "importance": "high",
       "why": "Auctions already have accepted bid and planner payloads; settlement/refund is the next user-facing gap.",
-      "definitionOfDone": "Winner settlement and loser refund drafts are reviewable, explicit about custody, and do not claim atomic exchange or MEV resistance.",
+      "definitionOfDone": "Winner settlement and loser refund drafts are reviewable, with custody-source and wallet-standard checks recorded.",
       "startWith": [
         "fixtures/AuctionIntentPrototype.json",
-        "artifacts/submit-console-registry.json"
+        "artifacts/auction-settlement-drafts.json",
+        "artifacts/auction-custody-review.json"
       ],
       "gates": [
-        "npm run auction:intents",
-        "npm run wallet:review",
+        "npm run auction:settlement-drafts",
+        "npm run auction:custody-review",
         "npm run check:all"
       ]
     },
@@ -351,14 +352,15 @@
       "lane": "payload-indexer",
       "importance": "high",
       "why": "Agent commitments have accepted task/proof/dispute payload state, but no payout lifecycle.",
-      "definitionOfDone": "Release, refund, and dispute-hold drafts are generated from accepted lifecycle state and gated by wallet review.",
+      "definitionOfDone": "Release, refund, and dispute-hold drafts are generated from accepted lifecycle state and reviewed for custody source, reviewer decision, and wallet-standard readiness.",
       "startWith": [
         "fixtures/AgentCommitments.json",
-        "artifacts/project-plan.json"
+        "artifacts/agent-settlement-drafts.json",
+        "artifacts/agent-settlement-review.json"
       ],
       "gates": [
-        "npm run agent:commitments",
-        "npm run wallet:review",
+        "npm run agent:settlement-drafts",
+        "npm run agent:settlement-review",
         "npm run check:all"
       ]
     },
@@ -369,14 +371,15 @@
       "lane": "wallet-policy",
       "importance": "high",
       "why": "Treasury controls are a practical business app and reuse the vault proof base.",
-      "definitionOfDone": "Payroll, large-withdrawal delay, approval, and recovery drafts exist with role separation and clear wallet-policy versus script boundaries.",
+      "definitionOfDone": "Payroll and delayed-withdrawal drafts exist with exact next steps for role keys, source UTXOs, and wallet-standard requests.",
       "startWith": [
         "fixtures/TreasuryVaults.json",
-        "src/treasuryVault.mjs"
+        "artifacts/treasury-constrained-spends.json",
+        "artifacts/treasury-role-review.json"
       ],
       "gates": [
-        "npm run treasury:registry",
-        "npm run wallet:review",
+        "npm run treasury:spends",
+        "npm run treasury:role-review",
         "npm run check:all"
       ]
     },
@@ -387,15 +390,15 @@
       "lane": "payload-indexer",
       "importance": "high",
       "why": "Invoices are the shortest path to a real non-covenant app because they need payments, payloads, indexing, and wallet UX.",
-      "definitionOfDone": "Brief names the exact mainnet-safe pieces, TN12-only pieces, wallet/indexer requirements, failure states, and launch blockers.",
+      "definitionOfDone": "Brief names the payment/indexer pieces, wallet/indexer requirements, failure states, and launch blockers.",
       "startWith": [
         "artifacts/mainnet-readiness.json",
-        "fixtures/InvoiceReceipts.json",
-        "docs/TRANSACTION_API_NOTES.md"
+        "artifacts/invoice-registry.json",
+        "artifacts/invoice-mainnet-launch-brief.json"
       ],
       "gates": [
         "npm run mainnet:readiness",
-        "npm run invoice:registry",
+        "npm run invoice:mainnet-brief",
         "npm run check:all"
       ]
     },
@@ -406,14 +409,15 @@
       "lane": "payload-indexer",
       "importance": "medium",
       "why": "Access passes are simple user-facing apps, but duplicate/expired/issuer disputes must be explicit.",
-      "definitionOfDone": "Accepted redemption counting handles expiry, issuer revocation, duplicate holder/pass attempts, and missing txids.",
+      "definitionOfDone": "Accepted redemption counting handles expiry, issuer review, duplicate holder/pass attempts, and missing txids.",
       "startWith": [
         "fixtures/AccessPassPlanner.json",
-        "src/accessPassPlanner.mjs"
+        "artifacts/access-pass-planner.json",
+        "artifacts/access-pass-issuer-review.json"
       ],
       "gates": [
         "npm run access:passes",
-        "npm run check:negative",
+        "npm run access:issuer-review",
         "npm run check:all"
       ]
     },

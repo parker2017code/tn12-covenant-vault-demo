@@ -17,6 +17,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Enforcement: planner/indexer.
    - Mainnet potential: high, with wallet/node/indexer hardening.
    - Indexer status: checkpointed known-txid public-read index covers 36 accepted TN12 records: 7 proof spends, 26 payload events, and 3 accepted batch-assurance pledge outputs. `npm run indexer:replay-plan` defines the durable node/RPC replay build order, `npm run indexer:schema` defines the storage contract, `npm run indexer:replay` materializes the current checkpoint into table-shaped rows, `npm run indexer:virtual-chain-plan` defines the live reader/rollback contract, `npm run indexer:virtual-chain-run` produces fixture-backed virtual-chain window rows plus wallet-submit candidate rows, `npm run indexer:virtual-chain-adapter` writes the bounded node/RPC adapter contract without requiring local `kaspad`, and `npm run indexer:live-preflight` records the remaining endpoint-configuration gate before live reads.
+   - Launch brief: `npm run invoice:mainnet-brief` turns the mainnet-capable label into a blocker list instead of launch approval; durable live ingestion and live wallet signing remain explicit blockers.
 
 2. Wallet-facing submit console: signed draft manifest, input/output/fee/payload review, explicit submit commands.
    - Current status: base built with wallet-review readiness, wallet-connector spec, wallet-submit package, connector submit request artifacts, dry-run adapter sessions, a submit-result ledger, and bounded result validation.
@@ -44,11 +45,13 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Current status: base built plus constrained spend drafts.
    - Enforcement: wallet policy plus existing vault primitives.
    - Drafts: `npm run treasury:spends` lists payroll and delayed-withdrawal draft records with cap, balance, delay, recipient, and wallet-review checks.
+   - Review: `npm run treasury:role-review` records the current gaps: no role-separated treasury rows and no exact source-UTXO rows yet.
    - Boundary: payroll/caps are not script-enforced yet.
 
 6. KRC / access pass planner: coupons, memberships, tickets, redeemable claims.
    - Current status: accepted TN12 redemption payload plus planner state.
    - Enforcement: issuer/indexer.
+   - Review: `npm run access:issuer-review` keeps expiry, issuer confirmation, supply, duplicate, and accepted-txid checks explicit before redemption state is counted.
    - Mainnet potential: medium-high as accepted payload/indexer app state.
 
 7. Simple asset policy: mint, transfer, burn, recovery, redemption policy shapes.
@@ -60,6 +63,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Current status: accepted TN12 bid payloads plus planner state and settlement/refund draft records.
    - Enforcement: planner/indexer.
    - Drafts: `npm run auction:settlement-drafts` lists winner-release and loser-refund draft records while keeping custody and atomic exchange unclaimed.
+   - Review: `npm run auction:custody-review` records that no auction row is custody-ready because custody sources are not attached.
    - Boundary: no bid custody, no atomic exchange, no MEV resistance claim.
 
 9. DeFi research backlog: swaps, AMMs, lending, stable-value, insurance, derivatives, prediction hedges, portfolio automation.
@@ -84,6 +88,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
     - Current status: accepted TN12 task/proof/dispute payloads plus planner state and settlement draft records.
     - Enforcement: planner/indexer.
     - Drafts: `npm run agent:settlement-drafts` lists release, hold, and refund records while keeping autonomous payouts unclaimed.
+    - Review: `npm run agent:settlement-review` records release/refund/hold decisions separately from custody readiness and live wallet signing.
     - Boundary: no autonomous payouts.
 
 13. Transparent coordination-market prototype: Stag, Intendo, Pack, toy Solver, Hunt plan.

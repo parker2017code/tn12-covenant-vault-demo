@@ -1,0 +1,66 @@
+{
+  "schema": "kaspa-auction-custody-review/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:21:06.724Z",
+  "status": "auction-custody-review-ready",
+  "summary": {
+    "drafts": 3,
+    "winnerReleaseDrafts": 1,
+    "refundDrafts": 2,
+    "plannerEvidenceRows": 2,
+    "custodyReadyRows": 0
+  },
+  "rows": [
+    {
+      "id": "auction-pass-001:winner-release:bid-pass-002",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-002",
+      "kind": "winner-release",
+      "amountTkas": 155,
+      "recipient": "kaspatest:seller-workshop",
+      "plannerEvidencePresent": true,
+      "custodySourcePresent": false,
+      "walletStandardMapped": false,
+      "status": "needs-custody-source",
+      "next": "Attach accepted bid custody outputs or an escrow/covenant source before settlement/refund review."
+    },
+    {
+      "id": "auction-pass-001:loser-refund:bid-pass-001",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-001",
+      "kind": "loser-refund",
+      "amountTkas": 130,
+      "recipient": "kaspatest:bidder-alpha",
+      "plannerEvidencePresent": true,
+      "custodySourcePresent": false,
+      "walletStandardMapped": false,
+      "status": "needs-custody-source",
+      "next": "Attach accepted bid custody outputs or an escrow/covenant source before settlement/refund review."
+    },
+    {
+      "id": "auction-voucher-001:loser-refund:bid-voucher-001",
+      "auctionId": "auction-voucher-001",
+      "bidId": "bid-voucher-001",
+      "kind": "loser-refund",
+      "amountTkas": 220,
+      "recipient": "kaspatest:bidder-delta",
+      "plannerEvidencePresent": false,
+      "custodySourcePresent": false,
+      "walletStandardMapped": false,
+      "status": "needs-custody-source",
+      "next": "Attach accepted bid custody outputs or an escrow/covenant source before settlement/refund review."
+    }
+  ],
+  "requiredBeforeSubmit": [
+    "accepted bid custody source",
+    "winner asset delivery rule",
+    "loser refund source output",
+    "wallet-standard signing route",
+    "accepted virtual-chain replay after submit"
+  ],
+  "boundaries": [
+    "Accepted auction payloads are planner/indexer evidence.",
+    "Next rails are custody, asset delivery, ordering, and wallet/replay checks.",
+    "Submit after custody source rows exist."
+  ]
+}
