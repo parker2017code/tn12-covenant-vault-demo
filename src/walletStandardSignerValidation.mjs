@@ -6,6 +6,19 @@ export function buildWalletStandardSignerValidation({
   const requests = new Map((standardRequests.requests || []).map((request) => [request.requestId, request]));
   const results = Array.isArray(signerResults.results) ? signerResults.results : [];
   const validations = results.map((result) => validateResult({ result, request: requests.get(result.requestId) }));
+  const resultRequestIds = new Set(results.map((result) => result.requestId));
+  for (const request of requests.values()) {
+    if (!resultRequestIds.has(request.requestId)) {
+      validations.push(validateResult({
+        result: {
+          id: `${request.requestId}:pending-external-signer`,
+          requestId: request.requestId,
+          status: "pending-external-signer"
+        },
+        request
+      }));
+    }
+  }
   const returned = validations.filter((item) => item.status !== "pending-external-signer");
   const accepted = returned.filter((item) => item.validation === "accepted");
   const rejected = returned.filter((item) => item.validation === "rejected");

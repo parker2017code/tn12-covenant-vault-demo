@@ -1,14 +1,14 @@
 {
   "schema": "tn12-wallet-connector-implementation-slice/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T15:34:03.371Z",
+  "generatedAt": "2026-05-09T21:10:04.478Z",
   "status": "wallet-connector-implementation-slice-ready",
   "selectedStandard": "pskb-pskt",
   "firstUserFlow": "payload-receipt-unsigned-sign",
   "secondUserFlow": "v1-compute-budget-contract-sign",
   "summary": {
     "unsignedTemplates": 47,
-    "standardRequests": 2,
+    "standardRequests": 4,
     "payloadTemplates": 26,
     "computeBudgetTemplates": 2,
     "liveWalletIntegrationReady": false

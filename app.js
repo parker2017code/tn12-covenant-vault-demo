@@ -511,16 +511,17 @@ async function renderEscrowPrimitive() {
     const actionMapResponse = await fetch("artifacts/escrow-marketplace-action-map.json", { cache: "no-store" });
     if (actionMapResponse.ok) {
       const actionMap = await actionMapResponse.json();
-      const mappedCancel = actionMap.flows
+      const mappedRequests = actionMap.flows
         ?.flatMap((flow) => flow.actions || [])
-        .find((action) => action.action === "mutual-cancel" && action.walletStandardRequestId);
+        .map((action) => action.walletStandardRequestId)
+        .filter(Boolean) || [];
       const article = document.createElement("article");
       article.className = "escrow-card";
       article.innerHTML = `
         <span>${escapeHtml(actionMap.status)}</span>
         <strong>Marketplace action map</strong>
         <p>${escapeHtml(actionMap.summary.actions)} actions; ${escapeHtml(actionMap.summary.blockedActions)} blocked until external signer validation and accepted replay.</p>
-        <small>${escapeHtml(mappedCancel?.walletStandardRequestId || "wallet-standard request not mapped")}</small>
+        <small>${escapeHtml(mappedRequests.join(" / ") || "wallet-standard request not mapped")}</small>
       `;
       escrowListNode.append(article);
     }

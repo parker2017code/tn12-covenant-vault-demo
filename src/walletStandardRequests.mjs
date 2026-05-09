@@ -51,8 +51,26 @@ export function buildWalletStandardRequests({
 
 function selectTemplates(templates) {
   const payload = templates.find((template) => template.class === "payload-app-state" && template.payload?.present);
-  const computeBudget = templates.find((template) => Number(template.preservation?.computeBudgetInputs || 0) > 0);
-  return [payload, computeBudget].filter(Boolean);
+  const escrowActions = [
+    findByLabel(templates, "Role-separated escrow release"),
+    findByLabel(templates, "Role-separated escrow refund"),
+    findByLabel(templates, "Role-separated escrow cancel")
+  ];
+  return dedupeByRequestId([payload, ...escrowActions].filter(Boolean));
+}
+
+function findByLabel(templates, label) {
+  return templates.find((template) => template.label === label);
+}
+
+function dedupeByRequestId(templates) {
+  const seen = new Set();
+  return templates.filter((template) => {
+    const id = template.requestId || template.sourceSignedDraftPath || template.label;
+    if (seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
 }
 
 function buildRequest({ template = {}, network = "kaspa-testnet-12" } = {}) {

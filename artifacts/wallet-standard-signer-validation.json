@@ -1,13 +1,13 @@
 {
   "schema": "tn12-wallet-standard-signer-validation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T15:40:57.441Z",
+  "generatedAt": "2026-05-09T21:10:04.148Z",
   "status": "wallet-standard-signer-validation-ready",
   "liveExternalSignerAccepted": false,
   "summary": {
-    "requests": 2,
+    "requests": 4,
     "results": 4,
-    "pending": 2,
+    "pending": 4,
     "accepted": 0,
     "rejected": 2,
     "negativeCasesCaught": 2
@@ -51,6 +51,24 @@
         "review fingerprint mismatch",
         "input 0 sigOpCount mismatch",
         "input 0 computeBudget mismatch"
+      ]
+    },
+    {
+      "id": "ureq-fda320a9-standard:pending-external-signer",
+      "requestId": "ureq-fda320a9-standard",
+      "status": "pending-external-signer",
+      "validation": "pending",
+      "reasons": [
+        "external signer has not returned a transaction yet"
+      ]
+    },
+    {
+      "id": "ureq-f5845e00-standard:pending-external-signer",
+      "requestId": "ureq-f5845e00-standard",
+      "status": "pending-external-signer",
+      "validation": "pending",
+      "reasons": [
+        "external signer has not returned a transaction yet"
       ]
     }
   ],

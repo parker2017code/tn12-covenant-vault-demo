@@ -453,7 +453,7 @@ const nextTenExecutionPlan = buildNextTenExecutionPlan({
 });
 assert.equal(nextTenExecutionPlan.status, "next-ten-execution-plan-ready");
 assert.equal(nextTenExecutionPlan.summary.tasks, 10);
-assert.equal(nextTenExecutionPlan.summary.walletStandardRequests, 2);
+assert.equal(nextTenExecutionPlan.summary.walletStandardRequests, 4);
 assert.ok(nextTenExecutionPlan.slices.some((slice) => slice.id === "wallet-submit"));
 const nextTenExecutionPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/next-ten-execution-plan.json", import.meta.url), "utf8"));
 assert.equal(nextTenExecutionPlanArtifact.status, "next-ten-execution-plan-ready");
@@ -726,6 +726,20 @@ assert.ok(escrowMarketplaceActionMap.flows.some((flow) =>
   && flow.actions.some((action) =>
     action.action === "mutual-cancel"
     && action.walletStandardRequestId === "ureq-d12412d8-standard"
+  )
+));
+assert.ok(escrowMarketplaceActionMap.flows.some((flow) =>
+  flow.escrowId === "escrow-freelance-001"
+  && flow.actions.some((action) =>
+    action.action === "release"
+    && action.walletStandardRequestId === "ureq-fda320a9-standard"
+  )
+));
+assert.ok(escrowMarketplaceActionMap.flows.some((flow) =>
+  flow.escrowId === "escrow-freelance-001"
+  && flow.actions.some((action) =>
+    action.action === "timeout-refund"
+    && action.walletStandardRequestId === "ureq-f5845e00-standard"
   )
 ));
 const escrowMarketplaceActionMapArtifact = JSON.parse(await readFile(new URL("../artifacts/escrow-marketplace-action-map.json", import.meta.url), "utf8"));
@@ -1429,7 +1443,7 @@ const walletStandardRequests = buildWalletStandardRequests({
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(walletStandardRequests.status, "wallet-standard-request-candidates-ready");
-assert.equal(walletStandardRequests.summary.mappedRequests, 2);
+assert.equal(walletStandardRequests.summary.mappedRequests, 4);
 assert.equal(walletStandardRequests.summary.payloadRequests, 1);
 assert.equal(walletStandardRequests.summary.computeBudgetRequests, 1);
 assert.ok(walletStandardRequests.requests.every((request) =>
@@ -1441,9 +1455,15 @@ assert.ok(walletStandardRequests.requests.some((request) =>
   request.preservation.computeBudgetInputs > 0
   && request.signerReturnContract.rejectWhen.some((rule) => /computeBudget/.test(rule))
 ));
+assert.ok(walletStandardRequests.requests.some((request) =>
+  request.sourceSignedDraftPath === "artifacts/signed-drafts/role-escrow-release.json"
+));
+assert.ok(walletStandardRequests.requests.some((request) =>
+  request.sourceSignedDraftPath === "artifacts/signed-drafts/role-escrow-refund.json"
+));
 const walletStandardRequestsArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-requests.json", import.meta.url), "utf8"));
 assert.equal(walletStandardRequestsArtifact.status, "wallet-standard-request-candidates-ready");
-assert.equal(walletStandardRequestsArtifact.summary.mappedRequests, 2);
+assert.equal(walletStandardRequestsArtifact.summary.mappedRequests, 4);
 const walletSignerResultsFixture = JSON.parse(await readFile(new URL("../fixtures/WalletStandardSignerResults.json", import.meta.url), "utf8"));
 const walletSignerValidation = buildWalletStandardSignerValidation({
   standardRequests: walletStandardRequestsArtifact,
@@ -1451,7 +1471,7 @@ const walletSignerValidation = buildWalletStandardSignerValidation({
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(walletSignerValidation.status, "wallet-standard-signer-validation-ready");
-assert.equal(walletSignerValidation.summary.pending, 2);
+assert.equal(walletSignerValidation.summary.pending, 4);
 assert.equal(walletSignerValidation.summary.negativeCasesCaught, 2);
 assert.equal(walletSignerValidation.liveExternalSignerAccepted, false);
 assert.ok(walletSignerValidation.validations.some((item) =>
@@ -1466,6 +1486,7 @@ assert.ok(walletSignerValidation.validations.some((item) =>
 ));
 const walletSignerValidationArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8"));
 assert.equal(walletSignerValidationArtifact.status, "wallet-standard-signer-validation-ready");
+assert.equal(walletSignerValidationArtifact.summary.pending, 4);
 assert.equal(walletSignerValidationArtifact.summary.negativeCasesCaught, 2);
 const walletImplementationSlice = buildWalletConnectorImplementationSlice({
   walletMapping: walletStandardMappingArtifact,
@@ -1476,7 +1497,7 @@ const walletImplementationSlice = buildWalletConnectorImplementationSlice({
 assert.equal(walletImplementationSlice.status, "wallet-connector-implementation-slice-ready");
 assert.equal(walletImplementationSlice.firstUserFlow, "payload-receipt-unsigned-sign");
 assert.equal(walletImplementationSlice.summary.payloadTemplates, 26);
-assert.equal(walletImplementationSlice.summary.standardRequests, 2);
+assert.equal(walletImplementationSlice.summary.standardRequests, 4);
 assert.ok(walletImplementationSlice.firstRoundTripRequest.reviewFingerprint);
 const walletImplementationSliceArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-implementation-slice.json", import.meta.url), "utf8"));
 assert.equal(walletImplementationSliceArtifact.status, "wallet-connector-implementation-slice-ready");

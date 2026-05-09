@@ -77,6 +77,7 @@ try {
   await expectText(page, "#escrow-list", "Review seller-release");
   await expectText(page, "#escrow-list", "Marketplace action map");
   await expectText(page, "#escrow-list", "escrow-action-map-ready");
+  await expectText(page, "#escrow-list", "ureq-fda320a9-standard");
   await expectText(page, "#escrow-list", "ureq-d12412d8-standard");
   await expectText(page, "#treasury-summary", "Payroll");
   await expectText(page, "#treasury-list", "Core team operating vault");
