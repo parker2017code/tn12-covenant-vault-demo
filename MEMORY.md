@@ -154,6 +154,15 @@ Accepted role-separated proof state:
 
 Current WIP:
 
+- Paused on 2026-05-09 at the user's request after continuing from commit `bd7b15d`.
+  - Do not assume this work is committed yet. `git status --short` showed uncommitted TN12 edits in `AGENTS.md`, `CONTEXT.md`, `MEMORY.md`, `README.md`, `app.js`, AI discipline docs/fixtures/artifact, next-ten/progress/completion docs, `package.json`, `scripts/check-ui.mjs`, `scripts/check.mjs`, plus new virtual-chain live-window/replay-row and wallet-signer-validation files/artifacts.
+  - Kaspa Explained also has one uncommitted edit in `AGENTS.md`: the continue-until-stop rule.
+  - Persistent Codex memory notes were written under `/home/parker2017/.codex/memories/extensions/ad_hoc/notes/` for continue-until-stop, code quality, and feature quality operating rules.
+  - TN12 local gates passed after these changes: `npm run ai:discipline && npm run check:all`, then later `npm run indexer:live-replay-rows && npm run check:all`, and later `npm run wallet:standard-signer-validation && npm run check:all`.
+  - New live-indexer work: `src/virtualChainLiveWindow.mjs`, `scripts/read-virtual-chain-live-window.mjs`, and `artifacts/virtual-chain-live-window.json`. It uses `KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa` because npm `kaspa-wasm@0.13.0` does not expose `getVirtualChainFromBlockV2`. The live window returned high-verbosity accepted transactions and v1 `computeBudget` inputs, but does not promote app state.
+  - New replay-row work: `src/virtualChainLiveReplayRows.mjs`, `scripts/build-virtual-chain-live-replay-rows.mjs`, and `artifacts/virtual-chain-live-replay-rows.json`. It converts the live V2 sample into replay-table-shaped rows with `appStatePromoted=false`.
+  - New wallet validation work: `fixtures/WalletStandardSignerResults.json`, `src/walletStandardSignerValidation.mjs`, `scripts/build-wallet-standard-signer-validation.mjs`, and `artifacts/wallet-standard-signer-validation.json`. It validates external signer-return metadata against wallet-standard request fingerprints and catches mutated fingerprint plus dropped compute-budget negative cases.
+  - Before resuming implementation, run `git diff --stat`, then `npm run check:all`. If committing this batch, include both repos or split commits cleanly: TN12 implementation/docs first, then Kaspa Explained `AGENTS.md` rule.
 - On 2026-05-09, the wallet-standard lane moved past mapping-only:
   - `npm run wallet:standard-requests` writes `artifacts/wallet-standard-requests.json`.
   - The artifact contains two concrete candidate request objects: one payload receipt round trip and one v1 `computeBudget` covenant round trip.
@@ -162,7 +171,9 @@ Current WIP:
 - Same pass added a reachable TN12 wRPC endpoint probe:
   - `TN12_VIRTUAL_CHAIN_RPC_URL=<endpoint> npm run indexer:wrpc-probe` writes `artifacts/tn12-wrpc-endpoint-probe.json`.
   - The committed probe shows `serverVersion=1.1.1-toc.1`, synced, UTXO-indexed, and TN12 DAG info reachable.
-  - This is endpoint reachability only. The next indexer task is mapping the available virtual-chain RPC method shape into a bounded live read with rollback replay.
+  - `KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa TN12_VIRTUAL_CHAIN_RPC_URL=<endpoint> npm run indexer:live-window` writes `artifacts/virtual-chain-live-window.json`.
+  - The live-window artifact proves a bounded `getVirtualChainFromBlockV2` call with high-verbosity accepted transactions and v1 compute-budget inputs. It does not persist app state.
+  - The next indexer task is converting that response into replay rows with rollback overlap.
 - Paused on 2026-05-09 after a minimal next-ten continuation pass:
   - Added next-ten execution artifacts for wallet, indexer, and batch-assurance settlement follow-through.
   - New commands: `npm run wallet:implementation-slice`, `npm run indexer:endpoint-runbook`, `npm run campaign:submit-runbook`, and `npm run project:next-ten`.

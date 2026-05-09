@@ -1,0 +1,106 @@
+{
+  "schema": "tn12-virtual-chain-live-window/v1",
+  "network": "testnet-12",
+  "generatedAt": "2026-05-09T15:37:01.670Z",
+  "status": "virtual-chain-live-window-ready",
+  "liveReadAttempted": true,
+  "endpoint": {
+    "url": "ws://65.108.107.30:18210",
+    "encoding": "json",
+    "requestedNetworkId": "testnet-12"
+  },
+  "sdk": {
+    "package": "kaspa-wasm",
+    "version": "1.1.1-toc.1",
+    "source": "/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa"
+  },
+  "request": {
+    "method": "getVirtualChainFromBlockV2",
+    "startHash": "a80b8c8f58544341a20e27cfed0ff960f9c0ceb285d2202f6422ebf22d914b57",
+    "minConfirmationCount": 0,
+    "dataVerbosityLevel": "High"
+  },
+  "summary": {
+    "removedBlocks": 0,
+    "addedBlocks": 1,
+    "acceptedBlocks": 1,
+    "acceptedTransactions": 44,
+    "payloadTransactions": 1,
+    "computeBudgetInputs": 43,
+    "firstBlockBlueScore": "7186414",
+    "firstBlockDaaScore": "7299475"
+  },
+  "sample": {
+    "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+    "acceptedTransactionIds": [
+      "a2a955a6b893e60d6894799c190779d8a45eb5965da6c42de50399e80fd55789",
+      "fecdddac1817be5517a8fce64e29efbb844abe963f7da9b2686022acc2ca5094",
+      "fb4b4102a049565e165720bfccdd87207794334cb2ebadb0eab16e4f5c628f58",
+      "fb2752ce61d2429791c29fe5a6854770a990f32e206dd31eaa3b35e9c5a6c158",
+      "e949ce9349ad6cc5a3f478339e2c9f50a18a36b53c47deb9241cd47efb9e113d",
+      "e78da9409546091ab88d432136458a89461a3bf720dbcf628a10bbf0c72a6412",
+      "e5303382bdf6ebf09d5df8a3065fd2d95eb482886e2afb9bd1a3625ed4a05498",
+      "e216d9544e6977610369dd111d54ddf520e8250f4ad187c5d7bc6340935e52d1"
+    ],
+    "payloadBytes": [
+      70
+    ],
+    "computeBudgetInputs": [
+      {
+        "previousOutpoint": {
+          "transactionId": "4cda974f0e0a7f0932c5b1df29e07b402071712f77038ba82df073c750de38f6",
+          "index": 1
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      },
+      {
+        "previousOutpoint": {
+          "transactionId": "c9b66d9648540383d0bd1bd7cd74356047c89b36cc27f904b9c5ddf8dac3e1b5",
+          "index": 1
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      },
+      {
+        "previousOutpoint": {
+          "transactionId": "166c869650fce885635ef7837fff5f44a9457115535fbc0ed39e8005e0214c76",
+          "index": 1
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      },
+      {
+        "previousOutpoint": {
+          "transactionId": "a785eb1775d95232f6d540970d26c928fb02126270a6fa9d8888aca5cc620187",
+          "index": 0
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      },
+      {
+        "previousOutpoint": {
+          "transactionId": "9fbad8a8a8d6e718e2d928153a185abe55b919f8076454915c6c17a4d5b018b3",
+          "index": 0
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      }
+    ]
+  },
+  "replayUse": {
+    "nextTable": "virtual_chain_windows",
+    "checkpointRule": "Do not persist this live window as app state until rollback overlap and payload/proof reducers match expected rows.",
+    "reducerInputs": [
+      "removedChainBlockHashes",
+      "addedChainBlockHashes",
+      "chainBlockAcceptedTransactions.chainBlockHeader",
+      "chainBlockAcceptedTransactions.acceptedTransactions"
+    ]
+  },
+  "boundaries": [
+    "This is one bounded live read, not a durable indexer.",
+    "It does not update checkpointed app state.",
+    "The next step is converting this response shape into replay rows with rollback overlap."
+  ]
+}

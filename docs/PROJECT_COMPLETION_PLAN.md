@@ -131,8 +131,8 @@ These are active work items, not future fantasies:
    - Done when: a returned txid is validated against the original review fingerprint and accepted evidence promotes it from pending to accepted.
 
 2. Durable virtual-chain indexer.
-   - Built: storage schema, replay plan, fixture replay, virtual-chain plan/run, bounded adapter contract, and reachable TN12 wRPC endpoint probe.
-   - Missing: mapped virtual-chain method call with persistence and rollback replay from live virtual-chain data.
+   - Built: storage schema, replay plan, fixture replay, virtual-chain plan/run, bounded adapter contract, reachable TN12 wRPC endpoint probe, and one bounded V2 live-window artifact.
+   - Missing: persistence and rollback replay from live virtual-chain data.
    - Done when: new accepted transactions can be discovered and replayed without editing txid fixtures by hand.
 
 3. Batch-assurance settlement.

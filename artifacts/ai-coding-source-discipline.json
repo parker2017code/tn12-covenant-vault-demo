@@ -7,7 +7,7 @@
     "watchedSources": 22,
     "primaryOrImplementationSources": 3,
     "sourcesNeedingContentImport": 0,
-    "agentOperatingPrinciples": 11,
+    "agentOperatingPrinciples": 14,
     "kaspaDailyQaThemes": 9,
     "failureModes": 21,
     "kaspaExplainedFailureModes": 13,
@@ -242,6 +242,24 @@
       "principle": "Crypto product code is reviewed around value flow and adversarial failure modes, not just happy-path type checks.",
       "why": "Top engineers identify custody, ordering, oracle, rollback, and abuse paths before naming a product done.",
       "repoPractice": "Every app lane must name funds held, signer authority, wrong/stale data behavior, replay/rollback behavior, and user-visible failure state."
+    },
+    {
+      "id": "continue-until-stop",
+      "principle": "When the user says continue, keep moving through concrete queued tasks until stop, pause, or a real blocker.",
+      "why": "Repeated permission checks waste the user's time and break long-running implementation flow.",
+      "repoPractice": "Use MEMORY.md, docs/NEXT_10_EXECUTION_PLAN.md, and npm run project:queue to choose the next task; update handoff notes after meaningful work."
+    },
+    {
+      "id": "feature-quality-vertical-slice",
+      "principle": "A feature is code plus behavior, not a label or standalone fixture.",
+      "why": "Planning artifacts only matter when they drive a command, validate a boundary, or narrow the next implementation step.",
+      "repoPractice": "Each feature should have an input or event source, state transition, user/operator review surface, validation gate, and handoff note."
+    },
+    {
+      "id": "fewer-stronger-rails",
+      "principle": "Prefer fewer stronger verticals over more app labels.",
+      "why": "The repo is strongest when wallet, indexer, custody, attestation, and proof rails get deeper instead of spreading into shallow lanes.",
+      "repoPractice": "New app ideas should reuse an existing rail or remain research until the first executable artifact and boundary exist."
     },
     {
       "id": "assume-local-premise-may-be-wrong",

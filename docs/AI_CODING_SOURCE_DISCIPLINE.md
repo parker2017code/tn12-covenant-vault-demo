@@ -25,6 +25,9 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 - Use one coherent review unit per commit: fixture, builder, generated artifact, docs, and check assertions should move together when they represent one lane.
 - Treat public company and open-source agent practices as evidence only when they are public. Internal/private company practices may exist but should be recorded as unknown rather than invented.
 - For state transitions and external IO, observability is part of the feature: output txids, endpoints, network IDs, payload hashes, rollback status, and review states where relevant.
+- When asked to continue, keep moving through the repo queue until the user says stop/pause or a real blocker needs input. Do not spend turns asking whether to proceed after each small step.
+- Treat code quality as behavior plus checks, not prose quality. A good feature has an input/event source, state transition, user/operator review surface, validation gate, and a handoff note.
+- Prefer fewer stronger verticals over more labels. New feature work should reuse wallet, indexer, custody, attestation, or proof rails unless a specific source or artifact justifies a new lane.
 
 ## Failure Modes To Avoid
 

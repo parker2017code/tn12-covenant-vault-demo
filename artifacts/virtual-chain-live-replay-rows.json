@@ -1,0 +1,192 @@
+{
+  "schema": "tn12-virtual-chain-live-replay-rows/v1",
+  "network": "testnet-12",
+  "generatedAt": "2026-05-09T15:39:43.152Z",
+  "status": "virtual-chain-live-replay-rows-ready",
+  "sourceStatus": "virtual-chain-live-window-ready",
+  "appStatePromoted": false,
+  "summary": {
+    "rows": 14,
+    "acceptedTransactionRows": 8,
+    "computeBudgetRows": 5,
+    "rollbackRows": 0,
+    "payloadRows": 1
+  },
+  "rows": [
+    {
+      "kind": "virtual_chain_window",
+      "data": {
+        "id": "testnet-12:a80b8c8f58544341a20e27cfed0ff960f9c0ceb285d2202f6422ebf22d914b57",
+        "network": "testnet-12",
+        "method": "getVirtualChainFromBlockV2",
+        "startHash": "a80b8c8f58544341a20e27cfed0ff960f9c0ceb285d2202f6422ebf22d914b57",
+        "minConfirmationCount": 0,
+        "dataVerbosityLevel": "High",
+        "removedBlocks": 0,
+        "addedBlocks": 1,
+        "acceptedBlocks": 1,
+        "acceptedTransactions": 44
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:a2a955a6b893e60d6894799c190779d8a45eb5965da6c42de50399e80fd55789",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "a2a955a6b893e60d6894799c190779d8a45eb5965da6c42de50399e80fd55789",
+        "ordinal": 0,
+        "payloadBytes": 70
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:fecdddac1817be5517a8fce64e29efbb844abe963f7da9b2686022acc2ca5094",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "fecdddac1817be5517a8fce64e29efbb844abe963f7da9b2686022acc2ca5094",
+        "ordinal": 1,
+        "payloadBytes": 0
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:fb4b4102a049565e165720bfccdd87207794334cb2ebadb0eab16e4f5c628f58",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "fb4b4102a049565e165720bfccdd87207794334cb2ebadb0eab16e4f5c628f58",
+        "ordinal": 2,
+        "payloadBytes": 0
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:fb2752ce61d2429791c29fe5a6854770a990f32e206dd31eaa3b35e9c5a6c158",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "fb2752ce61d2429791c29fe5a6854770a990f32e206dd31eaa3b35e9c5a6c158",
+        "ordinal": 3,
+        "payloadBytes": 0
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:e949ce9349ad6cc5a3f478339e2c9f50a18a36b53c47deb9241cd47efb9e113d",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "e949ce9349ad6cc5a3f478339e2c9f50a18a36b53c47deb9241cd47efb9e113d",
+        "ordinal": 4,
+        "payloadBytes": 0
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:e78da9409546091ab88d432136458a89461a3bf720dbcf628a10bbf0c72a6412",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "e78da9409546091ab88d432136458a89461a3bf720dbcf628a10bbf0c72a6412",
+        "ordinal": 5,
+        "payloadBytes": 0
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:e5303382bdf6ebf09d5df8a3065fd2d95eb482886e2afb9bd1a3625ed4a05498",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "e5303382bdf6ebf09d5df8a3065fd2d95eb482886e2afb9bd1a3625ed4a05498",
+        "ordinal": 6,
+        "payloadBytes": 0
+      }
+    },
+    {
+      "kind": "accepted_transaction_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:e216d9544e6977610369dd111d54ddf520e8250f4ad187c5d7bc6340935e52d1",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "txid": "e216d9544e6977610369dd111d54ddf520e8250f4ad187c5d7bc6340935e52d1",
+        "ordinal": 7,
+        "payloadBytes": 0
+      }
+    },
+    {
+      "kind": "compute_budget_input_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:compute-budget:0",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "ordinal": 0,
+        "previousOutpoint": {
+          "transactionId": "4cda974f0e0a7f0932c5b1df29e07b402071712f77038ba82df073c750de38f6",
+          "index": 1
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      }
+    },
+    {
+      "kind": "compute_budget_input_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:compute-budget:1",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "ordinal": 1,
+        "previousOutpoint": {
+          "transactionId": "c9b66d9648540383d0bd1bd7cd74356047c89b36cc27f904b9c5ddf8dac3e1b5",
+          "index": 1
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      }
+    },
+    {
+      "kind": "compute_budget_input_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:compute-budget:2",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "ordinal": 2,
+        "previousOutpoint": {
+          "transactionId": "166c869650fce885635ef7837fff5f44a9457115535fbc0ed39e8005e0214c76",
+          "index": 1
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      }
+    },
+    {
+      "kind": "compute_budget_input_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:compute-budget:3",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "ordinal": 3,
+        "previousOutpoint": {
+          "transactionId": "a785eb1775d95232f6d540970d26c928fb02126270a6fa9d8888aca5cc620187",
+          "index": 0
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      }
+    },
+    {
+      "kind": "compute_budget_input_seen",
+      "data": {
+        "id": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a:compute-budget:4",
+        "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+        "ordinal": 4,
+        "previousOutpoint": {
+          "transactionId": "9fbad8a8a8d6e718e2d928153a185abe55b919f8076454915c6c17a4d5b018b3",
+          "index": 0
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      }
+    }
+  ],
+  "promotionGate": [
+    "Replay a trusted overlap from the last persisted checkpoint.",
+    "Apply removed-chain rows before added-chain rows.",
+    "Match payload bytes and proof outpoints against reducers.",
+    "Persist only after app-state rows are deterministic across the overlap."
+  ],
+  "boundaries": [
+    "These are live-window replay rows, not the durable app-state checkpoint.",
+    "They intentionally keep appStatePromoted=false until rollback overlap and reducer matching are implemented."
+  ]
+}

@@ -11,6 +11,7 @@
 ## General Agent Autonomy
 
 - Work end to end: inspect, install routine tooling when needed, change, verify, and report the result.
+- When the user says start, continue, go, keep going, or similar, keep executing the next concrete tasks from repo handoff/queue and track progress until the user says stop/pause or a real blocker needs input.
 - Protocol debugging starts with the local evidence: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK version/API shape, node/network id, and Rusty Kaspa source/tests.
 - When the first explanation fails, check adjacent causes too: stale SDKs, compatibility fields, serialization differences, endpoint encoding, network suffix, and diagnostics that prove only a txid rather than the committed transaction shape.
 - Escalate protocol questions with a small reproducer and exact evidence: txid, artifact path, endpoint response, source line, and command.

@@ -74,10 +74,13 @@ import { buildWalletExternalSignerGap } from "../src/walletExternalSignerGap.mjs
 import { buildWalletUnsignedRequestTemplates } from "../src/walletUnsignedRequestTemplates.mjs";
 import { buildWalletStandardMapping } from "../src/walletStandardMapping.mjs";
 import { buildWalletStandardRequests } from "../src/walletStandardRequests.mjs";
+import { buildWalletStandardSignerValidation } from "../src/walletStandardSignerValidation.mjs";
 import { buildWalletConnectorImplementationSlice } from "../src/walletConnectorImplementationSlice.mjs";
 import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
 import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRunbook.mjs";
 import { summarizeTn12WrpcEndpointProbe } from "../src/tn12WrpcEndpointProbe.mjs";
+import { summarizeVirtualChainLiveWindow } from "../src/virtualChainLiveWindow.mjs";
+import { buildVirtualChainLiveReplayRows } from "../src/virtualChainLiveReplayRows.mjs";
 import { buildBatchAssuranceSettlementDecision } from "../src/batchAssuranceSettlementDecision.mjs";
 import { buildBatchAssuranceSubmitRunbook } from "../src/batchAssuranceSubmitRunbook.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
@@ -1204,6 +1207,61 @@ const rebuiltEndpointProbe = summarizeTn12WrpcEndpointProbe({
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(rebuiltEndpointProbe.status, "tn12-wrpc-endpoint-probe-ready");
+const virtualChainLiveWindowArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-window.json", import.meta.url), "utf8"));
+assert.equal(virtualChainLiveWindowArtifact.status, "virtual-chain-live-window-ready");
+assert.equal(virtualChainLiveWindowArtifact.request.method, "getVirtualChainFromBlockV2");
+assert.equal(virtualChainLiveWindowArtifact.request.dataVerbosityLevel, "High");
+assert.ok(virtualChainLiveWindowArtifact.summary.acceptedBlocks > 0);
+assert.ok(virtualChainLiveWindowArtifact.summary.acceptedTransactions > 0);
+assert.ok(virtualChainLiveWindowArtifact.summary.computeBudgetInputs > 0);
+assert.match(virtualChainLiveWindowArtifact.replayUse.checkpointRule, /rollback overlap/);
+const rebuiltLiveWindow = summarizeVirtualChainLiveWindow({
+  endpointProbe: tn12WrpcEndpointProbeArtifact,
+  request: virtualChainLiveWindowArtifact.request,
+  response: {
+    removedChainBlockHashes: [],
+    addedChainBlockHashes: ["sample-added-block"],
+    chainBlockAcceptedTransactions: [
+      {
+        chainBlockHeader: {
+          hash: "sample-block",
+          blueScore: "1",
+          daaScore: "2"
+        },
+        acceptedTransactions: [
+          {
+            payload: "00ff",
+            inputs: [
+              {
+                previousOutpoint: { transactionId: "sample", index: 0 },
+                sigOpCount: 0,
+                computeBudget: 10
+              }
+            ],
+            verboseData: { transactionId: "sample-tx" }
+          }
+        ]
+      }
+    ]
+  },
+  sdk: virtualChainLiveWindowArtifact.sdk,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(rebuiltLiveWindow.status, "virtual-chain-live-window-ready");
+assert.equal(rebuiltLiveWindow.summary.payloadTransactions, 1);
+assert.equal(rebuiltLiveWindow.summary.computeBudgetInputs, 1);
+const liveReplayRows = buildVirtualChainLiveReplayRows({
+  liveWindow: virtualChainLiveWindowArtifact,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(liveReplayRows.status, "virtual-chain-live-replay-rows-ready");
+assert.equal(liveReplayRows.appStatePromoted, false);
+assert.ok(liveReplayRows.summary.acceptedTransactionRows > 0);
+assert.ok(liveReplayRows.summary.computeBudgetRows > 0);
+const liveReplayRowsArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-replay-rows.json", import.meta.url), "utf8"));
+assert.equal(liveReplayRowsArtifact.status, "virtual-chain-live-replay-rows-ready");
+assert.equal(liveReplayRowsArtifact.appStatePromoted, false);
+assert.match(liveReplayRowsArtifact.promotionGate.join(" "), /trusted overlap/);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -1330,6 +1388,29 @@ assert.ok(walletStandardRequests.requests.some((request) =>
 const walletStandardRequestsArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-requests.json", import.meta.url), "utf8"));
 assert.equal(walletStandardRequestsArtifact.status, "wallet-standard-request-candidates-ready");
 assert.equal(walletStandardRequestsArtifact.summary.mappedRequests, 2);
+const walletSignerResultsFixture = JSON.parse(await readFile(new URL("../fixtures/WalletStandardSignerResults.json", import.meta.url), "utf8"));
+const walletSignerValidation = buildWalletStandardSignerValidation({
+  standardRequests: walletStandardRequestsArtifact,
+  signerResults: walletSignerResultsFixture,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletSignerValidation.status, "wallet-standard-signer-validation-ready");
+assert.equal(walletSignerValidation.summary.pending, 2);
+assert.equal(walletSignerValidation.summary.negativeCasesCaught, 2);
+assert.equal(walletSignerValidation.liveExternalSignerAccepted, false);
+assert.ok(walletSignerValidation.validations.some((item) =>
+  item.id === "negative-mutated-fingerprint"
+  && item.validation === "rejected"
+  && item.reasons.includes("review fingerprint mismatch")
+));
+assert.ok(walletSignerValidation.validations.some((item) =>
+  item.id === "negative-dropped-compute-budget"
+  && item.validation === "rejected"
+  && item.reasons.includes("input 0 computeBudget mismatch")
+));
+const walletSignerValidationArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8"));
+assert.equal(walletSignerValidationArtifact.status, "wallet-standard-signer-validation-ready");
+assert.equal(walletSignerValidationArtifact.summary.negativeCasesCaught, 2);
 const walletImplementationSlice = buildWalletConnectorImplementationSlice({
   walletMapping: walletStandardMappingArtifact,
   unsignedTemplates: walletUnsignedTemplatesArtifact,
@@ -1544,6 +1625,8 @@ const files = [
   "scripts/build-virtual-chain-live-preflight.mjs",
   "scripts/build-virtual-chain-endpoint-runbook.mjs",
   "scripts/probe-tn12-wrpc-endpoint.mjs",
+  "scripts/read-virtual-chain-live-window.mjs",
+  "scripts/build-virtual-chain-live-replay-rows.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -1560,6 +1643,8 @@ const files = [
   "scripts/build-wallet-external-signer-gap.mjs",
   "scripts/build-wallet-unsigned-request-templates.mjs",
   "scripts/build-wallet-standard-mapping.mjs",
+  "scripts/build-wallet-standard-requests.mjs",
+  "scripts/build-wallet-standard-signer-validation.mjs",
   "scripts/build-wallet-connector-implementation-slice.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
@@ -1668,6 +1753,8 @@ const files = [
   "artifacts/wallet-external-signer-gap.json",
   "artifacts/wallet-unsigned-request-templates.json",
   "artifacts/wallet-standard-mapping.json",
+  "artifacts/wallet-standard-requests.json",
+  "artifacts/wallet-standard-signer-validation.json",
   "artifacts/wallet-connector-implementation-slice.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
@@ -1717,6 +1804,8 @@ const files = [
   "artifacts/virtual-chain-live-preflight.json",
   "artifacts/virtual-chain-endpoint-runbook.json",
   "artifacts/tn12-wrpc-endpoint-probe.json",
+  "artifacts/virtual-chain-live-window.json",
+  "artifacts/virtual-chain-live-replay-rows.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
   "artifacts/access-pass-planner.json",
@@ -1810,6 +1899,8 @@ const files = [
   "src/virtualChainLivePreflight.mjs",
   "src/virtualChainEndpointRunbook.mjs",
   "src/tn12WrpcEndpointProbe.mjs",
+  "src/virtualChainLiveWindow.mjs",
+  "src/virtualChainLiveReplayRows.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/attestationReputationThresholds.mjs",
@@ -1826,6 +1917,7 @@ const files = [
   "src/walletUnsignedRequestTemplates.mjs",
   "src/walletStandardMapping.mjs",
   "src/walletStandardRequests.mjs",
+  "src/walletStandardSignerValidation.mjs",
   "src/walletConnectorImplementationSlice.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",

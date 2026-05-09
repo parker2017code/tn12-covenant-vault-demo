@@ -79,6 +79,7 @@ Current attestation provenance state:
 ## Hard Boundaries
 
 - Operating rule: do the work, verify it, then report what changed.
+- Continue-until-stop rule: when the user says start, continue, go, keep going, or similar, keep choosing the next concrete task from `MEMORY.md`, `docs/NEXT_10_EXECUTION_PLAN.md`, or `npm run project:queue`, update handoff notes, and continue until the user says stop/pause or a real blocker needs input.
 - TN12 evidence rule: positive app-state transitions need accepted TN12 transaction evidence before they are marked done. Local reducer tests are for adversarial, duplicate, stale, malformed, or unsafe cases; they do not replace a safe testnet transaction for real state changes.
 - Testnet-only. Keep mainnet covenant activation out of the claims.
 - Keep private keys private. `.local/tn12-wallet.json` may be read by signing scripts but must never be pasted into docs, source, UI, or chat.

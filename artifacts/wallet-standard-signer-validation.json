@@ -1,0 +1,63 @@
+{
+  "schema": "tn12-wallet-standard-signer-validation/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T15:40:57.441Z",
+  "status": "wallet-standard-signer-validation-ready",
+  "liveExternalSignerAccepted": false,
+  "summary": {
+    "requests": 2,
+    "results": 4,
+    "pending": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "negativeCasesCaught": 2
+  },
+  "validations": [
+    {
+      "id": "payload-roundtrip-placeholder",
+      "requestId": "ureq-6cfe79da-standard",
+      "status": "pending-external-signer",
+      "validation": "pending",
+      "reasons": [
+        "external signer has not returned a transaction yet"
+      ]
+    },
+    {
+      "id": "covenant-roundtrip-placeholder",
+      "requestId": "ureq-d12412d8-standard",
+      "status": "pending-external-signer",
+      "validation": "pending",
+      "reasons": [
+        "external signer has not returned a transaction yet"
+      ]
+    },
+    {
+      "id": "negative-mutated-fingerprint",
+      "requestId": "ureq-6cfe79da-standard",
+      "status": "returned",
+      "validation": "rejected",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "reasons": [
+        "review fingerprint mismatch"
+      ]
+    },
+    {
+      "id": "negative-dropped-compute-budget",
+      "requestId": "ureq-d12412d8-standard",
+      "status": "returned",
+      "validation": "rejected",
+      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "reasons": [
+        "review fingerprint mismatch",
+        "input 0 sigOpCount mismatch",
+        "input 0 computeBudget mismatch"
+      ]
+    }
+  ],
+  "promotionRule": "A signer result can enter submit-result validation only if reviewFingerprint, txid, payload bytes, input budget report, signer metadata, route, and explicit user action all pass.",
+  "boundaries": [
+    "This validates signer-return metadata; it does not sign or broadcast.",
+    "Pending rows are expected until a real external signer integration exists.",
+    "Accepted signer results still need payload-preserving submit and virtual-chain accepted evidence before app-state promotion."
+  ]
+}

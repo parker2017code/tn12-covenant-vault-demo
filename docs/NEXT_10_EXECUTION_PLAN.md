@@ -23,6 +23,7 @@ This is the working order after the first five rail tasks landed. The rule is pl
 - Wallet request candidates: `npm run wallet:standard-requests`.
 - Indexer slice: `npm run indexer:endpoint-runbook`.
 - Endpoint probe: `TN12_VIRTUAL_CHAIN_RPC_URL=<ws-or-wrpc-endpoint> npm run indexer:wrpc-probe`.
+- Live window: `KASPA_WASM_MODULE=<tn12-sdk-path> TN12_VIRTUAL_CHAIN_RPC_URL=<ws-or-wrpc-endpoint> npm run indexer:live-window`.
 - Settlement slice: `npm run campaign:submit-runbook`.
 - Combined queue slice: `npm run project:next-ten`.
 
@@ -37,5 +38,5 @@ This is the working order after the first five rail tasks landed. The rule is pl
 The next substantial commit should pick one of:
 
 - wallet: run one external-signer round trip from `artifacts/wallet-standard-requests.json`;
-- indexer: map the available virtual-chain RPC method shape from the probed TN12 endpoint;
+- indexer: convert the bounded V2 live-window response into replay rows with rollback overlap;
 - settlement: choose release or refund for batch assurance and record the submit decision.
