@@ -1574,7 +1574,8 @@ const files = [
   "docs/MASTER_APP_PLAN.md",
   "docs/PROGRAMMABILITY_PATHS.md",
   "docs/MAINSTREAM_APP_DIRECTION.md",
-  "docs/AI_CODING_SOURCE_DISCIPLINE.md"
+  "docs/AI_CODING_SOURCE_DISCIPLINE.md",
+  "docs/PROJECT_COMPLETION_PLAN.md"
 ];
 
 for (const file of files) {
@@ -1653,6 +1654,7 @@ assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /PROGRAMMABILITY_PATHS\.md/);
 assert.match(readme, /MAINSTREAM_APP_DIRECTION\.md/);
+assert.match(readme, /PROJECT_COMPLETION_PLAN\.md/);
 assert.match(readme, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
 assert.match(readme, /npm run check:tn12/);
 
@@ -1768,6 +1770,18 @@ const githubHosting = await readFile(new URL("../docs/GITHUB_HOSTING.md", import
 assert.match(githubHosting, /GitHub Pages/);
 assert.match(githubHosting, /Repo Settings/);
 assert.match(githubHosting, /Never commit `\.local\/tn12-wallet\.json`/);
+
+const projectCompletionPlan = await readFile(new URL("../docs/PROJECT_COMPLETION_PLAN.md", import.meta.url), "utf8");
+assert.match(projectCompletionPlan, /Definition Of Done/);
+assert.match(projectCompletionPlan, /wallet path is no-local-key/);
+assert.match(projectCompletionPlan, /Durable virtual-chain indexer/);
+assert.match(projectCompletionPlan, /Batch-assurance settlement/);
+assert.match(projectCompletionPlan, /Stop Rules/);
+assert.match(projectCompletionPlan, /not a reason to keep inflating this phase/);
+assert.match(projectCompletionPlan, /Differentiation Thesis/);
+assert.match(projectCompletionPlan, /How We Know It Is Real/);
+assert.match(projectCompletionPlan, /How Everything Stays Tethered/);
+assert.match(projectCompletionPlan, /Adoption Odds Filter/);
 
 const vaultContract = await readFile(new URL("../contracts/DelayedRecoveryVault.sil", import.meta.url), "utf8");
 assert.match(vaultContract, /contract DelayedRecoveryVault/);

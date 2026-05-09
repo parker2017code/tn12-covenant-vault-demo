@@ -6,7 +6,7 @@ The real core is narrow: accepted TN12 covenant spends, accepted payload receipt
 
 It avoids mainnet-wallet claims. All local keys and funds in this repo are testnet-only.
 
-Start with [`docs/CORE_LAB_NOTES.md`](docs/CORE_LAB_NOTES.md) for the short version: what actually landed on TN12, what broke, and what is still just scaffolding. Then use [`MEMORY.md`](MEMORY.md), [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md), [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md), and [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md) to verify GitHub state, Pages artifacts, txids, and claim boundaries.
+Start with [`docs/CORE_LAB_NOTES.md`](docs/CORE_LAB_NOTES.md) for the short version: what actually landed on TN12, what broke, and what is still just scaffolding. Then use [`docs/PROJECT_COMPLETION_PLAN.md`](docs/PROJECT_COMPLETION_PLAN.md), [`MEMORY.md`](MEMORY.md), [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md), [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md), and [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md) to verify done/WIP/future state, GitHub state, Pages artifacts, txids, and claim boundaries.
 The L1 covenant, based-rollup, and vProg boundary lives in [`docs/PROGRAMMABILITY_PATHS.md`](docs/PROGRAMMABILITY_PATHS.md).
 
 High-impact app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md), but it is not proof that those apps exist. It is a research queue for what would be useful after wallet, indexer, custody, and settlement rails are real.
@@ -31,6 +31,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 ## What It Does Now
 
 - See `docs/PROGRESS.md` for the current lane-by-lane build state and next work.
+- See `docs/PROJECT_COMPLETION_PLAN.md` for the explicit done/WIP/continuing/future plan and the criteria for when this phase is finished.
 - Designs a vault policy with owner, recovery, withdrawal delay, daily limit, guardian count, and memo fields.
 - Produces a deterministic policy ID in the browser.
 - Simulates vault funding, delayed withdrawal, cancel, and recovery paths.
