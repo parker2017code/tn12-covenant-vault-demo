@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-endpoint-runbook/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:20:30.689Z",
+  "generatedAt": "2026-05-09T21:30:27.969Z",
   "status": "endpoint-runbook-live-tested-no-promotion",
   "summary": {
     "endpointConfigured": false,
@@ -32,10 +32,10 @@
     "endpoint": "ws://65.108.107.30:18210",
     "serverVersion": "1.1.1-toc.1",
     "virtualDaaScore": "7509992",
-    "acceptedTransactions": 13,
+    "acceptedTransactions": 46,
     "payloadTransactions": 3,
-    "computeBudgetInputs": 10,
-    "rollbackRows": 1,
+    "computeBudgetInputs": 43,
+    "rollbackRows": 0,
     "matchedCheckpointRows": 0,
     "decision": "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it."
   },

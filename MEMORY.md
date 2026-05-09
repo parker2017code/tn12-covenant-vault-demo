@@ -123,9 +123,14 @@ Updated 2026-05-09 after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca
 - `npm run wallet:external-signer-roundtrip` writes `artifacts/wallet-external-signer-roundtrip-plan.json`.
   - It selects the payload receipt request and role-separated escrow cancel request as the first two external signer round trips.
   - It is a runbook/checklist, not a live signer integration.
+- The live virtual-chain reader now preserves the full accepted transaction list returned by the bounded window:
+  - `scripts/read-virtual-chain-live-window.mjs` supports `TN12_VIRTUAL_CHAIN_START_HASH` for deliberate overlap tests instead of always starting from the current sink.
+  - `artifacts/virtual-chain-live-window.json` carries full replay input under `replay.acceptedTransactions` and `replay.computeBudgetInputs`.
+  - `artifacts/virtual-chain-live-replay-rows.json` records `fullAcceptedReplay: true`; the latest live sample had 46 accepted tx rows, 43 compute-budget rows, and 0 checkpoint matches.
+  - App state is still not promoted until a checkpoint-overlap window or deterministic cursor transition is proven.
 - `npm run check:all` passed after each committed slice before push.
-- Current pushed head after this pass is `9df5a91` unless newer work has landed.
-- GitHub `check` and Pages were green for `9df5a91` when verified with `gh run list` on 2026-05-09.
+- Current pushed head before the full-replay indexer patch is `18293f0` unless newer work has landed.
+- GitHub `check` and Pages were green for `18293f0` when verified with `gh run list` on 2026-05-09.
 
 Immediate next tasks:
 

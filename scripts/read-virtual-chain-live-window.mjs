@@ -12,6 +12,7 @@ const encoding = normalizeEncoding(process.env.KASPA_WRPC_ENCODING || "json");
 const networkId = testnetNetworkType();
 const outPath = process.env.OUT || "artifacts/virtual-chain-live-window.json";
 const minConfirmationCount = Number(process.env.TN12_VIRTUAL_CHAIN_CONFIRMATIONS || 0);
+const configuredStartHash = process.env.TN12_VIRTUAL_CHAIN_START_HASH || "";
 
 if (!url) {
   await writeArtifact(outPath, summarizeVirtualChainLiveWindow({
@@ -47,10 +48,11 @@ try {
     callRpc(() => rpc.getBlockDagInfo({}))
   ]);
   probe = { serverInfo, currentNetwork, info, blockDagInfo };
-  const startHash = blockDagInfo.value?.sink;
+  const startHash = configuredStartHash || blockDagInfo.value?.sink;
   if (!startHash) throw new Error("getBlockDagInfo did not return a sink hash for live-window startHash.");
   request = {
     startHash,
+    startHashSource: configuredStartHash ? "env:TN12_VIRTUAL_CHAIN_START_HASH" : "getBlockDagInfo.sink",
     minConfirmationCount,
     dataVerbosityLevel: "High"
   };

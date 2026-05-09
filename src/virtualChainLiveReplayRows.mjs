@@ -3,9 +3,18 @@ export function buildVirtualChainLiveReplayRows({
   generatedAt = new Date().toISOString()
 } = {}) {
   const source = liveWindow.sample || {};
-  const acceptedIds = Array.isArray(source.acceptedTransactionIds) ? source.acceptedTransactionIds : [];
-  const payloadBytes = Array.isArray(source.payloadBytes) ? source.payloadBytes : [];
-  const computeBudgetInputs = Array.isArray(source.computeBudgetInputs) ? source.computeBudgetInputs : [];
+  const replay = liveWindow.replay || {};
+  const replayTransactions = Array.isArray(replay.acceptedTransactions) ? replay.acceptedTransactions : [];
+  const acceptedIds = replayTransactions.length
+    ? replayTransactions.map((tx) => tx.txid).filter(Boolean)
+    : Array.isArray(source.acceptedTransactionIds) ? source.acceptedTransactionIds : [];
+  const payloadBytes = replayTransactions.length
+    ? replayTransactions.map((tx) => tx.payloadBytes || 0)
+    : Array.isArray(source.payloadBytes) ? source.payloadBytes : [];
+  const computeBudgetInputs = Array.isArray(replay.computeBudgetInputs) && replay.computeBudgetInputs.length
+    ? replay.computeBudgetInputs
+    : Array.isArray(source.computeBudgetInputs) ? source.computeBudgetInputs : [];
+  const removedBlockHashes = Array.isArray(replay.removedBlockHashes) ? replay.removedBlockHashes : [];
   const blockHash = source.blockHash || "";
   const removedBlocks = Number(liveWindow.summary?.removedBlocks || 0);
   const rows = [
@@ -22,23 +31,24 @@ export function buildVirtualChainLiveReplayRows({
       acceptedTransactions: Number(liveWindow.summary?.acceptedTransactions || 0)
     }),
     ...acceptedIds.map((txid, index) => row("accepted_transaction_seen", {
-      id: `${blockHash}:${txid}`,
-      blockHash,
+      id: `${replayTransactions[index]?.blockHash || blockHash}:${txid}`,
+      blockHash: replayTransactions[index]?.blockHash || blockHash,
       txid,
       ordinal: index,
       payloadBytes: payloadBytes[index] || 0
     })),
     ...computeBudgetInputs.map((input, index) => row("compute_budget_input_seen", {
-      id: `${blockHash}:compute-budget:${index}`,
-      blockHash,
+      id: `${input.blockHash || blockHash}:compute-budget:${index}`,
+      blockHash: input.blockHash || blockHash,
       ordinal: index,
       previousOutpoint: input.previousOutpoint || null,
       sigOpCount: input.sigOpCount ?? null,
       computeBudget: input.computeBudget ?? null
     })),
     ...Array.from({ length: removedBlocks }, (_, index) => row("rollback_removed_block_seen", {
-      id: `${liveWindow.request?.startHash || "unknown"}:removed:${index}`,
-      ordinal: index
+      id: `${removedBlockHashes[index] || liveWindow.request?.startHash || "unknown"}:removed:${index}`,
+      ordinal: index,
+      blockHash: removedBlockHashes[index] || ""
     }))
   ];
 
@@ -54,7 +64,8 @@ export function buildVirtualChainLiveReplayRows({
       acceptedTransactionRows: rows.filter((item) => item.kind === "accepted_transaction_seen").length,
       computeBudgetRows: rows.filter((item) => item.kind === "compute_budget_input_seen").length,
       rollbackRows: rows.filter((item) => item.kind === "rollback_removed_block_seen").length,
-      payloadRows: rows.filter((item) => item.data?.payloadBytes > 0).length
+      payloadRows: rows.filter((item) => item.data?.payloadBytes > 0).length,
+      fullAcceptedReplay: replayTransactions.length > 0
     },
     rows,
     promotionGate: [

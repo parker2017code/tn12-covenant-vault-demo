@@ -1279,6 +1279,15 @@ assert.equal(virtualChainLiveWindowArtifact.request.dataVerbosityLevel, "High");
 assert.ok(virtualChainLiveWindowArtifact.summary.acceptedBlocks > 0);
 assert.ok(virtualChainLiveWindowArtifact.summary.acceptedTransactions > 0);
 assert.ok(virtualChainLiveWindowArtifact.summary.computeBudgetInputs > 0);
+assert.equal(virtualChainLiveWindowArtifact.request.startHashSource, "getBlockDagInfo.sink");
+assert.equal(
+  virtualChainLiveWindowArtifact.replay.acceptedTransactions.length,
+  virtualChainLiveWindowArtifact.summary.acceptedTransactions
+);
+assert.equal(
+  virtualChainLiveWindowArtifact.replay.computeBudgetInputs.length,
+  virtualChainLiveWindowArtifact.summary.computeBudgetInputs
+);
 assert.match(virtualChainLiveWindowArtifact.replayUse.checkpointRule, /rollback overlap/);
 const rebuiltLiveWindow = summarizeVirtualChainLiveWindow({
   endpointProbe: tn12WrpcEndpointProbeArtifact,
@@ -1315,6 +1324,8 @@ const rebuiltLiveWindow = summarizeVirtualChainLiveWindow({
 assert.equal(rebuiltLiveWindow.status, "virtual-chain-live-window-ready");
 assert.equal(rebuiltLiveWindow.summary.payloadTransactions, 1);
 assert.equal(rebuiltLiveWindow.summary.computeBudgetInputs, 1);
+assert.equal(rebuiltLiveWindow.replay.acceptedTransactions.length, 1);
+assert.equal(rebuiltLiveWindow.replay.acceptedTransactions[0].blockHash, "sample-block");
 const liveReplayRows = buildVirtualChainLiveReplayRows({
   liveWindow: virtualChainLiveWindowArtifact,
   generatedAt: "2026-05-09T00:00:00.000Z"
@@ -1323,9 +1334,12 @@ assert.equal(liveReplayRows.status, "virtual-chain-live-replay-rows-ready");
 assert.equal(liveReplayRows.appStatePromoted, false);
 assert.ok(liveReplayRows.summary.acceptedTransactionRows > 0);
 assert.ok(liveReplayRows.summary.computeBudgetRows > 0);
+assert.equal(liveReplayRows.summary.fullAcceptedReplay, true);
+assert.equal(liveReplayRows.summary.acceptedTransactionRows, virtualChainLiveWindowArtifact.summary.acceptedTransactions);
 const liveReplayRowsArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-replay-rows.json", import.meta.url), "utf8"));
 assert.equal(liveReplayRowsArtifact.status, "virtual-chain-live-replay-rows-ready");
 assert.equal(liveReplayRowsArtifact.appStatePromoted, false);
+assert.equal(liveReplayRowsArtifact.summary.fullAcceptedReplay, true);
 assert.match(liveReplayRowsArtifact.promotionGate.join(" "), /trusted overlap/);
 const checkpointComparison = buildVirtualChainCheckpointComparison({
   liveReplayRows: liveReplayRowsArtifact,

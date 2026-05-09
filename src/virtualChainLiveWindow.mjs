@@ -13,8 +13,23 @@ export function summarizeVirtualChainLiveWindow({
     : []);
   const payloadTransactions = transactions.filter(({ tx }) => Boolean(tx.payload));
   const computeBudgetInputs = transactions.flatMap(({ tx }) => tx.inputs || [])
-    .filter((input) => input.computeBudget !== undefined && input.computeBudget !== null);
-  const rollbackRows = Array.isArray(response.removedChainBlockHashes) ? response.removedChainBlockHashes.length : 0;
+    .map((input) => ({ input }))
+    .filter(({ input }) => input.computeBudget !== undefined && input.computeBudget !== null);
+  const removedBlockHashes = Array.isArray(response.removedChainBlockHashes) ? response.removedChainBlockHashes : [];
+  const rollbackRows = removedBlockHashes.length;
+  const replayTransactions = transactions.map(({ block, tx }, index) => ({
+    blockHash: block.chainBlockHeader?.hash || "",
+    txid: tx.verboseData?.transactionId || tx.verboseData?.hash || "",
+    ordinal: index,
+    payloadBytes: tx.payload ? Math.ceil(String(tx.payload).length / 2) : 0
+  })).filter((row) => row.txid);
+  const replayComputeBudgetInputs = computeBudgetInputs.map(({ input }, index) => ({
+    blockHash: transactions.find(({ tx }) => (tx.inputs || []).includes(input))?.block?.chainBlockHeader?.hash || "",
+    ordinal: index,
+    previousOutpoint: input.previousOutpoint || null,
+    sigOpCount: input.sigOpCount ?? null,
+    computeBudget: input.computeBudget ?? null
+  }));
 
   return {
     schema: "tn12-virtual-chain-live-window/v1",
@@ -31,6 +46,7 @@ export function summarizeVirtualChainLiveWindow({
     request: {
       method: "getVirtualChainFromBlockV2",
       startHash: request.startHash || "",
+      startHashSource: request.startHashSource || "getBlockDagInfo.sink",
       minConfirmationCount: Number(request.minConfirmationCount ?? 0),
       dataVerbosityLevel: request.dataVerbosityLevel || "High"
     },
@@ -46,15 +62,18 @@ export function summarizeVirtualChainLiveWindow({
     },
     sample: {
       blockHash: acceptedBlocks[0]?.chainBlockHeader?.hash || "",
-      acceptedTransactionIds: transactions.slice(0, 8).map(({ tx }) =>
-        tx.verboseData?.transactionId || tx.verboseData?.hash || ""
-      ).filter(Boolean),
+      acceptedTransactionIds: replayTransactions.slice(0, 8).map((tx) => tx.txid),
       payloadBytes: payloadTransactions.slice(0, 5).map(({ tx }) => Math.ceil(String(tx.payload || "").length / 2)),
-      computeBudgetInputs: computeBudgetInputs.slice(0, 5).map((input) => ({
-        previousOutpoint: input.previousOutpoint || null,
-        sigOpCount: input.sigOpCount ?? null,
-        computeBudget: input.computeBudget ?? null
+      computeBudgetInputs: replayComputeBudgetInputs.slice(0, 5).map(({ previousOutpoint, sigOpCount, computeBudget }) => ({
+        previousOutpoint,
+        sigOpCount,
+        computeBudget
       }))
+    },
+    replay: {
+      removedBlockHashes,
+      acceptedTransactions: replayTransactions,
+      computeBudgetInputs: replayComputeBudgetInputs
     },
     replayUse: {
       nextTable: "virtual_chain_windows",

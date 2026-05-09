@@ -18,6 +18,7 @@ The latest continuation commits were committed and pushed on 2026-05-09:
 - `eb0830d Surface live indexer checkpoint comparison`
 - `9997bbb Record live endpoint evidence in indexer runbook`
 - `9df5a91 Add external signer roundtrip plan`
+- `18293f0 Refresh handoff after wallet and indexer work`
 
 Do not assume the worktree is clean on resume; verify with `git status --short`.
 
@@ -32,6 +33,9 @@ The current head also adds live endpoint evidence and an external-signer roundtr
 - The live sample had one rollback row and zero checkpoint overlap, so app state remains unpromoted.
 - `npm run wallet:external-signer-roundtrip` writes the first external-signer checklist for the payload receipt request and role-separated escrow cancel request.
 - The external-signer checklist is not a live no-local-key proof; it is the next operator/signer runbook.
+- The live-window reducer now carries every accepted txid returned by the V2 response into replay rows, not just the UI sample.
+- `TN12_VIRTUAL_CHAIN_START_HASH=<hash>` is available for the next checkpoint-overlap test.
+- The latest live sample still has zero checkpoint overlap, so keep settlement and wallet-submit promotion held.
 
 ## Recently Completed Before This WIP
 
@@ -53,7 +57,7 @@ Before this pickup note was refreshed, these passed after the latest local chang
 npm run check:all
 ```
 
-GitHub `check` and Pages were green for pushed head `9df5a91` when verified on 2026-05-09.
+GitHub `check` and Pages were green for pushed head `18293f0` when verified on 2026-05-09.
 
 On resume, rerun at least:
 
