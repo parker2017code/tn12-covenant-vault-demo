@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-settlement-drafts/v1",
   "network": "kaspa-testnet-12",
-  "status": "signed-not-broadcast",
+  "status": "release-accepted-tn12",
   "campaign": {
     "id": "kaspa-dev-docs-sprint",
     "name": "Kaspa dev docs sprint",
@@ -68,5 +68,10 @@
     "Do not submit more than one mutually exclusive settlement path.",
     "Generated pledge private keys stay in .local and are testnet-only."
   ],
-  "next": "Review one settlement path, then submit explicitly only if the mutually exclusive consequences are intended."
+  "next": "Review one settlement path, then submit explicitly only if the mutually exclusive consequences are intended.",
+  "settlementDecision": "release",
+  "settlementTxid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+  "settlementBlueScore": 7413626,
+  "settlementAt": "2026-05-09T21:55:12.772Z",
+  "note": "Release path submitted and accepted on TN12. Refund paths are now voided (mutually exclusive)."
 }

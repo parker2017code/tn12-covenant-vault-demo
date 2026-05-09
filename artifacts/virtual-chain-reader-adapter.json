@@ -1,12 +1,12 @@
 {
   "schema": "tn12-virtual-chain-reader-adapter/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T11:30:34.456Z",
+  "generatedAt": "2026-05-09T21:57:20.087Z",
   "status": "virtual-chain-reader-adapter-ready",
   "mode": "configured-rpc-adapter-contract",
   "endpoint": {
     "configEnv": "TN12_VIRTUAL_CHAIN_RPC_URL",
-    "configured": false,
+    "configured": true,
     "transport": "json-wrpc-or-rpc-client",
     "networkId": "testnet-12",
     "method": "getVirtualChainFromBlockV2",
@@ -108,7 +108,7 @@
     "payloadRows": 26,
     "proofRows": 7,
     "rollbackRows": 0,
-    "endpointConfigured": false,
+    "endpointConfigured": true,
     "localNodeRequired": false,
     "acceptedCountsChanged": false
   },
@@ -119,9 +119,9 @@
     "retryBackoff": true,
     "payloadAndProofMatching": true,
     "fixtureReplayCompatible": true,
-    "endpointConfiguredForLiveRead": false
+    "endpointConfiguredForLiveRead": true
   },
-  "nextLiveStep": "Set TN12_VIRTUAL_CHAIN_RPC_URL to a hosted TN12 RPC endpoint before attempting live reads.",
+  "nextLiveStep": "Run the live adapter against the configured TN12 virtual-chain endpoint and compare its rows with this artifact before committing a checkpoint.",
   "boundaries": [
     "This artifact is an adapter contract, not a live node subscription.",
     "It does not require local kaspad.",

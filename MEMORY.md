@@ -82,8 +82,9 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 - Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order. Use `npm run project:plan` / `artifacts/project-plan.json` for the older done/WIP/next/later grouping.
 - Use `npm run ai:discipline` / `artifacts/ai-coding-source-discipline.json` before broad roadmap or source-discipline rewrites. It encodes the Kaspa Daily Q&A implications, public coding-agent practice, and the rule that unknown private company workflows stay marked unknown.
-- WIP lanes: live wallet connector submit without local keys, batch-assurance pledge-output funding/import, durable indexer replay implementation, and wiring hardened attestation provenance/quorum output into future signal-consuming dashboards.
-- Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant rejection attempts from fresh expendable outputs, and dashboard consumers for the attestation provenance/quorum artifact.
+- WIP lanes: live wallet connector submit without local keys, durable indexer replay implementation (blocked on TN12 SDK build), and wiring hardened attestation provenance/quorum output into future signal-consuming dashboards.
+- Batch-assurance settlement is CLOSED: release `4d84472e...` accepted at blue score 7413626. Refund paths voided.
+- Next actions: external signer roundtrip (priority 1), TN12 SDK build for virtual-chain indexer (priority 2), covenant rejection attempts from fresh expendable outputs (priority 3).
 - Keep real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
   - escrow/assurance app: TN12 covenant proof app,
@@ -93,7 +94,21 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Latest Continuation Snapshot
 
-Updated 2026-05-09 after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca48e84`, `b833234`, `02ae416`, `e578689`, `c73bf02`, `eb0830d`, `9997bbb`, and `9df5a91`.
+Updated 2026-05-09 after multi-AI feedback review and execution pass.
+
+Key completed in this pass:
+- **Batch-assurance release accepted on TN12**: `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` at blue score 7413626. 3-pledge batch (45+35+20 TKAS) released to recipient in one tx. Refund paths are now void (mutually exclusive). This is the 8th accepted proof.
+- **README compressed**: 617-line lab notebook moved to `docs/LAB_NOTEBOOK.md`. New `README.md` is ~80 lines — answers 5 questions only: what this is, what is accepted, what is not proven, how to verify, next blockers.
+- **Status label vocabulary** (`TN12_ACCEPTED`, `SIGNED_NOT_BROADCAST`, `PLANNER_ONLY`, etc.) now visible in README table.
+- **Virtual-chain live indexer blocker documented**: `getVirtualChainFromBlockV2` not available in installed `kaspa-wasm 0.13.x`. Requires `1.1.1-toc.1` build or `kaspa-python-sdk v1.1.0`. Subscription attempt also failed (protocol mismatch). REST-based accepted-tx verification remains the working read path.
+- **check.mjs updated**: README assertions migrated to `docs/LAB_NOTEBOOK.md`; settlement status and preflight status assertions widened to accept new states.
+
+Remaining blockers (priority order):
+1. External signer roundtrip — 4 requests in `artifacts/wallet-external-signer-roundtrip-plan.json`, none executed through a real signer yet.
+2. Virtual-chain live indexer — needs TN12 SDK build or Python SDK for `getVirtualChainFromBlockV2`.
+3. Adversarial rejection evidence — fresh expendable outputs needed for invalid-candidate submissions.
+
+Previously updated after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca48e84`, `b833234`, `02ae416`, `e578689`, `c73bf02`, `eb0830d`, `9997bbb`, and `9df5a91`.
 
 - Escrow marketplace action map is now a first-class artifact:
   - `npm run escrow:action-map` writes `artifacts/escrow-marketplace-action-map.json`.
