@@ -1,0 +1,34 @@
+{
+  "schema": "tn12-virtual-chain-endpoint-runbook/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:30:07.343Z",
+  "status": "endpoint-runbook-needs-endpoint",
+  "summary": {
+    "endpointConfigured": false,
+    "blockingChecks": 1,
+    "localNodeRequired": false,
+    "fixtureReplayCompatible": true
+  },
+  "env": {
+    "required": "TN12_VIRTUAL_CHAIN_RPC_URL",
+    "optional": [
+      "TN12_VIRTUAL_CHAIN_START_BLUE_SCORE",
+      "TN12_VIRTUAL_CHAIN_CONFIRMATIONS"
+    ]
+  },
+  "testSequence": [
+    "Set TN12_VIRTUAL_CHAIN_RPC_URL to a hosted TN12 wRPC endpoint.",
+    "Run npm run indexer:virtual-chain-adapter.",
+    "Run npm run indexer:live-preflight.",
+    "Compare returned rows against checkpointed accepted proof and payload records.",
+    "Persist checkpoint only after rollback and payload/proof matching checks pass."
+  ],
+  "promotionRule": "A transaction becomes app state only after the virtual-chain window reports the accepted txid and the reducer matches payload or output rules.",
+  "blocking": [
+    {
+      "id": "endpoint-configured",
+      "pass": false,
+      "detail": "Set TN12_VIRTUAL_CHAIN_RPC_URL before live reads."
+    }
+  ]
+}

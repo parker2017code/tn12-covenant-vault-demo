@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-batch-assurance-submit-runbook/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:30:47.032Z",
+  "status": "release-path-review-ready",
+  "selectedPath": "release-review",
+  "submitNow": false,
+  "summary": {
+    "readyImports": 3,
+    "releaseDraftPresent": true,
+    "refundDrafts": 3,
+    "mutuallyExclusiveInputs": true
+  },
+  "releasePath": {
+    "path": "artifacts/signed-drafts/batch-assurance-release.json",
+    "transactionId": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "reviewChecks": [
+      "recipient output amount matches accepted pledge total minus fee",
+      "inputs match the imported 45/35/20 TKAS pledge outputs",
+      "refund drafts are held back if release is submitted"
+    ]
+  },
+  "refundPath": {
+    "paths": [
+      "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json",
+      "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-002.json",
+      "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-003.json"
+    ],
+    "transactionIds": [
+      "d3162da114013bfabf918f6f0f25091942cb8a87e3580af585399482a2397999",
+      "a5f07faab17cd16f8849a85c69c068bfe89e0ee77c5909aa0df4a9a842e08382",
+      "9bfc17c1ab73a7ed740f0f95220e65dff7930a1f499fa62b3bb7200b5ae1781c"
+    ],
+    "reviewChecks": [
+      "each refund spends only its contributor pledge output",
+      "release draft is held back if any refund is accepted",
+      "all intended refunds are tracked independently"
+    ]
+  },
+  "operatorChecklist": [
+    "Choose release or refund before any submit.",
+    "Run npm run campaign:settlement-decision.",
+    "Review the selected signed draft path.",
+    "Submit one path manually only after wallet review.",
+    "Run npm run tx:verify or targeted accepted-tx verification after submit.",
+    "Update checkpoint, test matrix, submit registry, and UI after accepted evidence."
+  ]
+}

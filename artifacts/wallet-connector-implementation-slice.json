@@ -1,0 +1,52 @@
+{
+  "schema": "tn12-wallet-connector-implementation-slice/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T13:30:07.036Z",
+  "status": "wallet-connector-implementation-slice-ready",
+  "selectedStandard": "pskb-pskt",
+  "firstUserFlow": "payload-receipt-unsigned-sign",
+  "secondUserFlow": "v1-compute-budget-contract-sign",
+  "summary": {
+    "unsignedTemplates": 47,
+    "payloadTemplates": 26,
+    "computeBudgetTemplates": 2,
+    "liveWalletIntegrationReady": false
+  },
+  "implementationSteps": [
+    {
+      "id": "field-map",
+      "action": "Map repo unsigned-template fields into the selected partial transaction shape.",
+      "output": "wallet-standard adapter"
+    },
+    {
+      "id": "payload-roundtrip",
+      "action": "Sign one payload receipt through an external signer and compare txid, payload bytes, and outputs.",
+      "output": "accepted payload receipt"
+    },
+    {
+      "id": "compute-budget-roundtrip",
+      "action": "Sign one v1 covenant spend and compare computeBudget fields after signing.",
+      "output": "accepted or rejected TN12 evidence"
+    },
+    {
+      "id": "result-validation",
+      "action": "Feed the returned txid into the existing submit-result validator and virtual-chain replay.",
+      "output": "promotion or review row"
+    }
+  ],
+  "requiredPreservation": [
+    "network",
+    "transaction.version",
+    "transaction.lockTime",
+    "transaction.subnetworkId",
+    "inputs.previousOutpoint",
+    "inputs.sequence",
+    "inputs.sigOpCount",
+    "inputs.computeBudget",
+    "outputs.amount",
+    "outputs.scriptPublicKey",
+    "payload.bytes",
+    "payload.hash"
+  ],
+  "acceptanceRule": "First success is one external-signed payload receipt accepted and replayed; covenant signing follows after computeBudget preservation is proven."
+}

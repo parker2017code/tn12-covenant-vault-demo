@@ -1,0 +1,154 @@
+{
+  "schema": "tn12-next-ten-execution-plan/v1",
+  "generatedAt": "2026-05-09T13:30:08.063Z",
+  "status": "next-ten-execution-plan-ready",
+  "summary": {
+    "tasks": 10,
+    "critical": 3,
+    "high": 6,
+    "medium": 1,
+    "walletMapped": true,
+    "liveIndexerEndpointConfigured": false,
+    "batchSettlementPath": "release-review"
+  },
+  "tasks": [
+    {
+      "rank": 1,
+      "id": "wallet-connector-submit",
+      "lane": "wallet-policy",
+      "importance": "critical",
+      "nextOutput": "artifacts/wallet-unsigned-request-templates.json",
+      "gate": "npm run wallet:unsigned-requests"
+    },
+    {
+      "rank": 2,
+      "id": "durable-virtual-chain-indexer",
+      "lane": "indexer",
+      "importance": "critical",
+      "nextOutput": "artifacts/virtual-chain-reader-adapter.json",
+      "gate": "npm run indexer:live-preflight"
+    },
+    {
+      "rank": 3,
+      "id": "batch-assurance-settlement-path-review",
+      "lane": "tn12-covenant",
+      "importance": "critical",
+      "nextOutput": "artifacts/batch-assurance-settlement-decision.json",
+      "gate": "npm run campaign:settlement-decision"
+    },
+    {
+      "rank": 4,
+      "id": "escrow-marketplace-demo",
+      "lane": "tn12-covenant",
+      "importance": "high",
+      "nextOutput": "artifacts/escrow-marketplace-demo.json",
+      "gate": "npm run escrow:marketplace"
+    },
+    {
+      "rank": 5,
+      "id": "attestation-reputation-thresholds",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "nextOutput": "artifacts/oracle-source-matrix.json",
+      "gate": "npm run check:all"
+    },
+    {
+      "rank": 6,
+      "id": "auction-settlement-refund-drafts",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "nextOutput": "artifacts/auction-settlement-drafts.json",
+      "gate": "npm run auction:settlement-drafts"
+    },
+    {
+      "rank": 7,
+      "id": "agent-release-refund-drafts",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "nextOutput": "artifacts/agent-settlement-drafts.json",
+      "gate": "npm run agent:settlement-drafts"
+    },
+    {
+      "rank": 8,
+      "id": "treasury-constrained-spend-drafts",
+      "lane": "wallet-policy",
+      "importance": "high",
+      "nextOutput": "artifacts/treasury-constrained-spends.json",
+      "gate": "npm run treasury:spends"
+    },
+    {
+      "rank": 9,
+      "id": "invoice-mainnet-readiness-brief",
+      "lane": "payload-indexer",
+      "importance": "high",
+      "nextOutput": "artifacts/mainnet-readiness.json",
+      "gate": "npm run mainnet:readiness"
+    },
+    {
+      "rank": 10,
+      "id": "access-pass-expiry-issuer-review",
+      "lane": "payload-indexer",
+      "importance": "medium",
+      "nextOutput": "artifacts/access-pass-planner.json",
+      "gate": "npm run access:passes"
+    }
+  ],
+  "slices": [
+    {
+      "id": "wallet-submit",
+      "goal": "Wire no-local-key signing around the mapped wallet standard.",
+      "taskIds": [
+        "wallet-connector-submit",
+        "auction-settlement-refund-drafts",
+        "agent-release-refund-drafts",
+        "treasury-constrained-spend-drafts"
+      ],
+      "tasks": [
+        1,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "id": "durable-indexer",
+      "goal": "Move accepted state from fixture windows to a configured virtual-chain endpoint.",
+      "taskIds": [
+        "durable-virtual-chain-indexer",
+        "invoice-mainnet-readiness-brief",
+        "access-pass-expiry-issuer-review"
+      ],
+      "tasks": [
+        2,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "custody-settlement",
+      "goal": "Turn matched accepted outputs into one reviewed settlement path.",
+      "taskIds": [
+        "escrow-marketplace-demo"
+      ],
+      "tasks": [
+        4
+      ]
+    },
+    {
+      "id": "signal-quality",
+      "goal": "Keep attestation-fed review prompts gated by signer and quorum checks.",
+      "taskIds": [
+        "attestation-reputation-thresholds"
+      ],
+      "tasks": [
+        5
+      ]
+    }
+  ],
+  "operatorOrder": [
+    "Do wallet-standard implementation work before more settlement surfaces.",
+    "Do live indexer endpoint work before promoting new app-state claims.",
+    "Review one mutually exclusive batch-assurance settlement path before submit.",
+    "Keep research lanes tied to a concrete artifact, not a new product page."
+  ]
+}
