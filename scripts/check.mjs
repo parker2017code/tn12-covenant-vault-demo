@@ -69,6 +69,7 @@ import { buildWalletConnectorAdapterRun } from "../src/walletConnectorAdapterRun
 import { buildWalletConnectorSubmitLedger } from "../src/walletConnectorSubmitLedger.mjs";
 import { buildWalletSubmitResultValidation } from "../src/walletSubmitResultValidation.mjs";
 import { buildWalletExternalSignerGap } from "../src/walletExternalSignerGap.mjs";
+import { buildWalletUnsignedRequestTemplates } from "../src/walletUnsignedRequestTemplates.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "../src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
@@ -1103,6 +1104,34 @@ const walletExternalSignerGapArtifact = JSON.parse(await readFile(new URL("../ar
 assert.equal(walletExternalSignerGapArtifact.status, "external-signer-gap-documented");
 assert.equal(walletExternalSignerGapArtifact.liveNoLocalKeySigningReady, false);
 assert.equal(walletExternalSignerGapArtifact.summary.signedLocalDrafts, 47);
+const submitPackageArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-submit-package.json", import.meta.url), "utf8"));
+const draftArtifactsByPath = {};
+for (const intent of submitPackageArtifact.intents || []) {
+  draftArtifactsByPath[intent.path] = JSON.parse(await readFile(new URL(`../${intent.path}`, import.meta.url), "utf8"));
+}
+const walletUnsignedTemplates = buildWalletUnsignedRequestTemplates({
+  submitPackage: submitPackageArtifact,
+  draftArtifacts: draftArtifactsByPath,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletUnsignedTemplates.status, "unsigned-request-templates-ready");
+assert.equal(walletUnsignedTemplates.standardMapped, false);
+assert.equal(walletUnsignedTemplates.liveExternalSignerReady, false);
+assert.equal(walletUnsignedTemplates.summary.templates, 47);
+assert.equal(walletUnsignedTemplates.summary.payloadTemplates, 26);
+assert.equal(walletUnsignedTemplates.summary.computeBudgetTemplates, 2);
+assert.ok(walletUnsignedTemplates.summary.signatureScriptsStripped > 0);
+assert.ok(walletUnsignedTemplates.templates.every((template) =>
+  template.transaction.inputs.every((input) => input.signatureScript === "" && input.signatureScriptBytes === 0)
+));
+assert.ok(walletUnsignedTemplates.templates.some((template) =>
+  template.preservation.computeBudgetInputs > 0
+  && template.requestedSignerAction.mustPreserve.includes("computeBudget fields when present")
+));
+const walletUnsignedTemplatesArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-unsigned-request-templates.json", import.meta.url), "utf8"));
+assert.equal(walletUnsignedTemplatesArtifact.status, "unsigned-request-templates-ready");
+assert.equal(walletUnsignedTemplatesArtifact.summary.templates, 47);
+assert.equal(walletUnsignedTemplatesArtifact.standardMapped, false);
 const samplePayloadArtifact = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/payload-receipt-self-send.json", import.meta.url), "utf8"));
 const samplePayloadTx = {
   is_accepted: true,
@@ -1315,6 +1344,7 @@ const files = [
   "scripts/build-wallet-connector-submit-ledger.mjs",
   "scripts/build-wallet-submit-result-validation.mjs",
   "scripts/build-wallet-external-signer-gap.mjs",
+  "scripts/build-wallet-unsigned-request-templates.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
   "scripts/build-mainstream-app-direction.mjs",
@@ -1411,6 +1441,7 @@ const files = [
   "artifacts/wallet-connector-submit-ledger.json",
   "artifacts/wallet-submit-result-validation.json",
   "artifacts/wallet-external-signer-gap.json",
+  "artifacts/wallet-unsigned-request-templates.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
   "artifacts/based-rollup-scout.json",
@@ -1550,6 +1581,7 @@ const files = [
   "src/walletConnectorSubmitLedger.mjs",
   "src/walletSubmitResultValidation.mjs",
   "src/walletExternalSignerGap.mjs",
+  "src/walletUnsignedRequestTemplates.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
   "src/mainstreamAppDirection.mjs",
@@ -1653,6 +1685,7 @@ assert.match(readme, /npm run wallet:adapter-run/);
 assert.match(readme, /npm run wallet:submit-ledger/);
 assert.match(readme, /npm run wallet:result-validation/);
 assert.match(readme, /npm run wallet:external-signer-gap/);
+assert.match(readme, /npm run wallet:unsigned-requests/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run escrow:marketplace/);
 assert.match(readme, /npm run research:library/);
