@@ -41,8 +41,6 @@ Primary proof state:
 - `fixtures/AcceptedProofTransactions.json`: canonical list of accepted proof spends.
 - `artifacts/proof-evidence.json`: resolved evidence that each proof spend consumed a TN12 P2SH (`p...`) output and paid the expected P2PK (`q...`) output.
 - `fixtures/AcceptedAppState.json`: accepted transaction state used by the UI/indexer lane.
-- `docs/STATUS.md`: human-readable txid and address list.
-
 Claim boundaries:
 
 - `fixtures/EnforcementMatrix.json`
@@ -50,7 +48,6 @@ Claim boundaries:
 - `fixtures/BuildStatus.json`
 - `artifacts/build-status.json`
 - `docs/PROGRESS.md`
-- `docs/BUILD_PLAN.md`
 - `docs/ROADMAP_STATE.md`
 
 Submit/draft review:

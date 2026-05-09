@@ -4,16 +4,13 @@
   "purpose": "One ordered task map for the whole project after reading the repo docs: what is done, what is WIP, what is roadmap, and the next 30 things to build.",
   "sourceDocs": [
     "MEMORY.md",
-    "CONTEXT.md",
     "docs/ROADMAP_STATE.md",
     "docs/PROGRESS.md",
     "docs/TN12_TEST_MATRIX.md",
     "docs/MASTER_APP_PLAN.md",
-    "docs/BUILD_PLAN.md",
     "docs/MAINSTREAM_APP_DIRECTION.md",
     "docs/ECOSYSTEM_BUILD_PLAN.md",
     "docs/PROGRAMMABILITY_PATHS.md",
-    "docs/STATUS.md",
     "docs/MICHAEL_QUESTIONS.md"
   ],
   "done": [

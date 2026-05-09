@@ -43,7 +43,7 @@ The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof t
 ## First-Read Order
 
 1. `MEMORY.md`: current handoff and doc map.
-2. `CONTEXT.md`: operating context, wallet/address boundaries, accepted txids, commands, and longer handoff.
+2. `CLAUDE.md`: project rules (key commands, artifact conventions, claim discipline).
 3. `AGENTS.md`: behavior rules for future coding agents.
 4. `docs/ROADMAP_STATE.md`: durable lane map and current next work.
 5. `docs/PROGRESS.md`: lane-by-lane build state and immediate task list.
@@ -52,8 +52,6 @@ The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof t
 8. `docs/MAINSTREAM_APP_DIRECTION.md`: high-impact user-facing app direction and which mainstream crypto use cases are build-now, later, or research.
 9. `docs/MICHAEL_QUESTIONS.md`: exact protocol/tooling questions to escalate through the user.
 10. `docs/AI_CODING_SOURCE_DISCIPLINE.md`: public-source, AI-agent, and Kaspa Q&A guardrails for future coding/explanation work.
-11. `docs/STATUS.md`: human-readable proof/status list.
-12. `docs/BUILD_PLAN.md`: backlog history and next build tasks.
 
 Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source discipline or protocol claims. Use `docs/TRANSACTION_API_NOTES.md` before touching transaction creation, payloads, submit routes, or accepted-indexing code.
 
@@ -244,7 +242,7 @@ Current WIP:
   - New commands: `npm run wallet:implementation-slice`, `npm run indexer:endpoint-runbook`, `npm run campaign:submit-runbook`, and `npm run project:next-ten`.
   - Generated artifacts: `artifacts/wallet-connector-implementation-slice.json`, `artifacts/virtual-chain-endpoint-runbook.json`, `artifacts/batch-assurance-submit-runbook.json`, and `artifacts/next-ten-execution-plan.json`.
   - User asked to stop expanding, keep it minimal, commit current changes, and preserve context.
-  - Next resume: run `npm run check:all`, then continue from `docs/NEXT_10_EXECUTION_PLAN.md` only if the user wants more build work.
+  - Next resume: run `npm run check:all`, then check `artifacts/next-work-queue.json` for the current priority queue.
 - On 2026-05-09, the next-five pass added review artifacts for auction custody, agent settlement, treasury role/source checks, invoice mainnet readiness, and access-pass issuer review:
   - `npm run auction:custody-review` writes `artifacts/auction-custody-review.json`;
   - `npm run agent:settlement-review` writes `artifacts/agent-settlement-review.json`;

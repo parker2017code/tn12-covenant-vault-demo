@@ -234,7 +234,7 @@
       "id": "continue-until-stop",
       "principle": "When the user says continue, keep moving through concrete queued tasks until stop, pause, or a real blocker.",
       "why": "Repeated permission checks waste the user's time and break long-running implementation flow.",
-      "repoPractice": "Use MEMORY.md, docs/NEXT_10_EXECUTION_PLAN.md, and npm run project:queue to choose the next task; update handoff notes after meaningful work."
+      "repoPractice": "Use MEMORY.md and npm run project:queue to choose the next task; update handoff notes after meaningful work."
     },
     {
       "id": "feature-quality-vertical-slice",

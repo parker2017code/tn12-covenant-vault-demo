@@ -2121,11 +2121,8 @@ const files = [
   "src/submitPayload.mjs",
   "README.md",
   "AGENTS.md",
-  "CONTEXT.md",
-  "docs/STATUS.md",
   "docs/PROGRESS.md",
   "docs/SOURCES.md",
-  "docs/BUILD_PLAN.md",
   "docs/LLM_REVIEW_GUIDE.md",
   "docs/MICHAEL_QUESTIONS.md",
   "docs/ROADMAP_STATE.md",
@@ -2134,13 +2131,10 @@ const files = [
   "docs/ASSURANCE_CONTRACTS.md",
   "docs/KASPA_DOCS_REVIEW.md",
   "docs/ECOSYSTEM_BUILD_PLAN.md",
-  "docs/GITHUB_HOSTING.md",
   "docs/MASTER_APP_PLAN.md",
   "docs/PROGRAMMABILITY_PATHS.md",
   "docs/MAINSTREAM_APP_DIRECTION.md",
-  "docs/AI_CODING_SOURCE_DISCIPLINE.md",
-  "docs/PROJECT_COMPLETION_PLAN.md",
-  "docs/NEXT_10_EXECUTION_PLAN.md"
+  "docs/AI_CODING_SOURCE_DISCIPLINE.md"
 ];
 
 for (const file of files) {
@@ -2242,7 +2236,6 @@ assert.match(labNotebook, /Manual Address Checks/);
 assert.match(labNotebook, /Build Plan/);
 assert.match(labNotebook, /PROGRAMMABILITY_PATHS\.md/);
 assert.match(labNotebook, /MAINSTREAM_APP_DIRECTION\.md/);
-assert.match(labNotebook, /PROJECT_COMPLETION_PLAN\.md/);
 assert.match(labNotebook, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
 assert.match(labNotebook, /npm run check:tn12/);
 
@@ -2286,11 +2279,6 @@ assert.match(assuranceDocs, /funding rule strangers can rely on/);
 assert.match(assuranceDocs, /AssurancePledge\.sil/);
 assert.match(assuranceDocs, /target aggregation/);
 
-const buildPlan = await readFile(new URL("../docs/BUILD_PLAN.md", import.meta.url), "utf8");
-assert.match(buildPlan, /Completed Proof Path/);
-assert.match(buildPlan, /Next 20 Build Tasks/);
-assert.match(buildPlan, /Accepted-transaction app-state snapshot/);
-
 const michaelQuestions = await readFile(new URL("../docs/MICHAEL_QUESTIONS.md", import.meta.url), "utf8");
 assert.match(michaelQuestions, /14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c/);
 assert.match(michaelQuestions, /computeBudget: 30/);
@@ -2299,11 +2287,6 @@ assert.match(michaelQuestions, /kaspa-wasm@0\.13\.0/);
 assert.match(michaelQuestions, /1\.1\.1-toc\.1/);
 assert.match(michaelQuestions, /RpcTransactionInput\.sig_op_count is inconsistent/);
 assert.match(michaelQuestions, /RPC response error NotFound/);
-
-const statusDocs = await readFile(new URL("../docs/STATUS.md", import.meta.url), "utf8");
-assert.match(statusDocs, /payload receipts must use JSON wRPC/);
-assert.match(statusDocs, /26 accepted payload events/);
-assert.doesNotMatch(statusDocs, /broadcast: implemented through the TN12 public REST API/);
 
 const builderLessons = await readFile(new URL("../docs/BUILDER_LESSONS.md", import.meta.url), "utf8");
 assert.match(builderLessons, /Accepted State Beats Local Confidence/);
@@ -2353,23 +2336,6 @@ assert.match(mainstreamDirection, /Invoice \/ receipt app/);
 assert.match(mainstreamDirection, /Escrow \/ freelance \/ marketplace/);
 assert.match(mainstreamDirection, /DEX \/ AMM \/ lending \/ perps/);
 assert.match(mainstreamDirection, /Build-Now Focus/);
-
-const githubHosting = await readFile(new URL("../docs/GITHUB_HOSTING.md", import.meta.url), "utf8");
-assert.match(githubHosting, /GitHub Pages/);
-assert.match(githubHosting, /Repo Settings/);
-assert.match(githubHosting, /Never commit `\.local\/tn12-wallet\.json`/);
-
-const projectCompletionPlan = await readFile(new URL("../docs/PROJECT_COMPLETION_PLAN.md", import.meta.url), "utf8");
-assert.match(projectCompletionPlan, /Definition Of Done/);
-assert.match(projectCompletionPlan, /wallet path is no-local-key/);
-assert.match(projectCompletionPlan, /Durable virtual-chain indexer/);
-assert.match(projectCompletionPlan, /Batch-assurance settlement/);
-assert.match(projectCompletionPlan, /Stop Rules/);
-assert.match(projectCompletionPlan, /Later work becomes a new phase with a new scope/);
-assert.match(projectCompletionPlan, /Differentiation Thesis/);
-assert.match(projectCompletionPlan, /How We Know It Is Real/);
-assert.match(projectCompletionPlan, /How Everything Stays Tethered/);
-assert.match(projectCompletionPlan, /Adoption Odds Filter/);
 
 const vaultContract = await readFile(new URL("../contracts/DelayedRecoveryVault.sil", import.meta.url), "utf8");
 assert.match(vaultContract, /contract DelayedRecoveryVault/);

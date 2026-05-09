@@ -6,7 +6,7 @@ The core is accepted TN12 covenant spends, accepted payload receipts, role-separ
 
 All local keys and funds in this repo are testnet-only.
 
-Start with [`docs/CORE_LAB_NOTES.md`](docs/CORE_LAB_NOTES.md) for accepted TN12 evidence, debugging notes, and the shortest current status. Then use [`docs/PROJECT_COMPLETION_PLAN.md`](docs/PROJECT_COMPLETION_PLAN.md), [`MEMORY.md`](MEMORY.md), [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md), [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md), and [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md) to verify done/WIP/future state, GitHub state, Pages artifacts, txids, and status labels.
+Start with [`docs/CORE_LAB_NOTES.md`](docs/CORE_LAB_NOTES.md) for accepted TN12 evidence, debugging notes, and the shortest current status. Then use [`MEMORY.md`](MEMORY.md), [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md), [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md), and [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md) to verify done/WIP/future state, GitHub state, Pages artifacts, txids, and status labels.
 The L1 covenant, based-rollup, and vProg boundary lives in [`docs/PROGRAMMABILITY_PATHS.md`](docs/PROGRAMMABILITY_PATHS.md).
 
 High-impact app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md). It is the research queue for the next useful wallet, indexer, custody, and settlement rails.
@@ -31,7 +31,6 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 ## What It Does Now
 
 - See `docs/PROGRESS.md` for the current lane-by-lane build state and next work.
-- See `docs/PROJECT_COMPLETION_PLAN.md` for the explicit done/WIP/continuing/future plan and the criteria for when this phase is finished.
 - Designs a vault policy with owner, recovery, withdrawal delay, daily limit, guardian count, and memo fields.
 - Produces a deterministic policy ID in the browser.
 - Simulates vault funding, delayed withdrawal, cancel, and recovery paths.
@@ -115,7 +114,7 @@ Refresh that fixture:
 npm run utxos:fetch
 ```
 
-Accepted TN12 proof transactions are tracked in `docs/STATUS.md`. The most important spends are:
+Accepted TN12 proof transactions are tracked in `fixtures/AcceptedProofTransactions.json` and `artifacts/proof-evidence.json`. The most important spends are:
 
 ```txt
 vault recovery:  b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391
