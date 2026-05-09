@@ -91,6 +91,39 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - The payload vertical slice has 26 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
 - Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
 
+## Latest Continuation Snapshot
+
+Updated 2026-05-09 after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca48e84`, and `b833234`.
+
+- Escrow marketplace action map is now a first-class artifact:
+  - `npm run escrow:action-map` writes `artifacts/escrow-marketplace-action-map.json`.
+  - The app shows the action map in the escrow panel.
+  - Release, refund, and mutual-cancel actions map to wallet-standard request candidates.
+  - All remain blocked until an external signer accepted result and accepted replay exist.
+- Wallet-standard request coverage expanded from two requests to four:
+  - payload receipt,
+  - role-separated escrow release,
+  - role-separated escrow refund,
+  - role-separated escrow cancel.
+  - `npm run wallet:standard-signer-validation` now adds pending external-signer rows for mapped requests without fixture results.
+- Existing review/blocker artifacts are now visible in the browser:
+  - auction custody review,
+  - agent settlement review,
+  - treasury role review,
+  - access-pass issuer review,
+  - invoice mainnet launch brief.
+- `npm run check:all` passed after each committed slice before push.
+- Current pushed head after this pass is `b833234` unless newer work has landed.
+- GitHub `check` and Pages were green through `ca48e84`; `b833234` was still running when this note was edited, so verify with `gh run list` on resume.
+
+Immediate next tasks:
+
+1. Verify GitHub `check` and Pages for `b833234`.
+2. Continue wallet connector submit: real external signer round trip is still the main blocker.
+3. Continue durable indexer: live endpoint replay remains unset/unpromoted.
+4. Continue batch-assurance settlement review: pick one mutually exclusive path only after wallet/external signer hardening.
+5. Avoid adding new app lanes until one of those rails improves.
+
 ## Latest Pause Note
 
 Paused on 2026-05-09 after bounded batch-assurance custody import validation:
