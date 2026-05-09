@@ -1,0 +1,72 @@
+{
+  "schema": "tn12-batch-assurance-settlement-drafts/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "campaign": {
+    "id": "kaspa-dev-docs-sprint",
+    "name": "Kaspa dev docs sprint",
+    "targetTkas": 100,
+    "minimumPledgeTkas": 10,
+    "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "deadlineIso": "2026-05-14T00:00:00.000Z",
+    "releaseMode": "batch-release-after-target",
+    "refundMode": "individual-refund-after-deadline"
+  },
+  "release": {
+    "kind": "release",
+    "pledgeId": null,
+    "path": "artifacts/signed-drafts/batch-assurance-release.json",
+    "transactionId": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "inputCount": 3,
+    "outputCount": 1,
+    "outputTkas": [
+      "99.99995"
+    ],
+    "status": "signed-not-broadcast"
+  },
+  "refunds": [
+    {
+      "kind": "refund",
+      "pledgeId": "pledge-docs-001",
+      "path": "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json",
+      "transactionId": "d3162da114013bfabf918f6f0f25091942cb8a87e3580af585399482a2397999",
+      "inputCount": 1,
+      "outputCount": 1,
+      "outputTkas": [
+        "44.99995"
+      ],
+      "status": "signed-not-broadcast"
+    },
+    {
+      "kind": "refund",
+      "pledgeId": "pledge-docs-002",
+      "path": "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-002.json",
+      "transactionId": "a5f07faab17cd16f8849a85c69c068bfe89e0ee77c5909aa0df4a9a842e08382",
+      "inputCount": 1,
+      "outputCount": 1,
+      "outputTkas": [
+        "34.99995"
+      ],
+      "status": "signed-not-broadcast"
+    },
+    {
+      "kind": "refund",
+      "pledgeId": "pledge-docs-003",
+      "path": "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-003.json",
+      "transactionId": "9bfc17c1ab73a7ed740f0f95220e65dff7930a1f499fa62b3bb7200b5ae1781c",
+      "inputCount": 1,
+      "outputCount": 1,
+      "outputTkas": [
+        "19.99995"
+      ],
+      "status": "signed-not-broadcast"
+    }
+  ],
+  "boundaries": [
+    "These drafts spend accepted P2PK pledge outputs, not pooled covenant aggregation.",
+    "Release and refund paths are mutually exclusive for the same pledge outputs.",
+    "Do not submit more than one mutually exclusive settlement path.",
+    "Generated pledge private keys stay in .local and are testnet-only."
+  ],
+  "next": "Review one settlement path, then submit explicitly only if the mutually exclusive consequences are intended."
+}

@@ -30,6 +30,7 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - AI/source discipline command: `npm run ai:discipline`
 - Batch-assurance custody import command: `npm run campaign:custody-imports`
 - Batch-assurance pledge funding draft command: `npm run campaign:pledge-funding-draft`
+- Batch-assurance settlement draft command: `npm run campaign:settlement-drafts`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - High-impact mainstream app direction: `docs/MAINSTREAM_APP_DIRECTION.md`
 - AI/source discipline: `docs/AI_CODING_SOURCE_DISCIPLINE.md`
@@ -178,6 +179,7 @@ Batch-assurance custody import state:
 
 - `npm run campaign:custody-imports` writes `artifacts/batch-assurance-custody-imports.json`.
 - `npm run campaign:pledge-funding-draft` writes `artifacts/signed-drafts/batch-assurance-pledge-funding.json` and public pledge-wallet metadata. Generated pledge private keys stay in `.local` and are testnet-only.
+- `npm run campaign:settlement-drafts` writes `artifacts/batch-assurance-settlement-drafts.json` plus signed release/refund drafts. These drafts are mutually exclusive and are not auto-broadcast.
 - It validates pasted/imported pledge outpoints against custody requirements: pledge id, amount, txid/index presence, accepted evidence presence, duplicate outpoint, below-minimum rows, and planner-payload-only promotion.
 - Current status is `custody-imports-ready`: the accepted 45/35/20 TKAS pledge outputs are imported and amount-matched. The release artifact is review-ready but not signed or submitted.
 

@@ -533,6 +533,25 @@ assert.doesNotMatch(JSON.stringify(pledgeFundingDraft), /privateKey/i);
 assert.equal(pledgeWalletPublic.schema, "tn12-batch-assurance-pledge-wallets-public/v1");
 assert.equal(pledgeWalletPublic.wallets.length, 3);
 assert.doesNotMatch(JSON.stringify(pledgeWalletPublic), /privateKey/i);
+const batchSettlementDrafts = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-settlement-drafts.json", import.meta.url), "utf8"));
+const batchReleaseDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/batch-assurance-release.json", import.meta.url), "utf8"));
+const batchRefundDraft001 = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json", import.meta.url), "utf8"));
+assert.equal(batchSettlementDrafts.schema, "tn12-batch-assurance-settlement-drafts/v1");
+assert.equal(batchSettlementDrafts.status, "signed-not-broadcast");
+assert.equal(batchSettlementDrafts.release.inputCount, 3);
+assert.equal(batchSettlementDrafts.release.outputTkas[0], "99.99995");
+assert.equal(batchSettlementDrafts.refunds.length, 3);
+assert.ok(batchSettlementDrafts.boundaries.some((boundary) => /mutually exclusive/.test(boundary)));
+assert.equal(batchReleaseDraft.kind, "release");
+assert.equal(batchReleaseDraft.inputs.length, 3);
+assert.equal(batchReleaseDraft.submitPayload.transaction.inputs.length, 3);
+assert.equal(batchReleaseDraft.submitPayload.transaction.outputs[0].amount, 9999995000);
+assert.equal(batchRefundDraft001.kind, "refund");
+assert.equal(batchRefundDraft001.pledgeId, "pledge-docs-001");
+assert.equal(batchRefundDraft001.submitPayload.transaction.inputs.length, 1);
+assert.equal(batchRefundDraft001.submitPayload.transaction.outputs[0].amount, 4499995000);
+assert.doesNotMatch(JSON.stringify(batchSettlementDrafts), /privateKey/i);
+assert.doesNotMatch(JSON.stringify(batchReleaseDraft), /privateKey/i);
 const syntheticCustodyCheckpoint = {
   network: "kaspa-testnet-12",
   records: campaignState.releasePlan.inputs.map((input) => ({
@@ -1369,7 +1388,12 @@ const files = [
   "artifacts/batch-assurance-custody-requirements.json",
   "artifacts/batch-assurance-pledge-output-plan.json",
   "artifacts/batch-assurance-custody-imports.json",
+  "artifacts/batch-assurance-settlement-drafts.json",
   "artifacts/signed-drafts/batch-assurance-pledge-funding.json",
+  "artifacts/signed-drafts/batch-assurance-release.json",
+  "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json",
+  "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-002.json",
+  "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-003.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/escrow-marketplace-demo.json",
   "artifacts/proof-evidence.json",
@@ -1605,6 +1629,7 @@ assert.match(readme, /npm run campaign:custody/);
 assert.match(readme, /npm run campaign:custody-requirements/);
 assert.match(readme, /npm run campaign:custody-imports/);
 assert.match(readme, /npm run campaign:pledge-funding-draft/);
+assert.match(readme, /npm run campaign:settlement-drafts/);
 assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /npm run treasury:registry/);

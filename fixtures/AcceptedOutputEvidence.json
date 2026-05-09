@@ -10,7 +10,8 @@
       "outputIndex": 0,
       "amountSompi": "4500000000",
       "destination": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
-      "scriptType": "pubkey"
+      "scriptType": "pubkey",
+      "acceptingBlockBlueScore": 7042656
     },
     {
       "label": "Batch assurance pledge output 002",
@@ -20,7 +21,8 @@
       "outputIndex": 1,
       "amountSompi": "3500000000",
       "destination": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9",
-      "scriptType": "pubkey"
+      "scriptType": "pubkey",
+      "acceptingBlockBlueScore": 7042656
     },
     {
       "label": "Batch assurance pledge output 003",
@@ -30,7 +32,8 @@
       "outputIndex": 2,
       "amountSompi": "2000000000",
       "destination": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
-      "scriptType": "pubkey"
+      "scriptType": "pubkey",
+      "acceptingBlockBlueScore": 7042656
     }
   ]
 }

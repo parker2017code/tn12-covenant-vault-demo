@@ -1,0 +1,192 @@
+{
+  "schema": "tn12-batch-assurance-settlement-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "kind": "refund",
+  "pledgeId": "pledge-docs-003",
+  "campaign": {
+    "id": "kaspa-dev-docs-sprint",
+    "name": "Kaspa dev docs sprint",
+    "targetTkas": 100,
+    "minimumPledgeTkas": 10,
+    "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "deadlineIso": "2026-05-14T00:00:00.000Z",
+    "releaseMode": "batch-release-after-target",
+    "refundMode": "individual-refund-after-deadline"
+  },
+  "inputs": [
+    {
+      "pledgeId": "pledge-docs-003",
+      "outpoint": {
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "index": 2
+      },
+      "amountSompi": "2000000000",
+      "amountTkas": "20"
+    }
+  ],
+  "outputs": [
+    {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountSompi": "1999995000",
+      "amountTkas": "19.99995",
+      "role": "refund"
+    }
+  ],
+  "transactionId": "9bfc17c1ab73a7ed740f0f95220e65dff7930a1f499fa62b3bb7200b5ae1781c",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+            "index": 2
+          },
+          "signatureScript": "41637e7a3d8ef1e130d6d893e05e68f1a6acfbf46efeac6e3e0063ad2cb002f2efa2a3700a0e181cf08d31cd153543ba45dd7bdcb2376dafc3a2a7b69185f2be6701",
+          "sequence": 0,
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 1999995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "entries": [
+      {
+        "utxo": {
+          "address": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+          "entry": {
+            "amount": 2000000000,
+            "blockDaaScore": 7042656,
+            "isCoinbase": false,
+            "scriptPublicKey": "000020764b4912fdca1746572e698af95e23f09845f97db6e89c736e4d2b94c264a982ac"
+          },
+          "outpoint": {
+            "inner": {
+              "index": 2,
+              "transactionId": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"
+            }
+          }
+        }
+      }
+    ],
+    "tx": {
+      "inner": {
+        "gas": 0,
+        "id": "9bfc17c1ab73a7ed740f0f95220e65dff7930a1f499fa62b3bb7200b5ae1781c",
+        "inputs": [
+          {
+            "inner": {
+              "previousOutpoint": {
+                "inner": {
+                  "index": 2,
+                  "transactionId": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"
+                }
+              },
+              "sequence": 0,
+              "sigOpCount": 1,
+              "signatureScript": [
+                65,
+                99,
+                126,
+                122,
+                61,
+                142,
+                241,
+                225,
+                48,
+                214,
+                216,
+                147,
+                224,
+                94,
+                104,
+                241,
+                166,
+                172,
+                251,
+                244,
+                110,
+                254,
+                172,
+                110,
+                62,
+                0,
+                99,
+                173,
+                44,
+                176,
+                2,
+                242,
+                239,
+                162,
+                163,
+                112,
+                10,
+                14,
+                24,
+                28,
+                240,
+                141,
+                49,
+                205,
+                21,
+                53,
+                67,
+                186,
+                69,
+                221,
+                123,
+                220,
+                178,
+                55,
+                109,
+                175,
+                195,
+                162,
+                167,
+                182,
+                145,
+                133,
+                242,
+                190,
+                103,
+                1
+              ]
+            }
+          }
+        ],
+        "lockTime": 0,
+        "outputs": [
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 1999995000
+            }
+          }
+        ],
+        "payload": [],
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "version": 0
+      }
+    }
+  },
+  "warning": "Review only. Do not submit alongside a mutually exclusive settlement draft for the same pledge outputs.",
+  "boundaries": [
+    "This is a P2PK settlement draft from accepted pledge outputs.",
+    "It is not pooled covenant target aggregation.",
+    "It does not prove mainnet readiness or wallet connector readiness."
+  ]
+}
