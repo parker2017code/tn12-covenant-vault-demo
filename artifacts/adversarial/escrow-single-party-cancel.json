@@ -1,0 +1,53 @@
+{
+  "schema": "tn12-adversarial-invalid-spend/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T22:47:42.309Z",
+  "id": "escrow-single-party-cancel",
+  "contract": "Escrow",
+  "entrypoint": "cancelEscrow",
+  "invalidation": "single-party-cancel",
+  "correctSigners": "escrowBuyer + escrowSeller (both required)",
+  "usedSigners": "escrowBuyer only (seller omitted)",
+  "selector": "OP_2",
+  "version": 1,
+  "computeBudget": 30,
+  "expectedFailure": "Cancel branch requires two OP_CHECKSIG verifications; single sig leaves seller checkSig unsatisfied",
+  "sourceOutpoint": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c:2",
+  "status": "rejected-as-expected",
+  "submissionResult": {
+    "httpStatus": 400,
+    "body": {
+      "error": "RPC Server (remote error) -> Rejected transaction 5aebc0dd699017182741352b4f859a16a696ed649135ea47ff03ce6307f96d5d: failed to verify the signature script: opcode requires at least 2 but stack has only 1"
+    },
+    "submittedAt": "2026-05-09T22:47:42.308Z"
+  },
+  "submitPayload": {
+    "transaction": {
+      "version": 1,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
+            "index": 2
+          },
+          "signatureScript": "418c6f92bf60afa9bf189126113eed43f48e05d8560b84bac42acf317bc136f366c2b1db98e3022b2e3f45e94c2538bfaf60e616d03b749d733228ddd218acdcd601524d5f016b6c76009c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6900c2b9be028813949c6900c32054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669030000207c7e01ac7e876975516776519c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6904ccedfe69b000c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975516776529c637578200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac69762054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac6900c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975755167750069686868",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 0,
+          "computeBudget": 30
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  }
+}

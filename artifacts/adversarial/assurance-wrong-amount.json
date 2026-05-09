@@ -1,0 +1,50 @@
+{
+  "schema": "tn12-adversarial-invalid-spend/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T22:43:34.688Z",
+  "id": "assurance-wrong-amount",
+  "contract": "AssurancePledge",
+  "invalidation": "wrong-output-amount",
+  "correctAmount": "2499995000",
+  "usedAmount": "2499994999",
+  "signer": "pledgeRecipient (correct)",
+  "expectedFailure": "Covenant enforces output amount = input - minerFee; 1-sompi deficit → script fails",
+  "sourceOutpoint": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6:1",
+  "payload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
+            "index": 1
+          },
+          "signatureScript": "4131891337c7c722905d6d616337c7b03787575d64772e7664133b0cf6016954ed3b30ec8709463783182b219f796f8b74f4936a2feb16acd73775a14d13dae72401004cb06b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6904ccedfe69b000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499994999,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67bac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "submissionResult": {
+    "status": "rejected-as-expected",
+    "httpStatus": 400,
+    "body": {
+      "error": "RPC Server (remote error) -> Rejected transaction 90cf279afb5cb1339100c76676f7f3dfcc30ca21558cb4532d22029add8a405d: failed to verify the signature script: script ran, but verification failed"
+    },
+    "submittedAt": "2026-05-09T22:43:34.688Z"
+  },
+  "status": "rejected-as-expected"
+}

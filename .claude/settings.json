@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(node scripts/*.mjs)",
+      "Bash(node scripts/*.mjs artifacts/*)",
+      "Bash(node -e *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add artifacts/* fixtures/* docs/* src/* scripts/* README.md CLAUDE.md package.json)",
+      "Bash(git add .claude/* docs/*)",
+      "Bash(git commit -m *)",
+      "Bash(curl -s \"https://api-tn12.kaspa.org/*\")",
+      "Bash(python3 -c *)",
+      "Bash(python3 -m json.tool)"
+    ],
+    "deny": [
+      "Bash(* --submit *)",
+      "Bash(git add .local/*)",
+      "Bash(git add -A)",
+      "Bash(git add .)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /home/parker2017/tn12-covenant-vault-demo/.claude/hooks/check-submit-guard.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

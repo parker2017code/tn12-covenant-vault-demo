@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "lane": "role-escrow",
   "contract": "Escrow",
-  "fetchedAt": "2026-05-08T08:26:52.533Z",
-  "endpoint": "https://api-tn12.kaspa.org/transactions/ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-  "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+  "fetchedAt": "2026-05-09T15:10:00.000Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
+  "txid": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
   "outputIndex": 2,
   "amountTkas": 25,
   "amountSompi": "2500000000",
@@ -15,12 +15,13 @@
   "redeemScriptHex": "6b6c76009c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6900c2b9be028813949c6900c32054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669030000207c7e01ac7e876975516776519c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6904ccedfe69b000c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975516776529c637578200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac69762054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac6900c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975755167750069686868",
   "redeemScriptBytes": 351,
   "status": "accepted",
-  "acceptingBlockBlueScore": 6070948,
-  "explorerUrl": "https://tn12.kaspa.stream/txs/ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+  "acceptingBlockBlueScore": 7532926,
+  "note": "Updated 2026-05-09 \u2014 fresh output from second role-separated funding tx 658067a4. Used for single-party cancel adversarial test.",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
   "raw": {
     "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w",
     "outpoint": {
-      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "transactionId": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
       "index": 2
     },
     "utxoEntry": {
@@ -28,7 +29,7 @@
       "scriptPublicKey": {
         "scriptPublicKey": "aa20275822281faf40aaa22233df25b76df03a05e16e3bdc613f692800409c0e8aaf87"
       },
-      "blockDaaScore": "6070948",
+      "blockDaaScore": "7532926",
       "isCoinbase": false
     }
   }

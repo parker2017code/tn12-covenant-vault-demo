@@ -1,0 +1,50 @@
+{
+  "schema": "tn12-adversarial-invalid-spend/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T22:43:34.780Z",
+  "id": "escrow-wrong-amount",
+  "contract": "Escrow",
+  "invalidation": "wrong-output-amount",
+  "correctAmount": "2499995000",
+  "usedAmount": "2499994999",
+  "signer": "escrowBuyer (correct)",
+  "expectedFailure": "Covenant enforces output amount = input - minerFee; 1-sompi deficit → script fails",
+  "sourceOutpoint": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6:2",
+  "payload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
+            "index": 2
+          },
+          "signatureScript": "4188973ba34ece5cb9ef762f46f893a672e590cbd5e2578f074e2ff01931794091a86012052504e87adb3f710b757714bb2967f07a6edd91349db1f89709836c1601004d5f016b6c76009c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6900c2b9be028813949c6900c32054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669030000207c7e01ac7e876975516776519c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6904ccedfe69b000c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975516776529c637578200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac69762054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac6900c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975755167750069686868",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499994999,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "submissionResult": {
+    "status": "rejected-as-expected",
+    "httpStatus": 400,
+    "body": {
+      "error": "RPC Server (remote error) -> Rejected transaction a0d47e624cc3c1e91cf4a38b923b90ea7d33cd37cc02909b098eae49df42f97f: failed to verify the signature script: script ran, but verification failed"
+    },
+    "submittedAt": "2026-05-09T22:43:34.779Z"
+  },
+  "status": "rejected-as-expected"
+}

@@ -16,6 +16,11 @@ A Kaspa TN12 testnet workspace for covenant scripts, payload receipts, and the d
 | Role-separated positive paths (all 7) | all contracts | `TN12_ACCEPTED` | see `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `AssurancePledge.sil` × 3 | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
 | 26 payload events (invoice, access-pass, auction, attestation, agent, etc.) | payload tx | `TN12_ACCEPTED` | see `fixtures/PayloadEventEvidence.json` |
+| Adversarial rejection — wrong-signer (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
+| Adversarial rejection — wrong-selector (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
+| Adversarial rejection — wrong-output-lock (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
+| Adversarial rejection — wrong-output-amount (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
+| Adversarial rejection — single-party escrow cancel | `Escrow.sil` | `TN12_REJECTED` | see `artifacts/adversarial/escrow-single-party-cancel.json` |
 
 ## What is NOT proven
 
@@ -23,7 +28,7 @@ A Kaspa TN12 testnet workspace for covenant scripts, payload receipts, and the d
 - Pooled threshold enforcement on-chain — batch target aggregation is `PLANNER_ONLY`.
 - External wallet signing — all accepted proofs used local keys. Wallet connector is `SIGNED_NOT_BROADCAST` / planning only.
 - Historical virtual-chain replay — `getVirtualChainFromBlockV2` requires the TN12 SDK build (`1.1.1-toc.1`); installed `kaspa-wasm` does not expose it.
-- Negative-path rejection evidence — invalid-candidate maps are `LOCAL_TEST_ONLY`, not submitted rejections.
+- External wallet signing — all accepted proofs used local keys. Wallet connector is `SIGNED_NOT_BROADCAST` / planning only.
 
 ## Verify existing proofs
 
@@ -41,7 +46,7 @@ If these pass, you have verified the existing accepted evidence. You have not cr
 
 1. **External signer roundtrip** — `artifacts/wallet-external-signer-roundtrip-plan.json` has 4 requests ready; none have gone through a real external signer yet.
 2. **Virtual-chain live indexer** — requires `kaspa-wasm 1.1.1-toc.1` or `kaspa-python-sdk v1.1.0` for `getVirtualChainFromBlockV2`; current indexer is fixture-driven.
-3. **Adversarial rejection evidence** — `npm run covenant:adversarial` maps invalid candidates locally; fresh expendable outputs needed to submit actual rejection attempts.
+3. **Virtual-chain live indexer** — requires `kaspa-wasm 1.1.1-toc.1` or `kaspa-python-sdk v1.1.0` for `getVirtualChainFromBlockV2`; current indexer is fixture-driven. Adversarial suite is now complete (13 cases, all 5 mutation types).
 
 ## Deeper docs
 
@@ -62,6 +67,7 @@ If these pass, you have verified the existing accepted evidence. You have not cr
 | Label | Meaning |
 |---|---|
 | `TN12_ACCEPTED` | Transaction accepted on kaspa-testnet-12, verified by txid |
+| `TN12_REJECTED` | Transaction rejected by kaspa-testnet-12 node (adversarial negative-path evidence) |
 | `SIGNED_NOT_BROADCAST` | Signed locally, not submitted |
 | `LOCAL_TEST_ONLY` | Script or artifact test only, no TN12 transaction |
 | `PLANNER_ONLY` | App/indexer-layer logic, no on-chain enforcement |

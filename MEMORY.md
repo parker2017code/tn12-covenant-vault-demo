@@ -80,17 +80,14 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 ## Current Next Work
 
-- Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order. Use `npm run project:plan` / `artifacts/project-plan.json` for the older done/WIP/next/later grouping.
-- Use `npm run ai:discipline` / `artifacts/ai-coding-source-discipline.json` before broad roadmap or source-discipline rewrites. It encodes the Kaspa Daily Q&A implications, public coding-agent practice, and the rule that unknown private company workflows stay marked unknown.
-- WIP lanes: live wallet connector submit without local keys, durable indexer replay implementation (blocked on TN12 SDK build), and wiring hardened attestation provenance/quorum output into future signal-consuming dashboards.
-- Batch-assurance settlement is CLOSED: release `4d84472e...` accepted at blue score 7413626. Refund paths voided.
-- Next actions: external signer roundtrip (priority 1), TN12 SDK build for virtual-chain indexer (priority 2), covenant rejection attempts from fresh expendable outputs (priority 3).
-- Keep real depth in three verticals first:
-  - invoice/receipt app: accepted transaction app state,
-  - escrow/assurance app: TN12 covenant proof app,
-  - attestation/agent/prediction simulator: research-to-app bridge.
-- The payload vertical slice has 26 accepted TN12 JSON wRPC events listed in `fixtures/PayloadEventEvidence.json`. Keep app state tied to matched accepted payload bytes.
-- Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
+- Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order.
+- **Adversarial suite COMPLETE**: 13 cases TN12-rejected — wrong-signer (3), wrong-selector (3), wrong-output-lock (3), wrong-output-amount (3), single-party-cancel (1). All in `artifacts/adversarial/`.
+- **Claude Code infrastructure in place**: `CLAUDE.md` (lean, 23 lines), `.claude/settings.json` (deny `--submit` + protect `.local/`), hook at `.claude/hooks/check-submit-guard.sh`, slash commands `/verify`, `/next`, `/adversarial`.
+- **Remaining open blockers** (priority order):
+  1. External signer roundtrip — 4 requests in `artifacts/wallet-external-signer-roundtrip-plan.json`, none through a real signer.
+  2. Virtual-chain live indexer — blocked on `kaspa-wasm 1.1.1-toc.1` (no pip, no wasm port). REST reads still work.
+- Batch-assurance settlement CLOSED: `4d84472e...` at blue score 7413626.
+- Escrow mutual cancel is accepted through the version-1 compute-budget path. REST submit for v1 txs requires both `sigOpCount: 0` and `computeBudget: 30`.
 
 ## Latest Continuation Snapshot
 

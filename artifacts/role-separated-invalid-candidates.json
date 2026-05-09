@@ -1,7 +1,7 @@
 {
   "schema": "tn12-role-separated-invalid-candidates/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-08T09:54:12.011Z",
+  "generatedAt": "2026-05-09T22:15:20.233Z",
   "status": "local-review-only-not-submitted",
   "summary": {
     "proofPaths": 7,

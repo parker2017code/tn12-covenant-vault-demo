@@ -1,0 +1,50 @@
+{
+  "schema": "tn12-adversarial-invalid-spend/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T22:43:34.042Z",
+  "id": "vault-wrong-selector",
+  "contract": "DelayedRecoveryVault",
+  "invalidation": "wrong-selector",
+  "correctSelector": "OP_1 (recover)",
+  "usedSelector": "OP_0 (withdraw branch)",
+  "signer": "vaultRecovery (correct key, wrong branch)",
+  "expectedFailure": "OP_0 dispatches to withdrawal branch which encodes vaultOwner key; checkSig fails",
+  "sourceOutpoint": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6:0",
+  "payload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
+            "index": 0
+          },
+          "signatureScript": "4118f6c174984372d45b4c6b38c74c0d34279f133f8ce55f2ecc18fe604ada23c036c394f9c55831fd05ce2fcf859d894fbbe05e78973299a9a4bc4311c005f8a401004cd56b6c76009c63757620d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185ac6904ccedfe69b000c2b9be028813949c6900c320d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185030000207c7e01ac7e876975516776519c63757620e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac6900c2b9be028813949c6900c320e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9030000207c7e01ac7e87697551677500696868",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "submissionResult": {
+    "status": "rejected-as-expected",
+    "httpStatus": 400,
+    "body": {
+      "error": "RPC Server (remote error) -> Rejected transaction 15c980f3fd7371cb5f32f80f0b155f70386b6df13e8df8c5c59b177c6bbbb656: failed to verify the signature script: script ran, but verification failed"
+    },
+    "submittedAt": "2026-05-09T22:43:34.041Z"
+  },
+  "status": "rejected-as-expected"
+}

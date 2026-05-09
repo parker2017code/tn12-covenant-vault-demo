@@ -1,0 +1,114 @@
+{
+  "schema": "tn12-adversarial-summary/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T22:29:28.878Z",
+  "fundingTxid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
+  "submitted": true,
+  "cases": [
+    {
+      "id": "vault-wrong-signer",
+      "txid": "d5fa85521f2e89488e53a95799f7a3d4a639c739e323d5201cd725d04dc6afab",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "assurance-wrong-signer",
+      "txid": "22d89a2ccc296fa63321736c75dfe1afbd01a7b7d62297cb5e9fe1747c9a8417",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "escrow-wrong-signer",
+      "txid": "18a50d92fec739611a1b56e9732033de1df4cd925684e00b18acbed5c106ef82",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "vault-wrong-selector",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "assurance-wrong-selector",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "escrow-wrong-selector",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "vault-wrong-output-lock",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "assurance-wrong-output-lock",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "escrow-wrong-output-lock",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "vault-wrong-amount",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "assurance-wrong-amount",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "escrow-wrong-amount",
+      "status": "built-not-submitted"
+    },
+    {
+      "id": "vault-wrong-selector",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "assurance-wrong-selector",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "escrow-wrong-selector",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "vault-wrong-output-lock",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "assurance-wrong-output-lock",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "escrow-wrong-output-lock",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "vault-wrong-amount",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "assurance-wrong-amount",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "escrow-wrong-amount",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    },
+    {
+      "id": "escrow-single-party-cancel",
+      "status": "rejected-as-expected",
+      "httpStatus": 400
+    }
+  ],
+  "updatedAt": "2026-05-09T22:47:42.312Z"
+}

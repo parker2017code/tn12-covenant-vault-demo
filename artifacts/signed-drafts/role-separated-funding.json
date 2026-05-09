@@ -6,10 +6,11 @@
   "warning": "This funds fresh role-separated contract outputs for the next proof pass. Do not submit if the source outpoint has already been spent.",
   "source": {
     "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-    "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+    "txid": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
     "outputIndex": 1,
-    "amountTkas": 1138.29815
+    "amountTkas": 974.99995
   },
+  "artifactDir": "artifacts/role-separated",
   "outputs": [
     {
       "index": 0,
@@ -49,23 +50,23 @@
       "label": "change",
       "lane": "change",
       "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "amountTkas": "1063.2981",
-      "amountSompi": "106329810000",
+      "amountTkas": "899.9999",
+      "amountSompi": "89999990000",
       "scriptType": "p2pk"
     }
   ],
   "minerFeeSompi": "5000",
-  "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+  "transactionId": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
   "submitPayload": {
     "transaction": {
       "version": 0,
       "inputs": [
         {
           "previousOutpoint": {
-            "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+            "transactionId": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
             "index": 1
           },
-          "signatureScript": "41f66f4bcb57e408db66be3b14254063979a227afb7ec710dc0ef0e554183abc5e90ac86e15e230034253884a513bb90e8f228c97540fb2dd43b7cd74c5b3ccd4901",
+          "signatureScript": "4169109340cd955c3b718d0437b486ce0c7df9ae3243550a0a9eff15cadca4d12272d533010bcde163bbbc56e729ae12940be24ea962f6139e38341edc74b1aa0c01",
           "sequence": 0,
           "sigOpCount": 1
         }
@@ -93,7 +94,7 @@
           }
         },
         {
-          "amount": 106329810000,
+          "amount": 89999990000,
           "scriptPublicKey": {
             "version": 0,
             "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
@@ -111,15 +112,15 @@
         "utxo": {
           "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
           "entry": {
-            "amount": 113829815000,
-            "blockDaaScore": 6064981,
+            "amount": 97499995000,
+            "blockDaaScore": 5306418,
             "isCoinbase": false,
             "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
           },
           "outpoint": {
             "inner": {
               "index": 1,
-              "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d"
+              "transactionId": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2"
             }
           }
         }
@@ -128,84 +129,84 @@
     "tx": {
       "inner": {
         "gas": 0,
-        "id": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "id": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
         "inputs": [
           {
             "inner": {
               "previousOutpoint": {
                 "inner": {
                   "index": 1,
-                  "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d"
+                  "transactionId": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2"
                 }
               },
               "sequence": 0,
               "sigOpCount": 1,
               "signatureScript": [
                 65,
-                246,
-                111,
-                75,
-                203,
-                87,
-                228,
-                8,
-                219,
-                102,
-                190,
-                59,
-                20,
-                37,
-                64,
-                99,
-                151,
-                154,
-                34,
-                122,
-                251,
-                126,
-                199,
+                105,
                 16,
-                220,
-                14,
-                240,
-                229,
-                84,
-                24,
-                58,
-                188,
-                94,
-                144,
-                172,
-                134,
-                225,
-                94,
-                35,
-                0,
-                52,
-                37,
-                56,
-                132,
-                165,
-                19,
-                187,
-                144,
-                232,
-                242,
-                40,
-                201,
-                117,
+                147,
                 64,
-                251,
-                45,
-                212,
-                59,
-                124,
-                215,
-                76,
-                91,
-                60,
                 205,
-                73,
+                149,
+                92,
+                59,
+                113,
+                141,
+                4,
+                55,
+                180,
+                134,
+                206,
+                12,
+                125,
+                249,
+                174,
+                50,
+                67,
+                85,
+                10,
+                10,
+                158,
+                255,
+                21,
+                202,
+                220,
+                164,
+                209,
+                34,
+                114,
+                213,
+                51,
+                1,
+                11,
+                205,
+                225,
+                99,
+                187,
+                188,
+                86,
+                231,
+                41,
+                174,
+                18,
+                148,
+                11,
+                226,
+                78,
+                169,
+                98,
+                246,
+                19,
+                158,
+                56,
+                52,
+                30,
+                220,
+                116,
+                177,
+                170,
+                12,
                 1
               ]
             }
@@ -234,7 +235,7 @@
           {
             "inner": {
               "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
-              "value": 106329810000
+              "value": 89999990000
             }
           }
         ],

@@ -3,9 +3,9 @@
   "network": "kaspa-testnet-12",
   "lane": "role-assurance",
   "contract": "AssurancePledge",
-  "fetchedAt": "2026-05-08T08:26:52.593Z",
-  "endpoint": "https://api-tn12.kaspa.org/transactions/ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-  "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+  "fetchedAt": "2026-05-09T14:00:00.000Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
+  "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
   "outputIndex": 1,
   "amountTkas": 25,
   "amountSompi": "2500000000",
@@ -15,12 +15,13 @@
   "redeemScriptHex": "6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6904ccedfe69b000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
   "redeemScriptBytes": 176,
   "status": "accepted",
-  "acceptingBlockBlueScore": 6070948,
-  "explorerUrl": "https://tn12.kaspa.stream/txs/ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+  "acceptingBlockBlueScore": 7532926,
+  "note": "Updated 2026-05-09 — fresh output from role-separated funding tx 7ed52d20. Previous outpoint ce1a94b8:1 was spent by prior role-separated proof pass.",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
   "raw": {
     "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r",
     "outpoint": {
-      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
       "index": 1
     },
     "utxoEntry": {
@@ -28,7 +29,7 @@
       "scriptPublicKey": {
         "scriptPublicKey": "aa20bd9096d1ef2d25514d2d5a608db6ee7d8aa866fa08bdc93ee43b401dcd80b2f387"
       },
-      "blockDaaScore": "6070948",
+      "blockDaaScore": "7532926",
       "isCoinbase": false
     }
   }

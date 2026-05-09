@@ -1,0 +1,50 @@
+{
+  "schema": "tn12-adversarial-invalid-spend/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T22:29:28.400Z",
+  "id": "vault-wrong-signer",
+  "contract": "DelayedRecoveryVault",
+  "entrypoint": "recover",
+  "invalidation": "wrong-signer",
+  "correctRole": "vaultRecovery",
+  "usedRole": "pledgeRecipient",
+  "expectedFailure": "checkSig fails — pledgeRecipient key not recognized by vault recover branch",
+  "sourceOutpoint": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6:0",
+  "transactionId": "d5fa85521f2e89488e53a95799f7a3d4a639c739e323d5201cd725d04dc6afab",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
+            "index": 0
+          },
+          "signatureScript": "411153fdf270192bc58d0000e0ea4a4318afc42622b53a92068717139b00df1ec3c32c43929c6b01277db76a84c38ad76f4c0425ca6824a232b2bc046c07a8444201514cd56b6c76009c63757620d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185ac6904ccedfe69b000c2b9be028813949c6900c320d35da2e915727588ee28acc673e6fc563c8034feb86cb47b2f2cf77b06ac6185030000207c7e01ac7e876975516776519c63757620e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9ac6900c2b9be028813949c6900c320e0c9836d5112bf4ed4bcb09414994837cad14a03e88b6fdb9fbd70e0f98010b9030000207c7e01ac7e87697551677500696868",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67bac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "status": "rejected-as-expected",
+  "submissionResult": {
+    "httpStatus": 400,
+    "body": {
+      "error": "RPC Server (remote error) -> Rejected transaction d5fa85521f2e89488e53a95799f7a3d4a639c739e323d5201cd725d04dc6afab: failed to verify the signature script: script ran, but verification failed"
+    },
+    "submittedAt": "2026-05-09T22:29:28.708Z"
+  }
+}
