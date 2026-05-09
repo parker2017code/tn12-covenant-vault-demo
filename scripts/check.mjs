@@ -527,6 +527,28 @@ assert.ok(custodyImports.imports.some((row) =>
 const custodyImportsArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-custody-imports.json", import.meta.url), "utf8"));
 assert.equal(custodyImportsArtifact.status, "custody-imports-blocked-review");
 assert.equal(custodyImportsArtifact.summary.readyCount, 0);
+const pledgeFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/batch-assurance-pledge-funding.json", import.meta.url), "utf8"));
+const pledgeWalletPublic = JSON.parse(await readFile(new URL("../fixtures/BatchAssurancePledgeWallets.public.json", import.meta.url), "utf8"));
+assert.equal(pledgeFundingDraft.schema, "tn12-batch-assurance-pledge-funding-draft/v1");
+assert.equal(pledgeFundingDraft.status, "signed-not-broadcast");
+assert.equal(pledgeFundingDraft.lane, "batch-assurance-pledge-custody-funding");
+assert.equal(pledgeFundingDraft.outputs.length, 4);
+assert.deepEqual(
+  pledgeFundingDraft.outputs.filter((output) => output.pledgeId).map((output) => [output.pledgeId, output.amountTkas]),
+  [
+    ["pledge-docs-001", "45"],
+    ["pledge-docs-002", "35"],
+    ["pledge-docs-003", "20"]
+  ]
+);
+assert.equal(pledgeFundingDraft.submitPayload.transaction.outputs.length, 4);
+assert.equal(pledgeFundingDraft.submitPayload.transaction.payload, undefined);
+assert.ok(pledgeFundingDraft.transactionId);
+assert.ok(Number(pledgeFundingDraft.source.amountTkas) > 100);
+assert.doesNotMatch(JSON.stringify(pledgeFundingDraft), /privateKey/i);
+assert.equal(pledgeWalletPublic.schema, "tn12-batch-assurance-pledge-wallets-public/v1");
+assert.equal(pledgeWalletPublic.wallets.length, 3);
+assert.doesNotMatch(JSON.stringify(pledgeWalletPublic), /privateKey/i);
 const syntheticCustodyCheckpoint = {
   network: "kaspa-testnet-12",
   records: campaignState.releasePlan.inputs.map((input) => ({
@@ -1354,6 +1376,7 @@ const files = [
   "artifacts/batch-assurance-custody-requirements.json",
   "artifacts/batch-assurance-pledge-output-plan.json",
   "artifacts/batch-assurance-custody-imports.json",
+  "artifacts/signed-drafts/batch-assurance-pledge-funding.json",
   "artifacts/enforcement-matrix.json",
   "artifacts/escrow-marketplace-demo.json",
   "artifacts/proof-evidence.json",
@@ -1414,6 +1437,7 @@ const files = [
   "fixtures/NextWorkQueue.json",
   "fixtures/BatchAssuranceCampaign.json",
   "fixtures/BatchAssuranceCustodyImports.json",
+  "fixtures/BatchAssurancePledgeWallets.public.json",
   "fixtures/EnforcementMatrix.json",
   "fixtures/EscrowPrimitives.json",
   "fixtures/TreasuryVaults.json",
@@ -1587,6 +1611,7 @@ assert.match(readme, /npm run campaign:state/);
 assert.match(readme, /npm run campaign:custody/);
 assert.match(readme, /npm run campaign:custody-requirements/);
 assert.match(readme, /npm run campaign:custody-imports/);
+assert.match(readme, /npm run campaign:pledge-funding-draft/);
 assert.match(readme, /npm run enforcement:matrix/);
 assert.match(readme, /npm run escrow:registry/);
 assert.match(readme, /npm run treasury:registry/);

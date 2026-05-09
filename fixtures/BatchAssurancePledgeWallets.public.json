@@ -1,0 +1,32 @@
+{
+  "schema": "tn12-batch-assurance-pledge-wallets-public/v1",
+  "network": "kaspa-testnet-12",
+  "status": "public-pledge-wallet-metadata",
+  "warning": "Public metadata only. Private keys live in .local/tn12-batch-pledge-wallets.json and must not be committed.",
+  "wallets": [
+    {
+      "pledgeId": "pledge-docs-001",
+      "contributor": "docs-backer-alpha",
+      "address": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
+      "publicKey": "022ec76c435b524ec5c740f4ef21396bddecee96f8502474f1dba24f2e989a0379",
+      "xOnlyPublicKey": "2ec76c435b524ec5c740f4ef21396bddecee96f8502474f1dba24f2e989a0379",
+      "network": "kaspa-testnet-12"
+    },
+    {
+      "pledgeId": "pledge-docs-002",
+      "contributor": "wallet-builder-beta",
+      "address": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9",
+      "publicKey": "02b0658560c10867bd50dc4362e821fb3369f656223ada2e55dd1b27d2418e741b",
+      "xOnlyPublicKey": "b0658560c10867bd50dc4362e821fb3369f656223ada2e55dd1b27d2418e741b",
+      "network": "kaspa-testnet-12"
+    },
+    {
+      "pledgeId": "pledge-docs-003",
+      "contributor": "pool-tooling-gamma",
+      "address": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+      "publicKey": "03764b4912fdca1746572e698af95e23f09845f97db6e89c736e4d2b94c264a982",
+      "xOnlyPublicKey": "764b4912fdca1746572e698af95e23f09845f97db6e89c736e4d2b94c264a982",
+      "network": "kaspa-testnet-12"
+    }
+  ]
+}

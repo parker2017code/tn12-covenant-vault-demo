@@ -1,0 +1,275 @@
+{
+  "schema": "tn12-batch-assurance-pledge-funding-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "batch-assurance-pledge-custody-funding",
+  "warning": "This draft creates amount-matched TN12 P2PK pledge outputs for custody import review. It is not submitted and is not pooled covenant settlement.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+    "outputIndex": 3,
+    "amountTkas": 988.29805
+  },
+  "campaign": {
+    "id": "kaspa-dev-docs-sprint",
+    "name": "Kaspa dev docs sprint",
+    "targetTkas": 100,
+    "minimumPledgeTkas": 10,
+    "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "deadlineIso": "2026-05-14T00:00:00.000Z",
+    "releaseMode": "batch-release-after-target",
+    "refundMode": "individual-refund-after-deadline"
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "pledgeId": "pledge-docs-001",
+      "contributor": "docs-backer-alpha",
+      "address": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
+      "amountTkas": "45",
+      "amountSompi": "4500000000",
+      "scriptType": "p2pk",
+      "importTarget": {
+        "fixturePath": "fixtures/BatchAssuranceCustodyImports.json",
+        "outpointIndex": 0,
+        "acceptedEvidenceTxid": "fill-after-submit"
+      }
+    },
+    {
+      "index": 1,
+      "pledgeId": "pledge-docs-002",
+      "contributor": "wallet-builder-beta",
+      "address": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9",
+      "amountTkas": "35",
+      "amountSompi": "3500000000",
+      "scriptType": "p2pk",
+      "importTarget": {
+        "fixturePath": "fixtures/BatchAssuranceCustodyImports.json",
+        "outpointIndex": 1,
+        "acceptedEvidenceTxid": "fill-after-submit"
+      }
+    },
+    {
+      "index": 2,
+      "pledgeId": "pledge-docs-003",
+      "contributor": "pool-tooling-gamma",
+      "address": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+      "amountTkas": "20",
+      "amountSompi": "2000000000",
+      "scriptType": "p2pk",
+      "importTarget": {
+        "fixturePath": "fixtures/BatchAssuranceCustodyImports.json",
+        "outpointIndex": 2,
+        "acceptedEvidenceTxid": "fill-after-submit"
+      }
+    },
+    {
+      "index": 3,
+      "label": "change",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": "888.298",
+      "amountSompi": "88829800000",
+      "scriptType": "p2pk"
+    }
+  ],
+  "minerFeeSompi": "5000",
+  "transactionId": "2d7710ac0bef427a0dd77486646fc34d89b2d13fc10c538372e82904ecbeb20a",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+            "index": 3
+          },
+          "signatureScript": "41bd5896d6c4d9461d8a0af26270d41576cbe0f5859b886ff9fbf3d39e724cec1e702224331130d1c4a0518ac5c29c7a82fd1eeacf6915618196c7bfed846ddcda01",
+          "sequence": 0,
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 4500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "202ec76c435b524ec5c740f4ef21396bddecee96f8502474f1dba24f2e989a0379ac"
+          }
+        },
+        {
+          "amount": 3500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20b0658560c10867bd50dc4362e821fb3369f656223ada2e55dd1b27d2418e741bac"
+          }
+        },
+        {
+          "amount": 2000000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20764b4912fdca1746572e698af95e23f09845f97db6e89c736e4d2b94c264a982ac"
+          }
+        },
+        {
+          "amount": 88829800000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "entries": [
+      {
+        "utxo": {
+          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "entry": {
+            "amount": 98829805000,
+            "blockDaaScore": 6185388,
+            "isCoinbase": false,
+            "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "outpoint": {
+            "inner": {
+              "index": 3,
+              "transactionId": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141"
+            }
+          }
+        }
+      }
+    ],
+    "tx": {
+      "inner": {
+        "gas": 0,
+        "id": "2d7710ac0bef427a0dd77486646fc34d89b2d13fc10c538372e82904ecbeb20a",
+        "inputs": [
+          {
+            "inner": {
+              "previousOutpoint": {
+                "inner": {
+                  "index": 3,
+                  "transactionId": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141"
+                }
+              },
+              "sequence": 0,
+              "sigOpCount": 1,
+              "signatureScript": [
+                65,
+                189,
+                88,
+                150,
+                214,
+                196,
+                217,
+                70,
+                29,
+                138,
+                10,
+                242,
+                98,
+                112,
+                212,
+                21,
+                118,
+                203,
+                224,
+                245,
+                133,
+                155,
+                136,
+                111,
+                249,
+                251,
+                243,
+                211,
+                158,
+                114,
+                76,
+                236,
+                30,
+                112,
+                34,
+                36,
+                51,
+                17,
+                48,
+                209,
+                196,
+                160,
+                81,
+                138,
+                197,
+                194,
+                156,
+                122,
+                130,
+                253,
+                30,
+                234,
+                207,
+                105,
+                21,
+                97,
+                129,
+                150,
+                199,
+                191,
+                237,
+                132,
+                109,
+                220,
+                218,
+                1
+              ]
+            }
+          }
+        ],
+        "lockTime": 0,
+        "outputs": [
+          {
+            "inner": {
+              "scriptPublicKey": "0000202ec76c435b524ec5c740f4ef21396bddecee96f8502474f1dba24f2e989a0379ac",
+              "value": 4500000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020b0658560c10867bd50dc4362e821fb3369f656223ada2e55dd1b27d2418e741bac",
+              "value": 3500000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020764b4912fdca1746572e698af95e23f09845f97db6e89c736e4d2b94c264a982ac",
+              "value": 2000000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+              "value": 88829800000
+            }
+          }
+        ],
+        "payload": [],
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "version": 0
+      }
+    }
+  },
+  "nextAfterAccepted": [
+    "Review and submit this draft explicitly; it is not auto-broadcast.",
+    "Fetch the accepted transaction and import outputs 0, 1, and 2 into fixtures/BatchAssuranceCustodyImports.json.",
+    "Rerun npm run campaign:custody-imports and only then rebuild custody settlement drafts."
+  ],
+  "boundaries": [
+    "Generated pledge private keys are stored only in .local/tn12-batch-pledge-wallets.json and are testnet-only.",
+    "These are amount-matched P2PK pledge outputs, not pooled covenant enforcement.",
+    "This draft does not mutate the campaign fixture or mark custody ready."
+  ]
+}

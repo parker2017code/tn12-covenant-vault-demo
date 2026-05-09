@@ -65,6 +65,7 @@
     "campaign:custody-requirements": "node scripts/build-batch-assurance-custody-requirements.mjs",
     "campaign:pledge-outputs": "node scripts/build-batch-assurance-pledge-output-plan.mjs",
     "campaign:custody-imports": "node scripts/build-batch-assurance-custody-imports.mjs",
+    "campaign:pledge-funding-draft": "node scripts/build-batch-assurance-pledge-funding-draft.mjs",
     "enforcement:matrix": "node scripts/build-enforcement-matrix.mjs",
     "escrow:registry": "node scripts/build-escrow-primitives.mjs",
     "escrow:marketplace": "node scripts/build-escrow-marketplace-demo.mjs",

@@ -99,7 +99,8 @@ Paused on 2026-05-09 after bounded batch-assurance custody import validation:
 - `src/batchAssuranceCustodyImports.mjs` and `scripts/build-batch-assurance-custody-imports.mjs` generate `artifacts/batch-assurance-custody-imports.json`.
 - The validator checks pledge id, amount, txid/index presence, accepted evidence presence, duplicate outpoints, below-minimum rows, and planner-payload-only promotion.
 - Current status is intentionally `custody-imports-blocked-review`: zero ready imports, because existing matching rows are accepted planner payload records rather than real accepted custody outputs.
-- Next safe task in this lane: create accepted TN12 pledge outputs for 45/35/20 TKAS, paste those accepted outpoints into `fixtures/BatchAssuranceCustodyImports.json`, then rerun `npm run campaign:custody-imports`.
+- `scripts/build-batch-assurance-pledge-funding-draft.mjs` and `npm run campaign:pledge-funding-draft` now create the signed-not-broadcast 45/35/20 TKAS pledge funding draft and public pledge-wallet metadata. Generated pledge private keys stay in `.local/tn12-batch-pledge-wallets.json`.
+- Next safe task in this lane: review/submit the pledge funding draft, paste the accepted outputs into `fixtures/BatchAssuranceCustodyImports.json`, then rerun `npm run campaign:custody-imports`.
 
 Paused on 2026-05-09 after bounded virtual-chain reader adapter artifact work:
 
