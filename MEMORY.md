@@ -128,6 +128,9 @@ Updated 2026-05-09 after commits `35140c6`, `75c8772`, `d210907`, `638b608`, `ca
   - `artifacts/virtual-chain-live-window.json` carries full replay input under `replay.acceptedTransactions` and `replay.computeBudgetInputs`.
   - `artifacts/virtual-chain-live-replay-rows.json` records `fullAcceptedReplay: true`; the latest live sample had 46 accepted tx rows, 43 compute-budget rows, and 0 checkpoint matches.
   - App state is still not promoted until a checkpoint-overlap window or deterministic cursor transition is proven.
+- `npm run wallet:external-signer-template` writes `artifacts/wallet-external-signer-result-template.json`.
+  - It is generated from the current roundtrip plan so signer-return placeholders use current request fingerprints, txids, payload bytes, routes, and input-budget reports.
+  - It is still not a signer result; `signedTransaction`, signer metadata, and user approval stay blank until a real external signer run.
 - `npm run check:all` passed after each committed slice before push.
 - Current pushed head before the full-replay indexer patch is `18293f0` unless newer work has landed.
 - GitHub `check` and Pages were green for `18293f0` when verified with `gh run list` on 2026-05-09.

@@ -36,6 +36,7 @@ The current head also adds live endpoint evidence and an external-signer roundtr
 - The live-window reducer now carries every accepted txid returned by the V2 response into replay rows, not just the UI sample.
 - `TN12_VIRTUAL_CHAIN_START_HASH=<hash>` is available for the next checkpoint-overlap test.
 - The latest live sample still has zero checkpoint overlap, so keep settlement and wallet-submit promotion held.
+- `npm run wallet:external-signer-template` generates the current-field signer-return template from the roundtrip plan. Use it for the first real external signer attempt instead of editing stale placeholder rows.
 
 ## Recently Completed Before This WIP
 
@@ -63,6 +64,7 @@ On resume, rerun at least:
 
 ```sh
 npm run wallet:external-signer-roundtrip
+npm run wallet:external-signer-template
 npm run indexer:endpoint-runbook
 npm run check:all
 ```

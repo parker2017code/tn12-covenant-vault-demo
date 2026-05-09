@@ -71,6 +71,7 @@
     "wallet:standard-requests": "node scripts/build-wallet-standard-requests.mjs",
     "wallet:standard-signer-validation": "node scripts/build-wallet-standard-signer-validation.mjs",
     "wallet:external-signer-roundtrip": "node scripts/build-wallet-external-signer-roundtrip-plan.mjs",
+    "wallet:external-signer-template": "node scripts/build-wallet-external-signer-result-template.mjs",
     "wallet:implementation-slice": "node scripts/build-wallet-connector-implementation-slice.mjs",
     "research:library": "node scripts/build-research-library.mjs",
     "campaign:state": "node scripts/build-batch-assurance-campaign.mjs",

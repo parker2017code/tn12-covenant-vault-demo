@@ -77,6 +77,7 @@ import { buildWalletStandardMapping } from "../src/walletStandardMapping.mjs";
 import { buildWalletStandardRequests } from "../src/walletStandardRequests.mjs";
 import { buildWalletStandardSignerValidation } from "../src/walletStandardSignerValidation.mjs";
 import { buildWalletExternalSignerRoundtripPlan } from "../src/walletExternalSignerRoundtripPlan.mjs";
+import { buildWalletExternalSignerResultTemplate } from "../src/walletExternalSignerResultTemplate.mjs";
 import { buildWalletConnectorImplementationSlice } from "../src/walletConnectorImplementationSlice.mjs";
 import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
 import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRunbook.mjs";
@@ -1524,6 +1525,26 @@ assert.deepEqual(walletExternalSignerRoundtripPlan.recommendedOrder, [
 ]);
 const walletExternalSignerRoundtripPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-roundtrip-plan.json", import.meta.url), "utf8"));
 assert.equal(walletExternalSignerRoundtripPlanArtifact.status, "external-signer-roundtrip-plan-ready");
+const walletExternalSignerResultTemplate = buildWalletExternalSignerResultTemplate({
+  roundtripPlan: walletExternalSignerRoundtripPlanArtifact,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletExternalSignerResultTemplate.status, "external-signer-result-template-ready");
+assert.equal(walletExternalSignerResultTemplate.summary.templates, 4);
+assert.equal(walletExternalSignerResultTemplate.summary.recommendedFirstPass, 2);
+assert.equal(walletExternalSignerResultTemplate.results.length, 4);
+assert.ok(walletExternalSignerResultTemplate.results.some((row) =>
+  row.requestId === "ureq-6cfe79da-standard"
+  && row.reviewFingerprint === "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3"
+  && row.route === "payload-preserving-wrpc"
+));
+assert.ok(walletExternalSignerResultTemplate.results.some((row) =>
+  row.requestId === "ureq-d12412d8-standard"
+  && row.inputBudgetReport[0]?.computeBudget === 30
+));
+const walletExternalSignerResultTemplateArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-result-template.json", import.meta.url), "utf8"));
+assert.equal(walletExternalSignerResultTemplateArtifact.status, "external-signer-result-template-ready");
+assert.equal(walletExternalSignerResultTemplateArtifact.results.length, 4);
 const walletImplementationSlice = buildWalletConnectorImplementationSlice({
   walletMapping: walletStandardMappingArtifact,
   unsignedTemplates: walletUnsignedTemplatesArtifact,
@@ -1760,6 +1781,7 @@ const files = [
   "scripts/build-wallet-standard-requests.mjs",
   "scripts/build-wallet-standard-signer-validation.mjs",
   "scripts/build-wallet-external-signer-roundtrip-plan.mjs",
+  "scripts/build-wallet-external-signer-result-template.mjs",
   "scripts/build-wallet-connector-implementation-slice.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
@@ -1873,6 +1895,7 @@ const files = [
   "artifacts/wallet-standard-requests.json",
   "artifacts/wallet-standard-signer-validation.json",
   "artifacts/wallet-external-signer-roundtrip-plan.json",
+  "artifacts/wallet-external-signer-result-template.json",
   "artifacts/wallet-connector-implementation-slice.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
@@ -2041,6 +2064,7 @@ const files = [
   "src/walletStandardRequests.mjs",
   "src/walletStandardSignerValidation.mjs",
   "src/walletExternalSignerRoundtripPlan.mjs",
+  "src/walletExternalSignerResultTemplate.mjs",
   "src/walletConnectorImplementationSlice.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",

@@ -1306,7 +1306,7 @@ async function renderWalletConnector() {
   if (!walletConnectorNode) return;
 
   try {
-    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse, standardResponse, signerValidationResponse, roundtripResponse] = await Promise.all([
+    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse, standardResponse, signerValidationResponse, roundtripResponse, signerTemplateResponse] = await Promise.all([
       fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" }),
       fetch("artifacts/wallet-submit-package.json", { cache: "no-store" }),
       fetch("artifacts/wallet-connector-submit-requests.json", { cache: "no-store" }),
@@ -1314,7 +1314,8 @@ async function renderWalletConnector() {
       fetch("artifacts/wallet-connector-submit-ledger.json", { cache: "no-store" }),
       fetch("artifacts/wallet-standard-requests.json", { cache: "no-store" }),
       fetch("artifacts/wallet-standard-signer-validation.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-external-signer-roundtrip-plan.json", { cache: "no-store" })
+      fetch("artifacts/wallet-external-signer-roundtrip-plan.json", { cache: "no-store" }),
+      fetch("artifacts/wallet-external-signer-result-template.json", { cache: "no-store" })
     ]);
     const readiness = await readinessResponse.json();
     const submitPackage = await packageResponse.json();
@@ -1324,6 +1325,7 @@ async function renderWalletConnector() {
     const standard = await standardResponse.json();
     const signerValidation = await signerValidationResponse.json();
     const roundtrip = await roundtripResponse.json();
+    const signerTemplate = await signerTemplateResponse.json();
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
@@ -1358,6 +1360,12 @@ async function renderWalletConnector() {
         <strong>${escapeHtml(roundtrip.summary.requests)} external-signer requests</strong>
         <p>Recommended order: ${escapeHtml(roundtrip.recommendedOrder.join(" -> "))}</p>
         <small>${escapeHtml(roundtrip.acceptanceRule)}</small>
+      </article>
+      <article>
+        <span>${escapeHtml(signerTemplate.status)}</span>
+        <strong>${escapeHtml(signerTemplate.summary.templates)} signer-return templates</strong>
+        <p>${escapeHtml(signerTemplate.summary.recommendedFirstPass)} are marked for the first external signer pass.</p>
+        <small>${escapeHtml(signerTemplate.validationCommand)}</small>
       </article>
       <article>
         <span>${escapeHtml(ledger.status)}</span>
