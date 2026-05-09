@@ -1,7 +1,7 @@
 {
   "schema": "tn12-escrow-marketplace-flow/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:13:57.185Z",
+  "generatedAt": "2026-05-09T21:16:33.255Z",
   "status": "escrow-marketplace-flow-ready",
   "summary": {
     "flows": 3,
@@ -43,7 +43,7 @@
           "ready": false
         }
       ],
-      "next": "Map one enabled action to the wallet-standard handoff after standard mapping is implemented."
+      "next": "Use the action map to route enabled actions through wallet-standard requests, then wait for external signer validation and accepted replay."
     },
     {
       "escrowId": "escrow-pass-redemption-002",
@@ -113,7 +113,7 @@
           "ready": false
         }
       ],
-      "next": "Map one enabled action to the wallet-standard handoff after standard mapping is implemented."
+      "next": "Use the action map to route enabled actions through wallet-standard requests, then wait for external signer validation and accepted replay."
     }
   ],
   "globalGates": [

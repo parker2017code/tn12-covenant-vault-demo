@@ -1,7 +1,7 @@
 {
   "schema": "tn12-escrow-marketplace-action-map/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:10:05.159Z",
+  "generatedAt": "2026-05-09T21:16:33.540Z",
   "status": "escrow-action-map-ready",
   "summary": {
     "flows": 3,

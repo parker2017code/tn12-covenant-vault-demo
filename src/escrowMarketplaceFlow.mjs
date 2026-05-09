@@ -47,7 +47,7 @@ function buildFlow({ listing, contractTemplates }) {
     ],
     next: listing.actionState === "needs-funding"
       ? "Build funding template before release/refund/cancel review."
-      : "Map one enabled action to the wallet-standard handoff after standard mapping is implemented."
+      : "Use the action map to route enabled actions through wallet-standard requests, then wait for external signer validation and accepted replay."
   };
 }
 

@@ -43,4 +43,3 @@ The next substantial commit should pick one of:
 - wallet: run one external-signer round trip from `artifacts/wallet-standard-requests.json`;
 - indexer: convert the bounded V2 live-window response into replay rows with rollback overlap;
 - settlement: keep batch-assurance hold/release/refund decision aligned with wallet signer validation and checkpoint overlap.
-- escrow: expand wallet-standard request coverage for release/refund and rerun the action map.
