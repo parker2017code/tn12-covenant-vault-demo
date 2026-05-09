@@ -98,9 +98,9 @@ Paused on 2026-05-09 after bounded batch-assurance custody import validation:
 - `fixtures/BatchAssuranceCustodyImports.json` defines pasted/imported custody outpoint review rows for the current campaign.
 - `src/batchAssuranceCustodyImports.mjs` and `scripts/build-batch-assurance-custody-imports.mjs` generate `artifacts/batch-assurance-custody-imports.json`.
 - The validator checks pledge id, amount, txid/index presence, accepted evidence presence, duplicate outpoints, below-minimum rows, and planner-payload-only promotion.
-- Current status is intentionally `custody-imports-blocked-review`: zero ready imports, because existing matching rows are accepted planner payload records rather than real accepted custody outputs.
-- `scripts/build-batch-assurance-pledge-funding-draft.mjs` and `npm run campaign:pledge-funding-draft` now create the signed-not-broadcast 45/35/20 TKAS pledge funding draft and public pledge-wallet metadata. Generated pledge private keys stay in `.local/tn12-batch-pledge-wallets.json`.
-- Next safe task in this lane: review/submit the pledge funding draft, paste the accepted outputs into `fixtures/BatchAssuranceCustodyImports.json`, then rerun `npm run campaign:custody-imports`.
+- Current status is `custody-imports-ready`: three accepted 45/35/20 TKAS pledge outputs are imported and amount-matched.
+- `scripts/build-batch-assurance-pledge-funding-draft.mjs` and `npm run campaign:pledge-funding-draft` created the 45/35/20 TKAS pledge funding draft and public pledge-wallet metadata. Generated pledge private keys stay in `.local/tn12-batch-pledge-wallets.json`.
+- Next safe task in this lane: build wallet-reviewable release/refund drafts from the accepted pledge outputs; do not claim pooled covenant aggregation.
 
 Paused on 2026-05-09 after bounded virtual-chain reader adapter artifact work:
 

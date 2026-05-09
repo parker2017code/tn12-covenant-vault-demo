@@ -8,6 +8,8 @@ export function buildCheckpointedAcceptedIndex({
   payloadManifest = {},
   payloadArtifacts = {},
   payloadTransactions = {},
+  outputManifest = {},
+  outputTransactions = {},
   fetchedAt = new Date().toISOString(),
   endpointBase = DEFAULT_TN12_TRANSACTION_ENDPOINT
 }) {
@@ -19,7 +21,10 @@ export function buildCheckpointedAcceptedIndex({
     const txid = artifact?.transactionId || "";
     return buildPayloadRecord({ event, artifact, tx: payloadTransactions[txid], txid });
   });
-  const records = [...proofRecords, ...payloadRecords];
+  const outputRecords = (outputManifest.outputs || []).map((output) =>
+    buildOutputRecord({ output, tx: outputTransactions[output.txid] })
+  );
+  const records = [...proofRecords, ...payloadRecords, ...outputRecords];
   const checkpoint = buildCheckpoint(records);
 
   return {
@@ -29,7 +34,8 @@ export function buildCheckpointedAcceptedIndex({
     endpointBase,
     sourceManifests: {
       proofs: "fixtures/AcceptedProofTransactions.json",
-      payloadEvents: "fixtures/PayloadEventEvidence.json"
+      payloadEvents: "fixtures/PayloadEventEvidence.json",
+      outputEvidence: "fixtures/AcceptedOutputEvidence.json"
     },
     status: records.every((record) => record.status.endsWith("matched"))
       ? "accepted-index-fully-matched"
@@ -39,6 +45,7 @@ export function buildCheckpointedAcceptedIndex({
       total: records.length,
       proofs: proofRecords.length,
       payloadEvents: payloadRecords.length,
+      outputEvidence: outputRecords.length,
       accepted: records.filter((record) => record.accepted).length,
       matched: records.filter((record) => record.status.endsWith("matched")).length,
       mismatches: records.filter((record) => !record.status.endsWith("matched")).length,
@@ -50,6 +57,63 @@ export function buildCheckpointedAcceptedIndex({
       "It is rollback-aware metadata, not a full virtual-chain subscription.",
       "A production indexer should persist checkpoints from node/RPC virtual-chain reads before serving app state."
     ]
+  };
+}
+
+function buildOutputRecord({ output, tx }) {
+  const outputIndex = Number(output.outputIndex || 0);
+  const observedOutput = tx?.outputs?.find((candidate) => Number(candidate.index) === outputIndex) || null;
+  const accepted = Boolean(tx?.is_accepted);
+  const outputMatches = Boolean(
+    observedOutput
+    && String(observedOutput.amount) === String(output.amountSompi)
+    && observedOutput.script_public_key_address === output.destination
+    && observedOutput.script_public_key_type === String(output.scriptType || "pubkey")
+  );
+
+  return {
+    kind: "accepted-output",
+    lane: String(output.lane || "accepted-output"),
+    label: String(output.label || ""),
+    txid: String(output.txid || ""),
+    status: accepted && outputMatches ? "accepted-output-matched" : "needs-review",
+    accepted,
+    matched: accepted && outputMatches,
+    acceptingBlockBlueScore: tx?.accepting_block_blue_score ?? null,
+    acceptingBlockTime: tx?.accepting_block_time ?? null,
+    expected: {
+      outputIndex,
+      amountSompi: String(output.amountSompi || ""),
+      destination: String(output.destination || ""),
+      type: String(output.scriptType || "pubkey"),
+      subject: output.subject || null
+    },
+    output: {
+      expected: {
+        outputIndex,
+        amountSompi: String(output.amountSompi || ""),
+        destination: String(output.destination || ""),
+        type: String(output.scriptType || "pubkey")
+      },
+      observed: observedOutput
+        ? {
+            outputIndex: Number(observedOutput.index),
+            amountSompi: String(observedOutput.amount),
+            destination: observedOutput.script_public_key_address,
+            type: observedOutput.script_public_key_type
+          }
+        : null,
+      matches: outputMatches
+    },
+    observed: observedOutput
+      ? {
+          outputIndex: Number(observedOutput.index),
+          amountSompi: String(observedOutput.amount),
+          destination: observedOutput.script_public_key_address,
+          type: observedOutput.script_public_key_type
+        }
+      : null,
+    explorerUrl: `https://tn12.kaspa.stream/txs/${output.txid}`
   };
 }
 

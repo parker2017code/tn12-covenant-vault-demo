@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-custody-requirements/v1",
   "network": "kaspa-testnet-12",
-  "status": "custody-requirements-open",
+  "status": "custody-requirements-satisfied",
   "campaign": {
     "id": "kaspa-dev-docs-sprint",
     "name": "Kaspa dev docs sprint",
@@ -14,19 +14,19 @@
   },
   "summary": {
     "pledgeOutputCount": 3,
-    "readyCount": 0,
-    "blockedCount": 3,
+    "readyCount": 3,
+    "blockedCount": 0,
     "requiredTkas": "100",
-    "observedReferencedTkas": "3",
-    "amountMatchedTkas": "0",
-    "missingMatchedTkas": "100",
-    "custodyDraftStatus": "custody-draft-blocked"
+    "observedReferencedTkas": "100",
+    "amountMatchedTkas": "100",
+    "missingMatchedTkas": "0",
+    "custodyDraftStatus": "custody-release-draft-ready"
   },
   "requirements": [
     {
       "pledgeId": "pledge-docs-001",
       "contributor": "docs-backer-alpha",
-      "status": "custody-input-blocked",
+      "status": "custody-input-ready",
       "required": {
         "amountSompi": "4500000000",
         "amountTkas": "45",
@@ -34,66 +34,60 @@
         "outputIndex": 0
       },
       "currentReference": {
-        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "outputIndex": 0,
-        "acceptedTxid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "acceptedTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "recordMatched": true,
-        "observedAmountSompi": "100000000",
-        "observedAmountTkas": "1",
-        "amountMatches": false
+        "observedAmountSompi": "4500000000",
+        "observedAmountTkas": "45",
+        "amountMatches": true
       },
-      "next": "Build and submit an accepted TN12 pledge output with this exact amount, then import that outpoint into the campaign fixture.",
-      "blockers": [
-        "Accepted transaction exists, but output amount does not match the pledge."
-      ]
+      "next": "Use this outpoint in the custody release draft after duplicate-source review.",
+      "blockers": []
     },
     {
       "pledgeId": "pledge-docs-002",
       "contributor": "wallet-builder-beta",
-      "status": "custody-input-blocked",
+      "status": "custody-input-ready",
       "required": {
         "amountSompi": "3500000000",
         "amountTkas": "35",
         "sourceKind": "accepted-pledge-output",
-        "outputIndex": 0
+        "outputIndex": 1
       },
       "currentReference": {
-        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
-        "outputIndex": 0,
-        "acceptedTxid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "outputIndex": 1,
+        "acceptedTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "recordMatched": true,
-        "observedAmountSompi": "100000000",
-        "observedAmountTkas": "1",
-        "amountMatches": false
+        "observedAmountSompi": "3500000000",
+        "observedAmountTkas": "35",
+        "amountMatches": true
       },
-      "next": "Build and submit an accepted TN12 pledge output with this exact amount, then import that outpoint into the campaign fixture.",
-      "blockers": [
-        "Accepted transaction exists, but output amount does not match the pledge."
-      ]
+      "next": "Use this outpoint in the custody release draft after duplicate-source review.",
+      "blockers": []
     },
     {
       "pledgeId": "pledge-docs-003",
       "contributor": "pool-tooling-gamma",
-      "status": "custody-input-blocked",
+      "status": "custody-input-ready",
       "required": {
         "amountSompi": "2000000000",
         "amountTkas": "20",
         "sourceKind": "accepted-pledge-output",
-        "outputIndex": 0
+        "outputIndex": 2
       },
       "currentReference": {
-        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
-        "outputIndex": 0,
-        "acceptedTxid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "outputIndex": 2,
+        "acceptedTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "recordMatched": true,
-        "observedAmountSompi": "100000000",
-        "observedAmountTkas": "1",
-        "amountMatches": false
+        "observedAmountSompi": "2000000000",
+        "observedAmountTkas": "20",
+        "amountMatches": true
       },
-      "next": "Build and submit an accepted TN12 pledge output with this exact amount, then import that outpoint into the campaign fixture.",
-      "blockers": [
-        "Accepted transaction exists, but output amount does not match the pledge."
-      ]
+      "next": "Use this outpoint in the custody release draft after duplicate-source review.",
+      "blockers": []
     }
   ],
   "acceptanceCriteria": [

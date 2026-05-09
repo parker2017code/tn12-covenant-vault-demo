@@ -15,14 +15,14 @@ export function buildBatchAssuranceCustodyImports({
     pledge.pledgeId,
     pledge
   ]));
-  const recordsByTxid = new Map((checkpointIndex.records || []).map((record) => [record.txid, record]));
+  const recordsByOutpoint = buildRecordMaps(checkpointIndex.records || []);
   const duplicateOutpoints = buildDuplicateOutpointMap(importFixture.imports || []);
   const imports = (importFixture.imports || []).map((row) => validateImportRow({
     row,
     campaign,
     requirement: requirementsByPledge.get(row.pledgeId),
     campaignPledge: campaignPledgesById.get(row.pledgeId),
-    recordsByTxid,
+    recordsByOutpoint,
     duplicateOutpoints
   }));
   const readyImports = imports.filter((row) => row.status === "custody-import-ready");
@@ -67,7 +67,7 @@ export function buildBatchAssuranceCustodyImports({
       "This validator only reviews pasted/imported custody outpoints.",
       "It does not mutate the campaign fixture.",
       "It does not mark batch release ready unless every required pledge has an accepted amount-matched non-payload custody outpoint.",
-      "Current fixture rows intentionally remain blocked because the repo lacks real matching custody outputs."
+      "Rows remain blocked until real matching custody outputs replace planner-payload references."
     ],
     next: requirementsSatisfied
       ? "Review the ready imports, update the campaign fixture intentionally, then rerun custody drafts."
@@ -80,7 +80,7 @@ function validateImportRow({
   campaign,
   requirement,
   campaignPledge,
-  recordsByTxid,
+  recordsByOutpoint,
   duplicateOutpoints
 }) {
   const pledgeId = String(row.pledgeId || "");
@@ -91,7 +91,9 @@ function validateImportRow({
   const outpointValid = isHex64(txid) && Number.isInteger(outputIndex) && outputIndex >= 0;
   const acceptedEvidenceTxid = String(row.acceptedEvidenceTxid || row.acceptedTxid || "");
   const evidenceLookupTxid = isHex64(acceptedEvidenceTxid) ? acceptedEvidenceTxid : txid;
-  const evidenceRecord = recordsByTxid.get(evidenceLookupTxid);
+  const evidenceRecord = outpointValid
+    ? recordForOutpoint(recordsByOutpoint, { txid: evidenceLookupTxid, index: outputIndex })
+    : recordsByOutpoint.byTxid.get(evidenceLookupTxid);
   const requiredSompi = BigInt(requirement?.required?.amountSompi || 0);
   const campaignMinimumSompi = tkasToSompi(campaign.minimumPledgeTkas || 0);
   const amountMatchesRequirement = Boolean(requirement) && amountSompi === requiredSompi;
@@ -101,7 +103,6 @@ function validateImportRow({
   const plannerPayloadOnly = acceptedEvidencePresent && (
     evidenceRecord.kind === "payload-event"
     || campaignPledge?.status === "accepted-payload-indexed"
-    || campaignPledge?.acceptedTxid === txid
   );
   const problems = [
     !requirement ? "pledge id is not required by the current campaign custody plan" : "",
@@ -163,6 +164,24 @@ function buildDuplicateOutpointMap(rows) {
     }
   }
   return map;
+}
+
+function buildRecordMaps(records) {
+  const byOutpoint = new Map();
+  const byTxid = new Map();
+  for (const record of records) {
+    byTxid.set(record.txid, record);
+    const index = record.output?.observed?.outputIndex ?? record.observed?.outputIndex ?? record.expected?.outputIndex;
+    if (Number.isInteger(Number(index))) {
+      byOutpoint.set(outpointKey({ txid: record.txid, index: Number(index) }), record);
+    }
+  }
+  return { byOutpoint, byTxid };
+}
+
+function recordForOutpoint(recordsByOutpoint, outpoint = {}) {
+  const key = outpointKey(outpoint);
+  return recordsByOutpoint.byOutpoint.get(key) || recordsByOutpoint.byTxid.get(outpoint.txid);
 }
 
 function outpointKey(outpoint) {

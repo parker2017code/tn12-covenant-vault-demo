@@ -51,7 +51,7 @@
       "order": 3,
       "id": "batch-assurance",
       "name": "Batch Assurance Campaigns",
-      "status": "accepted-planner-payloads",
+      "status": "accepted-custody-outputs",
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-tn12-json-wrpc-payload-events",
@@ -63,11 +63,14 @@
         "npm run campaign:state",
         "npm run campaign:custody",
         "npm run campaign:custody-requirements",
+        "npm run campaign:custody-imports",
+        "artifacts/batch-assurance-custody-imports.json",
         "artifacts/batch-assurance-custody-requirements.json",
+        "fixtures/AcceptedOutputEvidence.json",
         "artifacts/payload-batch-pledge-docs-001-evidence.json",
         "artifacts/payload-batch-release-plan-evidence.json"
       ],
-      "next": "Build accepted TN12 pledge outputs for the exact campaign amounts, then import those outpoints before settlement."
+      "next": "Build signed release/refund transaction drafts from the matched accepted pledge outputs."
     },
     {
       "order": 4,

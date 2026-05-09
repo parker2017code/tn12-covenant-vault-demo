@@ -5,9 +5,9 @@ export function buildBatchAssuranceCustodyDrafts({
   checkpointIndex = {},
   minerFeeSompi = "5000"
 } = {}) {
-  const recordsByTxid = new Map((checkpointIndex.records || []).map((record) => [record.txid, record]));
+  const recordsByOutpoint = buildRecordMaps(checkpointIndex.records || []);
   const acceptedInputs = (campaignState.releasePlan?.inputs || []).map((input) =>
-    reviewCustodyInput({ input, record: recordsByTxid.get(input.sourceOutpoint?.txid) })
+    reviewCustodyInput({ input, record: recordForOutpoint(recordsByOutpoint, input.sourceOutpoint) })
   );
   const eligibleInputs = acceptedInputs.filter((input) => input.status === "custody-input-ready");
   const blockedInputs = acceptedInputs.filter((input) => input.status !== "custody-input-ready");
@@ -52,7 +52,7 @@ export function buildBatchAssuranceCustodyDrafts({
         reason: input.reason
       }))
     },
-    refundDrafts: buildRefundDrafts({ campaignState, recordsByTxid, minerFeeSompi: feeSompi }),
+    refundDrafts: buildRefundDrafts({ campaignState, recordsByOutpoint, minerFeeSompi: feeSompi }),
     boundaries: [
       "This artifact is a custody draft review, not a signed transaction.",
       "Accepted payload planner records do not become custody inputs unless the referenced output amount and txid match the pledge record.",
@@ -90,7 +90,7 @@ function reviewCustodyInput({ input, record }) {
   };
 }
 
-function buildRefundDrafts({ campaignState, recordsByTxid, minerFeeSompi }) {
+function buildRefundDrafts({ campaignState, recordsByOutpoint, minerFeeSompi }) {
   return (campaignState.refundPlan?.refunds || []).map((refund) => {
     const input = reviewCustodyInput({
       input: {
@@ -99,7 +99,7 @@ function buildRefundDrafts({ campaignState, recordsByTxid, minerFeeSompi }) {
         amountTkas: refund.amountTkas,
         sourceOutpoint: refund.sourceOutpoint
       },
-      record: recordsByTxid.get(refund.sourceOutpoint?.txid)
+      record: recordForOutpoint(recordsByOutpoint, refund.sourceOutpoint)
     });
     const inputSompi = BigInt(input.observedAmountSompi);
     const outputSompi = input.status === "custody-input-ready" && inputSompi > minerFeeSompi
@@ -118,6 +118,28 @@ function buildRefundDrafts({ campaignState, recordsByTxid, minerFeeSompi }) {
       blocker: input.status === "custody-input-ready" ? null : input.reason
     };
   });
+}
+
+function buildRecordMaps(records) {
+  const byOutpoint = new Map();
+  const byTxid = new Map();
+  for (const record of records) {
+    byTxid.set(record.txid, record);
+    const index = record.output?.observed?.outputIndex ?? record.observed?.outputIndex ?? record.expected?.outputIndex;
+    if (Number.isInteger(Number(index))) {
+      byOutpoint.set(outpointKey({ txid: record.txid, index: Number(index) }), record);
+    }
+  }
+  return { byOutpoint, byTxid };
+}
+
+function recordForOutpoint(recordsByOutpoint, outpoint = {}) {
+  const key = outpointKey(outpoint);
+  return recordsByOutpoint.byOutpoint.get(key) || recordsByOutpoint.byTxid.get(outpoint.txid);
+}
+
+function outpointKey(outpoint = {}) {
+  return `${outpoint.txid || ""}:${Number(outpoint.index || 0)}`;
 }
 
 function stripReviewOnlyFields(input) {

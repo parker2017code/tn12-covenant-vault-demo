@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-custody-drafts/v1",
   "network": "kaspa-testnet-12",
-  "status": "custody-draft-blocked",
+  "status": "custody-release-draft-ready",
   "campaign": {
     "id": "kaspa-dev-docs-sprint",
     "name": "Kaspa dev docs sprint",
@@ -14,97 +14,97 @@
   },
   "summary": {
     "requestedReleaseTkas": "100",
-    "eligibleInputTkas": "0",
-    "blockedInputCount": 3,
-    "eligibleInputCount": 0,
+    "eligibleInputTkas": "100",
+    "blockedInputCount": 0,
+    "eligibleInputCount": 3,
     "minerFeeSompi": "5000",
-    "releaseOutputTkas": "0",
+    "releaseOutputTkas": "99.99995",
     "targetMet": true,
-    "custodyReady": false
+    "custodyReady": true
   },
   "releaseDraft": {
-    "status": "blocked-until-custody-inputs-match",
-    "inputs": [],
-    "output": {
-      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "amountSompi": "0",
-      "amountTkas": "0"
-    },
-    "blockers": [
+    "status": "review-ready-not-signed",
+    "inputs": [
       {
         "pledgeId": "pledge-docs-001",
-        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
-        "expectedAmountTkas": "45",
-        "observedAmountTkas": "1",
-        "reason": "Referenced accepted output amount does not match the pledge amount."
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "outputIndex": 0,
+        "amountSompi": "4500000000",
+        "amountTkas": "45"
       },
       {
         "pledgeId": "pledge-docs-002",
-        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
-        "expectedAmountTkas": "35",
-        "observedAmountTkas": "1",
-        "reason": "Referenced accepted output amount does not match the pledge amount."
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "outputIndex": 1,
+        "amountSompi": "3500000000",
+        "amountTkas": "35"
       },
       {
         "pledgeId": "pledge-docs-003",
-        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
-        "expectedAmountTkas": "20",
-        "observedAmountTkas": "1",
-        "reason": "Referenced accepted output amount does not match the pledge amount."
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "outputIndex": 2,
+        "amountSompi": "2000000000",
+        "amountTkas": "20"
       }
-    ]
+    ],
+    "output": {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountSompi": "9999995000",
+      "amountTkas": "99.99995"
+    },
+    "blockers": []
   },
   "refundDrafts": [
     {
       "pledgeId": "pledge-docs-001",
-      "status": "blocked-until-custody-input-matches",
+      "status": "review-ready-not-signed",
       "input": {
         "pledgeId": "pledge-docs-001",
-        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "outputIndex": 0,
-        "amountSompi": "100000000",
-        "amountTkas": "1"
+        "amountSompi": "4500000000",
+        "amountTkas": "45"
       },
       "output": {
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "amountSompi": "0",
-        "amountTkas": "0"
+        "amountSompi": "4499995000",
+        "amountTkas": "44.99995"
       },
-      "blocker": "Referenced accepted output amount does not match the pledge amount."
+      "blocker": null
     },
     {
       "pledgeId": "pledge-docs-002",
-      "status": "blocked-until-custody-input-matches",
+      "status": "review-ready-not-signed",
       "input": {
         "pledgeId": "pledge-docs-002",
-        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
-        "outputIndex": 0,
-        "amountSompi": "100000000",
-        "amountTkas": "1"
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "outputIndex": 1,
+        "amountSompi": "3500000000",
+        "amountTkas": "35"
       },
       "output": {
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "amountSompi": "0",
-        "amountTkas": "0"
+        "amountSompi": "3499995000",
+        "amountTkas": "34.99995"
       },
-      "blocker": "Referenced accepted output amount does not match the pledge amount."
+      "blocker": null
     },
     {
       "pledgeId": "pledge-docs-003",
-      "status": "blocked-until-custody-input-matches",
+      "status": "review-ready-not-signed",
       "input": {
         "pledgeId": "pledge-docs-003",
-        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
-        "outputIndex": 0,
-        "amountSompi": "100000000",
-        "amountTkas": "1"
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "outputIndex": 2,
+        "amountSompi": "2000000000",
+        "amountTkas": "20"
       },
       "output": {
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "amountSompi": "0",
-        "amountTkas": "0"
+        "amountSompi": "1999995000",
+        "amountTkas": "19.99995"
       },
-      "blocker": "Referenced accepted output amount does not match the pledge amount."
+      "blocker": null
     }
   ],
   "boundaries": [

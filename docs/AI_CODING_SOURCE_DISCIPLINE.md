@@ -26,6 +26,17 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 - Treat public company and open-source agent practices as evidence only when they are public. Internal/private company practices may exist but should be recorded as unknown rather than invented.
 - For state transitions and external IO, observability is part of the feature: output txids, endpoints, network IDs, payload hashes, rollback status, and review states where relevant.
 
+## Failure Modes To Avoid
+
+- Inflated surface area: many lanes and JSON artifacts can make a small proof kernel look like a product suite. Lead with accepted txids, scripts, and SDK lessons, not lane count.
+- Fixture transformation as faux progress: a script that reads one JSON file and writes another is useful only if it catches a bug, tightens a claim, or drives the next transaction.
+- Roadmap language sounding like implementation: words such as app, market, DeFi, stable-value, agent, and coordination must stay research/planner-labeled until custody, settlement, wallet, indexer, and failure paths exist.
+- Repetitive boundary prose: restating every non-claim everywhere makes the repo read like machine output. Put boundaries once in the right artifact and keep public copy shorter.
+- LLM self-management sprawl: docs about agents are not product work. Keep AI guidance small, executable, and tied to checks.
+- Txid-only reasoning: UTXO work must key by full outpoint. A single accepted transaction can carry several distinct outputs.
+- Planning before proof: when a lane has an obvious next transaction or negative test, build that before adding another matrix, queue, or status page.
+- Public copy over-explaining itself: external readers should see what landed, how to verify it, what broke, and what is next.
+
 ## Current Source Watch
 
 - Kaspa Daily Yonatan Q&A Part 1 entry: https://x.com/DailyKaspa/status/2052716697262374936

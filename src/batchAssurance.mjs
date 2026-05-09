@@ -86,7 +86,9 @@ function reviewPledge({ pledge, campaign, duplicateMap }) {
   const signedOnlyStatus = pledge.status === "signed-not-submitted" || pledge.status === "draft";
   const meetsMinimum = pledge.amountTkas >= campaign.minimumPledgeTkas;
   const duplicateOutpoint = hasOutpoint && duplicateMap.outpoints.get(outpointKey(pledge.outpoint)) > 1;
-  const duplicateAcceptedTxid = hasAcceptedTxid && duplicateMap.acceptedTxids.get(pledge.acceptedTxid) > 1;
+  const duplicateAcceptedTxid = pledge.status === "accepted-payload-indexed"
+    && hasAcceptedTxid
+    && duplicateMap.acceptedTxids.get(pledge.acceptedTxid) > 1;
   const duplicateAcceptedSource = duplicateOutpoint || duplicateAcceptedTxid;
   const countsTowardRelease = acceptedStatus && hasOutpoint && meetsMinimum && !duplicateAcceptedSource;
   const countsTowardPlanned = countsTowardRelease || (signedOnlyStatus && meetsMinimum);

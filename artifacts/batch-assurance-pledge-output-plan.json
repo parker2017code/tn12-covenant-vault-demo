@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-pledge-output-plan/v1",
   "network": "kaspa-testnet-12",
-  "status": "pledge-output-plan-ready",
+  "status": "pledge-outputs-already-matched",
   "campaign": {
     "id": "kaspa-dev-docs-sprint",
     "name": "Kaspa dev docs sprint",
@@ -14,95 +14,16 @@
   },
   "summary": {
     "requiredOutputs": 3,
-    "readyOutputs": 0,
-    "outputsToCreate": 3,
+    "readyOutputs": 3,
+    "outputsToCreate": 0,
     "totalRequiredTkas": "100",
-    "readyTkas": "0",
-    "missingTkas": "100",
+    "readyTkas": "100",
+    "missingTkas": "0",
     "walletConnectorRequestsReady": true,
     "walletConnectorRequestCount": 47,
-    "statusBeforeFunding": "custody-requirements-open"
+    "statusBeforeFunding": "custody-requirements-satisfied"
   },
-  "outputsToCreate": [
-    {
-      "id": "pledge-output-001",
-      "pledgeId": "pledge-docs-001",
-      "contributor": "docs-backer-alpha",
-      "amountSompi": "4500000000",
-      "amountTkas": "45",
-      "intendedSettlementUse": "batch-assurance-release-or-refund-input",
-      "reviewLabel": "Batch assurance pledge output for pledge-docs-001",
-      "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "replacementFor": {
-        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
-        "outputIndex": 0,
-        "observedAmountTkas": "1",
-        "reason": "Accepted transaction exists, but output amount does not match the pledge."
-      },
-      "importTarget": {
-        "fixturePath": "fixtures/BatchAssuranceCampaign.json",
-        "pledgeId": "pledge-docs-001",
-        "fields": [
-          "acceptedTxid",
-          "outpoint.txid",
-          "outpoint.index",
-          "status"
-        ]
-      }
-    },
-    {
-      "id": "pledge-output-002",
-      "pledgeId": "pledge-docs-002",
-      "contributor": "wallet-builder-beta",
-      "amountSompi": "3500000000",
-      "amountTkas": "35",
-      "intendedSettlementUse": "batch-assurance-release-or-refund-input",
-      "reviewLabel": "Batch assurance pledge output for pledge-docs-002",
-      "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "replacementFor": {
-        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
-        "outputIndex": 0,
-        "observedAmountTkas": "1",
-        "reason": "Accepted transaction exists, but output amount does not match the pledge."
-      },
-      "importTarget": {
-        "fixturePath": "fixtures/BatchAssuranceCampaign.json",
-        "pledgeId": "pledge-docs-002",
-        "fields": [
-          "acceptedTxid",
-          "outpoint.txid",
-          "outpoint.index",
-          "status"
-        ]
-      }
-    },
-    {
-      "id": "pledge-output-003",
-      "pledgeId": "pledge-docs-003",
-      "contributor": "pool-tooling-gamma",
-      "amountSompi": "2000000000",
-      "amountTkas": "20",
-      "intendedSettlementUse": "batch-assurance-release-or-refund-input",
-      "reviewLabel": "Batch assurance pledge output for pledge-docs-003",
-      "recipientAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "replacementFor": {
-        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
-        "outputIndex": 0,
-        "observedAmountTkas": "1",
-        "reason": "Accepted transaction exists, but output amount does not match the pledge."
-      },
-      "importTarget": {
-        "fixturePath": "fixtures/BatchAssuranceCampaign.json",
-        "pledgeId": "pledge-docs-003",
-        "fields": [
-          "acceptedTxid",
-          "outpoint.txid",
-          "outpoint.index",
-          "status"
-        ]
-      }
-    }
-  ],
+  "outputsToCreate": [],
   "submitFlow": [
     {
       "step": "create-wallet-reviewed-output",

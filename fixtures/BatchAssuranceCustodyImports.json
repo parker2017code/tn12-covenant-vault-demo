@@ -1,67 +1,44 @@
 {
   "schema": "tn12-batch-assurance-custody-imports-fixture/v1",
   "network": "kaspa-testnet-12",
-  "status": "review-fixture-no-custody-ready-imports",
+  "status": "accepted-custody-output-imports",
   "campaignId": "kaspa-dev-docs-sprint",
   "imports": [
     {
       "pledgeId": "pledge-docs-001",
-      "label": "Rejected planner-payload outpoint paste",
+      "label": "Accepted custody output for pledge-docs-001",
       "amountTkas": "45",
-      "acceptedEvidenceTxid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "acceptedEvidenceTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "outpoint": {
-        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "index": 0
       },
-      "source": "existing accepted planner payload record",
-      "note": "This proves accepted campaign state only. It must not promote to custody."
+      "source": "accepted batch pledge funding transaction",
+      "note": "Amount-matched TN12 P2PK output imported after accepted funding transaction."
     },
     {
       "pledgeId": "pledge-docs-002",
-      "label": "Rejected missing outpoint index",
+      "label": "Accepted custody output for pledge-docs-002",
       "amountTkas": "35",
-      "acceptedEvidenceTxid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "acceptedEvidenceTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "outpoint": {
-        "txid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "index": 1
       },
-      "source": "manual paste",
-      "note": "A pasted txid without an explicit output index cannot be used as a custody input."
+      "source": "accepted batch pledge funding transaction",
+      "note": "Amount-matched TN12 P2PK output imported after accepted funding transaction."
     },
     {
       "pledgeId": "pledge-docs-003",
-      "label": "Rejected duplicate pasted outpoint",
+      "label": "Accepted custody output for pledge-docs-003",
       "amountTkas": "20",
-      "acceptedEvidenceTxid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "acceptedEvidenceTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "outpoint": {
-        "txid": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-        "index": 1
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "index": 2
       },
-      "source": "manual paste",
-      "note": "This shares its outpoint with another pasted row and has no custody evidence in the accepted index."
-    },
-    {
-      "pledgeId": "pledge-docs-003",
-      "label": "Rejected duplicate pasted outpoint copy",
-      "amountTkas": "20",
-      "acceptedEvidenceTxid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
-      "outpoint": {
-        "txid": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-        "index": 1
-      },
-      "source": "manual paste",
-      "note": "Duplicate outpoint imports must stay in review."
-    },
-    {
-      "pledgeId": "pledge-docs-005",
-      "label": "Rejected below-minimum pledge import",
-      "amountTkas": "5",
-      "acceptedEvidenceTxid": "5555555555555555555555555555555555555555555555555555555555555555",
-      "outpoint": {
-        "txid": "5555555555555555555555555555555555555555555555555555555555555555",
-        "index": 0
-      },
-      "source": "manual paste",
-      "note": "Below-minimum rows cannot become custody-ready even with accepted-looking fields."
+      "source": "accepted batch pledge funding transaction",
+      "note": "Amount-matched TN12 P2PK output imported after accepted funding transaction."
     }
   ]
 }

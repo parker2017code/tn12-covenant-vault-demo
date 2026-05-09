@@ -6,9 +6,9 @@
   "warning": "This draft creates amount-matched TN12 P2PK pledge outputs for custody import review. It is not submitted and is not pooled covenant settlement.",
   "source": {
     "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-    "txid": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
-    "outputIndex": 3,
-    "amountTkas": 988.29805
+    "txid": "b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8",
+    "outputIndex": 1,
+    "amountTkas": 974.99995
   },
   "campaign": {
     "id": "kaspa-dev-docs-sprint",
@@ -67,23 +67,23 @@
       "index": 3,
       "label": "change",
       "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "amountTkas": "888.298",
-      "amountSompi": "88829800000",
+      "amountTkas": "874.9999",
+      "amountSompi": "87499990000",
       "scriptType": "p2pk"
     }
   ],
   "minerFeeSompi": "5000",
-  "transactionId": "2d7710ac0bef427a0dd77486646fc34d89b2d13fc10c538372e82904ecbeb20a",
+  "transactionId": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
   "submitPayload": {
     "transaction": {
       "version": 0,
       "inputs": [
         {
           "previousOutpoint": {
-            "transactionId": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
-            "index": 3
+            "transactionId": "b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8",
+            "index": 1
           },
-          "signatureScript": "41bd5896d6c4d9461d8a0af26270d41576cbe0f5859b886ff9fbf3d39e724cec1e702224331130d1c4a0518ac5c29c7a82fd1eeacf6915618196c7bfed846ddcda01",
+          "signatureScript": "41a6451b3ff439030bf8f56129a854366c59db5975445333ad6ae83e02c0665975098af9cd26889c275071cc02c1e7d9d64e86435162695b86eac66c0caca40a3501",
           "sequence": 0,
           "sigOpCount": 1
         }
@@ -111,7 +111,7 @@
           }
         },
         {
-          "amount": 88829800000,
+          "amount": 87499990000,
           "scriptPublicKey": {
             "version": 0,
             "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
@@ -129,15 +129,15 @@
         "utxo": {
           "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
           "entry": {
-            "amount": 98829805000,
-            "blockDaaScore": 6185388,
+            "amount": 97499995000,
+            "blockDaaScore": 5298644,
             "isCoinbase": false,
             "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
           },
           "outpoint": {
             "inner": {
-              "index": 3,
-              "transactionId": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141"
+              "index": 1,
+              "transactionId": "b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8"
             }
           }
         }
@@ -146,84 +146,84 @@
     "tx": {
       "inner": {
         "gas": 0,
-        "id": "2d7710ac0bef427a0dd77486646fc34d89b2d13fc10c538372e82904ecbeb20a",
+        "id": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "inputs": [
           {
             "inner": {
               "previousOutpoint": {
                 "inner": {
-                  "index": 3,
-                  "transactionId": "935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141"
+                  "index": 1,
+                  "transactionId": "b782aaca139e231d3e88ac2610334c6feebb82833c60ba3457749efce0b25de8"
                 }
               },
               "sequence": 0,
               "sigOpCount": 1,
               "signatureScript": [
                 65,
-                189,
-                88,
-                150,
-                214,
-                196,
-                217,
-                70,
-                29,
-                138,
-                10,
-                242,
-                98,
-                112,
-                212,
-                21,
-                118,
-                203,
-                224,
+                166,
+                69,
+                27,
+                63,
+                244,
+                57,
+                3,
+                11,
+                248,
                 245,
-                133,
-                155,
-                136,
-                111,
-                249,
-                251,
-                243,
-                211,
-                158,
-                114,
-                76,
-                236,
-                30,
-                112,
-                34,
-                36,
-                51,
-                17,
-                48,
-                209,
-                196,
-                160,
-                81,
-                138,
-                197,
-                194,
-                156,
-                122,
-                130,
-                253,
-                30,
-                234,
-                207,
-                105,
-                21,
                 97,
-                129,
-                150,
-                199,
-                191,
-                237,
-                132,
-                109,
-                220,
-                218,
+                41,
+                168,
+                84,
+                54,
+                108,
+                89,
+                219,
+                89,
+                117,
+                68,
+                83,
+                51,
+                173,
+                106,
+                232,
+                62,
+                2,
+                192,
+                102,
+                89,
+                117,
+                9,
+                138,
+                249,
+                205,
+                38,
+                136,
+                156,
+                39,
+                80,
+                113,
+                204,
+                2,
+                193,
+                231,
+                217,
+                214,
+                78,
+                134,
+                67,
+                81,
+                98,
+                105,
+                91,
+                134,
+                234,
+                198,
+                108,
+                12,
+                172,
+                164,
+                10,
+                53,
                 1
               ]
             }
@@ -252,7 +252,7 @@
           {
             "inner": {
               "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
-              "value": 88829800000
+              "value": 87499990000
             }
           }
         ],

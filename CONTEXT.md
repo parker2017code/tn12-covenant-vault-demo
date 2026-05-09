@@ -164,7 +164,7 @@ Escrow mutual cancel is now accepted on TN12. The original submit used `sigOpCou
 
 Accepted payload events are listed in `fixtures/PayloadEventEvidence.json` and verified by `npm run payload:verify:events`. The current set covers invoice paid/refund/error, access-pass redemption, auction bids, stable-value issuer issuance/redemption, miner/watcher attestation, prediction/hedge review state, agent task/proof/dispute state, and batch-assurance pledge/release planner state.
 
-`npm run indexer:checkpoint` rebuilds `artifacts/checkpointed-accepted-index.json` from public TN12 transaction reads. It currently tracks 33 accepted records: 7 proof spends and 26 payload events.
+`npm run indexer:checkpoint` rebuilds `artifacts/checkpointed-accepted-index.json` from public TN12 transaction reads. It currently tracks 36 accepted records: 7 proof spends, 26 payload events, and 3 accepted batch-assurance pledge outputs.
 
 Fixtures:
 
@@ -179,7 +179,7 @@ Batch-assurance custody import state:
 - `npm run campaign:custody-imports` writes `artifacts/batch-assurance-custody-imports.json`.
 - `npm run campaign:pledge-funding-draft` writes `artifacts/signed-drafts/batch-assurance-pledge-funding.json` and public pledge-wallet metadata. Generated pledge private keys stay in `.local` and are testnet-only.
 - It validates pasted/imported pledge outpoints against custody requirements: pledge id, amount, txid/index presence, accepted evidence presence, duplicate outpoint, below-minimum rows, and planner-payload-only promotion.
-- Current status remains `custody-imports-blocked-review` because the repo has accepted planner payload evidence, not real amount-matched accepted custody outputs for the 45/35/20 TKAS pledge requirements.
+- Current status is `custody-imports-ready`: the accepted 45/35/20 TKAS pledge outputs are imported and amount-matched. The release artifact is review-ready but not signed or submitted.
 
 ## Implemented Commands
 
@@ -440,7 +440,7 @@ Pause note, 2026-05-08:
 - `artifacts/mainstream-app-direction.json` is the generated version of the high-impact app direction.
 - `artifacts/missing-rails-matrix.json` answers the first-principles rail questions for DEX/AMM, lending, perps/prediction, bridge/source-chain, and stable-value use cases before any product claims.
 - `artifacts/indexer-storage-schema.json` defines the durable indexer storage contract.
-- `artifacts/indexer-replay-run.json` materializes the current 33 accepted records into table-shaped replay rows and keeps app state ready only when mismatches and rollback segments are zero.
+- `artifacts/indexer-replay-run.json` materializes the current 36 accepted records into table-shaped replay rows and keeps app state ready only when mismatches and rollback segments are zero.
 - Do not submit invalid TN12 transactions until a candidate is reviewed and backed by a fresh expendable output.
 
 Recommended order from here:

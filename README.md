@@ -1,13 +1,16 @@
-# TN12 Covenant Vault Demo
+# TN12 Covenant Lab Notes
 
-TN12-configured prototype for a Kaspa covenant vault and assurance-contract app.
+Small Kaspa TN12 proof workspace for covenant scripts, payload receipts, and the debugging notes needed to reproduce them.
 
-This repo is a TN12 learning and proof workspace. It makes covenant-style money rules understandable, compiles Silverscript templates, builds and submits TN12 proof transactions, and avoids mainnet-wallet claims.
+The real core is narrow: accepted TN12 covenant spends, accepted payload receipts, role-separated repeat proofs, and the gotchas found while making them land. The larger app-lane material is scaffolding for tests, fixtures, and future work. Treat it as planning unless it points to accepted transaction evidence or an executable artifact.
 
-Reviewers and LLM agents should start with [`MEMORY.md`](MEMORY.md), then use [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md). The accepted/not-yet-tested TN12 evidence map lives in [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md). The L1 covenant, based-rollup, and vProg boundary lives in [`docs/PROGRAMMABILITY_PATHS.md`](docs/PROGRAMMABILITY_PATHS.md).
+It avoids mainnet-wallet claims. All local keys and funds in this repo are testnet-only.
 
-High-impact mainstream app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md). It keeps invoice/receipt, escrow, assurance, wallet submit, access passes, auctions, vault/treasury, assets, stable-value, DEX/AMM, lending, perps, bridge, ZK, and vProg use cases in the pipeline while separating build-now work from research.
-AI/source discipline lives in [`docs/AI_CODING_SOURCE_DISCIPLINE.md`](docs/AI_CODING_SOURCE_DISCIPLINE.md). It encodes current Kaspa Q&A guardrails, public coding-agent practice, and failure modes so future agents keep persistent instructions short, run executable checks, avoid generic payment-adoption drift, and keep L1-first/product-activity framing.
+Start with [`docs/CORE_LAB_NOTES.md`](docs/CORE_LAB_NOTES.md) for the short version: what actually landed on TN12, what broke, and what is still just scaffolding. Then use [`MEMORY.md`](MEMORY.md), [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md), [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md), and [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md) to verify GitHub state, Pages artifacts, txids, and claim boundaries.
+The L1 covenant, based-rollup, and vProg boundary lives in [`docs/PROGRAMMABILITY_PATHS.md`](docs/PROGRAMMABILITY_PATHS.md).
+
+High-impact app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md), but it is not proof that those apps exist. It is a research queue for what would be useful after wallet, indexer, custody, and settlement rails are real.
+AI/source discipline lives in [`docs/AI_CODING_SOURCE_DISCIPLINE.md`](docs/AI_CODING_SOURCE_DISCIPLINE.md). It is a guardrail against stale or inflated claims, not a product feature.
 
 Protocol-debugging rule: unclear TN12, Silverscript, Rusty Kaspa, signing, submit, serialization, or covenant behavior starts with local evidence: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and upstream source/tests. Escalation needs a txid, artifact path, endpoint response, source line, and smallest reproducer command.
 Resolved escalation notes are tracked in [`docs/MICHAEL_QUESTIONS.md`](docs/MICHAEL_QUESTIONS.md).
@@ -18,6 +21,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 - Accepted proof core: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, escrow DAA-refund, and escrow mutual cancel.
 - Accepted role-separated proof passes: TN12 accepted all seven distinct-key positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.
 - Accepted invoice payload events: paid, refunded, and error states now have TN12 JSON wRPC transactions and evidence artifacts.
+- Accepted batch-assurance custody outputs: TN12 accepted one funding transaction with 45/35/20 TKAS pledge outputs, and the custody-import gate now matches those exact outpoints.
 - Escrow mutual cancel is now accepted on TN12. The old script-unit rejection came from `sigOpCount=1` bad configuration; the accepted path is the corrected tx version 1 `computeBudget=30` draft rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`.
 - Near-term app priority: payload invoice/receipt vertical slice, because it is closest to mainnet-capable Kaspa behavior.
 - Strategic framing: invoice/receipt work is a payment and accepted-state rail, not the headline adoption thesis. Current source discipline down-ranks generic merchant/POS adoption language and moves usable product activity, coordination-market direction, and visible on-chain metrics higher.
@@ -45,6 +49,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 - Builds a transaction-payload signal artifact as the first step toward accepted-transaction app indexing.
 - Builds a cross-chain research library that maps PMF, failure modes, and open-source code patterns into Kaspa status lanes.
 - Builds batch assurance campaign state from multiple pledge records without claiming pooled covenant enforcement.
+- Imports accepted 45/35/20 TKAS batch-assurance pledge outputs and builds a custody-release review artifact from those matched outpoints.
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
 - Builds an escrow primitive registry and escrow Silverscript templates for buyer-approved release, DAA-score timeout refund, and mutual cancel planning.
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
@@ -63,6 +68,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 - It does not broadcast from the wallet connector artifacts; they are review and state-ledger surfaces until a real wallet adapter is wired.
 - It does not run a local Kaspa full node.
 - It does not implement pooled assurance target aggregation yet.
+- It does not sign or submit the batch-assurance release/refund spend yet; the current artifact is a review-ready custody draft.
 - It does not claim mainnet covenant support.
 - It does not implement full vProgs, mature native DeFi, or cross-app atomic composition.
 
@@ -389,7 +395,7 @@ npm run campaign:custody-imports
 npm run campaign:pledge-funding-draft
 ```
 
-This turns `fixtures/BatchAssuranceCampaign.json` and `fixtures/BatchAssuranceCustodyImports.json` into `artifacts/batch-assurance-campaign.json`, `artifacts/batch-assurance-custody-drafts.json`, `artifacts/batch-assurance-custody-requirements.json`, `artifacts/batch-assurance-pledge-output-plan.json`, `artifacts/batch-assurance-custody-imports.json`, and `artifacts/signed-drafts/batch-assurance-pledge-funding.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. The custody draft review blocks planner payloads unless the referenced output amount matches the pledge amount. The requirements artifact lists the exact amount-matched pledge outputs that must be accepted on TN12 before release or refund custody drafts can be treated as spendable settlement work. The pledge-output plan turns that gap into wallet-reviewable output requirements and an import workflow. The pledge-funding draft creates signed-not-broadcast 45/35/20 TKAS P2PK outputs for those requirements, with generated pledge private keys stored only in `.local/tn12-batch-pledge-wallets.json` and public metadata in `fixtures/BatchAssurancePledgeWallets.public.json`. The custody-import validator reviews pasted outpoints for pledge id, amount, txid/index, accepted evidence, duplicate outpoints, minimum pledge, and planner-payload-only promotion. Current batch-assurance pledge and release-ready records have accepted TN12 payload evidence, but they do not prove custody settlement or pooled covenant enforcement.
+This turns `fixtures/BatchAssuranceCampaign.json` and `fixtures/BatchAssuranceCustodyImports.json` into `artifacts/batch-assurance-campaign.json`, `artifacts/batch-assurance-custody-drafts.json`, `artifacts/batch-assurance-custody-requirements.json`, `artifacts/batch-assurance-pledge-output-plan.json`, `artifacts/batch-assurance-custody-imports.json`, and `artifacts/signed-drafts/batch-assurance-pledge-funding.json`. Accepted pledge records count toward release readiness; signed-only or draft pledge records are visible as planned progress only. The custody draft review blocks planner payloads unless the referenced output amount matches the pledge amount. The requirements artifact lists the exact amount-matched pledge outputs that must be accepted on TN12 before release or refund custody drafts can be treated as spendable settlement work. The pledge-output plan now reports those outputs already matched. The pledge-funding draft created 45/35/20 TKAS P2PK outputs, with generated pledge private keys stored only in `.local/tn12-batch-pledge-wallets.json` and public metadata in `fixtures/BatchAssurancePledgeWallets.public.json`; the rebuilt draft was accepted as `0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a`. The custody-import validator reviews pasted outpoints for pledge id, amount, txid/index, accepted evidence, duplicate outpoints, minimum pledge, and planner-payload-only promotion. Current batch-assurance planner records and accepted pledge outputs prove review-ready custody inputs, not pooled covenant aggregation or a signed release spend.
 
 Build the enforcement matrix:
 

@@ -5,9 +5,9 @@ export function buildBatchAssuranceCustodyRequirements({
   checkpointIndex = {},
   custodyDrafts = {}
 } = {}) {
-  const recordsByTxid = new Map((checkpointIndex.records || []).map((record) => [record.txid, record]));
+  const recordsByOutpoint = buildRecordMaps(checkpointIndex.records || []);
   const requirements = (campaignState.releasePlan?.inputs || []).map((input) =>
-    buildPledgeRequirement({ input, record: recordsByTxid.get(input.sourceOutpoint?.txid) })
+    buildPledgeRequirement({ input, record: recordForOutpoint(recordsByOutpoint, input.sourceOutpoint) })
   );
   const readyRequirements = requirements.filter((requirement) => requirement.status === "custody-input-ready");
   const blockedRequirements = requirements.filter((requirement) => requirement.status !== "custody-input-ready");
@@ -107,6 +107,28 @@ function buildPledgeRequirement({ input, record }) {
       : "Build and submit an accepted TN12 pledge output with this exact amount, then import that outpoint into the campaign fixture.",
     blockers
   };
+}
+
+function buildRecordMaps(records) {
+  const byOutpoint = new Map();
+  const byTxid = new Map();
+  for (const record of records) {
+    byTxid.set(record.txid, record);
+    const index = record.output?.observed?.outputIndex ?? record.observed?.outputIndex ?? record.expected?.outputIndex;
+    if (Number.isInteger(Number(index))) {
+      byOutpoint.set(outpointKey({ txid: record.txid, index: Number(index) }), record);
+    }
+  }
+  return { byOutpoint, byTxid };
+}
+
+function recordForOutpoint(recordsByOutpoint, outpoint = {}) {
+  const key = outpointKey(outpoint);
+  return recordsByOutpoint.byOutpoint.get(key) || recordsByOutpoint.byTxid.get(outpoint.txid);
+}
+
+function outpointKey(outpoint = {}) {
+  return `${outpoint.txid || ""}:${Number(outpoint.index || 0)}`;
 }
 
 function tkasToSompi(value) {

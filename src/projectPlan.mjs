@@ -9,7 +9,8 @@ export function buildProjectPlan(fixture = {}) {
     laneItem(byId, "auction-intents", "Accepted bid and planner payloads prove indexer-side auction state."),
     laneItem(byId, "ai-agent-commitments", "Accepted task, proof, dispute, release, and hold payloads prove lifecycle state."),
     laneItem(byId, "defi-research", "Prediction/hedge review payloads are accepted while settlement remains out of scope."),
-    action("custody-requirements", "Batch assurance now names the exact amount-matched pledge outputs needed before custody settlement.", "batch-assurance"),
+    action("custody-requirements", "Batch assurance names the exact amount-matched pledge outputs needed before custody settlement.", "batch-assurance"),
+    action("accepted-pledge-outputs", "TN12 accepted the 45/35/20 TKAS batch-assurance pledge outputs and the custody import gate now matches those accepted outpoints.", "batch-assurance"),
     action("indexer-replay-plan", "The accepted-index replay plan defines storage, virtual-chain reader, reducers, rollback replay, and health surface.", "payload-invoice"),
     action("indexer-storage-schema", "The durable indexer storage contract now defines checkpoint, transaction, payload event, proof spend, and rollback tables.", "payload-invoice"),
     action("indexer-fixture-replay", "The fixture-backed replay run now materializes checkpoint, accepted transaction, payload event, proof spend, and rollback rows from the current checkpoint.", "payload-invoice"),
@@ -24,13 +25,13 @@ export function buildProjectPlan(fixture = {}) {
 
   const wip = [
     laneItem(byId, "submit-console", "Wallet submit package is built; the live no-local-key connector remains WIP."),
-    laneItem(byId, "batch-assurance", "Next work is real accepted pledge-output transactions for the amounts listed in the custody requirements."),
+    laneItem(byId, "batch-assurance", "Accepted amount-matched pledge outputs are imported; next work is signed release/refund drafts from those outputs."),
     laneItem(byId, "miner-pool-signals", "Source signature review now gates influence; reputation thresholds still need hardening."),
     laneItem(byId, "treasury-vaults", "Turn policy templates into constrained spend drafts with role separation.")
   ];
 
   const next = [
-    action("pledge-output-drafts", "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS.", "batch-assurance"),
+    action("batch-release-refund-drafts", "Build wallet-reviewable batch assurance release/refund drafts from the accepted 45/35/20 TKAS pledge outputs.", "batch-assurance"),
     action("indexer-virtual-chain-reader", "Replace known-txid checkpoint input with a node/RPC virtual-chain reader feeding the replay tables.", "payload-invoice"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),

@@ -18,39 +18,39 @@
       "contributor": "docs-backer-alpha",
       "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
       "amountTkas": 45,
-      "acceptedTxid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "acceptedTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "outpoint": {
-        "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
         "index": 0
       },
-      "status": "accepted-payload-indexed",
-      "note": "Accepted planner record. It counts toward app-state release readiness, not custody settlement."
+      "status": "accepted-output-imported",
+      "note": "Accepted amount-matched custody output imported from batch pledge funding tx output 0."
     },
     {
       "pledgeId": "pledge-docs-002",
       "contributor": "wallet-builder-beta",
       "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
       "amountTkas": 35,
-      "acceptedTxid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "acceptedTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "outpoint": {
-        "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
-        "index": 0
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "index": 1
       },
-      "status": "accepted-payload-indexed",
-      "note": "Accepted planner record. It counts toward app-state release readiness, not custody settlement."
+      "status": "accepted-output-imported",
+      "note": "Accepted amount-matched custody output imported from batch pledge funding tx output 1."
     },
     {
       "pledgeId": "pledge-docs-003",
       "contributor": "pool-tooling-gamma",
       "refundAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
       "amountTkas": 20,
-      "acceptedTxid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "acceptedTxid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "outpoint": {
-        "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
-        "index": 0
+        "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "index": 2
       },
-      "status": "accepted-payload-indexed",
-      "note": "Accepted planner record. It completes the target in planner/indexer state."
+      "status": "accepted-output-imported",
+      "note": "Accepted amount-matched custody output imported from batch pledge funding tx output 2."
     },
     {
       "pledgeId": "pledge-docs-004",

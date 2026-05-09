@@ -1,0 +1,36 @@
+{
+  "schema": "tn12-accepted-output-evidence-manifest/v1",
+  "network": "kaspa-testnet-12",
+  "outputs": [
+    {
+      "label": "Batch assurance pledge output 001",
+      "lane": "batch-assurance-pledge-output",
+      "subject": "pledge-docs-001",
+      "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+      "outputIndex": 0,
+      "amountSompi": "4500000000",
+      "destination": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
+      "scriptType": "pubkey"
+    },
+    {
+      "label": "Batch assurance pledge output 002",
+      "lane": "batch-assurance-pledge-output",
+      "subject": "pledge-docs-002",
+      "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+      "outputIndex": 1,
+      "amountSompi": "3500000000",
+      "destination": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9",
+      "scriptType": "pubkey"
+    },
+    {
+      "label": "Batch assurance pledge output 003",
+      "lane": "batch-assurance-pledge-output",
+      "subject": "pledge-docs-003",
+      "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+      "outputIndex": 2,
+      "amountSompi": "2000000000",
+      "destination": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+      "scriptType": "pubkey"
+    }
+  ]
+}

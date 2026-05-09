@@ -49,7 +49,7 @@ export function buildIndexerReplayPlan({
       step("ui-health-surface", "Expose last checkpoint, lag, rollback status, and mismatch count in the app.", "later")
     ],
     acceptanceCriteria: [
-      "A replay run can rebuild the same 33 accepted records now covered by `npm run check:tn12`.",
+      `A replay run can rebuild the same ${Number(summary.total || checkpoint.recordCount || records.length || 0)} accepted records now covered by the checkpoint and verification commands.`,
       "The indexer stores the txid, accepting block blue score, payload bytes, output data, and matched reducer status.",
       "A lower blue-score watermark or missing previous txid blocks derived app state until replay finishes.",
       "Payload app state remains tied to matched accepted payload bytes, not submitted txids alone.",
@@ -57,7 +57,7 @@ export function buildIndexerReplayPlan({
     ],
     boundaries: [
       "This is an implementation plan for durable indexing, not a live node subscription.",
-      "It does not change accepted proof or payload counts.",
+      "It does not change accepted proof, payload, or output-evidence counts.",
       "It keeps local-node setup optional until a durable backend slice is explicitly built."
     ]
   };

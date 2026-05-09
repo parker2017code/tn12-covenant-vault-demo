@@ -318,6 +318,36 @@
       "appliesTo": ["tn12"],
       "risk": "AI broadcasts, pushes, deletes, or connects to external systems without a human review boundary.",
       "guardrail": "Broadcast remains explicit; wallet connector run is dry-run until a real wallet and user action exist."
+    },
+    {
+      "id": "inflated-surface-area",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "Many lanes, fixtures, and generated artifacts make a small proof kernel look like a product suite.",
+      "guardrail": "Lead public copy with accepted txids, scripts, and SDK lessons; keep lane count and research surfaces secondary."
+    },
+    {
+      "id": "fixture-transform-as-progress",
+      "appliesTo": ["tn12"],
+      "risk": "A script that reads JSON and emits JSON is treated like product progress even when it adds no new evidence.",
+      "guardrail": "A fixture transform counts only if it catches a bug, tightens a claim, exposes a missing rail, or drives the next accepted transaction."
+    },
+    {
+      "id": "roadmap-language-as-implementation",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "Words like app, market, DeFi, stable-value, agent, and coordination make research or planner state sound implemented.",
+      "guardrail": "Keep those terms research/planner-labeled until custody, settlement, wallet, indexer, and failure paths exist."
+    },
+    {
+      "id": "repetitive-boundary-prose",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "Every page repeats all non-claims, making the repo read like machine-generated scaffolding.",
+      "guardrail": "Put boundaries once in the right artifact and keep public-facing copy short: what landed, how to verify, what broke, what is next."
+    },
+    {
+      "id": "txid-only-utxo-reasoning",
+      "appliesTo": ["tn12"],
+      "risk": "Code treats a transaction id as one spendable pledge, missing that distinct outputs in the same transaction are different UTXOs.",
+      "guardrail": "Key custody, import, and matching logic by full outpoint: txid plus output index."
     }
   ],
   "topCryptoEngineerRules": [

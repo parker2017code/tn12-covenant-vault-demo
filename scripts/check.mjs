@@ -458,39 +458,36 @@ assert.ok(campaignState.pledges.some((pledge) =>
   && pledge.review.countsTowardRelease === false
 ));
 const custodyDraftFixture = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-custody-drafts.json", import.meta.url), "utf8"));
-assert.equal(custodyDraftFixture.status, "custody-draft-blocked");
-assert.equal(custodyDraftFixture.summary.blockedInputCount, 3);
-assert.equal(custodyDraftFixture.summary.eligibleInputCount, 0);
-assert.match(custodyDraftFixture.releaseDraft.blockers[0].reason, /amount does not match/);
+assert.equal(custodyDraftFixture.status, "custody-release-draft-ready");
+assert.equal(custodyDraftFixture.summary.blockedInputCount, 0);
+assert.equal(custodyDraftFixture.summary.eligibleInputCount, 3);
+assert.equal(custodyDraftFixture.summary.releaseOutputTkas, "99.99995");
+assert.equal(custodyDraftFixture.releaseDraft.blockers.length, 0);
 const custodyRequirementsFixture = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-custody-requirements.json", import.meta.url), "utf8"));
-assert.equal(custodyRequirementsFixture.status, "custody-requirements-open");
+assert.equal(custodyRequirementsFixture.status, "custody-requirements-satisfied");
 assert.equal(custodyRequirementsFixture.summary.pledgeOutputCount, 3);
-assert.equal(custodyRequirementsFixture.summary.readyCount, 0);
-assert.equal(custodyRequirementsFixture.summary.blockedCount, 3);
+assert.equal(custodyRequirementsFixture.summary.readyCount, 3);
+assert.equal(custodyRequirementsFixture.summary.blockedCount, 0);
 assert.equal(custodyRequirementsFixture.summary.requiredTkas, "100");
-assert.equal(custodyRequirementsFixture.summary.observedReferencedTkas, "3");
-assert.equal(custodyRequirementsFixture.summary.missingMatchedTkas, "100");
+assert.equal(custodyRequirementsFixture.summary.observedReferencedTkas, "100");
+assert.equal(custodyRequirementsFixture.summary.missingMatchedTkas, "0");
 assert.ok(custodyRequirementsFixture.requirements.every((requirement) =>
   requirement.required.sourceKind === "accepted-pledge-output"
-  && requirement.currentReference.amountMatches === false
+  && requirement.currentReference.amountMatches === true
 ));
 const pledgeOutputPlan = buildBatchAssurancePledgeOutputPlan({
   custodyRequirements: custodyRequirementsFixture,
   walletConnectorRequests: walletConnectorRequestsArtifact
 });
-assert.equal(pledgeOutputPlan.status, "pledge-output-plan-ready");
-assert.equal(pledgeOutputPlan.summary.outputsToCreate, 3);
+assert.equal(pledgeOutputPlan.status, "pledge-outputs-already-matched");
+assert.equal(pledgeOutputPlan.summary.outputsToCreate, 0);
 assert.equal(pledgeOutputPlan.summary.totalRequiredTkas, "100");
-assert.equal(pledgeOutputPlan.summary.missingTkas, "100");
+assert.equal(pledgeOutputPlan.summary.missingTkas, "0");
 assert.equal(pledgeOutputPlan.summary.walletConnectorRequestsReady, true);
-assert.ok(pledgeOutputPlan.outputsToCreate.some((output) =>
-  output.pledgeId === "pledge-docs-001"
-  && output.amountTkas === "45"
-  && output.importTarget.fixturePath === "fixtures/BatchAssuranceCampaign.json"
-));
+assert.equal(pledgeOutputPlan.outputsToCreate.length, 0);
 const pledgeOutputPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-pledge-output-plan.json", import.meta.url), "utf8"));
-assert.equal(pledgeOutputPlanArtifact.status, "pledge-output-plan-ready");
-assert.equal(pledgeOutputPlanArtifact.summary.outputsToCreate, 3);
+assert.equal(pledgeOutputPlanArtifact.status, "pledge-outputs-already-matched");
+assert.equal(pledgeOutputPlanArtifact.summary.outputsToCreate, 0);
 const custodyImportsFixture = JSON.parse(await readFile(new URL("../fixtures/BatchAssuranceCustodyImports.json", import.meta.url), "utf8"));
 const custodyImportCheckpoint = JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8"));
 const custodyImports = buildBatchAssuranceCustodyImports({
@@ -499,34 +496,21 @@ const custodyImports = buildBatchAssuranceCustodyImports({
   custodyRequirements: custodyRequirementsFixture,
   checkpointIndex: custodyImportCheckpoint
 });
-assert.equal(custodyImports.status, "custody-imports-blocked-review");
-assert.equal(custodyImports.summary.importCount, 5);
-assert.equal(custodyImports.summary.readyCount, 0);
-assert.equal(custodyImports.summary.blockedCount, 5);
+assert.equal(custodyImports.status, "custody-imports-ready");
+assert.equal(custodyImports.summary.importCount, 3);
+assert.equal(custodyImports.summary.readyCount, 3);
+assert.equal(custodyImports.summary.blockedCount, 0);
 assert.equal(custodyImports.summary.requiredPledgeCount, 3);
-assert.equal(custodyImports.summary.missingRequiredImports, 3);
-assert.equal(custodyImports.summary.requirementsSatisfied, false);
-assert.ok(custodyImports.imports.some((row) =>
-  row.pledgeId === "pledge-docs-001"
-  && row.acceptedEvidence.kind === "payload-event"
-  && row.checks.plannerPayloadOnly
-  && row.problems.includes("accepted planner payload record is not a custody output")
-));
-assert.ok(custodyImports.imports.some((row) =>
-  row.pledgeId === "pledge-docs-002"
-  && row.checks.hasOutpointIndex === false
-));
-assert.ok(custodyImports.imports.some((row) =>
-  row.pledgeId === "pledge-docs-003"
-  && row.checks.duplicateOutpoint
-));
-assert.ok(custodyImports.imports.some((row) =>
-  row.pledgeId === "pledge-docs-005"
-  && row.checks.meetsMinimum === false
+assert.equal(custodyImports.summary.missingRequiredImports, 0);
+assert.equal(custodyImports.summary.requirementsSatisfied, true);
+assert.ok(custodyImports.imports.every((row) =>
+  row.status === "custody-import-ready"
+  && row.acceptedEvidence.kind === "accepted-output"
+  && row.checks.plannerPayloadOnly === false
 ));
 const custodyImportsArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-custody-imports.json", import.meta.url), "utf8"));
-assert.equal(custodyImportsArtifact.status, "custody-imports-blocked-review");
-assert.equal(custodyImportsArtifact.summary.readyCount, 0);
+assert.equal(custodyImportsArtifact.status, "custody-imports-ready");
+assert.equal(custodyImportsArtifact.summary.readyCount, 3);
 const pledgeFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/batch-assurance-pledge-funding.json", import.meta.url), "utf8"));
 const pledgeWalletPublic = JSON.parse(await readFile(new URL("../fixtures/BatchAssurancePledgeWallets.public.json", import.meta.url), "utf8"));
 assert.equal(pledgeFundingDraft.schema, "tn12-batch-assurance-pledge-funding-draft/v1");
@@ -556,6 +540,7 @@ const syntheticCustodyCheckpoint = {
     matched: true,
     output: {
       observed: {
+        outputIndex: input.sourceOutpoint.index,
         amountSompi: String(BigInt(Math.round(input.amountTkas * 100000000))),
         amountTkas: String(input.amountTkas)
       }
@@ -773,7 +758,7 @@ assert.ok(projectStatus.naturalNextSteps.some((step) => /agent-task/i.test(step)
 assert.ok(projectStatus.lanes.some((lane) => lane.id === "zk-anchor-readiness" && lane.status === "research"));
 const projectPlan = buildProjectPlan(buildStatusFixture);
 assert.equal(projectPlan.status, "active-operator-plan");
-assert.equal(projectPlan.summary.done, 17);
+assert.equal(projectPlan.summary.done, 18);
 assert.equal(projectPlan.summary.wip, 4);
 assert.equal(projectPlan.summary.next, 5);
 assert.equal(projectPlan.summary.later, 6);
@@ -783,6 +768,7 @@ assert.ok(projectPlan.done.some((item) => item.id === "covenant-adversarial-map"
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-drafts"));
+assert.ok(projectPlan.done.some((item) => item.id === "accepted-pledge-outputs"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-invalid-candidates"));
 assert.ok(projectPlan.done.some((item) => item.id === "indexer-storage-schema"));
@@ -908,20 +894,27 @@ assert.ok(acceptedState.records.some((record) =>
   && record.txid === "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
 ));
 const checkpointFixture = JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8"));
-assert.equal(checkpointFixture.summary.total, 33);
+assert.equal(checkpointFixture.summary.total, 36);
 assert.equal(checkpointFixture.summary.proofs, 7);
 assert.equal(checkpointFixture.summary.payloadEvents, 26);
+assert.equal(checkpointFixture.summary.outputEvidence, 3);
 assert.equal(checkpointFixture.summary.mismatches, 0);
 assert.equal(checkpointFixture.status, "accepted-index-fully-matched");
+assert.ok(checkpointFixture.records.some((record) =>
+  record.kind === "accepted-output"
+  && record.lane === "batch-assurance-pledge-output"
+  && record.expected.subject === "pledge-docs-001"
+  && record.output.observed.outputIndex === 0
+));
 assert.ok(checkpointFixture.checkpoint.maxAcceptingBlockBlueScore > checkpointFixture.checkpoint.minAcceptingBlockBlueScore);
 const persistedCheckpointFixture = JSON.parse(await readFile(new URL("../artifacts/persisted-checkpoint-guard.json", import.meta.url), "utf8"));
 assert.equal(persistedCheckpointFixture.status, "persisted-checkpoint-ready");
-assert.equal(persistedCheckpointFixture.summary.recordCount, 33);
+assert.equal(persistedCheckpointFixture.summary.recordCount, 36);
 assert.equal(persistedCheckpointFixture.summary.mismatches, 0);
 assert.equal(persistedCheckpointFixture.summary.rollbackDetected, false);
 const replayPlanFixture = JSON.parse(await readFile(new URL("../artifacts/indexer-replay-plan.json", import.meta.url), "utf8"));
 assert.equal(replayPlanFixture.status, "durable-indexer-plan-ready");
-assert.equal(replayPlanFixture.currentCheckpoint.recordCount, 33);
+assert.equal(replayPlanFixture.currentCheckpoint.recordCount, 36);
 assert.equal(replayPlanFixture.currentCheckpoint.proofSpends, 7);
 assert.equal(replayPlanFixture.currentCheckpoint.payloadEvents, 26);
 assert.equal(replayPlanFixture.currentCheckpoint.rollbackDetected, false);
@@ -932,7 +925,7 @@ const indexerStorageFixture = JSON.parse(await readFile(new URL("../artifacts/in
 assert.equal(indexerStorageFixture.status, "storage-schema-ready");
 assert.equal(indexerStorageFixture.tables.length, 5);
 assert.ok(indexerStorageFixture.tables.some((table) => table.name === "rollback_segments"));
-assert.equal(indexerStorageFixture.sourceCheckpoint.recordCount, 33);
+assert.equal(indexerStorageFixture.sourceCheckpoint.recordCount, 36);
 const rebuiltIndexerStorage = buildIndexerStorageSchema({
   replayPlan: replayPlanFixture,
   checkpointIndex: checkpointFixture,
@@ -942,11 +935,11 @@ assert.equal(rebuiltIndexerStorage.status, "storage-schema-ready");
 assert.equal(rebuiltIndexerStorage.sourceCheckpoint.payloadEvents, 26);
 const indexerReplayRunFixture = JSON.parse(await readFile(new URL("../artifacts/indexer-replay-run.json", import.meta.url), "utf8"));
 assert.equal(indexerReplayRunFixture.status, "fixture-replay-ready");
-assert.equal(indexerReplayRunFixture.summary.records, 33);
+assert.equal(indexerReplayRunFixture.summary.records, 36);
 assert.equal(indexerReplayRunFixture.summary.payloadEvents, 26);
 assert.equal(indexerReplayRunFixture.summary.proofSpends, 7);
 assert.equal(indexerReplayRunFixture.summary.appStateReady, true);
-assert.equal(indexerReplayRunFixture.tableCounts.accepted_transactions, 33);
+assert.equal(indexerReplayRunFixture.tableCounts.accepted_transactions, 36);
 assert.equal(indexerReplayRunFixture.tableCounts.rollback_segments, 0);
 const rebuiltReplayRun = buildIndexerReplayRun({
   checkpointIndex: checkpointFixture,
@@ -964,7 +957,7 @@ const virtualChainIngestionPlan = buildVirtualChainIngestionPlan({
   generatedAt: "2026-05-08T00:00:00.000Z"
 });
 assert.equal(virtualChainIngestionPlan.status, "virtual-chain-ingestion-contract-ready");
-assert.equal(virtualChainIngestionPlan.sourceCheckpoint.recordCount, 33);
+assert.equal(virtualChainIngestionPlan.sourceCheckpoint.recordCount, 36);
 assert.equal(virtualChainIngestionPlan.readerContract.dataVerbosity, "High");
 assert.ok(virtualChainIngestionPlan.rollbackPolicy.openWhen.some((item) => /lower than/.test(item)));
 const virtualChainIngestionArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-plan.json", import.meta.url), "utf8"));
@@ -976,14 +969,14 @@ const virtualChainIngestionRun = buildVirtualChainIngestionRun({
   runAt: "2026-05-08T00:00:00.000Z"
 });
 assert.equal(virtualChainIngestionRun.status, "fixture-virtual-chain-run-ready");
-assert.equal(virtualChainIngestionRun.summary.virtualChainRows, 33);
+assert.equal(virtualChainIngestionRun.summary.virtualChainRows, 36);
 assert.equal(virtualChainIngestionRun.summary.payloadRows, 26);
 assert.equal(virtualChainIngestionRun.summary.proofRows, 7);
 assert.equal(virtualChainIngestionRun.summary.rollbackRows, 0);
 assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 10);
 const virtualChainIngestionRunArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-run.json", import.meta.url), "utf8"));
 assert.equal(virtualChainIngestionRunArtifact.status, "fixture-virtual-chain-run-ready");
-assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, 33);
+assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, 36);
 const virtualChainReaderAdapterFixture = JSON.parse(await readFile(new URL("../fixtures/VirtualChainReaderAdapter.json", import.meta.url), "utf8"));
 const virtualChainReaderAdapter = buildVirtualChainReaderAdapter({
   fixture: virtualChainReaderAdapterFixture,
@@ -1008,7 +1001,7 @@ assert.equal(virtualChainReaderAdapter.summary.acceptedCountsChanged, false);
 assert.equal(virtualChainReaderAdapter.readinessChecks.fixtureReplayCompatible, true);
 const virtualChainReaderAdapterArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-reader-adapter.json", import.meta.url), "utf8"));
 assert.equal(virtualChainReaderAdapterArtifact.status, "virtual-chain-reader-adapter-ready");
-assert.equal(virtualChainReaderAdapterArtifact.summary.virtualChainRows, 33);
+assert.equal(virtualChainReaderAdapterArtifact.summary.virtualChainRows, 36);
 assert.equal(virtualChainReaderAdapterArtifact.summary.localNodeRequired, false);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,

@@ -38,7 +38,7 @@
     {
       "id": "checkpointed-indexer-fixture-replay",
       "label": "Checkpointed indexer schema and fixture replay",
-      "evidence": "Current 33 accepted records are checkpointed, persisted, shaped into tables, and replayed from fixture data.",
+      "evidence": "Current 36 accepted records are checkpointed, persisted, shaped into tables, and replayed from fixture data.",
       "lane": "indexer"
     },
     {

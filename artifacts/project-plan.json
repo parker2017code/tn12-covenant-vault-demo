@@ -3,7 +3,7 @@
   "reviewedAt": "2026-05-08",
   "status": "active-operator-plan",
   "summary": {
-    "done": 17,
+    "done": 18,
     "wip": 4,
     "next": 5,
     "later": 6
@@ -78,7 +78,12 @@
     {
       "id": "custody-requirements",
       "laneId": "batch-assurance",
-      "detail": "Batch assurance now names the exact amount-matched pledge outputs needed before custody settlement."
+      "detail": "Batch assurance names the exact amount-matched pledge outputs needed before custody settlement."
+    },
+    {
+      "id": "accepted-pledge-outputs",
+      "laneId": "batch-assurance",
+      "detail": "TN12 accepted the 45/35/20 TKAS batch-assurance pledge outputs and the custody import gate now matches those accepted outpoints."
     },
     {
       "id": "indexer-replay-plan",
@@ -145,12 +150,12 @@
     {
       "laneId": "batch-assurance",
       "name": "Batch Assurance Campaigns",
-      "status": "accepted-planner-payloads",
+      "status": "accepted-custody-outputs",
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-tn12-json-wrpc-payload-events",
-      "detail": "Next work is real accepted pledge-output transactions for the amounts listed in the custody requirements.",
-      "next": "Build accepted TN12 pledge outputs for the exact campaign amounts, then import those outpoints before settlement."
+      "detail": "Accepted amount-matched pledge outputs are imported; next work is signed release/refund drafts from those outputs.",
+      "next": "Build signed release/refund transaction drafts from the matched accepted pledge outputs."
     },
     {
       "laneId": "miner-pool-signals",
@@ -175,9 +180,9 @@
   ],
   "next": [
     {
-      "id": "pledge-output-drafts",
+      "id": "batch-release-refund-drafts",
       "laneId": "batch-assurance",
-      "detail": "Build wallet-reviewable pledge output drafts for 45, 35, and 20 TKAS."
+      "detail": "Build wallet-reviewable batch assurance release/refund drafts from the accepted 45/35/20 TKAS pledge outputs."
     },
     {
       "id": "indexer-virtual-chain-reader",
