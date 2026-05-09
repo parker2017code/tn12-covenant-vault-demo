@@ -37,7 +37,7 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
    - Current status: base built plus marketplace demo plan.
    - Enforcement: script for accepted release, DAA-refund, and mutual-cancel paths.
    - Proof: accepted escrow funding, accepted release spend, and accepted DAA-expired refund spend.
-   - App surface: `npm run escrow:marketplace` maps buyer/seller listings, release/refund/cancel actions, wallet connector dependency, proof backdrop, and dispute boundaries. `npm run escrow:flow` turns those listings into a buyer/seller workflow that remains blocked on wallet-standard signing and accepted replay.
+   - App surface: `npm run escrow:marketplace` maps buyer/seller listings, release/refund/cancel actions, wallet connector dependency, proof backdrop, and dispute boundaries. `npm run escrow:flow` turns those listings into a buyer/seller workflow. `npm run escrow:action-map` now maps five marketplace actions to unsigned proof-lab templates and the current wallet-standard request set; all five stay blocked until external signer validation and accepted replay exist.
    - Cancel status: accepted on a separate funded output. The first submit used `sigOpCount=1` and hit `used=200870`, `limit=109999`; the old-SDK v1 attempt failed verification; the corrected local TN12 SDK route accepted `14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c`.
    - Latest route: Rusty Kaspa TN12 source confirms tx version 1 plus `computeBudget`; v1 malformed RPC transactions with non-zero `sig_op_count` are rejected. The accepted JS route uses local TN12 `kaspa-wasm 1.1.1-toc.1` with `sigOpCount: 0, computeBudget: 30`.
 

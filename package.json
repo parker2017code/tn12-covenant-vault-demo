@@ -86,6 +86,7 @@
     "escrow:registry": "node scripts/build-escrow-primitives.mjs",
     "escrow:marketplace": "node scripts/build-escrow-marketplace-demo.mjs",
     "escrow:flow": "node scripts/build-escrow-marketplace-flow.mjs",
+    "escrow:action-map": "node scripts/build-escrow-marketplace-action-map.mjs",
     "treasury:registry": "node scripts/build-treasury-vaults.mjs",
     "treasury:spends": "node scripts/build-treasury-constrained-spends.mjs",
     "treasury:role-review": "node scripts/build-treasury-role-review.mjs",

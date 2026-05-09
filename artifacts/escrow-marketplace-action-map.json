@@ -1,0 +1,103 @@
+{
+  "schema": "tn12-escrow-marketplace-action-map/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T21:07:48.955Z",
+  "status": "escrow-action-map-ready",
+  "summary": {
+    "flows": 3,
+    "actions": 5,
+    "mappedActions": 0,
+    "blockedActions": 5,
+    "liveExternalSignerAccepted": false
+  },
+  "flows": [
+    {
+      "escrowId": "escrow-freelance-001",
+      "title": "Freelance wallet integration review",
+      "marketState": "funded-awaiting-action",
+      "state": "wallet-review-needed",
+      "actions": [
+        {
+          "action": "release",
+          "status": "wallet-request-blocked",
+          "unsignedRequestId": "ureq-fda320a9",
+          "walletStandardRequestId": "",
+          "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-release.json",
+          "reviewFingerprint": "",
+          "blockers": [
+            "no wallet-standard request mapped",
+            "external signer accepted result missing"
+          ]
+        },
+        {
+          "action": "timeout-refund",
+          "status": "wallet-request-blocked",
+          "unsignedRequestId": "ureq-f5845e00",
+          "walletStandardRequestId": "",
+          "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-refund.json",
+          "reviewFingerprint": "",
+          "blockers": [
+            "no wallet-standard request mapped",
+            "external signer accepted result missing"
+          ]
+        },
+        {
+          "action": "mutual-cancel",
+          "status": "wallet-request-blocked",
+          "unsignedRequestId": "ureq-d12412d8",
+          "walletStandardRequestId": "ureq-d12412d8-standard",
+          "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
+          "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
+          "blockers": [
+            "external signer accepted result missing"
+          ]
+        }
+      ]
+    },
+    {
+      "escrowId": "escrow-pass-redemption-002",
+      "title": "Access pass redemption batch",
+      "marketState": "draft",
+      "state": "needs-funding",
+      "actions": [
+        {
+          "action": "mutual-cancel",
+          "status": "wallet-request-blocked",
+          "unsignedRequestId": "ureq-d12412d8",
+          "walletStandardRequestId": "ureq-d12412d8-standard",
+          "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
+          "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
+          "blockers": [
+            "listing needs funding output",
+            "external signer accepted result missing"
+          ]
+        }
+      ]
+    },
+    {
+      "escrowId": "escrow-docs-grant-003",
+      "title": "Docs grant milestone payout",
+      "marketState": "disputed",
+      "state": "wallet-review-needed",
+      "actions": [
+        {
+          "action": "mutual-cancel",
+          "status": "wallet-request-blocked",
+          "unsignedRequestId": "ureq-d12412d8",
+          "walletStandardRequestId": "ureq-d12412d8-standard",
+          "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
+          "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
+          "blockers": [
+            "external signer accepted result missing"
+          ]
+        }
+      ]
+    }
+  ],
+  "promotionRule": "An escrow action can become submit-ready only after it maps to a wallet-standard request, external signer validation accepts the return, and accepted virtual-chain replay observes the txid.",
+  "boundaries": [
+    "This maps marketplace actions to existing wallet request candidates; it does not sign or broadcast.",
+    "The mapped templates are proof-lab templates, not fresh user custody for these fixture listings.",
+    "Needs-funding listings remain blocked until a funded escrow output exists."
+  ]
+}

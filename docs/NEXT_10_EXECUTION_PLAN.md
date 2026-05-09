@@ -26,6 +26,7 @@ This is the working order after the first five rail tasks landed. The rule is pl
 - Live window: `KASPA_WASM_MODULE=<tn12-sdk-path> TN12_VIRTUAL_CHAIN_RPC_URL=<ws-or-wrpc-endpoint> npm run indexer:live-window`.
 - Settlement slice: `npm run campaign:submit-runbook`.
 - Operator settlement decision: `npm run campaign:operator-decision`.
+- Escrow action map: `npm run escrow:action-map`.
 - Combined queue slice: `npm run project:next-ten`.
 
 ## Done For This Batch
@@ -33,6 +34,7 @@ This is the working order after the first five rail tasks landed. The rule is pl
 - The queue names the next ten in one order.
 - Tasks 6-10 now have review artifacts and checks.
 - Public wording uses accepted evidence, working rails, and next dependency language.
+- Escrow marketplace actions are mapped to unsigned and wallet-standard request coverage; the current blocker is external signer validation plus accepted replay.
 
 ## Next Commit Target
 
@@ -41,3 +43,4 @@ The next substantial commit should pick one of:
 - wallet: run one external-signer round trip from `artifacts/wallet-standard-requests.json`;
 - indexer: convert the bounded V2 live-window response into replay rows with rollback overlap;
 - settlement: keep batch-assurance hold/release/refund decision aligned with wallet signer validation and checkpoint overlap.
+- escrow: expand wallet-standard request coverage for release/refund and rerun the action map.

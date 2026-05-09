@@ -427,9 +427,10 @@ Build the escrow primitive registry:
 npm run escrow:registry
 npm run escrow:marketplace
 npm run escrow:flow
+npm run escrow:action-map
 ```
 
-This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json` and `artifacts/escrow-marketplace-demo.json`. The marketplace artifact maps buyer/seller listings, release/refund/cancel actions, accepted escrow proof backdrop, wallet connector dependency, and dispute boundaries. The repo also has `contracts/Escrow.sil`, `contracts/EscrowExpired.sil`, accepted escrow funding, an accepted escrow release proof, an accepted DAA-expired escrow refund proof, and an accepted mutual-cancel proof on a separate funded output.
+This turns `fixtures/EscrowPrimitives.json` into `artifacts/escrow-primitives.json`, `artifacts/escrow-marketplace-demo.json`, `artifacts/escrow-marketplace-flow.json`, and `artifacts/escrow-marketplace-action-map.json`. The marketplace artifacts map buyer/seller listings, release/refund/cancel actions, accepted escrow proof backdrop, wallet connector dependency, wallet-standard request coverage, external-signer blockers, and dispute boundaries. The repo also has `contracts/Escrow.sil`, `contracts/EscrowExpired.sil`, accepted escrow funding, an accepted escrow release proof, an accepted DAA-expired escrow refund proof, and an accepted mutual-cancel proof on a separate funded output.
 
 Build the treasury/team vault registry:
 

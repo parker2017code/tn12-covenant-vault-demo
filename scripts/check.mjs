@@ -61,6 +61,7 @@ import { buildEnforcementMatrix } from "../src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "../src/escrowPrimitive.mjs";
 import { buildEscrowMarketplaceDemo } from "../src/escrowMarketplaceDemo.mjs";
 import { buildEscrowMarketplaceFlow } from "../src/escrowMarketplaceFlow.mjs";
+import { buildEscrowMarketplaceActionMap } from "../src/escrowMarketplaceActionMap.mjs";
 import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 import { buildTreasuryConstrainedSpends } from "../src/treasuryConstrainedSpends.mjs";
 import { buildPayloadSubmitReadiness } from "../src/payloadSubmitReadiness.mjs";
@@ -707,6 +708,30 @@ assert.equal(escrowMarketplaceFlow.summary.flows, 3);
 assert.equal(escrowMarketplaceFlow.summary.blockedOnWalletStandard, 3);
 const escrowMarketplaceFlowArtifact = JSON.parse(await readFile(new URL("../artifacts/escrow-marketplace-flow.json", import.meta.url), "utf8"));
 assert.equal(escrowMarketplaceFlowArtifact.status, "escrow-marketplace-flow-ready");
+const walletUnsignedTemplatesForEscrow = JSON.parse(await readFile(new URL("../artifacts/wallet-unsigned-request-templates.json", import.meta.url), "utf8"));
+const walletStandardRequestsForEscrow = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-requests.json", import.meta.url), "utf8"));
+const walletStandardSignerValidationForEscrow = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8"));
+const escrowMarketplaceActionMap = buildEscrowMarketplaceActionMap({
+  marketplaceFlow: escrowMarketplaceFlowArtifact,
+  unsignedTemplates: walletUnsignedTemplatesForEscrow,
+  walletStandardRequests: walletStandardRequestsForEscrow,
+  signerValidation: walletStandardSignerValidationForEscrow,
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(escrowMarketplaceActionMap.status, "escrow-action-map-ready");
+assert.equal(escrowMarketplaceActionMap.summary.actions, 5);
+assert.equal(escrowMarketplaceActionMap.summary.blockedActions, 5);
+assert.ok(escrowMarketplaceActionMap.flows.some((flow) =>
+  flow.escrowId === "escrow-freelance-001"
+  && flow.actions.some((action) =>
+    action.action === "mutual-cancel"
+    && action.walletStandardRequestId === "ureq-d12412d8-standard"
+  )
+));
+const escrowMarketplaceActionMapArtifact = JSON.parse(await readFile(new URL("../artifacts/escrow-marketplace-action-map.json", import.meta.url), "utf8"));
+assert.equal(escrowMarketplaceActionMapArtifact.status, "escrow-action-map-ready");
+assert.equal(escrowMarketplaceActionMapArtifact.summary.actions, 5);
+assert.equal(escrowMarketplaceActionMapArtifact.summary.blockedActions, 5);
 const treasuryFixture = JSON.parse(await readFile(new URL("../fixtures/TreasuryVaults.json", import.meta.url), "utf8"));
 const treasuryRegistry = buildTreasuryVaultRegistry(treasuryFixture);
 assert.equal(treasuryRegistry.status, "planner-policy-before-extra-script-paths");
@@ -1698,6 +1723,7 @@ const files = [
   "scripts/build-escrow-primitives.mjs",
   "scripts/build-escrow-marketplace-demo.mjs",
   "scripts/build-escrow-marketplace-flow.mjs",
+  "scripts/build-escrow-marketplace-action-map.mjs",
   "scripts/build-treasury-vaults.mjs",
   "scripts/build-treasury-constrained-spends.mjs",
   "scripts/build-treasury-role-review.mjs",
@@ -1815,6 +1841,7 @@ const files = [
   "artifacts/enforcement-matrix.json",
   "artifacts/escrow-marketplace-demo.json",
   "artifacts/escrow-marketplace-flow.json",
+  "artifacts/escrow-marketplace-action-map.json",
   "artifacts/proof-evidence.json",
   "artifacts/role-separated-proof-evidence.json",
   "artifacts/covenant-adversarial-coverage.json",
@@ -1975,6 +2002,7 @@ const files = [
   "src/escrowPrimitive.mjs",
   "src/escrowMarketplaceDemo.mjs",
   "src/escrowMarketplaceFlow.mjs",
+  "src/escrowMarketplaceActionMap.mjs",
   "src/treasuryVault.mjs",
   "src/treasuryConstrainedSpends.mjs",
   "src/treasuryRoleReview.mjs",
@@ -2077,6 +2105,7 @@ assert.match(readme, /npm run wallet:implementation-slice/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run escrow:marketplace/);
 assert.match(readme, /npm run escrow:flow/);
+assert.match(readme, /npm run escrow:action-map/);
 assert.match(readme, /npm run research:library/);
 assert.match(readme, /npm run rollup:scout/);
 assert.match(readme, /npm run mainstream:direction/);

@@ -75,6 +75,9 @@ try {
   await expectText(page, "#escrow-summary", "Escrows");
   await expectText(page, "#escrow-list", "Freelance wallet integration review");
   await expectText(page, "#escrow-list", "Review seller-release");
+  await expectText(page, "#escrow-list", "Marketplace action map");
+  await expectText(page, "#escrow-list", "escrow-action-map-ready");
+  await expectText(page, "#escrow-list", "ureq-d12412d8-standard");
   await expectText(page, "#treasury-summary", "Payroll");
   await expectText(page, "#treasury-list", "Core team operating vault");
   await expectText(page, "#treasury-list", "Review delayed large withdrawal");
