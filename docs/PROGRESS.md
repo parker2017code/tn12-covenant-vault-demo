@@ -1,6 +1,6 @@
 # Progress Snapshot
 
-Reviewed: 2026-05-08
+Reviewed: 2026-05-09
 
 This repo is now a TN12 covenant/app primitive workshop with a browser control surface, generated artifacts, local checks, GitHub Actions, and GitHub Pages deployment. It is not a mainnet wallet and does not claim live mainnet covenant support.
 
@@ -94,7 +94,13 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
     - Current status: research roadmap.
     - Enforcement: documentation.
     - Boundary: no ZK proof is used by the current vault, assurance, or escrow proofs.
-    - Rule: ZK proves math over selected inputs; builders still need an anchor/trust model for external roots, events, prices, and source-chain state.
+   - Rule: ZK proves math over selected inputs; builders still need an anchor/trust model for external roots, events, prices, and source-chain state.
+
+15. AI/source discipline: public source watch, coding-agent failure modes, and Kaspa Q&A guardrails.
+    - Current status: base built.
+    - Enforcement: documentation plus generated artifact checks.
+    - Command: `npm run ai:discipline`.
+    - Boundary: this is not a protocol source and not a giant prompt; it keeps future agents focused on concrete repo commands, source lanes, usable products, L1-first direction, and measured on-chain activity.
 
 ## Immediate Next Work
 
@@ -117,6 +123,7 @@ Done now:
 - Role-separated accepted proof passes: TN12 accepted all seven distinct-key positive paths. Recovery/release proofs are `dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0`, `fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32`, and `4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382`. DAA-expired withdrawal/refund proofs are `cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11`, `a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa`, and `7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0`. Mutual cancel is `677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa`.
 - Role-separated invalid candidates: `npm run roles:invalid-candidates` builds `artifacts/role-separated-invalid-candidates.json`, a local-review-only map of 32 wrong-signer, wrong-selector, wrong-output-lock, wrong-amount, bad-lock-shape, and single-party-cancel mutations. It is not signed invalid transaction evidence.
 - Prediction/hedge: accepted review payloads plus a simulator; no settlement, odds, custody, or advice.
+- AI/source discipline: Kaspa Daily Q&A Part 1 takeaways, public coding-agent guidance, open-source AGENTS.md examples, empirical agent-failure studies, and unknown-private-practice boundaries are now encoded in `docs/AI_CODING_SOURCE_DISCIPLINE.md`, `fixtures/AiCodingSourceDiscipline.json`, and `artifacts/ai-coding-source-discipline.json`.
 
 WIP now:
 

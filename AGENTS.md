@@ -16,6 +16,8 @@
 - Escalate protocol questions with a small reproducer and exact evidence: txid, artifact path, endpoint response, source line, and command.
 - Ask before destructive actions, credential use, mainnet signing/broadcasting, publishing a local-only prototype, or anything involving secrets, wallets, private keys, personal data, paid services, or irreversible system changes.
 - After changing the environment, mention the package, tool, or configuration that was added so future agents understand the machine state.
+- Keep this file short and executable. Longer AI/coding-agent research and failure-mode rationale lives in `docs/AI_CODING_SOURCE_DISCIPLINE.md` and `artifacts/ai-coding-source-discipline.json`.
+- Prefer concrete repo commands, source files, and known traps over generic "best practice" prose. If a new recurring agent rule is not actionable in this repo, do not add it here.
 
 ## Status Rules
 
@@ -33,10 +35,12 @@
 - Avoid clever authority voice: no dramatic adjective piles, faux-bold certainty, invented slogans, or lines that sound written to impress the writer rather than help the builder.
 - Use one clear status label or source link instead of long defensive caveat stacks.
 - Treat text as part of the product. UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes should be scanned with the same care as code: necessary, specific, clean, and defensible.
+- Treat invoice, payload, receipt, and wallet work as rails, not as a generic merchant-payment adoption thesis. Current strategic framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
 - Treat the current version as a TN12-configured proof app. The browser builds policy/control artifacts, while scripts compile, sign, submit, verify, and index accepted testnet transactions.
 - Public TN12 APIs, manual explorer data, and local fixtures are the default. Bring back local node work only on direct request.
 - Payload/miner-signal work starts with transaction payload receipts and accepted-transaction indexing. Coinbase payload or pool policy is a later mining-software lane.
 - Payload receipt submit needs a verified wallet/wRPC route. The public TN12 REST route accepted a payment while dropping payload bytes, so it cannot mark an invoice paid.
+- Do not default to EVM or external-L2 assumptions for Kaspa app strategy. Keep ecosystem L2 or bridge references in research/scouting lanes unless a sourced artifact makes the dependency explicit.
 
 ## Sources
 
@@ -47,6 +51,7 @@
   - https://github.com/kaspanet/vprogs
   - https://medium.com/@michaelsuttonil/kaspa-covenants-toccata-hard-fork-outlook-a4d81a40900c
 - Use Kaspa Explained as internal framing discipline, not protocol authority.
+- Use public AI-agent guidance and open-source repo examples as operator input only. Private company practices may be unknown; do not invent them.
 
 ## Validation
 
@@ -54,3 +59,4 @@
 - For UI work, serve locally and confirm the page returns HTTP 200 before sharing a link.
 - When checking public state, follow `docs/LLM_REVIEW_GUIDE.md` before summarizing what is built, live, stale, or still in limbo.
 - When a chain/protocol result is surprising, preserve the failed artifact as evidence, label it accurately, and exhaust the local checks above before turning uncertainty into a claim or asking for expert review.
+- For new artifact lanes, wire the builder into `npm run check:all` so future agents verify behavior rather than trusting prose.

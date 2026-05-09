@@ -80,6 +80,7 @@ import { buildAgentSettlementDrafts } from "../src/agentSettlementDrafts.mjs";
 import { buildBasedRollupScout } from "../src/basedRollupScout.mjs";
 import { buildProjectStatus } from "../src/buildStatus.mjs";
 import { buildProjectPlan } from "../src/projectPlan.mjs";
+import { buildAiCodingSourceDiscipline } from "../src/aiCodingSourceDiscipline.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildCovenantAdversarialCoverage } from "../src/covenantAdversarialCoverage.mjs";
 import { buildRoleSeparatedInvalidCandidates } from "../src/roleSeparatedInvalidCandidates.mjs";
@@ -559,6 +560,16 @@ assert.equal(coordinationPrototype.summary.stags, 2);
 assert.equal(coordinationPrototype.summary.intendos, 5);
 assert.equal(coordinationPrototype.summary.satisfiablePacks, 1);
 assert.ok(coordinationPrototype.missingProperties.includes("accumulation opacity"));
+const aiDisciplineFixture = JSON.parse(await readFile(new URL("../fixtures/AiCodingSourceDiscipline.json", import.meta.url), "utf8"));
+const aiDiscipline = buildAiCodingSourceDiscipline(aiDisciplineFixture);
+assert.equal(aiDiscipline.status, "ai-source-discipline-ready");
+assert.equal(aiDiscipline.summary.sourcesNeedingContentImport, 0);
+assert.ok(aiDiscipline.summary.agentOperatingPrinciples >= 8);
+assert.ok(aiDiscipline.kaspaDailyQaThemes.some((theme) => theme.id === "payments-are-not-2026-adoption-vector"));
+assert.ok(aiDiscipline.kaspaDailyQaThemes.some((theme) => theme.id === "coordination-markets-priority"));
+assert.ok(aiDiscipline.agentOperatingPrinciples.some((principle) => principle.id === "public-practice-not-private-magic"));
+assert.ok(aiDiscipline.operatingRules.some((rule) => /L1-first/.test(rule)));
+assert.ok(aiDiscipline.boundaries.some((boundary) => /user-provided/.test(boundary)));
 const accessPassFixture = JSON.parse(await readFile(new URL("../fixtures/AccessPassPlanner.json", import.meta.url), "utf8"));
 const accessPassPlanner = buildAccessPassPlanner(accessPassFixture);
 assert.equal(accessPassPlanner.status, "issuer-indexer-flow-not-native-enforcement");
@@ -1107,6 +1118,7 @@ const files = [
   "scripts/build-stable-issuer-redemptions.mjs",
   "scripts/build-status.mjs",
   "scripts/build-project-plan.mjs",
+  "scripts/build-ai-coding-source-discipline.mjs",
   "scripts/build-agent-settlement-drafts.mjs",
   "scripts/check-negative.mjs",
   "contracts/DelayedRecoveryVault.sil",
@@ -1211,6 +1223,7 @@ const files = [
   "artifacts/build-status.json",
   "artifacts/agent-settlement-drafts.json",
   "artifacts/project-plan.json",
+  "artifacts/ai-coding-source-discipline.json",
   "fixtures/FundedWalletOutpoint.example.json",
   "fixtures/FundedWalletOutpoint.json",
   "fixtures/FundedWalletUtxos.json",
@@ -1246,6 +1259,7 @@ const files = [
   "fixtures/StableValuePaths.json",
   "fixtures/StableIssuerRedemptions.json",
   "fixtures/BuildStatus.json",
+  "fixtures/AiCodingSourceDiscipline.json",
   "fixtures/EscrowContractOutpoint.json",
   "fixtures/EscrowDaaRefundContractOutpoint.json",
   "fixtures/EscrowCancelContractOutpoint.json",
@@ -1315,6 +1329,7 @@ const files = [
   "src/agentSettlementDrafts.mjs",
   "src/buildStatus.mjs",
   "src/projectPlan.mjs",
+  "src/aiCodingSourceDiscipline.mjs",
   "src/covenantAdversarialCoverage.mjs",
   "src/roleSeparatedInvalidCandidates.mjs",
   "src/transactionPlanner.mjs",
@@ -1340,7 +1355,8 @@ const files = [
   "docs/GITHUB_HOSTING.md",
   "docs/MASTER_APP_PLAN.md",
   "docs/PROGRAMMABILITY_PATHS.md",
-  "docs/MAINSTREAM_APP_DIRECTION.md"
+  "docs/MAINSTREAM_APP_DIRECTION.md",
+  "docs/AI_CODING_SOURCE_DISCIPLINE.md"
 ];
 
 for (const file of files) {
@@ -1407,6 +1423,7 @@ assert.match(readme, /npm run stable:value/);
 assert.match(readme, /npm run stable:issuer/);
 assert.match(readme, /npm run build:status/);
 assert.match(readme, /npm run agent:settlement-drafts/);
+assert.match(readme, /npm run ai:discipline/);
 assert.match(readme, /Manual Address Checks/);
 assert.match(readme, /Build Plan/);
 assert.match(readme, /PROGRAMMABILITY_PATHS\.md/);

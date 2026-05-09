@@ -34,6 +34,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Treasury constrained spend gate: `npm run treasury:spends`
 - Auction settlement draft gate: `npm run auction:settlement-drafts`
 - Agent settlement draft gate: `npm run agent:settlement-drafts`
+- AI/source discipline gate: `npm run ai:discipline`
 
 The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has accepted role-separated positive proofs for all seven vault, assurance, and escrow paths: recovery/withdrawal, release/refund, and release/refund/cancel. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
 
@@ -48,8 +49,9 @@ The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof t
 7. `docs/TN12_TEST_MATRIX.md`: what is TN12 accepted, what is only local reducer-tested, and what still needs a safe testnet transaction.
 8. `docs/MAINSTREAM_APP_DIRECTION.md`: high-impact user-facing app direction and which mainstream crypto use cases are build-now, later, or research.
 9. `docs/MICHAEL_QUESTIONS.md`: exact protocol/tooling questions to escalate through the user.
-10. `docs/STATUS.md`: human-readable proof/status list.
-11. `docs/BUILD_PLAN.md`: backlog history and next build tasks.
+10. `docs/AI_CODING_SOURCE_DISCIPLINE.md`: public-source, AI-agent, and Kaspa Q&A guardrails for future coding/explanation work.
+11. `docs/STATUS.md`: human-readable proof/status list.
+12. `docs/BUILD_PLAN.md`: backlog history and next build tasks.
 
 Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source discipline or protocol claims. Use `docs/TRANSACTION_API_NOTES.md` before touching transaction creation, payloads, submit routes, or accepted-indexing code.
 
@@ -64,6 +66,8 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - Use public TN12 REST reads, local fixtures, local signing, explicit submit commands, and the verified TN12 JSON wRPC route for payload receipts until wallet review replaces local signing.
 - When TN12, Silverscript, Rusty Kaspa, transaction signing, submit serialization, or covenant verification behavior remains unclear, first dig through the basic layers yourself: local artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK version/API shape, node/network id, and upstream Rusty Kaspa source/tests. Ask the user to get Michael's guidance only after those checks are exhausted or a precise external confirmation is genuinely needed. Include the exact txid, artifact path, endpoint response, source line, and smallest reproducer command.
 - Keep status lanes separate: live Kaspa mainnet, TN12/Toccata covenant work, roadmap vProgs/native app rails, and research-only ideas.
+- Keep current strategic framing explicit: invoice/receipt/payment work is a rail, not the generic 2026 adoption thesis; prioritize usable products, coordination-market direction, accepted on-chain activity, and measurable product pull.
+- Keep `AGENTS.md` short and executable. Put deeper AI-agent/coding-source research in `docs/AI_CODING_SOURCE_DISCIPLINE.md` and `artifacts/ai-coding-source-discipline.json`.
 - Keep rollup/vProg claims separate: Toccata gives L1 covenants and zk/sequencing foundations; based-rollup work is a separate execution lane; full synchronously composable vProgs remain roadmap until the interfaces are testable.
 - Use `npm run rollup:scout` / `artifacts/based-rollup-scout.json` for based-rollup planning. It treats Maxim's TN12 PoC as bridge/proof reference, Hans' work as runtime/proving direction, and ecosystem rollups as possible future app surfaces.
 - Use `npm run covenant:adversarial` / `artifacts/covenant-adversarial-coverage.json` before claiming hardened covenant coverage. It is local adversarial mapping, not TN12 rejection evidence. Current gaps include historical escrow cancel key reuse, fresh role-separated outputs for cancel/refund paths, and exact accepted-script preservation for older vault/assurance proof drafts.
@@ -75,6 +79,7 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 ## Current Next Work
 
 - Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order. Use `npm run project:plan` / `artifacts/project-plan.json` for the older done/WIP/next/later grouping.
+- Use `npm run ai:discipline` / `artifacts/ai-coding-source-discipline.json` before broad roadmap or source-discipline rewrites. It encodes the Kaspa Daily Q&A implications, public coding-agent practice, and the rule that unknown private company workflows stay marked unknown.
 - WIP lanes: live wallet connector submit without local keys, batch-assurance pledge-output funding/import, durable indexer replay implementation, and attestation provenance/quorum hardening.
 - Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant rejection attempts from fresh expendable outputs, and attestation signer provenance/quorum handling.
 - Keep real depth in three verticals first:

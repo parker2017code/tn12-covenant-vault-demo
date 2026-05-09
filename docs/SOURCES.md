@@ -21,6 +21,7 @@
 - Silverscript: https://github.com/kaspanet/silverscript
 - vProgs: https://github.com/kaspanet/vprogs
 - Michael Sutton Toccata outlook: https://medium.com/@michaelsuttonil/kaspa-covenants-toccata-hard-fork-outlook-a4d81a40900c
+- Kaspa Daily Yonatan Q&A Part 1: https://x.com/DailyKaspa/status/2052716697262374936
 
 ## TN12 Public Utilities
 
@@ -71,9 +72,26 @@ Good reference categories:
 
 Every copied idea must keep a Kaspa status lane:
 
-- live Kaspa lane for payments, wallets, KRC-aware tooling, payload receipts, and accepted-transaction indexing;
+- live Kaspa lane for payment/receipt rails, wallets, KRC-aware tooling, payload receipts, and accepted-transaction indexing;
 - TN12/Toccata lane for covenant-shaped vaults, escrow, assurance, simple assets, and state-output experiments;
 - roadmap/research lane for Based Apps, full vProgs, cross-app composition, rich DeFi, RTD/oracle markets, and miner-attestation flows.
+
+## AI-Agent And Coding Practice Sources
+
+Use public agent practice as operator input, not as product truth. Some high-performing company workflows are private or only partly described publicly; record that boundary instead of inventing internal practice.
+
+Current public sources encoded by `npm run ai:discipline`:
+
+- OpenAI Codex practice: https://openai.com/business/guides-and-resources/how-openai-uses-codex/
+- AGENTS.md open format: https://github.com/openai/agents.md
+- OpenAI Codex repo AGENTS.md example: https://github.com/openai/codex/blob/main/AGENTS.md
+- Anthropic Claude Code best practices: https://code.claude.com/docs/en/best-practices
+- GitHub Copilot repository custom instructions: https://docs.github.com/en/copilot/how-tos/custom-instructions/adding-repository-custom-instructions-for-github-copilot
+- AGENTS.md effectiveness study: https://arxiv.org/abs/2602.11988
+- Failed agent PR study: https://arxiv.org/abs/2601.15195
+- Agent logging study: https://huggingface.co/papers/2604.09409
+
+Practical rule: prefer specific repo commands, files, and failure traps over generic agent maxims. For this repo that means `npm run check:all`, `npm run check:tn12`, accepted transaction evidence, generated artifacts, and exact source lanes.
 
 ## Local Finding
 

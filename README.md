@@ -7,6 +7,7 @@ This repo is a TN12 learning and proof workspace. It makes covenant-style money 
 Reviewers and LLM agents should start with [`MEMORY.md`](MEMORY.md), then use [`docs/LLM_REVIEW_GUIDE.md`](docs/LLM_REVIEW_GUIDE.md) to verify GitHub state, Pages artifacts, TN12 txids, and claim boundaries. The durable app roadmap and current lane status live in [`docs/ROADMAP_STATE.md`](docs/ROADMAP_STATE.md). The accepted/not-yet-tested TN12 evidence map lives in [`docs/TN12_TEST_MATRIX.md`](docs/TN12_TEST_MATRIX.md). The L1 covenant, based-rollup, and vProg boundary lives in [`docs/PROGRAMMABILITY_PATHS.md`](docs/PROGRAMMABILITY_PATHS.md).
 
 High-impact mainstream app direction lives in [`docs/MAINSTREAM_APP_DIRECTION.md`](docs/MAINSTREAM_APP_DIRECTION.md). It keeps invoice/receipt, escrow, assurance, wallet submit, access passes, auctions, vault/treasury, assets, stable-value, DEX/AMM, lending, perps, bridge, ZK, and vProg use cases in the pipeline while separating build-now work from research.
+AI/source discipline lives in [`docs/AI_CODING_SOURCE_DISCIPLINE.md`](docs/AI_CODING_SOURCE_DISCIPLINE.md). It encodes current Kaspa Q&A guardrails, public coding-agent practice, and failure modes so future agents keep persistent instructions short, run executable checks, avoid generic payment-adoption drift, and keep L1-first/product-activity framing.
 
 Protocol-debugging rule: unclear TN12, Silverscript, Rusty Kaspa, signing, submit, serialization, or covenant behavior starts with local evidence: artifacts, constructor keys, witness order, sighash/preimage shape, accepted sibling spends, SDK/API shape, node/network id, and upstream source/tests. Escalation needs a txid, artifact path, endpoint response, source line, and smallest reproducer command.
 Resolved escalation notes are tracked in [`docs/MICHAEL_QUESTIONS.md`](docs/MICHAEL_QUESTIONS.md).
@@ -19,6 +20,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 - Accepted invoice payload events: paid, refunded, and error states now have TN12 JSON wRPC transactions and evidence artifacts.
 - Escrow mutual cancel is now accepted on TN12. The old script-unit rejection came from `sigOpCount=1` bad configuration; the accepted path is the corrected tx version 1 `computeBudget=30` draft rebuilt with local TN12 `kaspa-wasm 1.1.1-toc.1`.
 - Near-term app priority: payload invoice/receipt vertical slice, because it is closest to mainnet-capable Kaspa behavior.
+- Strategic framing: invoice/receipt work is a payment and accepted-state rail, not the headline adoption thesis. Current source discipline down-ranks generic merchant/POS adoption language and moves usable product activity, coordination-market direction, and visible on-chain metrics higher.
 - Toccata-oriented priority: keep vault, assurance, escrow, and treasury primitives clean so they are ready to adapt when covenant tooling stabilizes.
 - Research priority: keep based rollups, ZK, anchors, vProgs, prediction markets, and coordination markets in roadmap lanes until the missing rails are explicit.
 
@@ -416,6 +418,14 @@ npm run coordination:market
 ```
 
 This turns `fixtures/CoordinationMarketPrototype.json` into `artifacts/coordination-market-prototype.json`. It is not a Hashdag/Staghunt implementation; it is a transparent toy planner for Stag, Intendo, Pack, Solver, and Hunt before opacity, capital multiplexing, composability, and atomic execution exist.
+
+Build the AI coding/source discipline artifact:
+
+```sh
+npm run ai:discipline
+```
+
+This turns `fixtures/AiCodingSourceDiscipline.json` into `artifacts/ai-coding-source-discipline.json`. It records public source-watch rules, current Kaspa Q&A implications, coding-agent failure modes, and agent operating principles. It is not a substitute for reading sources; it is the repo's guardrail against stale protocol claims, generic payment-thesis drift, EVM/L2 default drift, and instruction bloat.
 
 Build the access pass planner:
 

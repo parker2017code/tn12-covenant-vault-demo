@@ -26,8 +26,10 @@ Future agents should read `MEMORY.md` first, then this file before editing. `MEM
 - Ordered project queue command: `npm run project:queue`
 - Durable indexer schema command: `npm run indexer:schema`
 - Durable indexer fixture replay command: `npm run indexer:replay`
+- AI/source discipline command: `npm run ai:discipline`
 - Current roadmap / lane map: `docs/ROADMAP_STATE.md`
 - High-impact mainstream app direction: `docs/MAINSTREAM_APP_DIRECTION.md`
+- AI/source discipline: `docs/AI_CODING_SOURCE_DISCIPLINE.md`
 - TN12 tested/not-tested map: `docs/TN12_TEST_MATRIX.md`
 
 The local preview server has been running on port `4176`. If it is not running, start it from this repo with `npm run serve`.
@@ -38,11 +40,18 @@ Build a real TN12-configured Kaspa covenant app stack. The durable lane map is `
 
 The immediate build shape is three real verticals first:
 
-- invoice/receipt app: accepted-transaction app state,
+- invoice/receipt app: accepted-transaction app state and wallet/indexer rails, not the adoption thesis by itself,
 - escrow/assurance app: TN12 covenant proof app,
-- attestation/agent/prediction simulator: research-to-app bridge.
+- attestation/agent/prediction/coordination simulator: research-to-app bridge.
 
 Do not build twenty fake apps at the same depth. Keep the rest of the lanes attached to those rails or clearly marked as research.
+
+Current strategic source discipline:
+
+- Generic merchant/POS payments are not the headline 2026 adoption vector; payment, receipt, wallet, and payload work are rails.
+- Coordination markets, product activity, visible accepted on-chain state, liquidity, and L1-first app architecture get higher weight.
+- Public AI-agent and open-source repo practices are useful when they are public and testable; unknown private company workflows stay marked unknown.
+- Persistent agent rules should stay short and executable. Longer rationale belongs in `docs/AI_CODING_SOURCE_DISCIPLINE.md` and generated artifacts.
 
 The current base includes:
 
@@ -259,7 +268,8 @@ UI sections now include:
 - Kaspa app lab,
 - miner signal research,
 - signal payload artifact builder,
-- setup/source discipline.
+- setup/source discipline,
+- AI/source discipline artifact builder.
 
 ## Assurance Contract Caveat
 

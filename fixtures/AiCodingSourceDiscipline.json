@@ -1,0 +1,364 @@
+{
+  "schema": "tn12-ai-coding-source-discipline-fixture/v1",
+  "reviewedAt": "2026-05-09",
+  "purpose": "Make AI failure modes and current crypto-source discipline explicit for TN12 and Kaspa Explained work.",
+  "watchedSources": [
+    {
+      "id": "kaspa-daily-yonatan-qa-part-1",
+      "title": "Kaspa Daily Yonatan Sompolinsky Q&A Part 1 thread",
+      "url": "https://x.com/DailyKaspa/status/2052716697262374936",
+      "sourceType": "ecosystem-primary-ish",
+      "status": "thread-body-user-provided",
+      "knownText": "Yonatan Sompolinsky (@hashdag), Kaspa's founder and primary architect, took part in a Q&A. Part 1 is below, Part 2 coming soon.",
+      "watch": "Part 1 body was user-provided from Thread Reader on 2026-05-09; check for Part 2 before refreshing public source discipline."
+    },
+    {
+      "id": "yonatan-hashdag",
+      "title": "Yonatan / Hashdag writings and protocol commentary",
+      "url": "https://x.com/hashdag",
+      "sourceType": "protocol-founder",
+      "status": "watch",
+      "watch": "Use for strategic/programming-model direction, but do not treat social posts as final specs without matching docs, code, or accepted network behavior."
+    },
+    {
+      "id": "michael-sutton",
+      "title": "Michael Sutton Toccata and covenant writing",
+      "url": "https://medium.com/@michaelsuttonil/kaspa-covenants-toccata-hard-fork-outlook-a4d81a40900c",
+      "sourceType": "protocol-engineering",
+      "status": "watch",
+      "watch": "Use for Toccata/covenant direction and keep exact activation/tooling status separate from roadmap framing."
+    },
+    {
+      "id": "kaspa-builder-docs",
+      "title": "Kaspa builder documentation",
+      "url": "https://docs.kaspa.org/",
+      "sourceType": "official-docs",
+      "status": "primary",
+      "watch": "Use for current wallet, payload, accepted transaction, programmability, and node/RPC claims."
+    },
+    {
+      "id": "rusty-kaspa-tn12",
+      "title": "Rusty Kaspa TN12/Toccata code",
+      "url": "https://github.com/kaspanet/rusty-kaspa",
+      "sourceType": "implementation-source",
+      "status": "primary-for-serialization-behavior",
+      "watch": "Use code/tests before guessing transaction, computeBudget, payload, or virtual-chain behavior."
+    },
+    {
+      "id": "silverscript",
+      "title": "Silverscript",
+      "url": "https://github.com/kaspanet/silverscript",
+      "sourceType": "implementation-source",
+      "status": "primary-for-contract-template-behavior",
+      "watch": "Use compiler/runtime behavior before claiming covenant expressiveness."
+    },
+    {
+      "id": "owasp-llm-top-10",
+      "title": "OWASP Top 10 for LLM Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "sourceType": "ai-security",
+      "status": "current-risk-framework",
+      "watch": "Use prompt injection, insecure output handling, excessive agency, misinformation, and supply-chain risks as agent guardrails."
+    },
+    {
+      "id": "owasp-smart-contract-top-10",
+      "title": "OWASP Smart Contract Top 10",
+      "url": "https://owasp.org/www-project-smart-contract-top-10/",
+      "sourceType": "crypto-security",
+      "status": "current-risk-framework",
+      "watch": "Use for custody, access-control, oracle, arithmetic, external-call, and economic-risk review language even when Kaspa is not EVM."
+    },
+    {
+      "id": "nyu-copilot-security-study",
+      "title": "NYU study on security of Copilot-generated code",
+      "url": "https://cyber.nyu.edu/2021/10/15/ccs-researchers-find-github-copilot-generates-vulnerable-code-40-of-the-time/",
+      "sourceType": "ai-code-security-research",
+      "status": "empirical-warning",
+      "watch": "Treat AI-generated code as requiring human-grade security review, especially around auth, parsing, crypto, shell, and network boundaries."
+    },
+    {
+      "id": "ai-coding-tool-bugs-study",
+      "title": "Engineering pitfalls in AI coding tools",
+      "url": "https://arxiv.org/abs/2603.20847",
+      "sourceType": "ai-code-tooling-research",
+      "status": "empirical-warning",
+      "watch": "Expect API/config/integration errors from coding agents; verify against local commands and primary docs."
+    },
+    {
+      "id": "openai-codex-best-practices",
+      "title": "How OpenAI uses Codex",
+      "url": "https://openai.com/business/guides-and-resources/how-openai-uses-codex/",
+      "sourceType": "agent-operator-guidance",
+      "status": "current-agent-guidance",
+      "watch": "Use for structured prompts, repo context, environment setup, task sizing, and iteration habits."
+    },
+    {
+      "id": "anthropic-agentic-coding-best-practices",
+      "title": "Best practices for Claude Code",
+      "url": "https://code.claude.com/docs/en/best-practices",
+      "sourceType": "agent-operator-guidance",
+      "status": "current-agent-guidance",
+      "watch": "Use for verification-first workflows, explore-plan-code sequencing, context management, and failure-pattern prevention."
+    },
+    {
+      "id": "agents-md-effectiveness-study",
+      "title": "Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?",
+      "url": "https://arxiv.org/abs/2602.11988",
+      "sourceType": "ai-code-tooling-research",
+      "status": "empirical-warning",
+      "watch": "Keep AGENTS.md minimal and task-relevant; unnecessary requirements can lower success and increase token cost."
+    },
+    {
+      "id": "failed-agent-pr-study",
+      "title": "Where Do AI Coding Agents Fail?",
+      "url": "https://arxiv.org/abs/2601.15195",
+      "sourceType": "ai-code-tooling-research",
+      "status": "empirical-warning",
+      "watch": "Watch large multi-file changes, bug fixes, performance work, CI failures, and weak review dynamics more carefully."
+    },
+    {
+      "id": "agent-logging-study",
+      "title": "Do AI Coding Agents Log Like Humans?",
+      "url": "https://huggingface.co/papers/2604.09409",
+      "sourceType": "ai-code-tooling-research",
+      "status": "empirical-warning",
+      "watch": "Treat observability/logging as deterministic checklist work; natural-language reminders alone are not enough."
+    },
+    {
+      "id": "openai-agents-md-standard",
+      "title": "AGENTS.md open format",
+      "url": "https://github.com/openai/agents.md",
+      "sourceType": "agent-context-standard",
+      "status": "public-open-standard",
+      "watch": "Use AGENTS.md as the predictable repo-level instruction file, but keep it scoped to local commands, conventions, and traps."
+    },
+    {
+      "id": "openai-codex-repo-agents",
+      "title": "OpenAI Codex repository AGENTS.md",
+      "url": "https://github.com/openai/codex/blob/main/AGENTS.md",
+      "sourceType": "open-source-agent-repo-example",
+      "status": "public-repo-example",
+      "watch": "Use as an example of specific commands, generated-file rules, test/snapshot rules, and codebase-specific traps rather than generic motivational advice."
+    },
+    {
+      "id": "github-copilot-repo-instructions",
+      "title": "GitHub Copilot repository custom instructions",
+      "url": "https://docs.github.com/en/copilot/how-tos/custom-instructions/adding-repository-custom-instructions-for-github-copilot",
+      "sourceType": "agent-context-standard",
+      "status": "current-tool-guidance",
+      "watch": "Track cross-tool instruction files such as AGENTS.md and .github/copilot-instructions.md only when this repo needs multiple agents."
+    }
+  ],
+  "agentOperatingPrinciples": [
+    {
+      "id": "minimal-persistent-context",
+      "principle": "Persistent repo instructions should be short, local, and enforceable.",
+      "why": "Agent context files can make agents explore more and obey local rules, but unnecessary requirements add cost and can reduce task success.",
+      "repoPractice": "Put the full research shelf in generated artifacts and docs; keep AGENTS.md to the rules future agents must actually follow."
+    },
+    {
+      "id": "verify-first-loop",
+      "principle": "Every nontrivial coding task needs an executable verification loop.",
+      "why": "Agents improve when they can run tests, compare expected outputs, or validate artifacts themselves.",
+      "repoPractice": "Add scripts/artifact checks for new lanes and wire them into npm run check:all before committing."
+    },
+    {
+      "id": "explore-plan-code",
+      "principle": "Read the repo shape, make the smallest useful plan, then code.",
+      "why": "Agent failures cluster around broad changes, wrong assumptions, and poor local context.",
+      "repoPractice": "Use rg and nearby patterns first; for large changes, state the file set and gates before editing."
+    },
+    {
+      "id": "hour-sized-units",
+      "principle": "Prefer coherent implementation units that a strong engineer could review in one sitting.",
+      "why": "Large multi-file PRs are riskier for agents, while tiny unrelated commits create overhead.",
+      "repoPractice": "Group commits by artifact lane: fixture, builder, generated artifact, docs, and checks."
+    },
+    {
+      "id": "observability-is-a-feature",
+      "principle": "State transitions and external IO need inspectable logs, artifacts, or evidence records.",
+      "why": "AI agents under-handle logging and post-generation log repair without deterministic guardrails.",
+      "repoPractice": "For wallet, submit, indexer, oracle, and custody work, output reviewable artifacts with endpoint, network, txid, payload, status, and rollback fields."
+    },
+    {
+      "id": "public-practice-not-private-magic",
+      "principle": "Do not invent private company agent practices.",
+      "why": "Some high-performing company workflows are private, internal, or only partially described in public docs.",
+      "repoPractice": "Record public examples and empirical findings; mark unknown company practices as unknown instead of treating blog summaries as universal truth."
+    },
+    {
+      "id": "specific-over-generic-instructions",
+      "principle": "Good agent instructions name concrete files, commands, conventions, and traps.",
+      "why": "Public repo examples and instruction-format guidance converge on actionable local context rather than vague best-practice prose.",
+      "repoPractice": "Prefer 'run npm run check:all' and 'do not use REST submit for payload receipts' over broad rules like 'be careful' or 'write high quality code'."
+    },
+    {
+      "id": "senior-crypto-review",
+      "principle": "Crypto product code is reviewed around value flow and adversarial failure modes, not just happy-path type checks.",
+      "why": "Top engineers identify custody, ordering, oracle, rollback, and abuse paths before naming a product done.",
+      "repoPractice": "Every app lane must name funds held, signer authority, wrong/stale data behavior, replay/rollback behavior, and user-visible failure state."
+    }
+  ],
+  "kaspaDailyQaThemes": [
+    {
+      "id": "bol-is-thesis-not-plan",
+      "theme": "Base of Liquidity can frame Kaspa's asset role, but it is not itself an app, use case, or adoption strategy.",
+      "repoRule": "Do not let BoL language replace concrete product rails, on-chain usage, or app-market evidence."
+    },
+    {
+      "id": "payments-are-not-2026-adoption-vector",
+      "theme": "Generic real-world merchant or point-of-sale payments were explicitly down-ranked as the adoption battle for 2026.",
+      "repoRule": "Keep invoice, receipt, payload, and wallet work because they are necessary rails, but do not market generic POS payments as the main killer app."
+    },
+    {
+      "id": "coordination-markets-priority",
+      "theme": "Coordination markets are the founder-highlighted new product category, while copying useful apps from other chains still requires business development.",
+      "repoRule": "Move coordination-market research and product rails higher in planning, while keeping the current toy prototype clearly below Staghunt/Hashdag production claims."
+    },
+    {
+      "id": "product-before-marketing",
+      "theme": "Narrative-setting matters, but a hook without product or interesting on-chain activity wastes attention.",
+      "repoRule": "Optimize work order for usable artifacts, accepted state, and measurable app activity before broad marketing copy."
+    },
+    {
+      "id": "unified-narrative-not-single-voice",
+      "theme": "The issue is lack of a unified narrative more than lack of a unified voice.",
+      "repoRule": "Keep README, docs, generated artifacts, UI, and Kaspa Explained copy aligned around the same lanes and boundaries."
+    },
+    {
+      "id": "toccata-serious-apps",
+      "theme": "Small covenant apps can launch after the hard fork; serious means potential for real usage, and the bottleneck is business development as much as technology.",
+      "repoRule": "Treat post-HF app plans as product-readiness work, not only compiler or proof work."
+    },
+    {
+      "id": "l1-first-not-evm-l2-default",
+      "theme": "The stated direction is L1-first and not EVM/L2-led; external L2s can fragment messaging, standards, and network effects.",
+      "repoRule": "Do not make EVM compatibility or external L2 dependency a default assumption for TN12, Kaspa Explained, or roadmap artifacts."
+    },
+    {
+      "id": "adoption-measured-on-chain",
+      "theme": "Real adoption should be visible in clear on-chain metrics, while much of crypto remains ghost-chain or synthetic activity.",
+      "repoRule": "Distinguish real accepted activity, repeated useful app use, liquidity, and durable users from demos, mints, campaign traffic, or price attention."
+    },
+    {
+      "id": "universal-scheduler-and-netsplit-watch",
+      "theme": "Universal scheduler research and netsplit resistance/100 BPS are important but not current product claims.",
+      "repoRule": "Track them as research/watch items; do not fold them into current TN12 app readiness."
+    }
+  ],
+  "failureModes": [
+    {
+      "id": "stale-or-imagined-protocol-status",
+      "appliesTo": ["kaspa-explained", "tn12"],
+      "risk": "AI states roadmap or testnet behavior as current mainnet fact.",
+      "guardrail": "Require status lane: live mainnet, TN12/Toccata, roadmap, research, or local artifact."
+    },
+    {
+      "id": "hallucinated-api-or-sdk-surface",
+      "appliesTo": ["tn12"],
+      "risk": "AI invents wallet/RPC/kaspa-wasm methods or wrong transaction field names.",
+      "guardrail": "Check implementation docs/source and run a local adapter/dry-run check before claiming the surface exists."
+    },
+    {
+      "id": "instruction-bloat",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "AI adds generic rules until future agents spend tokens obeying stale or irrelevant instructions.",
+      "guardrail": "Keep repo AGENTS.md short and executable; store longer research context in docs/artifacts reached only when relevant."
+    },
+    {
+      "id": "large-change-diffusion",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "AI touches many files without a coherent review unit, increasing missed regressions and CI failures.",
+      "guardrail": "Use one lane per commit and make checks prove fixture, source, generated artifact, and docs moved together."
+    },
+    {
+      "id": "fixture-evidence-confusion",
+      "appliesTo": ["tn12"],
+      "risk": "AI treats fixture replay, planner state, or signed drafts as accepted custody or network proof.",
+      "guardrail": "Positive app-state transitions need accepted TN12 tx evidence; custody claims need amount-matched accepted outputs and spend authority."
+    },
+    {
+      "id": "crypto-custody-overclaim",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "AI says DEX, lending, perps, bridge, or stable-value is buildable without reserves, custody, oracle, liquidation, settlement, and ordering rails.",
+      "guardrail": "Run missing-rails and research-trigger artifacts before upgrading any DeFi/product claim."
+    },
+    {
+      "id": "security-review-gap",
+      "appliesTo": ["tn12"],
+      "risk": "AI writes code that works locally but weakens secret handling, shell execution, payload preservation, replay safety, or submit permissions.",
+      "guardrail": "No secret serialization, no default broadcast, no shelling untrusted input, exact transaction preservation, rollback guard, and negative tests."
+    },
+    {
+      "id": "copy-hype-or-abstraction",
+      "appliesTo": ["kaspa-explained"],
+      "risk": "AI writes vague or hype copy that sounds confident but fails a beginner/source check.",
+      "guardrail": "Use concrete-first language, cite sources, and keep every claim tied to what a user can inspect now."
+    },
+    {
+      "id": "payments-as-killer-app-drift",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "AI turns payment speed, invoice receipts, or merchant tooling into the headline adoption thesis.",
+      "guardrail": "Describe payment/payload work as rails and proof surfaces; prioritize coordination markets, useful app activity, and visible on-chain metrics for adoption language."
+    },
+    {
+      "id": "evm-l2-default-drift",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "AI imports the Ethereum rollup/EVM mental model and treats Kaspa app strategy as external L2 migration.",
+      "guardrail": "Use the L1-first lane unless a source explicitly describes a compatible bridge/runtime experiment; keep ecosystem L2 references as research or app-surface scouting."
+    },
+    {
+      "id": "overbroad-refactor",
+      "appliesTo": ["tn12", "kaspa-explained"],
+      "risk": "AI changes too much surface area and hides behavioral regressions under cleanup.",
+      "guardrail": "Use focused commits, local gates, and explicit diff review; leave unrelated churn alone."
+    },
+    {
+      "id": "excessive-agent-agency",
+      "appliesTo": ["tn12"],
+      "risk": "AI broadcasts, pushes, deletes, or connects to external systems without a human review boundary.",
+      "guardrail": "Broadcast remains explicit; wallet connector run is dry-run until a real wallet and user action exist."
+    }
+  ],
+  "topCryptoEngineerRules": [
+    "State the asset/custody model before building the product model.",
+    "Separate transaction acceptance, payload event state, custody, spend authority, and user-facing readiness.",
+    "Treat oracles as adversarial inputs with stale, wrong, delayed, manipulated, and unavailable modes.",
+    "Design rollback/reorg/replay behavior before claiming indexer-derived app state.",
+    "Prefer small auditable state machines over broad magical abstractions.",
+    "Make every unsafe action explicit: signing, broadcasting, importing outpoints, upgrading claims, and changing source status.",
+    "Prove negative paths or document why they still need fresh expendable outputs.",
+    "Never rely on model memory for current protocol status when primary docs/code or accepted transaction evidence can be checked.",
+    "When copying ideas from other chains, copy jobs-to-be-done and failure lessons, not protocol claims.",
+    "Before a DeFi claim, name reserves, LP shares, custody, oracle, liquidation, settlement, ordering/MEV, and bridge/source-chain anchors.",
+    "Treat payment, invoice, and accepted-payload work as base rails unless the product has repeat usage, liquidity, distribution, and a reason users care beyond speed.",
+    "Make coordination-market and real-time-decentralization research concrete before promoting it: who commits, what is measured, how settlement happens, and what can be inspected on-chain."
+  ],
+  "requiredRepoAudits": [
+    {
+      "id": "claim-lane-audit",
+      "target": "docs and UI copy",
+      "question": "Does every claim say whether it is accepted TN12 proof, accepted payload/indexer state, wallet policy, planner state, roadmap, or research?"
+    },
+    {
+      "id": "api-surface-audit",
+      "target": "scripts and src",
+      "question": "Do wallet, RPC, payload, and transaction APIs match docs/source and local executable checks?"
+    },
+    {
+      "id": "custody-audit",
+      "target": "assurance, auction, agent, treasury, escrow",
+      "question": "Does any lane imply funds moved when it only has a payload/planner event?"
+    },
+    {
+      "id": "ai-copy-audit",
+      "target": "Kaspa Explained and README docs",
+      "question": "Could a reader mistake roadmap/vision language for current production behavior?"
+    },
+    {
+      "id": "current-source-watch",
+      "target": "source docs",
+      "question": "Have Yonatan/Hashdag, Michael Sutton, Kaspa docs, Rusty Kaspa, Silverscript, and Kaspa Daily Part 2 been checked recently?"
+    }
+  ]
+}

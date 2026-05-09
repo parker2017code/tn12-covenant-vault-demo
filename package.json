@@ -89,6 +89,7 @@
     "project:queue": "node scripts/build-next-work-queue.mjs",
     "build:status": "node scripts/build-status.mjs",
     "project:plan": "node scripts/build-project-plan.mjs",
+    "ai:discipline": "node scripts/build-ai-coding-source-discipline.mjs",
     "signal:payload": "node scripts/build-signal-payload.mjs",
     "serve": "python3 -m http.server 4176"
   },

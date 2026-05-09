@@ -1,10 +1,10 @@
 # Mainstream App Direction
 
-Reviewed: 2026-05-08
+Reviewed: 2026-05-09
 
-This repo should point toward high-impact crypto app categories that have already shown user demand on other chains, but each idea must be rebuilt around Kaspa's actual lanes: live payments and indexing, TN12/Toccata covenants, wallet policy, roadmap rails, or research.
+This repo should point toward high-impact crypto app categories that have already shown user demand on other chains, but each idea must be rebuilt around Kaspa's actual lanes: live payments/indexing as rails, TN12/Toccata covenants, wallet policy, roadmap rails, or research.
 
-The priority is not to clone every DeFi app. The priority is to choose app shapes that can bring liquidity, attention, and repeat usage while staying honest about what is proved.
+The priority is not to clone every DeFi app or make generic payments the adoption story. The priority is to choose app shapes that can bring liquidity, attention, repeat usage, coordination-market depth, and visible on-chain activity while staying honest about what is proved.
 
 Machine-readable source: `fixtures/MainstreamAppDirection.json`.
 Generated artifact: `artifacts/mainstream-app-direction.json`.
@@ -31,14 +31,16 @@ Build the highest-impact user-facing apps first when they can be connected to ex
 1. payments plus accepted app state,
 2. escrow and assurance contracts,
 3. wallet-reviewed submit flow,
-4. indexed access, auctions, attestations, and simple issuer assets,
+4. indexed access, auctions, attestations, coordination-market primitives, and simple issuer assets,
 5. larger DeFi, bridge, rollup, ZK, and vProg lanes only after the missing rails are explicit.
+
+Payment work remains high because every app needs accepted-value and receipt rails. It should not be described as a standalone merchant/POS adoption vector unless product pull, distribution, and repeat usage are visible.
 
 ## Mainstream App Targets
 
 | Priority | App direction | User use case | Current lane | Why it matters | Current repo status |
 |---|---|---|---|---|---|
-| 1 | Invoice / receipt app | Merchant gets a payment with attached receipt/order state | Live-style payment plus indexer | Payment proofs are the fastest path to real users because they do not need covenants | Accepted TN12 JSON wRPC paid/refund/error payload events; durable indexer replay still WIP |
+| 1 | Invoice / receipt app | User or merchant gets a payment with attached receipt/order state | Payment rail plus indexer | Receipt proofs are the fastest rail to real app state because they do not need covenants; they are not the whole adoption thesis | Accepted TN12 JSON wRPC paid/refund/error payload events; durable indexer replay still WIP |
 | 2 | Escrow / freelance / marketplace | Buyer funds, seller completes, buyer releases or timeout/refund/cancel handles failure | TN12/Toccata covenant | Escrow is easy for normal users to understand and is a strong covenant showcase | Release, DAA refund, and mutual cancel accepted on TN12; wallet submit UX still WIP |
 | 3 | Batch assurance / public-goods funding | Contributors fund a target, release happens only if the target is met, otherwise refunds are planned | Planner/indexer now, covenant-assisted later | Public-goods funding and group purchases can create visible community use | Accepted planner payloads and custody requirements exist; matched pledge-output custody transactions still WIP |
 | 4 | Wallet-facing submit console | User reviews exact inputs, outputs, fees, payloads, and submit route before signing | Wallet policy | Every serious app needs safer signing and broadcast before it can face users | Review package and connector spec exist; live no-local-key connector is WIP |
@@ -47,7 +49,8 @@ Build the highest-impact user-facing apps first when they can be connected to ex
 | 7 | Vault / treasury / team wallet | Safer custody, delayed withdrawals, recovery, team spend controls, payroll templates | TN12/Toccata covenant plus wallet policy | Strong business and wallet-safety use case | Vault recovery and delayed withdrawal accepted on TN12; team caps/payroll still planner/wallet-policy |
 | 8 | Simple asset / redeemable claim | Issuer-backed credits, vouchers, recoverable claims, later covenant-native assets | Issuer/indexer now, covenant-native later | Asset workflows bring users, but native-asset claims must wait for rails | Policy artifacts exist; keep separate from KRC/native-asset overclaims |
 | 9 | Stable-value issuer app | Issuer-backed issuance/redemption state, receipts, reserves, redemption requests | Issuer/indexer and research | Stable-value flows bring liquidity attention, but native stablecoin claims are high-risk | Accepted issuance/redemption payload state exists; not a native stablecoin |
-| 10 | DEX / AMM / lending / perps | Trading, liquidity provision, borrowing, leverage, hedging | Research / future rails | These are high-liquidity categories on other chains, but need oracles, liquidity, liquidation, MEV/order rules, wallet safety, and composability | DeFi backlog and prediction/hedge simulator exist; no live settlement, odds, custody, or advice |
+| 10 | Coordination markets | Public commitments, group thresholds, incentives, solver results, and later private/opaque execution | Research prototype | Founder-highlighted product direction and a natural fit for Kaspa's real-time-decentralization narrative, but current repo work is only transparent planning | Transparent Stag/Intendo/Pack/toy Solver exists; no Staghunt/Hashdag implementation, opacity, capital multiplexing, or atomic Hunt execution |
+| 11 | DEX / AMM / lending / perps | Trading, liquidity provision, borrowing, leverage, hedging | Research / future rails | These are high-liquidity categories on other chains, but need oracles, liquidity, liquidation, MEV/order rules, wallet safety, and composability | DeFi backlog and prediction/hedge simulator exist; no live settlement, odds, custody, or advice |
 
 ## Build-Now Focus
 
@@ -57,7 +60,8 @@ The build-now direction is:
 2. make the wallet submit path usable without local private keys;
 3. turn escrow into a simple freelance or marketplace demo;
 4. turn batch assurance into accepted matched-output custody flow;
-5. harden access passes, auctions, and attestations as indexed app-state products.
+5. harden access passes, auctions, and attestations as indexed app-state products;
+6. turn the transparent coordination-market prototype into a settlement/app brief before claiming stronger market infrastructure.
 
 These are the shortest path to real user-facing apps because they reuse accepted transactions, payloads, or already accepted TN12 covenant proofs.
 
