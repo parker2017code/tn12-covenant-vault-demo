@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-live-window/v1",
   "network": "testnet-12",
-  "generatedAt": "2026-05-09T15:37:01.670Z",
+  "generatedAt": "2026-05-09T21:17:12.278Z",
   "status": "virtual-chain-live-window-ready",
   "liveReadAttempted": true,
   "endpoint": {
@@ -16,63 +16,41 @@
   },
   "request": {
     "method": "getVirtualChainFromBlockV2",
-    "startHash": "a80b8c8f58544341a20e27cfed0ff960f9c0ceb285d2202f6422ebf22d914b57",
+    "startHash": "0efe3a34c12ffec02ce70e252a93ae5e7f25c53e75ecbdbc171909bb6a7301aa",
     "minConfirmationCount": 0,
     "dataVerbosityLevel": "High"
   },
   "summary": {
-    "removedBlocks": 0,
-    "addedBlocks": 1,
-    "acceptedBlocks": 1,
-    "acceptedTransactions": 44,
-    "payloadTransactions": 1,
-    "computeBudgetInputs": 43,
-    "firstBlockBlueScore": "7186414",
-    "firstBlockDaaScore": "7299475"
+    "removedBlocks": 1,
+    "addedBlocks": 3,
+    "acceptedBlocks": 3,
+    "acceptedTransactions": 13,
+    "payloadTransactions": 3,
+    "computeBudgetInputs": 10,
+    "firstBlockBlueScore": "7390701",
+    "firstBlockDaaScore": "7510001"
   },
   "sample": {
-    "blockHash": "8b70849dbe2274d525b815723ce846505fcd548011d40f3b9d6d61a0fa10494a",
+    "blockHash": "1074217a0ce4d3c4c7d853ebab225012a8d8c660576ad080dfba891cd7ba4354",
     "acceptedTransactionIds": [
-      "a2a955a6b893e60d6894799c190779d8a45eb5965da6c42de50399e80fd55789",
-      "fecdddac1817be5517a8fce64e29efbb844abe963f7da9b2686022acc2ca5094",
-      "fb4b4102a049565e165720bfccdd87207794334cb2ebadb0eab16e4f5c628f58",
-      "fb2752ce61d2429791c29fe5a6854770a990f32e206dd31eaa3b35e9c5a6c158",
-      "e949ce9349ad6cc5a3f478339e2c9f50a18a36b53c47deb9241cd47efb9e113d",
-      "e78da9409546091ab88d432136458a89461a3bf720dbcf628a10bbf0c72a6412",
-      "e5303382bdf6ebf09d5df8a3065fd2d95eb482886e2afb9bd1a3625ed4a05498",
-      "e216d9544e6977610369dd111d54ddf520e8250f4ad187c5d7bc6340935e52d1"
+      "300adbc2e0bd5f6cd8398225cd4c95f64127eb768947c4ca4785261559d60559",
+      "e98bc82bfaa1c3684e3e0f838ff27095ed546984f0e3bc5281a43b868c89c6a1",
+      "f8a8a5b98b52fcde896457d050b5d5c2132fd8b90881173ed8f98c5229e3043b",
+      "df7a9e2760066b5338fe201c608bb68989f1a72d213b28bf4c08b9f81a77f3b5",
+      "dc51a36bfb9d846350e62282173735efa2599e56e6d1921f105ebff9098c6f3c",
+      "c61eb34b4b1411e8feea95dce63d3b3779819a6650fbce9af45c93533fc8a609",
+      "afe9be501ec30c6215b20e7bf1157da2844e6aca1f82b01b03f1ab25c67d3b65",
+      "9dcc73a44b24f749642ace8b27e02aef4599151fc70e895ffc4e998f99175553"
     ],
     "payloadBytes": [
+      70,
+      70,
       70
     ],
     "computeBudgetInputs": [
       {
         "previousOutpoint": {
-          "transactionId": "4cda974f0e0a7f0932c5b1df29e07b402071712f77038ba82df073c750de38f6",
-          "index": 1
-        },
-        "sigOpCount": 1,
-        "computeBudget": 0
-      },
-      {
-        "previousOutpoint": {
-          "transactionId": "c9b66d9648540383d0bd1bd7cd74356047c89b36cc27f904b9c5ddf8dac3e1b5",
-          "index": 1
-        },
-        "sigOpCount": 1,
-        "computeBudget": 0
-      },
-      {
-        "previousOutpoint": {
-          "transactionId": "166c869650fce885635ef7837fff5f44a9457115535fbc0ed39e8005e0214c76",
-          "index": 1
-        },
-        "sigOpCount": 1,
-        "computeBudget": 0
-      },
-      {
-        "previousOutpoint": {
-          "transactionId": "a785eb1775d95232f6d540970d26c928fb02126270a6fa9d8888aca5cc620187",
+          "transactionId": "fca6833dc25077cabfd982422c844db1a32a96415535e731320a1c82fbf2a194",
           "index": 0
         },
         "sigOpCount": 1,
@@ -80,8 +58,32 @@
       },
       {
         "previousOutpoint": {
-          "transactionId": "9fbad8a8a8d6e718e2d928153a185abe55b919f8076454915c6c17a4d5b018b3",
+          "transactionId": "608058527cb8b8ca1a5d5bc99b334fe926c2f07fecab3e0cd2319ec1e1ade002",
           "index": 0
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      },
+      {
+        "previousOutpoint": {
+          "transactionId": "a787da39e9568e03c3c7c9afa16ecea8d0fe081fa424add144f2d52bff921ef9",
+          "index": 0
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      },
+      {
+        "previousOutpoint": {
+          "transactionId": "29b373732dd5735d6adc252e8eec08f02f8511f4bb2e6da919c88e7ccff103be",
+          "index": 0
+        },
+        "sigOpCount": 1,
+        "computeBudget": 0
+      },
+      {
+        "previousOutpoint": {
+          "transactionId": "6aca552fe459d27e71da285a72d1f27a199d2aca0c40c249cf76d73cfeb417c7",
+          "index": 1
         },
         "sigOpCount": 1,
         "computeBudget": 0
