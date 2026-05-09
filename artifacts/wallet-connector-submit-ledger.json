@@ -1,0 +1,1332 @@
+{
+  "schema": "tn12-wallet-connector-submit-ledger/v1",
+  "network": "kaspa-testnet-12",
+  "runAt": "2026-05-09T10:59:03.197Z",
+  "status": "wallet-submit-ledger-ready",
+  "summary": {
+    "sessions": 47,
+    "acceptedEvidence": 3,
+    "pendingWalletSubmit": 44,
+    "blockedReview": 0,
+    "rejectedOrError": 0,
+    "payloadRows": 26,
+    "computeBudgetRows": 2,
+    "secretFields": 0,
+    "broadcastsByThisArtifact": 0
+  },
+  "promotionRules": [
+    "A review session can become submitted only after an external wallet returns a txid and route.",
+    "A submitted txid can become app state only after the virtual-chain reader reports it accepted with matching payload/output rules.",
+    "Historical accepted JSON wRPC evidence can be recorded, but it does not prove the wallet connector is live.",
+    "Rejected, error, stale, or missing accepted evidence rows stay out of app reducers."
+  ],
+  "requiredResultFields": [
+    "requestId",
+    "sessionId",
+    "transactionId",
+    "status",
+    "route",
+    "acceptedEvidencePath"
+  ],
+  "ledgerRows": [
+    {
+      "requestId": "wreq-6cfe79da",
+      "sessionId": "review-wreq-6cfe79da",
+      "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "state": "accepted-evidence-recorded",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "historical-json-wrpc-accepted",
+      "route": "json-wrpc",
+      "acceptedEvidencePath": "artifacts/payload-receipt-evidence.json",
+      "acceptedByVirtualChain": true,
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-7de55774",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": "Historical accepted payload receipt evidence is already in the checkpoint. This fixture proves result-ledger shape without broadcasting."
+    },
+    {
+      "requestId": "wreq-0d276be0",
+      "sessionId": "review-wreq-0d276be0",
+      "path": "artifacts/signed-drafts/payload-refund-self-send.json",
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "state": "accepted-evidence-recorded",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "historical-json-wrpc-accepted",
+      "route": "json-wrpc",
+      "acceptedEvidencePath": "artifacts/payload-refund-evidence.json",
+      "acceptedByVirtualChain": true,
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-fd173d58",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": "Historical accepted payload refund evidence is already in the checkpoint. This fixture proves result-ledger shape without broadcasting."
+    },
+    {
+      "requestId": "wreq-c3d8c6a4",
+      "sessionId": "review-wreq-c3d8c6a4",
+      "path": "artifacts/signed-drafts/payload-error-self-send.json",
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "state": "accepted-evidence-recorded",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "historical-json-wrpc-accepted",
+      "route": "json-wrpc",
+      "acceptedEvidencePath": "artifacts/payload-error-evidence.json",
+      "acceptedByVirtualChain": true,
+      "payload": {
+        "present": true,
+        "bytes": 130,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-074cd5d2",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": "Historical accepted payload error evidence is already in the checkpoint. This fixture proves result-ledger shape without broadcasting."
+    },
+    {
+      "requestId": "wreq-68feaa92",
+      "sessionId": "review-wreq-68feaa92",
+      "path": "artifacts/signed-drafts/payload-access-pass-redemption.json",
+      "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 159,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-dc664430",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-9e1d350b",
+      "sessionId": "review-wreq-9e1d350b",
+      "path": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
+      "transactionId": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 122,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-89cdbcb1",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-f924ff6d",
+      "sessionId": "review-wreq-f924ff6d",
+      "path": "artifacts/signed-drafts/payload-auction-bid.json",
+      "transactionId": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 128,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-6ff937a2",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-1e636be2",
+      "sessionId": "review-wreq-1e636be2",
+      "path": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json",
+      "transactionId": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 160,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-02a784bc",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-77ff1bf3",
+      "sessionId": "review-wreq-77ff1bf3",
+      "path": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json",
+      "transactionId": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 195,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-f5e58225",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-ac38755e",
+      "sessionId": "review-wreq-ac38755e",
+      "path": "artifacts/signed-drafts/payload-auction-refund-pass-001.json",
+      "transactionId": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 185,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-62ecc358",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-136eca53",
+      "sessionId": "review-wreq-136eca53",
+      "path": "artifacts/signed-drafts/payload-stable-issuance.json",
+      "transactionId": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 135,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-39227da3",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-c3b0416e",
+      "sessionId": "review-wreq-c3b0416e",
+      "path": "artifacts/signed-drafts/payload-stable-issuance-002.json",
+      "transactionId": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 138,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-093b0fbe",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-254ced6d",
+      "sessionId": "review-wreq-254ced6d",
+      "path": "artifacts/signed-drafts/payload-stable-redemption.json",
+      "transactionId": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 140,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-a3edb170",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-fc5f0adc",
+      "sessionId": "review-wreq-fc5f0adc",
+      "path": "artifacts/signed-drafts/payload-miner-attestation.json",
+      "transactionId": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 156,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-9bc02089",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-f5479471",
+      "sessionId": "review-wreq-f5479471",
+      "path": "artifacts/signed-drafts/payload-agent-task-invoice.json",
+      "transactionId": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 136,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-6b026884",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-93d91369",
+      "sessionId": "review-wreq-93d91369",
+      "path": "artifacts/signed-drafts/payload-agent-task-escrow.json",
+      "transactionId": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 139,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-4049291e",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-a1a412a6",
+      "sessionId": "review-wreq-a1a412a6",
+      "path": "artifacts/signed-drafts/payload-agent-proof.json",
+      "transactionId": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 133,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-9f2a612f",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-e419fdce",
+      "sessionId": "review-wreq-e419fdce",
+      "path": "artifacts/signed-drafts/payload-agent-proof-escrow.json",
+      "transactionId": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 148,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-544a3327",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-e9f4aad0",
+      "sessionId": "review-wreq-e9f4aad0",
+      "path": "artifacts/signed-drafts/payload-agent-dispute-escrow.json",
+      "transactionId": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 127,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-e8893632",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-0da38349",
+      "sessionId": "review-wreq-0da38349",
+      "path": "artifacts/signed-drafts/payload-agent-release-invoice.json",
+      "transactionId": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 207,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-efd801dd",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-882fdf01",
+      "sessionId": "review-wreq-882fdf01",
+      "path": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
+      "transactionId": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-b6b4fc8f",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-b45afbcc",
+      "sessionId": "review-wreq-b45afbcc",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-001.json",
+      "transactionId": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-4531ed82",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-4a2e00eb",
+      "sessionId": "review-wreq-4a2e00eb",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-002.json",
+      "transactionId": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 183,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-e9ca5275",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-33f32c32",
+      "sessionId": "review-wreq-33f32c32",
+      "path": "artifacts/signed-drafts/payload-batch-pledge-docs-003.json",
+      "transactionId": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 194,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-7a6b86ad",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-e79aee58",
+      "sessionId": "review-wreq-e79aee58",
+      "path": "artifacts/signed-drafts/payload-batch-release-plan.json",
+      "transactionId": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 186,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-dffd7153",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-4ea6bf46",
+      "sessionId": "review-wreq-4ea6bf46",
+      "path": "artifacts/signed-drafts/payload-prediction-market-network-stress.json",
+      "transactionId": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 179,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-05869549",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-fb286440",
+      "sessionId": "review-wreq-fb286440",
+      "path": "artifacts/signed-drafts/payload-prediction-hedge-position-miner-revenue.json",
+      "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "payload-preserving-wallet-or-json-wrpc",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": true,
+        "bytes": 190,
+        "routeRequired": true
+      },
+      "preservation": {
+        "fingerprint": "fp-f42b6718",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-ade32cd1",
+      "sessionId": "review-wreq-ade32cd1",
+      "path": "artifacts/signed-drafts/split-funding.json",
+      "transactionId": "83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-ecb6957e",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-42682575",
+      "sessionId": "review-wreq-42682575",
+      "path": "artifacts/signed-drafts/role-separated-funding.json",
+      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-02d21f20",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-700a182c",
+      "sessionId": "review-wreq-700a182c",
+      "path": "artifacts/signed-drafts/role-vault-withdrawal.json",
+      "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-a18c167a",
+        "version": 0,
+        "lockTime": "1778229191",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 282
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-1ffef490",
+      "sessionId": "review-wreq-1ffef490",
+      "path": "artifacts/signed-drafts/role-vault-recovery.json",
+      "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-aef4e3f4",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 282
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-6080546b",
+      "sessionId": "review-wreq-6080546b",
+      "path": "artifacts/signed-drafts/role-assurance-release.json",
+      "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-67d5284a",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 179
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-a4f739ba",
+      "sessionId": "review-wreq-a4f739ba",
+      "path": "artifacts/signed-drafts/role-assurance-refund.json",
+      "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-ad14340a",
+        "version": 0,
+        "lockTime": "1778229191",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 245
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-fda320a9",
+      "sessionId": "review-wreq-fda320a9",
+      "path": "artifacts/signed-drafts/role-escrow-release.json",
+      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-953779f6",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 421
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-f5845e00",
+      "sessionId": "review-wreq-f5845e00",
+      "path": "artifacts/signed-drafts/role-escrow-refund.json",
+      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-15ad079e",
+        "version": 0,
+        "lockTime": "1778229191",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 421
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-d12412d8",
+      "sessionId": "review-wreq-d12412d8",
+      "path": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-c2b0fc42",
+        "version": 1,
+        "lockTime": "0",
+        "computeBudgetInputs": 1,
+        "signatureScriptBytes": 487
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-bfe853f3",
+      "sessionId": "review-wreq-bfe853f3",
+      "path": "artifacts/signed-drafts/vault-recovery.json",
+      "transactionId": "6c3873c7374e6cd9cd1cdfdd5aab81222d3fb6090e3ec9ff512f42579a4f4c4c",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-3b05fc0b",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 281
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-484c1de3",
+      "sessionId": "review-wreq-484c1de3",
+      "path": "artifacts/signed-drafts/vault-withdrawal.json",
+      "transactionId": "187686b8fb24935de12f68fae6fbaf03dae971029eaa4502ae34f55a3ec7aed5",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-abd0de0c",
+        "version": 0,
+        "lockTime": "1778143352",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 281
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-cb883b9e",
+      "sessionId": "review-wreq-cb883b9e",
+      "path": "artifacts/signed-drafts/assurance-release.json",
+      "transactionId": "0567afb049fbed78674cf8bc119714470c0f7e9b1f329ae5fe2d74d9ced77601",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-06cb1ef6",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 178
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-11c831ed",
+      "sessionId": "review-wreq-11c831ed",
+      "path": "artifacts/signed-drafts/assurance-refund.json",
+      "transactionId": "0ad367cea66c3c823cc9c23e1e874cedc0fb30e90c3deaa309cdcee2dc4f54aa",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-25253255",
+        "version": 0,
+        "lockTime": "1778143352",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 244
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-782b16c6",
+      "sessionId": "review-wreq-782b16c6",
+      "path": "artifacts/signed-drafts/escrow-funding.json",
+      "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-c526f6ab",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-9532d7b2",
+      "sessionId": "review-wreq-9532d7b2",
+      "path": "artifacts/signed-drafts/escrow-release.json",
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-c659ea65",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 421
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-b94a10a1",
+      "sessionId": "review-wreq-b94a10a1",
+      "path": "artifacts/signed-drafts/escrow-refund.json",
+      "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-0ae341ef",
+        "version": 0,
+        "lockTime": "1778153976",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 421
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-e83f441d",
+      "sessionId": "review-wreq-e83f441d",
+      "path": "artifacts/signed-drafts/escrow-cancel.json",
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-2e9eb12d",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 487
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-eecfa326",
+      "sessionId": "review-wreq-eecfa326",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-funding.json",
+      "transactionId": "f839eb30667eed509a55dae382da6aeeccebe21014bf6fc74f4bf0f2f204a96f",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-854a094f",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-cd98a52a",
+      "sessionId": "review-wreq-cd98a52a",
+      "path": "artifacts/signed-drafts/escrow-daa-refund-proof-refund.json",
+      "transactionId": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-b384b987",
+        "version": 0,
+        "lockTime": "5341732",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 420
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-a097c871",
+      "sessionId": "review-wreq-a097c871",
+      "path": "artifacts/signed-drafts/escrow-cancel-funding.json",
+      "transactionId": "331b0372e9a8dd12516a772c9ce983f519031fa6970113a64eae16c0fcf4f022",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-06e980c8",
+        "version": 0,
+        "lockTime": "0",
+        "computeBudgetInputs": 0,
+        "signatureScriptBytes": 66
+      },
+      "reviewProblems": [],
+      "notes": ""
+    },
+    {
+      "requestId": "wreq-5dd4b1ef",
+      "sessionId": "review-wreq-5dd4b1ef",
+      "path": "artifacts/signed-drafts/escrow-cancel-proof-cancel.json",
+      "transactionId": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "state": "pending-wallet-submit",
+      "reviewedAt": "2026-05-08T12:22:03.748Z",
+      "recordedAt": "2026-05-09T10:59:03.197Z",
+      "resultSource": "none",
+      "route": "wallet-exact-transaction-submit",
+      "acceptedEvidencePath": "",
+      "acceptedByVirtualChain": false,
+      "payload": {
+        "present": false,
+        "bytes": 0,
+        "routeRequired": false
+      },
+      "preservation": {
+        "fingerprint": "fp-7d1c3f9a",
+        "version": 1,
+        "lockTime": "0",
+        "computeBudgetInputs": 1,
+        "signatureScriptBytes": 487
+      },
+      "reviewProblems": [],
+      "notes": ""
+    }
+  ],
+  "readyForIndexer": [
+    {
+      "requestId": "wreq-6cfe79da",
+      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "acceptedEvidencePath": "artifacts/payload-receipt-evidence.json",
+      "source": "historical-json-wrpc-accepted",
+      "caveat": "Only already accepted evidence is indexer-ready; wallet connector liveness is still unproven."
+    },
+    {
+      "requestId": "wreq-0d276be0",
+      "transactionId": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
+      "acceptedEvidencePath": "artifacts/payload-refund-evidence.json",
+      "source": "historical-json-wrpc-accepted",
+      "caveat": "Only already accepted evidence is indexer-ready; wallet connector liveness is still unproven."
+    },
+    {
+      "requestId": "wreq-c3d8c6a4",
+      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
+      "acceptedEvidencePath": "artifacts/payload-error-evidence.json",
+      "source": "historical-json-wrpc-accepted",
+      "caveat": "Only already accepted evidence is indexer-ready; wallet connector liveness is still unproven."
+    }
+  ],
+  "boundaries": [
+    "This ledger records review/submit/result state; it does not sign or broadcast.",
+    "Rows with historical JSON wRPC evidence keep the accepted payload facts, but do not upgrade the wallet connector to live.",
+    "Pending wallet-submit rows remain candidates until a real wallet and virtual-chain accepted evidence exist.",
+    "No private keys, mnemonics, seeds, or local wallet files are inputs to this artifact."
+  ],
+  "secretFields": []
+}

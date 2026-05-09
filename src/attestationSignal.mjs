@@ -33,10 +33,12 @@ export function normalizeSignal(signal) {
     ? null
     : clampPercent(signal.resolution.accuracy);
   const signatureReview = buildSignatureReview(signal);
+  const signerProvenance = buildSignerProvenance(signal);
   const influenceReady = String(signal.status || "draft") === "verified"
     && Boolean(signal.acceptedTxid)
     && Boolean(signal.evidencePath)
-    && signatureReview.status === "verified";
+    && signatureReview.status === "verified"
+    && signerProvenance.status === "active";
 
   return {
     id: String(signal.id || ""),
@@ -52,8 +54,12 @@ export function normalizeSignal(signal) {
     confidence,
     evidence: signal.evidence || {},
     signatureReview,
+    signerProvenance,
     influenceReady,
     status: String(signal.status || "draft"),
+    expiresAt: String(signal.expiresAt || ""),
+    claimPosition: String(signal.claimPosition || "supports-claim"),
+    conflictsWith: Array.isArray(signal.conflictsWith) ? signal.conflictsWith.map(String) : [],
     marketUse: String(signal.marketUse || "research-only"),
     portfolioUse: String(signal.portfolioUse || "alert-only"),
     rewardHint: String(signal.rewardHint || "Reward only after usefulness and accuracy are measured."),
@@ -87,6 +93,16 @@ function buildSourceSummaries(signals) {
     if (signal.signatureReview.status === "verified") {
       current.signatureVerified = (current.signatureVerified || 0) + 1;
     }
+    if (signal.signerProvenance.status === "active") {
+      current.activeSignerProvenance = (current.activeSignerProvenance || 0) + 1;
+    }
+    if (signal.signerProvenance.status === "revoked") {
+      current.revokedSigners = (current.revokedSigners || 0) + 1;
+    }
+    current.signerIds = current.signerIds || new Set();
+    if (signal.signerProvenance.signerId) current.signerIds.add(signal.signerProvenance.signerId);
+    current.independenceGroups = current.independenceGroups || new Set();
+    if (signal.signerProvenance.independenceGroup) current.independenceGroups.add(signal.signerProvenance.independenceGroup);
     if (signal.influenceReady) {
       current.influenceReady = (current.influenceReady || 0) + 1;
     }
@@ -116,6 +132,10 @@ function buildSourceSummaries(signals) {
       submitted: source.submitted,
       verified: source.verified,
       signatureVerified: source.signatureVerified || 0,
+      activeSignerProvenance: source.activeSignerProvenance || 0,
+      revokedSigners: source.revokedSigners || 0,
+      signerIds: [...(source.signerIds || [])],
+      independenceGroups: [...(source.independenceGroups || [])],
       influenceReady: source.influenceReady || 0,
       disputed: source.disputed,
       averageConfidence,
@@ -123,6 +143,21 @@ function buildSourceSummaries(signals) {
       reputationScore
     };
   }).sort((a, b) => b.reputationScore - a.reputationScore);
+}
+
+function buildSignerProvenance(signal) {
+  const provenance = signal.signerProvenance || {};
+  return {
+    signerId: String(provenance.signerId || ""),
+    publicKey: String(signal.signature?.publicKey || ""),
+    registryEntry: String(provenance.registryEntry || ""),
+    controlEvidence: String(provenance.controlEvidence || ""),
+    independenceGroup: String(provenance.independenceGroup || signal.source || "unknown"),
+    status: String(provenance.status || "unverified"),
+    registeredAt: String(provenance.registeredAt || ""),
+    revokedAt: String(provenance.revokedAt || ""),
+    revocationReason: String(provenance.revocationReason || "")
+  };
 }
 
 function buildSignatureReview(signal) {

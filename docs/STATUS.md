@@ -19,7 +19,7 @@
 - Assurance refund: submitted and accepted with a past DAA-score deadline.
 - Proof evidence artifact: `npm run proof:evidence` confirms all seven proof spends consume TN12 P2SH (`p...`) contract outputs and pay the expected P2PK (`q...`) saved wallet output.
 - Payload evidence artifacts: `npm run payload:verify:events` confirms 26 accepted payload events with matched payload bytes.
-- Wallet connector: not implemented.
+- Wallet connector: live external wallet integration is not implemented. Review/session/package artifacts and a submit-result ledger are implemented; they do not sign or broadcast.
 - Silverscript templates: drafted.
 - Silverscript compiler integration: helper added; artifacts depend on local `silverc`.
 - Faucet automation: not available from this shell because the faucet returns a Cloudflare challenge.

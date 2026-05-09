@@ -66,6 +66,12 @@ The current base includes:
 
 The project no longer depends on a local full Kaspa node. It uses public TN12 REST endpoints, local fixtures, local signing, and explicit submit commands.
 
+Current attestation provenance state:
+
+- `npm run attestation:reputation` writes `artifacts/attestation-reputation-thresholds.json`.
+- The artifact records signer provenance, active/revoked signer status, conflict sets, quorum thresholds, stale/unresolved/revoked signal states, and dashboard policy.
+- `dashboardInfluenceEnabled` is currently `false`. Future dashboards should consume only `influenceAllowed` signals from that artifact, not raw registry `influenceReady` flags.
+
 ## Hard Boundaries
 
 - Operating rule: do the work, verify it, then report what changed.

@@ -80,8 +80,8 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 
 - Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order. Use `npm run project:plan` / `artifacts/project-plan.json` for the older done/WIP/next/later grouping.
 - Use `npm run ai:discipline` / `artifacts/ai-coding-source-discipline.json` before broad roadmap or source-discipline rewrites. It encodes the Kaspa Daily Q&A implications, public coding-agent practice, and the rule that unknown private company workflows stay marked unknown.
-- WIP lanes: live wallet connector submit without local keys, batch-assurance pledge-output funding/import, durable indexer replay implementation, and attestation provenance/quorum hardening.
-- Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant rejection attempts from fresh expendable outputs, and attestation signer provenance/quorum handling.
+- WIP lanes: live wallet connector submit without local keys, batch-assurance pledge-output funding/import, durable indexer replay implementation, and wiring hardened attestation provenance/quorum output into future signal-consuming dashboards.
+- Next actions: wallet submit route, accepted pledge-output custody transactions, durable indexer, covenant rejection attempts from fresh expendable outputs, and dashboard consumers for the attestation provenance/quorum artifact.
 - Keep real depth in three verticals first:
   - invoice/receipt app: accepted transaction app state,
   - escrow/assurance app: TN12 covenant proof app,
@@ -90,6 +90,16 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - Escrow mutual cancel is accepted through the version-1 compute-budget path. Preserve old cancel rejections as historical bad configuration or old-SDK evidence only.
 
 ## Latest Pause Note
+
+Paused on 2026-05-09 after bounded attestation provenance/quorum hardening:
+
+- `fixtures/AttestationSignals.json` now includes signer-provenance records plus conflict, stale, and revoked-source review cases.
+- `src/attestationSignal.mjs` carries active/revoked signer provenance and keeps influence-ready blocked for revoked provenance.
+- `src/attestationReputationThresholds.mjs` extends `artifacts/attestation-reputation-thresholds.json` with signer provenance, conflict sets, quorum thresholds, stale/unresolved/revoked states, and `dashboardInfluenceEnabled: false` until source, signature, provenance, accuracy, conflict, and quorum checks all pass.
+- `npm run attestation:reputation` regenerated the artifact successfully.
+- Follow-up integration fixed the README wallet-submit-ledger assertion and `npm run check` now passes with the attestation checks.
+- `npm run check:negative` passed after updating the extra conflicting-signal expectation.
+- Next safe task in this lane: make a future signal-consuming dashboard read `artifacts/attestation-reputation-thresholds.json` rather than raw registry influence flags.
 
 Paused on 2026-05-08 after local invalid-candidate work:
 

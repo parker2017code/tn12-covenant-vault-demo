@@ -78,8 +78,10 @@ try {
   await expectText(page, "#treasury-list", "Core team operating vault");
   await expectText(page, "#treasury-list", "Review delayed large withdrawal");
   await expectText(page, "#coordination-summary", "Intendos");
+  await expectText(page, "#coordination-summary", "Routes");
   await expectText(page, "#coordination-packs", "pack-stag-docs-sprint");
   await expectText(page, "#coordination-packs", "satisfiable-transparent-pack");
+  await expectText(page, "#coordination-packs", "transparent-settlement-brief-ready-not-production");
   await expectText(page, "#access-summary", "Redeemed");
   await expectText(page, "#access-list", "Kaspa dev workshop ticket");
   await expectText(page, "#access-list", "issuer-indexer");
@@ -135,6 +137,8 @@ try {
   await expectText(page, "#payload-draft-status", "signed-not-broadcast");
   await expectText(page, "#payload-draft-status", "accepted through TN12 JSON wRPC");
   await expectText(page, "#wallet-connector", "wallet-submit-package-ready");
+  await expectText(page, "#wallet-connector", "wallet-submit-ledger-ready");
+  await expectText(page, "#wallet-connector", "pending wallet-submit candidates");
   await expectText(page, "#master-roadmap", "Payload Receipt / Invoice App");
   await expectText(page, "#master-roadmap", "AI-Agent Commitment Board");
   await expectText(page, "#attestation-summary", "Verified");

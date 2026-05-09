@@ -1,0 +1,72 @@
+{
+  "schema": "kaspa-coordination-market-settlement-brief-fixture/v1",
+  "network": "kaspa-testnet-12",
+  "appId": "coordination-docs-sprint-settlement-brief",
+  "prototypeArtifact": "artifacts/coordination-market-prototype.json",
+  "selectedPackId": "pack-stag-docs-sprint",
+  "appBrief": {
+    "title": "Transparent docs sprint coordination settlement",
+    "userPromise": "Backers can see which signed commitments satisfy the docs sprint threshold before any release plan is drafted.",
+    "userSurface": "A transparent app brief that shows Stag, qualifying Intendos, Pack solver result, release/refund routes, wallet review needs, and missing production rails.",
+    "currentLane": "planner-indexer",
+    "notProduction": "This is not Hashdag, Staghunt, private accumulation, or production market settlement."
+  },
+  "settlementRoutes": [
+    {
+      "routeId": "docs-sprint-release",
+      "kind": "release",
+      "fromSolverStatus": "satisfiable-transparent-pack",
+      "draftStatus": "brief-ready-not-signed",
+      "custodySource": "batch-assurance-campaign",
+      "recipient": "docs-sprint-recipient",
+      "walletReview": [
+        "show selected Stag and Pack",
+        "show each qualifying Intendo",
+        "show exact amount per commitment",
+        "show release recipient",
+        "show that this is transparent planner state"
+      ]
+    },
+    {
+      "routeId": "docs-sprint-refund",
+      "kind": "refund",
+      "fromSolverStatus": "not-satisfiable-or-expired",
+      "draftStatus": "brief-ready-not-signed",
+      "custodySource": "individual-pledge-outpoints",
+      "recipient": "original-committers",
+      "walletReview": [
+        "show expired or unsatisfied Pack state",
+        "show original Intendo and capital reference",
+        "show refund recipient per commitment",
+        "show no automatic Hunt execution"
+      ]
+    }
+  ],
+  "missingRails": [
+    {
+      "id": "opacity",
+      "name": "Opacity",
+      "currentAnswer": "All commitments and solver inputs are transparent fixture data.",
+      "neededForProduction": "Private or selectively revealed accumulation so participants cannot trivially front-run or infer hidden demand."
+    },
+    {
+      "id": "capital-multiplexing",
+      "name": "Capital multiplexing",
+      "currentAnswer": "Each Intendo references one visible capital source and cannot safely reuse the same capital across competing Packs.",
+      "neededForProduction": "A rule set that prevents double use while letting capital back multiple conditional opportunities before one Hunt wins."
+    },
+    {
+      "id": "atomic-hunt-execution",
+      "name": "Atomic Hunt execution",
+      "currentAnswer": "The current Hunt is a plan field, not a transaction path that consumes every qualified commitment together.",
+      "neededForProduction": "A transaction or protocol route that executes all selected commitments atomically or fails them together."
+    },
+    {
+      "id": "oracle-settlement",
+      "name": "Oracle / settlement",
+      "currentAnswer": "No external event oracle, dispute process, or final settlement source is wired to this brief.",
+      "neededForProduction": "A defined settlement source, challenge path, and accepted evidence model for events outside the transaction itself."
+    }
+  ],
+  "nextArtifact": "signed settlement draft or payload event only after custody source and wallet review are explicit"
+}

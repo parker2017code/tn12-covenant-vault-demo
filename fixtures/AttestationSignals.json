@@ -45,6 +45,14 @@
         "messageHash": "sha256:example-hashrate-window",
         "signature": "demo-signature-rtd-hashrate-001"
       },
+      "signerProvenance": {
+        "signerId": "watcher-alpha-operator-key-2026q2",
+        "registryEntry": "local-fixture:watcher-alpha",
+        "controlEvidence": "operator-signed-demo-key",
+        "independenceGroup": "watcher-alpha",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:00:00.000Z"
+      },
       "status": "verified",
       "marketUse": "Update simulated probability for a network-stress event.",
       "portfolioUse": "Raise alert for portfolios concentrated in short-term miner revenue assumptions.",
@@ -76,6 +84,14 @@
         "publicKey": "",
         "messageHash": "sha256:example-public-source-bundle",
         "signature": ""
+      },
+      "signerProvenance": {
+        "signerId": "market-research-beta-unregistered",
+        "registryEntry": "",
+        "controlEvidence": "",
+        "independenceGroup": "research-beta",
+        "status": "unverified",
+        "registeredAt": ""
       },
       "status": "draft",
       "marketUse": "Simulated prediction market input only.",
@@ -109,6 +125,14 @@
         "messageHash": "sha256:example-pool-policy-message",
         "signature": "demo-signature-pool-policy-001"
       },
+      "signerProvenance": {
+        "signerId": "pool-gamma-policy-key",
+        "registryEntry": "local-fixture:pool-gamma",
+        "controlEvidence": "pending-operator-review",
+        "independenceGroup": "pool-gamma",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:15:00.000Z"
+      },
       "status": "verified",
       "marketUse": "Infrastructure readiness signal, not a tradeable event.",
       "portfolioUse": "No direct hedge action; improves confidence in future signal supply.",
@@ -117,6 +141,133 @@
         "status": "resolved",
         "accuracy": 88,
         "note": "Fixture marks willingness as verified, not production support."
+      }
+    },
+    {
+      "id": "sig-rtd-hashrate-002-conflict",
+      "eventId": "event-network-hashrate-shift",
+      "channel": "signed-watcher-attestation",
+      "source": "tn12-watcher-delta",
+      "sourceType": "watcher",
+      "acceptedTxid": "",
+      "evidencePath": "",
+      "claim": "Observed no material hashrate movement in the same short-window TN12-like monitoring inputs.",
+      "observedAt": "2026-05-07T09:20:30.000Z",
+      "submittedAt": "2026-05-07T09:21:00.000Z",
+      "confidence": 74,
+      "evidence": {
+        "kind": "dashboard-snapshot-hash",
+        "hash": "sha256:example-hashrate-window-delta",
+        "url": "local-research-note"
+      },
+      "signature": {
+        "status": "verified",
+        "scheme": "demo-ed25519-message",
+        "publicKey": "tn12-watcher-delta-demo-key",
+        "messageHash": "sha256:example-hashrate-window-delta",
+        "signature": "demo-signature-rtd-hashrate-002"
+      },
+      "signerProvenance": {
+        "signerId": "watcher-delta-operator-key-2026q2",
+        "registryEntry": "local-fixture:watcher-delta",
+        "controlEvidence": "operator-signed-demo-key",
+        "independenceGroup": "watcher-delta",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:05:00.000Z"
+      },
+      "status": "verified",
+      "claimPosition": "conflicts-with-sig-rtd-hashrate-001",
+      "conflictsWith": ["sig-rtd-hashrate-001"],
+      "marketUse": "Conflict review only.",
+      "portfolioUse": "Do not move dashboard probability while conflict is open.",
+      "rewardHint": "No reward until conflict is resolved and quorum rules pass.",
+      "resolution": {
+        "status": "resolved",
+        "accuracy": 42,
+        "note": "Fixture marks this as conflicting and below accuracy threshold."
+      }
+    },
+    {
+      "id": "sig-stale-feed-001",
+      "eventId": "event-stale-price-feed",
+      "channel": "signed-research-attestation",
+      "source": "market-research-beta",
+      "sourceType": "researcher",
+      "claim": "A price-feed observation is older than the allowed review window.",
+      "observedAt": "2026-05-05T09:20:00.000Z",
+      "submittedAt": "2026-05-07T09:20:00.000Z",
+      "expiresAt": "2026-05-06T09:20:00.000Z",
+      "confidence": 61,
+      "evidence": {
+        "kind": "public-source-bundle",
+        "hash": "sha256:example-stale-feed",
+        "url": "local-research-note"
+      },
+      "signature": {
+        "status": "verified",
+        "scheme": "demo-ed25519-message",
+        "publicKey": "market-research-beta-demo-key",
+        "messageHash": "sha256:example-stale-feed",
+        "signature": "demo-signature-stale-feed-001"
+      },
+      "signerProvenance": {
+        "signerId": "market-research-beta-feed-key",
+        "registryEntry": "local-fixture:market-research-beta",
+        "controlEvidence": "researcher-signed-demo-key",
+        "independenceGroup": "research-beta",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:10:00.000Z"
+      },
+      "status": "verified",
+      "marketUse": "Review stale-source behavior only.",
+      "portfolioUse": "No dashboard action.",
+      "rewardHint": "No reward for stale observations.",
+      "resolution": {
+        "status": "stale",
+        "accuracy": null,
+        "note": "Expired before review."
+      }
+    },
+    {
+      "id": "sig-revoked-source-001",
+      "eventId": "event-revoked-source",
+      "channel": "signed-watcher-attestation",
+      "source": "watcher-revoked-epsilon",
+      "sourceType": "watcher",
+      "claim": "A revoked source submitted an otherwise signed observation.",
+      "observedAt": "2026-05-07T09:40:00.000Z",
+      "submittedAt": "2026-05-07T09:41:00.000Z",
+      "confidence": 72,
+      "evidence": {
+        "kind": "dashboard-snapshot-hash",
+        "hash": "sha256:example-revoked-source",
+        "url": "local-research-note"
+      },
+      "signature": {
+        "status": "verified",
+        "scheme": "demo-ed25519-message",
+        "publicKey": "watcher-revoked-epsilon-demo-key",
+        "messageHash": "sha256:example-revoked-source",
+        "signature": "demo-signature-revoked-source-001"
+      },
+      "signerProvenance": {
+        "signerId": "watcher-epsilon-revoked-key",
+        "registryEntry": "local-fixture:watcher-epsilon",
+        "controlEvidence": "revoked-demo-key",
+        "independenceGroup": "watcher-epsilon",
+        "status": "revoked",
+        "registeredAt": "2026-05-07T09:00:00.000Z",
+        "revokedAt": "2026-05-07T09:35:00.000Z",
+        "revocationReason": "Fixture revocation before submittedAt."
+      },
+      "status": "verified",
+      "marketUse": "Revocation handling only.",
+      "portfolioUse": "No dashboard action.",
+      "rewardHint": "No reward after signer revocation.",
+      "resolution": {
+        "status": "resolved",
+        "accuracy": 90,
+        "note": "Accurate but revoked before submission."
       }
     }
   ]

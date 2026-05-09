@@ -83,8 +83,9 @@ For the high-impact mainstream app direction and why each use case is or is not 
 
 13. Transparent Coordination-Market Prototype
    - Stag, Intendo, Pack, toy Solver, Hunt-plan artifact.
-   - Explicitly not a Hashdag/Staghunt implementation: no opacity, capital multiplexing, composability, RTD resolution, or coordinated atomic execution.
-   - Current repo surface: `fixtures/CoordinationMarketPrototype.json`, `src/coordinationMarket.mjs`, `npm run coordination:market`, and the browser coordination panel.
+   - Settlement/app brief maps one satisfiable transparent Pack to release/refund routes and wallet review checks.
+   - Explicitly not a Hashdag/Staghunt implementation: no opacity, capital multiplexing, composability, oracle/settlement rail, or coordinated atomic execution.
+   - Current repo surface: `fixtures/CoordinationMarketPrototype.json`, `fixtures/CoordinationMarketSettlementBrief.json`, `src/coordinationMarket.mjs`, `src/coordinationMarketSettlementBrief.mjs`, `npm run coordination:market`, `npm run coordination:settlement-brief`, and the browser coordination panel.
 
 14. ZK / Anchor Readiness
    - Track where future apps may need compact proofs or canonical anchors: off-chain state, coordination solver results, source-chain state, oracle attestations, and vProg-style execution.

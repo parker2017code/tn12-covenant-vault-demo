@@ -33,6 +33,7 @@ import { buildEscrowPrimitive } from "./src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "./src/treasuryVault.mjs";
 import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
+import { buildCoordinationMarketSettlementBrief } from "./src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
 import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
@@ -532,14 +533,20 @@ async function renderCoordinationMarket() {
   if (!coordinationSummaryNode || !coordinationPacksNode) return;
 
   try {
-    const response = await fetch("fixtures/CoordinationMarketPrototype.json", { cache: "no-store" });
+    const [response, briefResponse] = await Promise.all([
+      fetch("fixtures/CoordinationMarketPrototype.json", { cache: "no-store" }),
+      fetch("fixtures/CoordinationMarketSettlementBrief.json", { cache: "no-store" })
+    ]);
     const fixture = await response.json();
+    const briefFixture = await briefResponse.json();
     const prototype = buildCoordinationMarketPrototype(fixture);
+    const settlementBrief = buildCoordinationMarketSettlementBrief({ fixture: briefFixture, coordinationPrototype: prototype });
     coordinationSummaryNode.innerHTML = `
       <article><span>Stags</span><strong>${escapeHtml(prototype.summary.stags)}</strong></article>
       <article><span>Intendos</span><strong>${escapeHtml(prototype.summary.intendos)}</strong></article>
       <article><span>Packs</span><strong>${escapeHtml(prototype.summary.packs)}</strong></article>
       <article><span>Satisfiable</span><strong>${escapeHtml(prototype.summary.satisfiablePacks)}</strong></article>
+      <article><span>Routes</span><strong>${escapeHtml(settlementBrief.summary.settlementRoutes)}</strong></article>
     `;
 
     coordinationPacksNode.innerHTML = "";
@@ -554,6 +561,15 @@ async function renderCoordinationMarket() {
       `;
       coordinationPacksNode.append(article);
     }
+    const briefArticle = document.createElement("article");
+    briefArticle.className = "coordination-card";
+    briefArticle.innerHTML = `
+      <span>${escapeHtml(settlementBrief.status)}</span>
+      <strong>${escapeHtml(settlementBrief.appBrief.title)}</strong>
+      <p>${escapeHtml(settlementBrief.summary.qualifyingIntendos)} qualifying intendos; ${escapeHtml(settlementBrief.summary.qualifyingTkas)} TKAS transparent route amount.</p>
+      <small>${escapeHtml(settlementBrief.nonProductionBoundary[1])}</small>
+    `;
+    coordinationPacksNode.append(briefArticle);
   } catch (error) {
     coordinationSummaryNode.textContent = `Coordination market prototype unavailable: ${error.message}`;
   }
@@ -1180,16 +1196,18 @@ async function renderWalletConnector() {
   if (!walletConnectorNode) return;
 
   try {
-    const [readinessResponse, packageResponse, requestResponse, adapterResponse] = await Promise.all([
+    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse] = await Promise.all([
       fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" }),
       fetch("artifacts/wallet-submit-package.json", { cache: "no-store" }),
       fetch("artifacts/wallet-connector-submit-requests.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-connector-adapter-run.json", { cache: "no-store" })
+      fetch("artifacts/wallet-connector-adapter-run.json", { cache: "no-store" }),
+      fetch("artifacts/wallet-connector-submit-ledger.json", { cache: "no-store" })
     ]);
     const readiness = await readinessResponse.json();
     const submitPackage = await packageResponse.json();
     const requests = await requestResponse.json();
     const adapterRun = await adapterResponse.json();
+    const ledger = await ledgerResponse.json();
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
@@ -1206,6 +1224,12 @@ async function renderWalletConnector() {
         <strong>${escapeHtml(adapterRun.summary.reviewReady)} review sessions, ${escapeHtml(adapterRun.summary.submitBroadcasts)} broadcasts</strong>
         <p>${escapeHtml(requests.summary.payloadRequests)} payload requests and ${escapeHtml(requests.summary.computeBudgetRequests)} compute-budget requests must preserve exact fields.</p>
         <small>${escapeHtml(adapterRun.boundaries[1])}</small>
+      </article>
+      <article>
+        <span>${escapeHtml(ledger.status)}</span>
+        <strong>${escapeHtml(ledger.summary.acceptedEvidence)} accepted evidence rows, ${escapeHtml(ledger.summary.pendingWalletSubmit)} pending wallet-submit candidates</strong>
+        <p>${escapeHtml(ledger.summary.broadcastsByThisArtifact)} broadcasts by this artifact; app state still waits for virtual-chain accepted evidence.</p>
+        <small>${escapeHtml(ledger.boundaries[1])}</small>
       </article>
     `;
   } catch (error) {

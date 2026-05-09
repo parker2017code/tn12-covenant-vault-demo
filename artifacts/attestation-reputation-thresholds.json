@@ -3,28 +3,152 @@
   "network": "kaspa-testnet-12",
   "status": "attestation-thresholds-ready",
   "summary": {
-    "sources": 3,
-    "signals": 3,
+    "sources": 5,
+    "signals": 6,
     "influenceAllowedSources": 1,
-    "reviewOnlySources": 2,
-    "influenceAllowedSignals": 1,
-    "staleOrUnresolvedSignals": 1
+    "reviewOnlySources": 4,
+    "influenceAllowedSignals": 0,
+    "staleOrUnresolvedSignals": 2,
+    "revokedSignals": 1,
+    "conflictedEvents": 1,
+    "quorumPassedEvents": 0,
+    "dashboardInfluenceEnabled": false
   },
   "thresholds": {
     "sourceReputationMinimum": 70,
     "signatureVerifiedMinimum": 1,
     "influenceReadyMinimum": 1,
     "resolvedAccuracyMinimum": 70,
+    "quorumMinimum": 2,
+    "independentProvenanceMinimum": 2,
     "stalePolicy": "Unresolved or unsigned signals can create review prompts only.",
-    "conflictPolicy": "Conflicting sources must be shown side by side until quorum and dispute rules are implemented."
+    "conflictPolicy": "Conflicting sources must be shown side by side and cannot influence dashboards until the conflict is resolved.",
+    "dashboardPolicy": "Dashboard influence stays disabled unless source, signature, provenance, quorum, conflict, fixture stale-state, revocation, and accuracy checks all pass."
   },
+  "quorumThresholds": [
+    {
+      "eventId": "event-network-hashrate-shift",
+      "signalIds": [
+        "sig-rtd-hashrate-001",
+        "sig-rtd-hashrate-002-conflict"
+      ],
+      "activeResolvedSignals": [
+        "sig-rtd-hashrate-001"
+      ],
+      "independentProvenanceGroups": [
+        "watcher-alpha"
+      ],
+      "quorumMet": false,
+      "conflictOpen": true,
+      "conflictingSignalIds": [
+        "sig-rtd-hashrate-002-conflict",
+        "sig-rtd-hashrate-001"
+      ],
+      "reviewReasons": [
+        "below signal quorum",
+        "below independent provenance quorum",
+        "open signal conflict"
+      ]
+    },
+    {
+      "eventId": "event-exchange-listing-window",
+      "signalIds": [
+        "sig-listing-rumor-001"
+      ],
+      "activeResolvedSignals": [],
+      "independentProvenanceGroups": [],
+      "quorumMet": false,
+      "conflictOpen": false,
+      "conflictingSignalIds": [],
+      "reviewReasons": [
+        "below signal quorum",
+        "below independent provenance quorum"
+      ]
+    },
+    {
+      "eventId": "event-pool-signal-support",
+      "signalIds": [
+        "sig-pool-policy-001"
+      ],
+      "activeResolvedSignals": [],
+      "independentProvenanceGroups": [],
+      "quorumMet": false,
+      "conflictOpen": false,
+      "conflictingSignalIds": [],
+      "reviewReasons": [
+        "below signal quorum",
+        "below independent provenance quorum"
+      ]
+    },
+    {
+      "eventId": "event-stale-price-feed",
+      "signalIds": [
+        "sig-stale-feed-001"
+      ],
+      "activeResolvedSignals": [],
+      "independentProvenanceGroups": [],
+      "quorumMet": false,
+      "conflictOpen": false,
+      "conflictingSignalIds": [],
+      "reviewReasons": [
+        "below signal quorum",
+        "below independent provenance quorum"
+      ]
+    },
+    {
+      "eventId": "event-revoked-source",
+      "signalIds": [
+        "sig-revoked-source-001"
+      ],
+      "activeResolvedSignals": [],
+      "independentProvenanceGroups": [],
+      "quorumMet": false,
+      "conflictOpen": false,
+      "conflictingSignalIds": [],
+      "reviewReasons": [
+        "below signal quorum",
+        "below independent provenance quorum"
+      ]
+    }
+  ],
   "sources": [
+    {
+      "source": "watcher-revoked-epsilon",
+      "sourceType": "watcher",
+      "reputationScore": 87,
+      "averageAccuracy": 90,
+      "signatureVerified": 1,
+      "activeSignerProvenance": 0,
+      "revokedSigners": 1,
+      "signerIds": [
+        "watcher-epsilon-revoked-key"
+      ],
+      "independenceGroups": [
+        "watcher-epsilon"
+      ],
+      "influenceReady": 0,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "no active signer provenance",
+        "revoked signer present",
+        "no influence-ready accepted signal"
+      ]
+    },
     {
       "source": "pool-operator-gamma",
       "sourceType": "pool",
       "reputationScore": 86,
       "averageAccuracy": 88,
       "signatureVerified": 0,
+      "activeSignerProvenance": 1,
+      "revokedSigners": 0,
+      "signerIds": [
+        "pool-gamma-policy-key"
+      ],
+      "independenceGroups": [
+        "pool-gamma"
+      ],
       "influenceReady": 0,
       "influenceAllowed": false,
       "lane": "review-only",
@@ -39,23 +163,61 @@
       "reputationScore": 82,
       "averageAccuracy": 78,
       "signatureVerified": 1,
+      "activeSignerProvenance": 1,
+      "revokedSigners": 0,
+      "signerIds": [
+        "watcher-alpha-operator-key-2026q2"
+      ],
+      "independenceGroups": [
+        "watcher-alpha"
+      ],
       "influenceReady": 1,
       "influenceAllowed": true,
       "lane": "dashboard-input",
       "reviewReasons": []
     },
     {
+      "source": "tn12-watcher-delta",
+      "sourceType": "watcher",
+      "reputationScore": 70,
+      "averageAccuracy": 42,
+      "signatureVerified": 1,
+      "activeSignerProvenance": 1,
+      "revokedSigners": 0,
+      "signerIds": [
+        "watcher-delta-operator-key-2026q2"
+      ],
+      "independenceGroups": [
+        "watcher-delta"
+      ],
+      "influenceReady": 0,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "no influence-ready accepted signal",
+        "resolved accuracy below threshold"
+      ]
+    },
+    {
       "source": "market-research-beta",
       "sourceType": "researcher",
-      "reputationScore": 0,
+      "reputationScore": 28,
       "averageAccuracy": 0,
-      "signatureVerified": 0,
+      "signatureVerified": 1,
+      "activeSignerProvenance": 1,
+      "revokedSigners": 0,
+      "signerIds": [
+        "market-research-beta-unregistered",
+        "market-research-beta-feed-key"
+      ],
+      "independenceGroups": [
+        "research-beta"
+      ],
       "influenceReady": 0,
       "influenceAllowed": false,
       "lane": "review-only",
       "reviewReasons": [
         "reputation below threshold",
-        "no verified signature",
         "no influence-ready accepted signal",
         "resolved accuracy below threshold"
       ]
@@ -67,23 +229,54 @@
       "source": "tn12-watcher-alpha",
       "eventId": "event-network-hashrate-shift",
       "acceptedTxid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "signerProvenance": {
+        "signerId": "watcher-alpha-operator-key-2026q2",
+        "publicKey": "tn12-watcher-alpha-demo-key",
+        "registryEntry": "local-fixture:watcher-alpha",
+        "controlEvidence": "operator-signed-demo-key",
+        "independenceGroup": "watcher-alpha",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:00:00.000Z",
+        "revokedAt": "",
+        "revocationReason": ""
+      },
+      "state": "resolved",
+      "conflictsWith": [],
+      "quorumMet": false,
       "influenceReady": true,
-      "influenceAllowed": true,
-      "lane": "dashboard-input",
-      "reviewReasons": []
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "event quorum not met"
+      ]
     },
     {
       "id": "sig-listing-rumor-001",
       "source": "market-research-beta",
       "eventId": "event-exchange-listing-window",
       "acceptedTxid": "",
+      "signerProvenance": {
+        "signerId": "market-research-beta-unregistered",
+        "publicKey": "",
+        "registryEntry": "",
+        "controlEvidence": "",
+        "independenceGroup": "research-beta",
+        "status": "unverified",
+        "registeredAt": "",
+        "revokedAt": "",
+        "revocationReason": ""
+      },
+      "state": "unresolved",
+      "conflictsWith": [],
+      "quorumMet": false,
       "influenceReady": false,
       "influenceAllowed": false,
       "lane": "review-only",
       "reviewReasons": [
         "source review only",
         "signal not influence-ready",
-        "unresolved signal"
+        "unresolved signal",
+        "event quorum not met"
       ]
     },
     {
@@ -91,20 +284,125 @@
       "source": "pool-operator-gamma",
       "eventId": "event-pool-signal-support",
       "acceptedTxid": "",
+      "signerProvenance": {
+        "signerId": "pool-gamma-policy-key",
+        "publicKey": "pool-operator-gamma-demo-key",
+        "registryEntry": "local-fixture:pool-gamma",
+        "controlEvidence": "pending-operator-review",
+        "independenceGroup": "pool-gamma",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:15:00.000Z",
+        "revokedAt": "",
+        "revocationReason": ""
+      },
+      "state": "resolved",
+      "conflictsWith": [],
+      "quorumMet": false,
       "influenceReady": false,
       "influenceAllowed": false,
       "lane": "review-only",
       "reviewReasons": [
         "source review only",
-        "signal not influence-ready"
+        "signal not influence-ready",
+        "event quorum not met"
+      ]
+    },
+    {
+      "id": "sig-rtd-hashrate-002-conflict",
+      "source": "tn12-watcher-delta",
+      "eventId": "event-network-hashrate-shift",
+      "acceptedTxid": "",
+      "signerProvenance": {
+        "signerId": "watcher-delta-operator-key-2026q2",
+        "publicKey": "tn12-watcher-delta-demo-key",
+        "registryEntry": "local-fixture:watcher-delta",
+        "controlEvidence": "operator-signed-demo-key",
+        "independenceGroup": "watcher-delta",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:05:00.000Z",
+        "revokedAt": "",
+        "revocationReason": ""
+      },
+      "state": "conflicted",
+      "conflictsWith": [
+        "sig-rtd-hashrate-001"
+      ],
+      "quorumMet": false,
+      "influenceReady": false,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "source review only",
+        "signal not influence-ready",
+        "conflicted signal",
+        "accuracy below threshold",
+        "event quorum not met"
+      ]
+    },
+    {
+      "id": "sig-stale-feed-001",
+      "source": "market-research-beta",
+      "eventId": "event-stale-price-feed",
+      "acceptedTxid": "",
+      "signerProvenance": {
+        "signerId": "market-research-beta-feed-key",
+        "publicKey": "market-research-beta-demo-key",
+        "registryEntry": "local-fixture:market-research-beta",
+        "controlEvidence": "researcher-signed-demo-key",
+        "independenceGroup": "research-beta",
+        "status": "active",
+        "registeredAt": "2026-05-07T09:10:00.000Z",
+        "revokedAt": "",
+        "revocationReason": ""
+      },
+      "state": "stale",
+      "conflictsWith": [],
+      "quorumMet": false,
+      "influenceReady": false,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "source review only",
+        "signal not influence-ready",
+        "stale signal",
+        "event quorum not met"
+      ]
+    },
+    {
+      "id": "sig-revoked-source-001",
+      "source": "watcher-revoked-epsilon",
+      "eventId": "event-revoked-source",
+      "acceptedTxid": "",
+      "signerProvenance": {
+        "signerId": "watcher-epsilon-revoked-key",
+        "publicKey": "watcher-revoked-epsilon-demo-key",
+        "registryEntry": "local-fixture:watcher-epsilon",
+        "controlEvidence": "revoked-demo-key",
+        "independenceGroup": "watcher-epsilon",
+        "status": "revoked",
+        "registeredAt": "2026-05-07T09:00:00.000Z",
+        "revokedAt": "2026-05-07T09:35:00.000Z",
+        "revocationReason": "Fixture revocation before submittedAt."
+      },
+      "state": "revoked",
+      "conflictsWith": [],
+      "quorumMet": false,
+      "influenceReady": false,
+      "influenceAllowed": false,
+      "lane": "review-only",
+      "reviewReasons": [
+        "source review only",
+        "signal not influence-ready",
+        "revoked signer",
+        "event quorum not met"
       ]
     }
   ],
   "consumerPolicy": [
     {
       "consumer": "oracle-risk-dashboard",
-      "allowedInput": "influenceAllowed signal summaries",
-      "blockedInput": "draft, unsigned, unresolved, or source-review-only signals"
+      "allowedInput": "influenceAllowed signal summaries after quorum",
+      "blockedInput": "draft, unsigned, unresolved, stale, revoked, conflicted, below-quorum, or source-review-only signals"
     },
     {
       "consumer": "prediction-hedge-simulator",
@@ -120,7 +418,7 @@
   "boundaries": [
     "This is an app-level gating policy, not an oracle protocol.",
     "A high reputation score does not make a claim true.",
-    "Signals can influence dashboards only after accepted payload evidence, verified signature, resolved accuracy, and source threshold checks pass.",
+    "Signals can influence dashboards only after accepted payload evidence, verified signature, active signer provenance, quorum, no open conflict, non-stale fixture state, resolved accuracy, and source threshold checks pass.",
     "Custody, liquidation, and market settlement remain out of scope until oracle failure modes and dispute paths are explicit."
   ]
 }

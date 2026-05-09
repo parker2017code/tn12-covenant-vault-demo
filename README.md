@@ -48,7 +48,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
 - Builds an escrow primitive registry and escrow Silverscript templates for buyer-approved release, DAA-score timeout refund, and mutual cancel planning.
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
-- Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, and Hunt-plan artifacts.
+- Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, Hunt-plan artifacts, and a settlement/app brief.
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
 - Builds a mainnet-readiness map that separates payment/indexer paths from TN12/Toccata covenant paths.
 - Builds simple asset policy artifacts for issuer-indexed assets now and possible covenant-native assets later.
@@ -60,6 +60,7 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 ## What It Does Not Do Yet
 
 - It does not connect to an external wallet UI.
+- It does not broadcast from the wallet connector artifacts; they are review and state-ledger surfaces until a real wallet adapter is wired.
 - It does not run a local Kaspa full node.
 - It does not implement pooled assurance target aggregation yet.
 - It does not claim mainnet covenant support.
@@ -295,7 +296,7 @@ npm run signal:payload
 npm run attestation:reputation
 ```
 
-`npm run attestation:reputation` writes `artifacts/attestation-reputation-thresholds.json`, the app-level source/signal gate for watcher, researcher, and pool attestations. It allows dashboard influence only after accepted payload evidence, verified signatures, resolved accuracy, and source thresholds; unresolved or unsigned signals remain review-only.
+`npm run attestation:reputation` writes `artifacts/attestation-reputation-thresholds.json`, the app-level source/signal gate for watcher, researcher, and pool attestations. It records signer provenance, conflict sets, source reputation, quorum thresholds, stale/unresolved/revoked states, and dashboard policy. Dashboard influence stays disabled unless accepted payload evidence, verified signatures, active signer provenance, resolved accuracy, no open conflict, source thresholds, and quorum thresholds all pass; the current fixture deliberately keeps influence disabled.
 
 Build the invoice registry for the first payload receipt app:
 
@@ -356,9 +357,10 @@ npm run wallet:connector
 npm run wallet:submit-package
 npm run wallet:connector-requests
 npm run wallet:adapter-run
+npm run wallet:submit-ledger
 ```
 
-The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact. `npm run wallet:submit-package` writes the wallet handoff package for exact transaction review, payload-preserving submit, no local keys, and explicit user action. `npm run wallet:connector-requests` writes `artifacts/wallet-connector-submit-requests.json`, the exact request bundle a no-local-key connector should review and submit. `npm run wallet:adapter-run` consumes that bundle into review sessions, preservation fingerprints, and not-submitted result rows. It does not read `.local/tn12-wallet.json`, expose private keys, sign, or broadcast.
+The submit console reads signed draft artifacts, shows input/output/payload summaries, and prints dry-run plus explicit submit commands. `npm run wallet:review` checks the published registry for testnet network, explicit submit commands, payload-route gating, and serialized secret fields. `npm run wallet:connector` writes the connector spec artifact. `npm run wallet:submit-package` writes the wallet handoff package for exact transaction review, payload-preserving submit, no local keys, and explicit user action. `npm run wallet:connector-requests` writes `artifacts/wallet-connector-submit-requests.json`, the exact request bundle a no-local-key connector should review and submit. `npm run wallet:adapter-run` consumes that bundle into review sessions, preservation fingerprints, and not-submitted result rows. `npm run wallet:submit-ledger` writes `artifacts/wallet-connector-submit-ledger.json`, separating already accepted evidence rows from pending wallet-submit candidates. These artifacts do not read `.local/tn12-wallet.json`, expose private keys, sign, or broadcast.
 
 Build the cross-chain app research library:
 
@@ -415,9 +417,10 @@ Build the transparent coordination-market prototype:
 
 ```sh
 npm run coordination:market
+npm run coordination:settlement-brief
 ```
 
-This turns `fixtures/CoordinationMarketPrototype.json` into `artifacts/coordination-market-prototype.json`. It is not a Hashdag/Staghunt implementation; it is a transparent toy planner for Stag, Intendo, Pack, Solver, and Hunt before opacity, capital multiplexing, composability, and atomic execution exist.
+This turns `fixtures/CoordinationMarketPrototype.json` into `artifacts/coordination-market-prototype.json`, then turns `fixtures/CoordinationMarketSettlementBrief.json` into `artifacts/coordination-market-settlement-brief.json`. It is not a Hashdag/Staghunt implementation; it is a transparent toy planner plus settlement/app brief for Stag, Intendo, Pack, Solver, and Hunt before opacity, capital multiplexing, atomic Hunt execution, and oracle/settlement rails exist.
 
 Build the AI coding/source discipline artifact:
 

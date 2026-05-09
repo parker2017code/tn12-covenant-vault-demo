@@ -264,7 +264,7 @@ const badSignatureSimulator = buildPredictionHedgeSimulator({
 const networkStressMarket = badSignatureSimulator.markets.find((market) => market.eventId === "event-network-hashrate-shift");
 assert.equal(badSignatureAttestation.summary.influenceReady, 0);
 assert.equal(networkStressMarket.simulatedProbability, 42);
-assert.equal(networkStressMarket.ignoredSignals, 1);
+assert.equal(networkStressMarket.ignoredSignals, 2);
 
 const agentFixture = JSON.parse(await readFile(new URL("../fixtures/AgentCommitments.json", import.meta.url), "utf8"));
 const disputedAcceptedProofBoard = buildAgentCommitmentBoard({

@@ -244,7 +244,7 @@ npm run campaign:custody</pre>
       <div class="section-title">
         <p class="eyebrow">Escrow primitive</p>
         <h2>Buyer fund, seller release, timeout refund, mutual cancel.</h2>
-        <p>This is lane 4: a commerce escrow primitive with accepted TN12 funding, release, and DAA-refund proof. Cancel is funded as a separate attempt; the current version-1 compute-budget draft reconstructs locally but still needs the correct submit route.</p>
+        <p>This is lane 4: a commerce escrow primitive with accepted TN12 funding, release, DAA-refund, and mutual-cancel proof. Cancel is accepted on a separate funded output through the local TN12 compute-budget route; older bad-submit attempts are historical evidence.</p>
       </div>
       <div id="escrow-summary" class="escrow-summary" aria-live="polite"></div>
       <div id="escrow-list" class="escrow-list" aria-live="polite"></div>
@@ -270,7 +270,8 @@ npm run campaign:custody</pre>
       </div>
       <div id="coordination-summary" class="coordination-summary" aria-live="polite"></div>
       <div id="coordination-packs" class="coordination-packs" aria-live="polite"></div>
-      <pre>npm run coordination:market</pre>
+      <pre>npm run coordination:market
+npm run coordination:settlement-brief</pre>
     </section>
 
     <section id="access-passes" class="panel access-passes">
