@@ -161,6 +161,8 @@ try {
   await expectText(page, "#wallet-connector", "wallet-submit-ledger-ready");
   await expectText(page, "#wallet-connector", "wallet-standard-request-candidates-ready");
   await expectText(page, "#wallet-connector", "wallet-standard-signer-validation-ready");
+  await expectText(page, "#wallet-connector", "external-signer-roundtrip-plan-ready");
+  await expectText(page, "#wallet-connector", "ureq-6cfe79da-standard");
   await expectText(page, "#wallet-connector", "pending wallet-submit candidates");
   await expectText(page, "#master-roadmap", "Payload Receipt / Invoice App");
   await expectText(page, "#master-roadmap", "AI-Agent Commitment Board");

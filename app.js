@@ -1306,14 +1306,15 @@ async function renderWalletConnector() {
   if (!walletConnectorNode) return;
 
   try {
-    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse, standardResponse, signerValidationResponse] = await Promise.all([
+    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse, standardResponse, signerValidationResponse, roundtripResponse] = await Promise.all([
       fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" }),
       fetch("artifacts/wallet-submit-package.json", { cache: "no-store" }),
       fetch("artifacts/wallet-connector-submit-requests.json", { cache: "no-store" }),
       fetch("artifacts/wallet-connector-adapter-run.json", { cache: "no-store" }),
       fetch("artifacts/wallet-connector-submit-ledger.json", { cache: "no-store" }),
       fetch("artifacts/wallet-standard-requests.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-standard-signer-validation.json", { cache: "no-store" })
+      fetch("artifacts/wallet-standard-signer-validation.json", { cache: "no-store" }),
+      fetch("artifacts/wallet-external-signer-roundtrip-plan.json", { cache: "no-store" })
     ]);
     const readiness = await readinessResponse.json();
     const submitPackage = await packageResponse.json();
@@ -1322,6 +1323,7 @@ async function renderWalletConnector() {
     const ledger = await ledgerResponse.json();
     const standard = await standardResponse.json();
     const signerValidation = await signerValidationResponse.json();
+    const roundtrip = await roundtripResponse.json();
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
@@ -1350,6 +1352,12 @@ async function renderWalletConnector() {
         <strong>${escapeHtml(signerValidation.summary.pending)} pending signer returns, ${escapeHtml(signerValidation.summary.negativeCasesCaught)} negative cases caught</strong>
         <p>Returned signer rows must preserve review fingerprint, payload bytes, txid, route, explicit approval, and input budget fields.</p>
         <small>${escapeHtml(signerValidation.boundaries[0])}</small>
+      </article>
+      <article>
+        <span>${escapeHtml(roundtrip.status)}</span>
+        <strong>${escapeHtml(roundtrip.summary.requests)} external-signer requests</strong>
+        <p>Recommended order: ${escapeHtml(roundtrip.recommendedOrder.join(" -> "))}</p>
+        <small>${escapeHtml(roundtrip.acceptanceRule)}</small>
       </article>
       <article>
         <span>${escapeHtml(ledger.status)}</span>

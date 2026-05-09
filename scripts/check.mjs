@@ -76,6 +76,7 @@ import { buildWalletUnsignedRequestTemplates } from "../src/walletUnsignedReques
 import { buildWalletStandardMapping } from "../src/walletStandardMapping.mjs";
 import { buildWalletStandardRequests } from "../src/walletStandardRequests.mjs";
 import { buildWalletStandardSignerValidation } from "../src/walletStandardSignerValidation.mjs";
+import { buildWalletExternalSignerRoundtripPlan } from "../src/walletExternalSignerRoundtripPlan.mjs";
 import { buildWalletConnectorImplementationSlice } from "../src/walletConnectorImplementationSlice.mjs";
 import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
 import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRunbook.mjs";
@@ -1494,6 +1495,21 @@ const walletSignerValidationArtifact = JSON.parse(await readFile(new URL("../art
 assert.equal(walletSignerValidationArtifact.status, "wallet-standard-signer-validation-ready");
 assert.equal(walletSignerValidationArtifact.summary.pending, 4);
 assert.equal(walletSignerValidationArtifact.summary.negativeCasesCaught, 2);
+const walletExternalSignerRoundtripPlan = buildWalletExternalSignerRoundtripPlan({
+  standardRequests: walletStandardRequestsArtifact,
+  signerValidation: walletSignerValidationArtifact,
+  endpointRunbook: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-endpoint-runbook.json", import.meta.url), "utf8")),
+  generatedAt: "2026-05-09T00:00:00.000Z"
+});
+assert.equal(walletExternalSignerRoundtripPlan.status, "external-signer-roundtrip-plan-ready");
+assert.equal(walletExternalSignerRoundtripPlan.summary.requests, 4);
+assert.equal(walletExternalSignerRoundtripPlan.summary.pendingExternalSigner, 4);
+assert.deepEqual(walletExternalSignerRoundtripPlan.recommendedOrder, [
+  "ureq-6cfe79da-standard",
+  "ureq-d12412d8-standard"
+]);
+const walletExternalSignerRoundtripPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-roundtrip-plan.json", import.meta.url), "utf8"));
+assert.equal(walletExternalSignerRoundtripPlanArtifact.status, "external-signer-roundtrip-plan-ready");
 const walletImplementationSlice = buildWalletConnectorImplementationSlice({
   walletMapping: walletStandardMappingArtifact,
   unsignedTemplates: walletUnsignedTemplatesArtifact,
@@ -1729,6 +1745,7 @@ const files = [
   "scripts/build-wallet-standard-mapping.mjs",
   "scripts/build-wallet-standard-requests.mjs",
   "scripts/build-wallet-standard-signer-validation.mjs",
+  "scripts/build-wallet-external-signer-roundtrip-plan.mjs",
   "scripts/build-wallet-connector-implementation-slice.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
@@ -1841,6 +1858,7 @@ const files = [
   "artifacts/wallet-standard-mapping.json",
   "artifacts/wallet-standard-requests.json",
   "artifacts/wallet-standard-signer-validation.json",
+  "artifacts/wallet-external-signer-roundtrip-plan.json",
   "artifacts/wallet-connector-implementation-slice.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
@@ -2008,6 +2026,7 @@ const files = [
   "src/walletStandardMapping.mjs",
   "src/walletStandardRequests.mjs",
   "src/walletStandardSignerValidation.mjs",
+  "src/walletExternalSignerRoundtripPlan.mjs",
   "src/walletConnectorImplementationSlice.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",
@@ -2128,6 +2147,7 @@ assert.match(readme, /npm run wallet:result-validation/);
 assert.match(readme, /npm run wallet:external-signer-gap/);
 assert.match(readme, /npm run wallet:unsigned-requests/);
 assert.match(readme, /npm run wallet:standard-map/);
+assert.match(readme, /npm run wallet:external-signer-roundtrip/);
 assert.match(readme, /npm run wallet:implementation-slice/);
 assert.match(readme, /npm run campaign:pledge-outputs/);
 assert.match(readme, /npm run escrow:marketplace/);

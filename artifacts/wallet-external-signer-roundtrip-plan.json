@@ -1,0 +1,138 @@
+{
+  "schema": "tn12-wallet-external-signer-roundtrip-plan/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-09T21:23:12.482Z",
+  "status": "external-signer-roundtrip-plan-ready",
+  "liveWalletIntegrationReady": false,
+  "summary": {
+    "requests": 4,
+    "pendingExternalSigner": 4,
+    "payloadRequests": 1,
+    "covenantRequests": 3,
+    "computeBudgetRequests": 1,
+    "liveEndpointTested": true,
+    "appStatePromoted": false
+  },
+  "recommendedOrder": [
+    "ureq-6cfe79da-standard",
+    "ureq-d12412d8-standard"
+  ],
+  "rows": [
+    {
+      "order": 1,
+      "requestId": "ureq-6cfe79da-standard",
+      "label": "Payload receipt self-send",
+      "kind": "payload-receipt",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+      "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3",
+      "expectedTransactionIdAfterSigning": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "payloadBytes": 127,
+      "computeBudgetInputs": 0,
+      "pendingExternalSigner": true,
+      "requiredPreservation": [
+        "network",
+        "version",
+        "lockTime",
+        "subnetworkId",
+        "previousOutpoints",
+        "sequences",
+        "sigOpCount fields when present",
+        "computeBudget fields when present",
+        "outputs",
+        "payload bytes"
+      ],
+      "next": "Run this first: verify payload bytes and accepted replay before using it as the no-local-key proof."
+    },
+    {
+      "order": 2,
+      "requestId": "ureq-fda320a9-standard",
+      "label": "Role-separated escrow release",
+      "kind": "covenant-spend",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-release.json",
+      "reviewFingerprint": "92ffa8b1ad17f0fa1230370772c9ae11837162e6b86371e1e9f3df1e33617844",
+      "expectedTransactionIdAfterSigning": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "payloadBytes": 0,
+      "computeBudgetInputs": 0,
+      "pendingExternalSigner": true,
+      "requiredPreservation": [
+        "network",
+        "version",
+        "lockTime",
+        "subnetworkId",
+        "previousOutpoints",
+        "sequences",
+        "sigOpCount fields when present",
+        "computeBudget fields when present",
+        "outputs",
+        "payload bytes"
+      ],
+      "next": "Run only after payload round trip works; preserve covenant input fields exactly."
+    },
+    {
+      "order": 3,
+      "requestId": "ureq-f5845e00-standard",
+      "label": "Role-separated escrow refund",
+      "kind": "covenant-spend",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-refund.json",
+      "reviewFingerprint": "480a5cd4539fca0e4e9c3d4a0aebe56723761beae7db35598a88dbd62e33e6b8",
+      "expectedTransactionIdAfterSigning": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "payloadBytes": 0,
+      "computeBudgetInputs": 0,
+      "pendingExternalSigner": true,
+      "requiredPreservation": [
+        "network",
+        "version",
+        "lockTime",
+        "subnetworkId",
+        "previousOutpoints",
+        "sequences",
+        "sigOpCount fields when present",
+        "computeBudget fields when present",
+        "outputs",
+        "payload bytes"
+      ],
+      "next": "Run only after payload round trip works; preserve covenant input fields exactly."
+    },
+    {
+      "order": 4,
+      "requestId": "ureq-d12412d8-standard",
+      "label": "Role-separated escrow cancel",
+      "kind": "covenant-spend",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
+      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
+      "expectedTransactionIdAfterSigning": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "payloadBytes": 0,
+      "computeBudgetInputs": 1,
+      "pendingExternalSigner": true,
+      "requiredPreservation": [
+        "network",
+        "version",
+        "lockTime",
+        "subnetworkId",
+        "previousOutpoints",
+        "sequences",
+        "sigOpCount fields when present",
+        "computeBudget fields when present",
+        "outputs",
+        "payload bytes"
+      ],
+      "next": "Run only after payload round trip works; preserve covenant input fields exactly."
+    }
+  ],
+  "signerReturnRequired": [
+    "signedTransaction",
+    "transactionId",
+    "reviewFingerprint",
+    "payloadBytes",
+    "inputBudgetReport",
+    "signerName",
+    "signerVersion",
+    "explicit user approval"
+  ],
+  "acceptanceRule": "One row becomes live only after an external signer returns the exact fingerprint-preserving transaction, the tx is submitted through a payload-preserving route, and virtual-chain replay observes accepted matching evidence.",
+  "boundaries": [
+    "This is a signer runbook, not a wallet integration.",
+    "Do not use local private keys for the acceptance claim.",
+    "Do not promote app state from a returned txid until accepted replay matches payload/output rules."
+  ]
+}
