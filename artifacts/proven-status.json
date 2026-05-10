@@ -1,0 +1,46 @@
+{
+  "schema": "tn12-proven-status/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T23:40:50.062Z",
+  "status": "proof-core-ready-product-blocked",
+  "currentPercent": "47-50%",
+  "afterExternalSignerPercent": "57-62%",
+  "acceptedEvidence": {
+    "checkpointRecords": 43,
+    "matchedRecords": 43,
+    "proofTransactions": 9,
+    "roleSeparatedProofTransactions": 7,
+    "payloadEvents": 30,
+    "outputEvidence": 4
+  },
+  "readiness": {
+    "externalSignerAccepted": false,
+    "localReplayReady": true,
+    "liveRollbackObserved": false,
+    "durablePromotionReady": false,
+    "auctionCustodyEvidenceRows": 1,
+    "auctionCustodyReadyRows": 0,
+    "agentReviewEvidenceReadyRows": 2,
+    "agentCustodyReadyRows": 0,
+    "nextTenCompleted": 5,
+    "nextTenRealizedGainPercent": 13
+  },
+  "blockers": [
+    "external signer accepted result missing",
+    "live removed-block rollback evidence missing",
+    "auction custody source not amount-matched",
+    "agent settlement custody source missing"
+  ],
+  "nextActions": [
+    "Run one real external signer round trip.",
+    "Capture a live removed-block rollback window.",
+    "Create amount-matched auction custody source rows.",
+    "Create agent reward/deposit custody source rows."
+  ],
+  "boundaries": [
+    "Accepted TN12 evidence is not mainnet readiness.",
+    "Planner payloads are not custody.",
+    "Local replay readiness is not live removed-block evidence.",
+    "No-local-key signing is not proven until a real external signer returns signed transaction bytes."
+  ]
+}

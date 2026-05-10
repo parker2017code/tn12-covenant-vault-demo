@@ -1,15 +1,15 @@
 {
   "schema": "tn12-wallet-submit-result-validation/v1",
   "network": "kaspa-testnet-12",
-  "runAt": "2026-05-10T22:06:53.273Z",
+  "runAt": "2026-05-10T23:39:43.785Z",
   "status": "wallet-submit-result-validation-ready",
   "liveWalletConnectorExists": false,
   "summary": {
     "claims": 3,
     "validClaims": 3,
     "invalidClaims": 0,
-    "negativeCases": 6,
-    "caughtNegativeCases": 6,
+    "negativeCases": 7,
+    "caughtNegativeCases": 7,
     "uncaughtNegativeCases": 0,
     "acceptedEvidencePromotions": 3,
     "liveWalletPromotions": 0,
@@ -288,6 +288,38 @@
         "session fingerprint mismatch",
         "payload byte count mismatch",
         "accepted result missing evidence artifact"
+      ]
+    },
+    {
+      "id": "promotion-without-virtual-chain-acceptance",
+      "negative": true,
+      "requestId": "wreq-68feaa92",
+      "sessionId": "review-wreq-68feaa92",
+      "transactionId": "not-on-virtual-chain-accepted-set",
+      "resultStatus": "accepted-evidence-already-recorded",
+      "resultRoute": "payload-preserving-wallet",
+      "resultSource": "fixture-claim",
+      "acceptedEvidencePath": "artifacts/payload-access-pass-redemption-evidence.json",
+      "checks": {
+        "txidMatchesSession": false,
+        "fingerprintMatchesSession": false,
+        "routeAllowed": true,
+        "payloadBytesPreserved": false,
+        "versionPreserved": true,
+        "computeBudgetPreserved": true,
+        "explicitUserAction": true,
+        "historicalEvidence": false,
+        "acceptedByVirtualChain": false
+      },
+      "promotion": {
+        "state": "blocked-review",
+        "indexerReady": false
+      },
+      "problems": [
+        "transaction id does not match review session",
+        "session fingerprint mismatch",
+        "payload byte count mismatch",
+        "accepted result missing virtual-chain acceptance"
       ]
     }
   ],

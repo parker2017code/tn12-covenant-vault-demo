@@ -127,6 +127,7 @@ import { buildIndexerReplayRun } from "../src/indexerReplayRun.mjs";
 import { buildVirtualChainIngestionPlan } from "../src/virtualChainIngestion.mjs";
 import { buildVirtualChainIngestionRun } from "../src/virtualChainIngestionRun.mjs";
 import { buildVirtualChainReaderAdapter } from "../src/virtualChainReaderAdapter.mjs";
+import { buildProvenStatus } from "../src/provenStatus.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -496,6 +497,26 @@ const rebuiltNextTenExecutionStatus = buildNextTenExecutionStatus({
 });
 assert.equal(rebuiltNextTenExecutionStatus.status, "next-ten-execution-status-review");
 assert.equal(rebuiltNextTenExecutionStatus.summary.completed, nextTenExecutionStatusArtifact.summary.completed);
+const provenStatus = buildProvenStatus({
+  checkpoint: JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8")),
+  proofEvidence: JSON.parse(await readFile(new URL("../artifacts/proof-evidence.json", import.meta.url), "utf8")),
+  roleProofEvidence: JSON.parse(await readFile(new URL("../artifacts/role-separated-proof-evidence.json", import.meta.url), "utf8")),
+  signerValidation: JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8")),
+  durableReplayGuard: JSON.parse(await readFile(new URL("../artifacts/durable-replay-promotion-guard.json", import.meta.url), "utf8")),
+  auctionCustodyReview: JSON.parse(await readFile(new URL("../artifacts/auction-custody-review.json", import.meta.url), "utf8")),
+  agentSettlementReview: JSON.parse(await readFile(new URL("../artifacts/agent-settlement-review.json", import.meta.url), "utf8")),
+  nextTenStatus: nextTenExecutionStatusArtifact,
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(provenStatus.status, "proof-core-ready-product-blocked");
+assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 43);
+assert.equal(provenStatus.acceptedEvidence.payloadEvents, 30);
+assert.equal(provenStatus.readiness.durablePromotionReady, false);
+assert.ok(provenStatus.blockers.includes("external signer accepted result missing"));
+assert.ok(provenStatus.blockers.includes("live removed-block rollback evidence missing"));
+const provenStatusArtifact = JSON.parse(await readFile(new URL("../artifacts/proven-status.json", import.meta.url), "utf8"));
+assert.equal(provenStatusArtifact.status, "proof-core-ready-product-blocked");
+assert.equal(provenStatusArtifact.currentPercent, "47-50%");
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -1551,18 +1572,22 @@ assert.equal(walletSubmitResultValidation.summary.claims, 3);
 assert.equal(walletSubmitResultValidation.summary.validClaims, 3);
 assert.equal(walletSubmitResultValidation.summary.liveWalletPromotions, 0);
 assert.equal(walletSubmitResultValidation.summary.acceptedEvidencePromotions, 3);
-assert.equal(walletSubmitResultValidation.summary.negativeCases, 6);
-assert.equal(walletSubmitResultValidation.summary.caughtNegativeCases, 6);
+assert.equal(walletSubmitResultValidation.summary.negativeCases, 7);
+assert.equal(walletSubmitResultValidation.summary.caughtNegativeCases, 7);
 assert.equal(walletSubmitResultValidation.summary.v1ComputeBudgetSessionsPreserved, walletSubmitResultValidation.summary.computeBudgetSessions);
 assert.ok(walletSubmitResultValidation.actualRows.every((row) => row.promotion.state === "accepted-evidence-only"));
 assert.ok(walletSubmitResultValidation.negativeRows.some((row) => row.id === "forbidden-rest-route" && row.problems.includes("forbidden submit route")));
 assert.ok(walletSubmitResultValidation.negativeRows.some((row) => row.id === "missing-user-action" && row.problems.includes("live wallet result missing explicit user action")));
 assert.ok(walletSubmitResultValidation.negativeRows.some((row) => row.id === "compute-budget-lost" && row.problems.includes("transaction version mismatch")));
+assert.ok(walletSubmitResultValidation.negativeRows.some((row) =>
+  row.id === "promotion-without-virtual-chain-acceptance"
+  && row.problems.includes("accepted result missing virtual-chain acceptance")
+));
 const walletSubmitResultValidationArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-submit-result-validation.json", import.meta.url), "utf8"));
 assert.equal(walletSubmitResultValidationArtifact.status, "wallet-submit-result-validation-ready");
 assert.equal(walletSubmitResultValidationArtifact.liveWalletConnectorExists, false);
 assert.equal(walletSubmitResultValidationArtifact.summary.validClaims, 3);
-assert.equal(walletSubmitResultValidationArtifact.summary.caughtNegativeCases, 6);
+assert.equal(walletSubmitResultValidationArtifact.summary.caughtNegativeCases, 7);
 const walletExternalSignerGap = buildWalletExternalSignerGap({
   submitRequests: walletConnectorRequestsArtifact,
   adapterRun: walletConnectorAdapterArtifact,
@@ -1994,6 +2019,7 @@ const files = [
   "scripts/build-next-work-queue.mjs",
   "scripts/build-next-ten-execution-plan.mjs",
   "scripts/build-next-ten-execution-status.mjs",
+  "scripts/build-proven-status.mjs",
   "scripts/build-defi-receipt-replay-guard.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
@@ -2172,6 +2198,7 @@ const files = [
   "artifacts/stable-value-paths.json",
   "artifacts/stable-issuer-redemptions.json",
   "artifacts/build-status.json",
+  "artifacts/proven-status.json",
   "artifacts/agent-settlement-drafts.json",
   "artifacts/agent-settlement-review.json",
   "artifacts/project-plan.json",
@@ -2287,6 +2314,7 @@ const files = [
   "src/nextWorkQueue.mjs",
   "src/nextTenExecutionPlan.mjs",
   "src/nextTenExecutionStatus.mjs",
+  "src/provenStatus.mjs",
   "src/defiReceiptReplayGuard.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",

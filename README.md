@@ -50,6 +50,7 @@ npm run check:tn12
 | Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
 | Mainnet readiness | `MAINNET_READINESS.md` |
 | Current 10-task slice | `artifacts/next-ten-execution-status.json` |
+| Proven status boundary | `artifacts/proven-status.json` |
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |

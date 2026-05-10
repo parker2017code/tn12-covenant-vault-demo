@@ -124,6 +124,7 @@ npm run wallet:adapter-run
 npm run wallet:submit-ledger
 npm run wallet:result-validation
 npm run wallet:external-signer-template
+npm run project:proven-status
 ```
 
 Indexer/replay rail:
@@ -186,6 +187,7 @@ npm run rails:research
 npm run oracle:matrix
 npm run project:queue
 npm run project:next-ten-status
+npm run project:proven-status
 ```
 
 ## Accepted Txid References

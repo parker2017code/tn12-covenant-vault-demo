@@ -170,6 +170,21 @@
         "explicit": true,
         "kind": "wallet-user-approved-submit"
       }
+    },
+    {
+      "id": "promotion-without-virtual-chain-acceptance",
+      "requestId": "wreq-68feaa92",
+      "transactionId": "not-on-virtual-chain-accepted-set",
+      "expectedFingerprint": "fp-a1056169",
+      "returnedRoute": "payload-preserving-wallet",
+      "expectedPayloadBytes": 182,
+      "expectedVersion": 0,
+      "expectedComputeBudgetInputs": 0,
+      "acceptedEvidencePath": "artifacts/payload-access-pass-redemption-evidence.json",
+      "userAction": {
+        "explicit": true,
+        "kind": "wallet-user-approved-submit"
+      }
     }
   ],
   "boundaries": [

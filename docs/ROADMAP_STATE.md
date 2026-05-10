@@ -30,6 +30,7 @@ Use artifacts instead of prose plans:
 
 - `artifacts/next-work-queue.json`: ordered broad queue.
 - `artifacts/next-ten-execution-status.json`: current 10-task slice.
+- `artifacts/proven-status.json`: compact accepted-evidence, blocker, and percent boundary.
 - `artifacts/missing-rails-matrix.json`: missing DeFi/product rails.
 - `artifacts/rail-research-triggers.json`: when to do deeper research.
 - `artifacts/oracle-source-matrix.json`: oracle/source assumptions.

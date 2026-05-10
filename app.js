@@ -107,6 +107,8 @@ const agentSummaryNode = document.querySelector("#agent-summary");
 const agentListNode = document.querySelector("#agent-list");
 const buildStatusSummaryNode = document.querySelector("#build-status-summary");
 const buildStatusLanesNode = document.querySelector("#build-status-lanes");
+const provenStatusSummaryNode = document.querySelector("#proven-status-summary");
+const provenStatusBlockersNode = document.querySelector("#proven-status-blockers");
 const projectPlanSummaryNode = document.querySelector("#project-plan-summary");
 const projectPlanNextNode = document.querySelector("#project-plan-next");
 const projectPlanVisionNode = document.querySelector("#project-plan-vision");
@@ -249,6 +251,7 @@ renderStableValuePaths();
 renderStableIssuerRedemptions();
 renderAgentCommitments();
 renderBuildStatus();
+renderProvenStatus();
 renderNextWorkQueue();
 renderNextTenStatus();
 renderProofTransactions();
@@ -801,6 +804,33 @@ async function renderBuildStatus() {
   }
 }
 
+async function renderProvenStatus() {
+  if (!provenStatusSummaryNode || !provenStatusBlockersNode) return;
+
+  try {
+    const response = await fetch("artifacts/proven-status.json", { cache: "no-store" });
+    const status = await response.json();
+    provenStatusSummaryNode.innerHTML = `
+      <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.currentPercent)}</strong><p>After external signer: ${escapeHtml(status.afterExternalSignerPercent)}.</p></article>
+      <article><span>Checkpoint</span><strong>${escapeHtml(status.acceptedEvidence.checkpointRecords)}</strong><p>${escapeHtml(status.acceptedEvidence.matchedRecords)} matched records.</p></article>
+      <article><span>Payloads</span><strong>${escapeHtml(status.acceptedEvidence.payloadEvents)}</strong><p>${escapeHtml(status.acceptedEvidence.outputEvidence)} output-evidence rows.</p></article>
+      <article><span>Replay</span><strong>${escapeHtml(status.readiness.durablePromotionReady ? "promotable" : "blocked")}</strong><p>Local ready: ${escapeHtml(status.readiness.localReplayReady)}; live rollback: ${escapeHtml(status.readiness.liveRollbackObserved)}.</p></article>
+    `;
+    provenStatusBlockersNode.innerHTML = "";
+    for (const blocker of status.blockers) {
+      const article = document.createElement("article");
+      article.className = "build-status-card compact-card";
+      article.innerHTML = `
+        <span>blocker</span>
+        <strong>${escapeHtml(blocker)}</strong>
+      `;
+      provenStatusBlockersNode.append(article);
+    }
+  } catch (error) {
+    provenStatusSummaryNode.textContent = `Proven status unavailable: ${error.message}`;
+  }
+}
+
 async function renderNextWorkQueue() {
   if (!nextQueueSummaryNode || !nextQueueTopNode || !nextQueueTasksNode) return;
 
@@ -907,7 +937,7 @@ async function renderAuctionIntents() {
       article.innerHTML = `
         <span>${escapeHtml(custody.status)}</span>
         <strong>Auction custody review</strong>
-        <p>${escapeHtml(custody.summary.drafts)} settlement rows; ${escapeHtml(custody.summary.custodyReadyRows)} custody-ready.</p>
+        <p>${escapeHtml(custody.summary.drafts)} settlement rows; ${escapeHtml(custody.summary.custodyEvidenceRows || 0)} evidence row; ${escapeHtml(custody.summary.custodyReadyRows)} custody-ready.</p>
         <small>${escapeHtml(custody.requiredBeforeSubmit.join(" | "))}</small>
       `;
       auctionListNode.append(article);
@@ -1046,7 +1076,7 @@ async function renderAgentCommitments() {
       article.innerHTML = `
         <span>${escapeHtml(review.status)}</span>
         <strong>Agent settlement review</strong>
-        <p>${escapeHtml(review.summary.releaseRows)} release; ${escapeHtml(review.summary.refundRows)} refund; ${escapeHtml(review.summary.holdRows)} hold; ${escapeHtml(review.summary.custodyReadyRows)} custody-ready.</p>
+        <p>${escapeHtml(review.summary.releaseRows)} release; ${escapeHtml(review.summary.refundRows)} refund; ${escapeHtml(review.summary.holdRows)} hold; ${escapeHtml(review.summary.reviewEvidenceReadyRows || 0)} review-ready; ${escapeHtml(review.summary.custodyReadyRows)} custody-ready.</p>
         <small>${escapeHtml(review.boundaries.join(" | "))}</small>
       `;
       agentListNode.append(article);

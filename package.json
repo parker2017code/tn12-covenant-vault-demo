@@ -138,6 +138,7 @@
     "project:queue": "node scripts/build-next-work-queue.mjs",
     "project:next-ten": "node scripts/build-next-ten-execution-plan.mjs",
     "project:next-ten-status": "node scripts/build-next-ten-execution-status.mjs",
+    "project:proven-status": "node scripts/build-proven-status.mjs",
     "build:status": "node scripts/build-status.mjs",
     "project:plan": "node scripts/build-project-plan.mjs",
     "ai:discipline": "node scripts/build-ai-coding-source-discipline.mjs",

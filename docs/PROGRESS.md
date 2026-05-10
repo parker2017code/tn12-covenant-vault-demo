@@ -25,6 +25,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |
 | Next 10-task status | `artifacts/next-ten-execution-status.json` |
+| Proven status boundary | `artifacts/proven-status.json` |
 
 ## Blockers
 
@@ -47,6 +48,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 npm run check:all
 npm run check:tn12
 npm run project:next-ten-status
+npm run project:proven-status
 npm run indexer:durable-promotion-guard
 npm run wallet:external-signer-research
 ```
