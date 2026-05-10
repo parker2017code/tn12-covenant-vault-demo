@@ -1,53 +1,56 @@
 {
   "schema": "tn12-wrpc-endpoint-probe/v1",
-  "generatedAt": "2026-05-10T15:04:26.101Z",
-  "status": "tn12-wrpc-endpoint-probe-review",
+  "generatedAt": "2026-05-10T15:05:45.550Z",
+  "status": "tn12-wrpc-endpoint-probe-ready",
   "endpoint": {
-    "url": "",
+    "url": "ws://65.108.107.30:18210",
     "encoding": "json",
     "requestedNetworkId": "testnet-12"
   },
   "checks": [
     {
       "id": "endpoint-reachable",
-      "pass": false,
+      "pass": true,
       "detail": "getInfo returned from the configured endpoint"
     },
     {
       "id": "server-synced",
-      "pass": false,
+      "pass": true,
       "detail": "endpoint reports isSynced=true"
     },
     {
       "id": "utxo-indexed",
-      "pass": false,
+      "pass": true,
       "detail": "endpoint reports isUtxoIndexed=true"
     },
     {
       "id": "network-matches",
-      "pass": false,
+      "pass": true,
       "detail": "current network and DAG info match TN12"
     },
     {
       "id": "virtual-chain-base-ready",
-      "pass": false,
+      "pass": true,
       "detail": "DAG info has virtual DAA score and virtual parents"
     }
   ],
   "observed": {
-    "serverVersion": "",
-    "mempoolSize": "",
-    "currentNetwork": "",
-    "dagNetwork": "",
-    "blockCount": "",
-    "headerCount": "",
-    "virtualDaaScore": "",
-    "virtualParentHashes": [],
-    "sink": ""
+    "serverVersion": "1.1.1-toc.1",
+    "mempoolSize": "0",
+    "currentNetwork": "testnet",
+    "dagNetwork": "testnet-12",
+    "blockCount": "1134268",
+    "headerCount": "1134268",
+    "virtualDaaScore": "8150234",
+    "virtualParentHashes": [
+      "ebefeacd84d3d7ab38cea85782e6bf1e437931bb986bc55a2e6134aed457f929",
+      "07f4b39d7e221ee83700e7b50075ca9b85706aec25c3b6c3836ec7ec45332ca3"
+    ],
+    "sink": "ebefeacd84d3d7ab38cea85782e6bf1e437931bb986bc55a2e6134aed457f929"
   },
   "rpcCaveats": {
     "serverInfoOk": false,
-    "serverInfoError": "",
+    "serverInfoError": "RPC Server (remote error) -> RPC serde deserialization error: invalid type: integer `1`, expected an array of length 4",
     "note": "getServerInfo may fail against this public endpoint while getInfo, getCurrentNetwork, and getBlockDagInfo are still usable."
   },
   "nextIndexerStep": "Use this endpoint for a bounded getVirtualChainFromBlock read only after mapping the available RpcClient method shape and preserving rollback replay.",
