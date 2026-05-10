@@ -66,6 +66,7 @@ If these pass, you have verified the existing accepted evidence. You have not cr
 | Debugging lessons (sigOpCount, computeBudget, DAA locks, payload route) | `docs/BUILDER_LESSONS.md` |
 | Claim boundaries (what not to call this) | `docs/LLM_REVIEW_GUIDE.md` |
 | Full lab notebook (original long README) | `docs/LAB_NOTEBOOK.md` |
+| Canonical mainnet readiness summary | `MAINNET_READINESS.md` |
 | AI/source discipline rules | `docs/AI_CODING_SOURCE_DISCIPLINE.md` |
 | Priority queue (30 tasks) | `npm run project:queue` → `artifacts/next-work-queue.json` |
 

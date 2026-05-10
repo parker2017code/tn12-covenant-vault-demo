@@ -120,6 +120,7 @@ Done now:
 - Escrow, vault, and assurance proof spends: seven accepted TN12 proof spends, guarded by `npm run check:tn12`.
 - Payload app state: 26 accepted TN12 JSON wRPC payload events, with REST no-payload evidence preserved as historical.
 - Browser/repo control surface: submit registry, wallet-review readiness, wallet-connector spec, submit-result ledger, checkpointed accepted index, and operator plan.
+- Canonical mainnet readiness summary: `MAINNET_READINESS.md` centralizes the current deployment percentage, live TN12 evidence, repo-only surfaces, mock-only surfaces, and remaining external-signer / replay / settlement blockers.
 - Durable indexer storage schema: `npm run indexer:schema` writes `artifacts/indexer-storage-schema.json`.
 - Fixture-backed indexer replay: `npm run indexer:replay` writes `artifacts/indexer-replay-run.json` and marks app state ready only when mismatches and rollback segments are zero.
 - Virtual-chain ingestion contract/run: `npm run indexer:virtual-chain-plan` writes `artifacts/virtual-chain-ingestion-plan.json`, `npm run indexer:virtual-chain-run` writes `artifacts/virtual-chain-ingestion-run.json`, and `npm run indexer:virtual-chain-adapter` writes `artifacts/virtual-chain-reader-adapter.json`, connecting the replay schema, wallet submit candidates, endpoint config, checkpoint cursor, retry/backoff, rollback handling, and payload/proof matching rules without requiring local `kaspad`.
