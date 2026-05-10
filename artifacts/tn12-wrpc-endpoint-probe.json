@@ -1,54 +1,52 @@
 {
   "schema": "tn12-wrpc-endpoint-probe/v1",
-  "generatedAt": "2026-05-10T15:43:51.695Z",
-  "status": "tn12-wrpc-endpoint-probe-ready",
+  "generatedAt": "2026-05-10T15:55:57.615Z",
+  "status": "tn12-wrpc-endpoint-probe-review",
   "endpoint": {
-    "url": "ws://tn12-node.kaspa.com:17210",
-    "encoding": "borsh",
+    "url": "",
+    "encoding": "json",
     "requestedNetworkId": "testnet-12"
   },
   "checks": [
     {
       "id": "endpoint-reachable",
-      "pass": true,
+      "pass": false,
       "detail": "getInfo returned from the configured endpoint"
     },
     {
       "id": "server-synced",
-      "pass": true,
+      "pass": false,
       "detail": "endpoint reports isSynced=true"
     },
     {
       "id": "utxo-indexed",
-      "pass": true,
+      "pass": false,
       "detail": "endpoint reports isUtxoIndexed=true"
     },
     {
       "id": "network-matches",
-      "pass": true,
+      "pass": false,
       "detail": "current network and DAG info match TN12"
     },
     {
       "id": "virtual-chain-base-ready",
-      "pass": true,
+      "pass": false,
       "detail": "DAG info has virtual DAA score and virtual parents"
     }
   ],
   "observed": {
-    "serverVersion": "1.1.1-toc.1",
-    "mempoolSize": "36",
-    "currentNetwork": "testnet",
-    "dagNetwork": "testnet-12",
-    "blockCount": "1158450",
-    "headerCount": "1158450",
-    "virtualDaaScore": "8174416",
-    "virtualParentHashes": [
-      "c97f84f77144dbd91125c503e175c081ef38c4a6c8f75ccd4bcafac04c8df57e"
-    ],
-    "sink": "c97f84f77144dbd91125c503e175c081ef38c4a6c8f75ccd4bcafac04c8df57e"
+    "serverVersion": "",
+    "mempoolSize": "",
+    "currentNetwork": "",
+    "dagNetwork": "",
+    "blockCount": "",
+    "headerCount": "",
+    "virtualDaaScore": "",
+    "virtualParentHashes": [],
+    "sink": ""
   },
   "rpcCaveats": {
-    "serverInfoOk": true,
+    "serverInfoOk": false,
     "serverInfoError": "",
     "note": "getServerInfo may fail against this public endpoint while getInfo, getCurrentNetwork, and getBlockDagInfo are still usable."
   },

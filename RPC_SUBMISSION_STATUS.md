@@ -1,36 +1,43 @@
 # RPC Submission Status - Escrow Funding
 
 **Date:** 2026-05-10
-**Status:** submitted-awaiting-acceptance
+**Time:** 17:59 UTC
+**Status:** submitted-to-rpc (awaiting on-chain acceptance)
 
-## Escrow Funding Transaction
+## Current Escrow Funding Transaction ✓
 
-- **Signed txid:** `07e017f7b7cf61b68968a5b379a6fa4544f83953d3d71b413c64e8bcf9688596`
-- **Source UTXO:** `8f6ae53f2f53efd4eab109bc4b2b7aa4c1ae40e088e9476d39f6171316d1eeb6:1`
-- **Source amount:** `974.99995 TKAS`
+- **Txid:** `64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3`
+- **Source UTXO:** `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801:0`
+- **Source amount:** `99.99995 TKAS` (verified on TN12 chain)
 - **Escrow output:** `1 TKAS` to covenant P2SH
+- **Change output:** `98.99990 TKAS` back to wallet
 - **Artifact:** `artifacts/escrow-funding-tx.json`
-- **Endpoint:** `ws://tn12-node.kaspa.com:17210`
-- **Encoding:** `borsh`
+- **Endpoint:** `ws://tn12-node.kaspa.com:17210` (Borsh)
+- **Fixture:** `fixtures/FundedWalletOutpoint.json` (updated)
 
-## Submit Result
+## Submission Timeline
 
-Submission succeeded with the live TN12 wRPC endpoint and the TN12 WASM module.
+### Previous Attempts (FAILED)
+- 2026-05-10 15:51 UTC: Txid `07e017f7b7cf61b68968a5b379a6fa4544f83953d3d71b413c64e8bcf9688596`
+  - Source UTXO `8f6ae53f2f53efd4eab109bc4b2b7aa4c1ae40e088e9476d39f6171316d1eeb6:1` did NOT exist on TN12
+  - **Result:** ❌ REJECTED (orphan - source UTXO missing from chain)
 
-```text
-transactionId: 07e017f7b7cf61b68968a5b379a6fa4544f83953d3d71b413c64e8bcf9688596
-```
+### Current Attempt (SUCCESS)
+- 2026-05-10 17:59 UTC: Txid `64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3`
+- **RPC Response:** `transactionId: 64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3`
+- **Result:** ✓ ACCEPTED by RPC mempool
+- **Status:** Awaiting on-chain acceptance (mining/DAA score)
 
-## Current Next Step
+## Key Fixes Applied
 
-Wait for acceptance, then fetch the accepted escrow UTXO and update:
+1. **Verified UTXO on TN12:** Source UTXO now confirmed to exist on-chain (DAA score 7532926)
+2. **Fixed submitPayload:** Added missing `previousOutpoint.index` field
+3. **Updated fixture:** `fixtures/FundedWalletOutpoint.json` now points to correct live UTXO
 
-1. `fixtures/RoleEscrowContractOutpoint.json`
-2. settlement draft generators
-3. batch-assurance settlement docs
+## Next Action
 
-## What Changed
-
-- The stale `ws://65.108.107.30:18210` endpoint path is no longer the active route.
-- The escrow funding artifact now uses a live TN12 UTXO.
-- The submit script now honors the Borsh endpoint and reconstructs output values and scripts from the signed transaction when needed.
+Wait for transaction to be accepted on-chain, then:
+1. Verify acceptance via REST API or explorer
+2. Update `fixtures/RoleEscrowContractOutpoint.json` with new escrow UTXO
+3. Rebuild settlement drafts from accepted UTXO
+4. Test settlement flows with real covenant
