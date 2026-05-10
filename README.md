@@ -1,93 +1,62 @@
 # TN12 Covenant Lab
 
-A Kaspa TN12 testnet workspace for covenant scripts, payload receipts, and the debugging record needed to reproduce them. All keys and funds are testnet-only. Not a mainnet wallet. Not proof that Toccata covenants are live on mainnet.
+Kaspa testnet-12 repo for covenant proof spends, payload receipts, and replay guards. Testnet-only. Not a mainnet wallet. Not proof that Toccata covenants are live on mainnet.
 
-When you ask how complete the project is, the percentage should be read as mainnet deployment readiness unless the answer explicitly says it is only talking about TN12 proof-core progress.
+Percentages in this repo mean mainnet deployment readiness unless a line explicitly says TN12/demo progress.
 
-## What is accepted on TN12
+## Accepted On TN12
 
-| Primitive | Contract | Status | Txid |
-|---|---|---|---|
-| Vault recovery | `DelayedRecoveryVault.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
-| Vault delayed withdrawal | `DelayedRecoveryVault.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
-| Assurance release | `AssurancePledge.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
-| Assurance refund | `AssurancePledge.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
-| Escrow release | `Escrow.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
-| Escrow DAA-score refund | `EscrowExpired.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
-| Escrow mutual cancel | `Escrow.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
-| Role-separated positive paths (all 7) | all contracts | `TN12_ACCEPTED` | see `artifacts/role-separated-proof-evidence.json` |
-| Batch-assurance 3-pledge release | `AssurancePledge.sil` × 3 | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
-| 30 payload events (invoice, multi-wallet DeFi v1 live receipts, access-pass, auction, attestation, agent, etc.) | payload tx | `TN12_ACCEPTED` | see `fixtures/PayloadEventEvidence.json` |
-| Adversarial rejection — wrong-signer (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
-| Adversarial rejection — wrong-selector (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
-| Adversarial rejection — wrong-output-lock (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
-| Adversarial rejection — wrong-output-amount (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
-| Adversarial rejection — single-party escrow cancel | `Escrow.sil` | `TN12_REJECTED` | see `artifacts/adversarial/escrow-single-party-cancel.json` |
+| Evidence | Status | Where |
+|---|---|---|
+| Vault recovery and delayed withdrawal | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
+| Assurance release and refund | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
+| Escrow release, DAA refund, mutual cancel | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
+| Role-separated positive paths, all 7 | `TN12_ACCEPTED` | `artifacts/role-separated-proof-evidence.json` |
+| Batch-assurance 3-pledge release | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
+| 30 payload events, including 4 DeFi v1 receipts | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
+| Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |
 
-## What is NOT proven
+## NOT Proven
 
-- Mainnet covenant activation — covenant paths are `TN12/TOCCATA` lane only.
-- Pooled threshold enforcement on-chain — batch target aggregation is `PLANNER_ONLY`.
-- External wallet signing — all accepted proofs used local keys. Wallet connector is `SIGNED_NOT_BROADCAST` / planning only.
-- Historical virtual-chain replay — `getVirtualChainFromBlockV2` requires the TN12 SDK build (`1.1.1-toc.1`); installed `kaspa-wasm` does not expose it.
-- Full DeFi — the repo has accepted TN12 receipts and covenant proof primitives, but not AMM/lending/liquidation/oracle/custody production rails.
+- Mainnet covenant activation.
+- Full DeFi: no AMM, lending, liquidation, oracle, or production custody rail.
+- No-local-key wallet signing: accepted proofs still used local testnet keys.
+- Pooled threshold enforcement: current batch target aggregation is planner/indexer logic.
+- Production indexer reliability: local replay guards pass, but live removed-block rollback evidence is still useful.
 
-## Verify existing proofs
+## Current Blockers
+
+| Blocker | Current state | Clears when |
+|---|---|---|
+| External signer | `artifacts/external-signer-path-research.json` and 4 request templates are ready | A real wallet returns signed tx bytes, submit succeeds, replay sees the accepted txid |
+| Live rollback evidence | `artifacts/durable-replay-promotion-guard.json` passes local rollback matching | A live TN12 removed-block window is captured and matched |
+| Batch-assurance settlement | Release/refund drafts exist; release-first is the default | One mutually exclusive path is submitted and replayed |
+
+## Verify
 
 ```sh
 npm install
-npm run check:all        # local gate: scripts, artifacts, UI smoke
-npm run check:tn12       # full TN12 evidence gate
-npm run tx:verify        # fetch and verify all accepted proof txids
-npm run proof:evidence   # print accepted proof table
+npm run check:all
+npm run check:tn12
 ```
 
-If these pass, you have verified the existing accepted evidence. You have not created a new covenant spend.
+`npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence. Passing both verifies existing evidence; it does not create a new spend.
 
-## Current blockers (in priority order)
+## Useful Artifacts
 
-| Blocker | What I do | What you do |
-|---|---|---|
-| External signer roundtrip | Wire the live wallet connector, preserve tx bytes, validate accepted replay | Only provide wallet access or a deployment decision if you want a specific signer path tested |
-| Virtual-chain promotion | Test the live TN12 reader and prove checkpoint overlap plus reducer matching before promotion | Only provide a target start hash or a required replay window if you want a specific promotion test |
-| Batch-assurance settle path | Pick and exercise one mutually exclusive settlement path end to end | Only choose release vs refund if you want that lane submitted |
-
-1. **External signer roundtrip** — `artifacts/wallet-external-signer-roundtrip-plan.json` has 4 requests ready; local signer simulation in progress.
-2. **Virtual-chain live indexer** — operational with local TN12 wasm build. `KASPA_WASM_MODULE=.../kaspa npm run indexer:live-window` calls `getVirtualChainFromBlockV2`, produces 46+ accepted-tx rows, forward-indexing capable. Checkpoint overlap with historic proofs not expected (near-tip only); see `artifacts/virtual-chain-live-app-state.json`.
-
-## Deeper docs
-
-| What you need | Where |
+| Need | Artifact |
 |---|---|
-| Full accepted evidence with txids | `docs/CORE_LAB_NOTES.md` |
-| Lane-by-lane build state | `docs/PROGRESS.md` |
-| Shipped vs roadmap lane map | `docs/ROADMAP_STATE.md` |
-| TN12 tested / not-tested map | `docs/TN12_TEST_MATRIX.md` |
-| Debugging lessons (sigOpCount, computeBudget, DAA locks, payload route) | `docs/BUILDER_LESSONS.md` |
-| Claim boundaries (what not to call this) | `docs/LLM_REVIEW_GUIDE.md` |
-| Full lab notebook (original long README) | `docs/LAB_NOTEBOOK.md` |
-| Canonical mainnet readiness summary | `MAINNET_READINESS.md` |
-| AI/source discipline rules | `docs/AI_CODING_SOURCE_DISCIPLINE.md` |
-| Priority queue (30 tasks) | `npm run project:queue` → `artifacts/next-work-queue.json` |
-| Current 10-task execution slice | `npm run project:next-ten-status` → `artifacts/next-ten-execution-status.json` |
-| DeFi receipt duplicate/stale guard | `npm run defi:receipt-guard` → `artifacts/defi-receipt-replay-guard.json` |
+| Proof index | `docs/PROOF_INDEX.md` |
+| Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
+| Mainnet readiness | `MAINNET_READINESS.md` |
+| Current 10-task slice | `artifacts/next-ten-execution-status.json` |
+| DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
+| Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
+| External signer path | `artifacts/external-signer-path-research.json` |
+| Full lab notebook | `docs/LAB_NOTEBOOK.md` |
 
-## Status labels used in this repo
-
-| Label | Meaning |
-|---|---|
-| `TN12_ACCEPTED` | Transaction accepted on kaspa-testnet-12, verified by txid |
-| `TN12_REJECTED` | Transaction rejected by kaspa-testnet-12 node (adversarial negative-path evidence) |
-| `SIGNED_NOT_BROADCAST` | Signed locally, not submitted |
-| `LOCAL_TEST_ONLY` | Script or artifact test only, no TN12 transaction |
-| `PLANNER_ONLY` | App/indexer-layer logic, no on-chain enforcement |
-| `WALLET_POLICY_ONLY` | Enforced by wallet convention, not by script |
-| `RESEARCH_ONLY` | No build yet, conceptual lane |
-| `MAINNET_APP_LAYER_CANDIDATE` | Usable on mainnet with standard tx/indexer work |
-| `MAINNET_BLOCKED` | Waiting on Toccata activation or external tooling |
-
-## Local preview
+## Local Preview
 
 ```sh
-npm run serve   # starts on http://127.0.0.1:4176
+npm run serve
 ```

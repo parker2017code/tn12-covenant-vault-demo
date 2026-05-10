@@ -2,68 +2,33 @@
 
 Reviewed: 2026-05-10
 
-This document is the canonical place for mainnet deployment readiness, not TN12 proof-core progress. When a percentage appears anywhere in this repo, read it as mainnet deployment readiness unless the line explicitly says it is TN12 proof-core only.
+This file is about deployment readiness, not TN12 proof-core progress.
 
-## Current estimate
+## Estimate
 
-- Mainnet deployment readiness: about 55-60%
-- After the current repo-verifiable sweep lands: about 60-65%
-- After live external signer plus durable live replay promotion plus one live settlement path: about 70-75%
+- Current mainnet deployment readiness: about 55-60%.
+- After real external signer plus one accepted settlement path: about 65-70%.
+- After production wallet/indexer hardening: about 70-75%.
 
-## What is proven live on TN12
+## Proven On TN12
 
-- Accepted covenant proof spends for vault recovery, vault delayed withdrawal, assurance release/refund, escrow release, escrow DAA-score refund, escrow mutual cancel, and role-separated positive paths.
-- Accepted payload-state evidence for invoice, access-pass, auction, attestation, agent, prediction/hedge, stable-value issuer, and batch-assurance planner records.
-- Verified public TN12 wRPC endpoint at `ws://tn12-node.kaspa.com:17210` using Borsh.
-- Bounded live virtual-chain reads are reachable from the endpoint, including a checkpoint-derived start hash that returned 13,968 accepted transactions and 1,116 payload transactions. A later chain-block anchor from the accepted `0b819...` pledge output returned 13,958 accepted transactions and now overlaps the current checkpoint in the replay rows, but app-state promotion is still blocked until deterministic reducer replay and rollback matching are proven. An earlier checkpoint accepting block hash (`4c70d51f67ea293b54a3cfaebfc2c9a474b16ea371b297be95a07905007c2a25`) was not findable by the public endpoint, which leaves promotion gated on reachable-window coverage plus reducer validation.
+- Covenant spends: vault recovery/withdrawal, assurance release/refund, escrow release/refund/cancel, and all seven role-separated positive paths.
+- Payload state: 30 accepted payload events, including four DeFi v1 receipts across three wallets.
+- Batch assurance: accepted pledge outputs and accepted 3-pledge release tx `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`.
+- Live replay: public TN12 wRPC reads work, checkpoint overlap is recorded, and `artifacts/durable-replay-promotion-guard.json` passes deterministic replay plus local rollback matching.
 
-## What is repo-only
+## Still Not Mainnet-Ready
 
-- Wallet connector request bundles, submit ledgers, result validators, unsigned request templates, and the external-signer gap/template artifacts.
-- Batch-assurance release and refund drafts.
-- Escrow marketplace action maps and flow models.
-- Durable indexer replay plans and bounded live-window adapter artifacts.
-- Treasury spend-cap, access-pass, auction, agent, attestation, and invoice hardening artifacts.
-
-## What is mock-only
-
-- The wallet external signer stub and review-only signer simulations.
-- Signed-local wallet drafts and ledger rows.
-- UI-only or planner-only settlement and retry surfaces.
-
-## Current blockers
-
-| Blocker | Why it blocks mainnet readiness | What would clear it |
+| Gap | Why it matters | Current artifact |
 |---|---|---|
-| Live external signer round trip | Proves the wallet path can hand off exact transaction bytes without this repo holding keys | One real unsigned/partial request, one signer return, one payload-preserving submit, one accepted replay |
-| Live replay promotion | Proves live indexer promotion can safely overlap the known checkpoint window and preserve reducer matching | A live window that overlaps the checkpoint and passes rollback/payload/proof matching |
-| Batch-assurance settle choice | Proves one mutually exclusive settlement path end to end instead of leaving both modeled | An explicit decision plus one accepted submit path and one preserved alternate path as non-selected |
-| Escrow marketplace demo | Proves the accepted escrow primitives can be shown as a usable product slice | A clean demo that moves through funding and one selected settlement path |
-| Wallet/indexer hardening | Mainnet deployment needs operational reliability, not more proof artifacts | Better submit validation, replay safety, and state promotion rules |
+| External signer | Users must sign without this repo holding keys | `artifacts/external-signer-path-research.json` |
+| Live removed-block evidence | Local rollback matching is not the same as observing a live rollback window | `artifacts/durable-replay-promotion-guard.json` |
+| Batch settlement choice | Release and refund drafts are mutually exclusive | `artifacts/batch-assurance-operator-decision.json` |
+| Wallet/indexer hardening | Product state needs operational reliability | `artifacts/wallet-submit-result-validation.json` |
 
-## Batch-assurance recommendation
+## Next Order
 
-- Exercise `release` first.
-- Why: the repo already has accepted custody outputs, signed-not-broadcast release and refund drafts, and the operator guide treats release as the happy-path settlement when the accepted pledge outputs match the target.
-- What would prove it: one accepted release submit, a post-submit alternate-path update that marks refund unavailable for that pledge set, and the corresponding checkpoint/replay evidence.
-
-## What I can do without user input
-
-- Inspect repo artifacts, docs, checks, and replay assumptions
-- Update status docs and canonical readiness notes
-- Recommend a technical order for batch-assurance and wallet lanes
-- Harden tests, guards, and claim boundaries
-
-## What may need user input
-
-- A real wallet or signer path to test, if you want a true external-signer round trip
-- A specific replay start hash or overlap window, if you want a targeted live overlap test
-- An explicit batch-assurance choice, if you want one settlement path submitted
-
-## Recommended next order
-
-1. External signer round trip.
-2. Live replay promotion.
-3. One batch-assurance settlement path.
-4. Escrow marketplace demo.
-5. Treasury / access-pass / auction / agent / attestation hardening.
+1. Run one real external signer round trip.
+2. Submit and replay one batch-assurance settlement path.
+3. Capture live removed-block rollback evidence when TN12 provides it.
+4. Keep dashboard/docs proof-first: accepted evidence, gate output, blocker.

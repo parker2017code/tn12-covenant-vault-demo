@@ -2441,7 +2441,7 @@ assert.match(html, /npm run project:plan/);
 assert.match(html, /Wallet-facing submit console/);
 assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);
-assert.match(html, /Master app plan/);
+assert.match(html, /App map/);
 assert.match(html, /Attestation registry/);
 assert.match(html, /Prediction hedge simulator/);
 assert.match(html, /npm run prediction:hedge/);

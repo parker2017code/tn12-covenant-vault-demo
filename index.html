@@ -38,7 +38,7 @@
       <a href="#indexer">Indexer</a>
       <a href="#invoices">Invoices</a>
       <a href="#submit">Submit</a>
-      <a href="#roadmap">Roadmap</a>
+      <a href="#roadmap">Map</a>
       <a href="#research-library">Research</a>
       <a href="#stack">Stack</a>
       <a href="#app-lab">App lab</a>
@@ -54,13 +54,13 @@
     <section class="hero">
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
-        <h2>Accepted proof rails, then app rails.</h2>
-        <p>The core is accepted TN12 evidence: covenant spends, role-separated repeats, payload receipts, and batch-assurance pledge outputs. The app lanes turn that evidence into fixtures, checks, wallet review flows, and the next build tasks.</p>
+        <h2>Accepted TN12 evidence first.</h2>
+        <p>Covenant spends, role-separated repeats, payload receipts, and batch-assurance outputs are accepted on TN12. Everything else is labeled as local, planner, or blocked.</p>
       </div>
       <aside class="facts">
         <span>Proof core</span>
         <strong>7 core + 2 auction + 7 role-separated + 42 indexed records</strong>
-        <p>Vault, assurance, escrow, payload receipts, and batch-assurance pledge outputs have accepted TN12 evidence. Wallet, indexer, custody, and settlement rails come next.</p>
+        <p>Vault, assurance, escrow, payload receipts, and batch-assurance outputs have accepted TN12 evidence.</p>
       </aside>
     </section>
 
@@ -86,7 +86,7 @@
           <p>One accepted funding transaction created 45/35/20 TKAS pledge outputs; release/refund drafts are signed but not broadcast.</p>
         </article>
       </div>
-      <p class="note">Read <code>docs/CORE_LAB_NOTES.md</code> before the roadmap pages. DeFi, coordination, stable-value, and agent sections stay attached to wallet, indexer, custody, and settlement rails.</p>
+      <p class="note">Read <code>docs/PROOF_INDEX.md</code> and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
     </section>
 
     <section id="designer" class="workspace">
@@ -343,7 +343,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Simple asset policy</p>
         <h2>Mint, transfer, burn, recovery, redemption.</h2>
-        <p>This is lane 7: policy shape for issuer-indexed assets now and possible covenant-native assets later. It does not claim live native asset enforcement.</p>
+        <p>Issuer-indexed policy shapes only. No live native asset enforcement claim.</p>
       </div>
       <div id="asset-summary" class="asset-summary" aria-live="polite"></div>
       <div id="asset-list" class="asset-list" aria-live="polite"></div>
@@ -353,8 +353,8 @@ npm run coordination:settlement-brief</pre>
     <section id="build-status" class="panel build-status">
       <div class="section-title">
         <p class="eyebrow">Build status</p>
-        <h2>What is built, blocked, and naturally next.</h2>
-        <p>This is the repo-level map that keeps the app lanes, enforcement labels, readiness labels, and proof status aligned.</p>
+        <h2>Built, blocked, next.</h2>
+        <p>Repo status from generated artifacts.</p>
       </div>
       <div id="build-status-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="build-status-lanes" class="build-status-lanes" aria-live="polite"></div>
@@ -364,8 +364,8 @@ npm run coordination:settlement-brief</pre>
     <section id="project-plan" class="panel build-status">
       <div class="section-title">
         <p class="eyebrow">Operator plan</p>
-        <h2>Done, WIP, next, and later.</h2>
-        <p>This is the working plan for the next build chunks. It keeps accepted TN12 evidence, wallet work, custody work, and future protocol rails separate.</p>
+        <h2>Operator state.</h2>
+        <p>Accepted evidence, WIP, and next blocker.</p>
       </div>
       <div id="project-plan-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="project-plan-next" class="build-status-lanes" aria-live="polite"></div>
@@ -376,8 +376,8 @@ npm run coordination:settlement-brief</pre>
     <section id="next-queue" class="panel build-status">
       <div class="section-title">
         <p class="eyebrow">Priority queue</p>
-        <h2>The next 5, 10, 20, and 30 tasks in one order.</h2>
-        <p>This is the all-in-one build order after the repo docs are reconciled. The highest-impact rails come first: wallet connector submit, durable indexing, batch-assurance settlement-path review, escrow marketplace UX, and attestation thresholds.</p>
+        <h2>Priority queue.</h2>
+        <p>Generated order. Broad plans stay in artifacts, not prose.</p>
       </div>
       <div id="next-queue-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="next-queue-top" class="build-status-lanes priority-grid" aria-live="polite"></div>
@@ -389,7 +389,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Auction / intent prototype</p>
         <h2>Accepted bid payloads, winner rule, refund planning.</h2>
-        <p>This is lane 8: accepted payload/indexer state for auctions and bid intents. It is not MEV resistant, does not enforce atomic asset exchange, and does not custody bids yet.</p>
+        <p>Accepted bid payloads and planner state. No custody or atomic exchange claim.</p>
       </div>
       <div id="auction-summary" class="auction-summary" aria-live="polite"></div>
       <div id="auction-list" class="auction-list" aria-live="polite"></div>
@@ -399,16 +399,16 @@ npm run coordination:settlement-brief</pre>
     <section id="defi-backlog" class="panel defi-backlog">
       <div class="section-title">
         <p class="eyebrow">Basic DeFi research backlog</p>
-        <h2>Lending, swaps, stable-value, insurance, derivatives, portfolio automation.</h2>
-        <p>This is lane 9: a missing-rails backlog for DeFi ideas brought from other ecosystems. It is research and simulation planning, not a live Kaspa DeFi claim.</p>
+        <h2>Missing rails.</h2>
+        <p>Research only until custody, signer, oracle, and settlement paths exist.</p>
       </div>
       <div id="defi-summary" class="defi-summary" aria-live="polite"></div>
       <div id="defi-list" class="defi-list" aria-live="polite"></div>
       <pre>npm run defi:backlog</pre>
       <div class="section-title compact-title">
         <p class="eyebrow">Stable-value paths</p>
-        <h3>Issuer-backed, overcollateralized, synthetic, and external rails.</h3>
-        <p>This is a comparison brief only. It does not claim a live native stablecoin, wrapped stablecoin, or automated collateral system.</p>
+        <h3>Stable-value paths.</h3>
+        <p>Comparison only. No live stablecoin claim.</p>
       </div>
       <div id="stable-summary" class="defi-summary" aria-live="polite"></div>
       <div id="stable-list" class="defi-list" aria-live="polite"></div>
@@ -416,7 +416,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title compact-title">
         <p class="eyebrow">Issuer redemption state</p>
         <h3>Accepted issuance, accepted redemption, and signed-only requests.</h3>
-        <p>This is issuer/indexer accounting for a demo stable-value credit. Signed-only redemptions do not change accepted outstanding balance.</p>
+        <p>Issuer/indexer accounting. Signed-only rows do not change accepted balance.</p>
       </div>
       <div id="stable-issuer-summary" class="defi-summary" aria-live="polite"></div>
       <div id="stable-issuer-list" class="defi-list" aria-live="polite"></div>
@@ -427,7 +427,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">AI-agent commitment board</p>
         <h2>Task offers, deposits, completion proofs, disputes, refunds.</h2>
-        <p>This is lane 12: machine-readable task commitments indexed from accepted payloads. It does not run autonomous payouts or trust agent proofs without reviewer/wallet policy.</p>
+        <p>Accepted payload commitments plus reviewer/wallet policy. No autonomous payouts.</p>
       </div>
       <div id="agent-summary" class="agent-summary" aria-live="polite"></div>
       <div id="agent-list" class="agent-list" aria-live="polite"></div>
@@ -497,9 +497,9 @@ npm run wallet:adapter-run</pre>
 
     <section id="roadmap" class="panel roadmap">
       <div class="section-title">
-        <p class="eyebrow">Master app plan</p>
-        <h2>Twelve lanes from Kaspa Explained into buildable apps.</h2>
-        <p>Each lane stays status-labeled: live Kaspa, TN12/Toccata, roadmap, or research. Other-chain code informs PMF and failure modes, but Kaspa implementation must fit accepted transactions, payloads, UTXO flows, and TN12 covenant limits.</p>
+        <p class="eyebrow">App map</p>
+        <h2>Status-labeled lanes.</h2>
+        <p>Accepted evidence first. Research stays research.</p>
       </div>
       <div id="master-roadmap" class="roadmap-list" aria-live="polite"></div>
       <pre>docs/MASTER_APP_PLAN.md</pre>
@@ -509,7 +509,7 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Cross-chain research library</p>
         <h2>PMF, failure modes, and Kaspa mapping.</h2>
-        <p>Open-source apps from other ecosystems are used as evidence for product shape, code patterns, and mistakes to avoid. Every candidate is remapped to live Kaspa, TN12/Toccata, roadmap, or research before it becomes app work.</p>
+        <p>External examples are reference material, not claims about this repo.</p>
       </div>
       <div id="research-summary" class="research-summary" aria-live="polite"></div>
       <div id="research-candidates" class="research-candidates" aria-live="polite"></div>
