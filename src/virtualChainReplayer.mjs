@@ -1,8 +1,10 @@
 /**
  * Virtual-chain replay indexer
  * Reads accepted transactions from TN12 and derives app state
- * Works around SDK getVirtualChainFromBlockV2 limitation by querying REST API
+ * Uses proper virtualChainSync.mjs to build canonical transaction ordering
  */
+
+import { getGlobalVirtualChainSync } from "./virtualChainSync.mjs";
 
 const TN12_REST = "https://api-tn12.kaspa.org";
 const POLL_INTERVAL_MS = 5000; // Poll every 5 seconds for new blocks
@@ -14,6 +16,7 @@ export class VirtualChainReplayer {
     this.acceptedTransactions = new Map(); // txid -> txData
     this.lastPolledBlueScore = 0;
     this.listeners = [];
+    this.virtualChainSync = getGlobalVirtualChainSync();
   }
 
   /**
