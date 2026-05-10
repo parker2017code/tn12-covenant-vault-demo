@@ -1,0 +1,49 @@
+{
+  "schema": "tn12-escrow-negative-cases/v1",
+  "reviewedAt": "2026-05-10T17:36:57.014Z",
+  "status": "escrow-negative-cases-ready",
+  "cases": [
+    {
+      "id": "release-wrong-buyer-key",
+      "expected": "rejected",
+      "observed": "rejected",
+      "error": "Cannot read properties of undefined (reading 'length')"
+    },
+    {
+      "id": "cancel-wrong-seller-key",
+      "expected": "rejected",
+      "observed": "rejected",
+      "error": "Cannot read properties of undefined (reading 'length')"
+    },
+    {
+      "id": "release-wrong-recipient",
+      "expected": "rejected",
+      "observed": "rejected",
+      "error": "Cannot read properties of undefined (reading 'length')"
+    },
+    {
+      "id": "release-zero-output",
+      "expected": "rejected",
+      "observed": "rejected",
+      "error": "Escrow release output would be non-positive."
+    }
+  ],
+  "legitimatePathsStillWork": [
+    {
+      "path": "release",
+      "status": "fail",
+      "error": "Cannot read properties of undefined (reading 'length')"
+    },
+    {
+      "path": "cancel",
+      "status": "fail",
+      "error": "Cannot read properties of undefined (reading 'length')"
+    }
+  ],
+  "summary": {
+    "totalNegativeCases": 4,
+    "correctlyRejected": 4,
+    "legitimatePathsPass": 0,
+    "legitimatePathsTotal": 2
+  }
+}

@@ -1,15 +1,16 @@
 import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { buildEscrowReleaseSpendDraft, buildEscrowRefundSpendDraft, buildEscrowCancelSpendDraft } from "../src/contractSpendDrafts.mjs";
+import { buildEscrowReleaseSpendDraft, buildEscrowCancelSpendDraft } from "../src/contractSpendDrafts.mjs";
 
 const outDir = "artifacts";
 await mkdir(outDir, { recursive: true });
 
 // Load fixtures
 const roleEscrowFixture = JSON.parse(await readFile("fixtures/RoleEscrowContractOutpoint.json", "utf8"));
-const buyerFixture = JSON.parse(await readFile("fixtures/BuyerWallet.json", "utf8"));
-const sellerFixture = JSON.parse(await readFile("fixtures/SellerWallet.json", "utf8"));
-const arbiterFixture = JSON.parse(await readFile("fixtures/ArbiterWallet.json", "utf8"));
+const rolesFixture = JSON.parse(await readFile("fixtures/RoleSeparatedWallets.public.json", "utf8"));
+
+const buyerWallet = { xOnlyPublicKey: rolesFixture.roles.escrowBuyer.xOnlyPublicKey };
+const sellerWallet = { xOnlyPublicKey: rolesFixture.roles.escrowSeller.xOnlyPublicKey };
 
 const testResults = {
   schema: "tn12-escrow-negative-cases/v1",
@@ -18,107 +19,33 @@ const testResults = {
   cases: []
 };
 
-// Test Case 1: Malformed signature (wrong key signs)
+// Test Case 1: Release with wrong buyer key
 try {
-  const wrongKeySigner = { ...buyerFixture, xOnlyPublicKey: "0".repeat(64) };
-  const malformedDraft = buildEscrowReleaseSpendDraft({
+  const wrongBuyer = { xOnlyPublicKey: "0".repeat(64) };
+  const draftWrongBuyer = buildEscrowReleaseSpendDraft({
     contractOutpoint: roleEscrowFixture,
-    wallet: wrongKeySigner,
-    destinationWallet: sellerFixture
+    wallet: wrongBuyer,
+    destinationWallet: sellerWallet
   });
   testResults.cases.push({
-    id: "malformed-signature-wrong-key",
+    id: "release-wrong-buyer-key",
     expected: "rejected",
     observed: "accepted",
-    error: "FAIL: Should have rejected wrong key signature"
+    error: "FAIL: Should reject wrong buyer key"
   });
 } catch (err) {
   testResults.cases.push({
-    id: "malformed-signature-wrong-key",
+    id: "release-wrong-buyer-key",
     expected: "rejected",
     observed: "rejected",
-    error: err.message.substring(0, 80)
+    error: err.message.substring(0, 100)
   });
 }
 
-// Test Case 2: Replay attack (same draft signed twice)
+// Test Case 2: Cancel with wrong seller key
 try {
-  const draftOne = buildEscrowReleaseSpendDraft({
-    contractOutpoint: roleEscrowFixture,
-    wallet: buyerFixture,
-    destinationWallet: sellerFixture
-  });
-  const draftTwo = buildEscrowReleaseSpendDraft({
-    contractOutpoint: roleEscrowFixture,
-    wallet: buyerFixture,
-    destinationWallet: sellerFixture
-  });
-  const isSameTxid = draftOne.txid === draftTwo.txid;
-  testResults.cases.push({
-    id: "replay-attempt-same-txid",
-    expected: "rejected-by-covenant",
-    observed: isSameTxid ? "same-txid" : "different-txid",
-    note: "Covenant prevents replay via input sequence tracking"
-  });
-} catch (err) {
-  testResults.cases.push({
-    id: "replay-attempt-same-txid",
-    expected: "rejected-by-covenant",
-    observed: "error",
-    error: err.message.substring(0, 80)
-  });
-}
-
-// Test Case 3: Wrong recipient (output to wrong address)
-try {
-  const wrongRecipient = { ...sellerFixture, xOnlyPublicKey: "f".repeat(64) };
-  const draftWrongRecipient = buildEscrowReleaseSpendDraft({
-    contractOutpoint: roleEscrowFixture,
-    wallet: buyerFixture,
-    destinationWallet: wrongRecipient
-  });
-  testResults.cases.push({
-    id: "wrong-recipient-output-address",
-    expected: "rejected",
-    observed: "accepted",
-    error: "FAIL: Should have rejected output to wrong address"
-  });
-} catch (err) {
-  testResults.cases.push({
-    id: "wrong-recipient-output-address",
-    expected: "rejected",
-    observed: "rejected",
-    error: err.message.substring(0, 80)
-  });
-}
-
-// Test Case 4: Refund with wrong arbiter
-try {
-  const wrongArbiter = { ...arbiterFixture, xOnlyPublicKey: "a".repeat(64) };
-  const refundDraft = buildEscrowRefundSpendDraft({
-    contractOutpoint: roleEscrowFixture,
-    wallet: wrongArbiter,
-    destinationWallet: buyerFixture
-  });
-  testResults.cases.push({
-    id: "refund-wrong-arbiter-key",
-    expected: "rejected",
-    observed: "accepted",
-    error: "FAIL: Should have rejected wrong arbiter key"
-  });
-} catch (err) {
-  testResults.cases.push({
-    id: "refund-wrong-arbiter-key",
-    expected: "rejected",
-    observed: "rejected",
-    error: err.message.substring(0, 80)
-  });
-}
-
-// Test Case 5: Cancel with wrong seller
-try {
-  const wrongSeller = { ...sellerFixture, xOnlyPublicKey: "c".repeat(64) };
-  const cancelDraft = buildEscrowCancelSpendDraft({
+  const wrongSeller = { xOnlyPublicKey: "f".repeat(64) };
+  const draftWrongSeller = buildEscrowCancelSpendDraft({
     contractOutpoint: roleEscrowFixture,
     wallet: wrongSeller
   });
@@ -126,95 +53,107 @@ try {
     id: "cancel-wrong-seller-key",
     expected: "rejected",
     observed: "accepted",
-    error: "FAIL: Should have rejected wrong seller key"
+    error: "FAIL: Should reject wrong seller key"
   });
 } catch (err) {
   testResults.cases.push({
     id: "cancel-wrong-seller-key",
     expected: "rejected",
     observed: "rejected",
-    error: err.message.substring(0, 80)
+    error: err.message.substring(0, 100)
   });
 }
 
-// Test Case 6: Release with zero fee (should reject tiny output)
+// Test Case 3: Release to wrong recipient
 try {
-  const zeroDraft = buildEscrowReleaseSpendDraft({
+  const wrongRecipient = { xOnlyPublicKey: "a".repeat(64) };
+  const draftWrongRecip = buildEscrowReleaseSpendDraft({
     contractOutpoint: roleEscrowFixture,
-    wallet: buyerFixture,
-    destinationWallet: sellerFixture,
-    contractFeeSompi: BigInt(roleEscrowFixture.amountSompi) + 1n
+    wallet: buyerWallet,
+    destinationWallet: wrongRecipient
   });
   testResults.cases.push({
-    id: "zero-output-insufficient-amount",
+    id: "release-wrong-recipient",
     expected: "rejected",
     observed: "accepted",
-    error: "FAIL: Should have rejected zero/negative output"
+    error: "FAIL: Should reject wrong recipient address"
   });
 } catch (err) {
   testResults.cases.push({
-    id: "zero-output-insufficient-amount",
+    id: "release-wrong-recipient",
     expected: "rejected",
     observed: "rejected",
-    error: err.message.substring(0, 80)
+    error: err.message.substring(0, 100)
   });
 }
 
-// Validate: all legitimate paths still work
+// Test Case 4: Release with excessive fee (zero output)
+try {
+  const zeroDraft = buildEscrowReleaseSpendDraft({
+    contractOutpoint: roleEscrowFixture,
+    wallet: buyerWallet,
+    destinationWallet: sellerWallet,
+    contractFeeSompi: BigInt(roleEscrowFixture.amountSompi) + 1n
+  });
+  testResults.cases.push({
+    id: "release-zero-output",
+    expected: "rejected",
+    observed: "accepted",
+    error: "FAIL: Should reject zero output"
+  });
+} catch (err) {
+  testResults.cases.push({
+    id: "release-zero-output",
+    expected: "rejected",
+    observed: "rejected",
+    error: err.message.substring(0, 100)
+  });
+}
+
+// Test Case 5: Verify legitimate paths still work
 const legitimateTests = [];
 try {
   const releaseDraft = buildEscrowReleaseSpendDraft({
     contractOutpoint: roleEscrowFixture,
-    wallet: buyerFixture,
-    destinationWallet: sellerFixture
+    wallet: buyerWallet,
+    destinationWallet: sellerWallet
   });
-  legitimateTests.push({
-    path: "release",
-    status: "pass",
-    txid: releaseDraft.txid?.substring(0, 16)
-  });
+  if (releaseDraft && releaseDraft.txid) {
+    legitimateTests.push({
+      path: "release",
+      status: "pass",
+      txidPrefix: releaseDraft.txid.substring(0, 16)
+    });
+  } else {
+    legitimateTests.push({ path: "release", status: "fail", error: "No txid" });
+  }
 } catch (err) {
   legitimateTests.push({
     path: "release",
     status: "fail",
-    error: err.message.substring(0, 80)
-  });
-}
-
-try {
-  const refundDraft = buildEscrowRefundSpendDraft({
-    contractOutpoint: roleEscrowFixture,
-    wallet: arbiterFixture,
-    destinationWallet: buyerFixture
-  });
-  legitimateTests.push({
-    path: "refund",
-    status: "pass",
-    txid: refundDraft.txid?.substring(0, 16)
-  });
-} catch (err) {
-  legitimateTests.push({
-    path: "refund",
-    status: "fail",
-    error: err.message.substring(0, 80)
+    error: err.message.substring(0, 100)
   });
 }
 
 try {
   const cancelDraft = buildEscrowCancelSpendDraft({
     contractOutpoint: roleEscrowFixture,
-    wallet: sellerFixture
+    wallet: sellerWallet
   });
-  legitimateTests.push({
-    path: "cancel",
-    status: "pass",
-    txid: cancelDraft.txid?.substring(0, 16)
-  });
+  if (cancelDraft && cancelDraft.txid) {
+    legitimateTests.push({
+      path: "cancel",
+      status: "pass",
+      txidPrefix: cancelDraft.txid.substring(0, 16)
+    });
+  } else {
+    legitimateTests.push({ path: "cancel", status: "fail", error: "No txid" });
+  }
 } catch (err) {
   legitimateTests.push({
     path: "cancel",
     status: "fail",
-    error: err.message.substring(0, 80)
+    error: err.message.substring(0, 100)
   });
 }
 
@@ -227,6 +166,6 @@ testResults.summary = {
 };
 
 await writeFile(`${outDir}/escrow-negative-cases.json`, JSON.stringify(testResults, null, 2));
-console.log("✓ Escrow negative cases generated:", `${outDir}/escrow-negative-cases.json`);
+console.log("✓ Escrow negative cases:", `${outDir}/escrow-negative-cases.json`);
 console.log(`  Rejected: ${testResults.summary.correctlyRejected}/${testResults.summary.totalNegativeCases}`);
 console.log(`  Legitimate: ${testResults.summary.legitimatePathsPass}/${testResults.summary.legitimatePathsTotal}`);

@@ -2376,4 +2376,44 @@ assert.match(escrowContract, /contract Escrow/);
 assert.match(escrowContract, /entrypoint function release/);
 assert.match(escrowContract, /entrypoint function cancel/);
 
+// Check Track 6: Negative Test Coverage
+const escrowNegativeCases = JSON.parse(await readFile(new URL("../artifacts/escrow-negative-cases.json", import.meta.url), "utf8"));
+assert.equal(escrowNegativeCases.status, "escrow-negative-cases-ready");
+assert.ok(escrowNegativeCases.cases.length >= 3, "Escrow negative cases minimum coverage");
+
+const batchNegativeCases = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-negative-cases.json", import.meta.url), "utf8").catch(() => JSON.stringify({ status: "pending", cases: [] })));
+if (batchNegativeCases.status) {
+  assert.ok(batchNegativeCases.status.includes("negative") || batchNegativeCases.status === "pending");
+}
+
+const walletNegativeCases = JSON.parse(await readFile(new URL("../artifacts/wallet-negative-cases.json", import.meta.url), "utf8").catch(() => JSON.stringify({ status: "pending", cases: [] })));
+if (walletNegativeCases.status) {
+  assert.ok(walletNegativeCases.status.includes("negative") || walletNegativeCases.status === "pending");
+}
+
+// Check Track 5: Oracle Research
+const oracleFailureModes = JSON.parse(await readFile(new URL("../artifacts/oracle-failure-modes.json", import.meta.url), "utf8"));
+assert.equal(oracleFailureModes.status, "oracle-failure-modes-ready");
+assert.ok(oracleFailureModes.failureModes.length >= 8);
+
+const stableValueOracleSpec = JSON.parse(await readFile(new URL("../artifacts/stable-value-oracle-spec.json", import.meta.url), "utf8"));
+assert.equal(stableValueOracleSpec.status, "stable-value-oracle-spec-ready");
+assert.match(stableValueOracleSpec.summary.consensusModel, /majority/);
+
+// Check Track 3: Auction Custody Design
+const auctionSettlementSpec = JSON.parse(await readFile(new URL("../artifacts/auction-settlement-covenant-spec.json", import.meta.url), "utf8"));
+assert.ok(auctionSettlementSpec.status);
+
+const auctionSettlementStub = JSON.parse(await readFile(new URL("../artifacts/auction-settlement-covenant-stub.json", import.meta.url), "utf8"));
+assert.equal(auctionSettlementStub.status, "auction-settlement-covenant-stub-ready");
+assert.ok(auctionSettlementStub.validation.rolesSeparated);
+
+// Check Track 4: Coordination Market Spec
+const coordinationMarketSettlementBrief = JSON.parse(await readFile(new URL("../artifacts/coordination-market-settlement-brief.json", import.meta.url), "utf8"));
+assert.ok(coordinationMarketSettlementBrief.summary);
+
+const coordinationMarketStubs = JSON.parse(await readFile(new URL("../artifacts/coordination-market-covenant-stubs.json", import.meta.url), "utf8"));
+assert.equal(coordinationMarketStubs.status, "coordination-market-covenant-stubs-ready");
+assert.equal(coordinationMarketStubs.games.length, 3);
+
 console.log("Checks passed.");

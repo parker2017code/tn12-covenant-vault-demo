@@ -1,0 +1,58 @@
+{
+  "schema": "tn12-auction-settlement-covenant-artifact/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T17:38:01.646Z",
+  "status": "auction-settlement-covenant-stub-ready",
+  "summary": {
+    "contractType": "AuctionSettlement",
+    "roles": 2,
+    "settlementOutcomes": 1,
+    "validated": true
+  },
+  "covenant": {
+    "schema": "tn12-auction-settlement-covenant/v1",
+    "auctionId": "tn12-auction-001",
+    "contractType": "AuctionSettlement",
+    "roles": {
+      "seller": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+      "highestBidder": "0674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede"
+    },
+    "parameters": {
+      "reservePriceSompi": "50000000",
+      "bidAmountSompi": "75000000",
+      "endBlockDaa": 8055346,
+      "reserveMet": true
+    },
+    "settlement": {
+      "winner": "highestBidder",
+      "winnerAmount": "75000000",
+      "sellerPayout": "75000000",
+      "status": "pending-settlement"
+    },
+    "locks": {
+      "buyerOutput": {
+        "recipient": "0674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede",
+        "amount": "74995000",
+        "purpose": "item-receipt-to-bidder"
+      },
+      "sellerOutput": {
+        "recipient": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+        "amount": "75000000",
+        "purpose": "payout-to-seller"
+      }
+    },
+    "note": "Auction settlement reuses escrow pattern: bidder=buyer, seller=seller, highest-bid=acceptance"
+  },
+  "validation": {
+    "reservePriceMet": true,
+    "auctionClosed": true,
+    "rolesSeparated": true,
+    "outputsLocked": {
+      "recipient": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+      "amount": "75000000",
+      "purpose": "payout-to-seller"
+    },
+    "valid": true
+  },
+  "note": "Stub implementation using escrow pattern; ready for TN12 covenant build"
+}

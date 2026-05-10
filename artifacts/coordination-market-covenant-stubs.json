@@ -1,0 +1,39 @@
+{
+  "schema": "tn12-coordination-market-covenant-artifact/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T17:38:01.736Z",
+  "status": "coordination-market-covenant-stubs-ready",
+  "summary": {
+    "contractType": "CoordinationGame",
+    "gameTypesSupported": 3,
+    "gamesConfigured": 3,
+    "settlementModel": "escrow-multi-party"
+  },
+  "games": [
+    {
+      "gameId": "tn12-stag-hunt-1778434681736",
+      "gameType": "stag-hunt",
+      "status": "ready-for-move-commitment",
+      "roles": 2,
+      "possibleOutcomes": 4,
+      "stakePerPlayerSompi": "50000000"
+    },
+    {
+      "gameId": "tn12-intendo-1778434681736",
+      "gameType": "intendo",
+      "status": "ready-for-move-commitment",
+      "roles": 2,
+      "possibleOutcomes": 4,
+      "stakePerPlayerSompi": "40000000"
+    },
+    {
+      "gameId": "tn12-pack-1778434681736",
+      "gameType": "pack",
+      "status": "ready-for-move-commitment",
+      "roles": 2,
+      "possibleOutcomes": 4,
+      "stakePerPlayerSompi": "60000000"
+    }
+  ],
+  "note": "Stub implementations for stag-hunt, intendo, pack games; ready for move commitment and settlement testing"
+}
