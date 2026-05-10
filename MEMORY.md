@@ -256,6 +256,29 @@ Current WIP:
 - The next high-impact build step is the project queue top item: wallet connector submit without local keys. The next high-impact app research step is turning a trigger lane into a brief only after the missing-rails matrix, trigger registry, and oracle/source artifacts name the gaps and do-not-claim boundary.
 - The next safe protocol step is funding fresh expendable role-separated outputs before attempting any TN12 rejection submissions.
 
+## Session handoff — 2026-05-10
+
+Both hard blockers are now resolved:
+
+1. **Virtual-chain live indexer** — RESOLVED. `getVirtualChainFromBlockV2` is available in the local TN12 wasm build at `/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa`. Running `KASPA_WASM_MODULE=.../kaspa npm run indexer:live-window` queries the live TN12 chain and returns 46+ accepted transactions. `npm run indexer:live-app-state` applies the reducer and proves `forwardIndexingCapable=true`. Artifact: `artifacts/virtual-chain-live-app-state.json`.
+
+2. **External signer roundtrip** — RESOLVED with local sim. `npm run wallet:external-signer-sim` signs all 4 unsigned requests (payload receipt + 3 covenant spends) using existing local drafts, validates fingerprint/payload/computeBudget preservation, status=`sim-roundtrip-all-passed`. Artifact: `artifacts/wallet-external-signer-sim-results.json`. Full live-KasWare roundtrip still needs a real external wallet.
+
+3. **Escrow marketplace** — action map updated to recognize `sim-validated` status. 4/5 actions are sim-validated; 1 blocked (needs-funding listing). `artifacts/escrow-marketplace-action-map.json`.
+
+4. **Doc cleanup** — 7 stale docs deleted (CONTEXT.md, BUILD_PLAN.md, STATUS.md, GITHUB_HOSTING.md, PROJECT_COMPLETION_PLAN.md, NEXT_10_EXECUTION_PLAN.md, PICKUP.md). All cross-references in surviving docs and artifacts cleaned. `npm run check:all` passes.
+
+5. **Claude Code infrastructure** — CLAUDE.md + .claude/settings.json + .claude/hooks/check-submit-guard.sh + .claude/commands/ in both repos and global. Global `~/.claude/OPERATOR_REFERENCE.md` added with full operator command reference.
+
+**What is NOT yet done / next TN12 work:**
+- Submit a live TN12 tx from the signer sim path — the payload receipt draft (`artifacts/signed-drafts/payload-receipt-self-send.json`, txid `34d5f807...`) may still have a spendable UTXO. Confirm UTXO is live, then submit via wRPC. This is the next live TN12 experiment.
+- Check whether batch-assurance release (txid `4d84472e...`) UTXO is spent, and if not, submit the release draft.
+- KasWare/KasSigner live roundtrip still needs a wallet session — cannot be done without user running a browser wallet.
+
+**Last commit:** `983e5a4` on `main`. Both repos pushed to GitHub.
+
+**Gate to run on resume:** `npm run check:all && npm run check:tn12`
+
 ## Update Rule
 
 When you make a meaningful repo change, update this file with:
