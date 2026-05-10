@@ -1,7 +1,7 @@
 {
   "schema": "tn12-contract-spend-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-09T10:59:52.234Z",
+  "verifiedAt": "2026-05-10T15:07:43.780Z",
   "summary": {
     "total": 7,
     "accepted": 7,
@@ -269,37 +269,6 @@
         "amountMatchesExpectedOutput": true,
         "outputAddressMatchesExpected": true
       }
-    },
-    {
-      "label": "Batch assurance release (3-pledge batch)",
-      "lane": "assurance",
-      "entrypoint": "batch-release",
-      "txid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
-      "accepted": true,
-      "acceptingBlockBlueScore": 7413626,
-      "acceptingBlockTime": 1778363663545,
-      "inputs": [
-        {
-          "pledgeId": "pledge-docs-001",
-          "outpoint": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a:0",
-          "amountTkas": "45"
-        },
-        {
-          "pledgeId": "pledge-docs-002",
-          "outpoint": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a:1",
-          "amountTkas": "35"
-        },
-        {
-          "pledgeId": "pledge-docs-003",
-          "outpoint": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a:2",
-          "amountTkas": "20"
-        }
-      ],
-      "output": {
-        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "amountTkas": "99.99995"
-      },
-      "note": "First batch-assurance multi-input release accepted on TN12. 3 pledge outputs spent in one transaction to recipient."
     }
   ],
   "note": "Each proof spend resolves its input's previous output, checks the expected funding outpoint, then checks that the consumed output is a TN12 scripthash address and the spend pays the expected P2PK wallet output."
