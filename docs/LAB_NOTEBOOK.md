@@ -305,6 +305,8 @@ npm run indexer:checkpoint-compare
 
 This writes `artifacts/checkpointed-accepted-index.json`, `artifacts/persisted-checkpoint-guard.json`, `artifacts/indexer-replay-plan.json`, `artifacts/indexer-storage-schema.json`, `artifacts/indexer-replay-run.json`, `artifacts/virtual-chain-ingestion-plan.json`, `artifacts/virtual-chain-ingestion-run.json`, `artifacts/virtual-chain-reader-adapter.json`, `artifacts/virtual-chain-live-preflight.json`, `artifacts/virtual-chain-endpoint-runbook.json`, and optionally `artifacts/tn12-wrpc-endpoint-probe.json`, `artifacts/virtual-chain-live-window.json`, `artifacts/virtual-chain-live-replay-rows.json`, and `artifacts/virtual-chain-checkpoint-comparison.json`. The endpoint runbook is the next live-indexer checklist: configure `TN12_VIRTUAL_CHAIN_RPC_URL`, run the endpoint probe, read a bounded V2 live window through a TN12 SDK that exposes `getVirtualChainFromBlockV2`, compare returned rows, and persist only after rollback and payload/proof matching pass. `TN12_VIRTUAL_CHAIN_START_HASH=<hash>` can override the default sink start hash when testing a deliberate checkpoint-overlap window; the replay artifact carries every accepted txid returned by the live window, not only the UI sample.
 
+For future validator/indexer work, keep the SMT validation model stateless at the ChainBlock transition level: selected-parent root, current ChainBlock root, and per-leaf write witnesses are enough to verify a single write step. Do not require client-side maintenance of the full incremental SMT unless you are building node-side caching or a durable indexer.
+
 Build a compact transaction-payload receipt artifact for the accepted-transaction indexer lane:
 
 ```sh

@@ -5,7 +5,7 @@
  * Wires external wallet signing (KasWare CDP or alternative) to the wallet submit console.
  * Currently stub implementation; ready for KasWare or real wallet adapter.
  *
- * Usage: node scripts/wallet-external-signer.mjs [--signer kaswarer|stub|ledger] [--test]
+ * Usage: node scripts/wallet-external-signer.mjs [--signer kasware|kaswarer|stub|ledger] [--test]
  */
 
 import { readFile } from "fs/promises";
@@ -33,13 +33,12 @@ console.log(`
 console.log(`Signer type: ${args.signer}`);
 console.log(`Test mode: ${args.test ? "YES" : "NO"}`);
 
-const signerConfig = {
-  kaswarer: {
-    name: "KasWare CDP",
-    status: "pending-extension-build",
-    description: "KasWare browser extension with CDP protocol",
-    impl: () => {
-      console.log(`
+const kaswareConfig = {
+  name: "KasWare CDP",
+  status: "pending-extension-build",
+  description: "KasWare browser extension with CDP protocol",
+  impl: () => {
+    console.log(`
 ⏳ KasWare CDP Integration (PENDING)
 
 Setup requires:
@@ -53,23 +52,26 @@ Integration points:
   - Parse signed transaction response
   - Submit to wallet submit console
 
-Current: Extension build in progress. Ready when npm install completes.
-      `);
-    },
+Current: External signer boundary only. No live connector yet.
+    `);
   },
+};
 
+const signerConfig = {
+  kasware: kaswareConfig,
+  kaswarer: kaswareConfig,
   stub: {
     name: "Stub Signer",
     status: "ready",
-    description: "Mock signer for testing, uses local key",
+    description: "Mock signer for review-only testing",
     impl: () => {
       console.log(`
-✓ Stub Signer Implementation (READY)
+✓ Stub Signer Implementation (REVIEW-ONLY)
 
-Purpose: Testing wallet flow without real external signer
-Current: Local-key signing (review gates built, 47 drafts signed)
+Purpose: Exercise wallet flow without claiming a live external signer
+Current: Signed-local review artifacts and negative gates only
 
-Next: Replace with KasWare or real wallet when external signer ready
+Next: Replace with KasWare or a real wallet adapter when the external signer is wired
 
 Test flow:
   1. Prepare unsigned draft
@@ -77,7 +79,7 @@ Test flow:
   3. Submit to console
   4. Verify acceptance
 
-Status: All gates passing with stub. Ready for KasWare swap.
+Status: Review gates passing. No no-local-key claim yet.
       `);
     },
   },
@@ -132,15 +134,15 @@ Next Steps:
 
 1. For KasWare:
    - Wait for extension build
-   - Run: npm run wallet:kaswarer-integration
+   - Wire a real external signer adapter before claiming no-local-key support
 
 2. For Stub (current):
-   - All gates passing
-   - Ready to broadcast when escrow funds
+   - Review-only path
+   - Do not claim live broadcast or external signing
 
 3. For Ledger:
    - Design later during mainnet hardening
 
-Current wallet lane: 60% → 80% (when external-signer wired)
+Current wallet lane: review artifacts built; live connector still missing
 ═══════════════════════════════════════════════════════════════
 `);
