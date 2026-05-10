@@ -44,9 +44,8 @@ If these pass, you have verified the existing accepted evidence. You have not cr
 
 ## Current blockers (in priority order)
 
-1. **External signer roundtrip** — `artifacts/wallet-external-signer-roundtrip-plan.json` has 4 requests ready; none have gone through a real external signer yet.
-2. **Virtual-chain live indexer** — requires `kaspa-wasm 1.1.1-toc.1` or `kaspa-python-sdk v1.1.0` for `getVirtualChainFromBlockV2`; current indexer is fixture-driven.
-3. **Virtual-chain live indexer** — requires `kaspa-wasm 1.1.1-toc.1` or `kaspa-python-sdk v1.1.0` for `getVirtualChainFromBlockV2`; current indexer is fixture-driven. Adversarial suite is now complete (13 cases, all 5 mutation types).
+1. **External signer roundtrip** — `artifacts/wallet-external-signer-roundtrip-plan.json` has 4 requests ready; local signer simulation in progress.
+2. **Virtual-chain live indexer** — operational with local TN12 wasm build. `KASPA_WASM_MODULE=.../kaspa npm run indexer:live-window` calls `getVirtualChainFromBlockV2`, produces 46+ accepted-tx rows, forward-indexing capable. Checkpoint overlap with historic proofs not expected (near-tip only); see `artifacts/virtual-chain-live-app-state.json`.
 
 ## Deeper docs
 

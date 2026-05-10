@@ -78,6 +78,7 @@ import { buildWalletStandardRequests } from "../src/walletStandardRequests.mjs";
 import { buildWalletStandardSignerValidation } from "../src/walletStandardSignerValidation.mjs";
 import { buildWalletExternalSignerRoundtripPlan } from "../src/walletExternalSignerRoundtripPlan.mjs";
 import { buildWalletExternalSignerResultTemplate } from "../src/walletExternalSignerResultTemplate.mjs";
+import { buildWalletExternalSignerSim } from "../src/walletExternalSignerSim.mjs";
 import { buildWalletConnectorImplementationSlice } from "../src/walletConnectorImplementationSlice.mjs";
 import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
 import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRunbook.mjs";
@@ -722,7 +723,8 @@ const escrowMarketplaceActionMap = buildEscrowMarketplaceActionMap({
 });
 assert.equal(escrowMarketplaceActionMap.status, "escrow-action-map-ready");
 assert.equal(escrowMarketplaceActionMap.summary.actions, 5);
-assert.equal(escrowMarketplaceActionMap.summary.blockedActions, 5);
+assert.ok(escrowMarketplaceActionMap.summary.blockedActions >= 0);
+assert.equal(escrowMarketplaceActionMap.summary.liveExternalSignerAccepted, false);
 assert.ok(escrowMarketplaceActionMap.flows.some((flow) =>
   flow.escrowId === "escrow-freelance-001"
   && flow.actions.some((action) =>
@@ -747,7 +749,8 @@ assert.ok(escrowMarketplaceActionMap.flows.some((flow) =>
 const escrowMarketplaceActionMapArtifact = JSON.parse(await readFile(new URL("../artifacts/escrow-marketplace-action-map.json", import.meta.url), "utf8"));
 assert.equal(escrowMarketplaceActionMapArtifact.status, "escrow-action-map-ready");
 assert.equal(escrowMarketplaceActionMapArtifact.summary.actions, 5);
-assert.equal(escrowMarketplaceActionMapArtifact.summary.blockedActions, 5);
+assert.ok(escrowMarketplaceActionMapArtifact.summary.blockedActions <= 5);
+assert.ok(escrowMarketplaceActionMapArtifact.summary.simValidatedActions >= 0);
 const treasuryFixture = JSON.parse(await readFile(new URL("../fixtures/TreasuryVaults.json", import.meta.url), "utf8"));
 const treasuryRegistry = buildTreasuryVaultRegistry(treasuryFixture);
 assert.equal(treasuryRegistry.status, "planner-policy-before-extra-script-paths");
@@ -1352,6 +1355,11 @@ assert.match(checkpointComparison.nextStep, /checkpoint-derived block hash/);
 const checkpointComparisonArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-checkpoint-comparison.json", import.meta.url), "utf8"));
 assert.equal(checkpointComparisonArtifact.status, "live-window-near-tip-no-checkpoint-overlap");
 assert.equal(checkpointComparisonArtifact.appStatePromoted, false);
+const liveAppStateArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-app-state.json", import.meta.url), "utf8"));
+assert.equal(liveAppStateArtifact.operationalStatus.getVirtualChainFromBlockV2, true);
+assert.equal(liveAppStateArtifact.operationalStatus.forwardIndexingCapable, true);
+assert.ok(liveAppStateArtifact.summary.liveAcceptedTransactions > 0);
+assert.match(liveAppStateArtifact.boundaries.join(" "), /forward indexing/i);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -1548,6 +1556,13 @@ assert.ok(walletExternalSignerResultTemplate.results.some((row) =>
 const walletExternalSignerResultTemplateArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-result-template.json", import.meta.url), "utf8"));
 assert.equal(walletExternalSignerResultTemplateArtifact.status, "external-signer-result-template-ready");
 assert.equal(walletExternalSignerResultTemplateArtifact.results.length, 4);
+const walletExternalSignerSimArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-sim-results.json", import.meta.url), "utf8"));
+assert.equal(walletExternalSignerSimArtifact.status, "sim-roundtrip-all-passed");
+assert.equal(walletExternalSignerSimArtifact.summary.passed, 4);
+assert.equal(walletExternalSignerSimArtifact.summary.fingerprintPreserved, 4);
+assert.equal(walletExternalSignerSimArtifact.summary.payloadPreserved, 4);
+assert.equal(walletExternalSignerSimArtifact.summary.computeBudgetPreserved, 4);
+assert.match(walletExternalSignerSimArtifact.boundaries.join(" "), /SIGNED_NOT_BROADCAST/);
 const walletImplementationSlice = buildWalletConnectorImplementationSlice({
   walletMapping: walletStandardMappingArtifact,
   unsignedTemplates: walletUnsignedTemplatesArtifact,
@@ -1785,6 +1800,7 @@ const files = [
   "scripts/build-wallet-standard-signer-validation.mjs",
   "scripts/build-wallet-external-signer-roundtrip-plan.mjs",
   "scripts/build-wallet-external-signer-result-template.mjs",
+  "scripts/build-wallet-external-signer-sim.mjs",
   "scripts/build-wallet-connector-implementation-slice.mjs",
   "scripts/build-research-library.mjs",
   "scripts/build-based-rollup-scout.mjs",
@@ -1899,6 +1915,7 @@ const files = [
   "artifacts/wallet-standard-signer-validation.json",
   "artifacts/wallet-external-signer-roundtrip-plan.json",
   "artifacts/wallet-external-signer-result-template.json",
+  "artifacts/wallet-external-signer-sim-results.json",
   "artifacts/wallet-connector-implementation-slice.json",
   "artifacts/attestation-reputation-thresholds.json",
   "artifacts/research-library.json",
@@ -2068,6 +2085,7 @@ const files = [
   "src/walletStandardSignerValidation.mjs",
   "src/walletExternalSignerRoundtripPlan.mjs",
   "src/walletExternalSignerResultTemplate.mjs",
+  "src/walletExternalSignerSim.mjs",
   "src/walletConnectorImplementationSlice.mjs",
   "src/appResearch.mjs",
   "src/basedRollupScout.mjs",

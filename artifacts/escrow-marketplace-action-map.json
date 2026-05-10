@@ -1,14 +1,16 @@
 {
   "schema": "tn12-escrow-marketplace-action-map/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:16:33.540Z",
+  "generatedAt": "2026-05-10T14:00:23.463Z",
   "status": "escrow-action-map-ready",
   "summary": {
     "flows": 3,
     "actions": 5,
     "mappedActions": 0,
-    "blockedActions": 5,
-    "liveExternalSignerAccepted": false
+    "simValidatedActions": 4,
+    "blockedActions": 1,
+    "liveExternalSignerAccepted": false,
+    "simRoundtripPassed": true
   },
   "flows": [
     {
@@ -19,35 +21,35 @@
       "actions": [
         {
           "action": "release",
-          "status": "wallet-request-blocked",
+          "status": "sim-validated",
           "unsignedRequestId": "ureq-fda320a9",
           "walletStandardRequestId": "ureq-fda320a9-standard",
           "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-release.json",
           "reviewFingerprint": "92ffa8b1ad17f0fa1230370772c9ae11837162e6b86371e1e9f3df1e33617844",
           "blockers": [
-            "external signer accepted result missing"
+            "sim-validated only — live external signer still required for submission"
           ]
         },
         {
           "action": "timeout-refund",
-          "status": "wallet-request-blocked",
+          "status": "sim-validated",
           "unsignedRequestId": "ureq-f5845e00",
           "walletStandardRequestId": "ureq-f5845e00-standard",
           "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-refund.json",
           "reviewFingerprint": "480a5cd4539fca0e4e9c3d4a0aebe56723761beae7db35598a88dbd62e33e6b8",
           "blockers": [
-            "external signer accepted result missing"
+            "sim-validated only — live external signer still required for submission"
           ]
         },
         {
           "action": "mutual-cancel",
-          "status": "wallet-request-blocked",
+          "status": "sim-validated",
           "unsignedRequestId": "ureq-d12412d8",
           "walletStandardRequestId": "ureq-d12412d8-standard",
           "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
           "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
           "blockers": [
-            "external signer accepted result missing"
+            "sim-validated only — live external signer still required for submission"
           ]
         }
       ]
@@ -67,7 +69,7 @@
           "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
           "blockers": [
             "listing needs funding output",
-            "external signer accepted result missing"
+            "sim-validated only — live external signer still required for submission"
           ]
         }
       ]
@@ -80,21 +82,23 @@
       "actions": [
         {
           "action": "mutual-cancel",
-          "status": "wallet-request-blocked",
+          "status": "sim-validated",
           "unsignedRequestId": "ureq-d12412d8",
           "walletStandardRequestId": "ureq-d12412d8-standard",
           "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
           "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
           "blockers": [
-            "external signer accepted result missing"
+            "sim-validated only — live external signer still required for submission"
           ]
         }
       ]
     }
   ],
   "promotionRule": "An escrow action can become submit-ready only after it maps to a wallet-standard request, external signer validation accepts the return, and accepted virtual-chain replay observes the txid.",
+  "simNote": "4 action(s) sim-validated: protocol structure confirmed, SIGNED_NOT_BROADCAST. Live external signer required for full promotion.",
   "boundaries": [
     "This maps marketplace actions to existing wallet request candidates; it does not sign or broadcast.",
+    "sim-validated means local roundtrip simulation passed — not a live external wallet acceptance.",
     "The mapped templates are proof-lab templates, not fresh user custody for these fixture listings.",
     "Needs-funding listings remain blocked until a funded escrow output exists."
   ]

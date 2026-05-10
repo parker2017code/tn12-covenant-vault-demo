@@ -1,0 +1,446 @@
+{
+  "schema": "tn12-virtual-chain-live-app-state/v1",
+  "network": "testnet-12",
+  "generatedAt": "2026-05-10T13:24:09.777Z",
+  "status": "live-window-near-tip-no-checkpoint-overlap",
+  "appStatePromoted": false,
+  "summary": {
+    "liveAcceptedTransactions": 46,
+    "liveRollbackRows": 0,
+    "computeBudgetRows": 43,
+    "payloadTransactions": 3,
+    "matchedCheckpointTxids": 0,
+    "newTxids": 46,
+    "knownCheckpointSize": 34
+  },
+  "matchedKnownTxids": [],
+  "appStateRows": [
+    {
+      "txid": "9904c9f0d9f38709a1a23177011865e2e625e5049d1e84a17b92cba0041f315a",
+      "blockHash": "6bfb6f81c882975b4b05bf56745f9f76bedb3b0d1a7f48ea380c50431729d204",
+      "payloadBytes": 70,
+      "hasPayload": true,
+      "computeBudget": null,
+      "matchedCheckpoint": false,
+      "appStateLabel": "new-payload-tx"
+    },
+    {
+      "txid": "789546032789919ac67347e06144c04fb69ca182bee177f9b4c429343db38fac",
+      "blockHash": "4ab434d0e4391b313cd93cc303c722b21f5f2c80dfaba897ce6c0bd22848e521",
+      "payloadBytes": 70,
+      "hasPayload": true,
+      "computeBudget": null,
+      "matchedCheckpoint": false,
+      "appStateLabel": "new-payload-tx"
+    },
+    {
+      "txid": "8ab0829aded2640b2f466ada3228496cac32082b3a1bf98ae75ae9bb34a0fb0f",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 70,
+      "hasPayload": true,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "new-payload-tx"
+    },
+    {
+      "txid": "ff8755e2e60abcda5b0098f9c840131e71f39cdcc216bc0b454193eb97bc9654",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "f8b84f0d1c9dbf8429aa38f1ff6a547a1cced64efc279e80f758bc1762d2e080",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "ea76c83fe32514dac10298be40836ed24591661fe6fa804de48c90a41e681ac6",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "e2ed0c8beab9f1694966352cc7335b89a41f85d46d20c25b74122779430f7273",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "dc5b5b944ce5692906352f812b199ec45542dc1d10eef7751f0543b4b2297feb",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "da309e8432a25f76a8c95e0f4ededa23a1583e84d22893ef2babf8fb00dd3659",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "d19ab6b13323b877d5ba597f0616927df4a8600d0ac049cd9f81f7fa60190e31",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "cdb51fbd7a6fede7ac5c7a0efa8c0b6acc376f15313e5c3e6f280f3a2b743a98",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "c9e78232f44c19d37bee093bf6aada2b9312c8c20a98a162cbedb75afc15cc4b",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "c119a86517354b384b86759f87e7730e2c96b546c7e40eadc885ca1cc405f2a2",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "bfec5237f908c9f1f33f943dc7a0dd024e226a90ae5b87ac9ee4420648b4098f",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "bfe3e8c673820966e224ed53e09350e33c248039250cf7fb132e28be718fd431",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "bb3b68086b244c798d8f27c94fd23b3bf91b849cfefad91783e5e216a8e2c0c7",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "b9475d92cb667220795fcdb5041831698ab50cf02ab2e4205c0e23c0744978c8",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "b1391e19132b4c8337526bc5c360051754f622af29906ef8d595870c78a6b3af",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "ac775ff1708fb8682408fe2dd8fd86ac22c9a7177d2d3ad4812cf274758d769f",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "9de2432d4586fe719f965fa75da4ccfa0bbe33a43893a8edf8658bf8cd19a310",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "9d99f0348908788b0b741880a3bc116a225b70ca4cf08ae4107d956438452962",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "97652e402691757719256fa67d31ceeb4fc21f8ca7f6c8970b4093e915fa4fc2",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "92a5d4b8585e0f20d9298dce8ad05c8bc35edc0159be80d5051b9ad47d9d787d",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "7c76cdcb2773824fbe100eed552dc82de88e9161f3960e32724618e4d8178acc",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "7b6850006a3c4e9bea10472f0073ca1045ab9034cf48da5b8ab8993146eeacb2",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "774f2a9c25dfc35db99617240492f117b5a1c0b63969b16a8aa85908a0d5d789",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "766a6ac11420a284ff01c46bda8e27256ac1ba6b13eba45ec1f737d0296565ba",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "73de99b6287c3ed4a0be476cfe41499304573f05288c795f7e395688fb09e8e5",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "6bd1d8cb7e1969a4fee2b2ebf95c35fc953bd0b5fe534f9d0a3926f49e1a7f09",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "6b6d0ec2e3ff74a8ff0ac1f77884abb1a5c0eca97740e6b14adf3f977af98d9e",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "6400eb3254df18a7f456e4f91f0f3d8fb980313e4ab04afd673b7babe1482290",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "457f1a939d0a519a19d1828dbca8bcffc018168c1704d2f79ea3df93f54fe838",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "445dba671f4a447c8a45399f485bafc1c87c2a5738c539f1609f83e244aa816d",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "41099ffff06b7c149f5839e9935ec97a04d173af3ed3c6994d6851595abffa2f",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "3ae821b2acd6b9a393f06d9376449cf68b5f33065890b3fbf4837ac3b869d632",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "3a76d7ec6aa77d89c6ac55058fbd11fce9eb2e970f85a6fc7d0a728e7ee0b794",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "32be65c1e2b44f29cf0461c5c1f297c3091fb6be4aeab02de31f1faeab34febb",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "2c9696761917b1c9bca0cacca1a85cded46dd550f80f2a002886990ced10b63e",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "274c843a339a24beb036e44a85a2d2b65d34801e4bf55ac818c766343667f839",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "229b31d0e2bf1f7c65f13e3efddfebde3a4ce4d6edbf4eb3e617d1ddbf044158",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "1e375df4cda630cb6ca03c0377c0ba84f257891b933d8414286e6d00f63216a3",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "1e2f9420981780620cfe1cbdf34894308f31256c9168446f5fc825116ac8859f",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "1958832d6878fd46946f5def452409bcdc3fcb9508aa487408ac365c393a0f1e",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "166c08760d6a79fc905b6358c17abe373bf0c72e4ee1f0285d3545035eaa8033",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "1074e0c9ea04d5c5fc4ef03b1196ffb9f392d9906359af0b6aed087509a8fe81",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    },
+    {
+      "txid": "099c0d911180f67070b1808d81cfe1f593d732f829beeb638b77cb9e59244a33",
+      "blockHash": "87b438bd5244ce130aad89efd1b6e836e33dca2eace52f04af5cd62708079f29",
+      "payloadBytes": 0,
+      "hasPayload": false,
+      "computeBudget": 0,
+      "matchedCheckpoint": false,
+      "appStateLabel": "covenant-input-tx"
+    }
+  ],
+  "operationalStatus": {
+    "endpointReachable": true,
+    "getVirtualChainFromBlockV2": true,
+    "wasmModule": "virtual-chain-live-window-ready",
+    "forwardIndexingCapable": true,
+    "historicOverlapNote": "No proof txids in the live window — expected for near-tip queries against months-old accepted transactions. Forward indexing from current tip works."
+  },
+  "boundaries": [
+    "appStatePromoted=false when no checkpoint overlap — safe to read but does not advance the watermark.",
+    "Forward indexing from current sink is operational: new TN12 transactions will appear in live windows.",
+    "Historic proof txids require starting from a hash near their accepting block, which may be pruned on TN12.",
+    "This artifact replaces the 'virtual-chain SDK blocked' status — the local TN12 wasm build resolves it."
+  ]
+}

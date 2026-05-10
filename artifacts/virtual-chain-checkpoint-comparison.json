@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-checkpoint-comparison/v1",
   "network": "testnet-12",
-  "generatedAt": "2026-05-09T21:30:27.648Z",
+  "generatedAt": "2026-05-10T13:22:40.291Z",
   "status": "live-window-near-tip-no-checkpoint-overlap",
   "appStatePromoted": false,
   "summary": {

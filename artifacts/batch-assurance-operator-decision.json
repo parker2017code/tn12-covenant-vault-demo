@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-operator-decision/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T15:50:08.033Z",
+  "generatedAt": "2026-05-10T14:01:04.024Z",
   "campaignId": "kaspa-dev-docs-sprint",
   "status": "operator-hold-review",
   "selectedPath": "hold-review",

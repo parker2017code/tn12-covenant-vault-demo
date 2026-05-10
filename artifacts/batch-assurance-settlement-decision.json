@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-settlement-decision/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:13:56.879Z",
+  "generatedAt": "2026-05-10T14:01:03.720Z",
   "status": "settlement-decision-ready",
   "selectedPath": "release-review",
   "submitNow": false,
