@@ -79,6 +79,7 @@ import { buildWalletStandardRequests } from "../src/walletStandardRequests.mjs";
 import { buildWalletStandardSignerValidation } from "../src/walletStandardSignerValidation.mjs";
 import { buildWalletExternalSignerRoundtripPlan } from "../src/walletExternalSignerRoundtripPlan.mjs";
 import { buildWalletExternalSignerResultTemplate } from "../src/walletExternalSignerResultTemplate.mjs";
+import { buildExternalSignerPathResearch } from "../src/externalSignerPathResearch.mjs";
 import { buildWalletExternalSignerSim } from "../src/walletExternalSignerSim.mjs";
 import { buildWalletConnectorImplementationSlice } from "../src/walletConnectorImplementationSlice.mjs";
 import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
@@ -87,6 +88,7 @@ import { summarizeTn12WrpcEndpointProbe } from "../src/tn12WrpcEndpointProbe.mjs
 import { summarizeVirtualChainLiveWindow } from "../src/virtualChainLiveWindow.mjs";
 import { buildVirtualChainLiveReplayRows } from "../src/virtualChainLiveReplayRows.mjs";
 import { buildVirtualChainCheckpointComparison } from "../src/virtualChainCheckpointComparison.mjs";
+import { buildDurableReplayPromotionGuard } from "../src/durableReplayPromotionGuard.mjs";
 import { buildBatchAssuranceSettlementDecision } from "../src/batchAssuranceSettlementDecision.mjs";
 import { buildBatchAssuranceSubmitRunbook } from "../src/batchAssuranceSubmitRunbook.mjs";
 import { buildBatchAssuranceOperatorDecision } from "../src/batchAssuranceOperatorDecision.mjs";
@@ -486,8 +488,10 @@ const rebuiltNextTenExecutionStatus = buildNextTenExecutionStatus({
   signerValidation: JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8")),
   signerSim: JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-sim-results.json", import.meta.url), "utf8")),
   liveAppState: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-app-state.json", import.meta.url), "utf8")),
+  durableReplayGuard: JSON.parse(await readFile(new URL("../artifacts/durable-replay-promotion-guard.json", import.meta.url), "utf8")),
   submitLedger: JSON.parse(await readFile(new URL("../artifacts/wallet-connector-submit-ledger.json", import.meta.url), "utf8")),
   defiLoop: JSON.parse(await readFile(new URL("../artifacts/defi-v1-operator-loop.json", import.meta.url), "utf8")),
+  signerResearch: JSON.parse(await readFile(new URL("../artifacts/external-signer-path-research.json", import.meta.url), "utf8")),
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
 assert.equal(rebuiltNextTenExecutionStatus.status, "next-ten-execution-status-ready");
@@ -1460,6 +1464,28 @@ assert.equal(liveAppStateArtifact.appStatePromoted, true);
 assert.ok(liveAppStateArtifact.summary.matchedCheckpointTxids > 0);
 assert.ok(liveAppStateArtifact.summary.liveAcceptedTransactions > 0);
 assert.match(liveAppStateArtifact.boundaries.join(" "), /forward indexing/i);
+const durableReplayPromotionGuard = buildDurableReplayPromotionGuard({
+  checkpointIndex: checkpointFixture,
+  fixtureReplay: JSON.parse(await readFile(new URL("../artifacts/indexer-replay-run.json", import.meta.url), "utf8")),
+  liveReplayRows: liveReplayRowsArtifact,
+  liveAppState: liveAppStateArtifact,
+  rollbackTests: [{
+    id: "remove-stale-anchor-then-add-replacement",
+    before: ["0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a", "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"],
+    removedTxids: ["0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"],
+    added: ["synthetic-replacement-app-state-txid"],
+    expectedFinalTxids: ["34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e", "synthetic-replacement-app-state-txid"]
+  }],
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(durableReplayPromotionGuard.status, "durable-replay-promotion-guard-ready");
+assert.equal(durableReplayPromotionGuard.summary.promotionReady, true);
+assert.equal(durableReplayPromotionGuard.summary.rollbackMatchingReady, true);
+const durableReplayPromotionGuardArtifact = JSON.parse(await readFile(new URL("../artifacts/durable-replay-promotion-guard.json", import.meta.url), "utf8"));
+assert.equal(durableReplayPromotionGuardArtifact.status, "durable-replay-promotion-guard-ready");
+assert.equal(durableReplayPromotionGuardArtifact.summary.promotionReady, true);
+assert.equal(durableReplayPromotionGuardArtifact.summary.liveRollbackObserved, false);
+assert.match(durableReplayPromotionGuardArtifact.boundaries.join(" "), /locally tested/i);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -1661,6 +1687,20 @@ assert.ok(walletExternalSignerResultTemplate.results.some((row) =>
 const walletExternalSignerResultTemplateArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-result-template.json", import.meta.url), "utf8"));
 assert.equal(walletExternalSignerResultTemplateArtifact.status, "external-signer-result-template-ready");
 assert.equal(walletExternalSignerResultTemplateArtifact.results.length, 4);
+const externalSignerPathResearch = buildExternalSignerPathResearch({
+  roundtripPlan: walletExternalSignerRoundtripPlanArtifact,
+  resultTemplate: walletExternalSignerResultTemplateArtifact,
+  signerValidation: walletSignerValidationArtifact,
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(externalSignerPathResearch.status, "external-signer-path-ready-for-wallet-approval");
+assert.equal(externalSignerPathResearch.summary.userApprovalRequired, true);
+assert.equal(externalSignerPathResearch.requestChecklist.length, 2);
+assert.match(externalSignerPathResearch.acceptanceRule, /virtual-chain replay observes/);
+const externalSignerPathResearchArtifact = JSON.parse(await readFile(new URL("../artifacts/external-signer-path-research.json", import.meta.url), "utf8"));
+assert.equal(externalSignerPathResearchArtifact.status, "external-signer-path-ready-for-wallet-approval");
+assert.equal(externalSignerPathResearchArtifact.summary.userApprovalRequired, true);
+assert.ok(externalSignerPathResearchArtifact.sourceNotes.some((source) => /KasWare/.test(source.label)));
 const walletExternalSignerSimArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-sim-results.json", import.meta.url), "utf8"));
 assert.equal(walletExternalSignerSimArtifact.status, "sim-roundtrip-all-passed");
 assert.equal(walletExternalSignerSimArtifact.summary.passed, 4);
@@ -1885,6 +1925,7 @@ const files = [
   "scripts/read-virtual-chain-live-window.mjs",
   "scripts/build-virtual-chain-live-replay-rows.mjs",
   "scripts/build-virtual-chain-checkpoint-comparison.mjs",
+  "scripts/build-durable-replay-promotion-guard.mjs",
   "scripts/submit-signed-draft.mjs",
   "scripts/submit-signed-draft-wrpc.mjs",
   "scripts/plan-transactions.mjs",
@@ -1905,6 +1946,7 @@ const files = [
   "scripts/build-wallet-standard-signer-validation.mjs",
   "scripts/build-wallet-external-signer-roundtrip-plan.mjs",
   "scripts/build-wallet-external-signer-result-template.mjs",
+  "scripts/build-external-signer-path-research.mjs",
   "scripts/build-wallet-external-signer-sim.mjs",
   "scripts/build-wallet-connector-implementation-slice.mjs",
   "scripts/build-research-library.mjs",
@@ -2022,6 +2064,7 @@ const files = [
   "artifacts/wallet-standard-signer-validation.json",
   "artifacts/wallet-external-signer-roundtrip-plan.json",
   "artifacts/wallet-external-signer-result-template.json",
+  "artifacts/external-signer-path-research.json",
   "artifacts/wallet-external-signer-sim-results.json",
   "artifacts/wallet-connector-implementation-slice.json",
   "artifacts/attestation-reputation-thresholds.json",
@@ -2079,6 +2122,7 @@ const files = [
   "artifacts/virtual-chain-live-window.json",
   "artifacts/virtual-chain-live-replay-rows.json",
   "artifacts/virtual-chain-checkpoint-comparison.json",
+  "artifacts/durable-replay-promotion-guard.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
   "artifacts/access-pass-planner.json",
@@ -2175,6 +2219,7 @@ const files = [
   "src/virtualChainLiveWindow.mjs",
   "src/virtualChainLiveReplayRows.mjs",
   "src/virtualChainCheckpointComparison.mjs",
+  "src/durableReplayPromotionGuard.mjs",
   "src/signalPayload.mjs",
   "src/attestationSignal.mjs",
   "src/attestationReputationThresholds.mjs",
@@ -2194,6 +2239,7 @@ const files = [
   "src/walletStandardSignerValidation.mjs",
   "src/walletExternalSignerRoundtripPlan.mjs",
   "src/walletExternalSignerResultTemplate.mjs",
+  "src/externalSignerPathResearch.mjs",
   "src/walletExternalSignerSim.mjs",
   "src/walletConnectorImplementationSlice.mjs",
   "src/appResearch.mjs",

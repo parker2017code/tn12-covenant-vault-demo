@@ -9,8 +9,10 @@ const status = buildNextTenExecutionStatus({
   signerValidation: await readJson("artifacts/wallet-standard-signer-validation.json"),
   signerSim: await readJson("artifacts/wallet-external-signer-sim-results.json"),
   liveAppState: await readJson("artifacts/virtual-chain-live-app-state.json"),
+  durableReplayGuard: await readJson("artifacts/durable-replay-promotion-guard.json"),
   submitLedger: await readJson("artifacts/wallet-connector-submit-ledger.json"),
-  defiLoop: await readJson("artifacts/defi-v1-operator-loop.json")
+  defiLoop: await readJson("artifacts/defi-v1-operator-loop.json"),
+  signerResearch: await readJson("artifacts/external-signer-path-research.json")
 });
 
 await mkdir("artifacts", { recursive: true });

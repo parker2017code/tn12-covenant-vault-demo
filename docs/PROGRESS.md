@@ -122,6 +122,8 @@ Done now:
 - Escrow, vault, and assurance proof spends: seven accepted TN12 proof spends, guarded by `npm run check:tn12`.
 - Payload app state: 30 accepted TN12 JSON wRPC payload events, including four live DeFi v1 receipts across three wallets, with REST no-payload evidence preserved as historical.
 - DeFi receipt replay guard: `npm run defi:receipt-guard` writes `artifacts/defi-receipt-replay-guard.json`, covering four accepted multi-wallet DeFi v1 receipts plus duplicate/stale negative promotion checks.
+- Durable replay promotion guard: `npm run indexer:durable-promotion-guard` writes `artifacts/durable-replay-promotion-guard.json`. It currently passes deterministic fixture replay, checkpoint-overlap live replay, duplicate-free live txids, and local rollback matching. It has not yet observed a live TN12 removed-block rollback window.
+- External signer path research: `npm run wallet:external-signer-research` writes `artifacts/external-signer-path-research.json`, naming KasWare as the browser approval candidate and Kaspa external signing / Wallet API as fallback references. Real user approval is still required.
 - Browser/repo control surface: submit registry, wallet-review readiness, wallet-connector spec, submit-result ledger, checkpointed accepted index, and operator plan.
 - Canonical mainnet readiness summary: `MAINNET_READINESS.md` centralizes the current deployment percentage, live TN12 evidence, repo-only surfaces, mock-only surfaces, and remaining external-signer / replay / settlement blockers.
 - Durable indexer storage schema: `npm run indexer:schema` writes `artifacts/indexer-storage-schema.json`.
@@ -135,7 +137,7 @@ Done now:
 - Batch-assurance settlement drafts: `npm run campaign:settlement-drafts` writes `artifacts/batch-assurance-settlement-drafts.json`, one signed release draft, and three signed refund drafts. These are mutually exclusive P2PK pledge-output spends and are not broadcast.
 - Access-pass gates and treasury spend-cap gates: `npm run access:gates`, `npm run access:negative`, `npm run treasury:spend-caps`, and `npm run treasury:negative` now keep the new guardrails and edge cases reproducible.
 - Next-work queue: `npm run project:queue` records the ordered next 30 tasks; the top five now start with wallet connector submit, durable virtual-chain indexer, batch-assurance settlement-path review/submit, escrow marketplace demo, and attestation thresholds.
-- Next-ten status: `npm run project:next-ten-status` records the current one-sweep execution slice. Completed local tasks are durable live-indexer promotion, multi-wallet receipt UI, wallet-submit ledger updates, duplicate/stale receipt replay guard, DeFi v1 operator runbook, and main dashboard cleanup. External signer receipt/spend tasks remain blocked on real wallet signature.
+- Next-ten status: `npm run project:next-ten-status` records the current one-sweep execution slice. Completed local tasks are durable replay promotion guard, multi-wallet receipt UI, wallet-submit ledger updates, duplicate/stale receipt replay guard, DeFi v1 operator runbook, and main dashboard cleanup. External signer receipt/spend tasks remain blocked on real wallet signature.
 - Covenant adversarial map: `npm run covenant:adversarial` records local selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and script-mapping checks for the seven accepted proof paths.
 - Role-separated fixture lane: `npm run fixtures:roles` and `npm run compile:roles` create the clean constructor/script base for the next accepted-proof pass without mutating historical proof artifacts.
 - Role-separated funding: accepted TN12 transaction `ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0` created fresh role-separated vault, assurance, and escrow P2SH outputs.
@@ -150,19 +152,19 @@ WIP now:
 | Blocker | What I do | What you do |
 |---|---|---|
 | External signer roundtrip | Build the live wallet connector and validate accepted replay | Only provide wallet access or a signer choice if you want a specific live path tested |
-| Virtual-chain promotion | Test the live TN12 reader and prove checkpoint overlap plus reducer matching before promotion | Only provide a start hash or replay window if you want a specific promotion test |
+| Live removed-block rollback evidence | Capture a live TN12 window with removed blocks when available | Only provide a required replay window if you want one targeted |
 | Batch-assurance settle path | Pick and exercise one mutually exclusive settlement path end to end | Only choose release vs refund if you want that lane submitted |
 
 - Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package, connector request bundle, dry-run adapter review sessions, submit-result ledger, result validator, external-signer gap artifact, unsigned request templates, wallet-standard mapping, four wallet-standard request candidates, and KasSigner/KasSee reference boundary are built; a real external signer round trip is still needed before no-local-key signing is claimed.
 - Batch-assurance settlement-path review from amount-matched pledge outputs. Accepted 45/35/20 TKAS pledge outputs are imported, release/refund drafts are signed, and the remaining decision is which mutually exclusive path to review/submit.
-- Durable indexer node/RPC replay beyond the generated fixture-backed replay. The reader/rollback contract and bounded adapter artifact exist; the live checkpoint overlap now works, but deterministic reducer replay and promotion still need to be proven against a configured hosted TN12 virtual-chain endpoint.
+- Durable indexer node/RPC replay beyond the generated fixture-backed replay. The reader/rollback contract, bounded adapter artifact, checkpoint-overlap live replay, deterministic fixture replay, and local rollback matching now pass. A live removed-block rollback window remains useful evidence when TN12 provides one.
 - Reputation threshold and signer-provenance hardening for attestation-fed flows. Signature review, active provenance, stale/revoked/conflict states, and quorum checks are encoded in `npm run attestation:reputation`; `npm run prediction:hedge` now consumes that artifact and keeps current accepted signals threshold-blocked until the gate passes.
 
 Next actions:
 
 1. Wire the wallet-submit package into a live wallet connector.
 2. Review one signed batch-assurance release/refund settlement path from matched pledge outputs and do not submit both mutually exclusive spends.
-3. Promote the bounded durable virtual-chain reader from overlap to deterministic reducer replay and UI health using the generated replay rows.
+3. Capture a live removed-block rollback window when available and compare it against the durable replay promotion guard.
 4. Use the prediction/hedge threshold-consumer pattern for any future signal-consuming dashboard before signals affect more app lanes.
 5. Fund fresh expendable role-separated outputs before any invalid-candidate TN12 rejection submission.
 

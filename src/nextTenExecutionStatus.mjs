@@ -5,21 +5,26 @@ export function buildNextTenExecutionStatus({
   signerValidation = {},
   signerSim = {},
   liveAppState = {},
+  durableReplayGuard = {},
   submitLedger = {},
   defiLoop = {},
+  signerResearch = {},
   generatedAt = new Date().toISOString()
 } = {}) {
+  const durablePromotionReady = durableReplayGuard.summary?.promotionReady === true;
+  const signerPathReady = signerResearch.status === "external-signer-path-ready-for-wallet-approval"
+    || signerResearch.status === "external-signer-path-accepted";
   const tasks = [
     task("external-signer-defi-receipt", "External signer roundtrip for one DeFi receipt", 5, signerTaskReady(walletRoundtrip, signerValidation, "payload-receipt")),
     task("external-signer-covenant-spend", "External signer roundtrip for one covenant spend", 4, signerTaskReady(walletRoundtrip, signerValidation, "covenant-spend")),
-    task("durable-live-indexer-promotion", "Durable live indexer promotion", 5, liveAppState.appStatePromoted ? "completed" : "ready-not-promoted"),
+    task("durable-live-indexer-promotion", "Durable live indexer promotion", 5, durablePromotionReady ? "completed" : liveAppState.appStatePromoted ? "overlap-ready-needs-promotion-guard" : "ready-not-promoted"),
     task("multi-wallet-receipt-ui", "Receipt app v1 UI: multi-wallet receipts panel", 3, Number(checkpoint.summary?.payloadEvents || 0) >= 30 ? "completed" : "needs-receipts"),
     task("wallet-submit-ledger-new-receipts", "Wallet submit result ledger for the new receipts", 2, Number(submitLedger.summary?.payloadRows || 0) >= 29 ? "completed" : "needs-ledger-refresh"),
     task("fresh-covenant-wallet-standard-flow", "Fresh escrow/covenant spend with current wallet-standard flow", 4, Number(walletRoundtrip.summary?.computeBudgetRequests || 0) >= 1 ? "prepared-not-live-signed" : "needs-compute-budget-request"),
     task("negative-replay-promotion-tests", "Negative replay/promotion tests for duplicate/stale receipts", 3, receiptGuard.status === "defi-receipt-replay-guard-ready" ? "completed" : "needs-negative-guard"),
     task("defi-v1-operator-runbook", "Batch operator runbook for DeFi v1", 2, defiLoop.status === "repeatable-live-receipt-loop-ready" ? "completed" : "needs-loop-artifact"),
     task("main-dashboard-cleanup", "Main app dashboard cleanup", 3, Number(checkpoint.summary?.total || 0) >= 42 ? "completed" : "needs-dashboard-counts"),
-    task("ci-pages-verification", "Commit CI/Pages verification after each major slice", 2, "local-gates-ready")
+    task("ci-pages-verification", "Commit CI/Pages verification after each major slice", 2, signerPathReady ? "local-gates-ready" : "needs-signer-research")
   ];
   const completed = tasks.filter((item) => item.status === "completed").length;
   const blocked = tasks.filter((item) => /blocked|not-live-signed|ready-not-promoted/.test(item.status)).length;

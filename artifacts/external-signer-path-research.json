@@ -1,0 +1,85 @@
+{
+  "schema": "tn12-external-signer-path-research/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T21:43:25.252Z",
+  "status": "external-signer-path-ready-for-wallet-approval",
+  "summary": {
+    "requestRows": 4,
+    "templates": 4,
+    "recommendedFirstPass": 2,
+    "pendingExternalSigner": 4,
+    "liveExternalSignerAccepted": false,
+    "userApprovalRequired": true
+  },
+  "recommendedPath": {
+    "first": "ureq-fcfdf1df-standard",
+    "second": "ureq-d12412d8-standard",
+    "browserWalletSurface": "KasWare window.kasware flow if it can return or submit the exact reviewed transaction",
+    "nonBrowserFallback": "Kaspa wallet API / PSKT-style handoff if browser wallet cannot preserve the current transaction fields"
+  },
+  "requestChecklist": [
+    {
+      "requestId": "ureq-fcfdf1df-standard",
+      "kind": "payload-receipt",
+      "reviewFingerprint": "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4",
+      "expectedTransactionIdAfterSigning": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "payloadBytes": 154,
+      "computeBudgetInputs": 0,
+      "requiredPreservation": [
+        "network",
+        "version",
+        "lockTime",
+        "subnetworkId",
+        "previousOutpoints",
+        "sequences",
+        "sigOpCount fields when present",
+        "computeBudget fields when present",
+        "outputs",
+        "payload bytes"
+      ]
+    },
+    {
+      "requestId": "ureq-d12412d8-standard",
+      "kind": "covenant-spend",
+      "reviewFingerprint": "3c94c9091718fe8ba5461322e554b9764cf032d6f0a80fb74536a7255fea8353",
+      "expectedTransactionIdAfterSigning": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
+      "payloadBytes": 0,
+      "computeBudgetInputs": 1,
+      "requiredPreservation": [
+        "network",
+        "version",
+        "lockTime",
+        "subnetworkId",
+        "previousOutpoints",
+        "sequences",
+        "sigOpCount fields when present",
+        "computeBudget fields when present",
+        "outputs",
+        "payload bytes"
+      ]
+    }
+  ],
+  "sourceNotes": [
+    {
+      "label": "KasWare integration docs",
+      "url": "https://docs.kasware.xyz/wallet/dev-base/kaspa",
+      "relevance": "Browser injection can request accounts and expose Kaspa signing methods, but the API is wallet-specific and may change."
+    },
+    {
+      "label": "Kaspa signing docs",
+      "url": "https://kaspa-mdbook.aspectron.com/transactions/signing.html",
+      "relevance": "External signing can be modeled as signing transaction/input hashes and applying signatures back to the transaction."
+    },
+    {
+      "label": "Kaspa Wallet API docs",
+      "url": "https://kaspa.aspectron.org/wallets/wallet-api/index.html",
+      "relevance": "A non-browser wallet API route can be used as a fallback if extension signing cannot preserve exact tx fields."
+    }
+  ],
+  "acceptanceRule": "Do not mark external signing complete until a real wallet returns the signed transaction for one recommended request, wallet-standard validation accepts it, submit/result validation records it, and virtual-chain replay observes the accepted txid.",
+  "boundaries": [
+    "This artifact is research and orchestration; it does not connect to a browser or sign.",
+    "OpenClaw/KasWare is useful only if it produces a real user-approved signature or submit result.",
+    "Local signer simulation remains separate from no-local-key wallet evidence."
+  ]
+}

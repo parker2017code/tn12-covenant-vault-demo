@@ -9,10 +9,12 @@ What changed in this pass:
 - Batch-assurance operator decision is release-first review, with external signer acceptance still missing.
 - Mainnet readiness docs now separate proof-core progress from deployment readiness.
 - The current next-ten execution status is artifact-backed: 6/10 local tasks complete, duplicate/stale DeFi receipt replay guard ready, and external signer tasks still blocked on a real wallet signature.
+- Durable replay promotion guard now passes deterministic fixture replay, live checkpoint overlap, duplicate-free live txids, and local rollback matching. Live removed-block rollback evidence is still useful when available.
+- External signer path research is now artifact-backed; real user approval remains required.
 
 Current blockers:
 - Live external signer round trip
-- Live replay promotion with deterministic reducer / rollback matching
+- Live removed-block rollback evidence
 - One accepted batch-assurance settlement path
 - Escrow marketplace demo
 - Wallet/indexer hardening
@@ -28,6 +30,8 @@ Files to read first:
 - `docs/PROGRESS.md`
 - `docs/ROADMAP_STATE.md`
 - `artifacts/virtual-chain-live-app-state.json`
+- `artifacts/durable-replay-promotion-guard.json`
+- `artifacts/external-signer-path-research.json`
 - `artifacts/next-ten-execution-status.json`
 - `artifacts/defi-receipt-replay-guard.json`
 - `artifacts/batch-assurance-operator-decision.json`

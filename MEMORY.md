@@ -26,6 +26,8 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Project next-work queue gate: `npm run project:queue`
 - Project next-ten execution gates: `npm run project:next-ten` and `npm run project:next-ten-status`
 - DeFi receipt replay guard gate: `npm run defi:receipt-guard`
+- Durable replay promotion guard gate: `npm run indexer:durable-promotion-guard`
+- External signer path research gate: `npm run wallet:external-signer-research`
 - Durable indexer schema/replay gates: `npm run indexer:schema` and `npm run indexer:replay`
 - Wallet connector request gate: `npm run wallet:connector-requests`
 - Wallet connector adapter dry-run gate: `npm run wallet:adapter-run`
@@ -83,11 +85,13 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 - Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order.
 - Use `npm run project:next-ten-status` / `artifacts/next-ten-execution-status.json` for the current 10-task execution slice. It records 6/10 locally completed tasks, 18% realized local-slice gain, and keeps the live external-signer tasks blocked until a real wallet signature returns.
 - Use `npm run defi:receipt-guard` / `artifacts/defi-receipt-replay-guard.json` for the four accepted multi-wallet DeFi v1 receipts plus duplicate/stale negative promotion checks.
+- Use `npm run indexer:durable-promotion-guard` / `artifacts/durable-replay-promotion-guard.json` before treating live replay as promoted. It currently passes deterministic fixture replay, live checkpoint overlap, duplicate-free live txids, and local rollback matching; no live removed-block rollback window has been observed yet.
+- Use `npm run wallet:external-signer-research` / `artifacts/external-signer-path-research.json` for the signer path. It records KasWare as the browser approval candidate and Kaspa external signing / Wallet API as fallback references, but still requires real user approval before no-local-key signing is claimed.
 - **Adversarial suite COMPLETE**: 13 cases TN12-rejected — wrong-signer (3), wrong-selector (3), wrong-output-lock (3), wrong-output-amount (3), single-party-cancel (1). All in `artifacts/adversarial/`.
 - **Claude Code infrastructure in place**: `CLAUDE.md` (lean, 23 lines), `.claude/settings.json` (deny `--submit` + protect `.local/`), hook at `.claude/hooks/check-submit-guard.sh`, slash commands `/verify`, `/next`, `/adversarial`.
 - **Remaining open blockers** (priority order):
   1. External signer roundtrip — 4 requests in `artifacts/wallet-external-signer-roundtrip-plan.json`, none through a real signer.
-  2. Virtual-chain live indexer — blocked on `kaspa-wasm 1.1.1-toc.1` (no pip, no wasm port). REST reads still work.
+  2. Live removed-block rollback evidence — local rollback matching passes, but no live TN12 removed-block window has been captured.
 - Batch-assurance settlement CLOSED: `4d84472e...` at blue score 7413626.
 - Escrow mutual cancel is accepted through the version-1 compute-budget path. REST submit for v1 txs requires both `sigOpCount: 0` and `computeBudget: 30`.
 

@@ -1,0 +1,70 @@
+{
+  "schema": "tn12-durable-replay-promotion-guard/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T21:43:25.638Z",
+  "status": "durable-replay-promotion-guard-ready",
+  "summary": {
+    "checkpointTxids": 40,
+    "fixtureReplayRecords": 42,
+    "fixtureReplayMismatches": 0,
+    "liveAcceptedTransactions": 13958,
+    "matchedCheckpointTxids": 1,
+    "rollbackRows": 0,
+    "duplicateLiveTxids": 0,
+    "rollbackTests": 2,
+    "deterministicReducerReplay": true,
+    "liveOverlapReady": true,
+    "duplicateFree": true,
+    "rollbackMatchingReady": true,
+    "liveRollbackObserved": false,
+    "promotionReady": true
+  },
+  "matchedCheckpointTxids": [
+    "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"
+  ],
+  "duplicateLiveTxids": [],
+  "rollbackReviews": [
+    {
+      "id": "remove-stale-anchor-then-add-replacement",
+      "removedTxids": [
+        "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"
+      ],
+      "addedTxids": [
+        "synthetic-replacement-app-state-txid"
+      ],
+      "finalTxids": [
+        "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+        "synthetic-replacement-app-state-txid"
+      ],
+      "expectedFinalTxids": [
+        "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+        "synthetic-replacement-app-state-txid"
+      ],
+      "status": "rollback-match-ready"
+    },
+    {
+      "id": "remove-none-preserves-order",
+      "removedTxids": [],
+      "addedTxids": [
+        "synthetic-new-live-txid"
+      ],
+      "finalTxids": [
+        "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+        "synthetic-new-live-txid"
+      ],
+      "expectedFinalTxids": [
+        "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+        "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+        "synthetic-new-live-txid"
+      ],
+      "status": "rollback-match-ready"
+    }
+  ],
+  "promotionRule": "Promote accepted app state only when fixture replay is deterministic, live replay overlaps a known checkpoint, duplicate txids are absent, and rollback matching has passed.",
+  "boundaries": [
+    "This is a promotion guard over existing replay artifacts; it does not fetch a new live window.",
+    "Rollback matching is locally tested here. A future live window with removed blocks should be recorded separately when TN12 provides one.",
+    "External wallet signing remains a separate blocker."
+  ]
+}
