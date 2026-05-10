@@ -1,0 +1,51 @@
+{
+  "schema": "tn12-integration-test-results/v1",
+  "generatedAt": "2026-05-10T17:39:29.139Z",
+  "network": "kaspa-testnet-12",
+  "endpoint": "https://api-tn12.kaspa.org",
+  "tests": [
+    {
+      "id": "endpoint-online",
+      "endpoint": "https://api-tn12.kaspa.org",
+      "status": "fail",
+      "httpStatus": 404
+    },
+    {
+      "id": "escrow-utxo-live",
+      "txid": "64b68f1cc61acc11",
+      "status": "pass",
+      "accepted": true,
+      "blueScore": 8055346
+    },
+    {
+      "id": "batch-funding-ready",
+      "status": "pass",
+      "signed": true,
+      "drafted": true,
+      "note": "Draft ready for submission on-chain"
+    },
+    {
+      "id": "wallet-submit-ready",
+      "status": "pass",
+      "packageStatus": "wallet-submit-package-ready",
+      "hasIntents": true,
+      "intentCount": 47
+    },
+    {
+      "id": "negative-test-coverage",
+      "status": "pass",
+      "escrowNegativeCases": {
+        "total": 4,
+        "correctlyRejected": 4,
+        "rejectionRate": "100%"
+      }
+    }
+  ],
+  "summary": {
+    "totalTests": 5,
+    "passed": 4,
+    "pending": 0,
+    "failed": 1,
+    "readyForLiveSubmission": false
+  }
+}
