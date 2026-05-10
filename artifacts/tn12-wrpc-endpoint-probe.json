@@ -1,52 +1,55 @@
 {
   "schema": "tn12-wrpc-endpoint-probe/v1",
-  "generatedAt": "2026-05-10T15:55:57.615Z",
-  "status": "tn12-wrpc-endpoint-probe-review",
+  "generatedAt": "2026-05-10T16:13:06.042Z",
+  "status": "tn12-wrpc-endpoint-probe-ready",
   "endpoint": {
-    "url": "",
-    "encoding": "json",
+    "url": "ws://tn12-node.kaspa.com:17210",
+    "encoding": "borsh",
     "requestedNetworkId": "testnet-12"
   },
   "checks": [
     {
       "id": "endpoint-reachable",
-      "pass": false,
+      "pass": true,
       "detail": "getInfo returned from the configured endpoint"
     },
     {
       "id": "server-synced",
-      "pass": false,
+      "pass": true,
       "detail": "endpoint reports isSynced=true"
     },
     {
       "id": "utxo-indexed",
-      "pass": false,
+      "pass": true,
       "detail": "endpoint reports isUtxoIndexed=true"
     },
     {
       "id": "network-matches",
-      "pass": false,
+      "pass": true,
       "detail": "current network and DAG info match TN12"
     },
     {
       "id": "virtual-chain-base-ready",
-      "pass": false,
+      "pass": true,
       "detail": "DAG info has virtual DAA score and virtual parents"
     }
   ],
   "observed": {
-    "serverVersion": "",
-    "mempoolSize": "",
-    "currentNetwork": "",
-    "dagNetwork": "",
-    "blockCount": "",
-    "headerCount": "",
-    "virtualDaaScore": "",
-    "virtualParentHashes": [],
-    "sink": ""
+    "serverVersion": "1.1.1-toc.1",
+    "mempoolSize": "10",
+    "currentNetwork": "testnet",
+    "dagNetwork": "testnet-12",
+    "blockCount": "1176332",
+    "headerCount": "1176332",
+    "virtualDaaScore": "8192298",
+    "virtualParentHashes": [
+      "eef93c481a757eefcc06cb7308aa36379d524ed53adc161be5b93dee5c29cb01",
+      "53bb17d1aa761f55d66191496e224d5eb85b2c14079bf7769ac9597c279b94d3"
+    ],
+    "sink": "eef93c481a757eefcc06cb7308aa36379d524ed53adc161be5b93dee5c29cb01"
   },
   "rpcCaveats": {
-    "serverInfoOk": false,
+    "serverInfoOk": true,
     "serverInfoError": "",
     "note": "getServerInfo may fail against this public endpoint while getInfo, getCurrentNetwork, and getBlockDagInfo are still usable."
   },

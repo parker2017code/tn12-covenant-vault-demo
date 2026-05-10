@@ -1,11 +1,11 @@
 {
   "schema": "tn12-virtual-chain-endpoint-runbook/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:56:37.620Z",
+  "generatedAt": "2026-05-10T16:13:06.628Z",
   "status": "endpoint-runbook-live-tested-no-promotion",
   "summary": {
-    "endpointConfigured": false,
-    "blockingChecks": 1,
+    "endpointConfigured": true,
+    "blockingChecks": 0,
     "localNodeRequired": false,
     "fixtureReplayCompatible": true,
     "probeReady": true,
@@ -29,35 +29,15 @@
   ],
   "promotionRule": "A transaction becomes app state only after the virtual-chain window reports the accepted txid and the reducer matches payload or output rules.",
   "latestLiveEvidence": {
-    "endpoint": "ws://65.108.107.30:18210",
+    "endpoint": "ws://tn12-node.kaspa.com:17210",
     "serverVersion": "1.1.1-toc.1",
-    "virtualDaaScore": "7509992",
+    "virtualDaaScore": "8192298",
     "acceptedTransactions": 46,
     "payloadTransactions": 3,
     "computeBudgetInputs": 43,
     "rollbackRows": 0,
     "matchedCheckpointRows": 0,
-    "decision": "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it.",
-    "subscriptionAttempted": true,
-    "subscriptionResult": "protocol-mismatch-installed-kaspa-wasm-not-compatible-with-tn12-node",
-    "getVirtualChainFromBlockV2Available": false,
-    "installedKaspaWasmVersion": "0.13.x",
-    "requiredVersion": "1.1.1-toc.1",
-    "availableAlternatives": [
-      "Build local kaspa-wasm 1.1.1-toc.1 from rusty-kaspa-tn12-inspect",
-      "Install kaspa-python-sdk v1.1.0 which exposes GetVirtualChainFromBlockV2",
-      "Use REST API for accepted tx reads (current working path)"
-    ],
-    "batchAssuranceReleaseVerifiedViaRest": true,
-    "batchAssuranceReleaseTxid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
-    "batchAssuranceReleaseBlueScore": 7413626,
-    "updatedAt": "2026-05-09T22:03:00.233Z"
+    "decision": "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it."
   },
-  "blocking": [
-    {
-      "id": "endpoint-configured",
-      "pass": false,
-      "detail": "Set TN12_VIRTUAL_CHAIN_RPC_URL before live reads."
-    }
-  ]
+  "blocking": []
 }
