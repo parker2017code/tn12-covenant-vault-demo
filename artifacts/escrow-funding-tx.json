@@ -131,15 +131,17 @@
       ],
       "outputs": [
         {
+          "amount": "100000000",
           "scriptPublicKey": {
             "version": 0,
-            "scriptPublicKey": ""
+            "scriptPublicKey": "aa20e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd187"
           }
         },
         {
+          "amount": "97399990000",
           "scriptPublicKey": {
             "version": 0,
-            "scriptPublicKey": ""
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
           }
         }
       ],
