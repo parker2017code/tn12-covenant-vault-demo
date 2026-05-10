@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-10T20:04:37.418Z",
+  "fetchedAt": "2026-05-10T20:40:33.814Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -11,9 +11,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 39,
+    "recordCount": 40,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 8199289,
+    "maxAcceptingBlockBlueScore": 8210235,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -26,6 +26,7 @@
       "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
       "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
       "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
       "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
       "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
       "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
@@ -58,12 +59,12 @@
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 39,
+    "total": 40,
     "proofs": 9,
-    "payloadEvents": 27,
+    "payloadEvents": 28,
     "outputEvidence": 3,
-    "accepted": 39,
-    "matched": 39,
+    "accepted": 40,
+    "matched": 40,
     "mismatches": 0,
     "lanes": [
       {
@@ -164,9 +165,9 @@
       },
       {
         "lane": "order-receipt",
-        "total": 4,
-        "accepted": 4,
-        "matched": 4
+        "total": 5,
+        "accepted": 5,
+        "matched": 5
       },
       {
         "lane": "prediction-update",
@@ -511,6 +512,55 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "order-receipt",
+      "label": "DeFi v1 repeat receipt",
+      "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 8210235,
+      "acceptingBlockTime": 1778444324427,
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+      "evidencePath": "artifacts/payload-defi-v1-repeat-receipt-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303032222c2276616c7565223a2270616964222c226e6f7465223a22526570656174206c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2063757272656e74206368616e6765205554584f227d",
+        "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303032222c2276616c7565223a2270616964222c226e6f7465223a22526570656174206c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2063757272656e74206368616e6765205554584f227d",
+        "matches": true,
+        "bytes": 150,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "order-receipt",
+            "subject": "defi-v1-live-receipt-002",
+            "value": "paid",
+            "note": "Repeat live funded TN12 DeFi v1 receipt from current change UTXO"
+          },
+          "encoded": {
+            "bytes": 150,
+            "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303032222c2276616c7565223a2270616964222c226e6f7465223a22526570656174206c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2063757272656e74206368616e6765205554584f227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd"
     },
     {
       "kind": "payload-event",

@@ -17,7 +17,7 @@ When you ask how complete the project is, the percentage should be read as mainn
 | Escrow mutual cancel | `Escrow.sil` | `TN12_ACCEPTED` | see `artifacts/proof-evidence.json` |
 | Role-separated positive paths (all 7) | all contracts | `TN12_ACCEPTED` | see `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `AssurancePledge.sil` × 3 | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
-| 27 payload events (invoice, DeFi v1 live receipt, access-pass, auction, attestation, agent, etc.) | payload tx | `TN12_ACCEPTED` | see `fixtures/PayloadEventEvidence.json` |
+| 28 payload events (invoice, repeatable DeFi v1 live receipts, access-pass, auction, attestation, agent, etc.) | payload tx | `TN12_ACCEPTED` | see `fixtures/PayloadEventEvidence.json` |
 | Adversarial rejection — wrong-signer (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
 | Adversarial rejection — wrong-selector (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |
 | Adversarial rejection — wrong-output-lock (3 cases) | all 3 contracts | `TN12_REJECTED` | see `artifacts/adversarial/adversarial-summary.json` |

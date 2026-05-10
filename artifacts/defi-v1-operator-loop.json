@@ -1,0 +1,69 @@
+{
+  "schema": "tn12-defi-v1-operator-loop/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T20:31:20.489Z",
+  "status": "repeatable-live-receipt-loop-ready",
+  "wallet": {
+    "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+    "localKeyPath": ".local/tn12-defi-v1-wallet.json",
+    "boundary": "Local testnet wallet signing only; this is not proof of browser wallet or external signer readiness."
+  },
+  "receipts": [
+    {
+      "id": "first-live-receipt",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "subject": "defi-v1-live-receipt-001",
+      "value": "paid",
+      "accepted": true,
+      "payloadMatches": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 8199289
+    },
+    {
+      "id": "repeat-live-receipt",
+      "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "subject": "defi-v1-live-receipt-002",
+      "value": "paid",
+      "accepted": true,
+      "payloadMatches": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 8210235
+    }
+  ],
+  "staleOutpointGuards": [
+    {
+      "id": "initial-funding-spent",
+      "txid": "b05a3849276e9dcc3c5357d044f9d048c806a7b1237fd0e93ff5809203e6a236",
+      "outputIndex": 0,
+      "amountTkas": 10000,
+      "consumedBy": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "consumed": true
+    },
+    {
+      "id": "first-change-spent",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "outputIndex": 1,
+      "amountTkas": 9998.99995,
+      "consumedBy": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "consumed": true
+    }
+  ],
+  "currentSpendableOutpoint": {
+    "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+    "outputIndex": 1,
+    "amountTkas": 9997.9999,
+    "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+    "spendable": true
+  },
+  "commands": {
+    "fetchCurrentUtxo": "TN12_ADDRESS=<wallet-address> OUTPOINT_PATH=artifacts/tn12-defi-v1-current-outpoint.json UTXOS_PATH=artifacts/tn12-defi-v1-current-utxos.json node scripts/fetch-funded-utxos.mjs",
+    "buildNextReceipt": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa FUNDING_OUTPOINT=artifacts/tn12-defi-v1-current-outpoint.json TN12_WALLET=.local/tn12-defi-v1-wallet.json OUT=artifacts/signed-drafts/<next-receipt>.json AMOUNT_TKAS=1 SIGNAL_KIND=order-receipt SIGNAL_SUBJECT=<subject> SIGNAL_VALUE=paid SIGNAL_NOTE=<note> node scripts/build-signed-payload-receipt-draft.mjs",
+    "submitNextReceipt": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://65.108.107.30:18210 KASPA_WRPC_ENCODING=json KASPA_WRPC_NETWORK_ID=testnet-12 KASPA_WRPC_SUBMIT_SHAPE=object node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/<next-receipt>.json --submit",
+    "verifyAndIndex": "npm run payload:verify:events && npm run indexer:checkpoint && npm run indexer:persist"
+  },
+  "next": [
+    "Use the current spendable outpoint, never an already consumed outpoint, for the next local-wallet TN12 receipt.",
+    "After each accepted receipt, refresh artifacts/tn12-defi-v1-current-outpoint.json before building the next transaction.",
+    "Replace the local wallet path with external wallet signing before claiming user-wallet readiness."
+  ]
+}

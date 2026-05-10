@@ -99,6 +99,7 @@ import { buildAssetPolicyRegistry } from "../src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildAuctionSettlementDrafts } from "../src/auctionSettlementDrafts.mjs";
 import { buildAuctionCustodyReview } from "../src/auctionCustodyReview.mjs";
+import { buildDefiV1OperatorLoop } from "../src/defiV1OperatorLoop.mjs";
 import { buildDefiResearchBacklog } from "../src/defiBacklog.mjs";
 import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.mjs";
 import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
@@ -895,6 +896,28 @@ assert.equal(defiBacklog.summary.total, 8);
 assert.equal(defiBacklog.summary.researchOnly, 4);
 assert.ok(defiBacklog.missingRails.includes("price oracle"));
 assert.ok(defiBacklog.briefs.some((brief) => brief.id === "prediction-hedge-simulator" && brief.status === "prototype-later"));
+const defiLoopArtifact = JSON.parse(await readFile(new URL("../artifacts/defi-v1-operator-loop.json", import.meta.url), "utf8"));
+assert.equal(defiLoopArtifact.status, "repeatable-live-receipt-loop-ready");
+assert.equal(defiLoopArtifact.receipts.length, 2);
+assert.ok(defiLoopArtifact.receipts.every((receipt) => receipt.accepted && receipt.payloadMatches));
+assert.ok(defiLoopArtifact.staleOutpointGuards.every((outpoint) => outpoint.consumed));
+assert.equal(defiLoopArtifact.currentSpendableOutpoint.txid, "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd");
+const rebuiltDefiLoop = buildDefiV1OperatorLoop({
+  firstReceipt: {
+    ...JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-live-receipt-evidence.json", import.meta.url), "utf8")),
+    source: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/tn12-defi-v1-payload-receipt.json", import.meta.url), "utf8")).source
+  },
+  repeatReceipt: {
+    ...JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-repeat-receipt-evidence.json", import.meta.url), "utf8")),
+    source: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json", import.meta.url), "utf8")).source
+  },
+  fundedOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-funded-outpoint.json", import.meta.url), "utf8")),
+  previousCurrentOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-first-change-outpoint.json", import.meta.url), "utf8")),
+  currentOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-current-outpoint.json", import.meta.url), "utf8")),
+  walletAddress: "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(rebuiltDefiLoop.status, "repeatable-live-receipt-loop-ready");
 const predictionFixture = JSON.parse(await readFile(new URL("../fixtures/PredictionHedgeSimulator.json", import.meta.url), "utf8"));
 const predictionSimulator = buildPredictionHedgeSimulator({ fixture: predictionFixture, attestationRegistry, attestationThresholds });
 assert.equal(predictionSimulator.status, "simulation-only");

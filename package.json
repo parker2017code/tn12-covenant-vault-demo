@@ -120,6 +120,7 @@
     "auction:settlement-drafts": "node scripts/build-auction-settlement-drafts.mjs",
     "auction:custody-review": "node scripts/build-auction-custody-review.mjs",
     "defi:backlog": "node scripts/build-defi-backlog.mjs",
+    "defi:v1-loop": "node scripts/build-defi-v1-operator-loop.mjs",
     "prediction:hedge": "node scripts/build-prediction-hedge-simulator.mjs",
     "stable:value": "node scripts/build-stable-value-paths.mjs",
     "stable:issuer": "node scripts/build-stable-issuer-redemptions.mjs",
