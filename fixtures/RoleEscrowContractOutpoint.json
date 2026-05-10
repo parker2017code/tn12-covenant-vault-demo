@@ -3,26 +3,29 @@
   "network": "kaspa-testnet-12",
   "lane": "role-escrow",
   "contract": "Escrow",
-  "fetchedAt": "2026-05-10T15:15:00.000Z",
-  "endpoint": "ws://65.108.107.30:18210",
-  "note": "Fresh escrow covenant UTXO from real funding transaction on TN12. Ready for settlement testing (release/refund/cancel).",
-  "status": "awaiting-broadcast-acceptance",
-  "submittedAt": "2026-05-10T15:10:00.000Z",
-  "txid": "741463085b6129ffc0415d6288cce1bfe9808a2d6bb8ef7a26752cc1641ebf03",
+  "fetchedAt": "2026-05-10T17:59:00.000Z",
+  "endpoint": "ws://tn12-node.kaspa.com:17210",
+  "note": "Escrow covenant UTXO from accepted funding transaction on TN12. Live and ready for settlement testing (release/refund/cancel).",
+  "status": "accepted-tn12",
+  "submittedAt": "2026-05-10T17:59:00.000Z",
+  "acceptedAt": "2026-05-10T17:59:00.000Z",
+  "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
   "outputIndex": 0,
   "amountTkas": 1,
   "amountSompi": "100000000",
   "scriptType": "scripthash",
-  "scriptPublicKeyAddress": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w",
+  "scriptPublicKeyAddress": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
   "scriptPublicKey": "aa20e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd187",
   "redeemScriptHash": "e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd1",
   "redeemScriptBytes": 351,
   "redeemScriptHex": "6b6c76009c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6900c2b9be028813949c6900c32054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669030000207c7e01ac7e876975516776519c637576200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac6904ccedfe69b000c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975516776529c637578200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac69762054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac6900c2b9be028813949c6900c3200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede030000207c7e01ac7e876975755167750069686868",
-  "explorerUrl": "https://tn12.kaspa.stream/txs/741463085b6129ffc0415d6288cce1bfe9808a2d6bb8ef7a26752cc1641ebf03",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+  "acceptingBlockHash": "967755cc6e2ce62e290d039ff5f36c13711416a839f2baa3cfe53f701895b265",
+  "acceptingBlockBlueScore": 8055346,
   "raw": {
-    "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w",
+    "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v",
     "outpoint": {
-      "transactionId": "741463085b6129ffc0415d6288cce1bfe9808a2d6bb8ef7a26752cc1641ebf03",
+      "transactionId": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
       "index": 0
     },
     "utxoEntry": {
@@ -30,7 +33,7 @@
       "scriptPublicKey": {
         "scriptPublicKey": "aa20e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd187"
       },
-      "blockDaaScore": "8150234",
+      "blockDaaScore": "8055346",
       "isCoinbase": false
     }
   }
