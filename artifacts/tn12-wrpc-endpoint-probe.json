@@ -1,6 +1,6 @@
 {
   "schema": "tn12-wrpc-endpoint-probe/v1",
-  "generatedAt": "2026-05-09T21:58:43.375Z",
+  "generatedAt": "2026-05-10T14:51:41.794Z",
   "status": "tn12-wrpc-endpoint-probe-ready",
   "endpoint": {
     "url": "ws://65.108.107.30:18210",
@@ -39,13 +39,15 @@
     "mempoolSize": "0",
     "currentNetwork": "testnet",
     "dagNetwork": "testnet-12",
-    "blockCount": "1384064",
-    "headerCount": "1384064",
-    "virtualDaaScore": "7535630",
+    "blockCount": "1125578",
+    "headerCount": "1125578",
+    "virtualDaaScore": "8141544",
     "virtualParentHashes": [
-      "041d4f5f77b5fa3d1c30fea56392bcb1bb5ea0782c38e03cb95a97aaddb66a44"
+      "5e68131b592796b4d1f115f8b7af404be0cf7fd531989b19ea0c3277767e9169",
+      "e343648521f7f10d3baec7c6a86b6fe4a4da4d3c3940643afcfa0be68cf6b96d",
+      "067dc8e63cfaa737ffd9a3b5c894295d16006c2c497a963e146080b29abfe997"
     ],
-    "sink": "041d4f5f77b5fa3d1c30fea56392bcb1bb5ea0782c38e03cb95a97aaddb66a44"
+    "sink": "e343648521f7f10d3baec7c6a86b6fe4a4da4d3c3940643afcfa0be68cf6b96d"
   },
   "rpcCaveats": {
     "serverInfoOk": false,
