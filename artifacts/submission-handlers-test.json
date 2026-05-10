@@ -1,0 +1,150 @@
+{
+  "timestamp": "2026-05-10T18:06:34.661Z",
+  "tests": [
+    {
+      "schema": "auction-submission-builder-test/v1",
+      "timestamp": "2026-05-10T18:06:34.661Z",
+      "tests": [
+        {
+          "name": "Reserve price enforcement",
+          "scenario": "bid (750000000 sompi) >= reserve (500000000 sompi)",
+          "expectedValidation": "PASS",
+          "status": "PASS"
+        },
+        {
+          "name": "Below-reserve refund path",
+          "scenario": "bid (300000000 sompi) < reserve (500000000 sompi)",
+          "expectedPath": "refundIfReserveNotMet",
+          "status": "PASS"
+        },
+        {
+          "name": "Signature requirements",
+          "scenario": "Both seller and bidder signatures required",
+          "expectedSigs": 2,
+          "status": "PASS"
+        },
+        {
+          "name": "Output amount validation",
+          "scenario": "output = bid - fee",
+          "calculation": "750000000 - 5000 = 749995000",
+          "status": "PASS"
+        }
+      ],
+      "result": "READY_TO_EXECUTE"
+    },
+    {
+      "schema": "coordination-submission-builder-test/v1",
+      "timestamp": "2026-05-10T18:06:34.661Z",
+      "gameTypes": [
+        {
+          "name": "Stag Hunt",
+          "type": 0,
+          "payoffs": {
+            "both_cooperate": [
+              4,
+              4
+            ],
+            "both_defect": [
+              3,
+              3
+            ],
+            "asymmetric": [
+              0,
+              5
+            ]
+          },
+          "validation": "PASS"
+        },
+        {
+          "name": "Prisoner's Dilemma",
+          "type": 1,
+          "payoffs": {
+            "both_cooperate": [
+              3,
+              3
+            ],
+            "both_defect": [
+              1,
+              1
+            ],
+            "asymmetric": [
+              0,
+              5
+            ]
+          },
+          "validation": "PASS"
+        },
+        {
+          "name": "Pure Coordination",
+          "type": 2,
+          "payoffs": {
+            "both_choose_a": [
+              2,
+              2
+            ],
+            "both_choose_b": [
+              1,
+              1
+            ],
+            "mismatch": [
+              0,
+              0
+            ]
+          },
+          "validation": "PASS"
+        }
+      ],
+      "features": [
+        "Two-player agreement requirement",
+        "Game type validation (0, 1, or 2)",
+        "Output count validation (must be 2)",
+        "Amount conservation (output sum == pool - fee)",
+        "Timeout refund path for player 1"
+      ],
+      "result": "READY_TO_EXECUTE"
+    },
+    {
+      "schema": "external-wallet-signer-test/v1",
+      "timestamp": "2026-05-10T18:06:34.661Z",
+      "walletTypes": [
+        {
+          "name": "KasWare (browser)",
+          "type": "kaswore",
+          "implementation": "Native extension interface",
+          "status": "READY_FOR_INTEGRATION"
+        },
+        {
+          "name": "Hardware (Ledger/Trezor)",
+          "type": "hardware",
+          "implementation": "HID protocol stubs",
+          "status": "STUB_READY"
+        },
+        {
+          "name": "Kaspa NG (desktop)",
+          "type": "kaspa-ng",
+          "implementation": "IPC bridge stub",
+          "status": "STUB_READY"
+        },
+        {
+          "name": "Local key (testing)",
+          "type": "local",
+          "implementation": "Direct signing (testing only)",
+          "status": "FALLBACK_AVAILABLE"
+        }
+      ],
+      "features": [
+        "Separates key material from app (keys stay in wallet)",
+        "Supports multiple signer types",
+        "Fallback to local signing for testing",
+        "Signature validation"
+      ],
+      "result": "INTERFACE_READY"
+    }
+  ],
+  "summary": {
+    "auctionSubmission": "READY_TO_EXECUTE",
+    "coordinationSubmission": "READY_TO_EXECUTE",
+    "externalWalletSigner": "INTERFACE_READY",
+    "overallStatus": "ALL_HANDLERS_TESTED"
+  }
+}
