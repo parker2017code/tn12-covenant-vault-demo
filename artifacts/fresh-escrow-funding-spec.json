@@ -1,0 +1,22 @@
+{
+  "schema": "tn12-escrow-funding-spec/v1",
+  "network": "kaspa-testnet-12",
+  "timestamp": "2026-05-10T17:56:19.830Z",
+  "status": "ready-for-funding",
+  "description": "Escrow contract ready to fund with these role keys",
+  "parameters": {
+    "buyer": {
+      "address": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "publicKey": "030674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede",
+      "xOnlyPublicKey": "0674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede"
+    },
+    "seller": {
+      "address": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "publicKey": "0254c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+      "xOnlyPublicKey": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669"
+    },
+    "minerFeeSompi": 5000,
+    "refundTimeSeconds": 1778522179
+  },
+  "nextStep": "Fund this escrow contract with a real UTXO, then submit escrow-release.json"
+}
