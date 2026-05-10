@@ -37,7 +37,7 @@ export function buildVirtualChainCheckpointComparison({
       ? "A replay reducer can compare this live window against known accepted rows before checkpoint promotion."
       : "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it.",
     nextStep: overlapReady
-      ? "Run reducer matching across the overlap and persist only deterministic rows."
+      ? "Run deterministic reducer replay and rollback matching before promotion."
       : "Start the live reader from a checkpoint-derived block hash or trusted overlap window, not from current sink only.",
     boundaries: [
       "Endpoint and V2 response are working, but app-state promotion still needs overlap or deterministic reducer replay.",

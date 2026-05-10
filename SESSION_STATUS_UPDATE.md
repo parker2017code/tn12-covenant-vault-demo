@@ -29,7 +29,7 @@
 | Document | Purpose | Status |
 |----------|---------|--------|
 | `SPRINT_EXECUTION_GUIDE.md` | Week-by-week roadmap, decisions, metrics | Complete |
-| `NEXT_SPRINT_PLAN.md` | 45% → 60% completion targets, effort estimates | Complete |
+| `NEXT_SPRINT_PLAN.md` | 55% → 65% completion targets, effort estimates | Complete |
 | `CODEX_PARALLEL_WORK.md` | 7 non-blocking work tracks for parallel execution | Complete |
 | `RPC_SUBMISSION_STATUS.md` | Funding TX history, next steps, blockers | Complete |
 
@@ -159,7 +159,7 @@ npm run campaign:broadcast-settlement
 ## Metrics & Progress
 
 ### Overall Completion
-- **Current:** 45% (33% proven on TN12, 12% built/signed)
+- **Current:** about 55-60% (proof core + live replay overlap now stronger, signer/replay promotion still open)
 - **Target by Week 4:** 60% (55% on build-now, 25% on research)
 - **Trajectory:** On track if:
   - Escrow funding succeeds this week ✓ (signed, ready)
@@ -185,7 +185,7 @@ npm run campaign:broadcast-settlement
 - ✅ `artifacts/escrow-funding-tx.json` — Signed funding transaction
 - ✅ `SPRINT_EXECUTION_GUIDE.md` — Complete roadmap & decision points
 - ✅ `CODEX_PARALLEL_WORK.md` — 7 work tracks for parallel execution
-- ✅ `NEXT_SPRINT_PLAN.md` — 45% → 60% completion plan
+- ✅ `NEXT_SPRINT_PLAN.md` — 55% → 65% completion plan
 - ✅ `RPC_SUBMISSION_STATUS.md` — Funding TX status & blockers
 - ✅ `scripts/monitor-rpc-and-submit.mjs` — Auto-retry submission monitor
 - ✅ `scripts/post-escrow-funding-workflow.mjs` — Automated post-funding steps

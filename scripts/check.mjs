@@ -618,7 +618,8 @@ assert.equal(batchOperatorDecision.status, "operator-hold-review");
 assert.equal(batchOperatorDecision.selectedPath, "release-review");
 assert.equal(batchOperatorDecision.submitNow, false);
 assert.ok(batchOperatorDecision.blockers.includes("external signer accepted result missing"));
-assert.ok(batchOperatorDecision.blockers.includes("live indexer checkpoint overlap missing"));
+assert.equal(batchOperatorDecision.summary.blockers, 1);
+assert.ok(!batchOperatorDecision.blockers.includes("live indexer checkpoint overlap missing"));
 const batchOperatorDecisionArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-operator-decision.json", import.meta.url), "utf8"));
 assert.equal(batchOperatorDecisionArtifact.status, "operator-hold-review");
 assert.equal(batchOperatorDecisionArtifact.selectedPath, "release-review");
@@ -1352,16 +1353,19 @@ const checkpointComparison = buildVirtualChainCheckpointComparison({
   checkpointIndex: checkpointFixture,
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
-assert.equal(checkpointComparison.status, "live-window-near-tip-no-checkpoint-overlap");
+assert.equal(checkpointComparison.status, "live-window-overlaps-checkpoint");
 assert.equal(checkpointComparison.appStatePromoted, false);
-assert.equal(checkpointComparison.summary.overlapReady, false);
-assert.match(checkpointComparison.nextStep, /checkpoint-derived block hash/);
+assert.equal(checkpointComparison.summary.overlapReady, true);
+assert.match(checkpointComparison.nextStep, /deterministic reducer replay|rollback overlap/i);
 const checkpointComparisonArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-checkpoint-comparison.json", import.meta.url), "utf8"));
-assert.equal(checkpointComparisonArtifact.status, "live-window-near-tip-no-checkpoint-overlap");
+assert.equal(checkpointComparisonArtifact.status, "live-window-overlaps-checkpoint");
 assert.equal(checkpointComparisonArtifact.appStatePromoted, false);
 const liveAppStateArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-app-state.json", import.meta.url), "utf8"));
 assert.equal(liveAppStateArtifact.operationalStatus.getVirtualChainFromBlockV2, true);
 assert.equal(liveAppStateArtifact.operationalStatus.forwardIndexingCapable, true);
+assert.equal(liveAppStateArtifact.status, "live-window-overlaps-checkpoint");
+assert.equal(liveAppStateArtifact.appStatePromoted, true);
+assert.ok(liveAppStateArtifact.summary.matchedCheckpointTxids > 0);
 assert.ok(liveAppStateArtifact.summary.liveAcceptedTransactions > 0);
 assert.match(liveAppStateArtifact.boundaries.join(" "), /forward indexing/i);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({

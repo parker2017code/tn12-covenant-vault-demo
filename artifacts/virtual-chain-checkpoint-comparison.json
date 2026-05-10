@@ -1,20 +1,26 @@
 {
   "schema": "tn12-virtual-chain-checkpoint-comparison/v1",
   "network": "testnet-12",
-  "generatedAt": "2026-05-10T17:00:04.168Z",
-  "status": "live-window-near-tip-no-checkpoint-overlap",
+  "generatedAt": "2026-05-10T17:25:36.223Z",
+  "status": "live-window-overlaps-checkpoint",
   "appStatePromoted": false,
   "summary": {
     "checkpointRecords": 36,
     "checkpointTxids": 34,
-    "liveAcceptedRows": 46,
-    "matchedCheckpointRows": 0,
+    "liveAcceptedRows": 13958,
+    "matchedCheckpointRows": 1,
     "liveRollbackRows": 0,
-    "overlapReady": false
+    "overlapReady": true
   },
-  "matchedRows": [],
-  "decision": "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it.",
-  "nextStep": "Start the live reader from a checkpoint-derived block hash or trusted overlap window, not from current sink only.",
+  "matchedRows": [
+    {
+      "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+      "blockHash": "b4b1cb0c5d7a59b4579f1f1dff142b9fd45771d15853cee20077ad2698d22f56",
+      "payloadBytes": 0
+    }
+  ],
+  "decision": "A replay reducer can compare this live window against known accepted rows before checkpoint promotion.",
+  "nextStep": "Run deterministic reducer replay and rollback matching before promotion.",
   "boundaries": [
     "Endpoint and V2 response are working, but app-state promotion still needs overlap or deterministic reducer replay.",
     "No checkpoint watermark is advanced by this artifact."

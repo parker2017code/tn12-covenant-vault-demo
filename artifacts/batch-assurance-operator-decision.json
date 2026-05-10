@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-operator-decision/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T17:14:15.346Z",
+  "generatedAt": "2026-05-10T17:25:13.573Z",
   "campaignId": "kaspa-dev-docs-sprint",
   "status": "operator-hold-review",
   "selectedPath": "release-review",
@@ -9,11 +9,11 @@
   "operatorReason": "Use release as the first review path because the accepted pledge outputs are amount-matched and the release draft already exists.",
   "summary": {
     "walletReady": false,
-    "checkpointOverlapReady": false,
+    "checkpointOverlapReady": true,
     "releaseReady": true,
     "refundReady": true,
     "mutuallyExclusiveInputs": true,
-    "blockers": 2
+    "blockers": 1
   },
   "selectedDrafts": [
     {
@@ -27,8 +27,7 @@
     }
   ],
   "blockers": [
-    "external signer accepted result missing",
-    "live indexer checkpoint overlap missing"
+    "external signer accepted result missing"
   ],
   "requiredBeforeSubmit": [
     "external signer route or explicit local-testnet override",

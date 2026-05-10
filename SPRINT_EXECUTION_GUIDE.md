@@ -1,7 +1,7 @@
 # Sprint Execution Guide — Week 1 Status & Next Steps
 
 **Sprint Period:** Week of 2026-05-10  
-**Overall Progress:** 45% → Target 60% (5 lanes to advance 15 percentage points)  
+**Overall Progress:** 55% → Target 65% (5 lanes to advance 10 percentage points)  
 **Current Blocker:** TN12 wRPC endpoint WebSocket issues (transaction ready, awaiting RPC stability)
 
 ---
@@ -161,7 +161,7 @@ These 7 work streams run in parallel, zero blocking dependencies on escrow:
 
 **Build-Now Rails:** 60% → 75% (Week 1-2)  
 **Research Rails:** 20% → 25% (Week 2-4)  
-**Overall:** 45% → 60% (4 weeks)
+**Overall:** 55% → 65% (4 weeks)
 
 ---
 
@@ -261,7 +261,7 @@ SPRINT_EXECUTION_GUIDE.md                # This sprint guide
 ✅ Auction custody designed  
 ✅ Coordination market spec ready  
 ✅ All parallel tracks complete  
-✅ Overall: 55-60% complete for mainnet deployment readiness
+✅ Overall: about 55-60% complete for mainnet deployment readiness
 
 ---
 

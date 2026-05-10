@@ -49,7 +49,7 @@ If these pass, you have verified the existing accepted evidence. You have not cr
 | Blocker | What I do | What you do |
 |---|---|---|
 | External signer roundtrip | Wire the live wallet connector, preserve tx bytes, validate accepted replay | Only provide wallet access or a deployment decision if you want a specific signer path tested |
-| Virtual-chain overlap | Test the live TN12 reader and prove checkpoint overlap before promotion | Only provide a target start hash or a required replay window if you want a specific overlap test |
+| Virtual-chain promotion | Test the live TN12 reader and prove checkpoint overlap plus reducer matching before promotion | Only provide a target start hash or a required replay window if you want a specific promotion test |
 | Batch-assurance settle path | Pick and exercise one mutually exclusive settlement path end to end | Only choose release vs refund if you want that lane submitted |
 
 1. **External signer roundtrip** — `artifacts/wallet-external-signer-roundtrip-plan.json` has 4 requests ready; local signer simulation in progress.

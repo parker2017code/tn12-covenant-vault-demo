@@ -113,7 +113,7 @@
 - 7 parallel work tracks are fully scoped in `CODEX_PARALLEL_WORK.md`
 - All fixtures updated and committed
 - No blockers for parallel execution
-- Recommended next: Continue parallel tracks → 45% → 60% by week 2
+- Recommended next: Continue parallel tracks → about 55% → 65% while closing signer/promotion gaps
 
 ---
 

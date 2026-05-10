@@ -1,9 +1,9 @@
-# Next Sprint Plan: 45% → 60% Overall
+# Next Sprint Plan: 55% → 65% Overall
 
 > Completion percentages in this plan are mainnet deployment readiness unless a line explicitly says it is only TN12 proof-core progress.
 
-**Current State:** 45% complete for mainnet deployment readiness (60% on build-now rails, 20% on research)  
-**Target:** 55-60% overall mainnet deployment readiness (push build-now to 75%, maintain research)  
+**Current State:** about 55-60% complete for mainnet deployment readiness (build-now rails are stronger after live overlap proof)  
+**Target:** 60-65% overall mainnet deployment readiness (finish promotion, keep research disciplined)  
 **Horizon:** 2-3 weeks
 
 ---
@@ -151,7 +151,7 @@ Coordination Market Design (3-5 days):
 | | | | |
 | **BUILD-NOW RAILS** | 60% | 80% | **2 weeks** |
 | **RESEARCH RAILS** | 20% | 25% | **2 weeks** |
-| **OVERALL** | **45%** | **60%** | **3-4 weeks** |
+| **OVERALL** | **55%** | **65%** | **3-4 weeks** |
 
 ---
 
@@ -233,7 +233,7 @@ Auction:          Custody designed + atomic exchange drafted
 ✅ **Access Pass:** Duplicate + expiry gates passing  
 ✅ **Treasury:** Spend caps enforced  
 ✅ **Auction:** Custody designed, atomic exchange sketched  
-✅ **Overall:** 55-60% complete for mainnet deployment readiness, all build-now rails at 70%+  
+✅ **Overall:** about 55-60% complete for mainnet deployment readiness, with the live overlap proof now landing the indexer lane but signer/promotion still open
 
 ---
 

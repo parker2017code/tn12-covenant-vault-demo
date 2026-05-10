@@ -64,7 +64,7 @@ export function buildVirtualChainLiveAppState({
         : `${matchedKnownTxids.length} known proof txid(s) confirmed in live window.`
     },
     boundaries: [
-      "appStatePromoted=false when no checkpoint overlap — safe to read but does not advance the watermark.",
+      "Checkpoint overlap can be proven from a live window, but deterministic reducer replay is still required before promotion is trusted.",
       "Forward indexing from current sink is operational: new TN12 transactions will appear in live windows.",
       "Historic proof txids require starting from a hash near their accepting block, which may be pruned on TN12.",
       "This artifact replaces the 'virtual-chain SDK blocked' status — the local TN12 wasm build resolves it."
