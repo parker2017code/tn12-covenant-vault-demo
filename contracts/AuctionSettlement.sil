@@ -1,0 +1,31 @@
+pragma silverscript ^0.1.0;
+
+contract AuctionSettlement(
+    pubkey seller,
+    pubkey highestBidder,
+    int reservePrice,
+    int minerFee
+) {
+    entrypoint function settleWinningBid(sig sellerSig, sig bidderSig) {
+        require(checkSig(sellerSig, seller));
+        require(checkSig(bidderSig, highestBidder));
+
+        int bidAmount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(bidAmount >= reservePrice);
+        require(tx.outputs[0].value == bidAmount);
+
+        byte[34] sellerLock = new ScriptPubKeyP2PK(seller);
+        require(tx.outputs[0].scriptPubKey == byte[](sellerLock));
+    }
+
+    entrypoint function refundIfReserveNotMet(sig bidderSig) {
+        require(checkSig(bidderSig, highestBidder));
+
+        int bidAmount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(bidAmount < reservePrice);
+        require(tx.outputs[0].value == bidAmount);
+
+        byte[34] bidderLock = new ScriptPubKeyP2PK(highestBidder);
+        require(tx.outputs[0].scriptPubKey == byte[](bidderLock));
+    }
+}

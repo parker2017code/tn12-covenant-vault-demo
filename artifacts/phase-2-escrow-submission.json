@@ -1,0 +1,28 @@
+{
+  "schema": "tn12-phase-2-escrow-submission/v1",
+  "timestamp": "2026-05-10T17:53:56.840Z",
+  "network": "kaspa-testnet-12",
+  "phase": "2-escrow-submission",
+  "utxoVerification": {
+    "status": "live",
+    "utxo": "64b68f1cc61acc119719...",
+    "message": "Escrow UTXO confirmed spendable on TN12"
+  },
+  "submission": {
+    "transactionId": "3550475ff95e472a8ec8...",
+    "destination": "kaspatest:qp2vxrdg3c...",
+    "amount": "0.99995",
+    "status": "rejected",
+    "httpStatus": 400,
+    "accepted": false
+  },
+  "acceptance": {
+    "status": "timeout",
+    "blueScore": null,
+    "message": "Transaction not confirmed in 30 seconds"
+  },
+  "outputVerification": {
+    "status": "pending",
+    "message": "Awaiting final confirmation"
+  }
+}

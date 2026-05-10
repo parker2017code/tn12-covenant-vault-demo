@@ -1,0 +1,37 @@
+{
+  "schema": "tn12-phases-3-5-extended-lanes/v1",
+  "timestamp": "2026-05-10T17:58:34.621Z",
+  "network": "kaspa-testnet-12",
+  "phases": {
+    "phase3": {
+      "name": "Batch-Assurance Settlement",
+      "status": "infrastructure-ready",
+      "description": "Multi-pledge coordination already proven (proof-evidence.json)",
+      "nextStep": "Fund batch campaign with real UTXO"
+    },
+    "phase4": {
+      "name": "Wallet External Signer",
+      "status": "interface-implemented",
+      "description": "externalWalletSigner.mjs built - KasWare integration point wired",
+      "nextStep": "Connect to KasWare extension when available"
+    },
+    "phase5a": {
+      "name": "Auction Settlement",
+      "status": "contract-and-submission-ready",
+      "description": "AuctionSettlement.sil created, auctionSubmission.mjs implemented",
+      "nextStep": "Fund auction UTXO and test settlement"
+    },
+    "phase5b": {
+      "name": "Coordination Market",
+      "status": "contract-and-submission-ready",
+      "description": "CoordinationMarket.sil created, coordinationSubmission.mjs implemented",
+      "nextStep": "Fund game pool and test coordination games"
+    }
+  },
+  "infrastructure": {
+    "virtualChainReplayer": "✓ Implemented - polls TN12 for accepted transactions",
+    "externalWalletSigner": "✓ Implemented - KasWare, hardware wallet stubs, local fallback",
+    "auctionSettlement": "✓ Implemented - contract + submission handler",
+    "coordinationMarket": "✓ Implemented - contract + submission handler"
+  }
+}

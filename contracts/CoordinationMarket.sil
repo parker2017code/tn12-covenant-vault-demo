@@ -1,0 +1,34 @@
+pragma silverscript ^0.1.0;
+
+contract CoordinationMarket(
+    pubkey player1,
+    pubkey player2,
+    int timeoutSeconds,
+    int minerFee
+) {
+    entrypoint function executeCoordination(sig player1Sig, sig player2Sig, byte gameType) {
+        require(checkSig(player1Sig, player1));
+        require(checkSig(player2Sig, player2));
+        
+        // gameType: 0=stag-hunt, 1=prisoner-dilemma, 2=coordination
+        require(gameType == 0x00 || gameType == 0x01 || gameType == 0x02);
+        
+        int potAmount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(potAmount > 0);
+        
+        // Both must agree on distribution
+        require(tx.outputs.length == 2);
+        require(tx.outputs[0].value + tx.outputs[1].value == potAmount);
+    }
+
+    entrypoint function timeoutRefund(sig player1Sig) {
+        require(checkSig(player1Sig, player1));
+        require(tx.time >= timeoutSeconds);
+        
+        int refundAmount = tx.inputs[this.activeInputIndex].value - minerFee;
+        require(tx.outputs[0].value == refundAmount);
+        
+        byte[34] player1Lock = new ScriptPubKeyP2PK(player1);
+        require(tx.outputs[0].scriptPubKey == byte[](player1Lock));
+    }
+}

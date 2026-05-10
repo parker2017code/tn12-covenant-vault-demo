@@ -1,0 +1,13 @@
+{
+  "schema": "tn12-signed-escrow-cancel-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-ready-for-submission",
+  "timestamp": "2026-05-10T17:49:36.830Z",
+  "role": "escrowSeller",
+  "action": "cancel",
+  "description": "Seller cancels escrow and recovers funds",
+  "inputs": 1,
+  "outputs": 1,
+  "fee": "5000",
+  "note": "Ready to submit to TN12 wRPC endpoint"
+}

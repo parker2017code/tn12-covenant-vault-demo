@@ -1,0 +1,75 @@
+{
+  "schema": "tn12-test-escrow-utxo/v1",
+  "network": "kaspa-testnet-12",
+  "timestamp": "2026-05-10T17:59:26.967Z",
+  "status": "LOCAL_TEST_SPEC",
+  "description": "Test escrow UTXO specification with role keys for resubmission testing",
+  "parameters": {
+    "buyer": {
+      "address": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+      "publicKey": "030674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede",
+      "xOnlyPublicKey": "0674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aede"
+    },
+    "seller": {
+      "address": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+      "publicKey": "0254c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669",
+      "xOnlyPublicKey": "54c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669"
+    },
+    "refundTime": 1778522366,
+    "minerFee": 5000
+  },
+  "resubmissionPipeline": {
+    "step1_fundEscrow": {
+      "status": "BLOCKED_NO_UTXO",
+      "description": "Requires real UTXO to spend",
+      "workaround": "Fund from KasWare or test wallet once available"
+    },
+    "step2_buildReleaseDraft": {
+      "status": "READY",
+      "command": "ESCROW_CONTRACT_OUTPOINT=<test-utxo-fixture> node scripts/build-signed-escrow-spend-drafts.mjs",
+      "expected": "escrow-release.json with valid signature"
+    },
+    "step3_submitToTN12": {
+      "status": "READY",
+      "command": "node scripts/phase-2-submit-escrow-tn12.mjs",
+      "expected": "New txid in artifacts/phase-2-escrow-submission.json with blue score"
+    },
+    "step4_verifyAcceptance": {
+      "status": "READY",
+      "command": "npm run tx:verify",
+      "expected": "Transaction accepted, output at seller address"
+    }
+  },
+  "testCases": [
+    {
+      "name": "Release Path",
+      "description": "Buyer signs release → funds to seller",
+      "expectedOutput": "Seller receives amount - fee",
+      "status": "READY_TO_TEST"
+    },
+    {
+      "name": "Refund Path",
+      "description": "Buyer signs refund after deadline → funds back to buyer",
+      "expectedOutput": "Buyer receives amount - fee",
+      "status": "READY_TO_TEST"
+    },
+    {
+      "name": "Cancel Path",
+      "description": "Buyer + seller both sign cancel → funds to buyer",
+      "expectedOutput": "Buyer receives amount - fee",
+      "status": "READY_TO_TEST"
+    },
+    {
+      "name": "Role-Separated Release",
+      "description": "Buyer from escrowBuyer role signs release",
+      "expectedOutput": "Seller from escrowSeller role receives funds",
+      "status": "READY_TO_TEST"
+    },
+    {
+      "name": "Wrong Signature Rejection",
+      "description": "Non-buyer attempts to release → rejected",
+      "expectedOutput": "Script validation fails, TN12_REJECTED",
+      "status": "READY_TO_TEST"
+    }
+  ]
+}

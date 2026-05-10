@@ -1,0 +1,33 @@
+{
+  "schema": "tn12-phase-1-settlement-drafts/v1",
+  "timestamp": "2026-05-10T17:49:36.816Z",
+  "network": "kaspa-testnet-12",
+  "phase": "1-key-integration",
+  "utxo": {
+    "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+    "index": 0,
+    "amount": 1
+  },
+  "roles": {
+    "buyer": "kaspatest:qqr8fl2xuw...",
+    "seller": "kaspatest:qp2vxrdg3c..."
+  },
+  "drafts": [
+    {
+      "type": "release",
+      "status": "error",
+      "error": "Cannot read properties of undefined (reading 'substring')"
+    },
+    {
+      "type": "cancel",
+      "status": "error",
+      "error": "Cannot read properties of undefined (reading 'substring')"
+    }
+  ],
+  "summary": {
+    "totalDrafts": 2,
+    "signed": 0,
+    "failed": 2,
+    "nextStep": "Submit drafts to TN12 wRPC: ws://65.108.107.30:18210"
+  }
+}

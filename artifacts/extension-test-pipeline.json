@@ -1,0 +1,67 @@
+{
+  "schema": "tn12-extension-test-pipeline/v1",
+  "timestamp": "2026-05-10T17:59:26.968Z",
+  "auctionSettlement": {
+    "status": "CONTRACT_READY",
+    "file": "contracts/AuctionSettlement.sil",
+    "submission": "src/auctionSubmission.mjs",
+    "testCases": [
+      {
+        "name": "Winning Bid Settlement",
+        "description": "Seller + bidder both sign → bid amount to seller",
+        "status": "READY_TO_TEST"
+      },
+      {
+        "name": "Reserve Not Met Refund",
+        "description": "Bidder signs refund if bid < reserve → funds back to bidder",
+        "status": "READY_TO_TEST"
+      },
+      {
+        "name": "Invalid Reserve Check",
+        "description": "Attempt to settle below reserve → rejected",
+        "status": "READY_TO_TEST"
+      }
+    ]
+  },
+  "coordinationMarket": {
+    "status": "CONTRACT_READY",
+    "file": "contracts/CoordinationMarket.sil",
+    "submission": "src/coordinationSubmission.mjs",
+    "games": [
+      {
+        "name": "Stag Hunt",
+        "status": "READY_TO_TEST"
+      },
+      {
+        "name": "Prisoner's Dilemma",
+        "status": "READY_TO_TEST"
+      },
+      {
+        "name": "Coordination Game",
+        "status": "READY_TO_TEST"
+      }
+    ]
+  },
+  "walletExternalSigner": {
+    "status": "INTERFACE_READY",
+    "file": "src/externalWalletSigner.mjs",
+    "signers": [
+      {
+        "type": "kaswore",
+        "status": "STUB - needs browser extension"
+      },
+      {
+        "type": "hardware",
+        "status": "STUB - Ledger/Trezor ready"
+      },
+      {
+        "type": "kaspa-ng",
+        "status": "STUB - desktop wallet ready"
+      },
+      {
+        "type": "local",
+        "status": "FALLBACK - for testing only"
+      }
+    ]
+  }
+}
