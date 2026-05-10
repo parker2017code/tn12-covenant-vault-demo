@@ -615,12 +615,13 @@ const batchOperatorDecision = buildBatchAssuranceOperatorDecision({
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(batchOperatorDecision.status, "operator-hold-review");
-assert.equal(batchOperatorDecision.selectedPath, "hold-review");
+assert.equal(batchOperatorDecision.selectedPath, "release-review");
 assert.equal(batchOperatorDecision.submitNow, false);
 assert.ok(batchOperatorDecision.blockers.includes("external signer accepted result missing"));
 assert.ok(batchOperatorDecision.blockers.includes("live indexer checkpoint overlap missing"));
 const batchOperatorDecisionArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-operator-decision.json", import.meta.url), "utf8"));
 assert.equal(batchOperatorDecisionArtifact.status, "operator-hold-review");
+assert.equal(batchOperatorDecisionArtifact.selectedPath, "release-review");
 assert.equal(batchOperatorDecisionArtifact.submitNow, false);
 assert.equal(batchReleaseDraft.kind, "release");
 assert.equal(batchReleaseDraft.inputs.length, 3);
