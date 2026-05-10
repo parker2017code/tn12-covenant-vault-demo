@@ -3,6 +3,7 @@
 import { readFile } from "node:fs/promises";
 import WebSocket from "isomorphic-ws";
 import { getKaspaWasmRuntime } from "../src/kaspaWasmRuntime.mjs";
+import { buildWrpcSubmitArgs } from "../src/wrpcSubmitCandidate.mjs";
 
 globalThis.WebSocket = WebSocket;
 
@@ -13,7 +14,9 @@ const shouldProbe = process.argv.includes("--probe");
 const artifact = JSON.parse(await readFile(artifactPath, "utf8"));
 const rpcModule = getKaspaWasmRuntime().module;
 const { RpcClient, Transaction } = rpcModule;
-const rpcUrl = process.env.KASPA_WRPC_URL || "ws://65.108.107.30:18210";
+const rpcUrl = process.env.KASPA_WRPC_URL || "ws://tn12-node.kaspa.com:17210";
+const rpcEncoding = process.env.KASPA_WRPC_ENCODING || "borsh";
+const allowOrphan = process.argv.includes("--allow-orphan") || Boolean(artifact.submitPayload?.allowOrphan);
 
 console.log(`🔗 Submitting Escrow Funding Transaction to TN12`);
 console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
@@ -29,8 +32,9 @@ if (!shouldSubmit && !shouldProbe) {
 }
 
 const rpc = RpcClient.length <= 1
-  ? new RpcClient({ url: rpcUrl, encoding: "json", networkId: "testnet-12" })
-  : new RpcClient(rpcUrl, "json", "testnet-12");
+  ? new RpcClient({ url: rpcUrl, encoding: rpcEncoding, networkId: "testnet-12" })
+  : new RpcClient(rpcUrl, rpcEncoding, "testnet-12");
+let response = null;
 
 try {
   await rpc.connect({});
@@ -53,6 +57,7 @@ try {
         throw new Error("Artifact missing submitPayload.transaction");
       }
 
+      const signedOutputs = artifact.signedTransaction?.tx?.inner?.outputs || artifact.signedTransaction?.tx?.outputs || [];
       // Rebuild transaction from submitPayload
       const tx = new Transaction({
         version: Number(submit.version || 0),
@@ -68,9 +73,9 @@ try {
             sigOpCount: input.sigOpCount || 1
           };
         }),
-        outputs: (submit.outputs || []).map(output => ({
-          value: typeof output.amount === 'string' ? BigInt(output.amount) : BigInt(output.amount || 0),
-          scriptPublicKey: `${Number(output.scriptPublicKey.version).toString(16).padStart(4, "0")}${output.scriptPublicKey.scriptPublicKey}`
+        outputs: (submit.outputs || []).map((output, index) => ({
+          value: normalizeOutputValue(output, signedOutputs[index]),
+          scriptPublicKey: serializeOutputScriptPublicKey(output, signedOutputs[index])
         })),
         lockTime: typeof submit.lockTime === 'string' ? BigInt(submit.lockTime || "0") : BigInt(submit.lockTime || 0),
         subnetworkId: submit.subnetworkId || "0000000000000000000000000000000000000000",
@@ -80,7 +85,9 @@ try {
       tx.finalize();
 
       console.log(`  Rebuilt TX id: ${tx.id?.substring(0, 16)}...`);
-      const response = await rpc.submitTransaction(tx, false, "object");
+      response = await rpc.submitTransaction(
+        ...buildWrpcSubmitArgs(tx, allowOrphan, process.env.KASPA_WRPC_SUBMIT_SHAPE || "object")
+      );
       console.log(`✓ Transaction submitted`);
       console.log(`  Response type: ${typeof response}`);
       if (response) {
@@ -113,4 +120,52 @@ try {
   } catch (e) {
     // ignore
   }
+}
+
+function serializeOutputScriptPublicKey(output, signedOutput) {
+  const explicit = output?.scriptPublicKey;
+  if (explicit && typeof explicit === "object") {
+    const version = Number(explicit.version ?? 0);
+    const script = String(explicit.scriptPublicKey || "");
+    if (script) {
+      return `${version.toString(16).padStart(4, "0")}${script}`;
+    }
+  }
+
+  const fallback = extractSignedOutputScriptPublicKey(signedOutput);
+  if (!fallback) {
+    throw new Error("Unable to resolve output scriptPublicKey from artifact or signed transaction.");
+  }
+  return fallback;
+}
+
+function normalizeOutputValue(output, signedOutput) {
+  const explicit = output?.amount;
+  if (explicit != null && explicit !== "") {
+    return typeof explicit === "string" ? BigInt(explicit) : BigInt(explicit);
+  }
+
+  const inner = signedOutput?.inner || signedOutput || {};
+  const value = inner.value ?? inner.amount;
+  if (value != null && value !== "") {
+    return typeof value === "string" ? BigInt(value) : BigInt(value);
+  }
+
+  throw new Error("Unable to resolve output amount from artifact or signed transaction.");
+}
+
+function extractSignedOutputScriptPublicKey(outputOrOutputs) {
+  const outputs = Array.isArray(outputOrOutputs) ? outputOrOutputs : [outputOrOutputs];
+  for (const output of outputs || []) {
+    const inner = output?.inner || output;
+    const script = inner?.scriptPublicKey;
+    if (!script) continue;
+    if (typeof script === "string") return script;
+    const version = Number(script.version ?? 0);
+    const body = String(script.scriptPublicKey || "");
+    if (body) {
+      return `${version.toString(16).padStart(4, "0")}${body}`;
+    }
+  }
+  return "";
 }

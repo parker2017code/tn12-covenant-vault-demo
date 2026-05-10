@@ -1,0 +1,77 @@
+{
+  "schema": "tn12-access-pass-gates/v1",
+  "network": "kaspa-testnet-12",
+  "reviewedAt": "2026-05-10T00:00:00.000Z",
+  "status": "access-pass-gates-ready",
+  "summary": {
+    "passes": 3,
+    "acceptedRedemptions": 1,
+    "duplicateRedemptions": 0,
+    "missingAcceptedTxids": 0,
+    "expiredPasses": 0,
+    "expiredRedemptions": 0
+  },
+  "scenarios": [
+    {
+      "label": "baseline",
+      "planner": {
+        "acceptedRedemptions": 1,
+        "duplicateRedemptions": 0,
+        "missingAcceptedTxids": 0
+      },
+      "review": {
+        "expiredPasses": 0,
+        "expiredRedemptions": 0,
+        "workshopPassState": "partially-redeemed",
+        "workshopRedemptionStatus": "counted-accepted-redemption"
+      }
+    },
+    {
+      "label": "duplicate-redemption",
+      "planner": {
+        "acceptedRedemptions": 1,
+        "duplicateRedemptions": 1,
+        "missingAcceptedTxids": 0
+      },
+      "review": {
+        "expiredPasses": 0,
+        "expiredRedemptions": 0,
+        "workshopPassState": "partially-redeemed",
+        "workshopRedemptionStatus": "counted-accepted-redemption"
+      }
+    },
+    {
+      "label": "missing-txid",
+      "planner": {
+        "acceptedRedemptions": 1,
+        "duplicateRedemptions": 0,
+        "missingAcceptedTxids": 1
+      },
+      "review": {
+        "expiredPasses": 0,
+        "expiredRedemptions": 0,
+        "workshopPassState": "partially-redeemed",
+        "workshopRedemptionStatus": "counted-accepted-redemption"
+      }
+    },
+    {
+      "label": "expired-redemption",
+      "planner": {
+        "acceptedRedemptions": 1,
+        "duplicateRedemptions": 1,
+        "missingAcceptedTxids": 0
+      },
+      "review": {
+        "expiredPasses": 0,
+        "expiredRedemptions": 1,
+        "workshopPassState": "partially-redeemed",
+        "workshopRedemptionStatus": "counted-accepted-redemption"
+      }
+    }
+  ],
+  "boundaries": [
+    "Access passes are issuer/indexer claims, not native covenant-enforced tickets.",
+    "Accepted redemptions count only when the txid exists.",
+    "Duplicate or post-expiry redemptions stay review-only."
+  ]
+}

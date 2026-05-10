@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-external-signer-gap/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T12:54:34.511Z",
+  "generatedAt": "2026-05-10T15:20:12.645Z",
   "status": "external-signer-gap-documented",
   "liveNoLocalKeySigningReady": false,
   "summary": {
@@ -11,7 +11,7 @@
     "submitOnlyCandidates": 47,
     "signAndSubmitCandidates": 0,
     "payloadPreservationNeeded": 26,
-    "computeBudgetPreservationNeeded": 2,
+    "computeBudgetPreservationNeeded": 3,
     "blockedRows": 47,
     "sensitiveFieldMatches": 0
   },
@@ -801,7 +801,7 @@
         "outputs": 4,
         "signatureScriptBytes": 66,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-02d21f20"
+        "fingerprint": "fp-748c0caa"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -1193,7 +1193,7 @@
         "outputs": 1,
         "signatureScriptBytes": 421,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-0ae341ef"
+        "fingerprint": "fp-34bb8e82"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -1216,12 +1216,12 @@
         "route": "wallet-exact-transaction-submit"
       },
       "preservation": {
-        "version": 0,
+        "version": 1,
         "inputs": 1,
         "outputs": 1,
         "signatureScriptBytes": 487,
-        "computeBudgetInputs": 0,
-        "fingerprint": "fp-2e9eb12d"
+        "computeBudgetInputs": 1,
+        "fingerprint": "fp-b2a53f58"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },

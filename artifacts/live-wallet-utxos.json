@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-05-10T17:50:00.000Z",
+  "endpoint": "https://api-tn12.kaspa.org",
+  "walletAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+  "utxoCount": 46,
+  "selected": {
+    "reason": "Sufficient balance for escrow funding (1 TKAS) + miner fee (0.00005 TKAS)",
+    "txid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "index": 0,
+    "amountSompi": "9999950000",
+    "amountTkas": 99.99995
+  }
+}

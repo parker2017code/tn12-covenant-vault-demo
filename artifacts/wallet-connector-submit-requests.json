@@ -5,7 +5,7 @@
   "summary": {
     "requests": 47,
     "payloadRequests": 26,
-    "computeBudgetRequests": 2,
+    "computeBudgetRequests": 3,
     "missingArtifacts": 0,
     "secretFields": 0
   },
@@ -1926,7 +1926,7 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+              "transactionId": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
               "index": 1
             },
             "sequence": "0",
@@ -1956,7 +1956,7 @@
           },
           {
             "index": 3,
-            "amount": "106329810000",
+            "amount": "89999990000",
             "scriptVersion": 0,
             "scriptPublicKeyBytes": 34
           }
@@ -2826,7 +2826,7 @@
       "transaction": {
         "id": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
         "version": 0,
-        "lockTime": "1778153976",
+        "lockTime": "1778425609",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
           {
@@ -2888,7 +2888,7 @@
       "blockers": [],
       "transaction": {
         "id": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
-        "version": 0,
+        "version": 1,
         "lockTime": "0",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
@@ -2898,8 +2898,8 @@
               "index": 0
             },
             "sequence": "18446744073709551615",
-            "sigOpCount": 1,
-            "computeBudget": null,
+            "sigOpCount": null,
+            "computeBudget": 30,
             "signatureScriptBytes": 487
           }
         ],

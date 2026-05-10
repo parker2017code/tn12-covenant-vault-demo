@@ -1,14 +1,14 @@
 {
   "schema": "tn12-wallet-standard-mapping/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:13:56.199Z",
+  "generatedAt": "2026-05-10T15:20:05.481Z",
   "status": "wallet-standard-mapping-ready",
   "selectedCandidate": "pskb-pskt",
   "liveWalletIntegrationReady": false,
   "summary": {
     "unsignedTemplates": 47,
     "payloadTemplates": 26,
-    "computeBudgetTemplates": 2,
+    "computeBudgetTemplates": 3,
     "candidates": 4,
     "signerReferenceMentions": 4
   },

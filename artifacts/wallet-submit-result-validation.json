@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-submit-result-validation/v1",
   "network": "kaspa-testnet-12",
-  "runAt": "2026-05-09T12:54:13.479Z",
+  "runAt": "2026-05-10T15:20:12.774Z",
   "status": "wallet-submit-result-validation-ready",
   "liveWalletConnectorExists": false,
   "summary": {
@@ -14,8 +14,8 @@
     "acceptedEvidencePromotions": 3,
     "liveWalletPromotions": 0,
     "payloadValidated": 3,
-    "computeBudgetSessions": 2,
-    "v1ComputeBudgetSessionsPreserved": 2,
+    "computeBudgetSessions": 3,
+    "v1ComputeBudgetSessionsPreserved": 3,
     "secretFields": 0
   },
   "policy": {
@@ -300,6 +300,16 @@
       "version": 1,
       "computeBudgetInputs": 1,
       "fingerprint": "fp-c2b0fc42",
+      "preserved": true
+    },
+    {
+      "requestId": "wreq-e83f441d",
+      "sessionId": "review-wreq-e83f441d",
+      "path": "artifacts/signed-drafts/escrow-cancel.json",
+      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "version": 1,
+      "computeBudgetInputs": 1,
+      "fingerprint": "fp-b2a53f58",
       "preserved": true
     },
     {

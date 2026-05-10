@@ -1,6 +1,6 @@
 # Progress Snapshot
 
-Reviewed: 2026-05-09
+Reviewed: 2026-05-10
 
 This repo is now a TN12 covenant/app primitive workshop with a browser control surface, generated artifacts, local checks, GitHub Actions, and GitHub Pages deployment. It is not a mainnet wallet and does not claim live mainnet covenant support.
 
@@ -44,14 +44,14 @@ Standard: positive app-state transitions need accepted TN12 transaction evidence
 5. Treasury / team vaults: spend caps, delayed large withdrawals, recovery, payroll templates.
    - Current status: base built plus constrained spend drafts.
    - Enforcement: wallet policy plus existing vault primitives.
-   - Drafts: `npm run treasury:spends` lists payroll and delayed-withdrawal draft records with cap, balance, delay, recipient, and wallet-review checks.
+   - Drafts: `npm run treasury:spends` lists payroll and delayed-withdrawal draft records with cap, balance, delay, recipient, and wallet-review checks. `npm run treasury:spend-caps` now adds gate artifacts for over-cap payroll and invalid recovery-address cases, and `npm run treasury:negative` keeps those checks reproducible.
    - Review: `npm run treasury:role-review` records the current gaps: no role-separated treasury rows and no exact source-UTXO rows yet.
    - Boundary: payroll/caps are not script-enforced yet.
 
 6. KRC / access pass planner: coupons, memberships, tickets, redeemable claims.
    - Current status: accepted TN12 redemption payload plus planner state.
    - Enforcement: issuer/indexer.
-   - Review: `npm run access:issuer-review` keeps expiry, issuer confirmation, supply, duplicate, and accepted-txid checks explicit before redemption state is counted.
+   - Review: `npm run access:issuer-review` keeps expiry, issuer confirmation, supply, duplicate, and accepted-txid checks explicit before redemption state is counted. `npm run access:gates` and `npm run access:negative` now add reproducible duplicate, missing-txid, and expired-redemption cases.
    - Mainnet potential: medium-high as accepted payload/indexer app state.
 
 7. Simple asset policy: mint, transfer, burn, recovery, redemption policy shapes.
@@ -125,6 +125,7 @@ Done now:
 - Batch-assurance custody-import validator: `npm run campaign:custody-imports` writes `artifacts/batch-assurance-custody-imports.json`. Current fixtures are `custody-imports-ready` with three ready imports from the accepted pledge funding transaction.
 - Batch-assurance pledge funding: `npm run campaign:pledge-funding-draft` writes `artifacts/signed-drafts/batch-assurance-pledge-funding.json` plus public pledge-wallet metadata. The rebuilt draft was submitted and accepted as `0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a`.
 - Batch-assurance settlement drafts: `npm run campaign:settlement-drafts` writes `artifacts/batch-assurance-settlement-drafts.json`, one signed release draft, and three signed refund drafts. These are mutually exclusive P2PK pledge-output spends and are not broadcast.
+- Access-pass gates and treasury spend-cap gates: `npm run access:gates`, `npm run access:negative`, `npm run treasury:spend-caps`, and `npm run treasury:negative` now keep the new guardrails and edge cases reproducible.
 - Next-work queue: `npm run project:queue` records the ordered next 30 tasks; the top five now start with wallet connector submit, durable virtual-chain indexer, batch-assurance settlement-path review/submit, escrow marketplace demo, and attestation thresholds.
 - Covenant adversarial map: `npm run covenant:adversarial` records local selector, witness, output-lock, amount, time-lock, input-mass, role-separation, and script-mapping checks for the seven accepted proof paths.
 - Role-separated fixture lane: `npm run fixtures:roles` and `npm run compile:roles` create the clean constructor/script base for the next accepted-proof pass without mutating historical proof artifacts.

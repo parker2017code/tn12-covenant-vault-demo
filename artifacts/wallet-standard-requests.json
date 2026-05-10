@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-standard-requests/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:10:03.812Z",
+  "generatedAt": "2026-05-10T15:20:12.813Z",
   "status": "wallet-standard-request-candidates-ready",
   "selectedStandard": "pskb-pskt",
   "liveWalletIntegrationReady": false,

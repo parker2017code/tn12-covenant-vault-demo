@@ -1,6 +1,6 @@
 # Roadmap State
 
-Reviewed: 2026-05-09
+Reviewed: 2026-05-10
 
 This repo is a Toccata-ready TN12 app primitive lab. The goal is to build and verify Kaspa-native app rails before mainnet covenant tooling is production-ready, while keeping every claim separated into accepted proof, planner/indexer state, wallet policy, documentation, or research.
 
@@ -75,8 +75,8 @@ These are roadmap or research until the missing rails are explicit and tested.
 | 2. Submit console | Review gate built | 47 signed draft reviews, 26 payload drafts, wallet-review readiness artifact, wallet-connector spec artifact, wallet-submit package, connector request bundle, dry-run adapter review sessions, and submit-result ledger | Real wallet adapter signing/submitting externally |
 | 3. Batch assurance | Accepted TN12 payload state plus accepted custody outputs | Campaign planner with accepted pledge planner records, accepted release-ready planner event, accepted 45/35/20 TKAS pledge outputs, custody-imports-ready, requirements satisfied, and signed-not-broadcast release/refund drafts | Decide which mutually exclusive settlement path to test next, then submit explicitly if intended |
 | 4. Escrow | Strong TN12 lane | Accepted release, accepted DAA-refund, accepted mutual-cancel proofs, local role-separated invalid-candidate map, and marketplace demo plan | Fund fresh expendable outputs before any TN12 rejection submissions |
-| 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates, and constrained spend draft records | Role-key separation and accepted spend lifecycle |
-| 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload | Duplicate and expiry checks |
+| 5. Treasury/team vaults | Planner base | Spend caps, payroll, recovery templates, constrained spend draft records, and new over-cap/invalid-recovery gate artifacts | Role-key separation and accepted spend lifecycle |
+| 6. Access passes/coupons | Accepted TN12 payload state | Issuer model plus accepted redemption payload and gate artifacts for duplicate/missing/expired redemptions | Duplicate and expiry checks |
 | 7. Simple asset policy | Roadmap base | Mint, transfer, burn, recovery, redemption policy shapes | Keep issuer-indexed now, covenant-native later |
 | 8. Auction/intents | Accepted TN12 payload state | Accepted bid payloads, winner rule, below-reserve state, and settlement/refund draft records | Custody source and atomic exchange design |
 | 9. DeFi backlog | Research | Missing rails matrix, swaps/lending/stable-value briefs, stable-value comparison, and prediction-hedge simulator built | More simulation dashboards only |

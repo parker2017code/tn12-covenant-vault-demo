@@ -1,0 +1,22 @@
+{
+  "schema": "tn12-access-pass-negative-cases/v1",
+  "reviewedAt": "2026-05-10T00:00:00.000Z",
+  "status": "access-pass-negative-cases-ready",
+  "cases": [
+    {
+      "id": "duplicate-redemption",
+      "observed": 1,
+      "expected": 1
+    },
+    {
+      "id": "missing-txid",
+      "observed": 1,
+      "expected": 1
+    },
+    {
+      "id": "expired-redemption",
+      "observed": 1,
+      "expected": 1
+    }
+  ]
+}

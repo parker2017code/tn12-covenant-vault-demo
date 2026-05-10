@@ -1,0 +1,46 @@
+{
+  "schema": "tn12-treasury-spend-caps/v1",
+  "network": "kaspa-testnet-12",
+  "status": "treasury-spend-caps-ready",
+  "summary": {
+    "vaults": 2,
+    "drafts": 4,
+    "payrollDrafts": 3,
+    "delayedWithdrawalDrafts": 1,
+    "blockedDrafts": 0
+  },
+  "scenarios": [
+    {
+      "label": "baseline",
+      "coreTeam": {
+        "payrollTotal": 40,
+        "payrollWithinBalance": true,
+        "payrollWithinDailyCap": true,
+        "largeWithdrawalReviewRequired": true,
+        "recoveryAddressValidShape": true
+      },
+      "grantsRound": {
+        "payrollTotal": 40,
+        "payrollWithinBalance": true,
+        "payrollWithinDailyCap": true,
+        "largeWithdrawalReviewRequired": false,
+        "recoveryAddressValidShape": true
+      }
+    },
+    {
+      "label": "over-cap-payroll",
+      "draftStatus": "blocked-policy-check",
+      "withinDailyCap": false,
+      "withinBalance": true
+    },
+    {
+      "label": "invalid-recovery-address",
+      "recoveryAddressValidShape": false
+    }
+  ],
+  "boundaries": [
+    "Treasury payroll and spend caps are wallet-policy/planner state.",
+    "The current TN12 proof core covers delayed withdrawal and recovery primitives only.",
+    "Role labels are review labels, not multisig or governance enforcement."
+  ]
+}

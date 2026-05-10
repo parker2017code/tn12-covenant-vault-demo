@@ -1,0 +1,16 @@
+{
+  "schema": "tn12-treasury-negative-cases/v1",
+  "status": "treasury-negative-cases-ready",
+  "cases": [
+    {
+      "id": "over-cap-payroll",
+      "observed": "blocked-policy-check",
+      "expected": "blocked-policy-check"
+    },
+    {
+      "id": "invalid-recovery-address",
+      "observed": false,
+      "expected": false
+    }
+  ]
+}

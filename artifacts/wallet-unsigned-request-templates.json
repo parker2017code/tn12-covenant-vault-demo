@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-unsigned-request-templates/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:05:37.011Z",
+  "generatedAt": "2026-05-10T15:19:54.389Z",
   "status": "unsigned-request-templates-ready",
   "standardMapped": false,
   "liveExternalSignerReady": false,
@@ -10,7 +10,7 @@
     "ready": 47,
     "blocked": 0,
     "payloadTemplates": 26,
-    "computeBudgetTemplates": 2,
+    "computeBudgetTemplates": 3,
     "signatureScriptsStripped": 7385,
     "secretFields": 0
   },
@@ -2169,7 +2169,7 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+              "transactionId": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
               "index": 1
             },
             "sequence": "0",
@@ -2206,7 +2206,7 @@
           },
           {
             "index": 3,
-            "amount": "106329810000",
+            "amount": "89999990000",
             "scriptPublicKey": {
               "version": 0,
               "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
@@ -2222,7 +2222,7 @@
       },
       "preservation": {
         "expectedTransactionIdAfterSigning": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-        "originalSignedDraftFingerprint": "h-be29e4c0",
+        "originalSignedDraftFingerprint": "h-bd83f798",
         "strippedSignatureScriptBytes": 66,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -3189,7 +3189,7 @@
       "blockers": [],
       "transaction": {
         "version": 0,
-        "lockTime": "1778153976",
+        "lockTime": "1778425609",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
           {
@@ -3223,7 +3223,7 @@
       },
       "preservation": {
         "expectedTransactionIdAfterSigning": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
-        "originalSignedDraftFingerprint": "h-13a1f36e",
+        "originalSignedDraftFingerprint": "h-6a9eb243",
         "strippedSignatureScriptBytes": 421,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -3259,7 +3259,7 @@
       "status": "unsigned-request-template-ready",
       "blockers": [],
       "transaction": {
-        "version": 0,
+        "version": 1,
         "lockTime": "0",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
@@ -3269,8 +3269,8 @@
               "index": 0
             },
             "sequence": "18446744073709551615",
-            "sigOpCount": 1,
-            "computeBudget": null,
+            "sigOpCount": null,
+            "computeBudget": 30,
             "signatureScript": "",
             "signatureScriptBytes": 0
           }
@@ -3294,9 +3294,9 @@
       },
       "preservation": {
         "expectedTransactionIdAfterSigning": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
-        "originalSignedDraftFingerprint": "h-d3abb5ca",
+        "originalSignedDraftFingerprint": "h-d52df1fb",
         "strippedSignatureScriptBytes": 487,
-        "computeBudgetInputs": 0,
+        "computeBudgetInputs": 1,
         "requiredWalletChecks": [
           "Confirm kaspa-testnet-12.",
           "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",

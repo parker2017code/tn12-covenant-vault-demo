@@ -1418,7 +1418,7 @@ assert.equal(walletExternalSignerGap.summary.requests, 47);
 assert.equal(walletExternalSignerGap.summary.signedLocalDrafts, 47);
 assert.equal(walletExternalSignerGap.summary.unsignedWalletSignRequests, 0);
 assert.equal(walletExternalSignerGap.summary.payloadPreservationNeeded, 26);
-assert.equal(walletExternalSignerGap.summary.computeBudgetPreservationNeeded, 2);
+assert.equal(walletExternalSignerGap.summary.computeBudgetPreservationNeeded, 3);
 assert.ok(walletExternalSignerGap.currentTruth.some((line) => /signed local drafts/.test(line)));
 assert.ok(walletExternalSignerGap.closeGapChecklist.some((item) => item.id === "unsigned-request-schema"));
 const walletExternalSignerGapArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-gap.json", import.meta.url), "utf8"));

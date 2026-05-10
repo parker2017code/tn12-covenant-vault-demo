@@ -124,10 +124,10 @@ try {
       sigOpCount: input?.inner?.sigOpCount || input?.sigOpCount || 1
     })),
     outputs: (innerTx?.outputs || []).map(output => ({
-      amount: output?.value || output?.amount,
+      amount: extractOutputAmount(output),
       scriptPublicKey: {
-        version: 0,
-        scriptPublicKey: typeof output?.scriptPublicKey === 'string' ? output.scriptPublicKey : (output?.scriptPublicKey?.scriptPublicKey || "")
+        version: extractOutputScriptPublicKeyVersion(output),
+        scriptPublicKey: extractOutputScriptPublicKey(output)
       }
     })),
     lockTime: String(innerTx?.lockTime || 0),
@@ -213,7 +213,7 @@ try {
       `4. Use new UTXO to test settlement flows`
     ],
 
-    nextCommand: `KASPA_WRPC_URL=ws://65.108.107.30:18210 KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa node scripts/submit-escrow-funding.mjs artifacts/escrow-funding-tx.json --submit`
+    nextCommand: `KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 KASPA_WRPC_ENCODING=borsh KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa node scripts/submit-escrow-funding.mjs artifacts/escrow-funding-tx.json --submit`
   };
 
   await mkdir("artifacts", { recursive: true });
@@ -257,4 +257,27 @@ function parsePossiblyNestedJson(value) {
     parsed = JSON.parse(parsed);
   }
   return parsed;
+}
+
+function extractOutputAmount(output) {
+  const inner = output?.inner || output || {};
+  return inner.value ?? inner.amount ?? 0;
+}
+
+function extractOutputScriptPublicKey(output) {
+  const inner = output?.inner || output || {};
+  const scriptPublicKey = inner.scriptPublicKey;
+  if (typeof scriptPublicKey === "string") {
+    return scriptPublicKey.startsWith("0000") ? scriptPublicKey.slice(4) : scriptPublicKey;
+  }
+  return scriptPublicKey?.scriptPublicKey || "";
+}
+
+function extractOutputScriptPublicKeyVersion(output) {
+  const inner = output?.inner || output || {};
+  const scriptPublicKey = inner.scriptPublicKey;
+  if (typeof scriptPublicKey === "string" && scriptPublicKey.length >= 4) {
+    return Number.parseInt(scriptPublicKey.slice(0, 4), 16) || 0;
+  }
+  return Number(scriptPublicKey?.version ?? 0);
 }

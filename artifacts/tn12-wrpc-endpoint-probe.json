@@ -1,10 +1,10 @@
 {
   "schema": "tn12-wrpc-endpoint-probe/v1",
-  "generatedAt": "2026-05-10T15:05:45.550Z",
+  "generatedAt": "2026-05-10T15:43:51.695Z",
   "status": "tn12-wrpc-endpoint-probe-ready",
   "endpoint": {
-    "url": "ws://65.108.107.30:18210",
-    "encoding": "json",
+    "url": "ws://tn12-node.kaspa.com:17210",
+    "encoding": "borsh",
     "requestedNetworkId": "testnet-12"
   },
   "checks": [
@@ -36,21 +36,20 @@
   ],
   "observed": {
     "serverVersion": "1.1.1-toc.1",
-    "mempoolSize": "0",
+    "mempoolSize": "36",
     "currentNetwork": "testnet",
     "dagNetwork": "testnet-12",
-    "blockCount": "1134268",
-    "headerCount": "1134268",
-    "virtualDaaScore": "8150234",
+    "blockCount": "1158450",
+    "headerCount": "1158450",
+    "virtualDaaScore": "8174416",
     "virtualParentHashes": [
-      "ebefeacd84d3d7ab38cea85782e6bf1e437931bb986bc55a2e6134aed457f929",
-      "07f4b39d7e221ee83700e7b50075ca9b85706aec25c3b6c3836ec7ec45332ca3"
+      "c97f84f77144dbd91125c503e175c081ef38c4a6c8f75ccd4bcafac04c8df57e"
     ],
-    "sink": "ebefeacd84d3d7ab38cea85782e6bf1e437931bb986bc55a2e6134aed457f929"
+    "sink": "c97f84f77144dbd91125c503e175c081ef38c4a6c8f75ccd4bcafac04c8df57e"
   },
   "rpcCaveats": {
-    "serverInfoOk": false,
-    "serverInfoError": "RPC Server (remote error) -> RPC serde deserialization error: invalid type: integer `1`, expected an array of length 4",
+    "serverInfoOk": true,
+    "serverInfoError": "",
     "note": "getServerInfo may fail against this public endpoint while getInfo, getCurrentNetwork, and getBlockDagInfo are still usable."
   },
   "nextIndexerStep": "Use this endpoint for a bounded getVirtualChainFromBlock read only after mapping the available RpcClient method shape and preserving rollback replay.",

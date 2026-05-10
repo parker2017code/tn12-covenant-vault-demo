@@ -10,6 +10,8 @@ import { buildAttestationRegistry } from "../src/attestationSignal.mjs";
 import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.mjs";
 import { buildProofEvidence } from "../src/proofEvidence.mjs";
 import { buildStableIssuerRedemptionState } from "../src/stableIssuerRedemption.mjs";
+import { buildTreasuryConstrainedSpends } from "../src/treasuryConstrainedSpends.mjs";
+import { buildTreasuryVaultRegistry } from "../src/treasuryVault.mjs";
 
 const escrowCancelProofDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-cancel-proof-cancel.json", import.meta.url), "utf8"));
 const escrowReleaseDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-release.json", import.meta.url), "utf8"));
@@ -302,6 +304,36 @@ assert.equal(workshopPass.redeemed, 1);
 assert.equal(duplicateAccessPassPlanner.summary.acceptedRedemptions, 1);
 assert.equal(duplicateAccessPassPlanner.summary.duplicateRedemptions, 1);
 assert.equal(duplicateAccessPassPlanner.summary.missingAcceptedTxids, 1);
+
+const treasuryFixture = JSON.parse(await readFile(new URL("../fixtures/TreasuryVaults.json", import.meta.url), "utf8"));
+const overCapTreasuryRegistry = buildTreasuryVaultRegistry({
+  ...treasuryFixture,
+  vaults: treasuryFixture.vaults.map((vault) => vault.vaultId === "treasury-core-team"
+    ? {
+        ...vault,
+        payroll: vault.payroll.map((payment) => payment.paymentId === "payroll-dev-001"
+          ? { ...payment, amountTkas: 100 }
+          : payment)
+      }
+    : vault)
+});
+const overCapTreasuryDrafts = buildTreasuryConstrainedSpends({
+  treasuryRegistry: overCapTreasuryRegistry
+});
+const overCapPayrollDraft = overCapTreasuryDrafts.drafts.find((draft) => draft.id === "treasury-core-team:payroll:payroll-dev-001");
+assert.equal(overCapPayrollDraft.status, "blocked-policy-check");
+assert.equal(overCapPayrollDraft.checks.withinDailyCap, false);
+assert.equal(overCapPayrollDraft.checks.withinBalance, true);
+assert.equal(overCapTreasuryDrafts.summary.blockedDrafts > 0, true);
+
+const invalidRecoveryTreasuryRegistry = buildTreasuryVaultRegistry({
+  ...treasuryFixture,
+  vaults: treasuryFixture.vaults.map((vault) => vault.vaultId === "treasury-grants-round"
+    ? { ...vault, recoveryAddress: "invalid-recovery-address" }
+    : vault)
+});
+const invalidRecoveryVault = invalidRecoveryTreasuryRegistry.vaults.find((vault) => vault.vaultId === "treasury-grants-round");
+assert.equal(invalidRecoveryVault.checks.recoveryAddressValidShape, false);
 
 const stableIssuerFixture = JSON.parse(await readFile(new URL("../fixtures/StableIssuerRedemptions.json", import.meta.url), "utf8"));
 const signedOnlyFullRedemption = buildStableIssuerRedemptionState({

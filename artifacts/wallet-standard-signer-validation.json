@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-standard-signer-validation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:37:32.223Z",
+  "generatedAt": "2026-05-10T15:20:16.878Z",
   "status": "wallet-standard-signer-validation-ready",
   "liveExternalSignerAccepted": false,
   "summary": {

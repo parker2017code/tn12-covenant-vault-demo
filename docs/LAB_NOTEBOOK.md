@@ -53,13 +53,16 @@ General builder lessons from the escrow cancel debugging pass are tracked in [`d
 - Builds an enforcement matrix that separates script-enforced, planner/indexer, wallet-policy, documentation, and simulation-only claims.
 - Builds an escrow primitive registry and escrow Silverscript templates for buyer-approved release, DAA-score timeout refund, and mutual cancel planning.
 - Builds treasury/team vault registry state for spend caps, delayed large withdrawals, recovery, and payroll templates.
+- Builds treasury spend-cap gate artifacts and negative cases for over-cap payroll and invalid recovery addresses.
 - Builds a transparent pre-Staghunt coordination-market prototype with Stag, Intendo, Pack, toy Solver, Hunt-plan artifacts, and a settlement/app brief.
 - Builds KRC/access-pass planner state for issuer-backed coupons, memberships, tickets, and redeemable claims.
+- Builds access-pass gate artifacts and negative cases for duplicate redemptions, missing txids, and expired redemptions.
 - Builds a mainnet-readiness map that separates payment/indexer paths from TN12/Toccata covenant paths.
 - Builds simple asset policy artifacts for issuer-indexed assets now and possible covenant-native assets later.
 - Builds an auction/intent prototype for accepted bid payloads, planner-side winner selection, and refund planning.
 - Builds a DeFi research backlog for swaps, lending, stable-value, insurance, derivatives, prediction hedges, and portfolio automation.
 - Builds an AI-agent commitment board for task offers, deposits, completion proofs, disputes, release planning, and refund planning.
+- Builds auction settlement logic, coordination-market custody notes, oracle gate notes, and operator guides for escrow, batch assurance, and wallet submit.
 - Builds a repo-level build-status map for what is built, blocked, naturally next, and research-only.
 
 ## Next Rails
