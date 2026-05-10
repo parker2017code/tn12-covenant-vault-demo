@@ -1,0 +1,274 @@
+{
+  "schema": "tn12-agent-settlement-orchestration/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T14:55:00Z",
+  "status": "spec-ready-for-agent-implementation",
+  "title": "Agent-Driven Settlement Orchestration",
+  "description": "Claude Code + Codex orchestrate covenant settlement flows with live TN12 submission and fallback to sim-validated paths.",
+
+  "systemArchitecture": {
+    "claude-code": {
+      "role": "Orchestrator",
+      "responsibilities": [
+        "Receive settlement request (escrow/batch-assurance/auction)",
+        "Build unsigned covenant drafts",
+        "Delegate to external signer (OpenClaw KasWare or local sim)",
+        "Assemble and submit signed drafts",
+        "Track TN12 acceptance"
+      ],
+      "tools": [
+        "Read/Write (local artifacts)",
+        "Bash (npm scripts for covenant/draft building)",
+        "WebSearch (TN12 testnet status)",
+        "Agent (spawn Codex for parallel bid validation)"
+      ]
+    },
+    "codex": {
+      "role": "Parallel worker",
+      "responsibilities": [
+        "Validate bid amounts against reserve",
+        "Audit role-key assignments",
+        "Review settlement output splitting",
+        "Generate settlement decision artifacts"
+      ],
+      "trigger": "openclaw coding-agent skill"
+    },
+    "openclaw": {
+      "role": "External signer gateway",
+      "responsibilities": [
+        "Drive KasWare for wallet signing",
+        "Fall back to local sim if wallet unavailable",
+        "Return signature bytes to Claude"
+      ],
+      "skill": "tn12-kaswore-signer"
+    }
+  },
+
+  "orchestrationFlows": [
+    {
+      "flowName": "Escrow Release (happy path)",
+      "actors": ["claude-code", "openclaw (kaswore)", "tn12-node"],
+      "steps": [
+        {
+          "step": 1,
+          "actor": "claude-code",
+          "action": "Read escrow UTXO and settlement parameters",
+          "input": "artifacts/escrow-marketplace-action-map.json",
+          "output": "escrow state loaded"
+        },
+        {
+          "step": 2,
+          "actor": "claude-code",
+          "action": "Build unsigned covenant spend draft",
+          "input": "escrow UTXO, settlement role addresses",
+          "output": "artifacts/unsigned-drafts/escrow-release.json"
+        },
+        {
+          "step": 3,
+          "actor": "openclaw (kaswore)",
+          "action": "Sign covenant spend with KasWare",
+          "input": "unsigned draft",
+          "output": "signature bytes + signed tx"
+        },
+        {
+          "step": 4,
+          "actor": "claude-code",
+          "action": "Assemble final signed draft",
+          "input": "unsigned + signature",
+          "output": "artifacts/signed-drafts/escrow-release.json"
+        },
+        {
+          "step": 5,
+          "actor": "claude-code",
+          "action": "Submit via TN12 wRPC endpoint",
+          "input": "signed draft, KASPA_WRPC_URL",
+          "output": "txid, accepting block blue score"
+        },
+        {
+          "step": 6,
+          "actor": "claude-code",
+          "action": "Record settlement acceptance",
+          "input": "txid from step 5",
+          "output": "artifacts/settlement-acceptance-log.json"
+        }
+      ],
+      "successCriteria": [
+        "Draft txid matches expected fingerprint",
+        "Signature preserved through roundtrip",
+        "Submit returns accepted txid",
+        "Role-separated outputs confirmed in DAG"
+      ],
+      "fallback": [
+        "If KasWare unavailable: use local sim (status: sim-validated)",
+        "If TN12 endpoint down: queue for replay (status: signed-not-broadcast)",
+        "If signature mismatch: trigger MPC recovery flow"
+      ]
+    },
+    {
+      "flowName": "Batch-Assurance Settlement (parallel release + refunds)",
+      "actors": ["claude-code", "codex (parallel validation)", "openclaw"],
+      "steps": [
+        {
+          "step": 1,
+          "actor": "codex",
+          "action": "Validate pledge outputs against custody imports",
+          "input": "batch custody drafts",
+          "output": "validation report (concurrent)"
+        },
+        {
+          "step": 2,
+          "actor": "claude-code",
+          "action": "Build release + N refund drafts in parallel",
+          "input": "custody validation + pledge wallets",
+          "output": "N+1 unsigned drafts"
+        },
+        {
+          "step": 3,
+          "actor": "openclaw",
+          "action": "Sign each draft batch",
+          "input": "N+1 unsigned drafts",
+          "output": "N+1 signatures (parallel)"
+        },
+        {
+          "step": 4,
+          "actor": "claude-code",
+          "action": "Assemble signed drafts",
+          "input": "unsigned + signatures",
+          "output": "signed-drafts/"
+        },
+        {
+          "step": 5,
+          "actor": "claude-code",
+          "action": "Submit mutually exclusive path (release OR all refunds)",
+          "input": "one settlement path chosen",
+          "output": "txid for release -or- N txids for refunds"
+        }
+      ],
+      "concurrency": {
+        "validation": "Codex validates while Claude builds drafts",
+        "signing": "OpenClaw signs multiple drafts in batch",
+        "submission": "Sequential (mutual exclusivity enforced)"
+      }
+    },
+    {
+      "flowName": "Auction Settlement (with OpenClaw fallback to sim)",
+      "actors": ["claude-code", "openclaw (kaswore fallback)", "tn12-node"],
+      "steps": [
+        {
+          "step": 1,
+          "actor": "claude-code",
+          "action": "Build unsigned auction settlement covenant spend",
+          "input": "highest-bid UTXO, seller/buyer addresses",
+          "output": "unsigned-drafts/auction-settlement.json"
+        },
+        {
+          "step": 2,
+          "actor": "openclaw",
+          "action": "Try KasWare signing; fall back to sim if unavailable",
+          "input": "unsigned draft",
+          "fallback": {
+            "condition": "KasWare unavailable or timeout > 30s",
+            "action": "Use buildWalletExternalSignerSim()",
+            "status": "sim-validated (not-broadcast)"
+          },
+          "output": "signature -or- sim-validated status"
+        },
+        {
+          "step": 3,
+          "actor": "claude-code",
+          "action": "Check signature source (live vs sim)",
+          "input": "signature origin",
+          "decision": "if live-signed → submit now; if sim-validated → queue for manual approval"
+        },
+        {
+          "step": 4,
+          "actor": "claude-code (or operator)",
+          "action": "Submit settlement spend to TN12",
+          "input": "signed draft (live-signed only)",
+          "output": "txid + acceptance confirmation"
+        }
+      ],
+      "fallbackPath": {
+        "trigger": "KasWare unavailable or timeout",
+        "action": "Generate sim-validated artifact",
+        "output": "artifacts/auction-settlement-sim-validated.json",
+        "status": "ready-for-manual-signing",
+        "nextStep": "User loads artifact in KasWare manually when wallet available"
+      }
+    }
+  ],
+
+  "errorHandling": [
+    {
+      "error": "Draft txid mismatch after signing",
+      "cause": "Payload corruption or budget field change",
+      "recovery": "Rebuild draft from scratch, re-sign"
+    },
+    {
+      "error": "TN12 submit rejected (script validation failed)",
+      "cause": "Role key mismatch or input budget incorrect",
+      "recovery": "Review covenant constraints, audit role key assignments, retry"
+    },
+    {
+      "error": "KasWare timeout (no response after 60s)",
+      "cause": "Wallet locked, user not responding, or browser crashed",
+      "recovery": "Fall back to sim, alert user, retry with manual approval"
+    },
+    {
+      "error": "Signature bytes corrupted in roundtrip",
+      "cause": "Encoding mismatch (hex vs base64)",
+      "recovery": "Verify roundtrip encoding, normalize, re-sign"
+    }
+  ],
+
+  "integrationPoints": [
+    {
+      "name": "OpenClaw KasWare skill",
+      "interface": "openclaw coding-agent skill tn12-kaswore-signer",
+      "inputs": ["unsigned draft paths", "kaswore tab ID"],
+      "outputs": ["signatures map", "signed drafts"]
+    },
+    {
+      "name": "Codex validation parallelization",
+      "interface": "Agent(subagent_type: 'general-purpose', prompt: 'validate custody imports...')",
+      "inputs": ["custody draft", "accepted outputs"],
+      "outputs": ["validation report"]
+    },
+    {
+      "name": "TN12 wRPC submission",
+      "interface": "scripts/submit-signed-draft-wrpc.mjs",
+      "inputs": ["signed draft path", "KASPA_WRPC_URL"],
+      "outputs": ["txid", "blue score"]
+    },
+    {
+      "name": "Settlement acceptance logging",
+      "interface": "artifacts/settlement-acceptance-log.json",
+      "inputs": ["txid", "timestamp", "flow name"],
+      "outputs": ["transaction receipt record"]
+    }
+  ],
+
+  "statusLabels": {
+    "live-signed": "Signed by KasWare or external signer; ready for TN12 submission",
+    "sim-validated": "Signature structure validated by local sim; no live keys involved",
+    "signed-not-broadcast": "Signed locally but not submitted to TN12 (safety hold)",
+    "accepted-tn12": "Settlement transaction accepted on kaspa-testnet-12; txid confirmed"
+  },
+
+  "boundaries": [
+    "Agent orchestration is non-custodial: keys remain in wallet (KasWare) or local test environment (.local/)",
+    "Fallback to sim is transient: when KasWare available again, operator can re-sign for live submission",
+    "Mutual exclusivity enforcement (release vs refunds) is covenant-script driven; agent just picks the path",
+    "Settlement ordering (escrow → batch → auction) is app-layer; agent handles each independently",
+    "TN12 endpoint availability is external dependency; agent logs and retries on failure"
+  ],
+
+  "nextSteps": [
+    "1. Test escrow release flow end-to-end (unsigned → signed → submitted)",
+    "2. Load KasWare extension and run with live OpenClaw signing",
+    "3. Test fallback (disable KasWare, verify sim-validated path)",
+    "4. Run batch-assurance with Codex parallel validation",
+    "5. Test auction settlement with mutual exclusivity enforcement",
+    "6. Scale to 10+ concurrent settlement flows"
+  ]
+}

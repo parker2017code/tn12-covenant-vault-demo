@@ -1,0 +1,174 @@
+{
+  "schema": "tn12-auction-settlement-covenant-spec/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T14:50:00Z",
+  "status": "spec-ready-for-contract-build",
+  "title": "Auction Settlement Covenant Contract",
+  "description": "Validates highest-bidder payload, enforces reserve met, locks seller/buyer outputs, authorizes settlement.",
+
+  "roles": {
+    "auctioneer": {
+      "responsibility": "Configure auction parameters, start/end, reserve price",
+      "keys": "auctioneers[0]"
+    },
+    "highestBidder": {
+      "responsibility": "Provide winning bid tx, sign settlement covenant spend",
+      "keys": "bidder-key (from winning-bid-payload)"
+    },
+    "seller": {
+      "responsibility": "Approve winning bid, authorize payout release",
+      "keys": "seller-key (role-separated)"
+    },
+    "witness": {
+      "responsibility": "Validate reserve met, confirm bid ordering",
+      "keys": "witness-key (optional, 1-of-2 sig endorsement)"
+    }
+  },
+
+  "stateTransitions": [
+    {
+      "from": "auction-open",
+      "to": "auction-closed",
+      "trigger": "end-block-reached",
+      "action": "Lock highest-bid payload as pending-settlement",
+      "guards": ["DAA score >= end-score", "highest-bid amount cached"]
+    },
+    {
+      "from": "auction-closed",
+      "to": "settlement-accepted",
+      "trigger": "settlement-spend-accepted-on-tn12",
+      "action": "Release seller payout, award item to buyer",
+      "guards": [
+        "settlement-tx spends highest-bid UTXO",
+        "payload commitment matches auction winner",
+        "seller signed payout release",
+        "reserve price met (bidAmount >= reservePrice)",
+        "role-separated outputs locked (seller-receipt, buyer-item-receipt)"
+      ]
+    },
+    {
+      "from": "auction-closed",
+      "to": "auction-cancelled",
+      "trigger": "seller-cancel (DAA-score timeout) OR reserve-not-met",
+      "action": "Refund high bidders, unlock reserve",
+      "guards": [
+        "2-of-3 seller/auctioneer/witness approval",
+        "refund amounts match original bid UTXOs"
+      ]
+    }
+  ],
+
+  "payloadSchema": {
+    "kind": "auction-winning-bid",
+    "auctionId": "string (uuid or hash)",
+    "highestBidderAddress": "kaspatest:xxx",
+    "bidAmountSompi": "string (big int)",
+    "itemDescription": "string",
+    "auctionEndBlock": "number (DAA score)",
+    "timestampUtc": "ISO8601",
+    "sellerSignature": "hex (EdDSA signature proof)"
+  },
+
+  "covenantInputs": [
+    {
+      "name": "highest-bid-utxo",
+      "purpose": "Locked bid output from auctioneer funding",
+      "amount": "reserve-price minimum",
+      "script": "covenant-script-hash (validates settlement spend)",
+      "computeBudget": 30,
+      "sigOpCount": 1
+    }
+  ],
+
+  "covenantOutputs": [
+    {
+      "name": "seller-payout-receipt",
+      "role": "seller",
+      "address": "role-separated-seller-key",
+      "amount": "bid-amount - miner-fee",
+      "label": "receipt-for-payout-tracking"
+    },
+    {
+      "name": "buyer-item-receipt",
+      "role": "buyer",
+      "address": "role-separated-buyer-key",
+      "amount": "1 sompi (receipt marker)",
+      "label": "receipt-for-item-delivery-proof"
+    },
+    {
+      "name": "change-to-auctioneer",
+      "role": "auctioneer",
+      "address": "auctioneer-key",
+      "amount": "remainder",
+      "condition": "if bid-amount < reserve, refund to bidder instead"
+    }
+  ],
+
+  "settlementValidation": {
+    "checks": [
+      {
+        "name": "payload-commitment-match",
+        "check": "settlement-tx payload.auctionId === auction-config.auctionId",
+        "enforced": "covenant-script (script-enforced)"
+      },
+      {
+        "name": "reserve-price-check",
+        "check": "bidAmount >= reservePrice",
+        "enforced": "covenant-script (prevent below-reserve settlement)"
+      },
+      {
+        "name": "role-separated-outputs",
+        "check": "seller-output spends to seller-role-key, buyer-output to buyer-role-key",
+        "enforced": "covenant-script (role-key-lock)"
+      },
+      {
+        "name": "input-outpoint-match",
+        "check": "settlement-tx input.prevTxid matches highest-bid UTXO txid",
+        "enforced": "covenant-script (outpoint validation)"
+      },
+      {
+        "name": "signature-authority",
+        "check": "settlement-spend signed by seller-key",
+        "enforced": "standard-signature (wallet-signing via KasWare or signer-sim)"
+      }
+    ]
+  },
+
+  "implementation": {
+    "reusablePattern": "role-separated-funding from escrow covenant",
+    "scriptTemplate": "tn12-auction-settlement.silverscript",
+    "dependencies": [
+      "src/auctionContract.mjs (placeholder — new file)",
+      "src/roleKeyLocking.mjs (reuse from escrow)",
+      "src/covenantInputValidation.mjs (standard)"
+    ],
+    "testing": {
+      "happy-path": [
+        "1. Fund highest-bid UTXO",
+        "2. Build settlement-spend tx with seller/buyer payouts",
+        "3. Sign settlement-spend with seller-key",
+        "4. Submit to TN12, verify acceptance"
+      ],
+      "sad-path": [
+        "1. Try settlement with bid < reserve → should fail script validation",
+        "2. Try settlement with wrong bidder signature → should fail sig check",
+        "3. Try settlement with mismatched auction ID → should fail payload check"
+      ]
+    }
+  },
+
+  "boundaries": [
+    "Auction-setup (open/close) happens off-covenant via timestamps/DAA scores; settlement covenant only handles the close-to-payout transition.",
+    "Highest-bid tracking (ordering) is app-layer responsibility; covenant trusts the payload commitment.",
+    "Multi-bid management (refunds of losing bids) happens separately; settlement covenant focuses on winner payout.",
+    "Seller can cancel before settlement (custody control); after settlement-tx accepted, refund requires 2-of-3 approval."
+  ],
+
+  "nextSteps": [
+    "1. Define auctionContract.mjs with settlement payload validation",
+    "2. Write Silverscript covenant that enforces role-separated outputs",
+    "3. Generate settlement-drafts (unsigned) that spend highest-bid UTXO",
+    "4. Test happy/sad paths with local TN12 wasm",
+    "5. Integrate with OpenClaw KasWare signing (seller approval step)"
+  ]
+}
