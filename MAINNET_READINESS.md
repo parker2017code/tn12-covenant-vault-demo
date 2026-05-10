@@ -41,6 +41,12 @@ This document is the canonical place for mainnet deployment readiness, not TN12 
 | Escrow marketplace demo | Proves the accepted escrow primitives can be shown as a usable product slice | A clean demo that moves through funding and one selected settlement path |
 | Wallet/indexer hardening | Mainnet deployment needs operational reliability, not more proof artifacts | Better submit validation, replay safety, and state promotion rules |
 
+## Batch-assurance recommendation
+
+- Exercise `release` first.
+- Why: the repo already has accepted custody outputs, signed-not-broadcast release and refund drafts, and the operator guide treats release as the happy-path settlement when the accepted pledge outputs match the target.
+- What would prove it: one accepted release submit, a post-submit alternate-path update that marks refund unavailable for that pledge set, and the corresponding checkpoint/replay evidence.
+
 ## What I can do without user input
 
 - Inspect repo artifacts, docs, checks, and replay assumptions
