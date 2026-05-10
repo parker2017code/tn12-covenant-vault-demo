@@ -1,0 +1,65 @@
+{
+  "schema": "tn12-escrow-release-orchestration-summary/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T14:49:06.004Z",
+  "status": "awaiting-kaswore-signature",
+  "escrowId": "escrow-freelance-001",
+  "releaseAction": {
+    "action": "release",
+    "status": "sim-validated",
+    "unsignedRequestId": "ureq-fda320a9",
+    "walletStandardRequestId": "ureq-fda320a9-standard",
+    "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-release.json",
+    "reviewFingerprint": "92ffa8b1ad17f0fa1230370772c9ae11837162e6b86371e1e9f3df1e33617844",
+    "blockers": [
+      "sim-validated only — live external signer still required for submission"
+    ]
+  },
+  "roundtripPlan": {
+    "schema": "tn12-kaswore-roundtrip-plan/v1",
+    "network": "kaspa-testnet-12",
+    "generatedAt": "2026-05-10T14:49:06.003Z",
+    "escrowId": "escrow-freelance-001",
+    "releaseAction": {
+      "requestId": "ureq-fda320a9",
+      "expectedTxid": "92ffa8b1ad17f0fa1230370772c9ae11837162e6b86371e1e9f3df1e33617844",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-release.json",
+      "payloadBytes": 0
+    },
+    "instructions": {
+      "step1": "KasWare should display the unsigned transaction payload",
+      "step2": "Verify amount matches escrow release (seller receives payout)",
+      "step3": "Sign and confirm in KasWare",
+      "step4": "Return signature bytes to orchestrator"
+    }
+  },
+  "kasworeRequest": {
+    "schema": "tn12-kaswore-signing-request/v1",
+    "timestamp": "2026-05-10T14:49:06.004Z",
+    "flowName": "escrow-release",
+    "escrowId": "escrow-freelance-001",
+    "unsignedDraftPath": "artifacts/signed-drafts/role-escrow-release.json",
+    "expectedSignature": "KasWare will provide",
+    "fallback": {
+      "enabled": true,
+      "strategy": "use-local-sim-if-timeout",
+      "timeoutMs": 30000
+    }
+  },
+  "nextSteps": [
+    "1. OpenClaw KasWare skill is awaiting signature",
+    "2. Confirm signature received matches expected fingerprint",
+    "3. Assemble final signed draft",
+    "4. Submit to TN12 via wRPC"
+  ],
+  "liveSigningPath": {
+    "method": "OpenClaw CDP → KasWare extension",
+    "expectedFlow": "unsigned-tx → KasWare sign button → signature extraction → callback",
+    "status": "ready-to-orchestrate"
+  },
+  "simValidatedPath": {
+    "method": "Local cryptographic validation (no live keys)",
+    "status": "available-as-fallback",
+    "readyForManualKaswareWhenOnline": true
+  }
+}
