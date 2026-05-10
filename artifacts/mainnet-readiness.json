@@ -1,6 +1,6 @@
 {
   "schema": "kaspa-app-mainnet-readiness/v1",
-  "reviewedAt": "2026-05-07",
+  "reviewedAt": "2026-05-10",
   "status": "readiness-map-not-launch-approval",
   "sources": [
     "https://docs.kaspa.org/",
