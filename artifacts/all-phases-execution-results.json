@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-05-10T18:19:55.099Z",
+  "phases": [
+    {
+      "phase": 2,
+      "status": "PARTIAL"
+    },
+    {
+      "phase": "5a",
+      "status": "PARTIAL"
+    },
+    {
+      "phase": "5b",
+      "game": "Stag Hunt",
+      "status": "ERROR"
+    },
+    {
+      "phase": "5b",
+      "game": "PD",
+      "status": "ERROR"
+    },
+    {
+      "phase": "5b",
+      "game": "Pure Coord",
+      "status": "ERROR"
+    },
+    {
+      "phase": 4,
+      "status": "KASWORE_READY"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "txid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "index": 0,
+  "amount": 2500,
+  "buyer": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+  "seller": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+  "buyerPrivateKey": "3ad8dfc3191e0046c47f0c6b716a7e689cd8f57f8caf2eccb83bf95c0d7d866a",
+  "sellerPrivateKey": "d5c7b70582287dca2485248b8728be581eb81b5694c43d5508fe000fd90e56e8",
+  "refundTime": 5400000,
+  "minerFee": 5000
+}

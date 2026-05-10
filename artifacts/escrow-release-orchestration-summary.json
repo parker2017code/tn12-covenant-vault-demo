@@ -1,7 +1,7 @@
 {
   "schema": "tn12-escrow-release-orchestration-summary/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T14:49:06.004Z",
+  "generatedAt": "2026-05-10T18:20:08.541Z",
   "status": "awaiting-kaswore-signature",
   "escrowId": "escrow-freelance-001",
   "releaseAction": {
@@ -18,7 +18,7 @@
   "roundtripPlan": {
     "schema": "tn12-kaswore-roundtrip-plan/v1",
     "network": "kaspa-testnet-12",
-    "generatedAt": "2026-05-10T14:49:06.003Z",
+    "generatedAt": "2026-05-10T18:20:08.540Z",
     "escrowId": "escrow-freelance-001",
     "releaseAction": {
       "requestId": "ureq-fda320a9",
@@ -35,7 +35,7 @@
   },
   "kasworeRequest": {
     "schema": "tn12-kaswore-signing-request/v1",
-    "timestamp": "2026-05-10T14:49:06.004Z",
+    "timestamp": "2026-05-10T18:20:08.541Z",
     "flowName": "escrow-release",
     "escrowId": "escrow-freelance-001",
     "unsignedDraftPath": "artifacts/signed-drafts/role-escrow-release.json",

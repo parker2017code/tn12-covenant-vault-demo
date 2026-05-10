@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-05-10T18:19:06.977Z",
+  "phases": {
+    "phase2": {
+      "phase": "2-escrow-resubmission",
+      "status": "EXECUTING",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Build signed escrow drafts",
+          "command": "ESCROW_CONTRACT_OUTPOINT=fixtures/FreshEscrowContractOutpoint.json node scripts/build-signed-escrow-spend-drafts.mjs",
+          "expected": "release_draft.json, refund_draft.json, cancel_draft.json"
+        },
+        {
+          "step": 2,
+          "action": "Submit to TN12",
+          "command": "node scripts/phase-2-submit-escrow-tn12.mjs",
+          "expected": "3 txids submitted"
+        },
+        {
+          "step": 3,
+          "action": "Verify acceptance",
+          "command": "npm run tx:verify",
+          "expected": "3 new txids accepted"
+        }
+      ]
+    },
+    "phase5a": {
+      "phase": "5a-auction-settlement",
+      "status": "EXECUTING",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Build auction settlement",
+          "inputs": {
+            "seller": "kaspatest:qp2vxrdg3cr2wthd686yt7jzeqkx3sx54t49sug2hsrlmmwpk8rxjdc965u5y",
+            "bidder": "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
+            "reserve": 1000,
+            "bid": 2000
+          }
+        },
+        {
+          "step": 2,
+          "action": "Sign with both keys",
+          "inputs": "seller + bidder signatures"
+        },
+        {
+          "step": 3,
+          "action": "Submit settlement",
+          "expected": "1 auction txid"
+        }
+      ]
+    },
+    "phase5b": {
+      "phase": "5b-coordination-games",
+      "status": "EXECUTING",
+      "games": [
+        {
+          "game": "Stag Hunt",
+          "type": 0,
+          "player1": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
+          "player2": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9",
+          "expected": "1 txid"
+        },
+        {
+          "game": "Prisoner's Dilemma",
+          "type": 1,
+          "player1": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
+          "player2": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+          "expected": "1 txid"
+        },
+        {
+          "game": "Pure Coordination",
+          "type": 2,
+          "player1": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9",
+          "player2": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+          "expected": "1 txid"
+        }
+      ]
+    },
+    "phase4": {
+      "phase": "4-external-wallet-signing",
+      "status": "EXECUTING_WITH_OPENCLAW",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Test KasWare signing",
+          "command": "node scripts/test-kaswore-signing.mjs",
+          "note": "OpenClaw automates: Browser opens → KasWare → Sign approval"
+        },
+        {
+          "step": 2,
+          "action": "Use KasWare for escrow settlement",
+          "command": "SIGNER_TYPE=kaswore ESCROW_CONTRACT_OUTPOINT=fixtures/FreshEscrowContractOutpoint.json node scripts/build-signed-escrow-spend-drafts.mjs",
+          "note": "Signs with external wallet, not local key"
+        },
+        {
+          "step": 3,
+          "action": "Submit wallet-signed txs",
+          "expected": "3+ wallet-signed txids"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "status": "READY_TO_EXECUTE",
+    "phases_ready": 4,
+    "total_expected_txids": 21,
+    "blocking_factors": "None (all keys + fixtures ready, OpenClaw configured)"
+  }
+}

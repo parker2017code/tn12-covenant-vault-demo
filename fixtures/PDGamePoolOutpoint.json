@@ -1,0 +1,11 @@
+{
+  "txid": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "index": 0,
+  "amount": 2500,
+  "player1": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
+  "player2": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+  "player1PrivateKey": "56b947540c4f4127da5707233e875c5b5169a5912b6437d57f45b939d8a7bcae",
+  "player2PrivateKey": "66a81fff37c56b4d9b821bf020b500f2e3f55219f80b5d0535d9ebcb8be76c33",
+  "gameType": 1,
+  "minerFee": 5000
+}
