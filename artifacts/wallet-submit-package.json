@@ -3,11 +3,11 @@
   "network": "kaspa-testnet-12",
   "status": "wallet-submit-package-ready",
   "summary": {
-    "total": 47,
-    "payloadDrafts": 26,
+    "total": 50,
+    "payloadDrafts": 29,
     "contractDrafts": 19,
     "localSecretFields": 0,
-    "ready": 47
+    "ready": 50
   },
   "routePolicy": {
     "payload": "Use payload-preserving JSON wRPC or wallet submit. Do not use public REST submit for payload drafts.",
@@ -43,6 +43,78 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-receipt-self-send.json",
         "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-receipt-self-send.json --submit"
+      },
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action.",
+        "Reject public REST payload submit."
+      ]
+    },
+    {
+      "path": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+      "label": "DeFi v1 repeat receipt",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "transactionId": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "status": "wallet-submit-ready",
+      "route": "payload-preserving-wrpc-or-wallet",
+      "payload": {
+        "present": true,
+        "bytes": 150,
+        "routeReady": true
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json --submit"
+      },
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action.",
+        "Reject public REST payload submit."
+      ]
+    },
+    {
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+      "label": "DeFi v1 multi-wallet A receipt",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "status": "wallet-submit-ready",
+      "route": "payload-preserving-wrpc-or-wallet",
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "routeReady": true
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json --submit"
+      },
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action.",
+        "Reject public REST payload submit."
+      ]
+    },
+    {
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+      "label": "DeFi v1 multi-wallet B receipt",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "transactionId": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "status": "wallet-submit-ready",
+      "route": "payload-preserving-wrpc-or-wallet",
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "routeReady": true
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json --submit"
       },
       "requiredWalletChecks": [
         "Confirm kaspa-testnet-12.",
@@ -679,7 +751,7 @@
       "label": "Role-separated proof funding",
       "lane": "role-separated-funding",
       "class": "funding",
-      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "transactionId": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -702,7 +774,7 @@
       "label": "Role-separated vault withdrawal",
       "lane": "vault-withdrawal",
       "class": "contract-proof",
-      "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+      "transactionId": "180d4ecf6ce5a858a2f85237582c2e565dbac719624699a74eb271b3ea634e6b",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -726,7 +798,7 @@
       "label": "Role-separated vault recovery",
       "lane": "vault-recovery",
       "class": "contract-proof",
-      "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "transactionId": "15c980f3fd7371cb5f32f80f0b155f70386b6df13e8df8c5c59b177c6bbbb656",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -750,7 +822,7 @@
       "label": "Role-separated assurance release",
       "lane": "assurance-release",
       "class": "contract-proof",
-      "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "transactionId": "55c365ae920b29de08666a5649ee8a75a854a83b2adb247cff040bd2a6b6bba6",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -774,7 +846,7 @@
       "label": "Role-separated assurance refund",
       "lane": "assurance-refund",
       "class": "contract-proof",
-      "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+      "transactionId": "5931ffa2c04318f46fc1d3cb98c8c0bccecfd8f33d1fe4da4ef6b216766ec740",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -798,7 +870,7 @@
       "label": "Role-separated escrow release",
       "lane": "escrow-release",
       "class": "contract-proof",
-      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "transactionId": "3550475ff95e472a8ec8f50bfb2a40f8d38e90e2f69cdf8ceb6d1d51cd1e1379",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -822,7 +894,7 @@
       "label": "Role-separated escrow refund",
       "lane": "escrow-refund",
       "class": "contract-proof",
-      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "transactionId": "aed75c6b897e16bdeb9f835d3a4ce537158e6061aba14bddc4e63a448eec0b96",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -846,7 +918,7 @@
       "label": "Role-separated escrow cancel",
       "lane": "escrow-cancel",
       "class": "contract-proof",
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -990,7 +1062,7 @@
       "label": "Escrow release",
       "lane": "escrow-release",
       "class": "contract-proof",
-      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "transactionId": "3a785b49bf8e63f15a136d2f454aab22d5f9c3beb4efdcb905166106d357a999",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -1014,7 +1086,7 @@
       "label": "Escrow refund",
       "lane": "escrow-refund",
       "class": "contract-proof",
-      "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+      "transactionId": "4495b59886fa68356de2c44a27a950132436b2dbeff79c2d2cc9b80098dc8a7d",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -1038,7 +1110,7 @@
       "label": "Escrow cancel",
       "lane": "escrow-cancel",
       "class": "contract-proof",
-      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "transactionId": "5929cf73639bd1003c564446320040fc30ef17b560fb6688505b699a9f3a757d",
       "status": "wallet-submit-ready",
       "route": "exact-transaction-wallet",
       "payload": {
@@ -1180,6 +1252,78 @@
       ]
     },
     {
+      "path": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+      "label": "DeFi v1 repeat receipt",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "transactionId": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "status": "wallet-submit-ready",
+      "route": "payload-preserving-wrpc-or-wallet",
+      "payload": {
+        "present": true,
+        "bytes": 150,
+        "routeReady": true
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json --submit"
+      },
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action.",
+        "Reject public REST payload submit."
+      ]
+    },
+    {
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+      "label": "DeFi v1 multi-wallet A receipt",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "status": "wallet-submit-ready",
+      "route": "payload-preserving-wrpc-or-wallet",
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "routeReady": true
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json --submit"
+      },
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action.",
+        "Reject public REST payload submit."
+      ]
+    },
+    {
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+      "label": "DeFi v1 multi-wallet B receipt",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "class": "payload-app-state",
+      "transactionId": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "status": "wallet-submit-ready",
+      "route": "payload-preserving-wrpc-or-wallet",
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "routeReady": true
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json --submit"
+      },
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action.",
+        "Reject public REST payload submit."
+      ]
+    },
+    {
       "path": "artifacts/signed-drafts/payload-refund-self-send.json",
       "label": "Payload refund self-send",
       "lane": "tn12-signed-payload-receipt-draft/v1",
@@ -1195,78 +1339,6 @@
       "submit": {
         "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-refund-self-send.json",
         "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-refund-self-send.json --submit"
-      },
-      "requiredWalletChecks": [
-        "Confirm kaspa-testnet-12.",
-        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
-        "Require explicit user action.",
-        "Reject public REST payload submit."
-      ]
-    },
-    {
-      "path": "artifacts/signed-drafts/payload-error-self-send.json",
-      "label": "Payload error self-send",
-      "lane": "tn12-signed-payload-receipt-draft/v1",
-      "class": "payload-app-state",
-      "transactionId": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
-      "status": "wallet-submit-ready",
-      "route": "payload-preserving-wrpc-or-wallet",
-      "payload": {
-        "present": true,
-        "bytes": 130,
-        "routeReady": true
-      },
-      "submit": {
-        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-error-self-send.json",
-        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-error-self-send.json --submit"
-      },
-      "requiredWalletChecks": [
-        "Confirm kaspa-testnet-12.",
-        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
-        "Require explicit user action.",
-        "Reject public REST payload submit."
-      ]
-    },
-    {
-      "path": "artifacts/signed-drafts/payload-access-pass-redemption.json",
-      "label": "Access pass redemption payload",
-      "lane": "tn12-signed-payload-receipt-draft/v1",
-      "class": "payload-app-state",
-      "transactionId": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
-      "status": "wallet-submit-ready",
-      "route": "payload-preserving-wrpc-or-wallet",
-      "payload": {
-        "present": true,
-        "bytes": 159,
-        "routeReady": true
-      },
-      "submit": {
-        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-access-pass-redemption.json",
-        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-access-pass-redemption.json --submit"
-      },
-      "requiredWalletChecks": [
-        "Confirm kaspa-testnet-12.",
-        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
-        "Require explicit user action.",
-        "Reject public REST payload submit."
-      ]
-    },
-    {
-      "path": "artifacts/signed-drafts/payload-auction-bid-pass-001.json",
-      "label": "Auction bid pass 001 payload",
-      "lane": "tn12-signed-payload-receipt-draft/v1",
-      "class": "payload-app-state",
-      "transactionId": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
-      "status": "wallet-submit-ready",
-      "route": "payload-preserving-wrpc-or-wallet",
-      "payload": {
-        "present": true,
-        "bytes": 122,
-        "routeReady": true
-      },
-      "submit": {
-        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/payload-auction-bid-pass-001.json",
-        "reviewedSubmitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-auction-bid-pass-001.json --submit"
       },
       "requiredWalletChecks": [
         "Confirm kaspa-testnet-12.",

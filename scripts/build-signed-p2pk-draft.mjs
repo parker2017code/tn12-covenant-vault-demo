@@ -28,6 +28,8 @@ if (wallet.address !== funding.address || !wallet.address.startsWith("kaspatest:
 }
 
 const address = new Address(wallet.address);
+const destinationAddress = process.env.DESTINATION_ADDRESS || wallet.address;
+const destinationXOnlyPublicKey = process.env.DESTINATION_XONLY_PUBLIC_KEY || wallet.xOnlyPublicKey || "";
 const fundingSompi = BigInt(funding.raw.utxoEntry.amount);
 const changeSompi = fundingSompi - amountSompi - minerFeeSompi;
 
@@ -36,6 +38,7 @@ if (changeSompi <= 0n) {
 }
 
 const sourceScript = scriptPublicKeyFromHex(funding.raw.utxoEntry.scriptPublicKey.scriptPublicKey);
+const destinationScript = p2pkScriptFromXOnly(destinationXOnlyPublicKey);
 const entries = new UtxoEntries([{
   address,
   outpoint: funding.raw.outpoint,
@@ -57,7 +60,7 @@ const tx = new Transaction({
     })
   ],
   outputs: [
-    new TransactionOutput(amountSompi, sourceScript),
+    new TransactionOutput(amountSompi, destinationScript),
     new TransactionOutput(changeSompi, sourceScript)
   ],
   lockTime: 0n,
@@ -82,7 +85,7 @@ const artifact = {
     amountTkas: funding.amountTkas
   },
   payment: {
-    to: wallet.address,
+    to: destinationAddress,
     amountTkas,
     amountSompi: amountSompi.toString(),
     changeTkas: sompiToTkas(changeSompi),
@@ -101,6 +104,14 @@ console.log(`transactionId=${artifact.transactionId}`);
 
 function scriptPublicKeyFromHex(hex) {
   return new ScriptPublicKey(0, Uint8Array.from(hex.match(/../g).map((chunk) => Number.parseInt(chunk, 16))));
+}
+
+function p2pkScriptFromXOnly(xOnlyPublicKey) {
+  const keyBytes = Uint8Array.from(String(xOnlyPublicKey).match(/../g)?.map((chunk) => Number.parseInt(chunk, 16)) || []);
+  if (keyBytes.length !== 32) {
+    throw new Error("DESTINATION_XONLY_PUBLIC_KEY must be a 32-byte hex public key for destination P2PK funding.");
+  }
+  return new ScriptPublicKey(0, Uint8Array.from([0x20, ...keyBytes, 0xac]));
 }
 
 function sompiToTkas(sompi) {

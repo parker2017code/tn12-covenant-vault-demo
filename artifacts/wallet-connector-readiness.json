@@ -3,8 +3,8 @@
   "network": "kaspa-testnet-12",
   "status": "wallet-connector-spec-ready",
   "summary": {
-    "drafts": 47,
-    "payloadDrafts": 26,
+    "drafts": 50,
+    "payloadDrafts": 29,
     "blockedDrafts": 0,
     "registrySecretFields": 0,
     "payloadRouteReady": true,
@@ -71,9 +71,9 @@
     },
     {
       "class": "payload-app-state",
-      "total": 26,
-      "payloadDrafts": 26,
-      "reviewReady": 26
+      "total": 29,
+      "payloadDrafts": 29,
+      "reviewReady": 29
     }
   ],
   "blockedDrafts": [],

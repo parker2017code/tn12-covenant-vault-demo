@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-external-signer-result-template/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T15:20:17.116Z",
+  "generatedAt": "2026-05-10T20:50:32.810Z",
   "status": "external-signer-result-template-ready",
   "summary": {
     "templates": 4,
@@ -11,14 +11,14 @@
   },
   "templates": [
     {
-      "id": "ureq-6cfe79da-standard:external-signer-return",
+      "id": "ureq-fcfdf1df-standard:external-signer-return",
       "status": "pending-external-signer",
-      "requestId": "ureq-6cfe79da-standard",
-      "label": "Payload receipt self-send",
+      "requestId": "ureq-fcfdf1df-standard",
+      "label": "DeFi v1 multi-wallet A receipt",
       "recommendedFirstPass": true,
-      "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3",
-      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
-      "payloadBytes": 127,
+      "reviewFingerprint": "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "payloadBytes": 154,
       "inputBudgetReport": [
         {
           "inputIndex": 0,
@@ -43,8 +43,8 @@
       "requestId": "ureq-fda320a9-standard",
       "label": "Role-separated escrow release",
       "recommendedFirstPass": false,
-      "reviewFingerprint": "92ffa8b1ad17f0fa1230370772c9ae11837162e6b86371e1e9f3df1e33617844",
-      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "reviewFingerprint": "3f3594fede596a084d1b06b8aba37989e984a646f0bf82ef9cdfb823a58388e1",
+      "transactionId": "3550475ff95e472a8ec8f50bfb2a40f8d38e90e2f69cdf8ceb6d1d51cd1e1379",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {
@@ -70,8 +70,8 @@
       "requestId": "ureq-f5845e00-standard",
       "label": "Role-separated escrow refund",
       "recommendedFirstPass": false,
-      "reviewFingerprint": "480a5cd4539fca0e4e9c3d4a0aebe56723761beae7db35598a88dbd62e33e6b8",
-      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "reviewFingerprint": "f942d584621067e78ab79bb6175a3f35e127e6d859fb4b7b26bc782eaa3485b5",
+      "transactionId": "aed75c6b897e16bdeb9f835d3a4ce537158e6061aba14bddc4e63a448eec0b96",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {
@@ -97,8 +97,8 @@
       "requestId": "ureq-d12412d8-standard",
       "label": "Role-separated escrow cancel",
       "recommendedFirstPass": true,
-      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "reviewFingerprint": "3c94c9091718fe8ba5461322e554b9764cf032d6f0a80fb74536a7255fea8353",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {
@@ -121,14 +121,14 @@
   ],
   "results": [
     {
-      "id": "ureq-6cfe79da-standard:external-signer-return",
+      "id": "ureq-fcfdf1df-standard:external-signer-return",
       "status": "pending-external-signer",
-      "requestId": "ureq-6cfe79da-standard",
-      "label": "Payload receipt self-send",
+      "requestId": "ureq-fcfdf1df-standard",
+      "label": "DeFi v1 multi-wallet A receipt",
       "recommendedFirstPass": true,
-      "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3",
-      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
-      "payloadBytes": 127,
+      "reviewFingerprint": "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "payloadBytes": 154,
       "inputBudgetReport": [
         {
           "inputIndex": 0,
@@ -153,8 +153,8 @@
       "requestId": "ureq-fda320a9-standard",
       "label": "Role-separated escrow release",
       "recommendedFirstPass": false,
-      "reviewFingerprint": "92ffa8b1ad17f0fa1230370772c9ae11837162e6b86371e1e9f3df1e33617844",
-      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "reviewFingerprint": "3f3594fede596a084d1b06b8aba37989e984a646f0bf82ef9cdfb823a58388e1",
+      "transactionId": "3550475ff95e472a8ec8f50bfb2a40f8d38e90e2f69cdf8ceb6d1d51cd1e1379",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {
@@ -180,8 +180,8 @@
       "requestId": "ureq-f5845e00-standard",
       "label": "Role-separated escrow refund",
       "recommendedFirstPass": false,
-      "reviewFingerprint": "480a5cd4539fca0e4e9c3d4a0aebe56723761beae7db35598a88dbd62e33e6b8",
-      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "reviewFingerprint": "f942d584621067e78ab79bb6175a3f35e127e6d859fb4b7b26bc782eaa3485b5",
+      "transactionId": "aed75c6b897e16bdeb9f835d3a4ce537158e6061aba14bddc4e63a448eec0b96",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {
@@ -207,8 +207,8 @@
       "requestId": "ureq-d12412d8-standard",
       "label": "Role-separated escrow cancel",
       "recommendedFirstPass": true,
-      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "reviewFingerprint": "3c94c9091718fe8ba5461322e554b9764cf032d6f0a80fb74536a7255fea8353",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {

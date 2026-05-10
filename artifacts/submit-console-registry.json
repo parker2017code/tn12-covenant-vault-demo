@@ -3,10 +3,10 @@
   "network": "kaspa-testnet-12",
   "status": "review-only-not-broadcast",
   "summary": {
-    "total": 47,
-    "payloadDrafts": 26,
-    "explicitSubmitRequired": 47,
-    "payloadSubmitGated": 26
+    "total": 50,
+    "payloadDrafts": 29,
+    "explicitSubmitRequired": 50,
+    "payloadSubmitGated": 29
   },
   "drafts": [
     {
@@ -72,6 +72,198 @@
       "label": "Payload receipt self-send",
       "priority": 1,
       "description": "Accepted invoice payload receipt draft. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+        "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+        "outputIndex": 1,
+        "amountTkas": 9998.99995
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 150
+      },
+      "totals": {
+        "outputSompi": "999899990000",
+        "outputTkas": "9998.9999"
+      },
+      "inputs": [
+        {
+          "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+          "index": 1,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "208f6c97ecc3c234...e77ca2c94321edac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "999799990000",
+          "amountTkas": "9997.9999",
+          "scriptVersion": 0,
+          "scriptPreview": "208f6c97ecc3c234...e77ca2c94321edac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 150,
+        "previewHex": "7b226b696e64223a226f726465722d7265636569707422...6d2063757272656e74206368616e6765205554584f227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "DeFi v1 repeat receipt",
+      "priority": 1.5,
+      "description": "Second accepted DeFi v1 payload receipt from the live repeatable wallet loop. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",
+        "txid": "d12e4c75b7d82ebaefe68dd85917655b98b5086ce6c5742fd5c171691cd15dc9",
+        "outputIndex": 0,
+        "amountTkas": 100
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 154
+      },
+      "totals": {
+        "outputSompi": "9999995000",
+        "outputTkas": "99.99995"
+      },
+      "inputs": [
+        {
+          "txid": "d12e4c75b7d82ebaefe68dd85917655b98b5086ce6c5742fd5c171691cd15dc9",
+          "index": 0,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20394d411e8ba875...6d5fe119a81d29ac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "9899995000",
+          "amountTkas": "98.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20394d411e8ba875...6d5fe119a81d29ac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "previewHex": "7b226b696e64223a226f726465722d7265636569707422...692d77616c6c657420446546692076312074657374227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "DeFi v1 multi-wallet A receipt",
+      "priority": 1.6,
+      "description": "Accepted payload receipt from fresh wallet A in the multi-wallet DeFi v1 test. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
+    },
+    {
+      "schema": "tn12-submit-console-summary/v1",
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "tn12-signed-payload-receipt-draft/v1",
+      "transactionId": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+      "requiresPayloadSubmitSupport": true,
+      "source": {
+        "address": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
+        "txid": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+        "outputIndex": 0,
+        "amountTkas": 100
+      },
+      "counts": {
+        "inputs": 1,
+        "outputs": 2,
+        "payloadBytes": 154
+      },
+      "totals": {
+        "outputSompi": "9999995000",
+        "outputTkas": "99.99995"
+      },
+      "inputs": [
+        {
+          "txid": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+          "index": 0,
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "sequence": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amountSompi": "100000000",
+          "amountTkas": "1",
+          "scriptVersion": 0,
+          "scriptPreview": "20e9c140df747c06...02c1eed3f4d1cfac"
+        },
+        {
+          "index": 1,
+          "amountSompi": "9899995000",
+          "amountTkas": "98.99995",
+          "scriptVersion": 0,
+          "scriptPreview": "20e9c140df747c06...02c1eed3f4d1cfac"
+        }
+      ],
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "previewHex": "7b226b696e64223a226f726465722d7265636569707422...692d77616c6c657420446546692076312074657374227d"
+      },
+      "submit": {
+        "dryRunCommand": "node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+        "submitCommand": "KASPA_WRPC_URL=<ws-or-wss-url> node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json --submit",
+        "restSubmitCommand": "ALLOW_PAYLOAD_REST_SUBMIT=1 node scripts/submit-signed-draft.mjs artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json --submit",
+        "boundary": "Do not use the public REST submit route for payload receipts; use a verified payload-preserving wRPC/wallet route."
+      },
+      "label": "DeFi v1 multi-wallet B receipt",
+      "priority": 1.7,
+      "description": "Accepted payload receipt from fresh wallet B in the multi-wallet DeFi v1 test. Use TN12 JSON wRPC; the public REST route remains unsuitable for payload receipts."
     },
     {
       "schema": "tn12-submit-console-summary/v1",
@@ -1750,14 +1942,14 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "role-separated-funding",
-      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "transactionId": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
       "warning": "This funds fresh role-separated contract outputs for the next proof pass. Do not submit if the source outpoint has already been spent.",
       "requiresPayloadSubmitSupport": false,
       "source": {
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+        "txid": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
         "outputIndex": 1,
-        "amountTkas": 1138.29815
+        "amountTkas": 974.99995
       },
       "counts": {
         "inputs": 1,
@@ -1765,12 +1957,12 @@
         "payloadBytes": 0
       },
       "totals": {
-        "outputSompi": "113829810000",
-        "outputTkas": "1138.2981"
+        "outputSompi": "97499990000",
+        "outputTkas": "974.9999"
       },
       "inputs": [
         {
-          "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
+          "txid": "abbaa9618b86ce4129a7cefcdb7b268bbf0867a1d57ee521234fc360a8466ae2",
           "index": 1,
           "sigOpCount": 1,
           "computeBudget": null,
@@ -1801,8 +1993,8 @@
         },
         {
           "index": 3,
-          "amountSompi": "106329810000",
-          "amountTkas": "1063.2981",
+          "amountSompi": "89999990000",
+          "amountTkas": "899.9999",
           "scriptVersion": 0,
           "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
         }
@@ -1828,11 +2020,11 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "vault-withdrawal",
-      "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+      "transactionId": "180d4ecf6ce5a858a2f85237582c2e565dbac719624699a74eb271b3ea634e6b",
       "warning": "This spends the vault P2SH output if submitted after unlockTime and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
         "outputIndex": 0,
         "amountTkas": 25,
         "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
@@ -1848,7 +2040,7 @@
       },
       "inputs": [
         {
-          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
           "index": 0,
           "sigOpCount": 1,
           "computeBudget": null,
@@ -1885,11 +2077,11 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "vault-recovery",
-      "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "transactionId": "15c980f3fd7371cb5f32f80f0b155f70386b6df13e8df8c5c59b177c6bbbb656",
       "warning": "This spends the vault P2SH output if submitted and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
         "outputIndex": 0,
         "amountTkas": 25,
         "address": "kaspatest:pr8p8mupupuuzxr5ng3s0l7u8074dnkmf23zxejpt2ejyecau5vxzfen0qqfr"
@@ -1905,7 +2097,7 @@
       },
       "inputs": [
         {
-          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
           "index": 0,
           "sigOpCount": 1,
           "computeBudget": null,
@@ -1942,11 +2134,11 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "assurance-release",
-      "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "transactionId": "55c365ae920b29de08666a5649ee8a75a854a83b2adb247cff040bd2a6b6bba6",
       "warning": "This spends the assurance pledge P2SH output if submitted and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
         "outputIndex": 1,
         "amountTkas": 25,
         "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r"
@@ -1962,7 +2154,7 @@
       },
       "inputs": [
         {
-          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
           "index": 1,
           "sigOpCount": 1,
           "computeBudget": null,
@@ -1999,11 +2191,11 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "assurance-refund",
-      "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+      "transactionId": "5931ffa2c04318f46fc1d3cb98c8c0bccecfd8f33d1fe4da4ef6b216766ec740",
       "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
         "outputIndex": 1,
         "amountTkas": 25,
         "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r"
@@ -2019,7 +2211,7 @@
       },
       "inputs": [
         {
-          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+          "txid": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
           "index": 1,
           "sigOpCount": 1,
           "computeBudget": null,
@@ -2056,14 +2248,14 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "escrow-release",
-      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "transactionId": "3550475ff95e472a8ec8f50bfb2a40f8d38e90e2f69cdf8ceb6d1d51cd1e1379",
       "warning": "This spends the escrow P2SH output to the seller path if submitted and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-        "outputIndex": 2,
-        "amountTkas": 25,
-        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+        "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+        "outputIndex": 0,
+        "amountTkas": 1,
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
       },
       "counts": {
         "inputs": 1,
@@ -2071,13 +2263,13 @@
         "payloadBytes": 0
       },
       "totals": {
-        "outputSompi": "2499995000",
-        "outputTkas": "24.99995"
+        "outputSompi": "99995000",
+        "outputTkas": "0.99995"
       },
       "inputs": [
         {
-          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-          "index": 2,
+          "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+          "index": 0,
           "sigOpCount": 1,
           "computeBudget": null,
           "sequence": "18446744073709551615"
@@ -2086,8 +2278,8 @@
       "outputs": [
         {
           "index": 0,
-          "amountSompi": "2499995000",
-          "amountTkas": "24.99995",
+          "amountSompi": "99995000",
+          "amountTkas": "0.99995",
           "scriptVersion": 0,
           "scriptPreview": "2054c30da88e06a7...07fdedc1b1c669ac"
         }
@@ -2113,14 +2305,14 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "escrow-refund",
-      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "transactionId": "aed75c6b897e16bdeb9f835d3a4ce537158e6061aba14bddc4e63a448eec0b96",
       "warning": "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-        "outputIndex": 2,
-        "amountTkas": 25,
-        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+        "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+        "outputIndex": 0,
+        "amountTkas": 1,
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
       },
       "counts": {
         "inputs": 1,
@@ -2128,13 +2320,13 @@
         "payloadBytes": 0
       },
       "totals": {
-        "outputSompi": "2499995000",
-        "outputTkas": "24.99995"
+        "outputSompi": "99995000",
+        "outputTkas": "0.99995"
       },
       "inputs": [
         {
-          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-          "index": 2,
+          "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+          "index": 0,
           "sigOpCount": 1,
           "computeBudget": null,
           "sequence": "0"
@@ -2143,8 +2335,8 @@
       "outputs": [
         {
           "index": 0,
-          "amountSompi": "2499995000",
-          "amountTkas": "24.99995",
+          "amountSompi": "99995000",
+          "amountTkas": "0.99995",
           "scriptVersion": 0,
           "scriptPreview": "200674fd46e3b854...4d985d3373aedeac"
         }
@@ -2170,14 +2362,14 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "escrow-cancel",
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "warning": "This spends the escrow P2SH output through mutual cancel if submitted and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-        "outputIndex": 2,
-        "amountTkas": 25,
-        "address": "kaspatest:pqn4sg3gr7h5p24zygea7fdhdhcr5p0pdcaaccfldy5qqsyup6927hnmrx62w"
+        "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+        "outputIndex": 0,
+        "amountTkas": 1,
+        "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
       },
       "counts": {
         "inputs": 1,
@@ -2185,13 +2377,13 @@
         "payloadBytes": 0
       },
       "totals": {
-        "outputSompi": "2499995000",
-        "outputTkas": "24.99995"
+        "outputSompi": "99995000",
+        "outputTkas": "0.99995"
       },
       "inputs": [
         {
-          "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-          "index": 2,
+          "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+          "index": 0,
           "sigOpCount": null,
           "computeBudget": 30,
           "sequence": "18446744073709551615"
@@ -2200,8 +2392,8 @@
       "outputs": [
         {
           "index": 0,
-          "amountSompi": "2499995000",
-          "amountTkas": "24.99995",
+          "amountSompi": "99995000",
+          "amountTkas": "0.99995",
           "scriptVersion": 0,
           "scriptPreview": "200674fd46e3b854...4d985d3373aedeac"
         }
@@ -2496,13 +2688,13 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "escrow-release",
-      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "transactionId": "3a785b49bf8e63f15a136d2f454aab22d5f9c3beb4efdcb905166106d357a999",
       "warning": "This spends the escrow P2SH output to the seller path if submitted and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
         "outputIndex": 0,
-        "amountTkas": 50,
+        "amountTkas": 1,
         "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
       },
       "counts": {
@@ -2511,12 +2703,12 @@
         "payloadBytes": 0
       },
       "totals": {
-        "outputSompi": "4999995000",
-        "outputTkas": "49.99995"
+        "outputSompi": "99995000",
+        "outputTkas": "0.99995"
       },
       "inputs": [
         {
-          "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+          "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
           "index": 0,
           "sigOpCount": 1,
           "computeBudget": null,
@@ -2526,8 +2718,8 @@
       "outputs": [
         {
           "index": 0,
-          "amountSompi": "4999995000",
-          "amountTkas": "49.99995",
+          "amountSompi": "99995000",
+          "amountTkas": "0.99995",
           "scriptVersion": 0,
           "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
         }
@@ -2553,13 +2745,13 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "escrow-refund",
-      "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+      "transactionId": "4495b59886fa68356de2c44a27a950132436b2dbeff79c2d2cc9b80098dc8a7d",
       "warning": "This spends the escrow P2SH output to the buyer refund path if submitted after refundTime and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
         "outputIndex": 0,
-        "amountTkas": 50,
+        "amountTkas": 1,
         "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
       },
       "counts": {
@@ -2568,12 +2760,12 @@
         "payloadBytes": 0
       },
       "totals": {
-        "outputSompi": "4999995000",
-        "outputTkas": "49.99995"
+        "outputSompi": "99995000",
+        "outputTkas": "0.99995"
       },
       "inputs": [
         {
-          "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+          "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
           "index": 0,
           "sigOpCount": 1,
           "computeBudget": null,
@@ -2583,8 +2775,8 @@
       "outputs": [
         {
           "index": 0,
-          "amountSompi": "4999995000",
-          "amountTkas": "49.99995",
+          "amountSompi": "99995000",
+          "amountTkas": "0.99995",
           "scriptVersion": 0,
           "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
         }
@@ -2610,13 +2802,13 @@
       "network": "kaspa-testnet-12",
       "status": "signed-not-broadcast",
       "lane": "escrow-cancel",
-      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "transactionId": "5929cf73639bd1003c564446320040fc30ef17b560fb6688505b699a9f3a757d",
       "warning": "This spends the escrow P2SH output through mutual cancel if submitted and accepted.",
       "requiresPayloadSubmitSupport": false,
       "source": {
-        "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+        "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
         "outputIndex": 0,
-        "amountTkas": 50,
+        "amountTkas": 1,
         "address": "kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v"
       },
       "counts": {
@@ -2625,23 +2817,23 @@
         "payloadBytes": 0
       },
       "totals": {
-        "outputSompi": "4999995000",
-        "outputTkas": "49.99995"
+        "outputSompi": "99995000",
+        "outputTkas": "0.99995"
       },
       "inputs": [
         {
-          "txid": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+          "txid": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
           "index": 0,
-          "sigOpCount": 1,
-          "computeBudget": null,
+          "sigOpCount": null,
+          "computeBudget": 30,
           "sequence": "18446744073709551615"
         }
       ],
       "outputs": [
         {
           "index": 0,
-          "amountSompi": "4999995000",
-          "amountTkas": "49.99995",
+          "amountSompi": "99995000",
+          "amountTkas": "0.99995",
           "scriptVersion": 0,
           "scriptPreview": "20d739de4b3b61a8...22a4f12e0b60d5ac"
         }

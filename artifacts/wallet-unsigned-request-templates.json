@@ -1,17 +1,17 @@
 {
   "schema": "tn12-wallet-unsigned-request-templates/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T15:19:54.389Z",
+  "generatedAt": "2026-05-10T20:50:05.146Z",
   "status": "unsigned-request-templates-ready",
   "standardMapped": false,
   "liveExternalSignerReady": false,
   "summary": {
-    "templates": 47,
-    "ready": 47,
+    "templates": 50,
+    "ready": 50,
     "blocked": 0,
-    "payloadTemplates": 26,
+    "payloadTemplates": 29,
     "computeBudgetTemplates": 3,
-    "signatureScriptsStripped": 7385,
+    "signatureScriptsStripped": 7583,
     "secretFields": 0
   },
   "templates": [
@@ -67,6 +67,243 @@
       "preservation": {
         "expectedTransactionIdAfterSigning": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
         "originalSignedDraftFingerprint": "h-98768c44",
+        "strippedSignatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "requiredWalletChecks": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      },
+      "requestedSignerAction": {
+        "kind": "sign-then-return-transaction",
+        "userActionRequired": true,
+        "routeAfterSigning": "payload-preserving-wrpc-or-wallet",
+        "mustPreserve": [
+          "network",
+          "version",
+          "lockTime",
+          "subnetworkId",
+          "previousOutpoints",
+          "sequences",
+          "sigOpCount fields when present",
+          "computeBudget fields when present",
+          "outputs",
+          "payload bytes"
+        ]
+      }
+    },
+    {
+      "requestId": "ureq-dd44253e",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+      "label": "DeFi v1 repeat receipt",
+      "class": "payload-app-state",
+      "status": "unsigned-request-template-ready",
+      "blockers": [],
+      "transaction": {
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+              "index": 1
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScript": "",
+            "signatureScriptBytes": 0
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptPublicKey": {
+              "version": 0,
+              "scriptPublicKey": "208f6c97ecc3c23411012e08cceff7bb6f7d3977208cac852a99e77ca2c94321edac"
+            }
+          },
+          {
+            "index": 1,
+            "amount": "999799990000",
+            "scriptPublicKey": {
+              "version": 0,
+              "scriptPublicKey": "208f6c97ecc3c23411012e08cceff7bb6f7d3977208cac852a99e77ca2c94321edac"
+            }
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 150,
+        "hash": "h-d4f3668a",
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c..."
+      },
+      "preservation": {
+        "expectedTransactionIdAfterSigning": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+        "originalSignedDraftFingerprint": "h-0fbe7025",
+        "strippedSignatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "requiredWalletChecks": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      },
+      "requestedSignerAction": {
+        "kind": "sign-then-return-transaction",
+        "userActionRequired": true,
+        "routeAfterSigning": "payload-preserving-wrpc-or-wallet",
+        "mustPreserve": [
+          "network",
+          "version",
+          "lockTime",
+          "subnetworkId",
+          "previousOutpoints",
+          "sequences",
+          "sigOpCount fields when present",
+          "computeBudget fields when present",
+          "outputs",
+          "payload bytes"
+        ]
+      }
+    },
+    {
+      "requestId": "ureq-fcfdf1df",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+      "label": "DeFi v1 multi-wallet A receipt",
+      "class": "payload-app-state",
+      "status": "unsigned-request-template-ready",
+      "blockers": [],
+      "transaction": {
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "d12e4c75b7d82ebaefe68dd85917655b98b5086ce6c5742fd5c171691cd15dc9",
+              "index": 0
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScript": "",
+            "signatureScriptBytes": 0
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptPublicKey": {
+              "version": 0,
+              "scriptPublicKey": "20394d411e8ba8752868b7f3810077466264838676369820c2706d5fe119a81d29ac"
+            }
+          },
+          {
+            "index": 1,
+            "amount": "9899995000",
+            "scriptPublicKey": {
+              "version": 0,
+              "scriptPublicKey": "20394d411e8ba8752868b7f3810077466264838676369820c2706d5fe119a81d29ac"
+            }
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "hash": "h-ce7f6711",
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c..."
+      },
+      "preservation": {
+        "expectedTransactionIdAfterSigning": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+        "originalSignedDraftFingerprint": "h-b5904e77",
+        "strippedSignatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "requiredWalletChecks": [
+          "Confirm kaspa-testnet-12.",
+          "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+          "Require explicit user action.",
+          "Reject public REST payload submit."
+        ]
+      },
+      "requestedSignerAction": {
+        "kind": "sign-then-return-transaction",
+        "userActionRequired": true,
+        "routeAfterSigning": "payload-preserving-wrpc-or-wallet",
+        "mustPreserve": [
+          "network",
+          "version",
+          "lockTime",
+          "subnetworkId",
+          "previousOutpoints",
+          "sequences",
+          "sigOpCount fields when present",
+          "computeBudget fields when present",
+          "outputs",
+          "payload bytes"
+        ]
+      }
+    },
+    {
+      "requestId": "ureq-ebaba940",
+      "sourceSignedDraftPath": "artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+      "label": "DeFi v1 multi-wallet B receipt",
+      "class": "payload-app-state",
+      "status": "unsigned-request-template-ready",
+      "blockers": [],
+      "transaction": {
+        "version": 0,
+        "lockTime": "0",
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "inputs": [
+          {
+            "previousOutpoint": {
+              "transactionId": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+              "index": 0
+            },
+            "sequence": "0",
+            "sigOpCount": 1,
+            "computeBudget": null,
+            "signatureScript": "",
+            "signatureScriptBytes": 0
+          }
+        ],
+        "outputs": [
+          {
+            "index": 0,
+            "amount": "100000000",
+            "scriptPublicKey": {
+              "version": 0,
+              "scriptPublicKey": "20e9c140df747c0651c143df02d5552e5be0a5efdeaf2fcf5f1102c1eed3f4d1cfac"
+            }
+          },
+          {
+            "index": 1,
+            "amount": "9899995000",
+            "scriptPublicKey": {
+              "version": 0,
+              "scriptPublicKey": "20e9c140df747c0651c143df02d5552e5be0a5efdeaf2fcf5f1102c1eed3f4d1cfac"
+            }
+          }
+        ]
+      },
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "hash": "h-8e9c537d",
+        "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c..."
+      },
+      "preservation": {
+        "expectedTransactionIdAfterSigning": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+        "originalSignedDraftFingerprint": "h-623b985c",
         "strippedSignatureScriptBytes": 66,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2221,8 +2458,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-        "originalSignedDraftFingerprint": "h-bd83f798",
+        "expectedTransactionIdAfterSigning": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
+        "originalSignedDraftFingerprint": "h-882a6e78",
         "strippedSignatureScriptBytes": 66,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2258,12 +2495,12 @@
       "blockers": [],
       "transaction": {
         "version": 0,
-        "lockTime": "1778229191",
+        "lockTime": "1778428847",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
               "index": 0
             },
             "sequence": "0",
@@ -2291,8 +2528,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
-        "originalSignedDraftFingerprint": "h-29893835",
+        "expectedTransactionIdAfterSigning": "180d4ecf6ce5a858a2f85237582c2e565dbac719624699a74eb271b3ea634e6b",
+        "originalSignedDraftFingerprint": "h-fee1cb88",
         "strippedSignatureScriptBytes": 282,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2334,7 +2571,7 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
               "index": 0
             },
             "sequence": "18446744073709551615",
@@ -2362,8 +2599,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
-        "originalSignedDraftFingerprint": "h-5d09a223",
+        "expectedTransactionIdAfterSigning": "15c980f3fd7371cb5f32f80f0b155f70386b6df13e8df8c5c59b177c6bbbb656",
+        "originalSignedDraftFingerprint": "h-3d03d38b",
         "strippedSignatureScriptBytes": 282,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2405,7 +2642,7 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
               "index": 1
             },
             "sequence": "18446744073709551615",
@@ -2433,8 +2670,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
-        "originalSignedDraftFingerprint": "h-713c367b",
+        "expectedTransactionIdAfterSigning": "55c365ae920b29de08666a5649ee8a75a854a83b2adb247cff040bd2a6b6bba6",
+        "originalSignedDraftFingerprint": "h-783e964a",
         "strippedSignatureScriptBytes": 179,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2471,12 +2708,12 @@
       "blockers": [],
       "transaction": {
         "version": 0,
-        "lockTime": "1778229191",
+        "lockTime": "1778428847",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+              "transactionId": "7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
               "index": 1
             },
             "sequence": "0",
@@ -2504,8 +2741,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
-        "originalSignedDraftFingerprint": "h-44ebf94a",
+        "expectedTransactionIdAfterSigning": "5931ffa2c04318f46fc1d3cb98c8c0bccecfd8f33d1fe4da4ef6b216766ec740",
+        "originalSignedDraftFingerprint": "h-ffd085df",
         "strippedSignatureScriptBytes": 245,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2547,8 +2784,8 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-              "index": 2
+              "transactionId": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+              "index": 0
             },
             "sequence": "18446744073709551615",
             "sigOpCount": 1,
@@ -2560,7 +2797,7 @@
         "outputs": [
           {
             "index": 0,
-            "amount": "2499995000",
+            "amount": "99995000",
             "scriptPublicKey": {
               "version": 0,
               "scriptPublicKey": "2054c30da88e06a72eedd1f445fa42c82c68c0d4aaea58710abc07fdedc1b1c669ac"
@@ -2575,8 +2812,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
-        "originalSignedDraftFingerprint": "h-4cb34a5b",
+        "expectedTransactionIdAfterSigning": "3550475ff95e472a8ec8f50bfb2a40f8d38e90e2f69cdf8ceb6d1d51cd1e1379",
+        "originalSignedDraftFingerprint": "h-5d8afc67",
         "strippedSignatureScriptBytes": 421,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2613,13 +2850,13 @@
       "blockers": [],
       "transaction": {
         "version": 0,
-        "lockTime": "1778229191",
+        "lockTime": "1778428847",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-              "index": 2
+              "transactionId": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+              "index": 0
             },
             "sequence": "0",
             "sigOpCount": 1,
@@ -2631,7 +2868,7 @@
         "outputs": [
           {
             "index": 0,
-            "amount": "2499995000",
+            "amount": "99995000",
             "scriptPublicKey": {
               "version": 0,
               "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
@@ -2646,8 +2883,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
-        "originalSignedDraftFingerprint": "h-8b7185c3",
+        "expectedTransactionIdAfterSigning": "aed75c6b897e16bdeb9f835d3a4ce537158e6061aba14bddc4e63a448eec0b96",
+        "originalSignedDraftFingerprint": "h-e4ba56cd",
         "strippedSignatureScriptBytes": 421,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -2689,8 +2926,8 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
-              "index": 2
+              "transactionId": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
+              "index": 0
             },
             "sequence": "18446744073709551615",
             "sigOpCount": null,
@@ -2702,7 +2939,7 @@
         "outputs": [
           {
             "index": 0,
-            "amount": "2499995000",
+            "amount": "99995000",
             "scriptPublicKey": {
               "version": 0,
               "scriptPublicKey": "200674fd46e3b854f15fa4aad7c962005ab11b202773fc2c8ff94d985d3373aedeac"
@@ -2717,8 +2954,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
-        "originalSignedDraftFingerprint": "h-9b896fed",
+        "expectedTransactionIdAfterSigning": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
+        "originalSignedDraftFingerprint": "h-250d2c35",
         "strippedSignatureScriptBytes": 487,
         "computeBudgetInputs": 1,
         "requiredWalletChecks": [
@@ -3123,7 +3360,7 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+              "transactionId": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
               "index": 0
             },
             "sequence": "18446744073709551615",
@@ -3136,7 +3373,7 @@
         "outputs": [
           {
             "index": 0,
-            "amount": "4999995000",
+            "amount": "99995000",
             "scriptPublicKey": {
               "version": 0,
               "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
@@ -3151,8 +3388,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
-        "originalSignedDraftFingerprint": "h-0c6ac992",
+        "expectedTransactionIdAfterSigning": "3a785b49bf8e63f15a136d2f454aab22d5f9c3beb4efdcb905166106d357a999",
+        "originalSignedDraftFingerprint": "h-a1fc180e",
         "strippedSignatureScriptBytes": 421,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -3189,12 +3426,12 @@
       "blockers": [],
       "transaction": {
         "version": 0,
-        "lockTime": "1778425609",
+        "lockTime": "1778435600",
         "subnetworkId": "0000000000000000000000000000000000000000",
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+              "transactionId": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
               "index": 0
             },
             "sequence": "0",
@@ -3207,7 +3444,7 @@
         "outputs": [
           {
             "index": 0,
-            "amount": "4999995000",
+            "amount": "99995000",
             "scriptPublicKey": {
               "version": 0,
               "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
@@ -3222,8 +3459,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
-        "originalSignedDraftFingerprint": "h-6a9eb243",
+        "expectedTransactionIdAfterSigning": "4495b59886fa68356de2c44a27a950132436b2dbeff79c2d2cc9b80098dc8a7d",
+        "originalSignedDraftFingerprint": "h-7d896d23",
         "strippedSignatureScriptBytes": 421,
         "computeBudgetInputs": 0,
         "requiredWalletChecks": [
@@ -3265,7 +3502,7 @@
         "inputs": [
           {
             "previousOutpoint": {
-              "transactionId": "6042f46571a1b983f9d823562813bd0a99793bfcae81aa15d5ac82268c3f8ba2",
+              "transactionId": "64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3",
               "index": 0
             },
             "sequence": "18446744073709551615",
@@ -3278,7 +3515,7 @@
         "outputs": [
           {
             "index": 0,
-            "amount": "4999995000",
+            "amount": "99995000",
             "scriptPublicKey": {
               "version": 0,
               "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
@@ -3293,8 +3530,8 @@
         "hexPreview": ""
       },
       "preservation": {
-        "expectedTransactionIdAfterSigning": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
-        "originalSignedDraftFingerprint": "h-d52df1fb",
+        "expectedTransactionIdAfterSigning": "5929cf73639bd1003c564446320040fc30ef17b560fb6688505b699a9f3a757d",
+        "originalSignedDraftFingerprint": "h-bc0d41b2",
         "strippedSignatureScriptBytes": 487,
         "computeBudgetInputs": 1,
         "requiredWalletChecks": [

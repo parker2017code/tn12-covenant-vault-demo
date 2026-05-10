@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-v1-operator-loop/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:31:20.489Z",
+  "generatedAt": "2026-05-10T20:50:45.995Z",
   "status": "repeatable-live-receipt-loop-ready",
   "wallet": {
     "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
@@ -49,9 +49,9 @@
     }
   ],
   "currentSpendableOutpoint": {
-    "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+    "txid": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
     "outputIndex": 1,
-    "amountTkas": 9997.9999,
+    "amountTkas": 9797.9998,
     "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
     "spendable": true
   },

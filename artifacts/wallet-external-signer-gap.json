@@ -1,18 +1,18 @@
 {
   "schema": "tn12-wallet-external-signer-gap/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T15:20:12.645Z",
+  "generatedAt": "2026-05-10T20:50:04.452Z",
   "status": "external-signer-gap-documented",
   "liveNoLocalKeySigningReady": false,
   "summary": {
-    "requests": 47,
-    "signedLocalDrafts": 47,
+    "requests": 50,
+    "signedLocalDrafts": 50,
     "unsignedWalletSignRequests": 0,
-    "submitOnlyCandidates": 47,
+    "submitOnlyCandidates": 50,
     "signAndSubmitCandidates": 0,
-    "payloadPreservationNeeded": 26,
+    "payloadPreservationNeeded": 29,
     "computeBudgetPreservationNeeded": 3,
-    "blockedRows": 47,
+    "blockedRows": 50,
     "sensitiveFieldMatches": 0
   },
   "currentTruth": [
@@ -46,6 +46,90 @@
         "signatureScriptBytes": 66,
         "computeBudgetInputs": 0,
         "fingerprint": "fp-7de55774"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-dd44253e",
+      "sessionId": "review-wreq-dd44253e",
+      "path": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+      "label": "DeFi v1 repeat receipt",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "payload": {
+        "present": true,
+        "bytes": 150,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-18aa95a5"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-fcfdf1df",
+      "sessionId": "review-wreq-fcfdf1df",
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+      "label": "DeFi v1 multi-wallet A receipt",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-b0f1c1a3"
+      },
+      "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
+    },
+    {
+      "requestId": "wreq-ebaba940",
+      "sessionId": "review-wreq-ebaba940",
+      "path": "artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+      "label": "DeFi v1 multi-wallet B receipt",
+      "class": "payload-app-state",
+      "status": "external-signer-review-blocked",
+      "currentArtifactMode": "signed-local-draft",
+      "externalSignerMode": "submit-only",
+      "blockers": [
+        "already signed by local draft builder"
+      ],
+      "transactionId": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "payload": {
+        "present": true,
+        "bytes": 154,
+        "route": "payload-preserving-wallet-or-json-wrpc"
+      },
+      "preservation": {
+        "version": 0,
+        "inputs": 1,
+        "outputs": 2,
+        "signatureScriptBytes": 66,
+        "computeBudgetInputs": 0,
+        "fingerprint": "fp-c38354da"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -789,7 +873,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+      "transactionId": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -801,7 +885,7 @@
         "outputs": 4,
         "signatureScriptBytes": 66,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-748c0caa"
+        "fingerprint": "fp-76f745da"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -817,7 +901,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+      "transactionId": "180d4ecf6ce5a858a2f85237582c2e565dbac719624699a74eb271b3ea634e6b",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -829,7 +913,7 @@
         "outputs": 1,
         "signatureScriptBytes": 282,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-a18c167a"
+        "fingerprint": "fp-5c20c413"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -845,7 +929,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+      "transactionId": "15c980f3fd7371cb5f32f80f0b155f70386b6df13e8df8c5c59b177c6bbbb656",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -857,7 +941,7 @@
         "outputs": 1,
         "signatureScriptBytes": 282,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-aef4e3f4"
+        "fingerprint": "fp-a51134dc"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -873,7 +957,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+      "transactionId": "55c365ae920b29de08666a5649ee8a75a854a83b2adb247cff040bd2a6b6bba6",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -885,7 +969,7 @@
         "outputs": 1,
         "signatureScriptBytes": 179,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-67d5284a"
+        "fingerprint": "fp-bac19923"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -901,7 +985,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+      "transactionId": "5931ffa2c04318f46fc1d3cb98c8c0bccecfd8f33d1fe4da4ef6b216766ec740",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -913,7 +997,7 @@
         "outputs": 1,
         "signatureScriptBytes": 245,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-ad14340a"
+        "fingerprint": "fp-f0a9ebbb"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -929,7 +1013,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+      "transactionId": "3550475ff95e472a8ec8f50bfb2a40f8d38e90e2f69cdf8ceb6d1d51cd1e1379",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -941,7 +1025,7 @@
         "outputs": 1,
         "signatureScriptBytes": 421,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-953779f6"
+        "fingerprint": "fp-85d668bc"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -957,7 +1041,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+      "transactionId": "aed75c6b897e16bdeb9f835d3a4ce537158e6061aba14bddc4e63a448eec0b96",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -969,7 +1053,7 @@
         "outputs": 1,
         "signatureScriptBytes": 421,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-15ad079e"
+        "fingerprint": "fp-0a8620b6"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -985,7 +1069,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -997,7 +1081,7 @@
         "outputs": 1,
         "signatureScriptBytes": 487,
         "computeBudgetInputs": 1,
-        "fingerprint": "fp-c2b0fc42"
+        "fingerprint": "fp-a0a193bc"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -1153,7 +1237,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "transactionId": "3a785b49bf8e63f15a136d2f454aab22d5f9c3beb4efdcb905166106d357a999",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -1165,7 +1249,7 @@
         "outputs": 1,
         "signatureScriptBytes": 421,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-c659ea65"
+        "fingerprint": "fp-c9448a09"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -1181,7 +1265,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+      "transactionId": "4495b59886fa68356de2c44a27a950132436b2dbeff79c2d2cc9b80098dc8a7d",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -1193,7 +1277,7 @@
         "outputs": 1,
         "signatureScriptBytes": 421,
         "computeBudgetInputs": 0,
-        "fingerprint": "fp-34bb8e82"
+        "fingerprint": "fp-2275ab02"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },
@@ -1209,7 +1293,7 @@
       "blockers": [
         "already signed by local draft builder"
       ],
-      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "transactionId": "5929cf73639bd1003c564446320040fc30ef17b560fb6688505b699a9f3a757d",
       "payload": {
         "present": false,
         "bytes": 0,
@@ -1221,7 +1305,7 @@
         "outputs": 1,
         "signatureScriptBytes": 487,
         "computeBudgetInputs": 1,
-        "fingerprint": "fp-b2a53f58"
+        "fingerprint": "fp-35b917b5"
       },
       "requiredUpgrade": "Replace signed-local draft input with an unsigned or partial transaction request for external wallet signing."
     },

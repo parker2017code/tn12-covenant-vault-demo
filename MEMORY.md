@@ -286,9 +286,13 @@ Both hard blockers are now resolved:
 - Live DeFi v1 payload receipts accepted on TN12:
   - `8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807`, subject `defi-v1-live-receipt-001`, value `paid`.
   - `e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd`, subject `defi-v1-live-receipt-002`, value `paid`.
-- Current spendable change output: `e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd:1`, amount `9997.9999` TKAS; artifact `artifacts/tn12-defi-v1-current-outpoint.json`.
+- Multi-wallet DeFi v1 payload receipts accepted on TN12:
+  - `ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa`, fresh wallet A, subject `defi-v1-multi-wallet-a`, value `paid`.
+  - `8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39`, fresh wallet B, subject `defi-v1-multi-wallet-b`, value `paid`.
+- Current primary wallet spendable change output: `f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c:1`, amount `9797.9998` TKAS; artifact `artifacts/tn12-defi-v1-current-outpoint.json`.
+- Fresh wallet current spendable change outputs: wallet A `ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa:1`, wallet B `8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39:1`; each has `98.99995` TKAS.
 - Repeatable-loop artifact: `artifacts/defi-v1-operator-loop.json`; `npm run defi:v1-loop` reports `repeatable-live-receipt-loop-ready`.
-- Gates passed after integration: `npm run check:all` and `npm run check:tn12`. Current checkpoint is 40 records: 9 proof rows, 28 payload events, 3 accepted output-evidence rows.
+- Gates passed after integration: `npm run check:all` and `npm run check:tn12`. Current checkpoint is 42 records: 9 proof rows, 30 payload events, 3 accepted output-evidence rows.
 - Submit note: the default npm `kaspa-wasm@0.13.0` rebuilt the txid but submit failed with `invalid transaction data`; the accepted submit used `KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa` with JSON wRPC.
 - Local machine note: OpenClaw user service was stopped and disabled because it was respawning and consuming CPU/RAM; this DeFi v1 rail does not need browser automation.
 

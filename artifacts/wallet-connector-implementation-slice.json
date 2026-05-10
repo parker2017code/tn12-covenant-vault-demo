@@ -1,15 +1,15 @@
 {
   "schema": "tn12-wallet-connector-implementation-slice/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T15:20:17.072Z",
+  "generatedAt": "2026-05-10T20:50:34.026Z",
   "status": "wallet-connector-implementation-slice-ready",
   "selectedStandard": "pskb-pskt",
   "firstUserFlow": "payload-receipt-unsigned-sign",
   "secondUserFlow": "v1-compute-budget-contract-sign",
   "summary": {
-    "unsignedTemplates": 47,
+    "unsignedTemplates": 50,
     "standardRequests": 4,
-    "payloadTemplates": 26,
+    "payloadTemplates": 29,
     "computeBudgetTemplates": 3,
     "liveWalletIntegrationReady": false
   },
@@ -36,14 +36,14 @@
     }
   ],
   "firstRoundTripRequest": {
-    "requestId": "ureq-6cfe79da-standard",
-    "sourceSignedDraftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
-    "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3"
+    "requestId": "ureq-fcfdf1df-standard",
+    "sourceSignedDraftPath": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+    "reviewFingerprint": "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4"
   },
   "covenantRoundTripRequest": {
     "requestId": "ureq-d12412d8-standard",
     "sourceSignedDraftPath": "artifacts/signed-drafts/role-escrow-cancel.json",
-    "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92"
+    "reviewFingerprint": "3c94c9091718fe8ba5461322e554b9764cf032d6f0a80fb74536a7255fea8353"
   },
   "requiredPreservation": [
     "network",

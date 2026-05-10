@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-10T20:58:14.148Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+  "accepted": true,
+  "acceptingBlockBlueScore": 8228493,
+  "acceptingBlockTime": 1778446142995,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6d756c74692d77616c6c65742d62222c2276616c7565223a2270616964222c226e6f7465223a2246726573682077616c6c65742042206c69766520544e3132207061796c6f6164207265636569707420666f72206d756c74692d77616c6c657420446546692076312074657374227d",
+    "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6d756c74692d77616c6c65742d62222c2276616c7565223a2270616964222c226e6f7465223a2246726573682077616c6c65742042206c69766520544e3132207061796c6f6164207265636569707420666f72206d756c74692d77616c6c657420446546692076312074657374227d",
+    "bytes": 154,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "order-receipt",
+        "subject": "defi-v1-multi-wallet-b",
+        "value": "paid",
+        "note": "Fresh wallet B live TN12 payload receipt for multi-wallet DeFi v1 test"
+      },
+      "encoded": {
+        "bytes": 154,
+        "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6d756c74692d77616c6c65742d62222c2276616c7565223a2270616964222c226e6f7465223a2246726573682077616c6c65742042206c69766520544e3132207061796c6f6164207265636569707420666f72206d756c74692d77616c6c657420446546692076312074657374227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "defi-v1-multi-wallet-b",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39"
+}

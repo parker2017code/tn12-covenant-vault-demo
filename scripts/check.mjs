@@ -261,9 +261,14 @@ for (const draft of submitManifest.drafts) {
   submitArtifacts[draft.path] = JSON.parse(await readFile(new URL(`../${draft.path}`, import.meta.url), "utf8"));
 }
 const submitRegistry = buildSubmitConsoleRegistry(submitManifest, submitArtifacts);
-assert.equal(submitRegistry.summary.total, 47);
-assert.equal(submitRegistry.summary.payloadDrafts, 26);
-assert.equal(submitRegistry.summary.payloadSubmitGated, 26);
+assert.equal(submitRegistry.summary.total, 50);
+assert.equal(submitRegistry.summary.payloadDrafts, 29);
+assert.equal(submitRegistry.summary.payloadSubmitGated, 29);
+assert.ok(submitRegistry.drafts.some((draft) =>
+  draft.path === "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json"
+  && draft.transactionId === "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa"
+  && draft.payload.present
+));
 assert.ok(submitRegistry.drafts.some((draft) =>
   draft.path === "artifacts/signed-drafts/role-separated-funding.json"
   && draft.counts.outputs === 4
@@ -274,21 +279,21 @@ assert.ok(submitRegistry.drafts.some((draft) =>
 ));
 const walletReview = buildWalletReviewReadiness(submitRegistry);
 assert.equal(walletReview.status, "wallet-review-ready");
-assert.equal(walletReview.summary.ready, 47);
-assert.equal(walletReview.summary.payloadRouteReady, 26);
+assert.equal(walletReview.summary.ready, 50);
+assert.equal(walletReview.summary.payloadRouteReady, 29);
 assert.equal(walletReview.summary.registrySecretFields, 0);
 const walletConnector = buildWalletConnectorReadiness(walletReview);
 assert.equal(walletConnector.status, "wallet-connector-spec-ready");
-assert.equal(walletConnector.summary.drafts, 47);
-assert.equal(walletConnector.summary.payloadDrafts, 26);
+assert.equal(walletConnector.summary.drafts, 50);
+assert.equal(walletConnector.summary.payloadDrafts, 29);
 assert.equal(walletConnector.summary.registrySecretFields, 0);
 assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "payload-preserving-submit"));
 assert.ok(walletConnector.requiredWalletCapabilities.some((capability) => capability.id === "standard-partial-transaction-format"));
 assert.ok(walletConnector.referenceImplementations.some((reference) => reference.id === "kassigner"));
 const walletSubmitPackage = buildWalletSubmitPackage({ walletReview, walletConnector });
 assert.equal(walletSubmitPackage.status, "wallet-submit-package-ready");
-assert.equal(walletSubmitPackage.summary.total, 47);
-assert.equal(walletSubmitPackage.summary.payloadDrafts, 26);
+assert.equal(walletSubmitPackage.summary.total, 50);
+assert.equal(walletSubmitPackage.summary.payloadDrafts, 29);
 assert.equal(walletSubmitPackage.summary.contractDrafts, 19);
 assert.ok(walletSubmitPackage.firstPayloadIntents.every((intent) => intent.requiredWalletChecks.includes("Reject public REST payload submit.")));
 const walletConnectorRequests = buildWalletConnectorSubmitRequests({
@@ -296,8 +301,8 @@ const walletConnectorRequests = buildWalletConnectorSubmitRequests({
   draftArtifacts: submitArtifacts
 });
 assert.equal(walletConnectorRequests.status, "connector-submit-requests-ready");
-assert.equal(walletConnectorRequests.summary.requests, 47);
-assert.equal(walletConnectorRequests.summary.payloadRequests, 26);
+assert.equal(walletConnectorRequests.summary.requests, 50);
+assert.equal(walletConnectorRequests.summary.payloadRequests, 29);
 assert.ok(walletConnectorRequests.summary.computeBudgetRequests >= 1);
 assert.equal(walletConnectorRequests.summary.secretFields, 0);
 assert.ok(walletConnectorRequests.requests.some((request) =>
@@ -306,14 +311,14 @@ assert.ok(walletConnectorRequests.requests.some((request) =>
 ));
 const walletConnectorRequestsArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-submit-requests.json", import.meta.url), "utf8"));
 assert.equal(walletConnectorRequestsArtifact.status, "connector-submit-requests-ready");
-assert.equal(walletConnectorRequestsArtifact.summary.requests, 47);
+assert.equal(walletConnectorRequestsArtifact.summary.requests, 50);
 const walletConnectorAdapterRun = buildWalletConnectorAdapterRun({
   submitRequests: walletConnectorRequestsArtifact,
   runAt: "2026-05-08T00:00:00.000Z"
 });
 assert.equal(walletConnectorAdapterRun.status, "adapter-dry-run-ready");
-assert.equal(walletConnectorAdapterRun.summary.reviewReady, 47);
-assert.equal(walletConnectorAdapterRun.summary.payloadRequests, 26);
+assert.equal(walletConnectorAdapterRun.summary.reviewReady, 50);
+assert.equal(walletConnectorAdapterRun.summary.payloadRequests, 29);
 assert.equal(walletConnectorAdapterRun.summary.submitBroadcasts, 0);
 assert.equal(walletConnectorAdapterRun.summary.secretFields, 0);
 assert.ok(walletConnectorAdapterRun.reviewSessions.some((session) =>
@@ -322,7 +327,7 @@ assert.ok(walletConnectorAdapterRun.reviewSessions.some((session) =>
 ));
 const walletConnectorAdapterArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-adapter-run.json", import.meta.url), "utf8"));
 assert.equal(walletConnectorAdapterArtifact.status, "adapter-dry-run-ready");
-assert.equal(walletConnectorAdapterArtifact.summary.reviewReady, 47);
+assert.equal(walletConnectorAdapterArtifact.summary.reviewReady, 50);
 const walletSubmitResultsFixture = JSON.parse(await readFile(new URL("../fixtures/WalletConnectorSubmitResults.json", import.meta.url), "utf8"));
 const walletSubmitValidationFixture = JSON.parse(await readFile(new URL("../fixtures/WalletSubmitResultValidation.json", import.meta.url), "utf8"));
 const escrowFundingDraft = JSON.parse(await readFile(new URL("../artifacts/signed-drafts/escrow-funding.json", import.meta.url), "utf8"));
@@ -901,7 +906,7 @@ assert.equal(defiLoopArtifact.status, "repeatable-live-receipt-loop-ready");
 assert.equal(defiLoopArtifact.receipts.length, 2);
 assert.ok(defiLoopArtifact.receipts.every((receipt) => receipt.accepted && receipt.payloadMatches));
 assert.ok(defiLoopArtifact.staleOutpointGuards.every((outpoint) => outpoint.consumed));
-assert.equal(defiLoopArtifact.currentSpendableOutpoint.txid, "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd");
+assert.equal(defiLoopArtifact.currentSpendableOutpoint.txid, "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c");
 const rebuiltDefiLoop = buildDefiV1OperatorLoop({
   firstReceipt: {
     ...JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-live-receipt-evidence.json", import.meta.url), "utf8")),
@@ -1204,7 +1209,7 @@ assert.equal(virtualChainIngestionRun.summary.virtualChainRows, checkpointFixtur
 assert.equal(virtualChainIngestionRun.summary.payloadRows, payloadEventCount);
 assert.equal(virtualChainIngestionRun.summary.proofRows, proofFixtureCount);
 assert.equal(virtualChainIngestionRun.summary.rollbackRows, 0);
-assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 47);
+assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 50);
 assert.equal(virtualChainIngestionRun.tables.wallet_submit_candidates.length, walletConnectorRequestsArtifact.requests.length);
 assert.ok(virtualChainIngestionRun.tables.wallet_submit_candidates.some((row) =>
   row.txid === "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
@@ -1219,7 +1224,7 @@ assert.ok(virtualChainIngestionRun.tables.wallet_submit_candidates.some((row) =>
 const virtualChainIngestionRunArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-run.json", import.meta.url), "utf8"));
 assert.equal(virtualChainIngestionRunArtifact.status, "fixture-virtual-chain-run-ready");
 assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, checkpointFixture.summary.total);
-assert.equal(virtualChainIngestionRunArtifact.summary.walletCandidateRows, 47);
+assert.equal(virtualChainIngestionRunArtifact.summary.walletCandidateRows, 50);
 const virtualChainReaderAdapterFixture = JSON.parse(await readFile(new URL("../fixtures/VirtualChainReaderAdapter.json", import.meta.url), "utf8"));
 const virtualChainReaderAdapter = buildVirtualChainReaderAdapter({
   fixture: virtualChainReaderAdapterFixture,
@@ -1402,9 +1407,9 @@ const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   runAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(walletSubmitLedger.status, "wallet-submit-ledger-ready");
-assert.equal(walletSubmitLedger.summary.sessions, 47);
+assert.equal(walletSubmitLedger.summary.sessions, 50);
 assert.equal(walletSubmitLedger.summary.acceptedEvidence, 3);
-assert.equal(walletSubmitLedger.summary.pendingWalletSubmit, 44);
+assert.equal(walletSubmitLedger.summary.pendingWalletSubmit, 47);
 assert.equal(walletSubmitLedger.summary.broadcastsByThisArtifact, 0);
 assert.equal(walletSubmitLedger.summary.secretFields, 0);
 assert.ok(walletSubmitLedger.ledgerRows
@@ -1449,17 +1454,17 @@ const walletExternalSignerGap = buildWalletExternalSignerGap({
 });
 assert.equal(walletExternalSignerGap.status, "external-signer-gap-documented");
 assert.equal(walletExternalSignerGap.liveNoLocalKeySigningReady, false);
-assert.equal(walletExternalSignerGap.summary.requests, 47);
-assert.equal(walletExternalSignerGap.summary.signedLocalDrafts, 47);
+assert.equal(walletExternalSignerGap.summary.requests, 50);
+assert.equal(walletExternalSignerGap.summary.signedLocalDrafts, 50);
 assert.equal(walletExternalSignerGap.summary.unsignedWalletSignRequests, 0);
-assert.equal(walletExternalSignerGap.summary.payloadPreservationNeeded, 26);
+assert.equal(walletExternalSignerGap.summary.payloadPreservationNeeded, 29);
 assert.equal(walletExternalSignerGap.summary.computeBudgetPreservationNeeded, 3);
 assert.ok(walletExternalSignerGap.currentTruth.some((line) => /signed local drafts/.test(line)));
 assert.ok(walletExternalSignerGap.closeGapChecklist.some((item) => item.id === "unsigned-request-schema"));
 const walletExternalSignerGapArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-gap.json", import.meta.url), "utf8"));
 assert.equal(walletExternalSignerGapArtifact.status, "external-signer-gap-documented");
 assert.equal(walletExternalSignerGapArtifact.liveNoLocalKeySigningReady, false);
-assert.equal(walletExternalSignerGapArtifact.summary.signedLocalDrafts, 47);
+assert.equal(walletExternalSignerGapArtifact.summary.signedLocalDrafts, 50);
 const submitPackageArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-submit-package.json", import.meta.url), "utf8"));
 const draftArtifactsByPath = {};
 for (const intent of submitPackageArtifact.intents || []) {
@@ -1473,8 +1478,8 @@ const walletUnsignedTemplates = buildWalletUnsignedRequestTemplates({
 assert.equal(walletUnsignedTemplates.status, "unsigned-request-templates-ready");
 assert.equal(walletUnsignedTemplates.standardMapped, false);
 assert.equal(walletUnsignedTemplates.liveExternalSignerReady, false);
-assert.equal(walletUnsignedTemplates.summary.templates, 47);
-assert.equal(walletUnsignedTemplates.summary.payloadTemplates, 26);
+assert.equal(walletUnsignedTemplates.summary.templates, 50);
+assert.equal(walletUnsignedTemplates.summary.payloadTemplates, 29);
 assert.equal(walletUnsignedTemplates.summary.computeBudgetTemplates, 3);
 assert.ok(walletUnsignedTemplates.summary.signatureScriptsStripped > 0);
 assert.ok(walletUnsignedTemplates.templates.every((template) =>
@@ -1486,7 +1491,7 @@ assert.ok(walletUnsignedTemplates.templates.some((template) =>
 ));
 const walletUnsignedTemplatesArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-unsigned-request-templates.json", import.meta.url), "utf8"));
 assert.equal(walletUnsignedTemplatesArtifact.status, "unsigned-request-templates-ready");
-assert.equal(walletUnsignedTemplatesArtifact.summary.templates, 47);
+assert.equal(walletUnsignedTemplatesArtifact.summary.templates, 50);
 assert.equal(walletUnsignedTemplatesArtifact.standardMapped, false);
 const signerReferences = await readFile(new URL("../docs/WALLET_SIGNER_REFERENCES.md", import.meta.url), "utf8");
 const walletStandardMapping = buildWalletStandardMapping({
@@ -1509,6 +1514,10 @@ assert.equal(walletStandardRequests.status, "wallet-standard-request-candidates-
 assert.equal(walletStandardRequests.summary.mappedRequests, 4);
 assert.equal(walletStandardRequests.summary.payloadRequests, 1);
 assert.equal(walletStandardRequests.summary.computeBudgetRequests, 1);
+assert.ok(walletStandardRequests.requests.some((request) =>
+  request.sourceSignedDraftPath === "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json"
+  && request.preservation.expectedTransactionIdAfterSigning === "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa"
+));
 assert.ok(walletStandardRequests.requests.every((request) =>
   request.body.format === "pskb-pskt-candidate-json"
   && request.reviewFingerprint.length === 64
@@ -1566,7 +1575,7 @@ assert.equal(walletExternalSignerRoundtripPlan.status, "external-signer-roundtri
 assert.equal(walletExternalSignerRoundtripPlan.summary.requests, 4);
 assert.equal(walletExternalSignerRoundtripPlan.summary.pendingExternalSigner, 4);
 assert.deepEqual(walletExternalSignerRoundtripPlan.recommendedOrder, [
-  "ureq-6cfe79da-standard",
+  "ureq-fcfdf1df-standard",
   "ureq-d12412d8-standard"
 ]);
 const walletExternalSignerRoundtripPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-roundtrip-plan.json", import.meta.url), "utf8"));
@@ -1580,8 +1589,9 @@ assert.equal(walletExternalSignerResultTemplate.summary.templates, 4);
 assert.equal(walletExternalSignerResultTemplate.summary.recommendedFirstPass, 2);
 assert.equal(walletExternalSignerResultTemplate.results.length, 4);
 assert.ok(walletExternalSignerResultTemplate.results.some((row) =>
-  row.requestId === "ureq-6cfe79da-standard"
-  && row.reviewFingerprint === "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3"
+  row.requestId === "ureq-fcfdf1df-standard"
+  && row.reviewFingerprint === "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4"
+  && row.transactionId === "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa"
   && row.route === "payload-preserving-wrpc"
 ));
 assert.ok(walletExternalSignerResultTemplate.results.some((row) =>
@@ -1606,7 +1616,7 @@ const walletImplementationSlice = buildWalletConnectorImplementationSlice({
 });
 assert.equal(walletImplementationSlice.status, "wallet-connector-implementation-slice-ready");
 assert.equal(walletImplementationSlice.firstUserFlow, "payload-receipt-unsigned-sign");
-assert.equal(walletImplementationSlice.summary.payloadTemplates, 26);
+assert.equal(walletImplementationSlice.summary.payloadTemplates, 29);
 assert.equal(walletImplementationSlice.summary.standardRequests, 4);
 assert.ok(walletImplementationSlice.firstRoundTripRequest.reviewFingerprint);
 const walletImplementationSliceArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-connector-implementation-slice.json", import.meta.url), "utf8"));

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-reader-adapter/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:31:20.161Z",
+  "generatedAt": "2026-05-10T20:54:24.112Z",
   "status": "virtual-chain-reader-adapter-ready",
   "mode": "configured-rpc-adapter-contract",
   "endpoint": {
@@ -30,7 +30,7 @@
     "kind": "blue-score-checkpoint",
     "bootstrapFrom": "artifacts/checkpointed-accepted-index.json",
     "persistTable": "checkpoint_watermarks",
-    "startBlueScore": 8210235,
+    "startBlueScore": 8228493,
     "trustedOverlapStartBlueScore": 5203140,
     "persistFields": [
       "network",
@@ -88,7 +88,7 @@
         "expected output amount/address matched",
         "decoded app event kind matched"
       ],
-      "currentMatchedRows": 28
+      "currentMatchedRows": 30
     },
     "proof": {
       "source": "fixtures/AcceptedProofTransactions.json",
@@ -103,9 +103,9 @@
     "appStateReady": true
   },
   "summary": {
-    "sourceCheckpointRecords": 40,
-    "virtualChainRows": 40,
-    "payloadRows": 28,
+    "sourceCheckpointRecords": 42,
+    "virtualChainRows": 42,
+    "payloadRows": 30,
     "proofRows": 9,
     "rollbackRows": 0,
     "endpointConfigured": false,

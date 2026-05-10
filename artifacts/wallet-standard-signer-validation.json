@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-standard-signer-validation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T15:20:16.878Z",
+  "generatedAt": "2026-05-10T20:50:28.609Z",
   "status": "wallet-standard-signer-validation-ready",
   "liveExternalSignerAccepted": false,
   "summary": {
@@ -15,7 +15,7 @@
   "validations": [
     {
       "id": "payload-roundtrip-placeholder",
-      "requestId": "ureq-6cfe79da-standard",
+      "requestId": "ureq-fcfdf1df-standard",
       "status": "pending-external-signer",
       "validation": "pending",
       "reasons": [
@@ -33,10 +33,10 @@
     },
     {
       "id": "negative-mutated-fingerprint",
-      "requestId": "ureq-6cfe79da-standard",
+      "requestId": "ureq-fcfdf1df-standard",
       "status": "returned",
       "validation": "rejected",
-      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
       "reasons": [
         "review fingerprint mismatch"
       ]
@@ -46,7 +46,7 @@
       "requestId": "ureq-d12412d8-standard",
       "status": "returned",
       "validation": "rejected",
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "reasons": [
         "input 0 computeBudget mismatch"
       ]

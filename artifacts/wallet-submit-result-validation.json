@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-submit-result-validation/v1",
   "network": "kaspa-testnet-12",
-  "runAt": "2026-05-10T15:20:12.774Z",
+  "runAt": "2026-05-10T20:50:03.798Z",
   "status": "wallet-submit-result-validation-ready",
   "liveWalletConnectorExists": false,
   "summary": {
@@ -296,20 +296,20 @@
       "requestId": "wreq-d12412d8",
       "sessionId": "review-wreq-d12412d8",
       "path": "artifacts/signed-drafts/role-escrow-cancel.json",
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "version": 1,
       "computeBudgetInputs": 1,
-      "fingerprint": "fp-c2b0fc42",
+      "fingerprint": "fp-a0a193bc",
       "preserved": true
     },
     {
       "requestId": "wreq-e83f441d",
       "sessionId": "review-wreq-e83f441d",
       "path": "artifacts/signed-drafts/escrow-cancel.json",
-      "transactionId": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+      "transactionId": "5929cf73639bd1003c564446320040fc30ef17b560fb6688505b699a9f3a757d",
       "version": 1,
       "computeBudgetInputs": 1,
-      "fingerprint": "fp-b2a53f58",
+      "fingerprint": "fp-35b917b5",
       "preserved": true
     },
     {

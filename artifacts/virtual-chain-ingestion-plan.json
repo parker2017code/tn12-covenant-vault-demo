@@ -1,21 +1,21 @@
 {
   "schema": "tn12-virtual-chain-ingestion-plan/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:31:19.478Z",
+  "generatedAt": "2026-05-10T20:49:27.561Z",
   "status": "virtual-chain-ingestion-contract-ready",
   "sourceCheckpoint": {
-    "recordCount": 40,
-    "payloadEvents": 28,
+    "recordCount": 42,
+    "payloadEvents": 30,
     "proofSpends": 9,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 8210235
+    "maxAcceptingBlockBlueScore": 8228493
   },
   "readerContract": {
     "source": "getVirtualChainFromBlockV2 or equivalent node/RPC virtual-chain feed",
     "dataVerbosity": "High",
     "cursor": {
       "type": "blue-score-watermark",
-      "startFrom": 8210235,
+      "startFrom": 8228493,
       "persistTo": "checkpoint_watermarks.max_blue_score"
     },
     "requiredTransactionFields": [

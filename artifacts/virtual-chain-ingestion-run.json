@@ -1,20 +1,20 @@
 {
   "schema": "tn12-virtual-chain-ingestion-run/v1",
   "network": "kaspa-testnet-12",
-  "runAt": "2026-05-10T20:31:17.552Z",
+  "runAt": "2026-05-10T20:49:25.909Z",
   "status": "fixture-virtual-chain-run-ready",
   "source": {
     "mode": "fixture-window-from-current-checkpoint",
     "targetReader": "getVirtualChainFromBlockV2 or equivalent node/RPC virtual-chain feed",
     "startBlueScore": 5203140,
-    "endBlueScore": 8210235
+    "endBlueScore": 8228493
   },
   "summary": {
-    "virtualChainRows": 40,
-    "acceptedRows": 40,
-    "payloadRows": 28,
+    "virtualChainRows": 42,
+    "acceptedRows": 42,
+    "payloadRows": 30,
     "proofRows": 9,
-    "walletCandidateRows": 47,
+    "walletCandidateRows": 50,
     "rollbackRows": 0,
     "appStateReady": true
   },
@@ -32,7 +32,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -46,7 +46,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
@@ -60,7 +60,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
@@ -74,7 +74,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
@@ -88,7 +88,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
@@ -102,7 +102,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
@@ -116,7 +116,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
@@ -130,7 +130,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
@@ -144,7 +144,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
@@ -158,7 +158,7 @@
         "payloadBytes": 127,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
@@ -172,7 +172,7 @@
         "payloadBytes": 136,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
@@ -186,7 +186,35 @@
         "payloadBytes": 150,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
+      },
+      {
+        "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+        "network": "kaspa-testnet-12",
+        "kind": "payload-event",
+        "lane": "order-receipt",
+        "accepted": true,
+        "matched": true,
+        "acceptingBlockBlueScore": 8228466,
+        "acceptingBlockTime": 1778446141322,
+        "payloadBytes": 154,
+        "outputMatched": true,
+        "source": "checkpoint-fixture-as-virtual-chain-window",
+        "seenAt": "2026-05-10T20:49:25.909Z"
+      },
+      {
+        "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+        "network": "kaspa-testnet-12",
+        "kind": "payload-event",
+        "lane": "order-receipt",
+        "accepted": true,
+        "matched": true,
+        "acceptingBlockBlueScore": 8228493,
+        "acceptingBlockTime": 1778446142995,
+        "payloadBytes": 154,
+        "outputMatched": true,
+        "source": "checkpoint-fixture-as-virtual-chain-window",
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
@@ -200,7 +228,7 @@
         "payloadBytes": 135,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
@@ -214,7 +242,7 @@
         "payloadBytes": 130,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
@@ -228,7 +256,7 @@
         "payloadBytes": 159,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
@@ -242,7 +270,7 @@
         "payloadBytes": 122,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
@@ -256,7 +284,7 @@
         "payloadBytes": 128,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
@@ -270,7 +298,7 @@
         "payloadBytes": 160,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
@@ -284,7 +312,7 @@
         "payloadBytes": 195,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
@@ -298,7 +326,7 @@
         "payloadBytes": 185,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
@@ -312,7 +340,7 @@
         "payloadBytes": 135,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
@@ -326,7 +354,7 @@
         "payloadBytes": 138,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
@@ -340,7 +368,7 @@
         "payloadBytes": 140,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
@@ -354,7 +382,7 @@
         "payloadBytes": 156,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
@@ -368,7 +396,7 @@
         "payloadBytes": 179,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
@@ -382,7 +410,7 @@
         "payloadBytes": 190,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
@@ -396,7 +424,7 @@
         "payloadBytes": 136,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
@@ -410,7 +438,7 @@
         "payloadBytes": 139,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
@@ -424,7 +452,7 @@
         "payloadBytes": 133,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
@@ -438,7 +466,7 @@
         "payloadBytes": 148,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
@@ -452,7 +480,7 @@
         "payloadBytes": 127,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
@@ -466,7 +494,7 @@
         "payloadBytes": 207,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
@@ -480,7 +508,7 @@
         "payloadBytes": 179,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
@@ -494,7 +522,7 @@
         "payloadBytes": 183,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
@@ -508,7 +536,7 @@
         "payloadBytes": 183,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
@@ -522,7 +550,7 @@
         "payloadBytes": 194,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
@@ -536,7 +564,7 @@
         "payloadBytes": 186,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -550,7 +578,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -564,7 +592,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       },
       {
         "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -578,7 +606,7 @@
         "payloadBytes": 0,
         "outputMatched": true,
         "source": "checkpoint-fixture-as-virtual-chain-window",
-        "seenAt": "2026-05-10T20:31:17.552Z"
+        "seenAt": "2026-05-10T20:49:25.909Z"
       }
     ],
     "wallet_submit_candidates": [
@@ -588,6 +616,51 @@
         "path": "artifacts/signed-drafts/payload-receipt-self-send.json",
         "route": "payload-preserving-wallet-or-json-wrpc",
         "payloadBytes": 127,
+        "acceptedByVirtualChain": true,
+        "payloadMatches": true,
+        "outputMatched": true,
+        "promotionState": "accepted-matched",
+        "state": "accepted-matched",
+        "acceptedLane": "order-receipt",
+        "acceptedKind": "payload-event",
+        "promoteWhen": "accepted virtual-chain row with matching txid and payload/output checks"
+      },
+      {
+        "requestId": "wreq-dd44253e",
+        "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+        "path": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json",
+        "route": "payload-preserving-wallet-or-json-wrpc",
+        "payloadBytes": 150,
+        "acceptedByVirtualChain": true,
+        "payloadMatches": true,
+        "outputMatched": true,
+        "promotionState": "accepted-matched",
+        "state": "accepted-matched",
+        "acceptedLane": "order-receipt",
+        "acceptedKind": "payload-event",
+        "promoteWhen": "accepted virtual-chain row with matching txid and payload/output checks"
+      },
+      {
+        "requestId": "wreq-fcfdf1df",
+        "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+        "path": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
+        "route": "payload-preserving-wallet-or-json-wrpc",
+        "payloadBytes": 154,
+        "acceptedByVirtualChain": true,
+        "payloadMatches": true,
+        "outputMatched": true,
+        "promotionState": "accepted-matched",
+        "state": "accepted-matched",
+        "acceptedLane": "order-receipt",
+        "acceptedKind": "payload-event",
+        "promoteWhen": "accepted virtual-chain row with matching txid and payload/output checks"
+      },
+      {
+        "requestId": "wreq-ebaba940",
+        "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+        "path": "artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json",
+        "route": "payload-preserving-wallet-or-json-wrpc",
+        "payloadBytes": 154,
         "acceptedByVirtualChain": true,
         "payloadMatches": true,
         "outputMatched": true,
@@ -989,7 +1062,7 @@
       },
       {
         "requestId": "wreq-42682575",
-        "txid": "ce1a94b8ced52cbc73e8f79c173e6b3611fa0c57fa3a712db64da290f555f4e0",
+        "txid": "658067a4669f08455ca4234f89aaec28ac736a57f4727d174257399b0b38e29c",
         "path": "artifacts/signed-drafts/role-separated-funding.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1004,7 +1077,7 @@
       },
       {
         "requestId": "wreq-700a182c",
-        "txid": "034e08d745cab60e2633e029872e3f324dc8d24cd2b6fc47fac12eff42faef12",
+        "txid": "180d4ecf6ce5a858a2f85237582c2e565dbac719624699a74eb271b3ea634e6b",
         "path": "artifacts/signed-drafts/role-vault-withdrawal.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1019,7 +1092,7 @@
       },
       {
         "requestId": "wreq-1ffef490",
-        "txid": "dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0",
+        "txid": "15c980f3fd7371cb5f32f80f0b155f70386b6df13e8df8c5c59b177c6bbbb656",
         "path": "artifacts/signed-drafts/role-vault-recovery.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1034,7 +1107,7 @@
       },
       {
         "requestId": "wreq-6080546b",
-        "txid": "fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32",
+        "txid": "55c365ae920b29de08666a5649ee8a75a854a83b2adb247cff040bd2a6b6bba6",
         "path": "artifacts/signed-drafts/role-assurance-release.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1049,7 +1122,7 @@
       },
       {
         "requestId": "wreq-a4f739ba",
-        "txid": "2415e0091906618545ce6f40e3d646a1a19e670b85727823f170e9e8333976aa",
+        "txid": "5931ffa2c04318f46fc1d3cb98c8c0bccecfd8f33d1fe4da4ef6b216766ec740",
         "path": "artifacts/signed-drafts/role-assurance-refund.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1064,7 +1137,7 @@
       },
       {
         "requestId": "wreq-fda320a9",
-        "txid": "4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382",
+        "txid": "3550475ff95e472a8ec8f50bfb2a40f8d38e90e2f69cdf8ceb6d1d51cd1e1379",
         "path": "artifacts/signed-drafts/role-escrow-release.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1079,7 +1152,7 @@
       },
       {
         "requestId": "wreq-f5845e00",
-        "txid": "37af74be33c368bd0208a3844941c24bca26a11ea06db1b91a4d4db091a22009",
+        "txid": "aed75c6b897e16bdeb9f835d3a4ce537158e6061aba14bddc4e63a448eec0b96",
         "path": "artifacts/signed-drafts/role-escrow-refund.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1094,7 +1167,7 @@
       },
       {
         "requestId": "wreq-d12412d8",
-        "txid": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+        "txid": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
         "path": "artifacts/signed-drafts/role-escrow-cancel.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1184,22 +1257,22 @@
       },
       {
         "requestId": "wreq-9532d7b2",
-        "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+        "txid": "3a785b49bf8e63f15a136d2f454aab22d5f9c3beb4efdcb905166106d357a999",
         "path": "artifacts/signed-drafts/escrow-release.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
-        "acceptedByVirtualChain": true,
+        "acceptedByVirtualChain": false,
         "payloadMatches": true,
-        "outputMatched": true,
-        "promotionState": "accepted-matched",
-        "state": "accepted-matched",
-        "acceptedLane": "escrow",
-        "acceptedKind": "proof-spend",
+        "outputMatched": false,
+        "promotionState": "candidate-only",
+        "state": "candidate-only",
+        "acceptedLane": "",
+        "acceptedKind": "",
         "promoteWhen": "accepted virtual-chain row with matching txid and payload/output checks"
       },
       {
         "requestId": "wreq-b94a10a1",
-        "txid": "e95852e2203c9330b81c9dc65f0ddd8c07d801c7b917dac59f272e79736fb425",
+        "txid": "4495b59886fa68356de2c44a27a950132436b2dbeff79c2d2cc9b80098dc8a7d",
         "path": "artifacts/signed-drafts/escrow-refund.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
@@ -1214,17 +1287,17 @@
       },
       {
         "requestId": "wreq-e83f441d",
-        "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
+        "txid": "5929cf73639bd1003c564446320040fc30ef17b560fb6688505b699a9f3a757d",
         "path": "artifacts/signed-drafts/escrow-cancel.json",
         "route": "wallet-exact-transaction-submit",
         "payloadBytes": 0,
-        "acceptedByVirtualChain": true,
+        "acceptedByVirtualChain": false,
         "payloadMatches": true,
-        "outputMatched": true,
-        "promotionState": "accepted-matched",
-        "state": "accepted-matched",
-        "acceptedLane": "escrow",
-        "acceptedKind": "proof-spend",
+        "outputMatched": false,
+        "promotionState": "candidate-only",
+        "state": "candidate-only",
+        "acceptedLane": "",
+        "acceptedKind": "",
         "promoteWhen": "accepted virtual-chain row with matching txid and payload/output checks"
       },
       {

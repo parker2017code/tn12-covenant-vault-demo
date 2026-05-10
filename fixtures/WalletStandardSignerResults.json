@@ -5,10 +5,10 @@
     {
       "id": "payload-roundtrip-placeholder",
       "status": "pending-external-signer",
-      "requestId": "ureq-6cfe79da-standard",
-      "reviewFingerprint": "c9f663c65d95ad3cf592d40261e14d26b0dce4bab5db0ff68eba6e7a00754ff3",
+      "requestId": "ureq-fcfdf1df-standard",
+      "reviewFingerprint": "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4",
       "transactionId": "",
-      "payloadBytes": 127,
+      "payloadBytes": 154,
       "inputBudgetReport": [
         {
           "inputIndex": 0,
@@ -25,7 +25,7 @@
       "id": "covenant-roundtrip-placeholder",
       "status": "pending-external-signer",
       "requestId": "ureq-d12412d8-standard",
-      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
+      "reviewFingerprint": "3c94c9091718fe8ba5461322e554b9764cf032d6f0a80fb74536a7255fea8353",
       "transactionId": "",
       "payloadBytes": 0,
       "inputBudgetReport": [
@@ -43,10 +43,10 @@
     {
       "id": "negative-mutated-fingerprint",
       "status": "returned",
-      "requestId": "ureq-6cfe79da-standard",
+      "requestId": "ureq-fcfdf1df-standard",
       "reviewFingerprint": "bad-fingerprint",
-      "transactionId": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
-      "payloadBytes": 127,
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "payloadBytes": 154,
       "inputBudgetReport": [
         {
           "inputIndex": 0,
@@ -63,8 +63,8 @@
       "id": "negative-dropped-compute-budget",
       "status": "returned",
       "requestId": "ureq-d12412d8-standard",
-      "reviewFingerprint": "20bf6dd1782f92ae969961b43dff44633db79d7bdfeb77af9b7797120076af92",
-      "transactionId": "10b96fc23b6d460d8ba3c2ccd8a2e5172f674c2a0487456a60c7868d9ef3616b",
+      "reviewFingerprint": "3c94c9091718fe8ba5461322e554b9764cf032d6f0a80fb74536a7255fea8353",
+      "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "payloadBytes": 0,
       "inputBudgetReport": [
         {

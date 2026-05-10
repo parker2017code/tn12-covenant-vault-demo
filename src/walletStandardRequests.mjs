@@ -50,7 +50,11 @@ export function buildWalletStandardRequests({
 }
 
 function selectTemplates(templates) {
-  const payload = templates.find((template) => template.class === "payload-app-state" && template.payload?.present);
+  const payload = findByLabel(templates, "DeFi v1 multi-wallet A receipt")
+    || findByLabel(templates, "DeFi v1 multi-wallet B receipt")
+    || findByLabel(templates, "DeFi v1 repeat receipt")
+    || findByLabel(templates, "DeFi v1 live receipt")
+    || templates.find((template) => template.class === "payload-app-state" && template.payload?.present);
   const escrowActions = [
     findByLabel(templates, "Role-separated escrow release"),
     findByLabel(templates, "Role-separated escrow refund"),
