@@ -1,0 +1,145 @@
+{
+  "schema": "tn12-escrow-negative-test-spec/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T18:00:00.000Z",
+  "status": "escrow-negative-test-spec-ready",
+  "purpose": "Specify negative test cases for escrow settlement (role-based access control, mutual exclusivity, amount conservation)",
+  "testCases": [
+    {
+      "id": "wrong-key-release",
+      "name": "Release Path with Wrong Buyer Key",
+      "description": "Attempt escrow release using a key that is NOT the registered buyer",
+      "precondition": "Escrow covenant with buyer=BUYER_KEY, seller=SELLER_KEY, arbiter=ARBITER_KEY",
+      "action": "Call release path with signature from attacker_key (not BUYER_KEY)",
+      "expectedBehavior": "rejected by covenant script (signature verification fails)",
+      "why": "Covenant enforces role-based access; only buyer can trigger release",
+      "severity": "critical"
+    },
+    {
+      "id": "wrong-key-refund",
+      "name": "Refund Path with Wrong Arbiter Key",
+      "description": "Attempt escrow refund using a key that is NOT the registered arbiter",
+      "precondition": "Escrow covenant with arbiter=ARBITER_KEY",
+      "action": "Call refund path with signature from attacker_key (not ARBITER_KEY)",
+      "expectedBehavior": "rejected by covenant script (signature verification fails)",
+      "why": "Only arbiter can trigger refund; prevents buyer from self-refunding or seller from blocking refund",
+      "severity": "critical"
+    },
+    {
+      "id": "wrong-key-cancel",
+      "name": "Cancel Path with Wrong Seller Key",
+      "description": "Attempt escrow cancel using a key that is NOT the registered seller",
+      "precondition": "Escrow covenant with seller=SELLER_KEY",
+      "action": "Call cancel path with signature from attacker_key (not SELLER_KEY)",
+      "expectedBehavior": "rejected by covenant script (signature verification fails)",
+      "why": "Only seller can cancel; prevents buyer from canceling and getting refund without consent",
+      "severity": "critical"
+    },
+    {
+      "id": "wrong-release-recipient",
+      "name": "Release to Wrong Recipient Address",
+      "description": "Buyer attempts to release funds to address other than registered seller",
+      "precondition": "Escrow covenant with seller=SELLER_ADDRESS",
+      "action": "Call release path with output going to attacker_address instead of SELLER_ADDRESS",
+      "expectedBehavior": "rejected by covenant script (output constraint violation)",
+      "why": "Covenant locks output recipient to seller; prevents buyer from stealing funds by redirecting release",
+      "severity": "critical"
+    },
+    {
+      "id": "wrong-refund-recipient",
+      "name": "Refund to Wrong Recipient Address",
+      "description": "Arbiter attempts to refund to address other than original buyer",
+      "precondition": "Escrow covenant with buyer=BUYER_ADDRESS",
+      "action": "Call refund path with output going to attacker_address instead of BUYER_ADDRESS",
+      "expectedBehavior": "rejected by covenant script (output constraint violation)",
+      "why": "Covenant locks refund recipient to buyer; prevents arbiter from stealing funds",
+      "severity": "critical"
+    },
+    {
+      "id": "replay-attack-same-input",
+      "name": "Replay Attack (Spend Same Input Twice)",
+      "description": "After escrow release is confirmed, attacker replays the same transaction to spend the UTXO again",
+      "precondition": "Escrow release transaction broadcast and accepted on-chain",
+      "action": "Submit identical release transaction with same input (UTXO already spent)",
+      "expectedBehavior": "rejected by mempool (input already spent) or by chain (orphan UTXO)",
+      "why": "Escrow covenant prevents replay by consuming the UTXO; once released, cannot release again",
+      "severity": "high"
+    },
+    {
+      "id": "output-amount-mismatch",
+      "name": "Release with Amount Greater Than Input",
+      "description": "Attempt to release more funds than escrow contract holds",
+      "precondition": "Escrow holds 100 TKAS; attempt to release with output = 101 TKAS",
+      "action": "Build release transaction with output amount > input amount (violates conservation law)",
+      "expectedBehavior": "rejected by covenant (or by transaction builder due to insufficient input)",
+      "why": "Cannot create funds out of thin air; covenant enforces amount conservation",
+      "severity": "critical"
+    },
+    {
+      "id": "zero-fee-dust-output",
+      "name": "Release with Zero Fee (Dust Output)",
+      "description": "Attempt to release with fee so high that output becomes dust (< 546 satoshis)",
+      "precondition": "Escrow holds 100 satoshi, fee = 100 satoshi → output = 0",
+      "action": "Build release with excessive fee, creating zero-value output",
+      "expectedBehavior": "rejected by covenant or transaction validator (zero output disallowed)",
+      "why": "Standard validation rules reject zero outputs; prevents fund destruction",
+      "severity": "medium"
+    },
+    {
+      "id": "multiple-release-signatures",
+      "name": "Multiple Settlement Paths in Same Transaction",
+      "description": "Attempt to include both release AND refund in same transaction",
+      "precondition": "Escrow contract with distinct release and refund code paths",
+      "action": "Build transaction that satisfies both release and refund witness constraints",
+      "expectedBehavior": "rejected by covenant (mutual exclusivity enforced in script logic)",
+      "why": "Covenant enforces exactly one settlement path; prevents double-spending in same block",
+      "severity": "critical"
+    },
+    {
+      "id": "delayed-release-after-cancel",
+      "name": "Release After Seller Cancels",
+      "description": "Seller cancels escrow (resetting state), then buyer tries to release",
+      "precondition": "Escrow has expiry; seller calls cancel, which expires the escrow state",
+      "action": "After cancel, attempt to call release path using original buyer key",
+      "expectedBehavior": "rejected by covenant (escrow state invalid or expired after cancel)",
+      "why": "Covenant tracks expiry/state; settlement impossible after cancel",
+      "severity": "medium"
+    },
+    {
+      "id": "signature-malleability",
+      "name": "Malleated Signature (Flip S Value)",
+      "description": "Attacker modifies valid signature by flipping the S value in ECDSA (low_s vs high_s)",
+      "precondition": "Valid buyer signature on release path",
+      "action": "Flip S value (S → order - S) while keeping rest of signature same",
+      "expectedBehavior": "rejected by covenant if using strict DER-encoded signatures",
+      "why": "Standard script validation enforces signature canonicality; prevents signature malleability attacks",
+      "severity": "low"
+    },
+    {
+      "id": "insufficient-signatures",
+      "name": "Release with Missing Witness Data",
+      "description": "Attempt release without providing buyer signature in witness",
+      "precondition": "Escrow release path expects buyer signature",
+      "action": "Build transaction without witness data (empty scriptSig)",
+      "expectedBehavior": "rejected by covenant script (signature verification fails)",
+      "why": "Covenant requires all required signatures; missing signature fails validation",
+      "severity": "high"
+    }
+  ],
+  "executionStrategy": {
+    "framework": "test-escrow-negative.mjs",
+    "fixtures": [
+      "fixtures/RoleEscrowContractOutpoint.json",
+      "fixtures/RoleSeparatedWallets.public.json"
+    ],
+    "testRunner": "node scripts/test-escrow-negative.mjs",
+    "expectedOutput": "artifacts/escrow-negative-cases.json",
+    "successCriteria": "All 12 cases correctly rejected; all 3 legitimate paths (release, refund, cancel) still work"
+  },
+  "implementationNotes": "Escrow negative tests focus on role-based access control (RBAC) enforcement and mutual exclusivity. Most critical failures are key/signature mismatches (attacker uses wrong key). Amount conservation and output constraints are secondary validations.",
+  "relatedGates": [
+    "check:escrow-rbac (role-based access control validation)",
+    "check:escrow-mutual-exclusive (settlement path mutual exclusivity)",
+    "check:escrow-amount-conservation (input/output balance)"
+  ]
+}

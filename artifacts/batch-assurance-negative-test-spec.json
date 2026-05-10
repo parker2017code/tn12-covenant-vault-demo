@@ -1,0 +1,146 @@
+{
+  "schema": "tn12-batch-assurance-negative-test-spec/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T18:00:00.000Z",
+  "status": "batch-assurance-negative-test-spec-ready",
+  "purpose": "Specify negative test cases for batch-assurance settlement (mutual exclusivity, operator signing, amount conservation, deadline enforcement)",
+  "testCases": [
+    {
+      "id": "both-release-and-refund",
+      "name": "Attempt Both Release and Refund in Same Settlement",
+      "description": "Campaign attempts to settle with both RELEASE and REFUND outcomes in same transaction",
+      "precondition": "Batch-assurance covenant with pledge pool and operator signature requirement",
+      "action": "Build transaction with both release output (to beneficiary) and refund output (to pledgers)",
+      "expectedBehavior": "rejected by covenant (mutual exclusivity enforced in script logic)",
+      "why": "Covenant enforces exactly one outcome per campaign; prevents double-spending of same pledge pool",
+      "severity": "critical"
+    },
+    {
+      "id": "wrong-operator-signature",
+      "name": "Settlement with Wrong Operator Key",
+      "description": "Attempt batch settlement using signature from non-operator key",
+      "precondition": "Covenant specifies operator=OP_KEY; attacker uses different key",
+      "action": "Call settlement path with signature from attacker_key (not OP_KEY)",
+      "expectedBehavior": "rejected by covenant (operator signature verification fails)",
+      "why": "Only registered operator can trigger settlement; prevents unauthorized person from settling campaign",
+      "severity": "critical"
+    },
+    {
+      "id": "missing-operator-signature",
+      "name": "Settlement Without Operator Signature",
+      "description": "Attempt settlement without providing required operator signature in witness",
+      "precondition": "Covenant requires operator signature",
+      "action": "Build transaction with empty witness data (no operator signature)",
+      "expectedBehavior": "rejected by covenant (signature verification fails)",
+      "why": "Covenant requires operator sign-off; settlement without signature is unauthorized",
+      "severity": "critical"
+    },
+    {
+      "id": "amount-mismatch-release",
+      "name": "Release Amount Greater Than Pledge Pool",
+      "description": "Attempt to release more funds to beneficiary than total pledges",
+      "precondition": "Pledge pool = 100 TKAS; attempt release = 101 TKAS",
+      "action": "Build release transaction with output > total input",
+      "expectedBehavior": "rejected by covenant (amount conservation violated)",
+      "why": "Cannot release more than was pledged; covenant enforces input/output balance",
+      "severity": "critical"
+    },
+    {
+      "id": "amount-mismatch-refund",
+      "name": "Refund Amount Less Than Pledge Pool",
+      "description": "Refund to pledgers is less than original pledge amount (funds lost/stolen)",
+      "precondition": "Pledge pool = 100 TKAS; refund = 80 TKAS",
+      "action": "Build refund transaction with output < total input",
+      "expectedBehavior": "rejected by covenant (amount conservation violated)",
+      "why": "All pledges must be returned in refund; covenant prevents fund loss",
+      "severity": "critical"
+    },
+    {
+      "id": "wrong-beneficiary-address",
+      "name": "Release to Wrong Beneficiary",
+      "description": "Attempt to release campaign funds to address other than registered beneficiary",
+      "precondition": "Covenant specifies beneficiary=BENEFICIARY_ADDRESS",
+      "action": "Call release with output going to attacker_address instead of BENEFICIARY_ADDRESS",
+      "expectedBehavior": "rejected by covenant (output constraint violation)",
+      "why": "Covenant locks release recipient to beneficiary; prevents operator from stealing funds",
+      "severity": "critical"
+    },
+    {
+      "id": "settlement-after-deadline",
+      "name": "Settle Campaign After Deadline Passed",
+      "description": "Attempt to settle a campaign whose deadline has already passed",
+      "precondition": "Campaign deadline = 2026-05-10 12:00 UTC; current time = 2026-05-10 13:00 UTC",
+      "action": "Call settlement path after deadline; covenant checks timestamp in script",
+      "expectedBehavior": "rejected by covenant (deadline check fails)",
+      "why": "Campaigns can only settle within deadline window; prevents late settlements",
+      "severity": "high"
+    },
+    {
+      "id": "settlement-before-funding",
+      "name": "Settle Campaign Before Pledge Deadline",
+      "description": "Attempt to settle campaign while pledges are still being collected",
+      "precondition": "Campaign pledge deadline = 2026-05-12; settle time = 2026-05-11",
+      "action": "Call settlement before campaign pledge period closes",
+      "expectedBehavior": "rejected by covenant (settlement forbidden before pledge deadline)",
+      "why": "Campaign must collect all pledges before settlement; prevents early settlement with incomplete pledges",
+      "severity": "high"
+    },
+    {
+      "id": "partial-refund-pledgers",
+      "name": "Refund to Only Some Pledgers",
+      "description": "Refund transaction includes outputs for pledgers A, B, C but not D, E",
+      "precondition": "Campaign has 5 pledgers; only 3 receive refund",
+      "action": "Build refund with missing pledger outputs (funds stuck in covenant)",
+      "expectedBehavior": "rejected by covenant (mutual exclusivity + amount mismatch checks)",
+      "why": "All pledges must be returned together; prevents selective refund (fund loss)",
+      "severity": "critical"
+    },
+    {
+      "id": "operator-settlement-without-pledges",
+      "name": "Settle Campaign with Zero Pledges",
+      "description": "Attempt to settle campaign that has no pledges (invalid state)",
+      "precondition": "Campaign created but no pledges collected",
+      "action": "Call settlement on empty campaign; attempt release with zero input",
+      "expectedBehavior": "rejected by covenant (zero-amount settlement disallowed)",
+      "why": "Cannot settle campaign with no pledges; prevents spurious settlement",
+      "severity": "medium"
+    },
+    {
+      "id": "replay-same-settlement",
+      "name": "Replay Same Settlement (Spend Same UTXO Twice)",
+      "description": "After campaign settles with release, attacker replays same transaction to spend already-spent UTXO",
+      "precondition": "Campaign UTXO already spent in release settlement",
+      "action": "Submit identical release transaction",
+      "expectedBehavior": "rejected by mempool (input already spent) or by consensus (orphan UTXO)",
+      "why": "UTXO consumed in settlement; cannot replay",
+      "severity": "high"
+    },
+    {
+      "id": "zero-fee-settlement",
+      "name": "Settlement with Zero Fee (Dust Output)",
+      "description": "Settle with such high fee that output becomes less than dust threshold",
+      "precondition": "Pledge pool = 100 satoshi; fee = 100 satoshi → output = 0",
+      "action": "Build settlement with excessive fee, creating zero/dust output",
+      "expectedBehavior": "rejected by covenant or validator (zero output disallowed)",
+      "why": "Cannot create zero-value outputs; prevents fund destruction",
+      "severity": "medium"
+    }
+  ],
+  "executionStrategy": {
+    "framework": "test-batch-assurance-negative.mjs",
+    "fixtures": [
+      "fixtures/BatchAssurancePledgeWallets.public.json",
+      "artifacts/batch-assurance-custody-requirements.json"
+    ],
+    "testRunner": "node scripts/test-batch-assurance-negative.mjs",
+    "expectedOutput": "artifacts/batch-assurance-negative-cases.json",
+    "successCriteria": "All 12 cases correctly rejected; legitimate settlement paths (release, refund) still work"
+  },
+  "implementationNotes": "Batch-assurance negative tests focus on operator authorization, mutual-exclusive outcomes, and amount conservation. Critical issues include wrong operator signature and amount mismatches. Deadline enforcement and partial refunds are secondary but important for campaign correctness.",
+  "relatedGates": [
+    "check:batch-operator-auth (operator signature validation)",
+    "check:batch-mutual-exclusive (exactly one outcome per campaign)",
+    "check:batch-amount-conservation (pledge amount conservation)",
+    "check:batch-deadline (deadline enforcement)"
+  ]
+}

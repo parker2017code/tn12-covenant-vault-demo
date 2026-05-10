@@ -1,0 +1,157 @@
+{
+  "schema": "tn12-wallet-negative-test-spec/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T18:00:00.000Z",
+  "status": "wallet-negative-test-spec-ready",
+  "purpose": "Specify negative test cases for wallet submit console (external signer validation, double-spend prevention, signature verification, key type checks)",
+  "testCases": [
+    {
+      "id": "unsigned-draft-submission",
+      "name": "Submit Unsigned Draft (No Witness Data)",
+      "description": "Attempt to submit draft transaction without witness/signature data",
+      "precondition": "Draft transaction exists but witness field is empty",
+      "action": "Call submit endpoint with draft.witness = null or empty string",
+      "expectedBehavior": "rejected by submit console (unsigned transaction disallowed)",
+      "why": "All submissions must be signed; prevents broadcasting of unsigned transactions",
+      "severity": "critical"
+    },
+    {
+      "id": "local-key-submission",
+      "name": "Submit Using Local Key (Non-External Signer)",
+      "description": "Attempt to submit draft signed with local private key instead of external signer (KasWare)",
+      "precondition": "Draft contains signer.source = 'local-key-storage'",
+      "action": "Call submit endpoint with local-key signer",
+      "expectedBehavior": "rejected by submit console (local keys disallowed)",
+      "why": "TN12 settlement requires external signer (KasWare/hardware) for key security; prevents local key exposure",
+      "severity": "critical"
+    },
+    {
+      "id": "double-spend-same-utxo",
+      "name": "Double-Spend Same UTXO in Two Submissions",
+      "description": "Submit two different transactions spending the same input UTXO",
+      "precondition": "UTXO tx:0 prepared in two different drafts",
+      "action": "Submit both drafts (first succeeds, second attempts to spend same UTXO)",
+      "expectedBehavior": "second submission rejected (input already spent by first)",
+      "why": "Submit console tracks submitted UTXOs; prevents double-spend within submit session",
+      "severity": "critical"
+    },
+    {
+      "id": "malformed-witness-signature",
+      "name": "Submit with Invalid Signature Format",
+      "description": "Draft includes witness that is not valid hex or is truncated",
+      "precondition": "Draft.witness = 'not-a-valid-hex-string'",
+      "action": "Call submit endpoint with malformed witness",
+      "expectedBehavior": "rejected by submit console (signature format validation fails)",
+      "why": "Signatures must be valid hex; prevents broadcast of malformed transactions",
+      "severity": "high"
+    },
+    {
+      "id": "wrong-key-signature-mismatch",
+      "name": "Signature from Wrong Key (Key-Signature Mismatch)",
+      "description": "Attempt to submit draft signed with key that doesn't match contract requirements",
+      "precondition": "Contract expects signature from BUY_KEY; draft signed with SELL_KEY",
+      "action": "Call submit with mismatched signature",
+      "expectedBehavior": "rejected by covenant validation on-chain (or by submit console pre-check if implemented)",
+      "why": "Signature must match the key expected by covenant; prevents unauthorized signers",
+      "severity": "critical"
+    },
+    {
+      "id": "missing-input-utxo",
+      "name": "Submit Transaction with Non-Existent UTXO",
+      "description": "Draft references UTXO that doesn't exist on-chain",
+      "precondition": "Draft.inputOutpoint = 'nonexistent:0'",
+      "action": "Call submit endpoint; transaction broadcast attempts to spend missing UTXO",
+      "expectedBehavior": "rejected by mempool (orphan UTXO) or by consensus later",
+      "why": "Cannot spend non-existent UTXO; prevents invalid transactions",
+      "severity": "high"
+    },
+    {
+      "id": "burned-funds-missing-change",
+      "name": "Transaction Burns Funds (Output + Fee != Input)",
+      "description": "Transaction output and fee sum to less than input amount (funds destroyed)",
+      "precondition": "Input = 100 TKAS; Output = 40 TKAS; Fee = 50 TKAS → Lost: 10 TKAS",
+      "action": "Call submit with unbalanced transaction",
+      "expectedBehavior": "rejected by submit console (amount conservation check)",
+      "why": "All funds must be accounted for (output + fee = input); prevents accidental loss",
+      "severity": "high"
+    },
+    {
+      "id": "overpay-fee",
+      "name": "Excessive Fee (Overpay Significantly)",
+      "description": "Draft includes suspiciously high fee (e.g., 90% of input amount)",
+      "precondition": "Input = 100 TKAS; Fee = 90 TKAS; Output = 10 TKAS",
+      "action": "Call submit endpoint",
+      "expectedBehavior": "warning/confirmation required (not rejected, but flagged as unusual)",
+      "why": "Excessive fees are likely user error; submit console should warn operator",
+      "severity": "medium"
+    },
+    {
+      "id": "zero-output-transaction",
+      "name": "Transaction with Zero-Value Output",
+      "description": "After fee, output amount is exactly zero",
+      "precondition": "Input = 100 satoshi; Fee = 100 satoshi; Output = 0",
+      "action": "Call submit endpoint",
+      "expectedBehavior": "rejected by submit console or validator (zero-value outputs disallowed)",
+      "why": "Cannot create zero-value outputs; prevents fund destruction",
+      "severity": "high"
+    },
+    {
+      "id": "reordered-inputs-outputs",
+      "name": "Submit with Reordered Inputs/Outputs",
+      "description": "Draft reorders inputs or outputs from canonical order, breaking commitment",
+      "precondition": "Signed draft has committed to specific input/output order",
+      "action": "Reorder inputs/outputs in submitted version",
+      "expectedBehavior": "rejected by covenant (signature no longer matches reordered transaction)",
+      "why": "Reordering changes transaction hash; invalidates signature",
+      "severity": "critical"
+    },
+    {
+      "id": "concurrent-submissions-same-draft",
+      "name": "Submit Same Draft Concurrently (Race Condition)",
+      "description": "Two users/operators submit identical draft at the same time",
+      "precondition": "Draft TX_HASH already submitted and broadcast",
+      "action": "Submit same draft again concurrently",
+      "expectedBehavior": "second submission rejected (same draft already submitted)",
+      "why": "Prevents duplicate submission; dedups by txid/draft hash",
+      "severity": "medium"
+    },
+    {
+      "id": "expired-signer-session",
+      "name": "Submit After Signer Session Expires",
+      "description": "Draft signed by KasWare; session times out before submission",
+      "precondition": "Signature obtained at T=0; submitted at T=2hours (KasWare session expires 1 hour)",
+      "action": "Attempt submit with stale signature",
+      "expectedBehavior": "submission succeeds on-chain (signatures don't have session expiry), but may be warned by submit console",
+      "why": "Signatures are valid indefinitely; session expiry is UX only",
+      "severity": "low"
+    },
+    {
+      "id": "submitter-key-not-matching-draft-key",
+      "name": "Submitter Identity Doesn't Match Draft Key",
+      "description": "User A signs draft; User B attempts to submit (permission issue, not cryptographic)",
+      "precondition": "Draft signed by USER_A_KEY; USER_B attempts to submit",
+      "action": "Submit console checks submitSubjectPublicKey against signer key",
+      "expectedBehavior": "accepted (submit console doesn't enforce key ownership), but audit log flags the mismatch",
+      "why": "Cryptographic validation passes (signature is valid); permissions are application-level",
+      "severity": "low"
+    }
+  ],
+  "executionStrategy": {
+    "framework": "test-wallet-negative.mjs",
+    "fixtures": [
+      "fixtures/WalletConnectorSubmitResults.json",
+      "artifacts/wallet-submit-package.json"
+    ],
+    "testRunner": "node scripts/test-wallet-negative.mjs",
+    "expectedOutput": "artifacts/wallet-negative-cases.json",
+    "successCriteria": "All 13 cases correctly rejected/validated; legitimate submission paths still work"
+  },
+  "implementationNotes": "Wallet negative tests focus on external signer validation, double-spend prevention, and fund conservation. Critical issues are unsigned drafts, local key submission, and signature mismatches. Amount conservation checks (overpayment, zero-output, fund burn) are secondary but important for user protection.",
+  "relatedGates": [
+    "check:wallet-external-signer (KasWare/external signer enforcement)",
+    "check:wallet-unsigned-rejection (reject unsigned drafts)",
+    "check:wallet-double-spend (UTXO collision detection)",
+    "check:wallet-amount-conservation (input/output balance)",
+    "check:wallet-signature-mismatch (key-signature validation)"
+  ]
+}

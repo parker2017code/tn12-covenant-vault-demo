@@ -1,0 +1,28 @@
+{
+  "schema": "tn12-negative-test-matrix/v1",
+  "generatedAt": "2026-05-10T17:32:19.082Z",
+  "status": "negative-test-matrix-ready",
+  "summary": {
+    "totalTestSuites": 5,
+    "totalCases": 5,
+    "totalCorrectlyRejected": 0,
+    "legitimatePathsPass": 0,
+    "legitimatePathsTotal": 0,
+    "completeness": "2/5 test suites",
+    "rejectionRate": "0/5 (0%)"
+  },
+  "suites": [
+    {
+      "name": "access-pass",
+      "status": "access-pass-negative-cases-ready",
+      "cases": 3,
+      "correctlyRejected": 0
+    },
+    {
+      "name": "treasury",
+      "status": "treasury-negative-cases-ready",
+      "cases": 2,
+      "correctlyRejected": 0
+    }
+  ]
+}

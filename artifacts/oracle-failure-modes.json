@@ -1,0 +1,282 @@
+{
+  "schema": "tn12-oracle-failure-modes/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T18:00:00.000Z",
+  "status": "oracle-failure-modes-ready",
+  "purpose": "Document oracle failure scenarios, their impact on settlement, and recovery procedures",
+  "failureModes": [
+    {
+      "id": "single-oracle-offline",
+      "name": "Single Oracle Offline (Outage)",
+      "probability": "medium",
+      "severity": "low",
+      "scenario": "One of 5 oracles stops responding; others report normally",
+      "impactOnConsensus": "4-of-5 supermajority still achievable; settlement unaffected",
+      "coveredByConsensus": true,
+      "userImpact": "None - settlement proceeds normally",
+      "recoveryTime": "automatic when oracle comes online",
+      "requirements": [
+        "Monitor oracle response latency (alert if > 10 seconds)",
+        "Mark oracle offline after 5 consecutive timeouts",
+        "Automatic fallback: require 3-of-4 remaining oracles"
+      ]
+    },
+    {
+      "id": "two-oracles-offline",
+      "name": "Two Oracles Offline (Cascade Outage)",
+      "probability": "low",
+      "severity": "medium",
+      "scenario": "Two of 5 oracles down (e.g., shared infrastructure failure)",
+      "impactOnConsensus": "3 oracles remain; 4-of-5 supermajority impossible",
+      "coveredByConsensus": false,
+      "userImpact": "Settlement blocked; requires manual operator override or timeout recovery",
+      "recoveryTime": "up to 1 hour (operator override timeout)",
+      "recoveryProcedure": [
+        "wait 5 minutes for oracles to recover",
+        "if still offline after 5 min, trigger 30-minute timeout",
+        "if consensus not restored after 30 min, escalate to manual override",
+        "manual override: 2-of-3 operators + 6-hour timelock can force settlement at last-known-good price"
+      ],
+      "preventionMeasures": [
+        "use geographically distributed oracle providers (different cloud regions)",
+        "use different data sources (Coinbase, Kraken, Binance - not shared infrastructure)",
+        "monitor oracle provider status pages",
+        "implement redundant data fetching (fallback to backup provider)"
+      ]
+    },
+    {
+      "id": "oracle-disagree-price",
+      "name": "Oracle Price Disagreement (≥1% divergence)",
+      "probability": "medium",
+      "severity": "high",
+      "scenario": "Oracles report conflicting prices; 2 say $1.00, 3 say $0.99",
+      "cause": "Stale feed, CEX data desync, network latency, market flash move",
+      "impactOnConsensus": "if divergence > 2%, supermajority consensus fails (conflicting outcomes)",
+      "coveredByConsensus": false,
+      "userImpact": "Settlement blocked; affected users cannot execute trades until consensus restored",
+      "exampleImpact": "Liquidation oracle disagrees; borrower stays underwater or gets unfairly liquidated",
+      "recoveryProcedure": [
+        "covenant detects disagreement (more than 2 oracles outside consensus band)",
+        "automatically publish 'price-divergence' event to attestation registry",
+        "pause new settlements for 1 minute (allow staleness check to resolve)",
+        "after 1 minute, if agreement restored, resume settlement",
+        "if still diverged after 1 minute, require manual operator review"
+      ],
+      "preventionMeasures": [
+        "implement consensus band checks (reject > 2% deviation from median)",
+        "fetch prices from multiple sources within same 500ms window",
+        "add price stability checks: reject 10x move in 1 minute",
+        "monitor oracle-source latency (alert if > 2 seconds apart)",
+        "implement rolling medians (use last 3 prices to smooth noise)"
+      ]
+    },
+    {
+      "id": "oracle-stale-feed",
+      "name": "Stale Oracle Feed (No Update)",
+      "probability": "high",
+      "severity": "medium",
+      "scenario": "Oracle reports last price from 10 minutes ago (should refresh every 5 min)",
+      "cause": "Oracle service crashed, network connectivity lost, operator forgot to restart",
+      "impactOnConsensus": "if 3+ oracles stale, consensus uses outdated data (settlement may be wrong)",
+      "coveredByConsensus": false,
+      "userImpact": "Settlement uses stale prices; liquidations may use wrong collateral value",
+      "exampleImpact": "Collateral worth $100 but oracle reports $120; liquidator profits on price decay",
+      "preventionMeasures": [
+        "set 5-minute staleness limit per oracle",
+        "reject prices older than staleness limit",
+        "if consensus has > 2 stale oracles, block settlement",
+        "implement automatic fallback: use 'last-known-good' price with exponential decay penalty",
+        "monitor staleness actively; alert operator if any oracle hasn't updated in 3 minutes"
+      ],
+      "recoveryProcedure": [
+        "operator is alerted of stale oracle",
+        "operator investigates oracle service status",
+        "restart oracle service if crashed",
+        "if stale > 30 min, enable manual override (2-of-3 operators can force price)"
+      ]
+    },
+    {
+      "id": "oracle-key-compromise",
+      "name": "Oracle Operator Key Compromised",
+      "probability": "low",
+      "severity": "critical",
+      "scenario": "Attacker obtains oracle operator's signing key; can forge any price",
+      "cause": "key phishing, server breach, insider threat",
+      "impactOnConsensus": "attacker can sign arbitrary prices; 4-of-5 supermajority requires 4 keys, so attacker needs 4 keys for full control",
+      "coveredByConsensus": false,
+      "userImpact": "Attacker can trigger false liquidations, steal collateral, or crash market",
+      "maxDamageScenario": "attacker controls 4 of 5 oracle keys; can force settlement at any price for 1 block",
+      "preventionMeasures": [
+        "rotate oracle keys quarterly",
+        "use hardware wallets for oracle signing keys",
+        "enforce multi-sig on key management (2-of-3 operators approve key rotation)",
+        "monitor key usage patterns (alert if unusual signing frequency)",
+        "implement rate limits (reject > 10 price updates per minute per oracle)"
+      ],
+      "emergencyProcedure": [
+        "operator discovers key compromise",
+        "operator immediately revokes compromised key",
+        "remove oracle from active set (reduce to 4 oracles)",
+        "mark all prices signed by compromised key as 'untrusted'",
+        "trigger manual price validation for all recent settlements (last 24 hours)",
+        "escalate to governance for oracle replacement"
+      ]
+    },
+    {
+      "id": "oracle-malicious-collusion",
+      "name": "Malicious Oracle Collusion (3-of-5 Agree on False Price)",
+      "probability": "low",
+      "severity": "critical",
+      "scenario": "Three oracle operators collude to report false prices; trigger false liquidations",
+      "cause": "operator bribery, shared incentive misalignment, hostile takeover",
+      "impactOnConsensus": "3-of-5 supermajority requires 4 oracles; collusion of 3 is insufficient",
+      "coveredByConsensus": true,
+      "userImpact": "Mitigated by supermajority; even if 3 collude, 4th oracle prevents bad consensus",
+      "maxDamageScenario": "if attacker controls 4+ oracles, can force any settlement; requires either compromise of 4 keys or collusion of 4 operators",
+      "preventionMeasures": [
+        "diversify oracle operators (different companies, different incentives)",
+        "use reputable established oracle providers (Chainlink, Uniswap, dYdX)",
+        "implement oracle reputation scoring (track historical accuracy)",
+        "enforce supermajority consensus (4-of-5 makes collusion harder)",
+        "monitor price deviation (alert if multiple oracles suddenly diverge)"
+      ],
+      "governance_escalation": [
+        "if 2+ oracles show correlated price errors over time, governance may vote to replace them",
+        "implement emergency pause (2-of-3 multisig operators can pause settlement for 24 hours)",
+        "escalate to community vote for oracle replacement"
+      ]
+    },
+    {
+      "id": "consensus-timeout",
+      "name": "Consensus Timeout (No Resolution)",
+      "probability": "low",
+      "severity": "high",
+      "scenario": "Oracles in deadlock; < 4 agree on outcome; settlement cannot proceed",
+      "cause": "network partition, oracle disagreement, 2+ oracles offline simultaneously",
+      "impactOnConsensus": "cannot reach 4-of-5 supermajority; settlement blocked indefinitely",
+      "userImpact": "Users stuck in pending settlement state; collateral locked; opportunity cost",
+      "recoveryTime": "operator manual override (30-60 minutes) or automatic timeout fallback (1-6 hours)",
+      "recoveryProcedure": [
+        "1. Automatic phase (0-30 minutes): system waits for consensus to resolve",
+        "2. Operator alert phase (30-60 minutes): operators notified, investigate cause",
+        "3. Manual override phase (60+ minutes): 2-of-3 operators vote to use 'last-known-good' price with timestamp",
+        "4. Governance escalation (> 6 hours): if still unresolved, escalate to community vote"
+      ],
+      "preventionMeasures": [
+        "pre-commit oracle prices (require price commitment before use)",
+        "use quorum-based consensus (simple majority 3-of-5 for faster settlement, supermajority 4-of-5 for high-value)",
+        "implement timelock mechanism (force settlement at last-known-good price after 1 hour)",
+        "diversify oracle data sources (reduce single-point-of-failure in data fetch)"
+      ]
+    },
+    {
+      "id": "market-flash-move",
+      "name": "Flash Price Move (Legitimate Market Move > 5%)",
+      "probability": "high",
+      "severity": "low",
+      "scenario": "Market suddenly moves 5-10% (e.g., Fed announcement); oracles report conflicting prices",
+      "cause": "Legitimate market volatility; oracles fetch at different times, see different prices",
+      "impactOnConsensus": "oracles show > 2% deviation; supermajority consensus fails",
+      "coveredByConsensus": false,
+      "userImpact": "Settlement delayed by 1-5 minutes (oracles realign on actual price)",
+      "recoveryTime": "automatic (1-5 minutes as market calms)",
+      "preventionMeasures": [
+        "use price stability checks (allow max 2% divergence for 10-minute moving average)",
+        "implement consensus band (median ±2% for normal assets, ±0.01% for stable-value)",
+        "use time-weighted averages (smooth out flash moves)",
+        "require price update frequency (e.g., at least every 5 seconds during high volatility)"
+      ],
+      "operatorNotes": "This is expected behavior during volatile markets. Settlement automatically resumes once oracles realign. No manual intervention needed."
+    },
+    {
+      "id": "zero-oracle-confidence",
+      "name": "No Oracle Confidence (All Oracles Report Error)",
+      "probability": "very-low",
+      "severity": "high",
+      "scenario": "All 5 oracles unable to fetch price (e.g., all CEXes offline, network partition)",
+      "cause": "global internet outage, CEX DDoS attack, oracle service cascade failure",
+      "impactOnConsensus": "impossible to reach any consensus; settlement completely blocked",
+      "coveredByConsensus": false,
+      "userImpact": "All settlements blocked; users cannot move collateral; liquidations paused",
+      "recoveryTime": "wait for infrastructure recovery (hours to days) or governance override",
+      "recoveryProcedure": [
+        "1. Automatic phase: system broadcasts 'zero-confidence' alert to all users",
+        "2. Operator phase (after 1 hour): operators vote to use historical average price with 5% haircut",
+        "3. Governance phase (after 6 hours): if still no consensus, escalate to community vote for recovery mechanism"
+      ],
+      "preventionMeasures": [
+        "use backup oracle providers (not correlated with primary 5)",
+        "implement historical price fallback (use last-known-good price for up to 24 hours with penalty)",
+        "use on-chain price feeds (if available) as fallback",
+        "implement manual operator override with timelock"
+      ]
+    }
+  ],
+  "summaryTable": {
+    "failureMode": [
+      "Single oracle offline",
+      "Two oracles offline",
+      "Price disagreement (> 2%)",
+      "Stale feed (> 5 min)",
+      "Key compromised (1 of 5)",
+      "Collusion (3-of-5)",
+      "Consensus timeout",
+      "Flash move (> 5%)",
+      "Zero confidence (all fail)"
+    ],
+    "probability": [
+      "medium",
+      "low",
+      "medium",
+      "high",
+      "low",
+      "low",
+      "low",
+      "high",
+      "very-low"
+    ],
+    "covered_by_consensus": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ],
+    "recovery_time_minutes": [
+      "automatic",
+      "30-60",
+      "1-5",
+      "automatic",
+      "60+",
+      "governance",
+      "30-60",
+      "1-5",
+      "60++"
+    ]
+  },
+  "implementation_recommendations": {
+    "tier1_must_have": [
+      "Implement 5-minute staleness limit per oracle",
+      "Implement 2% consensus band deviation check",
+      "Alert operators if any oracle offline",
+      "Implement automatic fallback to last-known-good price after 30-minute timeout"
+    ],
+    "tier2_should_have": [
+      "Implement 2-of-3 manual override with 6-hour timelock",
+      "Monitor oracle key rotation (quarterly)",
+      "Implement price stability checks (reject > 2% move in 1 minute)",
+      "Build operator dashboard with oracle health metrics"
+    ],
+    "tier3_nice_to_have": [
+      "Implement reputation scoring for oracle accuracy",
+      "Use hardware wallets for oracle signing keys",
+      "Implement Byzantine fault tolerance (support weighted oracle consensus)",
+      "Build governance escalation UI for community override votes"
+    ]
+  },
+  "notes": "This failure-modes document assumes 5 oracles with 4-of-5 supermajority consensus. Adjust recovery times and thresholds if using different oracle count or consensus model. For stable-value assets, use stricter deviation bands (0.01% instead of 2%)."
+}

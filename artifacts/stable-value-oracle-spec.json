@@ -1,0 +1,147 @@
+{
+  "schema": "tn12-stable-value-oracle-spec/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T18:00:00.000Z",
+  "status": "stable-value-oracle-spec-ready",
+  "purpose": "Define pricing model for stablecoin pegging (e.g., USDC = 1 USD) via oracle consensus",
+  "summary": {
+    "targetAssets": ["USDC", "USDT", "DAI"],
+    "oracleSources": 3,
+    "updateFrequency": "5-minute intervals",
+    "deviationTolerance": "±0.01%",
+    "consensusModel": "majority-3-of-5",
+    "stalenessLimit": "5 minutes"
+  },
+  "priceFeedModel": {
+    "model": "Weighted Median with Confidence Bands",
+    "description": "Stable-value oracles report confidence intervals rather than point prices. Settlement uses median price; de-pegging triggers if any oracle deviates > tolerance.",
+    "sources": [
+      {
+        "id": "coinbase-api",
+        "name": "Coinbase Price API",
+        "url": "https://docs.cloud.coinbase.com/exchange-rest-api/reference/prices",
+        "asset": "USDC",
+        "confidence": "±0.001%",
+        "updateFrequency": "1 second",
+        "weight": 1.0,
+        "fallbackBehavior": "use-median-of-remaining"
+      },
+      {
+        "id": "kraken-rest",
+        "name": "Kraken REST API",
+        "url": "https://docs.kraken.com/rest",
+        "asset": "USDC",
+        "confidence": "±0.002%",
+        "updateFrequency": "2 seconds",
+        "weight": 0.9,
+        "fallbackBehavior": "use-median-of-remaining"
+      },
+      {
+        "id": "binance-websocket",
+        "name": "Binance WebSocket Streams",
+        "url": "https://binance-docs.github.io/apidocs/",
+        "asset": "USDC",
+        "confidence": "±0.003%",
+        "updateFrequency": "100ms",
+        "weight": 0.8,
+        "fallbackBehavior": "use-median-of-remaining"
+      }
+    ],
+    "calculations": {
+      "medianPrice": "weighted_median(prices from all sources, weights)",
+      "deviationCheck": "max(abs(source_price - median_price) / median_price) <= 0.01%",
+      "consensusBand": "[median_price * 0.9999, median_price * 1.0001]",
+      "requirementForSettlement": ">= 3 oracles report within consensus band"
+    }
+  },
+  "settlementRules": {
+    "normalSettlement": {
+      "condition": "price deviation < 0.01% for > 1 minute",
+      "consensusRequired": "3-of-5 oracles agree",
+      "dataAgeLimit": "5 minutes",
+      "action": "settlement proceeds at reported price"
+    },
+    "depegScenario": {
+      "condition": "price deviation > 0.01% (e.g., USDC trades at $0.999)",
+      "consensusRequired": "4-of-5 oracles confirm depeg",
+      "action": "pause minting, trigger recovery protocol",
+      "recoverySteps": [
+        "broadcast depeg event to all apps",
+        "freeze new stable-value mints",
+        "allow redemptions at last-known-good price for 1 hour",
+        "escalate to governance for corrective action"
+      ]
+    },
+    "oracleDisagreement": {
+      "condition": "< 3 oracles in consensus band",
+      "action": "settlement blocked, manual operator review required",
+      "timeoutForManualOverride": "30 minutes",
+      "overrideThreshold": "2-of-3 operators + timelock"
+    }
+  },
+  "dataQualityRequirements": {
+    "precision": "8 decimal places (matches native USDC)",
+    "updateFrequency": "at least every 5 minutes",
+    "stalenessLimit": "if no update in 5 minutes, mark oracle as offline",
+    "failoverTimeout": "if 2+ oracles offline, require manual override",
+    "signingRequirement": "each price update must be signed by oracle operator key"
+  },
+  "riskMitigations": {
+    "sybil_attack": "Require independent operator keys for each oracle source; prevent key sharing",
+    "price_manipulation": "Supermajority consensus (in stable-value context, relax to majority 3-of-5) requires attacker to compromise 3 independent CEXes",
+    "feed_staleness": "5-minute limit prevents settlement on stale data; automated alerts if staleness detected",
+    "confidence_band": "narrow band (±0.01%) forces settlement accuracy; prevents accidental de-pegging"
+  },
+  "exampleScenarios": [
+    {
+      "scenario": "Normal settlement (USDC on peg)",
+      "oraclePrices": [
+        {"source": "Coinbase", "price": 1.000050, "timestamp": "2026-05-10T18:05:00Z"},
+        {"source": "Kraken", "price": 1.000048, "timestamp": "2026-05-10T18:05:00Z"},
+        {"source": "Binance", "price": 1.000049, "timestamp": "2026-05-10T18:05:00Z"}
+      ],
+      "median": 1.000049,
+      "deviationFromMedian": ["0.0001%", "0.0001%", "0.0000%"],
+      "consensusResult": "PASS - 3-of-3 in band",
+      "action": "Settlement proceeds at $1.000049"
+    },
+    {
+      "scenario": "USDC briefly depeg (Flash loan attack attempt)",
+      "oraclePrices": [
+        {"source": "Coinbase", "price": 0.998000, "timestamp": "2026-05-10T18:05:00Z"},
+        {"source": "Kraken", "price": 1.000048, "timestamp": "2026-05-10T18:05:00Z"},
+        {"source": "Binance", "price": 1.000049, "timestamp": "2026-05-10T18:05:00Z"}
+      ],
+      "median": 1.000048,
+      "deviationFromMedian": ["0.2055%", "0.0000%", "0.0001%"],
+      "consensusResult": "FAIL - Coinbase outside band, only 2-of-3 agree",
+      "action": "Settlement blocked; manual operator review triggered"
+    },
+    {
+      "scenario": "Two oracles offline",
+      "oraclePrices": [
+        {"source": "Coinbase", "price": 1.000050, "timestamp": "2026-05-10T18:00:00Z"},
+        {"source": "Kraken", "status": "offline", "lastPrice": "1.000048"},
+        {"source": "Binance", "status": "offline", "lastPrice": "1.000049"}
+      ],
+      "consensusResult": "FAIL - Only 1-of-3 online, cannot form consensus",
+      "action": "Await Kraken/Binance recovery (up to 5 min), or trigger manual override after timeout"
+    }
+  ],
+  "implementationChecklist": [
+    "Deploy oracle listener for Coinbase, Kraken, Binance APIs",
+    "Implement weighted median price calculation",
+    "Add deviation-band checks (±0.01%)",
+    "Implement consensus gate (3-of-5 required)",
+    "Add 5-minute staleness timer per oracle",
+    "Log all price updates to attestation registry",
+    "Build depeg alert system",
+    "Test scenario: single oracle offline",
+    "Test scenario: two oracles offline",
+    "Test scenario: oracle disagreement (> 0.01% deviation)",
+    "Test scenario: rapid price swings (recovery behavior)",
+    "Deploy monitoring dashboards (price divergence, staleness, consensus rate)",
+    "Document manual override procedures for operators"
+  ],
+  "notes": "Stable-value requires tighter consensus and narrower deviation bands than general commodity pricing. This spec assumes 3 independent CEX sources (Coinbase, Kraken, Binance); adapt sources as needed for Kaspa ecosystem."
+}
