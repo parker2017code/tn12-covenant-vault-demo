@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-reader-adapter/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:54:24.112Z",
+  "generatedAt": "2026-05-10T22:12:48.831Z",
   "status": "virtual-chain-reader-adapter-ready",
   "mode": "configured-rpc-adapter-contract",
   "endpoint": {
@@ -103,8 +103,8 @@
     "appStateReady": true
   },
   "summary": {
-    "sourceCheckpointRecords": 42,
-    "virtualChainRows": 42,
+    "sourceCheckpointRecords": 43,
+    "virtualChainRows": 43,
     "payloadRows": 30,
     "proofRows": 9,
     "rollbackRows": 0,

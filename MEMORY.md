@@ -23,7 +23,7 @@ Read this first when resuming TN12 work. Keep it short. Details belong in artifa
 
 1. External signer: four request templates exist, but no real user-approved signature yet.
 2. Live removed-block rollback evidence: local rollback matching passes, but no live removed-block window has been captured.
-3. Batch-assurance settlement choice: release-first is the default; do not submit mutually exclusive release and refund paths.
+3. Batch-assurance alternate path: release is accepted; do not submit refund paths for the spent pledge set.
 4. Product hardening: wallet/indexer/recovery/monitoring are not production-grade.
 
 ## Commands
@@ -63,6 +63,6 @@ npm run wallet:external-signer-research
 
 1. Real external signer round trip for one payload receipt.
 2. Real external signer round trip for one covenant spend.
-3. Submit/replay one batch-assurance settlement path.
+3. Keep batch-assurance refund paths marked non-selected after the accepted release.
 4. Capture live removed-block rollback evidence when available.
 5. Continue repo cleanup only by reducing prose, not deleting evidence.

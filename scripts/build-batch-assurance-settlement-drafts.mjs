@@ -38,7 +38,12 @@ if (custodyDrafts.status !== "custody-release-draft-ready") {
 }
 
 const releaseArtifact = buildReleaseArtifact();
-const refundArtifacts = custodyDrafts.refundDrafts.map((refund) => buildRefundArtifact(refund));
+const releaseAccepted = hasAcceptedSettlementOutput(releaseArtifact.transactionId);
+const refundArtifacts = custodyDrafts.refundDrafts.map((refund) => buildRefundArtifact(refund, releaseAccepted));
+if (releaseAccepted) {
+  releaseArtifact.status = "tn12-accepted-local-signer";
+  releaseArtifact.acceptedEvidence = acceptedSettlementEvidence(releaseArtifact.transactionId);
+}
 
 await mkdir(outDir, { recursive: true });
 await writeFile(`${outDir}/batch-assurance-release.json`, `${JSON.stringify(releaseArtifact, null, 2)}\n`);
@@ -49,17 +54,21 @@ for (const artifact of refundArtifacts) {
 const summary = {
   schema: "tn12-batch-assurance-settlement-drafts/v1",
   network: "kaspa-testnet-12",
-  status: "signed-not-broadcast",
+  status: releaseAccepted ? "release-accepted-tn12" : "signed-not-broadcast",
   campaign: custodyDrafts.campaign,
   release: summarizeDraft(releaseArtifact, `${outDir}/batch-assurance-release.json`),
   refunds: refundArtifacts.map((artifact) => summarizeDraft(artifact, `${outDir}/batch-assurance-refund-${artifact.pledgeId}.json`)),
   boundaries: [
     "These drafts spend accepted P2PK pledge outputs, not pooled covenant aggregation.",
     "Release and refund paths are mutually exclusive for the same pledge outputs.",
-    "Do not submit more than one mutually exclusive settlement path.",
+    releaseAccepted
+      ? "The release path is accepted; refund drafts are non-selected alternates for the spent pledge outputs."
+      : "Do not submit more than one mutually exclusive settlement path.",
     "Generated pledge private keys stay in .local and are testnet-only."
   ],
-  next: "Review one settlement path, then submit explicitly only if the mutually exclusive consequences are intended."
+  next: releaseAccepted
+    ? "Keep refund paths marked non-selected for this pledge set and move signer work to a fresh request."
+    : "Review one settlement path, then submit explicitly only if the mutually exclusive consequences are intended."
 };
 await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`);
 
@@ -93,7 +102,7 @@ function buildReleaseArtifact() {
   });
 }
 
-function buildRefundArtifact(refund) {
+function buildRefundArtifact(refund, releaseAccepted) {
   const input = refund.input;
   const output = refund.output;
   const signedTransaction = signP2pkTransaction({
@@ -107,7 +116,7 @@ function buildRefundArtifact(refund) {
   return settlementArtifact({
     kind: "refund",
     pledgeId: refund.pledgeId,
-    status: "signed-not-broadcast",
+    status: releaseAccepted ? "non-selected-after-release" : "signed-not-broadcast",
     inputs: [input],
     outputs: [{
       address: output.address,
@@ -210,6 +219,17 @@ function summarizeDraft(artifact, path) {
     outputTkas: artifact.outputs.map((output) => output.amountTkas),
     status: artifact.status
   };
+}
+
+function hasAcceptedSettlementOutput(txid) {
+  return Boolean(acceptedSettlementEvidence(txid));
+}
+
+function acceptedSettlementEvidence(txid) {
+  return (outputEvidence.outputs || []).find((output) =>
+    output.txid === txid
+    && output.lane === "batch-assurance-settlement-output"
+  ) || null;
 }
 
 function requireWallet(pledgeId) {

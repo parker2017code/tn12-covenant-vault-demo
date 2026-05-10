@@ -1,11 +1,11 @@
 {
   "schema": "tn12-durable-replay-promotion-guard/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T21:43:25.638Z",
+  "generatedAt": "2026-05-10T22:12:50.756Z",
   "status": "durable-replay-promotion-guard-ready",
   "summary": {
-    "checkpointTxids": 40,
-    "fixtureReplayRecords": 42,
+    "checkpointTxids": 41,
+    "fixtureReplayRecords": 43,
     "fixtureReplayMismatches": 0,
     "liveAcceptedTransactions": 13958,
     "matchedCheckpointTxids": 1,

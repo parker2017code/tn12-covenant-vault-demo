@@ -625,22 +625,23 @@ const batchSettlementDecision = buildBatchAssuranceSettlementDecision({
   custodyRequirements: custodyRequirementsFixture,
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
-assert.equal(batchSettlementDecision.status, "settlement-decision-ready");
-assert.equal(batchSettlementDecision.selectedPath, "release-review");
+assert.equal(batchSettlementDecision.status, "settlement-release-accepted");
+assert.equal(batchSettlementDecision.selectedPath, "release-accepted");
 assert.equal(batchSettlementDecision.submitNow, false);
+assert.equal(batchSettlementDecision.summary.releaseAccepted, true);
 const batchSettlementDecisionArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-settlement-decision.json", import.meta.url), "utf8"));
-assert.equal(batchSettlementDecisionArtifact.status, "settlement-decision-ready");
-assert.equal(batchSettlementDecisionArtifact.selectedPath, "release-review");
+assert.equal(batchSettlementDecisionArtifact.status, "settlement-release-accepted");
+assert.equal(batchSettlementDecisionArtifact.selectedPath, "release-accepted");
 const batchSubmitRunbook = buildBatchAssuranceSubmitRunbook({
   settlementDecision: batchSettlementDecisionArtifact,
   settlementDrafts: batchSettlementDrafts,
   custodyImports: custodyImportsArtifact,
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
-assert.equal(batchSubmitRunbook.status, "release-path-review-ready");
+assert.equal(batchSubmitRunbook.status, "release-path-accepted");
 assert.equal(batchSubmitRunbook.summary.readyImports, 3);
 const batchSubmitRunbookArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-submit-runbook.json", import.meta.url), "utf8"));
-assert.equal(batchSubmitRunbookArtifact.status, "release-path-review-ready");
+assert.equal(batchSubmitRunbookArtifact.status, "release-path-accepted");
 const batchOperatorDecisionFixture = JSON.parse(await readFile(new URL("../fixtures/BatchAssuranceOperatorDecision.json", import.meta.url), "utf8"));
 const batchOperatorDecision = buildBatchAssuranceOperatorDecision({
   decisionFixture: batchOperatorDecisionFixture,
@@ -650,15 +651,15 @@ const batchOperatorDecision = buildBatchAssuranceOperatorDecision({
   checkpointComparison: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-checkpoint-comparison.json", import.meta.url), "utf8")),
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
-assert.equal(batchOperatorDecision.status, "operator-hold-review");
-assert.equal(batchOperatorDecision.selectedPath, "release-review");
+assert.equal(batchOperatorDecision.status, "operator-release-accepted");
+assert.equal(batchOperatorDecision.selectedPath, "release-accepted");
 assert.equal(batchOperatorDecision.submitNow, false);
-assert.ok(batchOperatorDecision.blockers.includes("external signer accepted result missing"));
-assert.equal(batchOperatorDecision.summary.blockers, 1);
+assert.ok(!batchOperatorDecision.blockers.includes("external signer accepted result missing"));
+assert.equal(batchOperatorDecision.summary.blockers, 0);
 assert.ok(!batchOperatorDecision.blockers.includes("live indexer checkpoint overlap missing"));
 const batchOperatorDecisionArtifact = JSON.parse(await readFile(new URL("../artifacts/batch-assurance-operator-decision.json", import.meta.url), "utf8"));
-assert.equal(batchOperatorDecisionArtifact.status, "operator-hold-review");
-assert.equal(batchOperatorDecisionArtifact.selectedPath, "release-review");
+assert.equal(batchOperatorDecisionArtifact.status, "operator-release-accepted");
+assert.equal(batchOperatorDecisionArtifact.selectedPath, "release-accepted");
 assert.equal(batchOperatorDecisionArtifact.submitNow, false);
 assert.equal(batchReleaseDraft.kind, "release");
 assert.equal(batchReleaseDraft.inputs.length, 3);
@@ -1197,7 +1198,7 @@ const checkpointFixture = JSON.parse(await readFile(new URL("../artifacts/checkp
 assert.equal(checkpointFixture.summary.total, proofFixtureCount + payloadEventCount + checkpointFixture.summary.outputEvidence);
 assert.equal(checkpointFixture.summary.proofs, proofFixtureCount);
 assert.equal(checkpointFixture.summary.payloadEvents, payloadEventCount);
-assert.equal(checkpointFixture.summary.outputEvidence, 3);
+assert.equal(checkpointFixture.summary.outputEvidence, 4);
 assert.equal(checkpointFixture.summary.mismatches, 0);
 assert.equal(checkpointFixture.status, "accepted-index-fully-matched");
 assert.ok(checkpointFixture.records.some((record) =>
@@ -1205,6 +1206,12 @@ assert.ok(checkpointFixture.records.some((record) =>
   && record.lane === "batch-assurance-pledge-output"
   && record.expected.subject === "pledge-docs-001"
   && record.output.observed.outputIndex === 0
+));
+assert.ok(checkpointFixture.records.some((record) =>
+  record.kind === "accepted-output"
+  && record.lane === "batch-assurance-settlement-output"
+  && record.txid === "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801"
+  && record.matched
 ));
 assert.ok(checkpointFixture.checkpoint.maxAcceptingBlockBlueScore > checkpointFixture.checkpoint.minAcceptingBlockBlueScore);
 const persistedCheckpointFixture = JSON.parse(await readFile(new URL("../artifacts/persisted-checkpoint-guard.json", import.meta.url), "utf8"));

@@ -1,11 +1,11 @@
 {
   "schema": "tn12-virtual-chain-endpoint-runbook/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T16:13:06.628Z",
+  "generatedAt": "2026-05-10T22:12:50.025Z",
   "status": "endpoint-runbook-live-tested-no-promotion",
   "summary": {
-    "endpointConfigured": true,
-    "blockingChecks": 0,
+    "endpointConfigured": false,
+    "blockingChecks": 1,
     "localNodeRequired": false,
     "fixtureReplayCompatible": true,
     "probeReady": true,
@@ -32,12 +32,18 @@
     "endpoint": "ws://tn12-node.kaspa.com:17210",
     "serverVersion": "1.1.1-toc.1",
     "virtualDaaScore": "8192298",
-    "acceptedTransactions": 46,
-    "payloadTransactions": 3,
-    "computeBudgetInputs": 43,
+    "acceptedTransactions": 13958,
+    "payloadTransactions": 1115,
+    "computeBudgetInputs": 12843,
     "rollbackRows": 0,
-    "matchedCheckpointRows": 0,
-    "decision": "The live window is reachable but does not overlap the current fixture checkpoint; do not promote app state from it."
+    "matchedCheckpointRows": 1,
+    "decision": "A replay reducer can compare this live window against known accepted rows before checkpoint promotion."
   },
-  "blocking": []
+  "blocking": [
+    {
+      "id": "endpoint-configured",
+      "pass": false,
+      "detail": "Set TN12_VIRTUAL_CHAIN_RPC_URL before live reads."
+    }
+  ]
 }

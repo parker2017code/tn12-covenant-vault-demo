@@ -1,10 +1,10 @@
 {
   "schema": "tn12-virtual-chain-ingestion-plan/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:49:27.561Z",
+  "generatedAt": "2026-05-10T22:12:47.231Z",
   "status": "virtual-chain-ingestion-contract-ready",
   "sourceCheckpoint": {
-    "recordCount": 42,
+    "recordCount": 43,
     "payloadEvents": 30,
     "proofSpends": 9,
     "minAcceptingBlockBlueScore": 5203140,

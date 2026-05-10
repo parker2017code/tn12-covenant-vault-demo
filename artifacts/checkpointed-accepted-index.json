@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-10T20:58:23.960Z",
+  "fetchedAt": "2026-05-10T22:13:35.790Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -11,7 +11,7 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 42,
+    "recordCount": 43,
     "minAcceptingBlockBlueScore": 5203140,
     "maxAcceptingBlockBlueScore": 8228493,
     "txids": [
@@ -56,17 +56,18 @@
       "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
-      "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"
+      "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
+      "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801"
     ],
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 42,
+    "total": 43,
     "proofs": 9,
     "payloadEvents": 30,
-    "outputEvidence": 3,
-    "accepted": 42,
-    "matched": 42,
+    "outputEvidence": 4,
+    "accepted": 43,
+    "matched": 43,
     "mismatches": 0,
     "lanes": [
       {
@@ -143,6 +144,12 @@
       },
       {
         "lane": "batch-assurance-release",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "batch-assurance-settlement-output",
         "total": 1,
         "accepted": 1,
         "matched": 1
@@ -2006,6 +2013,46 @@
         "type": "pubkey"
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"
+    },
+    {
+      "kind": "accepted-output",
+      "lane": "batch-assurance-settlement-output",
+      "label": "Batch assurance 3-pledge release output",
+      "txid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 7413626,
+      "acceptingBlockTime": 1778363663589,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "9999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "subject": "kaspa-dev-docs-sprint-release"
+      },
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "9999995000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "9999995000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "9999995000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801"
     }
   ],
   "boundaries": [

@@ -56,6 +56,7 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Batch assurance | Pledge docs 003 planner payload | `fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d` |
 | Batch assurance | Release-ready planner payload | `2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12` |
 | Batch assurance | 45/35/20 TKAS accepted pledge-output funding | `0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a` |
+| Batch assurance | 3-pledge release output | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
 
 ## Local Reducer Tests
 
@@ -85,8 +86,7 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 - wallet-review flow replacing local signing and shell submit,
 - durable node/RPC checkpoint ingestion with virtual-chain rollback replay,
 - role-separated covenant TN12 rejection attempts from fresh expendable outputs,
-- batch assurance custody release submission from the signed-not-broadcast matched-output draft,
-- batch assurance custody refund submission from the signed-not-broadcast matched-output drafts,
+- batch assurance refund submission for the already released pledge set,
 - auction custody settlement/refund transaction, atomic exchange, and asset delivery,
 - agent task custody release/refund transactions and autonomous payout lifecycle,
 - treasury/team-vault constrained spend drafts,
@@ -96,6 +96,6 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 
 1. Wallet-review flow for payload receipt submission.
 2. Durable node/RPC checkpoint ingestion with virtual-chain rollback replay.
-3. Batch assurance amount-matched custody release/refund drafts.
+3. Batch assurance alternate-path cleanup after accepted release.
 4. Auction settlement/refund drafts.
 5. Agent task release/refund drafts.

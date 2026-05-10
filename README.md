@@ -30,7 +30,7 @@ Percentages in this repo mean mainnet deployment readiness unless a line explici
 |---|---|---|
 | External signer | `artifacts/external-signer-path-research.json` and 4 request templates are ready | A real wallet returns signed tx bytes, submit succeeds, replay sees the accepted txid |
 | Live rollback evidence | `artifacts/durable-replay-promotion-guard.json` passes local rollback matching | A live TN12 removed-block window is captured and matched |
-| Batch-assurance settlement | Release/refund drafts exist; release-first is the default | One mutually exclusive path is submitted and replayed |
+| Batch-assurance settlement | Release path is accepted and indexed; refund path is now the non-selected alternate | Post-submit alternate-path status stays explicit |
 
 ## Verify
 

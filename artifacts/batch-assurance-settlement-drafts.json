@@ -1,7 +1,7 @@
 {
   "schema": "tn12-batch-assurance-settlement-drafts/v1",
   "network": "kaspa-testnet-12",
-  "status": "signed-not-broadcast",
+  "status": "release-accepted-tn12",
   "campaign": {
     "id": "kaspa-dev-docs-sprint",
     "name": "Kaspa dev docs sprint",
@@ -22,7 +22,7 @@
     "outputTkas": [
       "99.99995"
     ],
-    "status": "signed-not-broadcast"
+    "status": "tn12-accepted-local-signer"
   },
   "refunds": [
     {
@@ -35,7 +35,7 @@
       "outputTkas": [
         "44.99995"
       ],
-      "status": "signed-not-broadcast"
+      "status": "non-selected-after-release"
     },
     {
       "kind": "refund",
@@ -47,7 +47,7 @@
       "outputTkas": [
         "34.99995"
       ],
-      "status": "signed-not-broadcast"
+      "status": "non-selected-after-release"
     },
     {
       "kind": "refund",
@@ -59,14 +59,14 @@
       "outputTkas": [
         "19.99995"
       ],
-      "status": "signed-not-broadcast"
+      "status": "non-selected-after-release"
     }
   ],
   "boundaries": [
     "These drafts spend accepted P2PK pledge outputs, not pooled covenant aggregation.",
     "Release and refund paths are mutually exclusive for the same pledge outputs.",
-    "Do not submit more than one mutually exclusive settlement path.",
+    "The release path is accepted; refund drafts are non-selected alternates for the spent pledge outputs.",
     "Generated pledge private keys stay in .local and are testnet-only."
   ],
-  "next": "Review one settlement path, then submit explicitly only if the mutually exclusive consequences are intended."
+  "next": "Keep refund paths marked non-selected for this pledge set and move signer work to a fresh request."
 }

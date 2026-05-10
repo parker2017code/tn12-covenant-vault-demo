@@ -6,19 +6,27 @@ export function buildBatchAssuranceSettlementDecision({
   const release = settlementDrafts.release || {};
   const refunds = Array.isArray(settlementDrafts.refunds) ? settlementDrafts.refunds : [];
   const custodyReady = custodyRequirements.status === "custody-requirements-satisfied";
-  const releaseReady = release.status === "signed-not-broadcast" && custodyReady;
-  const refundReady = refunds.length > 0 && refunds.every((refund) => refund.status === "signed-not-broadcast") && custodyReady;
-  const selectedPath = releaseReady ? "release-review" : refundReady ? "refund-review" : "blocked";
+  const releaseAccepted = settlementDrafts.status === "release-accepted-tn12" || release.status === "tn12-accepted-local-signer";
+  const releaseReady = (release.status === "signed-not-broadcast" || releaseAccepted) && custodyReady;
+  const refundReady = !releaseAccepted
+    && refunds.length > 0
+    && refunds.every((refund) => refund.status === "signed-not-broadcast")
+    && custodyReady;
+  const selectedPath = releaseAccepted ? "release-accepted" : releaseReady ? "release-review" : refundReady ? "refund-review" : "blocked";
+  const status = releaseAccepted
+    ? "settlement-release-accepted"
+    : selectedPath === "blocked" ? "settlement-decision-blocked" : "settlement-decision-ready";
 
   return {
     schema: "tn12-batch-assurance-settlement-decision/v1",
     network: settlementDrafts.network || custodyRequirements.network || "kaspa-testnet-12",
     generatedAt,
-    status: selectedPath === "blocked" ? "settlement-decision-blocked" : "settlement-decision-ready",
+    status,
     selectedPath,
     submitNow: false,
     summary: {
       custodyReady,
+      releaseAccepted,
       releaseReady,
       refundReady,
       refundDrafts: refunds.length,
@@ -29,12 +37,16 @@ export function buildBatchAssuranceSettlementDecision({
       transactionId: release.transactionId || "",
       inputCount: Number(release.inputCount || 0),
       outputTkas: release.outputTkas || [],
-      recommendation: releaseReady ? "primary review path because target pledge outputs are amount-matched" : "blocked"
+      recommendation: releaseAccepted
+        ? "accepted TN12 release path; keep refund drafts non-selected for this pledge set"
+        : releaseReady ? "primary review path because target pledge outputs are amount-matched" : "blocked"
     },
     refundReview: {
       paths: refunds.map((refund) => refund.path),
       transactionIds: refunds.map((refund) => refund.transactionId),
-      recommendation: refundReady ? "alternate path only if release is intentionally rejected or deadline/refund policy is selected" : "blocked"
+      recommendation: releaseAccepted
+        ? "non-selected after accepted release"
+        : refundReady ? "alternate path only if release is intentionally rejected or deadline/refund policy is selected" : "blocked"
     },
     operatorDecision: [
       "Review release and refund as mutually exclusive alternatives.",

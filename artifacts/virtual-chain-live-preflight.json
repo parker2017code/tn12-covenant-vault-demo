@@ -1,12 +1,12 @@
 {
   "schema": "tn12-virtual-chain-live-preflight/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:57:27.489Z",
-  "status": "live-preflight-ready",
+  "generatedAt": "2026-05-10T22:12:49.389Z",
+  "status": "live-preflight-blocked",
   "liveReadAttempted": false,
   "endpoint": {
     "configEnv": "TN12_VIRTUAL_CHAIN_RPC_URL",
-    "configured": true,
+    "configured": false,
     "transport": "json-wrpc-or-rpc-client",
     "networkId": "testnet-12",
     "method": "getVirtualChainFromBlockV2",
@@ -23,7 +23,7 @@
     "kind": "blue-score-checkpoint",
     "bootstrapFrom": "artifacts/checkpointed-accepted-index.json",
     "persistTable": "checkpoint_watermarks",
-    "startBlueScore": 7042656,
+    "startBlueScore": 8228493,
     "trustedOverlapStartBlueScore": 5203140,
     "persistFields": [
       "network",
@@ -39,7 +39,7 @@
   "checks": [
     {
       "id": "endpoint-configured",
-      "pass": true,
+      "pass": false,
       "detail": "Set TN12_VIRTUAL_CHAIN_RPC_URL before live reads."
     },
     {
@@ -70,9 +70,9 @@
   ],
   "summary": {
     "checks": 6,
-    "passing": 6,
-    "blocking": 0,
-    "endpointConfigured": true,
+    "passing": 5,
+    "blocking": 1,
+    "endpointConfigured": false,
     "fixtureRowsReady": true
   },
   "nextCommand": "TN12_VIRTUAL_CHAIN_RPC_URL=<wss-or-wrpc-endpoint> npm run indexer:virtual-chain-adapter",

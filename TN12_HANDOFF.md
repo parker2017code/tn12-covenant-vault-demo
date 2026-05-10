@@ -15,13 +15,13 @@ What changed in this pass:
 Current blockers:
 - Live external signer round trip
 - Live removed-block rollback evidence
-- One accepted batch-assurance settlement path
+- Batch-assurance alternate-path cleanup after accepted release
 - Escrow marketplace demo
 - Wallet/indexer hardening
 
 What Claude should do next:
 1. Keep the live replay promotion lane honest and bounded.
-2. Continue the release-first batch-assurance review path.
+2. Keep the accepted batch-assurance release and non-selected refund paths explicit.
 3. Finish the wallet/external-signer lane only if a real throwaway signer path exists.
 4. Keep the readiness docs and artifacts synchronized.
 

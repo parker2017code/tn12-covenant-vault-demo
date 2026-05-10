@@ -32,7 +32,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 |---|---|
 | External signer | Request templates and research are ready; no real user-approved signature yet. |
 | Live removed-block rollback evidence | Local rollback matching passes; no live removed-block window captured yet. |
-| Batch-assurance settlement choice | Release-first is selected for review; only one mutually exclusive path should be submitted. |
+| Batch-assurance alternate path | Release is accepted; refund path is non-selected and must not be submitted for the spent pledge set. |
 | Product hardening | Wallet, indexer, monitoring, and recovery paths are not production-grade. |
 
 ## Current Percent
@@ -55,5 +55,5 @@ npm run wallet:external-signer-research
 
 1. Get one real external signer result for a payload receipt.
 2. Get one real external signer result for a covenant spend.
-3. Submit/replay one batch-assurance settlement path.
+3. Keep batch-assurance refund paths marked non-selected after the accepted release.
 4. Capture live removed-block rollback evidence when available.

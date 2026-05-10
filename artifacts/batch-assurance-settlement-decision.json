@@ -1,14 +1,15 @@
 {
   "schema": "tn12-batch-assurance-settlement-decision/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T14:01:03.720Z",
-  "status": "settlement-decision-ready",
-  "selectedPath": "release-review",
+  "generatedAt": "2026-05-10T22:12:35.571Z",
+  "status": "settlement-release-accepted",
+  "selectedPath": "release-accepted",
   "submitNow": false,
   "summary": {
     "custodyReady": true,
+    "releaseAccepted": true,
     "releaseReady": true,
-    "refundReady": true,
+    "refundReady": false,
     "refundDrafts": 3,
     "mutuallyExclusiveInputs": true
   },
@@ -19,7 +20,7 @@
     "outputTkas": [
       "99.99995"
     ],
-    "recommendation": "primary review path because target pledge outputs are amount-matched"
+    "recommendation": "accepted TN12 release path; keep refund drafts non-selected for this pledge set"
   },
   "refundReview": {
     "paths": [
@@ -32,7 +33,7 @@
       "a5f07faab17cd16f8849a85c69c068bfe89e0ee77c5909aa0df4a9a842e08382",
       "9bfc17c1ab73a7ed740f0f95220e65dff7930a1f499fa62b3bb7200b5ae1781c"
     ],
-    "recommendation": "alternate path only if release is intentionally rejected or deadline/refund policy is selected"
+    "recommendation": "non-selected after accepted release"
   },
   "operatorDecision": [
     "Review release and refund as mutually exclusive alternatives.",

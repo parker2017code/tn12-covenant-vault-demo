@@ -7,31 +7,40 @@ export function buildBatchAssuranceOperatorDecision({
   generatedAt = new Date().toISOString()
 } = {}) {
   const decision = decisionFixture.decision || {};
-  const selectedPath = decision.selectedPath || "hold-review";
+  const selectedPath = settlementDecision.selectedPath === "release-accepted"
+    ? "release-accepted"
+    : decision.selectedPath || "hold-review";
   const walletReady = walletSignerValidation.liveExternalSignerAccepted === true;
   const checkpointOverlapReady = checkpointComparison.summary?.overlapReady === true;
+  const releaseAccepted = settlementDecision.summary?.releaseAccepted === true || selectedPath === "release-accepted";
   const releaseReady = settlementDecision.summary?.releaseReady === true;
   const refundReady = settlementDecision.summary?.refundReady === true;
-  const submitNow = decision.submitNow === true && walletReady && checkpointOverlapReady;
+  const submitNow = !releaseAccepted && decision.submitNow === true && walletReady && checkpointOverlapReady;
   const blockers = [
-    !walletReady ? "external signer accepted result missing" : "",
+    !releaseAccepted && !walletReady ? "external signer accepted result missing" : "",
     !checkpointOverlapReady ? "live indexer checkpoint overlap missing" : "",
     selectedPath === "release-review" && !releaseReady ? "release draft not ready" : "",
     selectedPath === "refund-review" && !refundReady ? "refund drafts not ready" : ""
   ].filter(Boolean);
+  const status = releaseAccepted
+    ? "operator-release-accepted"
+    : submitNow ? "operator-submit-ready" : "operator-hold-review";
 
   return {
     schema: "tn12-batch-assurance-operator-decision/v1",
     network: settlementDecision.network || decisionFixture.network || "kaspa-testnet-12",
     generatedAt,
     campaignId: decisionFixture.campaignId || settlementDrafts.campaign?.id || "",
-    status: submitNow ? "operator-submit-ready" : "operator-hold-review",
+    status,
     selectedPath,
     submitNow,
-    operatorReason: decision.reason || "",
+    operatorReason: releaseAccepted
+      ? "Release path is already accepted on TN12; hold refund alternates as non-selected."
+      : decision.reason || "",
     summary: {
       walletReady,
       checkpointOverlapReady,
+      releaseAccepted,
       releaseReady,
       refundReady,
       mutuallyExclusiveInputs: settlementDecision.summary?.mutuallyExclusiveInputs === true,
@@ -50,7 +59,7 @@ export function buildBatchAssuranceOperatorDecision({
 }
 
 function selectedDraftSummary({ selectedPath, settlementDrafts }) {
-  if (selectedPath === "release-review") {
+  if (selectedPath === "release-review" || selectedPath === "release-accepted") {
     return [settlementDrafts.release || {}].filter((draft) => draft.path).map(summary);
   }
   if (selectedPath === "refund-review") {

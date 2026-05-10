@@ -13,13 +13,14 @@ This is the short index for accepted TN12 proof evidence, historical rejections,
 | Payload receipt | Accepted | `artifacts/payload-receipt-evidence.json` |
 | Payload refund | Accepted | `artifacts/payload-refund-evidence.json` |
 | Payload error | Accepted | `artifacts/payload-error-evidence.json` |
+| Batch-assurance release output | Accepted | `fixtures/AcceptedOutputEvidence.json` |
 
 ## Planner / indexer state
 
 | Rail | Status | Primary artifact |
 |---|---|---|
 | Batch-assurance campaign | Planner state | `artifacts/batch-assurance-campaign.json` |
-| Batch-assurance settlement drafts | Planner state | `artifacts/batch-assurance-settlement-drafts.json` |
+| Batch-assurance refund drafts | Non-selected alternate | `artifacts/batch-assurance-settlement-drafts.json` |
 | Public payload submit readiness | Historical limitation | `artifacts/payload-submit-readiness.json` |
 
 ## Historical or rejected evidence
@@ -35,7 +36,7 @@ This is the short index for accepted TN12 proof evidence, historical rejections,
 |---|---|---|
 | Wallet connector / external signer | WIP | Wire a real external signer round trip |
 | Virtual-chain live indexer | WIP | Test the bounded adapter against a configured TN12 endpoint |
-| Batch-assurance settlement | WIP | Pick one mutually exclusive settlement path to review or submit |
+| Batch-assurance alternate-path cleanup | WIP | Keep refund drafts non-selected after accepted release |
 | Escrow marketplace demo | WIP | Build the concrete demo on the accepted escrow output |
 
 ## Notes

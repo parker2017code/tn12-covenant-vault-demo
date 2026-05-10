@@ -1,9 +1,9 @@
 {
   "schema": "tn12-batch-assurance-submit-runbook/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T13:30:47.032Z",
-  "status": "release-path-review-ready",
-  "selectedPath": "release-review",
+  "generatedAt": "2026-05-10T22:12:36.103Z",
+  "status": "release-path-accepted",
+  "selectedPath": "release-accepted",
   "submitNow": false,
   "summary": {
     "readyImports": 3,
@@ -17,7 +17,7 @@
     "reviewChecks": [
       "recipient output amount matches accepted pledge total minus fee",
       "inputs match the imported 45/35/20 TKAS pledge outputs",
-      "refund drafts are held back if release is submitted"
+      "release output is accepted on TN12"
     ]
   },
   "refundPath": {
@@ -34,7 +34,7 @@
     "reviewChecks": [
       "each refund spends only its contributor pledge output",
       "release draft is held back if any refund is accepted",
-      "all intended refunds are tracked independently"
+      "refund drafts are non-selected after accepted release"
     ]
   },
   "operatorChecklist": [

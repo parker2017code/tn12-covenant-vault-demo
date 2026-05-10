@@ -7,7 +7,7 @@ This file is about deployment readiness, not TN12 proof-core progress.
 ## Estimate
 
 - Current mainnet deployment readiness: about 55-60%.
-- After real external signer plus one accepted settlement path: about 65-70%.
+- After real external signer: about 65-70%.
 - After production wallet/indexer hardening: about 70-75%.
 
 ## Proven On TN12
@@ -23,12 +23,12 @@ This file is about deployment readiness, not TN12 proof-core progress.
 |---|---|---|
 | External signer | Users must sign without this repo holding keys | `artifacts/external-signer-path-research.json` |
 | Live removed-block evidence | Local rollback matching is not the same as observing a live rollback window | `artifacts/durable-replay-promotion-guard.json` |
-| Batch settlement choice | Release and refund drafts are mutually exclusive | `artifacts/batch-assurance-operator-decision.json` |
+| Batch settlement follow-through | Release is accepted; alternate refund path must remain non-selected | `artifacts/batch-assurance-operator-decision.json` |
 | Wallet/indexer hardening | Product state needs operational reliability | `artifacts/wallet-submit-result-validation.json` |
 
 ## Next Order
 
 1. Run one real external signer round trip.
-2. Submit and replay one batch-assurance settlement path.
+2. Keep batch-assurance refund paths marked non-selected after the accepted release.
 3. Capture live removed-block rollback evidence when TN12 provides it.
 4. Keep dashboard/docs proof-first: accepted evidence, gate output, blocker.

@@ -34,6 +34,17 @@
       "destination": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
       "scriptType": "pubkey",
       "acceptingBlockBlueScore": 7042656
+    },
+    {
+      "label": "Batch assurance 3-pledge release output",
+      "lane": "batch-assurance-settlement-output",
+      "subject": "kaspa-dev-docs-sprint-release",
+      "txid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+      "outputIndex": 0,
+      "amountSompi": "9999995000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "scriptType": "pubkey",
+      "acceptingBlockBlueScore": 7413626
     }
   ]
 }
