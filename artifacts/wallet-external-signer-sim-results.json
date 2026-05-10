@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-external-signer-sim/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:50:33.394Z",
+  "generatedAt": "2026-05-10T21:05:05.870Z",
   "status": "sim-roundtrip-all-passed",
   "signerName": "local-sim",
   "signerVersion": "0.1.0",

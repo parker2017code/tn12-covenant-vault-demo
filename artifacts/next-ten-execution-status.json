@@ -1,0 +1,86 @@
+{
+  "schema": "tn12-next-ten-execution-status/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T21:36:43.960Z",
+  "status": "next-ten-execution-status-ready",
+  "summary": {
+    "tasks": 10,
+    "completed": 6,
+    "blocked": 3,
+    "totalPotentialGainPercent": 33,
+    "realizedGainPercent": 18,
+    "externalSignerStillRequired": true
+  },
+  "tasks": [
+    {
+      "id": "external-signer-defi-receipt",
+      "title": "External signer roundtrip for one DeFi receipt",
+      "estimatedGainPercent": 5,
+      "status": "blocked-needs-user-wallet-signature"
+    },
+    {
+      "id": "external-signer-covenant-spend",
+      "title": "External signer roundtrip for one covenant spend",
+      "estimatedGainPercent": 4,
+      "status": "blocked-needs-user-wallet-signature"
+    },
+    {
+      "id": "durable-live-indexer-promotion",
+      "title": "Durable live indexer promotion",
+      "estimatedGainPercent": 5,
+      "status": "completed"
+    },
+    {
+      "id": "multi-wallet-receipt-ui",
+      "title": "Receipt app v1 UI: multi-wallet receipts panel",
+      "estimatedGainPercent": 3,
+      "status": "completed"
+    },
+    {
+      "id": "wallet-submit-ledger-new-receipts",
+      "title": "Wallet submit result ledger for the new receipts",
+      "estimatedGainPercent": 2,
+      "status": "completed"
+    },
+    {
+      "id": "fresh-covenant-wallet-standard-flow",
+      "title": "Fresh escrow/covenant spend with current wallet-standard flow",
+      "estimatedGainPercent": 4,
+      "status": "prepared-not-live-signed"
+    },
+    {
+      "id": "negative-replay-promotion-tests",
+      "title": "Negative replay/promotion tests for duplicate/stale receipts",
+      "estimatedGainPercent": 3,
+      "status": "completed"
+    },
+    {
+      "id": "defi-v1-operator-runbook",
+      "title": "Batch operator runbook for DeFi v1",
+      "estimatedGainPercent": 2,
+      "status": "completed"
+    },
+    {
+      "id": "main-dashboard-cleanup",
+      "title": "Main app dashboard cleanup",
+      "estimatedGainPercent": 3,
+      "status": "completed"
+    },
+    {
+      "id": "ci-pages-verification",
+      "title": "Commit CI/Pages verification after each major slice",
+      "estimatedGainPercent": 2,
+      "status": "local-gates-ready"
+    }
+  ],
+  "currentCompletionEstimate": {
+    "before": "42-45%",
+    "afterLocalSlice": "50-53%",
+    "afterRealExternalSigner": "57-62%"
+  },
+  "blockers": [
+    "A real no-local-key external wallet signature is still required before external-signer tasks can be marked completed.",
+    "Browser/OpenClaw/KasWare should be used only for that signer pass, not for local gates.",
+    "Durable live promotion is gated by deterministic replay and rollback matching, not by checkpoint fixtures alone."
+  ]
+}

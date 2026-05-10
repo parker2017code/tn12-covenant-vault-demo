@@ -66,6 +66,7 @@ const indexerSummaryNode = document.querySelector("#indexer-summary");
 const indexerPersistenceNode = document.querySelector("#indexer-persistence");
 const indexerRecordsNode = document.querySelector("#indexer-records");
 const receiptEventsNode = document.querySelector("#receipt-events");
+const defiReceiptGuardNode = document.querySelector("#defi-receipt-guard");
 const invoiceSummaryNode = document.querySelector("#invoice-summary");
 const invoiceListNode = document.querySelector("#invoice-list");
 const invoiceDraftNode = document.querySelector("#invoice-draft");
@@ -112,6 +113,8 @@ const projectPlanVisionNode = document.querySelector("#project-plan-vision");
 const nextQueueSummaryNode = document.querySelector("#next-queue-summary");
 const nextQueueTopNode = document.querySelector("#next-queue-top");
 const nextQueueTasksNode = document.querySelector("#next-queue-tasks");
+const nextTenStatusNode = document.querySelector("#next-ten-status");
+const nextTenTasksNode = document.querySelector("#next-ten-tasks");
 const buildQueueNode = document.querySelector("#build-queue");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
@@ -247,6 +250,7 @@ renderStableIssuerRedemptions();
 renderAgentCommitments();
 renderBuildStatus();
 renderNextWorkQueue();
+renderNextTenStatus();
 renderProofTransactions();
 renderAcceptedAppState();
 renderInvoiceApp();
@@ -840,6 +844,33 @@ async function renderNextWorkQueue() {
   }
 }
 
+async function renderNextTenStatus() {
+  if (!nextTenStatusNode || !nextTenTasksNode) return;
+
+  try {
+    const response = await fetch("artifacts/next-ten-execution-status.json", { cache: "no-store" });
+    const status = await response.json();
+    nextTenStatusNode.innerHTML = `
+      <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.summary.completed)} / ${escapeHtml(status.summary.tasks)} done</strong><p>${escapeHtml(status.summary.realizedGainPercent)}% local gain realized; ${escapeHtml(status.summary.totalPotentialGainPercent)}% total potential.</p></article>
+      <article><span>Completion</span><strong>${escapeHtml(status.currentCompletionEstimate.afterLocalSlice)}</strong><p>After real external signer: ${escapeHtml(status.currentCompletionEstimate.afterRealExternalSigner)}.</p></article>
+      <article><span>Blocker</span><strong>${escapeHtml(status.summary.externalSignerStillRequired ? "external signer" : "none")}</strong><p>${escapeHtml(status.blockers[0])}</p></article>
+    `;
+    nextTenTasksNode.innerHTML = "";
+    for (const task of status.tasks) {
+      const article = document.createElement("article");
+      article.className = "build-status-card compact-card";
+      article.innerHTML = `
+        <span>${escapeHtml(task.status)} / +${escapeHtml(task.estimatedGainPercent)}%</span>
+        <strong>${escapeHtml(task.title)}</strong>
+        <p>${escapeHtml(task.id)}</p>
+      `;
+      nextTenTasksNode.append(article);
+    }
+  } catch (error) {
+    nextTenStatusNode.textContent = `Next-ten status unavailable: ${error.message}`;
+  }
+}
+
 async function renderAuctionIntents() {
   if (!auctionSummaryNode || !auctionListNode) return;
 
@@ -1156,6 +1187,30 @@ async function renderAcceptedAppState() {
         <small>${escapeHtml(shortTxid(event.txid))}</small>
       `;
       receiptEventsNode.append(article);
+    }
+
+    if (defiReceiptGuardNode) {
+      const guardResponse = await fetch("artifacts/defi-receipt-replay-guard.json", { cache: "no-store" });
+      const guard = await guardResponse.json();
+      defiReceiptGuardNode.innerHTML = `
+        <article>
+          <span>${escapeHtml(guard.status)}</span>
+          <strong>${escapeHtml(guard.summary.acceptedReceipts)} DeFi receipts across ${escapeHtml(guard.summary.wallets)} wallets</strong>
+          <p>${escapeHtml(guard.summary.negativeCasesCaught)} duplicate/stale promotion cases caught before app-state promotion.</p>
+          <small>${escapeHtml(guard.promotionRule)}</small>
+        </article>
+      `;
+      for (const receipt of guard.acceptedReceipts) {
+        const article = document.createElement("article");
+        article.className = "receipt-card";
+        article.innerHTML = `
+          <span>DeFi v1 receipt</span>
+          <strong>${escapeHtml(receipt.subject)} / ${escapeHtml(receipt.value)}</strong>
+          <p>${escapeHtml(shortAddress(receipt.walletAddress))}</p>
+          <small>${escapeHtml(shortTxid(receipt.txid))}</small>
+        `;
+        defiReceiptGuardNode.append(article);
+      }
     }
   } catch (error) {
     indexerSummaryNode.textContent = `Indexer snapshot unavailable: ${error.message}`;

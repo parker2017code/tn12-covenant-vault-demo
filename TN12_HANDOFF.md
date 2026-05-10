@@ -8,6 +8,7 @@ What changed in this pass:
 - Live TN12 replay overlap now exists from a chain-block anchor inside the checkpoint band.
 - Batch-assurance operator decision is release-first review, with external signer acceptance still missing.
 - Mainnet readiness docs now separate proof-core progress from deployment readiness.
+- The current next-ten execution status is artifact-backed: 6/10 local tasks complete, duplicate/stale DeFi receipt replay guard ready, and external signer tasks still blocked on a real wallet signature.
 
 Current blockers:
 - Live external signer round trip
@@ -27,6 +28,8 @@ Files to read first:
 - `docs/PROGRESS.md`
 - `docs/ROADMAP_STATE.md`
 - `artifacts/virtual-chain-live-app-state.json`
+- `artifacts/next-ten-execution-status.json`
+- `artifacts/defi-receipt-replay-guard.json`
 - `artifacts/batch-assurance-operator-decision.json`
 
 This handoff is for the next Codex/Claude pass. It is not a claim that mainnet is ready.

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-external-signer-result-template/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:50:32.810Z",
+  "generatedAt": "2026-05-10T21:05:05.556Z",
   "status": "external-signer-result-template-ready",
   "summary": {
     "templates": 4,

@@ -50,6 +50,7 @@ import { buildRailResearchTriggers } from "../src/railResearchTriggers.mjs";
 import { buildOracleSourceMatrix } from "../src/oracleSourceMatrix.mjs";
 import { buildNextWorkQueue } from "../src/nextWorkQueue.mjs";
 import { buildNextTenExecutionPlan } from "../src/nextTenExecutionPlan.mjs";
+import { buildNextTenExecutionStatus } from "../src/nextTenExecutionStatus.mjs";
 import { buildBatchAssuranceState } from "../src/batchAssurance.mjs";
 import { buildBatchAssuranceCustodyDrafts } from "../src/batchAssuranceCustodyDrafts.mjs";
 import { buildBatchAssuranceCustodyRequirements } from "../src/batchAssuranceCustodyRequirements.mjs";
@@ -100,6 +101,7 @@ import { buildAuctionIntentPrototype } from "../src/auctionIntent.mjs";
 import { buildAuctionSettlementDrafts } from "../src/auctionSettlementDrafts.mjs";
 import { buildAuctionCustodyReview } from "../src/auctionCustodyReview.mjs";
 import { buildDefiV1OperatorLoop } from "../src/defiV1OperatorLoop.mjs";
+import { buildDefiReceiptReplayGuard } from "../src/defiReceiptReplayGuard.mjs";
 import { buildDefiResearchBacklog } from "../src/defiBacklog.mjs";
 import { buildPredictionHedgeSimulator } from "../src/predictionHedgeSimulator.mjs";
 import { buildStableValuePathRegistry } from "../src/stableValuePaths.mjs";
@@ -466,6 +468,30 @@ assert.equal(nextTenExecutionPlan.summary.walletStandardRequests, 4);
 assert.ok(nextTenExecutionPlan.slices.some((slice) => slice.id === "wallet-submit"));
 const nextTenExecutionPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/next-ten-execution-plan.json", import.meta.url), "utf8"));
 assert.equal(nextTenExecutionPlanArtifact.status, "next-ten-execution-plan-ready");
+const nextTenExecutionStatusArtifact = JSON.parse(await readFile(new URL("../artifacts/next-ten-execution-status.json", import.meta.url), "utf8"));
+assert.equal(nextTenExecutionStatusArtifact.status, "next-ten-execution-status-ready");
+assert.equal(nextTenExecutionStatusArtifact.summary.tasks, 10);
+assert.equal(nextTenExecutionStatusArtifact.summary.completed, 6);
+assert.equal(nextTenExecutionStatusArtifact.summary.realizedGainPercent, 18);
+assert.equal(nextTenExecutionStatusArtifact.summary.externalSignerStillRequired, true);
+assert.equal(nextTenExecutionStatusArtifact.currentCompletionEstimate.afterLocalSlice, "50-53%");
+assert.ok(nextTenExecutionStatusArtifact.tasks.some((task) =>
+  task.id === "external-signer-defi-receipt"
+  && task.status === "blocked-needs-user-wallet-signature"
+));
+const rebuiltNextTenExecutionStatus = buildNextTenExecutionStatus({
+  checkpoint: JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8")),
+  receiptGuard: JSON.parse(await readFile(new URL("../artifacts/defi-receipt-replay-guard.json", import.meta.url), "utf8")),
+  walletRoundtrip: JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-roundtrip-plan.json", import.meta.url), "utf8")),
+  signerValidation: JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8")),
+  signerSim: JSON.parse(await readFile(new URL("../artifacts/wallet-external-signer-sim-results.json", import.meta.url), "utf8")),
+  liveAppState: JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-app-state.json", import.meta.url), "utf8")),
+  submitLedger: JSON.parse(await readFile(new URL("../artifacts/wallet-connector-submit-ledger.json", import.meta.url), "utf8")),
+  defiLoop: JSON.parse(await readFile(new URL("../artifacts/defi-v1-operator-loop.json", import.meta.url), "utf8")),
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(rebuiltNextTenExecutionStatus.status, "next-ten-execution-status-ready");
+assert.equal(rebuiltNextTenExecutionStatus.summary.completed, nextTenExecutionStatusArtifact.summary.completed);
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -923,6 +949,40 @@ const rebuiltDefiLoop = buildDefiV1OperatorLoop({
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
 assert.equal(rebuiltDefiLoop.status, "repeatable-live-receipt-loop-ready");
+const defiReceiptReplayGuardArtifact = JSON.parse(await readFile(new URL("../artifacts/defi-receipt-replay-guard.json", import.meta.url), "utf8"));
+assert.equal(defiReceiptReplayGuardArtifact.status, "defi-receipt-replay-guard-ready");
+assert.equal(defiReceiptReplayGuardArtifact.summary.acceptedReceipts, 4);
+assert.equal(defiReceiptReplayGuardArtifact.summary.wallets, 3);
+assert.equal(defiReceiptReplayGuardArtifact.summary.negativeCasesCaught, 3);
+assert.deepEqual(
+  defiReceiptReplayGuardArtifact.acceptedReceipts.map((receipt) => receipt.txid),
+  [
+    "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+    "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+    "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+    "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39"
+  ]
+);
+const rebuiltDefiReceiptReplayGuard = buildDefiReceiptReplayGuard({
+  receiptEvidence: [
+    JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-live-receipt-evidence.json", import.meta.url), "utf8")),
+    JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-repeat-receipt-evidence.json", import.meta.url), "utf8")),
+    JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-multi-wallet-a-evidence.json", import.meta.url), "utf8")),
+    JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-multi-wallet-b-evidence.json", import.meta.url), "utf8"))
+  ],
+  staleCandidates: [{
+    txid: "unknown-defi-receipt-txid",
+    subject: "defi-v1-stale-receipt",
+    walletAddress: "kaspatest:unknown"
+  }],
+  duplicateCandidates: [
+    JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-live-receipt-evidence.json", import.meta.url), "utf8")),
+    JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-live-receipt-evidence.json", import.meta.url), "utf8"))
+  ],
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(rebuiltDefiReceiptReplayGuard.status, "defi-receipt-replay-guard-ready");
+assert.equal(rebuiltDefiReceiptReplayGuard.summary.negativeCasesCaught, defiReceiptReplayGuardArtifact.summary.negativeCasesCaught);
 const predictionFixture = JSON.parse(await readFile(new URL("../fixtures/PredictionHedgeSimulator.json", import.meta.url), "utf8"));
 const predictionSimulator = buildPredictionHedgeSimulator({ fixture: predictionFixture, attestationRegistry, attestationThresholds });
 assert.equal(predictionSimulator.status, "simulation-only");
@@ -1855,6 +1915,8 @@ const files = [
   "scripts/build-oracle-source-matrix.mjs",
   "scripts/build-next-work-queue.mjs",
   "scripts/build-next-ten-execution-plan.mjs",
+  "scripts/build-next-ten-execution-status.mjs",
+  "scripts/build-defi-receipt-replay-guard.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
   "scripts/build-batch-assurance-custody-requirements.mjs",
@@ -1971,6 +2033,8 @@ const files = [
   "artifacts/oracle-source-matrix.json",
   "artifacts/next-work-queue.json",
   "artifacts/next-ten-execution-plan.json",
+  "artifacts/next-ten-execution-status.json",
+  "artifacts/defi-receipt-replay-guard.json",
   "artifacts/batch-assurance-campaign.json",
   "artifacts/batch-assurance-custody-drafts.json",
   "artifacts/batch-assurance-custody-requirements.json",
@@ -2140,6 +2204,8 @@ const files = [
   "src/oracleSourceMatrix.mjs",
   "src/nextWorkQueue.mjs",
   "src/nextTenExecutionPlan.mjs",
+  "src/nextTenExecutionStatus.mjs",
+  "src/defiReceiptReplayGuard.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
   "src/batchAssuranceCustodyRequirements.mjs",

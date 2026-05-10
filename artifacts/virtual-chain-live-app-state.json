@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-live-app-state/v1",
   "network": "testnet-12",
-  "generatedAt": "2026-05-10T17:25:12.532Z",
+  "generatedAt": "2026-05-10T21:05:06.971Z",
   "status": "live-window-overlaps-checkpoint",
   "appStatePromoted": true,
   "summary": {
@@ -11,7 +11,7 @@
     "payloadTransactions": 1115,
     "matchedCheckpointTxids": 1,
     "newTxids": 13957,
-    "knownCheckpointSize": 34
+    "knownCheckpointSize": 40
   },
   "matchedKnownTxids": [
     "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"

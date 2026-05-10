@@ -24,6 +24,8 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Rail research trigger gate: `npm run rails:research`
 - Oracle source matrix gate: `npm run oracle:matrix`
 - Project next-work queue gate: `npm run project:queue`
+- Project next-ten execution gates: `npm run project:next-ten` and `npm run project:next-ten-status`
+- DeFi receipt replay guard gate: `npm run defi:receipt-guard`
 - Durable indexer schema/replay gates: `npm run indexer:schema` and `npm run indexer:replay`
 - Wallet connector request gate: `npm run wallet:connector-requests`
 - Wallet connector adapter dry-run gate: `npm run wallet:adapter-run`
@@ -38,7 +40,7 @@ Read this file first when resuming work in this repo. It is the short routing la
 - Agent settlement draft gate: `npm run agent:settlement-drafts`
 - AI/source discipline gate: `npm run ai:discipline`
 
-The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has accepted role-separated positive proofs for all seven vault, assurance, and escrow paths: recovery/withdrawal, release/refund, and release/refund/cancel. It also has 26 accepted TN12 payload events for invoice, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
+The repo is a TN12 covenant/app primitive workshop. It has accepted TN12 proof transactions for vault recovery, vault delayed withdrawal, individual assurance release, individual assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel. It also has accepted role-separated positive proofs for all seven vault, assurance, and escrow paths: recovery/withdrawal, release/refund, and release/refund/cancel. It also has 30 accepted TN12 payload events for invoice, multi-wallet DeFi v1 receipts, access-pass, auction, stable-value issuer, miner/watcher attestation, prediction/hedge review, agent commitment, and batch-assurance planner state.
 
 ## First-Read Order
 
@@ -79,6 +81,8 @@ Use `docs/SOURCES.md` and `docs/KASPA_DOCS_REVIEW.md` when checking source disci
 ## Current Next Work
 
 - Use `npm run project:queue` / `artifacts/next-work-queue.json` as the all-in-one broad-continuation order.
+- Use `npm run project:next-ten-status` / `artifacts/next-ten-execution-status.json` for the current 10-task execution slice. It records 6/10 locally completed tasks, 18% realized local-slice gain, and keeps the live external-signer tasks blocked until a real wallet signature returns.
+- Use `npm run defi:receipt-guard` / `artifacts/defi-receipt-replay-guard.json` for the four accepted multi-wallet DeFi v1 receipts plus duplicate/stale negative promotion checks.
 - **Adversarial suite COMPLETE**: 13 cases TN12-rejected — wrong-signer (3), wrong-selector (3), wrong-output-lock (3), wrong-output-amount (3), single-party-cancel (1). All in `artifacts/adversarial/`.
 - **Claude Code infrastructure in place**: `CLAUDE.md` (lean, 23 lines), `.claude/settings.json` (deny `--submit` + protect `.local/`), hook at `.claude/hooks/check-submit-guard.sh`, slash commands `/verify`, `/next`, `/adversarial`.
 - **Remaining open blockers** (priority order):

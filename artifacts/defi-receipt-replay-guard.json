@@ -1,0 +1,83 @@
+{
+  "schema": "tn12-defi-receipt-replay-guard/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-10T21:36:39.477Z",
+  "status": "defi-receipt-replay-guard-ready",
+  "summary": {
+    "acceptedReceipts": 4,
+    "wallets": 3,
+    "duplicateReviews": 2,
+    "staleReviews": 1,
+    "negativeCasesCaught": 3
+  },
+  "acceptedReceipts": [
+    {
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "subject": "defi-v1-live-receipt-001",
+      "value": "paid",
+      "walletAddress": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "accepted": true,
+      "payloadMatches": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 8199289
+    },
+    {
+      "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "subject": "defi-v1-live-receipt-002",
+      "value": "paid",
+      "walletAddress": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "accepted": true,
+      "payloadMatches": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 8210235
+    },
+    {
+      "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "subject": "defi-v1-multi-wallet-a",
+      "value": "paid",
+      "walletAddress": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",
+      "accepted": true,
+      "payloadMatches": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 8228466
+    },
+    {
+      "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "subject": "defi-v1-multi-wallet-b",
+      "value": "paid",
+      "walletAddress": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
+      "accepted": true,
+      "payloadMatches": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 8228493
+    }
+  ],
+  "duplicateReviews": [
+    {
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "subject": "defi-v1-live-receipt-001",
+      "walletAddress": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "status": "duplicate-receipt-review"
+    },
+    {
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "subject": "defi-v1-live-receipt-001",
+      "walletAddress": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "status": "duplicate-receipt-review"
+    }
+  ],
+  "staleReviews": [
+    {
+      "txid": "unknown-defi-receipt-txid",
+      "subject": "defi-v1-stale-receipt",
+      "walletAddress": "kaspatest:unknown",
+      "status": "stale-or-unknown-receipt-review"
+    }
+  ],
+  "promotionRule": "Promote a DeFi receipt only when the tx is accepted, payload bytes match the signed draft, the subject is expected, and the txid/outpoint is not stale or duplicated.",
+  "boundaries": [
+    "This is an indexer/replay guard, not wallet signing evidence.",
+    "Synthetic duplicate and stale rows are local negative cases; accepted positive receipts still come from TN12 evidence artifacts.",
+    "A receipt can support product state only after this guard and the checkpointed index both pass."
+  ]
+}

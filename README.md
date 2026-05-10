@@ -30,7 +30,7 @@ When you ask how complete the project is, the percentage should be read as mainn
 - Pooled threshold enforcement on-chain — batch target aggregation is `PLANNER_ONLY`.
 - External wallet signing — all accepted proofs used local keys. Wallet connector is `SIGNED_NOT_BROADCAST` / planning only.
 - Historical virtual-chain replay — `getVirtualChainFromBlockV2` requires the TN12 SDK build (`1.1.1-toc.1`); installed `kaspa-wasm` does not expose it.
-- External wallet signing — all accepted proofs used local keys. Wallet connector is `SIGNED_NOT_BROADCAST` / planning only.
+- Full DeFi — the repo has accepted TN12 receipts and covenant proof primitives, but not AMM/lending/liquidation/oracle/custody production rails.
 
 ## Verify existing proofs
 
@@ -69,6 +69,8 @@ If these pass, you have verified the existing accepted evidence. You have not cr
 | Canonical mainnet readiness summary | `MAINNET_READINESS.md` |
 | AI/source discipline rules | `docs/AI_CODING_SOURCE_DISCIPLINE.md` |
 | Priority queue (30 tasks) | `npm run project:queue` → `artifacts/next-work-queue.json` |
+| Current 10-task execution slice | `npm run project:next-ten-status` → `artifacts/next-ten-execution-status.json` |
+| DeFi receipt duplicate/stale guard | `npm run defi:receipt-guard` → `artifacts/defi-receipt-replay-guard.json` |
 
 ## Status labels used in this repo
 

@@ -162,7 +162,10 @@
         <article><strong>Indexer</strong><p>Configure a TN12 virtual-chain endpoint, run preflight, then promote app state only after accepted replay matches.</p></article>
         <article><strong>Settlement</strong><p>Review one batch-assurance release or refund path; keep mutually exclusive spends explicit before submit.</p></article>
       </div>
-      <pre>npm run project:next-ten</pre>
+      <div id="next-ten-status" class="claim-grid" aria-live="polite"></div>
+      <div id="next-ten-tasks" class="build-status-list" aria-live="polite"></div>
+      <pre>npm run project:next-ten
+npm run project:next-ten-status</pre>
     </section>
 
     <section class="grid">
@@ -454,6 +457,7 @@ npm run coordination:settlement-brief</pre>
       <div id="indexer-persistence" class="indexer-persistence" aria-live="polite"></div>
       <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
       <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
+      <div id="defi-receipt-guard" class="receipt-events" aria-live="polite"></div>
       <pre>npm run indexer:checkpoint
 npm run indexer:persist
 npm run indexer:virtual-chain-run</pre>

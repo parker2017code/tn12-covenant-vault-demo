@@ -27,6 +27,9 @@ try {
   assert.match(html, /id="receipt-events"/);
   assert.match(html, /id="wallet-connector"/);
   assert.match(html, /id="defi-summary"/);
+  assert.match(html, /id="defi-receipt-guard"/);
+  assert.match(html, /id="next-ten-status"/);
+  assert.match(html, /id="next-ten-tasks"/);
 
   console.log("UI smoke check passed.");
 } finally {
