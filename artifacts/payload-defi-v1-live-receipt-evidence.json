@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-10T20:04:27.623Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+  "accepted": true,
+  "acceptingBlockBlueScore": 8199289,
+  "acceptingBlockTime": 1778443272235,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303031222c2276616c7565223a2270616964222c226e6f7465223a224c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2066726573682077616c6c6574227d",
+    "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303031222c2276616c7565223a2270616964222c226e6f7465223a224c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2066726573682077616c6c6574227d",
+    "bytes": 136,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "order-receipt",
+        "subject": "defi-v1-live-receipt-001",
+        "value": "paid",
+        "note": "Live funded TN12 DeFi v1 receipt from fresh wallet"
+      },
+      "encoded": {
+        "bytes": 136,
+        "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303031222c2276616c7565223a2270616964222c226e6f7465223a224c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2066726573682077616c6c6574227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "defi-v1-live-receipt-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807"
+}

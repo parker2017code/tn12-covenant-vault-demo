@@ -80,6 +80,7 @@ export function buildCovenantAdversarialCoverage({
     proofFixture,
     compiledContracts
   }));
+  const acceptedProofSpends = cases.filter((item) => item.positiveChecks.acceptedProofMapped).length;
   const roleSeparation = buildRoleSeparation(constructorArgs);
   const completeCases = cases.filter((item) => item.status === "local-adversarial-checks-covered");
   const roleSeparatedContracts = roleSeparation.contracts.filter((contract) => contract.rolesAreDistinct);
@@ -97,7 +98,8 @@ export function buildCovenantAdversarialCoverage({
       ? "local-adversarial-coverage-with-open-gaps"
       : "local-adversarial-coverage-complete",
     summary: {
-      acceptedProofSpends: proofFixture.transactions?.length || 0,
+      acceptedProofSpends,
+      acceptedEvidenceRows: proofFixture.transactions?.length || 0,
       localDraftCases: cases.length,
       coveredCases: completeCases.length,
       adversarialMutations: cases.reduce((total, item) => total + item.adversarialMutations.length, 0),

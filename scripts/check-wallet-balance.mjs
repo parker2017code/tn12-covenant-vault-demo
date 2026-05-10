@@ -6,13 +6,14 @@ import { getKaspaWasmRuntime } from "../src/kaspaWasmRuntime.mjs";
 
 globalThis.WebSocket = WebSocket;
 
-const walletPath = ".local/tn12-wallet.json";
+const walletPath = process.env.WALLET_PATH || ".local/tn12-wallet.json";
 const wallet = JSON.parse(await readFile(walletPath, "utf8"));
 
 const { RpcClient } = getKaspaWasmRuntime().module;
 const rpcUrl = process.env.KASPA_WRPC_URL || "ws://65.108.107.30:18210";
 
 console.log(`Checking wallet balance...`);
+console.log(`Wallet path: ${walletPath}`);
 console.log(`Address: ${wallet.address}`);
 console.log(`RPC URL: ${rpcUrl}`);
 

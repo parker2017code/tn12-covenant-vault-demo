@@ -1,12 +1,12 @@
 {
   "schema": "tn12-virtual-chain-reader-adapter/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:57:20.087Z",
+  "generatedAt": "2026-05-10T20:02:28.292Z",
   "status": "virtual-chain-reader-adapter-ready",
   "mode": "configured-rpc-adapter-contract",
   "endpoint": {
     "configEnv": "TN12_VIRTUAL_CHAIN_RPC_URL",
-    "configured": true,
+    "configured": false,
     "transport": "json-wrpc-or-rpc-client",
     "networkId": "testnet-12",
     "method": "getVirtualChainFromBlockV2",
@@ -30,7 +30,7 @@
     "kind": "blue-score-checkpoint",
     "bootstrapFrom": "artifacts/checkpointed-accepted-index.json",
     "persistTable": "checkpoint_watermarks",
-    "startBlueScore": 7042656,
+    "startBlueScore": 8199289,
     "trustedOverlapStartBlueScore": 5203140,
     "persistFields": [
       "network",
@@ -88,7 +88,7 @@
         "expected output amount/address matched",
         "decoded app event kind matched"
       ],
-      "currentMatchedRows": 26
+      "currentMatchedRows": 27
     },
     "proof": {
       "source": "fixtures/AcceptedProofTransactions.json",
@@ -98,17 +98,17 @@
         "expected P2PK output matched",
         "entrypoint/lane mapped to proof fixture"
       ],
-      "currentMatchedRows": 7
+      "currentMatchedRows": 9
     },
     "appStateReady": true
   },
   "summary": {
-    "sourceCheckpointRecords": 36,
-    "virtualChainRows": 36,
-    "payloadRows": 26,
-    "proofRows": 7,
+    "sourceCheckpointRecords": 39,
+    "virtualChainRows": 39,
+    "payloadRows": 27,
+    "proofRows": 9,
     "rollbackRows": 0,
-    "endpointConfigured": true,
+    "endpointConfigured": false,
     "localNodeRequired": false,
     "acceptedCountsChanged": false
   },
@@ -119,9 +119,9 @@
     "retryBackoff": true,
     "payloadAndProofMatching": true,
     "fixtureReplayCompatible": true,
-    "endpointConfiguredForLiveRead": true
+    "endpointConfiguredForLiveRead": false
   },
-  "nextLiveStep": "Run the live adapter against the configured TN12 virtual-chain endpoint and compare its rows with this artifact before committing a checkpoint.",
+  "nextLiveStep": "Set TN12_VIRTUAL_CHAIN_RPC_URL to a hosted TN12 RPC endpoint before attempting live reads.",
   "boundaries": [
     "This artifact is an adapter contract, not a live node subscription.",
     "It does not require local kaspad.",

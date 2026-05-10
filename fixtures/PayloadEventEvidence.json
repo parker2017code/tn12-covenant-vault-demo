@@ -8,6 +8,11 @@
       "outPath": "artifacts/payload-receipt-evidence.json"
     },
     {
+      "label": "DeFi v1 live receipt",
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-payload-receipt.json",
+      "outPath": "artifacts/payload-defi-v1-live-receipt-evidence.json"
+    },
+    {
       "label": "Invoice refunded",
       "draftPath": "artifacts/signed-drafts/payload-refund-self-send.json",
       "outPath": "artifacts/payload-refund-evidence.json"

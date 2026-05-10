@@ -10,6 +10,7 @@ import {
   UtxoEntries,
   signTransaction
 } from "kaspa-wasm";
+import { buildSubmitPayload } from "../src/submitPayload.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 const fundingOutpointPath = process.env.FUNDING_OUTPOINT || "fixtures/FundedWalletOutpoint.json";
@@ -89,7 +90,8 @@ const artifact = {
     minerFeeSompi: minerFeeSompi.toString()
   },
   transactionId: signedJson.tx?.id || signedJson.tx?.inner?.id || null,
-  signedTransaction: signedJson
+  signedTransaction: signedJson,
+  submitPayload: buildSubmitPayload(signedJson)
 };
 
 await mkdir("artifacts/signed-drafts", { recursive: true });

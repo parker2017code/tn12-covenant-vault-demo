@@ -984,6 +984,9 @@ assert.ok(projectPlan.later.some((item) => item.id === "vprog-forward-compat"));
 assert.ok(projectPlan.longTermVision.some((item) => /wallet-reviewed Kaspa app console/.test(item)));
 const proofFixture = JSON.parse(await readFile(new URL("../fixtures/AcceptedProofTransactions.json", import.meta.url), "utf8"));
 const roleProofFixture = JSON.parse(await readFile(new URL("../fixtures/RoleSeparatedAcceptedProofTransactions.json", import.meta.url), "utf8"));
+const payloadEventManifest = JSON.parse(await readFile(new URL("../fixtures/PayloadEventEvidence.json", import.meta.url), "utf8"));
+const proofFixtureCount = proofFixture.transactions.length;
+const payloadEventCount = payloadEventManifest.events.length;
 const roleProofEvidence = JSON.parse(await readFile(new URL("../artifacts/role-separated-proof-evidence.json", import.meta.url), "utf8"));
 assert.equal(roleProofFixture.schema, "tn12-role-separated-accepted-proof-transactions/v1");
 assert.equal(roleProofFixture.transactions.length, 7);
@@ -1063,6 +1066,7 @@ const covenantCoverage = buildCovenantAdversarialCoverage({
 });
 assert.equal(covenantCoverage.status, "local-adversarial-coverage-with-open-gaps");
 assert.equal(covenantCoverage.summary.acceptedProofSpends, 7);
+assert.equal(covenantCoverage.summary.acceptedEvidenceRows, proofFixtureCount);
 assert.equal(covenantCoverage.summary.localDraftCases, 7);
 assert.equal(covenantCoverage.summary.adversarialMutations, 38);
 assert.equal(covenantCoverage.summary.roleSeparationGaps, 3);
@@ -1088,8 +1092,8 @@ const fakeTransactions = Object.fromEntries(proofFixture.transactions.map((proof
   }
 ]));
 const acceptedState = buildAcceptedAppState({ proofFixture, transactions: fakeTransactions, fetchedAt: "2026-05-07T00:00:00.000Z" });
-assert.equal(acceptedState.summary.total, 7);
-assert.equal(acceptedState.summary.matched, 7);
+assert.equal(acceptedState.summary.total, proofFixtureCount);
+assert.equal(acceptedState.summary.matched, proofFixtureCount);
 assert.equal(acceptedState.appState.vault.status, "proofs-accepted");
 assert.equal(acceptedState.appState.escrow.status, "proofs-accepted");
 assert.ok(acceptedState.records.some((record) =>
@@ -1098,9 +1102,9 @@ assert.ok(acceptedState.records.some((record) =>
   && record.txid === "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
 ));
 const checkpointFixture = JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8"));
-assert.equal(checkpointFixture.summary.total, 36);
-assert.equal(checkpointFixture.summary.proofs, 7);
-assert.equal(checkpointFixture.summary.payloadEvents, 26);
+assert.equal(checkpointFixture.summary.total, proofFixtureCount + payloadEventCount + checkpointFixture.summary.outputEvidence);
+assert.equal(checkpointFixture.summary.proofs, proofFixtureCount);
+assert.equal(checkpointFixture.summary.payloadEvents, payloadEventCount);
 assert.equal(checkpointFixture.summary.outputEvidence, 3);
 assert.equal(checkpointFixture.summary.mismatches, 0);
 assert.equal(checkpointFixture.status, "accepted-index-fully-matched");
@@ -1113,14 +1117,14 @@ assert.ok(checkpointFixture.records.some((record) =>
 assert.ok(checkpointFixture.checkpoint.maxAcceptingBlockBlueScore > checkpointFixture.checkpoint.minAcceptingBlockBlueScore);
 const persistedCheckpointFixture = JSON.parse(await readFile(new URL("../artifacts/persisted-checkpoint-guard.json", import.meta.url), "utf8"));
 assert.equal(persistedCheckpointFixture.status, "persisted-checkpoint-ready");
-assert.equal(persistedCheckpointFixture.summary.recordCount, 36);
+assert.equal(persistedCheckpointFixture.summary.recordCount, checkpointFixture.summary.total);
 assert.equal(persistedCheckpointFixture.summary.mismatches, 0);
 assert.equal(persistedCheckpointFixture.summary.rollbackDetected, false);
 const replayPlanFixture = JSON.parse(await readFile(new URL("../artifacts/indexer-replay-plan.json", import.meta.url), "utf8"));
 assert.equal(replayPlanFixture.status, "durable-indexer-plan-ready");
-assert.equal(replayPlanFixture.currentCheckpoint.recordCount, 36);
-assert.equal(replayPlanFixture.currentCheckpoint.proofSpends, 7);
-assert.equal(replayPlanFixture.currentCheckpoint.payloadEvents, 26);
+assert.equal(replayPlanFixture.currentCheckpoint.recordCount, checkpointFixture.summary.total);
+assert.equal(replayPlanFixture.currentCheckpoint.proofSpends, proofFixtureCount);
+assert.equal(replayPlanFixture.currentCheckpoint.payloadEvents, payloadEventCount);
 assert.equal(replayPlanFixture.currentCheckpoint.rollbackDetected, false);
 assert.equal(replayPlanFixture.target.dataVerbosity, "High");
 assert.ok(replayPlanFixture.buildOrder.some((step) => step.id === "rollback-replay"));
@@ -1129,21 +1133,21 @@ const indexerStorageFixture = JSON.parse(await readFile(new URL("../artifacts/in
 assert.equal(indexerStorageFixture.status, "storage-schema-ready");
 assert.equal(indexerStorageFixture.tables.length, 5);
 assert.ok(indexerStorageFixture.tables.some((table) => table.name === "rollback_segments"));
-assert.equal(indexerStorageFixture.sourceCheckpoint.recordCount, 36);
+assert.equal(indexerStorageFixture.sourceCheckpoint.recordCount, checkpointFixture.summary.total);
 const rebuiltIndexerStorage = buildIndexerStorageSchema({
   replayPlan: replayPlanFixture,
   checkpointIndex: checkpointFixture,
   generatedAt: "2026-05-08T00:00:00.000Z"
 });
 assert.equal(rebuiltIndexerStorage.status, "storage-schema-ready");
-assert.equal(rebuiltIndexerStorage.sourceCheckpoint.payloadEvents, 26);
+assert.equal(rebuiltIndexerStorage.sourceCheckpoint.payloadEvents, payloadEventCount);
 const indexerReplayRunFixture = JSON.parse(await readFile(new URL("../artifacts/indexer-replay-run.json", import.meta.url), "utf8"));
 assert.equal(indexerReplayRunFixture.status, "fixture-replay-ready");
-assert.equal(indexerReplayRunFixture.summary.records, 36);
-assert.equal(indexerReplayRunFixture.summary.payloadEvents, 26);
-assert.equal(indexerReplayRunFixture.summary.proofSpends, 7);
+assert.equal(indexerReplayRunFixture.summary.records, checkpointFixture.summary.total);
+assert.equal(indexerReplayRunFixture.summary.payloadEvents, payloadEventCount);
+assert.equal(indexerReplayRunFixture.summary.proofSpends, proofFixtureCount);
 assert.equal(indexerReplayRunFixture.summary.appStateReady, true);
-assert.equal(indexerReplayRunFixture.tableCounts.accepted_transactions, 36);
+assert.equal(indexerReplayRunFixture.tableCounts.accepted_transactions, checkpointFixture.summary.total);
 assert.equal(indexerReplayRunFixture.tableCounts.rollback_segments, 0);
 const rebuiltReplayRun = buildIndexerReplayRun({
   checkpointIndex: checkpointFixture,
@@ -1161,7 +1165,7 @@ const virtualChainIngestionPlan = buildVirtualChainIngestionPlan({
   generatedAt: "2026-05-08T00:00:00.000Z"
 });
 assert.equal(virtualChainIngestionPlan.status, "virtual-chain-ingestion-contract-ready");
-assert.equal(virtualChainIngestionPlan.sourceCheckpoint.recordCount, 36);
+assert.equal(virtualChainIngestionPlan.sourceCheckpoint.recordCount, checkpointFixture.summary.total);
 assert.equal(virtualChainIngestionPlan.readerContract.dataVerbosity, "High");
 assert.ok(virtualChainIngestionPlan.rollbackPolicy.openWhen.some((item) => /lower than/.test(item)));
 const virtualChainIngestionArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-plan.json", import.meta.url), "utf8"));
@@ -1173,9 +1177,9 @@ const virtualChainIngestionRun = buildVirtualChainIngestionRun({
   runAt: "2026-05-08T00:00:00.000Z"
 });
 assert.equal(virtualChainIngestionRun.status, "fixture-virtual-chain-run-ready");
-assert.equal(virtualChainIngestionRun.summary.virtualChainRows, 36);
-assert.equal(virtualChainIngestionRun.summary.payloadRows, 26);
-assert.equal(virtualChainIngestionRun.summary.proofRows, 7);
+assert.equal(virtualChainIngestionRun.summary.virtualChainRows, checkpointFixture.summary.total);
+assert.equal(virtualChainIngestionRun.summary.payloadRows, payloadEventCount);
+assert.equal(virtualChainIngestionRun.summary.proofRows, proofFixtureCount);
 assert.equal(virtualChainIngestionRun.summary.rollbackRows, 0);
 assert.equal(virtualChainIngestionRun.summary.walletCandidateRows, 47);
 assert.equal(virtualChainIngestionRun.tables.wallet_submit_candidates.length, walletConnectorRequestsArtifact.requests.length);
@@ -1191,7 +1195,7 @@ assert.ok(virtualChainIngestionRun.tables.wallet_submit_candidates.some((row) =>
 ));
 const virtualChainIngestionRunArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-ingestion-run.json", import.meta.url), "utf8"));
 assert.equal(virtualChainIngestionRunArtifact.status, "fixture-virtual-chain-run-ready");
-assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, 36);
+assert.equal(virtualChainIngestionRunArtifact.summary.virtualChainRows, checkpointFixture.summary.total);
 assert.equal(virtualChainIngestionRunArtifact.summary.walletCandidateRows, 47);
 const virtualChainReaderAdapterFixture = JSON.parse(await readFile(new URL("../fixtures/VirtualChainReaderAdapter.json", import.meta.url), "utf8"));
 const virtualChainReaderAdapter = buildVirtualChainReaderAdapter({
@@ -1211,13 +1215,13 @@ assert.equal(virtualChainReaderAdapter.cursor.startBlueScore, checkpointFixture.
 assert.ok(virtualChainReaderAdapter.rollbackHandling.detectWhen.some((item) => /disappear/.test(item)));
 assert.ok(virtualChainReaderAdapter.retryBackoff.retryOn.includes("timeout"));
 assert.ok(virtualChainReaderAdapter.retryBackoff.doNotRetryOn.includes("wrong-network"));
-assert.equal(virtualChainReaderAdapter.matching.payload.currentMatchedRows, 26);
-assert.equal(virtualChainReaderAdapter.matching.proof.currentMatchedRows, 7);
+assert.equal(virtualChainReaderAdapter.matching.payload.currentMatchedRows, payloadEventCount);
+assert.equal(virtualChainReaderAdapter.matching.proof.currentMatchedRows, proofFixtureCount);
 assert.equal(virtualChainReaderAdapter.summary.acceptedCountsChanged, false);
 assert.equal(virtualChainReaderAdapter.readinessChecks.fixtureReplayCompatible, true);
 const virtualChainReaderAdapterArtifact = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-reader-adapter.json", import.meta.url), "utf8"));
 assert.equal(virtualChainReaderAdapterArtifact.status, "virtual-chain-reader-adapter-ready");
-assert.equal(virtualChainReaderAdapterArtifact.summary.virtualChainRows, 36);
+assert.equal(virtualChainReaderAdapterArtifact.summary.virtualChainRows, checkpointFixture.summary.total);
 assert.equal(virtualChainReaderAdapterArtifact.summary.localNodeRequired, false);
 const virtualChainLivePreflight = buildVirtualChainLivePreflight({
   readerAdapter: virtualChainReaderAdapterArtifact,
@@ -1701,11 +1705,11 @@ const proofEvidence = buildProofEvidence({
   previousTransactions: fakePreviousTransactions,
   verifiedAt: "2026-05-07T00:00:00.000Z"
 });
-assert.equal(proofEvidence.summary.accepted, 7);
-assert.equal(proofEvidence.summary.p2shInputs, 7);
-assert.equal(proofEvidence.summary.matchedInputs, 7);
-assert.equal(proofEvidence.summary.p2pkOutputs, 7);
-assert.equal(proofEvidence.summary.matchedOutputs, 7);
+assert.equal(proofEvidence.summary.accepted, proofFixtureCount);
+assert.equal(proofEvidence.summary.p2shInputs, proofFixtureCount);
+assert.equal(proofEvidence.summary.matchedInputs, proofFixtureCount);
+assert.equal(proofEvidence.summary.p2pkOutputs, proofFixtureCount);
+assert.equal(proofEvidence.summary.matchedOutputs, proofFixtureCount);
 
 const vaultContractArtifact = JSON.parse(await readFile(new URL("../artifacts/DelayedRecoveryVault.json", import.meta.url), "utf8"));
 const assuranceContractArtifact = JSON.parse(await readFile(new URL("../artifacts/AssurancePledge.json", import.meta.url), "utf8"));

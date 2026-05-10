@@ -93,6 +93,32 @@
       },
       "amountSompi": "4999995000",
       "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Auction settlement funding",
+      "lane": "auction",
+      "entrypoint": "funding",
+      "txid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+      "source": {
+        "txid": "07e017f7b7cf61b68968a5b379a6fa4544f83953d3d71b413c64e8bcf9688596",
+        "outputIndex": 1,
+        "amountSompi": "97399990000"
+      },
+      "amountSompi": "30000000000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+    },
+    {
+      "label": "Auction settlement",
+      "lane": "auction",
+      "entrypoint": "settle",
+      "txid": "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
+      "source": {
+        "txid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+        "outputIndex": 0,
+        "amountSompi": "30000000000"
+      },
+      "amountSompi": "20000000000",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
     }
   ]
 }

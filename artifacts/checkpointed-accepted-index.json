@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-10T18:20:26.563Z",
+  "fetchedAt": "2026-05-10T20:04:37.418Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -11,9 +11,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 36,
+    "recordCount": 39,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 7042656,
+    "maxAcceptingBlockBlueScore": 8199289,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -22,7 +22,10 @@
       "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
       "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
       "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
+      "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+      "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
       "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
       "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
       "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
       "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
@@ -55,12 +58,12 @@
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 36,
-    "proofs": 7,
-    "payloadEvents": 26,
+    "total": 39,
+    "proofs": 9,
+    "payloadEvents": 27,
     "outputEvidence": 3,
-    "accepted": 36,
-    "matched": 36,
+    "accepted": 39,
+    "matched": 39,
     "mismatches": 0,
     "lanes": [
       {
@@ -95,6 +98,12 @@
       },
       {
         "lane": "assurance",
+        "total": 2,
+        "accepted": 2,
+        "matched": 2
+      },
+      {
+        "lane": "auction",
         "total": 2,
         "accepted": 2,
         "matched": 2
@@ -155,9 +164,9 @@
       },
       {
         "lane": "order-receipt",
-        "total": 3,
-        "accepted": 3,
-        "matched": 3
+        "total": 4,
+        "accepted": 4,
+        "matched": 4
       },
       {
         "lane": "prediction-update",
@@ -356,6 +365,56 @@
       "explorerUrl": "https://tn12.kaspa.stream/txs/14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
     },
     {
+      "kind": "proof-spend",
+      "lane": "auction",
+      "label": "Auction settlement funding",
+      "entrypoint": "funding",
+      "txid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 8148912,
+      "acceptingBlockTime": 1778438257262,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "30000000000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "30000000000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea"
+    },
+    {
+      "kind": "proof-spend",
+      "lane": "auction",
+      "label": "Auction settlement",
+      "entrypoint": "settle",
+      "txid": "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
+      "status": "accepted-output-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 8152174,
+      "acceptingBlockTime": 1778438566076,
+      "expected": {
+        "outputIndex": 0,
+        "amountSompi": "20000000000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "observed": {
+        "outputIndex": 0,
+        "amountSompi": "20000000000",
+        "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236"
+    },
+    {
       "kind": "payload-event",
       "lane": "order-receipt",
       "label": "Invoice paid",
@@ -403,6 +462,55 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "order-receipt",
+      "label": "DeFi v1 live receipt",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 8199289,
+      "acceptingBlockTime": 1778443272235,
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-payload-receipt.json",
+      "evidencePath": "artifacts/payload-defi-v1-live-receipt-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303031222c2276616c7565223a2270616964222c226e6f7465223a224c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2066726573682077616c6c6574227d",
+        "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303031222c2276616c7565223a2270616964222c226e6f7465223a224c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2066726573682077616c6c6574227d",
+        "matches": true,
+        "bytes": 136,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "order-receipt",
+            "subject": "defi-v1-live-receipt-001",
+            "value": "paid",
+            "note": "Live funded TN12 DeFi v1 receipt from fresh wallet"
+          },
+          "encoded": {
+            "bytes": 136,
+            "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303031222c2276616c7565223a2270616964222c226e6f7465223a224c6976652066756e64656420544e3132204465466920763120726563656970742066726f6d2066726573682077616c6c6574227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807"
     },
     {
       "kind": "payload-event",

@@ -1,14 +1,14 @@
 {
   "schema": "tn12-contract-spend-evidence/v1",
   "network": "kaspa-testnet-12",
-  "verifiedAt": "2026-05-10T18:20:13.802Z",
+  "verifiedAt": "2026-05-10T20:04:21.916Z",
   "summary": {
-    "total": 7,
-    "accepted": 7,
+    "total": 9,
+    "accepted": 9,
     "p2shInputs": 7,
-    "matchedInputs": 7,
-    "p2pkOutputs": 7,
-    "matchedOutputs": 7
+    "matchedInputs": 9,
+    "p2pkOutputs": 9,
+    "matchedOutputs": 9
   },
   "proofs": [
     {
@@ -263,6 +263,80 @@
       "checks": {
         "accepted": true,
         "inputIsP2sh": true,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Auction settlement funding",
+      "lane": "auction",
+      "entrypoint": "funding",
+      "txid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+      "accepted": true,
+      "acceptingBlockBlueScore": 8148912,
+      "acceptingBlockTime": 1778438257262,
+      "input": {
+        "previousOutpointHash": "07e017f7b7cf61b68968a5b379a6fa4544f83953d3d71b413c64e8bcf9688596",
+        "previousOutpointIndex": "1",
+        "expectedPreviousOutpointHash": "07e017f7b7cf61b68968a5b379a6fa4544f83953d3d71b413c64e8bcf9688596",
+        "expectedPreviousOutpointIndex": 1,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 97399990000,
+        "expectedAmount": 97399990000,
+        "prefix": "q",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 30000000000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": false,
+        "sourceOutpointMatchesExpected": true,
+        "sourceAmountMatchesExpected": true,
+        "outputIsP2pk": true,
+        "amountMatchesExpectedOutput": true,
+        "outputAddressMatchesExpected": true
+      }
+    },
+    {
+      "label": "Auction settlement",
+      "lane": "auction",
+      "entrypoint": "settle",
+      "txid": "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
+      "accepted": true,
+      "acceptingBlockBlueScore": 8152174,
+      "acceptingBlockTime": 1778438566076,
+      "input": {
+        "previousOutpointHash": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+        "previousOutpointIndex": "0",
+        "expectedPreviousOutpointHash": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+        "expectedPreviousOutpointIndex": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 30000000000,
+        "expectedAmount": 30000000000,
+        "prefix": "q",
+        "sigOpCount": 1
+      },
+      "output": {
+        "index": 0,
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey",
+        "amount": 20000000000,
+        "prefix": "q"
+      },
+      "checks": {
+        "accepted": true,
+        "inputIsP2sh": false,
         "sourceOutpointMatchesExpected": true,
         "sourceAmountMatchesExpected": true,
         "outputIsP2pk": true,

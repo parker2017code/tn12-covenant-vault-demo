@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { chromium } from "@playwright/test";
 
-const port = Number(process.env.UI_CHECK_PORT || 4186);
+const port = Number(process.env.UI_CHECK_PORT || 4100 + Math.floor(Math.random() * 1000));
 const host = "127.0.0.1";
 const url = `http://${host}:${port}/`;
 const chromiumPath = process.env.CHROMIUM_PATH || "/usr/bin/chromium";
@@ -38,7 +39,9 @@ try {
     pageErrors.push(error.message);
   });
 
-  await page.goto(url, { waitUntil: "networkidle" });
+  const response = await page.goto(url, { waitUntil: "domcontentloaded" });
+  assert.equal(response?.ok(), true, `Failed to load ${url}; server output: ${serverOutput.join("")}`);
+  await page.waitForSelector("#assurance-form input[name='refundAddress']", { timeout: 15_000 });
   await page.locator("#assurance-form input[name='refundAddress']").fill("kaspatest:refund-smoke-check");
   await page.waitForSelector("#proof-status", { timeout: 15_000 });
   await page.waitForFunction(() => {
@@ -46,7 +49,8 @@ try {
     return text.includes("All proof cards refreshed from TN12 API.");
   }, null, { timeout: 20_000 });
 
-  assert.equal(await page.locator("[data-proof-status].ok").count(), 7);
+  const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
+  assert.equal(await page.locator("[data-proof-status].ok").count(), proofFixture.transactions.length);
   await expectText(page, "body", "TN12 configured. Proof transactions accepted.");
   await expectText(page, "#assurance-issues", "Assurance shape is valid.");
   await expectText(page, "#indexer-summary", "Matched");

@@ -1,7 +1,12 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { FUNDED_TN12_ADDRESS, normalizeManualOutpoint } from "../src/manualOutpoint.mjs";
 
-const endpoint = `https://api-tn12.kaspa.org/addresses/${FUNDED_TN12_ADDRESS}/utxos`;
+const walletPath = process.env.WALLET_PATH || "";
+const wallet = walletPath ? JSON.parse(await readFile(walletPath, "utf8")) : null;
+const address = process.env.TN12_ADDRESS || wallet?.address || FUNDED_TN12_ADDRESS;
+const outpointPath = process.env.OUTPOINT_PATH || "fixtures/FundedWalletOutpoint.json";
+const utxosPath = process.env.UTXOS_PATH || "fixtures/FundedWalletUtxos.json";
+const endpoint = `https://api-tn12.kaspa.org/addresses/${address}/utxos`;
 const response = await fetch(endpoint);
 
 if (!response.ok) {
@@ -36,8 +41,8 @@ const artifact = {
   raw: first
 };
 
-await writeFile("fixtures/FundedWalletOutpoint.json", `${JSON.stringify(artifact, null, 2)}\n`);
-await writeFile("fixtures/FundedWalletUtxos.json", `${JSON.stringify({
+await writeFile(outpointPath, `${JSON.stringify(artifact, null, 2)}\n`);
+await writeFile(utxosPath, `${JSON.stringify({
   schema: "tn12-funded-wallet-utxos/v1",
   network: "kaspa-testnet-12",
   fetchedAt: new Date().toISOString(),
