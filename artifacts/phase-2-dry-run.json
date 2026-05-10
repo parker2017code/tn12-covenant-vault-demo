@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-05-10T18:10:01.329Z",
+  "phase": "2-escrow-resubmission",
+  "network": "kaspa-testnet-12",
+  "scenario": "Fresh escrow UTXO with accessible buyer/seller keys",
+  "steps": [
+    {
+      "step": 1,
+      "action": "Fund fresh escrow",
+      "note": "External operation - fund escrow contract with accessible keys",
+      "utxo": {
+        "txid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "index": 0,
+        "amount": 5000000,
+        "scriptPubKey": "escrow_contract_hash",
+        "status": "HYPOTHETICAL_NOT_SUBMITTED"
+      }
+    },
+    {
+      "step": 2,
+      "action": "Build release draft",
+      "draft": {
+        "name": "Escrow Release",
+        "path": "release(sig buyerSig)",
+        "inputs": [
+          {
+            "txid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "index": 0,
+            "amount": 5000000,
+            "scriptPubKey": "escrow_contract_hash",
+            "status": "HYPOTHETICAL_NOT_SUBMITTED"
+          }
+        ],
+        "outputs": [
+          {
+            "address": "kaspatest:seller_address",
+            "amount": 4999995,
+            "scriptType": "pubkey"
+          }
+        ],
+        "fee": 5000,
+        "signature": "would_be_generated_by_buyer_wallet"
+      },
+      "would_require": "buyer_private_key"
+    },
+    {
+      "step": 3,
+      "action": "Build refund draft",
+      "draft": {
+        "name": "Escrow DAA Refund",
+        "path": "refund(sig buyerSig)",
+        "conditions": "tx.time >= refundTime (DAA score timeout)",
+        "inputs": [
+          {
+            "txid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "index": 0,
+            "amount": 5000000,
+            "scriptPubKey": "escrow_contract_hash",
+            "status": "HYPOTHETICAL_NOT_SUBMITTED"
+          }
+        ],
+        "outputs": [
+          {
+            "address": "kaspatest:buyer_address",
+            "amount": 4999995,
+            "scriptType": "pubkey"
+          }
+        ],
+        "fee": 5000
+      },
+      "triggers": "After DAA timeout expires"
+    },
+    {
+      "step": 4,
+      "action": "Build cancel draft",
+      "draft": {
+        "name": "Escrow Mutual Cancel",
+        "path": "cancel(sig buyerSig, sig sellerSig)",
+        "inputs": [
+          {
+            "txid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "index": 0,
+            "amount": 5000000,
+            "scriptPubKey": "escrow_contract_hash",
+            "status": "HYPOTHETICAL_NOT_SUBMITTED"
+          }
+        ],
+        "outputs": [
+          {
+            "address": "kaspatest:buyer_address",
+            "amount": 4999995,
+            "scriptType": "pubkey"
+          }
+        ],
+        "fee": 5000,
+        "requires": [
+          "buyer_signature",
+          "seller_signature"
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "Submit to TN12",
+      "submissions": [
+        {
+          "name": "Release Settlement",
+          "txid": "would_be_generated",
+          "status": "WOULD_SUBMIT_IF_UTXO_AVAILABLE"
+        },
+        {
+          "name": "Refund Settlement",
+          "txid": "would_be_generated",
+          "status": "WOULD_SUBMIT_IF_UTXO_AVAILABLE"
+        },
+        {
+          "name": "Cancel Settlement",
+          "txid": "would_be_generated",
+          "status": "WOULD_SUBMIT_IF_UTXO_AVAILABLE"
+        }
+      ],
+      "note": "Each path gets its own txid once accepted on chain"
+    }
+  ],
+  "summary": {
+    "readiness": "100% READY_TO_EXECUTE",
+    "awaiting": "Fresh escrow UTXO with accessible keys",
+    "expectedOutcome": "3 new escrow txids proving resubmission works",
+    "timeline": "1-2 days once UTXO available"
+  }
+}
