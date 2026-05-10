@@ -142,6 +142,12 @@ Done now:
 
 WIP now:
 
+| Blocker | What I do | What you do |
+|---|---|---|
+| External signer roundtrip | Build the live wallet connector and validate accepted replay | Only provide wallet access or a signer choice if you want a specific live path tested |
+| Virtual-chain overlap | Test the live TN12 reader and prove checkpoint overlap before promotion | Only provide a start hash or replay window if you want a specific overlap test |
+| Batch-assurance settle path | Pick and exercise one mutually exclusive settlement path end to end | Only choose release vs refund if you want that lane submitted |
+
 - Live wallet submit path that preserves payload bytes and exact tx fields without local private keys. The wallet-submit handoff package, connector request bundle, dry-run adapter review sessions, submit-result ledger, result validator, external-signer gap artifact, unsigned request templates, wallet-standard mapping, four wallet-standard request candidates, and KasSigner/KasSee reference boundary are built; a real external signer round trip is still needed before no-local-key signing is claimed.
 - Batch-assurance settlement-path review from amount-matched pledge outputs. Accepted 45/35/20 TKAS pledge outputs are imported, release/refund drafts are signed, and the remaining decision is which mutually exclusive path to review/submit.
 - Durable indexer node/RPC replay beyond the generated fixture-backed replay. The reader/rollback contract and bounded adapter artifact exist; a configured hosted TN12 virtual-chain endpoint still needs to be tested live.

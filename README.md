@@ -46,6 +46,12 @@ If these pass, you have verified the existing accepted evidence. You have not cr
 
 ## Current blockers (in priority order)
 
+| Blocker | What I do | What you do |
+|---|---|---|
+| External signer roundtrip | Wire the live wallet connector, preserve tx bytes, validate accepted replay | Only provide wallet access or a deployment decision if you want a specific signer path tested |
+| Virtual-chain overlap | Test the live TN12 reader and prove checkpoint overlap before promotion | Only provide a target start hash or a required replay window if you want a specific overlap test |
+| Batch-assurance settle path | Pick and exercise one mutually exclusive settlement path end to end | Only choose release vs refund if you want that lane submitted |
+
 1. **External signer roundtrip** — `artifacts/wallet-external-signer-roundtrip-plan.json` has 4 requests ready; local signer simulation in progress.
 2. **Virtual-chain live indexer** — operational with local TN12 wasm build. `KASPA_WASM_MODULE=.../kaspa npm run indexer:live-window` calls `getVirtualChainFromBlockV2`, produces 46+ accepted-tx rows, forward-indexing capable. Checkpoint overlap with historic proofs not expected (near-tip only); see `artifacts/virtual-chain-live-app-state.json`.
 
