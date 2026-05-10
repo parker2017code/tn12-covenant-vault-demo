@@ -1281,7 +1281,10 @@ assert.equal(virtualChainLiveWindowArtifact.request.dataVerbosityLevel, "High");
 assert.ok(virtualChainLiveWindowArtifact.summary.acceptedBlocks > 0);
 assert.ok(virtualChainLiveWindowArtifact.summary.acceptedTransactions > 0);
 assert.ok(virtualChainLiveWindowArtifact.summary.computeBudgetInputs > 0);
-assert.equal(virtualChainLiveWindowArtifact.request.startHashSource, "getBlockDagInfo.sink");
+assert.ok([
+  "getBlockDagInfo.sink",
+  "env:TN12_VIRTUAL_CHAIN_START_HASH"
+].includes(virtualChainLiveWindowArtifact.request.startHashSource));
 assert.equal(
   virtualChainLiveWindowArtifact.replay.acceptedTransactions.length,
   virtualChainLiveWindowArtifact.summary.acceptedTransactions

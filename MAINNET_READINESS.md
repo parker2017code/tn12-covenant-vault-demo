@@ -15,6 +15,7 @@ This document is the canonical place for mainnet deployment readiness, not TN12 
 - Accepted covenant proof spends for vault recovery, vault delayed withdrawal, assurance release/refund, escrow release, escrow DAA-score refund, escrow mutual cancel, and role-separated positive paths.
 - Accepted payload-state evidence for invoice, access-pass, auction, attestation, agent, prediction/hedge, stable-value issuer, and batch-assurance planner records.
 - Verified public TN12 wRPC endpoint at `ws://tn12-node.kaspa.com:17210` using Borsh.
+- Bounded live virtual-chain reads are reachable from the endpoint, including a checkpoint-derived start hash that returned 13,968 accepted transactions and 1,116 payload transactions. That window still produced zero checkpoint overlap, so it is live evidence of reachability and replay shape, not app-state promotion. An earlier checkpoint accepting block hash (`4c70d51f67ea293b54a3cfaebfc2c9a474b16ea371b297be95a07905007c2a25`) was not findable by the public endpoint, which leaves historical overlap blocked on reachable-window coverage.
 
 ## What is repo-only
 
@@ -60,4 +61,3 @@ This document is the canonical place for mainnet deployment readiness, not TN12 
 3. One batch-assurance settlement path.
 4. Escrow marketplace demo.
 5. Treasury / access-pass / auction / agent / attestation hardening.
-
