@@ -1440,7 +1440,7 @@ assert.equal(walletUnsignedTemplates.standardMapped, false);
 assert.equal(walletUnsignedTemplates.liveExternalSignerReady, false);
 assert.equal(walletUnsignedTemplates.summary.templates, 47);
 assert.equal(walletUnsignedTemplates.summary.payloadTemplates, 26);
-assert.equal(walletUnsignedTemplates.summary.computeBudgetTemplates, 2);
+assert.equal(walletUnsignedTemplates.summary.computeBudgetTemplates, 3);
 assert.ok(walletUnsignedTemplates.summary.signatureScriptsStripped > 0);
 assert.ok(walletUnsignedTemplates.templates.every((template) =>
   template.transaction.inputs.every((input) => input.signatureScript === "" && input.signatureScriptBytes === 0)
