@@ -1,7 +1,9 @@
 # Next Sprint Plan: 45% → 60% Overall
 
-**Current State:** 45% complete (60% on build-now rails, 20% on research)  
-**Target:** 55-60% overall (push build-now to 75%, maintain research)  
+> Completion percentages in this plan are mainnet deployment readiness unless a line explicitly says it is only TN12 proof-core progress.
+
+**Current State:** 45% complete for mainnet deployment readiness (60% on build-now rails, 20% on research)  
+**Target:** 55-60% overall mainnet deployment readiness (push build-now to 75%, maintain research)  
 **Horizon:** 2-3 weeks
 
 ---
@@ -16,7 +18,7 @@ These lanes have 70-90% infrastructure. Finishing them moves the needle.
 - **Action:** Submit funding TX → Get real UTXO → Run settlement test
 - **Outcome:** First live merchant/freelancer marketplace settlement on TN12
 - **Time:** 1-2 days
-- **Impact:** Closes escrow lane to ~95% complete
+- **Impact:** Closes escrow lane to ~95% of TN12 proof-core; still short of mainnet deployment readiness
 
 #### 1.2 Batch-Assurance Mutual Exclusivity (WEEK 2)
 - **Current:** Signed drafts (1 release + 3 refunds), custody outputs on TN12
@@ -231,7 +233,7 @@ Auction:          Custody designed + atomic exchange drafted
 ✅ **Access Pass:** Duplicate + expiry gates passing  
 ✅ **Treasury:** Spend caps enforced  
 ✅ **Auction:** Custody designed, atomic exchange sketched  
-✅ **Overall:** 55-60% complete, all build-now rails at 70%+  
+✅ **Overall:** 55-60% complete for mainnet deployment readiness, all build-now rails at 70%+  
 
 ---
 

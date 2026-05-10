@@ -2,6 +2,8 @@
 
 A Kaspa TN12 testnet workspace for covenant scripts, payload receipts, and the debugging record needed to reproduce them. All keys and funds are testnet-only. Not a mainnet wallet. Not proof that Toccata covenants are live on mainnet.
 
+When you ask how complete the project is, the percentage should be read as mainnet deployment readiness unless the answer explicitly says it is only talking about TN12 proof-core progress.
+
 ## What is accepted on TN12
 
 | Primitive | Contract | Status | Txid |

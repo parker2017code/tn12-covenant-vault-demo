@@ -4,6 +4,8 @@ Reviewed: 2026-05-10
 
 This repo is a Toccata-ready TN12 app primitive lab. The goal is to build and verify Kaspa-native app rails before mainnet covenant tooling is production-ready, while keeping every claim separated into accepted proof, planner/indexer state, wallet policy, documentation, or research.
 
+When you ask for "percent complete" in this repo, treat it as mainnet deployment readiness unless the answer explicitly narrows to TN12 proof-core status.
+
 Endpoint and proof routing now live in `docs/TN12_ENDPOINTS.md` and `docs/PROOF_INDEX.md`. The portable sample endpoint file is `.env.tn12.example`; the committed `.env.tn12` path stays out of the repo.
 
 High-impact mainstream app direction is tracked in `docs/MAINSTREAM_APP_DIRECTION.md`. That document keeps DEX/AMM, lending, perps, bridges, stable-value, marketplace, access, payment rails, escrow, assurance, and coordination-market use cases visible while preserving the current proof boundaries.

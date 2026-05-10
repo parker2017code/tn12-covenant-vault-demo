@@ -2,7 +2,7 @@
 
 **Context:** Claude is handed off due to token limits. This document lists all remaining work.
 
-**Status:** Escrow lane 95% complete (covenant live on TN12, settlement paths proven)
+**Status:** Escrow lane 95% complete for TN12 proof-core; not a mainnet deployment percentage.
 
 ---
 
