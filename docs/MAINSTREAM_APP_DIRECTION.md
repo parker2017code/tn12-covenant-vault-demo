@@ -59,7 +59,7 @@ The build-now direction is:
 1. make the invoice/receipt app durable through replayable indexing;
 2. make the wallet submit path usable without local private keys;
 3. turn escrow into a simple freelance or marketplace demo;
-4. review one mutually exclusive batch-assurance settlement path from accepted matched-output custody;
+4. keep the accepted batch-assurance release and non-selected refund alternates explicit;
 5. harden access passes, auctions, and attestations as indexed app-state products;
 6. turn the transparent coordination-market prototype into a settlement/app brief before claiming stronger market infrastructure.
 

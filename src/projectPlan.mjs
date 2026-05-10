@@ -21,18 +21,18 @@ export function buildProjectPlan(fixture = {}) {
     action("role-separated-spend-drafts", "Role-separated spend drafts now use distinct owner/recovery, contributor/recipient, and buyer/seller keys from the accepted role-separated outputs.", "escrow"),
     action("role-separated-accepted-spends", "TN12 accepted all seven role-separated positive paths: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.", "escrow"),
     action("role-separated-invalid-candidates", "Local review candidates now map wrong signer, wrong selector, wrong output lock, wrong amount, bad lock shape, and single-party cancel mutations before any TN12 rejection attempt.", "escrow"),
-    action("batch-settlement-drafts", "Signed-not-broadcast batch-assurance release and refund drafts now spend only the accepted 45/35/20 TKAS pledge outputs.", "batch-assurance")
+    action("batch-settlement-release", "TN12 accepted the 3-pledge batch-assurance release; refund drafts are non-selected alternates for that spent pledge set.", "batch-assurance")
   ];
 
   const wip = [
     laneItem(byId, "submit-console", "Wallet submit package is built; the live no-local-key connector remains WIP."),
-    laneItem(byId, "batch-assurance", "Accepted amount-matched pledge outputs and signed release/refund drafts are ready; next work is choosing and reviewing one mutually exclusive settlement path."),
+    laneItem(byId, "batch-assurance", "Accepted pledge outputs and the accepted release are indexed; refund drafts stay non-selected for that pledge set."),
     laneItem(byId, "miner-pool-signals", "Source signature review now gates influence; reputation thresholds still need hardening."),
     laneItem(byId, "treasury-vaults", "Turn policy templates into constrained spend drafts with role separation.")
   ];
 
   const next = [
-    action("batch-settlement-path-review", "Review release versus refund, then submit only one mutually exclusive batch-assurance settlement path if intended.", "batch-assurance"),
+    action("batch-alternate-path-cleanup", "Keep release acceptance, refund non-selection, checkpoint replay, and operator status synchronized.", "batch-assurance"),
     action("indexer-virtual-chain-reader", "Replace known-txid checkpoint input with a node/RPC virtual-chain reader feeding the replay tables.", "payload-invoice"),
     action("attestation-reputation", "Add reputation thresholds and signer provenance before signals affect more app lanes.", "miner-pool-signals"),
     action("wallet-connector-submit", "Wire the wallet-submit package into a live no-local-key wallet flow.", "submit-console"),

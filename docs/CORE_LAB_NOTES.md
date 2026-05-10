@@ -28,7 +28,7 @@ This is the concise reading of the repo. The useful core is TN12 evidence, debug
 
 ## Current next work
 
-1. Review one mutually exclusive batch-assurance settlement path from the signed release/refund drafts before any TN12 submit.
+1. Keep the accepted batch-assurance release indexed and the refund alternates non-selected.
 2. Keep wallet-submit work focused on a real no-local-key connector, not more handoff prose.
 3. Keep durable indexing focused on live virtual-chain ingestion and rollback replay, not more fixture reshaping.
 4. Keep public language centered on accepted evidence, working rails, and the next dependency.

@@ -10,7 +10,7 @@ The repo should read as proof-first, not plan-first. Use generated artifacts for
 |---|---|---|
 | Covenants | Vault, assurance, escrow, and role-separated paths accepted on TN12 | Fresh external-signer covenant spend |
 | Payload receipts | 30 accepted payload events, including four DeFi v1 receipts | External-signer payload receipt |
-| Batch assurance | Accepted pledge outputs and accepted release | One signer/replay-backed settlement path |
+| Batch assurance | Accepted pledge outputs and accepted release | Keep refund alternates non-selected; next signer work uses fresh requests |
 | Replay/indexer | Checkpoint, live overlap, durable promotion guard | Live removed-block rollback evidence |
 | Wallet submit | Review package, request templates, result validation | Real wallet-approved signed tx |
 

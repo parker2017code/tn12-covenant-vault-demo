@@ -52,7 +52,7 @@
     {
       "id": "payload-app-state-core",
       "label": "Accepted payload app-state core",
-      "evidence": "26 accepted JSON wRPC payload events cover invoice, access-pass, auction, stable-value issuer, attestation, prediction/hedge, agent, and batch-assurance planner state.",
+      "evidence": "30 accepted JSON wRPC payload events cover invoice, access-pass, auction, stable-value issuer, attestation, prediction/hedge, agent, and batch-assurance planner state.",
       "lane": "payload-indexer"
     },
     {
@@ -64,7 +64,7 @@
     {
       "id": "checkpointed-indexer-fixture-replay",
       "label": "Checkpointed indexer schema and fixture replay",
-      "evidence": "Current 36 accepted records are checkpointed, persisted, shaped into tables, replayed from fixture data, joined with 47 wallet-submit candidates, and preflighted for a future live endpoint.",
+      "evidence": "Current 43 accepted records are checkpointed, persisted, shaped into tables, replayed from fixture data, joined with wallet-submit candidates, and preflighted for a future live endpoint.",
       "lane": "indexer"
     },
     {
@@ -159,14 +159,14 @@
     "five": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-settlement-path-review",
+      "batch-assurance-alternate-path-cleanup",
       "escrow-marketplace-demo",
       "attestation-reputation-thresholds"
     ],
     "ten": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-settlement-path-review",
+      "batch-assurance-alternate-path-cleanup",
       "escrow-marketplace-demo",
       "attestation-reputation-thresholds",
       "auction-settlement-refund-drafts",
@@ -178,7 +178,7 @@
     "twenty": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-settlement-path-review",
+      "batch-assurance-alternate-path-cleanup",
       "escrow-marketplace-demo",
       "attestation-reputation-thresholds",
       "auction-settlement-refund-drafts",
@@ -200,7 +200,7 @@
     "thirty": [
       "wallet-connector-submit",
       "durable-virtual-chain-indexer",
-      "batch-assurance-settlement-path-review",
+      "batch-assurance-alternate-path-cleanup",
       "escrow-marketplace-demo",
       "attestation-reputation-thresholds",
       "auction-settlement-refund-drafts",
@@ -271,12 +271,12 @@
     },
     {
       "rank": 3,
-      "id": "batch-assurance-settlement-path-review",
-      "title": "Operator review for one batch-assurance settlement path",
+      "id": "batch-assurance-alternate-path-cleanup",
+      "title": "Keep batch-assurance alternate paths non-selected",
       "lane": "tn12-covenant",
       "importance": "critical",
-      "why": "Batch assurance now has accepted planner state, accepted amount-matched pledge outputs, and signed-not-broadcast settlement drafts; the next risk is choosing exactly one spend path.",
-      "definitionOfDone": "The release-review decision is confirmed or changed by the operator; if a submit is chosen, only that mutually exclusive path is submitted and evidence is recorded.",
+      "why": "Batch assurance now has accepted pledge outputs and an accepted release; the remaining risk is stale operator or refund-path state.",
+      "definitionOfDone": "Release acceptance, refund non-selection, checkpoint replay, and operator status stay synchronized across artifacts and docs.",
       "startWith": [
         "artifacts/batch-assurance-settlement-decision.json",
         "artifacts/batch-assurance-settlement-drafts.json"

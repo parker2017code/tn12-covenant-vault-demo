@@ -52,7 +52,7 @@ export function buildBatchAssuranceCustodyRequirements({
       {
         id: "wallet-submit-review",
         status: "ready",
-        detail: "Review the signed-not-broadcast settlement drafts with the wallet-submit surface before any TN12 submit."
+        detail: "Keep accepted release evidence and non-selected refund alternates synchronized before any fresh settlement work."
       }
     ] : [
       {

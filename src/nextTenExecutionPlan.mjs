@@ -19,7 +19,7 @@ export function buildNextTenExecutionPlan({
       "invoice-mainnet-readiness-brief",
       "access-pass-expiry-issuer-review"
     ]),
-    slice("custody-settlement", "Turn matched accepted outputs into one reviewed settlement path.", [
+    slice("custody-settlement", "Keep accepted settlement evidence and alternate-path state synchronized.", [
       "batch-assurance-settlement-submit",
       "escrow-marketplace-demo"
     ]),
@@ -58,7 +58,7 @@ export function buildNextTenExecutionPlan({
     operatorOrder: [
       "Do wallet-standard implementation work before more settlement surfaces.",
       "Do live indexer endpoint work before promoting new app-state claims.",
-      "Review one mutually exclusive batch-assurance settlement path before submit.",
+      "Keep the accepted batch-assurance release indexed and refund alternates non-selected.",
       "Keep research lanes tied to a concrete artifact, not a new product page."
     ]
   };

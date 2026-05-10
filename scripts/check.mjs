@@ -445,7 +445,7 @@ assert.ok(nextWorkQueue.sourceDocs.includes("docs/TN12_TEST_MATRIX.md"));
 assert.deepEqual(nextWorkQueue.next.five, [
   "wallet-connector-submit",
   "durable-virtual-chain-indexer",
-  "batch-assurance-settlement-path-review",
+  "batch-assurance-alternate-path-cleanup",
   "escrow-marketplace-demo",
   "attestation-reputation-thresholds"
 ]);
@@ -1065,7 +1065,7 @@ assert.ok(projectPlan.done.some((item) => item.id === "role-separated-fixtures")
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-funding"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-spend-drafts"));
 assert.ok(projectPlan.done.some((item) => item.id === "accepted-pledge-outputs"));
-assert.ok(projectPlan.done.some((item) => item.id === "batch-settlement-drafts"));
+assert.ok(projectPlan.done.some((item) => item.id === "batch-settlement-release"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-accepted-spends"));
 assert.ok(projectPlan.done.some((item) => item.id === "role-separated-invalid-candidates"));
 assert.ok(projectPlan.done.some((item) => item.id === "indexer-storage-schema"));
@@ -2333,13 +2333,12 @@ assert.match(readme, /4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea6
 // Full command list and lab details live in docs/LAB_NOTEBOOK.md
 const labNotebook = await readFile(new URL("../docs/LAB_NOTEBOOK.md", import.meta.url), "utf8");
 assert.match(labNotebook, /faucet-tn12\.kaspanet\.io/);
-assert.match(labNotebook, /starts with local evidence/i);
+assert.match(labNotebook, /Start with the artifact path/i);
 assert.match(labNotebook, /npm run address/);
 assert.match(labNotebook, /npm run fixtures/);
 assert.match(labNotebook, /npm run fixtures:roles/);
 assert.match(labNotebook, /npm run compile:roles/);
 assert.match(labNotebook, /npm run wallet:public/);
-assert.match(labNotebook, /npm run plan/);
 assert.match(labNotebook, /npm run drafts/);
 assert.match(labNotebook, /npm run indexer:persist/);
 assert.match(labNotebook, /npm run indexer:replay-plan/);
@@ -2352,13 +2351,10 @@ assert.match(labNotebook, /npm run indexer:live-preflight/);
 assert.match(labNotebook, /npm run indexer:endpoint-runbook/);
 assert.match(labNotebook, /npm run tx:p2pk/);
 assert.match(labNotebook, /npm run tx:contracts/);
-assert.match(labNotebook, /npm run tx:split/);
 assert.match(labNotebook, /npm run tx:roles:fund/);
 assert.match(labNotebook, /npm run tx:roles:spends/);
 assert.match(labNotebook, /npm run tx:roles:verify/);
 assert.match(labNotebook, /npm run roles:proof:evidence/);
-assert.match(labNotebook, /npm run roles:invalid-candidates/);
-assert.match(labNotebook, /npm run attestation:reputation/);
 assert.match(labNotebook, /npm run invoice:registry/);
 assert.match(labNotebook, /npm run submit:registry/);
 assert.match(labNotebook, /npm run wallet:review/);
@@ -2367,24 +2363,16 @@ assert.match(labNotebook, /npm run wallet:connector-requests/);
 assert.match(labNotebook, /npm run wallet:adapter-run/);
 assert.match(labNotebook, /npm run wallet:submit-ledger/);
 assert.match(labNotebook, /npm run wallet:result-validation/);
-assert.match(labNotebook, /npm run wallet:external-signer-gap/);
-assert.match(labNotebook, /npm run wallet:unsigned-requests/);
-assert.match(labNotebook, /npm run wallet:standard-map/);
-assert.match(labNotebook, /npm run wallet:external-signer-roundtrip/);
-assert.match(labNotebook, /npm run wallet:implementation-slice/);
+assert.match(labNotebook, /npm run wallet:external-signer-template/);
 assert.match(labNotebook, /npm run campaign:pledge-outputs/);
 assert.match(labNotebook, /npm run escrow:marketplace/);
 assert.match(labNotebook, /npm run escrow:flow/);
 assert.match(labNotebook, /npm run escrow:action-map/);
-assert.match(labNotebook, /npm run research:library/);
-assert.match(labNotebook, /npm run rollup:scout/);
-assert.match(labNotebook, /npm run mainstream:direction/);
 assert.match(labNotebook, /npm run rails:missing/);
 assert.match(labNotebook, /npm run rails:research/);
 assert.match(labNotebook, /npm run oracle:matrix/);
 assert.match(labNotebook, /npm run project:queue/);
-assert.match(labNotebook, /npm run project:next-ten/);
-assert.match(labNotebook, /npm run covenant:adversarial/);
+assert.match(labNotebook, /npm run project:next-ten-status/);
 assert.match(labNotebook, /npm run campaign:state/);
 assert.match(labNotebook, /npm run campaign:custody/);
 assert.match(labNotebook, /npm run campaign:custody-requirements/);
@@ -2399,25 +2387,17 @@ assert.match(labNotebook, /npm run treasury:registry/);
 assert.match(labNotebook, /npm run treasury:spends/);
 assert.match(labNotebook, /npm run treasury:role-review/);
 assert.match(labNotebook, /npm run payload:readiness/);
-assert.match(labNotebook, /npm run coordination:market/);
-assert.match(labNotebook, /npm run coordination:settlement-brief/);
 assert.match(labNotebook, /npm run access:passes/);
 assert.match(labNotebook, /npm run access:issuer-review/);
 assert.match(labNotebook, /npm run mainnet:readiness/);
 assert.match(labNotebook, /npm run invoice:mainnet-brief/);
-assert.match(labNotebook, /npm run asset:policies/);
+assert.match(labNotebook, /npm run auction:intents/);
 assert.match(labNotebook, /npm run auction:settlement-drafts/);
 assert.match(labNotebook, /npm run auction:custody-review/);
-assert.match(labNotebook, /npm run stable:value/);
-assert.match(labNotebook, /npm run stable:issuer/);
-assert.match(labNotebook, /npm run build:status/);
-assert.match(labNotebook, /npm run agent:settlement-drafts/);
-assert.match(labNotebook, /npm run agent:settlement-review/);
-assert.match(labNotebook, /npm run ai:discipline/);
-assert.match(labNotebook, /Manual Address Checks/);
-assert.match(labNotebook, /Build Plan/);
-assert.match(labNotebook, /PROGRAMMABILITY_PATHS\.md/);
-assert.match(labNotebook, /MAINSTREAM_APP_DIRECTION\.md/);
+assert.match(labNotebook, /Wallet And Keys/);
+assert.match(labNotebook, /Build Commands/);
+assert.match(labNotebook, /docs\/PROGRESS\.md/);
+assert.match(labNotebook, /docs\/ROADMAP_STATE\.md/);
 assert.match(labNotebook, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/);
 assert.match(labNotebook, /npm run check:tn12/);
 
@@ -2453,7 +2433,7 @@ assert.match(html, /Attestation registry/);
 assert.match(html, /Prediction hedge simulator/);
 assert.match(html, /npm run prediction:hedge/);
 assert.match(html, /escrow mutual-cancel proof transactions/);
-assert.match(html, /reviewed batch-assurance settlement/);
+assert.match(html, /batch-assurance release rails/);
 assert.doesNotMatch(html, /escrow cancel redesign/);
 
 const assuranceDocs = await readFile(new URL("../docs/ASSURANCE_CONTRACTS.md", import.meta.url), "utf8");
@@ -2482,11 +2462,11 @@ assert.match(kaspaDocsReview, /Wallet API is the better long-term send path/);
 assert.match(kaspaDocsReview, /getVirtualChainFromBlockV2/);
 
 const ecosystemBuildPlan = await readFile(new URL("../docs/ECOSYSTEM_BUILD_PLAN.md", import.meta.url), "utf8");
-assert.match(ecosystemBuildPlan, /Payload Receipt \/ Invoice App/);
-assert.match(ecosystemBuildPlan, /Batch Assurance Campaign App/);
-assert.match(ecosystemBuildPlan, /Escrow Primitive/);
-assert.match(ecosystemBuildPlan, /Cross-Chain App Code And PMF Research/);
-assert.match(ecosystemBuildPlan, /Miner \/ Pool Signal Research App/);
+assert.match(ecosystemBuildPlan, /Status Lanes/);
+assert.match(ecosystemBuildPlan, /Built Evidence/);
+assert.match(ecosystemBuildPlan, /Current Blockers/);
+assert.match(ecosystemBuildPlan, /Build Order/);
+assert.match(ecosystemBuildPlan, /Completion Standard/);
 
 const appLab = JSON.parse(await readFile(new URL("../fixtures/KaspaAppLab.json", import.meta.url), "utf8"));
 assert.ok(appLab.lanes.some((lane) => lane.id === "cross-chain-research"));
