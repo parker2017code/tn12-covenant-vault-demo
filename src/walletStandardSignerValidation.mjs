@@ -68,8 +68,10 @@ function validateResult({ result = {}, request }) {
   if (expectedPayloadBytes !== null && Number(result.payloadBytes ?? -1) !== Number(expectedPayloadBytes)) reasons.push("payload bytes mismatch");
   if (!result.signerName) reasons.push("missing signer name");
   if (!result.signerVersion) reasons.push("missing signer version");
+  if (!result.signedTransaction) reasons.push("missing signed transaction");
   if (result.userAction !== "approved") reasons.push("missing explicit user approval");
   if (!result.route) reasons.push("missing submit route");
+  if (request && result.route && result.route !== expectedRoute(request)) reasons.push("submit route mismatch");
 
   const expectedInputs = request?.body?.transaction?.inputs || [];
   const budgetReport = Array.isArray(result.inputBudgetReport) ? result.inputBudgetReport : [];
@@ -91,4 +93,9 @@ function validateResult({ result = {}, request }) {
     transactionId: result.transactionId || "",
     reasons
   };
+}
+
+function expectedRoute(request) {
+  const payloadBytes = Number(request?.body?.transaction?.payload?.bytes || 0);
+  return payloadBytes > 0 ? "payload-preserving-wrpc" : "json-wrpc";
 }

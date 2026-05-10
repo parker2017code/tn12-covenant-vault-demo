@@ -47,13 +47,13 @@ export function buildNextTenExecutionStatus({
     tasks,
     currentCompletionEstimate: {
       before: "42-45%",
-      afterLocalSlice: "50-53%",
+      afterLocalSlice: durablePromotionReady ? "50-53%" : "47-50%",
       afterRealExternalSigner: "57-62%"
     },
     blockers: [
       "A real no-local-key external wallet signature is still required before external-signer tasks can be marked completed.",
       "Browser/OpenClaw/KasWare should be used only for that signer pass, not for local gates.",
-      "Durable live promotion is gated by deterministic replay and rollback matching, not by checkpoint fixtures alone."
+      "Durable live promotion is gated by deterministic replay, rollback matching, and live removed-block evidence, not by checkpoint fixtures alone."
     ]
   };
 }

@@ -41,6 +41,18 @@ export function buildWalletExternalSignerResultTemplate({
     },
     templates,
     results: templates,
+    requiredReturnFields: [
+      "requestId",
+      "reviewFingerprint",
+      "transactionId",
+      "payloadBytes",
+      "inputBudgetReport",
+      "signedTransaction",
+      "signerName",
+      "signerVersion",
+      "userAction",
+      "route"
+    ],
     validationCommand: "WALLET_STANDARD_SIGNER_RESULTS=artifacts/wallet-external-signer-result-template.json npm run wallet:standard-signer-validation",
     boundaries: [
       "This is a current-field template for a future signer return, not a signer result.",

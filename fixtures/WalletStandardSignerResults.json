@@ -54,6 +54,7 @@
           "computeBudget": null
         }
       ],
+      "signedTransaction": "signed-transaction-placeholder",
       "signerName": "test",
       "signerVersion": "0",
       "userAction": "approved",
@@ -73,10 +74,31 @@
           "computeBudget": null
         }
       ],
+      "signedTransaction": "signed-transaction-placeholder",
       "signerName": "test",
       "signerVersion": "0",
       "userAction": "approved",
       "route": "json-wrpc"
+    },
+    {
+      "id": "negative-missing-signed-transaction",
+      "status": "returned",
+      "requestId": "ureq-fcfdf1df-standard",
+      "reviewFingerprint": "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "payloadBytes": 154,
+      "inputBudgetReport": [
+        {
+          "inputIndex": 0,
+          "sigOpCount": 1,
+          "computeBudget": null
+        }
+      ],
+      "signedTransaction": "",
+      "signerName": "test",
+      "signerVersion": "0",
+      "userAction": "approved",
+      "route": "payload-preserving-wrpc"
     }
   ]
 }

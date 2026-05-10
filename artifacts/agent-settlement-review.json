@@ -1,13 +1,16 @@
 {
   "schema": "kaspa-agent-settlement-review/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-09T21:12:24.034Z",
+  "generatedAt": "2026-05-10T23:07:56.706Z",
   "status": "agent-settlement-review-ready",
   "summary": {
     "drafts": 3,
     "releaseRows": 1,
     "refundRows": 1,
     "holdRows": 1,
+    "reviewEvidenceReadyRows": 2,
+    "releaseReviewReadyRows": 1,
+    "holdReviewReadyRows": 1,
     "custodyReadyRows": 0,
     "reviewerDecisionRows": 2
   },
@@ -19,11 +22,15 @@
       "amountTkas": 75,
       "recipient": "agent:indexer-auditor",
       "acceptedTaskEvidence": true,
+      "acceptedCompletionEvidence": true,
+      "acceptedDisputeEvidence": false,
+      "acceptedPlannerEvent": true,
+      "reviewEvidenceReady": true,
       "reviewerDecisionNeeded": true,
       "custodyReady": false,
       "walletStandardMapped": false,
-      "status": "needs-custody-source",
-      "next": "Attach accepted reward/deposit custody output before release/refund review."
+      "status": "release-review-evidence-ready-needs-custody",
+      "next": "Attach accepted reward/deposit custody output before release/refund submit."
     },
     {
       "id": "agent-task-escrow-001:hold",
@@ -32,11 +39,15 @@
       "amountTkas": 160,
       "recipient": "",
       "acceptedTaskEvidence": true,
+      "acceptedCompletionEvidence": false,
+      "acceptedDisputeEvidence": true,
+      "acceptedPlannerEvent": true,
+      "reviewEvidenceReady": true,
       "reviewerDecisionNeeded": true,
       "custodyReady": false,
       "walletStandardMapped": false,
-      "status": "needs-custody-source",
-      "next": "Attach accepted reward/deposit custody output before release/refund review."
+      "status": "hold-review-evidence-ready-needs-custody",
+      "next": "Attach accepted reward/deposit custody output before release/refund submit."
     },
     {
       "id": "agent-task-research-001:refund",
@@ -45,11 +56,15 @@
       "amountTkas": 10,
       "recipient": "kaspatest:sponsor-research",
       "acceptedTaskEvidence": false,
+      "acceptedCompletionEvidence": false,
+      "acceptedDisputeEvidence": false,
+      "acceptedPlannerEvent": false,
+      "reviewEvidenceReady": false,
       "reviewerDecisionNeeded": false,
       "custodyReady": false,
       "walletStandardMapped": false,
-      "status": "needs-custody-source",
-      "next": "Attach accepted reward/deposit custody output before release/refund review."
+      "status": "needs-accepted-review-evidence",
+      "next": "Add accepted task, proof/dispute, and planner evidence before custody review."
     }
   ],
   "boundaries": [

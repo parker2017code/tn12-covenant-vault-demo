@@ -1,8 +1,8 @@
 {
   "schema": "tn12-durable-replay-promotion-guard/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T22:12:50.756Z",
-  "status": "durable-replay-promotion-guard-ready",
+  "generatedAt": "2026-05-10T23:14:42.379Z",
+  "status": "durable-replay-promotion-guard-review",
   "summary": {
     "checkpointTxids": 41,
     "fixtureReplayRecords": 43,
@@ -17,7 +17,8 @@
     "duplicateFree": true,
     "rollbackMatchingReady": true,
     "liveRollbackObserved": false,
-    "promotionReady": true
+    "localPromotionReady": true,
+    "promotionReady": false
   },
   "matchedCheckpointTxids": [
     "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a"
@@ -61,10 +62,11 @@
       "status": "rollback-match-ready"
     }
   ],
-  "promotionRule": "Promote accepted app state only when fixture replay is deterministic, live replay overlaps a known checkpoint, duplicate txids are absent, and rollback matching has passed.",
+  "promotionRule": "Promote accepted app state only when fixture replay is deterministic, live replay overlaps a known checkpoint, duplicate txids are absent, rollback matching has passed, and a live removed-block window has been observed or explicitly waived.",
   "boundaries": [
     "This is a promotion guard over existing replay artifacts; it does not fetch a new live window.",
-    "Rollback matching is locally tested here. A future live window with removed blocks should be recorded separately when TN12 provides one.",
+    "Local rollback matching is not live removed-block evidence.",
+    "A future live window with removed blocks should be recorded separately when TN12 provides one.",
     "External wallet signing remains a separate blocker."
   ]
 }

@@ -26,10 +26,11 @@ export function buildDurableReplayPromotionGuard({
   const rollbackMatchingReady = rollbackReviews.length > 0
     && rollbackReviews.every((review) => review.status === "rollback-match-ready");
   const liveRollbackObserved = rollbackRows.length > 0;
-  const promotionReady = deterministicReducerReplay
+  const localPromotionReady = deterministicReducerReplay
     && liveOverlapReady
     && duplicateFree
     && rollbackMatchingReady;
+  const promotionReady = localPromotionReady && liveRollbackObserved;
 
   return {
     schema: "tn12-durable-replay-promotion-guard/v1",
@@ -50,15 +51,17 @@ export function buildDurableReplayPromotionGuard({
       duplicateFree,
       rollbackMatchingReady,
       liveRollbackObserved,
+      localPromotionReady,
       promotionReady
     },
     matchedCheckpointTxids,
     duplicateLiveTxids,
     rollbackReviews,
-    promotionRule: "Promote accepted app state only when fixture replay is deterministic, live replay overlaps a known checkpoint, duplicate txids are absent, and rollback matching has passed.",
+    promotionRule: "Promote accepted app state only when fixture replay is deterministic, live replay overlaps a known checkpoint, duplicate txids are absent, rollback matching has passed, and a live removed-block window has been observed or explicitly waived.",
     boundaries: [
       "This is a promotion guard over existing replay artifacts; it does not fetch a new live window.",
-      "Rollback matching is locally tested here. A future live window with removed blocks should be recorded separately when TN12 provides one.",
+      "Local rollback matching is not live removed-block evidence.",
+      "A future live window with removed blocks should be recorded separately when TN12 provides one.",
       "External wallet signing remains a separate blocker."
     ]
   };

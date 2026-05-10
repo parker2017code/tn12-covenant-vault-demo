@@ -22,7 +22,7 @@ Read this first when resuming TN12 work. Keep it short. Details belong in artifa
 ## Current Blockers
 
 1. External signer: four request templates exist, but no real user-approved signature yet.
-2. Live removed-block rollback evidence: local rollback matching passes, but no live removed-block window has been captured.
+2. Live removed-block rollback evidence: local rollback matching passes, but full promotion stays blocked until a live removed-block window is captured.
 3. Batch-assurance alternate path: release is accepted; do not submit refund paths for the spent pledge set.
 4. Product hardening: wallet/indexer/recovery/monitoring are not production-grade.
 
@@ -64,5 +64,5 @@ npm run wallet:external-signer-research
 1. Real external signer round trip for one payload receipt.
 2. Real external signer round trip for one covenant spend.
 3. Keep batch-assurance refund paths marked non-selected after the accepted release.
-4. Capture live removed-block rollback evidence when available.
-5. Continue repo cleanup only by reducing prose, not deleting evidence.
+4. Build amount-matched custody sources for auction and agent settlement rows.
+5. Capture live removed-block rollback evidence when available.

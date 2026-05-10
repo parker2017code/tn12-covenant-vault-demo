@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-external-signer-result-template/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T21:05:05.556Z",
+  "generatedAt": "2026-05-10T23:13:04.820Z",
   "status": "external-signer-result-template-ready",
   "summary": {
     "templates": 4,
@@ -228,6 +228,18 @@
         "After submit, accepted virtual-chain replay must match before app-state promotion."
       ]
     }
+  ],
+  "requiredReturnFields": [
+    "requestId",
+    "reviewFingerprint",
+    "transactionId",
+    "payloadBytes",
+    "inputBudgetReport",
+    "signedTransaction",
+    "signerName",
+    "signerVersion",
+    "userAction",
+    "route"
   ],
   "validationCommand": "WALLET_STANDARD_SIGNER_RESULTS=artifacts/wallet-external-signer-result-template.json npm run wallet:standard-signer-validation",
   "boundaries": [

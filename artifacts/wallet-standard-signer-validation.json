@@ -1,16 +1,16 @@
 {
   "schema": "tn12-wallet-standard-signer-validation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T21:05:04.878Z",
+  "generatedAt": "2026-05-10T23:12:40.197Z",
   "status": "wallet-standard-signer-validation-ready",
   "liveExternalSignerAccepted": false,
   "summary": {
     "requests": 4,
-    "results": 4,
+    "results": 5,
     "pending": 4,
     "accepted": 0,
-    "rejected": 2,
-    "negativeCasesCaught": 2
+    "rejected": 3,
+    "negativeCasesCaught": 3
   },
   "validations": [
     {
@@ -49,6 +49,16 @@
       "transactionId": "fcddd9a9af9bb1167e28d8079f8bc6cd965f423f5d8af1c5a18911b24f12a89e",
       "reasons": [
         "input 0 computeBudget mismatch"
+      ]
+    },
+    {
+      "id": "negative-missing-signed-transaction",
+      "requestId": "ureq-fcfdf1df-standard",
+      "status": "returned",
+      "validation": "rejected",
+      "transactionId": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "reasons": [
+        "missing signed transaction"
       ]
     },
     {

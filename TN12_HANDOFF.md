@@ -6,16 +6,16 @@ Current readiness: about 55-60% mainnet deployment readiness.
 
 What changed in this pass:
 - Live TN12 replay overlap now exists from a chain-block anchor inside the checkpoint band.
-- Batch-assurance operator decision is release-first review, with external signer acceptance still missing.
+- Batch-assurance release is accepted and indexed; refund paths remain non-selected for that spent pledge set.
 - Mainnet readiness docs now separate proof-core progress from deployment readiness.
-- The current next-ten execution status is artifact-backed: 6/10 local tasks complete, duplicate/stale DeFi receipt replay guard ready, and external signer tasks still blocked on a real wallet signature.
-- Durable replay promotion guard now passes deterministic fixture replay, live checkpoint overlap, duplicate-free live txids, and local rollback matching. Live removed-block rollback evidence is still useful when available.
+- The current next-ten execution status is artifact-backed: 5/10 local tasks complete, duplicate/stale DeFi receipt replay guard ready, and external signer tasks still blocked on a real wallet signature.
+- Durable replay guard has local promotion readiness, but full promotion remains blocked until live removed-block evidence exists.
 - External signer path research is now artifact-backed; real user approval remains required.
 
 Current blockers:
 - Live external signer round trip
 - Live removed-block rollback evidence
-- Batch-assurance alternate-path cleanup after accepted release
+- Auction and agent settlement custody sources
 - Escrow marketplace demo
 - Wallet/indexer hardening
 

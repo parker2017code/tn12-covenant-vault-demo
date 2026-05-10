@@ -1,0 +1,24 @@
+{
+  "schema": "kaspa-auction-custody-sources/v1",
+  "network": "kaspa-testnet-12",
+  "sources": [
+    {
+      "id": "auction-pass-001:settlement-proof",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-002",
+      "kind": "winner-release",
+      "sourceType": "accepted-auction-settlement-proof",
+      "fundingTxid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
+      "settlementTxid": "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
+      "amountTkas": 200,
+      "recipient": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "status": "accepted-proof-amount-mismatch",
+      "note": "Accepted TN12 auction funding and settlement proof exists, but it is not amount-matched to the 155 TKAS planner winner row."
+    }
+  ],
+  "boundaries": [
+    "Accepted settlement proof is not the same as custody for every planner bid.",
+    "A row becomes custody-ready only when auction id, bid id, kind, amount, and recipient match the draft.",
+    "This fixture does not prove atomic asset delivery or MEV-resistant ordering."
+  ]
+}

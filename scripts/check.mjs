@@ -471,12 +471,12 @@ assert.ok(nextTenExecutionPlan.slices.some((slice) => slice.id === "wallet-submi
 const nextTenExecutionPlanArtifact = JSON.parse(await readFile(new URL("../artifacts/next-ten-execution-plan.json", import.meta.url), "utf8"));
 assert.equal(nextTenExecutionPlanArtifact.status, "next-ten-execution-plan-ready");
 const nextTenExecutionStatusArtifact = JSON.parse(await readFile(new URL("../artifacts/next-ten-execution-status.json", import.meta.url), "utf8"));
-assert.equal(nextTenExecutionStatusArtifact.status, "next-ten-execution-status-ready");
+assert.equal(nextTenExecutionStatusArtifact.status, "next-ten-execution-status-review");
 assert.equal(nextTenExecutionStatusArtifact.summary.tasks, 10);
-assert.equal(nextTenExecutionStatusArtifact.summary.completed, 6);
-assert.equal(nextTenExecutionStatusArtifact.summary.realizedGainPercent, 18);
+assert.equal(nextTenExecutionStatusArtifact.summary.completed, 5);
+assert.equal(nextTenExecutionStatusArtifact.summary.realizedGainPercent, 13);
 assert.equal(nextTenExecutionStatusArtifact.summary.externalSignerStillRequired, true);
-assert.equal(nextTenExecutionStatusArtifact.currentCompletionEstimate.afterLocalSlice, "50-53%");
+assert.equal(nextTenExecutionStatusArtifact.currentCompletionEstimate.afterLocalSlice, "47-50%");
 assert.ok(nextTenExecutionStatusArtifact.tasks.some((task) =>
   task.id === "external-signer-defi-receipt"
   && task.status === "blocked-needs-user-wallet-signature"
@@ -494,7 +494,7 @@ const rebuiltNextTenExecutionStatus = buildNextTenExecutionStatus({
   signerResearch: JSON.parse(await readFile(new URL("../artifacts/external-signer-path-research.json", import.meta.url), "utf8")),
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
-assert.equal(rebuiltNextTenExecutionStatus.status, "next-ten-execution-status-ready");
+assert.equal(rebuiltNextTenExecutionStatus.status, "next-ten-execution-status-review");
 assert.equal(rebuiltNextTenExecutionStatus.summary.completed, nextTenExecutionStatusArtifact.summary.completed);
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
@@ -916,15 +916,26 @@ assert.equal(auctionSettlementDrafts.summary.custodyReadyDrafts, 0);
 const auctionSettlementDraftsArtifact = JSON.parse(await readFile(new URL("../artifacts/auction-settlement-drafts.json", import.meta.url), "utf8"));
 assert.equal(auctionSettlementDraftsArtifact.summary.drafts, 3);
 const walletStandardForAuctionReview = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));
+const auctionCustodySources = JSON.parse(await readFile(new URL("../fixtures/AuctionCustodySources.json", import.meta.url), "utf8"));
 const auctionCustodyReview = buildAuctionCustodyReview({
   settlementDrafts: auctionSettlementDraftsArtifact,
   walletStandardMapping: walletStandardForAuctionReview,
+  custodySources: auctionCustodySources,
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(auctionCustodyReview.status, "auction-custody-review-ready");
+assert.equal(auctionCustodyReview.summary.custodyEvidenceRows, 1);
+assert.equal(auctionCustodyReview.summary.amountMatchedRows, 0);
 assert.equal(auctionCustodyReview.summary.custodyReadyRows, 0);
+assert.ok(auctionCustodyReview.rows.some((row) =>
+  row.id === "auction-pass-001:winner-release:bid-pass-002"
+  && row.custodySourcePresent
+  && !row.amountMatched
+  && row.status === "custody-evidence-present-not-matched"
+));
 const auctionCustodyReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/auction-custody-review.json", import.meta.url), "utf8"));
 assert.equal(auctionCustodyReviewArtifact.status, "auction-custody-review-ready");
+assert.equal(auctionCustodyReviewArtifact.summary.custodyEvidenceRows, 1);
 const defiFixture = JSON.parse(await readFile(new URL("../fixtures/DefiResearchBacklog.json", import.meta.url), "utf8"));
 const defiBacklog = buildDefiResearchBacklog(defiFixture);
 assert.equal(defiBacklog.status, "research-backlog-not-live-defi");
@@ -1042,9 +1053,18 @@ const agentSettlementReview = buildAgentSettlementReview({
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(agentSettlementReview.status, "agent-settlement-review-ready");
+assert.equal(agentSettlementReview.summary.reviewEvidenceReadyRows, 2);
+assert.equal(agentSettlementReview.summary.releaseReviewReadyRows, 1);
+assert.equal(agentSettlementReview.summary.holdReviewReadyRows, 1);
 assert.equal(agentSettlementReview.summary.custodyReadyRows, 0);
+assert.ok(agentSettlementReview.rows.some((row) =>
+  row.id === "agent-task-invoice-001:release"
+  && row.reviewEvidenceReady
+  && row.status === "release-review-evidence-ready-needs-custody"
+));
 const agentSettlementReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/agent-settlement-review.json", import.meta.url), "utf8"));
 assert.equal(agentSettlementReviewArtifact.status, "agent-settlement-review-ready");
+assert.equal(agentSettlementReviewArtifact.summary.reviewEvidenceReadyRows, 2);
 const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
 const projectStatus = buildProjectStatus(buildStatusFixture);
 assert.equal(projectStatus.status, "active-build-map");
@@ -1485,14 +1505,17 @@ const durableReplayPromotionGuard = buildDurableReplayPromotionGuard({
   }],
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
-assert.equal(durableReplayPromotionGuard.status, "durable-replay-promotion-guard-ready");
-assert.equal(durableReplayPromotionGuard.summary.promotionReady, true);
+assert.equal(durableReplayPromotionGuard.status, "durable-replay-promotion-guard-review");
+assert.equal(durableReplayPromotionGuard.summary.localPromotionReady, true);
+assert.equal(durableReplayPromotionGuard.summary.liveRollbackObserved, false);
+assert.equal(durableReplayPromotionGuard.summary.promotionReady, false);
 assert.equal(durableReplayPromotionGuard.summary.rollbackMatchingReady, true);
 const durableReplayPromotionGuardArtifact = JSON.parse(await readFile(new URL("../artifacts/durable-replay-promotion-guard.json", import.meta.url), "utf8"));
-assert.equal(durableReplayPromotionGuardArtifact.status, "durable-replay-promotion-guard-ready");
-assert.equal(durableReplayPromotionGuardArtifact.summary.promotionReady, true);
+assert.equal(durableReplayPromotionGuardArtifact.status, "durable-replay-promotion-guard-review");
+assert.equal(durableReplayPromotionGuardArtifact.summary.localPromotionReady, true);
+assert.equal(durableReplayPromotionGuardArtifact.summary.promotionReady, false);
 assert.equal(durableReplayPromotionGuardArtifact.summary.liveRollbackObserved, false);
-assert.match(durableReplayPromotionGuardArtifact.boundaries.join(" "), /locally tested/i);
+assert.match(durableReplayPromotionGuardArtifact.boundaries.join(" "), /not live removed-block evidence/i);
 const walletSubmitLedger = buildWalletConnectorSubmitLedger({
   adapterRun: walletConnectorAdapterArtifact,
   submitResults: walletSubmitResultsFixture,
@@ -1637,7 +1660,7 @@ const walletSignerValidation = buildWalletStandardSignerValidation({
 });
 assert.equal(walletSignerValidation.status, "wallet-standard-signer-validation-ready");
 assert.equal(walletSignerValidation.summary.pending, 4);
-assert.equal(walletSignerValidation.summary.negativeCasesCaught, 2);
+assert.equal(walletSignerValidation.summary.negativeCasesCaught, 3);
 assert.equal(walletSignerValidation.liveExternalSignerAccepted, false);
 assert.ok(walletSignerValidation.validations.some((item) =>
   item.id === "negative-mutated-fingerprint"
@@ -1649,10 +1672,15 @@ assert.ok(walletSignerValidation.validations.some((item) =>
   && item.validation === "rejected"
   && item.reasons.includes("input 0 computeBudget mismatch")
 ));
+assert.ok(walletSignerValidation.validations.some((item) =>
+  item.id === "negative-missing-signed-transaction"
+  && item.validation === "rejected"
+  && item.reasons.includes("missing signed transaction")
+));
 const walletSignerValidationArtifact = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-signer-validation.json", import.meta.url), "utf8"));
 assert.equal(walletSignerValidationArtifact.status, "wallet-standard-signer-validation-ready");
 assert.equal(walletSignerValidationArtifact.summary.pending, 4);
-assert.equal(walletSignerValidationArtifact.summary.negativeCasesCaught, 2);
+assert.equal(walletSignerValidationArtifact.summary.negativeCasesCaught, 3);
 assert.ok(walletSignerValidationArtifact.validations.some((row) =>
   row.id === "negative-dropped-compute-budget"
   && row.reasons.length === 1
@@ -1681,6 +1709,7 @@ assert.equal(walletExternalSignerResultTemplate.status, "external-signer-result-
 assert.equal(walletExternalSignerResultTemplate.summary.templates, 4);
 assert.equal(walletExternalSignerResultTemplate.summary.recommendedFirstPass, 2);
 assert.equal(walletExternalSignerResultTemplate.results.length, 4);
+assert.ok(walletExternalSignerResultTemplate.requiredReturnFields.includes("signedTransaction"));
 assert.ok(walletExternalSignerResultTemplate.results.some((row) =>
   row.requestId === "ureq-fcfdf1df-standard"
   && row.reviewFingerprint === "03022c4021c69473bba1873e7141fb87d28d5bc80fad988b6bf8859f34980fc4"

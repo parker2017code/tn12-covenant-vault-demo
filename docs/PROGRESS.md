@@ -31,13 +31,13 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Blocker | State |
 |---|---|
 | External signer | Request templates and research are ready; no real user-approved signature yet. |
-| Live removed-block rollback evidence | Local rollback matching passes; no live removed-block window captured yet. |
+| Live removed-block rollback evidence | Local promotion readiness passes; full promotion is blocked until a live removed-block window is captured. |
 | Batch-assurance alternate path | Release is accepted; refund path is non-selected and must not be submitted for the spent pledge set. |
 | Product hardening | Wallet, indexer, monitoring, and recovery paths are not production-grade. |
 
 ## Current Percent
 
-- TN12 DeFi/demo lane: `50-53%` after the local slice.
+- TN12 DeFi/demo lane: `47-50%` after this local slice.
 - After real external signer: `57-62%`.
 - Mainnet deployment readiness: about `55-60%`.
 
