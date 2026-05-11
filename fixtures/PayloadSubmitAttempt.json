@@ -27,7 +27,7 @@
       "type": "pubkey"
     }
   ],
-  "explorerUrl": "https://tn12.kaspa.stream/txs/d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
   "result": "The public TN12 REST submit route accepted the spend but did not preserve the transaction payload. This is a payment/self-send proof, not an invoice receipt proof.",
   "next": "Use a wallet/RPC route that preserves transaction payload bytes before marking invoices paid from accepted payload receipts."
 }

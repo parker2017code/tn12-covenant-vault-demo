@@ -30,7 +30,7 @@ for (let index = 0; index < Math.min(outputs.length, paths.length); index += 1) 
     outputIndex: Number(output.index),
     amountTkas: Number(output.amount) / 100000000,
     scriptType: output.script_public_key_type,
-    explorerUrl: `https://tn12.kaspa.stream/txs/${txid}`,
+    explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`,
     note: "Fetched from the accepted split transaction, not from current wallet UTXO sorting.",
     raw: {
       address: output.script_public_key_address,

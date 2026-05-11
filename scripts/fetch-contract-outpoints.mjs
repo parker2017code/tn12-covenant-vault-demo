@@ -62,7 +62,7 @@ for (const item of contracts) {
     redeemScriptHex: bytesToHex(redeemScript),
     redeemScriptBytes: redeemScript.length,
     redeemScriptHash: bytesToHex(blake2b(redeemScript, undefined, 32)),
-    explorerUrl: `https://tn12.kaspa.stream/txs/${txid}`,
+    explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`,
     rawTransaction: tx,
     raw: {
       address: output.script_public_key_address,

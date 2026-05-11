@@ -41,7 +41,7 @@ const evidence = {
     amountMatches,
     addressMatches
   },
-  explorerUrl: `https://tn12.kaspa.stream/txs/${txid}`
+  explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`
 };
 
 await mkdir("artifacts", { recursive: true });

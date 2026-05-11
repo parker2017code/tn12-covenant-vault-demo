@@ -13,7 +13,7 @@
       "outputIndex": 1,
       "amountTkas": 98.99995,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr/utxos",
       "raw": {
         "address": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
@@ -40,7 +40,7 @@
       "outputIndex": 0,
       "amountTkas": 1,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr/utxos",
       "raw": {
         "address": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",

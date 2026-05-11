@@ -104,7 +104,7 @@ try {
       const submittedTxid = response.transactionId || response.transaction_id;
       console.log(`\n✓ Txid accepted: ${submittedTxid}`);
       console.log(`\nNext steps:`);
-      console.log(`1. Monitor on: https://tn12.kaspa.stream/txs/${submittedTxid}`);
+      console.log(`1. Monitor on: https://tn12.kaspa.stream/transactions/${submittedTxid}`);
       console.log(`2. Once accepted, escrow UTXO will be: ${submittedTxid}:0`);
       console.log(`3. Update RoleEscrowContractOutpoint.json with new UTXO`);
       console.log(`4. Run settlement tests with real covenant UTXO`);

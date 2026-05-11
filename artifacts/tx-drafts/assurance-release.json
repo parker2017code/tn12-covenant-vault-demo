@@ -14,7 +14,7 @@
       "txid": "f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
       "outputIndex": 0,
       "amountTkas": 10000,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
       "status": "exact-outpoint-entered"
     }
   },

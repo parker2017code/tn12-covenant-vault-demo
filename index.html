@@ -15,21 +15,20 @@
       <p class="eyebrow">Kaspa testnet proof lab</p>
       <h1>TN12 covenant proof page</h1>
     </div>
-    <nav aria-label="Project links">
-      <a href="#core-notes">Core</a>
-      <a href="#reviewer-path">Reviewer</a>
-      <a href="#operator-pack">Operator</a>
-      <a href="#enforcement">Enforcement</a>
-      <a href="#mainnet-readiness">Mainnet?</a>
-      <a href="#build-status">Status</a>
-      <a href="#proofs">Proofs</a>
-      <a href="#indexer">Indexer</a>
-      <a href="#submit">Submit</a>
-      <a href="results.html">Results</a>
-      <a href="playground.html">Playground</a>
-      <a href="lab.html">Lab workbench</a>
-      <a href="#setup">TN12 setup</a>
-      <a href="#sources">Sources</a>
+    <nav class="site-nav" aria-label="Site navigation">
+      <div class="nav-group nav-pages" aria-label="Pages">
+        <a href="index.html" aria-current="page">Proof Home</a>
+        <a href="results.html">Results</a>
+        <a href="playground.html">Live Play</a>
+        <a href="lab.html">Lab Tools</a>
+      </div>
+      <div class="nav-group nav-local" aria-label="This page">
+        <a href="#core-notes">Core</a>
+        <a href="#proofs">Proofs</a>
+        <a href="#indexer">Indexer</a>
+        <a href="#submit">Submit</a>
+        <a href="#sources">Sources</a>
+      </div>
     </nav>
   </header>
 
@@ -213,7 +212,7 @@ npm run wallet:connector</pre>
       <div class="section-title">
         <p class="eyebrow">Backlog boundary</p>
         <h2>Planner and research panels moved.</h2>
-        <p>The broad app-lab, DeFi backlog, stable-value, prediction, attestation, access-pass, and signal panels now live in <a href="lab.html">lab.html</a>. They are useful for building, but they are not the first reviewer surface.</p>
+        <p>The broad app-lab, DeFi backlog, stable-value, prediction, attestation, access-pass, and signal panels live in <a href="lab.html">Lab Tools</a>. They are useful for building, but they are not the first reviewer surface.</p>
       </div>
       <div id="master-roadmap" class="roadmap-list" aria-live="polite"></div>
       <pre>docs/MASTER_APP_PLAN.md</pre>
@@ -223,7 +222,7 @@ npm run wallet:connector</pre>
       <article id="setup" class="panel">
         <p class="eyebrow">TN12 setup</p>
         <h2>Get test tokens</h2>
-        <p>Use a browser for the faucet. From this shell, the faucet host returned a Cloudflare challenge, so token requests cannot be automated here.</p>
+        <p>Use the faucet in a browser, then verify accepted outputs through the TN12 explorer before building new spends.</p>
         <pre>npm run address</pre>
         <p>The command prints a <code>kaspatest:</code> address and stores testnet-only wallet material in <code>.local/tn12-wallet.json</code>. Paste that address into the faucet.</p>
         <div class="link-list">
@@ -238,7 +237,7 @@ npm run wallet:connector</pre>
         <p>The full vault designer, assurance forms, access-pass planner, app-lab, research, signals, and funding panels are still available, just moved out of the proof page.</p>
         <div class="link-list">
           <a href="lab.html">Open lab workbench</a>
-          <a href="docs/REPO_TIDYING.md">Read tidying map</a>
+          <a href="docs/AUDIT_MAP.md">Read audit map</a>
         </div>
       </article>
     </section>

@@ -42,7 +42,7 @@
         "type": "pubkey"
       }
     ],
-    "explorerUrl": "https://tn12.kaspa.stream/txs/d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
     "result": "The public TN12 REST submit route accepted the spend but did not preserve the transaction payload. This is a payment/self-send proof, not an invoice receipt proof.",
     "next": "Use a wallet/RPC route that preserves transaction payload bytes before marking invoices paid from accepted payload receipts."
   },
@@ -92,7 +92,7 @@
     },
     "receiptMatches": true,
     "invoiceId": "merchant-order-1337",
-    "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
   },
   "next": "Use the verified TN12 JSON wRPC route for payload receipts; keep the public REST submit failure as historical evidence only.",
   "boundary": "The invoice receipt is accepted through JSON wRPC and matched by payload bytes. The REST no-payload transaction remains a payment/self-send proof, not invoice evidence."

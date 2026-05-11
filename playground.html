@@ -15,15 +15,19 @@
       <p class="eyebrow">Real TN12 play</p>
       <h1>TN12 playground</h1>
     </div>
-    <nav aria-label="Project links">
-      <a href="index.html">Proof page</a>
-      <a href="results.html">Results</a>
-      <a href="lab.html#designer">Lab builder</a>
-      <a href="#roles">Roles</a>
-      <a href="#activity">Activity</a>
-      <a href="#replay">Replay</a>
-      <a href="#actions">Next actions</a>
-      <a href="#rules">Rules</a>
+    <nav class="site-nav" aria-label="Site navigation">
+      <div class="nav-group nav-pages" aria-label="Pages">
+        <a href="index.html">Proof Home</a>
+        <a href="results.html">Results</a>
+        <a href="playground.html" aria-current="page">Live Play</a>
+        <a href="lab.html">Lab Tools</a>
+      </div>
+      <div class="nav-group nav-local" aria-label="This page">
+        <a href="#activity">Tape</a>
+        <a href="#roles">Roles</a>
+        <a href="#replay">Replay</a>
+        <a href="#actions">Actions</a>
+      </div>
     </nav>
   </header>
 
@@ -115,10 +119,10 @@
         <h2>Explorer-checkable tx flow.</h2>
       </div>
       <div id="playground-session" class="results-rails" aria-live="polite">
-        <article><span>accepted</span><strong>Role funding</strong><p><a href="https://tn12.kaspa.stream/txs/85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5" target="_blank" rel="noreferrer"><code>85b5c6dc...40a4f6e5</code></a></p></article>
-        <article><span>accepted</span><strong>User A deposit</strong><p><a href="https://tn12.kaspa.stream/txs/83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c" target="_blank" rel="noreferrer"><code>83eae5c1...525501c</code></a></p></article>
-        <article><span>accepted</span><strong>User B deposit</strong><p><a href="https://tn12.kaspa.stream/txs/3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d" target="_blank" rel="noreferrer"><code>3bfca807...777f759d</code></a></p></article>
-        <article><span>accepted</span><strong>Pool payout</strong><p><a href="https://tn12.kaspa.stream/txs/8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78" target="_blank" rel="noreferrer"><code>8e9d1134...44b9f78</code></a></p></article>
+        <article><span>accepted</span><strong>Role funding</strong><p><a href="https://tn12.kaspa.stream/transactions/85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5" target="_blank" rel="noreferrer"><code>85b5c6dc...40a4f6e5</code></a></p></article>
+        <article><span>accepted</span><strong>User A deposit</strong><p><a href="https://tn12.kaspa.stream/transactions/83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c" target="_blank" rel="noreferrer"><code>83eae5c1...525501c</code></a></p></article>
+        <article><span>accepted</span><strong>User B deposit</strong><p><a href="https://tn12.kaspa.stream/transactions/3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d" target="_blank" rel="noreferrer"><code>3bfca807...777f759d</code></a></p></article>
+        <article><span>accepted</span><strong>Pool payout</strong><p><a href="https://tn12.kaspa.stream/transactions/8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78" target="_blank" rel="noreferrer"><code>8e9d1134...44b9f78</code></a></p></article>
       </div>
       <div id="playground-tx-map" class="playground-tx-map" aria-live="polite"></div>
     </section>

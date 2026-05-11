@@ -1,7 +1,7 @@
 {
   "schema": "tn12-standards-adapter-backlog/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:58:38.516Z",
+  "generatedAt": "2026-05-11T19:28:49.051Z",
   "status": "standards-adapter-backlog-ready",
   "summary": {
     "lanes": 7,
@@ -57,12 +57,12 @@
     {
       "id": "attestation-oracle-envelope",
       "label": "Attestation and oracle envelope",
-      "standard": "Verifiable credential / oracle metadata pattern",
+      "standard": "Repo attestation envelope",
       "status": "BUILDABLE_NEXT",
       "proofAvailable": true,
       "fit": "External facts should enter as explicit source, reporter, timestamp, dispute, and confidence records before any market or insurance action uses them.",
       "next": "Create one generic event-attestation envelope and negative cases for stale, conflicting, missing-quorum, and unauthenticated inputs.",
-      "source": "https://www.w3.org/TR/vc-data-model-2.0/"
+      "source": "fixtures/AttestationSignals.json"
     },
     {
       "id": "agent-task-settlement",
@@ -72,7 +72,7 @@
       "proofAvailable": true,
       "fit": "Agents need small agreements: task description, payment, completion proof, dispute state, and release/refund status.",
       "next": "Turn the existing agent invoice/escrow receipts into a minimal agent task API with accepted txid replay.",
-      "source": "https://docs.x402.org/"
+      "source": "fixtures/AgentCommitments.json"
     },
     {
       "id": "wallet-signing-standard",

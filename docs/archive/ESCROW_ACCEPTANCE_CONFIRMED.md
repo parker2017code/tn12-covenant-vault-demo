@@ -48,7 +48,7 @@
 | **Script Public Key Address** | `kaspatest:pr3x90f5geklry4lytdspzsve9zcdmafzp4v5v7km75gvhwg7v9azvapwu33v` |
 | **Redeem Script Hash** | `e262bd34466df192bf22db008a0cc94586efa9106aca33d6dfa8865dc8f30bd1` |
 | **Redeem Script Bytes** | 351 |
-| **Explorer** | https://tn12.kaspa.stream/txs/64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3 |
+| **Explorer** | https://tn12.kaspa.stream/transactions/64b68f1cc61acc1197198e67bf0c49130db9a43dead1d94823f81b487a5707a3 |
 
 ---
 

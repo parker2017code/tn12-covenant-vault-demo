@@ -398,7 +398,7 @@ async function renderProofTransactions() {
       article.innerHTML = `
         <span>${escapeHtml(proof.lane)} / ${escapeHtml(proof.entrypoint)}</span>
         <strong>${escapeHtml(proof.label)}</strong>
-        <a href="https://tn12.kaspa.stream/txs/${escapeHtml(proof.txid)}" target="_blank" rel="noreferrer">${escapeHtml(shortTxid(proof.txid))}</a>
+        <a href="https://tn12.kaspa.stream/transactions/${escapeHtml(proof.txid)}" target="_blank" rel="noreferrer">${escapeHtml(shortTxid(proof.txid))}</a>
         <p>${escapeHtml(sompiToTkas(BigInt(proof.amountSompi)))} TKAS to saved address</p>
         <small data-proof-status="${escapeHtml(proof.txid)}">Fixture loaded</small>
       `;
@@ -1894,7 +1894,7 @@ async function fetchManualTransactionOutputs() {
         manualFields.outputIndex.value = output.index;
         manualFields.amountTkas.value = sompiToTkas(BigInt(output.amount));
         manualFields.address.value = output.script_public_key_address || manualFields.address.value;
-        manualFields.explorerUrl.value = `https://tn12.kaspa.stream/txs/${txid}`;
+        manualFields.explorerUrl.value = `https://tn12.kaspa.stream/transactions/${txid}`;
         renderManualOutpoint();
       });
       manualOutputPickerNode.append(button);

@@ -273,7 +273,7 @@ function metric(label, value, detail) {
 }
 
 function txLink(txid) {
-  return `<a href="https://tn12.kaspa.stream/txs/${escapeHtml(txid)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(String(txid || "")))}</code></a>`;
+  return `<a href="https://tn12.kaspa.stream/transactions/${escapeHtml(txid)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(String(txid || "")))}</code></a>`;
 }
 
 function addressChip(address) {

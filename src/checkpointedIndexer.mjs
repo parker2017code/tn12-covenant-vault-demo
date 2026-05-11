@@ -113,7 +113,7 @@ function buildOutputRecord({ output, tx }) {
           type: observedOutput.script_public_key_type
         }
       : null,
-    explorerUrl: `https://tn12.kaspa.stream/txs/${output.txid}`
+    explorerUrl: `https://tn12.kaspa.stream/transactions/${output.txid}`
   };
 }
 
@@ -152,7 +152,7 @@ function buildProofRecord({ proof, tx }) {
           type: observedOutput.script_public_key_type
         }
       : null,
-    explorerUrl: `https://tn12.kaspa.stream/txs/${proof.txid}`
+    explorerUrl: `https://tn12.kaspa.stream/transactions/${proof.txid}`
   };
 }
 
@@ -216,7 +216,7 @@ function buildPayloadRecord({ event, artifact, tx, txid }) {
         : null,
       matches: outputMatches
     },
-    explorerUrl: `https://tn12.kaspa.stream/txs/${txid}`
+    explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`
   };
 }
 

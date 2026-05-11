@@ -40,7 +40,7 @@
         "type": "pubkey"
       },
       "receipt": null,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391"
     },
     {
       "id": "vault:withdraw:9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -66,7 +66,7 @@
         "type": "pubkey"
       },
       "receipt": null,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710"
     },
     {
       "id": "assurance:release:80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
@@ -92,7 +92,7 @@
         "type": "pubkey"
       },
       "receipt": null,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f"
     },
     {
       "id": "assurance:refund:faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
@@ -118,7 +118,7 @@
         "type": "pubkey"
       },
       "receipt": null,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61"
     },
     {
       "id": "escrow:release:825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
@@ -144,7 +144,7 @@
         "type": "pubkey"
       },
       "receipt": null,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d"
     },
     {
       "id": "escrow:refund:6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
@@ -170,7 +170,7 @@
         "type": "pubkey"
       },
       "receipt": null,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d"
     },
     {
       "id": "escrow:cancel:14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
@@ -196,7 +196,7 @@
         "type": "pubkey"
       },
       "receipt": null,
-      "explorerUrl": "https://tn12.kaspa.stream/txs/14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c"
     }
   ],
   "appState": {
@@ -299,7 +299,7 @@
             }
           },
           "evidencePath": "artifacts/payload-receipt-evidence.json",
-          "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
         },
         {
           "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
@@ -326,7 +326,7 @@
             }
           },
           "evidencePath": "artifacts/payload-refund-evidence.json",
-          "explorerUrl": "https://tn12.kaspa.stream/txs/4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13"
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13"
         },
         {
           "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
@@ -353,7 +353,7 @@
             }
           },
           "evidencePath": "artifacts/payload-error-evidence.json",
-          "explorerUrl": "https://tn12.kaspa.stream/txs/3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c"
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c"
         }
       ],
       "next": "Keep invoice state tied to accepted payload receipts."

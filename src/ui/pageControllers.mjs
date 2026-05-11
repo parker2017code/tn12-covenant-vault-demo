@@ -22,6 +22,7 @@ export function runProofPageController(renderers) {
 }
 
 export function runLabPageController(renderers) {
+  organizeLabPage();
   runProofPageController(renderers);
   run([
     renderers.renderVault,
@@ -53,6 +54,7 @@ export function runLabPageController(renderers) {
     renderers.renderPayloadDraftStatus,
     renderers.renderInvoiceApp
   ]);
+  openLabDrawerForHash();
 }
 
 export function detectPageController(documentRef = document) {
@@ -63,4 +65,63 @@ function run(renderers) {
   for (const renderer of renderers) {
     if (typeof renderer === "function") renderer();
   }
+}
+
+function organizeLabPage(documentRef = document) {
+  if (documentRef.body?.dataset.labOrganized === "true") return;
+  documentRef.body.dataset.labOrganized = "true";
+
+  const drawers = [
+    ["core-notes", "Proof core notes", "Accepted counts, verifier command, and first docs."],
+    ["reviewer-path", "Reviewer route", "Install, local gate, TN12 gate, and refresh command."],
+    ["next-ten", "Current WIP", "The active wallet, indexer, and settlement blockers."],
+    ["campaigns", "Batch assurance", "Pledge aggregation and release/refund planning."],
+    ["enforcement", "Enforcement matrix", "What is script-enforced versus planner or wallet policy."],
+    ["escrow", "Escrow primitive", "Buyer/seller release, refund, and cancel paths."],
+    ["treasury", "Treasury vaults", "Team vault planning and wallet-policy rows."],
+    ["coordination", "Coordination research", "Transparent Stag/Intendo/Pack prototype."],
+    ["access-passes", "Access passes", "Issuer/indexer coupons, tickets, and memberships."],
+    ["mainnet-readiness", "Mainnet readiness", "Mainnet-capable app layers versus TN12-only proofs."],
+    ["asset-policies", "Asset policies", "Issuer-indexed and future covenant-native policy shapes."],
+    ["build-status", "Build status", "Built, blocked, next, and research rows."],
+    ["proven-status", "Proven status", "Accepted evidence and mainnet-deferred blockers."],
+    ["operator-pack", "Operator pack", "Single refresh path and operator commands."],
+    ["project-plan", "Operator plan", "Done, WIP, next, and later lanes."],
+    ["next-queue", "Priority queue", "Generated work order and source artifacts."],
+    ["auction-intents", "Auction intents", "Accepted bids, winner selection, and refund planning."],
+    ["defi-backlog", "DeFi backlog", "Research-only rails and accepted-activity hardening."],
+    ["agent-commitments", "Agent commitments", "Task offers, proofs, disputes, and settlement review."],
+    ["proofs", "Accepted proofs", "Explorer-checkable vault, assurance, escrow, and auction txids."],
+    ["indexer", "Indexer records", "Checkpointed app state, payload rows, and replay guards."],
+    ["invoices", "Payload receipt app", "Invoice state after accepted payload receipts."],
+    ["submit", "Submit console", "Signed draft review, connector checks, and route constraints."],
+    ["roadmap", "App map", "Status-labeled app lanes."],
+    ["research-library", "Research library", "External examples used only as reference material."],
+    ["stack", "Kaspa app stack", "What the lab naturally grows into next."],
+    ["app-lab", "Application lanes", "Proof-first app map from Kaspa Explained framing."],
+    ["attestations", "Attestation registry", "Signal sources, reputation, and influence rules."],
+    ["prediction-hedge", "Prediction simulator", "Attestation-fed review prompts, not trading."]
+  ];
+
+  for (const [id, title, detail] of drawers) {
+    const section = documentRef.getElementById(id);
+    if (!section || section.closest("details.lab-drawer")) continue;
+    const details = documentRef.createElement("details");
+    details.className = "lab-drawer";
+    details.id = `${id}-drawer`;
+    const summary = documentRef.createElement("summary");
+    summary.innerHTML = `<span>${title}</span><small>${detail}</small>`;
+    section.before(details);
+    details.append(summary, section);
+  }
+
+  window.addEventListener("hashchange", () => openLabDrawerForHash(documentRef));
+}
+
+function openLabDrawerForHash(documentRef = document) {
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) return;
+  const target = documentRef.getElementById(id);
+  const drawer = target?.closest("details.lab-drawer");
+  if (drawer) drawer.open = true;
 }

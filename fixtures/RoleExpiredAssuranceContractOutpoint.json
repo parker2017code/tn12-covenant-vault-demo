@@ -16,7 +16,7 @@
   "redeemScriptBytes": 176,
   "status": "accepted",
   "acceptingBlockBlueScore": 6081823,
-  "explorerUrl": "https://tn12.kaspa.stream/txs/935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/935722ea25c6af83c9a8b883ad10300604175b87b79b9498f829881991851141",
   "raw": {
     "address": "kaspatest:pr33ceckm70tkfyd0csua5xh5rr6576enttrgenpkl7qqnx4x70sxhhuhw5la",
     "outpoint": {

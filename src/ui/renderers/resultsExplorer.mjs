@@ -118,7 +118,7 @@ function renderStandards(node, standards) {
       <strong>${escapeHtml(lane.label)}</strong>
       <p>${escapeHtml(lane.fit)}</p>
       <p><small>Next: ${escapeHtml(lane.next)}</small></p>
-      ${lane.source.startsWith("http") ? `<p><a href="${escapeHtml(lane.source)}" target="_blank" rel="noreferrer">source</a></p>` : `<p><code>${escapeHtml(lane.source)}</code></p>`}
+      ${sourceLink(lane.source)}
     </article>
   `).join("");
 }
@@ -157,5 +157,17 @@ function metric(label, value, detail) {
 }
 
 function txLink(txid) {
-  return `<a href="https://tn12.kaspa.stream/txs/${escapeHtml(txid)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(String(txid)))}</code></a>`;
+  return `<a href="https://tn12.kaspa.stream/transactions/${escapeHtml(txid)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(String(txid)))}</code></a>`;
+}
+
+function sourceLink(source) {
+  const value = String(source || "");
+  if (!value) return "";
+  if (value.startsWith("http")) {
+    return `<p><a href="${escapeHtml(value)}" target="_blank" rel="noreferrer">external reference</a></p>`;
+  }
+  if (/^(artifacts|fixtures|docs|src|scripts)\//.test(value)) {
+    return `<p><a href="${escapeHtml(value)}">repo source</a></p>`;
+  }
+  return `<p><code>${escapeHtml(value)}</code></p>`;
 }

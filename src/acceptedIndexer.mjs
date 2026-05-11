@@ -45,7 +45,7 @@ export function buildAcceptedAppState({
           }
         : null,
       receipt,
-      explorerUrl: `https://tn12.kaspa.stream/txs/${proof.txid}`
+      explorerUrl: `https://tn12.kaspa.stream/transactions/${proof.txid}`
     };
   });
 
@@ -131,7 +131,7 @@ function buildReceiptRecords({ receiptFixture = {}, receiptTransactions = {} }) 
       acceptingBlockTime: tx?.accepting_block_time ?? null,
       receipt: decoded,
       evidencePath: record.evidencePath || null,
-      explorerUrl: `https://tn12.kaspa.stream/txs/${record.txid}`
+      explorerUrl: `https://tn12.kaspa.stream/transactions/${record.txid}`
     };
   });
 }

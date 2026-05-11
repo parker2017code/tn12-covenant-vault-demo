@@ -49,7 +49,7 @@ const evidence = {
   acceptingBlockTime: tx.accepting_block_time ?? null,
   source: draft.source || null,
   outputs,
-  explorerUrl: `https://tn12.kaspa.stream/txs/${txid}`
+  explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`
 };
 
 await mkdir("artifacts", { recursive: true });

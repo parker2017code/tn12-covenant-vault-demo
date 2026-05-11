@@ -9,7 +9,7 @@ export const DEFAULT_MANUAL_OUTPOINT = Object.freeze({
   outputIndex: 0,
   amountTkas: 10000,
   scriptType: "p2pk",
-  explorerUrl: "https://tn12.kaspa.stream/txs/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
+  explorerUrl: "https://tn12.kaspa.stream/transactions/f6ca76d93accf1a468de36ba35439bc8ca5cb2e1ba28f30b3220586e90bb0aee",
   note: "User reported this saved TN12 address has about 10,000 testnet KAS/TKAS; api-tn12.kaspa.org returned this exact UTXO."
 });
 

@@ -61,6 +61,6 @@ export function buildPayloadReceiptEvidence({ artifact, tx, txid = artifact?.tra
     },
     receiptMatches,
     invoiceId: decoded?.payload?.subject || artifact?.receipt?.payload?.subject || null,
-    explorerUrl: `https://tn12.kaspa.stream/txs/${txid}`
+    explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`
   };
 }

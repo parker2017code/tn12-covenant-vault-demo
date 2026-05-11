@@ -63,7 +63,7 @@ try {
 
   console.log(`\n✓ Ready to broadcast. Transaction is signed and valid.`);
   console.log(`\nNext: Monitor on TN12 explorer`);
-  console.log(`  https://tn12.kaspa.stream/txs/${settlement.transaction.id}`);
+  console.log(`  https://tn12.kaspa.stream/transactions/${settlement.transaction.id}`);
 
 } catch (e) {
   console.error(`✗ Error: ${e.message}`);

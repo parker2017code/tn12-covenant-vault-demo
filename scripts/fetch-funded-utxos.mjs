@@ -28,7 +28,7 @@ const outpoint = normalizeManualOutpoint({
   outputIndex: first.outpoint.index,
   amountTkas: Number(first.utxoEntry.amount) / 100000000,
   scriptType: "p2pk",
-  explorerUrl: `https://tn12.kaspa.stream/txs/${first.outpoint.transactionId}`,
+  explorerUrl: `https://tn12.kaspa.stream/transactions/${first.outpoint.transactionId}`,
   note: `Fetched from ${endpoint}`
 });
 
@@ -62,7 +62,7 @@ function toOutpointArtifact(utxo) {
     outputIndex: utxo.outpoint.index,
     amountTkas: Number(utxo.utxoEntry.amount) / 100000000,
     scriptType: "p2pk",
-    explorerUrl: `https://tn12.kaspa.stream/txs/${utxo.outpoint.transactionId}`,
+    explorerUrl: `https://tn12.kaspa.stream/transactions/${utxo.outpoint.transactionId}`,
     note: `Fetched from ${endpoint}`,
     raw: utxo
   };

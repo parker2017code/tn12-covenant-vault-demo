@@ -13,7 +13,7 @@
       "outputIndex": 0,
       "amountTkas": 5,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/976a8b3bb5f8222b2749162434d4354a33080e08e9d17652110a8cba5425bb7d",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/976a8b3bb5f8222b2749162434d4354a33080e08e9d17652110a8cba5425bb7d",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -40,7 +40,7 @@
       "outputIndex": 0,
       "amountTkas": 5,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/270d62711492b28a74259700d97d135a3d5d1341cb2cf2971cb3f6c7bc1c6fdc",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/270d62711492b28a74259700d97d135a3d5d1341cb2cf2971cb3f6c7bc1c6fdc",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -67,7 +67,7 @@
       "outputIndex": 0,
       "amountTkas": 5,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/fed779306906a76de68f27b33438f827aebae19af077d5e1a34e27ef42cfcc45",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/fed779306906a76de68f27b33438f827aebae19af077d5e1a34e27ef42cfcc45",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -94,7 +94,7 @@
       "outputIndex": 0,
       "amountTkas": 10,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/8aa75cf158e85fa1e312fd05009cbec8665dc74197eb306fe49f1671f8b66ae6",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/8aa75cf158e85fa1e312fd05009cbec8665dc74197eb306fe49f1671f8b66ae6",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -121,7 +121,7 @@
       "outputIndex": 0,
       "amountTkas": 4,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/9b762866074f0dfc4c645d7f733c044e952ea0d5ed88a1fe88c7f45debc94d55",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/9b762866074f0dfc4c645d7f733c044e952ea0d5ed88a1fe88c7f45debc94d55",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -148,7 +148,7 @@
       "outputIndex": 0,
       "amountTkas": 5,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/3bd35efcfb631e30313a5e7181edb46f247ddea7bff3706cbb81ee2d12756cb1",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/3bd35efcfb631e30313a5e7181edb46f247ddea7bff3706cbb81ee2d12756cb1",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -175,7 +175,7 @@
       "outputIndex": 0,
       "amountTkas": 5,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/111fff76b36d5d595db464750820ef9d3eaaac0b5320baaedf9efdb6ca705435",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/111fff76b36d5d595db464750820ef9d3eaaac0b5320baaedf9efdb6ca705435",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -202,7 +202,7 @@
       "outputIndex": 1,
       "amountTkas": 6.9998,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -229,7 +229,7 @@
       "outputIndex": 0,
       "amountTkas": 10,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/7c987fef3d8978f32130ca19089fe4c7129395d612f4e42084c665c3aee23dd7",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/7c987fef3d8978f32130ca19089fe4c7129395d612f4e42084c665c3aee23dd7",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
       "raw": {
         "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",

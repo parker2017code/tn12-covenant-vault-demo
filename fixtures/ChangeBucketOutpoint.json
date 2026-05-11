@@ -9,7 +9,7 @@
   "outputIndex": 2,
   "amountTkas": 1399.99975,
   "scriptType": "pubkey",
-  "explorerUrl": "https://tn12.kaspa.stream/txs/83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/83548474ab77b79f7bc872ba5879519a6f311a64ecd5e1c92e04df17abf40eac",
   "note": "Fetched from the accepted split transaction, not from current wallet UTXO sorting.",
   "raw": {
     "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",

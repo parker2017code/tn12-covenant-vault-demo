@@ -215,7 +215,7 @@ try {
   console.log(`Expected escrow UTXO: ${txid}:0`);
   console.log(`Submitted Amount: ${FUNDING_AMOUNT_TKAS} TKAS`);
   console.log(`\nStatus: AWAITING_ACCEPTANCE`);
-  console.log(`\nCheck acceptance at: https://tn12.kaspa.stream/txs/${txid}`);
+  console.log(`\nCheck acceptance at: https://tn12.kaspa.stream/transactions/${txid}`);
 
   await rpc.disconnect();
 

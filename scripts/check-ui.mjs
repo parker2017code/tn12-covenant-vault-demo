@@ -52,6 +52,7 @@ try {
   assert.match(resultsHtml, /id="knowledge-levels"/);
   assert.match(resultsHtml, /id="results-rails"/);
   assert.match(resultsHtml, /id="standards-adapters"/);
+  assert.match(resultsHtml, /External links are design references/);
   assert.match(resultsHtml, /Accepted TN12 activity/);
   assert.match(resultsHtml, /Live playground/);
   assert.doesNotMatch(resultsHtml, /X post|x-post-draft|Draft post/);
@@ -74,7 +75,10 @@ try {
   assert.match(playgroundHtml, /id="playground-levels"/);
   assert.match(playgroundHtml, /id="playground-tx-map"/);
   assert.match(playgroundHtml, /Fast testnet money/);
+  assert.doesNotMatch(html + resultsHtml + playgroundHtml, /tn12\.kaspa\.stream\/txs\//);
+  assert.match(html + resultsHtml + playgroundHtml, /tn12\.kaspa\.stream\/transactions\//);
   assert.doesNotMatch(playgroundHtml, /What the playground will run/);
+  assert.match(await readFile("lab.html", "utf8"), /class="lab-page"/);
 
   await checkRenderedPages(url);
 
@@ -117,7 +121,8 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /7 TKAS/);
     assert.match(playgroundText, /4 accepted txs/);
     assert.match(playgroundText, /Open lab tools/);
-    assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/txs/"]').count(), 4);
+    assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
+    assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/transactions/"]').count(), 4);
     assert.equal(await page.locator('#playground-tx-map article').count(), 5);
     assert.ok(await page.locator('#playground-roles [data-copy^="kaspatest:"]').count() >= 6);
     assert.ok(await page.locator('#playground-balances details.full-ledger').count() >= 1);
@@ -128,8 +133,14 @@ async function checkRenderedPages(url) {
     assert.match(resultsText, /x402-style HTTP payment adapter/);
     assert.match(resultsText, /Accepted transfers/i);
     assert.match(resultsText, /25/);
+    assert.match(resultsText, /external reference/);
+    assert.match(resultsText, /repo source/);
     assert.doesNotMatch(resultsText, /Draft post|X post/);
-    assert.ok(await page.locator('#results-feed a[href*="tn12.kaspa.stream/txs/"]').count() >= 6);
+    assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
+    assert.ok(await page.locator('#results-feed a[href*="tn12.kaspa.stream/transactions/"]').count() >= 6);
+    await page.goto(`${url}lab.html`, { waitUntil: "networkidle" });
+    assert.ok(await page.locator("details.lab-drawer").count() >= 20);
+    assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
     await page.close();
   } finally {
     await browser.close();

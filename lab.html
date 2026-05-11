@@ -9,28 +9,26 @@
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="app.js"></script>
 </head>
-<body>
+<body class="lab-page">
   <header class="topbar">
     <div>
       <p class="eyebrow">Kaspa testnet lab</p>
       <h1>TN12 covenant lab workbench</h1>
     </div>
-    <nav aria-label="Project links">
-      <a href="#core-notes">Core</a>
-      <a href="index.html">Proof page</a>
-      <a href="#reviewer-path">Reviewer</a>
-      <a href="#operator-pack">Operator</a>
-      <a href="#enforcement">Enforcement</a>
-      <a href="#mainnet-readiness">Mainnet?</a>
-      <a href="#build-status">Status</a>
-      <a href="#proofs">Proofs</a>
-      <a href="#indexer">Indexer</a>
-      <a href="#submit">Submit</a>
-      <a href="results.html">Results</a>
-      <a href="playground.html">Playground</a>
-      <a href="#roadmap">Backlog</a>
-      <a href="#setup">TN12 setup</a>
-      <a href="#sources">Sources</a>
+    <nav class="site-nav" aria-label="Site navigation">
+      <div class="nav-group nav-pages" aria-label="Pages">
+        <a href="index.html">Proof Home</a>
+        <a href="results.html">Results</a>
+        <a href="playground.html">Live Play</a>
+        <a href="lab.html" aria-current="page">Lab Tools</a>
+      </div>
+      <div class="nav-group nav-local" aria-label="This page">
+        <a href="#designer">Vault</a>
+        <a href="#assurance">Pledge</a>
+        <a href="#funding">Outpoint</a>
+        <a href="#submit">Submit</a>
+        <a href="#proofs">Proofs</a>
+      </div>
     </nav>
   </header>
 
@@ -46,6 +44,20 @@
         <strong>7 core + 2 auction + 7 role-separated + 53 indexed records</strong>
         <p>Vault, assurance, escrow, payload receipts, and batch-assurance outputs have accepted TN12 evidence.</p>
       </aside>
+    </section>
+
+    <section class="panel workbench-routes">
+      <div class="section-title">
+        <p class="eyebrow">Workbench routes</p>
+        <h2>Use the right surface.</h2>
+      </div>
+      <div class="journey-grid">
+        <a href="#designer"><span>Create</span><strong>Vault policy</strong><p>Owner, recovery, delay, and policy artifact.</p></a>
+        <a href="#assurance"><span>Create</span><strong>Pledge primitive</strong><p>Individual release/refund pledge artifact.</p></a>
+        <a href="#funding"><span>Inspect</span><strong>Manual outpoint</strong><p>Paste explorer output data before signing.</p></a>
+        <a href="#submit"><span>Review</span><strong>Submit drafts</strong><p>Signed artifacts, wallet review, and route checks.</p></a>
+        <a href="playground.html"><span>Watch</span><strong>Real TN12 play</strong><p>Clickable funding, deposits, payout, and replay.</p></a>
+      </div>
     </section>
 
     <section id="core-notes" class="panel">
@@ -193,7 +205,7 @@ npm run project:next-ten-status</pre>
       <article class="panel">
         <p class="eyebrow">Wallet interface</p>
         <h2>Manual address check</h2>
-        <p>The saved TN12 address was funded with about 10,000 testnet KAS/TKAS and used for accepted proof transactions. Paste exact explorer outpoint data before signing new attempts.</p>
+        <p>This TN12 address has been used for accepted proof transactions. Paste exact explorer outpoint data before signing new attempts.</p>
         <pre>kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt</pre>
         <p>Use the TN12 explorer for transaction IDs and output indexes.</p>
       </article>
@@ -707,10 +719,10 @@ npm run wallet:adapter-run</pre>
       <article id="setup" class="panel">
         <p class="eyebrow">TN12 setup</p>
         <h2>Get test tokens</h2>
-        <p>Use a browser for the faucet. From this shell, the faucet host returned a Cloudflare challenge, so token requests cannot be automated here.</p>
+        <p>Use the faucet in a browser, then verify accepted outputs through the TN12 explorer before building new spends.</p>
         <pre>npm run address</pre>
         <p>The command prints a `kaspatest:` address and stores testnet-only wallet material in `.local/tn12-wallet.json`. Paste that address into the faucet.</p>
-        <p>The current saved address has been manually checked by the user and should be used for the first vault and assurance attempts.</p>
+        <p>Use fresh testnet-only wallet material for new attempts, and keep private keys out of committed files.</p>
         <div class="link-list">
           <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
           <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">TN12 explorer</a>

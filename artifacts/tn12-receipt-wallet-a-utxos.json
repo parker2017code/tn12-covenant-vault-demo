@@ -13,7 +13,7 @@
       "outputIndex": 0,
       "amountTkas": 100,
       "scriptType": "p2pk",
-      "explorerUrl": "https://tn12.kaspa.stream/txs/d12e4c75b7d82ebaefe68dd85917655b98b5086ce6c5742fd5c171691cd15dc9",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/d12e4c75b7d82ebaefe68dd85917655b98b5086ce6c5742fd5c171691cd15dc9",
       "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a/utxos",
       "raw": {
         "address": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",

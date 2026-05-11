@@ -51,12 +51,12 @@ export function buildStandardsAdapterBacklog({
     lane({
       id: "attestation-oracle-envelope",
       label: "Attestation and oracle envelope",
-      standard: "Verifiable credential / oracle metadata pattern",
+      standard: "Repo attestation envelope",
       status: "BUILDABLE_NEXT",
       fit: "External facts should enter as explicit source, reporter, timestamp, dispute, and confidence records before any market or insurance action uses them.",
       proof: payloadEvents >= 40,
       next: "Create one generic event-attestation envelope and negative cases for stale, conflicting, missing-quorum, and unauthenticated inputs.",
-      source: "https://www.w3.org/TR/vc-data-model-2.0/"
+      source: "fixtures/AttestationSignals.json"
     }),
     lane({
       id: "agent-task-settlement",
@@ -66,7 +66,7 @@ export function buildStandardsAdapterBacklog({
       fit: "Agents need small agreements: task description, payment, completion proof, dispute state, and release/refund status.",
       proof: payloadEvents >= 40,
       next: "Turn the existing agent invoice/escrow receipts into a minimal agent task API with accepted txid replay.",
-      source: "https://docs.x402.org/"
+      source: "fixtures/AgentCommitments.json"
     }),
     lane({
       id: "wallet-signing-standard",

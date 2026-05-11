@@ -17,7 +17,7 @@
   "status": "accepted",
   "acceptingBlockBlueScore": 7532926,
   "note": "Updated 2026-05-09 — fresh output from role-separated funding tx 7ed52d20. Previous outpoint ce1a94b8:1 was spent by prior role-separated proof pass.",
-  "explorerUrl": "https://tn12.kaspa.stream/txs/7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/7ed52d20017423a8f87c475ba2607fb7bc93d578e51709e851ae7957aae0b8d6",
   "raw": {
     "address": "kaspatest:pz7ep9k3aukj252d94dxprdkae7c42rxlgytmjf7usa5q8wdsze0xh792u97r",
     "outpoint": {

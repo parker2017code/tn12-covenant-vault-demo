@@ -44,5 +44,5 @@
   },
   "receiptMatches": true,
   "invoiceId": "merchant-refund-demo",
-  "explorerUrl": "https://tn12.kaspa.stream/txs/4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13"
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13"
 }

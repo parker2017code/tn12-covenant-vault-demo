@@ -44,5 +44,5 @@
   },
   "receiptMatches": true,
   "invoiceId": "merchant-order-1337",
-  "explorerUrl": "https://tn12.kaspa.stream/txs/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e"
 }

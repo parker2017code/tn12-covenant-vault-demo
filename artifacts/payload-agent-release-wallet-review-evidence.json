@@ -44,5 +44,5 @@
   },
   "receiptMatches": true,
   "invoiceId": "agent-task-invoice-001:release-wallet-review",
-  "explorerUrl": "https://tn12.kaspa.stream/txs/a146de4a14e20c3fede1781275315a2bb4cb324416a70389b46218e090ad347b"
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/a146de4a14e20c3fede1781275315a2bb4cb324416a70389b46218e090ad347b"
 }

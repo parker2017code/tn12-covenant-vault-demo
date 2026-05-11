@@ -15,15 +15,19 @@
       <p class="eyebrow">Kaspa TN12 results</p>
       <h1>TN12 results explorer</h1>
     </div>
-    <nav aria-label="Project links">
-      <a href="index.html">Proof page</a>
-      <a href="lab.html">Lab workbench</a>
-      <a href="#levels">Explain it</a>
-      <a href="#rails">Rails</a>
-      <a href="#feed">Recent txids</a>
-      <a href="#playground">Live play</a>
-      <a href="#standards">Adapters</a>
-      <a href="playground.html">Open playground</a>
+    <nav class="site-nav" aria-label="Site navigation">
+      <div class="nav-group nav-pages" aria-label="Pages">
+        <a href="index.html">Proof Home</a>
+        <a href="results.html" aria-current="page">Results</a>
+        <a href="playground.html">Live Play</a>
+        <a href="lab.html">Lab Tools</a>
+      </div>
+      <div class="nav-group nav-local" aria-label="This page">
+        <a href="#levels">Explain</a>
+        <a href="#flow">Flow</a>
+        <a href="#feed">Txids</a>
+        <a href="#standards">Adapters</a>
+      </div>
     </nav>
   </header>
 
@@ -148,7 +152,7 @@
       <div class="section-title">
         <p class="eyebrow">Extension lanes</p>
         <h2>Standards and adapters worth building next.</h2>
-        <p>These are adapter work items: message shapes, receipts, reducers, and negative cases.</p>
+        <p>These are adapter work items: message shapes, receipts, reducers, and negative cases. External links are design references; repo links are the local artifacts behind the row. Neither is a production-integration claim.</p>
       </div>
       <div id="standards-adapters" class="results-rails" aria-live="polite"></div>
     </section>

@@ -43,7 +43,7 @@ const fixture = {
   redeemScriptBytes: artifact.script.length,
   status: tx.is_accepted ? "accepted" : "not-accepted",
   acceptingBlockBlueScore: tx.accepting_block_blue_score ?? null,
-  explorerUrl: `https://tn12.kaspa.stream/txs/${txid}`,
+  explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`,
   raw: {
     address: output.script_public_key_address,
     outpoint: {
