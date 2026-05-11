@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 
-const [provenStatus, payloadEvents, readme, indexHtml, progress, mainnetReadiness] = await Promise.all([
+const [provenStatus, operatorPack, payloadEvents, readme, indexHtml, progress, mainnetReadiness] = await Promise.all([
   readJson("artifacts/proven-status.json"),
+  readJson("artifacts/operator-receipt-pack.json"),
   readJson("fixtures/PayloadEventEvidence.json"),
   readText("README.md"),
   readText("index.html"),
@@ -19,6 +20,27 @@ const observedPayloadEvents = Array.isArray(payloadEvents.events)
 
 if (observedPayloadEvents !== expectedPayloadEvents) {
   throw new Error(`Payload event fixture count mismatch: fixture=${observedPayloadEvents} proven-status=${expectedPayloadEvents}.`);
+}
+
+const operatorEvidence = operatorPack.evidence || {};
+const operatorCountFields = [
+  ["payloadEvents", expectedPayloadEvents],
+  ["manifestEvents", expectedPayloadEvents],
+  ["coreProofTransactions", expectedProofTransactions],
+  ["roleSeparatedProofTransactions", expectedRoleProofTransactions],
+  ["checkpointRecords", expectedCheckpointRecords],
+  ["matchedRecords", expectedCheckpointRecords]
+];
+
+for (const [field, expected] of operatorCountFields) {
+  const observed = readPositiveInteger(operatorEvidence[field], `operator-receipt-pack.evidence.${field}`);
+  if (observed !== expected) {
+    throw new Error(`Operator pack count mismatch for ${field}: operator=${observed} proven-status=${expected}.`);
+  }
+}
+
+if (!Array.isArray(operatorPack.wallet?.acceptedReceipts) || operatorPack.wallet.acceptedReceipts.length < 4) {
+  throw new Error("Operator pack must keep at least four accepted wallet receipts.");
 }
 
 const requiredSnippets = [

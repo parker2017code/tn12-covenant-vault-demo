@@ -1,6 +1,6 @@
 # Next Steps
 
-Reviewed: 2026-05-10
+Reviewed: 2026-05-11
 
 This file is the short queue. It does not replace the generated artifacts; it points reviewers and future agents to the next concrete work without reopening broad roadmap claims.
 
@@ -8,7 +8,7 @@ This file is the short queue. It does not replace the generated artifacts; it po
 
 - TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
 - Mainnet deployment readiness is still about `55-60%`.
-- Proof-lab auditability is roughly `85-88%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, wallet-submit readiness checks, attestation/invoice/research checks, batch-assurance checks, escrow-marketplace checks, and indexer replay checks.
+- Proof-lab auditability is roughly `87-90%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, wallet-submit readiness checks, attestation/invoice/research checks, batch-assurance checks, escrow-marketplace checks, treasury/access checks, indexer replay checks, and count drift guards.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 
@@ -18,10 +18,10 @@ These are the practical cleanup tasks surfaced by the latest repo reviews and Gi
 
 | Order | Task | Why It Matters | Blocked By User? |
 |---|---|---|---|
-| 1 | Keep splitting `scripts/check.mjs` into focused domain tests. | Smaller failures are easier for an outside reviewer to trust and debug. Wallet-submit, attestation/invoice/research, batch-assurance, escrow-marketplace, and indexer-replay slices now have focused tests. | No |
+| 1 | Keep splitting `scripts/check.mjs` into focused domain tests. | Smaller failures are easier for an outside reviewer to trust and debug. Wallet-submit, attestation/invoice/research, batch-assurance, escrow-marketplace, treasury/access, and indexer-replay slices now have focused tests. | No |
 | 2 | Add mutation coverage to proof-record tests. | The verifier should prove it catches bad source, amount, output, fee, and timing records. | No |
-| 3 | Derive public counts from canonical artifacts. | README/UI count drift should fail a check instead of relying on manual updates. Payload, proof-path, role-separated, and checkpoint/indexed counts now have a stronger local guard. | No |
-| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. Shared formatting/form helpers are now extracted; renderer/page extraction remains next. | No |
+| 3 | Derive public counts from canonical artifacts. | README/UI/operator-pack count drift should fail a check instead of relying on manual updates. Payload, proof-path, role-separated, checkpoint/indexed, and operator receipt counts now have a stronger local guard. | No |
+| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. Shared formatting/form/data-loading helpers are now extracted; renderer/page extraction remains next. | No |
 | 5 | Keep claim vocabulary close to public claims. | Reviewers should always know what is script-enforced, planner-only, indexer-derived, TN12-accepted, or mainnet-blocked. | No |
 | 6 | Continue exact validation for addresses, txids, amounts, and artifact shapes. | Prefix checks and loose fixtures are acceptable for drafts, not reviewer evidence. | No |
 | 7 | Keep historical reports archived and non-canonical. | The root and reviewer path should stay short enough to audit. | No |

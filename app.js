@@ -487,8 +487,7 @@ async function renderEnforcementMatrix() {
   if (!enforcementSummaryNode || !enforcementFeaturesNode) return;
 
   try {
-    const response = await fetch("fixtures/EnforcementMatrix.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/EnforcementMatrix.json");
     const matrix = buildEnforcementMatrix(fixture);
     enforcementSummaryNode.innerHTML = `
       <article><span>Features</span><strong>${escapeHtml(matrix.summary.total)}</strong></article>
@@ -518,8 +517,7 @@ async function renderEscrowPrimitive() {
   if (!escrowSummaryNode || !escrowListNode) return;
 
   try {
-    const response = await fetch("fixtures/EscrowPrimitives.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/EscrowPrimitives.json");
     const registry = buildEscrowPrimitive(fixture);
     escrowSummaryNode.innerHTML = `
       <article><span>Escrows</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
@@ -541,9 +539,8 @@ async function renderEscrowPrimitive() {
       escrowListNode.append(article);
     }
 
-    const actionMapResponse = await fetch("artifacts/escrow-marketplace-action-map.json", { cache: "no-store" });
-    if (actionMapResponse.ok) {
-      const actionMap = await actionMapResponse.json();
+    try {
+      const actionMap = await fetchJson("artifacts/escrow-marketplace-action-map.json");
       const mappedRequests = actionMap.flows
         ?.flatMap((flow) => flow.actions || [])
         .map((action) => action.walletStandardRequestId)
@@ -557,6 +554,8 @@ async function renderEscrowPrimitive() {
         <small>${escapeHtml(mappedRequests.join(" / ") || "wallet-standard request not mapped")}</small>
       `;
       escrowListNode.append(article);
+    } catch {
+      // Optional derived artifact; the base escrow registry should still render.
     }
   } catch (error) {
     escrowSummaryNode.textContent = `Escrow registry unavailable: ${error.message}`;
@@ -567,8 +566,7 @@ async function renderTreasuryVaults() {
   if (!treasurySummaryNode || !treasuryListNode) return;
 
   try {
-    const response = await fetch("fixtures/TreasuryVaults.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/TreasuryVaults.json");
     const registry = buildTreasuryVaultRegistry(fixture);
     treasurySummaryNode.innerHTML = `
       <article><span>Vaults</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
@@ -590,9 +588,8 @@ async function renderTreasuryVaults() {
       treasuryListNode.append(article);
     }
 
-    const reviewResponse = await fetch("artifacts/treasury-role-review.json", { cache: "no-store" });
-    if (reviewResponse.ok) {
-      const review = await reviewResponse.json();
+    try {
+      const review = await fetchJson("artifacts/treasury-role-review.json");
       const article = document.createElement("article");
       article.className = "treasury-card";
       article.innerHTML = `
@@ -602,6 +599,8 @@ async function renderTreasuryVaults() {
         <small>${escapeHtml(review.boundaries.join(" | "))}</small>
       `;
       treasuryListNode.append(article);
+    } catch {
+      // Optional derived artifact; the base treasury registry should still render.
     }
   } catch (error) {
     treasurySummaryNode.textContent = `Treasury registry unavailable: ${error.message}`;
@@ -612,12 +611,13 @@ async function renderCoordinationMarket() {
   if (!coordinationSummaryNode || !coordinationPacksNode) return;
 
   try {
-    const [response, briefResponse] = await Promise.all([
-      fetch("fixtures/CoordinationMarketPrototype.json", { cache: "no-store" }),
-      fetch("fixtures/CoordinationMarketSettlementBrief.json", { cache: "no-store" })
-    ]);
-    const fixture = await response.json();
-    const briefFixture = await briefResponse.json();
+    const {
+      prototype: fixture,
+      settlementBrief: briefFixture
+    } = await fetchJsonMap({
+      prototype: "fixtures/CoordinationMarketPrototype.json",
+      settlementBrief: "fixtures/CoordinationMarketSettlementBrief.json"
+    });
     const prototype = buildCoordinationMarketPrototype(fixture);
     const settlementBrief = buildCoordinationMarketSettlementBrief({ fixture: briefFixture, coordinationPrototype: prototype });
     coordinationSummaryNode.innerHTML = `
@@ -658,8 +658,7 @@ async function renderAccessPassPlanner() {
   if (!accessSummaryNode || !accessListNode) return;
 
   try {
-    const response = await fetch("fixtures/AccessPassPlanner.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/AccessPassPlanner.json");
     const planner = buildAccessPassPlanner(fixture);
     accessSummaryNode.innerHTML = `
       <article><span>Passes</span><strong>${escapeHtml(planner.summary.totalPasses)}</strong></article>
@@ -681,9 +680,8 @@ async function renderAccessPassPlanner() {
       accessListNode.append(article);
     }
 
-    const issuerReviewResponse = await fetch("artifacts/access-pass-issuer-review.json", { cache: "no-store" });
-    if (issuerReviewResponse.ok) {
-      const review = await issuerReviewResponse.json();
+    try {
+      const review = await fetchJson("artifacts/access-pass-issuer-review.json");
       const article = document.createElement("article");
       article.className = "access-card";
       article.innerHTML = `
@@ -693,6 +691,8 @@ async function renderAccessPassPlanner() {
         <small>${escapeHtml(review.boundaries.join(" | "))}</small>
       `;
       accessListNode.append(article);
+    } catch {
+      // Optional derived artifact; the base access-pass planner should still render.
     }
   } catch (error) {
     accessSummaryNode.textContent = `Access pass planner unavailable: ${error.message}`;
