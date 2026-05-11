@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-scenario-simulation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T15:42:12.296Z",
+  "generatedAt": "2026-05-11T15:56:59.910Z",
   "status": "scenario-simulation-ready-not-live-defi",
   "enforcement": "PLANNER_ONLY",
   "summary": {

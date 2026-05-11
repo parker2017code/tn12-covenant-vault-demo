@@ -1034,15 +1034,17 @@ async function renderDefiSimulationSurface() {
   if (!defiSimulationSummaryNode || !defiSimulationListNode) return;
 
   try {
-    const [planner, scenario, reducer, advanced, multiWallet] = await Promise.all([
+    const [planner, scenario, reducer, advanced, multiWallet, manifest] = await Promise.all([
       fetchJson("artifacts/defi-planner-simulation.json"),
       fetchJson("artifacts/defi-scenario-simulation.json"),
       fetchJson("artifacts/defi-scenario-reducer.json"),
       fetchJson("artifacts/defi-advanced-simulation.json"),
-      fetchJson("artifacts/defi-multi-wallet-scenario-pack.json")
+      fetchJson("artifacts/defi-multi-wallet-scenario-pack.json"),
+      fetchJson("artifacts/defi-artifact-manifest.json")
     ]);
 
     defiSimulationSummaryNode.innerHTML = `
+      <article><span>Manifest</span><strong>${escapeHtml(manifest.summary.readyArtifacts)}/${escapeHtml(manifest.summary.artifacts)}</strong></article>
       <article><span>Planner lanes</span><strong>${escapeHtml(planner.summary.lanes)}</strong></article>
       <article><span>Scenario refs</span><strong>${escapeHtml(scenario.summary.acceptedReferencesIndexed)}/${escapeHtml(scenario.summary.acceptedReferences)}</strong></article>
       <article><span>Reducer state</span><strong>${escapeHtml(reducer.summary.promotedReviewRows)} review</strong></article>
@@ -1053,6 +1055,12 @@ async function renderDefiSimulationSurface() {
 
     defiSimulationListNode.innerHTML = "";
     const cards = [
+      {
+        status: manifest.status,
+        title: "DeFi artifact manifest",
+        body: `${manifest.summary.readyArtifacts}/${manifest.summary.artifacts} artifacts ready; ${manifest.summary.problems} problems; ${manifest.summary.secretFindings} secret findings.`,
+        foot: "npm run defi:manifest"
+      },
       {
         status: planner.status,
         title: "Planner simulation",

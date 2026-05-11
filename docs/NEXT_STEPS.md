@@ -74,6 +74,7 @@ These are not all needed for the next commit, but they are the path from proof l
 - Use `npm run defi:reducer` to promote review-only state while blocking duplicate, missing, stale-oracle, slippage, liquidation-execution, and custody-promotion attempts.
 - Use `npm run defi:advanced` for AMM LP/invariant checks, lending threshold sweeps, and oracle failure cases without custody promotion.
 - Use `npm run defi:multi-wallet` to group scenario roles across accepted local-key TN12 receipt references without claiming external-wallet signing.
+- Use `npm run defi:refresh` to rebuild the full DeFi simulation suite and manifest in dependency order.
 - Do not treat local replay success as live removed-block rollback evidence.
 
 ## Commands

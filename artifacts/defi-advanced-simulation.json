@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-advanced-simulation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T15:46:34.462Z",
+  "generatedAt": "2026-05-11T15:57:00.582Z",
   "status": "advanced-simulation-ready-not-custody",
   "enforcement": "PLANNER_ONLY",
   "summary": {
