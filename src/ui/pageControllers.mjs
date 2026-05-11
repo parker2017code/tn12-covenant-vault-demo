@@ -75,6 +75,7 @@ function organizeLabPage(documentRef = document) {
     ["core-notes", "Proof core notes", "Accepted counts, verifier command, and first docs."],
     ["reviewer-path", "Reviewer route", "Install, local gate, TN12 gate, and refresh command."],
     ["next-ten", "Current WIP", "The active wallet, indexer, and settlement blockers."],
+    ["templates", "Vault templates", "Recovery, delayed withdrawal, spending cap, and escrow presets."],
     ["campaigns", "Batch assurance", "Pledge aggregation and release/refund planning."],
     ["enforcement", "Enforcement matrix", "What is script-enforced versus planner or wallet policy."],
     ["escrow", "Escrow primitive", "Buyer/seller release, refund, and cancel paths."],

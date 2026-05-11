@@ -403,6 +403,14 @@ pre {
   display: none;
 }
 
+.lab-drawer:nth-of-type(4n + 1) {
+  border-color: rgba(245, 194, 126, .24);
+}
+
+.lab-drawer:nth-of-type(4n + 2) {
+  border-color: rgba(150, 185, 255, .22);
+}
+
 progress {
   width: 100%;
   height: 16px;

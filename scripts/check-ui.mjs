@@ -155,6 +155,8 @@ async function checkRenderedPages(url) {
     assert.match(runbookText, /Replay before believing it/);
     assert.ok(await page.locator("details.lab-drawer").count() >= 20);
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
+    const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
+    assert.equal(firstPanelId, "product-map");
     await page.goto(`${url}lab.html#submit`, { waitUntil: "networkidle" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
     const submitText = await page.locator("#submit").innerText();
