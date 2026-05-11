@@ -9,7 +9,7 @@ The repo should read as proof-first, not plan-first. Use generated artifacts for
 | Rail | Current state | Next proof |
 |---|---|---|
 | Covenants | Vault, assurance, escrow, and role-separated paths accepted on TN12 | Fresh external-signer covenant spend |
-| Payload receipts | 30 accepted payload events, including four DeFi v1 receipts | External-signer payload receipt |
+| Payload receipts | 31 accepted payload events, including five DeFi v1 receipts | External-signer payload receipt |
 | Batch assurance | Accepted pledge outputs and accepted release | Keep refund alternates non-selected; next signer work uses fresh requests |
 | Replay/indexer | Checkpoint, live overlap, durable promotion guard | Live removed-block rollback evidence |
 | Wallet submit | Review package, request templates, result validation | Real wallet-approved signed tx |
@@ -31,6 +31,7 @@ Use artifacts instead of prose plans:
 - `artifacts/next-work-queue.json`: ordered broad queue.
 - `artifacts/next-ten-execution-status.json`: current 10-task slice.
 - `artifacts/proven-status.json`: compact accepted-evidence, blocker, and percent boundary.
+- `artifacts/operator-receipt-pack.json`: accepted evidence plus local-wallet command path.
 - `artifacts/missing-rails-matrix.json`: missing DeFi/product rails.
 - `artifacts/rail-research-triggers.json`: when to do deeper research.
 - `artifacts/oracle-source-matrix.json`: oracle/source assumptions.

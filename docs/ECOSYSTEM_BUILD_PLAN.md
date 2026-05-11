@@ -31,7 +31,7 @@ Source boundary:
 | Access passes | accepted issue/redeem payload events |
 | Stable-value planner | accepted issuer/redemption planner payload events |
 | Agents | accepted task, proof, release, and dispute payload events |
-| Indexer | 43 accepted matched checkpoint records |
+| Indexer | 44 accepted matched checkpoint records |
 
 Primary artifacts:
 

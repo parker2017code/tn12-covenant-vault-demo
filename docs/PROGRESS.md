@@ -9,7 +9,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 - Seven base covenant proof spends accepted on TN12.
 - Seven role-separated positive paths accepted on TN12.
 - Batch-assurance pledge outputs and 3-pledge release accepted on TN12.
-- 30 payload events accepted on TN12, including four DeFi v1 receipts across three wallets.
+- 31 payload events accepted on TN12, including five DeFi v1 receipts across three wallets.
 - Adversarial rejection evidence exists for wrong signer, wrong selector, wrong output lock, wrong amount, and single-party cancel.
 - Local gates cover proof evidence, payload matching, wallet review, signer-result validation, replay rows, duplicate/stale receipt guards, and UI smoke.
 
@@ -26,6 +26,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | External signer path | `artifacts/external-signer-path-research.json` |
 | Next 10-task status | `artifacts/next-ten-execution-status.json` |
 | Proven status boundary | `artifacts/proven-status.json` |
+| Operator receipt pack | `artifacts/operator-receipt-pack.json` |
 
 ## Demo Status
 
@@ -56,6 +57,7 @@ npm run check:all
 npm run check:tn12
 npm run project:next-ten-status
 npm run project:proven-status
+npm run project:operator-pack
 npm run indexer:durable-promotion-guard
 npm run wallet:external-signer-research
 ```

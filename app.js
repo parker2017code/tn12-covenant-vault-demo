@@ -109,6 +109,8 @@ const buildStatusSummaryNode = document.querySelector("#build-status-summary");
 const buildStatusLanesNode = document.querySelector("#build-status-lanes");
 const provenStatusSummaryNode = document.querySelector("#proven-status-summary");
 const provenStatusBlockersNode = document.querySelector("#proven-status-blockers");
+const operatorPackSummaryNode = document.querySelector("#operator-pack-summary");
+const operatorPackCommandsNode = document.querySelector("#operator-pack-commands");
 const projectPlanSummaryNode = document.querySelector("#project-plan-summary");
 const projectPlanNextNode = document.querySelector("#project-plan-next");
 const projectPlanVisionNode = document.querySelector("#project-plan-vision");
@@ -252,6 +254,7 @@ renderStableIssuerRedemptions();
 renderAgentCommitments();
 renderBuildStatus();
 renderProvenStatus();
+renderOperatorPack();
 renderNextWorkQueue();
 renderNextTenStatus();
 renderProofTransactions();
@@ -832,6 +835,34 @@ async function renderProvenStatus() {
     }
   } catch (error) {
     provenStatusSummaryNode.textContent = `Proven status unavailable: ${error.message}`;
+  }
+}
+
+async function renderOperatorPack() {
+  if (!operatorPackSummaryNode || !operatorPackCommandsNode) return;
+
+  try {
+    const response = await fetch("artifacts/operator-receipt-pack.json", { cache: "no-store" });
+    const pack = await response.json();
+    operatorPackSummaryNode.innerHTML = `
+      <article><span>${escapeHtml(pack.status)}</span><strong>${escapeHtml(pack.currentPercent)}</strong><p>${escapeHtml(pack.evidence.checkpointRecords)} accepted records.</p></article>
+      <article><span>Payloads</span><strong>${escapeHtml(pack.evidence.payloadEvents)}</strong><p>${escapeHtml(pack.evidence.manifestEvents)} manifest events.</p></article>
+      <article><span>Custody ready</span><strong>${escapeHtml(pack.custody.auctionReadyRows + pack.custody.agentReadyRows)}</strong><p>Auction ${escapeHtml(pack.custody.auctionReadyRows)}; agent ${escapeHtml(pack.custody.agentReadyRows)}.</p></article>
+      <article><span>Wallet</span><strong>${escapeHtml(pack.wallet.mode)}</strong><p>${escapeHtml(pack.wallet.acceptedReceipts.length)} accepted receipts.</p></article>
+    `;
+    operatorPackCommandsNode.innerHTML = "";
+    for (const step of pack.nextCommandPath || []) {
+      const article = document.createElement("article");
+      article.className = "build-status-card compact-card";
+      article.innerHTML = `
+        <span>${escapeHtml(step.ready ? "ready" : "missing")}</span>
+        <strong>${escapeHtml(step.id)}</strong>
+        <small>${escapeHtml(step.command)}</small>
+      `;
+      operatorPackCommandsNode.append(article);
+    }
+  } catch (error) {
+    operatorPackSummaryNode.textContent = `Operator pack unavailable: ${error.message}`;
   }
 }
 

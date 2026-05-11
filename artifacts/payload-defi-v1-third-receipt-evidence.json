@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-11T00:59:30.815Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
+  "accepted": true,
+  "acceptingBlockBlueScore": 8376287,
+  "acceptingBlockTime": 1778460891285,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303033222c2276616c7565223a2270616964222c226e6f7465223a226672657368206f70657261746f72207061636b2072656365697074227d",
+    "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303033222c2276616c7565223a2270616964222c226e6f7465223a226672657368206f70657261746f72207061636b2072656365697074227d",
+    "bytes": 113,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "order-receipt",
+        "subject": "defi-v1-live-receipt-003",
+        "value": "paid",
+        "note": "fresh operator pack receipt"
+      },
+      "encoded": {
+        "bytes": 113,
+        "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303033222c2276616c7565223a2270616964222c226e6f7465223a226672657368206f70657261746f72207061636b2072656365697074227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "defi-v1-live-receipt-003",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde"
+}

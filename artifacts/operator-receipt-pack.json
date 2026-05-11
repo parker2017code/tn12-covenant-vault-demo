@@ -1,0 +1,162 @@
+{
+  "schema": "tn12-operator-receipt-pack/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T00:59:52.314Z",
+  "status": "operator-receipt-pack-ready",
+  "currentPercent": "53-58%",
+  "evidence": {
+    "checkpointRecords": 44,
+    "matchedRecords": 44,
+    "coreProofTransactions": 9,
+    "roleSeparatedProofTransactions": 7,
+    "payloadEvents": 31,
+    "manifestEvents": 31,
+    "outputEvidence": 4
+  },
+  "custody": {
+    "auctionReadyRows": 2,
+    "auctionAmountMatchedRows": 2,
+    "agentReadyRows": 2,
+    "agentAmountMatchedRows": 2
+  },
+  "wallet": {
+    "mode": "local-testnet-wallet",
+    "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+    "boundary": "Local testnet wallet signing only; this is not proof of browser wallet or external signer readiness.",
+    "currentSpendableOutpoint": {
+      "txid": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
+      "outputIndex": 1,
+      "amountTkas": 9796.99975,
+      "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "spendable": true
+    },
+    "acceptedReceipts": [
+      {
+        "id": "first-live-receipt",
+        "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+        "subject": "defi-v1-live-receipt-001",
+        "value": "paid",
+        "acceptingBlockBlueScore": 8199289
+      },
+      {
+        "id": "repeat-live-receipt",
+        "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+        "subject": "defi-v1-live-receipt-002",
+        "value": "paid",
+        "acceptingBlockBlueScore": 8210235
+      },
+      {
+        "id": "third-live-receipt",
+        "txid": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
+        "subject": "defi-v1-live-receipt-003",
+        "value": "paid",
+        "acceptingBlockBlueScore": 8376287
+      }
+    ],
+    "ledgerAcceptedEvidenceRows": 3,
+    "ledgerPendingWalletSubmitRows": 47
+  },
+  "deferredMainnetRails": [
+    "external signer accepted result missing",
+    "live removed-block rollback evidence missing"
+  ],
+  "nextCommandPath": [
+    {
+      "id": "fetch-current-utxo",
+      "command": "TN12_ADDRESS=<wallet-address> OUTPOINT_PATH=artifacts/tn12-defi-v1-current-outpoint.json UTXOS_PATH=artifacts/tn12-defi-v1-current-utxos.json node scripts/fetch-funded-utxos.mjs",
+      "ready": true
+    },
+    {
+      "id": "build-next-receipt",
+      "command": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa FUNDING_OUTPOINT=artifacts/tn12-defi-v1-current-outpoint.json TN12_WALLET=.local/tn12-defi-v1-wallet.json OUT=artifacts/signed-drafts/<next-receipt>.json AMOUNT_TKAS=1 SIGNAL_KIND=order-receipt SIGNAL_SUBJECT=<subject> SIGNAL_VALUE=paid SIGNAL_NOTE=<note> node scripts/build-signed-payload-receipt-draft.mjs",
+      "ready": true
+    },
+    {
+      "id": "submit-next-receipt",
+      "command": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://65.108.107.30:18210 KASPA_WRPC_ENCODING=json KASPA_WRPC_NETWORK_ID=testnet-12 KASPA_WRPC_SUBMIT_SHAPE=object node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/<next-receipt>.json --submit",
+      "ready": true
+    },
+    {
+      "id": "verify-and-index",
+      "command": "npm run payload:verify:events && npm run indexer:checkpoint && npm run indexer:persist",
+      "ready": true
+    },
+    {
+      "id": "refresh-proven-status",
+      "command": "npm run project:proven-status",
+      "ready": true
+    },
+    {
+      "id": "refresh-operator-pack",
+      "command": "npm run project:operator-pack",
+      "ready": true
+    }
+  ],
+  "receiptsToShowFirst": [
+    {
+      "label": "DeFi v1 live receipt",
+      "evidencePath": "artifacts/payload-defi-v1-live-receipt-evidence.json",
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-payload-receipt.json"
+    },
+    {
+      "label": "DeFi v1 repeat receipt",
+      "evidencePath": "artifacts/payload-defi-v1-repeat-receipt-evidence.json",
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json"
+    },
+    {
+      "label": "DeFi v1 third receipt",
+      "evidencePath": "artifacts/payload-defi-v1-third-receipt-evidence.json",
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-third-receipt.json"
+    },
+    {
+      "label": "DeFi v1 multi-wallet A receipt",
+      "evidencePath": "artifacts/payload-defi-v1-multi-wallet-a-evidence.json",
+      "draftPath": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json"
+    },
+    {
+      "label": "DeFi v1 multi-wallet B receipt",
+      "evidencePath": "artifacts/payload-defi-v1-multi-wallet-b-evidence.json",
+      "draftPath": "artifacts/signed-drafts/tn12-multi-wallet-b-receipt.json"
+    },
+    {
+      "label": "Auction bid pass 001",
+      "evidencePath": "artifacts/payload-auction-bid-pass-001-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid-pass-001.json"
+    },
+    {
+      "label": "Auction bid pass 002",
+      "evidencePath": "artifacts/payload-auction-bid-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid.json"
+    },
+    {
+      "label": "Auction bid voucher 001",
+      "evidencePath": "artifacts/payload-auction-bid-voucher-001-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-auction-bid-voucher-001.json"
+    },
+    {
+      "label": "Auction settlement pass 001",
+      "evidencePath": "artifacts/payload-auction-settlement-pass-001-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-auction-settlement-pass-001.json"
+    },
+    {
+      "label": "Auction refund pass 001",
+      "evidencePath": "artifacts/payload-auction-refund-pass-001-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-auction-refund-pass-001.json"
+    },
+    {
+      "label": "Agent task invoice",
+      "evidencePath": "artifacts/payload-agent-task-invoice-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-agent-task-invoice.json"
+    },
+    {
+      "label": "Agent task escrow",
+      "evidencePath": "artifacts/payload-agent-task-escrow-evidence.json",
+      "draftPath": "artifacts/signed-drafts/payload-agent-task-escrow.json"
+    }
+  ],
+  "boundaries": [
+    "This pack is for TN12 demo operation, not mainnet readiness.",
+    "Local wallet receipts prove the repo path, not browser wallet or external signer readiness.",
+    "Deferred mainnet rails remain explicit until external signer and live rollback evidence exist."
+  ]
+}

@@ -13,7 +13,7 @@ Percentages in this repo mean mainnet deployment readiness unless a line explici
 | Escrow release, DAA refund, mutual cancel | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
 | Role-separated positive paths, all 7 | `TN12_ACCEPTED` | `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
-| 30 payload events, including 4 DeFi v1 receipts | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
+| 31 payload events, including 5 DeFi v1 receipts | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
 | Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |
 
 ## NOT Proven
@@ -51,6 +51,7 @@ npm run check:tn12
 | Mainnet readiness | `MAINNET_READINESS.md` |
 | Current 10-task slice | `artifacts/next-ten-execution-status.json` |
 | Proven status boundary | `artifacts/proven-status.json` |
+| Operator receipt pack | `artifacts/operator-receipt-pack.json` |
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |

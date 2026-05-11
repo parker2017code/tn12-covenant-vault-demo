@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-v1-operator-loop/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T20:50:45.995Z",
+  "generatedAt": "2026-05-11T00:59:51.673Z",
   "status": "repeatable-live-receipt-loop-ready",
   "wallet": {
     "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
@@ -28,6 +28,16 @@
       "payloadMatches": true,
       "outputMatches": true,
       "acceptingBlockBlueScore": 8210235
+    },
+    {
+      "id": "third-live-receipt",
+      "txid": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
+      "subject": "defi-v1-live-receipt-003",
+      "value": "paid",
+      "accepted": true,
+      "payloadMatches": true,
+      "outputMatches": true,
+      "acceptingBlockBlueScore": 8376287
     }
   ],
   "staleOutpointGuards": [
@@ -46,12 +56,20 @@
       "amountTkas": 9998.99995,
       "consumedBy": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
       "consumed": true
+    },
+    {
+      "id": "repeat-change-spent",
+      "txid": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+      "outputIndex": 1,
+      "amountTkas": 9797.9998,
+      "consumedBy": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
+      "consumed": true
     }
   ],
   "currentSpendableOutpoint": {
-    "txid": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+    "txid": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
     "outputIndex": 1,
-    "amountTkas": 9797.9998,
+    "amountTkas": 9796.99975,
     "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
     "spendable": true
   },

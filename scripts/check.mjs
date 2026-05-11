@@ -128,6 +128,7 @@ import { buildVirtualChainIngestionPlan } from "../src/virtualChainIngestion.mjs
 import { buildVirtualChainIngestionRun } from "../src/virtualChainIngestionRun.mjs";
 import { buildVirtualChainReaderAdapter } from "../src/virtualChainReaderAdapter.mjs";
 import { buildProvenStatus } from "../src/provenStatus.mjs";
+import { buildOperatorReceiptPack } from "../src/operatorReceiptPack.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
@@ -510,8 +511,8 @@ const provenStatus = buildProvenStatus({
 });
 assert.equal(provenStatus.status, "tn12-demo-proof-ready-mainnet-deferred");
 assert.equal(provenStatus.currentPercent, "53-58%");
-assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 43);
-assert.equal(provenStatus.acceptedEvidence.payloadEvents, 30);
+assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 44);
+assert.equal(provenStatus.acceptedEvidence.payloadEvents, 31);
 assert.equal(provenStatus.readiness.durablePromotionReady, false);
 assert.deepEqual(provenStatus.demoBlockers, []);
 assert.ok(provenStatus.mainnetDeferredBlockers.includes("external signer accepted result missing"));
@@ -519,6 +520,28 @@ assert.ok(provenStatus.mainnetDeferredBlockers.includes("live removed-block roll
 const provenStatusArtifact = JSON.parse(await readFile(new URL("../artifacts/proven-status.json", import.meta.url), "utf8"));
 assert.equal(provenStatusArtifact.status, "tn12-demo-proof-ready-mainnet-deferred");
 assert.equal(provenStatusArtifact.currentPercent, "53-58%");
+const operatorReceiptPack = buildOperatorReceiptPack({
+  provenStatus: provenStatusArtifact,
+  checkpoint: JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8")),
+  proofEvidence: JSON.parse(await readFile(new URL("../artifacts/proof-evidence.json", import.meta.url), "utf8")),
+  roleProofEvidence: JSON.parse(await readFile(new URL("../artifacts/role-separated-proof-evidence.json", import.meta.url), "utf8")),
+  payloadManifest: JSON.parse(await readFile(new URL("../fixtures/PayloadEventEvidence.json", import.meta.url), "utf8")),
+  operatorLoop: JSON.parse(await readFile(new URL("../artifacts/defi-v1-operator-loop.json", import.meta.url), "utf8")),
+  submitLedger: JSON.parse(await readFile(new URL("../artifacts/wallet-connector-submit-ledger.json", import.meta.url), "utf8")),
+  auctionCustodyReview: JSON.parse(await readFile(new URL("../artifacts/auction-custody-review.json", import.meta.url), "utf8")),
+  agentSettlementReview: JSON.parse(await readFile(new URL("../artifacts/agent-settlement-review.json", import.meta.url), "utf8")),
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(operatorReceiptPack.status, "operator-receipt-pack-ready");
+assert.equal(operatorReceiptPack.currentPercent, "53-58%");
+assert.equal(operatorReceiptPack.evidence.checkpointRecords, 44);
+assert.equal(operatorReceiptPack.evidence.payloadEvents, 31);
+assert.equal(operatorReceiptPack.custody.auctionReadyRows, 2);
+assert.equal(operatorReceiptPack.custody.agentReadyRows, 2);
+assert.ok(operatorReceiptPack.nextCommandPath.every((row) => row.ready));
+const operatorReceiptPackArtifact = JSON.parse(await readFile(new URL("../artifacts/operator-receipt-pack.json", import.meta.url), "utf8"));
+assert.equal(operatorReceiptPackArtifact.status, "operator-receipt-pack-ready");
+assert.equal(operatorReceiptPackArtifact.evidence.coreProofTransactions, 9);
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -968,10 +991,12 @@ assert.ok(defiBacklog.missingRails.includes("price oracle"));
 assert.ok(defiBacklog.briefs.some((brief) => brief.id === "prediction-hedge-simulator" && brief.status === "prototype-later"));
 const defiLoopArtifact = JSON.parse(await readFile(new URL("../artifacts/defi-v1-operator-loop.json", import.meta.url), "utf8"));
 assert.equal(defiLoopArtifact.status, "repeatable-live-receipt-loop-ready");
-assert.equal(defiLoopArtifact.receipts.length, 2);
+assert.ok(defiLoopArtifact.receipts.length >= 2);
 assert.ok(defiLoopArtifact.receipts.every((receipt) => receipt.accepted && receipt.payloadMatches));
 assert.ok(defiLoopArtifact.staleOutpointGuards.every((outpoint) => outpoint.consumed));
-assert.equal(defiLoopArtifact.currentSpendableOutpoint.txid, "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c");
+assert.ok(defiLoopArtifact.currentSpendableOutpoint.spendable);
+const optionalThirdReceipt = await readOptionalJson("../artifacts/payload-defi-v1-third-receipt-evidence.json");
+const optionalThirdDraft = await readOptionalJson("../artifacts/signed-drafts/tn12-defi-v1-third-receipt.json");
 const rebuiltDefiLoop = buildDefiV1OperatorLoop({
   firstReceipt: {
     ...JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-live-receipt-evidence.json", import.meta.url), "utf8")),
@@ -981,13 +1006,16 @@ const rebuiltDefiLoop = buildDefiV1OperatorLoop({
     ...JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-repeat-receipt-evidence.json", import.meta.url), "utf8")),
     source: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json", import.meta.url), "utf8")).source
   },
+  thirdReceipt: optionalThirdReceipt && optionalThirdDraft ? { ...optionalThirdReceipt, source: optionalThirdDraft.source } : null,
   fundedOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-funded-outpoint.json", import.meta.url), "utf8")),
   previousCurrentOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-first-change-outpoint.json", import.meta.url), "utf8")),
+  thirdPreviousOutpoint: await readOptionalJson("../artifacts/tn12-defi-v1-current-outpoint-before-third.json"),
   currentOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-current-outpoint.json", import.meta.url), "utf8")),
   walletAddress: "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
 assert.equal(rebuiltDefiLoop.status, "repeatable-live-receipt-loop-ready");
+assert.equal(rebuiltDefiLoop.receipts.length, defiLoopArtifact.receipts.length);
 const defiReceiptReplayGuardArtifact = JSON.parse(await readFile(new URL("../artifacts/defi-receipt-replay-guard.json", import.meta.url), "utf8"));
 assert.equal(defiReceiptReplayGuardArtifact.status, "defi-receipt-replay-guard-ready");
 assert.equal(defiReceiptReplayGuardArtifact.summary.acceptedReceipts, 4);
@@ -2027,6 +2055,7 @@ const files = [
   "scripts/build-next-ten-execution-plan.mjs",
   "scripts/build-next-ten-execution-status.mjs",
   "scripts/build-proven-status.mjs",
+  "scripts/build-operator-receipt-pack.mjs",
   "scripts/build-defi-receipt-replay-guard.mjs",
   "scripts/build-batch-assurance-campaign.mjs",
   "scripts/build-batch-assurance-custody-drafts.mjs",
@@ -2206,6 +2235,7 @@ const files = [
   "artifacts/stable-issuer-redemptions.json",
   "artifacts/build-status.json",
   "artifacts/proven-status.json",
+  "artifacts/operator-receipt-pack.json",
   "artifacts/agent-settlement-drafts.json",
   "artifacts/agent-settlement-review.json",
   "artifacts/project-plan.json",
@@ -2324,6 +2354,7 @@ const files = [
   "src/nextTenExecutionPlan.mjs",
   "src/nextTenExecutionStatus.mjs",
   "src/provenStatus.mjs",
+  "src/operatorReceiptPack.mjs",
   "src/defiReceiptReplayGuard.mjs",
   "src/batchAssurance.mjs",
   "src/batchAssuranceCustodyDrafts.mjs",
@@ -2439,6 +2470,7 @@ assert.match(labNotebook, /npm run rails:research/);
 assert.match(labNotebook, /npm run oracle:matrix/);
 assert.match(labNotebook, /npm run project:queue/);
 assert.match(labNotebook, /npm run project:next-ten-status/);
+assert.match(labNotebook, /npm run project:operator-pack/);
 assert.match(labNotebook, /npm run campaign:state/);
 assert.match(labNotebook, /npm run campaign:custody/);
 assert.match(labNotebook, /npm run campaign:custody-requirements/);
@@ -2619,3 +2651,12 @@ assert.equal(coordinationMarketStubs.status, "coordination-market-covenant-stubs
 assert.equal(coordinationMarketStubs.games.length, 3);
 
 console.log("Checks passed.");
+
+async function readOptionalJson(path) {
+  try {
+    return JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
+  } catch (error) {
+    if (error?.code === "ENOENT") return null;
+    throw error;
+  }
+}

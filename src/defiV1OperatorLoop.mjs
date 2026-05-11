@@ -1,21 +1,25 @@
 export function buildDefiV1OperatorLoop({
   firstReceipt = {},
   repeatReceipt = {},
+  thirdReceipt = null,
   fundedOutpoint = {},
   previousCurrentOutpoint = {},
+  thirdPreviousOutpoint = null,
   currentOutpoint = {},
   walletAddress = "",
   generatedAt = new Date().toISOString()
 } = {}) {
   const receipts = [
     receiptRow("first-live-receipt", firstReceipt),
-    receiptRow("repeat-live-receipt", repeatReceipt)
-  ];
+    receiptRow("repeat-live-receipt", repeatReceipt),
+    thirdReceipt ? receiptRow("third-live-receipt", thirdReceipt) : null
+  ].filter(Boolean);
   const acceptedReceipts = receipts.filter((receipt) => receipt.accepted && receipt.payloadMatches);
   const staleOutpoints = [
     outpointRow("initial-funding-spent", fundedOutpoint, firstReceipt),
-    outpointRow("first-change-spent", previousCurrentOutpoint, repeatReceipt)
-  ];
+    outpointRow("first-change-spent", previousCurrentOutpoint, repeatReceipt),
+    thirdReceipt && thirdPreviousOutpoint ? outpointRow("repeat-change-spent", thirdPreviousOutpoint, thirdReceipt) : null
+  ].filter(Boolean);
   const current = {
     txid: currentOutpoint.txid || "",
     outputIndex: Number(currentOutpoint.outputIndex ?? -1),

@@ -1,0 +1,111 @@
+{
+  "schema": "tn12-signed-payload-receipt-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "requiresPayloadSubmitSupport": true,
+  "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+  "source": {
+    "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+    "txid": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+    "outputIndex": 1,
+    "amountTkas": 9797.9998
+  },
+  "payment": {
+    "to": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+    "amountTkas": 1,
+    "amountSompi": "100000000",
+    "changeTkas": "9796.99975",
+    "changeSompi": "979699975000",
+    "minerFeeSompi": "5000"
+  },
+  "receipt": {
+    "schema": "kaspa-signal-payload/v1",
+    "status": "payload-size-ok",
+    "lane": "transaction-payload",
+    "payload": {
+      "kind": "order-receipt",
+      "subject": "defi-v1-live-receipt-003",
+      "value": "paid",
+      "note": "fresh operator pack receipt"
+    },
+    "encoded": {
+      "bytes": 113,
+      "transientMass": 452,
+      "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303033222c2276616c7565223a2270616964222c226e6f7465223a226672657368206f70657261746f72207061636b2072656365697074227d"
+    },
+    "limits": {
+      "standardTxMassLimit": 100000,
+      "transientByteMass": 4,
+      "remainingMassBeforeInputsOutputsAndSignatures": 99548
+    },
+    "boundary": "This models user transaction payload data, not arbitrary miner header data."
+  },
+  "transactionId": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+            "index": 1
+          },
+          "signatureScript": "41430323a9dfd457ef605ee9e6d078eee0ed47a3f64063484354233936d71847705e5301cc8b24f59c321ead9470e649b7b531aa433305409f2fbc1d216f2268bd01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 100000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "208f6c97ecc3c23411012e08cceff7bb6f7d3977208cac852a99e77ca2c94321edac"
+          }
+        },
+        {
+          "amount": 979699975000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "208f6c97ecc3c23411012e08cceff7bb6f7d3977208cac852a99e77ca2c94321edac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "payload": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303033222c2276616c7565223a2270616964222c226e6f7465223a226672657368206f70657261746f72207061636b2072656365697074227d"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "tx": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "f8a5e0f2f2bcacdd4a20ee6e1d7d0ea9b4ba12c1c54f464c975fea8b6d53715c",
+            "index": 1
+          },
+          "signatureScript": "41430323a9dfd457ef605ee9e6d078eee0ed47a3f64063484354233936d71847705e5301cc8b24f59c321ead9470e649b7b531aa433305409f2fbc1d216f2268bd01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "value": "100000000",
+          "scriptPublicKey": "0000208f6c97ecc3c23411012e08cceff7bb6f7d3977208cac852a99e77ca2c94321edac"
+        },
+        {
+          "value": "979699975000",
+          "scriptPublicKey": "0000208f6c97ecc3c23411012e08cceff7bb6f7d3977208cac852a99e77ca2c94321edac"
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "gas": "0",
+      "payload": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6c6976652d726563656970742d303033222c2276616c7565223a2270616964222c226e6f7465223a226672657368206f70657261746f72207061636b2072656365697074227d",
+      "id": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde"
+    }
+  }
+}

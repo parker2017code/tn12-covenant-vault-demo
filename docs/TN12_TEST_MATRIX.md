@@ -30,6 +30,7 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Role-separated assurance | DAA refund | `a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa` |
 | Role-separated escrow | DAA refund | `7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0` |
 | Invoice | Paid payload receipt | `34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e` |
+| DeFi v1 | Fresh local-wallet receipt 003 | `dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde` |
 | Invoice | Refund payload event | `4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13` |
 | Invoice | Error payload event | `3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c` |
 | Access pass | Workshop redemption payload | `59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90` |

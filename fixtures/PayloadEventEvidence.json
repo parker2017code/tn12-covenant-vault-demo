@@ -18,6 +18,11 @@
       "outPath": "artifacts/payload-defi-v1-repeat-receipt-evidence.json"
     },
     {
+      "label": "DeFi v1 third receipt",
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-third-receipt.json",
+      "outPath": "artifacts/payload-defi-v1-third-receipt-evidence.json"
+    },
+    {
       "label": "DeFi v1 multi-wallet A receipt",
       "draftPath": "artifacts/signed-drafts/tn12-multi-wallet-a-receipt.json",
       "outPath": "artifacts/payload-defi-v1-multi-wallet-a-evidence.json"
