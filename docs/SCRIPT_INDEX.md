@@ -51,9 +51,9 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | Rebuild compact proven status | `npm run project:proven-status` |
 | Rebuild operator receipt pack | `npm run operator:pack` |
 | Compatibility alias for operator pack | `npm run project:operator-pack` |
+| Rebuild reviewer manifest | `npm run project:review-manifest` |
 | Refresh DeFi v1 local-wallet receipt loop state | `npm run defi:v1-loop` |
 | Build current next-work queue | `npm run project:queue` |
-| Build reviewer command/doc/artifact manifest | `npm run project:review-manifest` |
 
 ## Wallet And Mainnet-Readiness Commands
 
