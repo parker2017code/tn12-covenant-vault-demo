@@ -158,11 +158,12 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
     assert.ok(await page.locator('#results-feed a[href*="tn12.kaspa.stream/transactions/"]').count() >= 6);
     await page.goto(`${url}lab.html`, { waitUntil: "networkidle" });
-    assert.equal(await page.locator("#product-map .product-grid a").count(), 12);
+    assert.equal(await page.locator("#product-map .product-grid a").count(), 13);
     const productMapText = await page.locator("#product-map").innerText();
     assert.match(productMapText, /What people can try/);
     assert.match(productMapText, /External wallet handoff/);
     assert.match(productMapText, /Get and verify tKAS/);
+    assert.match(productMapText, /Scheduler workbench/);
     const runbookText = await page.locator("#runbook").innerText();
     assert.match(runbookText, /If you are determined/);
     assert.match(runbookText, /Not finished: AMM custody/);
@@ -180,6 +181,14 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
     assert.equal(firstPanelId, "product-map");
+    await page.goto(`${url}lab.html#scheduler-workbench`, { waitUntil: "networkidle" });
+    await page.waitForSelector("#scheduler-workbench-jobs article", { timeout: 5000 });
+    const schedulerText = await page.locator("#scheduler-workbench").innerText();
+    assert.match(schedulerText, /Small version first/);
+    assert.match(schedulerText, /Accepted trigger/);
+    assert.match(schedulerText, /Transparent coordination pack/);
+    assert.match(schedulerText, /protocol-level automation/);
+    assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 6);
     await page.goto(`${url}lab.html#submit`, { waitUntil: "networkidle" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
     const submitText = await page.locator("#submit").innerText();

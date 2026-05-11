@@ -15,6 +15,7 @@ Start here:
 - `docs/CLAIM_VOCABULARY.md`: short definitions for `SCRIPT_ENFORCED`, `PLANNER_ONLY`, `INDEXER_DERIVED`, and related labels.
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
+- `docs/COPY_CLEANUP_PLAN.md`: public wording standard for pages and handoff docs.
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
 - `docs/NEXT_STEPS.md`: short current execution queue.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
@@ -89,6 +90,7 @@ npm run demo:operator-refresh
 | DeFi multi-wallet scenario pack | `artifacts/defi-multi-wallet-scenario-pack.json` |
 | DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
+| Scheduler workbench | `artifacts/universal-scheduler-workbench.json` |
 | Full DeFi benchmark | `artifacts/full-defi-benchmark.json` |
 | Real TN12 playground plan | `artifacts/playground-plan.json` |
 | Accepted playground funding | `artifacts/playground-funding-evidence.json` |
@@ -103,6 +105,7 @@ npm run demo:operator-refresh
 | External signer payload request | `artifacts/external-signer-payload-request.json` |
 | Full lab notebook | `docs/LAB_NOTEBOOK.md` |
 | Product execution plan | `docs/PRODUCT_EXECUTION_PLAN.md` |
+| Copy cleanup plan | `docs/COPY_CLEANUP_PLAN.md` |
 
 ## Local Preview
 

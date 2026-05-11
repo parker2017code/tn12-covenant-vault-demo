@@ -1,0 +1,152 @@
+{
+  "schema": "tn12-universal-scheduler-workbench/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T22:03:49.949Z",
+  "status": "scheduler-workbench-ready",
+  "thesis": "A scheduler is useful when it routes accepted triggers, bids, solver results, proof jobs, and settlement reviews without pretending to be protocol-level automation.",
+  "summary": {
+    "jobs": 6,
+    "acceptedEvidenceJobs": 5,
+    "replayCheckedJobs": 6,
+    "blockedPredictions": 23,
+    "acceptedCheckpointRows": 53,
+    "liveProductClaims": 0,
+    "protocolSchedulerClaims": 0,
+    "autonomousCustodyClaims": 0,
+    "mainnetClaims": 0
+  },
+  "jobs": [
+    {
+      "id": "scheduler-trigger-execution",
+      "title": "Accepted trigger -> execution",
+      "lane": "defi-scheduler",
+      "tn12Reality": "accepted-evidence",
+      "replayCheck": "passed",
+      "evidence": [
+        "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json",
+        "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
+        "1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d",
+        "artifacts/defi-accepted-activity-ledger.json"
+      ],
+      "expected": "Pool net must satisfy poolNetTkas >= 60 before execution.",
+      "observed": "4 TKAS execution transfer matched accepted receipt.",
+      "blockedCases": [
+        "duplicate-execution-receipt",
+        "stale-execution-receipt",
+        "execution-transfer-mismatch"
+      ]
+    },
+    {
+      "id": "scheduler-bid-selection",
+      "title": "Executor bid selection",
+      "lane": "defi-scheduler",
+      "tn12Reality": "accepted-evidence",
+      "replayCheck": "passed",
+      "evidence": [
+        "artifacts/payload-scheduler-bid-fast-executor-001-evidence.json",
+        "artifacts/payload-scheduler-bid-low-fee-001-evidence.json",
+        "artifacts/payload-scheduler-bid-stale-001-evidence.json"
+      ],
+      "expected": "Pick the lowest valid bid that satisfies latency and source policy.",
+      "observed": "local-pool-operator selected; stale or too-slow bids remain blocked.",
+      "blockedCases": [
+        "bid latency exceeds scheduler policy",
+        "bid references stale scheduler source"
+      ]
+    },
+    {
+      "id": "scheduler-covenant-binding",
+      "title": "Scheduler intent -> covenant proof binding",
+      "lane": "proof-binding",
+      "tn12Reality": "accepted-evidence",
+      "replayCheck": "passed",
+      "evidence": [],
+      "expected": "A scheduler row can reference an accepted covenant proof without upgrading itself into protocol scheduling.",
+      "observed": "1 binding rows accepted.",
+      "blockedCases": [
+        "binding cannot promote without an accepted proof txid",
+        "binding entrypoint must match the referenced proof row",
+        "accepted binding payload does not upgrade indexer-derived scheduler state into protocol scheduling"
+      ]
+    },
+    {
+      "id": "coordination-pack-solver",
+      "title": "Transparent coordination pack",
+      "lane": "coordination-market",
+      "tn12Reality": "deterministic-artifact",
+      "replayCheck": "passed",
+      "evidence": [
+        "artifacts/coordination-market-prototype.json",
+        "artifacts/coordination-market-settlement-brief.json"
+      ],
+      "expected": "Signed compatible intendos should form a pack only when threshold conditions are satisfied.",
+      "observed": "3 qualifying intendos; 75 TKAS route amount.",
+      "blockedCases": [
+        "accumulation opacity",
+        "capital multiplexing",
+        "coordinated atomic execution across independent participants",
+        "composability across downstream markets",
+        "DVP/private propagation",
+        "thFHE or sMPC opacity",
+        "RTD/miner-oracle event resolution"
+      ]
+    },
+    {
+      "id": "auction-settlement-review",
+      "title": "Auction settlement review",
+      "lane": "auction-intents",
+      "tn12Reality": "accepted-evidence",
+      "replayCheck": "passed",
+      "evidence": [
+        "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+        "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d"
+      ],
+      "expected": "Winner release and loser refund rows need accepted planner evidence, amount-matched custody, wallet review, and accepted replay.",
+      "observed": "2 custody rows ready; 3 settlement rows reviewed.",
+      "blockedCases": [
+        "accepted bid custody source",
+        "winner asset delivery rule",
+        "loser refund source output",
+        "wallet-standard signing route",
+        "accepted virtual-chain replay after submit"
+      ]
+    },
+    {
+      "id": "agent-task-settlement-review",
+      "title": "Agent task release / hold / refund",
+      "lane": "agent-commitments",
+      "tn12Reality": "accepted-evidence",
+      "replayCheck": "passed",
+      "evidence": [
+        "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+        "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755"
+      ],
+      "expected": "Release, hold, or refund can be scheduled only after task/proof/dispute evidence and wallet-reviewed settlement agree.",
+      "observed": "1 release, 1 hold, 1 refund rows.",
+      "blockedCases": [
+        "Reviewer policy scores proof quality.",
+        "Settlement review needs custody source, reviewer decision, wallet standard, and accepted replay.",
+        "Dispute holds stay held until reviewed."
+      ]
+    }
+  ],
+  "expectedBehavior": [
+    "Accepted trigger receipts can make an app job eligible.",
+    "Execution is promoted only when the accepted execution receipt and accepted transfer evidence match.",
+    "Executor bids can be ranked by explicit policy, but winner selection stays planner/indexer state until settlement is wallet-reviewed and accepted.",
+    "Coordination packs can be solved transparently now; private accumulation and atomic Hunt execution remain research.",
+    "Auction and agent settlement rows stay blocked until custody source, wallet-standard signing, submit result, and accepted replay all match."
+  ],
+  "predictionsToTestNext": [
+    "A duplicate scheduler execution receipt should stay blocked.",
+    "A low-fee but too-slow scheduler bid should lose to a valid faster bid.",
+    "A stale-source bid should never win even if its price is attractive.",
+    "A satisfiable coordination pack should produce exactly one selected settlement route.",
+    "A disputed agent task should stay held until reviewer decision and wallet review are attached."
+  ],
+  "boundaries": [
+    "This is a TN12 app workbench, not a protocol universal scheduler.",
+    "It schedules reviewable jobs over accepted evidence; it does not create autonomous custody.",
+    "The full research target still needs privacy, capital multiplexing, solver incentives, censorship resistance, MEV resistance, and atomic execution."
+  ]
+}

@@ -64,6 +64,7 @@
         <a href="#access-passes"><span>play now</span><strong>Access passes</strong><p>Tickets, coupons, memberships with issuer review.</p><small>Issuer/indexer state</small></a>
         <a href="#auction-intents"><span>play now</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Planner/indexer settlement boundary</small></a>
         <a href="#defi-backlog"><span>research/play</span><strong>DeFi lab</strong><p>Accepted receipts, pool transfers, reducers, blocked custody.</p><small>No AMM/lending custody claim</small></a>
+        <a href="#scheduler-workbench"><span>play next</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App scheduler, not protocol automation</small></a>
         <a href="#coordination"><span>research/play</span><strong>Coordination / Stag</strong><p>Transparent intendos, packs, solver, settlement brief.</p><small>No private Hunt execution yet</small></a>
         <a href="#agent-commitments"><span>play next</span><strong>Agent commitments</strong><p>Task offers, completion proofs, disputes, release/refund review.</p><small>Wallet review before payout</small></a>
         <a href="#submit"><span>required rail</span><strong>External wallet handoff</strong><p>Review unsigned requests, sign outside repo, validate return.</p><small>No private key sharing</small></a>
@@ -436,6 +437,21 @@ npm run campaign:custody</pre>
       <div id="coordination-packs" class="coordination-packs" aria-live="polite"></div>
       <pre>npm run coordination:market
 npm run coordination:settlement-brief</pre>
+    </section>
+
+    <section id="scheduler-workbench" class="panel scheduler-workbench">
+      <div class="section-title">
+        <p class="eyebrow">Universal scheduler workbench</p>
+        <h2>Small version first.</h2>
+        <p>This maps the scheduler idea into rows we can test: accepted trigger receipts, executor bids, execution receipts, coordination packs, auction settlement, and agent-task settlement. It schedules reviewable app jobs; it does not claim protocol-level automation.</p>
+      </div>
+      <div id="scheduler-workbench-summary" class="results-summary" aria-live="polite"></div>
+      <div id="scheduler-workbench-jobs" class="scheduler-workbench-jobs" aria-live="polite"></div>
+      <details class="playground-command-drawer">
+        <summary>Expected behavior and predictions</summary>
+        <div id="scheduler-workbench-predictions" class="results-rails" aria-live="polite"></div>
+      </details>
+      <pre>npm run scheduler:workbench</pre>
     </section>
 
     <section id="access-passes" class="panel access-passes">

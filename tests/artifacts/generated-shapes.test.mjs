@@ -68,6 +68,7 @@ const defiArtifacts = [
   ["artifacts/defi-artifact-manifest.json", "tn12-defi-artifact-manifest/v1"],
   ["artifacts/scheduler-intent-registry.json", "tn12-scheduler-intent-registry/v1"],
   ["artifacts/scheduler-covenant-binding.json", "tn12-scheduler-covenant-binding/v1"],
+  ["artifacts/universal-scheduler-workbench.json", "tn12-universal-scheduler-workbench/v1"],
   ["artifacts/full-defi-benchmark.json", "tn12-full-defi-benchmark/v1"],
   ["artifacts/playground-plan.json", "tn12-playground-plan/v1"],
   ["artifacts/playground-actions.json", "tn12-playground-actions/v1"],
