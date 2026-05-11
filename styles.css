@@ -1990,6 +1990,84 @@ progress::-moz-progress-bar {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
+.playground-start {
+  border-color: rgba(245, 194, 126, .34);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(245, 194, 126, .16), transparent 28%),
+    radial-gradient(circle at 100% 25%, rgba(118, 167, 158, .15), transparent 26%),
+    var(--panel);
+}
+
+.playground-quickstart {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.playground-quickstart article {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  min-height: 190px;
+  border: 1px solid rgba(118, 167, 158, .28);
+  border-radius: 22px;
+  padding: 18px;
+  overflow-wrap: anywhere;
+  background:
+    linear-gradient(145deg, rgba(118, 167, 158, .13), rgba(15, 22, 25, .96)),
+    #101615;
+}
+
+.playground-quickstart article:nth-child(2) {
+  border-color: rgba(245, 194, 126, .44);
+}
+
+.playground-quickstart article:nth-child(3) {
+  border-color: rgba(150, 185, 255, .42);
+}
+
+.playground-quickstart span {
+  width: fit-content;
+  border: 1px solid rgba(245, 194, 126, .32);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.playground-quickstart strong {
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1.08;
+}
+
+.playground-quickstart p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.playground-command-drawer {
+  margin-top: 14px;
+  border: 1px solid rgba(118, 167, 158, .24);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(8, 13, 14, .45);
+}
+
+.playground-command-drawer summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 850;
+}
+
+.playground-command-drawer pre {
+  margin: 12px 0 0;
+}
+
 .playground-flow-card {
   position: relative;
   border-color: rgba(118, 167, 158, .45) !important;
@@ -2375,6 +2453,7 @@ progress::-moz-progress-bar {
   .playground-level-grid,
   .playground-tx-map,
   .activity-strip,
+  .playground-quickstart,
   .session-balance-strip,
   .journey-grid {
     grid-template-columns: 1fr;

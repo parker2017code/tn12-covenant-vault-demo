@@ -4,6 +4,7 @@ import { escapeHtml, shortAddress, shortTxid } from "../formatters.mjs";
 export async function renderPlaygroundExplorer(documentRef = document) {
   const summaryNode = documentRef.querySelector("#playground-summary");
   const levelsNode = documentRef.querySelector("#playground-levels");
+  const quickstartNode = documentRef.querySelector("#playground-quickstart");
   const rolesNode = documentRef.querySelector("#playground-roles");
   const sessionNode = documentRef.querySelector("#playground-session");
   const activityStripNode = documentRef.querySelector("#playground-activity-strip");
@@ -11,6 +12,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   const actionsNode = documentRef.querySelector("#playground-actions");
   const rulesNode = documentRef.querySelector("#playground-rules");
   const flowNode = documentRef.querySelector("#playground-flow");
+  const walletFlowNode = documentRef.querySelector("#playground-wallet-flow");
   const replaySummaryNode = documentRef.querySelector("#playground-replay-summary");
   const sessionBalancesNode = documentRef.querySelector("#playground-session-balances");
   const balancesNode = documentRef.querySelector("#playground-balances");
@@ -37,6 +39,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}
       ${metric("Benchmark", `${plan.summary.benchmarkPercent}%`, "Current repo-local full-DeFi benchmark.")}
     `;
+    if (quickstartNode) renderQuickstart(quickstartNode, plan);
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });
     if (activityStripNode) renderActivityStrip(activityStripNode, { funding, deposit, secondDeposit, payout, reducer, activity });
     const sessionRoleMap = new Map((session.roles || []).map((role) => [role.id, role]));
@@ -103,11 +106,29 @@ export async function renderPlaygroundExplorer(documentRef = document) {
         <strong>${escapeHtml(step)}</strong>
       </article>
     `).join("");
+    if (walletFlowNode) {
+      walletFlowNode.innerHTML = plan.ownWalletFlow.map((step, index) => `
+        <article>
+          <span>${index + 1}</span>
+          <strong>${escapeHtml(step)}</strong>
+        </article>
+      `).join("");
+    }
     renderReplay({ replaySummaryNode, sessionBalancesNode, balancesNode, blockedNode, reducer, activity, actions, deposit, secondDeposit, payout });
     wireCopyButtons(documentRef);
   } catch (error) {
     summaryNode.innerHTML = `<article><span>Load error</span><strong>Playground plan unavailable</strong><p>${escapeHtml(error.message)}</p></article>`;
   }
+}
+
+function renderQuickstart(node, plan) {
+  node.innerHTML = (plan.startHere || []).map((step, index) => `
+    <article class="quickstart-${escapeHtml(step.id)}">
+      <span>${escapeHtml(String(index + 1))} · ${escapeHtml(step.requirement)}</span>
+      <strong>${escapeHtml(step.title)}</strong>
+      <p>${escapeHtml(step.detail)}</p>
+    </article>
+  `).join("");
 }
 
 function renderLevels(node, { activity, session, funding, deposit, secondDeposit, payout }) {

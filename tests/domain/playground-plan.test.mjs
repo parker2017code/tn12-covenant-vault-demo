@@ -22,6 +22,9 @@ assert.ok(artifact.roles.every((role) => /^kaspa-testnet-12$/.test(role.network)
 assert.ok(artifact.roles.every((role) => role.privateKeyPolicy === "session-only-not-committed"));
 assert.ok(artifact.actions.some((action) => action.enforcement === "TN12_ACCEPTED_TARGET"));
 assert.ok(artifact.actions.some((action) => action.enforcement === "REJECTED_BY_REDUCER"));
+assert.equal(artifact.startHere.length, 4);
+assert.ok(artifact.startHere.some((step) => step.id === "own-wallet"));
+assert.ok(artifact.ownWalletFlow.some((step) => /Sign outside the repo/.test(step)));
 assert.ok(artifact.commonSense.some((rule) => /fresh session wallets/.test(rule)));
 
 const checkedIn = await readJson("artifacts/playground-plan.json");

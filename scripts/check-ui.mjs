@@ -71,6 +71,8 @@ try {
   assert.match(playgroundHtml, /src="public-explorer\.js"/);
   assert.doesNotMatch(playgroundHtml, /src="app\.js"/);
   assert.match(playgroundHtml, /id="playground-activity-strip"/);
+  assert.match(playgroundHtml, /id="playground-quickstart"/);
+  assert.match(playgroundHtml, /id="playground-wallet-flow"/);
   assert.match(playgroundHtml, /id="playground-summary"/);
   assert.match(playgroundHtml, /id="playground-roles"/);
   assert.match(playgroundHtml, /id="playground-actions"/);
@@ -132,7 +134,12 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /7 TKAS/);
     assert.match(playgroundText, /4 accepted txs/);
     assert.match(playgroundText, /Open lab tools/);
+    assert.match(playgroundText, /Bring your own external wallet/);
+    assert.match(playgroundText, /Sign outside the repo/);
+    assert.match(playgroundText, /Build a based-app lane/);
     assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
+    assert.equal(await page.locator("#playground-quickstart article").count(), 4);
+    assert.ok(await page.locator('#wallet a[href="lab.html#submit"]').count() === 1);
     assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/transactions/"]').count(), 4);
     assert.equal(await page.locator('#playground-tx-map article').count(), 5);
     assert.ok(await page.locator('#playground-roles [data-copy^="kaspatest:"]').count() >= 6);

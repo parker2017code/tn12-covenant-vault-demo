@@ -42,6 +42,41 @@ export function buildPlaygroundPlan({
     },
     roles,
     actions,
+    startHere: [
+      quickstart(
+        "observe",
+        "Watch accepted TN12 money move",
+        "No wallet needed.",
+        "Open the four txids, compare the explorer records to the replay balances, then inspect blocked withdrawals."
+      ),
+      quickstart(
+        "faucet",
+        "Run with fresh faucet wallets",
+        "Needs TN12 tKAS.",
+        "Generate session wallets, fund only public kaspatest addresses, submit tiny transfers, then replay the accepted txids."
+      ),
+      quickstart(
+        "own-wallet",
+        "Bring your own external wallet",
+        "No repo private keys.",
+        "Export a request, review exact fields in your wallet, return signed bytes, validate the fingerprint, submit, then replay."
+      ),
+      quickstart(
+        "extend",
+        "Build a based-app lane",
+        "Start from accepted evidence.",
+        "Use the same loop for DeFi reducers, coordination packs, auctions, access passes, or agent commitments."
+      )
+    ],
+    ownWalletFlow: [
+      "Pick a lane and export the unsigned wallet-standard request.",
+      "Review network, inputs, outputs, fees, payload bytes, compute budget, and human intent.",
+      "Sign outside the repo with a TN12-capable wallet or signer.",
+      "Return the signed transaction or signer-result artifact.",
+      "Run signer validation before any submit.",
+      "Submit through the field-preserving route required by that lane.",
+      "Replay accepted txid evidence before the UI promotes app state."
+    ],
     faucetFlow: [
       "Generate fresh session wallets for each role.",
       "Display only kaspatest addresses and requested faucet amounts.",
@@ -79,4 +114,8 @@ function role(id, label, suggestedFundingTkas, purpose) {
 
 function action(id, label, enforcement, detail) {
   return { id, label, enforcement, detail };
+}
+
+function quickstart(id, title, requirement, detail) {
+  return { id, title, requirement, detail };
 }

@@ -43,6 +43,20 @@ For this project, based-app prototypes are already in scope:
 
 ZK is one verification path for based apps, not the definition of every based app. A simple prototype can start with accepted transactions plus deterministic replay. A stronger based-zk app adds proof verification, state roots, exits, bridge safety, wallet UX, and audits.
 
+### Coordination And Scheduling
+
+Coordination markets are a priority based-app prototype for this repo. The small buildable version is transparent:
+
+- users publish conditional commitments;
+- the app groups compatible commitments into packs;
+- a solver checks whether the pack conditions are satisfied;
+- the UI prepares one settlement or refund route;
+- accepted replay decides what app state can be promoted.
+
+The full research version is harder because it adds private accumulation, capital multiplexing, solver markets, censorship resistance, MEV resistance, and atomic execution. This repo should not wait for that full version before building useful transparent walkthroughs.
+
+The universal scheduler starts as a reusable app-job layer: accepted trigger, bid, execution, proof, and settlement records that can serve DeFi reducers, auctions, coordination packs, access passes, and agent commitments. Treat it as an app artifact and replay layer until protocol-level scheduler work exists.
+
 ## vProgs
 
 vProgs are the longer native verifiable-program direction. Current public material frames Toccata as a step toward that path, not the final form.

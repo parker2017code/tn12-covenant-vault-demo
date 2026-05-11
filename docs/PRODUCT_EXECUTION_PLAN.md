@@ -53,6 +53,24 @@ So yes: this repo should build based-app prototypes. We have already started: De
 | 9 | Real external signer round trip | A user-approved external wallet signs one payload and one covenant-style request; returned bytes validate, submit succeeds, replay matches. |
 | 10 | Durable live indexer promotion | New accepted transactions are discovered from a live virtual-chain feed, rollback behavior is handled, and promotion is deterministic. |
 
+## Coordination Markets And Scheduling
+
+Yes, this repo should take a stab at coordination markets. Start with the useful small version, not the full research target.
+
+Plain meaning: a coordination market lets people commit to an action only if enough of the right other people also commit. The app collects conditional commitments, groups compatible ones into a pack, runs a solver, and prepares a settlement or refund route for the selected pack.
+
+The current repo version is intentionally small:
+
+1. A Stag describes the shared goal.
+2. An Intendo is one user's conditional commitment.
+3. A Pack is the compatible group of intendos.
+4. A Solver checks whether the pack satisfies transparent threshold rules.
+5. A Hunt is the planned execution path for the winning pack.
+
+The full research version is hard because it wants privacy, capital multiplexing, solver incentives, censorship resistance, MEV resistance, atomic execution, and app-to-app composability. The repo can still build the first 20% now: transparent commitments, accepted payload receipts, deterministic solver output, wallet-reviewed settlement drafts, and replayed accepted evidence.
+
+Universal scheduler means the reusable execution layer for these app jobs. It should eventually schedule payload receipts, solver jobs, proof jobs, auction settlement, coordination-pack settlement, agent tasks, and DeFi reducer actions. It is not a protocol claim yet; in this repo it starts as artifact-backed job routing plus accepted replay.
+
 ## Current Lane Status
 
 | Lane | Usable Now | Still Missing |

@@ -23,6 +23,7 @@
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
+        <a href="#start">Start</a>
         <a href="#activity">Tape</a>
         <a href="#roles">Roles</a>
         <a href="#replay">Replay</a>
@@ -43,6 +44,15 @@
         <strong>4 accepted txs</strong>
         <p>Funding -> two deposits -> payout -> replay.</p>
       </aside>
+    </section>
+
+    <section id="start" class="panel results-panel playground-start">
+      <div class="section-title">
+        <p class="eyebrow">Start here</p>
+        <h2>Pick how real you want to get.</h2>
+        <p>Observe the accepted run, repeat it with faucet tKAS, bring your own TN12 wallet, or use the same pattern to build a based-app lane.</p>
+      </div>
+      <div id="playground-quickstart" class="playground-quickstart" aria-live="polite"></div>
     </section>
 
     <section class="panel results-panel">
@@ -133,13 +143,30 @@
         <h2>Try the same pattern.</h2>
       </div>
       <div id="playground-flow" class="results-flow" aria-live="polite"></div>
-      <pre>npm run playground:wallets
+      <details class="playground-command-drawer">
+        <summary>Show local commands</summary>
+        <pre>npm run playground:wallets
 npm run playground:funding-draft
 node scripts/submit-signed-draft.mjs .local/playground/funding-draft.json --submit</pre>
+      </details>
       <p class="note">If you just want to observe, skip the commands and click the txids above. If you want to run it, generate fresh roles, fund them with faucet tKAS or your own TN12 wallet, then replay the artifacts.</p>
       <div class="link-list">
         <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">Open TN12 faucet</a>
         <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">Open TN12 explorer</a>
+      </div>
+    </section>
+
+    <section id="wallet" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Your wallet</p>
+        <h2>Play without sharing keys.</h2>
+        <p>The target product path is external signing: the repo prepares reviewable requests, your wallet signs, the repo validates the returned bytes, and app state moves only after accepted replay.</p>
+      </div>
+      <div id="playground-wallet-flow" class="results-flow" aria-live="polite"></div>
+      <div class="link-list">
+        <a href="lab.html#submit">Open wallet handoff</a>
+        <a href="artifacts/wallet-standard-requests.json">Open request candidates</a>
+        <a href="artifacts/wallet-external-signer-result-template.json">Open signer return template</a>
       </div>
     </section>
 
