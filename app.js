@@ -1523,8 +1523,22 @@ async function renderWalletConnector() {
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
+    const firstRequestId = roundtrip.recommendedOrder?.[0] || standard.requests?.[0]?.requestId || "";
+    const firstRequest = standard.requests?.find((request) => request.requestId === firstRequestId) || standard.requests?.[0] || {};
+    const firstPreservation = firstRequest.preservation?.mustPreserve || [];
 
     walletConnectorNode.innerHTML = `
+      <article class="wallet-play-card">
+        <span>external-wallet-play-ready</span>
+        <strong>Use your own TN12 wallet without sharing keys</strong>
+        <p>Start with ${escapeHtml(firstRequest.label || "the first wallet-standard request")}. Copy or download the request, sign it in an external wallet, then return the signed bytes for validation and TN12 replay.</p>
+        <small>Must preserve: ${escapeHtml(firstPreservation.slice(0, 6).join(", "))}</small>
+        <p class="link-list compact-links">
+          <a href="artifacts/wallet-standard-requests.json">wallet requests</a>
+          <a href="artifacts/wallet-external-signer-result-template.json">return template</a>
+          <a href="artifacts/wallet-standard-signer-validation.json">validation rules</a>
+        </p>
+      </article>
       <article>
         <span>${escapeHtml(readiness.status)}</span>
         <strong>${escapeHtml(readiness.summary.drafts)} drafts, ${escapeHtml(readiness.summary.payloadDrafts)} payload drafts</strong>

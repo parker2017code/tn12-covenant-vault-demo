@@ -197,7 +197,7 @@ npm run indexer:virtual-chain-run</pre>
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
         <h2>Review signed drafts before any testnet broadcast.</h2>
-        <p>This is a review surface for exact inputs, outputs, fees, payload state, and submit commands. The remaining mainnet-readiness gap is real external signing: the repo must not hold user keys for a production custody rail.</p>
+        <p>This is a review surface for exact inputs, outputs, fees, payload state, and submit commands. External wallets should be able to play by signing reviewable requests without sharing private keys; the remaining readiness gap is one live accepted external-signer result.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>

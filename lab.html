@@ -544,7 +544,7 @@ npm run tx:payload</pre>
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
         <h2>Review signed drafts before any testnet broadcast.</h2>
-        <p>This is lane 2: exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. The browser reviews signed artifacts only; actual network submission remains an explicit shell command.</p>
+        <p>This is lane 2: exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. External wallet play is the goal: users should review an unsigned request, sign outside the repo, return signed bytes, and only then submit/replay.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>

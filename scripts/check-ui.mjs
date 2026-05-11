@@ -44,6 +44,7 @@ try {
   assert.match(html, /id="proof-status"/);
   assert.match(html, /id="receipt-events"/);
   assert.match(html, /id="wallet-connector"/);
+  assert.match(html, /External wallets should be able to play/);
   assert.match(html, /id="defi-receipt-guard"/);
   assert.match(html, /id="defi-simulation-summary"/);
   assert.match(html, /id="defi-simulation-list"/);
@@ -143,6 +144,11 @@ async function checkRenderedPages(url) {
     await page.goto(`${url}lab.html`, { waitUntil: "networkidle" });
     assert.ok(await page.locator("details.lab-drawer").count() >= 20);
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
+    await page.goto(`${url}lab.html#submit`, { waitUntil: "networkidle" });
+    await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
+    const submitText = await page.locator("#submit").innerText();
+    assert.match(submitText, /Use your own TN12 wallet without sharing keys/);
+    assert.ok(await page.locator('.wallet-play-card a[href="artifacts/wallet-standard-requests.json"]').count() === 1);
     await page.close();
   } finally {
     await browser.close();
