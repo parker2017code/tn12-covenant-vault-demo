@@ -27,6 +27,7 @@
         <a href="#flow">Flow</a>
         <a href="#feed">Txids</a>
         <a href="#standards">Adapters</a>
+        <a href="#source-map">Sources</a>
       </div>
     </nav>
   </header>
@@ -155,6 +156,32 @@
         <p>These are adapter work items: message shapes, receipts, reducers, and negative cases. External links are design references; repo links are the local artifacts behind the row. Neither is a production-integration claim.</p>
       </div>
       <div id="standards-adapters" class="results-rails" aria-live="polite"></div>
+    </section>
+
+    <section id="source-map" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Source map</p>
+        <h2>What should be clickable.</h2>
+        <p>Links are separated by job. Evidence links prove a transaction exists; repo links show the generated artifact or fixture; external references explain adapter vocabulary; commands remain text because they run locally.</p>
+      </div>
+      <div class="claim-grid">
+        <article>
+          <strong>TN12 explorer evidence</strong>
+          <p>Clickable txids and addresses should open <code>tn12.kaspa.stream/transactions/...</code> or <code>/addresses/...</code>.</p>
+        </article>
+        <article>
+          <strong>Repo source</strong>
+          <p>Clickable local files point at artifacts, fixtures, docs, scripts, or source files that back the row.</p>
+        </article>
+        <article>
+          <strong>External reference</strong>
+          <p>Standards and docs are design references only. They do not claim certification, partnership, or production integration.</p>
+        </article>
+        <article>
+          <strong>Commands</strong>
+          <p><code>npm run ...</code> and shell snippets stay plain text unless they reference an actual file path.</p>
+        </article>
+      </div>
     </section>
   </main>
 </body>

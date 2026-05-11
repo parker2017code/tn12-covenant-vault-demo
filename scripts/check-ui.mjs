@@ -52,7 +52,9 @@ try {
   assert.match(resultsHtml, /id="knowledge-levels"/);
   assert.match(resultsHtml, /id="results-rails"/);
   assert.match(resultsHtml, /id="standards-adapters"/);
+  assert.match(resultsHtml, /id="source-map"/);
   assert.match(resultsHtml, /External links are design references/);
+  assert.match(resultsHtml, /What should be clickable/);
   assert.match(resultsHtml, /Accepted TN12 activity/);
   assert.match(resultsHtml, /Live playground/);
   assert.doesNotMatch(resultsHtml, /X post|x-post-draft|Draft post/);
