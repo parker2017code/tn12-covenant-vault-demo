@@ -1,0 +1,189 @@
+{
+  "schema": "tn12-project-review-manifest/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T16:03:05.457Z",
+  "status": "project-review-manifest-ready",
+  "summary": {
+    "commands": 8,
+    "commandPresent": 8,
+    "docs": 8,
+    "docsPresent": 8,
+    "artifacts": 9,
+    "artifactsReady": 9,
+    "problems": 0
+  },
+  "commands": [
+    {
+      "command": "npm run check:focused",
+      "present": true
+    },
+    {
+      "command": "npm run check:all",
+      "present": true
+    },
+    {
+      "command": "npm run check:tn12",
+      "present": true
+    },
+    {
+      "command": "npm run operator:refresh",
+      "present": true
+    },
+    {
+      "command": "npm run defi:refresh",
+      "present": true
+    },
+    {
+      "command": "npm run mainnet:readiness",
+      "present": true
+    },
+    {
+      "command": "npm run project:proven-status",
+      "present": true
+    },
+    {
+      "command": "npm run project:operator-pack",
+      "present": true
+    }
+  ],
+  "docs": [
+    {
+      "path": "README.md",
+      "present": true,
+      "bytes": 4963
+    },
+    {
+      "path": "MAINNET_READINESS.md",
+      "present": true,
+      "bytes": 2589
+    },
+    {
+      "path": "TN12_HANDOFF.md",
+      "present": true,
+      "bytes": 2658
+    },
+    {
+      "path": "docs/PROGRESS.md",
+      "present": true,
+      "bytes": 3953
+    },
+    {
+      "path": "docs/NEXT_STEPS.md",
+      "present": true,
+      "bytes": 8804
+    },
+    {
+      "path": "docs/AUDIT_MAP.md",
+      "present": true,
+      "bytes": 6531
+    },
+    {
+      "path": "docs/SCRIPT_INDEX.md",
+      "present": true,
+      "bytes": 4177
+    },
+    {
+      "path": "docs/TN12_TEST_MATRIX.md",
+      "present": true,
+      "bytes": 7729
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "artifacts/proven-status.json",
+      "expectedSchema": "tn12-proven-status/v1",
+      "schema": "tn12-proven-status/v1",
+      "status": "tn12-demo-proof-ready-mainnet-deferred",
+      "hasSummary": false,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/operator-receipt-pack.json",
+      "expectedSchema": "tn12-operator-receipt-pack/v1",
+      "schema": "tn12-operator-receipt-pack/v1",
+      "status": "operator-receipt-pack-ready",
+      "hasSummary": false,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/mainnet-readiness.json",
+      "expectedSchema": "kaspa-app-mainnet-readiness/v1",
+      "schema": "kaspa-app-mainnet-readiness/v1",
+      "status": "readiness-map-not-launch-approval",
+      "hasSummary": true,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/defi-artifact-manifest.json",
+      "expectedSchema": "tn12-defi-artifact-manifest/v1",
+      "schema": "tn12-defi-artifact-manifest/v1",
+      "status": "defi-artifact-manifest-ready",
+      "hasSummary": true,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/durable-replay-promotion-guard.json",
+      "expectedSchema": "tn12-durable-replay-promotion-guard/v1",
+      "schema": "tn12-durable-replay-promotion-guard/v1",
+      "status": "durable-replay-promotion-guard-review",
+      "hasSummary": true,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/wallet-submit-result-validation.json",
+      "expectedSchema": "tn12-wallet-submit-result-validation/v1",
+      "schema": "tn12-wallet-submit-result-validation/v1",
+      "status": "wallet-submit-result-validation-ready",
+      "hasSummary": true,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/checkpointed-accepted-index.json",
+      "expectedSchema": "tn12-checkpointed-accepted-index/v1",
+      "schema": "tn12-checkpointed-accepted-index/v1",
+      "status": "accepted-index-fully-matched",
+      "hasSummary": true,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/proof-evidence.json",
+      "expectedSchema": "tn12-contract-spend-evidence/v1",
+      "schema": "tn12-contract-spend-evidence/v1",
+      "status": "",
+      "hasSummary": true,
+      "present": true,
+      "ready": true,
+      "problems": []
+    },
+    {
+      "path": "artifacts/role-separated-proof-evidence.json",
+      "expectedSchema": "tn12-contract-spend-evidence/v1",
+      "schema": "tn12-contract-spend-evidence/v1",
+      "status": "",
+      "hasSummary": true,
+      "present": true,
+      "ready": true,
+      "problems": []
+    }
+  ],
+  "problems": [],
+  "boundaries": [
+    "This manifest checks reviewer routing, not protocol truth.",
+    "Artifact readiness means schema/status presence and expected schema match.",
+    "Accepted TN12 evidence still comes from the proof and payload verification gates."
+  ]
+}

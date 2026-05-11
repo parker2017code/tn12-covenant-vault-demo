@@ -68,6 +68,7 @@ npm run demo:operator-refresh
 | Script groups | `docs/SCRIPT_INDEX.md` |
 | Tidying map | `docs/REPO_TIDYING.md` |
 | Next steps | `docs/NEXT_STEPS.md` |
+| Reviewer manifest | `artifacts/project-review-manifest.json` |
 | Proof index | `docs/PROOF_INDEX.md` |
 | Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
 | Mainnet readiness | `MAINNET_READINESS.md` |
