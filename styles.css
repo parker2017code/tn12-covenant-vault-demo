@@ -1575,6 +1575,69 @@ progress::-moz-progress-bar {
   margin-top: 24px;
 }
 
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.journey-grid a {
+  position: relative;
+  min-height: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(118, 167, 158, .25);
+  border-radius: 18px;
+  padding: 18px;
+  overflow: hidden;
+  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(118, 167, 158, .16), rgba(7, 8, 7, .08) 48%, rgba(185, 176, 223, .12)),
+    #101615;
+}
+
+.journey-grid a::after {
+  content: "";
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  right: -58px;
+  bottom: -58px;
+  border: 1px solid rgba(118, 167, 158, .28);
+  border-radius: 50%;
+  background: rgba(118, 167, 158, .08);
+}
+
+.journey-grid a:hover {
+  border-color: rgba(118, 167, 158, .7);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.journey-grid span {
+  position: relative;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.journey-grid strong {
+  position: relative;
+  display: block;
+  margin-top: 12px;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.journey-grid p {
+  position: relative;
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
 .results-summary,
 .results-rails,
 .results-feed,
@@ -1626,13 +1689,84 @@ progress::-moz-progress-bar {
 }
 
 .playground-level-grid,
-.playground-tx-map {
+.playground-tx-map,
+.activity-strip {
   display: grid;
   gap: 14px;
 }
 
 .playground-level-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.activity-strip {
+  grid-template-columns: 1.1fr 1fr 1fr 1.25fr;
+}
+
+.activity-card {
+  position: relative;
+  min-height: 180px;
+  border: 1px solid rgba(118, 167, 158, .25);
+  border-radius: 18px;
+  padding: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(245, 194, 126, .22), transparent 34%),
+    linear-gradient(135deg, rgba(118, 167, 158, .12), rgba(15, 22, 21, .92));
+}
+
+.activity-card::before {
+  content: "";
+  position: absolute;
+  inset: auto -20% -40% 25%;
+  height: 110px;
+  border-radius: 999px;
+  filter: blur(4px);
+  background: rgba(118, 167, 158, .18);
+  transform: rotate(-8deg);
+}
+
+.activity-card span {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(7, 17, 14, .8);
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.activity-card strong {
+  position: relative;
+  display: block;
+  margin-top: 16px;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.activity-card p {
+  position: relative;
+}
+
+.activity-amount {
+  margin: 12px 0 6px;
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.activity-hot {
+  border-color: rgba(245, 194, 126, .5);
+}
+
+.activity-go {
+  border-color: rgba(118, 167, 158, .55);
+}
+
+.activity-cool {
+  border-color: rgba(150, 185, 255, .42);
 }
 
 .playground-tx-map {
@@ -1803,7 +1937,9 @@ progress::-moz-progress-bar {
   .results-feed,
   .results-flow,
   .playground-level-grid,
-  .playground-tx-map {
+  .playground-tx-map,
+  .activity-strip,
+  .journey-grid {
     grid-template-columns: 1fr;
   }
 

@@ -21,7 +21,8 @@ const artifacts = await readArtifacts([
   "artifacts/wallet-submit-result-validation.json",
   "artifacts/checkpointed-accepted-index.json",
   "artifacts/proof-evidence.json",
-  "artifacts/role-separated-proof-evidence.json"
+  "artifacts/role-separated-proof-evidence.json",
+  "artifacts/standards-adapter-backlog.json"
 ]);
 const manifest = buildProjectReviewManifest({
   packageJson: await readJson("package.json"),
@@ -37,6 +38,7 @@ assert.equal(manifest.summary.commandPresent, manifest.summary.commands);
 assert.equal(manifest.summary.docsPresent, manifest.summary.docs);
 assert.equal(manifest.summary.artifactsReady, manifest.summary.artifacts);
 assert.ok(manifest.artifacts.some((row) => row.path === "artifacts/defi-artifact-manifest.json"));
+assert.ok(manifest.artifacts.some((row) => row.path === "artifacts/standards-adapter-backlog.json"));
 assert.ok(manifest.commands.some((row) => row.command === "npm run operator:refresh" && row.present));
 
 const artifact = await readJson("artifacts/project-review-manifest.json");

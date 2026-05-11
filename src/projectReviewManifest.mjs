@@ -29,7 +29,8 @@ const REQUIRED_ARTIFACTS = [
   ["artifacts/wallet-submit-result-validation.json", "tn12-wallet-submit-result-validation/v1"],
   ["artifacts/checkpointed-accepted-index.json", "tn12-checkpointed-accepted-index/v1"],
   ["artifacts/proof-evidence.json", "tn12-contract-spend-evidence/v1"],
-  ["artifacts/role-separated-proof-evidence.json", "tn12-contract-spend-evidence/v1"]
+  ["artifacts/role-separated-proof-evidence.json", "tn12-contract-spend-evidence/v1"],
+  ["artifacts/standards-adapter-backlog.json", "tn12-standards-adapter-backlog/v1"]
 ];
 
 export function buildProjectReviewManifest({

@@ -50,10 +50,14 @@ try {
   assert.match(resultsHtml, /id="results-summary"/);
   assert.match(resultsHtml, /id="knowledge-levels"/);
   assert.match(resultsHtml, /id="results-rails"/);
-  assert.match(resultsHtml, /id="x-post-draft"/);
-  assert.match(resultsHtml, /Safe playground design/);
+  assert.match(resultsHtml, /id="standards-adapters"/);
+  assert.match(resultsHtml, /Accepted TN12 activity/);
+  assert.match(resultsHtml, /Live playground/);
+  assert.doesNotMatch(resultsHtml, /X post|x-post-draft|Draft post/);
+  assert.doesNotMatch(resultsHtml, /Future implementation target/);
   assert.match(resultsHtml, /href="playground\.html"/);
   assert.match(playgroundHtml, /TN12 playground/);
+  assert.match(playgroundHtml, /id="playground-activity-strip"/);
   assert.match(playgroundHtml, /id="playground-summary"/);
   assert.match(playgroundHtml, /id="playground-roles"/);
   assert.match(playgroundHtml, /id="playground-actions"/);
@@ -63,6 +67,8 @@ try {
   assert.match(playgroundHtml, /3 accepted txs/);
   assert.match(playgroundHtml, /id="playground-levels"/);
   assert.match(playgroundHtml, /id="playground-tx-map"/);
+  assert.match(playgroundHtml, /Fast testnet money/);
+  assert.doesNotMatch(playgroundHtml, /What the playground will run/);
 
   console.log("UI smoke check passed.");
 } finally {

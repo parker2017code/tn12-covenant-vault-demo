@@ -94,6 +94,7 @@ npm run demo:operator-refresh
 | Accepted playground deposit | `artifacts/playground-user-a-pool-deposit-evidence.json` |
 | Accepted playground payout | `artifacts/playground-pool-user-b-payout-evidence.json` |
 | Current playground session | `artifacts/playground-session.example.json` |
+| Standards/adapters backlog | `artifacts/standards-adapter-backlog.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |

@@ -21,30 +21,59 @@
       <a href="#levels">Explain it</a>
       <a href="#rails">Rails</a>
       <a href="#feed">Recent txids</a>
-      <a href="#playground">Playground</a>
+      <a href="#playground">Live play</a>
+      <a href="#standards">Adapters</a>
       <a href="playground.html">Open playground</a>
-      <a href="#post">X post</a>
     </nav>
   </header>
 
   <main>
     <section class="hero results-hero">
       <div>
-        <p class="status">Artifact-backed. TN12 only.</p>
-        <h2>What we have actually proven so far.</h2>
-        <p>This page reads generated artifacts and explains the results at multiple crypto knowledge levels. It separates accepted TN12 activity from indexer-derived state, planner-only DeFi logic, and mainnet-blocked readiness rails.</p>
+        <p class="status">Accepted TN12 activity. Replayed state.</p>
+        <h2>Funds moved. Receipts landed. The repo replays them.</h2>
+        <p>Start with the concrete run: six role wallets funded on TN12, one user-to-pool deposit accepted, one pool-to-user payout accepted, then a reducer turns txids into balances and blocked actions.</p>
       </div>
       <aside class="facts">
-        <span>Full DeFi benchmark</span>
-        <strong>60%</strong>
-        <p>Repo-local benchmark: six of ten rails complete. It is not a production or mainnet readiness score.</p>
+        <span>Current playground run</span>
+        <strong>3 txs</strong>
+        <p>Role funding, pool deposit, and pool payout all link to TN12 explorer records.</p>
       </aside>
     </section>
 
     <section class="panel results-panel">
       <div class="section-title">
+        <p class="eyebrow">Fast route</p>
+        <h2>Start where you care.</h2>
+      </div>
+      <div class="journey-grid">
+        <a href="playground.html#activity">
+          <span>Watch</span>
+          <strong>Accepted TN12 flow</strong>
+          <p>Funding, deposit, payout, replay.</p>
+        </a>
+        <a href="#feed">
+          <span>Receipts</span>
+          <strong>App-state txids</strong>
+          <p>Payload rows accepted on TN12.</p>
+        </a>
+        <a href="#rails">
+          <span>Benchmark</span>
+          <strong>What is done</strong>
+          <p>Rail-by-rail artifact status.</p>
+        </a>
+        <a href="#standards">
+          <span>Build next</span>
+          <strong>Adapters</strong>
+          <p>x402, ISO-style metadata, DTI-style IDs, attestations.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-title">
         <p class="eyebrow">Live artifact summary</p>
-        <h2>Counts from generated JSON.</h2>
+        <h2>Generated counts.</h2>
       </div>
       <div id="results-summary" class="results-summary" aria-live="polite"></div>
     </section>
@@ -59,24 +88,25 @@
 
     <section id="flow" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">What is occurring</p>
-        <h2>From transaction to app state.</h2>
+        <p class="eyebrow">What is happening</p>
+        <h2>Transaction -> receipt -> replay.</h2>
+        <p>Compared with a normal demo server, the important state changes have public txids. Compared with a generic DeFi mock, the app can replay accepted TN12 records and show exactly where execution is still only reducer logic.</p>
       </div>
       <div id="results-flow" class="results-flow" aria-live="polite"></div>
     </section>
 
     <section id="rails" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">Full-DeFi benchmark</p>
-        <h2>Completed rails and open rails.</h2>
-        <p>These labels are intentionally blunt. A rail is only done when the artifact says it is done.</p>
+        <p class="eyebrow">Benchmark</p>
+        <h2>Done rails and open rails.</h2>
+        <p>Each rail points to an artifact, txid set, reducer, or explicit blocker.</p>
       </div>
       <div id="results-rails" class="results-rails" aria-live="polite"></div>
     </section>
 
     <section id="feed" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">Recent accepted payload receipts</p>
+        <p class="eyebrow">Recent accepted receipts</p>
         <h2>Latest app-state rows.</h2>
       </div>
       <div id="results-feed" class="results-feed" aria-live="polite"></div>
@@ -84,34 +114,34 @@
 
     <section id="playground" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">Safe playground design</p>
-        <h2>How people should play with this.</h2>
-        <p>The public playground should use throwaway TN12 wallets and faucet-funded roles. People can run real testnet actions without depending on shared repo keys.</p>
+        <p class="eyebrow">Live playground</p>
+        <h2>Real TN12 session flow.</h2>
+        <p>Open the playground for the role addresses, accepted txids, reducer output, and blocked-action view.</p>
       </div>
       <div class="claim-grid">
         <article>
-          <strong>1. Generate roles</strong>
-          <p>Create fresh local testnet wallets for operator, pool, user A, user B, executor, and reviewer. Store secrets in browser/session or <code>.local/</code>, never in committed artifacts.</p>
+          <strong>1. Roles funded</strong>
+          <p>Six fresh <code>kaspatest:</code> roles were funded by an accepted multi-output TN12 transaction.</p>
         </article>
         <article>
-          <strong>2. Fund with faucet</strong>
-          <p>Show each <code>kaspatest:</code> address with copy buttons and required tKAS amounts. Users paste those into the TN12 faucet or send from their own funded wallet.</p>
+          <strong>2. Deposit accepted</strong>
+          <p>User A moved 3 tKAS into the pool role. The txid is explorer-checkable.</p>
         </article>
         <article>
-          <strong>3. Run guided flows</strong>
-          <p>Submit payload receipts, local-key transfers, deposits, payouts, scheduler bids, and proof bindings. Every result gets an explorer txid and an artifact row.</p>
+          <strong>3. Payout accepted</strong>
+          <p>The pool moved 2 tKAS to user B. Replay now shows pool net, balances, and blocked withdrawals.</p>
         </article>
       </div>
-      <p class="note">Future implementation target: <code>playground.html</code> plus a <code>playground:* </code> script group for wallet creation, faucet checklist, scenario submit, receipt verification, and cleanup.</p>
+      <p class="note"><a href="playground.html">Open the playground walkthrough</a></p>
     </section>
 
-    <section id="post" class="panel results-panel">
+    <section id="standards" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">Draft post</p>
-        <h2>Bounded X copy.</h2>
-        <p>Short enough to adapt, strict enough not to imply mainnet or production DeFi.</p>
+        <p class="eyebrow">Extension lanes</p>
+        <h2>Standards and adapters worth building next.</h2>
+        <p>These are adapter work items: message shapes, receipts, reducers, and negative cases.</p>
       </div>
-      <pre id="x-post-draft"></pre>
+      <div id="standards-adapters" class="results-rails" aria-live="polite"></div>
     </section>
   </main>
 </body>

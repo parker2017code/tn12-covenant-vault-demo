@@ -24,7 +24,8 @@ const manifest = buildProjectReviewManifest({
     "artifacts/wallet-submit-result-validation.json",
     "artifacts/checkpointed-accepted-index.json",
     "artifacts/proof-evidence.json",
-    "artifacts/role-separated-proof-evidence.json"
+    "artifacts/role-separated-proof-evidence.json",
+    "artifacts/standards-adapter-backlog.json"
   ])
 });
 

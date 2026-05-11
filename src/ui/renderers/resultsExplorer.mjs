@@ -7,7 +7,7 @@ export async function renderResultsExplorer(documentRef = document) {
   const railNode = documentRef.querySelector("#results-rails");
   const feedNode = documentRef.querySelector("#results-feed");
   const flowNode = documentRef.querySelector("#results-flow");
-  const postNode = documentRef.querySelector("#x-post-draft");
+  const standardsNode = documentRef.querySelector("#standards-adapters");
   if (!summaryNode || !levelNode || !railNode || !feedNode || !flowNode) return;
 
   try {
@@ -18,6 +18,7 @@ export async function renderResultsExplorer(documentRef = document) {
       activity: "artifacts/defi-accepted-activity-ledger.json",
       scheduler: "artifacts/scheduler-intent-registry.json",
       binding: "artifacts/scheduler-covenant-binding.json",
+      standards: "artifacts/standards-adapter-backlog.json",
       payloadEvents: "fixtures/PayloadEventEvidence.json"
     });
     const recentEvents = await loadRecentEvents(artifacts.payloadEvents.events || []);
@@ -27,7 +28,7 @@ export async function renderResultsExplorer(documentRef = document) {
     renderRails(railNode, artifacts.benchmark);
     renderFeed(feedNode, recentEvents);
     renderFlow(flowNode, artifacts);
-    renderPost(postNode, artifacts);
+    if (standardsNode) renderStandards(standardsNode, artifacts.standards);
     wireLevelTabs(documentRef);
   } catch (error) {
     summaryNode.innerHTML = `<article><span>Load error</span><strong>Artifact read failed</strong><p>${escapeHtml(error.message)}</p></article>`;
@@ -54,19 +55,19 @@ function renderKnowledgeLevels(node) {
     </div>
     <article class="level-card" data-level-panel="beginner">
       <span>Plain English</span>
-      <h3>We are recording and checking real testnet actions.</h3>
-      <p>Some transactions spend covenant-style contracts on Kaspa TN12. Other transactions carry small app receipts, such as deposits, scheduler bids, or execution notes. The repo then replays those accepted records into a state view.</p>
-      <p>The important split: a receipt can prove "this message was accepted on TN12." It does not automatically prove a whole exchange, lending market, oracle, or liquidation engine is production-ready.</p>
+      <h3>Real testnet actions become a replayable app story.</h3>
+      <p>Money moved between TN12 wallets. App receipts landed on TN12. The repo reads those accepted records and shows who funded, who deposited, who got paid, and what actions were blocked.</p>
+      <p>That is the interesting part: fast public ordering plus small proofs lets an app explain itself without asking you to trust one private database.</p>
     </article>
     <article class="level-card hidden" data-level-panel="crypto">
       <span>Crypto-native</span>
       <h3>Accepted UTXO proofs plus payload-indexed app state.</h3>
-      <p>The proof core covers minimal vault, pledge, escrow, auction, and role-separated covenant spends. The app layer uses accepted payloads and local-key UTXO transfers to model receipts, positions, scheduler intents, bids, execution, and primitive bindings.</p>
-      <p>State is indexer-derived. AMM pricing, oracle truth, liquidation authority, and production custody are still separate rails.</p>
+      <p>The proof core covers minimal vault, pledge, escrow, auction, and role-separated covenant spends. The app layer adds accepted payloads and real local-key UTXO transfers for deposits, payouts, scheduler intents, bids, execution, and primitive bindings.</p>
+      <p>AMM pricing, oracle truth, liquidation authority, and production custody are separate rails, not hidden assumptions.</p>
     </article>
     <article class="level-card hidden" data-level-panel="builder">
       <span>Builder / reviewer</span>
-      <h3>Run the gates before trusting the page.</h3>
+      <h3>Click txids, then run the gates.</h3>
       <p>Use <code>npm run check:all</code>, <code>npm run check:tn12</code>, and <code>npm run operator:refresh</code>. The canonical maps are <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, <code>docs/TN12_TEST_MATRIX.md</code>, and <code>artifacts/full-defi-benchmark.json</code>.</p>
       <p>Look for the enforcement label on each rail: <code>TN12_ACCEPTED</code>, <code>LOCAL_KEY_CUSTODY_TEST</code>, <code>INDEXER_DERIVED</code>, <code>PLANNER_ONLY</code>, or <code>MAINNET_BLOCKED</code>.</p>
     </article>
@@ -110,19 +111,16 @@ function renderFlow(node, { proven, activity, scheduler, benchmark }) {
   `).join("");
 }
 
-function renderPost(node, { proven, benchmark }) {
-  if (!node) return;
-  node.textContent = [
-    "TN12 covenant lab update:",
-    "",
-    `${proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions} accepted covenant proof txs, ${proven.acceptedEvidence.payloadEvents} accepted payload events, ${proven.acceptedEvidence.checkpointRecords} indexed records.`,
-    "",
-    `Full-DeFi repo benchmark: ${benchmark.currentPercent}% (${benchmark.summary.completedRails}/${benchmark.summary.rails} rails).`,
-    "",
-    "Real testnet activity: covenant proofs, payload receipts, local-key custody transfers, scheduler intents/bids/execution, and a covenant-binding receipt.",
-    "",
-    "Still not claiming: mainnet activation, external-wallet signing, production custody, live rollback evidence, or autonomous AMM/lending/liquidation."
-  ].join("\n");
+function renderStandards(node, standards) {
+  node.innerHTML = standards.lanes.map((lane) => `
+    <article class="${lane.proofAvailable ? "rail-done" : "rail-open"}">
+      <span>${escapeHtml(lane.status)} · ${escapeHtml(lane.standard)}</span>
+      <strong>${escapeHtml(lane.label)}</strong>
+      <p>${escapeHtml(lane.fit)}</p>
+      <p><small>Next: ${escapeHtml(lane.next)}</small></p>
+      ${lane.source.startsWith("http") ? `<p><a href="${escapeHtml(lane.source)}" target="_blank" rel="noreferrer">source</a></p>` : `<p><code>${escapeHtml(lane.source)}</code></p>`}
+    </article>
+  `).join("");
 }
 
 async function loadRecentEvents(events) {

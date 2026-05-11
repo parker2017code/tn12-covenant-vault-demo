@@ -39,19 +39,17 @@ This queue is intentionally larger than one commit. It is the current batch to e
 |---|---|---|---|
 | 1 | Full-DeFi benchmark artifact. | `artifacts/full-defi-benchmark.json`, `npm run defi:benchmark`, focused shape tests, and docs links. | No |
 | 2 | Artifact-backed interactive results page. | A public page that explains accepted TN12 results at beginner, crypto-native, and builder levels, using artifacts rather than hand-maintained counts. | No |
-| 3 | Bounded X-post draft. | A short post/thread draft that says what is accepted on TN12, what is planner/indexer-derived, and what remains blocked. | No |
-| 4 | Safe TN12 playground design. | `playground.html` shows throwaway role wallets, funding commands, accepted role-funding evidence, guided TN12 actions, and replay state without committing secrets. | No |
+| 3 | Public evidence showcase. | `results.html` and `playground.html` lead with accepted TN12 activity, clickable txids, role wallets, replay balances, and concise level-based explanations. | No |
+| 4 | Live TN12 playground v1. | `playground.html` shows throwaway role wallets, funding commands, accepted role funding, accepted deposit, accepted payout, replay state, and blocked actions without committing secrets. | No |
 | 5 | Accepted/custody DeFi execution reducer hardening. | More deterministic balance, position, intent, duplicate, stale-oracle, impossible-withdrawal, and liquidation-block tests over accepted txids/receipts. | No |
-| 6 | AMM/lending/liquidation custody-adjacent rail. | Small accepted TN12 receipts and safe local-key transfers where useful, with execution labeled by what actually happened on-chain. | No; ask only if wallets need more tKAS |
-| 7 | Contract/primitive binding pass. | More app-state receipts reference accepted covenant proof rows without implying those app semantics are script-enforced. | No |
-| 8 | UI/app.js split continuation. | Move more renderer/page logic into `src/ui/` modules so the proof page, lab workbench, and results page are easier to audit. | No |
-| 9 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
-| 10 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
-| 11 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
-| 12 | Live playground v1. | Role wallet creation, role funding draft, submit, verification, and public session export are working. Next: guided app actions from those funded roles. | No |
-| 13 | Results/readability pass. | Keep pages useful for beginners and builders without repeating defensive caveats. One status label and one short boundary per section. | No |
-| 14 | App UI modularization. | Continue moving page-specific renderers out of `app.js`, especially results and playground surfaces. | No |
-| 15 | Actual external-wallet path. | Convert request templates into a wallet-consumable round trip, validate signed bytes, submit, and replay accepted txid. | Final proof needs user/wallet |
+| 6 | More on-chain app actions. | Add small accepted TN12 receipts and safe local-key transfers for deposit, payout, pass, invoice, scheduler, and proof-binding flows where tooling allows. | No; ask only if wallets need more tKAS |
+| 7 | Standards/adapters backlog. | `artifacts/standards-adapter-backlog.json` tracks x402-style payment, ISO 20022-style metadata, DTI-style asset IDs, attestation, agent settlement, and wallet-signing adapter lanes without claiming certification. | No |
+| 8 | Contract/primitive binding pass. | More app-state receipts reference accepted covenant proof rows without implying those app semantics are script-enforced. | No |
+| 9 | UI/app.js split continuation. | Move more renderer/page logic into `src/ui/` modules so the proof page, lab workbench, results page, and playground are easier to audit. | No |
+| 10 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
+| 11 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
+| 12 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
+| 13 | Actual external-wallet path. | Convert request templates into a wallet-consumable round trip, validate signed bytes, submit, and replay accepted txid. | Final proof needs user/wallet |
 
 ## Current Reviewer-Hardening Queue
 

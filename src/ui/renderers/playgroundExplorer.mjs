@@ -6,6 +6,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   const levelsNode = documentRef.querySelector("#playground-levels");
   const rolesNode = documentRef.querySelector("#playground-roles");
   const sessionNode = documentRef.querySelector("#playground-session");
+  const activityStripNode = documentRef.querySelector("#playground-activity-strip");
   const txMapNode = documentRef.querySelector("#playground-tx-map");
   const actionsNode = documentRef.querySelector("#playground-actions");
   const rulesNode = documentRef.querySelector("#playground-rules");
@@ -35,6 +36,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Benchmark", `${plan.summary.benchmarkPercent}%`, "Current repo-local full-DeFi benchmark.")}
     `;
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, payout });
+    if (activityStripNode) renderActivityStrip(activityStripNode, { funding, deposit, payout, reducer, activity });
     rolesNode.innerHTML = plan.roles.map((role) => `
       <article>
         <span>${escapeHtml(role.id)} · ${escapeHtml(role.suggestedFundingTkas)} tKAS</span>
@@ -117,6 +119,50 @@ function renderLevels(node, { activity, session, funding, deposit, payout }) {
       <p>Check ${txLink(funding.txid)}, ${txLink(deposit.txid)}, and ${txLink(payout.txid)} directly on the TN12 explorer.</p>
     </article>
   `;
+}
+
+function renderActivityStrip(node, { funding, deposit, payout, reducer, activity }) {
+  const poolBalance = (reducer.state?.balances || []).find((row) => row.address === payout.source.address);
+  const userB = (reducer.state?.balances || []).find((row) => row.address === payout.payment.to);
+  const rows = [
+    {
+      label: "Fund",
+      amount: "51 tKAS",
+      detail: "6 role wallets",
+      txid: funding.txid,
+      tone: "hot"
+    },
+    {
+      label: "Deposit",
+      amount: `${deposit.payment.amountTkas} tKAS`,
+      detail: "User A -> pool",
+      txid: deposit.txid,
+      tone: "go"
+    },
+    {
+      label: "Payout",
+      amount: `${payout.payment.amountTkas} tKAS`,
+      detail: "Pool -> User B",
+      txid: payout.txid,
+      tone: "go"
+    },
+    {
+      label: "Replay",
+      amount: `${activity.summary.acceptedTransferRows} rows`,
+      detail: `pool net ${poolBalance?.balanceTkas || activity.summary.poolNetTkas} tKAS; User B +${userB?.balanceTkas || payout.payment.amountTkas}`,
+      txid: "",
+      tone: "cool"
+    }
+  ];
+  node.innerHTML = rows.map((row, index) => `
+    <article class="activity-card activity-${escapeHtml(row.tone)}">
+      <span>${escapeHtml(String(index + 1))}</span>
+      <strong>${escapeHtml(row.label)}</strong>
+      <p class="activity-amount">${escapeHtml(row.amount)}</p>
+      <p>${escapeHtml(row.detail)}</p>
+      ${row.txid ? `<p>${txLink(row.txid)}</p>` : "<p>Reducer state below.</p>"}
+    </article>
+  `).join("");
 }
 
 function renderTxMap(node, { funding, deposit, payout }) {
