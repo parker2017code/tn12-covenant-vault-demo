@@ -18,11 +18,11 @@ try {
   const checkpoint = JSON.parse(await readFile("artifacts/checkpointed-accepted-index.json", "utf8"));
 
   assert.equal(proofFixture.transactions.length, 9);
-  assert.equal(checkpoint.summary.total, 49);
-  assert.equal(checkpoint.summary.payloadEvents, 36);
+  assert.equal(checkpoint.summary.total, 52);
+  assert.equal(checkpoint.summary.payloadEvents, 39);
   assert.match(html, /TN12 configured\. Proof transactions accepted\./);
-  assert.match(html, /7 core \+ 2 auction \+ 7 role-separated \+ 49 indexed records/);
-  assert.match(html, /Accepted payload events[\s\S]*<strong>36<\/strong>/);
+  assert.match(html, /7 core \+ 2 auction \+ 7 role-separated \+ 52 indexed records/);
+  assert.match(html, /Accepted payload events[\s\S]*<strong>39<\/strong>/);
   assert.match(html, /npm run operator:refresh/);
   assert.match(html, /id="reviewer-path"/);
   assert.match(html, /docs\/AUDIT_MAP\.md/);

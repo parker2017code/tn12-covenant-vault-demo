@@ -13,7 +13,7 @@ This file is about deployment readiness, not TN12 proof-core progress.
 ## Proven On TN12
 
 - Covenant spends: 16 proof paths across vault recovery/withdrawal, assurance release/refund, escrow release/refund/cancel, auction settlement/refund, and all seven role-separated positive paths.
-- Payload state: 36 accepted payload events, including seven DeFi v1 receipts, one scheduler-intent receipt, one scheduler-execution receipt, and one agent release wallet-review event.
+- Payload state: 39 accepted payload events, including seven DeFi v1 receipts, one scheduler-intent receipt, three scheduler-bid receipts, one scheduler-execution receipt, and one agent release wallet-review event.
 - Local-key DeFi custody/activity: 16 accepted TN12 transfer rows cover user funding, pool deposits, pool payouts, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
 - Batch assurance: accepted pledge outputs and accepted 3-pledge release tx `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`.
 - Live replay: public TN12 wRPC reads work, checkpoint overlap is recorded, and `artifacts/durable-replay-promotion-guard.json` passes deterministic replay plus local rollback matching.

@@ -181,6 +181,21 @@
       "label": "Scheduler execution receipt 001",
       "draftPath": "artifacts/signed-drafts/tn12-scheduler-execution-receipt-001.json",
       "outPath": "artifacts/payload-scheduler-execution-receipt-001-evidence.json"
+    },
+    {
+      "label": "Scheduler bid fast executor 001",
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-bid-fast-executor-001.json",
+      "outPath": "artifacts/payload-scheduler-bid-fast-executor-001-evidence.json"
+    },
+    {
+      "label": "Scheduler bid low fee 001",
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-bid-low-fee-001.json",
+      "outPath": "artifacts/payload-scheduler-bid-low-fee-001-evidence.json"
+    },
+    {
+      "label": "Scheduler bid stale 001",
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-bid-stale-001.json",
+      "outPath": "artifacts/payload-scheduler-bid-stale-001-evidence.json"
     }
   ]
 }

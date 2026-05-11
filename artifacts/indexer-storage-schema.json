@@ -1,14 +1,14 @@
 {
   "schema": "tn12-indexer-storage-schema/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T16:46:17.125Z",
+  "generatedAt": "2026-05-11T17:38:55.761Z",
   "status": "storage-schema-ready",
   "sourceCheckpoint": {
-    "recordCount": 49,
-    "payloadEvents": 36,
+    "recordCount": 52,
+    "payloadEvents": 39,
     "proofSpends": 9,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 8937625,
+    "maxAcceptingBlockBlueScore": 8971246,
     "replayPlanStatus": "durable-indexer-plan-ready"
   },
   "tables": [

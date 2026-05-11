@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-accepted-activity-ledger/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T16:45:56.229Z",
+  "generatedAt": "2026-05-11T17:38:55.700Z",
   "status": "accepted-activity-ledger-ready",
   "enforcement": "LOCAL_KEY_CUSTODY_TEST",
   "summary": {

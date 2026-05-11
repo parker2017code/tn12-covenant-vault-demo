@@ -6,9 +6,9 @@ Current readiness: about 58-62% mainnet deployment readiness.
 
 What changed in this pass:
 - Added one local-wallet operator-pack payload receipt accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
-- Payload evidence is now 36 accepted events and 49 checkpointed records.
+- Payload evidence is now 39 accepted events and 52 checkpointed records.
 - DeFi accepted activity now includes 16 accepted local-key transfer rows: user funding, pool deposits, pool payouts, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
-- Scheduler evidence now includes one accepted intent payload, one accepted execution receipt, and one accepted local-key payout reduced into executed trigger state in `artifacts/scheduler-intent-registry.json`.
+- Scheduler evidence now includes one accepted intent payload, three accepted bid receipts, one accepted execution receipt, and one accepted local-key payout reduced into executed trigger state in `artifacts/scheduler-intent-registry.json`.
 - Live TN12 replay overlap now exists from a chain-block anchor inside the checkpoint band.
 - Batch-assurance release is accepted and indexed; refund paths remain non-selected for that spent pledge set.
 - Mainnet readiness docs now separate proof-core progress from deployment readiness.

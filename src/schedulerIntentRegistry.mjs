@@ -11,6 +11,9 @@ export function buildSchedulerIntentRegistry({
   const executionReceipts = (payloadEvents.events || [])
     .map((event) => schedulerExecutionFromEvent(event, payloadEvidenceByPath[event.outPath]))
     .filter(Boolean);
+  const acceptedBids = (payloadEvents.events || [])
+    .map((event) => schedulerBidFromEvent(event, payloadEvidenceByPath[event.outPath]))
+    .filter(Boolean);
   const executionTransfers = Object.entries(executionEvidenceByPath)
     .map(([path, evidence]) => schedulerExecutionTransfer(path, evidence))
     .filter(Boolean);
@@ -19,7 +22,7 @@ export function buildSchedulerIntentRegistry({
     receipt: executionReceipts.find((receipt) => receipt.subject === intent.subject),
     transfer: executionTransfers.find((transfer) => transfer.intentSubject === intent.subject)
   }));
-  const auctionRows = buildAuctionRows({ acceptedIntents, triggerRows });
+  const auctionRows = buildAuctionRows({ acceptedIntents, acceptedBids, triggerRows });
   const negativeRows = buildNegativeRows({ acceptedIntents, context });
   const problems = [
     acceptedIntents.length === 0 ? "no accepted scheduler intent payloads" : "",
@@ -39,6 +42,7 @@ export function buildSchedulerIntentRegistry({
       blockedNegativeRows: negativeRows.filter((row) => row.status === "blocked").length,
       executionReceipts: triggerRows.filter((row) => row.executionReceiptTxid).length,
       executionTransfers: triggerRows.filter((row) => row.executionTransferTxid).length,
+      acceptedBids: acceptedBids.length,
       schedulerBids: auctionRows.length,
       winningBids: auctionRows.filter((row) => row.status === "winner-selected").length,
       blockedAuctionRows: auctionRows.filter((row) => row.status === "blocked").length,
@@ -51,6 +55,7 @@ export function buildSchedulerIntentRegistry({
     context,
     acceptedIntents,
     executionReceipts,
+    acceptedBids,
     executionTransfers,
     triggerRows,
     auctionRows,
@@ -104,6 +109,33 @@ function schedulerExecutionFromEvent(event = {}, evidence = {}) {
     payoutTxid: parseNoteField(payload.note || "", "payout"),
     intentTxid: parseNoteField(payload.note || "", "intent"),
     mode: parseNoteField(payload.note || "", "mode"),
+    acceptingBlockBlueScore: evidence.acceptingBlockBlueScore ?? null
+  };
+}
+
+function schedulerBidFromEvent(event = {}, evidence = {}) {
+  const payload = evidence.payload?.decoded?.payload || {};
+  if (payload.kind !== "scheduler-bid") return null;
+  if (evidence.accepted !== true || evidence.receiptMatches !== true) return null;
+
+  const subject = payload.subject || "";
+  return {
+    id: subject,
+    label: event.label || "",
+    evidencePath: event.outPath || "",
+    draftPath: event.draftPath || "",
+    txid: evidence.txid || evidence.transactionId || "",
+    accepted: true,
+    payloadMatches: evidence.payload?.matches === true,
+    subject,
+    triggerSubject: subject.replace(/:bid-[^:]+$/i, ""),
+    value: payload.value || "",
+    note: payload.note || "",
+    intentTxid: parseNoteField(payload.note || "", "intent"),
+    bidder: parseNoteField(payload.note || "", "bidder"),
+    bidTkas: parseNoteField(payload.note || "", "bidTkas"),
+    maxLatencyBlocks: Number(parseNoteField(payload.note || "", "maxLatencyBlocks") || 0),
+    source: parseNoteField(payload.note || "", "source"),
     acceptingBlockBlueScore: evidence.acceptingBlockBlueScore ?? null
   };
 }
@@ -209,32 +241,12 @@ function buildNegativeRows({ acceptedIntents = [], context = {} }) {
   ];
 }
 
-function buildAuctionRows({ acceptedIntents = [], triggerRows = [] }) {
+function buildAuctionRows({ acceptedIntents = [], acceptedBids = [], triggerRows = [] }) {
   return acceptedIntents.flatMap((intent) => {
     const trigger = triggerRows.find((row) => row.id === intent.subject) || {};
-    const bids = [
-      schedulerBid(intent, trigger, {
-        id: `${intent.subject}:bid-fast-executor`,
-        bidder: "local-pool-operator",
-        bidTkas: "0.05",
-        maxLatencyBlocks: 5,
-        source: "accepted-intent-review"
-      }),
-      schedulerBid(intent, trigger, {
-        id: `${intent.subject}:bid-low-fee`,
-        bidder: "watcher-low-fee",
-        bidTkas: "0.01",
-        maxLatencyBlocks: 30,
-        source: "planner-candidate"
-      }),
-      schedulerBid(intent, trigger, {
-        id: `${intent.subject}:bid-stale`,
-        bidder: "stale-executor",
-        bidTkas: "0.10",
-        maxLatencyBlocks: 1,
-        source: "stale-ledger"
-      })
-    ];
+    const bids = acceptedBids
+      .filter((bid) => bid.intentTxid === intent.txid && bid.triggerSubject === intent.subject)
+      .map((bid) => schedulerBid(intent, trigger, bid));
     const candidates = bids.filter((bid) => bid.status === "candidate");
     const winner = candidates.sort(compareSchedulerBids)[0];
     return bids.map((bid) => bid.id === winner?.id
@@ -260,6 +272,8 @@ function schedulerBid(intent, trigger, bid) {
     id: bid.id,
     subject: intent.subject,
     intentTxid: intent.txid,
+    bidTxid: bid.txid || "",
+    evidencePath: bid.evidencePath || "",
     bidder: bid.bidder,
     bidTkas: bid.bidTkas,
     maxLatencyBlocks: bid.maxLatencyBlocks,
