@@ -56,6 +56,7 @@ try {
   assert.match(resultsHtml, /id="source-map"/);
   assert.match(resultsHtml, /Useful next integrations, not finished products/);
   assert.match(resultsHtml, /What should be clickable/);
+  assert.match(resultsHtml, /docs\/PRODUCT_EXECUTION_PLAN\.md/);
   assert.match(resultsHtml, /Accepted TN12 activity/);
   assert.match(resultsHtml, /Live playground/);
   assert.doesNotMatch(resultsHtml, /X post|x-post-draft|Draft post/);
@@ -84,6 +85,7 @@ try {
   assert.match(await readFile("lab.html", "utf8"), /class="lab-page"/);
   assert.match(await readFile("lab.html", "utf8"), /id="product-map"/);
   assert.match(await readFile("lab.html", "utf8"), /id="runbook"/);
+  assert.match(await readFile("lab.html", "utf8"), /docs\/PRODUCT_EXECUTION_PLAN\.md/);
 
   await checkRenderedPages(url);
 
