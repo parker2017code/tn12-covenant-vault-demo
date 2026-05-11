@@ -77,6 +77,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | DeFi scenario reducer / promotion guard | `npm run defi:reducer` |
 | DeFi advanced simulation hardening | `npm run defi:advanced` |
 | DeFi multi-wallet scenario pack | `npm run defi:multi-wallet` |
+| DeFi artifact manifest | `npm run defi:manifest` |
 | Cross-chain research library | `npm run research:library` |
 | Refresh the core research guardrails | `npm run research:refresh` |
 

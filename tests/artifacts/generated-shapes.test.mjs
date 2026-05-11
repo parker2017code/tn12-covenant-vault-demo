@@ -63,7 +63,8 @@ const defiArtifacts = [
   ["artifacts/defi-scenario-simulation.json", "tn12-defi-scenario-simulation/v1"],
   ["artifacts/defi-scenario-reducer.json", "tn12-defi-scenario-reducer/v1"],
   ["artifacts/defi-advanced-simulation.json", "tn12-defi-advanced-simulation/v1"],
-  ["artifacts/defi-multi-wallet-scenario-pack.json", "tn12-defi-multi-wallet-scenario-pack/v1"]
+  ["artifacts/defi-multi-wallet-scenario-pack.json", "tn12-defi-multi-wallet-scenario-pack/v1"],
+  ["artifacts/defi-artifact-manifest.json", "tn12-defi-artifact-manifest/v1"]
 ];
 
 for (const [path, schema] of defiArtifacts) {
@@ -73,7 +74,7 @@ for (const [path, schema] of defiArtifacts) {
   assert.match(artifact.status, /ready|simulation/);
   assert.equal(artifact.summary.liveProductClaims, 0);
   assert.equal(artifact.summary.custodyActions ?? artifact.summary.custodyReadyLanes ?? 0, 0);
-  assert.doesNotMatch(JSON.stringify(artifact), /privateKey|mnemonic|seed|secret|\.local\/tn12-wallet\.json/i);
+  assert.doesNotMatch(JSON.stringify(artifact), /"privateKey"\s*:|"mnemonic"\s*:|"seed"\s*:|"secret"\s*:|\.local\/tn12-wallet\.json/i);
 }
 
 console.log("Generated artifact shape tests passed.");

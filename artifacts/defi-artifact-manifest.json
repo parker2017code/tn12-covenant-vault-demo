@@ -1,0 +1,95 @@
+{
+  "schema": "tn12-defi-artifact-manifest/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T15:55:43.491Z",
+  "status": "defi-artifact-manifest-ready",
+  "summary": {
+    "artifacts": 5,
+    "readyArtifacts": 5,
+    "problems": 0,
+    "liveProductClaims": 0,
+    "custodyActions": 0,
+    "externalSignerClaims": 0,
+    "secretFindings": 0
+  },
+  "rows": [
+    {
+      "id": "planner",
+      "path": "artifacts/defi-planner-simulation.json",
+      "command": "npm run defi:simulation",
+      "schema": "tn12-defi-planner-simulation/v1",
+      "status": "planner-only-defi-simulation-ready",
+      "ready": true,
+      "liveProductClaims": 0,
+      "custodyActions": 0,
+      "externalSignerClaims": 0,
+      "secretFindings": 0,
+      "problems": []
+    },
+    {
+      "id": "scenario",
+      "path": "artifacts/defi-scenario-simulation.json",
+      "command": "npm run defi:scenario",
+      "schema": "tn12-defi-scenario-simulation/v1",
+      "status": "scenario-simulation-ready-not-live-defi",
+      "ready": true,
+      "liveProductClaims": 0,
+      "custodyActions": 0,
+      "externalSignerClaims": 0,
+      "secretFindings": 0,
+      "problems": []
+    },
+    {
+      "id": "reducer",
+      "path": "artifacts/defi-scenario-reducer.json",
+      "command": "npm run defi:reducer",
+      "schema": "tn12-defi-scenario-reducer/v1",
+      "status": "scenario-reducer-ready-not-custody",
+      "ready": true,
+      "liveProductClaims": 0,
+      "custodyActions": 0,
+      "externalSignerClaims": 0,
+      "secretFindings": 0,
+      "problems": []
+    },
+    {
+      "id": "advanced",
+      "path": "artifacts/defi-advanced-simulation.json",
+      "command": "npm run defi:advanced",
+      "schema": "tn12-defi-advanced-simulation/v1",
+      "status": "advanced-simulation-ready-not-custody",
+      "ready": true,
+      "liveProductClaims": 0,
+      "custodyActions": 0,
+      "externalSignerClaims": 0,
+      "secretFindings": 0,
+      "problems": []
+    },
+    {
+      "id": "multi-wallet",
+      "path": "artifacts/defi-multi-wallet-scenario-pack.json",
+      "command": "npm run defi:multi-wallet",
+      "schema": "tn12-defi-multi-wallet-scenario-pack/v1",
+      "status": "multi-wallet-scenario-pack-ready-local-keys",
+      "ready": true,
+      "liveProductClaims": 0,
+      "custodyActions": 0,
+      "externalSignerClaims": 0,
+      "secretFindings": 0,
+      "problems": []
+    }
+  ],
+  "problems": [],
+  "commands": [
+    "npm run defi:simulation",
+    "npm run defi:scenario",
+    "npm run defi:reducer",
+    "npm run defi:advanced",
+    "npm run defi:multi-wallet"
+  ],
+  "boundaries": [
+    "This manifest is the reviewer entry point for DeFi simulation artifacts.",
+    "Ready means the artifacts are internally consistent and claim-bounded, not that DeFi is live.",
+    "All custody, live product, and external signer claims must remain zero until real wallet and settlement evidence exists."
+  ]
+}
