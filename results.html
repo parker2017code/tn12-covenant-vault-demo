@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TN12 Results Explorer</title>
+  <meta name="description" content="Interactive TN12 covenant lab results explorer with beginner, crypto-native, and builder explanations.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Kaspa TN12 results</p>
+      <h1>TN12 results explorer</h1>
+    </div>
+    <nav aria-label="Project links">
+      <a href="index.html">Proof page</a>
+      <a href="lab.html">Lab workbench</a>
+      <a href="#levels">Explain it</a>
+      <a href="#rails">Rails</a>
+      <a href="#feed">Recent txids</a>
+      <a href="#playground">Playground</a>
+      <a href="#post">X post</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero results-hero">
+      <div>
+        <p class="status">Artifact-backed. TN12 only.</p>
+        <h2>What we have actually proven so far.</h2>
+        <p>This page reads generated artifacts and explains the results at multiple crypto knowledge levels. It separates accepted TN12 activity from indexer-derived state, planner-only DeFi logic, and mainnet-blocked readiness rails.</p>
+      </div>
+      <aside class="facts">
+        <span>Full DeFi benchmark</span>
+        <strong>60%</strong>
+        <p>Repo-local benchmark: six of ten rails complete. It is not a production or mainnet readiness score.</p>
+      </aside>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Live artifact summary</p>
+        <h2>Counts from generated JSON.</h2>
+      </div>
+      <div id="results-summary" class="results-summary" aria-live="polite"></div>
+    </section>
+
+    <section id="levels" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Explain it by level</p>
+        <h2>Same evidence, different vocabulary.</h2>
+      </div>
+      <div id="knowledge-levels" aria-live="polite"></div>
+    </section>
+
+    <section id="flow" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">What is occurring</p>
+        <h2>From transaction to app state.</h2>
+      </div>
+      <div id="results-flow" class="results-flow" aria-live="polite"></div>
+    </section>
+
+    <section id="rails" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Full-DeFi benchmark</p>
+        <h2>Completed rails and open rails.</h2>
+        <p>These labels are intentionally blunt. A rail is only done when the artifact says it is done.</p>
+      </div>
+      <div id="results-rails" class="results-rails" aria-live="polite"></div>
+    </section>
+
+    <section id="feed" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Recent accepted payload receipts</p>
+        <h2>Latest app-state rows.</h2>
+      </div>
+      <div id="results-feed" class="results-feed" aria-live="polite"></div>
+    </section>
+
+    <section id="playground" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Safe playground design</p>
+        <h2>How people should play with this.</h2>
+        <p>The public playground should use throwaway TN12 wallets and faucet-funded roles, not shared reusable keys. This keeps the demo honest and prevents anyone from treating repo wallets as custody infrastructure.</p>
+      </div>
+      <div class="claim-grid">
+        <article>
+          <strong>1. Generate roles</strong>
+          <p>Create fresh local testnet wallets for operator, pool, user A, user B, executor, and reviewer. Store secrets in browser/session or <code>.local/</code>, never in committed artifacts.</p>
+        </article>
+        <article>
+          <strong>2. Fund with faucet</strong>
+          <p>Show each <code>kaspatest:</code> address with copy buttons and required tKAS amounts. Users paste those into the TN12 faucet or send from their own funded wallet.</p>
+        </article>
+        <article>
+          <strong>3. Run guided flows</strong>
+          <p>Submit payload receipts, local-key transfers, deposits, payouts, scheduler bids, and proof bindings. Every result gets an explorer txid and an artifact row.</p>
+        </article>
+      </div>
+      <p class="note">Future implementation target: <code>playground.html</code> plus a <code>playground:* </code> script group for wallet creation, faucet checklist, scenario submit, receipt verification, and cleanup.</p>
+    </section>
+
+    <section id="post" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Draft post</p>
+        <h2>Bounded X copy.</h2>
+        <p>Short enough to adapt, strict enough not to imply mainnet or production DeFi.</p>
+      </div>
+      <pre id="x-post-draft"></pre>
+    </section>
+  </main>
+</body>
+</html>

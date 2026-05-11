@@ -14,6 +14,9 @@ try {
   const response = await fetch(url);
   assert.equal(response.ok, true, `Failed to load ${url}`);
   const html = await response.text();
+  const resultsResponse = await fetch(`${url}results.html`);
+  assert.equal(resultsResponse.ok, true, "Failed to load results.html");
+  const resultsHtml = await resultsResponse.text();
   const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
   const checkpoint = JSON.parse(await readFile("artifacts/checkpointed-accepted-index.json", "utf8"));
 
@@ -40,6 +43,12 @@ try {
   assert.match(html, /id="defi-receipt-guard"/);
   assert.match(html, /id="defi-simulation-summary"/);
   assert.match(html, /id="defi-simulation-list"/);
+  assert.match(html, /href="results\.html"/);
+  assert.match(resultsHtml, /id="results-summary"/);
+  assert.match(resultsHtml, /id="knowledge-levels"/);
+  assert.match(resultsHtml, /id="results-rails"/);
+  assert.match(resultsHtml, /id="x-post-draft"/);
+  assert.match(resultsHtml, /Safe playground design/);
 
   console.log("UI smoke check passed.");
 } finally {

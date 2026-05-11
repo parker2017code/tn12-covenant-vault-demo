@@ -69,6 +69,7 @@ import {
   fetchOptionalJson
 } from "./src/ui/dataLoader.mjs";
 import { renderDefiSimulationSurface } from "./src/ui/renderers/defiSimulationSurface.mjs";
+import { renderResultsExplorer } from "./src/ui/renderers/resultsExplorer.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -287,7 +288,8 @@ const pageRenderers = {
   renderMinerSignalResearch,
   renderSignalPayload,
   renderPayloadDraftStatus,
-  renderDefiReceiptGuard
+  renderDefiReceiptGuard,
+  renderResultsExplorer
 };
 
 if (detectPageController() === "lab") {

@@ -39,13 +39,14 @@ This queue is intentionally larger than one commit. It is the current batch to e
 | 1 | Full-DeFi benchmark artifact. | `artifacts/full-defi-benchmark.json`, `npm run defi:benchmark`, focused shape tests, and docs links. | No |
 | 2 | Artifact-backed interactive results page. | A public page that explains accepted TN12 results at beginner, crypto-native, and builder levels, using artifacts rather than hand-maintained counts. | No |
 | 3 | Bounded X-post draft. | A short post/thread draft that says what is accepted on TN12, what is planner/indexer-derived, and what remains blocked. | No |
-| 4 | Accepted/custody DeFi execution reducer hardening. | More deterministic balance, position, intent, duplicate, stale-oracle, impossible-withdrawal, and liquidation-block tests over accepted txids/receipts. | No |
-| 5 | AMM/lending/liquidation custody-adjacent rail. | Small accepted TN12 receipts and safe local-key transfers where useful, with execution labeled by what actually happened on-chain. | No; ask only if wallets need more tKAS |
-| 6 | Contract/primitive binding pass. | More app-state receipts reference accepted covenant proof rows without implying those app semantics are script-enforced. | No |
-| 7 | UI/app.js split continuation. | Move more renderer/page logic into `src/ui/` modules so the proof page, lab workbench, and results page are easier to audit. | No |
-| 8 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
-| 9 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
-| 10 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
+| 4 | Safe TN12 playground design. | A future `playground.html` flow generates throwaway role wallets, shows faucet funding instructions, submits guided TN12 actions, verifies txids, and never commits secrets. | No |
+| 5 | Accepted/custody DeFi execution reducer hardening. | More deterministic balance, position, intent, duplicate, stale-oracle, impossible-withdrawal, and liquidation-block tests over accepted txids/receipts. | No |
+| 6 | AMM/lending/liquidation custody-adjacent rail. | Small accepted TN12 receipts and safe local-key transfers where useful, with execution labeled by what actually happened on-chain. | No; ask only if wallets need more tKAS |
+| 7 | Contract/primitive binding pass. | More app-state receipts reference accepted covenant proof rows without implying those app semantics are script-enforced. | No |
+| 8 | UI/app.js split continuation. | Move more renderer/page logic into `src/ui/` modules so the proof page, lab workbench, and results page are easier to audit. | No |
+| 9 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
+| 10 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
+| 11 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
 
 ## Current Reviewer-Hardening Queue
 
