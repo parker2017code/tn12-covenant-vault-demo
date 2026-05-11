@@ -57,6 +57,9 @@ try {
   assert.match(playgroundHtml, /id="playground-summary"/);
   assert.match(playgroundHtml, /id="playground-roles"/);
   assert.match(playgroundHtml, /id="playground-actions"/);
+  assert.match(playgroundHtml, /id="playground-replay-summary"/);
+  assert.match(playgroundHtml, /id="playground-balances"/);
+  assert.match(playgroundHtml, /id="playground-blocked"/);
   assert.match(playgroundHtml, /No shared keys/);
 
   console.log("UI smoke check passed.");

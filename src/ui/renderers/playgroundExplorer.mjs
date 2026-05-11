@@ -7,12 +7,17 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   const actionsNode = documentRef.querySelector("#playground-actions");
   const rulesNode = documentRef.querySelector("#playground-rules");
   const flowNode = documentRef.querySelector("#playground-flow");
+  const replaySummaryNode = documentRef.querySelector("#playground-replay-summary");
+  const balancesNode = documentRef.querySelector("#playground-balances");
+  const blockedNode = documentRef.querySelector("#playground-blocked");
   if (!summaryNode || !rolesNode || !actionsNode || !rulesNode || !flowNode) return;
 
   try {
-    const [plan, actions] = await Promise.all([
+    const [plan, actions, reducer, activity] = await Promise.all([
       fetchJson("artifacts/playground-plan.json"),
-      fetchJson("artifacts/playground-actions.json")
+      fetchJson("artifacts/playground-actions.json"),
+      fetchJson("artifacts/defi-scenario-reducer.json"),
+      fetchJson("artifacts/defi-accepted-activity-ledger.json")
     ]);
     summaryNode.innerHTML = `
       ${metric("Roles", plan.summary.roles, "Throwaway TN12 session roles.")}
@@ -44,9 +49,37 @@ export async function renderPlaygroundExplorer(documentRef = document) {
         <strong>${escapeHtml(step)}</strong>
       </article>
     `).join("");
+    renderReplay({ replaySummaryNode, balancesNode, blockedNode, reducer, activity, actions });
   } catch (error) {
     summaryNode.innerHTML = `<article><span>Load error</span><strong>Playground plan unavailable</strong><p>${escapeHtml(error.message)}</p></article>`;
   }
+}
+
+function renderReplay({ replaySummaryNode, balancesNode, blockedNode, reducer, activity, actions }) {
+  if (!replaySummaryNode || !balancesNode || !blockedNode) return;
+  replaySummaryNode.innerHTML = `
+    ${metric("Accepted transfers", activity.summary.acceptedTransferRows, "Real TN12 transfer rows in the current ledger.")}
+    ${metric("Pool net", `${activity.summary.poolNetTkas} TKAS`, "Net accepted movement into the pool role.")}
+    ${metric("Balance rows", reducer.summary.balanceRows, "Address-level net deltas from selected transfers.")}
+    ${metric("Blocked withdrawals", reducer.negativeRows.filter((row) => row.kind === "withdrawal-candidate").length, "Over-balance or unsigned withdrawal attempts.")}
+    ${metric("Ready actions", actions.summary.readyActions, "Guided actions with current public prerequisites.")}
+    ${metric("Live product claims", actions.summary.liveProductClaims, "Must stay zero.")}
+  `;
+  balancesNode.innerHTML = (reducer.state?.balances || []).map((row) => `
+    <article>
+      <span>${escapeHtml(row.promotionState)}</span>
+      <strong>${escapeHtml(row.balanceTkas)} TKAS</strong>
+      <p><code>${escapeHtml(row.address)}</code></p>
+      ${row.problems?.length ? `<small>${escapeHtml(row.problems.join("; "))}</small>` : ""}
+    </article>
+  `).join("");
+  blockedNode.innerHTML = (reducer.negativeRows || []).map((row) => `
+    <article>
+      <span>${escapeHtml(row.kind)} · ${escapeHtml(row.status)}</span>
+      <strong>${escapeHtml(row.id || row.txid || row.address)}</strong>
+      <p>${escapeHtml(row.reason)}</p>
+    </article>
+  `).join("");
 }
 
 function metric(label, value, detail) {

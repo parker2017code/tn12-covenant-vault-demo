@@ -21,6 +21,7 @@
       <a href="lab.html">Lab</a>
       <a href="#roles">Roles</a>
       <a href="#actions">Actions</a>
+      <a href="#replay">Replay</a>
       <a href="#rules">Rules</a>
     </nav>
   </header>
@@ -73,6 +74,16 @@
         <h2>Real actions first, reducer checks second.</h2>
       </div>
       <div id="playground-actions" class="results-rails" aria-live="polite"></div>
+    </section>
+
+    <section id="replay" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Replay state</p>
+        <h2>What current accepted rows reduce to.</h2>
+      </div>
+      <div id="playground-replay-summary" class="results-summary" aria-live="polite"></div>
+      <div id="playground-balances" class="results-feed" aria-live="polite"></div>
+      <div id="playground-blocked" class="results-rails" aria-live="polite"></div>
     </section>
 
     <section id="rules" class="panel results-panel">
