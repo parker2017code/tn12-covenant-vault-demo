@@ -26,7 +26,7 @@ These are the highest-impact things that can be advanced without asking for a re
 | 6 | Real TN12 DeFi activity ledger. | Local users are funded on-chain, pool deposits are accepted, pool payouts are accepted, and `artifacts/defi-accepted-activity-ledger.json` reduces those txids into balances. | No; first pass is accepted |
 | 7 | Wallet/indexer hardening. | Unsigned request templates, signer-return validation, submit-result promotion, replay reducers, rollback fixtures, and no-secret checks stay green. | No |
 | 8 | Reviewer/UI cleanup. | Public surfaces show accepted activity, planner/indexer state, and blocked market execution without adding product claims. | No |
-| 9 | Scheduler/TangVM-adjacent prototype. | Accepted payloads register trigger intents, a reducer selects eligible triggers, and any local-key execution remains labeled `LOCAL_KEY_CUSTODY_TEST`; see `docs/TANGVM_UNISC_BOUNDARY.md`. | No |
+| 9 | Scheduler/TangVM-adjacent prototype. | Accepted payloads register trigger intents and execution receipts, a reducer records executed triggers, planner-only auction rows rank candidates, and any local-key execution remains labeled `LOCAL_KEY_CUSTODY_TEST`; see `docs/TANGVM_UNISC_BOUNDARY.md`. | No |
 | 10 | External signer roundtrip. | A real wallet returns signed bytes, submit succeeds, and accepted txid replay matches. | Yes |
 
 ## Current Reviewer-Hardening Queue

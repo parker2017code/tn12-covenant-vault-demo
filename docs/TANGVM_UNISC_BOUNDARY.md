@@ -40,7 +40,7 @@ TangVM:
 |---|---|---|
 | Scheduler intent registry | Accepted payloads register trigger intents with subject, condition, deadline, bidder, and target action. | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
 | Trigger eligibility reducer | Repo reducer selects eligible triggers and rejects stale, duplicate, low-bid, wrong-event, or wrong-state triggers. | `INDEXER_DERIVED` |
-| Scheduler auction artifact | Multiple trigger bids compete for execution rights under deterministic rules. | `PLANNER_ONLY` until enforced |
+| Scheduler auction artifact | Multiple trigger bids compete for execution rights under deterministic planner rules; stale and slow bids are blocked. | `PLANNER_ONLY` until enforced |
 | Execution receipt | Accepted TN12 payload marks which trigger executed and which state/output it targeted. | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
 | Custody-adjacent execution | Local-key wallet transfers TKAS according to the selected trigger. | `LOCAL_KEY_CUSTODY_TEST` |
 | Covenant-bound trigger | A trigger routes into an existing vault, pledge, or escrow primitive where the script enforces the narrow spend rule. | `SCRIPT_ENFORCED` for the primitive only |

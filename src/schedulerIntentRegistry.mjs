@@ -19,6 +19,7 @@ export function buildSchedulerIntentRegistry({
     receipt: executionReceipts.find((receipt) => receipt.subject === intent.subject),
     transfer: executionTransfers.find((transfer) => transfer.intentSubject === intent.subject)
   }));
+  const auctionRows = buildAuctionRows({ acceptedIntents, triggerRows });
   const negativeRows = buildNegativeRows({ acceptedIntents, context });
   const problems = [
     acceptedIntents.length === 0 ? "no accepted scheduler intent payloads" : "",
@@ -38,6 +39,9 @@ export function buildSchedulerIntentRegistry({
       blockedNegativeRows: negativeRows.filter((row) => row.status === "blocked").length,
       executionReceipts: triggerRows.filter((row) => row.executionReceiptTxid).length,
       executionTransfers: triggerRows.filter((row) => row.executionTransferTxid).length,
+      schedulerBids: auctionRows.length,
+      winningBids: auctionRows.filter((row) => row.status === "winner-selected").length,
+      blockedAuctionRows: auctionRows.filter((row) => row.status === "blocked").length,
       liveProductClaims: 0,
       protocolSchedulerClaims: 0,
       externalSignerClaims: 0,
@@ -49,6 +53,7 @@ export function buildSchedulerIntentRegistry({
     executionReceipts,
     executionTransfers,
     triggerRows,
+    auctionRows,
     negativeRows,
     problems,
     boundaries: [
@@ -181,8 +186,95 @@ function buildNegativeRows({ acceptedIntents = [], context = {} }) {
       status: "blocked",
       reason: "payload kind must be scheduler-intent",
       observedKind: "receipt"
+    },
+    {
+      id: "duplicate-execution-receipt",
+      status: "blocked",
+      reason: "a trigger subject can promote only one execution receipt",
+      subject: first.subject || "missing-subject"
+    },
+    {
+      id: "stale-execution-receipt",
+      status: "blocked",
+      reason: "execution receipt must reference the accepted intent txid",
+      expectedIntentTxid: first.txid || "",
+      observedIntentTxid: "stale-intent-txid"
+    },
+    {
+      id: "execution-transfer-mismatch",
+      status: "blocked",
+      reason: "execution receipt payout txid must match the accepted transfer evidence",
+      subject: first.subject || "missing-subject"
     }
   ];
+}
+
+function buildAuctionRows({ acceptedIntents = [], triggerRows = [] }) {
+  return acceptedIntents.flatMap((intent) => {
+    const trigger = triggerRows.find((row) => row.id === intent.subject) || {};
+    const bids = [
+      schedulerBid(intent, trigger, {
+        id: `${intent.subject}:bid-fast-executor`,
+        bidder: "local-pool-operator",
+        bidTkas: "0.05",
+        maxLatencyBlocks: 5,
+        source: "accepted-intent-review"
+      }),
+      schedulerBid(intent, trigger, {
+        id: `${intent.subject}:bid-low-fee`,
+        bidder: "watcher-low-fee",
+        bidTkas: "0.01",
+        maxLatencyBlocks: 30,
+        source: "planner-candidate"
+      }),
+      schedulerBid(intent, trigger, {
+        id: `${intent.subject}:bid-stale`,
+        bidder: "stale-executor",
+        bidTkas: "0.10",
+        maxLatencyBlocks: 1,
+        source: "stale-ledger"
+      })
+    ];
+    const candidates = bids.filter((bid) => bid.status === "candidate");
+    const winner = candidates.sort(compareSchedulerBids)[0];
+    return bids.map((bid) => bid.id === winner?.id
+      ? { ...bid, status: "winner-selected", reason: "lowest valid bid with acceptable latency" }
+      : bid);
+  });
+}
+
+function schedulerBid(intent, trigger, bid) {
+  const triggerReady = ["eligible", "executed"].includes(trigger.status);
+  const stale = bid.source !== "accepted-intent-review" && bid.source !== "planner-candidate";
+  const slow = Number(bid.maxLatencyBlocks) > 20;
+  const status = !triggerReady || stale || slow ? "blocked" : "candidate";
+  const reason = !triggerReady
+    ? "trigger is not eligible or executed"
+    : stale
+      ? "bid references stale scheduler source"
+      : slow
+        ? "bid latency exceeds scheduler policy"
+        : "valid planner candidate";
+
+  return {
+    id: bid.id,
+    subject: intent.subject,
+    intentTxid: intent.txid,
+    bidder: bid.bidder,
+    bidTkas: bid.bidTkas,
+    maxLatencyBlocks: bid.maxLatencyBlocks,
+    source: bid.source,
+    status,
+    reason,
+    enforcement: "PLANNER_ONLY"
+  };
+}
+
+function compareSchedulerBids(a, b) {
+  const bidDelta = decimalStringToScaled(a.bidTkas) - decimalStringToScaled(b.bidTkas);
+  if (bidDelta < 0n) return -1;
+  if (bidDelta > 0n) return 1;
+  return Number(a.maxLatencyBlocks) - Number(b.maxLatencyBlocks);
 }
 
 function parseCondition(note) {

@@ -24,6 +24,8 @@ console.log(outPath);
 console.log(`status=${registry.status}`);
 console.log(`acceptedIntents=${registry.summary.acceptedIntents}`);
 console.log(`eligibleTriggers=${registry.summary.eligibleTriggers}`);
+console.log(`executedTriggers=${registry.summary.executedTriggers}`);
+console.log(`schedulerBids=${registry.summary.schedulerBids}`);
 
 async function readJson(path) {
   return JSON.parse(await readFile(path, "utf8"));
