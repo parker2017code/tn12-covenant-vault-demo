@@ -103,3 +103,11 @@ npm run serve
 ```
 
 Open `index.html` for the proof/reviewer page. Open `results.html` for the artifact-backed results explainer. Open `playground.html` for the role/faucet playground plan. Open `lab.html` for the full builder workbench.
+
+To create fresh local playground wallets:
+
+```sh
+npm run playground:wallets
+```
+
+The command writes private TN12 testnet keys under `.local/playground/` and prints public `kaspatest:` addresses to fund with the faucet.

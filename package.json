@@ -169,6 +169,7 @@
     "scheduler:covenant-binding": "node scripts/build-scheduler-covenant-binding.mjs",
     "defi:benchmark": "node scripts/build-full-defi-benchmark.mjs",
     "playground:plan": "node scripts/build-playground-plan.mjs",
+    "playground:wallets": "node scripts/create-playground-wallets.mjs",
     "playground:session": "node scripts/build-playground-session.mjs",
     "playground:actions": "node scripts/build-playground-actions.mjs"
   },
