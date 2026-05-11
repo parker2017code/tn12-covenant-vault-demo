@@ -1697,14 +1697,14 @@ progress::-moz-progress-bar {
 
 .journey-grid a {
   position: relative;
-  min-height: 152px;
+  min-height: 168px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid rgba(118, 167, 158, .25);
   border-radius: 18px;
   padding: 18px;
-  overflow: hidden;
+  overflow: visible;
   color: var(--text);
   background:
     linear-gradient(135deg, rgba(118, 167, 158, .16), rgba(7, 8, 7, .08) 48%, rgba(185, 176, 223, .12)),
@@ -1824,7 +1824,7 @@ progress::-moz-progress-bar {
   border: 1px solid rgba(118, 167, 158, .25);
   border-radius: 18px;
   padding: 18px;
-  overflow: hidden;
+  overflow: visible;
   background:
     radial-gradient(circle at 20% 0%, rgba(245, 194, 126, .22), transparent 34%),
     linear-gradient(135deg, rgba(118, 167, 158, .12), rgba(15, 22, 21, .92));
@@ -2021,6 +2021,8 @@ progress::-moz-progress-bar {
   border-radius: 7px;
   background: #12191d;
   padding: 14px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .results-summary span,
