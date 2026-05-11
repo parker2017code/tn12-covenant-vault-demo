@@ -12,7 +12,7 @@ This file is the short queue. It does not replace the generated artifacts; it po
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 - The current full-DeFi repo-local benchmark is `60%`: six of ten rails are complete, with external signer, live rollback evidence, AMM/lending/liquidation custody execution, and mainnet activation still incomplete.
-- The current playground run has three accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, user-to-pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, and pool-to-user payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
+- The current playground run has four accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, User A pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, User B pool deposit `3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d`, and pool-to-User B payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
 
 ## Autonomous Grand Plan Before User Input
 
@@ -40,7 +40,7 @@ This queue is intentionally larger than one commit. It is the current batch to e
 | 1 | Full-DeFi benchmark artifact. | `artifacts/full-defi-benchmark.json`, `npm run defi:benchmark`, focused shape tests, and docs links. | No |
 | 2 | Artifact-backed interactive results page. | A public page that explains accepted TN12 results at beginner, crypto-native, and builder levels, using artifacts rather than hand-maintained counts. | No |
 | 3 | Public evidence showcase. | `results.html` and `playground.html` lead with accepted TN12 activity, clickable txids, role wallets, replay balances, and concise level-based explanations. | No |
-| 4 | Live TN12 playground v1. | `playground.html` shows throwaway role wallets, funding commands, accepted role funding, accepted deposit, accepted payout, replay state, and blocked actions without committing secrets. | No |
+| 4 | Live TN12 playground v1. | `playground.html` shows throwaway role wallets, funding commands, accepted role funding, two accepted deposits, accepted payout, replay state, and blocked actions without committing secrets. | No |
 | 5 | Accepted/custody DeFi execution reducer hardening. | More deterministic balance, position, intent, duplicate, stale-oracle, impossible-withdrawal, and liquidation-block tests over accepted txids/receipts. | No |
 | 6 | More on-chain app actions. | Add small accepted TN12 receipts and safe local-key transfers for deposit, payout, pass, invoice, scheduler, and proof-binding flows where tooling allows. | No; ask only if wallets need more tKAS |
 | 7 | Standards/adapters backlog. | `artifacts/standards-adapter-backlog.json` tracks x402-style payment, ISO 20022-style metadata, DTI-style asset IDs, attestation, agent settlement, and wallet-signing adapter lanes without claiming certification. | No |

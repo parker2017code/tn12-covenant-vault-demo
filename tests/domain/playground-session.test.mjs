@@ -33,7 +33,7 @@ assert.doesNotMatch(JSON.stringify(Object.values(session).flat()), /\.local\/|xp
 const checkedIn = await readJson("artifacts/playground-session.example.json");
 assert.equal(checkedIn.schema, "tn12-playground-session/v1");
 assert.equal(checkedIn.summary.fundedRoles, 6);
-assert.equal(checkedIn.summary.acceptedTxids, 3);
+assert.equal(checkedIn.summary.acceptedTxids, 4);
 assert.equal(checkedIn.summary.privateKeysIncluded, 0);
 assert.doesNotMatch(JSON.stringify(checkedIn), /\.local\/|"privateKey"\s*:|"mnemonic"\s*:|"seed"\s*:/i);
 
@@ -46,6 +46,11 @@ const depositEvidence = await readJson("artifacts/playground-user-a-pool-deposit
 assert.equal(depositEvidence.status, "accepted-transfer-matched");
 assert.equal(depositEvidence.accepted, true);
 assert.equal(depositEvidence.payment.amountTkas, "3");
+
+const secondDepositEvidence = await readJson("artifacts/playground-user-b-pool-deposit-evidence.json");
+assert.equal(secondDepositEvidence.status, "accepted-transfer-matched");
+assert.equal(secondDepositEvidence.accepted, true);
+assert.equal(secondDepositEvidence.payment.amountTkas, "4");
 
 const payoutEvidence = await readJson("artifacts/playground-pool-user-b-payout-evidence.json");
 assert.equal(payoutEvidence.status, "accepted-transfer-matched");

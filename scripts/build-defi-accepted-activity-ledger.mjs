@@ -20,7 +20,9 @@ const transferPaths = [
   "artifacts/tn12-defi-pool-swap-payout-user-01-evidence.json",
   "artifacts/tn12-defi-pool-withdraw-payout-user-02-evidence.json",
   "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json",
+  "artifacts/playground-funding-evidence.json",
   "artifacts/playground-user-a-pool-deposit-evidence.json",
+  "artifacts/playground-user-b-pool-deposit-evidence.json",
   "artifacts/playground-pool-user-b-payout-evidence.json"
 ];
 const transferEvidenceByPath = Object.fromEntries(await Promise.all(

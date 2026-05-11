@@ -7,7 +7,7 @@
   <meta name="description" content="TN12 playground plan for role wallets, faucet funding, guided testnet actions, and accepted txid replay.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="app.js"></script>
+  <script type="module" src="public-explorer.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -32,12 +32,12 @@
       <div>
         <p class="status">Real TN12 transactions. Clickable evidence.</p>
         <h2>Fast testnet money, visible app state.</h2>
-        <p>Fresh role wallets got funded. User A sent 3 tKAS to the pool. The pool sent 2 tKAS to User B. Every step links to TN12 explorer evidence and replayed state.</p>
+        <p>Fresh role wallets got funded. User A sent 3 tKAS to the pool. User B sent 4 tKAS to the pool. The pool sent 2 tKAS to User B. Every step links to TN12 explorer evidence and replayed state.</p>
       </div>
       <aside class="facts">
         <span>Current run</span>
-        <strong>3 accepted txs</strong>
-        <p>Funding -> deposit -> payout -> replay.</p>
+        <strong>4 accepted txs</strong>
+        <p>Funding -> two deposits -> payout -> replay.</p>
       </aside>
     </section>
 
@@ -50,7 +50,7 @@
         <a href="#activity">
           <span>Watch</span>
           <strong>See the TN12 tape</strong>
-          <p>Funding, deposit, payout, replay.</p>
+          <p>Funding, two deposits, payout, replay.</p>
         </a>
         <a href="#roles">
           <span>Inspect</span>
@@ -75,7 +75,13 @@
         <p class="eyebrow">Live session tape</p>
         <h2>What happened on TN12.</h2>
       </div>
-      <div id="playground-activity-strip" class="activity-strip" aria-live="polite"></div>
+      <div id="playground-activity-strip" class="activity-strip" aria-live="polite">
+        <article class="activity-card activity-hot"><span>1</span><strong>Fund</strong><p class="activity-amount">51 tKAS</p><p>6 role wallets</p></article>
+        <article class="activity-card activity-go"><span>2</span><strong>Deposit</strong><p class="activity-amount">3 tKAS</p><p>User A -> pool</p></article>
+        <article class="activity-card activity-go"><span>3</span><strong>Deposit</strong><p class="activity-amount">4 tKAS</p><p>User B -> pool</p></article>
+        <article class="activity-card activity-go"><span>4</span><strong>Payout</strong><p class="activity-amount">2 tKAS</p><p>Pool -> User B</p></article>
+        <article class="activity-card activity-cool"><span>5</span><strong>Replay</strong><p class="activity-amount">state</p><p>Balances and blocked actions</p></article>
+      </div>
     </section>
 
     <section class="panel results-panel">
@@ -91,7 +97,11 @@
         <p class="eyebrow">Plan summary</p>
         <h2>What this run contains.</h2>
       </div>
-      <div id="playground-summary" class="results-summary" aria-live="polite"></div>
+      <div id="playground-summary" class="results-summary" aria-live="polite">
+        <article><span>Accepted txs</span><strong>4</strong><p>Funding, two deposits, one payout.</p></article>
+        <article><span>Roles</span><strong>6</strong><p>Fresh session public addresses.</p></article>
+        <article><span>Secrets published</span><strong>0</strong><p>Only public addresses and txids are committed.</p></article>
+      </div>
     </section>
 
     <section class="panel results-panel">
@@ -99,7 +109,12 @@
         <p class="eyebrow">Current session</p>
         <h2>Explorer-checkable tx flow.</h2>
       </div>
-      <div id="playground-session" class="results-rails" aria-live="polite"></div>
+      <div id="playground-session" class="results-rails" aria-live="polite">
+        <article><span>accepted</span><strong>Role funding</strong><p><a href="https://tn12.kaspa.stream/txs/85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5" target="_blank" rel="noreferrer"><code>85b5c6dc...40a4f6e5</code></a></p></article>
+        <article><span>accepted</span><strong>User A deposit</strong><p><a href="https://tn12.kaspa.stream/txs/83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c" target="_blank" rel="noreferrer"><code>83eae5c1...525501c</code></a></p></article>
+        <article><span>accepted</span><strong>User B deposit</strong><p><a href="https://tn12.kaspa.stream/txs/3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d" target="_blank" rel="noreferrer"><code>3bfca807...777f759d</code></a></p></article>
+        <article><span>accepted</span><strong>Pool payout</strong><p><a href="https://tn12.kaspa.stream/txs/8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78" target="_blank" rel="noreferrer"><code>8e9d1134...44b9f78</code></a></p></article>
+      </div>
       <div id="playground-tx-map" class="playground-tx-map" aria-live="polite"></div>
     </section>
 

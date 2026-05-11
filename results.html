@@ -7,7 +7,7 @@
   <meta name="description" content="Interactive TN12 covenant lab results explorer with beginner, crypto-native, and builder explanations.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="app.js"></script>
+  <script type="module" src="public-explorer.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -32,12 +32,12 @@
       <div>
         <p class="status">Accepted TN12 activity. Replayed state.</p>
         <h2>Funds moved. Receipts landed. The repo replays them.</h2>
-        <p>Start with the concrete run: six role wallets funded on TN12, one user-to-pool deposit accepted, one pool-to-user payout accepted, then a reducer turns txids into balances and blocked actions.</p>
+        <p>Start with the concrete run: six role wallets funded on TN12, two user-to-pool deposits accepted, one pool-to-user payout accepted, then a reducer turns txids into balances and blocked actions.</p>
       </div>
       <aside class="facts">
         <span>Current playground run</span>
-        <strong>3 txs</strong>
-        <p>Role funding, pool deposit, and pool payout all link to TN12 explorer records.</p>
+        <strong>4 txs</strong>
+        <p>Role funding, two pool deposits, and one pool payout all link to TN12 explorer records.</p>
       </aside>
     </section>
 
@@ -50,7 +50,7 @@
         <a href="playground.html#activity">
           <span>Watch</span>
           <strong>Accepted TN12 flow</strong>
-          <p>Funding, deposit, payout, replay.</p>
+          <p>Funding, two deposits, payout, replay.</p>
         </a>
         <a href="#feed">
           <span>Receipts</span>
@@ -75,7 +75,11 @@
         <p class="eyebrow">Live artifact summary</p>
         <h2>Generated counts.</h2>
       </div>
-      <div id="results-summary" class="results-summary" aria-live="polite"></div>
+      <div id="results-summary" class="results-summary" aria-live="polite">
+        <article><span>Accepted playground txs</span><strong>4</strong><p>Role funding, two deposits, and one payout.</p></article>
+        <article><span>Role wallets</span><strong>6</strong><p>Operator, pool, User A, User B, executor, reviewer.</p></article>
+        <article><span>Replay</span><strong>active</strong><p>Accepted txids reduce into balances and blocked actions.</p></article>
+      </div>
     </section>
 
     <section id="levels" class="panel results-panel">
@@ -92,7 +96,12 @@
         <h2>Transaction -> receipt -> replay.</h2>
         <p>Compared with a normal demo server, the important state changes have public txids. Compared with a generic DeFi mock, the app can replay accepted TN12 records and show exactly where execution is still only reducer logic.</p>
       </div>
-      <div id="results-flow" class="results-flow" aria-live="polite"></div>
+      <div id="results-flow" class="results-flow" aria-live="polite">
+        <article><span>1</span><strong>Fund roles</strong><p>Six session wallets received tKAS in one accepted TN12 tx.</p></article>
+        <article><span>2</span><strong>Deposit twice</strong><p>User A and User B each moved tKAS into the pool role.</p></article>
+        <article><span>3</span><strong>Pay out</strong><p>The pool sent tKAS back to User B.</p></article>
+        <article><span>4</span><strong>Replay</strong><p>The ledger converts accepted txids into review state.</p></article>
+      </div>
     </section>
 
     <section id="rails" class="panel results-panel">
@@ -124,12 +133,12 @@
           <p>Six fresh <code>kaspatest:</code> roles were funded by an accepted multi-output TN12 transaction.</p>
         </article>
         <article>
-          <strong>2. Deposit accepted</strong>
-          <p>User A moved 3 tKAS into the pool role. The txid is explorer-checkable.</p>
+          <strong>2. Deposits accepted</strong>
+          <p>User A moved 3 tKAS and User B moved 4 tKAS into the pool role. Both txids are explorer-checkable.</p>
         </article>
         <article>
           <strong>3. Payout accepted</strong>
-          <p>The pool moved 2 tKAS to user B. Replay now shows pool net, balances, and blocked withdrawals.</p>
+          <p>The pool moved 2 tKAS to User B. Replay now shows pool net, balances, and blocked withdrawals.</p>
         </article>
       </div>
       <p class="note"><a href="playground.html">Open the playground walkthrough</a></p>

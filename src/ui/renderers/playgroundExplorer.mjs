@@ -17,7 +17,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   if (!summaryNode || !rolesNode || !actionsNode || !rulesNode || !flowNode) return;
 
   try {
-    const [plan, actions, reducer, activity, session, funding, deposit, payout] = await Promise.all([
+    const [plan, actions, reducer, activity, session, funding, deposit, secondDeposit, payout] = await Promise.all([
       fetchJson("artifacts/playground-plan.json"),
       fetchJson("artifacts/playground-actions.json"),
       fetchJson("artifacts/defi-scenario-reducer.json"),
@@ -25,6 +25,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       fetchJson("artifacts/playground-session.example.json"),
       fetchJson("artifacts/playground-funding-evidence.json"),
       fetchJson("artifacts/playground-user-a-pool-deposit-evidence.json"),
+      fetchJson("artifacts/playground-user-b-pool-deposit-evidence.json"),
       fetchJson("artifacts/playground-pool-user-b-payout-evidence.json")
     ]);
     summaryNode.innerHTML = `
@@ -35,8 +36,8 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}
       ${metric("Benchmark", `${plan.summary.benchmarkPercent}%`, "Current repo-local full-DeFi benchmark.")}
     `;
-    if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, payout });
-    if (activityStripNode) renderActivityStrip(activityStripNode, { funding, deposit, payout, reducer, activity });
+    if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });
+    if (activityStripNode) renderActivityStrip(activityStripNode, { funding, deposit, secondDeposit, payout, reducer, activity });
     rolesNode.innerHTML = plan.roles.map((role) => `
       <article>
         <span>${escapeHtml(role.id)} · ${escapeHtml(role.suggestedFundingTkas)} tKAS</span>
@@ -64,18 +65,23 @@ export async function renderPlaygroundExplorer(documentRef = document) {
           <p>${txLink(deposit.txid)}</p>
         </article>
         <article class="playground-flow-card">
+          <span>${escapeHtml(secondDeposit.status)} · ${escapeHtml(secondDeposit.accepted ? "accepted" : "review")}</span>
+          <strong>${escapeHtml(secondDeposit.payment.amountTkas)} TKAS second deposit</strong>
+          <p>${txLink(secondDeposit.txid)}</p>
+        </article>
+        <article class="playground-flow-card">
           <span>${escapeHtml(payout.status)} · ${escapeHtml(payout.accepted ? "accepted" : "review")}</span>
           <strong>${escapeHtml(payout.payment.amountTkas)} TKAS pool payout</strong>
           <p>${txLink(payout.txid)}</p>
         </article>
         <article class="playground-flow-card flow-wide">
           <span>What happened</span>
-          <strong>fund roles -> user deposit -> pool payout -> replay balances</strong>
+          <strong>fund roles -> two deposits -> payout -> replay balances</strong>
           <p>These are accepted TN12 transfers. The reducer turns them into review state and blocks withdrawals that lack signer/spend evidence.</p>
         </article>
       `;
     }
-    if (txMapNode) renderTxMap(txMapNode, { funding, deposit, payout });
+    if (txMapNode) renderTxMap(txMapNode, { funding, deposit, secondDeposit, payout });
     actionsNode.innerHTML = actions.actionRows.map((action) => `
       <article>
         <span>${escapeHtml(action.enforcement)} · ${escapeHtml(action.ready ? "ready" : "needs funding")}</span>
@@ -96,12 +102,12 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   }
 }
 
-function renderLevels(node, { activity, session, funding, deposit, payout }) {
+function renderLevels(node, { activity, session, funding, deposit, secondDeposit, payout }) {
   node.innerHTML = `
     <article>
       <span>Beginner</span>
       <strong>Money moved between test wallets.</strong>
-      <p>One accepted tx funded the roles. Then user A sent ${escapeHtml(deposit.payment.amountTkas)} tKAS to the pool, and the pool sent ${escapeHtml(payout.payment.amountTkas)} tKAS to user B.</p>
+      <p>One accepted tx funded the roles. Then user A sent ${escapeHtml(deposit.payment.amountTkas)} tKAS to the pool, user B sent ${escapeHtml(secondDeposit.payment.amountTkas)} tKAS to the pool, and the pool sent ${escapeHtml(payout.payment.amountTkas)} tKAS to user B.</p>
     </article>
     <article>
       <span>Crypto-curious</span>
@@ -116,12 +122,12 @@ function renderLevels(node, { activity, session, funding, deposit, payout }) {
     <article>
       <span>Reviewer</span>
       <strong>${escapeHtml(session.summary.acceptedTxids)} accepted session txs, ${escapeHtml(activity.summary.acceptedTransferRows)} transfer rows.</strong>
-      <p>Check ${txLink(funding.txid)}, ${txLink(deposit.txid)}, and ${txLink(payout.txid)} directly on the TN12 explorer.</p>
+      <p>Check ${txLink(funding.txid)}, ${txLink(deposit.txid)}, ${txLink(secondDeposit.txid)}, and ${txLink(payout.txid)} directly on the TN12 explorer.</p>
     </article>
   `;
 }
 
-function renderActivityStrip(node, { funding, deposit, payout, reducer, activity }) {
+function renderActivityStrip(node, { funding, deposit, secondDeposit, payout, reducer, activity }) {
   const poolBalance = (reducer.state?.balances || []).find((row) => row.address === payout.source.address);
   const userB = (reducer.state?.balances || []).find((row) => row.address === payout.payment.to);
   const rows = [
@@ -137,6 +143,13 @@ function renderActivityStrip(node, { funding, deposit, payout, reducer, activity
       amount: `${deposit.payment.amountTkas} tKAS`,
       detail: "User A -> pool",
       txid: deposit.txid,
+      tone: "go"
+    },
+    {
+      label: "Deposit",
+      amount: `${secondDeposit.payment.amountTkas} tKAS`,
+      detail: "User B -> pool",
+      txid: secondDeposit.txid,
       tone: "go"
     },
     {
@@ -165,12 +178,13 @@ function renderActivityStrip(node, { funding, deposit, payout, reducer, activity
   `).join("");
 }
 
-function renderTxMap(node, { funding, deposit, payout }) {
+function renderTxMap(node, { funding, deposit, secondDeposit, payout }) {
   const rows = [
     ["1", "Fund roles", "Operator source", "Six session wallets", funding.txid],
     ["2", "Deposit", "User A", "Pool", deposit.txid],
-    ["3", "Payout", "Pool", "User B", payout.txid],
-    ["4", "Replay", "Accepted txids", "Balances + blocked withdrawals", ""]
+    ["3", "Deposit", "User B", "Pool", secondDeposit.txid],
+    ["4", "Payout", "Pool", "User B", payout.txid],
+    ["5", "Replay", "Accepted txids", "Balances + blocked withdrawals", ""]
   ];
   node.innerHTML = rows.map(([step, title, from, to, txid]) => `
     <article>

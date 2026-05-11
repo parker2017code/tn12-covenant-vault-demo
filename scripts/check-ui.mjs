@@ -3,6 +3,7 @@ import { once } from "node:events";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, join, normalize, resolve } from "node:path";
+import { chromium } from "@playwright/test";
 
 const host = "127.0.0.1";
 const server = createStaticServer(process.cwd());
@@ -55,8 +56,12 @@ try {
   assert.match(resultsHtml, /Live playground/);
   assert.doesNotMatch(resultsHtml, /X post|x-post-draft|Draft post/);
   assert.doesNotMatch(resultsHtml, /Future implementation target/);
+  assert.match(resultsHtml, /src="public-explorer\.js"/);
+  assert.doesNotMatch(resultsHtml, /src="app\.js"/);
   assert.match(resultsHtml, /href="playground\.html"/);
   assert.match(playgroundHtml, /TN12 playground/);
+  assert.match(playgroundHtml, /src="public-explorer\.js"/);
+  assert.doesNotMatch(playgroundHtml, /src="app\.js"/);
   assert.match(playgroundHtml, /id="playground-activity-strip"/);
   assert.match(playgroundHtml, /id="playground-summary"/);
   assert.match(playgroundHtml, /id="playground-roles"/);
@@ -64,16 +69,44 @@ try {
   assert.match(playgroundHtml, /id="playground-replay-summary"/);
   assert.match(playgroundHtml, /id="playground-balances"/);
   assert.match(playgroundHtml, /id="playground-blocked"/);
-  assert.match(playgroundHtml, /3 accepted txs/);
+  assert.match(playgroundHtml, /4 accepted txs/);
   assert.match(playgroundHtml, /id="playground-levels"/);
   assert.match(playgroundHtml, /id="playground-tx-map"/);
   assert.match(playgroundHtml, /Fast testnet money/);
   assert.doesNotMatch(playgroundHtml, /What the playground will run/);
 
+  await checkRenderedPages(url);
+
   console.log("UI smoke check passed.");
 } finally {
   server.close();
   await once(server, "close").catch(() => {});
+}
+
+async function checkRenderedPages(url) {
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage();
+    await page.goto(`${url}playground.html`, { waitUntil: "networkidle" });
+    await page.waitForSelector("#playground-session article", { timeout: 5000 });
+    const playgroundText = await page.locator("body").innerText();
+    assert.match(playgroundText, /4 TKAS second deposit/);
+    assert.match(playgroundText, /User B -> Pool/);
+    assert.match(playgroundText, /3bfca807/);
+    assert.match(playgroundText, /30 TKAS/);
+    assert.match(playgroundText, /4 accepted txs/);
+
+    await page.goto(`${url}results.html`, { waitUntil: "networkidle" });
+    await page.waitForSelector("#standards-adapters article", { timeout: 5000 });
+    const resultsText = await page.locator("body").innerText();
+    assert.match(resultsText, /x402-style HTTP payment adapter/);
+    assert.match(resultsText, /Accepted transfers/i);
+    assert.match(resultsText, /25/);
+    assert.doesNotMatch(resultsText, /Draft post|X post/);
+    await page.close();
+  } finally {
+    await browser.close();
+  }
 }
 
 function createStaticServer(rootDir) {
