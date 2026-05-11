@@ -60,6 +60,88 @@
       </div>
     </section>
 
+    <section id="product-map" class="panel product-map">
+      <div class="section-title">
+        <p class="eyebrow">Product playground map</p>
+        <h2>What people can try.</h2>
+        <p>Each lane should become self-serve: get tKAS, connect or use an external TN12 wallet, review exact bytes, submit, then replay accepted evidence. The labels below separate what is playable now from what still needs external wallet or production rails.</p>
+      </div>
+      <div class="product-grid">
+        <a href="playground.html"><span>play now</span><strong>Live TN12 money flow</strong><p>Role wallets, deposits, payout, replay, copyable addresses.</p><small>Accepted TN12 transfers</small></a>
+        <a href="#invoices"><span>play now</span><strong>Payload receipt invoices</strong><p>Accepted app receipts become invoice state.</p><small>Needs payload-preserving submit route</small></a>
+        <a href="#designer"><span>design now</span><strong>Vault policy</strong><p>Owner, recovery, delay, caps, guardian policy fields.</p><small>Guardians are planner-only until scripted</small></a>
+        <a href="#assurance"><span>play next</span><strong>Assurance funding</strong><p>Pledge, release/refund, batch campaign state.</p><small>Accepted pledge evidence plus settlement review</small></a>
+        <a href="#escrow"><span>play next</span><strong>Escrow / freelance</strong><p>Buyer fund, seller release, timeout refund, mutual cancel.</p><small>Accepted TN12 proof paths</small></a>
+        <a href="#access-passes"><span>play now</span><strong>Access passes</strong><p>Tickets, coupons, memberships with issuer review.</p><small>Issuer/indexer state</small></a>
+        <a href="#auction-intents"><span>play now</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Planner/indexer settlement boundary</small></a>
+        <a href="#defi-backlog"><span>research/play</span><strong>DeFi lab</strong><p>Accepted receipts, pool transfers, reducers, blocked custody.</p><small>No AMM/lending custody claim</small></a>
+        <a href="#coordination"><span>research/play</span><strong>Coordination / Stag</strong><p>Transparent intendos, packs, solver, settlement brief.</p><small>No private Hunt execution yet</small></a>
+        <a href="#agent-commitments"><span>play next</span><strong>Agent commitments</strong><p>Task offers, completion proofs, disputes, release/refund review.</p><small>Wallet review before payout</small></a>
+        <a href="#submit"><span>required rail</span><strong>External wallet handoff</strong><p>Review unsigned requests, sign outside repo, validate return.</p><small>No private key sharing</small></a>
+        <a href="#funding"><span>start here</span><strong>Get and verify tKAS</strong><p>Use faucet, paste outpoint, verify amount and output index.</p><small>TN12 only</small></a>
+      </div>
+    </section>
+
+    <section id="runbook" class="panel runbook-panel">
+      <div class="section-title">
+        <p class="eyebrow">Self-serve runbook</p>
+        <h2>If you are determined, this is the route.</h2>
+        <p>Finished lanes should be runnable from the UI or from copyable artifacts. Unfinished lanes still show the exact missing rail instead of pretending a button can do custody, oracle truth, liquidation, or external signing.</p>
+      </div>
+      <div class="runbook-grid">
+        <article>
+          <span>1</span>
+          <strong>Get TN12 tKAS</strong>
+          <p>Open the faucet, fund a fresh <code>kaspatest:</code> address, then paste the txid/outpoint into Manual funding.</p>
+          <a href="#funding">Open funding importer</a>
+        </article>
+        <article>
+          <span>2</span>
+          <strong>Pick a lane</strong>
+          <p>Use Live Play for real accepted transfers, Invoices for payload app state, Assurance/Escrow for covenant-shaped flows, and DeFi Lab for reducers and blocked custody.</p>
+          <a href="playground.html">Open Live Play</a>
+        </article>
+        <article>
+          <span>3</span>
+          <strong>Use your own wallet</strong>
+          <p>Export a wallet-standard request, review exact fields, sign outside the repo, return signed bytes, then run validation.</p>
+          <a href="#submit">Open wallet handoff</a>
+        </article>
+        <article>
+          <span>4</span>
+          <strong>Replay before believing it</strong>
+          <p>Promote app state only after accepted txid, payload/output match, duplicate guard, and replay checks pass.</p>
+          <a href="#indexer">Open indexer replay</a>
+        </article>
+      </div>
+      <div class="runbook-grid lane-runbook">
+        <article>
+          <span>DeFi</span>
+          <strong>Available now</strong>
+          <p>Accepted local-key funding, deposits, payouts, scheduler receipts, reducer replay, duplicate guards, and blocked withdrawals.</p>
+          <small>Not finished: AMM custody, lending custody, liquidation, oracle truth, production signer.</small>
+        </article>
+        <article>
+          <span>Assurance</span>
+          <strong>Available now</strong>
+          <p>Individual pledge release/refund proof, batch pledge records, release-ready planner state, and accepted release evidence.</p>
+          <small>Not finished: pooled campaign enforcement as one native contract.</small>
+        </article>
+        <article>
+          <span>Escrow</span>
+          <strong>Available now</strong>
+          <p>Accepted release, DAA refund, mutual cancel proofs, marketplace action map, and wallet-standard request candidates.</p>
+          <small>Not finished: live external-wallet submit and production dispute workflow.</small>
+        </article>
+        <article>
+          <span>Coordination</span>
+          <strong>Research playable</strong>
+          <p>Transparent Stag/Intendo/Pack/Solver model and settlement brief for one satisfiable pack.</p>
+          <small>Not finished: opacity, capital multiplexing, composability, atomic Hunt execution.</small>
+        </article>
+      </div>
+    </section>
+
     <section id="core-notes" class="panel">
       <div class="section-title">
         <p class="eyebrow">Core lab notes</p>

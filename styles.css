@@ -1695,6 +1695,109 @@ progress::-moz-progress-bar {
   gap: 14px;
 }
 
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.product-grid a {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 190px;
+  min-width: 0;
+  border: 1px solid rgba(245, 194, 126, .24);
+  border-radius: 18px;
+  padding: 16px;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(245, 194, 126, .18), transparent 38%),
+    linear-gradient(145deg, rgba(118, 167, 158, .13), rgba(15, 22, 25, .95));
+}
+
+.product-grid a:hover {
+  border-color: rgba(245, 194, 126, .58);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.product-grid span {
+  width: fit-content;
+  border: 1px solid rgba(118, 167, 158, .35);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.product-grid strong {
+  font-size: 19px;
+  line-height: 1.12;
+}
+
+.product-grid p,
+.product-grid small {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.product-grid small {
+  color: var(--muted);
+}
+
+.runbook-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.runbook-grid article {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid rgba(118, 167, 158, .28);
+  border-radius: 18px;
+  padding: 16px;
+  background:
+    linear-gradient(135deg, rgba(118, 167, 158, .11), transparent 58%),
+    #12191d;
+}
+
+.runbook-grid span {
+  display: inline-grid;
+  place-items: center;
+  width: fit-content;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 999px;
+  padding: 4px 9px;
+  background: rgba(245, 194, 126, .12);
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.runbook-grid strong {
+  font-size: 19px;
+}
+
+.runbook-grid p,
+.runbook-grid small {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.runbook-grid small {
+  color: var(--muted);
+}
+
 .journey-grid a {
   position: relative;
   min-height: 168px;
@@ -2163,6 +2266,14 @@ progress::-moz-progress-bar {
   .activity-strip,
   .session-balance-strip,
   .journey-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .runbook-grid {
     grid-template-columns: 1fr;
   }
 
