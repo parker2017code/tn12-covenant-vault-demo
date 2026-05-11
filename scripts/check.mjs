@@ -2424,6 +2424,7 @@ const files = [
   "README.md",
   "AGENTS.md",
   "docs/AUDIT_MAP.md",
+  "docs/REPO_TIDYING.md",
   "docs/SCRIPT_INDEX.md",
   "docs/PROGRESS.md",
   "docs/SOURCES.md",
@@ -2460,6 +2461,12 @@ assert.match(auditMap, /npm run demo:operator-refresh/);
 const scriptIndex = await readFile(new URL("../docs/SCRIPT_INDEX.md", import.meta.url), "utf8");
 assert.match(scriptIndex, /Reviewer Commands/);
 assert.match(scriptIndex, /Volatile Generated Artifacts/);
+const repoTidying = await readFile(new URL("../docs/REPO_TIDYING.md", import.meta.url), "utf8");
+assert.match(repoTidying, /Canonical Surface/);
+assert.match(repoTidying, /Archive Policy/);
+const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
+assert.equal(packageJson.scripts["operator:refresh"], "npm run demo:operator-refresh");
+assert.equal(packageJson.scripts["operator:pack"], "npm run project:operator-pack");
 // Full command list and lab details live in docs/LAB_NOTEBOOK.md
 const labNotebook = await readFile(new URL("../docs/LAB_NOTEBOOK.md", import.meta.url), "utf8");
 assert.match(labNotebook, /faucet-tn12\.kaspanet\.io/);

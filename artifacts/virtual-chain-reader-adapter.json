@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-reader-adapter/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T02:40:14.899Z",
+  "generatedAt": "2026-05-11T02:48:44.347Z",
   "status": "virtual-chain-reader-adapter-ready",
   "mode": "configured-rpc-adapter-contract",
   "endpoint": {

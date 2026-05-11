@@ -9,7 +9,8 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | Install exactly from lockfile | `npm ci` |
 | Local behavior gate | `npm run check:all` |
 | Public TN12 evidence gate | `npm run check:tn12` |
-| Full reviewer refresh | `npm run demo:operator-refresh` |
+| Full reviewer refresh | `npm run operator:refresh` |
+| Compatibility alias for full refresh | `npm run demo:operator-refresh` |
 | Public UI smoke check | `npm run check:ui` |
 
 ## Proof Commands
@@ -38,7 +39,8 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | Need | Command |
 |---|---|
 | Rebuild compact proven status | `npm run project:proven-status` |
-| Rebuild operator receipt pack | `npm run project:operator-pack` |
+| Rebuild operator receipt pack | `npm run operator:pack` |
+| Compatibility alias for operator pack | `npm run project:operator-pack` |
 | Refresh DeFi v1 local-wallet receipt loop state | `npm run defi:v1-loop` |
 | Build current next-work queue | `npm run project:queue` |
 
@@ -60,6 +62,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | DeFi backlog | `npm run defi:backlog` |
 | Oracle source matrix | `npm run oracle:matrix` |
 | Cross-chain research library | `npm run research:library` |
+| Refresh the core research guardrails | `npm run research:refresh` |
 
 ## Volatile Generated Artifacts
 

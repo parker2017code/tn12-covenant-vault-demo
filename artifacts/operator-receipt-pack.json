@@ -1,7 +1,7 @@
 {
   "schema": "tn12-operator-receipt-pack/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T02:40:16.232Z",
+  "generatedAt": "2026-05-11T02:48:45.959Z",
   "status": "operator-receipt-pack-ready",
   "currentPercent": "53-58%",
   "evidence": {

@@ -62,6 +62,7 @@ npm run demo:operator-refresh
 |---|---|
 | Reviewer claim map | `docs/AUDIT_MAP.md` |
 | Script groups | `docs/SCRIPT_INDEX.md` |
+| Tidying map | `docs/REPO_TIDYING.md` |
 | Proof index | `docs/PROOF_INDEX.md` |
 | Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
 | Mainnet readiness | `MAINNET_READINESS.md` |

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-indexer-storage-schema/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T02:40:13.888Z",
+  "generatedAt": "2026-05-11T02:48:43.452Z",
   "status": "storage-schema-ready",
   "sourceCheckpoint": {
     "recordCount": 45,
