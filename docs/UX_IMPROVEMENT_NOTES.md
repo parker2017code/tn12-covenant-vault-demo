@@ -67,6 +67,20 @@ This is an internal working note for product cleanup. Keep the public site focus
 3. Split large UI/check files and reduce package script sprawl.
 4. Replace more proof text with clearer user journeys.
 
+## Priority queue
+
+1. Fix visible layout defects first: mobile nav overlap, horizontal overflow, clipped card copy, copy-button crowding, and awkward empty space.
+2. Make every clickable-looking element either a real link/button or visually plain text.
+3. Audit public command snippets. Each visible command needs a nearby route, prerequisites, and expected outcome, or it moves behind an advanced/local-operator drawer.
+4. Route command prerequisites by class:
+   - `npm ci` required for repo checks and generators.
+   - TN12 faucet funds required for fresh wallet/playground runs.
+   - `.local` testnet wallet material required only for local signing flows.
+   - `KASPA_WASM_MODULE`, `KASPA_WRPC_URL`, encoding, network id, and submit shape required for payload-preserving submit flows.
+   - Explorer verification required before app state promotion.
+5. Keep public pages minimal by default. Long operator commands, artifact inventories, old planning notes, and generated matrices belong in docs/lab drawers.
+6. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
+
 ## Lessons from strong open-source websites
 
 - Homepage sells the shape; docs prove the details.
