@@ -16,6 +16,7 @@ This file is about deployment readiness, not TN12 proof-core progress.
 - Payload state: 33 accepted payload events, including six DeFi v1 receipts across three wallets and one agent release wallet-review event.
 - Batch assurance: accepted pledge outputs and accepted 3-pledge release tx `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`.
 - Live replay: public TN12 wRPC reads work, checkpoint overlap is recorded, and `artifacts/durable-replay-promotion-guard.json` passes deterministic replay plus local rollback matching.
+- DeFi simulation: deterministic planner, scenario, reducer, advanced, and multi-wallet artifacts are guarded by `artifacts/defi-artifact-manifest.json`. This is research/simulation evidence only: no live DeFi custody, oracle, AMM, liquidation, or external-signer claim.
 
 ## Still Not Mainnet-Ready
 
@@ -25,6 +26,7 @@ This file is about deployment readiness, not TN12 proof-core progress.
 | Live removed-block evidence | Local rollback matching is not the same as observing a live rollback window | `artifacts/durable-replay-promotion-guard.json` |
 | Batch settlement follow-through | Release is accepted; alternate refund path must remain non-selected | `artifacts/batch-assurance-operator-decision.json` |
 | Wallet/indexer hardening | Product state needs operational reliability | `artifacts/wallet-submit-result-validation.json`; focused tests now cover signer-return validation, submit-result promotion rules, rollback-by-missing-txid, blue-score regression, and virtual-chain rollback rows |
+| DeFi product readiness | Current DeFi lane is deterministic simulation over TN12 references, not custody or market execution | `artifacts/defi-artifact-manifest.json` |
 
 ## Next Order
 

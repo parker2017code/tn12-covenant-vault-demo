@@ -869,8 +869,13 @@ const mainnetReadiness = buildMainnetReadiness(mainnetReadinessFixture);
 assert.equal(mainnetReadiness.status, "readiness-map-not-launch-approval");
 assert.equal(mainnetReadiness.summary.mainnetCapable, 4);
 assert.equal(mainnetReadiness.summary.tn12Only, 3);
-assert.equal(mainnetReadiness.summary.researchOnly, 1);
+assert.equal(mainnetReadiness.summary.researchOnly, 2);
 assert.equal(mainnetReadiness.summary.localOnly, 1);
+assert.ok(mainnetReadiness.components.some((component) =>
+  component.id === "defi-simulation-suite"
+  && component.readiness === "research-only"
+  && /no live DeFi custody/.test(component.why)
+));
 const invoiceRegistryForMainnetBrief = JSON.parse(await readFile(new URL("../artifacts/invoice-registry.json", import.meta.url), "utf8"));
 const livePreflightForMainnetBrief = JSON.parse(await readFile(new URL("../artifacts/virtual-chain-live-preflight.json", import.meta.url), "utf8"));
 const walletStandardForMainnetBrief = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));

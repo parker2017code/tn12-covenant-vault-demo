@@ -1,6 +1,6 @@
 {
   "schema": "kaspa-app-mainnet-readiness/v1",
-  "reviewedAt": "2026-05-10",
+  "reviewedAt": "2026-05-11",
   "status": "readiness-map-not-launch-approval",
   "sources": [
     "https://docs.kaspa.org/",
@@ -8,10 +8,10 @@
     "https://kaspa.org/toccata-hard-fork-kaspa-covenants/"
   ],
   "summary": {
-    "total": 9,
+    "total": 10,
     "mainnetCapable": 4,
     "tn12Only": 3,
-    "researchOnly": 1,
+    "researchOnly": 2,
     "localOnly": 1
   },
   "components": [
@@ -143,6 +143,22 @@
         "vProg/zk rails"
       ],
       "next": "Keep the toy solver transparent and build exact settlement drafts for one pack before stronger claims."
+    },
+    {
+      "id": "defi-simulation-suite",
+      "name": "DeFi planner and reducer simulation suite",
+      "lane": "defi",
+      "readiness": "research-only",
+      "why": "The repo can deterministically model AMM, lending, liquidation-review, oracle-failure, reducer, and multi-wallet receipt scenarios over accepted TN12 references, but it still has no live DeFi custody, oracle, liquidation, AMM, or external-signer rail.",
+      "blockers": [
+        "real external-signer round trip",
+        "production custody review",
+        "oracle source and dispute model",
+        "liquidation execution design",
+        "live indexer rollback evidence",
+        "audit"
+      ],
+      "next": "Keep `npm run defi:refresh` green and use `artifacts/defi-artifact-manifest.json` as the reviewer boundary until custody and external-wallet evidence exist."
     }
   ],
   "rules": [
