@@ -116,6 +116,8 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /User A/);
     assert.match(playgroundText, /7 TKAS/);
     assert.match(playgroundText, /4 accepted txs/);
+    assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/txs/"]').count(), 4);
+    assert.equal(await page.locator('#playground-tx-map article').count(), 5);
 
     await page.goto(`${url}results.html`, { waitUntil: "networkidle" });
     await page.waitForSelector("#standards-adapters article", { timeout: 5000 });
@@ -124,6 +126,7 @@ async function checkRenderedPages(url) {
     assert.match(resultsText, /Accepted transfers/i);
     assert.match(resultsText, /25/);
     assert.doesNotMatch(resultsText, /Draft post|X post/);
+    assert.ok(await page.locator('#results-feed a[href*="tn12.kaspa.stream/txs/"]').count() >= 6);
     await page.close();
   } finally {
     await browser.close();

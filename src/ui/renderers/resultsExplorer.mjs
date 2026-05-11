@@ -89,7 +89,7 @@ function renderFeed(node, events) {
     <article>
       <span>${escapeHtml(event.value || event.status || "accepted")}</span>
       <strong>${escapeHtml(event.subject || event.label)}</strong>
-      <p>${escapeHtml(event.label)} · <code>${escapeHtml(shortTxid(String(event.txid)))}</code></p>
+      <p>${escapeHtml(event.label)} · ${txLink(event.txid)}</p>
     </article>
   `).join("");
 }
@@ -154,4 +154,8 @@ function wireLevelTabs(documentRef) {
 
 function metric(label, value, detail) {
   return `<article><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><p>${escapeHtml(detail)}</p></article>`;
+}
+
+function txLink(txid) {
+  return `<a href="https://tn12.kaspa.stream/txs/${escapeHtml(txid)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(String(txid)))}</code></a>`;
 }

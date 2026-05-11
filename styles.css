@@ -1716,6 +1716,16 @@ progress::-moz-progress-bar {
     linear-gradient(135deg, rgba(118, 167, 158, .12), rgba(15, 22, 21, .92));
 }
 
+.activity-card + .activity-card::after {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(118, 167, 158, .75));
+}
+
 .activity-card::before {
   content: "";
   position: absolute;
@@ -1749,6 +1759,22 @@ progress::-moz-progress-bar {
 
 .activity-card p {
   position: relative;
+}
+
+.activity-card a,
+.playground-tx-map a,
+.results-feed a {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.activity-card a:hover,
+.playground-tx-map a:hover,
+.results-feed a:hover {
+  text-decoration: underline;
 }
 
 .activity-amount {
@@ -1806,7 +1832,7 @@ progress::-moz-progress-bar {
 }
 
 .playground-tx-map {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   margin-top: 14px;
 }
 
