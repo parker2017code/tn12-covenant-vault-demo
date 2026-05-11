@@ -14,11 +14,41 @@ assert.ok(result.records.some((record) => record.lane === "vault" && record.timi
 assert.ok(result.records.some((record) => record.lane === "auction" && record.expectedInputType === "pubkey"));
 assert.ok(result.records.every((record) => BigInt(record.feeSompi) >= 0n));
 
-const mutated = structuredClone(proofEvidence);
-mutated.proofs[0].checks.outputAddressMatchesExpected = false;
-const mutatedResult = verifyProofRecordSet({ proofEvidence: mutated });
+assertMutation("output-address-mismatch", (mutated) => {
+  mutated.proofs[0].checks.outputAddressMatchesExpected = false;
+});
 
-assert.equal(mutatedResult.summary.failed, 1);
-assert.ok(mutatedResult.failures.some((failure) => failure.includes("output-address-mismatch")));
+assertMutation("source-outpoint-mismatch", (mutated) => {
+  mutated.proofs[0].checks.sourceOutpointMatchesExpected = false;
+});
+
+assertMutation("source-amount-mismatch", (mutated) => {
+  mutated.proofs[0].checks.sourceAmountMatchesExpected = false;
+});
+
+assertMutation("output-not-pubkey", (mutated) => {
+  mutated.proofs[0].output.type = "scripthash";
+});
+
+assertMutation("unknown-timing-class", (mutated) => {
+  mutated.proofs[0].entrypoint = "unexpected";
+});
+
+assertMutation("negative-fee", (mutated) => {
+  mutated.proofs[0].input.amount = "1000";
+  mutated.proofs[0].output.amount = "2000";
+});
+
+function assertMutation(expectedFailure, mutate) {
+  const mutated = structuredClone(proofEvidence);
+  mutate(mutated);
+  const mutatedResult = verifyProofRecordSet({ proofEvidence: mutated });
+
+  assert.equal(mutatedResult.summary.failed, 1);
+  assert.ok(
+    mutatedResult.failures.some((failure) => failure.includes(expectedFailure)),
+    `expected failure ${expectedFailure}`
+  );
+}
 
 console.log("Proof-record tests passed.");

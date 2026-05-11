@@ -11,7 +11,21 @@ This file is the short queue. It does not replace the generated artifacts; it po
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 
-## Next 5 Tasks
+## Current Reviewer-Hardening Queue
+
+These are the practical cleanup tasks surfaced by the latest repo reviews and GitHub surface check. They improve auditability before adding more app lanes.
+
+| Order | Task | Why It Matters | Blocked By User? |
+|---|---|---|---|
+| 1 | Keep splitting `scripts/check.mjs` into focused domain tests. | Smaller failures are easier for an outside reviewer to trust and debug. | No |
+| 2 | Add mutation coverage to proof-record tests. | The verifier should prove it catches bad source, amount, output, fee, and timing records. | No |
+| 3 | Derive public counts from canonical artifacts. | README/UI count drift should fail a check instead of relying on manual updates. | No |
+| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. | No |
+| 5 | Keep claim vocabulary close to public claims. | Reviewers should always know what is script-enforced, planner-only, indexer-derived, TN12-accepted, or mainnet-blocked. | No |
+| 6 | Continue exact validation for addresses, txids, amounts, and artifact shapes. | Prefix checks and loose fixtures are acceptable for drafts, not reviewer evidence. | No |
+| 7 | Keep historical reports archived and non-canonical. | The root and reviewer path should stay short enough to audit. | No |
+
+## Next 5 Deployment-Readiness Tasks
 
 | Order | Task | Why It Matters | Blocked By User? |
 |---|---|---|---|
