@@ -24,7 +24,7 @@
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
-        <a href="#core-notes">Core</a>
+        <a href="#core-notes">Details</a>
         <a href="#proofs">Proofs</a>
         <a href="#indexer">Indexer</a>
         <a href="#submit">Submit</a>
@@ -37,8 +37,8 @@
     <section class="hero">
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
-        <h2>Accepted TN12 evidence first.</h2>
-        <p>This page starts with accepted proof spends, accepted payload receipts, replay/indexing state, and the remaining work needed before public wallet use.</p>
+        <h2>What was proven on TN12.</h2>
+        <p>Start with the public evidence: covenant spends accepted, payload receipts accepted, and replayed app state derived from accepted txids. Deeper checks stay below the fold.</p>
       </div>
       <aside class="facts">
         <span>Proof core</span>
@@ -50,36 +50,37 @@
     <section class="panel">
       <div class="section-title">
         <p class="eyebrow">Start here</p>
-        <h2>What most people should do first.</h2>
+        <h2>Three useful paths.</h2>
       </div>
       <div class="journey-grid">
         <a href="results.html">
           <span>See it</span>
-          <strong>Accepted TN12 results</strong>
-          <p>Funds moved, receipts landed, and replay state updates from accepted txids.</p>
+          <strong>What happened?</strong>
+          <p>Funds moved, receipts landed, and replay state updated from accepted txids.</p>
         </a>
         <a href="playground.html">
           <span>Try it</span>
-          <strong>Live Play</strong>
+          <strong>Can I repeat it?</strong>
           <p>Open txids, inspect role wallets, copy addresses, and follow the faucet route.</p>
         </a>
         <a href="#proofs">
           <span>Verify</span>
-          <strong>Proof cards</strong>
+          <strong>Where is the evidence?</strong>
           <p>Vault, assurance, escrow, role-separated, and auction proof txids.</p>
         </a>
         <a href="lab.html">
           <span>Build</span>
-          <strong>Lab Tools</strong>
+          <strong>What can I build from it?</strong>
           <p>Vaults, assurance, escrow, scheduler, coordination, DeFi reducers, and wallet handoff.</p>
         </a>
       </div>
     </section>
 
-    <section id="core-notes" class="panel">
+    <details id="core-notes" class="panel section-drawer">
+      <summary>Technical proof counts and commands</summary>
       <div class="section-title">
-        <p class="eyebrow">Core lab notes</p>
-        <h2>What to read first.</h2>
+        <p class="eyebrow">Proof counts</p>
+        <h2>Open this when you want the audit route.</h2>
       </div>
       <div class="stat-grid">
         <article>
@@ -99,7 +100,7 @@
         </article>
       </div>
       <p class="note">Read <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
-    </section>
+    </details>
 
     <details id="reviewer-path" class="panel build-status section-drawer">
       <summary>Technical checks and docs</summary>
@@ -208,7 +209,8 @@
       <pre>npm run operator:refresh</pre>
     </details>
 
-    <section id="proofs" class="panel proofs">
+    <details id="proofs" class="panel proofs section-drawer">
+      <summary>Open accepted proof txids</summary>
       <div class="section-title">
         <p class="eyebrow">Accepted TN12 proofs</p>
         <h2>Vault, assurance, escrow, role, and auction paths verified on testnet.</h2>
@@ -219,9 +221,10 @@
       </div>
       <div id="proof-list" class="proof-list" aria-live="polite"></div>
       <pre>npm run proof:verify</pre>
-    </section>
+    </details>
 
-    <section id="indexer" class="panel indexer">
+    <details id="indexer" class="panel indexer section-drawer">
+      <summary>Open replay and indexer state</summary>
       <div class="section-title">
         <p class="eyebrow">Accepted transaction indexer</p>
         <h2>App state derived from TN12 reads.</h2>
@@ -248,9 +251,10 @@
       <pre>npm run indexer:checkpoint
 npm run indexer:persist
 npm run indexer:virtual-chain-run</pre>
-    </section>
+    </details>
 
-    <section id="submit" class="panel submit-console">
+    <details id="submit" class="panel submit-console section-drawer">
+      <summary>Open wallet handoff and draft review</summary>
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
         <h2>Review signed drafts before any testnet broadcast.</h2>
@@ -266,7 +270,7 @@ npm run indexer:virtual-chain-run</pre>
       <pre>npm run submit:registry
 npm run wallet:review
 npm run wallet:connector</pre>
-    </section>
+    </details>
 
     <details id="roadmap" class="panel roadmap section-drawer">
       <summary>Technical: app lane map</summary>
