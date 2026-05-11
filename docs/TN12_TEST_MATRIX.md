@@ -51,6 +51,7 @@ Run `npm run payload:verify:events` to re-fetch and verify every accepted payloa
 | Agent commitments | Proof escrow payload | `197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a` |
 | Agent commitments | Dispute escrow payload | `807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0` |
 | Agent commitments | Release planner event | `3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4` |
+| Agent commitments | Release wallet-review payload | `a146de4a14e20c3fede1781275315a2bb4cb324416a70389b46218e090ad347b` |
 | Agent commitments | Dispute-hold planner event | `82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382` |
 | Batch assurance | Pledge docs 001 planner payload | `10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1` |
 | Batch assurance | Pledge docs 002 planner payload | `9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86` |

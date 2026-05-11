@@ -1,16 +1,16 @@
 {
   "schema": "tn12-operator-receipt-pack/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T00:59:52.314Z",
+  "generatedAt": "2026-05-11T01:38:45.932Z",
   "status": "operator-receipt-pack-ready",
   "currentPercent": "53-58%",
   "evidence": {
-    "checkpointRecords": 44,
-    "matchedRecords": 44,
+    "checkpointRecords": 45,
+    "matchedRecords": 45,
     "coreProofTransactions": 9,
     "roleSeparatedProofTransactions": 7,
-    "payloadEvents": 31,
-    "manifestEvents": 31,
+    "payloadEvents": 32,
+    "manifestEvents": 32,
     "outputEvidence": 4
   },
   "custody": {
@@ -60,6 +60,7 @@
     "external signer accepted result missing",
     "live removed-block rollback evidence missing"
   ],
+  "reviewProblems": [],
   "nextCommandPath": [
     {
       "id": "fetch-current-utxo",
@@ -89,6 +90,11 @@
     {
       "id": "refresh-operator-pack",
       "command": "npm run project:operator-pack",
+      "ready": true
+    },
+    {
+      "id": "full-operator-refresh",
+      "command": "npm run demo:operator-refresh",
       "ready": true
     }
   ],

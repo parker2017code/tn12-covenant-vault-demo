@@ -849,6 +849,7 @@ async function renderOperatorPack() {
       <article><span>Payloads</span><strong>${escapeHtml(pack.evidence.payloadEvents)}</strong><p>${escapeHtml(pack.evidence.manifestEvents)} manifest events.</p></article>
       <article><span>Custody ready</span><strong>${escapeHtml(pack.custody.auctionReadyRows + pack.custody.agentReadyRows)}</strong><p>Auction ${escapeHtml(pack.custody.auctionReadyRows)}; agent ${escapeHtml(pack.custody.agentReadyRows)}.</p></article>
       <article><span>Wallet</span><strong>${escapeHtml(pack.wallet.mode)}</strong><p>${escapeHtml(pack.wallet.acceptedReceipts.length)} accepted receipts.</p></article>
+      <article><span>Review</span><strong>${escapeHtml((pack.reviewProblems || []).length ? "blocked" : "clean")}</strong><p>${escapeHtml((pack.deferredMainnetRails || []).length)} deferred rails.</p></article>
     `;
     operatorPackCommandsNode.innerHTML = "";
     for (const step of pack.nextCommandPath || []) {

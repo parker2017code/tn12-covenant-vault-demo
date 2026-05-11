@@ -13,12 +13,18 @@ export function buildOperatorReceiptPack({
   const acceptedEvidence = provenStatus.acceptedEvidence || {};
   const localCommands = operatorLoop.commands || {};
   const demoReady = Array.isArray(provenStatus.demoBlockers) && provenStatus.demoBlockers.length === 0;
+  const reviewProblems = buildReviewProblems({
+    acceptedEvidence,
+    payloadManifest,
+    operatorLoop,
+    checkpoint
+  });
 
   return {
     schema: "tn12-operator-receipt-pack/v1",
     network: provenStatus.network || checkpoint.network || "kaspa-testnet-12",
     generatedAt,
-    status: demoReady ? "operator-receipt-pack-ready" : "operator-receipt-pack-review",
+    status: demoReady && reviewProblems.length === 0 ? "operator-receipt-pack-ready" : "operator-receipt-pack-review",
     currentPercent: provenStatus.currentPercent || "unknown",
     evidence: {
       checkpointRecords: Number(acceptedEvidence.checkpointRecords || checkpoint.summary?.total || 0),
@@ -47,13 +53,15 @@ export function buildOperatorReceiptPack({
       ledgerPendingWalletSubmitRows: Number(submitLedger.summary?.pendingWalletSubmit || 0)
     },
     deferredMainnetRails: provenStatus.mainnetDeferredBlockers || [],
+    reviewProblems,
     nextCommandPath: [
       command("fetch-current-utxo", localCommands.fetchCurrentUtxo),
       command("build-next-receipt", localCommands.buildNextReceipt),
       command("submit-next-receipt", localCommands.submitNextReceipt),
       command("verify-and-index", localCommands.verifyAndIndex),
       command("refresh-proven-status", "npm run project:proven-status"),
-      command("refresh-operator-pack", "npm run project:operator-pack")
+      command("refresh-operator-pack", "npm run project:operator-pack"),
+      command("full-operator-refresh", "npm run demo:operator-refresh")
     ],
     receiptsToShowFirst: buildReceiptPointers({ operatorLoop, payloadManifest }),
     boundaries: [
@@ -62,6 +70,24 @@ export function buildOperatorReceiptPack({
       "Deferred mainnet rails remain explicit until external signer and live rollback evidence exist."
     ]
   };
+}
+
+function buildReviewProblems({ acceptedEvidence, payloadManifest, operatorLoop, checkpoint }) {
+  const problems = [];
+  const payloadEvents = Number(acceptedEvidence.payloadEvents || checkpoint.summary?.payloadEvents || 0);
+  const manifestEvents = Array.isArray(payloadManifest.events) ? payloadManifest.events.length : 0;
+  const receipts = Array.isArray(operatorLoop.receipts) ? operatorLoop.receipts : [];
+  const current = operatorLoop.currentSpendableOutpoint || {};
+
+  if (payloadEvents !== manifestEvents) problems.push("payload manifest count does not match accepted payload event count");
+  if (!current.spendable) problems.push("current local-wallet outpoint is not marked spendable");
+  if (receipts.length === 0) problems.push("no local-wallet receipts recorded");
+  if (receipts.some((receipt) => !receipt.accepted || !receipt.payloadMatches || !receipt.txid)) {
+    problems.push("one or more local-wallet receipts are not accepted and payload-matched");
+  }
+  if (Number(checkpoint.summary?.mismatches || 0) > 0) problems.push("checkpoint has mismatched records");
+
+  return problems;
 }
 
 function command(id, value = "") {

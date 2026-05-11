@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-11T01:38:35.920Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "a146de4a14e20c3fede1781275315a2bb4cb324416a70389b46218e090ad347b",
+  "accepted": true,
+  "acceptingBlockBlueScore": 8384999,
+  "acceptingBlockTime": 1778461777545,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d3030313a72656c656173652d77616c6c65742d726576696577222c2276616c7565223a2277616c6c65742d7265766965772d7265616479222c226e6f7465223a22736574746c656d656e742d61646a6163656e74206c6f63616c2d77616c6c657420616374696f6e227d",
+    "observedHex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d3030313a72656c656173652d77616c6c65742d726576696577222c2276616c7565223a2277616c6c65742d7265766965772d7265616479222c226e6f7465223a22736574746c656d656e742d61646a6163656e74206c6f63616c2d77616c6c657420616374696f6e227d",
+    "bytes": 163,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "agent-settlement",
+        "subject": "agent-task-invoice-001:release-wallet-review",
+        "value": "wallet-review-ready",
+        "note": "settlement-adjacent local-wallet action"
+      },
+      "encoded": {
+        "bytes": 163,
+        "hex": "7b226b696e64223a226167656e742d736574746c656d656e74222c227375626a656374223a226167656e742d7461736b2d696e766f6963652d3030313a72656c656173652d77616c6c65742d726576696577222c2276616c7565223a2277616c6c65742d7265766965772d7265616479222c226e6f7465223a22736574746c656d656e742d61646a6163656e74206c6f63616c2d77616c6c657420616374696f6e227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "agent-task-invoice-001:release-wallet-review",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/a146de4a14e20c3fede1781275315a2bb4cb324416a70389b46218e090ad347b"
+}

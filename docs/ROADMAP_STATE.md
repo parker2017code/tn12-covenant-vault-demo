@@ -9,7 +9,7 @@ The repo should read as proof-first, not plan-first. Use generated artifacts for
 | Rail | Current state | Next proof |
 |---|---|---|
 | Covenants | Vault, assurance, escrow, and role-separated paths accepted on TN12 | Fresh external-signer covenant spend |
-| Payload receipts | 31 accepted payload events, including five DeFi v1 receipts | External-signer payload receipt |
+| Payload receipts | 32 accepted payload events, including five DeFi v1 receipts and one agent release wallet-review event | External-signer payload receipt |
 | Batch assurance | Accepted pledge outputs and accepted release | Keep refund alternates non-selected; next signer work uses fresh requests |
 | Replay/indexer | Checkpoint, live overlap, durable promotion guard | Live removed-block rollback evidence |
 | Wallet submit | Review package, request templates, result validation | Real wallet-approved signed tx |

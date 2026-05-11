@@ -511,8 +511,8 @@ const provenStatus = buildProvenStatus({
 });
 assert.equal(provenStatus.status, "tn12-demo-proof-ready-mainnet-deferred");
 assert.equal(provenStatus.currentPercent, "53-58%");
-assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 44);
-assert.equal(provenStatus.acceptedEvidence.payloadEvents, 31);
+assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 45);
+assert.equal(provenStatus.acceptedEvidence.payloadEvents, 32);
 assert.equal(provenStatus.readiness.durablePromotionReady, false);
 assert.deepEqual(provenStatus.demoBlockers, []);
 assert.ok(provenStatus.mainnetDeferredBlockers.includes("external signer accepted result missing"));
@@ -534,11 +534,34 @@ const operatorReceiptPack = buildOperatorReceiptPack({
 });
 assert.equal(operatorReceiptPack.status, "operator-receipt-pack-ready");
 assert.equal(operatorReceiptPack.currentPercent, "53-58%");
-assert.equal(operatorReceiptPack.evidence.checkpointRecords, 44);
-assert.equal(operatorReceiptPack.evidence.payloadEvents, 31);
+assert.equal(operatorReceiptPack.evidence.checkpointRecords, 45);
+assert.equal(operatorReceiptPack.evidence.payloadEvents, 32);
 assert.equal(operatorReceiptPack.custody.auctionReadyRows, 2);
 assert.equal(operatorReceiptPack.custody.agentReadyRows, 2);
 assert.ok(operatorReceiptPack.nextCommandPath.every((row) => row.ready));
+assert.deepEqual(operatorReceiptPack.reviewProblems, []);
+assert.ok(operatorReceiptPack.nextCommandPath.some((row) => row.id === "full-operator-refresh"));
+const staleOperatorReceiptPack = buildOperatorReceiptPack({
+  provenStatus: provenStatusArtifact,
+  checkpoint: JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8")),
+  proofEvidence: JSON.parse(await readFile(new URL("../artifacts/proof-evidence.json", import.meta.url), "utf8")),
+  roleProofEvidence: JSON.parse(await readFile(new URL("../artifacts/role-separated-proof-evidence.json", import.meta.url), "utf8")),
+  payloadManifest: { events: [] },
+  operatorLoop: {
+    wallet: { address: "kaspatest:test" },
+    receipts: [{ txid: "", accepted: false, payloadMatches: false }],
+    currentSpendableOutpoint: { spendable: false },
+    commands: {}
+  },
+  submitLedger: {},
+  auctionCustodyReview: {},
+  agentSettlementReview: {},
+  generatedAt: "2026-05-10T00:00:00.000Z"
+});
+assert.equal(staleOperatorReceiptPack.status, "operator-receipt-pack-review");
+assert.ok(staleOperatorReceiptPack.reviewProblems.includes("payload manifest count does not match accepted payload event count"));
+assert.ok(staleOperatorReceiptPack.reviewProblems.includes("current local-wallet outpoint is not marked spendable"));
+assert.ok(staleOperatorReceiptPack.reviewProblems.includes("one or more local-wallet receipts are not accepted and payload-matched"));
 const operatorReceiptPackArtifact = JSON.parse(await readFile(new URL("../artifacts/operator-receipt-pack.json", import.meta.url), "utf8"));
 assert.equal(operatorReceiptPackArtifact.status, "operator-receipt-pack-ready");
 assert.equal(operatorReceiptPackArtifact.evidence.coreProofTransactions, 9);

@@ -29,6 +29,7 @@ Run the full local gate:
 
 ```sh
 npm run check:all
+npm run demo:operator-refresh
 ```
 
 Run the public TN12 evidence gate:

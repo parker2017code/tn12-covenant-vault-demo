@@ -4,6 +4,18 @@ Kaspa testnet-12 repo for covenant proof spends, payload receipts, and replay gu
 
 Percentages in this repo mean mainnet deployment readiness unless a line explicitly says TN12/demo progress.
 
+## Canonical Status
+
+Start here:
+
+- `README.md`: public summary and verification commands.
+- `artifacts/proven-status.json`: compact current counts, percent, and deferred rails.
+- `artifacts/operator-receipt-pack.json`: accepted evidence plus the local-wallet command path.
+- `MAINNET_READINESS.md`: deployment-readiness gaps only.
+- `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
+
+Older session/status reports are historical notes, not canonical.
+
 ## Accepted On TN12
 
 | Evidence | Status | Where |
@@ -13,7 +25,7 @@ Percentages in this repo mean mainnet deployment readiness unless a line explici
 | Escrow release, DAA refund, mutual cancel | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
 | Role-separated positive paths, all 7 | `TN12_ACCEPTED` | `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
-| 31 payload events, including 5 DeFi v1 receipts | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
+| 32 payload events, including 5 DeFi v1 receipts and 1 agent release wallet-review event | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
 | Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |
 
 ## NOT Proven
@@ -38,9 +50,10 @@ Percentages in this repo mean mainnet deployment readiness unless a line explici
 npm install
 npm run check:all
 npm run check:tn12
+npm run demo:operator-refresh
 ```
 
-`npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence. Passing both verifies existing evidence; it does not create a new spend.
+`npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence. `npm run demo:operator-refresh` verifies TN12, refreshes derived artifacts, rebuilds status packs, and reruns local checks.
 
 ## Useful Artifacts
 

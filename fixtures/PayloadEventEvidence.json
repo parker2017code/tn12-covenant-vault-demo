@@ -133,6 +133,11 @@
       "outPath": "artifacts/payload-agent-release-invoice-evidence.json"
     },
     {
+      "label": "Agent release wallet review",
+      "draftPath": "artifacts/signed-drafts/payload-agent-release-wallet-review.json",
+      "outPath": "artifacts/payload-agent-release-wallet-review-evidence.json"
+    },
+    {
       "label": "Agent hold escrow",
       "draftPath": "artifacts/signed-drafts/payload-agent-hold-escrow.json",
       "outPath": "artifacts/payload-agent-hold-escrow-evidence.json"
