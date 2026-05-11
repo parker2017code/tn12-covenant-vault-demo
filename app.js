@@ -63,6 +63,10 @@ import {
   setFormDefaults,
   setInputValue
 } from "./src/ui/forms.mjs";
+import {
+  fetchJson,
+  fetchJsonMap
+} from "./src/ui/dataLoader.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -374,8 +378,7 @@ async function renderProofTransactions() {
   if (!proofListNode) return;
 
   try {
-    const response = await fetch("fixtures/AcceptedProofTransactions.json", { cache: "no-store" });
-    const data = await response.json();
+    const data = await fetchJson("fixtures/AcceptedProofTransactions.json");
     proofListNode.innerHTML = "";
 
     for (const proof of data.transactions) {
@@ -400,15 +403,18 @@ async function renderBatchAssuranceCampaign() {
   if (!campaignSummaryNode || !campaignPlansNode || !campaignPledgesNode) return;
 
   try {
-    const response = await fetch("fixtures/BatchAssuranceCampaign.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const {
+      fixture,
+      custodyDrafts,
+      custodyRequirements,
+      operatorDecision
+    } = await fetchJsonMap({
+      fixture: "fixtures/BatchAssuranceCampaign.json",
+      custodyDrafts: "artifacts/batch-assurance-custody-drafts.json",
+      custodyRequirements: "artifacts/batch-assurance-custody-requirements.json",
+      operatorDecision: "artifacts/batch-assurance-operator-decision.json"
+    });
     const campaign = buildBatchAssuranceState(fixture);
-    const custodyResponse = await fetch("artifacts/batch-assurance-custody-drafts.json", { cache: "no-store" });
-    const custodyDrafts = await custodyResponse.json();
-    const requirementsResponse = await fetch("artifacts/batch-assurance-custody-requirements.json", { cache: "no-store" });
-    const custodyRequirements = await requirementsResponse.json();
-    const operatorResponse = await fetch("artifacts/batch-assurance-operator-decision.json", { cache: "no-store" });
-    const operatorDecision = await operatorResponse.json();
     campaignSummaryNode.innerHTML = `
       <article><span>Accepted</span><strong>${escapeHtml(campaign.summary.acceptedTkas)} / ${escapeHtml(campaign.summary.targetTkas)}</strong></article>
       <article><span>Progress</span><strong>${escapeHtml(Math.round(campaign.summary.acceptedProgress * 100))}%</strong></article>
