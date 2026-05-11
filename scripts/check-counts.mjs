@@ -1,34 +1,46 @@
 import { readFile } from "node:fs/promises";
 
-const [provenStatus, payloadEvents, readme, progress, mainnetReadiness] = await Promise.all([
+const [provenStatus, payloadEvents, readme, indexHtml, progress, mainnetReadiness] = await Promise.all([
   readJson("artifacts/proven-status.json"),
   readJson("fixtures/PayloadEventEvidence.json"),
   readText("README.md"),
+  readText("index.html"),
   readText("docs/PROGRESS.md"),
   readText("MAINNET_READINESS.md")
 ]);
 
-const expectedPayloadEvents = Number(provenStatus.acceptedEvidence?.payloadEvents);
+const expectedPayloadEvents = readPositiveInteger(provenStatus.acceptedEvidence?.payloadEvents, "acceptedEvidence.payloadEvents");
+const expectedProofTransactions = readPositiveInteger(provenStatus.acceptedEvidence?.proofTransactions, "acceptedEvidence.proofTransactions");
+const expectedRoleProofTransactions = readPositiveInteger(provenStatus.acceptedEvidence?.roleSeparatedProofTransactions, "acceptedEvidence.roleSeparatedProofTransactions");
+const expectedCheckpointRecords = readPositiveInteger(provenStatus.acceptedEvidence?.checkpointRecords, "acceptedEvidence.checkpointRecords");
 const observedPayloadEvents = Array.isArray(payloadEvents.events)
   ? payloadEvents.events.length
   : Number(payloadEvents.summary?.total || payloadEvents.length || 0);
 
-if (!Number.isInteger(expectedPayloadEvents) || expectedPayloadEvents <= 0) {
-  throw new Error("artifacts/proven-status.json missing acceptedEvidence.payloadEvents.");
-}
 if (observedPayloadEvents !== expectedPayloadEvents) {
   throw new Error(`Payload event fixture count mismatch: fixture=${observedPayloadEvents} proven-status=${expectedPayloadEvents}.`);
 }
 
 const requiredSnippets = [
-  ["README.md", readme, [`${expectedPayloadEvents} payload events`, `${expectedPayloadEvents} accepted payload events`]],
-  ["docs/PROGRESS.md", progress, [`${expectedPayloadEvents} accepted payload events`, `${expectedPayloadEvents} payload events accepted`]],
-  ["MAINNET_READINESS.md", mainnetReadiness, [`${expectedPayloadEvents} accepted payload events`]]
+  [
+    "README.md",
+    readme,
+    [
+      [`${expectedPayloadEvents} payload events`, `${expectedPayloadEvents} accepted payload events`],
+      [`${expectedRoleProofTransactions} role-separated`, `all ${expectedRoleProofTransactions}`]
+    ]
+  ],
+  ["index.html", indexHtml, [`${expectedPayloadEvents}</strong>`, `${expectedRoleProofTransactions} role-separated`, `${expectedCheckpointRecords} indexed records`]],
+  ["docs/PROGRESS.md", progress, [[`${expectedPayloadEvents} accepted payload events`, `${expectedPayloadEvents} payload events accepted`]]],
+  ["MAINNET_READINESS.md", mainnetReadiness, [`${expectedPayloadEvents} accepted payload events`, `${expectedProofTransactions + expectedRoleProofTransactions} proof paths`, [`${expectedRoleProofTransactions} role-separated`, `all seven role-separated`]]]
 ];
 
-for (const [path, text, acceptedPhrases] of requiredSnippets) {
-  if (!acceptedPhrases.some((phrase) => text.includes(phrase))) {
-    throw new Error(`${path} missing canonical payload count phrase for ${expectedPayloadEvents} payload events`);
+for (const [path, text, requiredGroups] of requiredSnippets) {
+  for (const group of requiredGroups) {
+    const alternatives = Array.isArray(group) ? group : [group];
+    if (!alternatives.some((phrase) => text.includes(phrase))) {
+      throw new Error(`${path} missing canonical count phrase; expected one of: ${alternatives.join(" | ")}`);
+    }
   }
 }
 
@@ -40,4 +52,12 @@ async function readJson(path) {
 
 async function readText(path) {
   return await readFile(path, "utf8");
+}
+
+function readPositiveInteger(value, label) {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    throw new Error(`artifacts/proven-status.json missing ${label}.`);
+  }
+  return parsed;
 }

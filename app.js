@@ -52,6 +52,17 @@ import {
   runLabPageController,
   runProofPageController
 } from "./src/ui/pageControllers.mjs";
+import {
+  cssEscape,
+  escapeHtml,
+  shortAddress,
+  shortTxid,
+  sompiToTkas
+} from "./src/ui/formatters.mjs";
+import {
+  setFormDefaults,
+  setInputValue
+} from "./src/ui/forms.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -1853,44 +1864,4 @@ async function fetchTn12Transaction(txid) {
     throw new Error(`${response.status} ${response.statusText}`);
   }
   return response.json();
-}
-
-function shortTxid(txid) {
-  return `${txid.slice(0, 8)}...${txid.slice(-8)}`;
-}
-
-function shortAddress(address) {
-  return `${address.slice(0, 18)}...${address.slice(-8)}`;
-}
-
-function sompiToTkas(sompi) {
-  const whole = sompi / 100000000n;
-  const fraction = sompi % 100000000n;
-  if (fraction === 0n) return whole.toString();
-  return `${whole}.${fraction.toString().padStart(8, "0").replace(/0+$/, "")}`;
-}
-
-function cssEscape(value) {
-  if (globalThis.CSS?.escape) return CSS.escape(value);
-  return String(value).replaceAll('"', '\\"');
-}
-
-function setFormDefaults(targetForm, defaults) {
-  if (!targetForm) return;
-  for (const [key, value] of Object.entries(defaults)) {
-    const input = targetForm.elements[key];
-    if (input) input.value = value;
-  }
-}
-
-function setInputValue(input, value) {
-  if (input) input.value = value;
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
 }

@@ -8,7 +8,7 @@ This file is the short queue. It does not replace the generated artifacts; it po
 
 - TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
 - Mainnet deployment readiness is still about `55-60%`.
-- Proof-lab auditability is roughly `75-80%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, and wallet-submit readiness checks.
+- Proof-lab auditability is roughly `80-83%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, wallet-submit readiness checks, attestation/invoice/research checks, and batch-assurance checks.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 
@@ -18,10 +18,10 @@ These are the practical cleanup tasks surfaced by the latest repo reviews and Gi
 
 | Order | Task | Why It Matters | Blocked By User? |
 |---|---|---|---|
-| 1 | Keep splitting `scripts/check.mjs` into focused domain tests. | Smaller failures are easier for an outside reviewer to trust and debug. | No |
+| 1 | Keep splitting `scripts/check.mjs` into focused domain tests. | Smaller failures are easier for an outside reviewer to trust and debug. Wallet-submit, attestation/invoice/research, and batch-assurance slices now have focused tests. | No |
 | 2 | Add mutation coverage to proof-record tests. | The verifier should prove it catches bad source, amount, output, fee, and timing records. | No |
-| 3 | Derive public counts from canonical artifacts. | README/UI count drift should fail a check instead of relying on manual updates. | No |
-| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. | No |
+| 3 | Derive public counts from canonical artifacts. | README/UI count drift should fail a check instead of relying on manual updates. Payload, proof-path, role-separated, and checkpoint/indexed counts now have a stronger local guard. | No |
+| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. Shared formatting/form helpers are now extracted; renderer/page extraction remains next. | No |
 | 5 | Keep claim vocabulary close to public claims. | Reviewers should always know what is script-enforced, planner-only, indexer-derived, TN12-accepted, or mainnet-blocked. | No |
 | 6 | Continue exact validation for addresses, txids, amounts, and artifact shapes. | Prefix checks and loose fixtures are acceptable for drafts, not reviewer evidence. | No |
 | 7 | Keep historical reports archived and non-canonical. | The root and reviewer path should stay short enough to audit. | No |
