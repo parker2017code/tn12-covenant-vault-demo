@@ -168,7 +168,7 @@ async function checkRenderedPages(url) {
     assert.match(productMapText, /Scheduler workbench/);
     const runbookText = await page.locator("#runbook").innerText();
     assert.match(runbookText, /Run it yourself/);
-    assert.match(runbookText, /Next rails: AMM custody/);
+    assert.match(runbookText, /Missing pieces: AMM custody/);
     assert.match(runbookText, /Replay before believing it/);
     await page.locator("#lane-runbook").evaluate((node) => {
       node.open = true;
@@ -193,7 +193,7 @@ async function checkRenderedPages(url) {
     assert.match(schedulerText, /Replay the accepted scheduler trigger/);
     assert.match(schedulerText, /Accepted trigger/);
     assert.match(schedulerText, /Transparent coordination pack/);
-    assert.match(schedulerText, /Protocol-level automation is a later rail/);
+    assert.match(schedulerText, /Protocol-level automation is separate research work/);
     assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 7);
     await page.goto(`${url}lab.html#coordination`, { waitUntil: "networkidle" });
     await page.waitForSelector(".coordination-run-card", { timeout: 5000 });

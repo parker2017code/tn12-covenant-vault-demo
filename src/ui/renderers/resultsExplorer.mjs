@@ -78,7 +78,7 @@ function renderRails(node, benchmark) {
   node.innerHTML = benchmark.rails.map((rail) => `
     <article class="${rail.done ? "rail-done" : "rail-open"}">
       <span>${escapeHtml(rail.label)}</span>
-      <strong>${escapeHtml(rail.done ? "done" : "open")}: ${escapeHtml(rail.title)}</strong>
+      <strong>${escapeHtml(rail.done ? "accepted evidence" : "missing piece")}: ${escapeHtml(rail.title)}</strong>
       <p>${escapeHtml(rail.evidence)}</p>
     </article>
   `).join("");

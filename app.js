@@ -804,9 +804,9 @@ async function renderBuildStatus() {
     const status = buildProjectStatus(fixture);
     const plan = buildProjectPlan(fixture);
     buildStatusSummaryNode.innerHTML = `
-      <article><span>Bases</span><strong>${escapeHtml(status.summary.builtBases)}</strong></article>
-      <article><span>Next</span><strong>${escapeHtml(status.summary.nextBuilds)}</strong></article>
-      <article><span>Blocked</span><strong>${escapeHtml(status.summary.blocked)}</strong></article>
+      <article><span>Evidence</span><strong>${escapeHtml(status.summary.builtBases)}</strong></article>
+      <article><span>Queued</span><strong>${escapeHtml(status.summary.nextBuilds)}</strong></article>
+      <article><span>Missing</span><strong>${escapeHtml(status.summary.blocked)}</strong></article>
       <article><span>Research</span><strong>${escapeHtml(status.summary.research)}</strong></article>
     `;
 
@@ -825,10 +825,10 @@ async function renderBuildStatus() {
 
     if (projectPlanSummaryNode && projectPlanNextNode && projectPlanVisionNode) {
       projectPlanSummaryNode.innerHTML = `
-        <article><span>Done</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
-        <article><span>WIP</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
-        <article><span>Next</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
-        <article><span>Later</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
+        <article><span>Accepted</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
+        <article><span>Active</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
+        <article><span>Queued</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
+        <article><span>Research</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
       `;
       projectPlanNextNode.innerHTML = "";
       for (const item of plan.next) {
@@ -846,7 +846,7 @@ async function renderBuildStatus() {
         .join("");
     }
   } catch (error) {
-    buildStatusSummaryNode.textContent = `Build status unavailable: ${error.message}`;
+    buildStatusSummaryNode.textContent = `Artifact map unavailable: ${error.message}`;
   }
 }
 
@@ -857,10 +857,10 @@ async function renderProjectPlan() {
     const fixture = await fetchJson("fixtures/BuildStatus.json");
     const plan = buildProjectPlan(fixture);
     projectPlanSummaryNode.innerHTML = `
-      <article><span>Done</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
-      <article><span>WIP</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
-      <article><span>Next</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
-      <article><span>Later</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
+      <article><span>Accepted</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
+      <article><span>Active</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
+      <article><span>Queued</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
+      <article><span>Research</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
     `;
     projectPlanNextNode.innerHTML = "";
     for (const item of plan.next) {
@@ -887,7 +887,7 @@ async function renderProvenStatus() {
   try {
     const status = await fetchJson("artifacts/proven-status.json");
     provenStatusSummaryNode.innerHTML = `
-      <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.currentPercent)}</strong><p>After external signer: ${escapeHtml(status.afterExternalSignerPercent)}.</p></article>
+      <article><span>${escapeHtml(status.status)}</span><strong>Accepted evidence</strong><p>External signer and live rollback evidence are still separate work.</p></article>
       <article><span>Checkpoint</span><strong>${escapeHtml(status.acceptedEvidence.checkpointRecords)}</strong><p>${escapeHtml(status.acceptedEvidence.matchedRecords)} matched records.</p></article>
       <article><span>Payloads</span><strong>${escapeHtml(status.acceptedEvidence.payloadEvents)}</strong><p>${escapeHtml(status.acceptedEvidence.outputEvidence)} output-evidence rows.</p></article>
       <article><span>Demo blockers</span><strong>${escapeHtml((status.demoBlockers || []).length)}</strong><p>Mainnet deferred: ${escapeHtml((status.mainnetDeferredBlockers || []).length)}.</p></article>
@@ -917,7 +917,7 @@ async function renderOperatorPack() {
   try {
     const pack = await fetchJson("artifacts/operator-receipt-pack.json");
     operatorPackSummaryNode.innerHTML = `
-      <article><span>${escapeHtml(pack.status)}</span><strong>${escapeHtml(pack.currentPercent)}</strong><p>${escapeHtml(pack.evidence.checkpointRecords)} accepted records.</p></article>
+      <article><span>${escapeHtml(pack.status)}</span><strong>${escapeHtml(pack.evidence.checkpointRecords)} records</strong><p>Accepted evidence in the current checkpoint.</p></article>
       <article><span>Payloads</span><strong>${escapeHtml(pack.evidence.payloadEvents)}</strong><p>${escapeHtml(pack.evidence.manifestEvents)} manifest events.</p></article>
       <article><span>Custody ready</span><strong>${escapeHtml(pack.custody.auctionReadyRows + pack.custody.agentReadyRows)}</strong><p>Auction ${escapeHtml(pack.custody.auctionReadyRows)}; agent ${escapeHtml(pack.custody.agentReadyRows)}.</p></article>
       <article><span>Wallet</span><strong>${escapeHtml(pack.wallet.mode)}</strong><p>${escapeHtml(pack.wallet.acceptedReceipts.length)} accepted receipts.</p></article>
@@ -946,9 +946,9 @@ async function renderNextWorkQueue() {
     const fixture = await fetchJson("fixtures/NextWorkQueue.json");
     const queue = buildNextWorkQueue(fixture);
     nextQueueSummaryNode.innerHTML = `
-      <article><span>Done</span><strong>${escapeHtml(queue.summary.done)}</strong></article>
-      <article><span>WIP</span><strong>${escapeHtml(queue.summary.wip)}</strong></article>
-      <article><span>Roadmap</span><strong>${escapeHtml(queue.summary.roadmap)}</strong></article>
+      <article><span>Accepted</span><strong>${escapeHtml(queue.summary.done)}</strong></article>
+      <article><span>Active</span><strong>${escapeHtml(queue.summary.wip)}</strong></article>
+      <article><span>Research</span><strong>${escapeHtml(queue.summary.roadmap)}</strong></article>
       <article><span>Tasks</span><strong>${escapeHtml(queue.summary.tasks)}</strong></article>
     `;
 
@@ -987,8 +987,8 @@ async function renderNextTenStatus() {
   try {
     const status = await fetchJson("artifacts/next-ten-execution-status.json");
     nextTenStatusNode.innerHTML = `
-      <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.summary.completed)} / ${escapeHtml(status.summary.tasks)} done</strong><p>${escapeHtml(status.summary.realizedGainPercent)}% local gain realized; ${escapeHtml(status.summary.totalPotentialGainPercent)}% total potential.</p></article>
-      <article><span>Completion</span><strong>${escapeHtml(status.currentCompletionEstimate.afterLocalSlice)}</strong><p>After real external signer: ${escapeHtml(status.currentCompletionEstimate.afterRealExternalSigner)}.</p></article>
+      <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.summary.completed)} / ${escapeHtml(status.summary.tasks)} tasks</strong><p>Current local slice; public wallet flow still needs an external signer result.</p></article>
+      <article><span>Readiness</span><strong>${escapeHtml(status.currentCompletionEstimate.afterLocalSlice)}</strong><p>After real external signer: ${escapeHtml(status.currentCompletionEstimate.afterRealExternalSigner)}.</p></article>
       <article><span>Blocker</span><strong>${escapeHtml(status.summary.externalSignerStillRequired ? "external signer" : "none")}</strong><p>${escapeHtml(status.blockers[0])}</p></article>
     `;
     nextTenTasksNode.innerHTML = "";
@@ -996,7 +996,7 @@ async function renderNextTenStatus() {
       const article = document.createElement("article");
       article.className = "build-status-card compact-card";
       article.innerHTML = `
-        <span>${escapeHtml(task.status)} / +${escapeHtml(task.estimatedGainPercent)}%</span>
+        <span>${escapeHtml(task.status)}</span>
         <strong>${escapeHtml(task.title)}</strong>
         <p>${escapeHtml(task.id)}</p>
       `;
@@ -1060,8 +1060,8 @@ async function renderDefiBacklog() {
     defiSummaryNode.innerHTML = `
       <article><span>Briefs</span><strong>${escapeHtml(backlog.summary.total)}</strong></article>
       <article><span>Research</span><strong>${escapeHtml(backlog.summary.researchOnly)}</strong></article>
-      <article><span>Later</span><strong>${escapeHtml(backlog.summary.prototypeLater)}</strong></article>
-      <article><span>Next rails</span><strong>${escapeHtml(backlog.summary.missingRailCount)}</strong></article>
+      <article><span>Queued</span><strong>${escapeHtml(backlog.summary.prototypeLater)}</strong></article>
+      <article><span>Missing</span><strong>${escapeHtml(backlog.summary.missingRailCount)}</strong></article>
     `;
 
     defiListNode.innerHTML = "";
@@ -1091,7 +1091,7 @@ async function renderStableValuePaths() {
       <article><span>Paths</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
       <article><span>Build now</span><strong>${escapeHtml(registry.summary.buildableNow)}</strong></article>
       <article><span>Research</span><strong>${escapeHtml(registry.summary.researchOnly)}</strong></article>
-      <article><span>Next rails</span><strong>${escapeHtml(registry.summary.missingRailCount)}</strong></article>
+      <article><span>Missing</span><strong>${escapeHtml(registry.summary.missingRailCount)}</strong></article>
     `;
 
     stableListNode.innerHTML = "";
@@ -1677,7 +1677,7 @@ async function renderSelfServeLaneRunbook() {
           <p>${lane.evidence.map((item) => artifactLink(item)).join(" ")}</p>
           <p>${lane.commands.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
         </details>
-        <p class="self-serve-open-rail"><strong>Next rail:</strong> ${escapeHtml(lane.openRail.join(" "))}</p>
+        <p class="self-serve-open-rail"><strong>Missing piece:</strong> ${escapeHtml(lane.openRail.join(" "))}</p>
       `;
       selfServeLanesNode.append(article);
     }
