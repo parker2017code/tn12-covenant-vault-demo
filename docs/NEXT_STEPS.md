@@ -22,7 +22,7 @@ These are the highest-impact things that can be advanced without asking for a re
 | 2 | AMM hardening. | Add/remove liquidity math, LP-share accounting, invariant checks, price-impact sweeps, and invalid reserve mutation tests. | No; first pass is `artifacts/defi-advanced-simulation.json` |
 | 3 | Lending/liquidation hardening. | Collateral-ratio sweeps, liquidation threshold tests, stale/wrong oracle blocks, and no-executable-liquidation boundaries are deterministic. | No; first pass is `artifacts/defi-advanced-simulation.json` |
 | 4 | Oracle failure matrix. | Stale, conflicting, unavailable, manipulated, missing-quorum, and fresh-but-not-truth inputs are executable negative cases. | No; first pass is `artifacts/defi-advanced-simulation.json` |
-| 5 | Multi-wallet scenario pack. | Existing multi-wallet receipt references are grouped into user/operator roles with accepted-index replay and no external-signer claim. | No |
+| 5 | Multi-wallet scenario pack. | Existing multi-wallet receipt references are grouped into user/operator roles with accepted-index replay and no external-signer claim. | No; first pass is `artifacts/defi-multi-wallet-scenario-pack.json` |
 | 6 | Wallet/indexer hardening. | Unsigned request templates, signer-return validation, submit-result promotion, replay reducers, rollback fixtures, and no-secret checks stay green. | No |
 | 7 | Reviewer/UI cleanup. | Public surfaces show accepted, simulated, and blocked states without adding product claims. | No |
 | 8 | External signer roundtrip. | A real wallet returns signed bytes, submit succeeds, and accepted txid replay matches. | Yes |
@@ -73,6 +73,7 @@ These are not all needed for the next commit, but they are the path from proof l
 - Use `npm run defi:scenario` for deterministic AMM output, min-output rejection, oracle freshness, lending health-factor, and liquidation-review simulations over accepted TN12 receipt references.
 - Use `npm run defi:reducer` to promote review-only state while blocking duplicate, missing, stale-oracle, slippage, liquidation-execution, and custody-promotion attempts.
 - Use `npm run defi:advanced` for AMM LP/invariant checks, lending threshold sweeps, and oracle failure cases without custody promotion.
+- Use `npm run defi:multi-wallet` to group scenario roles across accepted local-key TN12 receipt references without claiming external-wallet signing.
 - Do not treat local replay success as live removed-block rollback evidence.
 
 ## Commands

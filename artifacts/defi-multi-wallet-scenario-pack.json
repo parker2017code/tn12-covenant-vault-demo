@@ -1,0 +1,154 @@
+{
+  "schema": "tn12-defi-multi-wallet-scenario-pack/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T15:51:14.910Z",
+  "status": "multi-wallet-scenario-pack-ready-local-keys",
+  "enforcement": "INDEXER_DERIVED",
+  "summary": {
+    "roles": 4,
+    "acceptedIndexedRoles": 4,
+    "reviewStatePromotedRoles": 3,
+    "blockedRows": 8,
+    "advancedAmmBlockedActions": 2,
+    "advancedOracleBlockedCases": 5,
+    "advancedLendingBlocked": 2,
+    "localKeySignedReceipts": 4,
+    "actualWalletAddresses": 3,
+    "externalSignerClaims": 0,
+    "custodyActions": 0,
+    "liveProductClaims": 0
+  },
+  "roles": [
+    {
+      "id": "wallet-a-swapper",
+      "label": "Wallet A swap intent",
+      "scenarioId": "swap-ok-001",
+      "action": "swap-intent-review",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "acceptedIndexed": true,
+      "promotionState": "review-state-promoted",
+      "stateKind": "amm-swap",
+      "walletAddress": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "localKeyEvidence": true,
+      "externalSignerEvidence": false,
+      "custodyReady": false,
+      "reviewProblems": []
+    },
+    {
+      "id": "wallet-b-lender",
+      "label": "Wallet B lending position",
+      "scenarioId": "lend-safe-001",
+      "action": "lending-health-review",
+      "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "acceptedIndexed": true,
+      "promotionState": "review-state-promoted",
+      "stateKind": "lending-position",
+      "walletAddress": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",
+      "localKeyEvidence": true,
+      "externalSignerEvidence": false,
+      "custodyReady": false,
+      "reviewProblems": []
+    },
+    {
+      "id": "wallet-c-oracle-reporter",
+      "label": "Wallet C oracle reporter",
+      "scenarioId": "oracle-fresh-tkas",
+      "action": "oracle-update-review",
+      "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "acceptedIndexed": true,
+      "promotionState": "review-state-promoted",
+      "stateKind": "oracle-price",
+      "walletAddress": "scenario-role-no-wallet-address",
+      "localKeyEvidence": false,
+      "externalSignerEvidence": false,
+      "custodyReady": false,
+      "reviewProblems": []
+    },
+    {
+      "id": "wallet-d-risk-reviewer",
+      "label": "Wallet D risk reviewer",
+      "scenarioId": "lend-liquidation-review-001",
+      "action": "liquidation-review-blocked",
+      "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "acceptedIndexed": true,
+      "promotionState": "blocked-review",
+      "stateKind": "lending-position",
+      "walletAddress": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
+      "localKeyEvidence": true,
+      "externalSignerEvidence": false,
+      "custodyReady": false,
+      "reviewProblems": [
+        "liquidation review is not executable"
+      ]
+    }
+  ],
+  "blockedRows": [
+    {
+      "id": "swap-ok-001",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "kind": "duplicate-candidate",
+      "status": "blocked",
+      "reason": "duplicate scenario reference"
+    },
+    {
+      "id": "swap-missing-accepted-reference",
+      "txid": "missing-defi-scenario-txid",
+      "kind": "missing-reference-candidate",
+      "status": "blocked",
+      "reason": "missing or mismatched accepted-index reference"
+    },
+    {
+      "id": "lend-safe-001",
+      "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "kind": "custody-promotion-candidate",
+      "requestedAction": "custody-promotion",
+      "sourcePromotionState": "review-state-promoted",
+      "status": "blocked",
+      "reason": "review state cannot be promoted to custody without external signer and settlement evidence"
+    },
+    {
+      "id": "lend-liquidation-review-001",
+      "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "kind": "custody-promotion-candidate",
+      "requestedAction": "custody-promotion",
+      "sourcePromotionState": "blocked-review",
+      "status": "blocked",
+      "reason": "review state cannot be promoted to custody without external signer and settlement evidence"
+    },
+    {
+      "id": "swap-slippage-blocked-001",
+      "kind": "amm-swap",
+      "status": "blocked",
+      "reason": "min output not met"
+    },
+    {
+      "id": "oracle-stale-tkas",
+      "kind": "oracle-price",
+      "status": "blocked",
+      "reason": "stale oracle price"
+    },
+    {
+      "id": "lend-liquidation-review-001",
+      "kind": "lending-position",
+      "status": "blocked",
+      "reason": "liquidation review is not executable"
+    },
+    {
+      "id": "lend-stale-oracle-blocked-001",
+      "kind": "lending-position",
+      "status": "blocked",
+      "reason": "stale oracle blocks position"
+    }
+  ],
+  "operatorChecklist": [
+    "Review each role's accepted txid in the checkpoint index before using it in app state.",
+    "Treat review-state-promoted rows as dashboard state only, not settlement or custody.",
+    "Block custody-moving actions until external signer, accepted submit result, and replay promotion all match.",
+    "Keep local-key receipt evidence separate from external-wallet evidence."
+  ],
+  "boundaries": [
+    "This pack groups accepted TN12 references into wallet-like roles, but it does not prove external wallet signing.",
+    "Roles are scenario actors over existing accepted receipts and reducer rows.",
+    "No role here can move custody, operate a live AMM, liquidate a borrower, or assert oracle truth."
+  ]
+}

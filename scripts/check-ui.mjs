@@ -38,6 +38,8 @@ try {
   assert.match(html, /id="receipt-events"/);
   assert.match(html, /id="wallet-connector"/);
   assert.match(html, /id="defi-receipt-guard"/);
+  assert.match(html, /id="defi-simulation-summary"/);
+  assert.match(html, /id="defi-simulation-list"/);
 
   console.log("UI smoke check passed.");
 } finally {

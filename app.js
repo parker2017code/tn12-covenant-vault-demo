@@ -120,6 +120,8 @@ const auctionSummaryNode = document.querySelector("#auction-summary");
 const auctionListNode = document.querySelector("#auction-list");
 const defiSummaryNode = document.querySelector("#defi-summary");
 const defiListNode = document.querySelector("#defi-list");
+const defiSimulationSummaryNode = document.querySelector("#defi-simulation-summary");
+const defiSimulationListNode = document.querySelector("#defi-simulation-list");
 const stableSummaryNode = document.querySelector("#stable-summary");
 const stableListNode = document.querySelector("#stable-list");
 const stableIssuerSummaryNode = document.querySelector("#stable-issuer-summary");
@@ -259,6 +261,7 @@ const pageRenderers = {
   renderAssetPolicies,
   renderAuctionIntents,
   renderDefiBacklog,
+  renderDefiSimulationSurface,
   renderStableValuePaths,
   renderStableIssuerRedemptions,
   renderAgentCommitments,
@@ -1024,6 +1027,77 @@ async function renderDefiBacklog() {
     }
   } catch (error) {
     defiSummaryNode.textContent = `DeFi backlog unavailable: ${error.message}`;
+  }
+}
+
+async function renderDefiSimulationSurface() {
+  if (!defiSimulationSummaryNode || !defiSimulationListNode) return;
+
+  try {
+    const [planner, scenario, reducer, advanced, multiWallet] = await Promise.all([
+      fetchJson("artifacts/defi-planner-simulation.json"),
+      fetchJson("artifacts/defi-scenario-simulation.json"),
+      fetchJson("artifacts/defi-scenario-reducer.json"),
+      fetchJson("artifacts/defi-advanced-simulation.json"),
+      fetchJson("artifacts/defi-multi-wallet-scenario-pack.json")
+    ]);
+
+    defiSimulationSummaryNode.innerHTML = `
+      <article><span>Planner lanes</span><strong>${escapeHtml(planner.summary.lanes)}</strong></article>
+      <article><span>Scenario refs</span><strong>${escapeHtml(scenario.summary.acceptedReferencesIndexed)}/${escapeHtml(scenario.summary.acceptedReferences)}</strong></article>
+      <article><span>Reducer state</span><strong>${escapeHtml(reducer.summary.promotedReviewRows)} review</strong></article>
+      <article><span>Advanced blocks</span><strong>${escapeHtml(advanced.summary.ammBlockedActions + advanced.summary.oracleBlockedCases + advanced.summary.lendingBlocked)}</strong></article>
+      <article><span>Wallet roles</span><strong>${escapeHtml(multiWallet.summary.roles)}</strong></article>
+      <article><span>External signer claims</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
+    `;
+
+    defiSimulationListNode.innerHTML = "";
+    const cards = [
+      {
+        status: planner.status,
+        title: "Planner simulation",
+        body: `${planner.summary.simulationReadyLanes} lanes simulation-ready; ${planner.summary.blockedLiveLanes} live-product lanes blocked.`,
+        foot: "npm run defi:simulation"
+      },
+      {
+        status: scenario.status,
+        title: "Scenario math",
+        body: `${scenario.summary.executableSwapSimulations} swap simulation ok; ${scenario.summary.slippageBlockedSwaps} min-output block; ${scenario.summary.lendingPositions} lending positions.`,
+        foot: "npm run defi:scenario"
+      },
+      {
+        status: reducer.status,
+        title: "Reducer promotion guard",
+        body: `${reducer.summary.promotedReviewRows} review rows promoted; ${reducer.summary.blockedScenarioRows} scenario rows blocked; ${reducer.summary.custodyPromotions} custody promotions.`,
+        foot: "npm run defi:reducer"
+      },
+      {
+        status: advanced.status,
+        title: "Advanced hardening",
+        body: `${advanced.summary.ammActions} AMM actions; ${advanced.summary.oracleFailureCases} oracle cases; ${advanced.summary.lendingSweeps} lending sweeps.`,
+        foot: "npm run defi:advanced"
+      },
+      {
+        status: multiWallet.status,
+        title: "Multi-wallet scenario pack",
+        body: `${multiWallet.summary.acceptedIndexedRoles}/${multiWallet.summary.roles} roles indexed; ${multiWallet.summary.actualWalletAddresses} observed wallet addresses; no external-signer claim.`,
+        foot: "npm run defi:multi-wallet"
+      }
+    ];
+
+    for (const card of cards) {
+      const article = document.createElement("article");
+      article.className = "defi-card";
+      article.innerHTML = `
+        <span>${escapeHtml(card.status)}</span>
+        <strong>${escapeHtml(card.title)}</strong>
+        <p>${escapeHtml(card.body)}</p>
+        <small>${escapeHtml(card.foot)}</small>
+      `;
+      defiSimulationListNode.append(article);
+    }
+  } catch (error) {
+    defiSimulationSummaryNode.textContent = `DeFi simulation surface unavailable: ${error.message}`;
   }
 }
 

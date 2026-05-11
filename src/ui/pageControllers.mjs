@@ -12,6 +12,7 @@ export function runProofPageController(renderers) {
     renderers.renderWalletReview,
     renderers.renderWalletConnector,
     renderers.renderEnforcementMatrix,
+    renderers.renderDefiSimulationSurface,
     renderers.renderDefiReceiptGuard
   ]);
 }
@@ -31,6 +32,7 @@ export function runLabPageController(renderers) {
     renderers.renderAssetPolicies,
     renderers.renderAuctionIntents,
     renderers.renderDefiBacklog,
+    renderers.renderDefiSimulationSurface,
     renderers.renderStableValuePaths,
     renderers.renderStableIssuerRedemptions,
     renderers.renderAgentCommitments,
