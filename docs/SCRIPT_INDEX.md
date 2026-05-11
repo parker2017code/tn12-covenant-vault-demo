@@ -73,6 +73,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | DeFi backlog | `npm run defi:backlog` |
 | Oracle source matrix | `npm run oracle:matrix` |
 | DeFi planner simulation | `npm run defi:simulation` |
+| DeFi scenario simulation | `npm run defi:scenario` |
 | Cross-chain research library | `npm run research:library` |
 | Refresh the core research guardrails | `npm run research:refresh` |
 

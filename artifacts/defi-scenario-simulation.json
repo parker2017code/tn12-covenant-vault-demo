@@ -1,0 +1,222 @@
+{
+  "schema": "tn12-defi-scenario-simulation/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T15:35:38.918Z",
+  "status": "scenario-simulation-ready-not-live-defi",
+  "enforcement": "PLANNER_ONLY",
+  "summary": {
+    "swaps": 2,
+    "executableSwapSimulations": 1,
+    "slippageBlockedSwaps": 1,
+    "oraclePrices": 2,
+    "freshOraclePrices": 1,
+    "staleOraclePrices": 1,
+    "lendingPositions": 3,
+    "safePositions": 1,
+    "liquidationReviewPositions": 1,
+    "staleOracleBlockedPositions": 1,
+    "acceptedReferences": 7,
+    "acceptedReferencesIndexed": 7,
+    "liveProductClaims": 0,
+    "custodyActions": 0,
+    "blockedNegativeCases": 5
+  },
+  "inputs": {
+    "plannerSimulationStatus": "planner-only-defi-simulation-ready",
+    "acceptedIndexStatus": "accepted-index-fully-matched"
+  },
+  "amm": {
+    "poolId": "sim-kas-usdc-pool-001",
+    "baseSymbol": "TKAS",
+    "quoteSymbol": "TUSD",
+    "baseReserveUnits": "100000000000",
+    "quoteReserveUnits": "100000000000",
+    "feeBps": 30,
+    "swaps": [
+      {
+        "id": "swap-ok-001",
+        "inputSymbol": "TKAS",
+        "outputSymbol": "TUSD",
+        "inputUnits": "1000000000",
+        "expectedOutputUnits": "987158034",
+        "minOutputUnits": "980000000",
+        "feeBps": 30,
+        "priceImpactBps": 99,
+        "minOutputMet": true,
+        "status": "simulated-fill-ok",
+        "acceptedIntentTxid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+        "custodyReady": false,
+        "settlementReady": false
+      },
+      {
+        "id": "swap-slippage-blocked-001",
+        "inputSymbol": "TKAS",
+        "outputSymbol": "TUSD",
+        "inputUnits": "1000000000",
+        "expectedOutputUnits": "987158034",
+        "minOutputUnits": "995000000",
+        "feeBps": 30,
+        "priceImpactBps": 99,
+        "minOutputMet": false,
+        "status": "blocked-min-output",
+        "acceptedIntentTxid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+        "custodyReady": false,
+        "settlementReady": false
+      }
+    ]
+  },
+  "oracle": {
+    "maxAgeSeconds": 120,
+    "prices": [
+      {
+        "id": "oracle-fresh-tkas",
+        "symbol": "TKAS",
+        "priceCents": "100",
+        "ageSeconds": 45,
+        "maxAgeSeconds": 120,
+        "sourceModelId": "signed-reporter-attestation",
+        "acceptedUpdateTxid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+        "status": "fresh-review-only",
+        "custodyReady": false
+      },
+      {
+        "id": "oracle-stale-tkas",
+        "symbol": "TKAS",
+        "priceCents": "72",
+        "ageSeconds": 900,
+        "maxAgeSeconds": 120,
+        "sourceModelId": "cex-weighted-median",
+        "acceptedUpdateTxid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "status": "stale-block-custody",
+        "custodyReady": false
+      }
+    ]
+  },
+  "lending": {
+    "positions": [
+      {
+        "id": "lend-safe-001",
+        "collateralSymbol": "TKAS",
+        "collateralUnits": "10000000000",
+        "collateralValueCents": "10000",
+        "debtCents": "4000",
+        "liquidationThresholdBps": 6500,
+        "liquidationValueCents": "6500",
+        "healthFactorBps": "16250",
+        "oraclePriceId": "oracle-fresh-tkas",
+        "oracleStatus": "fresh-review-only",
+        "status": "healthy-review-only",
+        "acceptedPositionTxid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+        "custodyReady": false,
+        "liquidationExecutable": false
+      },
+      {
+        "id": "lend-liquidation-review-001",
+        "collateralSymbol": "TKAS",
+        "collateralUnits": "10000000000",
+        "collateralValueCents": "10000",
+        "debtCents": "9000",
+        "liquidationThresholdBps": 6500,
+        "liquidationValueCents": "6500",
+        "healthFactorBps": "7222",
+        "oraclePriceId": "oracle-fresh-tkas",
+        "oracleStatus": "fresh-review-only",
+        "status": "liquidation-review-only",
+        "acceptedPositionTxid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+        "custodyReady": false,
+        "liquidationExecutable": false
+      },
+      {
+        "id": "lend-stale-oracle-blocked-001",
+        "collateralSymbol": "TKAS",
+        "collateralUnits": "10000000000",
+        "collateralValueCents": "7200",
+        "debtCents": "5000",
+        "liquidationThresholdBps": 6500,
+        "liquidationValueCents": "4680",
+        "healthFactorBps": "9360",
+        "oraclePriceId": "oracle-stale-tkas",
+        "oracleStatus": "stale-block-custody",
+        "status": "blocked-stale-oracle",
+        "acceptedPositionTxid": "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
+        "custodyReady": false,
+        "liquidationExecutable": false
+      }
+    ]
+  },
+  "acceptedReferences": [
+    {
+      "id": "swap-ok-001",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "acceptedIndexed": true
+    },
+    {
+      "id": "swap-slippage-blocked-001",
+      "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "acceptedIndexed": true
+    },
+    {
+      "id": "lend-safe-001",
+      "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "acceptedIndexed": true
+    },
+    {
+      "id": "lend-liquidation-review-001",
+      "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "acceptedIndexed": true
+    },
+    {
+      "id": "lend-stale-oracle-blocked-001",
+      "txid": "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
+      "acceptedIndexed": true
+    },
+    {
+      "id": "oracle-fresh-tkas",
+      "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+      "acceptedIndexed": true
+    },
+    {
+      "id": "oracle-stale-tkas",
+      "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+      "acceptedIndexed": true
+    }
+  ],
+  "negativeCases": [
+    {
+      "id": "swap-below-min-output",
+      "status": "blocked",
+      "reason": "Simulated output is below user minOutput; settlement must not be promoted."
+    },
+    {
+      "id": "lending-stale-oracle",
+      "status": "blocked",
+      "reason": "Oracle price is stale; custody-moving lending or liquidation action must pause."
+    },
+    {
+      "id": "liquidation-without-authority",
+      "status": "blocked",
+      "reason": "Health factor is below threshold, but no enforceable liquidation authority exists."
+    },
+    {
+      "id": "fresh-oracle-is-not-truth",
+      "status": "blocked",
+      "reason": "Fresh source data can drive review prompts, not oracle-truth or automatic settlement claims."
+    },
+    {
+      "id": "accepted-receipt-is-not-custody",
+      "status": "blocked",
+      "reason": "Accepted TN12 receipt references prove replay inputs, not custody or live DeFi."
+    }
+  ],
+  "promotionRule": [
+    "A simulated swap can become a settlement claim only when reserve state and min-output enforcement are tied to a signed and accepted transaction path.",
+    "A simulated lending position can become a custody claim only when collateral custody, borrow accounting, oracle challenge, and liquidation authority are enforceable.",
+    "A fresh oracle value can drive review prompts; it cannot move funds unless stale/wrong-data handling and dispute policy are enforced.",
+    "Every custody-moving action remains blocked until external signer review, accepted txid replay, rollback behavior, and security review all pass."
+  ],
+  "boundaries": [
+    "This artifact computes deterministic DeFi scenarios from fixture inputs and accepted receipt references.",
+    "It does not custody funds, update pool reserves on TN12, lend assets, liquidate positions, or prove oracle truth.",
+    "Accepted txids are used as replayable evidence inputs only; app semantics remain planner/indexer-derived."
+  ]
+}

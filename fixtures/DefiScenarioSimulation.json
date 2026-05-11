@@ -1,0 +1,80 @@
+{
+  "schema": "tn12-defi-scenario-simulation-fixture/v1",
+  "reviewedAt": "2026-05-11",
+  "amm": {
+    "poolId": "sim-kas-usdc-pool-001",
+    "baseSymbol": "TKAS",
+    "quoteSymbol": "TUSD",
+    "baseReserveUnits": "100000000000",
+    "quoteReserveUnits": "100000000000",
+    "feeBps": 30,
+    "swaps": [
+      {
+        "id": "swap-ok-001",
+        "inputSymbol": "TKAS",
+        "inputUnits": "1000000000",
+        "minOutputUnits": "980000000",
+        "acceptedIntentTxid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807"
+      },
+      {
+        "id": "swap-slippage-blocked-001",
+        "inputSymbol": "TKAS",
+        "inputUnits": "1000000000",
+        "minOutputUnits": "995000000",
+        "acceptedIntentTxid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd"
+      }
+    ]
+  },
+  "oracle": {
+    "maxAgeSeconds": 120,
+    "prices": [
+      {
+        "id": "oracle-fresh-tkas",
+        "symbol": "TKAS",
+        "priceCents": "100",
+        "ageSeconds": 45,
+        "sourceModelId": "signed-reporter-attestation",
+        "acceptedUpdateTxid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d"
+      },
+      {
+        "id": "oracle-stale-tkas",
+        "symbol": "TKAS",
+        "priceCents": "72",
+        "ageSeconds": 900,
+        "sourceModelId": "cex-weighted-median",
+        "acceptedUpdateTxid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7"
+      }
+    ]
+  },
+  "lending": {
+    "positions": [
+      {
+        "id": "lend-safe-001",
+        "collateralSymbol": "TKAS",
+        "collateralUnits": "10000000000",
+        "debtCents": "4000",
+        "liquidationThresholdBps": 6500,
+        "oraclePriceId": "oracle-fresh-tkas",
+        "acceptedPositionTxid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa"
+      },
+      {
+        "id": "lend-liquidation-review-001",
+        "collateralSymbol": "TKAS",
+        "collateralUnits": "10000000000",
+        "debtCents": "9000",
+        "liquidationThresholdBps": 6500,
+        "oraclePriceId": "oracle-fresh-tkas",
+        "acceptedPositionTxid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39"
+      },
+      {
+        "id": "lend-stale-oracle-blocked-001",
+        "collateralSymbol": "TKAS",
+        "collateralUnits": "10000000000",
+        "debtCents": "5000",
+        "liquidationThresholdBps": 6500,
+        "oraclePriceId": "oracle-stale-tkas",
+        "acceptedPositionTxid": "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361"
+      }
+    ]
+  }
+}

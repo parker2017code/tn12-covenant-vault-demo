@@ -55,6 +55,7 @@ These are not all needed for the next commit, but they are the path from proof l
 - Do not submit non-selected batch refund paths for already spent pledge outputs.
 - Do not add AMM, lending, liquidation, oracle, or bridge claims until there is a narrower accepted custody/indexer path.
 - Use `npm run defi:simulation` for the maximum honest DeFi simulation pass: AMM, lending, liquidation, oracle, and settlement planner checks over accepted receipt/indexer inputs, with live-product promotion blocked.
+- Use `npm run defi:scenario` for deterministic AMM output, min-output rejection, oracle freshness, lending health-factor, and liquidation-review simulations over accepted TN12 receipt references.
 - Do not treat local replay success as live removed-block rollback evidence.
 
 ## Commands
