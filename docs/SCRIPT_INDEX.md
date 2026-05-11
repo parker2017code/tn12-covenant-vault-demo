@@ -75,6 +75,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | DeFi planner simulation | `npm run defi:simulation` |
 | DeFi scenario simulation | `npm run defi:scenario` |
 | DeFi scenario reducer / promotion guard | `npm run defi:reducer` |
+| DeFi advanced simulation hardening | `npm run defi:advanced` |
 | Cross-chain research library | `npm run research:library` |
 | Refresh the core research guardrails | `npm run research:refresh` |
 

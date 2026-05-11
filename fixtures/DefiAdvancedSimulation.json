@@ -1,0 +1,140 @@
+{
+  "schema": "tn12-defi-advanced-simulation-fixture/v1",
+  "reviewedAt": "2026-05-11",
+  "amm": {
+    "poolId": "sim-kas-usdc-pool-001",
+    "baseSymbol": "TKAS",
+    "quoteSymbol": "TUSD",
+    "baseReserveUnits": "100000000000",
+    "quoteReserveUnits": "100000000000",
+    "totalLpShares": "100000000000",
+    "liquidityActions": [
+      {
+        "id": "lp-add-balanced-001",
+        "type": "add",
+        "baseUnits": "1000000000",
+        "quoteUnits": "1000000000"
+      },
+      {
+        "id": "lp-add-imbalanced-blocked-001",
+        "type": "add",
+        "baseUnits": "1000000000",
+        "quoteUnits": "100000000"
+      },
+      {
+        "id": "lp-remove-001",
+        "type": "remove",
+        "lpShares": "500000000"
+      },
+      {
+        "id": "reserve-mutation-blocked-001",
+        "type": "mutate",
+        "newBaseReserveUnits": "100100000000",
+        "newQuoteReserveUnits": "100000000000"
+      }
+    ],
+    "priceImpactInputs": [
+      "100000000",
+      "1000000000",
+      "10000000000"
+    ]
+  },
+  "oracleFailures": [
+    {
+      "id": "oracle-stale-feed",
+      "kind": "stale",
+      "reporterCount": 3,
+      "requiredQuorum": 2,
+      "ageSeconds": 900,
+      "maxAgeSeconds": 120,
+      "pricesCents": ["100", "101", "99"]
+    },
+    {
+      "id": "oracle-conflicting-feed",
+      "kind": "conflict",
+      "reporterCount": 3,
+      "requiredQuorum": 2,
+      "ageSeconds": 30,
+      "maxAgeSeconds": 120,
+      "pricesCents": ["100", "180", "99"]
+    },
+    {
+      "id": "oracle-missing-quorum",
+      "kind": "missing-quorum",
+      "reporterCount": 1,
+      "requiredQuorum": 2,
+      "ageSeconds": 30,
+      "maxAgeSeconds": 120,
+      "pricesCents": ["100"]
+    },
+    {
+      "id": "oracle-manipulated-venue",
+      "kind": "manipulated",
+      "reporterCount": 4,
+      "requiredQuorum": 3,
+      "ageSeconds": 30,
+      "maxAgeSeconds": 120,
+      "pricesCents": ["100", "101", "99", "350"]
+    },
+    {
+      "id": "oracle-unavailable-source",
+      "kind": "unavailable",
+      "reporterCount": 0,
+      "requiredQuorum": 2,
+      "ageSeconds": 0,
+      "maxAgeSeconds": 120,
+      "pricesCents": []
+    },
+    {
+      "id": "oracle-fresh-not-truth",
+      "kind": "fresh-not-truth",
+      "reporterCount": 3,
+      "requiredQuorum": 2,
+      "ageSeconds": 20,
+      "maxAgeSeconds": 120,
+      "pricesCents": ["100", "101", "99"]
+    }
+  ],
+  "lendingSweeps": [
+    {
+      "id": "sweep-safe",
+      "collateralUnits": "10000000000",
+      "priceCents": "100",
+      "debtCents": "4000",
+      "liquidationThresholdBps": 6500,
+      "oracleFailureId": "oracle-fresh-not-truth"
+    },
+    {
+      "id": "sweep-boundary",
+      "collateralUnits": "10000000000",
+      "priceCents": "100",
+      "debtCents": "6500",
+      "liquidationThresholdBps": 6500,
+      "oracleFailureId": "oracle-fresh-not-truth"
+    },
+    {
+      "id": "sweep-liquidation-review",
+      "collateralUnits": "10000000000",
+      "priceCents": "100",
+      "debtCents": "9000",
+      "liquidationThresholdBps": 6500,
+      "oracleFailureId": "oracle-fresh-not-truth"
+    },
+    {
+      "id": "sweep-stale-oracle-blocked",
+      "collateralUnits": "10000000000",
+      "priceCents": "72",
+      "debtCents": "5000",
+      "liquidationThresholdBps": 6500,
+      "oracleFailureId": "oracle-stale-feed"
+    },
+    {
+      "id": "sweep-manipulated-oracle-blocked",
+      "collateralUnits": "10000000000",
+      "priceCents": "350",
+      "debtCents": "9000",
+      "liquidationThresholdBps": 6500,
+      "oracleFailureId": "oracle-manipulated-venue"
+    }
+  ]
+}

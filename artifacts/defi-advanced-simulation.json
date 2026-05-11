@@ -1,0 +1,307 @@
+{
+  "schema": "tn12-defi-advanced-simulation/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T15:46:34.462Z",
+  "status": "advanced-simulation-ready-not-custody",
+  "enforcement": "PLANNER_ONLY",
+  "summary": {
+    "ammActions": 4,
+    "ammReviewActions": 2,
+    "ammBlockedActions": 2,
+    "priceImpactRows": 3,
+    "oracleFailureCases": 6,
+    "oracleBlockedCases": 5,
+    "oracleReviewOnlyCases": 1,
+    "lendingSweeps": 5,
+    "lendingHealthyOrBoundary": 2,
+    "lendingLiquidationReview": 1,
+    "lendingBlocked": 2,
+    "reviewStateRowsFromReducer": 3,
+    "acceptedReferencesFromScenario": 7,
+    "liveProductClaims": 0,
+    "custodyActions": 0
+  },
+  "inputs": {
+    "scenarioStatus": "scenario-simulation-ready-not-live-defi",
+    "reducerStatus": "scenario-reducer-ready-not-custody"
+  },
+  "amm": {
+    "poolId": "sim-kas-usdc-pool-001",
+    "baseSymbol": "TKAS",
+    "quoteSymbol": "TUSD",
+    "baseReserveUnits": "100000000000",
+    "quoteReserveUnits": "100000000000",
+    "totalLpShares": "100000000000",
+    "invariantBefore": "10000000000000000000000",
+    "liquidityActions": [
+      {
+        "id": "lp-add-balanced-001",
+        "type": "add",
+        "baseUnits": "1000000000",
+        "quoteUnits": "1000000000",
+        "mintedShares": "1000000000",
+        "invariantAfter": "10201000000000000000000",
+        "invariantNonDecreasing": true,
+        "status": "review-state-promoted",
+        "reason": "balanced liquidity add"
+      },
+      {
+        "id": "lp-add-imbalanced-blocked-001",
+        "type": "add",
+        "baseUnits": "1000000000",
+        "quoteUnits": "100000000",
+        "mintedShares": "0",
+        "invariantAfter": "10110100000000000000000",
+        "invariantNonDecreasing": true,
+        "status": "blocked",
+        "reason": "imbalanced liquidity add"
+      },
+      {
+        "id": "lp-remove-001",
+        "type": "remove",
+        "lpShares": "500000000",
+        "baseOut": "500000000",
+        "quoteOut": "500000000",
+        "invariantAfter": "9900250000000000000000",
+        "status": "review-state-promoted",
+        "reason": "pro-rata liquidity remove"
+      },
+      {
+        "id": "reserve-mutation-blocked-001",
+        "type": "mutate",
+        "newBaseReserveUnits": "100100000000",
+        "newQuoteReserveUnits": "100000000000",
+        "invariantAfter": "10010000000000000000000",
+        "status": "blocked",
+        "reason": "reserve mutation without matched liquidity/swap path"
+      }
+    ],
+    "priceImpactRows": [
+      {
+        "inputUnits": "100000000",
+        "priceImpactBps": 9,
+        "outputUnits": "99600698"
+      },
+      {
+        "inputUnits": "1000000000",
+        "priceImpactBps": 99,
+        "outputUnits": "987158034"
+      },
+      {
+        "inputUnits": "10000000000",
+        "priceImpactBps": 909,
+        "outputUnits": "9066108938"
+      }
+    ]
+  },
+  "oracleFailures": [
+    {
+      "id": "oracle-stale-feed",
+      "kind": "stale",
+      "reporterCount": 3,
+      "requiredQuorum": 2,
+      "ageSeconds": 900,
+      "maxAgeSeconds": 120,
+      "medianPriceCents": "100",
+      "spreadBps": 200,
+      "checks": {
+        "stale": true,
+        "quorumMet": true,
+        "conflict": false,
+        "manipulated": false,
+        "unavailable": false,
+        "freshButNotTruth": false
+      },
+      "status": "blocked",
+      "reason": "oracle input cannot drive custody-moving action"
+    },
+    {
+      "id": "oracle-conflicting-feed",
+      "kind": "conflict",
+      "reporterCount": 3,
+      "requiredQuorum": 2,
+      "ageSeconds": 30,
+      "maxAgeSeconds": 120,
+      "medianPriceCents": "100",
+      "spreadBps": 8100,
+      "checks": {
+        "stale": false,
+        "quorumMet": true,
+        "conflict": true,
+        "manipulated": false,
+        "unavailable": false,
+        "freshButNotTruth": false
+      },
+      "status": "blocked",
+      "reason": "oracle input cannot drive custody-moving action"
+    },
+    {
+      "id": "oracle-missing-quorum",
+      "kind": "missing-quorum",
+      "reporterCount": 1,
+      "requiredQuorum": 2,
+      "ageSeconds": 30,
+      "maxAgeSeconds": 120,
+      "medianPriceCents": "100",
+      "spreadBps": 0,
+      "checks": {
+        "stale": false,
+        "quorumMet": false,
+        "conflict": false,
+        "manipulated": false,
+        "unavailable": false,
+        "freshButNotTruth": false
+      },
+      "status": "blocked",
+      "reason": "oracle input cannot drive custody-moving action"
+    },
+    {
+      "id": "oracle-manipulated-venue",
+      "kind": "manipulated",
+      "reporterCount": 4,
+      "requiredQuorum": 3,
+      "ageSeconds": 30,
+      "maxAgeSeconds": 120,
+      "medianPriceCents": "100",
+      "spreadBps": 25100,
+      "checks": {
+        "stale": false,
+        "quorumMet": true,
+        "conflict": true,
+        "manipulated": true,
+        "unavailable": false,
+        "freshButNotTruth": false
+      },
+      "status": "blocked",
+      "reason": "oracle input cannot drive custody-moving action"
+    },
+    {
+      "id": "oracle-unavailable-source",
+      "kind": "unavailable",
+      "reporterCount": 0,
+      "requiredQuorum": 2,
+      "ageSeconds": 0,
+      "maxAgeSeconds": 120,
+      "medianPriceCents": "0",
+      "spreadBps": 0,
+      "checks": {
+        "stale": false,
+        "quorumMet": false,
+        "conflict": false,
+        "manipulated": false,
+        "unavailable": true,
+        "freshButNotTruth": false
+      },
+      "status": "blocked",
+      "reason": "oracle input cannot drive custody-moving action"
+    },
+    {
+      "id": "oracle-fresh-not-truth",
+      "kind": "fresh-not-truth",
+      "reporterCount": 3,
+      "requiredQuorum": 2,
+      "ageSeconds": 20,
+      "maxAgeSeconds": 120,
+      "medianPriceCents": "100",
+      "spreadBps": 200,
+      "checks": {
+        "stale": false,
+        "quorumMet": true,
+        "conflict": false,
+        "manipulated": false,
+        "unavailable": false,
+        "freshButNotTruth": true
+      },
+      "status": "review-only",
+      "reason": "fresh quorum input can drive review prompts only"
+    }
+  ],
+  "lendingSweeps": [
+    {
+      "id": "sweep-safe",
+      "collateralUnits": "10000000000",
+      "priceCents": "100",
+      "debtCents": "4000",
+      "liquidationThresholdBps": 6500,
+      "collateralValueCents": "10000",
+      "liquidationValueCents": "6500",
+      "healthFactorBps": "16250",
+      "oracleFailureId": "oracle-fresh-not-truth",
+      "oracleStatus": "review-only",
+      "status": "healthy-review-only",
+      "liquidationExecutable": false,
+      "custodyReady": false
+    },
+    {
+      "id": "sweep-boundary",
+      "collateralUnits": "10000000000",
+      "priceCents": "100",
+      "debtCents": "6500",
+      "liquidationThresholdBps": 6500,
+      "collateralValueCents": "10000",
+      "liquidationValueCents": "6500",
+      "healthFactorBps": "10000",
+      "oracleFailureId": "oracle-fresh-not-truth",
+      "oracleStatus": "review-only",
+      "status": "boundary-review-only",
+      "liquidationExecutable": false,
+      "custodyReady": false
+    },
+    {
+      "id": "sweep-liquidation-review",
+      "collateralUnits": "10000000000",
+      "priceCents": "100",
+      "debtCents": "9000",
+      "liquidationThresholdBps": 6500,
+      "collateralValueCents": "10000",
+      "liquidationValueCents": "6500",
+      "healthFactorBps": "7222",
+      "oracleFailureId": "oracle-fresh-not-truth",
+      "oracleStatus": "review-only",
+      "status": "liquidation-review-only",
+      "liquidationExecutable": false,
+      "custodyReady": false
+    },
+    {
+      "id": "sweep-stale-oracle-blocked",
+      "collateralUnits": "10000000000",
+      "priceCents": "72",
+      "debtCents": "5000",
+      "liquidationThresholdBps": 6500,
+      "collateralValueCents": "7200",
+      "liquidationValueCents": "4680",
+      "healthFactorBps": "9360",
+      "oracleFailureId": "oracle-stale-feed",
+      "oracleStatus": "blocked",
+      "status": "oracle-blocked",
+      "liquidationExecutable": false,
+      "custodyReady": false
+    },
+    {
+      "id": "sweep-manipulated-oracle-blocked",
+      "collateralUnits": "10000000000",
+      "priceCents": "350",
+      "debtCents": "9000",
+      "liquidationThresholdBps": 6500,
+      "collateralValueCents": "35000",
+      "liquidationValueCents": "22750",
+      "healthFactorBps": "25277",
+      "oracleFailureId": "oracle-manipulated-venue",
+      "oracleStatus": "blocked",
+      "status": "oracle-blocked",
+      "liquidationExecutable": false,
+      "custodyReady": false
+    }
+  ],
+  "promotionRule": [
+    "AMM liquidity math can enter review state only when reserve ratio and invariant checks pass; invalid reserve mutation stays blocked.",
+    "Lending sweeps can show health-factor state, but liquidation remains review-only or blocked until oracle and custody authority are enforceable.",
+    "Oracle failures block custody-moving actions even if some reports are fresh or numerous.",
+    "This advanced simulation is still planner/indexer state; it does not alter TN12 pool reserves or move user funds."
+  ],
+  "boundaries": [
+    "This artifact hardens simulation logic for AMM, lending, liquidation, and oracle failure cases.",
+    "It is useful for product and reducer tests before external signing, but it is not live DeFi.",
+    "Review-state rows are dashboard/operator inputs only."
+  ]
+}

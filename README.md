@@ -78,6 +78,7 @@ npm run demo:operator-refresh
 | DeFi planner simulation | `artifacts/defi-planner-simulation.json` |
 | DeFi scenario simulation | `artifacts/defi-scenario-simulation.json` |
 | DeFi scenario reducer | `artifacts/defi-scenario-reducer.json` |
+| DeFi advanced simulation | `artifacts/defi-advanced-simulation.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |
 | External signer payload request | `artifacts/external-signer-payload-request.json` |
