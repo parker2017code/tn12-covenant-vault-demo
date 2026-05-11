@@ -24,6 +24,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |
+| Next steps | `docs/NEXT_STEPS.md` |
 | Next 10-task status | `artifacts/next-ten-execution-status.json` |
 | Proven status boundary | `artifacts/proven-status.json` |
 | Operator receipt pack | `artifacts/operator-receipt-pack.json` |
@@ -69,3 +70,5 @@ npm run wallet:external-signer-research
 2. Route the next local-wallet TN12 spend through the receipt/operator pack.
 3. Keep batch-assurance refund paths marked non-selected after the accepted release.
 4. Keep external signer and live rollback as mainnet-readiness rails.
+
+See `docs/NEXT_STEPS.md` for the short execution queue.

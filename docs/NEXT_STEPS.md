@@ -1,0 +1,50 @@
+# Next Steps
+
+Reviewed: 2026-05-10
+
+This file is the short queue. It does not replace the generated artifacts; it points reviewers and future agents to the next concrete work without reopening broad roadmap claims.
+
+## Current Position
+
+- TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
+- Mainnet deployment readiness is still about `55-60%`.
+- The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
+
+## Next 5 Tasks
+
+| Order | Task | Why It Matters | Blocked By User? |
+|---|---|---|---|
+| 1 | Keep `operator:refresh` green after every proof/artifact change. | This is the reviewer gate for accepted evidence plus local replay and UI checks. | No |
+| 2 | Route the next local-wallet TN12 spend through the operator receipt pack. | Proves the repo can turn a spend into a reviewer/operator receipt instead of only a raw txid. | No, if funded local test wallet remains available |
+| 3 | Keep batch-assurance release selected and refund alternates explicitly non-selected. | Prevents accidental double-claim language around the spent pledge set. | No |
+| 4 | Prepare one unsigned external-signer payload receipt request. | Keeps the missing no-local-key signer rail concrete without pretending a wallet already signed it. | No |
+| 5 | Only promote external signer status after a real wallet returns signed tx bytes and TN12 accepts the txid. | This is the main custody boundary for mainnet-style readiness. | Yes, unless a compatible throwaway signer is available |
+
+## Next 90-95% Readiness Tasks
+
+These are not all needed for the next commit, but they are the path from proof lab toward product infrastructure:
+
+| Task | Clears |
+|---|---|
+| Real external-signer round trip | Repo no longer needs local keys for the selected demo path |
+| Production wallet/indexer hardening | Operator can trust state recovery, monitoring, and retry behavior |
+| Live removed-block rollback capture | Replay promotion is backed by real TN12 rollback evidence |
+| Fresh accepted payload receipt through the operator pack | Demonstrates the current user-facing receipt loop |
+| Public docs stay proof-first after each change | Prevents roadmap/status drift |
+
+## Do Not Do Next
+
+- Do not buy signer hardware just to move the repo forward.
+- Do not submit non-selected batch refund paths for already spent pledge outputs.
+- Do not add AMM, lending, liquidation, oracle, or bridge claims until there is a narrower accepted custody/indexer path.
+- Do not treat local replay success as live removed-block rollback evidence.
+
+## Commands
+
+```sh
+npm run operator:refresh
+npm run proof:verify
+npm run project:operator-pack
+npm run project:proven-status
+npm run wallet:unsigned-requests
+```
