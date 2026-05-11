@@ -16,6 +16,19 @@ Every lane should eventually support the same loop:
 6. Replay accepted txids before promoting app state.
 7. Show blocked actions when a rail is not actually enforced.
 
+## App Stack Framing
+
+The plan is not "wait for vProgs." It is a staged Kaspa app stack:
+
+| Layer | What it means | TN12/product examples |
+|---|---|---|
+| Money rails | Fast PoW payments, payload receipts, accepted transaction replay, and wallet UX. | Live playground transfers, invoice receipts, tKAS funding, explorer links. |
+| Covenant primitives | L1 money-control rules around specific UTXOs. | Vault recovery/delay, escrow release/refund/cancel, assurance pledge release/refund. |
+| Based-app prototypes | Apps that need richer state while staying anchored to Kaspa ordering, commitments, proofs, or settlement. ZK is one verification path, not the definition of every based app. | DeFi reducers, auction/intents, coordination/Stag, agent commitments, future based-zk app slices. |
+| Full vProgs / syncomposability | Later architecture for stronger app-to-app atomic composition. | Roadmap only; do not make it the premise for current product work. |
+
+So yes: this repo should build based-app prototypes. We have already started: DeFi reducers, scheduler receipts, auction/intents, coordination/Stag, agent commitments, access-pass state, and payload receipts are early based-app-style surfaces. The next step is to make them user-runnable: accepted inputs, explicit app state, proof or replay boundary, wallet handoff, and blocked-action rules.
+
 ## Public Page Roles
 
 | Page | Job |
@@ -35,8 +48,8 @@ Every lane should eventually support the same loop:
 | 4 | DeFi self-serve walkthrough | Users can follow funding -> role wallet -> deposit/payout -> replay -> blocked action checks from UI instructions and artifacts. |
 | 5 | Assurance self-serve walkthrough | Users can inspect pledge/release/refund state, know what is accepted, and know what remains planner/indexer. |
 | 6 | Escrow self-serve walkthrough | Users can inspect buyer/seller/release/refund/cancel paths and map actions to wallet-standard request candidates. |
-| 7 | Coordination/Stag walkthrough | Transparent Stag/Intendo/Pack/Solver state is playable as research, with missing private Hunt execution called out. |
-| 8 | Access pass, auction, agent walkthroughs | Issuer/indexer and planner states are visible with accepted payload receipts and settlement boundaries. |
+| 7 | Based-app prototype walkthroughs | DeFi reducers, auction/intents, coordination/Stag, and agent commitments show app state anchored to accepted evidence, then add wallet handoff and settlement where each product needs it. |
+| 8 | Access pass and issuer/indexer walkthroughs | Issuer/indexer and planner states are visible with accepted payload receipts and settlement boundaries. |
 | 9 | Real external signer round trip | A user-approved external wallet signs one payload and one covenant-style request; returned bytes validate, submit succeeds, replay matches. |
 | 10 | Durable live indexer promotion | New accepted transactions are discovered from a live virtual-chain feed, rollback behavior is handled, and promotion is deterministic. |
 
@@ -81,12 +94,11 @@ Minimum credible build:
 5. Submit through the correct route.
 6. Replay accepted evidence before app-state promotion.
 
-## Do Not Blur
+## Status Labels
 
-- Future adapters are not finished products.
-- Planner/indexer state is not custody.
-- Local-key TN12 activity is not external-wallet proof.
-- Accepted TN12 evidence is not mainnet readiness.
-- A UI form is not script enforcement.
-- A source link is not certification, partnership, or production integration.
-
+- Future adapters: useful integration targets.
+- Planner/indexer state: replayed app state.
+- Local-key TN12 activity: testnet execution evidence.
+- Accepted TN12 evidence: testnet proof, not mainnet deployment by itself.
+- UI form: artifact builder unless a script path enforces the rule.
+- Source link: reference material, not certification, partnership, or production integration.

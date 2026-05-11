@@ -25,6 +25,7 @@
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#product-map">Start</a>
         <a href="#runbook">Runbook</a>
+        <a href="#lane-runbook">Lanes</a>
         <a href="#designer">Vault</a>
         <a href="#assurance">Pledge</a>
         <a href="#funding">Outpoint</a>
@@ -38,7 +39,7 @@
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
         <h2>Builder workbench for the proof lab.</h2>
-        <p>Start with the product map and runbook. Use the forms when you want to create or inspect artifacts. Heavy generated evidence, roadmap, and research panels are lower-page drawers so the page stays navigable.</p>
+        <p>Start with the stack: fast testnet money, covenant-controlled spends, then based-app prototypes that need richer state anchored to Kaspa ordering, commitments, proofs, or settlement. ZK is one verification path for based apps, not the definition of every based app.</p>
       </div>
       <aside class="facts">
         <span>Proof core</span>
@@ -51,7 +52,7 @@
       <div class="section-title">
         <p class="eyebrow">Product playground map</p>
         <h2>What people can try.</h2>
-        <p>Each lane should become self-serve: get tKAS, connect or use an external TN12 wallet, review exact bytes, submit, then replay accepted evidence. The labels below separate what is playable now from what still needs external wallet or production rails.</p>
+        <p>Each lane should become self-serve: get tKAS, connect or use an external TN12 wallet, review exact bytes, submit, then replay accepted evidence. The product stack is money rails first, covenant primitives second, and based-app prototypes where the app needs richer shared state.</p>
         <p class="note"><a href="docs/PRODUCT_EXECUTION_PLAN.md">Read the product execution plan</a></p>
       </div>
       <div class="product-grid">
@@ -128,6 +129,15 @@
           <small>Not finished: opacity, capital multiplexing, composability, atomic Hunt execution.</small>
         </article>
       </div>
+    </section>
+
+    <section id="lane-runbook" class="panel lane-runbook-panel">
+      <div class="section-title">
+        <p class="eyebrow">Generated lane guide</p>
+        <h2>Playable now, playable next, or research.</h2>
+        <p>This section is generated from repo artifacts. Each card says what a user can actually do, which evidence backs it, and what rail is still missing.</p>
+      </div>
+      <div id="self-serve-lanes" class="self-serve-lanes" aria-live="polite"></div>
     </section>
 
     <section class="panel workbench-routes">
@@ -675,7 +685,7 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Kaspa app lab</p>
         <h2>Base work from the application layer map.</h2>
-        <p>These are the natural next lanes from the Kaspa Explained app-page framing: build what can be proved now, label TN12 covenant work clearly, and keep later RTD/vProgs ideas in the research lane.</p>
+        <p>These are the natural next lanes from the Kaspa Explained app-page framing: build money rails, covenant products, and based-app prototypes now; keep full vProgs and deeper RTD designs in later lanes.</p>
       </div>
       <div id="app-lanes" class="app-lanes" aria-live="polite"></div>
     </section>
@@ -826,7 +836,7 @@ npm run wallet:adapter-run</pre>
       <h2>Status labels</h2>
       <div class="claim-grid">
         <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
-        <article><strong>Next rails</strong><p>Mainnet covenant tooling, native DeFi rails, full vProgs, wallet safety, miner/header data, and production wallet integration stay in their build lanes.</p></article>
+        <article><strong>Next rails</strong><p>Mainnet covenant tooling, based-app prototypes, wallet safety, live indexer behavior, and production wallet integration stay in their build lanes.</p></article>
         <article><strong>Next build</strong><p>External signing, live rollback evidence, durable payload indexing, and one more concrete settlement vertical.</p></article>
       </div>
     </section>

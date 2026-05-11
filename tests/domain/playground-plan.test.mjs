@@ -22,7 +22,7 @@ assert.ok(artifact.roles.every((role) => /^kaspa-testnet-12$/.test(role.network)
 assert.ok(artifact.roles.every((role) => role.privateKeyPolicy === "session-only-not-committed"));
 assert.ok(artifact.actions.some((action) => action.enforcement === "TN12_ACCEPTED_TARGET"));
 assert.ok(artifact.actions.some((action) => action.enforcement === "REJECTED_BY_REDUCER"));
-assert.ok(artifact.hardRules.some((rule) => /Never expose or reuse repo private keys/.test(rule)));
+assert.ok(artifact.commonSense.some((rule) => /fresh session wallets/.test(rule)));
 
 const checkedIn = await readJson("artifacts/playground-plan.json");
 assert.equal(checkedIn.status, artifact.status);

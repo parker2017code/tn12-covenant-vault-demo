@@ -23,10 +23,13 @@ try {
   const playgroundHtml = await playgroundResponse.text();
   const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
   const checkpoint = JSON.parse(await readFile("artifacts/checkpointed-accepted-index.json", "utf8"));
+  const selfServeRunbook = JSON.parse(await readFile("artifacts/self-serve-lane-runbook.json", "utf8"));
 
   assert.equal(proofFixture.transactions.length, 9);
   assert.equal(checkpoint.summary.total, 53);
   assert.equal(checkpoint.summary.payloadEvents, 40);
+  assert.equal(selfServeRunbook.summary.lanes, 12);
+  assert.equal(selfServeRunbook.summary.basedAppPrototypes, 4);
   assert.match(html, /TN12 configured\. Proof transactions accepted\./);
   assert.match(html, /7 core \+ 2 auction \+ 7 role-separated \+ 53 indexed records/);
   assert.match(html, /Accepted payload events[\s\S]*<strong>40<\/strong>/);
@@ -85,6 +88,7 @@ try {
   assert.match(await readFile("lab.html", "utf8"), /class="lab-page"/);
   assert.match(await readFile("lab.html", "utf8"), /id="product-map"/);
   assert.match(await readFile("lab.html", "utf8"), /id="runbook"/);
+  assert.match(await readFile("lab.html", "utf8"), /id="lane-runbook"/);
   assert.match(await readFile("lab.html", "utf8"), /docs\/PRODUCT_EXECUTION_PLAN\.md/);
 
   await checkRenderedPages(url);
@@ -156,6 +160,15 @@ async function checkRenderedPages(url) {
     assert.match(runbookText, /If you are determined/);
     assert.match(runbookText, /Not finished: AMM custody/);
     assert.match(runbookText, /Replay before believing it/);
+    await page.waitForSelector("#self-serve-lanes article", { timeout: 5000 });
+    assert.equal(await page.locator("#self-serve-lanes article").count(), 12);
+    const laneRunbookText = await page.locator("#lane-runbook").evaluate((node) => node.textContent || "");
+    assert.match(laneRunbookText, /DeFi lab/);
+    assert.match(laneRunbookText, /Coordination \/ Stag/);
+    assert.match(laneRunbookText, /based app prototype/i);
+    assert.match(laneRunbookText, /External wallet handoff/);
+    assert.match(laneRunbookText, /No AMM custody/);
+    assert.match(laneRunbookText, /npm run defi:refresh/);
     assert.ok(await page.locator("details.lab-drawer").count() >= 20);
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");

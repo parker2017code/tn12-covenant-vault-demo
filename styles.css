@@ -1806,6 +1806,109 @@ progress::-moz-progress-bar {
   color: var(--muted);
 }
 
+.self-serve-lanes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.self-serve-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  border: 1px solid rgba(118, 167, 158, .26);
+  border-radius: 20px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(118, 167, 158, .16), transparent 35%),
+    linear-gradient(145deg, rgba(18, 25, 29, .98), rgba(10, 15, 18, .98));
+}
+
+.self-serve-card.lane-play-now {
+  border-color: rgba(118, 167, 158, .55);
+}
+
+.self-serve-card.lane-required-rail,
+.self-serve-card.lane-start-here {
+  border-color: rgba(245, 194, 126, .52);
+}
+
+.self-serve-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.self-serve-card-head span {
+  border: 1px solid rgba(245, 194, 126, .32);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.self-serve-card-head a {
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 850;
+  line-height: 1.12;
+  text-align: right;
+}
+
+.self-serve-card strong,
+.self-serve-card p,
+.self-serve-card ul,
+.self-serve-card ol {
+  margin: 0;
+}
+
+.self-serve-layer {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: rgba(118, 167, 158, .12);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.self-serve-card ul,
+.self-serve-card ol {
+  display: grid;
+  gap: 6px;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.self-serve-card details {
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  padding-top: 10px;
+}
+
+.self-serve-card summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.self-serve-card code {
+  display: inline-block;
+  margin: 3px 4px 3px 0;
+  white-space: normal;
+}
+
+.self-serve-open-rail {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
 .journey-grid a {
   position: relative;
   min-height: 168px;
@@ -2282,6 +2385,10 @@ progress::-moz-progress-bar {
   }
 
   .runbook-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .self-serve-lanes {
     grid-template-columns: 1fr;
   }
 

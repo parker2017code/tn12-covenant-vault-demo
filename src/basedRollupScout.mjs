@@ -26,14 +26,14 @@ export function buildBasedRollupScout(fixture = {}) {
       usingAnyL2Now: Boolean(fixture.currentDecision?.usingAnyL2Now),
       considerCoreMigratableRollup: Boolean(fixture.currentDecision?.considerCoreMigratableRollup),
       whenItMatters: String(fixture.currentDecision?.whenItMatters || ""),
-      detail: "Based rollups add a future execution lane around L1 covenant settlement. They do not replace the current TN12 proof, wallet, custody, or indexer work."
+      detail: "Based-app prototypes are the richer-state lane around Kaspa ordering, commitments, proofs, settlement, and replay. Based rollups are one possible implementation surface, not the whole category."
     },
     sources,
     contributors,
     capabilityChanges,
     nextActions,
     boundaries: [
-      "This artifact is a scouting map, not proof that this repo has deployed to a rollup.",
+      "This artifact is a scouting map for based-app implementation surfaces.",
       "Maxim's rollup PoC is a reference input for bridge and proof mechanics, not a production dependency in this repo yet.",
       "Hans' vProgs work is tracked as runtime/proving direction, not as a completed rollup deployment by this repo.",
       "Current repo claims stay tied to accepted TN12 transactions, generated artifacts, or explicit research labels."

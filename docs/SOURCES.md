@@ -43,7 +43,7 @@ The new official builder docs are useful to this repo in three ways:
 - The accepted-transactions guide's stronger long-term indexer pattern is checkpointed `getVirtualChainFromBlockV2` with `dataVerbosityLevel: "High"` when full transaction data, payloads, and rollback handling are needed. This repo currently stays lighter with REST txid pulls because the local full-node workflow was intentionally removed.
 - The wallet guide matters for the payload route because it documents the high-level Wallet API as the normal JS/Rust send path, while the TN12 REST submit schema currently omits a payload field.
 - The covenants guide directly supports this repo's next app choices: vaults, treasury controls, escrow-like flows, and time/condition-based unlocks.
-- The Based Apps, full vProgs, and Inline ZK pages reinforce status boundaries: shared-state concurrency and app composition are later lanes, while ZK is specialized and not needed for the current vault/assurance/escrow path.
+- The Based Apps, full vProgs, and Inline ZK pages shape the build split: based apps are the richer-state app lane, Inline ZK is a specialized proving path, and full vProgs are the later atomic-composition direction.
 - Aspectron's `RpcClient` docs confirmed the current object-style constructor and request-style submit wrapper: `new RpcClient({ url, networkId })` and `submitTransaction({ transaction, allowOrphan })`.
 - Aspectron's signing guide confirmed the same submit wrapper after SDK signing. TN12-specific `computeBudget` behavior still had to be verified against Rusty Kaspa TN12 source/tests and the local TN12 WASM build.
 - KasSigner/KasSee is the best current public reference for this repo's missing external-signer boundary: watch-only transaction construction, offline signing, PSKB/KSPT-style handoff, and accepted-state promotion after broadcast. It is not evidence that this repo has a live wallet connector.
@@ -91,7 +91,8 @@ Every copied idea must keep a Kaspa status lane:
 
 - live Kaspa lane for payment/receipt rails, wallets, KRC-aware tooling, payload receipts, and accepted-transaction indexing;
 - TN12/Toccata lane for covenant-shaped vaults, escrow, assurance, simple assets, and state-output experiments;
-- roadmap/research lane for Based Apps, full vProgs, cross-app composition, rich DeFi, RTD/oracle markets, and miner-attestation flows.
+- based-app prototype lane for DeFi reducers, auctions/intents, coordination/Stag, agent commitments, and richer app state anchored to accepted Kaspa evidence;
+- roadmap/research lane for full vProgs, cross-app atomic composition, rich DeFi custody, RTD/oracle markets, and miner-attestation flows.
 
 ## AI-Agent And Coding Practice Sources
 

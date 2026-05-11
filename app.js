@@ -144,6 +144,7 @@ const nextQueueTasksNode = document.querySelector("#next-queue-tasks");
 const nextTenStatusNode = document.querySelector("#next-ten-status");
 const nextTenTasksNode = document.querySelector("#next-ten-tasks");
 const buildQueueNode = document.querySelector("#build-queue");
+const selfServeLanesNode = document.querySelector("#self-serve-lanes");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
 const appLanesNode = document.querySelector("#app-lanes");
@@ -272,6 +273,7 @@ const pageRenderers = {
   renderProjectPlan,
   renderNextWorkQueue,
   renderNextTenStatus,
+  renderSelfServeLaneRunbook,
   renderProofTransactions,
   renderAcceptedAppState,
   renderInvoiceApp,
@@ -1631,6 +1633,44 @@ async function renderBuildQueue() {
     }
   } catch (error) {
     buildQueueNode.textContent = `Build queue unavailable: ${error.message}`;
+  }
+}
+
+async function renderSelfServeLaneRunbook() {
+  if (!selfServeLanesNode) return;
+
+  try {
+    const runbook = await fetchJson("artifacts/self-serve-lane-runbook.json");
+    selfServeLanesNode.innerHTML = "";
+
+    for (const lane of runbook.lanes) {
+      const article = document.createElement("article");
+      article.className = `self-serve-card lane-${cssEscape(lane.status)}`;
+      article.innerHTML = `
+        <div class="self-serve-card-head">
+          <span>${escapeHtml(lane.status.replaceAll("-", " "))}</span>
+          <a href="${escapeHtml(lane.uiTarget)}">${escapeHtml(lane.title)}</a>
+        </div>
+        <p class="self-serve-layer">${escapeHtml(lane.stackLayer.replaceAll("-", " "))}</p>
+        <div>
+          <strong>Available now</strong>
+          <ul>${lane.availableNow.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+        </div>
+        <details>
+          <summary>How to run it</summary>
+          <ol>${lane.runSteps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
+        </details>
+        <details>
+          <summary>Evidence and commands</summary>
+          <p>${lane.evidence.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
+          <p>${lane.commands.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
+        </details>
+        <p class="self-serve-open-rail"><strong>Missing rail:</strong> ${escapeHtml(lane.openRail.join(" "))}</p>
+      `;
+      selfServeLanesNode.append(article);
+    }
+  } catch (error) {
+    selfServeLanesNode.textContent = `Self-serve runbook unavailable: ${error.message}`;
   }
 }
 

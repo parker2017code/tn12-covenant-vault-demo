@@ -49,12 +49,12 @@ export function buildPlaygroundPlan({
       "The playground fetches UTXOs and enables only actions with sufficient confirmed testnet funds.",
       "Each submitted action writes an artifact row with txid, accepted status, payload match, and replay result."
     ],
-    hardRules: [
-      "Never expose or reuse repo private keys as public playground wallets.",
-      "Do not commit session wallet secrets, mnemonics, seeds, or private keys.",
-      "Every positive app action should produce an accepted TN12 txid where network/tooling allows.",
-      "Reducer-only rows must stay labeled INDEXER_DERIVED or PLANNER_ONLY.",
-      "No mainnet, production custody, external-signer, AMM, lending, liquidation, or oracle-truth claim is allowed from playground activity alone."
+    commonSense: [
+      "Use fresh session wallets; keep repo private keys out of public playground flows.",
+      "Keep session wallet secrets, mnemonics, seeds, and private keys out of commits.",
+      "When tooling allows a positive app action, back it with an accepted TN12 txid.",
+      "Label reducer-only rows as indexer-derived or planner-only.",
+      "Treat mainnet, production custody, external signing, AMMs, lending, liquidation, and oracle truth as separate rails."
     ],
     nextImplementation: [
       "Add playground.html with role wallet generation and faucet checklist.",

@@ -96,7 +96,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
         <p>${escapeHtml(action.detail)}</p>
       </article>
     `).join("");
-    rulesNode.innerHTML = plan.hardRules.map((rule) => `<li>${escapeHtml(rule)}</li>`).join("");
+    rulesNode.innerHTML = plan.commonSense.map((rule) => `<li>${escapeHtml(rule)}</li>`).join("");
     flowNode.innerHTML = plan.faucetFlow.map((step, index) => `
       <article>
         <span>${index + 1}</span>

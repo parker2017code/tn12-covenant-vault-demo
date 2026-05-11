@@ -8,11 +8,11 @@
     "next": 5,
     "later": 6
   },
-  "currentPrinciple": "Positive app-state claims need accepted TN12 evidence; planner, wallet-policy, and research lanes stay labeled.",
+  "currentPrinciple": "Use direct labels: money rail, covenant primitive, based-app prototype, wallet policy, or later vProg work.",
   "focusVerticals": [
     "Invoice/receipt: accepted transaction app state.",
     "Escrow/assurance: TN12 covenant proof app.",
-    "Attestation/agent/prediction: research-to-app bridge."
+    "Based-app prototypes: DeFi, coordination, auctions, agents, and app-state reducers."
   ],
   "done": [
     {
@@ -101,9 +101,9 @@
       "detail": "The fixture-backed replay run now materializes checkpoint, accepted transaction, payload event, proof spend, and rollback rows from the current checkpoint."
     },
     {
-      "id": "based-rollup-scout",
+      "id": "based-app-prototypes",
       "laneId": "defi-research",
-      "detail": "The scout artifact records that current TN12 work does not use an L2, while core-migratable based rollups remain worth tracking for later."
+      "detail": "DeFi reducers, auction/intents, coordination/Stag, and agent commitments now form the based-app prototype lane."
     },
     {
       "id": "covenant-adversarial-map",
@@ -136,9 +136,9 @@
       "detail": "Local review candidates now map wrong signer, wrong selector, wrong output lock, wrong amount, bad lock shape, and single-party cancel mutations before any TN12 rejection attempt."
     },
     {
-      "id": "batch-settlement-drafts",
+      "id": "batch-settlement-release",
       "laneId": "batch-assurance",
-      "detail": "Signed-not-broadcast batch-assurance release and refund drafts now spend only the accepted 45/35/20 TKAS pledge outputs."
+      "detail": "TN12 accepted the 3-pledge batch-assurance release; refund drafts are non-selected alternates for that spent pledge set."
     }
   ],
   "wip": [
@@ -159,7 +159,7 @@
       "enforcement": "planner-indexer",
       "readiness": "tn12-toccata-only",
       "proof": "accepted-tn12-json-wrpc-payload-events",
-      "detail": "Accepted amount-matched pledge outputs and signed release/refund drafts are ready; next work is choosing and reviewing one mutually exclusive settlement path.",
+      "detail": "Accepted pledge outputs and the accepted release are indexed; refund drafts stay non-selected for that pledge set.",
       "next": "Review release versus refund, then submit only one mutually exclusive settlement path if intended."
     },
     {
@@ -185,9 +185,9 @@
   ],
   "next": [
     {
-      "id": "batch-settlement-path-review",
+      "id": "batch-alternate-path-cleanup",
       "laneId": "batch-assurance",
-      "detail": "Review release versus refund, then submit only one mutually exclusive batch-assurance settlement path if intended."
+      "detail": "Keep release acceptance, refund non-selection, checkpoint replay, and operator status synchronized."
     },
     {
       "id": "indexer-virtual-chain-reader",
@@ -205,9 +205,9 @@
       "detail": "Wire the wallet-submit package into a live no-local-key wallet flow."
     },
     {
-      "id": "rollup-bridge-brief",
+      "id": "based-app-vertical",
       "laneId": "defi-research",
-      "detail": "Map entry, transfer, exit, claim, proof, and state-root responsibilities from core and core-adjacent references."
+      "detail": "Turn one based-app prototype into a user-run flow: fund, submit, replay, block invalid action."
     }
   ],
   "later": [
@@ -249,7 +249,7 @@
     {
       "id": "vprog-forward-compat",
       "laneId": "defi-research",
-      "detail": "Keep L1 covenant, based-rollup, native-asset, ICC, and vProg assumptions separated until each interface is testable."
+      "detail": "Keep L1 covenant, based-app, native-asset, ICC, and vProg assumptions separated until each interface is testable."
     },
     {
       "id": "marketplace-escrow",
@@ -267,6 +267,6 @@
     "A wallet-reviewed Kaspa app console that can submit exact payload and covenant drafts without local keys.",
     "A durable accepted-transaction indexer with rollback replay instead of known-txid fixture reads.",
     "Covenant-backed escrow, vault, assurance, and treasury flows that remain TN12-labeled until mainnet tooling is ready.",
-    "Builder-facing examples for app-state payloads, attestations, issuer-indexed assets, based-rollup scouting, and future native rails."
+    "Builder-facing examples for app-state payloads, attestations, issuer-indexed assets, based-app prototypes, and future native rails."
   ]
 }

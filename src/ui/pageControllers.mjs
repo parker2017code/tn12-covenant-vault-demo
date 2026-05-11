@@ -44,6 +44,7 @@ export function runLabPageController(renderers) {
     renderers.renderProjectPlan,
     renderers.renderMasterRoadmap,
     renderers.renderResearchLibrary,
+    renderers.renderSelfServeLaneRunbook,
     renderers.renderBuildQueue,
     renderers.renderVaultTemplates,
     renderers.renderAppLab,

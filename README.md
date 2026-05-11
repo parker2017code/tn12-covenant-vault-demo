@@ -1,6 +1,6 @@
 # TN12 Covenant Lab
 
-Kaspa testnet-12 repo for covenant proof spends, payload receipts, and replay guards. Testnet-only. Not a mainnet wallet. Not proof that Toccata covenants are live on mainnet.
+Kaspa testnet-12 repo for money rails, covenant proof spends, payload receipts, based-app prototypes, and replay guards. Testnet-only. It is not a mainnet wallet or mainnet activation record.
 
 Percentages in this repo mean mainnet deployment readiness unless a line explicitly says TN12/demo progress.
 
@@ -14,6 +14,7 @@ Start here:
 - `docs/AUDIT_MAP.md`: canonical claim, status, and enforcement-class map.
 - `docs/CLAIM_VOCABULARY.md`: short definitions for `SCRIPT_ENFORCED`, `PLANNER_ONLY`, `INDEXER_DERIVED`, and related labels.
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
+- `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
 - `docs/NEXT_STEPS.md`: short current execution queue.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
@@ -35,10 +36,10 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 | 1 scheduler-covenant-binding receipt references an accepted vault recovery proof row | `TN12_ACCEPTED` / `INDEXER_DERIVED` / `SCRIPT_ENFORCED` reference | `artifacts/scheduler-covenant-binding.json` |
 | Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |
 
-## NOT Proven
+## Current Gaps
 
 - Mainnet covenant activation.
-- Full DeFi: no AMM, lending, liquidation, oracle, or production custody rail.
+- Full DeFi: current work has based-app prototype pieces, but no AMM, lending, liquidation, oracle, or production custody rail.
 - No-local-key wallet signing: accepted proofs still used local testnet keys; this is deferred for mainnet-readiness.
 - Pooled threshold enforcement: current batch target aggregation is planner/indexer logic.
 - Production indexer reliability: local replay guards pass, but live removed-block rollback evidence is still useful.
@@ -101,6 +102,7 @@ npm run demo:operator-refresh
 | External signer path | `artifacts/external-signer-path-research.json` |
 | External signer payload request | `artifacts/external-signer-payload-request.json` |
 | Full lab notebook | `docs/LAB_NOTEBOOK.md` |
+| Product execution plan | `docs/PRODUCT_EXECUTION_PLAN.md` |
 
 ## Local Preview
 

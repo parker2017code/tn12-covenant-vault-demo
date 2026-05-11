@@ -10,6 +10,8 @@ Read this first when resuming TN12 work. Keep it short. Details belong in artifa
 - Pages: `https://parker2017code.github.io/tn12-covenant-vault-demo/`
 - Main gate: `npm run check:all`
 - TN12 evidence gate: `npm run check:tn12`
+- Operating frame: build money rails first, covenant products second, based-app prototypes third, and treat full vProgs/synchronous composition as later architecture.
+- Style frame: use direct product labels and concrete next actions; avoid vague roadmap language and public-facing defensive caveat stacks.
 
 ## Proof Core
 
@@ -18,6 +20,7 @@ Read this first when resuming TN12 work. Keep it short. Details belong in artifa
 - Batch assurance accepted on TN12: pledge outputs plus 3-pledge release `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`.
 - Payload events accepted on TN12: 30, including four DeFi v1 receipts across three wallets.
 - Adversarial rejections accepted as negative evidence: wrong signer, wrong selector, wrong output lock, wrong amount, single-party cancel.
+- Based-app prototype work has started: DeFi reducers/replay, scheduler receipts, auction/intents, coordination/Stag, access-pass state, agent commitments, and payload receipt app state.
 
 ## Current Blockers
 
@@ -55,14 +58,14 @@ npm run wallet:external-signer-research
 - Never print or commit `.local/*` private keys.
 - Do not use mainnet keys.
 - Do not call local-signer output external-wallet evidence.
-- Positive app-state claims need accepted TN12 evidence or must be labeled local/planner/research.
+- Positive app-state labels should say exactly what backs them: accepted TN12 evidence, local-key TN12 activity, planner/indexer replay, or research prototype.
 - Do not use public TN12 REST submit for payload receipts; it previously dropped payload bytes.
 - Keep docs proof-first. Avoid broad future-app prose unless it points to a concrete artifact.
 
 ## Next
 
-1. Real external signer round trip for one payload receipt.
-2. Real external signer round trip for one covenant spend.
-3. Keep batch-assurance refund paths marked non-selected after the accepted release.
-4. Build amount-matched custody sources for auction and agent settlement rows.
+1. Make the self-serve lane runbook the public route into money rails, covenant products, and based-app prototypes.
+2. Real external signer round trip for one payload receipt.
+3. Real external signer round trip for one covenant spend.
+4. Turn one based-app prototype into a user-run vertical: fund, submit, replay, block invalid action.
 5. Capture live removed-block rollback evidence when available.
