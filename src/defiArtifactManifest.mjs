@@ -34,6 +34,12 @@ const EXPECTED = [
     path: "artifacts/defi-accepted-activity-ledger.json",
     schema: "tn12-defi-accepted-activity-ledger/v1",
     command: "npm run defi:accepted-activity"
+  },
+  {
+    id: "playground",
+    path: "artifacts/playground-plan.json",
+    schema: "tn12-playground-plan/v1",
+    command: "npm run playground:plan"
   }
 ];
 
@@ -87,7 +93,7 @@ function reviewArtifact(expected, artifact = {}) {
   const problems = [
     artifact.schema === expected.schema ? "" : `schema mismatch: expected ${expected.schema}`,
     artifact.network === "kaspa-testnet-12" ? "" : "network mismatch",
-    /ready|simulation/.test(String(artifact.status || "")) ? "" : "status is not ready/simulation",
+    /ready|simulation|plan/.test(String(artifact.status || "")) ? "" : "status is not ready/simulation/plan",
     liveProductClaims === 0 ? "" : "live product claims present",
     custodyActions === 0 ? "" : "custody actions present",
     externalSignerClaims === 0 ? "" : "external signer claims present",

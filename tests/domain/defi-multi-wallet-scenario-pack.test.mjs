@@ -15,7 +15,7 @@ assert.equal(pack.enforcement, "INDEXER_DERIVED");
 assert.equal(pack.summary.roles, 4);
 assert.equal(pack.summary.acceptedIndexedRoles, 4);
 assert.equal(pack.summary.reviewStatePromotedRoles, 3);
-assert.equal(pack.summary.blockedRows, 8);
+assert.equal(pack.summary.blockedRows, 10);
 assert.equal(pack.summary.actualWalletAddresses, 3);
 assert.equal(pack.summary.localKeySignedReceipts, 4);
 assert.equal(pack.summary.externalSignerClaims, 0);
@@ -38,6 +38,7 @@ assert.equal(reviewer.promotionState, "blocked-review");
 assert.ok(reviewer.reviewProblems.includes("liquidation review is not executable"));
 
 assert.ok(pack.blockedRows.some((row) => row.kind === "custody-promotion-candidate" && row.status === "blocked"));
+assert.equal(pack.blockedRows.filter((row) => row.kind === "withdrawal-candidate" && row.status === "blocked").length, 2);
 assert.ok(pack.boundaries.some((boundary) => /does not prove external wallet signing/.test(boundary)));
 
 const artifact = await readJson("artifacts/defi-multi-wallet-scenario-pack.json");

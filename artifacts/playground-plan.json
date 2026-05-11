@@ -1,0 +1,133 @@
+{
+  "schema": "tn12-playground-plan/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T18:04:13.959Z",
+  "status": "playground-plan-ready",
+  "target": "real-tn12-session-playground",
+  "summary": {
+    "roles": 6,
+    "guidedActions": 7,
+    "acceptedPayloadEventsAvailable": 40,
+    "acceptedTransferRowsAvailable": 16,
+    "benchmarkPercent": 60,
+    "sharedWalletPrivateKeys": 0,
+    "committedSecrets": 0,
+    "mainnetClaims": 0,
+    "liveProductClaims": 0
+  },
+  "roles": [
+    {
+      "id": "operator",
+      "label": "Operator / receipt submitter",
+      "network": "kaspa-testnet-12",
+      "suggestedFundingTkas": "2",
+      "purpose": "Submits payload receipts and starts guided scenarios.",
+      "privateKeyPolicy": "session-only-not-committed"
+    },
+    {
+      "id": "pool",
+      "label": "Pool wallet",
+      "network": "kaspa-testnet-12",
+      "suggestedFundingTkas": "25",
+      "purpose": "Receives deposits and sends small payouts under local-key test control.",
+      "privateKeyPolicy": "session-only-not-committed"
+    },
+    {
+      "id": "user-a",
+      "label": "User A / swapper",
+      "network": "kaspa-testnet-12",
+      "suggestedFundingTkas": "10",
+      "purpose": "Funds a deposit and receives a payout.",
+      "privateKeyPolicy": "session-only-not-committed"
+    },
+    {
+      "id": "user-b",
+      "label": "User B / lender",
+      "network": "kaspa-testnet-12",
+      "suggestedFundingTkas": "10",
+      "purpose": "Funds a deposit and requests a withdrawal review.",
+      "privateKeyPolicy": "session-only-not-committed"
+    },
+    {
+      "id": "executor",
+      "label": "Executor / scheduler bidder",
+      "network": "kaspa-testnet-12",
+      "suggestedFundingTkas": "2",
+      "purpose": "Submits bid and execution receipts.",
+      "privateKeyPolicy": "session-only-not-committed"
+    },
+    {
+      "id": "reviewer",
+      "label": "Reviewer / oracle reporter",
+      "network": "kaspa-testnet-12",
+      "suggestedFundingTkas": "2",
+      "purpose": "Submits review-only oracle or risk rows.",
+      "privateKeyPolicy": "session-only-not-committed"
+    }
+  ],
+  "actions": [
+    {
+      "id": "generate-session-wallets",
+      "label": "Create fresh TN12 role wallets",
+      "enforcement": "LOCAL_ONLY",
+      "detail": "Generate new kaspatest addresses; never commit private keys."
+    },
+    {
+      "id": "faucet-fund-roles",
+      "label": "Fund roles with faucet tKAS",
+      "enforcement": "USER_FUNDED_TN12",
+      "detail": "Show copy buttons and minimum tKAS amounts for each role."
+    },
+    {
+      "id": "submit-payload-receipt",
+      "label": "Submit an app receipt",
+      "enforcement": "TN12_ACCEPTED_TARGET",
+      "detail": "Broadcast a payload receipt and verify the txid/payload bytes."
+    },
+    {
+      "id": "submit-pool-deposit",
+      "label": "Move tKAS into pool role",
+      "enforcement": "LOCAL_KEY_CUSTODY_TEST",
+      "detail": "Create an accepted transfer from a user role to pool."
+    },
+    {
+      "id": "submit-pool-payout",
+      "label": "Move tKAS from pool role",
+      "enforcement": "LOCAL_KEY_CUSTODY_TEST",
+      "detail": "Create an accepted payout transfer from pool to user."
+    },
+    {
+      "id": "replay-ledger",
+      "label": "Replay accepted txids",
+      "enforcement": "INDEXER_DERIVED",
+      "detail": "Reduce proof, receipt, and transfer rows into balances and state."
+    },
+    {
+      "id": "attempt-bad-withdrawal",
+      "label": "Try impossible withdrawal",
+      "enforcement": "REJECTED_BY_REDUCER",
+      "detail": "Block over-balance or unsigned execution attempts before promotion."
+    }
+  ],
+  "faucetFlow": [
+    "Generate fresh session wallets for each role.",
+    "Display only kaspatest addresses and requested faucet amounts.",
+    "User funds addresses through the TN12 faucet or their own TN12 wallet.",
+    "The playground fetches UTXOs and enables only actions with sufficient confirmed testnet funds.",
+    "Each submitted action writes an artifact row with txid, accepted status, payload match, and replay result."
+  ],
+  "hardRules": [
+    "Never expose or reuse repo private keys as public playground wallets.",
+    "Do not commit session wallet secrets, mnemonics, seeds, or private keys.",
+    "Every positive app action should produce an accepted TN12 txid where network/tooling allows.",
+    "Reducer-only rows must stay labeled INDEXER_DERIVED or PLANNER_ONLY.",
+    "No mainnet, production custody, external-signer, AMM, lending, liquidation, or oracle-truth claim is allowed from playground activity alone."
+  ],
+  "nextImplementation": [
+    "Add playground.html with role wallet generation and faucet checklist.",
+    "Add playground session export/import with public addresses and txids only.",
+    "Add submit helpers for payload receipts, pool deposits, pool payouts, scheduler bids, and proof bindings.",
+    "Add replay panel showing accepted txids, balances, rejected duplicate rows, and blocked withdrawal attempts.",
+    "Add cleanup/reset that drops session secrets from browser storage or .local files."
+  ]
+}

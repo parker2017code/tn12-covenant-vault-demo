@@ -1,14 +1,14 @@
 {
   "schema": "tn12-defi-multi-wallet-scenario-pack/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T16:26:45.456Z",
+  "generatedAt": "2026-05-11T18:04:13.650Z",
   "status": "multi-wallet-scenario-pack-ready-local-keys",
   "enforcement": "INDEXER_DERIVED",
   "summary": {
     "roles": 4,
     "acceptedIndexedRoles": 4,
     "reviewStatePromotedRoles": 3,
-    "blockedRows": 8,
+    "blockedRows": 10,
     "advancedAmmBlockedActions": 2,
     "advancedOracleBlockedCases": 5,
     "advancedLendingBlocked": 2,
@@ -114,6 +114,26 @@
       "sourcePromotionState": "blocked-review",
       "status": "blocked",
       "reason": "review state cannot be promoted to custody without external signer and settlement evidence"
+    },
+    {
+      "id": "pool-over-withdraw-001",
+      "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "kind": "withdrawal-candidate",
+      "requestedAction": "withdraw-execute",
+      "requestedSompi": "999999999999999",
+      "balanceSompi": "5600000000",
+      "status": "blocked",
+      "reason": "withdrawal cannot execute from reducer balance without signer, settlement, and spend evidence"
+    },
+    {
+      "id": "unknown-wallet-withdraw-001",
+      "address": "kaspatest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+      "kind": "withdrawal-candidate",
+      "requestedAction": "withdraw-execute",
+      "requestedSompi": "100000000",
+      "balanceSompi": "0",
+      "status": "blocked",
+      "reason": "withdrawal cannot execute from reducer balance without signer, settlement, and spend evidence"
     },
     {
       "id": "swap-slippage-blocked-001",

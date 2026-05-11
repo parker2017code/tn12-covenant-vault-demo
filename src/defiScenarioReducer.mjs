@@ -1,8 +1,10 @@
 export function buildDefiScenarioReducer({
   scenario = {},
+  acceptedActivity = {},
   duplicateCandidates = [],
   missingCandidates = [],
   custodyPromotionCandidates = [],
+  withdrawalCandidates = [],
   generatedAt = new Date().toISOString()
 } = {}) {
   const acceptedReferences = Array.isArray(scenario.acceptedReferences) ? scenario.acceptedReferences : [];
@@ -10,11 +12,13 @@ export function buildDefiScenarioReducer({
   const swapRows = (scenario.amm?.swaps || []).map((swap) => reduceSwap({ swap, referenceById }));
   const oracleRows = (scenario.oracle?.prices || []).map((price) => reduceOracle({ price, referenceById }));
   const lendingRows = (scenario.lending?.positions || []).map((position) => reduceLending({ position, referenceById }));
+  const balanceRows = reduceBalances(acceptedActivity);
   const stateRows = [...swapRows, ...oracleRows, ...lendingRows];
   const negativeRows = [
     ...duplicateCandidates.map((candidate) => reviewDuplicate({ candidate, stateRows })),
     ...missingCandidates.map((candidate) => reviewMissing({ candidate, referenceById })),
-    ...custodyPromotionCandidates.map((candidate) => reviewCustodyPromotion({ candidate, stateRows }))
+    ...custodyPromotionCandidates.map((candidate) => reviewCustodyPromotion({ candidate, stateRows })),
+    ...withdrawalCandidates.map((candidate) => reviewWithdrawal({ candidate, balanceRows }))
   ];
   const blockedScenarioRows = stateRows.filter((row) => row.promotionState === "blocked-review");
   const promotedRows = stateRows.filter((row) => row.promotionState === "review-state-promoted");
@@ -37,25 +41,31 @@ export function buildDefiScenarioReducer({
       swapRows: swapRows.length,
       oracleRows: oracleRows.length,
       lendingRows: lendingRows.length,
+      balanceRows: balanceRows.length,
+      blockedBalanceRows: balanceRows.filter((row) => row.promotionState === "blocked-review").length,
       duplicateCandidateRows: duplicateCandidates.length,
       missingCandidateRows: missingCandidates.length,
       custodyPromotionCandidateRows: custodyPromotionCandidates.length,
+      withdrawalCandidateRows: withdrawalCandidates.length,
       negativeRows: negativeRows.length,
       blockedNegativeRows: blockedNegativeRows.length,
       custodyPromotions: promotedRows.filter((row) => row.custodyAction === true).length,
+      balanceCustodyPromotions: balanceRows.filter((row) => row.custodyAction === true).length,
       liveProductClaims: 0
     },
     state: {
       swaps: swapRows,
       oraclePrices: oracleRows,
-      lendingPositions: lendingRows
+      lendingPositions: lendingRows,
+      balances: balanceRows
     },
     negativeRows,
     promotionRule: [
       "Only accepted-indexed references can enter review app state.",
       "Scenario rows with min-output failure, stale oracle data, or liquidation-only status stay blocked.",
+      "Accepted local-key transfer balances are review state only; balances do not authorize withdrawals.",
       "Review-state promotion never means custody promotion; custody candidates are blocked until external signer, settlement, and live replay evidence exist.",
-      "Duplicate and missing scenario references are blocked before UI or operator state can use them."
+      "Duplicate, missing, impossible-withdrawal, and over-balance rows are blocked before UI or operator state can use them."
     ],
     boundaries: [
       "This reducer promotes review-only app state from deterministic DeFi scenarios.",
@@ -63,6 +73,37 @@ export function buildDefiScenarioReducer({
       "Rows marked review-state-promoted are safe for dashboards and operator review only."
     ]
   };
+}
+
+function reduceBalances(acceptedActivity) {
+  const rows = Array.isArray(acceptedActivity.transferRows) ? acceptedActivity.transferRows : [];
+  const balances = new Map();
+  for (const row of rows) {
+    if (row.accepted !== true || row.matches !== true) continue;
+    const amount = BigInt(row.amountSompi || 0);
+    addBalance(balances, row.from, -amount);
+    addBalance(balances, row.to, amount);
+  }
+  return [...balances.entries()]
+    .filter(([address]) => Boolean(address))
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([address, balanceSompi]) => {
+      const problems = balanceSompi < 0n ? ["negative net delta from selected transfer rows"] : [];
+      return {
+        address,
+        kind: "accepted-transfer-net-balance",
+        balanceSompi: balanceSompi.toString(),
+        balanceTkas: sompiToTkas(balanceSompi),
+        promotionState: problems.length ? "blocked-review" : "review-state-promoted",
+        custodyAction: false,
+        problems
+      };
+    });
+}
+
+function addBalance(balances, address, amount) {
+  if (!address) return;
+  balances.set(address, (balances.get(address) || 0n) + amount);
 }
 
 function reduceSwap({ swap, referenceById }) {
@@ -172,4 +213,32 @@ function reviewCustodyPromotion({ candidate, stateRows }) {
       ? "review state cannot be promoted to custody without external signer and settlement evidence"
       : "custody promotion unexpectedly allowed"
   };
+}
+
+function reviewWithdrawal({ candidate, balanceRows }) {
+  const row = balanceRows.find((item) => item.address === candidate.address);
+  const requestedSompi = BigInt(candidate.amountSompi || 0);
+  const balanceSompi = BigInt(row?.balanceSompi || 0);
+  const blocked = !row || requestedSompi <= 0n || requestedSompi > balanceSompi || candidate.requestedAction === "withdraw-execute";
+  return {
+    id: candidate.id || "",
+    address: candidate.address || "",
+    kind: "withdrawal-candidate",
+    requestedAction: candidate.requestedAction || "",
+    requestedSompi: requestedSompi.toString(),
+    balanceSompi: balanceSompi.toString(),
+    status: blocked ? "blocked" : "review-only",
+    reason: blocked
+      ? "withdrawal cannot execute from reducer balance without signer, settlement, and spend evidence"
+      : "withdrawal is review-only; execution still requires a signed accepted spend"
+  };
+}
+
+function sompiToTkas(sompi) {
+  const sign = sompi < 0n ? "-" : "";
+  const value = sompi < 0n ? -sompi : sompi;
+  const whole = value / 100000000n;
+  const fraction = value % 100000000n;
+  if (fraction === 0n) return `${sign}${whole}`;
+  return `${sign}${whole}.${fraction.toString().padStart(8, "0").replace(/0+$/, "")}`;
 }

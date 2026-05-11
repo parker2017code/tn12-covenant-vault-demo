@@ -1,7 +1,7 @@
 {
   "schema": "tn12-full-defi-benchmark/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T17:52:27.069Z",
+  "generatedAt": "2026-05-11T18:04:14.619Z",
   "status": "full-defi-benchmark-review",
   "currentPercent": 60,
   "completedWeight": 60,

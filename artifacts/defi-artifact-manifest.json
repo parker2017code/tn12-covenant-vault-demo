@@ -1,11 +1,11 @@
 {
   "schema": "tn12-defi-artifact-manifest/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T17:45:56.797Z",
+  "generatedAt": "2026-05-11T18:04:14.260Z",
   "status": "defi-artifact-manifest-ready",
   "summary": {
-    "artifacts": 6,
-    "readyArtifacts": 6,
+    "artifacts": 7,
+    "readyArtifacts": 7,
     "problems": 0,
     "liveProductClaims": 0,
     "custodyActions": 0,
@@ -90,6 +90,19 @@
       "externalSignerClaims": 0,
       "secretFindings": 0,
       "problems": []
+    },
+    {
+      "id": "playground",
+      "path": "artifacts/playground-plan.json",
+      "command": "npm run playground:plan",
+      "schema": "tn12-playground-plan/v1",
+      "status": "playground-plan-ready",
+      "ready": true,
+      "liveProductClaims": 0,
+      "custodyActions": 0,
+      "externalSignerClaims": 0,
+      "secretFindings": 0,
+      "problems": []
     }
   ],
   "problems": [],
@@ -99,7 +112,8 @@
     "npm run defi:reducer",
     "npm run defi:advanced",
     "npm run defi:multi-wallet",
-    "npm run defi:accepted-activity"
+    "npm run defi:accepted-activity",
+    "npm run playground:plan"
   ],
   "boundaries": [
     "This manifest is the reviewer entry point for DeFi simulation artifacts.",

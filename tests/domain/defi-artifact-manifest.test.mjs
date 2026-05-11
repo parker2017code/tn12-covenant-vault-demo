@@ -8,7 +8,8 @@ const artifacts = {
   reducer: await readJson("artifacts/defi-scenario-reducer.json"),
   advanced: await readJson("artifacts/defi-advanced-simulation.json"),
   "multi-wallet": await readJson("artifacts/defi-multi-wallet-scenario-pack.json"),
-  "accepted-activity": await readJson("artifacts/defi-accepted-activity-ledger.json")
+  "accepted-activity": await readJson("artifacts/defi-accepted-activity-ledger.json"),
+  playground: await readJson("artifacts/playground-plan.json")
 };
 
 const manifest = buildDefiArtifactManifest({
@@ -17,8 +18,8 @@ const manifest = buildDefiArtifactManifest({
 });
 
 assert.equal(manifest.status, "defi-artifact-manifest-ready");
-assert.equal(manifest.summary.artifacts, 6);
-assert.equal(manifest.summary.readyArtifacts, 6);
+assert.equal(manifest.summary.artifacts, 7);
+assert.equal(manifest.summary.readyArtifacts, 7);
 assert.equal(manifest.summary.problems, 0);
 assert.equal(manifest.summary.liveProductClaims, 0);
 assert.equal(manifest.summary.custodyActions, 0);
@@ -27,6 +28,7 @@ assert.equal(manifest.summary.secretFindings, 0);
 assert.ok(manifest.rows.every((row) => row.ready && row.problems.length === 0));
 assert.ok(manifest.commands.includes("npm run defi:multi-wallet"));
 assert.ok(manifest.commands.includes("npm run defi:accepted-activity"));
+assert.ok(manifest.commands.includes("npm run playground:plan"));
 
 const badManifest = buildDefiArtifactManifest({
   artifacts: {

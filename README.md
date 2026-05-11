@@ -89,6 +89,7 @@ npm run demo:operator-refresh
 | DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | Full DeFi benchmark | `artifacts/full-defi-benchmark.json` |
+| Real TN12 playground plan | `artifacts/playground-plan.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |

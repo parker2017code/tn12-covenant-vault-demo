@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-scenario-reducer/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T16:26:44.820Z",
+  "generatedAt": "2026-05-11T18:04:12.973Z",
   "status": "scenario-reducer-ready-not-custody",
   "enforcement": "INDEXER_DERIVED",
   "summary": {
@@ -11,12 +11,16 @@
     "swapRows": 2,
     "oracleRows": 2,
     "lendingRows": 3,
+    "balanceRows": 9,
+    "blockedBalanceRows": 3,
     "duplicateCandidateRows": 1,
     "missingCandidateRows": 1,
     "custodyPromotionCandidateRows": 2,
-    "negativeRows": 4,
-    "blockedNegativeRows": 4,
+    "withdrawalCandidateRows": 2,
+    "negativeRows": 6,
+    "blockedNegativeRows": 6,
     "custodyPromotions": 0,
+    "balanceCustodyPromotions": 0,
     "liveProductClaims": 0
   },
   "state": {
@@ -134,6 +138,95 @@
           "stale oracle blocks position"
         ]
       }
+    ],
+    "balances": [
+      {
+        "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "5600000000",
+        "balanceTkas": "56",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "1900000000",
+        "balanceTkas": "19",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "-1000000000",
+        "balanceTkas": "-10",
+        "promotionState": "blocked-review",
+        "custodyAction": false,
+        "problems": [
+          "negative net delta from selected transfer rows"
+        ]
+      },
+      {
+        "address": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "-1000000000",
+        "balanceTkas": "-10",
+        "promotionState": "blocked-review",
+        "custodyAction": false,
+        "problems": [
+          "negative net delta from selected transfer rows"
+        ]
+      },
+      {
+        "address": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "1500000000",
+        "balanceTkas": "15",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "-12500000000",
+        "balanceTkas": "-125",
+        "promotionState": "blocked-review",
+        "custodyAction": false,
+        "problems": [
+          "negative net delta from selected transfer rows"
+        ]
+      },
+      {
+        "address": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "2200000000",
+        "balanceTkas": "22",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "1800000000",
+        "balanceTkas": "18",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "1500000000",
+        "balanceTkas": "15",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      }
     ]
   },
   "negativeRows": [
@@ -168,13 +261,34 @@
       "sourcePromotionState": "blocked-review",
       "status": "blocked",
       "reason": "review state cannot be promoted to custody without external signer and settlement evidence"
+    },
+    {
+      "id": "pool-over-withdraw-001",
+      "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "kind": "withdrawal-candidate",
+      "requestedAction": "withdraw-execute",
+      "requestedSompi": "999999999999999",
+      "balanceSompi": "5600000000",
+      "status": "blocked",
+      "reason": "withdrawal cannot execute from reducer balance without signer, settlement, and spend evidence"
+    },
+    {
+      "id": "unknown-wallet-withdraw-001",
+      "address": "kaspatest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+      "kind": "withdrawal-candidate",
+      "requestedAction": "withdraw-execute",
+      "requestedSompi": "100000000",
+      "balanceSompi": "0",
+      "status": "blocked",
+      "reason": "withdrawal cannot execute from reducer balance without signer, settlement, and spend evidence"
     }
   ],
   "promotionRule": [
     "Only accepted-indexed references can enter review app state.",
     "Scenario rows with min-output failure, stale oracle data, or liquidation-only status stay blocked.",
+    "Accepted local-key transfer balances are review state only; balances do not authorize withdrawals.",
     "Review-state promotion never means custody promotion; custody candidates are blocked until external signer, settlement, and live replay evidence exist.",
-    "Duplicate and missing scenario references are blocked before UI or operator state can use them."
+    "Duplicate, missing, impossible-withdrawal, and over-balance rows are blocked before UI or operator state can use them."
   ],
   "boundaries": [
     "This reducer promotes review-only app state from deterministic DeFi scenarios.",

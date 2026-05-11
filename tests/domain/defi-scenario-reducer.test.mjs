@@ -3,8 +3,10 @@ import { readFile } from "node:fs/promises";
 import { buildDefiScenarioReducer } from "../../src/defiScenarioReducer.mjs";
 
 const scenario = await readJson("artifacts/defi-scenario-simulation.json");
+const acceptedActivity = await readJson("artifacts/defi-accepted-activity-ledger.json");
 const reducer = buildDefiScenarioReducer({
   scenario,
+  acceptedActivity,
   duplicateCandidates: [
     {
       id: "swap-ok-001",
@@ -29,6 +31,20 @@ const reducer = buildDefiScenarioReducer({
       requestedAction: "custody-promotion"
     }
   ],
+  withdrawalCandidates: [
+    {
+      id: "pool-over-withdraw-001",
+      address: acceptedActivity.pool.address,
+      amountSompi: "999999999999999",
+      requestedAction: "withdraw-execute"
+    },
+    {
+      id: "unknown-wallet-withdraw-001",
+      address: "kaspatest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+      amountSompi: "100000000",
+      requestedAction: "withdraw-execute"
+    }
+  ],
   generatedAt: "2026-05-11T00:00:00.000Z"
 });
 
@@ -40,9 +56,12 @@ assert.equal(reducer.summary.blockedScenarioRows, 4);
 assert.equal(reducer.summary.swapRows, 2);
 assert.equal(reducer.summary.oracleRows, 2);
 assert.equal(reducer.summary.lendingRows, 3);
-assert.equal(reducer.summary.negativeRows, 4);
-assert.equal(reducer.summary.blockedNegativeRows, 4);
+assert.equal(reducer.summary.balanceRows, 9);
+assert.equal(reducer.summary.blockedBalanceRows, 3);
+assert.equal(reducer.summary.negativeRows, 6);
+assert.equal(reducer.summary.blockedNegativeRows, 6);
 assert.equal(reducer.summary.custodyPromotions, 0);
+assert.equal(reducer.summary.balanceCustodyPromotions, 0);
 assert.equal(reducer.summary.liveProductClaims, 0);
 
 const okSwap = reducer.state.swaps.find((row) => row.id === "swap-ok-001");
@@ -72,16 +91,31 @@ const staleLending = reducer.state.lendingPositions.find((row) => row.id === "le
 assert.equal(staleLending.promotionState, "blocked-review");
 assert.ok(staleLending.problems.includes("stale oracle blocks position"));
 
+const poolBalance = reducer.state.balances.find((row) => row.address === acceptedActivity.pool.address);
+assert.equal(poolBalance.balanceTkas, "56");
+assert.equal(poolBalance.custodyAction, false);
+assert.equal(poolBalance.promotionState, "review-state-promoted");
+
+const partialFundingDelta = reducer.state.balances.find((row) => row.balanceTkas === "-125");
+assert.equal(partialFundingDelta.promotionState, "blocked-review");
+assert.ok(partialFundingDelta.problems.includes("negative net delta from selected transfer rows"));
+
 assert.ok(reducer.negativeRows.some((row) => row.kind === "duplicate-candidate" && row.status === "blocked"));
 assert.ok(reducer.negativeRows.some((row) => row.kind === "missing-reference-candidate" && row.status === "blocked"));
 assert.equal(
   reducer.negativeRows.filter((row) => row.kind === "custody-promotion-candidate" && row.status === "blocked").length,
   2
 );
+assert.equal(
+  reducer.negativeRows.filter((row) => row.kind === "withdrawal-candidate" && row.status === "blocked").length,
+  2
+);
 
 const artifact = await readJson("artifacts/defi-scenario-reducer.json");
 assert.equal(artifact.status, reducer.status);
 assert.equal(artifact.summary.stateRows, reducer.summary.stateRows);
+assert.equal(artifact.summary.balanceRows, reducer.summary.balanceRows);
+assert.equal(artifact.summary.blockedBalanceRows, reducer.summary.blockedBalanceRows);
 assert.equal(artifact.summary.blockedNegativeRows, reducer.summary.blockedNegativeRows);
 
 console.log("DeFi scenario reducer tests passed.");
