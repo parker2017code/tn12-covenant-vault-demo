@@ -19,7 +19,9 @@ const transferPaths = [
   "artifacts/tn12-defi-user-05-pool-deposit-001-evidence.json",
   "artifacts/tn12-defi-pool-swap-payout-user-01-evidence.json",
   "artifacts/tn12-defi-pool-withdraw-payout-user-02-evidence.json",
-  "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json"
+  "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json",
+  "artifacts/playground-user-a-pool-deposit-evidence.json",
+  "artifacts/playground-pool-user-b-payout-evidence.json"
 ];
 const transferEvidenceByPath = Object.fromEntries(await Promise.all(
   transferPaths.map(async (path) => [path, await readOptionalJson(path)])
@@ -29,6 +31,10 @@ const ledger = buildDefiAcceptedActivityLedger({
   payloadEvidenceByPath,
   transferEvidenceByPath,
   poolAddress: poolWallet.address,
+  poolAddresses: [
+    poolWallet.address,
+    "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg"
+  ],
   generatedAt: "2026-05-11T00:00:00.000Z"
 });
 
@@ -36,9 +42,9 @@ assert.equal(ledger.schema, "tn12-defi-accepted-activity-ledger/v1");
 assert.equal(ledger.status, "accepted-activity-ledger-ready");
 assert.equal(ledger.enforcement, "LOCAL_KEY_CUSTODY_TEST");
 assert.ok(ledger.summary.acceptedReceiptRows >= 7);
-assert.equal(ledger.summary.acceptedTransferRows, 16);
-assert.equal(ledger.summary.poolDeposits, 8);
-assert.equal(ledger.summary.poolPayouts, 3);
+assert.equal(ledger.summary.acceptedTransferRows, 18);
+assert.equal(ledger.summary.poolDeposits, 9);
+assert.equal(ledger.summary.poolPayouts, 4);
 assert.equal(ledger.summary.externalSignerClaims, 0);
 assert.equal(ledger.summary.autonomousCustodyClaims, 0);
 assert.ok(ledger.transferRows.every((row) => row.accepted && row.matches));

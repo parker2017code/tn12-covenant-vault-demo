@@ -19,7 +19,9 @@ const transferPaths = [
   "artifacts/tn12-defi-user-05-pool-deposit-001-evidence.json",
   "artifacts/tn12-defi-pool-swap-payout-user-01-evidence.json",
   "artifacts/tn12-defi-pool-withdraw-payout-user-02-evidence.json",
-  "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json"
+  "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json",
+  "artifacts/playground-user-a-pool-deposit-evidence.json",
+  "artifacts/playground-pool-user-b-payout-evidence.json"
 ];
 const transferEvidenceByPath = Object.fromEntries(await Promise.all(
   transferPaths.map(async (path) => [path, await readOptionalJson(path)])
@@ -28,7 +30,11 @@ const ledger = buildDefiAcceptedActivityLedger({
   payloadEvents,
   payloadEvidenceByPath,
   transferEvidenceByPath,
-  poolAddress: poolWallet.address
+  poolAddress: poolWallet.address,
+  poolAddresses: [
+    poolWallet.address,
+    "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg"
+  ]
 });
 
 await mkdir("artifacts", { recursive: true });

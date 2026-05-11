@@ -6,19 +6,22 @@ export function buildDefiAcceptedActivityLedger({
   payloadEvidenceByPath = {},
   transferEvidenceByPath = {},
   poolAddress = "",
+  poolAddresses = [],
   generatedAt = new Date().toISOString()
 } = {}) {
+  const knownPoolAddresses = new Set([poolAddress, ...poolAddresses].filter(Boolean));
   const receiptRows = (payloadEvents.events || [])
     .filter((event) => /defi/i.test(event.label || ""))
     .map((event) => receiptRow(event, payloadEvidenceByPath[event.outPath]))
     .filter(Boolean);
   const transferRows = Object.entries(transferEvidenceByPath)
-    .flatMap(([path, evidence]) => transferRowsFromEvidence(path, evidence, poolAddress))
+    .flatMap(([path, evidence]) => transferRowsFromEvidence(path, evidence, knownPoolAddresses))
     .filter(Boolean);
   const acceptedTransferRows = transferRows.filter((row) => row.accepted && row.matches);
   const balances = reduceBalances(acceptedTransferRows);
   const pool = {
     address: poolAddress,
+    addresses: [...knownPoolAddresses],
     depositsTkas: sompiToTkas(sumSompi(acceptedTransferRows.filter((row) => row.kind === POOL_DEPOSIT))),
     payoutsTkas: sompiToTkas(sumSompi(acceptedTransferRows.filter((row) => row.kind === POOL_PAYOUT))),
     netTkas: sompiToTkas(
@@ -77,11 +80,11 @@ function receiptRow(event, evidence = {}) {
   };
 }
 
-function transferRowsFromEvidence(path, evidence = {}, poolAddress = "") {
+function transferRowsFromEvidence(path, evidence = {}, poolAddresses = new Set()) {
   if (evidence.schema === "tn12-multi-p2pk-transfer-evidence/v1") {
     return (evidence.outputs || [])
       .filter((output) => output.label !== "change")
-      .map((output) => transferRowFromOutput(path, evidence, output, poolAddress));
+      .map((output) => transferRowFromOutput(path, evidence, output, poolAddresses));
   }
 
   return [transferRowFromOutput(path, evidence, {
@@ -92,17 +95,17 @@ function transferRowsFromEvidence(path, evidence = {}, poolAddress = "") {
     },
     observed: evidence.output?.observed || null,
     matches: evidence.output?.amountMatches !== false && evidence.output?.addressMatches !== false && evidence.output?.matches !== false
-  }, poolAddress)];
+  }, poolAddresses)];
 }
 
-function transferRowFromOutput(path, evidence, output, poolAddress) {
+function transferRowFromOutput(path, evidence, output, poolAddresses) {
   const to = output.expected?.address || output.observed?.address || "";
   const from = evidence.source?.address || "";
   const amountSompi = BigInt(output.expected?.amountSompi || output.observed?.amountSompi || 0);
   return {
     path,
     label: output.label || labelFromPath(path),
-    kind: classifyTransfer({ path, to, from, poolAddress }),
+    kind: classifyTransfer({ path, to, from, poolAddresses }),
     txid: evidence.txid || "",
     accepted: evidence.accepted === true,
     matches: output.matches === true,
@@ -114,10 +117,10 @@ function transferRowFromOutput(path, evidence, output, poolAddress) {
   };
 }
 
-function classifyTransfer({ path, to, from, poolAddress }) {
+function classifyTransfer({ path, to, from, poolAddresses }) {
   if (/funding/.test(path)) return "user-funding";
-  if (to === poolAddress) return POOL_DEPOSIT;
-  if (from === poolAddress) return POOL_PAYOUT;
+  if (poolAddresses.has(to)) return POOL_DEPOSIT;
+  if (poolAddresses.has(from)) return POOL_PAYOUT;
   return "transfer";
 }
 

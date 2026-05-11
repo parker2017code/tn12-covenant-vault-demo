@@ -1,14 +1,14 @@
 {
   "schema": "tn12-playground-plan/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:04:13.959Z",
+  "generatedAt": "2026-05-11T18:34:54.821Z",
   "status": "playground-plan-ready",
   "target": "real-tn12-session-playground",
   "summary": {
     "roles": 6,
     "guidedActions": 7,
     "acceptedPayloadEventsAvailable": 40,
-    "acceptedTransferRowsAvailable": 16,
+    "acceptedTransferRowsAvailable": 18,
     "benchmarkPercent": 60,
     "sharedWalletPrivateKeys": 0,
     "committedSecrets": 0,

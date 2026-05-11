@@ -12,7 +12,7 @@ This file is the short queue. It does not replace the generated artifacts; it po
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 - The current full-DeFi repo-local benchmark is `60%`: six of ten rails are complete, with external signer, live rollback evidence, AMM/lending/liquidation custody execution, and mainnet activation still incomplete.
-- The current playground funding run is accepted on TN12: `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5` funded six fresh role wallets and matched every output.
+- The current playground run has three accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, user-to-pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, and pool-to-user payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
 
 ## Autonomous Grand Plan Before User Input
 

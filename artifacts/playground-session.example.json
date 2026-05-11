@@ -1,13 +1,13 @@
 {
   "schema": "tn12-playground-session/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:19:17.586Z",
+  "generatedAt": "2026-05-11T18:34:53.512Z",
   "status": "playground-session-public-state-ready",
   "summary": {
     "roles": 6,
     "fundedRoles": 6,
-    "txids": 1,
-    "acceptedTxids": 1,
+    "txids": 3,
+    "acceptedTxids": 3,
     "privateKeysIncluded": 0,
     "committedSecrets": 0,
     "liveProductClaims": 0
@@ -66,6 +66,18 @@
     {
       "label": "playground role funding",
       "txid": "85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5",
+      "accepted": true,
+      "enforcement": "LOCAL_KEY_CUSTODY_TEST"
+    },
+    {
+      "label": "playground user-a pool deposit",
+      "txid": "83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c",
+      "accepted": true,
+      "enforcement": "LOCAL_KEY_CUSTODY_TEST"
+    },
+    {
+      "label": "playground pool user-b payout",
+      "txid": "8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78",
       "accepted": true,
       "enforcement": "LOCAL_KEY_CUSTODY_TEST"
     }

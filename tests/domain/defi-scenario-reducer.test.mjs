@@ -56,8 +56,8 @@ assert.equal(reducer.summary.blockedScenarioRows, 4);
 assert.equal(reducer.summary.swapRows, 2);
 assert.equal(reducer.summary.oracleRows, 2);
 assert.equal(reducer.summary.lendingRows, 3);
-assert.equal(reducer.summary.balanceRows, 9);
-assert.equal(reducer.summary.blockedBalanceRows, 3);
+assert.equal(reducer.summary.balanceRows, 12);
+assert.equal(reducer.summary.blockedBalanceRows, 4);
 assert.equal(reducer.summary.negativeRows, 6);
 assert.equal(reducer.summary.blockedNegativeRows, 6);
 assert.equal(reducer.summary.custodyPromotions, 0);
@@ -99,6 +99,14 @@ assert.equal(poolBalance.promotionState, "review-state-promoted");
 const partialFundingDelta = reducer.state.balances.find((row) => row.balanceTkas === "-125");
 assert.equal(partialFundingDelta.promotionState, "blocked-review");
 assert.ok(partialFundingDelta.problems.includes("negative net delta from selected transfer rows"));
+
+const playgroundPoolBalance = reducer.state.balances.find((row) => row.address === "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg");
+assert.equal(playgroundPoolBalance.balanceTkas, "1");
+assert.equal(playgroundPoolBalance.promotionState, "review-state-promoted");
+
+const playgroundUserB = reducer.state.balances.find((row) => row.address === "kaspatest:qps6e65f6567rsexvulkkh5yvqa497xu0grnw463dqx2knft6s9muelu4j7dt");
+assert.equal(playgroundUserB.balanceTkas, "2");
+assert.equal(playgroundUserB.promotionState, "review-state-promoted");
 
 assert.ok(reducer.negativeRows.some((row) => row.kind === "duplicate-candidate" && row.status === "blocked"));
 assert.ok(reducer.negativeRows.some((row) => row.kind === "missing-reference-candidate" && row.status === "blocked"));

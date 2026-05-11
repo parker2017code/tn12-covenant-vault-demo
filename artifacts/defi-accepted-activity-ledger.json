@@ -1,16 +1,16 @@
 {
   "schema": "tn12-defi-accepted-activity-ledger/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:04:12.645Z",
+  "generatedAt": "2026-05-11T18:34:53.846Z",
   "status": "accepted-activity-ledger-ready",
   "enforcement": "LOCAL_KEY_CUSTODY_TEST",
   "summary": {
     "acceptedReceiptRows": 7,
-    "acceptedTransferRows": 16,
-    "poolDeposits": 8,
-    "poolPayouts": 3,
-    "participantAddresses": 9,
-    "poolNetTkas": "56",
+    "acceptedTransferRows": 18,
+    "poolDeposits": 9,
+    "poolPayouts": 4,
+    "participantAddresses": 12,
+    "poolNetTkas": "57",
     "liveProductClaims": 0,
     "externalSignerClaims": 0,
     "autonomousCustodyClaims": 0,
@@ -18,9 +18,13 @@
   },
   "pool": {
     "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
-    "depositsTkas": "70",
-    "payoutsTkas": "14",
-    "netTkas": "56"
+    "addresses": [
+      "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg"
+    ],
+    "depositsTkas": "73",
+    "payoutsTkas": "16",
+    "netTkas": "57"
   },
   "receiptRows": [
     {
@@ -309,6 +313,32 @@
       "amountTkas": "4",
       "amountSompi": "400000000",
       "acceptingBlockBlueScore": 8937412
+    },
+    {
+      "path": "artifacts/playground-user-a-pool-deposit-evidence.json",
+      "label": "playground-user-a-pool-deposit-evidence",
+      "kind": "pool-deposit",
+      "txid": "83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qq3zk3cjp8tnzpduk69586qj8jkr3zxfezk2c2mew7r5edsvjfq4vwspyz9wr",
+      "to": "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg",
+      "amountTkas": "3",
+      "amountSompi": "300000000",
+      "acceptingBlockBlueScore": 9002902
+    },
+    {
+      "path": "artifacts/playground-pool-user-b-payout-evidence.json",
+      "label": "playground-pool-user-b-payout-evidence",
+      "kind": "pool-payout",
+      "txid": "8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg",
+      "to": "kaspatest:qps6e65f6567rsexvulkkh5yvqa497xu0grnw463dqx2knft6s9muelu4j7dt",
+      "amountTkas": "2",
+      "amountSompi": "200000000",
+      "acceptingBlockBlueScore": 9005352
     }
   ],
   "balances": [
@@ -356,6 +386,21 @@
       "address": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf",
       "netTkas": "15",
       "netSompi": "1500000000"
+    },
+    {
+      "address": "kaspatest:qq3zk3cjp8tnzpduk69586qj8jkr3zxfezk2c2mew7r5edsvjfq4vwspyz9wr",
+      "netTkas": "-3",
+      "netSompi": "-300000000"
+    },
+    {
+      "address": "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg",
+      "netTkas": "1",
+      "netSompi": "100000000"
+    },
+    {
+      "address": "kaspatest:qps6e65f6567rsexvulkkh5yvqa497xu0grnw463dqx2knft6s9muelu4j7dt",
+      "netTkas": "2",
+      "netSompi": "200000000"
     }
   ],
   "problems": [],

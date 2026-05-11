@@ -1,10 +1,12 @@
 import { fetchJson } from "../dataLoader.mjs";
-import { escapeHtml } from "../formatters.mjs";
+import { escapeHtml, shortAddress, shortTxid } from "../formatters.mjs";
 
 export async function renderPlaygroundExplorer(documentRef = document) {
   const summaryNode = documentRef.querySelector("#playground-summary");
+  const levelsNode = documentRef.querySelector("#playground-levels");
   const rolesNode = documentRef.querySelector("#playground-roles");
   const sessionNode = documentRef.querySelector("#playground-session");
+  const txMapNode = documentRef.querySelector("#playground-tx-map");
   const actionsNode = documentRef.querySelector("#playground-actions");
   const rulesNode = documentRef.querySelector("#playground-rules");
   const flowNode = documentRef.querySelector("#playground-flow");
@@ -14,13 +16,15 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   if (!summaryNode || !rolesNode || !actionsNode || !rulesNode || !flowNode) return;
 
   try {
-    const [plan, actions, reducer, activity, session, funding] = await Promise.all([
+    const [plan, actions, reducer, activity, session, funding, deposit, payout] = await Promise.all([
       fetchJson("artifacts/playground-plan.json"),
       fetchJson("artifacts/playground-actions.json"),
       fetchJson("artifacts/defi-scenario-reducer.json"),
       fetchJson("artifacts/defi-accepted-activity-ledger.json"),
       fetchJson("artifacts/playground-session.example.json"),
-      fetchJson("artifacts/playground-funding-evidence.json")
+      fetchJson("artifacts/playground-funding-evidence.json"),
+      fetchJson("artifacts/playground-user-a-pool-deposit-evidence.json"),
+      fetchJson("artifacts/playground-pool-user-b-payout-evidence.json")
     ]);
     summaryNode.innerHTML = `
       ${metric("Roles", plan.summary.roles, "Throwaway TN12 session roles.")}
@@ -30,28 +34,46 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}
       ${metric("Benchmark", `${plan.summary.benchmarkPercent}%`, "Current repo-local full-DeFi benchmark.")}
     `;
+    if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, payout });
     rolesNode.innerHTML = plan.roles.map((role) => `
       <article>
         <span>${escapeHtml(role.id)} · ${escapeHtml(role.suggestedFundingTkas)} tKAS</span>
         <strong>${escapeHtml(role.label)}</strong>
         <p>${escapeHtml(role.purpose)}</p>
+        <p><a href="https://tn12.kaspa.stream/addresses/${escapeHtml(role.address)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortAddress(role.address || ""))}</code></a></p>
         <small>${escapeHtml(role.privateKeyPolicy)}</small>
       </article>
     `).join("");
     if (sessionNode) {
       sessionNode.innerHTML = `
-        <article>
+        <article class="playground-flow-card">
           <span>${escapeHtml(funding.status)} · ${escapeHtml(funding.accepted ? "accepted" : "review")}</span>
           <strong>${escapeHtml(session.summary.fundedRoles)} funded roles</strong>
-          <p><code>${escapeHtml(funding.txid)}</code></p>
+          <p>${txLink(funding.txid)}</p>
         </article>
-        <article>
+        <article class="playground-flow-card">
           <span>Outputs matched</span>
           <strong>${escapeHtml(funding.outputs.filter((row) => row.matches).length)} / ${escapeHtml(funding.outputs.length)}</strong>
           <p>Each role output matched expected amount and address on TN12.</p>
         </article>
+        <article class="playground-flow-card">
+          <span>${escapeHtml(deposit.status)} · ${escapeHtml(deposit.accepted ? "accepted" : "review")}</span>
+          <strong>${escapeHtml(deposit.payment.amountTkas)} TKAS pool deposit</strong>
+          <p>${txLink(deposit.txid)}</p>
+        </article>
+        <article class="playground-flow-card">
+          <span>${escapeHtml(payout.status)} · ${escapeHtml(payout.accepted ? "accepted" : "review")}</span>
+          <strong>${escapeHtml(payout.payment.amountTkas)} TKAS pool payout</strong>
+          <p>${txLink(payout.txid)}</p>
+        </article>
+        <article class="playground-flow-card flow-wide">
+          <span>What happened</span>
+          <strong>fund roles -> user deposit -> pool payout -> replay balances</strong>
+          <p>These are accepted TN12 transfers. The reducer turns them into review state and blocks withdrawals that lack signer/spend evidence.</p>
+        </article>
       `;
     }
+    if (txMapNode) renderTxMap(txMapNode, { funding, deposit, payout });
     actionsNode.innerHTML = actions.actionRows.map((action) => `
       <article>
         <span>${escapeHtml(action.enforcement)} · ${escapeHtml(action.ready ? "ready" : "needs funding")}</span>
@@ -70,6 +92,48 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   } catch (error) {
     summaryNode.innerHTML = `<article><span>Load error</span><strong>Playground plan unavailable</strong><p>${escapeHtml(error.message)}</p></article>`;
   }
+}
+
+function renderLevels(node, { activity, session, funding, deposit, payout }) {
+  node.innerHTML = `
+    <article>
+      <span>Beginner</span>
+      <strong>Money moved between test wallets.</strong>
+      <p>One accepted tx funded the roles. Then user A sent ${escapeHtml(deposit.payment.amountTkas)} tKAS to the pool, and the pool sent ${escapeHtml(payout.payment.amountTkas)} tKAS to user B.</p>
+    </article>
+    <article>
+      <span>Crypto-curious</span>
+      <strong>UTXO transfers became replayable app state.</strong>
+      <p>The txids are accepted on TN12. The app reads those accepted rows and derives balances without pretending the reducer controls custody.</p>
+    </article>
+    <article>
+      <span>Kaspa-native</span>
+      <strong>Fast mined ordering plus constrained evidence.</strong>
+      <p>The chain supplies ordering and accepted transaction evidence. The repo layers role labels, receipts, reducers, and blocked-promotion rules on top.</p>
+    </article>
+    <article>
+      <span>Reviewer</span>
+      <strong>${escapeHtml(session.summary.acceptedTxids)} accepted session txs, ${escapeHtml(activity.summary.acceptedTransferRows)} transfer rows.</strong>
+      <p>Check ${txLink(funding.txid)}, ${txLink(deposit.txid)}, and ${txLink(payout.txid)} directly on the TN12 explorer.</p>
+    </article>
+  `;
+}
+
+function renderTxMap(node, { funding, deposit, payout }) {
+  const rows = [
+    ["1", "Fund roles", "Operator source", "Six session wallets", funding.txid],
+    ["2", "Deposit", "User A", "Pool", deposit.txid],
+    ["3", "Payout", "Pool", "User B", payout.txid],
+    ["4", "Replay", "Accepted txids", "Balances + blocked withdrawals", ""]
+  ];
+  node.innerHTML = rows.map(([step, title, from, to, txid]) => `
+    <article>
+      <span>${escapeHtml(step)}</span>
+      <strong>${escapeHtml(title)}</strong>
+      <p>${escapeHtml(from)} -> ${escapeHtml(to)}</p>
+      ${txid ? `<p>${txLink(txid)}</p>` : "<p>Reducer output below.</p>"}
+    </article>
+  `).join("");
 }
 
 function renderReplay({ replaySummaryNode, balancesNode, blockedNode, reducer, activity, actions }) {
@@ -101,4 +165,8 @@ function renderReplay({ replaySummaryNode, balancesNode, blockedNode, reducer, a
 
 function metric(label, value, detail) {
   return `<article><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><p>${escapeHtml(detail)}</p></article>`;
+}
+
+function txLink(txid) {
+  return `<a href="https://tn12.kaspa.stream/txs/${escapeHtml(txid)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(String(txid || "")))}</code></a>`;
 }

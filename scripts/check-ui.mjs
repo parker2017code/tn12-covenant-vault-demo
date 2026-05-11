@@ -60,7 +60,9 @@ try {
   assert.match(playgroundHtml, /id="playground-replay-summary"/);
   assert.match(playgroundHtml, /id="playground-balances"/);
   assert.match(playgroundHtml, /id="playground-blocked"/);
-  assert.match(playgroundHtml, /No shared keys/);
+  assert.match(playgroundHtml, /3 accepted txs/);
+  assert.match(playgroundHtml, /id="playground-levels"/);
+  assert.match(playgroundHtml, /id="playground-tx-map"/);
 
   console.log("UI smoke check passed.");
 } finally {

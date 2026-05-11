@@ -70,16 +70,24 @@ const defiArtifacts = [
   ["artifacts/scheduler-covenant-binding.json", "tn12-scheduler-covenant-binding/v1"],
   ["artifacts/full-defi-benchmark.json", "tn12-full-defi-benchmark/v1"],
   ["artifacts/playground-plan.json", "tn12-playground-plan/v1"],
-  ["artifacts/playground-actions.json", "tn12-playground-actions/v1"]
+  ["artifacts/playground-actions.json", "tn12-playground-actions/v1"],
+  ["artifacts/playground-session.example.json", "tn12-playground-session/v1"],
+  ["artifacts/playground-funding-evidence.json", "tn12-multi-p2pk-transfer-evidence/v1"],
+  ["artifacts/playground-user-a-pool-deposit-evidence.json", "tn12-p2pk-transfer-evidence/v1"],
+  ["artifacts/playground-pool-user-b-payout-evidence.json", "tn12-p2pk-transfer-evidence/v1"]
 ];
 
 for (const [path, schema] of defiArtifacts) {
   const artifact = await readJson(path);
   assert.equal(artifact.schema, schema);
   assert.equal(artifact.network, "kaspa-testnet-12");
-  assert.match(artifact.status, /ready|simulation|review|plan/);
-  assert.equal(artifact.summary.liveProductClaims, 0);
-  assert.equal(artifact.summary.custodyActions ?? artifact.summary.custodyReadyLanes ?? 0, 0);
+  assert.match(artifact.status, /ready|simulation|review|plan|accepted/);
+  if (artifact.summary) {
+    assert.equal(artifact.summary.liveProductClaims, 0);
+    assert.equal(artifact.summary.custodyActions ?? artifact.summary.custodyReadyLanes ?? 0, 0);
+  } else {
+    assert.equal(artifact.accepted, true);
+  }
   assert.doesNotMatch(JSON.stringify(artifact), /"privateKey"\s*:|"mnemonic"\s*:|"seed"\s*:|"secret"\s*:|\.local\/tn12-wallet\.json/i);
 }
 

@@ -5,17 +5,35 @@ const outPath = process.env.OUT || "artifacts/playground-session.example.json";
 const plan = await readJson("artifacts/playground-plan.json");
 const walletsPublicPath = process.env.PLAYGROUND_WALLETS_PUBLIC || "";
 const fundingEvidencePath = process.env.PLAYGROUND_FUNDING_EVIDENCE || "";
+const depositEvidencePath = process.env.PLAYGROUND_DEPOSIT_EVIDENCE || "";
+const payoutEvidencePath = process.env.PLAYGROUND_PAYOUT_EVIDENCE || "";
 const publicWallets = walletsPublicPath ? await readJson(walletsPublicPath) : null;
 const fundingEvidence = fundingEvidencePath ? await readJson(fundingEvidencePath) : null;
+const depositEvidence = depositEvidencePath ? await readJson(depositEvidencePath) : null;
+const payoutEvidence = payoutEvidencePath ? await readJson(payoutEvidencePath) : null;
 const session = buildPlaygroundSession({
   plan,
   publicAddresses: publicWallets ? publicAddressesFromWallets(publicWallets) : defaultPublicAddresses(),
-  txids: fundingEvidence ? [{
-    label: "playground role funding",
-    txid: fundingEvidence.txid,
-    accepted: fundingEvidence.status === "accepted-transfer-matched",
-    enforcement: "LOCAL_KEY_CUSTODY_TEST"
-  }] : []
+  txids: [
+    fundingEvidence ? {
+      label: "playground role funding",
+      txid: fundingEvidence.txid,
+      accepted: fundingEvidence.status === "accepted-transfer-matched",
+      enforcement: "LOCAL_KEY_CUSTODY_TEST"
+    } : null,
+    depositEvidence ? {
+      label: "playground user-a pool deposit",
+      txid: depositEvidence.txid,
+      accepted: depositEvidence.status === "accepted-transfer-matched",
+      enforcement: "LOCAL_KEY_CUSTODY_TEST"
+    } : null,
+    payoutEvidence ? {
+      label: "playground pool user-b payout",
+      txid: payoutEvidence.txid,
+      accepted: payoutEvidence.status === "accepted-transfer-matched",
+      enforcement: "LOCAL_KEY_CUSTODY_TEST"
+    } : null
+  ].filter(Boolean)
 });
 
 await mkdir("artifacts", { recursive: true });

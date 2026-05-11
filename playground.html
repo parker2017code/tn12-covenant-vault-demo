@@ -29,15 +29,23 @@
   <main>
     <section class="hero results-hero">
       <div>
-        <p class="status">Session wallets. Faucet-funded. TN12 only.</p>
-        <h2>Let people try the system with real testnet activity.</h2>
-        <p>The playground path is simple: create fresh role wallets, fund them with tKAS, run guided TN12 actions, verify txids, and replay state. Wallet generation and role funding now have accepted TN12 evidence; guided app actions are the next execution slice.</p>
+        <p class="status">Real TN12 transactions. Clickable evidence.</p>
+        <h2>Watch testnet funds move through app roles.</h2>
+        <p>This page turns the lab into a walkthrough: fresh role wallets get funded, a user deposits into a pool, the pool pays another user, and the reducer turns accepted txids into balances and blocked actions.</p>
       </div>
       <aside class="facts">
-        <span>Safety rule</span>
-        <strong>No shared keys</strong>
-        <p>Users get fresh session wallets. The repo never publishes reusable private keys.</p>
+        <span>Current run</span>
+        <strong>3 accepted txs</strong>
+        <p>Role funding, pool deposit, and pool payout are all explorer-checkable TN12 transactions.</p>
       </aside>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Choose your depth</p>
+        <h2>Same run, different mental models.</h2>
+      </div>
+      <div id="playground-levels" class="playground-level-grid" aria-live="polite"></div>
     </section>
 
     <section class="panel results-panel">
@@ -51,9 +59,10 @@
     <section class="panel results-panel">
       <div class="section-title">
         <p class="eyebrow">Current session</p>
-        <h2>Accepted role funding.</h2>
+        <h2>Accepted tx flow.</h2>
       </div>
       <div id="playground-session" class="results-rails" aria-live="polite"></div>
+      <div id="playground-tx-map" class="playground-tx-map" aria-live="polite"></div>
     </section>
 
     <section id="flow" class="panel results-panel">

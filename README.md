@@ -91,6 +91,8 @@ npm run demo:operator-refresh
 | Full DeFi benchmark | `artifacts/full-defi-benchmark.json` |
 | Real TN12 playground plan | `artifacts/playground-plan.json` |
 | Accepted playground funding | `artifacts/playground-funding-evidence.json` |
+| Accepted playground deposit | `artifacts/playground-user-a-pool-deposit-evidence.json` |
+| Accepted playground payout | `artifacts/playground-pool-user-b-payout-evidence.json` |
 | Current playground session | `artifacts/playground-session.example.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
@@ -114,4 +116,4 @@ npm run playground:wallets
 
 The command writes private TN12 testnet keys under `.local/playground/` and prints public `kaspatest:` addresses to fund with the faucet.
 If the local operator wallet has a current funded UTXO, `npm run playground:funding-draft` builds a local-only multi-output funding draft under `.local/playground/` for those roles.
-The current public session records accepted role funding at txid `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`.
+The current public session records accepted role funding, a user-to-pool deposit, and a pool-to-user payout. Start at `playground.html` for clickable txids and the visual walk-through.
