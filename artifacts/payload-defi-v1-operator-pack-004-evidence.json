@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-11T03:25:07.955Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
+  "accepted": true,
+  "acceptingBlockBlueScore": 8464324,
+  "acceptingBlockTime": 1778469734625,
+  "payload": {
+    "expectedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6f70657261746f722d7061636b2d303034222c2276616c7565223a2270616964222c226e6f7465223a226f70657261746f72207061636b2072656365697074207061746820616674657220636c61696d207469676874656e696e67227d",
+    "observedHex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6f70657261746f722d7061636b2d303034222c2276616c7565223a2270616964222c226e6f7465223a226f70657261746f72207061636b2072656365697074207061746820616674657220636c61696d207469676874656e696e67227d",
+    "bytes": 136,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "order-receipt",
+        "subject": "defi-v1-operator-pack-004",
+        "value": "paid",
+        "note": "operator pack receipt path after claim tightening"
+      },
+      "encoded": {
+        "bytes": 136,
+        "hex": "7b226b696e64223a226f726465722d72656365697074222c227375626a656374223a22646566692d76312d6f70657261746f722d7061636b2d303034222c2276616c7565223a2270616964222c226e6f7465223a226f70657261746f72207061636b2072656365697074207061746820616674657220636c61696d207469676874656e696e67227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "100000000",
+      "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "defi-v1-operator-pack-004",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361"
+}

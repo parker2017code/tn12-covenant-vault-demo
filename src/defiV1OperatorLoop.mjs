@@ -2,6 +2,7 @@ export function buildDefiV1OperatorLoop({
   firstReceipt = {},
   repeatReceipt = {},
   thirdReceipt = null,
+  extraReceipts = [],
   fundedOutpoint = {},
   previousCurrentOutpoint = {},
   thirdPreviousOutpoint = null,
@@ -12,13 +13,15 @@ export function buildDefiV1OperatorLoop({
   const receipts = [
     receiptRow("first-live-receipt", firstReceipt),
     receiptRow("repeat-live-receipt", repeatReceipt),
-    thirdReceipt ? receiptRow("third-live-receipt", thirdReceipt) : null
+    thirdReceipt ? receiptRow("third-live-receipt", thirdReceipt) : null,
+    ...extraReceipts.map((receipt, index) => receiptRow(receipt.id || `extra-live-receipt-${index + 1}`, receipt))
   ].filter(Boolean);
   const acceptedReceipts = receipts.filter((receipt) => receipt.accepted && receipt.payloadMatches);
   const staleOutpoints = [
     outpointRow("initial-funding-spent", fundedOutpoint, firstReceipt),
     outpointRow("first-change-spent", previousCurrentOutpoint, repeatReceipt),
-    thirdReceipt && thirdPreviousOutpoint ? outpointRow("repeat-change-spent", thirdPreviousOutpoint, thirdReceipt) : null
+    thirdReceipt && thirdPreviousOutpoint ? outpointRow("repeat-change-spent", thirdPreviousOutpoint, thirdReceipt) : null,
+    ...extraReceipts.map((receipt, index) => outpointRow(receipt.staleOutpointId || `extra-change-spent-${index + 1}`, receipt.source || {}, receipt))
   ].filter(Boolean);
   const current = {
     txid: currentOutpoint.txid || "",

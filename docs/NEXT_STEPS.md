@@ -9,13 +9,14 @@ This file is the short queue. It does not replace the generated artifacts; it po
 - TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
 - Mainnet deployment readiness is still about `55-60%`.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
+- The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 
 ## Next 5 Tasks
 
 | Order | Task | Why It Matters | Blocked By User? |
 |---|---|---|---|
 | 1 | Keep `operator:refresh` green after every proof/artifact change. | This is the reviewer gate for accepted evidence plus local replay and UI checks. | No |
-| 2 | Route the next local-wallet TN12 spend through the operator receipt pack. | Proves the repo can turn a spend into a reviewer/operator receipt instead of only a raw txid. | No, if funded local test wallet remains available |
+| 2 | Route the next local-wallet TN12 spend through the operator receipt pack. | Proves the repo can turn a spend into a reviewer/operator receipt instead of only a raw txid. | Done for txid `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`; repeatable, not external-signer evidence |
 | 3 | Keep batch-assurance release selected and refund alternates explicitly non-selected. | Prevents accidental double-claim language around the spent pledge set. | No |
 | 4 | Prepare one unsigned external-signer payload receipt request. | Keeps the missing no-local-key signer rail concrete without pretending a wallet already signed it. | No; artifact path is `artifacts/external-signer-payload-request.json` |
 | 5 | Only promote external signer status after a real wallet returns signed tx bytes and TN12 accepts the txid. | This is the main custody boundary for mainnet-style readiness. | Yes, unless a compatible throwaway signer is available |

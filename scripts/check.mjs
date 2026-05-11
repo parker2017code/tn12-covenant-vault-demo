@@ -512,8 +512,8 @@ const provenStatus = buildProvenStatus({
 });
 assert.equal(provenStatus.status, "tn12-demo-proof-ready-mainnet-deferred");
 assert.equal(provenStatus.currentPercent, "53-58%");
-assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 45);
-assert.equal(provenStatus.acceptedEvidence.payloadEvents, 32);
+assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 46);
+assert.equal(provenStatus.acceptedEvidence.payloadEvents, 33);
 assert.equal(provenStatus.readiness.durablePromotionReady, false);
 assert.deepEqual(provenStatus.demoBlockers, []);
 assert.ok(provenStatus.mainnetDeferredBlockers.includes("external signer accepted result missing"));
@@ -535,8 +535,8 @@ const operatorReceiptPack = buildOperatorReceiptPack({
 });
 assert.equal(operatorReceiptPack.status, "operator-receipt-pack-ready");
 assert.equal(operatorReceiptPack.currentPercent, "53-58%");
-assert.equal(operatorReceiptPack.evidence.checkpointRecords, 45);
-assert.equal(operatorReceiptPack.evidence.payloadEvents, 32);
+assert.equal(operatorReceiptPack.evidence.checkpointRecords, 46);
+assert.equal(operatorReceiptPack.evidence.payloadEvents, 33);
 assert.equal(operatorReceiptPack.custody.auctionReadyRows, 2);
 assert.equal(operatorReceiptPack.custody.agentReadyRows, 2);
 assert.ok(operatorReceiptPack.nextCommandPath.every((row) => row.ready));
@@ -1021,6 +1021,8 @@ assert.ok(defiLoopArtifact.staleOutpointGuards.every((outpoint) => outpoint.cons
 assert.ok(defiLoopArtifact.currentSpendableOutpoint.spendable);
 const optionalThirdReceipt = await readOptionalJson("../artifacts/payload-defi-v1-third-receipt-evidence.json");
 const optionalThirdDraft = await readOptionalJson("../artifacts/signed-drafts/tn12-defi-v1-third-receipt.json");
+const optionalFourthReceipt = await readOptionalJson("../artifacts/payload-defi-v1-operator-pack-004-evidence.json");
+const optionalFourthDraft = await readOptionalJson("../artifacts/signed-drafts/tn12-defi-v1-operator-pack-004.json");
 const rebuiltDefiLoop = buildDefiV1OperatorLoop({
   firstReceipt: {
     ...JSON.parse(await readFile(new URL("../artifacts/payload-defi-v1-live-receipt-evidence.json", import.meta.url), "utf8")),
@@ -1031,6 +1033,16 @@ const rebuiltDefiLoop = buildDefiV1OperatorLoop({
     source: JSON.parse(await readFile(new URL("../artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json", import.meta.url), "utf8")).source
   },
   thirdReceipt: optionalThirdReceipt && optionalThirdDraft ? { ...optionalThirdReceipt, source: optionalThirdDraft.source } : null,
+  extraReceipts: [
+    optionalFourthReceipt && optionalFourthDraft
+      ? {
+          id: "operator-pack-receipt-004",
+          staleOutpointId: "third-change-spent",
+          ...optionalFourthReceipt,
+          source: optionalFourthDraft.source
+        }
+      : null
+  ].filter(Boolean),
   fundedOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-funded-outpoint.json", import.meta.url), "utf8")),
   previousCurrentOutpoint: JSON.parse(await readFile(new URL("../artifacts/tn12-defi-v1-first-change-outpoint.json", import.meta.url), "utf8")),
   thirdPreviousOutpoint: await readOptionalJson("../artifacts/tn12-defi-v1-current-outpoint-before-third.json"),

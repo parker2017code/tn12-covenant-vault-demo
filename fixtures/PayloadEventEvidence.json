@@ -161,6 +161,11 @@
       "label": "Batch assurance release plan",
       "draftPath": "artifacts/signed-drafts/payload-batch-release-plan.json",
       "outPath": "artifacts/payload-batch-release-plan-evidence.json"
+    },
+    {
+      "label": "DeFi v1 operator pack receipt 004",
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-operator-pack-004.json",
+      "outPath": "artifacts/payload-defi-v1-operator-pack-004-evidence.json"
     }
   ]
 }

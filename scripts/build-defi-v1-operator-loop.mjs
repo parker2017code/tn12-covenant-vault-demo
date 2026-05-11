@@ -12,6 +12,8 @@ const [
   repeatDraft,
   thirdReceipt,
   thirdDraft,
+  fourthReceipt,
+  fourthDraft,
   fundedOutpoint,
   previousCurrentOutpoint,
   thirdPreviousOutpoint,
@@ -24,6 +26,8 @@ const [
   readJson("artifacts/signed-drafts/tn12-defi-v1-repeat-receipt.json"),
   readJson("artifacts/payload-defi-v1-third-receipt-evidence.json").catch(() => null),
   readJson("artifacts/signed-drafts/tn12-defi-v1-third-receipt.json").catch(() => null),
+  readJson("artifacts/payload-defi-v1-operator-pack-004-evidence.json").catch(() => null),
+  readJson("artifacts/signed-drafts/tn12-defi-v1-operator-pack-004.json").catch(() => null),
   readJson("artifacts/tn12-defi-v1-funded-outpoint.json"),
   readJson("artifacts/tn12-defi-v1-current-outpoint-before-repeat.json").catch(() => readJson("artifacts/tn12-defi-v1-first-change-outpoint.json")),
   readJson("artifacts/tn12-defi-v1-current-outpoint-before-third.json").catch(() => null),
@@ -34,6 +38,16 @@ const loop = buildDefiV1OperatorLoop({
   firstReceipt: { ...firstReceipt, source: firstDraft.source },
   repeatReceipt: { ...repeatReceipt, source: repeatDraft.source },
   thirdReceipt: thirdReceipt && thirdDraft ? { ...thirdReceipt, source: thirdDraft.source } : null,
+  extraReceipts: [
+    fourthReceipt && fourthDraft
+      ? {
+          id: "operator-pack-receipt-004",
+          staleOutpointId: "third-change-spent",
+          ...fourthReceipt,
+          source: fourthDraft.source
+        }
+      : null
+  ].filter(Boolean),
   fundedOutpoint,
   previousCurrentOutpoint,
   thirdPreviousOutpoint,

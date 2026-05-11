@@ -1,7 +1,7 @@
 {
   "schema": "tn12-virtual-chain-endpoint-runbook/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T02:48:44.694Z",
+  "generatedAt": "2026-05-11T03:24:48.740Z",
   "status": "endpoint-runbook-live-tested-no-promotion",
   "summary": {
     "endpointConfigured": false,

@@ -8,7 +8,7 @@ This is the concise reading of the repo. The useful core is TN12 evidence, debug
 
 - Seven original TN12 covenant spends were accepted: vault recovery, vault delayed withdrawal, assurance release, assurance refund, escrow release, escrow DAA-score refund, and escrow mutual cancel.
 - Seven role-separated positive paths were accepted after the repo stopped using one saved wallet for every role: vault recovery/withdrawal, assurance release/refund, and escrow release/refund/cancel.
-- Twenty-six TN12 JSON wRPC payload events were accepted and matched by the app-state indexer.
+- Thirty-three TN12 JSON wRPC payload events were accepted and matched by the app-state indexer.
 - One batch-assurance pledge funding transaction was accepted with three amount-matched outputs: 45, 35, and 20 TKAS. Those outputs now satisfy the custody-import gate.
 - The enforcement matrix is useful because it says which claims are script-enforced, planner/indexer, wallet-policy, simulation, documentation, or research.
 

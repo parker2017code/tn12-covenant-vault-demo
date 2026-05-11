@@ -5,6 +5,8 @@ Reviewed: 2026-05-10
 Current readiness: about 55-60% mainnet deployment readiness.
 
 What changed in this pass:
+- Added one local-wallet operator-pack payload receipt accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
+- Payload evidence is now 33 accepted events and 46 checkpointed records.
 - Live TN12 replay overlap now exists from a chain-block anchor inside the checkpoint band.
 - Batch-assurance release is accepted and indexed; refund paths remain non-selected for that spent pledge set.
 - Mainnet readiness docs now separate proof-core progress from deployment readiness.
