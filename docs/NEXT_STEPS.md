@@ -47,6 +47,10 @@ This queue is intentionally larger than one commit. It is the current batch to e
 | 9 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
 | 10 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
 | 11 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
+| 12 | Live playground v1. | `playground.html` creates session wallets, displays faucet funding, runs guided real TN12 actions, verifies txids, and exports public-address/txid state only. | No |
+| 13 | Results/readability pass. | Keep pages useful for beginners and builders without repeating defensive caveats. One status label and one short boundary per section. | No |
+| 14 | App UI modularization. | Continue moving page-specific renderers out of `app.js`, especially results and playground surfaces. | No |
+| 15 | Actual external-wallet path. | Convert request templates into a wallet-consumable round trip, validate signed bytes, submit, and replay accepted txid. | Final proof needs user/wallet |
 
 ## Current Reviewer-Hardening Queue
 

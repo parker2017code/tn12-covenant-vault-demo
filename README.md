@@ -102,4 +102,4 @@ npm run demo:operator-refresh
 npm run serve
 ```
 
-Open `index.html` for the proof/reviewer page. Open `lab.html` for the full builder workbench. Open `results.html` for the artifact-backed interactive results explainer.
+Open `index.html` for the proof/reviewer page. Open `results.html` for the artifact-backed results explainer. Open `playground.html` for the role/faucet playground plan. Open `lab.html` for the full builder workbench.

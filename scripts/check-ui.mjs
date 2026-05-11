@@ -17,6 +17,9 @@ try {
   const resultsResponse = await fetch(`${url}results.html`);
   assert.equal(resultsResponse.ok, true, "Failed to load results.html");
   const resultsHtml = await resultsResponse.text();
+  const playgroundResponse = await fetch(`${url}playground.html`);
+  assert.equal(playgroundResponse.ok, true, "Failed to load playground.html");
+  const playgroundHtml = await playgroundResponse.text();
   const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
   const checkpoint = JSON.parse(await readFile("artifacts/checkpointed-accepted-index.json", "utf8"));
 
@@ -49,6 +52,12 @@ try {
   assert.match(resultsHtml, /id="results-rails"/);
   assert.match(resultsHtml, /id="x-post-draft"/);
   assert.match(resultsHtml, /Safe playground design/);
+  assert.match(resultsHtml, /href="playground\.html"/);
+  assert.match(playgroundHtml, /TN12 playground/);
+  assert.match(playgroundHtml, /id="playground-summary"/);
+  assert.match(playgroundHtml, /id="playground-roles"/);
+  assert.match(playgroundHtml, /id="playground-actions"/);
+  assert.match(playgroundHtml, /No shared keys/);
 
   console.log("UI smoke check passed.");
 } finally {

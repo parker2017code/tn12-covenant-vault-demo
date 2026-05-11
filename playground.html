@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TN12 Playground</title>
+  <meta name="description" content="TN12 playground plan for role wallets, faucet funding, guided testnet actions, and accepted txid replay.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Real TN12 play</p>
+      <h1>TN12 playground</h1>
+    </div>
+    <nav aria-label="Project links">
+      <a href="index.html">Proof page</a>
+      <a href="results.html">Results</a>
+      <a href="lab.html">Lab</a>
+      <a href="#roles">Roles</a>
+      <a href="#actions">Actions</a>
+      <a href="#rules">Rules</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero results-hero">
+      <div>
+        <p class="status">Session wallets. Faucet-funded. TN12 only.</p>
+        <h2>Let people try the system with real testnet activity.</h2>
+        <p>The playground path is simple: create fresh role wallets, fund them with faucet tKAS, run guided TN12 actions, verify txids, and replay state. The page is artifact-backed today; wallet generation and submit buttons are the next implementation slice.</p>
+      </div>
+      <aside class="facts">
+        <span>Safety rule</span>
+        <strong>No shared keys</strong>
+        <p>Users get fresh session wallets. The repo never publishes reusable private keys.</p>
+      </aside>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Plan summary</p>
+        <h2>What the playground will run.</h2>
+      </div>
+      <div id="playground-summary" class="results-summary" aria-live="polite"></div>
+    </section>
+
+    <section id="flow" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Faucet flow</p>
+        <h2>How someone starts.</h2>
+      </div>
+      <div id="playground-flow" class="results-flow" aria-live="polite"></div>
+      <div class="link-list">
+        <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">Open TN12 faucet</a>
+        <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">Open TN12 explorer</a>
+      </div>
+    </section>
+
+    <section id="roles" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Role wallets</p>
+        <h2>Suggested testnet roles and funding.</h2>
+      </div>
+      <div id="playground-roles" class="results-rails" aria-live="polite"></div>
+    </section>
+
+    <section id="actions" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Guided actions</p>
+        <h2>Real actions first, reducer checks second.</h2>
+      </div>
+      <div id="playground-actions" class="results-rails" aria-live="polite"></div>
+    </section>
+
+    <section id="rules" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Hard rules</p>
+        <h2>Short version.</h2>
+      </div>
+      <ul id="playground-rules" class="issues" aria-live="polite"></ul>
+    </section>
+  </main>
+</body>
+</html>

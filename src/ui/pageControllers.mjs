@@ -14,7 +14,8 @@ export function runProofPageController(renderers) {
     renderers.renderEnforcementMatrix,
     renderers.renderDefiSimulationSurface,
     renderers.renderDefiReceiptGuard,
-    renderers.renderResultsExplorer
+    renderers.renderResultsExplorer,
+    renderers.renderPlaygroundExplorer
   ]);
 }
 

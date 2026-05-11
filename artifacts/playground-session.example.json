@@ -1,0 +1,71 @@
+{
+  "schema": "tn12-playground-session/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T18:08:04.378Z",
+  "status": "playground-session-public-state-ready",
+  "summary": {
+    "roles": 6,
+    "fundedRoles": 0,
+    "txids": 0,
+    "acceptedTxids": 0,
+    "privateKeysIncluded": 0,
+    "committedSecrets": 0,
+    "liveProductClaims": 0
+  },
+  "roles": [
+    {
+      "id": "operator",
+      "label": "Operator / receipt submitter",
+      "address": "",
+      "fundingTargetTkas": "2",
+      "funded": false,
+      "privateKeyIncluded": false
+    },
+    {
+      "id": "pool",
+      "label": "Pool wallet",
+      "address": "",
+      "fundingTargetTkas": "25",
+      "funded": false,
+      "privateKeyIncluded": false
+    },
+    {
+      "id": "user-a",
+      "label": "User A / swapper",
+      "address": "",
+      "fundingTargetTkas": "10",
+      "funded": false,
+      "privateKeyIncluded": false
+    },
+    {
+      "id": "user-b",
+      "label": "User B / lender",
+      "address": "",
+      "fundingTargetTkas": "10",
+      "funded": false,
+      "privateKeyIncluded": false
+    },
+    {
+      "id": "executor",
+      "label": "Executor / scheduler bidder",
+      "address": "",
+      "fundingTargetTkas": "2",
+      "funded": false,
+      "privateKeyIncluded": false
+    },
+    {
+      "id": "reviewer",
+      "label": "Reviewer / oracle reporter",
+      "address": "",
+      "fundingTargetTkas": "2",
+      "funded": false,
+      "privateKeyIncluded": false
+    }
+  ],
+  "txids": [],
+  "exportPolicy": [
+    "Export public addresses, labels, requested funding amounts, txids, and accepted status.",
+    "Do not export private keys, mnemonics, seeds, local wallet paths, browser storage keys, or signing material.",
+    "A session export is useful for replay and support; it is not custody recovery material."
+  ]
+}
