@@ -3,10 +3,10 @@
   "network": "kaspa-testnet-12",
   "status": "persisted-checkpoint-ready",
   "sourcePath": "artifacts/checkpointed-accepted-index.json",
-  "persistedAt": "2026-05-11T16:27:52.038Z",
+  "persistedAt": "2026-05-11T16:38:20.640Z",
   "summary": {
-    "recordCount": 47,
-    "matched": 47,
+    "recordCount": 48,
+    "matched": 48,
     "mismatches": 0,
     "addedTxids": 0,
     "missingTxids": 0,
@@ -15,9 +15,9 @@
   },
   "current": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 47,
+    "recordCount": 48,
     "minBlueScore": 5203140,
-    "maxBlueScore": 8920215,
+    "maxBlueScore": 8933924,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -62,6 +62,7 @@
       "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
       "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
       "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
+      "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -70,9 +71,9 @@
   },
   "previous": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 47,
+    "recordCount": 48,
     "minBlueScore": 5203140,
-    "maxBlueScore": 8920215,
+    "maxBlueScore": 8933924,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -117,6 +118,7 @@
       "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
       "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
       "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
+      "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",

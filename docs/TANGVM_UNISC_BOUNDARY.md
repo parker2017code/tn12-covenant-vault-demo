@@ -27,7 +27,7 @@ TangVM:
 
 | Piece | Current TN12 Evidence | Label |
 |---|---|---|
-| Fast ordered receipts | 34 accepted payload events and 47 checkpointed records | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
+| Fast ordered receipts | 35 accepted payload events and 48 checkpointed records | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
 | Attestation-like payloads | Miner/watcher signal and prediction/agent payload receipts | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
 | Local replay state | Checkpoint, fixture replay, virtual-chain ingestion, durable replay guard | `INDEXER_DERIVED` |
 | Trigger-like review rows | DeFi reducer blocks stale oracle, slippage, duplicate, liquidation, and custody-promotion rows | `PLANNER_ONLY` / `INDEXER_DERIVED` |

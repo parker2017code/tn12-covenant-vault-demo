@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-payload-receipt-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-11T16:38:15.302Z",
+  "endpointBase": "https://api-tn12.kaspa.org/transactions",
+  "status": "accepted-payload-receipt-matched",
+  "txid": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+  "accepted": true,
+  "acceptingBlockBlueScore": 8933924,
+  "acceptingBlockTime": 1778517303584,
+  "payload": {
+    "expectedHex": "7b226b696e64223a227363686564756c65722d696e74656e74222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a22747269676765722d72656769737465726564222c226e6f7465223a22696620706f6f6c4e6574546b61733e3d3630207468656e207061796f75742d757365722d30333b20736f757263653d646566692d61636365707465642d61637469766974792d6c65646765723b206d6f64653d6c6f63616c2d6b65792d726576696577227d",
+    "observedHex": "7b226b696e64223a227363686564756c65722d696e74656e74222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a22747269676765722d72656769737465726564222c226e6f7465223a22696620706f6f6c4e6574546b61733e3d3630207468656e207061796f75742d757365722d30333b20736f757263653d646566692d61636365707465642d61637469766974792d6c65646765723b206d6f64653d6c6f63616c2d6b65792d726576696577227d",
+    "bytes": 202,
+    "matches": true,
+    "decoded": {
+      "schema": "kaspa-signal-payload/v1",
+      "status": "decoded",
+      "payload": {
+        "kind": "scheduler-intent",
+        "subject": "unisc-pool-rebalance-001",
+        "value": "trigger-registered",
+        "note": "if poolNetTkas>=60 then payout-user-03; source=defi-accepted-activity-ledger; mode=local-key-review"
+      },
+      "encoded": {
+        "bytes": 202,
+        "hex": "7b226b696e64223a227363686564756c65722d696e74656e74222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a22747269676765722d72656769737465726564222c226e6f7465223a22696620706f6f6c4e6574546b61733e3d3630207468656e207061796f75742d757365722d30333b20736f757263653d646566692d61636365707465642d61637469766974792d6c65646765723b206d6f64653d6c6f63616c2d6b65792d726576696577227d"
+      }
+    }
+  },
+  "output": {
+    "expected": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "scriptVersion": 0
+    },
+    "observed": {
+      "index": 0,
+      "amountSompi": "10000000",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "type": "pubkey"
+    },
+    "matches": true
+  },
+  "receiptMatches": true,
+  "invoiceId": "unisc-pool-rebalance-001",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d"
+}

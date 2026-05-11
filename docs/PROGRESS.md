@@ -9,8 +9,9 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 - Seven base covenant proof spends accepted on TN12: minimal delayed owner/recovery vault, individual pledge release/refund, and buyer-controlled escrow primitives.
 - Seven role-separated positive paths accepted on TN12.
 - Batch-assurance pledge outputs and 3-pledge release accepted on TN12.
-- 34 payload events accepted on TN12, including seven DeFi v1 receipts and one agent release wallet-review event.
+- 35 payload events accepted on TN12, including seven DeFi v1 receipts, one scheduler-intent receipt, and one agent release wallet-review event.
 - 15 accepted local-key DeFi custody/activity transfer rows are recorded across user funding, pool deposits, and pool payouts.
+- One scheduler-intent payload is accepted on TN12 and reduced as indexer-derived trigger state.
 - Adversarial rejection evidence exists for wrong signer, wrong selector, wrong output lock, wrong amount, and single-party cancel.
 - Local gates cover proof evidence, payload matching, wallet review, signer-result validation, replay rows, duplicate/stale receipt guards, DeFi scenario/reducer/advanced simulation, artifact manifest guards, and UI smoke.
 - `docs/AUDIT_MAP.md` is the canonical claim and enforcement-class map.
@@ -25,6 +26,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Checkpoint index | `artifacts/checkpointed-accepted-index.json` |
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
+| Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | DeFi scenario reducer | `artifacts/defi-scenario-reducer.json` |
 | DeFi advanced simulation | `artifacts/defi-advanced-simulation.json` |
@@ -45,6 +47,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Batch-assurance alternate path | Release is accepted; refund path is non-selected and must not be submitted for the spent pledge set. |
 | DeFi accepted activity | Local users, wallet A/B, and pool/operator wallets have accepted TN12 funding, pool-deposit, and pool-payout transfers. |
 | DeFi planner/indexer logic | Planner, scenario math, reducer promotion guard, AMM/liquidity hardening, lending sweeps, oracle failure cases, and multi-wallet role pack remain bounded to indexer/planner state where no script enforces the market rule. |
+| Scheduler / TangVM-adjacent logic | One accepted scheduler-intent payload reduces into eligible trigger state. This is indexer-derived and aligned with upstream vProgs scheduler ideas, not TangVM/UniSc implementation. |
 | Product hardening | Wallet, indexer, monitoring, and recovery paths are not production-grade. |
 
 ## Deferred Mainnet-Readiness Rails

@@ -7,13 +7,14 @@ export async function renderDefiSimulationSurface(documentRef = document) {
   if (!summaryNode || !listNode) return;
 
   try {
-    const [planner, scenario, reducer, advanced, multiWallet, acceptedActivity, manifest] = await Promise.all([
+    const [planner, scenario, reducer, advanced, multiWallet, acceptedActivity, scheduler, manifest] = await Promise.all([
       fetchJson("artifacts/defi-planner-simulation.json"),
       fetchJson("artifacts/defi-scenario-simulation.json"),
       fetchJson("artifacts/defi-scenario-reducer.json"),
       fetchJson("artifacts/defi-advanced-simulation.json"),
       fetchJson("artifacts/defi-multi-wallet-scenario-pack.json"),
       fetchJson("artifacts/defi-accepted-activity-ledger.json"),
+      fetchJson("artifacts/scheduler-intent-registry.json"),
       fetchJson("artifacts/defi-artifact-manifest.json")
     ]);
 
@@ -24,6 +25,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       <article><span>Reducer state</span><strong>${escapeHtml(reducer.summary.promotedReviewRows)} review</strong></article>
       <article><span>Advanced blocks</span><strong>${escapeHtml(advanced.summary.ammBlockedActions + advanced.summary.oracleBlockedCases + advanced.summary.lendingBlocked)}</strong></article>
       <article><span>Accepted transfers</span><strong>${escapeHtml(acceptedActivity.summary.acceptedTransferRows)}</strong></article>
+      <article><span>Scheduler intents</span><strong>${escapeHtml(scheduler.summary.acceptedIntents)}</strong></article>
       <article><span>Pool net</span><strong>${escapeHtml(acceptedActivity.summary.poolNetTkas)} TKAS</strong></article>
       <article><span>Wallet roles</span><strong>${escapeHtml(multiWallet.summary.roles)}</strong></article>
       <article><span>External signer claims</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
@@ -42,6 +44,12 @@ export async function renderDefiSimulationSurface(documentRef = document) {
         title: "Accepted TN12 activity ledger",
         body: `${acceptedActivity.summary.acceptedTransferRows} accepted transfer rows; ${acceptedActivity.summary.poolDeposits} pool deposits; ${acceptedActivity.summary.poolPayouts} pool payouts; pool net ${acceptedActivity.summary.poolNetTkas} TKAS.`,
         foot: "npm run defi:accepted-activity"
+      },
+      {
+        status: scheduler.status,
+        title: "Scheduler intent registry",
+        body: `${scheduler.summary.acceptedIntents} accepted trigger intent; ${scheduler.summary.eligibleTriggers} eligible trigger; ${scheduler.summary.protocolSchedulerClaims} protocol-scheduler claims.`,
+        foot: "npm run scheduler:intents"
       },
       {
         status: planner.status,

@@ -1,0 +1,111 @@
+{
+  "schema": "tn12-signed-payload-receipt-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "requiresPayloadSubmitSupport": true,
+  "warning": "This signed draft carries transaction payload bytes. Use the verified TN12 JSON wRPC route; the public REST submit route has dropped payload bytes.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "6dddee5efa704fb4751ef7b8e5a83ecf627366163f6f183968759ffd9d815313",
+    "outputIndex": 1,
+    "amountTkas": 693.9998
+  },
+  "payment": {
+    "to": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": "0.1",
+    "amountSompi": "10000000",
+    "changeTkas": "693.89975",
+    "changeSompi": "69389975000",
+    "minerFeeSompi": "5000"
+  },
+  "receipt": {
+    "schema": "kaspa-signal-payload/v1",
+    "status": "payload-size-ok",
+    "lane": "transaction-payload",
+    "payload": {
+      "kind": "scheduler-intent",
+      "subject": "unisc-pool-rebalance-001",
+      "value": "trigger-registered",
+      "note": "if poolNetTkas>=60 then payout-user-03; source=defi-accepted-activity-ledger; mode=local-key-review"
+    },
+    "encoded": {
+      "bytes": 202,
+      "transientMass": 808,
+      "hex": "7b226b696e64223a227363686564756c65722d696e74656e74222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a22747269676765722d72656769737465726564222c226e6f7465223a22696620706f6f6c4e6574546b61733e3d3630207468656e207061796f75742d757365722d30333b20736f757263653d646566692d61636365707465642d61637469766974792d6c65646765723b206d6f64653d6c6f63616c2d6b65792d726576696577227d"
+    },
+    "limits": {
+      "standardTxMassLimit": 100000,
+      "transientByteMass": 4,
+      "remainingMassBeforeInputsOutputsAndSignatures": 99192
+    },
+    "boundary": "This models user transaction payload data, not arbitrary miner header data."
+  },
+  "transactionId": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "6dddee5efa704fb4751ef7b8e5a83ecf627366163f6f183968759ffd9d815313",
+            "index": 1
+          },
+          "signatureScript": "4161eedee8eef46d5bd39fe75f4e8bda3dfb9e47783b4ae2915f0ee6e1a7775efdd540046efe84cff8a7f7d60a48d48a64abb4d476ef227dcd16baf16216dfdc2c01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 10000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "amount": 69389975000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "payload": "7b226b696e64223a227363686564756c65722d696e74656e74222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a22747269676765722d72656769737465726564222c226e6f7465223a22696620706f6f6c4e6574546b61733e3d3630207468656e207061796f75742d757365722d30333b20736f757263653d646566692d61636365707465642d61637469766974792d6c65646765723b206d6f64653d6c6f63616c2d6b65792d726576696577227d"
+    },
+    "allowOrphan": false
+  },
+  "signedTransaction": {
+    "tx": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "6dddee5efa704fb4751ef7b8e5a83ecf627366163f6f183968759ffd9d815313",
+            "index": 1
+          },
+          "signatureScript": "4161eedee8eef46d5bd39fe75f4e8bda3dfb9e47783b4ae2915f0ee6e1a7775efdd540046efe84cff8a7f7d60a48d48a64abb4d476ef227dcd16baf16216dfdc2c01",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "value": "10000000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        },
+        {
+          "value": "69389975000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "gas": "0",
+      "payload": "7b226b696e64223a227363686564756c65722d696e74656e74222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a22747269676765722d72656769737465726564222c226e6f7465223a22696620706f6f6c4e6574546b61733e3d3630207468656e207061796f75742d757365722d30333b20736f757263653d646566692d61636365707465642d61637469766974792d6c65646765723b206d6f64653d6c6f63616c2d6b65792d726576696577227d",
+      "id": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d"
+    }
+  }
+}

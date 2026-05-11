@@ -1,0 +1,96 @@
+{
+  "schema": "tn12-scheduler-intent-registry/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T16:36:58.715Z",
+  "status": "scheduler-intent-registry-ready",
+  "enforcement": "INDEXER_DERIVED",
+  "summary": {
+    "acceptedIntents": 1,
+    "eligibleTriggers": 1,
+    "blockedNegativeRows": 4,
+    "executionReceipts": 0,
+    "liveProductClaims": 0,
+    "protocolSchedulerClaims": 0,
+    "externalSignerClaims": 0,
+    "autonomousCustodyClaims": 0,
+    "mainnetClaims": 0
+  },
+  "context": {
+    "source": "artifacts/defi-accepted-activity-ledger.json",
+    "poolNetTkas": "60",
+    "acceptedTransferRows": 15,
+    "poolDeposits": 8,
+    "poolPayouts": 2
+  },
+  "acceptedIntents": [
+    {
+      "label": "Scheduler intent pool rebalance 001",
+      "evidencePath": "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json",
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-intent-pool-rebalance-001.json",
+      "txid": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+      "accepted": true,
+      "payloadMatches": true,
+      "kind": "scheduler-intent",
+      "subject": "unisc-pool-rebalance-001",
+      "value": "trigger-registered",
+      "note": "if poolNetTkas>=60 then payout-user-03; source=defi-accepted-activity-ledger; mode=local-key-review",
+      "condition": {
+        "metric": "poolNetTkas",
+        "operator": ">=",
+        "thresholdTkas": "60"
+      },
+      "action": "payout-user-03",
+      "acceptingBlockBlueScore": 8933924
+    }
+  ],
+  "triggerRows": [
+    {
+      "id": "unisc-pool-rebalance-001",
+      "txid": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+      "sourceEvidencePath": "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json",
+      "metric": "poolNetTkas",
+      "operator": ">=",
+      "thresholdTkas": "60",
+      "observedTkas": "60",
+      "action": "payout-user-03",
+      "status": "eligible",
+      "reason": "condition-met",
+      "executionMode": "local-key-review-required",
+      "executionReceiptTxid": ""
+    }
+  ],
+  "negativeRows": [
+    {
+      "id": "duplicate-intent",
+      "status": "blocked",
+      "reason": "same subject and txid cannot be promoted twice",
+      "subject": "unisc-pool-rebalance-001"
+    },
+    {
+      "id": "stale-source",
+      "status": "blocked",
+      "reason": "trigger source must reference the current accepted activity ledger",
+      "expectedSource": "artifacts/defi-accepted-activity-ledger.json",
+      "observedSource": "artifacts/stale-defi-ledger.json"
+    },
+    {
+      "id": "insufficient-threshold",
+      "status": "blocked",
+      "reason": "poolNetTkas is below the requested threshold",
+      "observedTkas": "60",
+      "thresholdTkas": "1000000"
+    },
+    {
+      "id": "wrong-kind",
+      "status": "blocked",
+      "reason": "payload kind must be scheduler-intent",
+      "observedKind": "receipt"
+    }
+  ],
+  "problems": [],
+  "boundaries": [
+    "Accepted scheduler-intent payloads are TN12 evidence, but scheduler semantics are indexer-derived.",
+    "This is aligned with vProgs scheduler/runtime concepts, not an implementation of vProgs, TangVM, or a protocol universal scheduler.",
+    "Eligibility checks can select a local-key action; they do not prove autonomous custody, miner oracle consensus, or external fact truth."
+  ]
+}

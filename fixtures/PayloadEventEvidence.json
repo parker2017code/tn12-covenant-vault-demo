@@ -171,6 +171,11 @@
       "label": "DeFi v1 accepted activity 005",
       "draftPath": "artifacts/signed-drafts/tn12-defi-v1-accepted-activity-005.json",
       "outPath": "artifacts/payload-defi-v1-accepted-activity-005-evidence.json"
+    },
+    {
+      "label": "Scheduler intent pool rebalance 001",
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-intent-pool-rebalance-001.json",
+      "outPath": "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json"
     }
   ]
 }

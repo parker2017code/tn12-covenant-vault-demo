@@ -76,6 +76,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | Refresh DeFi simulation suite | `npm run defi:refresh` |
 | DeFi accepted activity ledger | `npm run defi:accepted-activity` |
 | DeFi planner simulation | `npm run defi:simulation` |
+| Scheduler intent registry | `npm run scheduler:intents` |
 | DeFi scenario simulation | `npm run defi:scenario` |
 | DeFi scenario reducer / promotion guard | `npm run defi:reducer` |
 | DeFi advanced simulation hardening | `npm run defi:advanced` |
