@@ -11,6 +11,8 @@ import { buildWalletConnectorReadiness } from "../../src/walletConnectorReadines
 import { buildWalletSubmitPackage } from "../../src/walletSubmitPackage.mjs";
 import { buildWalletConnectorSubmitRequests } from "../../src/walletConnectorSubmitRequests.mjs";
 import { buildWalletConnectorAdapterRun } from "../../src/walletConnectorAdapterRun.mjs";
+import { buildWalletStandardSignerValidation } from "../../src/walletStandardSignerValidation.mjs";
+import { buildWalletSubmitResultValidation } from "../../src/walletSubmitResultValidation.mjs";
 
 const payloadReadinessArtifact = await readJson("artifacts/payload-submit-readiness.json");
 const payloadReadiness = buildPayloadSubmitReadiness(payloadReadinessArtifact);
@@ -128,6 +130,47 @@ assert.ok(walletConnectorAdapterRun.reviewSessions.some((session) =>
 const walletConnectorAdapterArtifact = await readJson("artifacts/wallet-connector-adapter-run.json");
 assert.equal(walletConnectorAdapterArtifact.status, "adapter-dry-run-ready");
 assert.equal(walletConnectorAdapterArtifact.summary.reviewReady, 50);
+
+const walletStandardRequests = await readJson("artifacts/wallet-standard-requests.json");
+const signerValidation = buildWalletStandardSignerValidation({
+  standardRequests: walletStandardRequests,
+  signerResults: await readJson("fixtures/WalletStandardSignerResults.json"),
+  generatedAt: "2026-05-11T00:00:00.000Z"
+});
+assert.equal(signerValidation.status, "wallet-standard-signer-validation-ready");
+assert.equal(signerValidation.liveExternalSignerAccepted, false);
+assert.equal(signerValidation.summary.accepted, 0);
+assert.equal(signerValidation.summary.negativeCasesCaught, 3);
+assert.ok(signerValidation.validations.some((validation) =>
+  validation.validation === "rejected"
+  && validation.reasons.includes("review fingerprint mismatch")
+));
+assert.ok(signerValidation.validations.some((validation) =>
+  validation.status === "pending-external-signer"
+  && validation.reasons.includes("external signer has not returned a transaction yet")
+));
+
+const signerValidationArtifact = await readJson("artifacts/wallet-standard-signer-validation.json");
+assert.equal(signerValidationArtifact.summary.pending, signerValidation.summary.pending);
+assert.equal(signerValidationArtifact.summary.negativeCasesCaught, signerValidation.summary.negativeCasesCaught);
+
+const submitResultValidation = buildWalletSubmitResultValidation({
+  adapterRun: walletConnectorAdapterArtifact,
+  submitResults: await readJson("fixtures/WalletConnectorSubmitResults.json"),
+  virtualChainRun: await readJson("artifacts/virtual-chain-ingestion-run.json"),
+  validationFixture: await readJson("fixtures/WalletSubmitResultValidation.json"),
+  runAt: "2026-05-11T00:00:00.000Z"
+});
+assert.equal(submitResultValidation.status, "wallet-submit-result-validation-ready");
+assert.equal(submitResultValidation.summary.liveWalletPromotions, 0);
+assert.equal(submitResultValidation.summary.caughtNegativeCases, submitResultValidation.summary.negativeCases);
+assert.equal(submitResultValidation.summary.secretFields, 0);
+assert.ok(submitResultValidation.promotionRules.some((rule) => /explicit user approval/.test(rule)));
+assert.ok(submitResultValidation.negativeRows.every((row) => row.problems.length > 0));
+
+const submitResultValidationArtifact = await readJson("artifacts/wallet-submit-result-validation.json");
+assert.equal(submitResultValidationArtifact.status, "wallet-submit-result-validation-ready");
+assert.equal(submitResultValidationArtifact.summary.liveWalletPromotions, 0);
 
 console.log("Wallet submit readiness tests passed.");
 

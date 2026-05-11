@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { buildAcceptedAppState } from "../../src/acceptedIndexer.mjs";
+import { buildPersistedCheckpointGuard } from "../../src/indexerPersistence.mjs";
 import { buildIndexerStorageSchema } from "../../src/indexerStorageSchema.mjs";
 import { buildIndexerReplayRun } from "../../src/indexerReplayRun.mjs";
 import { buildVirtualChainIngestionPlan } from "../../src/virtualChainIngestion.mjs";
@@ -70,6 +71,36 @@ assert.equal(persistedCheckpoint.status, "persisted-checkpoint-ready");
 assert.equal(persistedCheckpoint.summary.recordCount, checkpoint.summary.total);
 assert.equal(persistedCheckpoint.summary.mismatches, 0);
 assert.equal(persistedCheckpoint.summary.rollbackDetected, false);
+
+const rollbackByMissingTxid = buildPersistedCheckpointGuard({
+  currentIndex: {
+    ...checkpoint,
+    checkpoint: {
+      ...checkpoint.checkpoint,
+      txids: checkpoint.checkpoint.txids.slice(1)
+    }
+  },
+  previousSnapshot: { current: persistedCheckpoint.current },
+  persistedAt: "2026-05-11T00:00:00.000Z"
+});
+assert.equal(rollbackByMissingTxid.status, "rollback-review-required");
+assert.equal(rollbackByMissingTxid.summary.rollbackDetected, true);
+assert.equal(rollbackByMissingTxid.summary.missingTxids, 1);
+assert.match(rollbackByMissingTxid.rollback.action, /Stop serving derived app state/);
+
+const rollbackByBlueScore = buildPersistedCheckpointGuard({
+  currentIndex: {
+    ...checkpoint,
+    checkpoint: {
+      ...checkpoint.checkpoint,
+      maxAcceptingBlockBlueScore: checkpoint.checkpoint.maxAcceptingBlockBlueScore - 10_000
+    }
+  },
+  previousSnapshot: { current: persistedCheckpoint.current },
+  persistedAt: "2026-05-11T00:00:00.000Z"
+});
+assert.equal(rollbackByBlueScore.status, "rollback-review-required");
+assert.equal(rollbackByBlueScore.summary.blueScoreRegression, true);
 
 const replayPlan = await readJson("artifacts/indexer-replay-plan.json");
 assert.equal(replayPlan.status, "durable-indexer-plan-ready");
@@ -153,6 +184,20 @@ assert.ok(ingestionRun.tables.wallet_submit_candidates.some((row) =>
 assert.ok(ingestionRun.tables.wallet_submit_candidates.some((row) =>
   row.promotionState === "candidate-only"
 ));
+
+const rollbackIngestionRun = buildVirtualChainIngestionRun({
+  ingestionPlan: ingestionPlanArtifact,
+  checkpointIndex: {
+    ...checkpoint,
+    records: checkpoint.records.slice(1)
+  },
+  submitRequests: walletConnectorRequests,
+  runAt: "2026-05-11T00:00:00.000Z"
+});
+assert.equal(rollbackIngestionRun.status, "fixture-virtual-chain-run-review");
+assert.equal(rollbackIngestionRun.summary.rollbackRows, 1);
+assert.equal(rollbackIngestionRun.summary.appStateReady, false);
+assert.equal(rollbackIngestionRun.tables.rollback_segments[0].reviewStatus, "open");
 
 const ingestionRunArtifact = await readJson("artifacts/virtual-chain-ingestion-run.json");
 assert.equal(ingestionRunArtifact.status, "fixture-virtual-chain-run-ready");

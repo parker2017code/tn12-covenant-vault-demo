@@ -704,8 +704,7 @@ async function renderMainnetReadiness() {
   if (!mainnetSummaryNode || !mainnetComponentsNode) return;
 
   try {
-    const response = await fetch("fixtures/MainnetReadiness.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/MainnetReadiness.json");
     const readiness = buildMainnetReadiness(fixture);
     mainnetSummaryNode.innerHTML = `
       <article><span>Mainnet paths</span><strong>${escapeHtml(readiness.summary.mainnetCapable)}</strong></article>
@@ -727,9 +726,8 @@ async function renderMainnetReadiness() {
       mainnetComponentsNode.append(article);
     }
 
-    const invoiceBriefResponse = await fetch("artifacts/invoice-mainnet-launch-brief.json", { cache: "no-store" });
-    if (invoiceBriefResponse.ok) {
-      const brief = await invoiceBriefResponse.json();
+    const brief = await fetchOptionalJson("artifacts/invoice-mainnet-launch-brief.json");
+    if (brief) {
       const article = document.createElement("article");
       article.className = "mainnet-card";
       article.innerHTML = `
@@ -1137,8 +1135,7 @@ async function verifyProofTransactions({ forceRemote }) {
   if (!proofListNode) return;
 
   try {
-    const response = await fetch("fixtures/AcceptedProofTransactions.json", { cache: "no-store" });
-    const data = await response.json();
+    const data = await fetchJson("fixtures/AcceptedProofTransactions.json");
     if (proofStatusNode) {
       proofStatusNode.textContent = forceRemote ? "Checking TN12 API..." : "Checking accepted status...";
     }
@@ -1173,20 +1170,21 @@ async function renderAcceptedAppState() {
   if (!indexerSummaryNode || !indexerRecordsNode || !receiptEventsNode) return;
 
   try {
-    const [stateResponse, checkpointResponse, persistenceResponse, replayPlanResponse, virtualRunResponse, checkpointCompareResponse] = await Promise.all([
-      fetch("fixtures/AcceptedAppState.json", { cache: "no-store" }),
-      fetch("artifacts/checkpointed-accepted-index.json", { cache: "no-store" }),
-      fetch("artifacts/persisted-checkpoint-guard.json", { cache: "no-store" }),
-      fetch("artifacts/indexer-replay-plan.json", { cache: "no-store" }),
-      fetch("artifacts/virtual-chain-ingestion-run.json", { cache: "no-store" }),
-      fetch("artifacts/virtual-chain-checkpoint-comparison.json", { cache: "no-store" })
-    ]);
-    const state = await stateResponse.json();
-    const checkpoint = await checkpointResponse.json();
-    const persistence = await persistenceResponse.json();
-    const replayPlan = await replayPlanResponse.json();
-    const virtualRun = await virtualRunResponse.json();
-    const checkpointCompare = await checkpointCompareResponse.json();
+    const {
+      state,
+      checkpoint,
+      persistence,
+      replayPlan,
+      virtualRun,
+      checkpointCompare
+    } = await fetchJsonMap({
+      state: "fixtures/AcceptedAppState.json",
+      checkpoint: "artifacts/checkpointed-accepted-index.json",
+      persistence: "artifacts/persisted-checkpoint-guard.json",
+      replayPlan: "artifacts/indexer-replay-plan.json",
+      virtualRun: "artifacts/virtual-chain-ingestion-run.json",
+      checkpointCompare: "artifacts/virtual-chain-checkpoint-comparison.json"
+    });
     const summary = state.summary;
     const checkpointSummary = checkpoint.summary || {};
     indexerSummaryNode.innerHTML = `
@@ -1267,8 +1265,7 @@ async function renderAcceptedAppState() {
     }
 
     if (defiReceiptGuardNode) {
-      const guardResponse = await fetch("artifacts/defi-receipt-replay-guard.json", { cache: "no-store" });
-      const guard = await guardResponse.json();
+      const guard = await fetchJson("artifacts/defi-receipt-replay-guard.json");
       defiReceiptGuardNode.innerHTML = `
         <article>
           <span>${escapeHtml(guard.status)}</span>
@@ -1298,8 +1295,7 @@ async function renderInvoiceApp() {
   if (!invoiceSummaryNode || !invoiceListNode || !invoiceDraftNode) return;
 
   try {
-    const response = await fetch("fixtures/InvoiceReceipts.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/InvoiceReceipts.json");
     const registry = buildInvoiceRegistry(fixture);
     invoiceSummaryNode.innerHTML = `
       <article><span>Total</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
@@ -1325,8 +1321,7 @@ async function renderInvoiceApp() {
     }
 
     try {
-      const draftResponse = await fetch("artifacts/signed-drafts/payload-receipt-self-send.json", { cache: "no-store" });
-      const draft = await draftResponse.json();
+      const draft = await fetchJson("artifacts/signed-drafts/payload-receipt-self-send.json");
       invoiceDraftNode.innerHTML = `
         <article>
           <span>${escapeHtml(draft.status)}</span>
@@ -1353,8 +1348,7 @@ async function renderPayloadSubmitReadiness() {
   if (!payloadReadinessNode) return;
 
   try {
-    const response = await fetch("artifacts/payload-submit-readiness.json", { cache: "no-store" });
-    const artifact = await response.json();
+    const artifact = await fetchJson("artifacts/payload-submit-readiness.json");
     const readiness = buildPayloadSubmitReadiness(artifact);
     payloadReadinessNode.innerHTML = `
       <article>
@@ -1379,12 +1373,10 @@ async function renderSubmitConsole() {
   if (!submitSummaryNode || !submitDraftsNode) return;
 
   try {
-    const manifestResponse = await fetch("fixtures/SubmitConsoleDrafts.json", { cache: "no-store" });
-    const manifest = await manifestResponse.json();
+    const manifest = await fetchJson("fixtures/SubmitConsoleDrafts.json");
     const artifactsByPath = {};
     await Promise.all((manifest.drafts || []).map(async (draft) => {
-      const response = await fetch(draft.path, { cache: "no-store" });
-      artifactsByPath[draft.path] = await response.json();
+      artifactsByPath[draft.path] = await fetchJson(draft.path);
     }));
     const registry = buildSubmitConsoleRegistry(manifest, artifactsByPath);
 
@@ -1419,8 +1411,7 @@ async function renderWalletReview() {
   if (!walletReviewNode) return;
 
   try {
-    const response = await fetch("artifacts/wallet-review-readiness.json", { cache: "no-store" });
-    const review = await response.json();
+    const review = await fetchJson("artifacts/wallet-review-readiness.json");
     walletReviewNode.innerHTML = `
       <article>
         <span>${escapeHtml(review.status)}</span>
@@ -1438,26 +1429,27 @@ async function renderWalletConnector() {
   if (!walletConnectorNode) return;
 
   try {
-    const [readinessResponse, packageResponse, requestResponse, adapterResponse, ledgerResponse, standardResponse, signerValidationResponse, roundtripResponse, signerTemplateResponse] = await Promise.all([
-      fetch("artifacts/wallet-connector-readiness.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-submit-package.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-connector-submit-requests.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-connector-adapter-run.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-connector-submit-ledger.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-standard-requests.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-standard-signer-validation.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-external-signer-roundtrip-plan.json", { cache: "no-store" }),
-      fetch("artifacts/wallet-external-signer-result-template.json", { cache: "no-store" })
-    ]);
-    const readiness = await readinessResponse.json();
-    const submitPackage = await packageResponse.json();
-    const requests = await requestResponse.json();
-    const adapterRun = await adapterResponse.json();
-    const ledger = await ledgerResponse.json();
-    const standard = await standardResponse.json();
-    const signerValidation = await signerValidationResponse.json();
-    const roundtrip = await roundtripResponse.json();
-    const signerTemplate = await signerTemplateResponse.json();
+    const {
+      readiness,
+      submitPackage,
+      requests,
+      adapterRun,
+      ledger,
+      standard,
+      signerValidation,
+      roundtrip,
+      signerTemplate
+    } = await fetchJsonMap({
+      readiness: "artifacts/wallet-connector-readiness.json",
+      submitPackage: "artifacts/wallet-submit-package.json",
+      requests: "artifacts/wallet-connector-submit-requests.json",
+      adapterRun: "artifacts/wallet-connector-adapter-run.json",
+      ledger: "artifacts/wallet-connector-submit-ledger.json",
+      standard: "artifacts/wallet-standard-requests.json",
+      signerValidation: "artifacts/wallet-standard-signer-validation.json",
+      roundtrip: "artifacts/wallet-external-signer-roundtrip-plan.json",
+      signerTemplate: "artifacts/wallet-external-signer-result-template.json"
+    });
     const capabilities = (readiness.requiredWalletCapabilities || [])
       .map((capability) => `${capability.id}: ${capability.status}`)
       .join("; ");
@@ -1515,8 +1507,7 @@ async function renderPayloadDraftStatus() {
   if (!payloadDraftStatusNode) return;
 
   try {
-    const response = await fetch("artifacts/signed-drafts/payload-receipt-self-send.json", { cache: "no-store" });
-    const draft = await response.json();
+    const draft = await fetchJson("artifacts/signed-drafts/payload-receipt-self-send.json");
     payloadDraftStatusNode.innerHTML = `
       <article>
         <span>${escapeHtml(draft.status)}</span>
@@ -1540,8 +1531,7 @@ async function renderBuildQueue() {
   if (!buildQueueNode) return;
 
   try {
-    const response = await fetch("fixtures/EcosystemBuildQueue.json", { cache: "no-store" });
-    const data = await response.json();
+    const data = await fetchJson("fixtures/EcosystemBuildQueue.json");
     buildQueueNode.innerHTML = "";
 
     for (const item of data.items) {
@@ -1564,8 +1554,7 @@ async function renderMasterRoadmap() {
   if (!masterRoadmapNode) return;
 
   try {
-    const response = await fetch("fixtures/MasterAppRoadmap.json", { cache: "no-store" });
-    const data = await response.json();
+    const data = await fetchJson("fixtures/MasterAppRoadmap.json");
     masterRoadmapNode.innerHTML = "";
 
     for (const lane of data.lanes) {
@@ -1588,8 +1577,7 @@ async function renderResearchLibrary() {
   if (!researchSummaryNode || !researchCandidatesNode) return;
 
   try {
-    const response = await fetch("fixtures/CrossChainResearchLibrary.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/CrossChainResearchLibrary.json");
     const library = buildResearchLibrary(fixture);
     researchSummaryNode.innerHTML = `
       <article><span>Candidates</span><strong>${escapeHtml(library.summary.total)}</strong></article>
@@ -1620,8 +1608,7 @@ async function renderAppLab() {
   if (!appLanesNode) return;
 
   try {
-    const response = await fetch("fixtures/KaspaAppLab.json", { cache: "no-store" });
-    const data = await response.json();
+    const data = await fetchJson("fixtures/KaspaAppLab.json");
     appLanesNode.innerHTML = "";
 
     for (const lane of data.lanes) {
@@ -1644,8 +1631,7 @@ async function renderMinerSignalResearch() {
   if (!signalChannelsNode) return;
 
   try {
-    const response = await fetch("fixtures/MinerSignalResearch.json", { cache: "no-store" });
-    const data = await response.json();
+    const data = await fetchJson("fixtures/MinerSignalResearch.json");
     signalChannelsNode.innerHTML = "";
 
     for (const channel of data.channels) {
@@ -1668,8 +1654,7 @@ async function renderAttestationRegistry() {
   if (!attestationSummaryNode || !attestationSourcesNode || !attestationSignalsNode) return;
 
   try {
-    const response = await fetch("fixtures/AttestationSignals.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/AttestationSignals.json");
     const registry = buildAttestationRegistry(fixture);
     attestationSummaryNode.innerHTML = `
       <article><span>Total</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
@@ -1713,12 +1698,13 @@ async function renderPredictionHedgeSimulator() {
   if (!predictionSummaryNode || !predictionMarketsNode || !predictionSuggestionsNode) return;
 
   try {
-    const [fixtureResponse, attestationResponse] = await Promise.all([
-      fetch("fixtures/PredictionHedgeSimulator.json", { cache: "no-store" }),
-      fetch("fixtures/AttestationSignals.json", { cache: "no-store" })
-    ]);
-    const fixture = await fixtureResponse.json();
-    const attestationFixture = await attestationResponse.json();
+    const {
+      fixture,
+      attestationFixture
+    } = await fetchJsonMap({
+      fixture: "fixtures/PredictionHedgeSimulator.json",
+      attestationFixture: "fixtures/AttestationSignals.json"
+    });
     const attestationRegistry = buildAttestationRegistry(attestationFixture);
     const attestationThresholds = buildAttestationReputationThresholds({ attestationRegistry });
     const simulator = buildPredictionHedgeSimulator({ fixture, attestationRegistry, attestationThresholds });
@@ -1777,8 +1763,7 @@ async function renderVaultTemplates() {
   if (!vaultTemplatesNode) return;
 
   try {
-    const response = await fetch("fixtures/VaultTemplates.json", { cache: "no-store" });
-    const data = await response.json();
+    const data = await fetchJson("fixtures/VaultTemplates.json");
     vaultTemplatesNode.innerHTML = "";
 
     for (const template of data.templates) {

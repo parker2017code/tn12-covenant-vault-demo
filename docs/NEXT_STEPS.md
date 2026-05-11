@@ -7,8 +7,8 @@ This file is the short queue. It does not replace the generated artifacts; it po
 ## Current Position
 
 - TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
-- Mainnet deployment readiness is still about `55-60%`.
-- Proof-lab auditability is roughly `89-91%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, generated-shape checks, wallet-submit readiness checks, attestation/invoice/research checks, batch-assurance checks, escrow-marketplace checks, treasury/access checks, market/DeFi/stable/agent checks, indexer replay checks, and count drift guards.
+- Mainnet deployment readiness is still about `58-62%`.
+- Proof-lab auditability is roughly `90-92%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, generated-shape checks, wallet-submit readiness checks, signer-return validation checks, submit-result promotion checks, attestation/invoice/research checks, batch-assurance checks, escrow-marketplace checks, treasury/access checks, market/DeFi/stable/agent checks, indexer replay/rollback checks, and count drift guards.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 
@@ -21,9 +21,9 @@ These are the practical cleanup tasks surfaced by the latest repo reviews and Gi
 | 1 | Keep splitting `scripts/check.mjs` into focused domain tests. | Smaller failures are easier for an outside reviewer to trust and debug. Wallet-submit, attestation/invoice/research, batch-assurance, escrow-marketplace, treasury/access, market/DeFi/stable/agent, and indexer-replay slices now have focused tests. | No |
 | 2 | Add mutation coverage to proof-record tests. | The verifier should prove it catches bad source, amount, output, fee, and timing records. | No |
 | 3 | Derive public counts from canonical artifacts. | README/UI/operator-pack count drift should fail a check instead of relying on manual updates. Payload, proof-path, role-separated, checkpoint/indexed, and operator receipt counts now have a stronger local guard. | No |
-| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. Shared formatting/form/data-loading helpers are now extracted; renderer/page extraction remains next. | No |
+| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. Shared formatting/form/data-loading helpers are now extracted; fixture/artifact fetches now use the shared loader, leaving only the live TN12 API fetch in `app.js`. Renderer/page extraction remains next. | No |
 | 5 | Keep claim vocabulary close to public claims. | Reviewers should always know what is script-enforced, planner-only, indexer-derived, TN12-accepted, or mainnet-blocked. | No |
-| 6 | Continue exact validation for addresses, txids, amounts, and artifact shapes. | Prefix checks and loose fixtures are acceptable for drafts, not reviewer evidence. Generated public artifacts now have a first shape gate; deeper per-artifact schemas remain useful. | No |
+| 6 | Continue exact validation for addresses, txids, amounts, artifact shapes, signer returns, and rollback promotion. | Prefix checks and loose fixtures are acceptable for drafts, not reviewer evidence. Generated public artifacts, signer-return metadata, submit-result promotion rules, and rollback cases now have focused gates; deeper per-artifact schemas remain useful. | No |
 | 7 | Keep historical reports archived and non-canonical. | The root and reviewer path should stay short enough to audit. | No |
 | 8 | Move command, artifact, and count inventories toward manifest-driven checks. | Generated indexes should prevent docs, UI, and artifact packs from drifting. | No |
 
@@ -44,7 +44,7 @@ These are not all needed for the next commit, but they are the path from proof l
 | Task | Clears |
 |---|---|
 | Real external-signer round trip | Repo no longer needs local keys for the selected demo path |
-| Production wallet/indexer hardening | Operator can trust state recovery, monitoring, and retry behavior |
+| Production wallet/indexer hardening | Focused tests now cover signer-return validation, submit-result promotion rules, missing-txid rollback, blue-score regression, and virtual-chain rollback rows; live external signing and live rollback evidence still remain |
 | Live removed-block rollback capture | Replay promotion is backed by real TN12 rollback evidence |
 | Fresh accepted payload receipt through the operator pack | Demonstrates the current user-facing receipt loop |
 | Public docs stay proof-first after each change | Prevents roadmap/status drift |
