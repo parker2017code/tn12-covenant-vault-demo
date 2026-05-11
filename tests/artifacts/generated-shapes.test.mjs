@@ -1,0 +1,65 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+
+const txid = /^[0-9a-f]{64}$/;
+
+const provenStatus = await readJson("artifacts/proven-status.json");
+assert.equal(provenStatus.schema, "tn12-proven-status/v1");
+assert.equal(provenStatus.network, "kaspa-testnet-12");
+assert.ok(provenStatus.acceptedEvidence.payloadEvents > 0);
+assert.ok(provenStatus.acceptedEvidence.proofTransactions > 0);
+assert.ok(provenStatus.boundaries.some((boundary) => /No-local-key signing/.test(boundary)));
+assert.equal(provenStatus.readiness.externalSignerAccepted, false);
+
+const proofEvidence = await readJson("artifacts/proof-evidence.json");
+assert.equal(proofEvidence.schema, "tn12-contract-spend-evidence/v1");
+assert.ok(proofEvidence.summary.accepted > 0);
+for (const proof of proofEvidence.proofs) {
+  assert.match(proof.txid, txid);
+  assert.equal(proof.accepted, true);
+  assert.ok(proof.entrypoint);
+  assert.equal(proof.checks.sourceOutpointMatchesExpected, true);
+  assert.equal(proof.checks.outputAddressMatchesExpected, true);
+}
+
+const roleProofEvidence = await readJson("artifacts/role-separated-proof-evidence.json");
+assert.equal(roleProofEvidence.schema, "tn12-contract-spend-evidence/v1");
+assert.equal(roleProofEvidence.summary.total, 7);
+assert.equal(roleProofEvidence.summary.accepted, 7);
+assert.equal(roleProofEvidence.summary.matchedInputs, 7);
+
+const payloadEvents = await readJson("fixtures/PayloadEventEvidence.json");
+assert.ok(Array.isArray(payloadEvents.events));
+for (const event of payloadEvents.events) {
+  assert.ok(event.label);
+  assert.ok(event.draftPath?.startsWith("artifacts/signed-drafts/"));
+  assert.ok(event.outPath?.startsWith("artifacts/"));
+  const evidence = await readJson(event.outPath);
+  assert.match(evidence.txid, txid);
+  assert.equal(evidence.accepted, true);
+  assert.ok(evidence.payload?.decoded?.payload?.subject || evidence.invoiceId);
+  assert.equal(evidence.payload?.matches ?? evidence.payloadMatches ?? evidence.receiptMatches, true);
+}
+
+const operatorPack = await readJson("artifacts/operator-receipt-pack.json");
+assert.equal(operatorPack.schema, "tn12-operator-receipt-pack/v1");
+assert.equal(operatorPack.status, "operator-receipt-pack-ready");
+assert.equal(operatorPack.evidence.payloadEvents, payloadEvents.events.length);
+assert.ok(operatorPack.wallet.boundary.includes("Local testnet wallet signing only"));
+for (const receipt of operatorPack.wallet.acceptedReceipts) {
+  assert.match(receipt.txid, txid);
+  assert.ok(receipt.subject);
+}
+
+const nextTen = await readJson("artifacts/next-ten-execution-status.json");
+assert.equal(nextTen.schema, "tn12-next-ten-execution-status/v1");
+assert.equal(nextTen.status, "next-ten-execution-status-review");
+assert.ok(nextTen.currentCompletionEstimate.afterLocalSlice);
+assert.equal(nextTen.summary.externalSignerStillRequired, true);
+assert.ok(nextTen.blockers.some((blocker) => /external[- ]signer/i.test(blocker)));
+
+console.log("Generated artifact shape tests passed.");
+
+async function readJson(path) {
+  return JSON.parse(await readFile(path, "utf8"));
+}

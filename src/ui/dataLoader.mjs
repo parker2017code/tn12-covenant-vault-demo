@@ -12,3 +12,11 @@ export async function fetchJsonMap(paths) {
   );
   return Object.fromEntries(entries);
 }
+
+export async function fetchOptionalJson(path) {
+  try {
+    return await fetchJson(path);
+  } catch {
+    return null;
+  }
+}

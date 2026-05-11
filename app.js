@@ -65,7 +65,8 @@ import {
 } from "./src/ui/forms.mjs";
 import {
   fetchJson,
-  fetchJsonMap
+  fetchJsonMap,
+  fetchOptionalJson
 } from "./src/ui/dataLoader.mjs";
 
 const form = document.querySelector("#policy-form");
@@ -748,8 +749,7 @@ async function renderAssetPolicies() {
   if (!assetSummaryNode || !assetListNode) return;
 
   try {
-    const response = await fetch("fixtures/SimpleAssetPolicies.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/SimpleAssetPolicies.json");
     const registry = buildAssetPolicyRegistry(fixture);
     assetSummaryNode.innerHTML = `
       <article><span>Policies</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
@@ -779,8 +779,7 @@ async function renderBuildStatus() {
   if (!buildStatusSummaryNode || !buildStatusLanesNode) return;
 
   try {
-    const response = await fetch("fixtures/BuildStatus.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/BuildStatus.json");
     const status = buildProjectStatus(fixture);
     const plan = buildProjectPlan(fixture);
     buildStatusSummaryNode.innerHTML = `
@@ -834,8 +833,7 @@ async function renderProvenStatus() {
   if (!provenStatusSummaryNode || !provenStatusBlockersNode) return;
 
   try {
-    const response = await fetch("artifacts/proven-status.json", { cache: "no-store" });
-    const status = await response.json();
+    const status = await fetchJson("artifacts/proven-status.json");
     provenStatusSummaryNode.innerHTML = `
       <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.currentPercent)}</strong><p>After external signer: ${escapeHtml(status.afterExternalSignerPercent)}.</p></article>
       <article><span>Checkpoint</span><strong>${escapeHtml(status.acceptedEvidence.checkpointRecords)}</strong><p>${escapeHtml(status.acceptedEvidence.matchedRecords)} matched records.</p></article>
@@ -865,8 +863,7 @@ async function renderOperatorPack() {
   if (!operatorPackSummaryNode || !operatorPackCommandsNode) return;
 
   try {
-    const response = await fetch("artifacts/operator-receipt-pack.json", { cache: "no-store" });
-    const pack = await response.json();
+    const pack = await fetchJson("artifacts/operator-receipt-pack.json");
     operatorPackSummaryNode.innerHTML = `
       <article><span>${escapeHtml(pack.status)}</span><strong>${escapeHtml(pack.currentPercent)}</strong><p>${escapeHtml(pack.evidence.checkpointRecords)} accepted records.</p></article>
       <article><span>Payloads</span><strong>${escapeHtml(pack.evidence.payloadEvents)}</strong><p>${escapeHtml(pack.evidence.manifestEvents)} manifest events.</p></article>
@@ -894,8 +891,7 @@ async function renderNextWorkQueue() {
   if (!nextQueueSummaryNode || !nextQueueTopNode || !nextQueueTasksNode) return;
 
   try {
-    const response = await fetch("fixtures/NextWorkQueue.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/NextWorkQueue.json");
     const queue = buildNextWorkQueue(fixture);
     nextQueueSummaryNode.innerHTML = `
       <article><span>Done</span><strong>${escapeHtml(queue.summary.done)}</strong></article>
@@ -937,8 +933,7 @@ async function renderNextTenStatus() {
   if (!nextTenStatusNode || !nextTenTasksNode) return;
 
   try {
-    const response = await fetch("artifacts/next-ten-execution-status.json", { cache: "no-store" });
-    const status = await response.json();
+    const status = await fetchJson("artifacts/next-ten-execution-status.json");
     nextTenStatusNode.innerHTML = `
       <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.summary.completed)} / ${escapeHtml(status.summary.tasks)} done</strong><p>${escapeHtml(status.summary.realizedGainPercent)}% local gain realized; ${escapeHtml(status.summary.totalPotentialGainPercent)}% total potential.</p></article>
       <article><span>Completion</span><strong>${escapeHtml(status.currentCompletionEstimate.afterLocalSlice)}</strong><p>After real external signer: ${escapeHtml(status.currentCompletionEstimate.afterRealExternalSigner)}.</p></article>
@@ -964,8 +959,7 @@ async function renderAuctionIntents() {
   if (!auctionSummaryNode || !auctionListNode) return;
 
   try {
-    const response = await fetch("fixtures/AuctionIntentPrototype.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/AuctionIntentPrototype.json");
     const prototype = buildAuctionIntentPrototype(fixture);
     auctionSummaryNode.innerHTML = `
       <article><span>Auctions</span><strong>${escapeHtml(prototype.summary.auctions)}</strong></article>
@@ -988,9 +982,8 @@ async function renderAuctionIntents() {
       auctionListNode.append(article);
     }
 
-    const custodyResponse = await fetch("artifacts/auction-custody-review.json", { cache: "no-store" });
-    if (custodyResponse.ok) {
-      const custody = await custodyResponse.json();
+    const custody = await fetchOptionalJson("artifacts/auction-custody-review.json");
+    if (custody) {
       const article = document.createElement("article");
       article.className = "auction-card";
       article.innerHTML = `
@@ -1010,8 +1003,7 @@ async function renderDefiBacklog() {
   if (!defiSummaryNode || !defiListNode) return;
 
   try {
-    const response = await fetch("fixtures/DefiResearchBacklog.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/DefiResearchBacklog.json");
     const backlog = buildDefiResearchBacklog(fixture);
     defiSummaryNode.innerHTML = `
       <article><span>Briefs</span><strong>${escapeHtml(backlog.summary.total)}</strong></article>
@@ -1041,8 +1033,7 @@ async function renderStableValuePaths() {
   if (!stableSummaryNode || !stableListNode) return;
 
   try {
-    const response = await fetch("fixtures/StableValuePaths.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/StableValuePaths.json");
     const registry = buildStableValuePathRegistry(fixture);
     stableSummaryNode.innerHTML = `
       <article><span>Paths</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
@@ -1072,8 +1063,7 @@ async function renderStableIssuerRedemptions() {
   if (!stableIssuerSummaryNode || !stableIssuerListNode) return;
 
   try {
-    const response = await fetch("fixtures/StableIssuerRedemptions.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/StableIssuerRedemptions.json");
     const state = buildStableIssuerRedemptionState(fixture);
     stableIssuerSummaryNode.innerHTML = `
       <article><span>Issued</span><strong>${escapeHtml(state.summary.acceptedIssuedDisplay)}</strong></article>
@@ -1103,8 +1093,7 @@ async function renderAgentCommitments() {
   if (!agentSummaryNode || !agentListNode) return;
 
   try {
-    const response = await fetch("fixtures/AgentCommitments.json", { cache: "no-store" });
-    const fixture = await response.json();
+    const fixture = await fetchJson("fixtures/AgentCommitments.json");
     const board = buildAgentCommitmentBoard(fixture);
     agentSummaryNode.innerHTML = `
       <article><span>Tasks</span><strong>${escapeHtml(board.summary.tasks)}</strong></article>
@@ -1127,9 +1116,8 @@ async function renderAgentCommitments() {
       agentListNode.append(article);
     }
 
-    const reviewResponse = await fetch("artifacts/agent-settlement-review.json", { cache: "no-store" });
-    if (reviewResponse.ok) {
-      const review = await reviewResponse.json();
+    const review = await fetchOptionalJson("artifacts/agent-settlement-review.json");
+    if (review) {
       const article = document.createElement("article");
       article.className = "agent-card";
       article.innerHTML = `
