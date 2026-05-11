@@ -28,6 +28,12 @@ const EXPECTED = [
     path: "artifacts/defi-multi-wallet-scenario-pack.json",
     schema: "tn12-defi-multi-wallet-scenario-pack/v1",
     command: "npm run defi:multi-wallet"
+  },
+  {
+    id: "accepted-activity",
+    path: "artifacts/defi-accepted-activity-ledger.json",
+    schema: "tn12-defi-accepted-activity-ledger/v1",
+    command: "npm run defi:accepted-activity"
   }
 ];
 

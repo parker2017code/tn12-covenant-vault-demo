@@ -64,6 +64,7 @@ const defiArtifacts = [
   ["artifacts/defi-scenario-reducer.json", "tn12-defi-scenario-reducer/v1"],
   ["artifacts/defi-advanced-simulation.json", "tn12-defi-advanced-simulation/v1"],
   ["artifacts/defi-multi-wallet-scenario-pack.json", "tn12-defi-multi-wallet-scenario-pack/v1"],
+  ["artifacts/defi-accepted-activity-ledger.json", "tn12-defi-accepted-activity-ledger/v1"],
   ["artifacts/defi-artifact-manifest.json", "tn12-defi-artifact-manifest/v1"]
 ];
 

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-planner-simulation/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T15:56:59.536Z",
+  "generatedAt": "2026-05-11T16:26:44.125Z",
   "status": "planner-only-defi-simulation-ready",
   "enforcement": "PLANNER_ONLY",
   "summary": {
@@ -11,8 +11,8 @@
     "custodyReadyLanes": 0,
     "scriptEnforcedLanes": 0,
     "blockedLiveLanes": 5,
-    "acceptedRecordsUsed": 46,
-    "acceptedPayloadEventsUsed": 33,
+    "acceptedRecordsUsed": 47,
+    "acceptedPayloadEventsUsed": 34,
     "acceptedProofSpendsUsed": 9,
     "walletPromotions": 0,
     "negativeCases": 5,
@@ -38,8 +38,8 @@
       "indexerState": "accepted-records-replayable-from-fixtures",
       "walletState": "wallet-results-validated-no-live-wallet-promotion",
       "acceptedInputs": {
-        "records": 46,
-        "payloadEvents": 33,
+        "records": 47,
+        "payloadEvents": 34,
         "proofs": 9
       },
       "checks": [
@@ -138,8 +138,8 @@
       "indexerState": "accepted-records-replayable-from-fixtures",
       "walletState": "wallet-results-validated-no-live-wallet-promotion",
       "acceptedInputs": {
-        "records": 46,
-        "payloadEvents": 33,
+        "records": 47,
+        "payloadEvents": 34,
         "proofs": 9
       },
       "checks": [
@@ -229,8 +229,8 @@
       "indexerState": "accepted-records-replayable-from-fixtures",
       "walletState": "wallet-results-validated-no-live-wallet-promotion",
       "acceptedInputs": {
-        "records": 46,
-        "payloadEvents": 33,
+        "records": 47,
+        "payloadEvents": 34,
         "proofs": 9
       },
       "checks": [
@@ -341,8 +341,8 @@
       "indexerState": "accepted-records-replayable-from-fixtures",
       "walletState": "wallet-results-validated-no-live-wallet-promotion",
       "acceptedInputs": {
-        "records": 46,
-        "payloadEvents": 33,
+        "records": 47,
+        "payloadEvents": 34,
         "proofs": 9
       },
       "checks": [
@@ -463,8 +463,8 @@
       "indexerState": "accepted-records-replayable-from-fixtures",
       "walletState": "wallet-results-validated-no-live-wallet-promotion",
       "acceptedInputs": {
-        "records": 46,
-        "payloadEvents": 33,
+        "records": 47,
+        "payloadEvents": 34,
         "proofs": 9
       },
       "checks": [

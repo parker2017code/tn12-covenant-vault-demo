@@ -13,6 +13,7 @@ Start here:
 - `artifacts/operator-receipt-pack.json`: accepted evidence plus the local-wallet command path.
 - `docs/AUDIT_MAP.md`: canonical claim, status, and enforcement-class map.
 - `docs/CLAIM_VOCABULARY.md`: short definitions for `SCRIPT_ENFORCED`, `PLANNER_ONLY`, `INDEXER_DERIVED`, and related labels.
+- `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
 - `docs/NEXT_STEPS.md`: short current execution queue.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
@@ -28,7 +29,8 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 | Buyer-controlled escrow primitive | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
 | Role-separated positive paths, all 7 | `TN12_ACCEPTED` | `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
-| 33 payload events, including 6 DeFi v1 receipts and 1 agent release wallet-review event | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
+| 34 payload events, including 7 DeFi v1 receipts and 1 agent release wallet-review event | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
+| 15 accepted local-key DeFi custody/activity transfer rows across funded users, pool deposits, and pool payouts | `LOCAL_KEY_CUSTODY_TEST` | `artifacts/defi-accepted-activity-ledger.json` |
 | Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |
 
 ## NOT Proven
@@ -66,6 +68,7 @@ npm run demo:operator-refresh
 |---|---|
 | Reviewer claim map | `docs/AUDIT_MAP.md` |
 | Script groups | `docs/SCRIPT_INDEX.md` |
+| TangVM / scheduler boundary | `docs/TANGVM_UNISC_BOUNDARY.md` |
 | Tidying map | `docs/REPO_TIDYING.md` |
 | Next steps | `docs/NEXT_STEPS.md` |
 | Reviewer manifest | `artifacts/project-review-manifest.json` |
@@ -81,6 +84,7 @@ npm run demo:operator-refresh
 | DeFi scenario reducer | `artifacts/defi-scenario-reducer.json` |
 | DeFi advanced simulation | `artifacts/defi-advanced-simulation.json` |
 | DeFi multi-wallet scenario pack | `artifacts/defi-multi-wallet-scenario-pack.json` |
+| DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |

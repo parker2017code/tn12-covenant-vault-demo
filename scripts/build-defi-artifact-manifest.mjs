@@ -9,7 +9,8 @@ const manifest = buildDefiArtifactManifest({
     scenario: await readJson("artifacts/defi-scenario-simulation.json"),
     reducer: await readJson("artifacts/defi-scenario-reducer.json"),
     advanced: await readJson("artifacts/defi-advanced-simulation.json"),
-    "multi-wallet": await readJson("artifacts/defi-multi-wallet-scenario-pack.json")
+    "multi-wallet": await readJson("artifacts/defi-multi-wallet-scenario-pack.json"),
+    "accepted-activity": await readJson("artifacts/defi-accepted-activity-ledger.json")
   }
 });
 

@@ -1,0 +1,115 @@
+{
+  "schema": "tn12-multi-p2pk-transfer-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-11T16:16:02.030Z",
+  "status": "accepted-transfer-matched",
+  "txid": "93b7e4d6558f8412b22b6d7117469301dc77053db085f03b10eed313f5f91058",
+  "accepted": true,
+  "acceptingBlockBlueScore": 8923228,
+  "acceptingBlockTime": 1778516150853,
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "3ce699131e814fab8a9fb303ad44b738f6d61fd96278388ee3e63d57c9cd7f98",
+    "outputIndex": 1,
+    "amountTkas": 703.2979
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "label": "user-01 seed funding",
+      "expected": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh"
+      },
+      "observed": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 1,
+      "label": "user-02 seed funding",
+      "expected": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v"
+      },
+      "observed": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 2,
+      "label": "user-03 seed funding",
+      "expected": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z"
+      },
+      "observed": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 3,
+      "label": "user-04 seed funding",
+      "expected": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9"
+      },
+      "observed": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 4,
+      "label": "user-05 seed funding",
+      "expected": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf"
+      },
+      "observed": {
+        "amountSompi": "2000000000",
+        "address": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 5,
+      "label": "change",
+      "expected": {
+        "amountSompi": "60329785000",
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+      },
+      "observed": {
+        "amountSompi": "60329785000",
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    }
+  ],
+  "explorerUrl": "https://tn12.kaspa.stream/txs/93b7e4d6558f8412b22b6d7117469301dc77053db085f03b10eed313f5f91058"
+}

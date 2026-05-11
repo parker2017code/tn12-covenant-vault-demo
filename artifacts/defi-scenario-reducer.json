@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-scenario-reducer/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T15:57:00.259Z",
+  "generatedAt": "2026-05-11T16:26:44.820Z",
   "status": "scenario-reducer-ready-not-custody",
   "enforcement": "INDEXER_DERIVED",
   "summary": {

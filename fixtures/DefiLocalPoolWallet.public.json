@@ -1,0 +1,8 @@
+{
+  "schema": "tn12-defi-local-pool-wallet-public/v1",
+  "network": "kaspa-testnet-12",
+  "role": "defi-local-operator-pool",
+  "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+  "xOnlyPublicKey": "0284f04662fcc5f1b50329db7c39a09f66abd2a85d189a315c49d893a5a25232",
+  "warning": "Public metadata only. Private key remains in .local/tn12-defi-pool-wallet.json."
+}

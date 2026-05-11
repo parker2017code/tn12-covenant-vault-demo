@@ -437,8 +437,8 @@ const provenStatus = buildProvenStatus({
 });
 assert.equal(provenStatus.status, "tn12-demo-proof-ready-mainnet-deferred");
 assert.equal(provenStatus.currentPercent, "53-58%");
-assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 46);
-assert.equal(provenStatus.acceptedEvidence.payloadEvents, 33);
+assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 47);
+assert.equal(provenStatus.acceptedEvidence.payloadEvents, 34);
 assert.equal(provenStatus.readiness.durablePromotionReady, false);
 assert.deepEqual(provenStatus.demoBlockers, []);
 assert.ok(provenStatus.mainnetDeferredBlockers.includes("external signer accepted result missing"));
@@ -460,8 +460,8 @@ const operatorReceiptPack = buildOperatorReceiptPack({
 });
 assert.equal(operatorReceiptPack.status, "operator-receipt-pack-ready");
 assert.equal(operatorReceiptPack.currentPercent, "53-58%");
-assert.equal(operatorReceiptPack.evidence.checkpointRecords, 46);
-assert.equal(operatorReceiptPack.evidence.payloadEvents, 33);
+assert.equal(operatorReceiptPack.evidence.checkpointRecords, 47);
+assert.equal(operatorReceiptPack.evidence.payloadEvents, 34);
 assert.equal(operatorReceiptPack.custody.auctionReadyRows, 2);
 assert.equal(operatorReceiptPack.custody.agentReadyRows, 2);
 assert.ok(operatorReceiptPack.nextCommandPath.every((row) => row.ready));

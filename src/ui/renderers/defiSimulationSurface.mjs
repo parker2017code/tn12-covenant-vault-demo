@@ -7,12 +7,13 @@ export async function renderDefiSimulationSurface(documentRef = document) {
   if (!summaryNode || !listNode) return;
 
   try {
-    const [planner, scenario, reducer, advanced, multiWallet, manifest] = await Promise.all([
+    const [planner, scenario, reducer, advanced, multiWallet, acceptedActivity, manifest] = await Promise.all([
       fetchJson("artifacts/defi-planner-simulation.json"),
       fetchJson("artifacts/defi-scenario-simulation.json"),
       fetchJson("artifacts/defi-scenario-reducer.json"),
       fetchJson("artifacts/defi-advanced-simulation.json"),
       fetchJson("artifacts/defi-multi-wallet-scenario-pack.json"),
+      fetchJson("artifacts/defi-accepted-activity-ledger.json"),
       fetchJson("artifacts/defi-artifact-manifest.json")
     ]);
 
@@ -22,6 +23,8 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       <article><span>Scenario refs</span><strong>${escapeHtml(scenario.summary.acceptedReferencesIndexed)}/${escapeHtml(scenario.summary.acceptedReferences)}</strong></article>
       <article><span>Reducer state</span><strong>${escapeHtml(reducer.summary.promotedReviewRows)} review</strong></article>
       <article><span>Advanced blocks</span><strong>${escapeHtml(advanced.summary.ammBlockedActions + advanced.summary.oracleBlockedCases + advanced.summary.lendingBlocked)}</strong></article>
+      <article><span>Accepted transfers</span><strong>${escapeHtml(acceptedActivity.summary.acceptedTransferRows)}</strong></article>
+      <article><span>Pool net</span><strong>${escapeHtml(acceptedActivity.summary.poolNetTkas)} TKAS</strong></article>
       <article><span>Wallet roles</span><strong>${escapeHtml(multiWallet.summary.roles)}</strong></article>
       <article><span>External signer claims</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
     `;
@@ -35,15 +38,21 @@ export async function renderDefiSimulationSurface(documentRef = document) {
         foot: "npm run defi:manifest"
       },
       {
+        status: acceptedActivity.status,
+        title: "Accepted TN12 activity ledger",
+        body: `${acceptedActivity.summary.acceptedTransferRows} accepted transfer rows; ${acceptedActivity.summary.poolDeposits} pool deposits; ${acceptedActivity.summary.poolPayouts} pool payouts; pool net ${acceptedActivity.summary.poolNetTkas} TKAS.`,
+        foot: "npm run defi:accepted-activity"
+      },
+      {
         status: planner.status,
-        title: "Planner simulation",
-        body: `${planner.summary.simulationReadyLanes} lanes simulation-ready; ${planner.summary.blockedLiveLanes} live-product lanes blocked.`,
+        title: "Planner-only market logic",
+        body: `${planner.summary.simulationReadyLanes} lanes checked; ${planner.summary.blockedLiveLanes} live-product lanes blocked.`,
         foot: "npm run defi:simulation"
       },
       {
         status: scenario.status,
         title: "Scenario math",
-        body: `${scenario.summary.executableSwapSimulations} swap simulation ok; ${scenario.summary.slippageBlockedSwaps} min-output block; ${scenario.summary.lendingPositions} lending positions.`,
+        body: `${scenario.summary.executableSwapSimulations} swap math row ok; ${scenario.summary.slippageBlockedSwaps} min-output block; ${scenario.summary.lendingPositions} lending positions.`,
         foot: "npm run defi:scenario"
       },
       {
@@ -78,6 +87,6 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       listNode.append(article);
     }
   } catch (error) {
-    summaryNode.textContent = `DeFi simulation surface unavailable: ${error.message}`;
+    summaryNode.textContent = `DeFi accepted-activity surface unavailable: ${error.message}`;
   }
 }

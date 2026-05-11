@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-11T15:29:04.661Z",
+  "fetchedAt": "2026-05-11T16:27:52.038Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -11,9 +11,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 46,
+    "recordCount": 47,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 8464324,
+    "maxAcceptingBlockBlueScore": 8920215,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -57,6 +57,7 @@
       "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
       "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
       "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
+      "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -65,12 +66,12 @@
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 46,
+    "total": 47,
     "proofs": 9,
-    "payloadEvents": 33,
+    "payloadEvents": 34,
     "outputEvidence": 4,
-    "accepted": 46,
-    "matched": 46,
+    "accepted": 47,
+    "matched": 47,
     "mismatches": 0,
     "lanes": [
       {
@@ -153,6 +154,12 @@
       },
       {
         "lane": "batch-assurance-settlement-output",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "defi-activity",
         "total": 1,
         "accepted": 1,
         "matched": 1
@@ -2043,6 +2050,55 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "defi-activity",
+      "label": "DeFi v1 accepted activity 005",
+      "txid": "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 8920215,
+      "acceptingBlockTime": 1778515824960,
+      "draftPath": "artifacts/signed-drafts/tn12-defi-v1-accepted-activity-005.json",
+      "evidencePath": "artifacts/payload-defi-v1-accepted-activity-005-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a22646566692d6163746976697479222c227375626a656374223a22646566692d76312d61636365707465642d61637469766974792d303035222c2276616c7565223a226c6f63616c2d77616c6c65742d746e31322d6578656375746564222c226e6f7465223a224672657368207265616c20544e3132206c6f63616c2d77616c6c6574204465466920616374697669747920726563656970743b20617070206c6f6769632072656d61696e7320696e64657865722d646572697665642c206e6f742070726f64756374696f6e20637573746f64792e227d",
+        "observedHex": "7b226b696e64223a22646566692d6163746976697479222c227375626a656374223a22646566692d76312d61636365707465642d61637469766974792d303035222c2276616c7565223a226c6f63616c2d77616c6c65742d746e31322d6578656375746564222c226e6f7465223a224672657368207265616c20544e3132206c6f63616c2d77616c6c6574204465466920616374697669747920726563656970743b20617070206c6f6769632072656d61696e7320696e64657865722d646572697665642c206e6f742070726f64756374696f6e20637573746f64792e227d",
+        "matches": true,
+        "bytes": 223,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "defi-activity",
+            "subject": "defi-v1-accepted-activity-005",
+            "value": "local-wallet-tn12-executed",
+            "note": "Fresh real TN12 local-wallet DeFi activity receipt; app logic remains indexer-derived, not production custody."
+          },
+          "encoded": {
+            "bytes": 223,
+            "hex": "7b226b696e64223a22646566692d6163746976697479222c227375626a656374223a22646566692d76312d61636365707465642d61637469766974792d303035222c2276616c7565223a226c6f63616c2d77616c6c65742d746e31322d6578656375746564222c226e6f7465223a224672657368207265616c20544e3132206c6f63616c2d77616c6c6574204465466920616374697669747920726563656970743b20617070206c6f6769632072656d61696e7320696e64657865722d646572697665642c206e6f742070726f64756374696f6e20637573746f64792e227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "100000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030"
     },
     {
       "kind": "accepted-output",

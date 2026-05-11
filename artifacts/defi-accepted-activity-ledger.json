@@ -1,0 +1,354 @@
+{
+  "schema": "tn12-defi-accepted-activity-ledger/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T16:26:45.764Z",
+  "status": "accepted-activity-ledger-ready",
+  "enforcement": "LOCAL_KEY_CUSTODY_TEST",
+  "summary": {
+    "acceptedReceiptRows": 7,
+    "acceptedTransferRows": 15,
+    "poolDeposits": 8,
+    "poolPayouts": 2,
+    "participantAddresses": 9,
+    "poolNetTkas": "60",
+    "liveProductClaims": 0,
+    "externalSignerClaims": 0,
+    "autonomousCustodyClaims": 0,
+    "mainnetClaims": 0
+  },
+  "pool": {
+    "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+    "depositsTkas": "70",
+    "payoutsTkas": "10",
+    "netTkas": "60"
+  },
+  "receiptRows": [
+    {
+      "label": "DeFi v1 live receipt",
+      "evidencePath": "artifacts/payload-defi-v1-live-receipt-evidence.json",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "accepted": true,
+      "payloadMatches": true,
+      "subject": "defi-v1-live-receipt-001",
+      "value": "paid",
+      "note": "Live funded TN12 DeFi v1 receipt from fresh wallet",
+      "acceptingBlockBlueScore": 8199289
+    },
+    {
+      "label": "DeFi v1 repeat receipt",
+      "evidencePath": "artifacts/payload-defi-v1-repeat-receipt-evidence.json",
+      "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+      "accepted": true,
+      "payloadMatches": true,
+      "subject": "defi-v1-live-receipt-002",
+      "value": "paid",
+      "note": "Repeat live funded TN12 DeFi v1 receipt from current change UTXO",
+      "acceptingBlockBlueScore": 8210235
+    },
+    {
+      "label": "DeFi v1 third receipt",
+      "evidencePath": "artifacts/payload-defi-v1-third-receipt-evidence.json",
+      "txid": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
+      "accepted": true,
+      "payloadMatches": true,
+      "subject": "defi-v1-live-receipt-003",
+      "value": "paid",
+      "note": "fresh operator pack receipt",
+      "acceptingBlockBlueScore": 8376287
+    },
+    {
+      "label": "DeFi v1 multi-wallet A receipt",
+      "evidencePath": "artifacts/payload-defi-v1-multi-wallet-a-evidence.json",
+      "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "accepted": true,
+      "payloadMatches": true,
+      "subject": "defi-v1-multi-wallet-a",
+      "value": "paid",
+      "note": "Fresh wallet A live TN12 payload receipt for multi-wallet DeFi v1 test",
+      "acceptingBlockBlueScore": 8228466
+    },
+    {
+      "label": "DeFi v1 multi-wallet B receipt",
+      "evidencePath": "artifacts/payload-defi-v1-multi-wallet-b-evidence.json",
+      "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "accepted": true,
+      "payloadMatches": true,
+      "subject": "defi-v1-multi-wallet-b",
+      "value": "paid",
+      "note": "Fresh wallet B live TN12 payload receipt for multi-wallet DeFi v1 test",
+      "acceptingBlockBlueScore": 8228493
+    },
+    {
+      "label": "DeFi v1 operator pack receipt 004",
+      "evidencePath": "artifacts/payload-defi-v1-operator-pack-004-evidence.json",
+      "txid": "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
+      "accepted": true,
+      "payloadMatches": true,
+      "subject": "defi-v1-operator-pack-004",
+      "value": "paid",
+      "note": "operator pack receipt path after claim tightening",
+      "acceptingBlockBlueScore": 8464324
+    },
+    {
+      "label": "DeFi v1 accepted activity 005",
+      "evidencePath": "artifacts/payload-defi-v1-accepted-activity-005-evidence.json",
+      "txid": "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
+      "accepted": true,
+      "payloadMatches": true,
+      "subject": "defi-v1-accepted-activity-005",
+      "value": "local-wallet-tn12-executed",
+      "note": "Fresh real TN12 local-wallet DeFi activity receipt; app logic remains indexer-derived, not production custody.",
+      "acceptingBlockBlueScore": 8920215
+    }
+  ],
+  "transferRows": [
+    {
+      "path": "artifacts/tn12-defi-pool-deposit-001-evidence.json",
+      "label": "tn12-defi-pool-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "6dddee5efa704fb4751ef7b8e5a83ecf627366163f6f183968759ffd9d815313",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "25",
+      "amountSompi": "2500000000",
+      "acceptingBlockBlueScore": 8921132
+    },
+    {
+      "path": "artifacts/tn12-defi-wallet-a-liquidity-deposit-001-evidence.json",
+      "label": "tn12-defi-wallet-a-liquidity-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "7c987fef3d8978f32130ca19089fe4c7129395d612f4e42084c665c3aee23dd7",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "10",
+      "amountSompi": "1000000000",
+      "acceptingBlockBlueScore": 8921752
+    },
+    {
+      "path": "artifacts/tn12-defi-wallet-b-liquidity-deposit-001-evidence.json",
+      "label": "tn12-defi-wallet-b-liquidity-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "8aa75cf158e85fa1e312fd05009cbec8665dc74197eb306fe49f1671f8b66ae6",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "10",
+      "amountSompi": "1000000000",
+      "acceptingBlockBlueScore": 8921761
+    },
+    {
+      "path": "artifacts/tn12-defi-local-users-funding-001-evidence.json",
+      "label": "user-01 seed funding",
+      "kind": "user-funding",
+      "txid": "93b7e4d6558f8412b22b6d7117469301dc77053db085f03b10eed313f5f91058",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
+      "amountTkas": "20",
+      "amountSompi": "2000000000",
+      "acceptingBlockBlueScore": 8923228
+    },
+    {
+      "path": "artifacts/tn12-defi-local-users-funding-001-evidence.json",
+      "label": "user-02 seed funding",
+      "kind": "user-funding",
+      "txid": "93b7e4d6558f8412b22b6d7117469301dc77053db085f03b10eed313f5f91058",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
+      "amountTkas": "20",
+      "amountSompi": "2000000000",
+      "acceptingBlockBlueScore": 8923228
+    },
+    {
+      "path": "artifacts/tn12-defi-local-users-funding-001-evidence.json",
+      "label": "user-03 seed funding",
+      "kind": "user-funding",
+      "txid": "93b7e4d6558f8412b22b6d7117469301dc77053db085f03b10eed313f5f91058",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+      "amountTkas": "20",
+      "amountSompi": "2000000000",
+      "acceptingBlockBlueScore": 8923228
+    },
+    {
+      "path": "artifacts/tn12-defi-local-users-funding-001-evidence.json",
+      "label": "user-04 seed funding",
+      "kind": "user-funding",
+      "txid": "93b7e4d6558f8412b22b6d7117469301dc77053db085f03b10eed313f5f91058",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
+      "amountTkas": "20",
+      "amountSompi": "2000000000",
+      "acceptingBlockBlueScore": 8923228
+    },
+    {
+      "path": "artifacts/tn12-defi-local-users-funding-001-evidence.json",
+      "label": "user-05 seed funding",
+      "kind": "user-funding",
+      "txid": "93b7e4d6558f8412b22b6d7117469301dc77053db085f03b10eed313f5f91058",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf",
+      "amountTkas": "20",
+      "amountSompi": "2000000000",
+      "acceptingBlockBlueScore": 8923228
+    },
+    {
+      "path": "artifacts/tn12-defi-user-01-pool-deposit-001-evidence.json",
+      "label": "tn12-defi-user-01-pool-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "270d62711492b28a74259700d97d135a3d5d1341cb2cf2971cb3f6c7bc1c6fdc",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "5",
+      "amountSompi": "500000000",
+      "acceptingBlockBlueScore": 8923506
+    },
+    {
+      "path": "artifacts/tn12-defi-user-02-pool-deposit-001-evidence.json",
+      "label": "tn12-defi-user-02-pool-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "fed779306906a76de68f27b33438f827aebae19af077d5e1a34e27ef42cfcc45",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "5",
+      "amountSompi": "500000000",
+      "acceptingBlockBlueScore": 8923521
+    },
+    {
+      "path": "artifacts/tn12-defi-user-03-pool-deposit-001-evidence.json",
+      "label": "tn12-defi-user-03-pool-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "111fff76b36d5d595db464750820ef9d3eaaac0b5320baaedf9efdb6ca705435",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "5",
+      "amountSompi": "500000000",
+      "acceptingBlockBlueScore": 8923548
+    },
+    {
+      "path": "artifacts/tn12-defi-user-04-pool-deposit-001-evidence.json",
+      "label": "tn12-defi-user-04-pool-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "3bd35efcfb631e30313a5e7181edb46f247ddea7bff3706cbb81ee2d12756cb1",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "5",
+      "amountSompi": "500000000",
+      "acceptingBlockBlueScore": 8923577
+    },
+    {
+      "path": "artifacts/tn12-defi-user-05-pool-deposit-001-evidence.json",
+      "label": "tn12-defi-user-05-pool-deposit-001-evidence",
+      "kind": "pool-deposit",
+      "txid": "976a8b3bb5f8222b2749162434d4354a33080e08e9d17652110a8cba5425bb7d",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf",
+      "to": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "amountTkas": "5",
+      "amountSompi": "500000000",
+      "acceptingBlockBlueScore": 8923595
+    },
+    {
+      "path": "artifacts/tn12-defi-pool-swap-payout-user-01-evidence.json",
+      "label": "tn12-defi-pool-swap-payout-user-01-evidence",
+      "kind": "pool-payout",
+      "txid": "5b26c8be6f82371d9d8d42a66d29775a2364b72b3b920e689f493ade5ddcb72f",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "to": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
+      "amountTkas": "7",
+      "amountSompi": "700000000",
+      "acceptingBlockBlueScore": 8924079
+    },
+    {
+      "path": "artifacts/tn12-defi-pool-withdraw-payout-user-02-evidence.json",
+      "label": "tn12-defi-pool-withdraw-payout-user-02-evidence",
+      "kind": "pool-payout",
+      "txid": "4daf48154b50798b690b4e8ef736fe0fbb3e08e748d9c5c1299981ac97b6e06e",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "to": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
+      "amountTkas": "3",
+      "amountSompi": "300000000",
+      "acceptingBlockBlueScore": 8924116
+    }
+  ],
+  "balances": [
+    {
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "netTkas": "-125",
+      "netSompi": "-12500000000"
+    },
+    {
+      "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "netTkas": "60",
+      "netSompi": "6000000000"
+    },
+    {
+      "address": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",
+      "netTkas": "-10",
+      "netSompi": "-1000000000"
+    },
+    {
+      "address": "kaspatest:qr5uzsxlw37qv5wpg00s94249ed7pf00m6hjln6lzypvrmkn7ngu75dcacuzr",
+      "netTkas": "-10",
+      "netSompi": "-1000000000"
+    },
+    {
+      "address": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
+      "netTkas": "22",
+      "netSompi": "2200000000"
+    },
+    {
+      "address": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
+      "netTkas": "18",
+      "netSompi": "1800000000"
+    },
+    {
+      "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+      "netTkas": "15",
+      "netSompi": "1500000000"
+    },
+    {
+      "address": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
+      "netTkas": "15",
+      "netSompi": "1500000000"
+    },
+    {
+      "address": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf",
+      "netTkas": "15",
+      "netSompi": "1500000000"
+    }
+  ],
+  "problems": [],
+  "boundaries": [
+    "These rows are real accepted TN12 local-key transactions.",
+    "Custody movement is operator/local-key custody, not autonomous AMM or liquidation enforcement.",
+    "AMM pricing, oracle truth, and liquidation authority remain planner/indexer-derived until script or wallet policy enforces them."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "tn12-defi-local-user-wallets-public/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T16:15:14.555Z",
+  "warning": "Public metadata only. Private keys remain in .local/tn12-defi-user-*.json.",
+  "wallets": [
+    {
+      "id": "user-01",
+      "role": "defi-local-user-01",
+      "address": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
+      "xOnlyPublicKey": "9584637e8e654ff948288d6b56a330abde4689d8d15299bc1cc65c77516889ce"
+    },
+    {
+      "id": "user-02",
+      "role": "defi-local-user-02",
+      "address": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
+      "xOnlyPublicKey": "a9908b2495b54377b24fb6b8eba1b553d5068aa54f8b8a2f7c06a698fc06ec99"
+    },
+    {
+      "id": "user-03",
+      "role": "defi-local-user-03",
+      "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+      "xOnlyPublicKey": "026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18"
+    },
+    {
+      "id": "user-04",
+      "role": "defi-local-user-04",
+      "address": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
+      "xOnlyPublicKey": "b0c9547deccb885be4384b39fa1f0db2f2896313aadd88d48478d38fadaa4fb8"
+    },
+    {
+      "id": "user-05",
+      "role": "defi-local-user-05",
+      "address": "kaspatest:qrfgc0vqvz4rmmqd7y4m7uzwhfdjzuj3aj898wg0jwyhwnznx2d6qruvz20jf",
+      "xOnlyPublicKey": "d28c3d8060aa3dec0df12bbf704eba5b217251ec8e53b90f9389774c53329ba0"
+    }
+  ]
+}

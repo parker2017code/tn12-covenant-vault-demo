@@ -10,6 +10,7 @@ Short reviewer labels used across the repo.
 | `INDEXER_DERIVED` | Accepted transactions or payload bytes exist; app state is derived by repo/indexer logic. |
 | `TN12_ACCEPTED` | A transaction or payload event is accepted on Kaspa testnet-12 and checked by repo commands. |
 | `TN12_REJECTED` | A candidate was rejected by TN12 or by local validation before being treated as evidence. |
+| `LOCAL_KEY_CUSTODY_TEST` | Real TN12 testnet funds move under repo-held local keys; useful for custody-adjacent testing, not production custody or external wallet signing. |
 | `LOCAL_TEST_ONLY` | Local fixture, draft, simulation, or template evidence; not an accepted TN12 result. |
 | `MAINNET_BLOCKED` | Useful proof exists, but mainnet activation, wallet, indexer, or custody requirements are not met. |
 | `RESEARCH_ONLY` | Design or scouting material, not a working product claim. |

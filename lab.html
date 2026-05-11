@@ -41,7 +41,7 @@
       </div>
       <aside class="facts">
         <span>Proof core</span>
-        <strong>7 core + 2 auction + 7 role-separated + 46 indexed records</strong>
+        <strong>7 core + 2 auction + 7 role-separated + 47 indexed records</strong>
         <p>Vault, assurance, escrow, payload receipts, and batch-assurance outputs have accepted TN12 evidence.</p>
       </aside>
     </section>
@@ -59,7 +59,7 @@
         </article>
         <article>
           <span>Accepted payload events</span>
-          <strong>33</strong>
+          <strong>34</strong>
           <p>JSON wRPC payload receipts include DeFi receipt and agent release events; the public REST route is kept as a no-payload negative result.</p>
         </article>
         <article>
@@ -441,9 +441,9 @@ npm run coordination:settlement-brief</pre>
       <div id="defi-list" class="defi-list" aria-live="polite"></div>
       <pre>npm run defi:backlog</pre>
       <div class="section-title compact-title">
-        <p class="eyebrow">DeFi simulation hardening</p>
-        <h3>Planner, scenario, reducer, advanced, and multi-wallet surfaces.</h3>
-        <p>Deterministic simulations and review-state reducers. No custody or live DeFi claim.</p>
+        <p class="eyebrow">DeFi accepted activity hardening</p>
+        <h3>Accepted TN12 activity, reducers, and bounded market logic.</h3>
+        <p>Local-key users and pool/operator wallets execute funding, deposits, and payouts on TN12. Market pricing, oracle truth, liquidation, production custody, and external signing remain explicitly blocked.</p>
       </div>
       <div id="defi-simulation-summary" class="defi-summary" aria-live="polite"></div>
       <div id="defi-simulation-list" class="defi-list" aria-live="polite"></div>
@@ -451,7 +451,8 @@ npm run coordination:settlement-brief</pre>
 npm run defi:scenario
 npm run defi:reducer
 npm run defi:advanced
-npm run defi:multi-wallet</pre>
+npm run defi:multi-wallet
+npm run defi:accepted-activity</pre>
       <div class="section-title compact-title">
         <p class="eyebrow">Stable-value paths</p>
         <h3>Stable-value paths.</h3>

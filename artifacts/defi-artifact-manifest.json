@@ -1,11 +1,11 @@
 {
   "schema": "tn12-defi-artifact-manifest/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T15:57:01.227Z",
+  "generatedAt": "2026-05-11T16:26:46.069Z",
   "status": "defi-artifact-manifest-ready",
   "summary": {
-    "artifacts": 5,
-    "readyArtifacts": 5,
+    "artifacts": 6,
+    "readyArtifacts": 6,
     "problems": 0,
     "liveProductClaims": 0,
     "custodyActions": 0,
@@ -77,6 +77,19 @@
       "externalSignerClaims": 0,
       "secretFindings": 0,
       "problems": []
+    },
+    {
+      "id": "accepted-activity",
+      "path": "artifacts/defi-accepted-activity-ledger.json",
+      "command": "npm run defi:accepted-activity",
+      "schema": "tn12-defi-accepted-activity-ledger/v1",
+      "status": "accepted-activity-ledger-ready",
+      "ready": true,
+      "liveProductClaims": 0,
+      "custodyActions": 0,
+      "externalSignerClaims": 0,
+      "secretFindings": 0,
+      "problems": []
     }
   ],
   "problems": [],
@@ -85,7 +98,8 @@
     "npm run defi:scenario",
     "npm run defi:reducer",
     "npm run defi:advanced",
-    "npm run defi:multi-wallet"
+    "npm run defi:multi-wallet",
+    "npm run defi:accepted-activity"
   ],
   "boundaries": [
     "This manifest is the reviewer entry point for DeFi simulation artifacts.",

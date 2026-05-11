@@ -69,7 +69,7 @@ export function buildVirtualChainIngestionPlan({
       ]
     },
     acceptanceCriteria: [
-      "A virtual-chain replay can reproduce the current 33-record fixture replay.",
+      "A virtual-chain replay can reproduce the current accepted payload fixture replay.",
       "Wallet-submitted txids do not become app state until seen as accepted by the reader.",
       "Rollback segments block affected lane readiness.",
       "Payload and proof reducers reuse the existing matched-byte and matched-output rules."

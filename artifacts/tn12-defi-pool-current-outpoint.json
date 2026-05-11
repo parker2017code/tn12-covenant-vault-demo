@@ -1,0 +1,29 @@
+{
+  "schema": "tn12-manual-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "fetchedAt": "2026-05-11T16:17:21.770Z",
+  "endpoint": "https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
+  "label": "Fetched funded TN12 wallet UTXO",
+  "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+  "txid": "5b26c8be6f82371d9d8d42a66d29775a2364b72b3b920e689f493ade5ddcb72f",
+  "outputIndex": 1,
+  "amountTkas": 17.99995,
+  "scriptType": "p2pk",
+  "explorerUrl": "https://tn12.kaspa.stream/txs/5b26c8be6f82371d9d8d42a66d29775a2364b72b3b920e689f493ade5ddcb72f",
+  "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4/utxos",
+  "raw": {
+    "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+    "outpoint": {
+      "transactionId": "5b26c8be6f82371d9d8d42a66d29775a2364b72b3b920e689f493ade5ddcb72f",
+      "index": 1
+    },
+    "utxoEntry": {
+      "amount": "1799995000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "200284f04662fcc5f1b50329db7c39a09f66abd2a85d189a315c49d893a5a25232ac"
+      },
+      "blockDaaScore": "9060630",
+      "isCoinbase": false
+    }
+  }
+}

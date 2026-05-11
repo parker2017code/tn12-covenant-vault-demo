@@ -4,14 +4,14 @@
   "status": "durable-indexer-plan-ready",
   "currentCheckpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 46,
+    "recordCount": 47,
     "proofSpends": 9,
-    "payloadEvents": 33,
-    "matched": 46,
+    "payloadEvents": 34,
+    "matched": 47,
     "mismatches": 0,
-    "laneCount": 21,
+    "laneCount": 22,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 8464324,
+    "maxAcceptingBlockBlueScore": 8920215,
     "persistedStatus": "persisted-checkpoint-ready",
     "rollbackDetected": false
   },
@@ -56,7 +56,7 @@
     }
   ],
   "acceptanceCriteria": [
-    "A replay run can rebuild the same 46 accepted records now covered by the checkpoint and verification commands.",
+    "A replay run can rebuild the same 47 accepted records now covered by the checkpoint and verification commands.",
     "The indexer stores the txid, accepting block blue score, payload bytes, output data, and matched reducer status.",
     "A lower blue-score watermark or missing previous txid blocks derived app state until replay finishes.",
     "Payload app state remains tied to matched accepted payload bytes, not submitted txids alone.",
