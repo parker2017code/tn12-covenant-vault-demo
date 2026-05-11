@@ -32,7 +32,15 @@ assert.doesNotMatch(JSON.stringify(Object.values(session).flat()), /\.local\/|xp
 
 const checkedIn = await readJson("artifacts/playground-session.example.json");
 assert.equal(checkedIn.schema, "tn12-playground-session/v1");
+assert.equal(checkedIn.summary.fundedRoles, 6);
+assert.equal(checkedIn.summary.acceptedTxids, 1);
 assert.equal(checkedIn.summary.privateKeysIncluded, 0);
+assert.doesNotMatch(JSON.stringify(checkedIn), /\.local\/|"privateKey"\s*:|"mnemonic"\s*:|"seed"\s*:/i);
+
+const fundingEvidence = await readJson("artifacts/playground-funding-evidence.json");
+assert.equal(fundingEvidence.status, "accepted-transfer-matched");
+assert.equal(fundingEvidence.accepted, true);
+assert.ok(fundingEvidence.outputs.every((row) => row.matches));
 
 console.log("Playground session tests passed.");
 

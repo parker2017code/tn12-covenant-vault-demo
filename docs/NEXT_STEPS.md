@@ -7,11 +7,12 @@ This file is the short queue. It does not replace the generated artifacts; it po
 ## Current Position
 
 - TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
-- Mainnet deployment readiness is still about `58-62%`.
-- Proof-lab auditability is roughly `91-93%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, generated-shape checks, reviewer-manifest checks, wallet-submit readiness checks, signer-return validation checks, submit-result promotion checks, attestation/invoice/research checks, batch-assurance checks, escrow-marketplace checks, treasury/access checks, market/DeFi/stable/agent checks, indexer replay/rollback checks, and count drift guards.
+- Mainnet deployment readiness is still about `55-60%`. The playground funding tx improves testnet execution evidence, not no-local-key signing or mainnet activation.
+- Proof-lab auditability is roughly `95%`: accepted covenant proofs, role-separated paths, payload events, replay guards, adversarial rejections, full-DeFi benchmark artifacts, results/playground pages, and focused tests are now in place.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 - The current full-DeFi repo-local benchmark is `60%`: six of ten rails are complete, with external signer, live rollback evidence, AMM/lending/liquidation custody execution, and mainnet activation still incomplete.
+- The current playground funding run is accepted on TN12: `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5` funded six fresh role wallets and matched every output.
 
 ## Autonomous Grand Plan Before User Input
 
@@ -39,7 +40,7 @@ This queue is intentionally larger than one commit. It is the current batch to e
 | 1 | Full-DeFi benchmark artifact. | `artifacts/full-defi-benchmark.json`, `npm run defi:benchmark`, focused shape tests, and docs links. | No |
 | 2 | Artifact-backed interactive results page. | A public page that explains accepted TN12 results at beginner, crypto-native, and builder levels, using artifacts rather than hand-maintained counts. | No |
 | 3 | Bounded X-post draft. | A short post/thread draft that says what is accepted on TN12, what is planner/indexer-derived, and what remains blocked. | No |
-| 4 | Safe TN12 playground design. | A future `playground.html` flow generates throwaway role wallets, shows faucet funding instructions, submits guided TN12 actions, verifies txids, and never commits secrets. | No |
+| 4 | Safe TN12 playground design. | `playground.html` shows throwaway role wallets, funding commands, accepted role-funding evidence, guided TN12 actions, and replay state without committing secrets. | No |
 | 5 | Accepted/custody DeFi execution reducer hardening. | More deterministic balance, position, intent, duplicate, stale-oracle, impossible-withdrawal, and liquidation-block tests over accepted txids/receipts. | No |
 | 6 | AMM/lending/liquidation custody-adjacent rail. | Small accepted TN12 receipts and safe local-key transfers where useful, with execution labeled by what actually happened on-chain. | No; ask only if wallets need more tKAS |
 | 7 | Contract/primitive binding pass. | More app-state receipts reference accepted covenant proof rows without implying those app semantics are script-enforced. | No |
@@ -47,7 +48,7 @@ This queue is intentionally larger than one commit. It is the current batch to e
 | 9 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
 | 10 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
 | 11 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
-| 12 | Live playground v1. | `playground.html` creates session wallets, displays faucet funding, runs guided real TN12 actions, verifies txids, and exports public-address/txid state only. | No |
+| 12 | Live playground v1. | Role wallet creation, role funding draft, submit, verification, and public session export are working. Next: guided app actions from those funded roles. | No |
 | 13 | Results/readability pass. | Keep pages useful for beginners and builders without repeating defensive caveats. One status label and one short boundary per section. | No |
 | 14 | App UI modularization. | Continue moving page-specific renderers out of `app.js`, especially results and playground surfaces. | No |
 | 15 | Actual external-wallet path. | Convert request templates into a wallet-consumable round trip, validate signed bytes, submit, and replay accepted txid. | Final proof needs user/wallet |
@@ -113,5 +114,7 @@ npm run operator:refresh
 npm run proof:verify
 npm run project:operator-pack
 npm run project:proven-status
+npm run playground:wallets
+npm run playground:funding-draft
 npm run wallet:unsigned-requests
 ```

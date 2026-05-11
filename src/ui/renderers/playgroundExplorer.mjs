@@ -4,6 +4,7 @@ import { escapeHtml } from "../formatters.mjs";
 export async function renderPlaygroundExplorer(documentRef = document) {
   const summaryNode = documentRef.querySelector("#playground-summary");
   const rolesNode = documentRef.querySelector("#playground-roles");
+  const sessionNode = documentRef.querySelector("#playground-session");
   const actionsNode = documentRef.querySelector("#playground-actions");
   const rulesNode = documentRef.querySelector("#playground-rules");
   const flowNode = documentRef.querySelector("#playground-flow");
@@ -13,11 +14,13 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   if (!summaryNode || !rolesNode || !actionsNode || !rulesNode || !flowNode) return;
 
   try {
-    const [plan, actions, reducer, activity] = await Promise.all([
+    const [plan, actions, reducer, activity, session, funding] = await Promise.all([
       fetchJson("artifacts/playground-plan.json"),
       fetchJson("artifacts/playground-actions.json"),
       fetchJson("artifacts/defi-scenario-reducer.json"),
-      fetchJson("artifacts/defi-accepted-activity-ledger.json")
+      fetchJson("artifacts/defi-accepted-activity-ledger.json"),
+      fetchJson("artifacts/playground-session.example.json"),
+      fetchJson("artifacts/playground-funding-evidence.json")
     ]);
     summaryNode.innerHTML = `
       ${metric("Roles", plan.summary.roles, "Throwaway TN12 session roles.")}
@@ -35,6 +38,20 @@ export async function renderPlaygroundExplorer(documentRef = document) {
         <small>${escapeHtml(role.privateKeyPolicy)}</small>
       </article>
     `).join("");
+    if (sessionNode) {
+      sessionNode.innerHTML = `
+        <article>
+          <span>${escapeHtml(funding.status)} · ${escapeHtml(funding.accepted ? "accepted" : "review")}</span>
+          <strong>${escapeHtml(session.summary.fundedRoles)} funded roles</strong>
+          <p><code>${escapeHtml(funding.txid)}</code></p>
+        </article>
+        <article>
+          <span>Outputs matched</span>
+          <strong>${escapeHtml(funding.outputs.filter((row) => row.matches).length)} / ${escapeHtml(funding.outputs.length)}</strong>
+          <p>Each role output matched expected amount and address on TN12.</p>
+        </article>
+      `;
+    }
     actionsNode.innerHTML = actions.actionRows.map((action) => `
       <article>
         <span>${escapeHtml(action.enforcement)} · ${escapeHtml(action.ready ? "ready" : "needs funding")}</span>

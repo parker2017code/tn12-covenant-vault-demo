@@ -35,6 +35,8 @@ const wallets = roles.map(([id, label, fundingTargetTkas]) => {
     address,
     addressPrefix: parsed.prefix,
     addressVersion: String(parsed.version),
+    publicKey: String(keypair.publicKey),
+    xOnlyPublicKey: String(keypair.xOnlyPublicKey),
     privateKey: String(keypair.privateKey)
   };
 });

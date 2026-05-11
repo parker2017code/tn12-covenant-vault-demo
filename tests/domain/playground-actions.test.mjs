@@ -12,7 +12,7 @@ const actions = buildPlaygroundActions({
 assert.equal(actions.schema, "tn12-playground-actions/v1");
 assert.equal(actions.status, "playground-actions-ready");
 assert.equal(actions.summary.actions, 7);
-assert.equal(actions.summary.readyActions, 6);
+assert.equal(actions.summary.readyActions, 7);
 assert.equal(actions.summary.realTn12Targets, 5);
 assert.equal(actions.summary.reducerChecks, 2);
 assert.equal(actions.summary.liveProductClaims, 0);
@@ -20,7 +20,7 @@ assert.equal(actions.summary.privateKeysIncluded, 0);
 assert.ok(actions.actionRows.some((row) => row.id === "payload-receipt" && row.ready));
 assert.ok(actions.actionRows.some((row) => row.id === "bad-withdrawal-check" && row.ready));
 assert.ok(actions.actionRows.some((row) => row.id === "pool-deposit" && row.ready));
-assert.ok(actions.actionRows.some((row) => row.id === "replay-state" && !row.ready));
+assert.ok(actions.actionRows.some((row) => row.id === "replay-state" && row.ready));
 
 const checkedIn = await readJson("artifacts/playground-actions.json");
 assert.equal(checkedIn.summary.actions, actions.summary.actions);

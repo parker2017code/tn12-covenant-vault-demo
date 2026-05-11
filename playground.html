@@ -31,7 +31,7 @@
       <div>
         <p class="status">Session wallets. Faucet-funded. TN12 only.</p>
         <h2>Let people try the system with real testnet activity.</h2>
-        <p>The playground path is simple: create fresh role wallets, fund them with faucet tKAS, run guided TN12 actions, verify txids, and replay state. The page is artifact-backed today; wallet generation and submit buttons are the next implementation slice.</p>
+        <p>The playground path is simple: create fresh role wallets, fund them with tKAS, run guided TN12 actions, verify txids, and replay state. Wallet generation and role funding now have accepted TN12 evidence; guided app actions are the next execution slice.</p>
       </div>
       <aside class="facts">
         <span>Safety rule</span>
@@ -48,6 +48,14 @@
       <div id="playground-summary" class="results-summary" aria-live="polite"></div>
     </section>
 
+    <section class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Current session</p>
+        <h2>Accepted role funding.</h2>
+      </div>
+      <div id="playground-session" class="results-rails" aria-live="polite"></div>
+    </section>
+
     <section id="flow" class="panel results-panel">
       <div class="section-title">
         <p class="eyebrow">Faucet flow</p>
@@ -55,7 +63,8 @@
       </div>
       <div id="playground-flow" class="results-flow" aria-live="polite"></div>
       <pre>npm run playground:wallets
-# then fund the printed kaspatest addresses</pre>
+npm run playground:funding-draft
+node scripts/submit-signed-draft.mjs .local/playground/funding-draft.json --submit</pre>
       <div class="link-list">
         <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">Open TN12 faucet</a>
         <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">Open TN12 explorer</a>

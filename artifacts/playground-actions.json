@@ -1,11 +1,11 @@
 {
   "schema": "tn12-playground-actions/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:10:55.384Z",
+  "generatedAt": "2026-05-11T18:19:17.902Z",
   "status": "playground-actions-ready",
   "summary": {
     "actions": 7,
-    "readyActions": 6,
+    "readyActions": 7,
     "realTn12Targets": 5,
     "reducerChecks": 2,
     "liveProductClaims": 0,
@@ -54,7 +54,7 @@
       "id": "replay-state",
       "label": "Replay txids into state",
       "enforcement": "INDEXER_DERIVED",
-      "ready": false,
+      "ready": true,
       "detail": "Reduce accepted txids into receipt, transfer, and balance rows."
     },
     {
