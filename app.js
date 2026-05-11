@@ -658,12 +658,19 @@ async function renderCoordinationMarket() {
       coordinationPacksNode.append(article);
     }
     const briefArticle = document.createElement("article");
-    briefArticle.className = "coordination-card";
+    briefArticle.className = "coordination-card coordination-run-card";
+    const runThisPack = settlementBrief.runThisPack;
     briefArticle.innerHTML = `
       <span>${escapeHtml(settlementBrief.status)}</span>
-      <strong>${escapeHtml(settlementBrief.appBrief.title)}</strong>
-      <p>${escapeHtml(settlementBrief.summary.qualifyingIntendos)} qualifying intendos; ${escapeHtml(settlementBrief.summary.qualifyingTkas)} TKAS transparent route amount.</p>
-      <small>${escapeHtml(settlementBrief.nonProductionBoundary[1])}</small>
+      <strong>${escapeHtml(runThisPack?.title || settlementBrief.appBrief.title)}</strong>
+      <p>${escapeHtml(runThisPack?.userGoal || settlementBrief.appBrief.userPromise)}</p>
+      <p>${escapeHtml(runThisPack?.expectedResult || `${settlementBrief.summary.qualifyingIntendos} qualifying intendos; ${settlementBrief.summary.qualifyingTkas} TKAS transparent route amount.`)}</p>
+      <details open>
+        <summary>Run this pack</summary>
+        <ol>${(runThisPack?.steps || []).map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+        <p>${(runThisPack?.currentEvidence || []).map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
+        <p>${escapeHtml(runThisPack?.nextUpgrade || "Build settlement drafts only after custody source and wallet review are explicit.")}</p>
+      </details>
     `;
     coordinationPacksNode.append(briefArticle);
   } catch (error) {

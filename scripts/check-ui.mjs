@@ -190,6 +190,12 @@ async function checkRenderedPages(url) {
     assert.match(schedulerText, /Transparent coordination pack/);
     assert.match(schedulerText, /protocol-level automation/);
     assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 7);
+    await page.goto(`${url}lab.html#coordination`, { waitUntil: "networkidle" });
+    await page.waitForSelector(".coordination-run-card", { timeout: 5000 });
+    const coordinationText = await page.locator("#coordination").innerText();
+    assert.match(coordinationText, /Run the transparent docs sprint pack/);
+    assert.match(coordinationText, /See conditional commitments become one selected release route/);
+    assert.match(coordinationText, /3 commitments qualify/);
     await page.goto(`${url}lab.html#submit`, { waitUntil: "networkidle" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
     const submitText = await page.locator("#submit").innerText();

@@ -29,6 +29,11 @@ export function buildCoordinationMarketSettlementBrief({
       productionReady: false
     },
     selectedPack: selectedPack ? summarizePack(selectedPack) : null,
+    runThisPack: selectedPack ? buildRunThisPack({
+      fixture,
+      selectedPack,
+      settlementRoutes
+    }) : null,
     settlementRoutes,
     missingRails,
     nonProductionBoundary: [
@@ -80,6 +85,30 @@ function buildSettlementRoute(route = {}, selectedPack) {
       ? selectedPack.solver.qualifyingTkas
       : 0,
     walletReview: (route.walletReview || []).map(String)
+  };
+}
+
+function buildRunThisPack({ fixture = {}, selectedPack = {}, settlementRoutes = [] } = {}) {
+  const releaseRoute = settlementRoutes.find((route) => route.kind === "release" && route.status === "route-applicable-needs-wallet-review");
+  return {
+    id: `${selectedPack.packId}:run-first`,
+    title: "Run the transparent docs sprint pack",
+    userGoal: "See conditional commitments become one selected release route.",
+    currentEvidence: [
+      fixture.prototypeArtifact || "artifacts/coordination-market-prototype.json",
+      "artifacts/coordination-market-settlement-brief.json",
+      releaseRoute?.routeId || ""
+    ].filter(Boolean),
+    steps: [
+      "Open the Stag goal.",
+      "Check each qualifying Intendo.",
+      "Check the Pack solver result.",
+      "Review the selected release route.",
+      "Do not submit alternate refunds for the same selected pack.",
+      "Build wallet-reviewed settlement only after custody source and recipient are explicit."
+    ],
+    expectedResult: `${selectedPack.solver?.qualifyingCount || 0} commitments qualify for ${selectedPack.solver?.qualifyingTkas || 0} TKAS of transparent route amount.`,
+    nextUpgrade: "Turn this route into a wallet-standard settlement request, then require accepted replay before marking settlement complete."
   };
 }
 

@@ -829,6 +829,8 @@ assert.equal(coordinationSettlementBrief.summary.productionReady, false);
 assert.equal(coordinationSettlementBrief.summary.qualifyingIntendos, 3);
 assert.equal(coordinationSettlementBrief.summary.qualifyingTkas, 75);
 assert.equal(coordinationSettlementBrief.summary.missingRails, 4);
+assert.equal(coordinationSettlementBrief.runThisPack.id, "pack-stag-docs-sprint:run-first");
+assert.match(coordinationSettlementBrief.runThisPack.expectedResult, /3 commitments qualify/);
 assert.ok(coordinationSettlementBrief.missingRails.some((rail) => rail.id === "opacity"));
 assert.ok(coordinationSettlementBrief.missingRails.some((rail) => rail.id === "capital-multiplexing"));
 assert.ok(coordinationSettlementBrief.missingRails.some((rail) => rail.id === "atomic-hunt-execution"));

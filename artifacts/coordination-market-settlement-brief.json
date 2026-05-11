@@ -40,6 +40,26 @@
     },
     "huntStatus": "hunt-plan-ready-not-atomic-execution"
   },
+  "runThisPack": {
+    "id": "pack-stag-docs-sprint:run-first",
+    "title": "Run the transparent docs sprint pack",
+    "userGoal": "See conditional commitments become one selected release route.",
+    "currentEvidence": [
+      "artifacts/coordination-market-prototype.json",
+      "artifacts/coordination-market-settlement-brief.json",
+      "docs-sprint-release"
+    ],
+    "steps": [
+      "Open the Stag goal.",
+      "Check each qualifying Intendo.",
+      "Check the Pack solver result.",
+      "Review the selected release route.",
+      "Do not submit alternate refunds for the same selected pack.",
+      "Build wallet-reviewed settlement only after custody source and recipient are explicit."
+    ],
+    "expectedResult": "3 commitments qualify for 75 TKAS of transparent route amount.",
+    "nextUpgrade": "Turn this route into a wallet-standard settlement request, then require accepted replay before marking settlement complete."
+  },
   "settlementRoutes": [
     {
       "routeId": "docs-sprint-release",
