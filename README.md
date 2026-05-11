@@ -76,6 +76,7 @@ npm run demo:operator-refresh
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |
+| External signer payload request | `artifacts/external-signer-payload-request.json` |
 | Full lab notebook | `docs/LAB_NOTEBOOK.md` |
 
 ## Local Preview

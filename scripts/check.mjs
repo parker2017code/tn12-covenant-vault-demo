@@ -81,6 +81,7 @@ import { buildWalletExternalSignerRoundtripPlan } from "../src/walletExternalSig
 import { buildWalletExternalSignerResultTemplate } from "../src/walletExternalSignerResultTemplate.mjs";
 import { buildExternalSignerPathResearch } from "../src/externalSignerPathResearch.mjs";
 import { buildWalletExternalSignerSim } from "../src/walletExternalSignerSim.mjs";
+import { buildExternalSignerPayloadRequest } from "../src/externalSignerPayloadRequest.mjs";
 import { buildWalletConnectorImplementationSlice } from "../src/walletConnectorImplementationSlice.mjs";
 import { buildVirtualChainLivePreflight } from "../src/virtualChainLivePreflight.mjs";
 import { buildVirtualChainEndpointRunbook } from "../src/virtualChainEndpointRunbook.mjs";
@@ -1692,6 +1693,13 @@ const walletUnsignedTemplatesArtifact = JSON.parse(await readFile(new URL("../ar
 assert.equal(walletUnsignedTemplatesArtifact.status, "unsigned-request-templates-ready");
 assert.equal(walletUnsignedTemplatesArtifact.summary.templates, 50);
 assert.equal(walletUnsignedTemplatesArtifact.standardMapped, false);
+const externalSignerPayloadRequest = buildExternalSignerPayloadRequest({ unsignedTemplates: walletUnsignedTemplatesArtifact });
+assert.equal(externalSignerPayloadRequest.status, "unsigned-payload-request-ready");
+assert.equal(externalSignerPayloadRequest.liveExternalSignerReady, false);
+assert.equal(externalSignerPayloadRequest.request.payload.present, true);
+const externalSignerPayloadRequestArtifact = JSON.parse(await readFile(new URL("../artifacts/external-signer-payload-request.json", import.meta.url), "utf8"));
+assert.equal(externalSignerPayloadRequestArtifact.status, "unsigned-payload-request-ready");
+assert.equal(externalSignerPayloadRequestArtifact.liveExternalSignerReady, false);
 const signerReferences = await readFile(new URL("../docs/WALLET_SIGNER_REFERENCES.md", import.meta.url), "utf8");
 const walletStandardMapping = buildWalletStandardMapping({
   unsignedTemplates: walletUnsignedTemplatesArtifact,
@@ -2060,6 +2068,7 @@ const files = [
   "scripts/build-wallet-submit-result-validation.mjs",
   "scripts/build-wallet-external-signer-gap.mjs",
   "scripts/build-wallet-unsigned-request-templates.mjs",
+  "scripts/build-external-signer-payload-request.mjs",
   "scripts/build-wallet-standard-mapping.mjs",
   "scripts/build-wallet-standard-requests.mjs",
   "scripts/build-wallet-standard-signer-validation.mjs",
@@ -2180,6 +2189,7 @@ const files = [
   "artifacts/wallet-submit-result-validation.json",
   "artifacts/wallet-external-signer-gap.json",
   "artifacts/wallet-unsigned-request-templates.json",
+  "artifacts/external-signer-payload-request.json",
   "artifacts/wallet-standard-mapping.json",
   "artifacts/wallet-standard-requests.json",
   "artifacts/wallet-standard-signer-validation.json",
@@ -2472,6 +2482,7 @@ assert.equal(packageJson.scripts["operator:refresh"], "npm run demo:operator-ref
 assert.equal(packageJson.scripts["operator:pack"], "npm run project:operator-pack");
 assert.match(packageJson.scripts["check:tn12"], /proof:records/);
 assert.match(packageJson.scripts["check:all"], /check:focused/);
+assert.equal(packageJson.scripts["wallet:external-signer-payload-request"], "node scripts/build-external-signer-payload-request.mjs");
 // Full command list and lab details live in docs/LAB_NOTEBOOK.md
 const labNotebook = await readFile(new URL("../docs/LAB_NOTEBOOK.md", import.meta.url), "utf8");
 assert.match(labNotebook, /faucet-tn12\.kaspanet\.io/);

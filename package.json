@@ -82,6 +82,7 @@
     "wallet:result-validation": "node scripts/build-wallet-submit-result-validation.mjs",
     "wallet:external-signer-gap": "node scripts/build-wallet-external-signer-gap.mjs",
     "wallet:unsigned-requests": "node scripts/build-wallet-unsigned-request-templates.mjs",
+    "wallet:external-signer-payload-request": "node scripts/build-external-signer-payload-request.mjs",
     "wallet:standard-map": "node scripts/build-wallet-standard-mapping.mjs",
     "wallet:standard-requests": "node scripts/build-wallet-standard-requests.mjs",
     "wallet:standard-signer-validation": "node scripts/build-wallet-standard-signer-validation.mjs",

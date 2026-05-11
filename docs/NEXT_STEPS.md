@@ -17,7 +17,7 @@ This file is the short queue. It does not replace the generated artifacts; it po
 | 1 | Keep `operator:refresh` green after every proof/artifact change. | This is the reviewer gate for accepted evidence plus local replay and UI checks. | No |
 | 2 | Route the next local-wallet TN12 spend through the operator receipt pack. | Proves the repo can turn a spend into a reviewer/operator receipt instead of only a raw txid. | No, if funded local test wallet remains available |
 | 3 | Keep batch-assurance release selected and refund alternates explicitly non-selected. | Prevents accidental double-claim language around the spent pledge set. | No |
-| 4 | Prepare one unsigned external-signer payload receipt request. | Keeps the missing no-local-key signer rail concrete without pretending a wallet already signed it. | No |
+| 4 | Prepare one unsigned external-signer payload receipt request. | Keeps the missing no-local-key signer rail concrete without pretending a wallet already signed it. | No; artifact path is `artifacts/external-signer-payload-request.json` |
 | 5 | Only promote external signer status after a real wallet returns signed tx bytes and TN12 accepts the txid. | This is the main custody boundary for mainnet-style readiness. | Yes, unless a compatible throwaway signer is available |
 
 ## Next 90-95% Readiness Tasks

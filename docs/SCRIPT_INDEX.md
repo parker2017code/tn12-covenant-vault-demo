@@ -61,6 +61,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | Build wallet review surface | `npm run wallet:review` |
 | Build external-signer research path | `npm run wallet:external-signer-research` |
 | Build unsigned request templates | `npm run wallet:unsigned-requests` |
+| Extract one external-signer payload request | `npm run wallet:external-signer-payload-request` |
 | Build mainnet readiness map | `npm run mainnet:readiness` |
 
 ## Research And Planner Commands

@@ -1,0 +1,98 @@
+{
+  "schema": "tn12-external-signer-payload-request/v1",
+  "network": "kaspa-testnet-12",
+  "status": "unsigned-payload-request-ready",
+  "liveExternalSignerReady": false,
+  "request": {
+    "requestId": "ureq-6cfe79da",
+    "label": "Payload receipt self-send",
+    "class": "payload-app-state",
+    "sourceSignedDraftPath": "artifacts/signed-drafts/payload-receipt-self-send.json",
+    "transaction": {
+      "version": 0,
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000",
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "d67880665f81a4bb9966a0fbcf77d31b8b501ddd4098b8e5861831e5bc044bb4",
+            "index": 1
+          },
+          "sequence": "0",
+          "sigOpCount": 1,
+          "computeBudget": null,
+          "signatureScript": "",
+          "signatureScriptBytes": 0
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "amount": "100000000",
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        },
+        {
+          "index": 1,
+          "amount": "114799940000",
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ]
+    },
+    "payload": {
+      "present": true,
+      "bytes": 127,
+      "hash": "h-543ab76c",
+      "hexPreview": "7b226b696e64223a226f726465722d72656365697074222c..."
+    },
+    "preservation": {
+      "expectedTransactionIdAfterSigning": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
+      "originalSignedDraftFingerprint": "h-98768c44",
+      "strippedSignatureScriptBytes": 66,
+      "computeBudgetInputs": 0,
+      "requiredWalletChecks": [
+        "Confirm kaspa-testnet-12.",
+        "Display exact inputs, outputs, fees, version, lock time, and payload bytes.",
+        "Require explicit user action.",
+        "Reject public REST payload submit."
+      ]
+    },
+    "requestedSignerAction": {
+      "kind": "sign-then-return-transaction",
+      "userActionRequired": true,
+      "routeAfterSigning": "payload-preserving-wrpc-or-wallet",
+      "mustPreserve": [
+        "network",
+        "version",
+        "lockTime",
+        "subnetworkId",
+        "previousOutpoints",
+        "sequences",
+        "sigOpCount fields when present",
+        "computeBudget fields when present",
+        "outputs",
+        "payload bytes"
+      ]
+    }
+  },
+  "acceptanceRule": [
+    "External signer returns signed transaction bytes for this exact request.",
+    "Returned transaction preserves previous outpoints, sequences, sigOpCount, outputs, and payload bytes.",
+    "Submission uses a payload-preserving TN12 route.",
+    "Accepted txid is observed by TN12 verification and replay/indexer checks."
+  ],
+  "blockers": [
+    "No real external signer has returned signed bytes for this request.",
+    "No accepted TN12 txid has been promoted from this unsigned request."
+  ],
+  "boundaries": [
+    "This artifact is not a wallet integration.",
+    "This artifact is not no-local-key signing evidence.",
+    "This artifact is the smallest reviewable payload receipt request for an external signer."
+  ]
+}
