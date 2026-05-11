@@ -1,11 +1,11 @@
 {
   "schema": "tn12-playground-session/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:08:04.378Z",
+  "generatedAt": "2026-05-11T18:10:18.586Z",
   "status": "playground-session-public-state-ready",
   "summary": {
     "roles": 6,
-    "fundedRoles": 0,
+    "fundedRoles": 6,
     "txids": 0,
     "acceptedTxids": 0,
     "privateKeysIncluded": 0,
@@ -16,49 +16,49 @@
     {
       "id": "operator",
       "label": "Operator / receipt submitter",
-      "address": "",
+      "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
       "fundingTargetTkas": "2",
-      "funded": false,
+      "funded": true,
       "privateKeyIncluded": false
     },
     {
       "id": "pool",
       "label": "Pool wallet",
-      "address": "",
+      "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
       "fundingTargetTkas": "25",
-      "funded": false,
+      "funded": true,
       "privateKeyIncluded": false
     },
     {
       "id": "user-a",
       "label": "User A / swapper",
-      "address": "",
+      "address": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
       "fundingTargetTkas": "10",
-      "funded": false,
+      "funded": true,
       "privateKeyIncluded": false
     },
     {
       "id": "user-b",
       "label": "User B / lender",
-      "address": "",
+      "address": "kaspatest:qz5epzeyjk65xaajf7mt36apk4fa2p52548chz300sr2dx8uqmkfjzvhq0a8v",
       "fundingTargetTkas": "10",
-      "funded": false,
+      "funded": true,
       "privateKeyIncluded": false
     },
     {
       "id": "executor",
       "label": "Executor / scheduler bidder",
-      "address": "",
+      "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
       "fundingTargetTkas": "2",
-      "funded": false,
+      "funded": true,
       "privateKeyIncluded": false
     },
     {
       "id": "reviewer",
       "label": "Reviewer / oracle reporter",
-      "address": "",
+      "address": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
       "fundingTargetTkas": "2",
-      "funded": false,
+      "funded": true,
       "privateKeyIncluded": false
     }
   ],

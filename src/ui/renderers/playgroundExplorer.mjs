@@ -10,7 +10,10 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   if (!summaryNode || !rolesNode || !actionsNode || !rulesNode || !flowNode) return;
 
   try {
-    const plan = await fetchJson("artifacts/playground-plan.json");
+    const [plan, actions] = await Promise.all([
+      fetchJson("artifacts/playground-plan.json"),
+      fetchJson("artifacts/playground-actions.json")
+    ]);
     summaryNode.innerHTML = `
       ${metric("Roles", plan.summary.roles, "Throwaway TN12 session roles.")}
       ${metric("Guided actions", plan.summary.guidedActions, "Real TN12 targets where tooling allows.")}
@@ -27,9 +30,9 @@ export async function renderPlaygroundExplorer(documentRef = document) {
         <small>${escapeHtml(role.privateKeyPolicy)}</small>
       </article>
     `).join("");
-    actionsNode.innerHTML = plan.actions.map((action) => `
+    actionsNode.innerHTML = actions.actionRows.map((action) => `
       <article>
-        <span>${escapeHtml(action.enforcement)}</span>
+        <span>${escapeHtml(action.enforcement)} · ${escapeHtml(action.ready ? "ready" : "needs funding")}</span>
         <strong>${escapeHtml(action.label)}</strong>
         <p>${escapeHtml(action.detail)}</p>
       </article>

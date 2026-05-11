@@ -1,0 +1,74 @@
+{
+  "schema": "tn12-playground-actions/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T18:10:55.384Z",
+  "status": "playground-actions-ready",
+  "summary": {
+    "actions": 7,
+    "readyActions": 6,
+    "realTn12Targets": 5,
+    "reducerChecks": 2,
+    "liveProductClaims": 0,
+    "mainnetClaims": 0,
+    "custodyActions": 0,
+    "externalSignerClaims": 0,
+    "privateKeysIncluded": 0
+  },
+  "actionRows": [
+    {
+      "id": "payload-receipt",
+      "label": "Submit payload receipt",
+      "enforcement": "TN12_ACCEPTED_TARGET",
+      "ready": true,
+      "detail": "Create a receipt payload and verify accepted txid plus payload bytes."
+    },
+    {
+      "id": "pool-deposit",
+      "label": "Submit pool deposit transfer",
+      "enforcement": "LOCAL_KEY_CUSTODY_TEST",
+      "ready": true,
+      "detail": "Move small tKAS from user to pool and add the txid to replay."
+    },
+    {
+      "id": "pool-payout",
+      "label": "Submit pool payout transfer",
+      "enforcement": "LOCAL_KEY_CUSTODY_TEST",
+      "ready": true,
+      "detail": "Move small tKAS from pool to user and add the txid to replay."
+    },
+    {
+      "id": "scheduler-bid",
+      "label": "Submit scheduler bid receipt",
+      "enforcement": "TN12_ACCEPTED_TARGET",
+      "ready": true,
+      "detail": "Record an executor bid against a trigger intent."
+    },
+    {
+      "id": "proof-binding",
+      "label": "Submit proof binding receipt",
+      "enforcement": "TN12_ACCEPTED_TARGET",
+      "ready": true,
+      "detail": "Reference an accepted covenant proof row from app state."
+    },
+    {
+      "id": "replay-state",
+      "label": "Replay txids into state",
+      "enforcement": "INDEXER_DERIVED",
+      "ready": false,
+      "detail": "Reduce accepted txids into receipt, transfer, and balance rows."
+    },
+    {
+      "id": "bad-withdrawal-check",
+      "label": "Run blocked withdrawal check",
+      "enforcement": "REJECTED_BY_REDUCER",
+      "ready": true,
+      "detail": "Show over-balance or unsigned withdrawal attempts blocked before promotion."
+    }
+  ],
+  "sourcePlanStatus": "playground-plan-ready",
+  "boundaries": [
+    "Ready means the role/session prerequisites are present.",
+    "TN12_ACCEPTED_TARGET actions should produce accepted txids before they are marked complete.",
+    "Reducer checks explain state and blocked attempts; they do not replace accepted transaction evidence."
+  ]
+}

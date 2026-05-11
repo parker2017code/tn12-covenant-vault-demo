@@ -69,7 +69,8 @@ const defiArtifacts = [
   ["artifacts/scheduler-intent-registry.json", "tn12-scheduler-intent-registry/v1"],
   ["artifacts/scheduler-covenant-binding.json", "tn12-scheduler-covenant-binding/v1"],
   ["artifacts/full-defi-benchmark.json", "tn12-full-defi-benchmark/v1"],
-  ["artifacts/playground-plan.json", "tn12-playground-plan/v1"]
+  ["artifacts/playground-plan.json", "tn12-playground-plan/v1"],
+  ["artifacts/playground-actions.json", "tn12-playground-actions/v1"]
 ];
 
 for (const [path, schema] of defiArtifacts) {
