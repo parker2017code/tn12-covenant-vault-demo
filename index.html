@@ -17,35 +17,15 @@
     </div>
     <nav aria-label="Project links">
       <a href="#core-notes">Core</a>
+      <a href="#reviewer-path">Reviewer</a>
       <a href="#operator-pack">Operator</a>
-      <a href="#designer">Designer</a>
-      <a href="#assurance">Assurance</a>
-      <a href="#campaigns">Campaigns</a>
       <a href="#enforcement">Enforcement</a>
-      <a href="#escrow">Escrow</a>
-      <a href="#treasury">Treasury</a>
-      <a href="#coordination">Coordination</a>
-      <a href="#access-passes">Access</a>
       <a href="#mainnet-readiness">Mainnet?</a>
-      <a href="#asset-policies">Assets</a>
-      <a href="#auction-intents">Auctions</a>
-      <a href="#defi-backlog">DeFi</a>
-      <a href="#agent-commitments">Agents</a>
       <a href="#build-status">Status</a>
-      <a href="#next-queue">Queue</a>
-      <a href="#next-ten">Next 10</a>
-      <a href="#funding">Funding</a>
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
-      <a href="#invoices">Invoices</a>
       <a href="#submit">Submit</a>
-      <a href="#roadmap">Map</a>
-      <a href="#research-library">Research</a>
-      <a href="#stack">Stack</a>
-      <a href="#app-lab">App lab</a>
-      <a href="#attestations">Attestations</a>
-      <a href="#prediction-hedge">Hedges</a>
-      <a href="#signals">Signals</a>
+      <a href="#roadmap">Backlog</a>
       <a href="#setup">TN12 setup</a>
       <a href="#sources">Sources</a>
     </nav>
@@ -88,6 +68,37 @@
         </article>
       </div>
       <p class="note">Read <code>docs/PROOF_INDEX.md</code> and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
+    </section>
+
+    <section id="reviewer-path" class="panel build-status">
+      <div class="section-title">
+        <p class="eyebrow">Reviewer path</p>
+        <h2>One audit route.</h2>
+        <p>Use this path before reading roadmap, app ideas, or archived session notes.</p>
+      </div>
+      <div class="stat-grid">
+        <article>
+          <span>Install</span>
+          <strong>npm ci</strong>
+          <p>Use the lockfile; avoid ad hoc dependency drift.</p>
+        </article>
+        <article>
+          <span>Local gate</span>
+          <strong>check:all</strong>
+          <p>Runs script checks, negative checks, and UI smoke checks.</p>
+        </article>
+        <article>
+          <span>TN12 gate</span>
+          <strong>check:tn12</strong>
+          <p>Verifies public TN12 proof and payload evidence.</p>
+        </article>
+        <article>
+          <span>Full refresh</span>
+          <strong>operator refresh</strong>
+          <p>Runs <code>npm run demo:operator-refresh</code> and rebuilds the current status artifacts.</p>
+        </article>
+      </div>
+      <p class="note">Claim-to-evidence mapping lives in <code>docs/AUDIT_MAP.md</code>. Script groups live in <code>docs/SCRIPT_INDEX.md</code>.</p>
     </section>
 
     <section id="designer" class="workspace">

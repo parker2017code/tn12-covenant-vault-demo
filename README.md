@@ -12,6 +12,7 @@ Start here:
 - `artifacts/proven-status.json`: compact current counts, percent, and deferred rails.
 - `artifacts/operator-receipt-pack.json`: accepted evidence plus the local-wallet command path.
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
+- `docs/AUDIT_MAP.md`: claim-to-evidence map for reviewers.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
 
 Older session/status reports are historical notes under `docs/archive/`, not canonical.
@@ -59,6 +60,8 @@ npm run demo:operator-refresh
 
 | Need | Artifact |
 |---|---|
+| Reviewer claim map | `docs/AUDIT_MAP.md` |
+| Script groups | `docs/SCRIPT_INDEX.md` |
 | Proof index | `docs/PROOF_INDEX.md` |
 | Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
 | Mainnet readiness | `MAINNET_READINESS.md` |

@@ -24,6 +24,9 @@ try {
   assert.match(html, /7 core \+ 2 auction \+ 7 role-separated \+ 45 indexed records/);
   assert.match(html, /Accepted payload events[\s\S]*<strong>32<\/strong>/);
   assert.match(html, /npm run demo:operator-refresh/);
+  assert.match(html, /id="reviewer-path"/);
+  assert.match(html, /docs\/AUDIT_MAP\.md/);
+  assert.doesNotMatch(html, /href="#prediction-hedge"/);
   assert.match(html, /<form id="assurance-form"/);
   assert.match(html, /id="proof-status"/);
   assert.match(html, /id="receipt-events"/);

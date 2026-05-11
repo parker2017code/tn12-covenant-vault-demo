@@ -2423,6 +2423,8 @@ const files = [
   "src/submitPayload.mjs",
   "README.md",
   "AGENTS.md",
+  "docs/AUDIT_MAP.md",
+  "docs/SCRIPT_INDEX.md",
   "docs/PROGRESS.md",
   "docs/SOURCES.md",
   "docs/LLM_REVIEW_GUIDE.md",
@@ -2449,7 +2451,15 @@ assert.match(readme, /testnet-only/i);
 assert.match(readme, /npm run check:all/);
 assert.match(readme, /TN12_ACCEPTED/);
 assert.match(readme, /NOT proven/i);
+assert.match(readme, /docs\/AUDIT_MAP\.md/);
 assert.match(readme, /4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801/);
+const auditMap = await readFile(new URL("../docs/AUDIT_MAP.md", import.meta.url), "utf8");
+assert.match(auditMap, /TN12_ACCEPTED/);
+assert.match(auditMap, /operator-receipt-pack\.json/);
+assert.match(auditMap, /npm run demo:operator-refresh/);
+const scriptIndex = await readFile(new URL("../docs/SCRIPT_INDEX.md", import.meta.url), "utf8");
+assert.match(scriptIndex, /Reviewer Commands/);
+assert.match(scriptIndex, /Volatile Generated Artifacts/);
 // Full command list and lab details live in docs/LAB_NOTEBOOK.md
 const labNotebook = await readFile(new URL("../docs/LAB_NOTEBOOK.md", import.meta.url), "utf8");
 assert.match(labNotebook, /faucet-tn12\.kaspanet\.io/);
