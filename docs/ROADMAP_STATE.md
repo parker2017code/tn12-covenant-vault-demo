@@ -13,6 +13,7 @@ The repo should read as proof-first, not plan-first. Use generated artifacts for
 | Batch assurance | Accepted pledge outputs and accepted release | Keep refund alternates non-selected; next signer work uses fresh requests |
 | Replay/indexer | Checkpoint, live overlap, durable promotion guard | Live removed-block rollback evidence |
 | Wallet submit | Review package, request templates, result validation | Real wallet-approved signed tx |
+| Full DeFi benchmark | 60% by repo-local benchmark; 6/10 rails complete | External signer, live rollback evidence, AMM/lending/liquidation custody execution |
 
 ## Research Rails
 

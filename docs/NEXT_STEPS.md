@@ -11,6 +11,7 @@ This file is the short queue. It does not replace the generated artifacts; it po
 - Proof-lab auditability is roughly `91-93%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, generated-shape checks, reviewer-manifest checks, wallet-submit readiness checks, signer-return validation checks, submit-result promotion checks, attestation/invoice/research checks, batch-assurance checks, escrow-marketplace checks, treasury/access checks, market/DeFi/stable/agent checks, indexer replay/rollback checks, and count drift guards.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
+- The current full-DeFi repo-local benchmark is `60%`: six of ten rails are complete, with external signer, live rollback evidence, AMM/lending/liquidation custody execution, and mainnet activation still incomplete.
 
 ## Autonomous Grand Plan Before User Input
 
@@ -28,6 +29,23 @@ These are the highest-impact things that can be advanced without asking for a re
 | 8 | Reviewer/UI cleanup. | Public surfaces show accepted activity, planner/indexer state, and blocked market execution without adding product claims. | No |
 | 9 | Scheduler/TangVM-adjacent prototype. | Accepted payloads register trigger intents and execution receipts, a reducer records executed triggers, planner-only auction rows rank candidates, and any local-key execution remains labeled `LOCAL_KEY_CUSTODY_TEST`; see `docs/TANGVM_UNISC_BOUNDARY.md`. | No |
 | 10 | External signer roundtrip. | A real wallet returns signed bytes, submit succeeds, and accepted txid replay matches. | Yes |
+
+## Expanded Active Queue
+
+This queue is intentionally larger than one commit. It is the current batch to execute in order unless a blocker changes the sequence.
+
+| Order | Work | Output | Needs User? |
+|---|---|---|---|
+| 1 | Full-DeFi benchmark artifact. | `artifacts/full-defi-benchmark.json`, `npm run defi:benchmark`, focused shape tests, and docs links. | No |
+| 2 | Artifact-backed interactive results page. | A public page that explains accepted TN12 results at beginner, crypto-native, and builder levels, using artifacts rather than hand-maintained counts. | No |
+| 3 | Bounded X-post draft. | A short post/thread draft that says what is accepted on TN12, what is planner/indexer-derived, and what remains blocked. | No |
+| 4 | Accepted/custody DeFi execution reducer hardening. | More deterministic balance, position, intent, duplicate, stale-oracle, impossible-withdrawal, and liquidation-block tests over accepted txids/receipts. | No |
+| 5 | AMM/lending/liquidation custody-adjacent rail. | Small accepted TN12 receipts and safe local-key transfers where useful, with execution labeled by what actually happened on-chain. | No; ask only if wallets need more tKAS |
+| 6 | Contract/primitive binding pass. | More app-state receipts reference accepted covenant proof rows without implying those app semantics are script-enforced. | No |
+| 7 | UI/app.js split continuation. | Move more renderer/page logic into `src/ui/` modules so the proof page, lab workbench, and results page are easier to audit. | No |
+| 8 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
+| 9 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
+| 10 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
 
 ## Current Reviewer-Hardening Queue
 

@@ -1,0 +1,133 @@
+{
+  "schema": "tn12-full-defi-benchmark/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T17:52:27.069Z",
+  "status": "full-defi-benchmark-review",
+  "currentPercent": 60,
+  "completedWeight": 60,
+  "totalWeight": 100,
+  "summary": {
+    "rails": 10,
+    "completedRails": 6,
+    "blockedRails": 3,
+    "plannerOnlyRails": 1,
+    "mainnetReady": false,
+    "fullDefiClaimAllowed": false,
+    "liveProductClaims": 0,
+    "custodyActions": 0
+  },
+  "rails": [
+    {
+      "id": "accepted-proof-core",
+      "title": "Covenant primitives accepted on TN12",
+      "label": "TN12_ACCEPTED",
+      "weight": 12,
+      "done": true,
+      "evidence": "Vault, pledge, escrow, auction, and role-separated proof rows are accepted."
+    },
+    {
+      "id": "accepted-receipt-ledger",
+      "title": "Accepted app-state payload ledger",
+      "label": "TN12_ACCEPTED",
+      "weight": 10,
+      "done": true,
+      "evidence": "40 payload events are accepted and replayed."
+    },
+    {
+      "id": "multi-wallet-custody-activity",
+      "title": "Multi-wallet local-key custody movement",
+      "label": "LOCAL_KEY_CUSTODY_TEST",
+      "weight": 10,
+      "done": true,
+      "evidence": "16 accepted transfer rows cover deposits, payouts, and user roles."
+    },
+    {
+      "id": "scheduler-intent-bid-execution",
+      "title": "Scheduler intent, bids, and execution receipts",
+      "label": "INDEXER_DERIVED",
+      "weight": 10,
+      "done": true,
+      "evidence": "Accepted scheduler payloads feed deterministic trigger and bid reducers."
+    },
+    {
+      "id": "scheduler-covenant-binding",
+      "title": "Scheduler-to-covenant proof binding",
+      "label": "INDEXER_DERIVED",
+      "weight": 8,
+      "done": true,
+      "evidence": "Accepted binding payload references an accepted covenant proof row."
+    },
+    {
+      "id": "deterministic-indexer-replay",
+      "title": "Deterministic indexer replay and duplicate guards",
+      "label": "INDEXER_DERIVED",
+      "weight": 10,
+      "done": true,
+      "evidence": "Fixture replay, overlap, duplicate, and rollback-match guards pass locally."
+    },
+    {
+      "id": "external-signer-roundtrip",
+      "title": "External signer round trip",
+      "label": "MAINNET_BLOCKED",
+      "weight": 15,
+      "done": false,
+      "evidence": "A real wallet must sign bytes and return a verifiable accepted txid."
+    },
+    {
+      "id": "live-rollback-evidence",
+      "title": "Live removed-block rollback evidence",
+      "label": "MAINNET_BLOCKED",
+      "weight": 10,
+      "done": false,
+      "evidence": "Promotion stays blocked until live removed-block evidence is captured."
+    },
+    {
+      "id": "amm-lending-liquidation-custody",
+      "title": "AMM/lending/liquidation custody execution",
+      "label": "PLANNER_ONLY",
+      "weight": 10,
+      "done": false,
+      "evidence": "Pricing, oracle truth, autonomous pool custody, liquidations, and risk engine execution are not script-enforced."
+    },
+    {
+      "id": "mainnet-activation",
+      "title": "Mainnet covenant activation and production wallet/indexer review",
+      "label": "MAINNET_BLOCKED",
+      "weight": 5,
+      "done": false,
+      "evidence": "TN12 evidence does not prove mainnet activation or production custody readiness."
+    }
+  ],
+  "nextHighestImpact": [
+    {
+      "id": "external-signer-roundtrip",
+      "title": "External signer round trip",
+      "weight": 15,
+      "blocker": "MAINNET_BLOCKED"
+    },
+    {
+      "id": "live-rollback-evidence",
+      "title": "Live removed-block rollback evidence",
+      "weight": 10,
+      "blocker": "MAINNET_BLOCKED"
+    },
+    {
+      "id": "amm-lending-liquidation-custody",
+      "title": "AMM/lending/liquidation custody execution",
+      "weight": 10,
+      "blocker": "PLANNER_ONLY"
+    },
+    {
+      "id": "mainnet-activation",
+      "title": "Mainnet covenant activation and production wallet/indexer review",
+      "weight": 5,
+      "blocker": "MAINNET_BLOCKED"
+    }
+  ],
+  "boundaries": [
+    "This benchmark is a repo-local progress model, not a production readiness score.",
+    "Accepted TN12 receipts and local-key transfers are real testnet activity.",
+    "AMM, lending, liquidation, oracle truth, and production custody remain planner/indexer or mainnet-blocked until separately proven.",
+    "External signer and live rollback evidence are the highest-signal readiness blockers."
+  ]
+}

@@ -67,14 +67,15 @@ const defiArtifacts = [
   ["artifacts/defi-accepted-activity-ledger.json", "tn12-defi-accepted-activity-ledger/v1"],
   ["artifacts/defi-artifact-manifest.json", "tn12-defi-artifact-manifest/v1"],
   ["artifacts/scheduler-intent-registry.json", "tn12-scheduler-intent-registry/v1"],
-  ["artifacts/scheduler-covenant-binding.json", "tn12-scheduler-covenant-binding/v1"]
+  ["artifacts/scheduler-covenant-binding.json", "tn12-scheduler-covenant-binding/v1"],
+  ["artifacts/full-defi-benchmark.json", "tn12-full-defi-benchmark/v1"]
 ];
 
 for (const [path, schema] of defiArtifacts) {
   const artifact = await readJson(path);
   assert.equal(artifact.schema, schema);
   assert.equal(artifact.network, "kaspa-testnet-12");
-  assert.match(artifact.status, /ready|simulation/);
+  assert.match(artifact.status, /ready|simulation|review/);
   assert.equal(artifact.summary.liveProductClaims, 0);
   assert.equal(artifact.summary.custodyActions ?? artifact.summary.custodyReadyLanes ?? 0, 0);
   assert.doesNotMatch(JSON.stringify(artifact), /"privateKey"\s*:|"mnemonic"\s*:|"seed"\s*:|"secret"\s*:|\.local\/tn12-wallet\.json/i);

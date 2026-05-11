@@ -88,6 +88,7 @@ npm run demo:operator-refresh
 | DeFi multi-wallet scenario pack | `artifacts/defi-multi-wallet-scenario-pack.json` |
 | DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
+| Full DeFi benchmark | `artifacts/full-defi-benchmark.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |

@@ -28,6 +28,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | Scheduler covenant binding | `artifacts/scheduler-covenant-binding.json` |
+| Full DeFi benchmark | `artifacts/full-defi-benchmark.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | DeFi scenario reducer | `artifacts/defi-scenario-reducer.json` |
 | DeFi advanced simulation | `artifacts/defi-advanced-simulation.json` |
