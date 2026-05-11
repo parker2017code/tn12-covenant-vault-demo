@@ -116,8 +116,11 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /User A/);
     assert.match(playgroundText, /7 TKAS/);
     assert.match(playgroundText, /4 accepted txs/);
+    assert.match(playgroundText, /Open lab tools/);
     assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/txs/"]').count(), 4);
     assert.equal(await page.locator('#playground-tx-map article').count(), 5);
+    assert.ok(await page.locator('#playground-roles [data-copy^="kaspatest:"]').count() >= 6);
+    assert.ok(await page.locator('#playground-balances details.full-ledger').count() >= 1);
 
     await page.goto(`${url}results.html`, { waitUntil: "networkidle" });
     await page.waitForSelector("#standards-adapters article", { timeout: 5000 });

@@ -39,15 +39,20 @@ export async function renderPlaygroundExplorer(documentRef = document) {
     `;
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });
     if (activityStripNode) renderActivityStrip(activityStripNode, { funding, deposit, secondDeposit, payout, reducer, activity });
-    rolesNode.innerHTML = plan.roles.map((role) => `
+    const sessionRoleMap = new Map((session.roles || []).map((role) => [role.id, role]));
+    rolesNode.innerHTML = plan.roles.map((role) => {
+      const sessionRole = sessionRoleMap.get(role.id) || {};
+      const address = role.address || sessionRole.address || "";
+      return `
       <article>
         <span>${escapeHtml(role.id)} · ${escapeHtml(role.suggestedFundingTkas)} tKAS</span>
         <strong>${escapeHtml(role.label)}</strong>
         <p>${escapeHtml(role.purpose)}</p>
-        <p><a href="https://tn12.kaspa.stream/addresses/${escapeHtml(role.address)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortAddress(role.address || ""))}</code></a></p>
+        ${addressChip(address)}
         <small>${escapeHtml(role.privateKeyPolicy)}</small>
       </article>
-    `).join("");
+    `;
+    }).join("");
     if (sessionNode) {
       sessionNode.innerHTML = `
         <article class="playground-flow-card">
@@ -83,6 +88,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       `;
     }
     if (txMapNode) renderTxMap(txMapNode, { funding, deposit, secondDeposit, payout });
+    wireCopyButtons(documentRef);
     actionsNode.innerHTML = actions.actionRows.map((action) => `
       <article>
         <span>${escapeHtml(action.enforcement)} · ${escapeHtml(action.ready ? "ready" : "needs funding")}</span>
@@ -98,6 +104,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       </article>
     `).join("");
     renderReplay({ replaySummaryNode, sessionBalancesNode, balancesNode, blockedNode, reducer, activity, actions, deposit, secondDeposit, payout });
+    wireCopyButtons(documentRef);
   } catch (error) {
     summaryNode.innerHTML = `<article><span>Load error</span><strong>Playground plan unavailable</strong><p>${escapeHtml(error.message)}</p></article>`;
   }
@@ -220,19 +227,38 @@ function renderReplay({ replaySummaryNode, sessionBalancesNode, balancesNode, bl
         <article>
           <span>${escapeHtml(label)}</span>
           <strong>${escapeHtml(row?.balanceTkas || "0")} TKAS</strong>
-          <p><a href="https://tn12.kaspa.stream/addresses/${escapeHtml(address)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortAddress(address))}</code></a></p>
+          ${addressChip(address)}
         </article>
       `;
     }).join("");
   }
-  balancesNode.innerHTML = (reducer.state?.balances || []).map((row) => `
+  const balances = reducer.state?.balances || [];
+  const [featured, remaining] = [
+    balances.filter((row) => row.promotionState === "review-state-promoted" && Number(row.balanceTkas) >= 0),
+    balances.filter((row) => row.promotionState !== "review-state-promoted" || Number(row.balanceTkas) < 0)
+  ];
+  balancesNode.innerHTML = featured.map((row) => `
     <article>
       <span>${escapeHtml(row.promotionState)}</span>
       <strong>${escapeHtml(row.balanceTkas)} TKAS</strong>
-      <p><code>${escapeHtml(row.address)}</code></p>
+      ${addressChip(row.address)}
       ${row.problems?.length ? `<small>${escapeHtml(row.problems.join("; "))}</small>` : ""}
     </article>
-  `).join("");
+  `).join("") + `
+    <details class="full-ledger">
+      <summary>Show blocked and negative balance rows (${escapeHtml(remaining.length)})</summary>
+      <div class="results-feed full-ledger-grid">
+        ${remaining.map((row) => `
+          <article>
+            <span>${escapeHtml(row.promotionState)}</span>
+            <strong>${escapeHtml(row.balanceTkas)} TKAS</strong>
+            ${addressChip(row.address)}
+            ${row.problems?.length ? `<small>${escapeHtml(row.problems.join("; "))}</small>` : ""}
+          </article>
+        `).join("")}
+      </div>
+    </details>
+  `;
   blockedNode.innerHTML = (reducer.negativeRows || []).map((row) => `
     <article>
       <span>${escapeHtml(row.kind)} · ${escapeHtml(row.status)}</span>
@@ -248,4 +274,30 @@ function metric(label, value, detail) {
 
 function txLink(txid) {
   return `<a href="https://tn12.kaspa.stream/txs/${escapeHtml(txid)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(String(txid || "")))}</code></a>`;
+}
+
+function addressChip(address) {
+  const value = String(address || "");
+  return `
+    <p class="address-chip">
+      <a href="https://tn12.kaspa.stream/addresses/${escapeHtml(value)}" target="_blank" rel="noreferrer" title="${escapeHtml(value)}"><code>${escapeHtml(shortAddress(value))}</code></a>
+      <button type="button" data-copy="${escapeHtml(value)}" aria-label="Copy ${escapeHtml(shortAddress(value))}">Copy</button>
+    </p>
+  `;
+}
+
+function wireCopyButtons(documentRef) {
+  for (const button of documentRef.querySelectorAll("[data-copy]")) {
+    if (button.dataset.copyBound === "true") continue;
+    button.dataset.copyBound = "true";
+    button.addEventListener("click", async () => {
+      if (!navigator.clipboard?.writeText) return;
+      await navigator.clipboard.writeText(button.dataset.copy || "");
+      const original = button.textContent;
+      button.textContent = "Copied";
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1100);
+    });
+  }
 }

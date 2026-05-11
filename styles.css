@@ -276,6 +276,7 @@ button:hover {
 code {
   color: var(--accent);
   font-size: 0.82em;
+  overflow-wrap: anywhere;
 }
 
 pre {
@@ -1763,7 +1764,8 @@ progress::-moz-progress-bar {
 
 .activity-card a,
 .playground-tx-map a,
-.results-feed a {
+.results-feed a,
+.address-chip a {
   position: relative;
   display: inline-flex;
   max-width: 100%;
@@ -1773,8 +1775,33 @@ progress::-moz-progress-bar {
 
 .activity-card a:hover,
 .playground-tx-map a:hover,
-.results-feed a:hover {
+.results-feed a:hover,
+.address-chip a:hover {
   text-decoration: underline;
+}
+
+.address-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 10px 0 0;
+}
+
+.address-chip code {
+  display: inline-block;
+  max-width: min(100%, 22ch);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.address-chip button {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  font-size: 11px;
+  color: var(--text);
+  background: rgba(118, 167, 158, .12);
 }
 
 .activity-amount {
@@ -1910,6 +1937,24 @@ progress::-moz-progress-bar {
 .results-flow p,
 .level-card p {
   margin-bottom: 0;
+}
+
+.full-ledger {
+  grid-column: 1 / -1;
+  border: 1px solid rgba(118, 167, 158, .25);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(8, 13, 14, .55);
+}
+
+.full-ledger summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.full-ledger-grid {
+  margin-top: 12px;
 }
 
 .rail-done {
