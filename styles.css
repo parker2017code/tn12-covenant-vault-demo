@@ -333,7 +333,7 @@ pre {
   border-radius: 7px;
   background: color-mix(in srgb, var(--bg) 78%, #000 8%);
   border: 1px solid var(--line);
-  color: #d8e8e1;
+  color: var(--text);
   font-size: 13px;
 }
 
@@ -520,11 +520,11 @@ progress {
   height: 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #0b1013;
+  background: var(--surface-soft);
 }
 
 progress::-webkit-progress-bar {
-  background: #0b1013;
+  background: var(--surface-soft);
   border-radius: 999px;
 }
 
@@ -553,7 +553,7 @@ progress::-moz-progress-bar {
 
 .issues li {
   border-left: 3px solid var(--accent-strong);
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 10px 12px;
   color: var(--muted);
 }
@@ -570,7 +570,7 @@ progress::-moz-progress-bar {
   border: 1px solid var(--line);
   border-radius: 7px;
   padding: 14px;
-  background: #12191d;
+  background: var(--surface-soft);
 }
 
 .timeline strong,
@@ -603,7 +603,7 @@ progress::-moz-progress-bar {
   border: 1px solid var(--line);
   border-radius: 7px;
   padding: 12px;
-  background: #12191d;
+  background: var(--surface-soft);
 }
 
 .sources {
@@ -718,7 +718,7 @@ progress::-moz-progress-bar {
 .indexer-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -750,7 +750,7 @@ progress::-moz-progress-bar {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -788,7 +788,7 @@ progress::-moz-progress-bar {
 .attestation-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -815,7 +815,7 @@ progress::-moz-progress-bar {
 .invoice-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -934,28 +934,28 @@ progress::-moz-progress-bar {
 .build-status-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
 .auction-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
 .defi-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
 .agent-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1018,7 +1018,7 @@ progress::-moz-progress-bar {
 .asset-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1039,7 +1039,7 @@ progress::-moz-progress-bar {
 .mainnet-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1060,7 +1060,7 @@ progress::-moz-progress-bar {
 .access-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1081,7 +1081,7 @@ progress::-moz-progress-bar {
 .coordination-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1102,7 +1102,7 @@ progress::-moz-progress-bar {
 .treasury-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1123,7 +1123,7 @@ progress::-moz-progress-bar {
 .escrow-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1144,7 +1144,7 @@ progress::-moz-progress-bar {
 .enforcement-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1165,7 +1165,7 @@ progress::-moz-progress-bar {
 .campaign-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1186,7 +1186,7 @@ progress::-moz-progress-bar {
 .research-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1207,7 +1207,7 @@ progress::-moz-progress-bar {
 .submit-summary article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1419,7 +1419,7 @@ progress::-moz-progress-bar {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1444,7 +1444,7 @@ progress::-moz-progress-bar {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1515,7 +1515,7 @@ progress::-moz-progress-bar {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -1788,7 +1788,7 @@ progress::-moz-progress-bar {
 .claim-grid article {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
 }
 
@@ -2511,7 +2511,7 @@ progress::-moz-progress-bar {
 .level-card {
   border: 1px solid var(--line);
   border-radius: 7px;
-  background: #12191d;
+  background: var(--surface-soft);
   padding: 14px;
   min-width: 0;
   overflow-wrap: anywhere;
