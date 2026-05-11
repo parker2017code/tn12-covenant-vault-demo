@@ -11,6 +11,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 
 - The front door still feels like a lab notebook. Compress around one question: what was proven on TN12?
 - The first screen should route to three jobs: see the proof, try the playground, inspect technical evidence.
+- Treat one reported issue as a class until proven otherwise. One confusing command means audit all visible commands; one fake-clickable card means audit all similar cards; one bad mobile control means inspect the whole mobile chrome.
 - Audit words like accepted evidence, indexer-derived, local-key custody, external signer, durable replay, and promotion guard are correct but too dense for the default path.
 - Generated artifact sections should be collapsed by default and renamed by user job, not internal script role.
 - Package scripts, large `app.js`, large `scripts/check.mjs`, and artifact count make the repo hard to review. Keep splitting renderers and checks.

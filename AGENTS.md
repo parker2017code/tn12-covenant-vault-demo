@@ -37,6 +37,7 @@
 - Use one clear status label or source link instead of long defensive caveat stacks.
 - Prefer plain build language: built, working, needs wallet, needs custody, needs indexer, research, roadmap, next rail. Avoid over-negative repetition when the useful point is simply what must be built next.
 - Treat text as part of the product. UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes should be scanned with the same care as code: necessary, specific, clean, and defensible.
+- Treat user examples as class signals unless the user explicitly says one instance only. If the user points at one command, fake-clickable card, crowded mobile control, copy button, source link, or status label, audit the whole class of similar patterns.
 - Treat agent-written code as suspect around adjacent assumptions: check existing artifact shapes, field names, negative cases, and security-sensitive paths before extending a pattern.
 - Treat invoice, payload, receipt, and wallet work as rails, not as a generic merchant-payment adoption thesis. Current strategic framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
 - Treat the current version as a TN12-configured proof app. The browser builds policy/control artifacts, while scripts compile, sign, submit, verify, and index accepted testnet transactions.
