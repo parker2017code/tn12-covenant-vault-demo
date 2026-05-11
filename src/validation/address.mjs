@@ -1,6 +1,12 @@
-import { Address } from "kaspa-wasm";
-
 export const TN12_PREFIX = "kaspatest";
+const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+const GENERATOR = [
+  0x98f2bc8e61n,
+  0x79b76d99e2n,
+  0xf33e5fb3c4n,
+  0xae2eabe2a8n,
+  0x1e4f43e470n
+];
 
 export function parseKaspaAddress(address) {
   const value = String(address || "").trim();
@@ -12,21 +18,50 @@ export function parseKaspaAddress(address) {
     };
   }
 
-  try {
-    const parsed = new Address(value);
-    return {
-      ok: true,
-      address: String(parsed),
-      prefix: parsed.prefix,
-      version: String(parsed.version)
-    };
-  } catch (error) {
+  if (value !== value.toLowerCase()) {
     return {
       ok: false,
       address: value,
-      error: "Address is not a valid Kaspa address."
+      error: "Address must be lowercase."
     };
   }
+
+  const [prefix, payload, extra] = value.split(":");
+  if (!prefix || !payload || extra !== undefined) {
+    return {
+      ok: false,
+      address: value,
+      error: "Address must use prefix:payload format."
+    };
+  }
+
+  const data = [];
+  for (const char of payload) {
+    const index = CHARSET.indexOf(char);
+    if (index === -1) {
+      return {
+        ok: false,
+        address: value,
+        error: "Address contains characters outside the Kaspa address alphabet."
+      };
+    }
+    data.push(BigInt(index));
+  }
+
+  if (data.length <= 8 || polymod(prefixExpand(prefix).concat(data)) !== 1n) {
+    return {
+      ok: false,
+      address: value,
+      error: "Address checksum is invalid."
+    };
+  }
+
+  return {
+    ok: true,
+    address: value,
+    prefix,
+    version: String(data[0])
+  };
 }
 
 export function validateKaspaAddress(address, { prefix } = {}) {
@@ -67,4 +102,22 @@ export function assertSameTn12Address(left, right, label = "Addresses") {
     throw new Error(`${label} must match exactly.`);
   }
   return normalizedLeft;
+}
+
+function prefixExpand(prefix) {
+  return [...prefix].map((char) => BigInt(char.charCodeAt(0) & 0x1f)).concat([0n]);
+}
+
+function polymod(values) {
+  let checksum = 1n;
+  for (const value of values) {
+    const top = checksum >> 35n;
+    checksum = ((checksum & 0x07ffffffffn) << 5n) ^ value;
+    for (let index = 0; index < GENERATOR.length; index += 1) {
+      if (((top >> BigInt(index)) & 1n) === 1n) {
+        checksum ^= GENERATOR[index];
+      }
+    }
+  }
+  return checksum;
 }

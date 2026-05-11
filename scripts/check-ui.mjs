@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { once } from "node:events";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
-import { extname, join, normalize, resolve } from "node:path";
+import { extname, join, normalize, relative, resolve } from "node:path";
 import { chromium } from "@playwright/test";
 
 const host = "127.0.0.1";
@@ -67,6 +67,7 @@ try {
   assert.match(playgroundHtml, /id="playground-roles"/);
   assert.match(playgroundHtml, /id="playground-actions"/);
   assert.match(playgroundHtml, /id="playground-replay-summary"/);
+  assert.match(playgroundHtml, /id="playground-session-balances"/);
   assert.match(playgroundHtml, /id="playground-balances"/);
   assert.match(playgroundHtml, /id="playground-blocked"/);
   assert.match(playgroundHtml, /4 accepted txs/);
@@ -86,6 +87,24 @@ try {
 async function checkRenderedPages(url) {
   const browser = await chromium.launch({ headless: true });
   try {
+    for (const path of ["index.html", "lab.html", "results.html", "playground.html"]) {
+      const page = await browser.newPage();
+      const errors = [];
+      page.on("pageerror", (error) => errors.push(error.message));
+      page.on("console", (message) => {
+        if (["error", "warning"].includes(message.type())) errors.push(message.text());
+      });
+      const response = await page.goto(`${url}${path}`, { waitUntil: "networkidle" });
+      assert.equal(response?.ok(), true, `${path} did not return 200`);
+      assert.deepEqual(errors, [], `${path} had browser errors: ${errors.join("; ")}`);
+      const emptyLiveRegions = await page.locator("[aria-live]").evaluateAll((nodes) => nodes
+        .filter((node) => !node.textContent.trim() && node.children.length === 0)
+        .map((node) => node.id || node.className || node.tagName));
+      assert.deepEqual(emptyLiveRegions, [], `${path} has empty live regions`);
+      await assertLocalLinks(page, path);
+      await page.close();
+    }
+
     const page = await browser.newPage();
     await page.goto(`${url}playground.html`, { waitUntil: "networkidle" });
     await page.waitForSelector("#playground-session article", { timeout: 5000 });
@@ -94,6 +113,8 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /User B -> Pool/);
     assert.match(playgroundText, /3bfca807/);
     assert.match(playgroundText, /30 TKAS/);
+    assert.match(playgroundText, /User A/);
+    assert.match(playgroundText, /7 TKAS/);
     assert.match(playgroundText, /4 accepted txs/);
 
     await page.goto(`${url}results.html`, { waitUntil: "networkidle" });
@@ -109,6 +130,34 @@ async function checkRenderedPages(url) {
   }
 }
 
+async function assertLocalLinks(page, path) {
+  const linksToCheck = await page.locator("a[href]").evaluateAll((links) => {
+    const pageNames = new Set(["index.html", "lab.html", "results.html", "playground.html"]);
+    return links.flatMap((link) => {
+      const href = link.getAttribute("href") || "";
+      if (/^(https?:|mailto:)/.test(href)) return [];
+      const url = new URL(href, window.location.href);
+      const targetPath = url.pathname.split("/").pop() || "index.html";
+      if (targetPath === window.location.pathname.split("/").pop() && url.hash) {
+        const id = decodeURIComponent(url.hash.slice(1));
+        if (!document.getElementById(id)) return [`Missing local anchor ${href}`];
+      }
+      if (pageNames.has(targetPath)) return [];
+      return [url.pathname.replace(/^\/+/, "")];
+    });
+  });
+
+  const problems = [];
+  for (const file of linksToCheck) {
+    try {
+      await access(file);
+    } catch {
+      problems.push(`Missing local target ${file}`);
+    }
+  }
+  assert.deepEqual(problems, [], `${path} has broken local links`);
+}
+
 function createStaticServer(rootDir) {
   const root = resolve(rootDir);
   return createServer(async (request, response) => {
@@ -116,7 +165,8 @@ function createStaticServer(rootDir) {
       const requestPath = normalize(decodeURIComponent(new URL(request.url || "/", "http://localhost").pathname));
       const relativePath = requestPath === "/" ? "index.html" : requestPath.replace(/^\/+/, "");
       const filePath = resolve(join(root, relativePath));
-      if (!filePath.startsWith(root)) {
+      const rootRelativePath = relative(root, filePath);
+      if (rootRelativePath.startsWith("..") || resolve(rootRelativePath) === rootRelativePath) {
         response.writeHead(403);
         response.end("Forbidden");
         return;

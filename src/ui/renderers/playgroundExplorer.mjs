@@ -12,6 +12,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   const rulesNode = documentRef.querySelector("#playground-rules");
   const flowNode = documentRef.querySelector("#playground-flow");
   const replaySummaryNode = documentRef.querySelector("#playground-replay-summary");
+  const sessionBalancesNode = documentRef.querySelector("#playground-session-balances");
   const balancesNode = documentRef.querySelector("#playground-balances");
   const blockedNode = documentRef.querySelector("#playground-blocked");
   if (!summaryNode || !rolesNode || !actionsNode || !rulesNode || !flowNode) return;
@@ -96,7 +97,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
         <strong>${escapeHtml(step)}</strong>
       </article>
     `).join("");
-    renderReplay({ replaySummaryNode, balancesNode, blockedNode, reducer, activity, actions });
+    renderReplay({ replaySummaryNode, sessionBalancesNode, balancesNode, blockedNode, reducer, activity, actions, deposit, secondDeposit, payout });
   } catch (error) {
     summaryNode.innerHTML = `<article><span>Load error</span><strong>Playground plan unavailable</strong><p>${escapeHtml(error.message)}</p></article>`;
   }
@@ -196,7 +197,7 @@ function renderTxMap(node, { funding, deposit, secondDeposit, payout }) {
   `).join("");
 }
 
-function renderReplay({ replaySummaryNode, balancesNode, blockedNode, reducer, activity, actions }) {
+function renderReplay({ replaySummaryNode, sessionBalancesNode, balancesNode, blockedNode, reducer, activity, actions, deposit, secondDeposit, payout }) {
   if (!replaySummaryNode || !balancesNode || !blockedNode) return;
   replaySummaryNode.innerHTML = `
     ${metric("Accepted transfers", activity.summary.acceptedTransferRows, "Real TN12 transfer rows in the current ledger.")}
@@ -206,6 +207,24 @@ function renderReplay({ replaySummaryNode, balancesNode, blockedNode, reducer, a
     ${metric("Ready actions", actions.summary.readyActions, "Guided actions with current public prerequisites.")}
     ${metric("Live product claims", actions.summary.liveProductClaims, "Must stay zero.")}
   `;
+  if (sessionBalancesNode) {
+    const sessionAddresses = [
+      ["Pool", payout.source.address],
+      ["User A", deposit.source.address],
+      ["User B", payout.payment.to]
+    ];
+    const balances = reducer.state?.balances || [];
+    sessionBalancesNode.innerHTML = sessionAddresses.map(([label, address]) => {
+      const row = balances.find((item) => item.address === address);
+      return `
+        <article>
+          <span>${escapeHtml(label)}</span>
+          <strong>${escapeHtml(row?.balanceTkas || "0")} TKAS</strong>
+          <p><a href="https://tn12.kaspa.stream/addresses/${escapeHtml(address)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortAddress(address))}</code></a></p>
+        </article>
+      `;
+    }).join("");
+  }
   balancesNode.innerHTML = (reducer.state?.balances || []).map((row) => `
     <article>
       <span>${escapeHtml(row.promotionState)}</span>

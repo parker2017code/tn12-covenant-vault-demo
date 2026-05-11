@@ -379,6 +379,10 @@ function renderManualOutpoint() {
     item.textContent = issue;
     manualIssuesNode.append(item);
   }
+
+  if (manualOutputPickerNode && !manualOutputPickerNode.textContent.trim()) {
+    manualOutputPickerNode.textContent = "Fetch a TN12 transaction to list selectable outputs here.";
+  }
 }
 
 async function renderProofTransactions() {
@@ -830,6 +834,37 @@ async function renderBuildStatus() {
     }
   } catch (error) {
     buildStatusSummaryNode.textContent = `Build status unavailable: ${error.message}`;
+  }
+}
+
+async function renderProjectPlan() {
+  if (!projectPlanSummaryNode || !projectPlanNextNode || !projectPlanVisionNode) return;
+
+  try {
+    const fixture = await fetchJson("fixtures/BuildStatus.json");
+    const plan = buildProjectPlan(fixture);
+    projectPlanSummaryNode.innerHTML = `
+      <article><span>Done</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
+      <article><span>WIP</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
+      <article><span>Next</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
+      <article><span>Later</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
+    `;
+    projectPlanNextNode.innerHTML = "";
+    for (const item of plan.next) {
+      const article = document.createElement("article");
+      article.className = "build-status-card";
+      article.innerHTML = `
+        <span>${escapeHtml(item.laneId)}</span>
+        <strong>${escapeHtml(item.id)}</strong>
+        <p>${escapeHtml(item.detail)}</p>
+      `;
+      projectPlanNextNode.append(article);
+    }
+    projectPlanVisionNode.innerHTML = plan.longTermVision
+      .map((item) => `<li>${escapeHtml(item)}</li>`)
+      .join("");
+  } catch (error) {
+    projectPlanSummaryNode.textContent = `Project plan unavailable: ${error.message}`;
   }
 }
 
@@ -1294,6 +1329,35 @@ async function renderAcceptedAppState() {
     }
   } catch (error) {
     indexerSummaryNode.textContent = `Indexer snapshot unavailable: ${error.message}`;
+  }
+}
+
+async function renderDefiReceiptGuard() {
+  if (!defiReceiptGuardNode) return;
+
+  try {
+    const guard = await fetchJson("artifacts/defi-receipt-replay-guard.json");
+    defiReceiptGuardNode.innerHTML = `
+      <article>
+        <span>${escapeHtml(guard.status)}</span>
+        <strong>${escapeHtml(guard.summary.acceptedReceipts)} DeFi receipts across ${escapeHtml(guard.summary.wallets)} wallets</strong>
+        <p>${escapeHtml(guard.summary.negativeCasesCaught)} duplicate/stale promotion cases caught before app-state promotion.</p>
+        <small>${escapeHtml(guard.promotionRule)}</small>
+      </article>
+    `;
+    for (const receipt of guard.acceptedReceipts) {
+      const article = document.createElement("article");
+      article.className = "receipt-card";
+      article.innerHTML = `
+        <span>DeFi v1 receipt</span>
+        <strong>${escapeHtml(receipt.subject)} / ${escapeHtml(receipt.value)}</strong>
+        <p>${escapeHtml(shortAddress(receipt.walletAddress))}</p>
+        <small>${escapeHtml(shortTxid(receipt.txid))}</small>
+      `;
+      defiReceiptGuardNode.append(article);
+    }
+  } catch (error) {
+    defiReceiptGuardNode.textContent = `DeFi receipt guard unavailable: ${error.message}`;
   }
 }
 

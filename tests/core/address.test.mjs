@@ -19,6 +19,7 @@ assert.equal(assertSameTn12Address(validTn12, validTn12), validTn12);
 assert.equal(validateTn12Address("").ok, false);
 assert.equal(validateTn12Address("kaspatest:").ok, false);
 assert.equal(validateTn12Address("kaspatest:not-a-real-address").ok, false);
+assert.equal(validateTn12Address(validTn12.replace(/.$/, "l")).ok, false);
 assert.equal(validateTn12Address(validMainnet).ok, false);
 assert.equal(validateKaspaAddress(validMainnet).ok, true);
 

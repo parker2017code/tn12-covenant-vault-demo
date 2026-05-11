@@ -12,8 +12,10 @@ export function runProofPageController(renderers) {
     renderers.renderWalletReview,
     renderers.renderWalletConnector,
     renderers.renderEnforcementMatrix,
+    renderers.renderMainnetReadiness,
     renderers.renderDefiSimulationSurface,
     renderers.renderDefiReceiptGuard,
+    renderers.renderMasterRoadmap,
     renderers.renderResultsExplorer,
     renderers.renderPlaygroundExplorer
   ]);
