@@ -1,0 +1,184 @@
+{
+  "schema": "tn12-defi-scenario-reducer/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T15:42:12.376Z",
+  "status": "scenario-reducer-ready-not-custody",
+  "enforcement": "INDEXER_DERIVED",
+  "summary": {
+    "stateRows": 7,
+    "promotedReviewRows": 3,
+    "blockedScenarioRows": 4,
+    "swapRows": 2,
+    "oracleRows": 2,
+    "lendingRows": 3,
+    "duplicateCandidateRows": 1,
+    "missingCandidateRows": 1,
+    "custodyPromotionCandidateRows": 2,
+    "negativeRows": 4,
+    "blockedNegativeRows": 4,
+    "custodyPromotions": 0,
+    "liveProductClaims": 0
+  },
+  "state": {
+    "swaps": [
+      {
+        "id": "swap-ok-001",
+        "kind": "amm-swap",
+        "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+        "acceptedIndexed": true,
+        "inputSymbol": "TKAS",
+        "outputSymbol": "TUSD",
+        "inputUnits": "1000000000",
+        "expectedOutputUnits": "987158034",
+        "minOutputUnits": "980000000",
+        "priceImpactBps": 99,
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "id": "swap-slippage-blocked-001",
+        "kind": "amm-swap",
+        "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
+        "acceptedIndexed": true,
+        "inputSymbol": "TKAS",
+        "outputSymbol": "TUSD",
+        "inputUnits": "1000000000",
+        "expectedOutputUnits": "987158034",
+        "minOutputUnits": "995000000",
+        "priceImpactBps": 99,
+        "promotionState": "blocked-review",
+        "custodyAction": false,
+        "problems": [
+          "min output not met"
+        ]
+      }
+    ],
+    "oraclePrices": [
+      {
+        "id": "oracle-fresh-tkas",
+        "kind": "oracle-price",
+        "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
+        "acceptedIndexed": true,
+        "symbol": "TKAS",
+        "priceCents": "100",
+        "ageSeconds": 45,
+        "sourceModelId": "signed-reporter-attestation",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "id": "oracle-stale-tkas",
+        "kind": "oracle-price",
+        "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
+        "acceptedIndexed": true,
+        "symbol": "TKAS",
+        "priceCents": "72",
+        "ageSeconds": 900,
+        "sourceModelId": "cex-weighted-median",
+        "promotionState": "blocked-review",
+        "custodyAction": false,
+        "problems": [
+          "stale oracle price"
+        ]
+      }
+    ],
+    "lendingPositions": [
+      {
+        "id": "lend-safe-001",
+        "kind": "lending-position",
+        "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+        "acceptedIndexed": true,
+        "collateralSymbol": "TKAS",
+        "collateralValueCents": "10000",
+        "debtCents": "4000",
+        "healthFactorBps": "16250",
+        "oraclePriceId": "oracle-fresh-tkas",
+        "oracleStatus": "fresh-review-only",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "id": "lend-liquidation-review-001",
+        "kind": "lending-position",
+        "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+        "acceptedIndexed": true,
+        "collateralSymbol": "TKAS",
+        "collateralValueCents": "10000",
+        "debtCents": "9000",
+        "healthFactorBps": "7222",
+        "oraclePriceId": "oracle-fresh-tkas",
+        "oracleStatus": "fresh-review-only",
+        "promotionState": "blocked-review",
+        "custodyAction": false,
+        "problems": [
+          "liquidation review is not executable"
+        ]
+      },
+      {
+        "id": "lend-stale-oracle-blocked-001",
+        "kind": "lending-position",
+        "txid": "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
+        "acceptedIndexed": true,
+        "collateralSymbol": "TKAS",
+        "collateralValueCents": "7200",
+        "debtCents": "5000",
+        "healthFactorBps": "9360",
+        "oraclePriceId": "oracle-stale-tkas",
+        "oracleStatus": "stale-block-custody",
+        "promotionState": "blocked-review",
+        "custodyAction": false,
+        "problems": [
+          "stale oracle blocks position"
+        ]
+      }
+    ]
+  },
+  "negativeRows": [
+    {
+      "id": "swap-ok-001",
+      "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
+      "kind": "duplicate-candidate",
+      "status": "blocked",
+      "reason": "duplicate scenario reference"
+    },
+    {
+      "id": "swap-missing-accepted-reference",
+      "txid": "missing-defi-scenario-txid",
+      "kind": "missing-reference-candidate",
+      "status": "blocked",
+      "reason": "missing or mismatched accepted-index reference"
+    },
+    {
+      "id": "lend-safe-001",
+      "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
+      "kind": "custody-promotion-candidate",
+      "requestedAction": "custody-promotion",
+      "sourcePromotionState": "review-state-promoted",
+      "status": "blocked",
+      "reason": "review state cannot be promoted to custody without external signer and settlement evidence"
+    },
+    {
+      "id": "lend-liquidation-review-001",
+      "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
+      "kind": "custody-promotion-candidate",
+      "requestedAction": "custody-promotion",
+      "sourcePromotionState": "blocked-review",
+      "status": "blocked",
+      "reason": "review state cannot be promoted to custody without external signer and settlement evidence"
+    }
+  ],
+  "promotionRule": [
+    "Only accepted-indexed references can enter review app state.",
+    "Scenario rows with min-output failure, stale oracle data, or liquidation-only status stay blocked.",
+    "Review-state promotion never means custody promotion; custody candidates are blocked until external signer, settlement, and live replay evidence exist.",
+    "Duplicate and missing scenario references are blocked before UI or operator state can use them."
+  ],
+  "boundaries": [
+    "This reducer promotes review-only app state from deterministic DeFi scenarios.",
+    "It is indexer-derived state, not script-enforced settlement and not live DeFi custody.",
+    "Rows marked review-state-promoted are safe for dashboards and operator review only."
+  ]
+}

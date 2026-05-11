@@ -12,6 +12,21 @@ This file is the short queue. It does not replace the generated artifacts; it po
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 
+## Autonomous Grand Plan Before User Input
+
+These are the highest-impact things that can be advanced without asking for a real external wallet signature:
+
+| Order | Work | Done When | Needs User? |
+|---|---|---|---|
+| 1 | DeFi scenario reducer and promotion guard. | Accepted scenario references reduce into review-only app state; duplicate, missing, stale-oracle, slippage, liquidation, and custody-promotion attempts are blocked. | No |
+| 2 | AMM hardening. | Add/remove liquidity math, LP-share accounting, invariant checks, price-impact sweeps, and invalid reserve mutation tests. | No |
+| 3 | Lending/liquidation hardening. | Collateral-ratio sweeps, liquidation threshold tests, stale/wrong oracle blocks, and no-executable-liquidation boundaries are deterministic. | No |
+| 4 | Oracle failure matrix. | Stale, conflicting, unavailable, manipulated, missing-quorum, and fresh-but-not-truth inputs are executable negative cases. | No |
+| 5 | Multi-wallet scenario pack. | Existing multi-wallet receipt references are grouped into user/operator roles with accepted-index replay and no external-signer claim. | No |
+| 6 | Wallet/indexer hardening. | Unsigned request templates, signer-return validation, submit-result promotion, replay reducers, rollback fixtures, and no-secret checks stay green. | No |
+| 7 | Reviewer/UI cleanup. | Public surfaces show accepted, simulated, and blocked states without adding product claims. | No |
+| 8 | External signer roundtrip. | A real wallet returns signed bytes, submit succeeds, and accepted txid replay matches. | Yes |
+
 ## Current Reviewer-Hardening Queue
 
 These are the practical cleanup tasks surfaced by the latest repo reviews and GitHub surface check. They improve auditability before adding more app lanes.
@@ -56,6 +71,7 @@ These are not all needed for the next commit, but they are the path from proof l
 - Do not add AMM, lending, liquidation, oracle, or bridge claims until there is a narrower accepted custody/indexer path.
 - Use `npm run defi:simulation` for the maximum honest DeFi simulation pass: AMM, lending, liquidation, oracle, and settlement planner checks over accepted receipt/indexer inputs, with live-product promotion blocked.
 - Use `npm run defi:scenario` for deterministic AMM output, min-output rejection, oracle freshness, lending health-factor, and liquidation-review simulations over accepted TN12 receipt references.
+- Use `npm run defi:reducer` to promote review-only state while blocking duplicate, missing, stale-oracle, slippage, liquidation-execution, and custody-promotion attempts.
 - Do not treat local replay success as live removed-block rollback evidence.
 
 ## Commands
