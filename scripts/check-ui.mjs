@@ -56,9 +56,8 @@ try {
   assert.match(resultsHtml, /id="knowledge-levels"/);
   assert.match(resultsHtml, /id="results-rails"/);
   assert.match(resultsHtml, /id="standards-adapters"/);
-  assert.match(resultsHtml, /id="source-map"/);
-  assert.match(resultsHtml, /Useful next integrations, not finished products/);
-  assert.match(resultsHtml, /What should be clickable/);
+  assert.match(resultsHtml, /Future adapters can plug into receipts/);
+  assert.match(resultsHtml, /Show adapter ideas/);
   assert.match(resultsHtml, /docs\/PRODUCT_EXECUTION_PLAN\.md/);
   assert.match(resultsHtml, /Accepted TN12 activity/);
   assert.match(resultsHtml, /Live playground/);
@@ -146,14 +145,15 @@ async function checkRenderedPages(url) {
     assert.ok(await page.locator('#playground-balances details.full-ledger').count() >= 1);
 
     await page.goto(`${url}results.html`, { waitUntil: "networkidle" });
-    await page.waitForSelector("#standards-adapters article", { timeout: 5000 });
+    await page.locator("#standards details.evidence-drawer").evaluate((node) => {
+      node.open = true;
+    });
+    await page.waitForSelector("#standards-adapters article", { state: "attached", timeout: 5000 });
     const resultsText = await page.locator("body").innerText();
     assert.match(resultsText, /x402-style HTTP payment adapter/);
     assert.match(resultsText, /future adapter/i);
     assert.match(resultsText, /Accepted transfers/i);
     assert.match(resultsText, /25/);
-    assert.match(resultsText, /external reference/);
-    assert.match(resultsText, /repo source/);
     assert.doesNotMatch(resultsText, /Draft post|X post/);
     assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
     assert.ok(await page.locator('#results-feed a[href*="tn12.kaspa.stream/transactions/"]').count() >= 6);
@@ -165,17 +165,20 @@ async function checkRenderedPages(url) {
     assert.match(productMapText, /Get and verify tKAS/);
     assert.match(productMapText, /Scheduler workbench/);
     const runbookText = await page.locator("#runbook").innerText();
-    assert.match(runbookText, /If you are determined/);
-    assert.match(runbookText, /Not finished: AMM custody/);
+    assert.match(runbookText, /Run it yourself/);
+    assert.match(runbookText, /Next rails: AMM custody/);
     assert.match(runbookText, /Replay before believing it/);
-    await page.waitForSelector("#self-serve-lanes article", { timeout: 5000 });
+    await page.locator("#lane-runbook").evaluate((node) => {
+      node.open = true;
+    });
+    await page.waitForSelector("#self-serve-lanes article", { state: "attached", timeout: 5000 });
     assert.equal(await page.locator("#self-serve-lanes article").count(), 12);
     const laneRunbookText = await page.locator("#lane-runbook").evaluate((node) => node.textContent || "");
     assert.match(laneRunbookText, /DeFi lab/);
     assert.match(laneRunbookText, /Coordination \/ Stag/);
     assert.match(laneRunbookText, /based app prototype/i);
     assert.match(laneRunbookText, /External wallet handoff/);
-    assert.match(laneRunbookText, /No AMM custody/);
+    assert.match(laneRunbookText, /AMM custody/);
     assert.match(laneRunbookText, /npm run defi:refresh/);
     assert.ok(await page.locator("details.lab-drawer").count() >= 20);
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
@@ -188,7 +191,7 @@ async function checkRenderedPages(url) {
     assert.match(schedulerText, /Replay the accepted scheduler trigger/);
     assert.match(schedulerText, /Accepted trigger/);
     assert.match(schedulerText, /Transparent coordination pack/);
-    assert.match(schedulerText, /protocol-level automation/);
+    assert.match(schedulerText, /Protocol-level automation is a later rail/);
     assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 7);
     await page.goto(`${url}lab.html#coordination`, { waitUntil: "networkidle" });
     await page.waitForSelector(".coordination-run-card", { timeout: 5000 });

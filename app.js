@@ -510,7 +510,7 @@ async function renderEnforcementMatrix() {
       <article><span>Features</span><strong>${escapeHtml(matrix.summary.total)}</strong></article>
       <article><span>Script</span><strong>${escapeHtml(matrix.summary.contractEnforced)}</strong></article>
       <article><span>Not script</span><strong>${escapeHtml(matrix.summary.notScriptEnforced)}</strong></article>
-      <article><span>Status</span><strong>claim audit</strong></article>
+      <article><span>Status</span><strong>script vs app state</strong></article>
     `;
 
     enforcementFeaturesNode.innerHTML = "";
@@ -895,7 +895,7 @@ async function renderProvenStatus() {
     provenStatusBlockersNode.innerHTML = "";
     const rows = [
       ...(status.demoBlockers || []).map((blocker) => ({ label: "demo blocker", blocker })),
-      ...(status.mainnetDeferredBlockers || []).map((blocker) => ({ label: "mainnet deferred", blocker }))
+      ...(status.mainnetDeferredBlockers || []).map((blocker) => ({ label: "mainnet work left", blocker }))
     ];
     for (const row of rows) {
       const article = document.createElement("article");
@@ -1061,7 +1061,7 @@ async function renderDefiBacklog() {
       <article><span>Briefs</span><strong>${escapeHtml(backlog.summary.total)}</strong></article>
       <article><span>Research</span><strong>${escapeHtml(backlog.summary.researchOnly)}</strong></article>
       <article><span>Later</span><strong>${escapeHtml(backlog.summary.prototypeLater)}</strong></article>
-      <article><span>Missing rails</span><strong>${escapeHtml(backlog.summary.missingRailCount)}</strong></article>
+      <article><span>Next rails</span><strong>${escapeHtml(backlog.summary.missingRailCount)}</strong></article>
     `;
 
     defiListNode.innerHTML = "";
@@ -1091,7 +1091,7 @@ async function renderStableValuePaths() {
       <article><span>Paths</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
       <article><span>Build now</span><strong>${escapeHtml(registry.summary.buildableNow)}</strong></article>
       <article><span>Research</span><strong>${escapeHtml(registry.summary.researchOnly)}</strong></article>
-      <article><span>Missing rails</span><strong>${escapeHtml(registry.summary.missingRailCount)}</strong></article>
+      <article><span>Next rails</span><strong>${escapeHtml(registry.summary.missingRailCount)}</strong></article>
     `;
 
     stableListNode.innerHTML = "";
@@ -1299,7 +1299,7 @@ async function renderAcceptedAppState() {
         <article>
           <span>${escapeHtml(state.appState?.receipts?.status || "payload-receipt-indexer-next")}</span>
           <strong>No accepted payload receipts yet</strong>
-          <p>${escapeHtml(state.appState?.receipts?.next || "Submit and verify one payload transaction before claiming receipt events.")}</p>
+        <p>${escapeHtml(state.appState?.receipts?.next || "Submit and verify one payload transaction before showing receipt events.")}</p>
         </article>
       `;
       return;
@@ -1609,7 +1609,7 @@ async function renderPayloadDraftStatus() {
       <article>
         <span>${escapeHtml(draft.status)}</span>
         <strong>${escapeHtml(shortTxid(draft.transactionId))}</strong>
-        <p>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; accepted through TN12 JSON wRPC. Do not use the public REST route for payload receipts.</p>
+        <p>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; accepted through TN12 JSON wRPC. Public REST submit did not preserve payload bytes in this test.</p>
         <small>${escapeHtml(draft.receipt.payload.kind)} / ${escapeHtml(draft.receipt.payload.subject)}</small>
       </article>
     `;
@@ -1662,6 +1662,7 @@ async function renderSelfServeLaneRunbook() {
           <span>${escapeHtml(lane.status.replaceAll("-", " "))}</span>
           <a href="${escapeHtml(lane.uiTarget)}">${escapeHtml(lane.title)}</a>
         </div>
+        <p><a class="button-link" href="${escapeHtml(lane.uiTarget)}">Open this lane</a></p>
         <p class="self-serve-layer">${escapeHtml(lane.stackLayer.replaceAll("-", " "))}</p>
         <div>
           <strong>Available now</strong>
@@ -1673,10 +1674,10 @@ async function renderSelfServeLaneRunbook() {
         </details>
         <details>
           <summary>Evidence and commands</summary>
-          <p>${lane.evidence.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
+          <p>${lane.evidence.map((item) => artifactLink(item)).join(" ")}</p>
           <p>${lane.commands.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
         </details>
-        <p class="self-serve-open-rail"><strong>Missing rail:</strong> ${escapeHtml(lane.openRail.join(" "))}</p>
+        <p class="self-serve-open-rail"><strong>Next rail:</strong> ${escapeHtml(lane.openRail.join(" "))}</p>
       `;
       selfServeLanesNode.append(article);
     }
@@ -1695,8 +1696,8 @@ async function renderUniversalSchedulerWorkbench() {
       <article><span>TN12 evidence</span><strong>${escapeHtml(workbench.summary.acceptedEvidenceJobs)}</strong><p>Jobs with accepted transaction evidence.</p></article>
       <article><span>Replay checks</span><strong>${escapeHtml(workbench.summary.replayCheckedJobs)}</strong><p>Rows with deterministic checks over current artifacts.</p></article>
       <article><span>Blocked cases</span><strong>${escapeHtml(workbench.summary.blockedPredictions)}</strong><p>Expected bad paths that must not promote.</p></article>
-      <article><span>Protocol claims</span><strong>${escapeHtml(workbench.summary.protocolSchedulerClaims)}</strong><p>Must stay zero here.</p></article>
-      <article><span>Custody claims</span><strong>${escapeHtml(workbench.summary.autonomousCustodyClaims)}</strong><p>Must stay zero without wallet-reviewed settlement.</p></article>
+      <article><span>Protocol automation</span><strong>${escapeHtml(workbench.summary.protocolSchedulerClaims)}</strong><p>Later rail here.</p></article>
+      <article><span>Autonomous custody</span><strong>${escapeHtml(workbench.summary.autonomousCustodyClaims)}</strong><p>Requires wallet-reviewed settlement first.</p></article>
     `;
 
     const firstRun = workbench.runThisFirst;
@@ -1986,6 +1987,14 @@ function applyVaultTemplate(template) {
   }
   renderVault();
   document.querySelector("#designer")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function artifactLink(path) {
+  const value = String(path || "");
+  if (/^(artifacts|fixtures|docs|contracts|scripts|src)\//.test(value)) {
+    return `<a href="${escapeHtml(value)}"><code>${escapeHtml(value)}</code></a>`;
+  }
+  return `<code>${escapeHtml(value)}</code>`;
 }
 
 async function fetchManualTransactionOutputs() {

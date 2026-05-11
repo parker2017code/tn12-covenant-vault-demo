@@ -7,6 +7,7 @@
   <meta name="description" content="Kaspa TN12 covenant proof notes, accepted testnet transactions, and app-rail build status.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
+  <script src="theme.js"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body class="lab-page">
@@ -58,14 +59,14 @@
       <div class="product-grid">
         <a href="playground.html"><span>play now</span><strong>Live TN12 money flow</strong><p>Role wallets, deposits, payout, replay, copyable addresses.</p><small>Accepted TN12 transfers</small></a>
         <a href="#invoices"><span>play now</span><strong>Payload receipt invoices</strong><p>Accepted app receipts become invoice state.</p><small>Needs payload-preserving submit route</small></a>
-        <a href="#designer"><span>design now</span><strong>Vault policy</strong><p>Owner, recovery, delay, caps, guardian policy fields.</p><small>Guardians are planner-only until scripted</small></a>
+        <a href="#designer"><span>design now</span><strong>Vault policy</strong><p>Owner, recovery, delay, caps, guardian policy fields.</p><small>Guardian policy needs a guardian script</small></a>
         <a href="#assurance"><span>play next</span><strong>Assurance funding</strong><p>Pledge, release/refund, batch campaign state.</p><small>Accepted pledge evidence plus settlement review</small></a>
         <a href="#escrow"><span>play next</span><strong>Escrow / freelance</strong><p>Buyer fund, seller release, timeout refund, mutual cancel.</p><small>Accepted TN12 proof paths</small></a>
         <a href="#access-passes"><span>play now</span><strong>Access passes</strong><p>Tickets, coupons, memberships with issuer review.</p><small>Issuer/indexer state</small></a>
-        <a href="#auction-intents"><span>play now</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Planner/indexer settlement boundary</small></a>
-        <a href="#defi-backlog"><span>research/play</span><strong>DeFi lab</strong><p>Accepted receipts, pool transfers, reducers, blocked custody.</p><small>No AMM/lending custody claim</small></a>
-        <a href="#scheduler-workbench"><span>play next</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App scheduler, not protocol automation</small></a>
-        <a href="#coordination"><span>research/play</span><strong>Coordination / Stag</strong><p>Transparent intendos, packs, solver, settlement brief.</p><small>No private Hunt execution yet</small></a>
+        <a href="#auction-intents"><span>play now</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Settlement spends still need review</small></a>
+        <a href="#defi-backlog"><span>research/play</span><strong>DeFi lab</strong><p>Accepted receipts, pool transfers, reducers, blocked custody.</p><small>AMM and lending custody still missing</small></a>
+        <a href="#scheduler-workbench"><span>play next</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App job routing over TN12 evidence</small></a>
+        <a href="#coordination"><span>research/play</span><strong>Coordination / Stag</strong><p>Transparent intendos, packs, solver, settlement brief.</p><small>Private Hunt execution is later</small></a>
         <a href="#agent-commitments"><span>play next</span><strong>Agent commitments</strong><p>Task offers, completion proofs, disputes, release/refund review.</p><small>Wallet review before payout</small></a>
         <a href="#submit"><span>required rail</span><strong>External wallet handoff</strong><p>Review unsigned requests, sign outside repo, validate return.</p><small>No private key sharing</small></a>
         <a href="#funding"><span>start here</span><strong>Get and verify tKAS</strong><p>Use faucet, paste outpoint, verify amount and output index.</p><small>TN12 only</small></a>
@@ -75,8 +76,8 @@
     <section id="runbook" class="panel runbook-panel">
       <div class="section-title">
         <p class="eyebrow">Self-serve runbook</p>
-        <h2>If you are determined, this is the route.</h2>
-        <p>Finished lanes should be runnable from the UI or from copyable artifacts. Unfinished lanes still show the exact missing rail instead of pretending a button can do custody, oracle truth, liquidation, or external signing.</p>
+        <h2>Run it yourself.</h2>
+        <p>Start with tKAS, pick a lane, use your wallet, then replay the accepted evidence before trusting the UI.</p>
       </div>
       <div class="runbook-grid">
         <article>
@@ -88,7 +89,7 @@
         <article>
           <span>2</span>
           <strong>Pick a lane</strong>
-          <p>Use Live Play for real accepted transfers, Invoices for payload app state, Assurance/Escrow for covenant-shaped flows, and DeFi Lab for reducers and blocked custody.</p>
+          <p>Use Live Play for accepted transfers, Invoices for payload app state, Assurance/Escrow for covenant flows, and DeFi Lab for reducers and custody gaps.</p>
           <a href="playground.html">Open Live Play</a>
         </article>
         <article>
@@ -109,37 +110,38 @@
           <span>DeFi</span>
           <strong>Available now</strong>
           <p>Accepted local-key funding, deposits, payouts, scheduler receipts, reducer replay, duplicate guards, and blocked withdrawals.</p>
-          <small>Not finished: AMM custody, lending custody, liquidation, oracle truth, production signer.</small>
+          <small>Next rails: AMM custody, lending custody, liquidation, oracle inputs, production signer.</small>
         </article>
         <article>
           <span>Assurance</span>
           <strong>Available now</strong>
           <p>Individual pledge release/refund proof, batch pledge records, release-ready planner state, and accepted release evidence.</p>
-          <small>Not finished: pooled campaign enforcement as one native contract.</small>
+          <small>Next rail: pooled campaign enforcement as one native contract.</small>
         </article>
         <article>
           <span>Escrow</span>
           <strong>Available now</strong>
           <p>Accepted release, DAA refund, mutual cancel proofs, marketplace action map, and wallet-standard request candidates.</p>
-          <small>Not finished: live external-wallet submit and production dispute workflow.</small>
+          <small>Next rails: live external-wallet submit and dispute workflow.</small>
         </article>
         <article>
           <span>Coordination</span>
           <strong>Research playable</strong>
           <p>Transparent Stag/Intendo/Pack/Solver model and settlement brief for one satisfiable pack.</p>
-          <small>Not finished: opacity, capital multiplexing, composability, atomic Hunt execution.</small>
+          <small>Next rails: opacity, capital multiplexing, composability, atomic Hunt execution.</small>
         </article>
       </div>
     </section>
 
-    <section id="lane-runbook" class="panel lane-runbook-panel">
+    <details id="lane-runbook" class="panel lane-runbook-panel section-drawer">
+      <summary>Generated lane guide</summary>
       <div class="section-title">
         <p class="eyebrow">Generated lane guide</p>
         <h2>Playable now, playable next, or research.</h2>
-        <p>This section is generated from repo artifacts. Each card says what a user can actually do, which evidence backs it, and what rail is still missing.</p>
+        <p>This generated guide stays available for builders. The simpler product map above is the default route.</p>
       </div>
       <div id="self-serve-lanes" class="self-serve-lanes" aria-live="polite"></div>
-    </section>
+    </details>
 
     <section class="panel workbench-routes">
       <div class="section-title">
@@ -149,7 +151,7 @@
       <div class="journey-grid">
         <a href="#product-map"><span>Start</span><strong>Product map</strong><p>Pick the lane before opening generated detail.</p></a>
         <a href="#runbook"><span>Run</span><strong>Self-serve path</strong><p>Get tKAS, pick a lane, sign externally, replay.</p></a>
-        <a href="playground.html"><span>Watch</span><strong>Real TN12 play</strong><p>Clickable funding, deposits, payout, and replay.</p></a>
+        <a href="playground.html"><span>Watch</span><strong>Real TN12 play</strong><p>Open funding, deposits, payout, and replay.</p></a>
         <a href="#designer"><span>Create</span><strong>Vault policy</strong><p>Owner, recovery, delay, and policy artifact.</p></a>
         <a href="#submit"><span>Review</span><strong>Wallet handoff</strong><p>Unsigned requests, external signing, validation.</p></a>
       </div>
@@ -208,7 +210,7 @@
           <p>Runs <code>npm run demo:operator-refresh</code> and rebuilds the current status artifacts.</p>
         </article>
       </div>
-      <p class="note">Claim-to-evidence mapping lives in <code>docs/AUDIT_MAP.md</code>. Script groups live in <code>docs/SCRIPT_INDEX.md</code>.</p>
+      <p class="note"><a href="docs/AUDIT_MAP.md">Evidence map</a> and <a href="docs/SCRIPT_INDEX.md">script groups</a> are available when you need the reviewer detail.</p>
     </section>
 
     <section id="designer" class="workspace">
@@ -397,8 +399,8 @@ npm run campaign:custody</pre>
     <section id="enforcement" class="panel enforcement">
       <div class="section-title">
         <p class="eyebrow">Enforcement matrix</p>
-        <h2>What is script-enforced versus app-planned.</h2>
-        <p>This is the claim audit surface. A feature is not a covenant guarantee unless it is marked script-enforced; planner/indexer and wallet-policy lanes are useful but must stay labeled.</p>
+        <h2>What scripts enforce and what the app tracks.</h2>
+        <p>Use this to see which behavior is enforced by Silverscript and which behavior is wallet, indexer, or planner state.</p>
       </div>
       <div id="enforcement-summary" class="enforcement-summary" aria-live="polite"></div>
       <div id="enforcement-features" class="enforcement-features" aria-live="polite"></div>
@@ -443,7 +445,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Universal scheduler workbench</p>
         <h2>Small version first.</h2>
-        <p>This maps the scheduler idea into rows we can test: accepted trigger receipts, executor bids, execution receipts, coordination packs, auction settlement, and agent-task settlement. It schedules reviewable app jobs; it does not claim protocol-level automation.</p>
+        <p>This maps the scheduler idea into rows we can test: accepted trigger receipts, executor bids, execution receipts, coordination packs, auction settlement, and agent-task settlement. Protocol-level automation is a later rail.</p>
       </div>
       <div id="scheduler-workbench-summary" class="results-summary" aria-live="polite"></div>
       <div id="scheduler-workbench-jobs" class="scheduler-workbench-jobs" aria-live="polite"></div>
@@ -480,7 +482,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Simple asset policy</p>
         <h2>Mint, transfer, burn, recovery, redemption.</h2>
-        <p>Issuer-indexed policy shapes only. No live native asset enforcement claim.</p>
+        <p>Issuer-indexed policy shapes only. Native asset enforcement is future work.</p>
       </div>
       <div id="asset-summary" class="asset-summary" aria-live="polite"></div>
       <div id="asset-list" class="asset-list" aria-live="polite"></div>
@@ -490,7 +492,7 @@ npm run coordination:settlement-brief</pre>
     <section id="build-status" class="panel build-status">
       <div class="section-title">
         <p class="eyebrow">Build status</p>
-        <h2>Built, blocked, next.</h2>
+        <h2>Built, next, waiting.</h2>
         <p>Repo status from generated artifacts.</p>
       </div>
       <div id="build-status-summary" class="build-status-summary" aria-live="polite"></div>
@@ -502,7 +504,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Proven status</p>
         <h2>What is actually accepted.</h2>
-        <p>Compact proof boundary: accepted TN12 evidence, current blockers, and current completion estimate.</p>
+        <p>Accepted TN12 evidence, current blockers, and readiness.</p>
       </div>
       <div id="proven-status-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="proven-status-blockers" class="build-status-lanes" aria-live="polite"></div>
@@ -548,7 +550,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Auction / intent prototype</p>
         <h2>Accepted bid payloads, winner rule, refund planning.</h2>
-        <p>Accepted bid payloads and planner state. No custody or atomic exchange claim.</p>
+        <p>Accepted bid payloads and planner state. Custody settlement and atomic exchange still need explicit spends.</p>
       </div>
       <div id="auction-summary" class="auction-summary" aria-live="polite"></div>
       <div id="auction-list" class="auction-list" aria-live="polite"></div>
@@ -558,8 +560,8 @@ npm run coordination:settlement-brief</pre>
     <section id="defi-backlog" class="panel defi-backlog">
       <div class="section-title">
         <p class="eyebrow">Basic DeFi research backlog</p>
-        <h2>Missing rails.</h2>
-        <p>Research only until custody, signer, oracle, and settlement paths exist.</p>
+        <h2>Next rails.</h2>
+        <p>Keep DeFi public-facing as a lab until custody, signer, oracle, and settlement paths are built.</p>
       </div>
       <div id="defi-summary" class="defi-summary" aria-live="polite"></div>
       <div id="defi-list" class="defi-list" aria-live="polite"></div>
@@ -567,10 +569,13 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title compact-title">
         <p class="eyebrow">DeFi accepted activity hardening</p>
         <h3>Accepted TN12 activity, reducers, and bounded market logic.</h3>
-        <p>Local-key users and pool/operator wallets execute funding, deposits, and payouts on TN12. Market pricing, oracle truth, liquidation, production custody, and external signing remain explicitly blocked.</p>
+        <p>Local-key users and pool/operator wallets execute funding, deposits, and payouts on TN12. Market pricing, oracle inputs, liquidation, production custody, and external signing still need enforcement.</p>
       </div>
       <div id="defi-simulation-summary" class="defi-summary" aria-live="polite"></div>
-      <div id="defi-simulation-list" class="defi-list" aria-live="polite"></div>
+      <details class="evidence-drawer">
+        <summary>Show DeFi reducer checks</summary>
+        <div id="defi-simulation-list" class="defi-list" aria-live="polite"></div>
+      </details>
       <pre>npm run defi:simulation
 npm run defi:scenario
 npm run defi:reducer
@@ -580,7 +585,7 @@ npm run defi:accepted-activity</pre>
       <div class="section-title compact-title">
         <p class="eyebrow">Stable-value paths</p>
         <h3>Stable-value paths.</h3>
-        <p>Comparison only. No live stablecoin claim.</p>
+        <p>Comparison only; no live stablecoin.</p>
       </div>
       <div id="stable-summary" class="defi-summary" aria-live="polite"></div>
       <div id="stable-list" class="defi-list" aria-live="polite"></div>
@@ -623,13 +628,16 @@ npm run defi:accepted-activity</pre>
       <div class="section-title">
         <p class="eyebrow">Accepted transaction indexer</p>
         <h2>App state derived from TN12 reads.</h2>
-        <p>This checkpoint turns accepted proof spends and payload events into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should all feed through this layer before the UI claims a state transition.</p>
+        <p>This checkpoint turns accepted proof spends and payload events into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should pass through replay before the UI updates app state.</p>
       </div>
       <div id="indexer-summary" class="indexer-summary" aria-live="polite"></div>
       <div id="indexer-persistence" class="indexer-persistence" aria-live="polite"></div>
-      <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
-      <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
-      <div id="defi-receipt-guard" class="receipt-events" aria-live="polite"></div>
+      <details class="evidence-drawer">
+        <summary>Show indexed proof and payload rows</summary>
+        <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
+        <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
+        <div id="defi-receipt-guard" class="receipt-events" aria-live="polite"></div>
+      </details>
       <pre>npm run indexer:checkpoint
 npm run indexer:persist
 npm run indexer:virtual-chain-run</pre>
@@ -659,7 +667,10 @@ npm run tx:payload</pre>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
       <div id="wallet-connector" class="wallet-connector" aria-live="polite"></div>
-      <div id="submit-drafts" class="submit-drafts" aria-live="polite"></div>
+      <details class="evidence-drawer">
+        <summary>Show signed draft registry</summary>
+        <div id="submit-drafts" class="submit-drafts" aria-live="polite"></div>
+      </details>
       <pre>npm run submit:registry
 npm run wallet:review
 npm run wallet:connector
@@ -673,7 +684,10 @@ npm run wallet:adapter-run</pre>
         <h2>Status-labeled lanes.</h2>
         <p>Accepted evidence first. Research stays research.</p>
       </div>
-      <div id="master-roadmap" class="roadmap-list" aria-live="polite"></div>
+      <details class="evidence-drawer">
+        <summary>Show app lane map</summary>
+        <div id="master-roadmap" class="roadmap-list" aria-live="polite"></div>
+      </details>
       <pre>docs/MASTER_APP_PLAN.md</pre>
     </section>
 
@@ -681,10 +695,13 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Cross-chain research library</p>
         <h2>PMF, failure modes, and Kaspa mapping.</h2>
-        <p>External examples are reference material, not claims about this repo.</p>
+        <p>External examples are reference material. Repo evidence is linked separately.</p>
       </div>
       <div id="research-summary" class="research-summary" aria-live="polite"></div>
-      <div id="research-candidates" class="research-candidates" aria-live="polite"></div>
+      <details class="evidence-drawer">
+        <summary>Show research reference rows</summary>
+        <div id="research-candidates" class="research-candidates" aria-live="polite"></div>
+      </details>
       <pre>npm run research:library</pre>
     </section>
 

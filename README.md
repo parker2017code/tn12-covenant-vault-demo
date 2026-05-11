@@ -16,6 +16,7 @@ Start here:
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
 - `docs/COPY_CLEANUP_PLAN.md`: public wording standard for pages and handoff docs.
+- `docs/PUBLIC_FLOW_RULES.md`: public-page flow for non-expert readers; reviewer material stays reachable but not first.
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
 - `docs/NEXT_STEPS.md`: short current execution queue.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
@@ -106,6 +107,7 @@ npm run demo:operator-refresh
 | Full lab notebook | `docs/LAB_NOTEBOOK.md` |
 | Product execution plan | `docs/PRODUCT_EXECUTION_PLAN.md` |
 | Copy cleanup plan | `docs/COPY_CLEANUP_PLAN.md` |
+| Public flow rules | `docs/PUBLIC_FLOW_RULES.md` |
 
 ## Local Preview
 

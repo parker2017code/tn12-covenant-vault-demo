@@ -7,6 +7,7 @@
   <meta name="description" content="Interactive TN12 covenant lab results explorer with beginner, crypto-native, and builder explanations.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
+  <script src="theme.js"></script>
   <script type="module" src="public-explorer.js"></script>
 </head>
 <body>
@@ -27,7 +28,6 @@
         <a href="#flow">Flow</a>
         <a href="#feed">Txids</a>
         <a href="#standards">Future</a>
-        <a href="#source-map">Sources</a>
       </div>
     </nav>
   </header>
@@ -70,7 +70,7 @@
         <a href="#standards">
           <span>Future</span>
           <strong>Adapter backlog</strong>
-          <p>Not the built product surface; these are next integration shapes.</p>
+        <p>Optional adapter ideas that could plug into accepted receipts.</p>
         </a>
       </div>
     </section>
@@ -123,7 +123,10 @@
         <p class="eyebrow">Recent accepted receipts</p>
         <h2>Latest app-state rows.</h2>
       </div>
-      <div id="results-feed" class="results-feed" aria-live="polite"></div>
+      <details class="evidence-drawer">
+        <summary>Show recent accepted receipt rows</summary>
+        <div id="results-feed" class="results-feed" aria-live="polite"></div>
+      </details>
     </section>
 
     <section id="playground" class="panel results-panel">
@@ -152,38 +155,16 @@
 
     <section id="standards" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">Future adapter backlog</p>
-        <h2>Useful next integrations, not finished products.</h2>
-        <p>This section is intentionally not the main proof story. These rows describe adapter shapes that could consume the accepted TN12 receipts and replay model. External links are design references; repo links are local artifacts behind the row. Neither is a certification, partnership, or production-integration claim.</p>
+        <p class="eyebrow">Integration ideas</p>
+        <h2>Future adapters can plug into receipts.</h2>
+        <p>Keep this behind the main proof story. These rows are optional shapes for builders who want standards-style payment, identity, or task metadata.</p>
       </div>
-      <div id="standards-adapters" class="results-rails" aria-live="polite"></div>
+      <details class="evidence-drawer">
+        <summary>Show adapter ideas</summary>
+        <div id="standards-adapters" class="results-rails" aria-live="polite"></div>
+      </details>
     </section>
 
-    <section id="source-map" class="panel results-panel">
-      <div class="section-title">
-        <p class="eyebrow">Source map</p>
-        <h2>What should be clickable.</h2>
-        <p>Links are separated by job. Evidence links prove a transaction exists; repo links show the generated artifact or fixture; external references explain adapter vocabulary; commands remain text because they run locally.</p>
-      </div>
-      <div class="claim-grid">
-        <article>
-          <strong>TN12 explorer evidence</strong>
-          <p>Clickable txids and addresses should open <code>tn12.kaspa.stream/transactions/...</code> or <code>/addresses/...</code>.</p>
-        </article>
-        <article>
-          <strong>Repo source</strong>
-          <p>Clickable local files point at artifacts, fixtures, docs, scripts, or source files that back the row.</p>
-        </article>
-        <article>
-          <strong>External reference</strong>
-          <p>Standards and docs are design references only. They do not claim certification, partnership, or production integration.</p>
-        </article>
-        <article>
-          <strong>Commands</strong>
-          <p><code>npm run ...</code> and shell snippets stay plain text unless they reference an actual file path.</p>
-        </article>
-      </div>
-    </section>
   </main>
 </body>
 </html>

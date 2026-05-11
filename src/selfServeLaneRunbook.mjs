@@ -35,7 +35,7 @@ export function buildSelfServeLaneRunbook({
         "artifacts/defi-accepted-activity-ledger.json"
       ],
       openRail: [
-        "Fresh user-run sessions still need wallet/faucet funding and explicit replay after submit."
+        "Fresh user-run sessions need wallet/faucet funding and explicit replay after submit."
       ],
       commands: ["npm run playground:wallets", "npm run playground:funding-draft", "npm run playground:session"]
     }),
@@ -61,8 +61,8 @@ export function buildSelfServeLaneRunbook({
         "artifacts/checkpointed-accepted-index.json"
       ],
       openRail: [
-        "Public REST submit remains a negative route for payload receipts.",
-        "External wallet signing is still required before public-user submit."
+        "Public REST submit did not preserve payload bytes in this test.",
+        "External wallet signing is the next public-user submit rail."
       ],
       commands: ["npm run invoice:registry", "npm run payload:readiness", "npm run indexer:checkpoint"]
     }),
@@ -88,7 +88,7 @@ export function buildSelfServeLaneRunbook({
         "docs/TN12_TEST_MATRIX.md"
       ],
       openRail: [
-        "Guardians are not enforced until modeled as explicit script branches or an indexer-gated policy with wallet refusal."
+        "Guardian enforcement needs explicit script branches or indexer-gated wallet refusal."
       ],
       commands: ["npm run tx:verify", "npm run enforcement:matrix"]
     }),
@@ -114,7 +114,7 @@ export function buildSelfServeLaneRunbook({
         "artifacts/batch-assurance-settlement-decision.json"
       ],
       openRail: [
-        "Campaign target aggregation is planner/indexer state, not one pooled script-enforced contract."
+        "Campaign target aggregation needs one pooled script-enforced contract or a stricter indexer/wallet gate."
       ],
       commands: ["npm run campaign:state", "npm run campaign:custody", "npm run campaign:submit-runbook"]
     }),
@@ -236,7 +236,7 @@ export function buildSelfServeLaneRunbook({
       runSteps: [
         "Inspect transparent intendos and packs.",
         "Review the qualifying subset.",
-        "Build exact settlement drafts before stronger execution claims."
+        "Build exact settlement drafts before stronger execution language."
       ],
       evidence: [
         "artifacts/coordination-market-prototype.json",

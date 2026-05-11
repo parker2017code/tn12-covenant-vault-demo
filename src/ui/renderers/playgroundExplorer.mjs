@@ -141,12 +141,12 @@ function renderLevels(node, { activity, session, funding, deposit, secondDeposit
     <article>
       <span>Crypto-curious</span>
       <strong>UTXO transfers became replayable app state.</strong>
-      <p>The txids are accepted on TN12. The app reads those accepted rows and derives balances without pretending the reducer controls custody.</p>
+      <p>The txids are accepted on TN12. The app reads those accepted rows and derives balances; wallet spend evidence still controls funds.</p>
     </article>
     <article>
       <span>Kaspa-native</span>
       <strong>Fast mined ordering plus constrained evidence.</strong>
-      <p>The chain supplies ordering and accepted transaction evidence. The repo layers role labels, receipts, reducers, and blocked-promotion rules on top.</p>
+      <p>The chain supplies ordering and accepted transaction evidence. The repo layers role labels, receipts, reducers, and promotion checks on top.</p>
     </article>
     <article>
       <span>Reviewer</span>
@@ -233,7 +233,7 @@ function renderReplay({ replaySummaryNode, sessionBalancesNode, balancesNode, bl
     ${metric("Balance rows", reducer.summary.balanceRows, "Address-level net deltas from selected transfers.")}
     ${metric("Blocked withdrawals", reducer.negativeRows.filter((row) => row.kind === "withdrawal-candidate").length, "Over-balance or unsigned withdrawal attempts.")}
     ${metric("Ready actions", actions.summary.readyActions, "Guided actions with current public prerequisites.")}
-    ${metric("Live product claims", actions.summary.liveProductClaims, "Must stay zero.")}
+    ${metric("Production actions", actions.summary.liveProductClaims, "None from this replay alone.")}
   `;
   if (sessionBalancesNode) {
     const sessionAddresses = [

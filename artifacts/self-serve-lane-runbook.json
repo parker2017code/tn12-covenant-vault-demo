@@ -2,7 +2,7 @@
   "schema": "tn12-self-serve-lane-runbook/v1",
   "network": "kaspa-testnet-12",
   "status": "self-serve-lane-runbook-ready",
-  "generatedAt": "2026-05-11T21:49:53.217Z",
+  "generatedAt": "2026-05-11T22:22:46.192Z",
   "summary": {
     "lanes": 12,
     "playNow": 4,
@@ -40,7 +40,7 @@
         "artifacts/defi-accepted-activity-ledger.json"
       ],
       "openRail": [
-        "Fresh user-run sessions still need wallet/faucet funding and explicit replay after submit."
+        "Fresh user-run sessions need wallet/faucet funding and explicit replay after submit."
       ],
       "commands": [
         "npm run playground:wallets",
@@ -70,8 +70,8 @@
         "artifacts/checkpointed-accepted-index.json"
       ],
       "openRail": [
-        "Public REST submit remains a negative route for payload receipts.",
-        "External wallet signing is still required before public-user submit."
+        "Public REST submit did not preserve payload bytes in this test.",
+        "External wallet signing is the next public-user submit rail."
       ],
       "commands": [
         "npm run invoice:registry",
@@ -101,7 +101,7 @@
         "docs/TN12_TEST_MATRIX.md"
       ],
       "openRail": [
-        "Guardians are not enforced until modeled as explicit script branches or an indexer-gated policy with wallet refusal."
+        "Guardian enforcement needs explicit script branches or indexer-gated wallet refusal."
       ],
       "commands": [
         "npm run tx:verify",
@@ -130,7 +130,7 @@
         "artifacts/batch-assurance-settlement-decision.json"
       ],
       "openRail": [
-        "Campaign target aggregation is planner/indexer state, not one pooled script-enforced contract."
+        "Campaign target aggregation needs one pooled script-enforced contract or a stricter indexer/wallet gate."
       ],
       "commands": [
         "npm run campaign:state",
@@ -272,7 +272,7 @@
       "runSteps": [
         "Inspect transparent intendos and packs.",
         "Review the qualifying subset.",
-        "Build exact settlement drafts before stronger execution claims."
+        "Build exact settlement drafts before stronger execution language."
       ],
       "evidence": [
         "artifacts/coordination-market-prototype.json",

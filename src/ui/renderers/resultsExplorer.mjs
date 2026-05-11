@@ -63,7 +63,7 @@ function renderKnowledgeLevels(node) {
       <span>Crypto-native</span>
       <h3>Accepted UTXO proofs plus payload-indexed app state.</h3>
       <p>The proof core covers minimal vault, pledge, escrow, auction, and role-separated covenant spends. The app layer adds accepted payloads and real local-key UTXO transfers for deposits, payouts, scheduler intents, bids, execution, and primitive bindings.</p>
-      <p>AMM pricing, oracle truth, liquidation authority, and production custody are separate rails, not hidden assumptions.</p>
+      <p>AMM pricing, oracle inputs, liquidation authority, and production custody are separate rails.</p>
     </article>
     <article class="level-card hidden" data-level-panel="builder">
       <span>Builder / reviewer</span>
@@ -100,7 +100,7 @@ function renderFlow(node, { proven, activity, scheduler, benchmark }) {
     ["2", "Payload receipt", `${proven.acceptedEvidence.payloadEvents} accepted payload events record app intent and status.`],
     ["3", "Custody-adjacent movement", `${activity.summary.acceptedTransferRows} accepted local-key transfers move tKAS across user, pool, and operator roles.`],
     ["4", "Reducer/indexer state", `${scheduler.summary.acceptedIntents} accepted scheduler intent and ${scheduler.summary.acceptedBids} accepted bids feed deterministic state.`],
-    ["5", "Benchmark boundary", `${benchmark.currentPercent}% complete by repo-local full-DeFi benchmark; remaining rails stay explicit.`]
+    ["5", "Benchmark", `${benchmark.currentPercent}% complete by repo-local full-DeFi benchmark; remaining rails stay visible.`]
   ];
   node.innerHTML = steps.map(([num, title, body]) => `
     <article>

@@ -28,7 +28,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       <article><span>Scheduler intents</span><strong>${escapeHtml(scheduler.summary.acceptedIntents)}</strong></article>
       <article><span>Pool net</span><strong>${escapeHtml(acceptedActivity.summary.poolNetTkas)} TKAS</strong></article>
       <article><span>Wallet roles</span><strong>${escapeHtml(multiWallet.summary.roles)}</strong></article>
-      <article><span>External signer claims</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
+      <article><span>External signer results</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
     `;
 
     listNode.innerHTML = "";
@@ -48,7 +48,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       {
         status: scheduler.status,
         title: "Scheduler intent registry",
-        body: `${scheduler.summary.acceptedIntents} accepted intent; ${scheduler.summary.executedTriggers} executed trigger; ${scheduler.summary.protocolSchedulerClaims} protocol-scheduler claims.`,
+        body: `${scheduler.summary.acceptedIntents} accepted intent; ${scheduler.summary.executedTriggers} executed trigger; ${scheduler.summary.protocolSchedulerClaims} protocol automation rows.`,
         foot: "npm run scheduler:intents"
       },
       {
@@ -78,7 +78,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       {
         status: multiWallet.status,
         title: "Multi-wallet scenario pack",
-        body: `${multiWallet.summary.acceptedIndexedRoles}/${multiWallet.summary.roles} roles indexed; ${multiWallet.summary.actualWalletAddresses} observed wallet addresses; no external-signer claim.`,
+        body: `${multiWallet.summary.acceptedIndexedRoles}/${multiWallet.summary.roles} roles indexed; ${multiWallet.summary.actualWalletAddresses} observed wallet addresses; external signer result still needed.`,
         foot: "npm run defi:multi-wallet"
       }
     ];
