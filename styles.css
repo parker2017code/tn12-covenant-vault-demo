@@ -416,12 +416,26 @@ pre {
 
 .theme-toggle {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: 14px;
+  bottom: 14px;
   z-index: 30;
+  min-width: 42px;
+  min-height: 30px;
   border-color: var(--line-bright);
-  box-shadow: var(--shadow);
-  background: var(--panel-strong);
+  padding: 5px 9px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--bg) 76%, transparent);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .16);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  font-weight: 750;
+  opacity: .78;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  background: var(--accent-soft);
+  opacity: 1;
 }
 
 :root[data-theme="light"] .topbar,

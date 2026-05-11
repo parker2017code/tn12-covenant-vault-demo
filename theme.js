@@ -9,8 +9,9 @@
 
   function render() {
     const light = document.documentElement.dataset.theme === "light";
-    button.textContent = light ? "Dark mode" : "Light mode";
+    button.textContent = light ? "Dark" : "Light";
     button.setAttribute("aria-label", `Switch to ${light ? "dark" : "light"} mode`);
+    button.title = `Switch to ${light ? "dark" : "light"} mode`;
   }
 
   button.addEventListener("click", () => {
