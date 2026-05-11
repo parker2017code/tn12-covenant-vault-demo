@@ -2,7 +2,7 @@
 
 This file defines the cleanup standard for the repo. It is not a roadmap for new features.
 
-Current tidying state after the May 2026 cleanup: about 80-85%.
+Current tidying state after the May 2026 cleanup: about 90-95%.
 
 ## Canonical Surface
 
@@ -44,6 +44,8 @@ The public page should lead with:
 - mainnet blockers.
 
 Backlog, research, app ideas, prediction, stable-value, and DeFi expansion should stay below the proof surface and remain explicitly status-labeled.
+
+The broad builder workbench lives in `lab.html`. The main `index.html` is the proof/reviewer/operator surface.
 
 ## Naming Policy
 
@@ -89,11 +91,11 @@ Low-signal artifact changes:
 
 Do not make a proof claim from low-signal diffs.
 
-## Remaining 10-15%
+## Remaining 5-10%
 
 The remaining cleanup is ongoing maintenance:
 
 - keep live Pages, README, and generated artifacts synchronized after each proof;
 - reduce old aliases only after a release window where docs no longer reference them;
-- split the public page into separate proof and lab pages if the UI grows again;
+- keep the proof page and lab workbench split if the UI grows again;
 - keep external signer and live rollback evidence as named blockers until they are actually cleared.

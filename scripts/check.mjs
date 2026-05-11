@@ -2422,6 +2422,7 @@ const files = [
   "src/contractSpendDrafts.mjs",
   "src/submitPayload.mjs",
   "README.md",
+  "lab.html",
   "AGENTS.md",
   "docs/AUDIT_MAP.md",
   "docs/REPO_TIDYING.md",
@@ -2540,39 +2541,46 @@ assert.match(labNotebook, /qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd2
 assert.match(labNotebook, /npm run check:tn12/);
 
 const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+const labHtml = await readFile(new URL("../lab.html", import.meta.url), "utf8");
 assert.match(html, /TN12 configured\. Proof transactions accepted\./);
 assert.match(html, /TN12 faucet/);
 assert.match(html, /npm run address/);
-assert.match(html, /Assurance contract/);
-assert.match(html, /Manual address check/);
-assert.match(html, /Kaspa app lab/);
-assert.match(html, /Miner signal research/);
+assert.match(html, /Lab workbench/);
+assert.match(html, /Planner and research panels moved/);
+assert.doesNotMatch(html, /Assurance contract/);
+assert.doesNotMatch(html, /Miner signal research/);
 assert.match(html, /Accepted transaction indexer/);
-assert.match(html, /Payload receipt app/);
-assert.match(html, /payload:readiness/);
-assert.match(html, /Batch assurance campaigns/);
 assert.match(html, /Enforcement matrix/);
-assert.match(html, /Escrow primitive/);
-assert.match(html, /Treasury \/ team vaults/);
-assert.match(html, /Transparent coordination-market prototype/);
-assert.match(html, /KRC \/ access pass planner/);
 assert.match(html, /Mainnet readiness map/);
-assert.match(html, /Simple asset policy/);
-assert.match(html, /Stable-value paths/);
-assert.match(html, /Issuer redemption state/);
 assert.match(html, /Build status/);
-assert.match(html, /Operator plan/);
-assert.match(html, /npm run project:plan/);
 assert.match(html, /Wallet-facing submit console/);
-assert.match(html, /Cross-chain research library/);
 assert.match(html, /receipt-events/);
-assert.match(html, /App map/);
-assert.match(html, /Attestation registry/);
-assert.match(html, /Prediction hedge simulator/);
-assert.match(html, /npm run prediction:hedge/);
-assert.match(html, /escrow mutual-cancel proof transactions/);
-assert.match(html, /batch-assurance release rails/);
 assert.doesNotMatch(html, /escrow cancel redesign/);
+assert.match(labHtml, /Assurance contract/);
+assert.match(labHtml, /Manual address check/);
+assert.match(labHtml, /Kaspa app lab/);
+assert.match(labHtml, /Miner signal research/);
+assert.match(labHtml, /Payload receipt app/);
+assert.match(labHtml, /payload:readiness/);
+assert.match(labHtml, /Batch assurance campaigns/);
+assert.match(labHtml, /Escrow primitive/);
+assert.match(labHtml, /Treasury \/ team vaults/);
+assert.match(labHtml, /Transparent coordination-market prototype/);
+assert.match(labHtml, /KRC \/ access pass planner/);
+assert.match(labHtml, /Simple asset policy/);
+assert.match(labHtml, /Stable-value paths/);
+assert.match(labHtml, /Issuer redemption state/);
+assert.match(labHtml, /Operator plan/);
+assert.match(labHtml, /npm run project:plan/);
+assert.match(labHtml, /Cross-chain research library/);
+assert.match(labHtml, /App map/);
+assert.match(labHtml, /Attestation registry/);
+assert.match(labHtml, /Prediction hedge simulator/);
+assert.match(labHtml, /npm run prediction:hedge/);
+assert.match(labHtml, /escrow mutual-cancel proof transactions/);
+assert.match(labHtml, /batch-assurance release rails/);
+assert.match(labHtml, /href="index\.html"/);
+assert.doesNotMatch(labHtml, /escrow cancel redesign/);
 
 const assuranceDocs = await readFile(new URL("../docs/ASSURANCE_CONTRACTS.md", import.meta.url), "utf8");
 assert.match(assuranceDocs, /funding rule strangers can rely on/);

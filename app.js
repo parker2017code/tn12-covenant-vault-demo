@@ -152,48 +152,36 @@ const resetButton = document.querySelector("#reset-policy");
 const resetAssuranceButton = document.querySelector("#reset-assurance");
 const resetSignalButton = document.querySelector("#reset-signal");
 
-for (const [key, value] of Object.entries(DEFAULT_POLICY)) {
-  const input = form.elements[key];
-  if (input) input.value = value;
-}
+setFormDefaults(form, DEFAULT_POLICY);
+setFormDefaults(assuranceForm, DEFAULT_ASSURANCE);
+setFormDefaults(signalForm, DEFAULT_SIGNAL_PAYLOAD);
+setInputValue(manualFields.address, DEFAULT_MANUAL_OUTPOINT.address);
+setInputValue(manualFields.txid, DEFAULT_MANUAL_OUTPOINT.txid);
+setInputValue(manualFields.outputIndex, DEFAULT_MANUAL_OUTPOINT.outputIndex);
+setInputValue(manualFields.amountTkas, DEFAULT_MANUAL_OUTPOINT.amountTkas);
+setInputValue(manualFields.explorerUrl, DEFAULT_MANUAL_OUTPOINT.explorerUrl);
 
-for (const [key, value] of Object.entries(DEFAULT_ASSURANCE)) {
-  const input = assuranceForm.elements[key];
-  if (input) input.value = value;
-}
-
-for (const [key, value] of Object.entries(DEFAULT_SIGNAL_PAYLOAD)) {
-  const input = signalForm.elements[key];
-  if (input) input.value = value;
-}
-
-manualFields.address.value = DEFAULT_MANUAL_OUTPOINT.address;
-manualFields.txid.value = DEFAULT_MANUAL_OUTPOINT.txid;
-manualFields.outputIndex.value = DEFAULT_MANUAL_OUTPOINT.outputIndex;
-manualFields.amountTkas.value = DEFAULT_MANUAL_OUTPOINT.amountTkas;
-manualFields.explorerUrl.value = DEFAULT_MANUAL_OUTPOINT.explorerUrl;
-
-form.addEventListener("input", renderVault);
-assuranceForm.addEventListener("input", renderAssurance);
-signalForm.addEventListener("input", renderSignalPayload);
-for (const input of Object.values(manualFields)) {
+form?.addEventListener("input", renderVault);
+assuranceForm?.addEventListener("input", renderAssurance);
+signalForm?.addEventListener("input", renderSignalPayload);
+for (const input of Object.values(manualFields).filter(Boolean)) {
   input.addEventListener("input", renderManualOutpoint);
 }
-resetButton.addEventListener("click", () => {
+resetButton?.addEventListener("click", () => {
   for (const [key, value] of Object.entries(DEFAULT_POLICY)) {
     const input = form.elements[key];
     if (input) input.value = value;
   }
   renderVault();
 });
-resetAssuranceButton.addEventListener("click", () => {
+resetAssuranceButton?.addEventListener("click", () => {
   for (const [key, value] of Object.entries(DEFAULT_ASSURANCE)) {
     const input = assuranceForm.elements[key];
     if (input) input.value = value;
   }
   renderAssurance();
 });
-resetSignalButton.addEventListener("click", () => {
+resetSignalButton?.addEventListener("click", () => {
   for (const [key, value] of Object.entries(DEFAULT_SIGNAL_PAYLOAD)) {
     const input = signalForm.elements[key];
     if (input) input.value = value;
@@ -201,7 +189,7 @@ resetSignalButton.addEventListener("click", () => {
   renderSignalPayload();
 });
 
-copyButton.addEventListener("click", async () => {
+copyButton?.addEventListener("click", async () => {
   await navigator.clipboard.writeText(artifactNode.textContent);
   copyButton.textContent = "Copied";
   setTimeout(() => {
@@ -209,7 +197,7 @@ copyButton.addEventListener("click", async () => {
   }, 1200);
 });
 
-copyAssuranceButton.addEventListener("click", async () => {
+copyAssuranceButton?.addEventListener("click", async () => {
   await navigator.clipboard.writeText(assuranceArtifactNode.textContent);
   copyAssuranceButton.textContent = "Copied";
   setTimeout(() => {
@@ -217,7 +205,7 @@ copyAssuranceButton.addEventListener("click", async () => {
   }, 1200);
 });
 
-copyManualButton.addEventListener("click", async () => {
+copyManualButton?.addEventListener("click", async () => {
   await navigator.clipboard.writeText(manualArtifactNode.textContent);
   copyManualButton.textContent = "Copied";
   setTimeout(() => {
@@ -225,7 +213,7 @@ copyManualButton.addEventListener("click", async () => {
   }, 1200);
 });
 
-copySignalButton.addEventListener("click", async () => {
+copySignalButton?.addEventListener("click", async () => {
   await navigator.clipboard.writeText(signalArtifactNode.textContent);
   copySignalButton.textContent = "Copied";
   setTimeout(() => {
@@ -233,8 +221,8 @@ copySignalButton.addEventListener("click", async () => {
   }, 1200);
 });
 
-fetchManualTxButton.addEventListener("click", fetchManualTransactionOutputs);
-refreshProofsButton.addEventListener("click", () => verifyProofTransactions({ forceRemote: true }));
+fetchManualTxButton?.addEventListener("click", fetchManualTransactionOutputs);
+refreshProofsButton?.addEventListener("click", () => verifyProofTransactions({ forceRemote: true }));
 
 renderVault();
 renderAssurance();
@@ -276,6 +264,7 @@ renderSignalPayload();
 renderPayloadDraftStatus();
 
 async function renderVault() {
+  if (!form || !policyIdNode || !artifactNode || !issuesNode || !lifecycleNode) return;
   const data = Object.fromEntries(new FormData(form).entries());
   const policy = normalizePolicy(data);
   const id = await policyId(policy);
@@ -305,6 +294,7 @@ async function renderVault() {
 }
 
 function renderAssurance() {
+  if (!assuranceForm || !assuranceProgressNode || !assuranceProgressTextNode || !assuranceArtifactNode || !assuranceIssuesNode || !assuranceLifecycleNode) return;
   const data = Object.fromEntries(new FormData(assuranceForm).entries());
   const contract = normalizeAssurance(data);
   const issues = validateAssurance(contract);
@@ -335,6 +325,7 @@ function renderAssurance() {
 }
 
 function renderManualOutpoint() {
+  if (!manualFields.address || !manualFields.txid || !manualFields.outputIndex || !manualFields.amountTkas || !manualFields.explorerUrl || !manualArtifactNode || !manualIssuesNode) return;
   const artifact = buildManualOutpointArtifact(normalizeManualOutpoint({
     address: manualFields.address.value,
     txid: manualFields.txid.value,
@@ -1789,6 +1780,7 @@ async function renderVaultTemplates() {
 }
 
 function applyVaultTemplate(template) {
+  if (!form) return;
   for (const [key, value] of Object.entries(template.settings)) {
     const input = form.elements[key];
     if (input) input.value = value;
@@ -1798,6 +1790,7 @@ function applyVaultTemplate(template) {
 }
 
 async function fetchManualTransactionOutputs() {
+  if (!manualFields.txid || !manualOutputPickerNode || !fetchManualTxButton) return;
   const txid = manualFields.txid.value.trim();
   manualOutputPickerNode.innerHTML = "";
 
@@ -1865,6 +1858,18 @@ function sompiToTkas(sompi) {
 function cssEscape(value) {
   if (globalThis.CSS?.escape) return CSS.escape(value);
   return String(value).replaceAll('"', '\\"');
+}
+
+function setFormDefaults(targetForm, defaults) {
+  if (!targetForm) return;
+  for (const [key, value] of Object.entries(defaults)) {
+    const input = targetForm.elements[key];
+    if (input) input.value = value;
+  }
+}
+
+function setInputValue(input, value) {
+  if (input) input.value = value;
 }
 
 function escapeHtml(value) {

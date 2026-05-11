@@ -23,18 +23,16 @@ try {
   assert.match(html, /TN12 configured\. Proof transactions accepted\./);
   assert.match(html, /7 core \+ 2 auction \+ 7 role-separated \+ 45 indexed records/);
   assert.match(html, /Accepted payload events[\s\S]*<strong>32<\/strong>/);
-  assert.match(html, /npm run demo:operator-refresh/);
+  assert.match(html, /npm run operator:refresh/);
   assert.match(html, /id="reviewer-path"/);
   assert.match(html, /docs\/AUDIT_MAP\.md/);
   assert.doesNotMatch(html, /href="#prediction-hedge"/);
-  assert.match(html, /<form id="assurance-form"/);
+  assert.match(html, /href="lab\.html"/);
+  assert.doesNotMatch(html, /<form id="assurance-form"/);
   assert.match(html, /id="proof-status"/);
   assert.match(html, /id="receipt-events"/);
   assert.match(html, /id="wallet-connector"/);
-  assert.match(html, /id="defi-summary"/);
   assert.match(html, /id="defi-receipt-guard"/);
-  assert.match(html, /id="next-ten-status"/);
-  assert.match(html, /id="next-ten-tasks"/);
 
   console.log("UI smoke check passed.");
 } finally {

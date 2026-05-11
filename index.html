@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TN12 Covenant Lab Notes</title>
-  <meta name="description" content="Kaspa TN12 covenant proof notes, accepted testnet transactions, and app-rail build status.">
+  <title>TN12 Covenant Proof Page</title>
+  <meta name="description" content="Kaspa TN12 covenant proof evidence, verifier path, and mainnet-readiness boundaries.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="app.js"></script>
@@ -12,8 +12,8 @@
 <body>
   <header class="topbar">
     <div>
-      <p class="eyebrow">Kaspa testnet lab</p>
-      <h1>TN12 covenant lab notes</h1>
+      <p class="eyebrow">Kaspa testnet proof lab</p>
+      <h1>TN12 covenant proof page</h1>
     </div>
     <nav aria-label="Project links">
       <a href="#core-notes">Core</a>
@@ -25,7 +25,7 @@
       <a href="#proofs">Proofs</a>
       <a href="#indexer">Indexer</a>
       <a href="#submit">Submit</a>
-      <a href="#roadmap">Backlog</a>
+      <a href="lab.html">Lab workbench</a>
       <a href="#setup">TN12 setup</a>
       <a href="#sources">Sources</a>
     </nav>
@@ -36,7 +36,7 @@
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
         <h2>Accepted TN12 evidence first.</h2>
-        <p>Covenant spends, role-separated repeats, payload receipts, and batch-assurance outputs are accepted on TN12. Everything else is labeled as local, planner, or blocked.</p>
+        <p>This page is the reviewer surface: accepted proof spends, accepted payload receipts, replay/indexing state, operator pack, and the remaining mainnet blockers. Planner and research panels moved to the lab workbench.</p>
       </div>
       <aside class="facts">
         <span>Proof core</span>
@@ -64,10 +64,10 @@
         <article>
           <span>Verifier command</span>
           <strong>operator refresh</strong>
-          <p><code>npm run demo:operator-refresh</code> verifies TN12 evidence, rebuilds derived artifacts, and reruns local checks.</p>
+          <p><code>npm run operator:refresh</code> verifies TN12 evidence, rebuilds derived artifacts, and reruns local checks.</p>
         </article>
       </div>
-      <p class="note">Read <code>docs/PROOF_INDEX.md</code> and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
+      <p class="note">Read <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
     </section>
 
     <section id="reviewer-path" class="panel build-status">
@@ -95,193 +95,10 @@
         <article>
           <span>Full refresh</span>
           <strong>operator refresh</strong>
-          <p>Runs <code>npm run demo:operator-refresh</code> and rebuilds the current status artifacts.</p>
+          <p>Runs <code>npm run operator:refresh</code> and rebuilds the current status artifacts.</p>
         </article>
       </div>
       <p class="note">Claim-to-evidence mapping lives in <code>docs/AUDIT_MAP.md</code>. Script groups live in <code>docs/SCRIPT_INDEX.md</code>.</p>
-    </section>
-
-    <section id="designer" class="workspace">
-      <form id="policy-form" class="panel">
-        <div class="section-title">
-          <p class="eyebrow">Vault policy</p>
-          <h2>Inputs</h2>
-        </div>
-
-        <label>
-          Owner address
-          <input name="ownerAddress" spellcheck="false">
-        </label>
-
-        <label>
-          Recovery address
-          <input name="recoveryAddress" spellcheck="false">
-        </label>
-
-        <div class="two-col">
-          <label>
-            Withdrawal delay, hours
-            <input name="withdrawalDelayHours" type="number" min="1" max="720" step="1">
-          </label>
-
-          <label>
-            Daily limit, TKAS
-            <input name="dailyLimitTkas" type="number" min="0.01" step="0.01">
-          </label>
-        </div>
-
-        <div class="two-col">
-          <label>
-            Guardian threshold
-            <input name="guardianThreshold" type="number" min="1" max="15" step="1">
-          </label>
-
-          <label>
-            Guardian count
-            <input name="guardianCount" type="number" min="1" max="15" step="1">
-          </label>
-        </div>
-
-        <label>
-          Memo
-          <textarea name="memo" rows="3"></textarea>
-        </label>
-
-        <div class="actions">
-          <button type="button" id="reset-policy">Reset</button>
-          <button type="button" id="copy-artifact">Copy JSON</button>
-        </div>
-      </form>
-
-      <section class="panel output" aria-live="polite">
-        <div class="section-title">
-          <p class="eyebrow">Generated artifact</p>
-          <h2>Policy ID <code id="policy-id">...</code></h2>
-        </div>
-
-        <ul id="issues" class="issues"></ul>
-        <pre id="artifact"></pre>
-      </section>
-    </section>
-
-    <section id="next-ten" class="panel">
-      <div class="section-title">
-        <p class="eyebrow">Next 10</p>
-        <h2>Current execution slice.</h2>
-      </div>
-      <div class="claim-grid">
-        <article><strong>Wallet</strong><p>Map unsigned templates into the selected wallet standard, then round-trip one payload receipt through an external signer.</p></article>
-        <article><strong>Indexer</strong><p>Configure a TN12 virtual-chain endpoint, run preflight, then promote app state only after accepted replay matches.</p></article>
-        <article><strong>Settlement</strong><p>Review one batch-assurance release or refund path; keep mutually exclusive spends explicit before submit.</p></article>
-      </div>
-      <div id="next-ten-status" class="claim-grid" aria-live="polite"></div>
-      <div id="next-ten-tasks" class="build-status-list" aria-live="polite"></div>
-      <pre>npm run project:next-ten
-npm run project:next-ten-status</pre>
-    </section>
-
-    <section class="grid">
-      <article class="panel">
-        <p class="eyebrow">How the vault should feel</p>
-        <h2>Lifecycle</h2>
-        <ol id="lifecycle" class="timeline"></ol>
-      </article>
-
-      <article class="panel">
-        <p class="eyebrow">Wallet interface</p>
-        <h2>Manual address check</h2>
-        <p>The saved TN12 address was funded with about 10,000 testnet KAS/TKAS and used for accepted proof transactions. Paste exact explorer outpoint data before signing new attempts.</p>
-        <pre>kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt</pre>
-        <p>Use the TN12 explorer for transaction IDs and output indexes.</p>
-      </article>
-    </section>
-
-    <section id="templates" class="panel templates">
-      <div class="section-title">
-        <p class="eyebrow">Vault templates</p>
-        <h2>Pick the next covenant-shaped primitive.</h2>
-      </div>
-      <div id="vault-templates" class="template-list" aria-live="polite"></div>
-    </section>
-
-    <section id="assurance" class="workspace">
-      <form id="assurance-form" class="panel">
-        <div class="section-title">
-          <p class="eyebrow">Assurance contract</p>
-          <h2>Inputs</h2>
-        </div>
-
-        <label>
-          Project name
-          <input name="projectName" spellcheck="false">
-        </label>
-
-        <label>
-          Recipient address
-          <input name="recipientAddress" spellcheck="false">
-        </label>
-
-        <label>
-          Refund address
-          <input name="refundAddress" spellcheck="false">
-        </label>
-
-        <div class="two-col">
-          <label>
-            Target, TKAS
-            <input name="targetTkas" type="number" min="1" step="1">
-          </label>
-
-          <label>
-            Pledged, TKAS
-            <input name="pledgedTkas" type="number" min="0" step="1">
-          </label>
-        </div>
-
-        <div class="two-col">
-          <label>
-            Minimum pledge, TKAS
-            <input name="minimumPledgeTkas" type="number" min="0.01" step="0.01">
-          </label>
-
-          <label>
-            Deadline, hours
-            <input name="deadlineHours" type="number" min="1" max="8760" step="1">
-          </label>
-        </div>
-
-        <div class="actions">
-          <button type="button" id="reset-assurance">Reset</button>
-          <button type="button" id="copy-assurance">Copy JSON</button>
-        </div>
-      </form>
-
-      <section class="panel output" aria-live="polite">
-        <div class="section-title">
-          <p class="eyebrow">Funding rule</p>
-          <h2>Release if funded, refund if not.</h2>
-        </div>
-
-        <progress id="assurance-progress" max="100" value="0"></progress>
-        <p id="assurance-progress-text" class="meter-label"></p>
-        <ul id="assurance-issues" class="issues"></ul>
-        <ol id="assurance-lifecycle" class="timeline compact"></ol>
-        <pre id="assurance-artifact"></pre>
-      </section>
-    </section>
-
-    <section id="campaigns" class="panel campaigns">
-      <div class="section-title">
-        <p class="eyebrow">Batch assurance campaigns</p>
-        <h2>Many pledge outputs, one campaign state.</h2>
-        <p>This is lane 3: planner/indexer aggregation over multiple pledge records. Accepted outputs count toward release readiness; signed-only or draft pledges can show planned progress but cannot unlock the campaign.</p>
-      </div>
-      <div id="campaign-summary" class="campaign-summary" aria-live="polite"></div>
-      <div id="campaign-plans" class="campaign-plans" aria-live="polite"></div>
-      <div id="campaign-custody" class="campaign-custody" aria-live="polite"></div>
-      <div id="campaign-pledges" class="campaign-pledges" aria-live="polite"></div>
-      <pre>npm run campaign:state
-npm run campaign:custody</pre>
     </section>
 
     <section id="enforcement" class="panel enforcement">
@@ -295,51 +112,6 @@ npm run campaign:custody</pre>
       <pre>npm run enforcement:matrix</pre>
     </section>
 
-    <section id="escrow" class="panel escrow">
-      <div class="section-title">
-        <p class="eyebrow">Escrow primitive</p>
-        <h2>Buyer fund, seller release, timeout refund, mutual cancel.</h2>
-        <p>This is lane 4: a commerce escrow primitive with accepted TN12 funding, release, DAA-refund, and mutual-cancel proof. Cancel is accepted on a separate funded output through the local TN12 compute-budget route; older bad-submit attempts are historical evidence.</p>
-      </div>
-      <div id="escrow-summary" class="escrow-summary" aria-live="polite"></div>
-      <div id="escrow-list" class="escrow-list" aria-live="polite"></div>
-      <pre>npm run escrow:registry</pre>
-    </section>
-
-    <section id="treasury" class="panel treasury">
-      <div class="section-title">
-        <p class="eyebrow">Treasury / team vaults</p>
-        <h2>Spend caps, delayed large withdrawals, recovery, payroll templates.</h2>
-        <p>This is lane 5: Safe-style treasury UX translated into Kaspa vault policy. Current script proof covers delayed withdrawal and recovery primitives; payroll and caps remain planner/wallet policy until hardened.</p>
-      </div>
-      <div id="treasury-summary" class="treasury-summary" aria-live="polite"></div>
-      <div id="treasury-list" class="treasury-list" aria-live="polite"></div>
-      <pre>npm run treasury:registry</pre>
-    </section>
-
-    <section id="coordination" class="panel coordination">
-      <div class="section-title">
-        <p class="eyebrow">Transparent coordination-market prototype</p>
-        <h2>Stag, Intendo, Pack, Solver, Hunt.</h2>
-        <p>This is a pre-Staghunt research prototype. It models transparent intendos and a toy solver, while explicitly missing opacity, capital multiplexing, composability, and atomic Hunt execution.</p>
-      </div>
-      <div id="coordination-summary" class="coordination-summary" aria-live="polite"></div>
-      <div id="coordination-packs" class="coordination-packs" aria-live="polite"></div>
-      <pre>npm run coordination:market
-npm run coordination:settlement-brief</pre>
-    </section>
-
-    <section id="access-passes" class="panel access-passes">
-      <div class="section-title">
-        <p class="eyebrow">KRC / access pass planner</p>
-        <h2>Coupons, memberships, tickets, redeemable claims.</h2>
-        <p>This is lane 6: issuer and indexer state for passes and redemptions. It is useful now as accepted payload/app-state UX, but it is not native ticket enforcement.</p>
-      </div>
-      <div id="access-summary" class="access-summary" aria-live="polite"></div>
-      <div id="access-list" class="access-list" aria-live="polite"></div>
-      <pre>npm run access:passes</pre>
-    </section>
-
     <section id="mainnet-readiness" class="panel mainnet-readiness">
       <div class="section-title">
         <p class="eyebrow">Mainnet readiness map</p>
@@ -349,17 +121,6 @@ npm run coordination:settlement-brief</pre>
       <div id="mainnet-summary" class="mainnet-summary" aria-live="polite"></div>
       <div id="mainnet-components" class="mainnet-components" aria-live="polite"></div>
       <pre>npm run mainnet:readiness</pre>
-    </section>
-
-    <section id="asset-policies" class="panel asset-policies">
-      <div class="section-title">
-        <p class="eyebrow">Simple asset policy</p>
-        <h2>Mint, transfer, burn, recovery, redemption.</h2>
-        <p>Issuer-indexed policy shapes only. No live native asset enforcement claim.</p>
-      </div>
-      <div id="asset-summary" class="asset-summary" aria-live="polite"></div>
-      <div id="asset-list" class="asset-list" aria-live="polite"></div>
-      <pre>npm run asset:policies</pre>
     </section>
 
     <section id="build-status" class="panel build-status">
@@ -392,93 +153,20 @@ npm run coordination:settlement-brief</pre>
       </div>
       <div id="operator-pack-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="operator-pack-commands" class="build-status-lanes" aria-live="polite"></div>
-      <pre>npm run demo:operator-refresh</pre>
-    </section>
-
-    <section id="project-plan" class="panel build-status">
-      <div class="section-title">
-        <p class="eyebrow">Operator plan</p>
-        <h2>Operator state.</h2>
-        <p>Accepted evidence, WIP, and next blocker.</p>
-      </div>
-      <div id="project-plan-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="project-plan-next" class="build-status-lanes" aria-live="polite"></div>
-      <ul id="project-plan-vision" class="issues"></ul>
-      <pre>npm run project:plan</pre>
-    </section>
-
-    <section id="next-queue" class="panel build-status">
-      <div class="section-title">
-        <p class="eyebrow">Priority queue</p>
-        <h2>Priority queue.</h2>
-        <p>Generated order. Broad plans stay in artifacts, not prose.</p>
-      </div>
-      <div id="next-queue-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="next-queue-top" class="build-status-lanes priority-grid" aria-live="polite"></div>
-      <div id="next-queue-tasks" class="build-status-lanes compact-grid" aria-live="polite"></div>
-      <pre>npm run project:queue</pre>
-    </section>
-
-    <section id="auction-intents" class="panel auction-intents">
-      <div class="section-title">
-        <p class="eyebrow">Auction / intent prototype</p>
-        <h2>Accepted bid payloads, winner rule, refund planning.</h2>
-        <p>Accepted bid payloads and planner state. No custody or atomic exchange claim.</p>
-      </div>
-      <div id="auction-summary" class="auction-summary" aria-live="polite"></div>
-      <div id="auction-list" class="auction-list" aria-live="polite"></div>
-      <pre>npm run auction:intents</pre>
-    </section>
-
-    <section id="defi-backlog" class="panel defi-backlog">
-      <div class="section-title">
-        <p class="eyebrow">Basic DeFi research backlog</p>
-        <h2>Missing rails.</h2>
-        <p>Research only until custody, signer, oracle, and settlement paths exist.</p>
-      </div>
-      <div id="defi-summary" class="defi-summary" aria-live="polite"></div>
-      <div id="defi-list" class="defi-list" aria-live="polite"></div>
-      <pre>npm run defi:backlog</pre>
-      <div class="section-title compact-title">
-        <p class="eyebrow">Stable-value paths</p>
-        <h3>Stable-value paths.</h3>
-        <p>Comparison only. No live stablecoin claim.</p>
-      </div>
-      <div id="stable-summary" class="defi-summary" aria-live="polite"></div>
-      <div id="stable-list" class="defi-list" aria-live="polite"></div>
-      <pre>npm run stable:value</pre>
-      <div class="section-title compact-title">
-        <p class="eyebrow">Issuer redemption state</p>
-        <h3>Accepted issuance, accepted redemption, and signed-only requests.</h3>
-        <p>Issuer/indexer accounting. Signed-only rows do not change accepted balance.</p>
-      </div>
-      <div id="stable-issuer-summary" class="defi-summary" aria-live="polite"></div>
-      <div id="stable-issuer-list" class="defi-list" aria-live="polite"></div>
-      <pre>npm run stable:issuer</pre>
-    </section>
-
-    <section id="agent-commitments" class="panel agent-commitments">
-      <div class="section-title">
-        <p class="eyebrow">AI-agent commitment board</p>
-        <h2>Task offers, deposits, completion proofs, disputes, refunds.</h2>
-        <p>Accepted payload commitments plus reviewer/wallet policy. No autonomous payouts.</p>
-      </div>
-      <div id="agent-summary" class="agent-summary" aria-live="polite"></div>
-      <div id="agent-list" class="agent-list" aria-live="polite"></div>
-      <pre>npm run agent:commitments</pre>
+      <pre>npm run operator:refresh</pre>
     </section>
 
     <section id="proofs" class="panel proofs">
       <div class="section-title">
         <p class="eyebrow">Accepted TN12 proofs</p>
-        <h2>Vault and assurance paths verified on testnet.</h2>
+        <h2>Vault, assurance, escrow, role, and auction paths verified on testnet.</h2>
       </div>
       <div class="proof-toolbar">
         <button type="button" id="refresh-proofs">Refresh from TN12 API</button>
         <span id="proof-status">Loaded from local fixture.</span>
       </div>
       <div id="proof-list" class="proof-list" aria-live="polite"></div>
-      <pre>npm run tx:verify</pre>
+      <pre>npm run proof:verify</pre>
     </section>
 
     <section id="indexer" class="panel indexer">
@@ -497,26 +185,11 @@ npm run indexer:persist
 npm run indexer:virtual-chain-run</pre>
     </section>
 
-    <section id="invoices" class="panel invoices">
-      <div class="section-title">
-        <p class="eyebrow">Payload receipt app</p>
-        <h2>Invoices become app state after accepted payload receipts.</h2>
-        <p>This is lane 1: payment plus app data. The invoice is not considered paid by local JSON alone; it becomes app state only when an accepted TN12 transaction carries the matching payload receipt.</p>
-      </div>
-      <div id="invoice-summary" class="invoice-summary" aria-live="polite"></div>
-      <div id="invoice-list" class="invoice-list" aria-live="polite"></div>
-      <div id="payload-readiness" class="payload-readiness" aria-live="polite"></div>
-      <div id="invoice-draft" class="invoice-draft" aria-live="polite"></div>
-      <pre>npm run invoice:registry
-npm run payload:readiness
-npm run tx:payload</pre>
-    </section>
-
     <section id="submit" class="panel submit-console">
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
         <h2>Review signed drafts before any testnet broadcast.</h2>
-        <p>This is lane 2: exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. The browser reviews signed artifacts only; actual network submission remains an explicit shell command.</p>
+        <p>This is a review surface for exact inputs, outputs, fees, payload state, and submit commands. The remaining mainnet-readiness gap is real external signing: the repo must not hold user keys for a production custody rail.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
@@ -524,167 +197,17 @@ npm run tx:payload</pre>
       <div id="submit-drafts" class="submit-drafts" aria-live="polite"></div>
       <pre>npm run submit:registry
 npm run wallet:review
-npm run wallet:connector
-npm run wallet:connector-requests
-npm run wallet:adapter-run</pre>
+npm run wallet:connector</pre>
     </section>
 
     <section id="roadmap" class="panel roadmap">
       <div class="section-title">
-        <p class="eyebrow">App map</p>
-        <h2>Status-labeled lanes.</h2>
-        <p>Accepted evidence first. Research stays research.</p>
+        <p class="eyebrow">Backlog boundary</p>
+        <h2>Planner and research panels moved.</h2>
+        <p>The broad app-lab, DeFi backlog, stable-value, prediction, attestation, access-pass, and signal panels now live in <a href="lab.html">lab.html</a>. They are useful for building, but they are not the first reviewer surface.</p>
       </div>
       <div id="master-roadmap" class="roadmap-list" aria-live="polite"></div>
       <pre>docs/MASTER_APP_PLAN.md</pre>
-    </section>
-
-    <section id="research-library" class="panel research-library">
-      <div class="section-title">
-        <p class="eyebrow">Cross-chain research library</p>
-        <h2>PMF, failure modes, and Kaspa mapping.</h2>
-        <p>External examples are reference material, not claims about this repo.</p>
-      </div>
-      <div id="research-summary" class="research-summary" aria-live="polite"></div>
-      <div id="research-candidates" class="research-candidates" aria-live="polite"></div>
-      <pre>npm run research:library</pre>
-    </section>
-
-    <section id="stack" class="panel stack">
-      <div class="section-title">
-        <p class="eyebrow">Kaspa app stack</p>
-        <h2>What this naturally grows into next.</h2>
-        <p>The queue starts with covenant products this repo can test on TN12, then moves outward to infrastructure and later proof-backed apps.</p>
-      </div>
-      <div id="build-queue" class="build-queue" aria-live="polite"></div>
-    </section>
-
-    <section id="app-lab" class="panel app-lab">
-      <div class="section-title">
-        <p class="eyebrow">Kaspa app lab</p>
-        <h2>Base work from the application layer map.</h2>
-        <p>These are the natural next lanes from the Kaspa Explained app-page framing: build what can be proved now, label TN12 covenant work clearly, and keep later RTD/vProgs ideas in the research lane.</p>
-      </div>
-      <div id="app-lanes" class="app-lanes" aria-live="polite"></div>
-    </section>
-
-    <section id="attestations" class="panel attestations">
-      <div class="section-title">
-        <p class="eyebrow">Attestation registry</p>
-        <h2>Signal incentives before prediction markets.</h2>
-        <p>RTD-style products start with signed signals, source reputation, and accepted payload receipts. Prediction markets and portfolio hedges consume this layer later; real-money settlement remains out of scope until assumptions are explicit.</p>
-      </div>
-      <div id="attestation-summary" class="attestation-summary" aria-live="polite"></div>
-      <div class="attestation-columns">
-        <section>
-          <h3>Sources</h3>
-          <div id="attestation-sources" class="attestation-list" aria-live="polite"></div>
-        </section>
-        <section>
-          <h3>Signals</h3>
-          <div id="attestation-signals" class="attestation-list" aria-live="polite"></div>
-        </section>
-      </div>
-      <pre>fixtures/AttestationSignals.json</pre>
-    </section>
-
-    <section id="prediction-hedge" class="panel prediction-hedge">
-      <div class="section-title">
-        <p class="eyebrow">Prediction hedge simulator</p>
-        <h2>Attestation-fed review prompts, no trading.</h2>
-        <p>Verified accepted payload signals can move simulated event probabilities. Draft signals remain context only. The output is a review prompt, not settlement, advice, or automated execution.</p>
-      </div>
-      <div id="prediction-summary" class="prediction-summary" aria-live="polite"></div>
-      <div id="prediction-markets" class="prediction-list" aria-live="polite"></div>
-      <div id="prediction-suggestions" class="prediction-list" aria-live="polite"></div>
-      <pre>npm run prediction:hedge</pre>
-    </section>
-
-    <section id="signals" class="workspace signals">
-      <form id="signal-form" class="panel">
-        <div class="section-title">
-          <p class="eyebrow">Signal payload</p>
-          <h2>Transaction payload receipt</h2>
-          <p>First buildable step for app data: put a compact receipt into a user transaction payload, then let an accepted-transaction indexer read it.</p>
-        </div>
-
-        <label>
-          Kind
-          <input name="kind" spellcheck="false">
-        </label>
-
-        <label>
-          Subject
-          <input name="subject" spellcheck="false">
-        </label>
-
-        <label>
-          Value
-          <input name="value" spellcheck="false">
-        </label>
-
-        <label>
-          Note
-          <textarea name="note" rows="3"></textarea>
-        </label>
-
-        <div class="actions">
-          <button type="button" id="reset-signal">Reset</button>
-          <button type="button" id="copy-signal">Copy JSON</button>
-        </div>
-      </form>
-
-      <section class="panel output" aria-live="polite">
-        <div class="section-title">
-          <p class="eyebrow">Miner signal research</p>
-          <h2>Do not overload block headers.</h2>
-          <p>Miner incentives can be explored, but app-specific data should start with transaction payloads and accepted transaction indexing. Coinbase payload and pool support are later mining-software research surfaces.</p>
-        </div>
-        <div id="signal-channels" class="signal-channels"></div>
-        <div id="payload-draft-status" class="payload-draft-status"></div>
-        <pre id="signal-artifact"></pre>
-      </section>
-    </section>
-
-    <section class="grid">
-      <article id="funding" class="panel">
-        <p class="eyebrow">Manual funding</p>
-        <h2>Explorer outpoint</h2>
-        <label>
-          Funded address
-          <input id="manual-address" spellcheck="false">
-        </label>
-        <label>
-          Transaction ID
-          <input id="manual-txid" spellcheck="false" placeholder="paste exact explorer txid before signing">
-        </label>
-        <div class="actions inline-actions">
-          <button type="button" id="fetch-manual-tx">Fetch outputs</button>
-          <button type="button" id="copy-manual-artifact">Copy JSON</button>
-        </div>
-        <div id="manual-output-picker" class="output-picker" aria-live="polite"></div>
-        <div class="two-col">
-          <label>
-            Output index
-            <input id="manual-output-index" type="number" min="0" step="1">
-          </label>
-          <label>
-            Amount, TKAS
-            <input id="manual-amount" type="number" min="0.00001" step="0.00001">
-          </label>
-        </div>
-        <label>
-          Explorer URL
-          <input id="manual-explorer-url" spellcheck="false">
-        </label>
-      </article>
-
-      <article class="panel output" aria-live="polite">
-        <p class="eyebrow">Funding artifact</p>
-        <h2>Ready for planner</h2>
-        <ul id="manual-issues" class="issues"></ul>
-        <pre id="manual-artifact"></pre>
-      </article>
     </section>
 
     <section class="grid">
@@ -693,8 +216,7 @@ npm run wallet:adapter-run</pre>
         <h2>Get test tokens</h2>
         <p>Use a browser for the faucet. From this shell, the faucet host returned a Cloudflare challenge, so token requests cannot be automated here.</p>
         <pre>npm run address</pre>
-        <p>The command prints a `kaspatest:` address and stores testnet-only wallet material in `.local/tn12-wallet.json`. Paste that address into the faucet.</p>
-        <p>The current saved address has been manually checked by the user and should be used for the first vault and assurance attempts.</p>
+        <p>The command prints a <code>kaspatest:</code> address and stores testnet-only wallet material in <code>.local/tn12-wallet.json</code>. Paste that address into the faucet.</p>
         <div class="link-list">
           <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
           <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">TN12 explorer</a>
@@ -702,10 +224,13 @@ npm run wallet:adapter-run</pre>
         </div>
       </article>
       <article class="panel">
-        <p class="eyebrow">Build plan</p>
-        <h2>Next build</h2>
-        <p>The vault, assurance, escrow, role-separated, payload, auction, access-pass, and batch-assurance release rails have TN12 evidence. Next build work is external signing, live rollback evidence, and one more concrete settlement vertical.</p>
-        <pre>docs/PROGRESS.md</pre>
+        <p class="eyebrow">Lab workbench</p>
+        <h2>Open the full builder surface.</h2>
+        <p>The full vault designer, assurance forms, access-pass planner, app-lab, research, signals, and funding panels are still available, just moved out of the proof page.</p>
+        <div class="link-list">
+          <a href="lab.html">Open lab workbench</a>
+          <a href="docs/REPO_TIDYING.md">Read tidying map</a>
+        </div>
       </article>
     </section>
 
@@ -713,9 +238,9 @@ npm run wallet:adapter-run</pre>
       <p class="eyebrow">Source discipline</p>
       <h2>Status labels</h2>
       <div class="claim-grid">
-        <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
-        <article><strong>Next rails</strong><p>Mainnet covenant tooling, native DeFi rails, full vProgs, wallet safety, miner/header data, and production wallet integration stay in their build lanes.</p></article>
-        <article><strong>Next build</strong><p>External signing, live rollback evidence, durable payload indexing, and one more concrete settlement vertical.</p></article>
+        <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow, role-separated, auction, payload, and batch-assurance evidence with explorer-verifiable testnet outputs.</p></article>
+        <article><strong>Mainnet blocked</strong><p>External signing, live rollback evidence, production indexer behavior, and mainnet covenant activation remain separate readiness rails.</p></article>
+        <article><strong>Planner or research</strong><p>Native DeFi, full vProgs, prediction markets, stable-value systems, and miner signal products stay in labeled lab lanes until real evidence changes.</p></article>
       </div>
     </section>
   </main>

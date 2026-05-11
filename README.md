@@ -79,3 +79,5 @@ npm run demo:operator-refresh
 ```sh
 npm run serve
 ```
+
+Open `index.html` for the proof/reviewer page. Open `lab.html` for the full builder workbench.
