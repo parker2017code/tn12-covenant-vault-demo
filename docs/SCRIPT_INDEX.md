@@ -2,6 +2,8 @@
 
 This repo has many scripts because it preserves proof construction, TN12 verification, local indexer replay, wallet review, and research lanes. Use this index instead of scanning `package.json` first.
 
+For prerequisites and safety classes, read `docs/COMMAND_RUNBOOK.md` before copying submit, wallet, or playground commands.
+
 ## Reviewer Commands
 
 | Need | Command |

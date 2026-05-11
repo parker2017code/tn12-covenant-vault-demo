@@ -79,6 +79,10 @@
         <h2>Run it yourself.</h2>
         <p>Start with tKAS, pick a lane, use your wallet, then replay the accepted evidence before trusting the UI.</p>
       </div>
+      <div class="callout">
+        <strong>Before copying commands</strong>
+        <p>Run <code>npm ci</code> first, then check <a href="docs/COMMAND_RUNBOOK.md">docs/COMMAND_RUNBOOK.md</a>. Some commands only rebuild artifacts; wallet and submit commands may write testnet-only files under <code>.local/</code> or broadcast to TN12.</p>
+      </div>
       <div class="runbook-grid">
         <article>
           <span>1</span>
@@ -851,6 +855,7 @@ npm run wallet:adapter-run</pre>
         <p>The command prints a `kaspatest:` address and stores testnet-only wallet material in `.local/tn12-wallet.json`. Paste that address into the faucet.</p>
         <p>Use fresh testnet-only wallet material for new attempts, and keep private keys out of committed files.</p>
         <div class="link-list">
+          <a href="docs/COMMAND_RUNBOOK.md">Command runbook</a>
           <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
           <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">TN12 explorer</a>
           <a href="https://github.com/kaspanet/silverscript" target="_blank" rel="noreferrer">Silverscript</a>

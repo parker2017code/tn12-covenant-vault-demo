@@ -146,12 +146,14 @@
       <div id="playground-flow" class="results-flow" aria-live="polite"></div>
       <details class="playground-command-drawer">
         <summary>Show local commands</summary>
+        <p class="note">Prereqs: run <code>npm ci</code>, use throwaway TN12 wallets only, fund generated <code>kaspatest:</code> addresses before building the funding draft, and treat <code>--submit</code> as a real testnet broadcast.</p>
         <pre>npm run playground:wallets
 npm run playground:funding-draft
 node scripts/submit-signed-draft.mjs .local/playground/funding-draft.json --submit</pre>
       </details>
       <p class="note">If you just want to observe, skip the commands and click the txids above. If you want to run it, generate fresh roles, fund them with faucet tKAS or your own TN12 wallet, then replay the artifacts.</p>
       <div class="link-list">
+        <a href="docs/COMMAND_RUNBOOK.md">Read command runbook</a>
         <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">Open TN12 faucet</a>
         <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">Open TN12 explorer</a>
       </div>

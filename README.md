@@ -13,6 +13,7 @@ Start here:
 - `artifacts/operator-receipt-pack.json`: accepted evidence plus the local-wallet command path.
 - `docs/AUDIT_MAP.md`: canonical claim, status, and enforcement-class map.
 - `docs/CLAIM_VOCABULARY.md`: short definitions for `SCRIPT_ENFORCED`, `PLANNER_ONLY`, `INDEXER_DERIVED`, and related labels.
+- `docs/COMMAND_RUNBOOK.md`: command prerequisites, safety classes, and fresh playground route.
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
 - `docs/COPY_CLEANUP_PLAN.md`: public wording standard for pages and handoff docs.
@@ -67,12 +68,15 @@ npm run demo:operator-refresh
 
 `npm run check:focused` runs the first split domain tests. `npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence and canonical proof-record shape. `npm run demo:operator-refresh` verifies TN12, refreshes derived artifacts, rebuilds status packs, and reruns local checks.
 
+Read `docs/COMMAND_RUNBOOK.md` before running wallet, faucet, or submit commands. Some snippets only rebuild local artifacts; others write testnet wallet material under `.local/` or broadcast TN12 transactions.
+
 ## Useful Artifacts
 
 | Need | Artifact |
 |---|---|
 | Reviewer claim map | `docs/AUDIT_MAP.md` |
 | Script groups | `docs/SCRIPT_INDEX.md` |
+| Command runbook | `docs/COMMAND_RUNBOOK.md` |
 | TangVM / scheduler boundary | `docs/TANGVM_UNISC_BOUNDARY.md` |
 | Tidying map | `docs/REPO_TIDYING.md` |
 | Next steps | `docs/NEXT_STEPS.md` |

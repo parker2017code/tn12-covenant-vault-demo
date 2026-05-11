@@ -80,7 +80,8 @@ This is an internal working note for product cleanup. Keep the public site focus
    - `KASPA_WASM_MODULE`, `KASPA_WRPC_URL`, encoding, network id, and submit shape required for payload-preserving submit flows.
    - Explorer verification required before app state promotion.
 5. Keep public pages minimal by default. Long operator commands, artifact inventories, old planning notes, and generated matrices belong in docs/lab drawers.
-6. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
+6. Run the public framing pass: money-first, covenants as constrained spend rules, based apps as app state anchored to Kaspa evidence, and vProgs as later architecture rather than the default product claim.
+7. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
 
 ## Lessons from strong open-source websites
 
