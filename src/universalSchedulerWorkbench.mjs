@@ -39,6 +39,7 @@ export function buildUniversalSchedulerWorkbench({
       autonomousCustodyClaims: 0,
       mainnetClaims: 0
     },
+    runThisFirst: buildRunThisFirst(schedulerRegistry),
     jobs,
     expectedBehavior: [
       "Accepted trigger receipts can make an app job eligible.",
@@ -59,6 +60,34 @@ export function buildUniversalSchedulerWorkbench({
       "It schedules reviewable jobs over accepted evidence; it does not create autonomous custody.",
       "The full research target still needs privacy, capital multiplexing, solver incentives, censorship resistance, MEV resistance, and atomic execution."
     ]
+  };
+}
+
+function buildRunThisFirst(registry) {
+  const trigger = registry.triggerRows?.[0] || {};
+  const winner = (registry.auctionRows || []).find((row) => row.status === "winner-selected") || {};
+  return {
+    id: "accepted-scheduler-trigger-replay",
+    title: "Replay the accepted scheduler trigger",
+    userGoal: "See a scheduler intent become an executed app job without trusting a hidden backend.",
+    currentEvidence: compact([
+      trigger.sourceEvidencePath,
+      trigger.executionReceiptTxid,
+      trigger.executionTransferTxid,
+      winner.evidencePath
+    ]),
+    steps: [
+      "Open the scheduler workbench.",
+      "Check the accepted intent receipt and accepted execution receipt.",
+      "Check the payout transfer txid.",
+      "Confirm the winning bid and blocked stale/slow bids.",
+      "Run scheduler:intents and scheduler:workbench.",
+      "Treat the row as app-state only after accepted receipt, transfer match, and replay checks pass."
+    ],
+    expectedResult: trigger.status === "executed"
+      ? "The trigger remains executed, the local-key payout remains matched, and stale or duplicate candidates stay blocked."
+      : "The trigger stays blocked until accepted execution evidence is attached.",
+    nextUpgrade: "Replace local-key execution with external-wallet signing, then replay the accepted txid before promotion."
   };
 }
 

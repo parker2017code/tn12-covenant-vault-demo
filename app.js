@@ -1692,7 +1692,25 @@ async function renderUniversalSchedulerWorkbench() {
       <article><span>Custody claims</span><strong>${escapeHtml(workbench.summary.autonomousCustodyClaims)}</strong><p>Must stay zero without wallet-reviewed settlement.</p></article>
     `;
 
+    const firstRun = workbench.runThisFirst;
     schedulerWorkbenchJobsNode.innerHTML = "";
+    if (firstRun) {
+      const runArticle = document.createElement("article");
+      runArticle.className = "scheduler-job scheduler-run-first";
+      runArticle.innerHTML = `
+        <span>run first</span>
+        <strong>${escapeHtml(firstRun.title)}</strong>
+        <p>${escapeHtml(firstRun.userGoal)}</p>
+        <p class="scheduler-observed">${escapeHtml(firstRun.expectedResult)}</p>
+        <details open>
+          <summary>Steps and evidence</summary>
+          <ol>${firstRun.steps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
+          <p>${firstRun.currentEvidence.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
+          <p>${escapeHtml(firstRun.nextUpgrade)}</p>
+        </details>
+      `;
+      schedulerWorkbenchJobsNode.append(runArticle);
+    }
     for (const job of workbench.jobs) {
       const article = document.createElement("article");
       article.className = `scheduler-job scheduler-${cssEscape(job.replayCheck)}`;

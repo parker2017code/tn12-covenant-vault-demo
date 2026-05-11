@@ -1934,6 +1934,14 @@ progress::-moz-progress-bar {
   border-color: rgba(118, 167, 158, .55);
 }
 
+.scheduler-job.scheduler-run-first {
+  grid-column: 1 / -1;
+  border-color: rgba(245, 194, 126, .62);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(245, 194, 126, .18), transparent 30%),
+    linear-gradient(135deg, rgba(118, 167, 158, .16), rgba(18, 25, 29, .98));
+}
+
 .scheduler-job span {
   width: fit-content;
   border: 1px solid rgba(118, 167, 158, .32);

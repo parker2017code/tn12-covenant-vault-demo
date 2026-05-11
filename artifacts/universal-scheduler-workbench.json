@@ -1,7 +1,7 @@
 {
   "schema": "tn12-universal-scheduler-workbench/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T22:03:49.949Z",
+  "generatedAt": "2026-05-11T22:06:49.236Z",
   "status": "scheduler-workbench-ready",
   "thesis": "A scheduler is useful when it routes accepted triggers, bids, solver results, proof jobs, and settlement reviews without pretending to be protocol-level automation.",
   "summary": {
@@ -14,6 +14,27 @@
     "protocolSchedulerClaims": 0,
     "autonomousCustodyClaims": 0,
     "mainnetClaims": 0
+  },
+  "runThisFirst": {
+    "id": "accepted-scheduler-trigger-replay",
+    "title": "Replay the accepted scheduler trigger",
+    "userGoal": "See a scheduler intent become an executed app job without trusting a hidden backend.",
+    "currentEvidence": [
+      "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json",
+      "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
+      "1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d",
+      "artifacts/payload-scheduler-bid-fast-executor-001-evidence.json"
+    ],
+    "steps": [
+      "Open the scheduler workbench.",
+      "Check the accepted intent receipt and accepted execution receipt.",
+      "Check the payout transfer txid.",
+      "Confirm the winning bid and blocked stale/slow bids.",
+      "Run scheduler:intents and scheduler:workbench.",
+      "Treat the row as app-state only after accepted receipt, transfer match, and replay checks pass."
+    ],
+    "expectedResult": "The trigger remains executed, the local-key payout remains matched, and stale or duplicate candidates stay blocked.",
+    "nextUpgrade": "Replace local-key execution with external-wallet signing, then replay the accepted txid before promotion."
   },
   "jobs": [
     {

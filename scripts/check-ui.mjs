@@ -185,10 +185,11 @@ async function checkRenderedPages(url) {
     await page.waitForSelector("#scheduler-workbench-jobs article", { timeout: 5000 });
     const schedulerText = await page.locator("#scheduler-workbench").innerText();
     assert.match(schedulerText, /Small version first/);
+    assert.match(schedulerText, /Replay the accepted scheduler trigger/);
     assert.match(schedulerText, /Accepted trigger/);
     assert.match(schedulerText, /Transparent coordination pack/);
     assert.match(schedulerText, /protocol-level automation/);
-    assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 6);
+    assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 7);
     await page.goto(`${url}lab.html#submit`, { waitUntil: "networkidle" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
     const submitText = await page.locator("#submit").innerText();
