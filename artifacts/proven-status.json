@@ -1,7 +1,7 @@
 {
   "schema": "tn12-proven-status/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T01:38:45.562Z",
+  "generatedAt": "2026-05-11T02:40:15.935Z",
   "status": "tn12-demo-proof-ready-mainnet-deferred",
   "currentPercent": "53-58%",
   "afterExternalSignerPercent": "57-62%",

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-v1-operator-loop/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T01:38:45.193Z",
+  "generatedAt": "2026-05-11T02:40:15.618Z",
   "status": "repeatable-live-receipt-loop-ready",
   "wallet": {
     "address": "kaspatest:qz8ke9lvc0prgygp9cyvemlhhdhh6wthyzx2epf2n8nhegkfgvs76tas8y3hk",

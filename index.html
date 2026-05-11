@@ -17,6 +17,7 @@
     </div>
     <nav aria-label="Project links">
       <a href="#core-notes">Core</a>
+      <a href="#operator-pack">Operator</a>
       <a href="#designer">Designer</a>
       <a href="#assurance">Assurance</a>
       <a href="#campaigns">Campaigns</a>
@@ -77,13 +78,13 @@
         </article>
         <article>
           <span>Accepted payload events</span>
-          <strong>30</strong>
-          <p>JSON wRPC payload receipts are indexed; the public REST route is kept as a no-payload negative result.</p>
+          <strong>32</strong>
+          <p>JSON wRPC payload receipts include DeFi receipt and agent release events; the public REST route is kept as a no-payload negative result.</p>
         </article>
         <article>
-          <span>Batch assurance custody</span>
-          <strong>ready drafts</strong>
-          <p>One accepted funding transaction created 45/35/20 TKAS pledge outputs; release/refund drafts are signed but not broadcast.</p>
+          <span>Verifier command</span>
+          <strong>operator refresh</strong>
+          <p><code>npm run demo:operator-refresh</code> verifies TN12 evidence, rebuilds derived artifacts, and reruns local checks.</p>
         </article>
       </div>
       <p class="note">Read <code>docs/PROOF_INDEX.md</code> and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
@@ -380,7 +381,7 @@ npm run coordination:settlement-brief</pre>
       </div>
       <div id="operator-pack-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="operator-pack-commands" class="build-status-lanes" aria-live="polite"></div>
-      <pre>npm run project:operator-pack</pre>
+      <pre>npm run demo:operator-refresh</pre>
     </section>
 
     <section id="project-plan" class="panel build-status">

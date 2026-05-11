@@ -22,6 +22,8 @@ try {
   assert.equal(checkpoint.summary.payloadEvents, 32);
   assert.match(html, /TN12 configured\. Proof transactions accepted\./);
   assert.match(html, /7 core \+ 2 auction \+ 7 role-separated \+ 45 indexed records/);
+  assert.match(html, /Accepted payload events[\s\S]*<strong>32<\/strong>/);
+  assert.match(html, /npm run demo:operator-refresh/);
   assert.match(html, /<form id="assurance-form"/);
   assert.match(html, /id="proof-status"/);
   assert.match(html, /id="receipt-events"/);

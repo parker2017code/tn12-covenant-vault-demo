@@ -1,7 +1,7 @@
 {
   "schema": "tn12-indexer-replay-run/v1",
   "network": "kaspa-testnet-12",
-  "runAt": "2026-05-11T01:38:42.169Z",
+  "runAt": "2026-05-11T02:40:12.809Z",
   "status": "fixture-replay-ready",
   "source": {
     "checkpointKind": "known-txid-public-read-checkpoint",
@@ -35,7 +35,7 @@
         "payload_event_count": 32,
         "proof_spend_count": 9,
         "mismatch_count": 0,
-        "created_at": "2026-05-11T01:38:42.169Z"
+        "created_at": "2026-05-11T02:40:12.809Z"
       }
     ],
     "accepted_transactions": [
@@ -61,7 +61,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -85,7 +85,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f",
@@ -109,7 +109,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61",
@@ -133,7 +133,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d",
@@ -157,7 +157,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d",
@@ -181,7 +181,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c",
@@ -205,7 +205,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
@@ -229,7 +229,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
@@ -253,7 +253,7 @@
           }
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "34d5f807c2a6b917458f2d1a3926f5ed49730f44da2c480a53a0236c915afc4e",
@@ -277,7 +277,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "8e3911ac9bd6d65e81e77a0ce69554ba3259f44c3846f026a64ed3f8e03e0807",
@@ -301,7 +301,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "e92803b4a2c84fee868b0f2ec52b9e6993fb0f4762abf7b00da3c48c84ac50bd",
@@ -325,7 +325,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "dd5a72404c0c025506ed833167c93b5b271ca65393904dcbe337f97e7ec92dde",
@@ -349,7 +349,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "ff7835059368b559db98e6625b0ffc82e1df2c37cb33f2fbe8abb6408d45ceaa",
@@ -373,7 +373,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "8dcda29ef07f3bc2ab799241ecbe932b98f003cd37839357ae14830bfa3c6e39",
@@ -397,7 +397,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "4f24d99891d1bf79aab0dd66dcb31e6808ca766507f729f9be2c59048f4b7a13",
@@ -421,7 +421,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "3738322fbe19c384b5472336f006560bceea3e004099eb50c2499874903b2c5c",
@@ -445,7 +445,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "59893fa4988540ef72643c803df692bbc1d3eaf9aded16339375178a9d22bd90",
@@ -469,7 +469,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
@@ -493,7 +493,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
@@ -517,7 +517,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "e23c03271a5e0702cc104e36651c63270d0756d74c098310ffbac6fbe8964861",
@@ -541,7 +541,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "3808098b8d44047c38710088e5d3ee29eff6f57df2ac407aca4a610af71dde7e",
@@ -565,7 +565,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "d8230790ca950e299541e30505cfdb9fb78bab3ba72fefa056bcd0e6c3bb2fa9",
@@ -589,7 +589,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "95a5f2796eeb3a4cf23fd491b2b989a81b6d2a86cf846ab03ae0bc777ecf0f7b",
@@ -613,7 +613,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "f899b5041c393c7e3d0c288b873c78179ec5530644f83f1f581b9e7f925f5162",
@@ -637,7 +637,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "3f0e28f244674e15f79948e45eb5513e12e7fde7e3e2b591ecc9a65931989663",
@@ -661,7 +661,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "a30ff2113c2821059d3c9332b9c1779cdb3fd77f1244187984841cd4ee07904d",
@@ -685,7 +685,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "9f9766567fbe8032804583e48e6e9a1aa70f8bb4fbd30018dd45f32e9c0daca7",
@@ -709,7 +709,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "1d5a3c2404188e62663535692ee575a1cb96a069fa19ea7c67670975078c6f3d",
@@ -733,7 +733,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
@@ -757,7 +757,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
@@ -781,7 +781,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "f3c3a5774d6185e1048a08aca2bb0246895eddb54fd9113ae07ff82c184a7e1e",
@@ -805,7 +805,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "197bac31e46b59441910e75e6f65e96e6b478c88777879b489265f5b9189638a",
@@ -829,7 +829,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "807b41bead247769509694aa34917b82a3adb288826912e522e3bb67e31877f0",
@@ -853,7 +853,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "3119d9293d0e895d354075f7abe7b57f21bb2f4edd66b2cfe072bfd5ca6048b4",
@@ -877,7 +877,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "a146de4a14e20c3fede1781275315a2bb4cb324416a70389b46218e090ad347b",
@@ -901,7 +901,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "82a5283f061b3a95ac59d8e168e96da488590d516157f38a3d1cc75a764df382",
@@ -925,7 +925,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
@@ -949,7 +949,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
@@ -973,7 +973,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
@@ -997,7 +997,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "2b38ca70ca1b04a0d71d661826232d2f5d31a54e97091f342700522547dbdc12",
@@ -1021,7 +1021,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -1046,7 +1046,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -1071,7 +1071,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -1096,7 +1096,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       },
       {
         "txid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
@@ -1121,7 +1121,7 @@
           "matches": true
         },
         "source": "known-txid-public-read-checkpoint",
-        "seen_at": "2026-05-11T01:38:42.169Z"
+        "seen_at": "2026-05-11T02:40:12.809Z"
       }
     ],
     "accepted_payload_events": [

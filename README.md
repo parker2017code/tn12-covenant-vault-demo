@@ -14,7 +14,7 @@ Start here:
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
 
-Older session/status reports are historical notes, not canonical.
+Older session/status reports are historical notes under `docs/archive/`, not canonical.
 
 ## Accepted On TN12
 
@@ -44,10 +44,10 @@ Older session/status reports are historical notes, not canonical.
 | Live rollback evidence | `artifacts/durable-replay-promotion-guard.json` passes local rollback matching | A live TN12 removed-block window is captured and matched |
 | Batch-assurance settlement | Release path is accepted and indexed; refund path is now the non-selected alternate | Post-submit alternate-path status stays explicit |
 
-## Verify
+## Independent Verification
 
 ```sh
-npm install
+npm ci
 npm run check:all
 npm run check:tn12
 npm run demo:operator-refresh
