@@ -8,7 +8,7 @@ This file is the short queue. It does not replace the generated artifacts; it po
 
 - TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
 - Mainnet deployment readiness is still about `55-60%`.
-- Proof-lab auditability is roughly `70-75%` after the first focused-check split, address validation pass, proof-record mutation coverage, and status-artifact checks.
+- Proof-lab auditability is roughly `75-80%` after the focused-check split, address validation pass, proof-record mutation coverage, status-artifact checks, and wallet-submit readiness checks.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 
