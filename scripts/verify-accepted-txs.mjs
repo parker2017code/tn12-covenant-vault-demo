@@ -9,7 +9,7 @@ const proofTransactions = proofFixture.transactions.map((item) => ({
   expectedOutputs: [
     {
       index: 0,
-      amount: Number(item.amountSompi),
+      amountSompi: String(item.amountSompi),
       address: item.destination,
       type: "pubkey"
     }
@@ -30,7 +30,7 @@ for (const proof of proofTransactions) {
     if (!output) {
       throw new Error(`${proof.label} is missing output ${expected.index}.`);
     }
-    if (Number(output.amount) !== expected.amount) {
+    if (String(output.amount) !== expected.amountSompi) {
       throw new Error(`${proof.label} output ${expected.index} amount mismatch.`);
     }
     if (output.script_public_key_address !== expected.address) {
@@ -60,7 +60,7 @@ console.log(JSON.stringify({
     outputs: [
       {
         index: record.expected.outputIndex,
-        amount: Number(record.expected.amountSompi),
+        amountSompi: String(record.expected.amountSompi),
         address: record.expected.destination,
         type: record.expected.type
       }

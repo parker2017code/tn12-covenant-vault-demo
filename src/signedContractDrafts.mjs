@@ -10,6 +10,7 @@ import {
   signTransaction
 } from "kaspa-wasm";
 import { blake2b } from "blakejs";
+import { decimalTkasToSompi, sompiToTkas as formatSompiToTkas } from "./amounts.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 
@@ -103,16 +104,11 @@ export function buildSignedContractFundingDraft({
 }
 
 export function tkasToSompi(value) {
-  return BigInt(Math.round(Number(value) * Number(SOMPI_PER_TKAS)));
+  return decimalTkasToSompi(value);
 }
 
 function sompiToTkas(sompi) {
-  const whole = sompi / SOMPI_PER_TKAS;
-  const fraction = sompi % SOMPI_PER_TKAS;
-  if (fraction === 0n) {
-    return whole.toString();
-  }
-  return `${whole}.${fraction.toString().padStart(8, "0").replace(/0+$/, "")}`;
+  return formatSompiToTkas(sompi);
 }
 
 function scriptPublicKeyFromHex(hex) {

@@ -14,6 +14,7 @@ const {
   signTransaction
 } = getKaspaWasmRuntime().module;
 import { buildSubmitPayload } from "../src/submitPayload.mjs";
+import { decimalTkasToSompi } from "../src/amounts.mjs";
 import {
   buildSignalPayloadArtifact,
   encodeSignalPayloadBytes
@@ -23,9 +24,9 @@ const SOMPI_PER_TKAS = 100000000n;
 const fundingOutpointPath = process.env.FUNDING_OUTPOINT || "fixtures/FundedWalletOutpoint.json";
 const walletPath = process.env.TN12_WALLET || ".local/tn12-wallet.json";
 const outPath = process.env.OUT || "artifacts/signed-drafts/payload-receipt-self-send.json";
-const amountTkas = Number(process.env.AMOUNT_TKAS || "1");
+const amountTkas = String(process.env.AMOUNT_TKAS || "1");
 const minerFeeSompi = BigInt(process.env.MINER_FEE_SOMPI || "5000");
-const amountSompi = BigInt(Math.round(amountTkas * Number(SOMPI_PER_TKAS)));
+const amountSompi = decimalTkasToSompi(amountTkas);
 
 const funding = JSON.parse(await readFile(fundingOutpointPath, "utf8"));
 const wallet = JSON.parse(await readFile(walletPath, "utf8"));

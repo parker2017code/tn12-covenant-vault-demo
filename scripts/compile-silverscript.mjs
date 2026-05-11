@@ -2,7 +2,7 @@ import { access, mkdir } from "node:fs/promises";
 import { spawn } from "node:child_process";
 import { basename, join } from "node:path";
 
-const silverc = process.env.SILVERC || "/home/parker2017/silverscript-tools/target/release/silverc";
+const silverc = process.env.SILVERC || "silverc";
 const contracts = process.argv.slice(2);
 const sources = contracts.length
   ? contracts

@@ -2,7 +2,7 @@ import { access, mkdir } from "node:fs/promises";
 import { spawn } from "node:child_process";
 import { basename, join } from "node:path";
 
-const silverc = process.env.SILVERC || "/home/parker2017/silverscript-tools/target/release/silverc";
+const silverc = process.env.SILVERC || "silverc";
 const ctorDir = process.env.ROLE_CTOR_DIR || "fixtures/role-separated";
 const outDir = process.env.OUT_DIR || "artifacts/role-separated";
 const sources = process.argv.slice(2);

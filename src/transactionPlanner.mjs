@@ -1,3 +1,5 @@
+import { decimalTkasToSompi, sompiToTkas as formatSompiToTkas } from "./amounts.mjs";
+
 const SOMPI_PER_TKAS = 100000000n;
 const DEFAULT_MINER_FEE_SOMPI = 5000n;
 
@@ -323,18 +325,13 @@ function amount(sompi) {
 }
 
 export function tkasToSompi(value) {
-  const normalized = clampNumber(Number(value), 0, 100000000);
-  return BigInt(Math.round(normalized * Number(SOMPI_PER_TKAS)));
+  const sompi = decimalTkasToSompi(value);
+  const maxSompi = 100000000n * SOMPI_PER_TKAS;
+  return sompi > maxSompi ? maxSompi : sompi;
 }
 
 function sompiToTkas(sompi) {
-  const whole = sompi / SOMPI_PER_TKAS;
-  const fraction = sompi % SOMPI_PER_TKAS;
-  if (fraction === 0n) {
-    return whole.toString();
-  }
-
-  return `${whole}.${fraction.toString().padStart(8, "0").replace(/0+$/, "")}`;
+  return formatSompiToTkas(sompi);
 }
 
 function relativeUnixTime(hoursFromNow) {

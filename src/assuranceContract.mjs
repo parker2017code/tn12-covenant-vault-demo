@@ -65,11 +65,26 @@ export function buildAssuranceArtifact(contract) {
       outcomeIfDeadlineNow: remainingTkas === 0 ? "release-to-recipient" : "refund-pledgers"
     },
     covenantIntent: [
-      "Each pledge is locked to one funding campaign.",
-      "If planner-side campaign rules decide the target is met, pledged outputs can release to the recipient.",
-      "If the deadline passes below target, each pledger can reclaim their own pledge.",
-      "A first TN12 implementation should keep pledge outputs auditable and easy to refund."
+      "Each pledge primitive has a recipient release path.",
+      "Each pledge primitive has a contributor refund path after its deadline.",
+      "Campaign target aggregation remains planner/indexer state.",
+      "A first TN12 implementation should keep individual pledge outputs auditable and easy to refund."
     ],
+    enforcementBoundary: {
+      scriptEnforced: [
+        "release output 0 value equals active input minus minerFee",
+        "release output 0 pays the recipient P2PK lock",
+        "refund requires contributor signature",
+        "refund requires tx.time >= deadline",
+        "refund output 0 pays the contributor P2PK lock"
+      ],
+      plannerOnly: [
+        "pooled funding target aggregation",
+        "campaign-level deadline decision before release",
+        "multi-pledge batching",
+        "coordinator campaign lifecycle"
+      ]
+    },
     repoProofs: [
       "Individual pledge funding is implemented in repo scripts.",
       "Release spend has been accepted on TN12.",
@@ -78,7 +93,7 @@ export function buildAssuranceArtifact(contract) {
     browserBoundary: [
       "This form does not submit transactions from the browser.",
       "Campaign target aggregation is still app/planner-side.",
-      "Multi-pledge release/refund batching is not built yet."
+      "AssurancePledge.sil is an individual pledge release/refund primitive, not a full pooled assurance contract."
     ]
   };
 }

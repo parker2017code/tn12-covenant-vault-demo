@@ -7,6 +7,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | Need | Command |
 |---|---|
 | Install exactly from lockfile | `npm ci` |
+| Minimal reviewer path | `npm ci && npm run check:tn12` |
 | Local behavior gate | `npm run check:all` |
 | Public TN12 evidence gate | `npm run check:tn12` |
 | Full reviewer refresh | `npm run operator:refresh` |
@@ -19,6 +20,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 |---|---|
 | Verify accepted proof txids from public TN12 API | `npm run tx:verify` |
 | Rebuild accepted proof evidence | `npm run proof:evidence` |
+| Verify canonical proof-record shape | `npm run proof:records` |
 | Verify role-separated accepted proof txids | `npm run tx:roles:verify` |
 | Rebuild role-separated proof evidence | `npm run roles:proof:evidence` |
 | Verify accepted payload events | `npm run payload:verify:events` |

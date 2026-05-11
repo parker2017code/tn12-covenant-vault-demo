@@ -64,9 +64,24 @@ export function buildPolicyArtifact(policy, policyId) {
     covenantIntent: [
       "Funds can be withdrawn by the owner only after a delay.",
       "A recovery path can move funds to the recovery address.",
-      "A daily spend limit can cap normal withdrawals.",
-      "A guardian threshold can approve emergency recovery or cancellation."
+      "Daily spend limits are planner/UI policy only in this artifact.",
+      "Guardian threshold fields are planner/UI policy only in this artifact."
     ],
+    enforcementBoundary: {
+      scriptEnforced: [
+        "owner signature on delayed withdrawal",
+        "tx.time >= unlockTime on delayed withdrawal",
+        "recovery signature on recovery spend",
+        "output 0 value equals active input minus minerFee",
+        "output 0 pays the owner or recovery P2PK lock"
+      ],
+      plannerOnly: [
+        "daily spend limit",
+        "guardian threshold and guardian count",
+        "withdrawal request/cancel lifecycle",
+        "arbitrary destination policy"
+      ]
+    },
     repoProofs: [
       "P2SH vault funding is implemented in repo scripts.",
       "Recovery spend has been accepted on TN12.",
@@ -75,7 +90,7 @@ export function buildPolicyArtifact(policy, policyId) {
     browserBoundary: [
       "This form does not submit transactions from the browser.",
       "Owner/recovery key separation still needs a wallet-facing UX.",
-      "Spending caps and guardian rules are planner/UI intent until enforced by a refined contract."
+      "Spending caps, guardian rules, request/cancel lifecycle, and arbitrary destination policy are not script-enforced by DelayedRecoveryVault.sil."
     ]
   };
 }

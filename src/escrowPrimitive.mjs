@@ -21,7 +21,8 @@ export function buildEscrowPrimitive(fixture = {}) {
     })),
     boundaries: [
       "This is the escrow app-state and transaction-planning surface.",
-      "It does not prove an accepted TN12 escrow covenant spend yet.",
+      "The accepted Escrow.sil proof paths are buyer-controlled release, buyer timeout refund, and buyer+seller cancel.",
+      "There is no arbiter-mediated script path in Escrow.sil.",
       "Release, timeout refund, and mutual cancel must be reviewed as exact signed drafts before submit.",
       "Dispute notes are app-layer context unless a separate arbiter script path is added."
     ]

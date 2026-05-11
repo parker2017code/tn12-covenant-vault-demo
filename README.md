@@ -11,9 +11,9 @@ Start here:
 - `README.md`: public summary and verification commands.
 - `artifacts/proven-status.json`: compact current counts, percent, and deferred rails.
 - `artifacts/operator-receipt-pack.json`: accepted evidence plus the local-wallet command path.
+- `docs/AUDIT_MAP.md`: canonical claim, status, and enforcement-class map.
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
 - `docs/NEXT_STEPS.md`: short current execution queue.
-- `docs/AUDIT_MAP.md`: claim-to-evidence map for reviewers.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.
 
 Older session/status reports are historical notes under `docs/archive/`, not canonical.
@@ -22,9 +22,9 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 
 | Evidence | Status | Where |
 |---|---|---|
-| Vault recovery and delayed withdrawal | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
-| Assurance release and refund | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
-| Escrow release, DAA refund, mutual cancel | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
+| Minimal delayed owner/recovery vault primitive | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
+| Individual pledge release/refund primitive | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
+| Buyer-controlled escrow primitive | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
 | Role-separated positive paths, all 7 | `TN12_ACCEPTED` | `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
 | 32 payload events, including 5 DeFi v1 receipts and 1 agent release wallet-review event | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
@@ -52,10 +52,11 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 npm ci
 npm run check:all
 npm run check:tn12
+npm run proof:records
 npm run demo:operator-refresh
 ```
 
-`npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence. `npm run demo:operator-refresh` verifies TN12, refreshes derived artifacts, rebuilds status packs, and reruns local checks.
+`npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence and canonical proof-record shape. `npm run demo:operator-refresh` verifies TN12, refreshes derived artifacts, rebuilds status packs, and reruns local checks.
 
 ## Useful Artifacts
 

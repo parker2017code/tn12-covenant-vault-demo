@@ -1,3 +1,5 @@
+import { sompiToSafeJsonNumber } from "./amounts.mjs";
+
 export function buildSubmitPayload(signedTransaction) {
   const tx = signedTransaction.tx?.inner || signedTransaction.tx;
   if (!tx) {
@@ -22,7 +24,7 @@ export function buildSubmitPayload(signedTransaction) {
     outputs: tx.outputs.map((output) => {
       const inner = output.inner || output;
       return {
-        amount: Number(inner.value ?? inner.amount),
+        amount: sompiToSafeJsonNumber(inner.value ?? inner.amount),
         scriptPublicKey: splitScriptPublicKey(inner.scriptPublicKey)
       };
     }),
