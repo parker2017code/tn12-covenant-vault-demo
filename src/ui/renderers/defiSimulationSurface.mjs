@@ -48,7 +48,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       {
         status: scheduler.status,
         title: "Scheduler intent registry",
-        body: `${scheduler.summary.acceptedIntents} accepted trigger intent; ${scheduler.summary.eligibleTriggers} eligible trigger; ${scheduler.summary.protocolSchedulerClaims} protocol-scheduler claims.`,
+        body: `${scheduler.summary.acceptedIntents} accepted intent; ${scheduler.summary.executedTriggers} executed trigger; ${scheduler.summary.protocolSchedulerClaims} protocol-scheduler claims.`,
         foot: "npm run scheduler:intents"
       },
       {

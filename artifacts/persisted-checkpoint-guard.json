@@ -3,10 +3,10 @@
   "network": "kaspa-testnet-12",
   "status": "persisted-checkpoint-ready",
   "sourcePath": "artifacts/checkpointed-accepted-index.json",
-  "persistedAt": "2026-05-11T16:38:20.640Z",
+  "persistedAt": "2026-05-11T16:47:14.179Z",
   "summary": {
-    "recordCount": 48,
-    "matched": 48,
+    "recordCount": 49,
+    "matched": 49,
     "mismatches": 0,
     "addedTxids": 0,
     "missingTxids": 0,
@@ -15,9 +15,9 @@
   },
   "current": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 48,
+    "recordCount": 49,
     "minBlueScore": 5203140,
-    "maxBlueScore": 8933924,
+    "maxBlueScore": 8937625,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -63,6 +63,7 @@
       "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
       "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
       "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+      "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -71,9 +72,9 @@
   },
   "previous": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 48,
+    "recordCount": 49,
     "minBlueScore": 5203140,
-    "maxBlueScore": 8933924,
+    "maxBlueScore": 8937625,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -119,6 +120,7 @@
       "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
       "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
       "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+      "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",

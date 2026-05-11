@@ -7,10 +7,14 @@ const acceptedActivity = await readJson("artifacts/defi-accepted-activity-ledger
 const payloadEvidenceByPath = Object.fromEntries(await Promise.all(
   (payloadEvents.events || []).map(async (event) => [event.outPath, await readOptionalJson(event.outPath)])
 ));
+const executionEvidenceByPath = {
+  "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json": await readOptionalJson("artifacts/tn12-scheduler-execution-payout-user-03-evidence.json")
+};
 
 const registry = buildSchedulerIntentRegistry({
   payloadEvents,
   payloadEvidenceByPath,
+  executionEvidenceByPath,
   acceptedActivity
 });
 

@@ -1,0 +1,183 @@
+{
+  "schema": "tn12-signed-p2pk-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "warning": "This artifact is a local signed draft. It has not been submitted to TN12.",
+  "source": {
+    "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+    "txid": "9b762866074f0dfc4c645d7f733c044e952ea0d5ed88a1fe88c7f45debc94d55",
+    "outputIndex": 1,
+    "amountTkas": 10.99985
+  },
+  "payment": {
+    "to": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+    "amountTkas": "4",
+    "amountSompi": "400000000",
+    "changeTkas": "6.9998",
+    "changeSompi": "699980000",
+    "minerFeeSompi": "5000"
+  },
+  "transactionId": "1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d",
+  "signedTransaction": {
+    "entries": [
+      {
+        "utxo": {
+          "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+          "entry": {
+            "amount": 1099985000,
+            "blockDaaScore": 9074419,
+            "isCoinbase": false,
+            "scriptPublicKey": "0000200284f04662fcc5f1b50329db7c39a09f66abd2a85d189a315c49d893a5a25232ac"
+          },
+          "outpoint": {
+            "inner": {
+              "index": 1,
+              "transactionId": "9b762866074f0dfc4c645d7f733c044e952ea0d5ed88a1fe88c7f45debc94d55"
+            }
+          }
+        }
+      }
+    ],
+    "tx": {
+      "inner": {
+        "gas": 0,
+        "id": "1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d",
+        "inputs": [
+          {
+            "inner": {
+              "previousOutpoint": {
+                "inner": {
+                  "index": 1,
+                  "transactionId": "9b762866074f0dfc4c645d7f733c044e952ea0d5ed88a1fe88c7f45debc94d55"
+                }
+              },
+              "sequence": 0,
+              "sigOpCount": 1,
+              "signatureScript": [
+                65,
+                98,
+                132,
+                55,
+                158,
+                150,
+                89,
+                224,
+                200,
+                59,
+                87,
+                18,
+                241,
+                2,
+                248,
+                35,
+                0,
+                147,
+                7,
+                163,
+                94,
+                127,
+                86,
+                247,
+                40,
+                207,
+                191,
+                171,
+                218,
+                237,
+                114,
+                247,
+                217,
+                182,
+                142,
+                84,
+                196,
+                123,
+                73,
+                74,
+                197,
+                218,
+                4,
+                235,
+                143,
+                45,
+                71,
+                197,
+                137,
+                163,
+                35,
+                22,
+                253,
+                68,
+                131,
+                119,
+                31,
+                65,
+                203,
+                205,
+                159,
+                246,
+                50,
+                225,
+                126,
+                1
+              ]
+            }
+          }
+        ],
+        "lockTime": 0,
+        "outputs": [
+          {
+            "inner": {
+              "scriptPublicKey": "000020026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18ac",
+              "value": 400000000
+            }
+          },
+          {
+            "inner": {
+              "scriptPublicKey": "0000200284f04662fcc5f1b50329db7c39a09f66abd2a85d189a315c49d893a5a25232ac",
+              "value": 699980000
+            }
+          }
+        ],
+        "payload": [],
+        "subnetworkId": "0000000000000000000000000000000000000000",
+        "version": 0
+      }
+    }
+  },
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "9b762866074f0dfc4c645d7f733c044e952ea0d5ed88a1fe88c7f45debc94d55",
+            "index": 1
+          },
+          "signatureScript": "416284379e9659e0c83b5712f102f823009307a35e7f56f728cfbfabdaed72f7d9b68e54c47b494ac5da04eb8f2d47c589a32316fd4483771f41cbcd9ff632e17e01",
+          "sequence": 0,
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 400000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18ac"
+          }
+        },
+        {
+          "amount": 699980000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "200284f04662fcc5f1b50329db7c39a09f66abd2a85d189a315c49d893a5a25232ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  }
+}

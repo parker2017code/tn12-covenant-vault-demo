@@ -18,7 +18,8 @@ const transferPaths = [
   "artifacts/tn12-defi-user-04-pool-deposit-001-evidence.json",
   "artifacts/tn12-defi-user-05-pool-deposit-001-evidence.json",
   "artifacts/tn12-defi-pool-swap-payout-user-01-evidence.json",
-  "artifacts/tn12-defi-pool-withdraw-payout-user-02-evidence.json"
+  "artifacts/tn12-defi-pool-withdraw-payout-user-02-evidence.json",
+  "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json"
 ];
 const transferEvidenceByPath = Object.fromEntries(await Promise.all(
   transferPaths.map(async (path) => [path, await readOptionalJson(path)])

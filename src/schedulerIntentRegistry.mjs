@@ -1,18 +1,28 @@
 export function buildSchedulerIntentRegistry({
   payloadEvents = {},
   payloadEvidenceByPath = {},
+  executionEvidenceByPath = {},
   acceptedActivity = {},
   generatedAt = new Date().toISOString()
 } = {}) {
   const acceptedIntents = (payloadEvents.events || [])
     .map((event) => schedulerIntentFromEvent(event, payloadEvidenceByPath[event.outPath]))
     .filter(Boolean);
+  const executionReceipts = (payloadEvents.events || [])
+    .map((event) => schedulerExecutionFromEvent(event, payloadEvidenceByPath[event.outPath]))
+    .filter(Boolean);
+  const executionTransfers = Object.entries(executionEvidenceByPath)
+    .map(([path, evidence]) => schedulerExecutionTransfer(path, evidence))
+    .filter(Boolean);
   const context = buildContext(acceptedActivity);
-  const triggerRows = acceptedIntents.map((intent) => evaluateTrigger(intent, context));
+  const triggerRows = acceptedIntents.map((intent) => evaluateTrigger(intent, context, {
+    receipt: executionReceipts.find((receipt) => receipt.subject === intent.subject),
+    transfer: executionTransfers.find((transfer) => transfer.intentSubject === intent.subject)
+  }));
   const negativeRows = buildNegativeRows({ acceptedIntents, context });
   const problems = [
     acceptedIntents.length === 0 ? "no accepted scheduler intent payloads" : "",
-    triggerRows.some((row) => row.status !== "eligible") ? "one or more accepted scheduler intents are not eligible" : ""
+    triggerRows.some((row) => !["eligible", "executed"].includes(row.status)) ? "one or more accepted scheduler intents are not eligible or executed" : ""
   ].filter(Boolean);
 
   return {
@@ -24,8 +34,10 @@ export function buildSchedulerIntentRegistry({
     summary: {
       acceptedIntents: acceptedIntents.length,
       eligibleTriggers: triggerRows.filter((row) => row.status === "eligible").length,
+      executedTriggers: triggerRows.filter((row) => row.status === "executed").length,
       blockedNegativeRows: negativeRows.filter((row) => row.status === "blocked").length,
       executionReceipts: triggerRows.filter((row) => row.executionReceiptTxid).length,
+      executionTransfers: triggerRows.filter((row) => row.executionTransferTxid).length,
       liveProductClaims: 0,
       protocolSchedulerClaims: 0,
       externalSignerClaims: 0,
@@ -34,6 +46,8 @@ export function buildSchedulerIntentRegistry({
     },
     context,
     acceptedIntents,
+    executionReceipts,
+    executionTransfers,
     triggerRows,
     negativeRows,
     problems,
@@ -47,7 +61,7 @@ export function buildSchedulerIntentRegistry({
 
 function schedulerIntentFromEvent(event = {}, evidence = {}) {
   const payload = evidence.payload?.decoded?.payload || {};
-  if (payload.kind !== "scheduler-intent" && !/scheduler/i.test(event.label || "")) return null;
+  if (payload.kind !== "scheduler-intent") return null;
   if (evidence.accepted !== true || evidence.receiptMatches !== true) return null;
 
   return {
@@ -67,6 +81,42 @@ function schedulerIntentFromEvent(event = {}, evidence = {}) {
   };
 }
 
+function schedulerExecutionFromEvent(event = {}, evidence = {}) {
+  const payload = evidence.payload?.decoded?.payload || {};
+  if (payload.kind !== "scheduler-execution") return null;
+  if (evidence.accepted !== true || evidence.receiptMatches !== true) return null;
+
+  return {
+    label: event.label || "",
+    evidencePath: event.outPath || "",
+    draftPath: event.draftPath || "",
+    txid: evidence.txid || evidence.transactionId || "",
+    accepted: true,
+    payloadMatches: evidence.payload?.matches === true,
+    subject: payload.subject || "",
+    value: payload.value || "",
+    note: payload.note || "",
+    payoutTxid: parseNoteField(payload.note || "", "payout"),
+    intentTxid: parseNoteField(payload.note || "", "intent"),
+    mode: parseNoteField(payload.note || "", "mode"),
+    acceptingBlockBlueScore: evidence.acceptingBlockBlueScore ?? null
+  };
+}
+
+function schedulerExecutionTransfer(path, evidence = {}) {
+  if (evidence.status !== "accepted-transfer-matched") return null;
+  return {
+    path,
+    txid: evidence.txid || "",
+    accepted: evidence.accepted === true,
+    from: evidence.source?.address || "",
+    to: evidence.payment?.to || "",
+    amountTkas: evidence.payment?.amountTkas || "",
+    intentSubject: "unisc-pool-rebalance-001",
+    acceptingBlockBlueScore: evidence.acceptingBlockBlueScore ?? null
+  };
+}
+
 function buildContext(acceptedActivity = {}) {
   return {
     source: "artifacts/defi-accepted-activity-ledger.json",
@@ -77,12 +127,13 @@ function buildContext(acceptedActivity = {}) {
   };
 }
 
-function evaluateTrigger(intent, context) {
+function evaluateTrigger(intent, context, execution = {}) {
   const poolNet = decimalStringToScaled(context.poolNetTkas);
   const threshold = decimalStringToScaled(intent.condition.thresholdTkas || "0");
   const eligible = intent.condition.metric === "poolNetTkas"
     && intent.condition.operator === ">="
     && poolNet >= threshold;
+  const executed = Boolean(execution.receipt?.txid && execution.transfer?.txid);
 
   return {
     id: intent.subject,
@@ -93,10 +144,12 @@ function evaluateTrigger(intent, context) {
     thresholdTkas: intent.condition.thresholdTkas,
     observedTkas: context.poolNetTkas,
     action: intent.action,
-    status: eligible ? "eligible" : "blocked",
-    reason: eligible ? "condition-met" : "condition-not-met",
-    executionMode: eligible ? "local-key-review-required" : "none",
-    executionReceiptTxid: ""
+    status: executed ? "executed" : eligible ? "eligible" : "blocked",
+    reason: executed ? "execution-receipt-and-transfer-matched" : eligible ? "condition-met" : "condition-not-met",
+    executionMode: executed || eligible ? "local-key-review-required" : "none",
+    executionReceiptTxid: execution.receipt?.txid || "",
+    executionTransferTxid: execution.transfer?.txid || "",
+    executionTransferAmountTkas: execution.transfer?.amountTkas || ""
   };
 }
 
@@ -143,6 +196,11 @@ function parseCondition(note) {
 
 function parseAction(note) {
   const match = String(note).match(/then\s+([^;]+)/i);
+  return match?.[1]?.trim() || "";
+}
+
+function parseNoteField(note, field) {
+  const match = String(note).match(new RegExp(`${field}=([^;]+)`, "i"));
   return match?.[1]?.trim() || "";
 }
 

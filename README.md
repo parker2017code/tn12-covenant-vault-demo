@@ -29,9 +29,9 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 | Buyer-controlled escrow primitive | `TN12_ACCEPTED` | `artifacts/proof-evidence.json` |
 | Role-separated positive paths, all 7 | `TN12_ACCEPTED` | `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
-| 35 payload events, including 7 DeFi v1 receipts, 1 scheduler-intent receipt, and 1 agent release wallet-review event | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
-| 15 accepted local-key DeFi custody/activity transfer rows across funded users, pool deposits, and pool payouts | `LOCAL_KEY_CUSTODY_TEST` | `artifacts/defi-accepted-activity-ledger.json` |
-| 1 scheduler-intent payload accepted and reduced as indexer-derived trigger state | `TN12_ACCEPTED` | `artifacts/scheduler-intent-registry.json` |
+| 36 payload events, including 7 DeFi v1 receipts, 1 scheduler-intent receipt, 1 scheduler-execution receipt, and 1 agent release wallet-review event | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
+| 16 accepted local-key DeFi custody/activity transfer rows across funded users, pool deposits, pool payouts, and scheduler execution payout | `LOCAL_KEY_CUSTODY_TEST` | `artifacts/defi-accepted-activity-ledger.json` |
+| 1 scheduler-intent payload, 1 scheduler-execution receipt, and 1 local-key payout reduced as executed trigger state | `TN12_ACCEPTED` / `INDEXER_DERIVED` / `LOCAL_KEY_CUSTODY_TEST` | `artifacts/scheduler-intent-registry.json` |
 | Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |
 
 ## NOT Proven

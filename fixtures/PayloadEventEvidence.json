@@ -176,6 +176,11 @@
       "label": "Scheduler intent pool rebalance 001",
       "draftPath": "artifacts/signed-drafts/tn12-scheduler-intent-pool-rebalance-001.json",
       "outPath": "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json"
+    },
+    {
+      "label": "Scheduler execution receipt 001",
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-execution-receipt-001.json",
+      "outPath": "artifacts/payload-scheduler-execution-receipt-001-evidence.json"
     }
   ]
 }

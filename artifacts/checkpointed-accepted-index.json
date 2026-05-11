@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-11T16:38:20.640Z",
+  "fetchedAt": "2026-05-11T16:47:14.179Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -11,9 +11,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 48,
+    "recordCount": 49,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 8933924,
+    "maxAcceptingBlockBlueScore": 8937625,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -59,6 +59,7 @@
       "50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361",
       "32f147beea95eefe9e6cc882a463985aab69f538f1876abec51b80cdbc5e5030",
       "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+      "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -67,12 +68,12 @@
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 48,
+    "total": 49,
     "proofs": 9,
-    "payloadEvents": 35,
+    "payloadEvents": 36,
     "outputEvidence": 4,
-    "accepted": 48,
-    "matched": 48,
+    "accepted": 49,
+    "matched": 49,
     "mismatches": 0,
     "lanes": [
       {
@@ -191,6 +192,12 @@
       },
       {
         "lane": "prediction-update",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
+      },
+      {
+        "lane": "scheduler-execution",
         "total": 1,
         "accepted": 1,
         "matched": 1
@@ -2155,6 +2162,55 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "scheduler-execution",
+      "label": "Scheduler execution receipt 001",
+      "txid": "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 8937625,
+      "acceptingBlockTime": 1778517664155,
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-execution-receipt-001.json",
+      "evidencePath": "artifacts/payload-scheduler-execution-receipt-001-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a227363686564756c65722d657865637574696f6e222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a2265786563757465642d6c6f63616c2d6b6579222c226e6f7465223a22696e74656e743d313835643632393238663563646461646166633766616631346563376230393265613434613365613863303861663731616337613133353033323234336434643b207061796f75743d316134383635343066613332346438623435393061393761323762373931656238393566333261353139366539326665306431626535383465636531656331643b206d6f64653d6c6f63616c2d6b65792d637573746f64792d74657374227d",
+        "observedHex": "7b226b696e64223a227363686564756c65722d657865637574696f6e222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a2265786563757465642d6c6f63616c2d6b6579222c226e6f7465223a22696e74656e743d313835643632393238663563646461646166633766616631346563376230393265613434613365613863303861663731616337613133353033323234336434643b207061796f75743d316134383635343066613332346438623435393061393761323762373931656238393566333261353139366539326665306431626535383465636531656331643b206d6f64653d6c6f63616c2d6b65792d637573746f64792d74657374227d",
+        "matches": true,
+        "bytes": 279,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "scheduler-execution",
+            "subject": "unisc-pool-rebalance-001",
+            "value": "executed-local-key",
+            "note": "intent=185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d; payout=1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d; mode=local-key-custody-test"
+          },
+          "encoded": {
+            "bytes": 279,
+            "hex": "7b226b696e64223a227363686564756c65722d657865637574696f6e222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d303031222c2276616c7565223a2265786563757465642d6c6f63616c2d6b6579222c226e6f7465223a22696e74656e743d313835643632393238663563646461646166633766616631346563376230393265613434613365613863303861663731616337613133353033323234336434643b207061796f75743d316134383635343066613332346438623435393061393761323762373931656238393566333261353139366539326665306431626535383465636531656331643b206d6f64653d6c6f63616c2d6b65792d637573746f64792d74657374227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909"
     },
     {
       "kind": "accepted-output",

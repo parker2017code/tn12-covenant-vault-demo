@@ -1,16 +1,16 @@
 {
   "schema": "tn12-defi-accepted-activity-ledger/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T16:26:45.764Z",
+  "generatedAt": "2026-05-11T16:45:56.229Z",
   "status": "accepted-activity-ledger-ready",
   "enforcement": "LOCAL_KEY_CUSTODY_TEST",
   "summary": {
     "acceptedReceiptRows": 7,
-    "acceptedTransferRows": 15,
+    "acceptedTransferRows": 16,
     "poolDeposits": 8,
-    "poolPayouts": 2,
+    "poolPayouts": 3,
     "participantAddresses": 9,
-    "poolNetTkas": "60",
+    "poolNetTkas": "56",
     "liveProductClaims": 0,
     "externalSignerClaims": 0,
     "autonomousCustodyClaims": 0,
@@ -19,8 +19,8 @@
   "pool": {
     "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
     "depositsTkas": "70",
-    "payoutsTkas": "10",
-    "netTkas": "60"
+    "payoutsTkas": "14",
+    "netTkas": "56"
   },
   "receiptRows": [
     {
@@ -296,6 +296,19 @@
       "amountTkas": "3",
       "amountSompi": "300000000",
       "acceptingBlockBlueScore": 8924116
+    },
+    {
+      "path": "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json",
+      "label": "tn12-scheduler-execution-payout-user-03-evidence",
+      "kind": "pool-payout",
+      "txid": "1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
+      "to": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+      "amountTkas": "4",
+      "amountSompi": "400000000",
+      "acceptingBlockBlueScore": 8937412
     }
   ],
   "balances": [
@@ -306,8 +319,8 @@
     },
     {
       "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
-      "netTkas": "60",
-      "netSompi": "6000000000"
+      "netTkas": "56",
+      "netSompi": "5600000000"
     },
     {
       "address": "kaspatest:qqu56sg73w5822rgkleczqrhge3xfquxwcmfsgxzwpk4lcge4qwjjs9hctv3a",
@@ -331,8 +344,8 @@
     },
     {
       "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
-      "netTkas": "15",
-      "netSompi": "1500000000"
+      "netTkas": "19",
+      "netSompi": "1900000000"
     },
     {
       "address": "kaspatest:qzcvj4raan9cskly8p9nn7slpke09ztrzw4dmzx5s3ud8rad4f8msvl6juaj9",
