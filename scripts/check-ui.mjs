@@ -31,7 +31,7 @@ try {
   assert.equal(selfServeRunbook.summary.lanes, 12);
   assert.equal(selfServeRunbook.summary.basedAppPrototypes, 4);
   assert.match(html, /TN12 configured\. Proof transactions accepted\./);
-  assert.match(html, /7 core \+ 2 auction \+ 7 role-separated \+ 53 indexed records/);
+  assert.match(html, /Money moved\. Proofs accepted\. State replayed\./);
   assert.match(html, /Accepted payload events[\s\S]*<strong>40<\/strong>/);
   assert.match(html, /npm run operator:refresh/);
   assert.match(html, /id="reviewer-path"/);

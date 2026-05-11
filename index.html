@@ -28,7 +28,7 @@
         <a href="#proofs">Proofs</a>
         <a href="#indexer">Indexer</a>
         <a href="#submit">Submit</a>
-        <a href="#sources">Sources</a>
+        <a href="#technical-links">Build</a>
       </div>
     </nav>
   </header>
@@ -41,9 +41,9 @@
         <p>Start with the public evidence: covenant spends accepted, payload receipts accepted, and replayed app state derived from accepted txids. Deeper checks stay below the fold.</p>
       </div>
       <aside class="facts">
-        <span>Proof core</span>
-        <strong>7 core + 2 auction + 7 role-separated + 53 indexed records</strong>
-        <p>Vault, assurance, escrow, payload receipts, and batch-assurance outputs have accepted TN12 evidence.</p>
+        <span>Short version</span>
+        <strong>Money moved. Proofs accepted. State replayed.</strong>
+        <p>The interesting claim is simple: public TN12 txids back the demo state instead of a private-only database.</p>
       </aside>
     </section>
 
@@ -137,78 +137,6 @@
       </details>
     </details>
 
-    <details id="enforcement" class="panel enforcement section-drawer">
-      <summary>Technical: script enforcement matrix</summary>
-      <div class="section-title">
-        <p class="eyebrow">Enforcement matrix</p>
-        <h2>What scripts enforce and what the app tracks.</h2>
-        <p>Use this to see which behavior is enforced by Silverscript and which behavior is wallet, indexer, or planner state.</p>
-      </div>
-      <div id="enforcement-summary" class="enforcement-summary" aria-live="polite"></div>
-      <details class="evidence-drawer">
-        <summary>Show enforcement rows</summary>
-        <div id="enforcement-features" class="enforcement-features" aria-live="polite"></div>
-      </details>
-      <pre>npm run enforcement:matrix</pre>
-    </details>
-
-    <details id="mainnet-readiness" class="panel mainnet-readiness section-drawer">
-      <summary>Technical: mainnet readiness rows</summary>
-      <div class="section-title">
-        <p class="eyebrow">Mainnet readiness map</p>
-        <h2>Payment/indexer paths versus TN12 covenant paths.</h2>
-        <p>Some app layers can become mainnet products with wallet, node, and indexer hardening. Covenant/Silverscript proof paths remain TN12/Toccata-only until final mainnet activation and compatible tooling.</p>
-      </div>
-      <div id="mainnet-summary" class="mainnet-summary" aria-live="polite"></div>
-      <details class="evidence-drawer">
-        <summary>Show mainnet readiness rows</summary>
-        <div id="mainnet-components" class="mainnet-components" aria-live="polite"></div>
-      </details>
-      <pre>npm run mainnet:readiness</pre>
-    </details>
-
-    <details id="build-status" class="panel build-status section-drawer">
-      <summary>Technical: artifact status</summary>
-      <div class="section-title">
-        <p class="eyebrow">Artifact map</p>
-        <h2>Accepted evidence, queued work, and missing pieces.</h2>
-        <p>Repo status from generated artifacts.</p>
-      </div>
-      <div id="build-status-summary" class="build-status-summary" aria-live="polite"></div>
-      <details class="evidence-drawer">
-        <summary>Show build lane rows</summary>
-        <div id="build-status-lanes" class="build-status-lanes" aria-live="polite"></div>
-      </details>
-      <pre>npm run build:status</pre>
-    </details>
-
-    <details id="proven-status" class="panel build-status section-drawer">
-      <summary>Technical: readiness and blockers</summary>
-      <div class="section-title">
-        <p class="eyebrow">Proven status</p>
-        <h2>What is actually accepted.</h2>
-        <p>Accepted TN12 evidence, current blockers, and readiness.</p>
-      </div>
-      <div id="proven-status-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="proven-status-blockers" class="build-status-lanes" aria-live="polite"></div>
-      <pre>npm run project:proven-status</pre>
-    </details>
-
-    <details id="operator-pack" class="panel build-status section-drawer">
-      <summary>Technical: refresh path</summary>
-      <div class="section-title">
-        <p class="eyebrow">Refresh pack</p>
-        <h2>One path to run.</h2>
-        <p>Accepted evidence, local-wallet receipts, custody readiness, and the single refresh command path.</p>
-      </div>
-      <div id="operator-pack-summary" class="build-status-summary" aria-live="polite"></div>
-      <details class="evidence-drawer">
-        <summary>Show operator command path</summary>
-        <div id="operator-pack-commands" class="build-status-lanes" aria-live="polite"></div>
-      </details>
-      <pre>npm run operator:refresh</pre>
-    </details>
-
     <details id="proofs" class="panel proofs section-drawer">
       <summary>Open accepted proof txids</summary>
       <div class="section-title">
@@ -272,21 +200,7 @@ npm run wallet:review
 npm run wallet:connector</pre>
     </details>
 
-    <details id="roadmap" class="panel roadmap section-drawer">
-      <summary>Technical: app lane map</summary>
-      <div class="section-title">
-        <p class="eyebrow">Research queue</p>
-        <h2>Planner and research panels moved.</h2>
-        <p>The broad app-lab, DeFi, stable-value, prediction, attestation, access-pass, and signal panels live in <a href="lab.html">Lab Tools</a>.</p>
-      </div>
-      <details class="evidence-drawer">
-        <summary>Show app lane map</summary>
-        <div id="master-roadmap" class="roadmap-list" aria-live="polite"></div>
-      </details>
-      <pre>docs/MASTER_APP_PLAN.md</pre>
-    </details>
-
-    <section class="grid">
+    <section id="technical-links" class="grid">
       <article id="setup" class="panel">
         <p class="eyebrow">TN12 setup</p>
         <h2>Get test tokens</h2>
@@ -300,29 +214,16 @@ npm run wallet:connector</pre>
         </div>
       </article>
       <article class="panel">
-        <p class="eyebrow">Lab workbench</p>
-        <h2>Open the full builder surface.</h2>
-        <p>The full vault designer, assurance forms, access-pass planner, app-lab, research, signals, and funding panels are still available, just moved out of the proof page.</p>
+        <p class="eyebrow">Build and audit</p>
+        <h2>Open the deeper workbench.</h2>
+        <p>Lab Tools holds enforcement rows, readiness maps, app lanes, wallet handoff, and research panels so this page can stay focused on the proof.</p>
         <div class="link-list">
           <a href="lab.html">Open lab workbench</a>
           <a href="docs/AUDIT_MAP.md">Read audit map</a>
+          <a href="docs/UX_IMPROVEMENT_NOTES.md">Read improvement notes</a>
         </div>
       </article>
     </section>
-
-    <details id="sources" class="panel sources section-drawer">
-      <summary>Technical: status labels</summary>
-      <p class="eyebrow">Source discipline</p>
-      <h2>What the labels mean.</h2>
-      <details class="evidence-drawer">
-        <summary>Show status labels</summary>
-        <div class="claim-grid">
-          <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow, role-separated, auction, payload, and batch-assurance evidence with explorer-verifiable testnet outputs.</p></article>
-          <article><strong>Mainnet work left</strong><p>External signing, live rollback evidence, production indexer behavior, and mainnet covenant activation are separate readiness rails.</p></article>
-          <article><strong>Planner or research</strong><p>Native DeFi, full vProgs, prediction markets, stable-value systems, and miner signal products stay in lab lanes until evidence changes.</p></article>
-        </div>
-      </details>
-    </details>
   </main>
 </body>
 </html>

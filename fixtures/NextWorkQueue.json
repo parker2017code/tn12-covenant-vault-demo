@@ -76,7 +76,7 @@
       "id": "mainnet-payment-indexer-products",
       "label": "Mainnet-capable payment/indexer products",
       "examples": ["invoice receipts", "access passes", "auction/intents", "attestation records"],
-      "condition": "Wallet submit and durable indexing are production-ready."
+      "condition": "Wallet submit and durable indexing have real accepted evidence."
     },
     {
       "id": "tn12-toccata-covenant-products",

@@ -1,40 +1,40 @@
 :root {
   color-scheme: dark;
-  --bg: #0b0c09;
-  --bg-2: #15140f;
-  --panel: rgba(25, 24, 19, .82);
-  --panel-strong: rgba(28, 27, 22, .95);
-  --text: #f7f0df;
-  --muted: #d6cdb9;
-  --faint: #a99f8b;
+  --bg: #101315;
+  --bg-2: #171d20;
+  --panel: rgba(25, 31, 34, .86);
+  --panel-strong: rgba(29, 37, 40, .96);
+  --text: #eef4ef;
+  --muted: #aab8b3;
+  --faint: #7e8c88;
   --line: rgba(255, 255, 255, .11);
-  --line-bright: rgba(177, 160, 110, .38);
-  --accent: #98b6aa;
-  --accent-strong: #d0b86b;
+  --line-bright: rgba(101, 214, 192, .34);
+  --accent: #65d6c0;
+  --accent-strong: #f2a65a;
   --danger: #ff8d7a;
-  --surface-soft: rgba(255, 248, 226, .045);
-  --accent-soft: rgba(152, 182, 170, .09);
+  --surface-soft: rgba(238, 244, 239, .045);
+  --accent-soft: rgba(101, 214, 192, .1);
   --shadow: 0 22px 54px rgba(0,0,0,.28);
   --body-font: "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f7f3ea;
-  --bg-2: #fffcf4;
-  --panel: rgba(255, 253, 246, .88);
-  --panel-strong: rgba(255, 253, 246, .97);
-  --text: #18201d;
-  --muted: #52615a;
-  --faint: #78847d;
-  --line: rgba(55, 43, 24, .14);
-  --line-bright: rgba(80, 91, 82, .24);
-  --accent: #326e61;
-  --accent-strong: #78601f;
+  --bg: #f4f1ea;
+  --bg-2: #fbfaf4;
+  --panel: rgba(255, 252, 244, .9);
+  --panel-strong: rgba(255, 252, 244, .98);
+  --text: #18211f;
+  --muted: #52625e;
+  --faint: #74827e;
+  --line: rgba(38, 51, 50, .14);
+  --line-bright: rgba(45, 123, 110, .26);
+  --accent: #247b6c;
+  --accent-strong: #a86620;
   --danger: #9a3b2f;
-  --surface-soft: rgba(60, 42, 15, .045);
-  --accent-soft: rgba(55, 104, 94, .1);
-  --shadow: 0 18px 46px rgba(92, 65, 30, .13);
+  --surface-soft: rgba(31, 46, 43, .045);
+  --accent-soft: rgba(36, 123, 108, .1);
+  --shadow: 0 18px 46px rgba(39, 54, 50, .12);
 }
 
 * {
@@ -44,8 +44,8 @@
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 14% 8%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30rem),
-    radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--accent-strong) 6%, transparent), transparent 26rem),
+    radial-gradient(circle at 14% 8%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 30rem),
+    radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--accent-strong) 7%, transparent), transparent 26rem),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 52%, var(--bg) 100%),
     var(--bg);
   color: var(--text);
@@ -2213,34 +2213,42 @@ progress::-moz-progress-bar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid rgba(118, 167, 158, .25);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
   border-radius: 18px;
   padding: 18px 18px 42px;
   overflow: visible;
   color: var(--text);
   background:
-    linear-gradient(135deg, rgba(118, 167, 158, .16), rgba(7, 8, 7, .08) 48%, rgba(185, 176, 223, .12)),
-    #101615;
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 13%, transparent), rgba(16, 19, 21, .1) 48%, color-mix(in srgb, var(--accent-strong) 10%, transparent)),
+    var(--panel-strong);
 }
 
 .journey-grid a::before {
-  content: "Go";
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), transparent 42%);
 }
 
 .journey-grid a::after {
-  content: "";
+  content: "Open";
   position: absolute;
-  width: 128px;
-  height: 128px;
-  right: -58px;
-  bottom: -58px;
-  border: 1px solid rgba(118, 167, 158, .28);
-  border-radius: 50%;
-  background: rgba(118, 167, 158, .08);
+  right: 14px;
+  bottom: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  font-size: 11px;
+  font-weight: 800;
+  pointer-events: none;
 }
 
 .journey-grid a:hover {
-  border-color: rgba(118, 167, 158, .7);
+  border-color: var(--accent);
   transform: translateY(-2px);
   text-decoration: none;
 }
@@ -2293,10 +2301,10 @@ progress::-moz-progress-bar {
 }
 
 .playground-start {
-  border-color: rgba(245, 194, 126, .34);
+  border-color: color-mix(in srgb, var(--accent-strong) 34%, transparent);
   background:
-    radial-gradient(circle at 8% 0%, rgba(245, 194, 126, .16), transparent 28%),
-    radial-gradient(circle at 100% 25%, rgba(118, 167, 158, .15), transparent 26%),
+    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent-strong) 16%, transparent), transparent 28%),
+    radial-gradient(circle at 100% 25%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 26%),
     var(--panel);
 }
 
@@ -2313,13 +2321,13 @@ progress::-moz-progress-bar {
   gap: 10px;
   min-width: 0;
   min-height: 190px;
-  border: 1px solid rgba(118, 167, 158, .28);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   border-radius: 22px;
   padding: 18px 18px 42px;
   overflow-wrap: anywhere;
   background:
-    linear-gradient(145deg, rgba(118, 167, 158, .13), rgba(15, 22, 25, .96)),
-    #101615;
+    linear-gradient(145deg, color-mix(in srgb, var(--accent) 12%, transparent), var(--panel-strong)),
+    var(--panel-strong);
   color: var(--text);
 }
 
@@ -2345,11 +2353,11 @@ progress::-moz-progress-bar {
 }
 
 .playground-quickstart a:nth-child(2) {
-  border-color: rgba(245, 194, 126, .44);
+  border-color: color-mix(in srgb, var(--accent-strong) 44%, transparent);
 }
 
 .playground-quickstart a:nth-child(3) {
-  border-color: rgba(150, 185, 255, .42);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
 }
 
 .playground-quickstart span {

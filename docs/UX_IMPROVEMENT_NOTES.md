@@ -66,3 +66,17 @@ This is an internal working note for product cleanup. Keep the public site focus
 2. Archive or rename old `100% / complete / production-ready` artifacts and docs.
 3. Split large UI/check files and reduce package script sprawl.
 4. Replace more proof text with clearer user journeys.
+
+## Lessons from strong open-source websites
+
+- Homepage sells the shape; docs prove the details.
+- Use one sharp promise, one primary action, and one secondary action before exposing matrices.
+- Vite-style lesson: one sentence, one command, one GitHub/docs route beats a broad feature wall.
+- Astro-style lesson: strong product promise first, concrete reasons second, ecosystem depth later.
+- Docusaurus/Starlight lesson: technical depth belongs in a clean docs/lab shell with search, stable navigation, and low decoration.
+- Kaspa.org lesson: public network portals use normal user-facing sections first; technical detail does not need to appear on the first screen.
+- For TN12, the first page should answer only: what happened, can I try it, can I audit/build from it?
+- Results should be the non-builder entry. Playground should be the self-serve entry. Lab Tools should be the technical entry.
+- Avoid matrix-as-UX. If a table is needed, put it behind a deliberate technical route.
+- Visual system: graphite base, cyan evidence/action links, orange action highlights, minimal glow.
+- Copy system: short verbs and nouns. Prefer `See`, `Try`, `Verify`, `Build`, `Run`, `Replay` over internal labels.

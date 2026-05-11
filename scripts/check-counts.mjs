@@ -52,7 +52,15 @@ const requiredSnippets = [
       [`${expectedRoleProofTransactions} role-separated`, `all ${expectedRoleProofTransactions}`]
     ]
   ],
-  ["index.html", indexHtml, [`${expectedPayloadEvents}</strong>`, `${expectedRoleProofTransactions} role-separated`, `${expectedCheckpointRecords} indexed records`]],
+  [
+    "index.html",
+    indexHtml,
+    [
+      `${expectedPayloadEvents}</strong>`,
+      "Money moved. Proofs accepted. State replayed.",
+      "Technical proof counts and commands"
+    ]
+  ],
   ["docs/PROGRESS.md", progress, [[`${expectedPayloadEvents} accepted payload events`, `${expectedPayloadEvents} payload events accepted`]]],
   ["MAINNET_READINESS.md", mainnetReadiness, [`${expectedPayloadEvents} accepted payload events`, `${expectedProofTransactions + expectedRoleProofTransactions} proof paths`, [`${expectedRoleProofTransactions} role-separated`, `all seven role-separated`]]]
 ];
