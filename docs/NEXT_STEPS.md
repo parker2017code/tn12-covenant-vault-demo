@@ -54,6 +54,7 @@ These are not all needed for the next commit, but they are the path from proof l
 - Do not buy signer hardware just to move the repo forward.
 - Do not submit non-selected batch refund paths for already spent pledge outputs.
 - Do not add AMM, lending, liquidation, oracle, or bridge claims until there is a narrower accepted custody/indexer path.
+- Use `npm run defi:simulation` for the maximum honest DeFi simulation pass: AMM, lending, liquidation, oracle, and settlement planner checks over accepted receipt/indexer inputs, with live-product promotion blocked.
 - Do not treat local replay success as live removed-block rollback evidence.
 
 ## Commands

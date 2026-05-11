@@ -75,6 +75,7 @@ npm run demo:operator-refresh
 | Proven status boundary | `artifacts/proven-status.json` |
 | Operator receipt pack | `artifacts/operator-receipt-pack.json` |
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
+| DeFi planner simulation | `artifacts/defi-planner-simulation.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
 | External signer path | `artifacts/external-signer-path-research.json` |
 | External signer payload request | `artifacts/external-signer-payload-request.json` |

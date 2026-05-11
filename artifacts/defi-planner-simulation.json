@@ -1,0 +1,710 @@
+{
+  "schema": "tn12-defi-planner-simulation/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T15:29:13.827Z",
+  "status": "planner-only-defi-simulation-ready",
+  "enforcement": "PLANNER_ONLY",
+  "summary": {
+    "lanes": 5,
+    "simulationReadyLanes": 5,
+    "liveProductClaims": 0,
+    "custodyReadyLanes": 0,
+    "scriptEnforcedLanes": 0,
+    "blockedLiveLanes": 5,
+    "acceptedRecordsUsed": 46,
+    "acceptedPayloadEventsUsed": 33,
+    "acceptedProofSpendsUsed": 9,
+    "walletPromotions": 0,
+    "negativeCases": 5,
+    "blockedNegativeCases": 5
+  },
+  "inputs": {
+    "backlogStatus": "research-backlog-not-live-defi",
+    "missingRailsStatus": "missing-rails-explicit",
+    "oracleMatrixStatus": "oracle-source-matrix-ready",
+    "acceptedIndexStatus": "accepted-index-fully-matched",
+    "walletValidationStatus": "wallet-submit-result-validation-ready"
+  },
+  "lanes": [
+    {
+      "id": "amm",
+      "label": "AMM / swap pool",
+      "status": "simulation-only-blocked-live-product",
+      "enforcement": "PLANNER_ONLY",
+      "simulationReady": true,
+      "liveProductBlocked": true,
+      "custodyReady": false,
+      "scriptEnforced": false,
+      "indexerState": "accepted-records-replayable-from-fixtures",
+      "walletState": "wallet-results-validated-no-live-wallet-promotion",
+      "acceptedInputs": {
+        "records": 46,
+        "payloadEvents": 33,
+        "proofs": 9
+      },
+      "checks": [
+        "reserve math",
+        "price impact",
+        "slippage warning",
+        "LP-share accounting sketch",
+        "MEV/order caveat"
+      ],
+      "nextArtifact": "Constant-product simulator plus accepted swap-intent receipt registry.",
+      "sourceBriefs": [
+        {
+          "id": "swap-intent-board",
+          "firstSafeArtifact": "Accepted swap-intent payload registry with no custody.",
+          "status": "prototype-later"
+        },
+        {
+          "id": "amm-pool-research",
+          "firstSafeArtifact": "Risk and UX brief for pool reserves, LP shares, price impact, and slippage.",
+          "status": "research-only"
+        }
+      ],
+      "sourceCategories": [
+        {
+          "id": "dex-amm",
+          "smallestHonestPrototype": "AMM risk and UX simulator plus accepted swap-intent payload registry with no custody or live swap claim.",
+          "status": "questions-answered-rails-named"
+        }
+      ],
+      "oracleModels": [
+        {
+          "id": "cex-weighted-median",
+          "lane": "research",
+          "riskLevel": "high",
+          "custodyReady": false
+        },
+        {
+          "id": "onchain-dclob-ground-truth",
+          "lane": "future-rails",
+          "riskLevel": "future",
+          "custodyReady": false
+        }
+      ],
+      "missingRails": [
+        "LP or order custody",
+        "LP share asset/accounting model",
+        "LP share custody",
+        "MEV analysis",
+        "accepted update lifecycle",
+        "asset liquidity",
+        "asset/liquidity model",
+        "atomic settlement",
+        "challenge policy",
+        "composable settlement",
+        "enforced shared pool state",
+        "indexer",
+        "liquidation custody model",
+        "liquidity depth",
+        "liquidity incentives",
+        "min-output enforcement",
+        "min-output enforcement in covenant, wallet, rollup, or vProg path",
+        "native asset model",
+        "native market execution",
+        "oracle/routing",
+        "ordering policy, batch auction, or sequencing commitment design",
+        "ordering/MEV policy",
+        "pricing engine tied to enforceable reserves",
+        "reserve update authority and enforcement model",
+        "shared pool state",
+        "shared pool state or rollup/vProg execution state",
+        "signed reporter set",
+        "stale-feed pause rule",
+        "wallet route"
+      ],
+      "cannotClaim": [
+        "LP share safety",
+        "MEV resistance",
+        "enforced AMM reserves",
+        "external wallet signing proven",
+        "live Kaspa DEX",
+        "live custody",
+        "mainnet readiness",
+        "oracle truth",
+        "production DeFi"
+      ]
+    },
+    {
+      "id": "lending",
+      "label": "Collateral lending",
+      "status": "simulation-only-blocked-live-product",
+      "enforcement": "PLANNER_ONLY",
+      "simulationReady": true,
+      "liveProductBlocked": true,
+      "custodyReady": false,
+      "scriptEnforced": false,
+      "indexerState": "accepted-records-replayable-from-fixtures",
+      "walletState": "wallet-results-validated-no-live-wallet-promotion",
+      "acceptedInputs": {
+        "records": 46,
+        "payloadEvents": 33,
+        "proofs": 9
+      },
+      "checks": [
+        "collateral ratio",
+        "borrow limit",
+        "health factor",
+        "stale-price pause",
+        "liquidation threshold"
+      ],
+      "nextArtifact": "Position-health simulator with accepted risk-update receipts.",
+      "sourceBriefs": [
+        {
+          "id": "lending-risk-dashboard",
+          "firstSafeArtifact": "Manual position/risk calculator fed by accepted receipts and external prices.",
+          "status": "prototype-later"
+        }
+      ],
+      "sourceCategories": [
+        {
+          "id": "lending",
+          "smallestHonestPrototype": "Manual risk dashboard fed by accepted deposit/repay receipts and explicit external prices, with no borrowing custody.",
+          "status": "questions-answered-rails-named"
+        }
+      ],
+      "oracleModels": [
+        {
+          "id": "cex-weighted-median",
+          "lane": "research",
+          "riskLevel": "high",
+          "custodyReady": false
+        },
+        {
+          "id": "signed-reporter-attestation",
+          "lane": "payload-indexer",
+          "riskLevel": "medium",
+          "custodyReady": false
+        }
+      ],
+      "missingRails": [
+        "accepted update lifecycle",
+        "anti-copy-source policy",
+        "borrow accounting",
+        "challenge policy",
+        "collateral custody",
+        "collateral custody model",
+        "collateral custody model for lending positions",
+        "custody-action guard",
+        "liquidation authority",
+        "liquidation custody model",
+        "liquidation engine",
+        "liquidation transaction path and authority model",
+        "liquidity",
+        "position accounting and interest-rate model",
+        "price oracle",
+        "price oracle challenge policy",
+        "price oracle trust model and dispute process",
+        "quorum thresholds",
+        "repayment settlement",
+        "reporter registry",
+        "reputation penalties",
+        "risk parameters",
+        "signed reporter set",
+        "stale-feed pause rule",
+        "stale-price guard, pause rule, dispute path, and bad-liquidation rollback policy"
+      ],
+      "cannotClaim": [
+        "automatic liquidations",
+        "borrowable liquidity",
+        "external wallet signing proven",
+        "live custody",
+        "live lending market",
+        "mainnet readiness",
+        "oracle safety",
+        "oracle truth",
+        "production DeFi"
+      ]
+    },
+    {
+      "id": "liquidation",
+      "label": "Liquidation / closeout",
+      "status": "simulation-only-blocked-live-product",
+      "enforcement": "PLANNER_ONLY",
+      "simulationReady": true,
+      "liveProductBlocked": true,
+      "custodyReady": false,
+      "scriptEnforced": false,
+      "indexerState": "accepted-records-replayable-from-fixtures",
+      "walletState": "wallet-results-validated-no-live-wallet-promotion",
+      "acceptedInputs": {
+        "records": 46,
+        "payloadEvents": 33,
+        "proofs": 9
+      },
+      "checks": [
+        "stale oracle rejection",
+        "minimum collateral shortfall",
+        "liquidator reward estimate",
+        "pause-on-dispute rule",
+        "operator-review receipt"
+      ],
+      "nextArtifact": "Liquidation decision simulator with pause/reject cases.",
+      "sourceBriefs": [
+        {
+          "id": "lending-risk-dashboard",
+          "firstSafeArtifact": "Manual position/risk calculator fed by accepted receipts and external prices.",
+          "status": "prototype-later"
+        },
+        {
+          "id": "insurance-protection",
+          "firstSafeArtifact": "Parametric payout research note using simulated attestations.",
+          "status": "research-only"
+        }
+      ],
+      "sourceCategories": [
+        {
+          "id": "lending",
+          "smallestHonestPrototype": "Manual risk dashboard fed by accepted deposit/repay receipts and explicit external prices, with no borrowing custody.",
+          "status": "questions-answered-rails-named"
+        }
+      ],
+      "oracleModels": [
+        {
+          "id": "cex-weighted-median",
+          "lane": "research",
+          "riskLevel": "high",
+          "custodyReady": false
+        },
+        {
+          "id": "arbitrage-simulated-fair-price",
+          "lane": "research",
+          "riskLevel": "high",
+          "custodyReady": false
+        },
+        {
+          "id": "signed-reporter-attestation",
+          "lane": "payload-indexer",
+          "riskLevel": "medium",
+          "custodyReady": false
+        }
+      ],
+      "missingRails": [
+        "accepted update lifecycle",
+        "anti-copy-source policy",
+        "capital pool",
+        "challenge policy",
+        "claims oracle",
+        "collateral custody",
+        "collateral custody model for lending positions",
+        "custody-action guard",
+        "custody-moving authority",
+        "dispute process",
+        "input archive",
+        "legal wrapper",
+        "liquidation custody model",
+        "liquidation engine",
+        "liquidation transaction path and authority model",
+        "liquidator incentive model",
+        "liquidity",
+        "oracle dispute window",
+        "partial closeout accounting",
+        "position accounting and interest-rate model",
+        "price oracle",
+        "price oracle trust model and dispute process",
+        "quorum thresholds",
+        "reporter registry",
+        "reputation penalties",
+        "review challenge window",
+        "risk parameters",
+        "rollback-safe promotion rule",
+        "route verifier",
+        "signed reporter set",
+        "stale-feed pause rule",
+        "stale-price guard, pause rule, dispute path, and bad-liquidation rollback policy",
+        "timestamp policy",
+        "underwriting model",
+        "venue reliability model"
+      ],
+      "cannotClaim": [
+        "automatic liquidations",
+        "borrowable liquidity",
+        "external wallet signing proven",
+        "live custody",
+        "live lending market",
+        "mainnet readiness",
+        "oracle safety",
+        "oracle truth",
+        "production DeFi"
+      ]
+    },
+    {
+      "id": "oracle",
+      "label": "Oracle source and failure handling",
+      "status": "simulation-only-blocked-live-product",
+      "enforcement": "PLANNER_ONLY",
+      "simulationReady": true,
+      "liveProductBlocked": true,
+      "custodyReady": false,
+      "scriptEnforced": false,
+      "indexerState": "accepted-records-replayable-from-fixtures",
+      "walletState": "wallet-results-validated-no-live-wallet-promotion",
+      "acceptedInputs": {
+        "records": 46,
+        "payloadEvents": 33,
+        "proofs": 9
+      },
+      "checks": [
+        "source freshness",
+        "reporter coverage",
+        "manipulation model",
+        "stale-data pause",
+        "human-review boundary"
+      ],
+      "nextArtifact": "Archived source-update payload format plus stale/challenge tests.",
+      "sourceBriefs": [
+        {
+          "id": "prediction-hedge-simulator",
+          "firstSafeArtifact": "Simulation-only market board linked to attestation signals and manual portfolio positions.",
+          "status": "prototype-later"
+        },
+        {
+          "id": "derivatives-options",
+          "firstSafeArtifact": "DLC-style conditional payout design note with no real funds.",
+          "status": "research-only"
+        }
+      ],
+      "sourceCategories": [
+        {
+          "id": "perps-prediction",
+          "smallestHonestPrototype": "Simulation-only board with accepted signal history, stale-signal review, and no trading, custody, or advice.",
+          "status": "questions-answered-rails-named"
+        }
+      ],
+      "oracleModels": [
+        {
+          "id": "cex-weighted-median",
+          "lane": "research",
+          "riskLevel": "high",
+          "custodyReady": false
+        },
+        {
+          "id": "arbitrage-simulated-fair-price",
+          "lane": "research",
+          "riskLevel": "high",
+          "custodyReady": false
+        },
+        {
+          "id": "signed-reporter-attestation",
+          "lane": "payload-indexer",
+          "riskLevel": "medium",
+          "custodyReady": false
+        },
+        {
+          "id": "miner-rtd-sampling",
+          "lane": "research",
+          "riskLevel": "medium",
+          "custodyReady": false
+        }
+      ],
+      "missingRails": [
+        "accepted update lifecycle",
+        "anti-bribery rules",
+        "anti-copy-source policy",
+        "canonical truth source",
+        "challenge policy",
+        "close, liquidation, and dispute authority",
+        "conflict resolution",
+        "custody integration",
+        "custody-action guard",
+        "dispute process",
+        "input archive",
+        "legal review",
+        "liquidation custody model",
+        "liquidations",
+        "margin custody and withdrawal/liquidation rules",
+        "margin engine",
+        "market liquidity",
+        "matching engine or market-making model",
+        "oracle resolution",
+        "pool identity model",
+        "position accounting",
+        "price oracle",
+        "quorum thresholds",
+        "reporter registry",
+        "reputation penalties",
+        "reputation thresholds, stale signal rules, market manipulation controls",
+        "review challenge window",
+        "risk limits",
+        "route verifier",
+        "sampling design",
+        "settlement oracle, dispute window, and final resolution rule",
+        "signed reporter set",
+        "signer set",
+        "stale-feed fail-close rule",
+        "stale-feed pause rule",
+        "timestamp policy",
+        "venue reliability model",
+        "weighting thresholds"
+      ],
+      "cannotClaim": [
+        "automated hedging",
+        "external wallet signing proven",
+        "financial advice",
+        "live custody",
+        "mainnet readiness",
+        "oracle truth",
+        "perpetual futures",
+        "prediction market settlement",
+        "production DeFi",
+        "real odds"
+      ]
+    },
+    {
+      "id": "settlement",
+      "label": "Settlement / replay promotion",
+      "status": "simulation-only-blocked-live-product",
+      "enforcement": "PLANNER_ONLY",
+      "simulationReady": true,
+      "liveProductBlocked": true,
+      "custodyReady": false,
+      "scriptEnforced": false,
+      "indexerState": "accepted-records-replayable-from-fixtures",
+      "walletState": "wallet-results-validated-no-live-wallet-promotion",
+      "acceptedInputs": {
+        "records": 46,
+        "payloadEvents": 33,
+        "proofs": 9
+      },
+      "checks": [
+        "accepted receipt replay",
+        "duplicate rejection",
+        "stale outpoint rejection",
+        "wallet result validation",
+        "rollback fixture"
+      ],
+      "nextArtifact": "Replay reducer over accepted receipts plus failed-promotion fixtures.",
+      "sourceBriefs": [
+        {
+          "id": "swap-intent-board",
+          "firstSafeArtifact": "Accepted swap-intent payload registry with no custody.",
+          "status": "prototype-later"
+        },
+        {
+          "id": "stable-value-unit",
+          "firstSafeArtifact": "Comparison brief: issuer-backed, overcollateralized, synthetic, and external stablecoin paths.",
+          "status": "research-only"
+        },
+        {
+          "id": "portfolio-automation",
+          "firstSafeArtifact": "Manual checklist and simulation planner for suggested actions.",
+          "status": "prototype-later"
+        }
+      ],
+      "sourceCategories": [
+        {
+          "id": "dex-amm",
+          "smallestHonestPrototype": "AMM risk and UX simulator plus accepted swap-intent payload registry with no custody or live swap claim.",
+          "status": "questions-answered-rails-named"
+        },
+        {
+          "id": "lending",
+          "smallestHonestPrototype": "Manual risk dashboard fed by accepted deposit/repay receipts and explicit external prices, with no borrowing custody.",
+          "status": "questions-answered-rails-named"
+        },
+        {
+          "id": "perps-prediction",
+          "smallestHonestPrototype": "Simulation-only board with accepted signal history, stale-signal review, and no trading, custody, or advice.",
+          "status": "questions-answered-rails-named"
+        },
+        {
+          "id": "bridge-source-chain",
+          "smallestHonestPrototype": "Receipt mapper and anchor checklist that records source-chain proof assumptions without minting wrapped assets.",
+          "status": "questions-answered-rails-named"
+        }
+      ],
+      "oracleModels": [
+        {
+          "id": "onchain-dclob-ground-truth",
+          "lane": "future-rails",
+          "riskLevel": "future",
+          "custodyReady": false
+        },
+        {
+          "id": "source-chain-anchor",
+          "lane": "research",
+          "riskLevel": "high",
+          "custodyReady": false
+        }
+      ],
+      "missingRails": [
+        "LP or order custody",
+        "LP share asset/accounting model",
+        "MEV analysis",
+        "asset liquidity",
+        "atomic settlement",
+        "canonical anchor",
+        "canonical source-chain anchor",
+        "challenge path",
+        "close, liquidation, and dispute authority",
+        "collateral custody model for lending positions",
+        "collateral model",
+        "composable settlement",
+        "cross-chain challenge and fraud handling",
+        "custody model",
+        "custody, mint/burn, exit, and redemption policy",
+        "custody/security review",
+        "execution venue",
+        "exit path",
+        "external signer roundtrip",
+        "finality verifier and trust model",
+        "indexer",
+        "issuer/redemption model",
+        "legal/compliance",
+        "liquidation transaction path and authority model",
+        "liquidity",
+        "liquidity depth",
+        "live rollback evidence",
+        "mainnet covenant activation",
+        "margin custody and withdrawal/liquidation rules",
+        "matching engine or market-making model",
+        "min-output enforcement in covenant, wallet, rollup, or vProg path",
+        "native market execution",
+        "oracle",
+        "ordering policy, batch auction, or sequencing commitment design",
+        "ordering/MEV policy",
+        "position accounting and interest-rate model",
+        "price oracle trust model and dispute process",
+        "pricing engine tied to enforceable reserves",
+        "production indexer persistence",
+        "reorg/outage policy",
+        "reputation thresholds, stale signal rules, market manipulation controls",
+        "reserve update authority and enforcement model",
+        "settlement oracle, dispute window, and final resolution rule",
+        "shared pool state or rollup/vProg execution state",
+        "stale-price guard, pause rule, dispute path, and bad-liquidation rollback policy",
+        "strategy risk controls",
+        "user consent",
+        "wallet permissions",
+        "wallet route"
+      ],
+      "cannotClaim": [
+        "LP share safety",
+        "MEV resistance",
+        "ZK proves real-world facts",
+        "automated hedging",
+        "automatic external-chain finality",
+        "automatic liquidations",
+        "borrowable liquidity",
+        "enforced AMM reserves",
+        "external wallet signing proven",
+        "financial advice",
+        "live Kaspa DEX",
+        "live custody",
+        "live lending market",
+        "mainnet readiness",
+        "oracle safety",
+        "oracle truth",
+        "perpetual futures",
+        "prediction market settlement",
+        "production DeFi",
+        "real odds",
+        "trustless bridge",
+        "wrapped asset issuance"
+      ]
+    }
+  ],
+  "negativeCases": [
+    {
+      "id": "amm-live-product-overclaim",
+      "claim": "AMM / swap pool is live on TN12 as a custody-moving DeFi product.",
+      "status": "blocked",
+      "reason": [
+        "Lane is PLANNER_ONLY.",
+        "Custody-ready and script-enforced flags are false.",
+        "Accepted payload/indexer evidence is not the same as live DeFi settlement."
+      ],
+      "requiredBeforePromotion": [
+        "LP or order custody",
+        "LP share asset/accounting model",
+        "LP share custody",
+        "MEV analysis",
+        "accepted update lifecycle",
+        "asset liquidity"
+      ]
+    },
+    {
+      "id": "lending-live-product-overclaim",
+      "claim": "Collateral lending is live on TN12 as a custody-moving DeFi product.",
+      "status": "blocked",
+      "reason": [
+        "Lane is PLANNER_ONLY.",
+        "Custody-ready and script-enforced flags are false.",
+        "Accepted payload/indexer evidence is not the same as live DeFi settlement."
+      ],
+      "requiredBeforePromotion": [
+        "accepted update lifecycle",
+        "anti-copy-source policy",
+        "borrow accounting",
+        "challenge policy",
+        "collateral custody",
+        "collateral custody model"
+      ]
+    },
+    {
+      "id": "liquidation-live-product-overclaim",
+      "claim": "Liquidation / closeout is live on TN12 as a custody-moving DeFi product.",
+      "status": "blocked",
+      "reason": [
+        "Lane is PLANNER_ONLY.",
+        "Custody-ready and script-enforced flags are false.",
+        "Accepted payload/indexer evidence is not the same as live DeFi settlement."
+      ],
+      "requiredBeforePromotion": [
+        "accepted update lifecycle",
+        "anti-copy-source policy",
+        "capital pool",
+        "challenge policy",
+        "claims oracle",
+        "collateral custody"
+      ]
+    },
+    {
+      "id": "oracle-live-product-overclaim",
+      "claim": "Oracle source and failure handling is live on TN12 as a custody-moving DeFi product.",
+      "status": "blocked",
+      "reason": [
+        "Lane is PLANNER_ONLY.",
+        "Custody-ready and script-enforced flags are false.",
+        "Accepted payload/indexer evidence is not the same as live DeFi settlement."
+      ],
+      "requiredBeforePromotion": [
+        "accepted update lifecycle",
+        "anti-bribery rules",
+        "anti-copy-source policy",
+        "canonical truth source",
+        "challenge policy",
+        "close, liquidation, and dispute authority"
+      ]
+    },
+    {
+      "id": "settlement-live-product-overclaim",
+      "claim": "Settlement / replay promotion is live on TN12 as a custody-moving DeFi product.",
+      "status": "blocked",
+      "reason": [
+        "Lane is PLANNER_ONLY.",
+        "Custody-ready and script-enforced flags are false.",
+        "Accepted payload/indexer evidence is not the same as live DeFi settlement."
+      ],
+      "requiredBeforePromotion": [
+        "LP or order custody",
+        "LP share asset/accounting model",
+        "MEV analysis",
+        "asset liquidity",
+        "atomic settlement",
+        "canonical anchor"
+      ]
+    }
+  ],
+  "promotionRule": [
+    "A lane can leave PLANNER_ONLY only after wallet requests, signer return, submit result, accepted txid replay, and indexer promotion all validate the same intent.",
+    "A custody-moving DeFi lane also needs oracle stale/challenge policy, liquidity/risk limits, security review, rollback handling, and explicit script-enforced versus indexer-derived semantics.",
+    "Accepted payload receipts can prove ordering and replay inputs; they do not prove custody, liquidity, oracle truth, or mainnet readiness by themselves."
+  ],
+  "boundaries": [
+    "This is a DeFi planner simulation over existing TN12 evidence and local artifacts.",
+    "It does not create a live AMM, lending market, liquidation bot, oracle, bridge, or custody product.",
+    "It is useful for testing app-state reducers, wallet-review surfaces, negative cases, and promotion rules before a real external signer or production indexer exists."
+  ]
+}
