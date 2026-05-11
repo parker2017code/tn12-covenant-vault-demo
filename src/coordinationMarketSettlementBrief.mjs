@@ -24,6 +24,8 @@ export function buildCoordinationMarketSettlementBrief({
       selectedSolverStatus: selectedPack?.solver?.status || "missing-pack",
       qualifyingIntendos: selectedPack?.solver?.qualifyingCount || 0,
       qualifyingTkas: selectedPack?.solver?.qualifyingTkas || 0,
+      selectedReleaseRoute: settlementRoutes.find((route) => route.kind === "release" && route.status === "route-applicable-needs-wallet-review")?.routeId || "",
+      selectedRefundRoute: settlementRoutes.find((route) => route.kind === "refund")?.routeId || "",
       settlementRoutes: settlementRoutes.length,
       missingRails: missingRails.length,
       productionReady: false
@@ -90,10 +92,20 @@ function buildSettlementRoute(route = {}, selectedPack) {
 
 function buildRunThisPack({ fixture = {}, selectedPack = {}, settlementRoutes = [] } = {}) {
   const releaseRoute = settlementRoutes.find((route) => route.kind === "release" && route.status === "route-applicable-needs-wallet-review");
+  const refundRoute = settlementRoutes.find((route) => route.kind === "refund");
+  const count = selectedPack.solver?.qualifyingCount || 0;
+  const amount = selectedPack.solver?.qualifyingTkas || 0;
   return {
     id: `${selectedPack.packId}:run-first`,
-    title: "Run the transparent docs sprint pack",
-    userGoal: "See conditional commitments become one selected release route.",
+    title: "Run a conditional commitment pack",
+    userGoal: "Backers commit only if enough compatible backers also commit.",
+    plainLanguage: `${count} signed commitments meet the threshold, so the app selects the release route for ${amount} TKAS instead of the refund route.`,
+    selectedReleaseRoute: releaseRoute?.routeId || "",
+    alternateRefundRoute: refundRoute?.routeId || "",
+    walletRequestNext: {
+      status: "next-build",
+      requirement: "Create one wallet-standard settlement request that shows the selected pack, route, recipient, amount, and source commitments before signing."
+    },
     currentEvidence: [
       fixture.prototypeArtifact || "artifacts/coordination-market-prototype.json",
       "artifacts/coordination-market-settlement-brief.json",
@@ -103,11 +115,11 @@ function buildRunThisPack({ fixture = {}, selectedPack = {}, settlementRoutes = 
       "Open the Stag goal.",
       "Check each qualifying Intendo.",
       "Check the Pack solver result.",
-      "Review the selected release route.",
-      "Do not submit alternate refunds for the same selected pack.",
-      "Build wallet-reviewed settlement only after custody source and recipient are explicit."
+      "Review the selected release route and alternate refund route.",
+      "Export one wallet request for the selected route.",
+      "Replay accepted evidence before marking the pack settled."
     ],
-    expectedResult: `${selectedPack.solver?.qualifyingCount || 0} commitments qualify for ${selectedPack.solver?.qualifyingTkas || 0} TKAS of transparent route amount.`,
+    expectedResult: `${count} commitments qualify for ${amount} TKAS of transparent route amount.`,
     nextUpgrade: "Turn this route into a wallet-standard settlement request, then require accepted replay before marking settlement complete."
   };
 }

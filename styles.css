@@ -20,17 +20,17 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f4ecd9;
-  --bg-2: #fff8e8;
-  --panel: rgba(255, 252, 241, .86);
-  --panel-strong: rgba(255, 252, 241, .96);
-  --text: #201a11;
-  --muted: #594c39;
-  --faint: #82735a;
-  --line: rgba(55, 43, 24, .16);
-  --line-bright: rgba(135, 111, 51, .34);
-  --accent: #37685e;
-  --accent-strong: #886c1e;
+  --bg: #f7f3ea;
+  --bg-2: #fffcf4;
+  --panel: rgba(255, 253, 246, .88);
+  --panel-strong: rgba(255, 253, 246, .97);
+  --text: #18201d;
+  --muted: #52615a;
+  --faint: #78847d;
+  --line: rgba(55, 43, 24, .14);
+  --line-bright: rgba(80, 91, 82, .24);
+  --accent: #326e61;
+  --accent-strong: #78601f;
   --danger: #9a3b2f;
   --surface-soft: rgba(60, 42, 15, .045);
   --accent-soft: rgba(55, 104, 94, .1);
@@ -51,6 +51,10 @@ body {
   color: var(--text);
   font-family: var(--body-font);
   line-height: 1.5;
+}
+
+:root[data-theme="light"] body {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%), var(--bg);
 }
 
 a {
@@ -418,6 +422,70 @@ pre {
   border-color: var(--line-bright);
   box-shadow: var(--shadow);
   background: var(--panel-strong);
+}
+
+:root[data-theme="light"] .topbar,
+:root[data-theme="light"] .hero,
+:root[data-theme="light"] .facts,
+:root[data-theme="light"] .panel,
+:root[data-theme="light"] .output,
+:root[data-theme="light"] .stat-grid article,
+:root[data-theme="light"] .proof-card,
+:root[data-theme="light"] .queue-card,
+:root[data-theme="light"] .app-lane-card,
+:root[data-theme="light"] .signal-card,
+:root[data-theme="light"] .invoice-card,
+:root[data-theme="light"] .submit-card,
+:root[data-theme="light"] .research-card,
+:root[data-theme="light"] .campaign-card,
+:root[data-theme="light"] .enforcement-card,
+:root[data-theme="light"] .escrow-card,
+:root[data-theme="light"] .treasury-card,
+:root[data-theme="light"] .coordination-card,
+:root[data-theme="light"] .access-card,
+:root[data-theme="light"] .mainnet-card,
+:root[data-theme="light"] .asset-card,
+:root[data-theme="light"] .auction-card,
+:root[data-theme="light"] .defi-card,
+:root[data-theme="light"] .prediction-card,
+:root[data-theme="light"] .agent-card,
+:root[data-theme="light"] .build-status-card,
+:root[data-theme="light"] .attestation-card,
+:root[data-theme="light"] .indexer-card,
+:root[data-theme="light"] .receipt-card,
+:root[data-theme="light"] .results-summary article,
+:root[data-theme="light"] .results-rails article,
+:root[data-theme="light"] .results-feed article,
+:root[data-theme="light"] .results-flow article,
+:root[data-theme="light"] .level-card {
+  background: var(--panel);
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+:root[data-theme="light"] .product-grid a,
+:root[data-theme="light"] .journey-grid a,
+:root[data-theme="light"] .playground-quickstart a,
+:root[data-theme="light"] .scheduler-job,
+:root[data-theme="light"] .coordination-run-card,
+:root[data-theme="light"] .activity-card,
+:root[data-theme="light"] .lab-drawer,
+:root[data-theme="light"] .priority-card,
+:root[data-theme="light"] .playground-command-drawer,
+:root[data-theme="light"] .playground-flow-card,
+:root[data-theme="light"] .session-balance-strip article,
+:root[data-theme="light"] .playground-level-grid article,
+:root[data-theme="light"] .playground-tx-map article,
+:root[data-theme="light"] .full-ledger {
+  background: var(--panel);
+  border-color: var(--line-bright);
+  box-shadow: none;
+}
+
+:root[data-theme="light"] .activity-card span,
+:root[data-theme="light"] .level-tabs button[aria-selected="true"] {
+  color: var(--text);
+  background: var(--accent-soft);
 }
 
 .lab-page pre {
@@ -1551,12 +1619,14 @@ progress::-moz-progress-bar {
 .receipt-events article span,
 .payload-draft-status article span {
   width: fit-content;
-  color: #07110e;
-  background: var(--accent);
-  border-radius: 999px;
-  padding: 4px 8px;
+  color: var(--accent);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 750;
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 .queue-card strong,
@@ -1814,6 +1884,7 @@ progress::-moz-progress-bar {
 }
 
 .product-grid a {
+  position: relative;
   display: grid;
   align-content: start;
   gap: 10px;
@@ -1821,11 +1892,29 @@ progress::-moz-progress-bar {
   min-width: 0;
   border: 1px solid rgba(245, 194, 126, .24);
   border-radius: 18px;
-  padding: 16px;
+  padding: 16px 16px 42px;
   color: var(--text);
   background:
     radial-gradient(circle at 0% 0%, rgba(245, 194, 126, .18), transparent 38%),
     linear-gradient(145deg, rgba(118, 167, 158, .13), rgba(15, 22, 25, .95));
+}
+
+.product-grid a::after,
+.journey-grid a::before {
+  content: "Open";
+  position: absolute;
+  right: 14px;
+  top: auto;
+  bottom: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  pointer-events: none;
 }
 
 .product-grid a:hover {
@@ -1836,13 +1925,13 @@ progress::-moz-progress-bar {
 
 .product-grid span {
   width: fit-content;
-  border: 1px solid rgba(118, 167, 158, .35);
-  border-radius: 999px;
-  padding: 4px 8px;
   color: var(--accent);
+  border: 0;
+  border-radius: 0;
+  padding: 0;
   font-size: 11px;
-  font-weight: 850;
-  letter-spacing: .08em;
+  font-weight: 750;
+  letter-spacing: .04em;
   text-transform: uppercase;
 }
 
@@ -1876,23 +1965,20 @@ progress::-moz-progress-bar {
   border: 1px solid rgba(118, 167, 158, .28);
   border-radius: 18px;
   padding: 16px;
-  background:
-    linear-gradient(135deg, rgba(118, 167, 158, .11), transparent 58%),
-    #12191d;
+  background: var(--surface-soft);
 }
 
 .runbook-grid span {
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
   width: fit-content;
-  min-width: 30px;
-  min-height: 30px;
-  border-radius: 999px;
-  padding: 4px 9px;
-  background: rgba(245, 194, 126, .12);
   color: var(--accent-strong);
+  background: transparent;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 0;
+  padding: 0;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 750;
   text-transform: uppercase;
 }
 
@@ -1924,9 +2010,7 @@ progress::-moz-progress-bar {
   border: 1px solid rgba(118, 167, 158, .26);
   border-radius: 20px;
   padding: 16px;
-  background:
-    radial-gradient(circle at 100% 0%, rgba(118, 167, 158, .16), transparent 35%),
-    linear-gradient(145deg, rgba(18, 25, 29, .98), rgba(10, 15, 18, .98));
+  background: var(--surface-soft);
 }
 
 .self-serve-card.lane-play-now {
@@ -1946,13 +2030,13 @@ progress::-moz-progress-bar {
 }
 
 .self-serve-card-head span {
-  border: 1px solid rgba(245, 194, 126, .32);
-  border-radius: 999px;
-  padding: 4px 8px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
   color: var(--accent-strong);
   font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .07em;
+  font-weight: 750;
+  letter-spacing: .04em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -2117,12 +2201,16 @@ progress::-moz-progress-bar {
   justify-content: space-between;
   border: 1px solid rgba(118, 167, 158, .25);
   border-radius: 18px;
-  padding: 18px;
+  padding: 18px 18px 42px;
   overflow: visible;
   color: var(--text);
   background:
     linear-gradient(135deg, rgba(118, 167, 158, .16), rgba(7, 8, 7, .08) 48%, rgba(185, 176, 223, .12)),
     #101615;
+}
+
+.journey-grid a::before {
+  content: "Go";
 }
 
 .journey-grid a::after {
@@ -2147,8 +2235,8 @@ progress::-moz-progress-bar {
   position: relative;
   color: var(--accent);
   font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .08em;
+  font-weight: 750;
+  letter-spacing: .04em;
   text-transform: uppercase;
 }
 
@@ -2204,7 +2292,8 @@ progress::-moz-progress-bar {
   gap: 14px;
 }
 
-.playground-quickstart article {
+.playground-quickstart a {
+  position: relative;
   display: grid;
   align-content: start;
   gap: 10px;
@@ -2212,30 +2301,52 @@ progress::-moz-progress-bar {
   min-height: 190px;
   border: 1px solid rgba(118, 167, 158, .28);
   border-radius: 22px;
-  padding: 18px;
+  padding: 18px 18px 42px;
   overflow-wrap: anywhere;
   background:
     linear-gradient(145deg, rgba(118, 167, 158, .13), rgba(15, 22, 25, .96)),
     #101615;
+  color: var(--text);
 }
 
-.playground-quickstart article:nth-child(2) {
+.playground-quickstart a::after {
+  content: "Go";
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  font-size: 11px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.playground-quickstart a:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.playground-quickstart a:nth-child(2) {
   border-color: rgba(245, 194, 126, .44);
 }
 
-.playground-quickstart article:nth-child(3) {
+.playground-quickstart a:nth-child(3) {
   border-color: rgba(150, 185, 255, .42);
 }
 
 .playground-quickstart span {
   width: fit-content;
-  border: 1px solid rgba(245, 194, 126, .32);
-  border-radius: 999px;
-  padding: 4px 8px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
   color: var(--accent);
   font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .07em;
+  font-weight: 750;
+  letter-spacing: .04em;
   text-transform: uppercase;
 }
 
@@ -2389,8 +2500,13 @@ progress::-moz-progress-bar {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
   min-width: 0;
   margin: 10px 0 0;
+}
+
+.address-chip a {
+  min-width: 0;
 }
 
 .address-chip code {
@@ -2403,11 +2519,14 @@ progress::-moz-progress-bar {
 
 .address-chip button {
   flex: 0 0 auto;
-  padding: 5px 9px;
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  padding: 4px 8px;
+  color: var(--accent);
+  background: var(--accent-soft);
   font-size: 11px;
-  color: var(--text);
-  background: rgba(118, 167, 158, .12);
+  font-weight: 800;
 }
+
 
 .activity-amount {
   margin: 12px 0 6px;

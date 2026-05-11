@@ -37,7 +37,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Payload events available", plan.summary.acceptedPayloadEventsAvailable, "Current accepted receipt evidence.")}
       ${metric("Transfer rows available", plan.summary.acceptedTransferRowsAvailable, "Current local-key custody movement evidence.")}
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}
-      ${metric("Benchmark", `${plan.summary.benchmarkPercent}%`, "Current repo-local full-DeFi benchmark.")}
+      ${metric("DeFi lab", `${plan.summary.benchmarkRails || "6 / 10"} rails`, "Detailed benchmark lives in Lab Tools.")}
     `;
     if (quickstartNode) renderQuickstart(quickstartNode, plan);
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });
@@ -123,11 +123,11 @@ export async function renderPlaygroundExplorer(documentRef = document) {
 
 function renderQuickstart(node, plan) {
   node.innerHTML = (plan.startHere || []).map((step, index) => `
-    <article class="quickstart-${escapeHtml(step.id)}">
+    <a class="quickstart-${escapeHtml(step.id)}" href="${escapeHtml(step.href || "#activity")}">
       <span>${escapeHtml(String(index + 1))} · ${escapeHtml(step.requirement)}</span>
       <strong>${escapeHtml(step.title)}</strong>
       <p>${escapeHtml(step.detail)}</p>
-    </article>
+    </a>
   `).join("");
 }
 
@@ -149,7 +149,7 @@ function renderLevels(node, { activity, session, funding, deposit, secondDeposit
       <p>The chain supplies ordering and accepted transaction evidence. The repo layers role labels, receipts, reducers, and promotion checks on top.</p>
     </article>
     <article>
-      <span>Reviewer</span>
+      <span>Technical</span>
       <strong>${escapeHtml(session.summary.acceptedTxids)} accepted session txs, ${escapeHtml(activity.summary.acceptedTransferRows)} transfer rows.</strong>
       <p>Check ${txLink(funding.txid)}, ${txLink(deposit.txid)}, ${txLink(secondDeposit.txid)}, and ${txLink(payout.txid)} directly on the TN12 explorer.</p>
     </article>

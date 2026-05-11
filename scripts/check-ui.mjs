@@ -137,7 +137,9 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /Sign outside the repo/);
     assert.match(playgroundText, /Build a based-app lane/);
     assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
-    assert.equal(await page.locator("#playground-quickstart article").count(), 4);
+    assert.equal(await page.locator("#playground-quickstart a").count(), 4);
+    assert.ok(await page.locator('#playground-quickstart a[href="#activity"]').count() === 1);
+    assert.ok(await page.locator('#playground-quickstart a[href="lab.html#product-map"]').count() === 1);
     assert.ok(await page.locator('#wallet a[href="lab.html#submit"]').count() === 1);
     assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/transactions/"]').count(), 4);
     assert.equal(await page.locator('#playground-tx-map article').count(), 5);
@@ -196,8 +198,8 @@ async function checkRenderedPages(url) {
     await page.goto(`${url}lab.html#coordination`, { waitUntil: "networkidle" });
     await page.waitForSelector(".coordination-run-card", { timeout: 5000 });
     const coordinationText = await page.locator("#coordination").innerText();
-    assert.match(coordinationText, /Run the transparent docs sprint pack/);
-    assert.match(coordinationText, /See conditional commitments become one selected release route/);
+    assert.match(coordinationText, /Run a conditional commitment pack/);
+    assert.match(coordinationText, /Backers commit only if enough compatible backers also commit/);
     assert.match(coordinationText, /3 commitments qualify/);
     await page.goto(`${url}lab.html#submit`, { waitUntil: "networkidle" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });

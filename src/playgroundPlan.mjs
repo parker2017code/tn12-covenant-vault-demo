@@ -35,6 +35,7 @@ export function buildPlaygroundPlan({
       acceptedPayloadEventsAvailable: Number(accepted.payloadEvents || 0),
       acceptedTransferRowsAvailable: Number(acceptedActivity.summary?.acceptedTransferRows || 0),
       benchmarkPercent: Number(benchmark.currentPercent || 0),
+      benchmarkRails: `${Number(benchmark.summary?.completedRails || 0)} / ${Number(benchmark.summary?.rails || 0)}`,
       sharedWalletPrivateKeys: 0,
       committedSecrets: 0,
       mainnetClaims: 0,
@@ -47,25 +48,29 @@ export function buildPlaygroundPlan({
         "observe",
         "Watch accepted TN12 money move",
         "No wallet needed.",
-        "Open the four txids, compare the explorer records to the replay balances, then inspect blocked withdrawals."
+        "Open the four txids, compare the explorer records to the replay balances, then inspect blocked withdrawals.",
+        "#activity"
       ),
       quickstart(
         "faucet",
         "Run with fresh faucet wallets",
         "Needs TN12 tKAS.",
-        "Generate session wallets, fund only public kaspatest addresses, submit tiny transfers, then replay the accepted txids."
+        "Generate session wallets, fund only public kaspatest addresses, submit tiny transfers, then replay the accepted txids.",
+        "#flow"
       ),
       quickstart(
         "own-wallet",
         "Bring your own external wallet",
         "No repo private keys.",
-        "Export a request, review exact fields in your wallet, return signed bytes, validate the fingerprint, submit, then replay."
+        "Export a request, review exact fields in your wallet, return signed bytes, validate the fingerprint, submit, then replay.",
+        "#wallet"
       ),
       quickstart(
         "extend",
         "Build a based-app lane",
         "Start from accepted evidence.",
-        "Use the same loop for DeFi reducers, coordination packs, auctions, access passes, or agent commitments."
+        "Use the same loop for DeFi reducers, coordination packs, auctions, access passes, or agent commitments.",
+        "lab.html#product-map"
       )
     ],
     ownWalletFlow: [
@@ -116,6 +121,6 @@ function action(id, label, enforcement, detail) {
   return { id, label, enforcement, detail };
 }
 
-function quickstart(id, title, requirement, detail) {
-  return { id, title, requirement, detail };
+function quickstart(id, title, requirement, detail, href) {
+  return { id, title, requirement, detail, href };
 }

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-universal-scheduler-workbench/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T22:06:49.236Z",
+  "generatedAt": "2026-05-11T22:42:26.429Z",
   "status": "scheduler-workbench-ready",
   "thesis": "A scheduler is useful when it routes accepted triggers, bids, solver results, proof jobs, and settlement reviews without pretending to be protocol-level automation.",
   "summary": {

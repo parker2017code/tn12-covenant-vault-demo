@@ -2,7 +2,7 @@
   "schema": "tn12-self-serve-lane-runbook/v1",
   "network": "kaspa-testnet-12",
   "status": "self-serve-lane-runbook-ready",
-  "generatedAt": "2026-05-11T22:22:46.192Z",
+  "generatedAt": "2026-05-11T22:40:03.898Z",
   "summary": {
     "lanes": 12,
     "playNow": 4,
@@ -237,7 +237,7 @@
       "availableNow": [
         "6 of 10 benchmark rails complete",
         "10 pool deposits and 4 payouts accepted",
-        "60% repo-local DeFi benchmark"
+        "replay guards and blocked custody rows"
       ],
       "runSteps": [
         "Replay accepted local-key transfers.",

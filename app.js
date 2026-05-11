@@ -661,7 +661,7 @@ async function renderCoordinationMarket() {
     briefArticle.className = "coordination-card coordination-run-card";
     const runThisPack = settlementBrief.runThisPack;
     briefArticle.innerHTML = `
-      <span>${escapeHtml(settlementBrief.status)}</span>
+      <span>conditional pack ready</span>
       <strong>${escapeHtml(runThisPack?.title || settlementBrief.appBrief.title)}</strong>
       <p>${escapeHtml(runThisPack?.userGoal || settlementBrief.appBrief.userPromise)}</p>
       <p>${escapeHtml(runThisPack?.expectedResult || `${settlementBrief.summary.qualifyingIntendos} qualifying intendos; ${settlementBrief.summary.qualifyingTkas} TKAS transparent route amount.`)}</p>

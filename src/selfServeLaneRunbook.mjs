@@ -205,7 +205,7 @@ export function buildSelfServeLaneRunbook({
       availableNow: [
         `${num(benchmark?.summary?.completedRails)} of ${num(benchmark?.summary?.rails)} benchmark rails complete`,
         `${num(acceptedActivity?.summary?.poolDeposits)} pool deposits and ${num(acceptedActivity?.summary?.poolPayouts)} payouts accepted`,
-        `${num(benchmark?.currentPercent)}% repo-local DeFi benchmark`
+        "replay guards and blocked custody rows"
       ],
       runSteps: [
         "Replay accepted local-key transfers.",

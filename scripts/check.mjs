@@ -2491,7 +2491,7 @@ assert.match(labHtml, /payload:readiness/);
 assert.match(labHtml, /Batch assurance campaigns/);
 assert.match(labHtml, /Escrow primitive/);
 assert.match(labHtml, /Treasury \/ team vaults/);
-assert.match(labHtml, /Transparent coordination-market prototype/);
+assert.match(labHtml, /Conditional commitments/);
 assert.match(labHtml, /KRC \/ access pass planner/);
 assert.match(labHtml, /Simple asset policy/);
 assert.match(labHtml, /Stable-value paths/);

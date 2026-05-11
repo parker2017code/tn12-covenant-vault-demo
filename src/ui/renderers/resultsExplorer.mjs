@@ -40,7 +40,7 @@ function renderSummary(node, { proven, benchmark, index, activity, scheduler, bi
     ${metric("Accepted proof txs", proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions, "Covenant proof spends and role-separated repeats.")}
     ${metric("Payload events", proven.acceptedEvidence.payloadEvents, "Accepted app-state receipts replayed from TN12.")}
     ${metric("Indexed records", index.summary.total, "Proof, payload, and output evidence in one checkpoint.")}
-    ${metric("Full-DeFi benchmark", `${benchmark.currentPercent}%`, `${benchmark.summary.completedRails}/${benchmark.summary.rails} rails complete in the repo-local model.`)}
+    ${metric("DeFi lab rails", `${benchmark.summary.completedRails} / ${benchmark.summary.rails}`, "Repo-local rail detail lives in Lab Tools.")}
     ${metric("Accepted transfers", activity.summary.acceptedTransferRows, "Local-key custody movement across pool and user roles.")}
     ${metric("Scheduler rows", scheduler.summary.acceptedBids + scheduler.summary.executedTriggers + binding.summary.readyBindings, "Intent, bids, execution, and covenant-binding rows.")}
   `;
@@ -77,7 +77,7 @@ function renderKnowledgeLevels(node) {
 function renderRails(node, benchmark) {
   node.innerHTML = benchmark.rails.map((rail) => `
     <article class="${rail.done ? "rail-done" : "rail-open"}">
-      <span>${escapeHtml(rail.label)} / ${escapeHtml(rail.weight)}%</span>
+      <span>${escapeHtml(rail.label)}</span>
       <strong>${escapeHtml(rail.done ? "done" : "open")}: ${escapeHtml(rail.title)}</strong>
       <p>${escapeHtml(rail.evidence)}</p>
     </article>
@@ -100,7 +100,7 @@ function renderFlow(node, { proven, activity, scheduler, benchmark }) {
     ["2", "Payload receipt", `${proven.acceptedEvidence.payloadEvents} accepted payload events record app intent and status.`],
     ["3", "Custody-adjacent movement", `${activity.summary.acceptedTransferRows} accepted local-key transfers move tKAS across user, pool, and operator roles.`],
     ["4", "Reducer/indexer state", `${scheduler.summary.acceptedIntents} accepted scheduler intent and ${scheduler.summary.acceptedBids} accepted bids feed deterministic state.`],
-    ["5", "Benchmark", `${benchmark.currentPercent}% complete by repo-local full-DeFi benchmark; remaining rails stay visible.`]
+    ["5", "Lab boundary", `${benchmark.summary.completedRails} of ${benchmark.summary.rails} DeFi lab rails have repo evidence; the rest stay in Lab Tools.`]
   ];
   node.innerHTML = steps.map(([num, title, body]) => `
     <article>
