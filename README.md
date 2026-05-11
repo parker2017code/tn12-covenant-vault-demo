@@ -50,13 +50,14 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 
 ```sh
 npm ci
+npm run check:focused
 npm run check:all
 npm run check:tn12
 npm run proof:records
 npm run demo:operator-refresh
 ```
 
-`npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence and canonical proof-record shape. `npm run demo:operator-refresh` verifies TN12, refreshes derived artifacts, rebuilds status packs, and reruns local checks.
+`npm run check:focused` runs the first split domain tests. `npm run check:all` is the local gate. `npm run check:tn12` verifies public TN12 evidence and canonical proof-record shape. `npm run demo:operator-refresh` verifies TN12, refreshes derived artifacts, rebuilds status packs, and reruns local checks.
 
 ## Useful Artifacts
 

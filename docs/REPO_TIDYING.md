@@ -47,6 +47,8 @@ Backlog, research, app ideas, prediction, stable-value, and DeFi expansion shoul
 
 The broad builder workbench lives in `lab.html`. The main `index.html` is the proof/reviewer/operator surface.
 
+`app.js` still owns most renderers, but page bootstrapping is split through `src/ui/pageControllers.mjs` so the proof page and lab workbench do not share one undifferentiated startup path.
+
 ## Naming Policy
 
 Prefer this vocabulary:

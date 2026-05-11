@@ -2471,6 +2471,7 @@ const packageJson = JSON.parse(await readFile(new URL("../package.json", import.
 assert.equal(packageJson.scripts["operator:refresh"], "npm run demo:operator-refresh");
 assert.equal(packageJson.scripts["operator:pack"], "npm run project:operator-pack");
 assert.match(packageJson.scripts["check:tn12"], /proof:records/);
+assert.match(packageJson.scripts["check:all"], /check:focused/);
 // Full command list and lab details live in docs/LAB_NOTEBOOK.md
 const labNotebook = await readFile(new URL("../docs/LAB_NOTEBOOK.md", import.meta.url), "utf8");
 assert.match(labNotebook, /faucet-tn12\.kaspanet\.io/);

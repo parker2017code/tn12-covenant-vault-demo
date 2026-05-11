@@ -47,6 +47,11 @@ import { buildAgentCommitmentBoard } from "./src/agentCommitments.mjs";
 import { buildProjectStatus } from "./src/buildStatus.mjs";
 import { buildProjectPlan } from "./src/projectPlan.mjs";
 import { buildNextWorkQueue } from "./src/nextWorkQueue.mjs";
+import {
+  detectPageController,
+  runLabPageController,
+  runProofPageController
+} from "./src/ui/pageControllers.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -224,44 +229,54 @@ copySignalButton?.addEventListener("click", async () => {
 fetchManualTxButton?.addEventListener("click", fetchManualTransactionOutputs);
 refreshProofsButton?.addEventListener("click", () => verifyProofTransactions({ forceRemote: true }));
 
-renderVault();
-renderAssurance();
-renderManualOutpoint();
-renderBatchAssuranceCampaign();
-renderEnforcementMatrix();
-renderEscrowPrimitive();
-renderTreasuryVaults();
-renderCoordinationMarket();
-renderAccessPassPlanner();
-renderMainnetReadiness();
-renderAssetPolicies();
-renderAuctionIntents();
-renderDefiBacklog();
-renderStableValuePaths();
-renderStableIssuerRedemptions();
-renderAgentCommitments();
-renderBuildStatus();
-renderProvenStatus();
-renderOperatorPack();
-renderNextWorkQueue();
-renderNextTenStatus();
-renderProofTransactions();
-renderAcceptedAppState();
-renderInvoiceApp();
-renderPayloadSubmitReadiness();
-renderSubmitConsole();
-renderWalletReview();
-renderWalletConnector();
-renderMasterRoadmap();
-renderResearchLibrary();
-renderBuildQueue();
-renderVaultTemplates();
-renderAppLab();
-renderAttestationRegistry();
-renderPredictionHedgeSimulator();
-renderMinerSignalResearch();
-renderSignalPayload();
-renderPayloadDraftStatus();
+const pageRenderers = {
+  renderVault,
+  renderAssurance,
+  renderManualOutpoint,
+  renderBatchAssuranceCampaign,
+  renderEnforcementMatrix,
+  renderEscrowPrimitive,
+  renderTreasuryVaults,
+  renderCoordinationMarket,
+  renderAccessPassPlanner,
+  renderMainnetReadiness,
+  renderAssetPolicies,
+  renderAuctionIntents,
+  renderDefiBacklog,
+  renderStableValuePaths,
+  renderStableIssuerRedemptions,
+  renderAgentCommitments,
+  renderBuildStatus,
+  renderProvenStatus,
+  renderOperatorPack,
+  renderProjectPlan,
+  renderNextWorkQueue,
+  renderNextTenStatus,
+  renderProofTransactions,
+  renderAcceptedAppState,
+  renderInvoiceApp,
+  renderPayloadSubmitReadiness,
+  renderSubmitConsole,
+  renderWalletReview,
+  renderWalletConnector,
+  renderMasterRoadmap,
+  renderResearchLibrary,
+  renderBuildQueue,
+  renderVaultTemplates,
+  renderAppLab,
+  renderAttestationRegistry,
+  renderPredictionHedgeSimulator,
+  renderMinerSignalResearch,
+  renderSignalPayload,
+  renderPayloadDraftStatus,
+  renderDefiReceiptGuard
+};
+
+if (detectPageController() === "lab") {
+  runLabPageController(pageRenderers);
+} else {
+  runProofPageController(pageRenderers);
+}
 
 async function renderVault() {
   if (!form || !policyIdNode || !artifactNode || !issuesNode || !lifecycleNode) return;

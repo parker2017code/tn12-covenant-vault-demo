@@ -8,6 +8,7 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 |---|---|
 | Install exactly from lockfile | `npm ci` |
 | Minimal reviewer path | `npm ci && npm run check:tn12` |
+| Focused domain tests | `npm run check:focused` |
 | Local behavior gate | `npm run check:all` |
 | Public TN12 evidence gate | `npm run check:tn12` |
 | Full reviewer refresh | `npm run operator:refresh` |
@@ -24,6 +25,13 @@ This repo has many scripts because it preserves proof construction, TN12 verific
 | Verify role-separated accepted proof txids | `npm run tx:roles:verify` |
 | Rebuild role-separated proof evidence | `npm run roles:proof:evidence` |
 | Verify accepted payload events | `npm run payload:verify:events` |
+
+## Focused Test Files
+
+| Domain | File |
+|---|---|
+| Core amount parsing and JSON-safe amount conversion | `tests/core/amounts.test.mjs` |
+| Canonical proof-record verification | `tests/proof/proof-records.test.mjs` |
 
 ## Indexer Commands
 

@@ -28,6 +28,11 @@ try {
   assert.match(html, /docs\/AUDIT_MAP\.md/);
   assert.doesNotMatch(html, /href="#prediction-hedge"/);
   assert.match(html, /href="lab\.html"/);
+  const appJs = await readFile("app.js", "utf8");
+  const pageControllers = await readFile("src/ui/pageControllers.mjs", "utf8");
+  assert.match(appJs, /runProofPageController/);
+  assert.match(appJs, /runLabPageController/);
+  assert.match(pageControllers, /detectPageController/);
   assert.doesNotMatch(html, /<form id="assurance-form"/);
   assert.match(html, /id="proof-status"/);
   assert.match(html, /id="receipt-events"/);
