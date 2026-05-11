@@ -1,7 +1,7 @@
 {
   "schema": "tn12-checkpointed-accepted-index/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-11T17:40:13.929Z",
+  "fetchedAt": "2026-05-11T17:46:37.119Z",
   "endpointBase": "https://api-tn12.kaspa.org/transactions",
   "sourceManifests": {
     "proofs": "fixtures/AcceptedProofTransactions.json",
@@ -11,9 +11,9 @@
   "status": "accepted-index-fully-matched",
   "checkpoint": {
     "kind": "known-txid-public-read-checkpoint",
-    "recordCount": 52,
+    "recordCount": 53,
     "minAcceptingBlockBlueScore": 5203140,
-    "maxAcceptingBlockBlueScore": 8971246,
+    "maxAcceptingBlockBlueScore": 8975114,
     "txids": [
       "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
       "9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710",
@@ -63,6 +63,7 @@
       "ab827a290bf4494fb923f6e8adb4ec5872dbd5b76d4dd586b9d1eff6f3c0cf23",
       "e9ec42b6880037603b2908a335817e0b7f0732a2a047b46a18b14202e90904d7",
       "0f8f5b1e90f37b9ac45b8d861b524742aec27de66f1a2a6f3e72b8fb821b808b",
+      "dcd580d40d7a493947bb8c5acf709a3091cb751763c55fde9059e1dcebeb5f97",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
       "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a",
@@ -71,12 +72,12 @@
     "rollbackNote": "If a future node/RPC backend reports rollback below this blue-score range, rebuild derived app state from the affected checkpoint."
   },
   "summary": {
-    "total": 52,
+    "total": 53,
     "proofs": 9,
-    "payloadEvents": 39,
+    "payloadEvents": 40,
     "outputEvidence": 4,
-    "accepted": 52,
-    "matched": 52,
+    "accepted": 53,
+    "matched": 53,
     "mismatches": 0,
     "lanes": [
       {
@@ -204,6 +205,12 @@
         "total": 3,
         "accepted": 3,
         "matched": 3
+      },
+      {
+        "lane": "scheduler-covenant-binding",
+        "total": 1,
+        "accepted": 1,
+        "matched": 1
       },
       {
         "lane": "scheduler-execution",
@@ -2367,6 +2374,55 @@
         "matches": true
       },
       "explorerUrl": "https://tn12.kaspa.stream/txs/0f8f5b1e90f37b9ac45b8d861b524742aec27de66f1a2a6f3e72b8fb821b808b"
+    },
+    {
+      "kind": "payload-event",
+      "lane": "scheduler-covenant-binding",
+      "label": "Scheduler covenant binding vault 001",
+      "txid": "dcd580d40d7a493947bb8c5acf709a3091cb751763c55fde9059e1dcebeb5f97",
+      "status": "accepted-payload-matched",
+      "accepted": true,
+      "matched": true,
+      "acceptingBlockBlueScore": 8975114,
+      "acceptingBlockTime": 1778521361710,
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-covenant-binding-vault-001.json",
+      "evidencePath": "artifacts/payload-scheduler-covenant-binding-vault-001-evidence.json",
+      "payload": {
+        "expectedHex": "7b226b696e64223a227363686564756c65722d636f76656e616e742d62696e64696e67222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d3030313a7661756c742d7265636f766572792d62696e64696e67222c2276616c7565223a2262696e64696e672d7265636f72646564222c226e6f7465223a22696e74656e743d313835643632393238663563646461646166633766616631346563376230393265613434613365613863303861663731616337613133353033323234336434643b207072696d69746976653d7661756c743b2070726f6f663d623736636339333362393761306264623930316666616532376135313761353235373763323732393763373062653334336463366361623733346261313339313b20656e747279706f696e743d7265636f7665723b20656e666f7263656d656e743d7072696d69746976652d6f6e6c79227d",
+        "observedHex": "7b226b696e64223a227363686564756c65722d636f76656e616e742d62696e64696e67222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d3030313a7661756c742d7265636f766572792d62696e64696e67222c2276616c7565223a2262696e64696e672d7265636f72646564222c226e6f7465223a22696e74656e743d313835643632393238663563646461646166633766616631346563376230393265613434613365613863303861663731616337613133353033323234336434643b207072696d69746976653d7661756c743b2070726f6f663d623736636339333362393761306264623930316666616532376135313761353235373763323732393763373062653334336463366361623733346261313339313b20656e747279706f696e743d7265636f7665723b20656e666f7263656d656e743d7072696d69746976652d6f6e6c79227d",
+        "matches": true,
+        "bytes": 342,
+        "decoded": {
+          "schema": "kaspa-signal-payload/v1",
+          "status": "decoded",
+          "payload": {
+            "kind": "scheduler-covenant-binding",
+            "subject": "unisc-pool-rebalance-001:vault-recovery-binding",
+            "value": "binding-recorded",
+            "note": "intent=185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d; primitive=vault; proof=b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391; entrypoint=recover; enforcement=primitive-only"
+          },
+          "encoded": {
+            "bytes": 342,
+            "hex": "7b226b696e64223a227363686564756c65722d636f76656e616e742d62696e64696e67222c227375626a656374223a22756e6973632d706f6f6c2d726562616c616e63652d3030313a7661756c742d7265636f766572792d62696e64696e67222c2276616c7565223a2262696e64696e672d7265636f72646564222c226e6f7465223a22696e74656e743d313835643632393238663563646461646166633766616631346563376230393265613434613365613863303861663731616337613133353033323234336434643b207072696d69746976653d7661756c743b2070726f6f663d623736636339333362393761306264623930316666616532376135313761353235373763323732393763373062653334336463366361623733346261313339313b20656e747279706f696e743d7265636f7665723b20656e666f7263656d656e743d7072696d69746976652d6f6e6c79227d"
+          }
+        }
+      },
+      "receiptMatches": true,
+      "output": {
+        "expected": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "type": "pubkey"
+        },
+        "observed": {
+          "outputIndex": 0,
+          "amountSompi": "10000000",
+          "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "type": "pubkey"
+        },
+        "matches": true
+      },
+      "explorerUrl": "https://tn12.kaspa.stream/txs/dcd580d40d7a493947bb8c5acf709a3091cb751763c55fde9059e1dcebeb5f97"
     },
     {
       "kind": "accepted-output",

@@ -1,21 +1,21 @@
 {
   "schema": "tn12-proven-status/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T17:39:34.941Z",
+  "generatedAt": "2026-05-11T17:46:07.292Z",
   "status": "tn12-demo-proof-ready-mainnet-deferred",
   "currentPercent": "53-58%",
   "afterExternalSignerPercent": "57-62%",
   "acceptedEvidence": {
-    "checkpointRecords": 52,
-    "matchedRecords": 52,
+    "checkpointRecords": 53,
+    "matchedRecords": 53,
     "proofTransactions": 9,
     "roleSeparatedProofTransactions": 7,
-    "payloadEvents": 39,
+    "payloadEvents": 40,
     "outputEvidence": 4
   },
   "readiness": {
     "externalSignerAccepted": false,
-    "localReplayReady": false,
+    "localReplayReady": true,
     "liveRollbackObserved": false,
     "durablePromotionReady": false,
     "auctionCustodyEvidenceRows": 2,

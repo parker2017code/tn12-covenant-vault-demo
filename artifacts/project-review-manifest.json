@@ -1,7 +1,7 @@
 {
   "schema": "tn12-project-review-manifest/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T17:39:43.857Z",
+  "generatedAt": "2026-05-11T17:46:08.000Z",
   "status": "project-review-manifest-ready",
   "summary": {
     "commands": 8,
@@ -50,22 +50,22 @@
     {
       "path": "README.md",
       "present": true,
-      "bytes": 5891
+      "bytes": 6132
     },
     {
       "path": "MAINNET_READINESS.md",
       "present": true,
-      "bytes": 3033
+      "bytes": 3073
     },
     {
       "path": "TN12_HANDOFF.md",
       "present": true,
-      "bytes": 3774
+      "bytes": 3947
     },
     {
       "path": "docs/PROGRESS.md",
       "present": true,
-      "bytes": 5101
+      "bytes": 5297
     },
     {
       "path": "docs/NEXT_STEPS.md",
@@ -75,7 +75,7 @@
     {
       "path": "docs/AUDIT_MAP.md",
       "present": true,
-      "bytes": 8127
+      "bytes": 8631
     },
     {
       "path": "docs/SCRIPT_INDEX.md",

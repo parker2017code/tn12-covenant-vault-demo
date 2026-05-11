@@ -1,16 +1,16 @@
 {
   "schema": "tn12-operator-receipt-pack/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T17:39:43.817Z",
+  "generatedAt": "2026-05-11T17:46:07.615Z",
   "status": "operator-receipt-pack-ready",
   "currentPercent": "53-58%",
   "evidence": {
-    "checkpointRecords": 52,
-    "matchedRecords": 52,
+    "checkpointRecords": 53,
+    "matchedRecords": 53,
     "coreProofTransactions": 9,
     "roleSeparatedProofTransactions": 7,
-    "payloadEvents": 39,
-    "manifestEvents": 39,
+    "payloadEvents": 40,
+    "manifestEvents": 40,
     "outputEvidence": 4
   },
   "custody": {

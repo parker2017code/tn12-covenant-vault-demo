@@ -27,7 +27,7 @@ TangVM:
 
 | Piece | Current TN12 Evidence | Label |
 |---|---|---|
-| Fast ordered receipts | 39 accepted payload events and 52 checkpointed records | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
+| Fast ordered receipts | 40 accepted payload events and 53 checkpointed records | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
 | Attestation-like payloads | Miner/watcher signal and prediction/agent payload receipts | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
 | Local replay state | Checkpoint, fixture replay, virtual-chain ingestion, durable replay guard | `INDEXER_DERIVED` |
 | Trigger-like review rows | DeFi reducer blocks stale oracle, slippage, duplicate, liquidation, and custody-promotion rows | `PLANNER_ONLY` / `INDEXER_DERIVED` |
@@ -44,6 +44,7 @@ TangVM:
 | Execution receipt | Accepted TN12 payload marks which trigger executed and which state/output it targeted. | `TN12_ACCEPTED` / `INDEXER_DERIVED` |
 | Custody-adjacent execution | Local-key wallet transfers TKAS according to the selected trigger. | `LOCAL_KEY_CUSTODY_TEST` |
 | Covenant-bound trigger | A trigger routes into an existing vault, pledge, or escrow primitive where the script enforces the narrow spend rule. | `SCRIPT_ENFORCED` for the primitive only |
+| Covenant binding receipt | Accepted payload links scheduler intent state to an accepted covenant proof row, while preserving the indexer-derived boundary. | `TN12_ACCEPTED` / `INDEXER_DERIVED` / `SCRIPT_ENFORCED` reference |
 
 ## What Remains Out Of Scope
 

@@ -196,6 +196,11 @@
       "label": "Scheduler bid stale 001",
       "draftPath": "artifacts/signed-drafts/tn12-scheduler-bid-stale-001.json",
       "outPath": "artifacts/payload-scheduler-bid-stale-001-evidence.json"
+    },
+    {
+      "label": "Scheduler covenant binding vault 001",
+      "draftPath": "artifacts/signed-drafts/tn12-scheduler-covenant-binding-vault-001.json",
+      "outPath": "artifacts/payload-scheduler-covenant-binding-vault-001-evidence.json"
     }
   ]
 }

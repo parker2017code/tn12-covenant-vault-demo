@@ -1,0 +1,67 @@
+{
+  "schema": "tn12-scheduler-covenant-binding/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-11T17:46:41.888Z",
+  "status": "scheduler-covenant-binding-ready",
+  "enforcement": "INDEXER_DERIVED",
+  "summary": {
+    "acceptedBindings": 1,
+    "readyBindings": 1,
+    "scriptEnforcedPrimitiveRefs": 1,
+    "blockedNegativeRows": 3,
+    "liveProductClaims": 0,
+    "custodyActions": 0,
+    "protocolSchedulerClaims": 0,
+    "externalSignerClaims": 0,
+    "autonomousCustodyClaims": 0,
+    "mainnetClaims": 0
+  },
+  "rows": [
+    {
+      "id": "unisc-pool-rebalance-001:vault-recovery-binding",
+      "txid": "dcd580d40d7a493947bb8c5acf709a3091cb751763c55fde9059e1dcebeb5f97",
+      "sourceEvidencePath": "artifacts/payload-scheduler-covenant-binding-vault-001-evidence.json",
+      "intentTxid": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+      "primitive": "vault",
+      "proofTxid": "b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391",
+      "entrypoint": "recover",
+      "status": "binding-ready",
+      "reason": "accepted-binding-references-accepted-proof-row",
+      "referencedProof": {
+        "label": "Vault recovery",
+        "lane": "vault",
+        "entrypoint": "recover",
+        "accepted": true
+      },
+      "primitiveStatus": "SCRIPT_ENFORCED_REFERENCE",
+      "bindingEnforcement": "INDEXER_DERIVED"
+    }
+  ],
+  "negativeRows": [
+    {
+      "id": "missing-proof-reference",
+      "status": "blocked",
+      "reason": "binding cannot promote without an accepted proof txid",
+      "subject": "unisc-pool-rebalance-001:vault-recovery-binding"
+    },
+    {
+      "id": "wrong-entrypoint-reference",
+      "status": "blocked",
+      "reason": "binding entrypoint must match the referenced proof row",
+      "expectedEntryPoint": "recover",
+      "observedEntryPoint": "wrong-entrypoint"
+    },
+    {
+      "id": "protocol-scheduler-upgrade",
+      "status": "blocked",
+      "reason": "accepted binding payload does not upgrade indexer-derived scheduler state into protocol scheduling"
+    }
+  ],
+  "problems": [],
+  "boundaries": [
+    "The binding receipt is accepted TN12 payload evidence.",
+    "The scheduler-to-primitive relationship is indexer-derived.",
+    "Only the referenced covenant proof spend has script-enforced semantics, and only for that primitive's narrow path.",
+    "This is not TangVM, UniSc, a protocol scheduler, autonomous custody, or mainnet activation."
+  ]
+}
