@@ -54,7 +54,7 @@ try {
   assert.match(resultsHtml, /id="results-rails"/);
   assert.match(resultsHtml, /id="standards-adapters"/);
   assert.match(resultsHtml, /id="source-map"/);
-  assert.match(resultsHtml, /External links are design references/);
+  assert.match(resultsHtml, /Useful next integrations, not finished products/);
   assert.match(resultsHtml, /What should be clickable/);
   assert.match(resultsHtml, /Accepted TN12 activity/);
   assert.match(resultsHtml, /Live playground/);
@@ -136,6 +136,7 @@ async function checkRenderedPages(url) {
     await page.waitForSelector("#standards-adapters article", { timeout: 5000 });
     const resultsText = await page.locator("body").innerText();
     assert.match(resultsText, /x402-style HTTP payment adapter/);
+    assert.match(resultsText, /future adapter/i);
     assert.match(resultsText, /Accepted transfers/i);
     assert.match(resultsText, /25/);
     assert.match(resultsText, /external reference/);

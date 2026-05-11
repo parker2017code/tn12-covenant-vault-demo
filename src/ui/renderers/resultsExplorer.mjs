@@ -113,8 +113,8 @@ function renderFlow(node, { proven, activity, scheduler, benchmark }) {
 
 function renderStandards(node, standards) {
   node.innerHTML = standards.lanes.map((lane) => `
-    <article class="${lane.proofAvailable ? "rail-done" : "rail-open"}">
-      <span>${escapeHtml(lane.status)} · ${escapeHtml(lane.standard)}</span>
+    <article class="rail-open">
+      <span>${escapeHtml(lane.status)} · future adapter · ${escapeHtml(lane.standard)}</span>
       <strong>${escapeHtml(lane.label)}</strong>
       <p>${escapeHtml(lane.fit)}</p>
       <p><small>Next: ${escapeHtml(lane.next)}</small></p>
