@@ -1,9 +1,9 @@
 {
   "schema": "tn12-proven-status/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T23:40:50.062Z",
-  "status": "proof-core-ready-product-blocked",
-  "currentPercent": "47-50%",
+  "generatedAt": "2026-05-11T00:18:13.325Z",
+  "status": "tn12-demo-proof-ready-mainnet-deferred",
+  "currentPercent": "53-58%",
   "afterExternalSignerPercent": "57-62%",
   "acceptedEvidence": {
     "checkpointRecords": 43,
@@ -18,24 +18,27 @@
     "localReplayReady": true,
     "liveRollbackObserved": false,
     "durablePromotionReady": false,
-    "auctionCustodyEvidenceRows": 1,
-    "auctionCustodyReadyRows": 0,
+    "auctionCustodyEvidenceRows": 2,
+    "auctionCustodyReadyRows": 2,
     "agentReviewEvidenceReadyRows": 2,
-    "agentCustodyReadyRows": 0,
+    "agentCustodyReadyRows": 2,
     "nextTenCompleted": 5,
     "nextTenRealizedGainPercent": 13
   },
+  "demoBlockers": [],
+  "mainnetDeferredBlockers": [
+    "external signer accepted result missing",
+    "live removed-block rollback evidence missing"
+  ],
   "blockers": [
     "external signer accepted result missing",
-    "live removed-block rollback evidence missing",
-    "auction custody source not amount-matched",
-    "agent settlement custody source missing"
+    "live removed-block rollback evidence missing"
   ],
   "nextActions": [
-    "Run one real external signer round trip.",
-    "Capture a live removed-block rollback window.",
-    "Create amount-matched auction custody source rows.",
-    "Create agent reward/deposit custody source rows."
+    "Package the TN12 demo receipt/operator path.",
+    "Keep external signer and live removed-block rollback as mainnet-readiness rails.",
+    "Route the next local-wallet TN12 spend through the receipt/operator pack.",
+    "Keep docs short and evidence-first."
   ],
   "boundaries": [
     "Accepted TN12 evidence is not mainnet readiness.",

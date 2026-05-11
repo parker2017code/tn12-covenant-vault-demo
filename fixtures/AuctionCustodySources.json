@@ -14,6 +14,32 @@
       "recipient": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
       "status": "accepted-proof-amount-mismatch",
       "note": "Accepted TN12 auction funding and settlement proof exists, but it is not amount-matched to the 155 TKAS planner winner row."
+    },
+    {
+      "id": "auction-pass-001:winner-release:bid-pass-002:local-custody",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-002",
+      "kind": "winner-release",
+      "sourceType": "local-testnet-custody-source",
+      "fundingTxid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+      "settlementTxid": "",
+      "amountTkas": 155,
+      "recipient": "kaspatest:seller-workshop",
+      "status": "amount-matched-local-source",
+      "note": "Amount and recipient match the planner winner-release row. This is demo custody review, not atomic asset delivery."
+    },
+    {
+      "id": "auction-pass-001:loser-refund:bid-pass-001:local-custody",
+      "auctionId": "auction-pass-001",
+      "bidId": "bid-pass-001",
+      "kind": "loser-refund",
+      "sourceType": "local-testnet-custody-source",
+      "fundingTxid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+      "settlementTxid": "",
+      "amountTkas": 130,
+      "recipient": "kaspatest:bidder-alpha",
+      "status": "amount-matched-local-source",
+      "note": "Amount and recipient match the planner loser-refund row. This is demo custody review, not a submitted refund."
     }
   ],
   "boundaries": [

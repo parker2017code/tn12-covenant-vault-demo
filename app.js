@@ -814,15 +814,19 @@ async function renderProvenStatus() {
       <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.currentPercent)}</strong><p>After external signer: ${escapeHtml(status.afterExternalSignerPercent)}.</p></article>
       <article><span>Checkpoint</span><strong>${escapeHtml(status.acceptedEvidence.checkpointRecords)}</strong><p>${escapeHtml(status.acceptedEvidence.matchedRecords)} matched records.</p></article>
       <article><span>Payloads</span><strong>${escapeHtml(status.acceptedEvidence.payloadEvents)}</strong><p>${escapeHtml(status.acceptedEvidence.outputEvidence)} output-evidence rows.</p></article>
-      <article><span>Replay</span><strong>${escapeHtml(status.readiness.durablePromotionReady ? "promotable" : "blocked")}</strong><p>Local ready: ${escapeHtml(status.readiness.localReplayReady)}; live rollback: ${escapeHtml(status.readiness.liveRollbackObserved)}.</p></article>
+      <article><span>Demo blockers</span><strong>${escapeHtml((status.demoBlockers || []).length)}</strong><p>Mainnet deferred: ${escapeHtml((status.mainnetDeferredBlockers || []).length)}.</p></article>
     `;
     provenStatusBlockersNode.innerHTML = "";
-    for (const blocker of status.blockers) {
+    const rows = [
+      ...(status.demoBlockers || []).map((blocker) => ({ label: "demo blocker", blocker })),
+      ...(status.mainnetDeferredBlockers || []).map((blocker) => ({ label: "mainnet deferred", blocker }))
+    ];
+    for (const row of rows) {
       const article = document.createElement("article");
       article.className = "build-status-card compact-card";
       article.innerHTML = `
-        <span>blocker</span>
-        <strong>${escapeHtml(blocker)}</strong>
+        <span>${escapeHtml(row.label)}</span>
+        <strong>${escapeHtml(row.blocker)}</strong>
       `;
       provenStatusBlockersNode.append(article);
     }

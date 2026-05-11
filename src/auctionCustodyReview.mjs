@@ -40,11 +40,15 @@ export function buildAuctionCustodyReview({
 }
 
 function buildReviewRow({ draft, sources, walletStandardMapping }) {
-  const custodySource = sources.find((source) =>
+  const matchingSources = sources.filter((source) =>
     source.auctionId === draft.auctionId
     && source.bidId === draft.bidId
     && source.kind === draft.kind
-  ) || null;
+  );
+  const custodySource = matchingSources.find((source) =>
+    Number(source.amountTkas || 0) === Number(draft.amountTkas || 0)
+    && String(source.recipient || "") === String(draft.recipient || "")
+  ) || matchingSources[0] || null;
   const amountMatched = Boolean(custodySource) && Number(custodySource.amountTkas || 0) === Number(draft.amountTkas || 0);
   const recipientMatched = Boolean(custodySource) && String(custodySource.recipient || "") === String(draft.recipient || "");
   const custodyReady = Boolean(custodySource) && amountMatched && recipientMatched;

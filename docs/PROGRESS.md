@@ -27,18 +27,25 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Next 10-task status | `artifacts/next-ten-execution-status.json` |
 | Proven status boundary | `artifacts/proven-status.json` |
 
-## Blockers
+## Demo Status
 
-| Blocker | State |
+| Lane | State |
 |---|---|
-| External signer | Request templates and research are ready; no real user-approved signature yet. |
-| Live removed-block rollback evidence | Local promotion readiness passes; full promotion is blocked until a live removed-block window is captured. |
+| Auction custody | 2 amount-matched local-testnet custody rows are ready for wallet review. |
+| Agent custody | 2 amount-matched local-testnet custody rows are ready for wallet review. |
 | Batch-assurance alternate path | Release is accepted; refund path is non-selected and must not be submitted for the spent pledge set. |
 | Product hardening | Wallet, indexer, monitoring, and recovery paths are not production-grade. |
 
+## Deferred Mainnet-Readiness Rails
+
+| Rail | State |
+|---|---|
+| External signer | Request templates and research are ready; no real user-approved signature yet. |
+| Live removed-block rollback evidence | Local promotion readiness passes; full promotion is deferred until a live removed-block window is captured. |
+
 ## Current Percent
 
-- TN12 DeFi/demo lane: `47-50%` after this local slice.
+- TN12 DeFi/demo lane: `53-58%` after the amount-matched auction and agent custody slice.
 - After real external signer: `57-62%`.
 - Mainnet deployment readiness: about `55-60%`.
 
@@ -55,7 +62,7 @@ npm run wallet:external-signer-research
 
 ## Next
 
-1. Get one real external signer result for a payload receipt.
-2. Get one real external signer result for a covenant spend.
+1. Package the TN12 demo receipt/operator path.
+2. Route the next local-wallet TN12 spend through the receipt/operator pack.
 3. Keep batch-assurance refund paths marked non-selected after the accepted release.
-4. Capture live removed-block rollback evidence when available.
+4. Keep external signer and live rollback as mainnet-readiness rails.

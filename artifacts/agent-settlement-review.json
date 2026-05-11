@@ -1,7 +1,7 @@
 {
   "schema": "kaspa-agent-settlement-review/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T23:07:56.706Z",
+  "generatedAt": "2026-05-11T00:10:52.130Z",
   "status": "agent-settlement-review-ready",
   "summary": {
     "drafts": 3,
@@ -11,7 +11,9 @@
     "reviewEvidenceReadyRows": 2,
     "releaseReviewReadyRows": 1,
     "holdReviewReadyRows": 1,
-    "custodyReadyRows": 0,
+    "custodyEvidenceRows": 2,
+    "amountMatchedRows": 2,
+    "custodyReadyRows": 2,
     "reviewerDecisionRows": 2
   },
   "rows": [
@@ -27,10 +29,22 @@
       "acceptedPlannerEvent": true,
       "reviewEvidenceReady": true,
       "reviewerDecisionNeeded": true,
-      "custodyReady": false,
+      "custodySourcePresent": true,
+      "custodySource": {
+        "id": "agent-task-invoice-001:release:local-custody",
+        "sourceType": "local-testnet-custody-source",
+        "fundingTxid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+        "settlementTxid": "",
+        "amountTkas": 75,
+        "recipient": "agent:indexer-auditor",
+        "status": "amount-matched-local-source"
+      },
+      "amountMatched": true,
+      "recipientMatched": true,
+      "custodyReady": true,
       "walletStandardMapped": false,
-      "status": "release-review-evidence-ready-needs-custody",
-      "next": "Attach accepted reward/deposit custody output before release/refund submit."
+      "status": "custody-source-ready-needs-wallet",
+      "next": "Route through wallet-standard signing and accepted replay."
     },
     {
       "id": "agent-task-escrow-001:hold",
@@ -44,10 +58,22 @@
       "acceptedPlannerEvent": true,
       "reviewEvidenceReady": true,
       "reviewerDecisionNeeded": true,
-      "custodyReady": false,
+      "custodySourcePresent": true,
+      "custodySource": {
+        "id": "agent-task-escrow-001:hold:local-custody",
+        "sourceType": "local-testnet-custody-source",
+        "fundingTxid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+        "settlementTxid": "",
+        "amountTkas": 160,
+        "recipient": "",
+        "status": "amount-matched-local-source"
+      },
+      "amountMatched": true,
+      "recipientMatched": true,
+      "custodyReady": true,
       "walletStandardMapped": false,
-      "status": "hold-review-evidence-ready-needs-custody",
-      "next": "Attach accepted reward/deposit custody output before release/refund submit."
+      "status": "custody-source-ready-needs-wallet",
+      "next": "Route through wallet-standard signing and accepted replay."
     },
     {
       "id": "agent-task-research-001:refund",
@@ -61,6 +87,10 @@
       "acceptedPlannerEvent": false,
       "reviewEvidenceReady": false,
       "reviewerDecisionNeeded": false,
+      "custodySourcePresent": false,
+      "custodySource": null,
+      "amountMatched": false,
+      "recipientMatched": false,
       "custodyReady": false,
       "walletStandardMapped": false,
       "status": "needs-accepted-review-evidence",

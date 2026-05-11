@@ -20,13 +20,13 @@ Percentages in this repo mean mainnet deployment readiness unless a line explici
 
 - Mainnet covenant activation.
 - Full DeFi: no AMM, lending, liquidation, oracle, or production custody rail.
-- No-local-key wallet signing: accepted proofs still used local testnet keys.
+- No-local-key wallet signing: accepted proofs still used local testnet keys; this is deferred for mainnet-readiness.
 - Pooled threshold enforcement: current batch target aggregation is planner/indexer logic.
 - Production indexer reliability: local replay guards pass, but live removed-block rollback evidence is still useful.
 
-## Current Blockers
+## Deferred Mainnet-Readiness Rails
 
-| Blocker | Current state | Clears when |
+| Rail | Current state | Clears when |
 |---|---|---|
 | External signer | `artifacts/external-signer-path-research.json` and 4 request templates are ready | A real wallet returns signed tx bytes, submit succeeds, replay sees the accepted txid |
 | Live rollback evidence | `artifacts/durable-replay-promotion-guard.json` passes local rollback matching | A live TN12 removed-block window is captured and matched |

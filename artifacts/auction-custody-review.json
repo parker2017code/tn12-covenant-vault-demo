@@ -1,16 +1,16 @@
 {
   "schema": "kaspa-auction-custody-review/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T22:41:57.847Z",
+  "generatedAt": "2026-05-11T00:10:51.406Z",
   "status": "auction-custody-review-ready",
   "summary": {
     "drafts": 3,
     "winnerReleaseDrafts": 1,
     "refundDrafts": 2,
     "plannerEvidenceRows": 2,
-    "custodyEvidenceRows": 1,
-    "amountMatchedRows": 0,
-    "custodyReadyRows": 0
+    "custodyEvidenceRows": 2,
+    "amountMatchedRows": 2,
+    "custodyReadyRows": 2
   },
   "rows": [
     {
@@ -23,20 +23,20 @@
       "plannerEvidencePresent": true,
       "custodySourcePresent": true,
       "custodySource": {
-        "id": "auction-pass-001:settlement-proof",
-        "sourceType": "accepted-auction-settlement-proof",
-        "fundingTxid": "6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea",
-        "settlementTxid": "523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236",
-        "amountTkas": 200,
-        "recipient": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "status": "accepted-proof-amount-mismatch"
+        "id": "auction-pass-001:winner-release:bid-pass-002:local-custody",
+        "sourceType": "local-testnet-custody-source",
+        "fundingTxid": "512d4b5db7d940858324bad05e76b4543e346774f39bf53b1b3fecada3a0284f",
+        "settlementTxid": "",
+        "amountTkas": 155,
+        "recipient": "kaspatest:seller-workshop",
+        "status": "amount-matched-local-source"
       },
-      "amountMatched": false,
-      "recipientMatched": false,
-      "custodyReady": false,
+      "amountMatched": true,
+      "recipientMatched": true,
+      "custodyReady": true,
       "walletStandardMapped": false,
-      "status": "custody-evidence-present-not-matched",
-      "next": "Create an amount-matched custody source for this planner row before submit."
+      "status": "custody-source-ready-needs-wallet",
+      "next": "Review with an external signer route before any submit."
     },
     {
       "id": "auction-pass-001:loser-refund:bid-pass-001",
@@ -46,14 +46,22 @@
       "amountTkas": 130,
       "recipient": "kaspatest:bidder-alpha",
       "plannerEvidencePresent": true,
-      "custodySourcePresent": false,
-      "custodySource": null,
-      "amountMatched": false,
-      "recipientMatched": false,
-      "custodyReady": false,
+      "custodySourcePresent": true,
+      "custodySource": {
+        "id": "auction-pass-001:loser-refund:bid-pass-001:local-custody",
+        "sourceType": "local-testnet-custody-source",
+        "fundingTxid": "e4ffbf97baa8f04d736ba90aeefa3032bacea16c184d9e80e4ded1f751f8385d",
+        "settlementTxid": "",
+        "amountTkas": 130,
+        "recipient": "kaspatest:bidder-alpha",
+        "status": "amount-matched-local-source"
+      },
+      "amountMatched": true,
+      "recipientMatched": true,
+      "custodyReady": true,
       "walletStandardMapped": false,
-      "status": "needs-custody-source",
-      "next": "Attach accepted bid custody outputs or an escrow/covenant source before settlement/refund review."
+      "status": "custody-source-ready-needs-wallet",
+      "next": "Review with an external signer route before any submit."
     },
     {
       "id": "auction-voucher-001:loser-refund:bid-voucher-001",

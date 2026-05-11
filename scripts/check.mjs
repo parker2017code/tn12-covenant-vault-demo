@@ -508,15 +508,17 @@ const provenStatus = buildProvenStatus({
   nextTenStatus: nextTenExecutionStatusArtifact,
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
-assert.equal(provenStatus.status, "proof-core-ready-product-blocked");
+assert.equal(provenStatus.status, "tn12-demo-proof-ready-mainnet-deferred");
+assert.equal(provenStatus.currentPercent, "53-58%");
 assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 43);
 assert.equal(provenStatus.acceptedEvidence.payloadEvents, 30);
 assert.equal(provenStatus.readiness.durablePromotionReady, false);
-assert.ok(provenStatus.blockers.includes("external signer accepted result missing"));
-assert.ok(provenStatus.blockers.includes("live removed-block rollback evidence missing"));
+assert.deepEqual(provenStatus.demoBlockers, []);
+assert.ok(provenStatus.mainnetDeferredBlockers.includes("external signer accepted result missing"));
+assert.ok(provenStatus.mainnetDeferredBlockers.includes("live removed-block rollback evidence missing"));
 const provenStatusArtifact = JSON.parse(await readFile(new URL("../artifacts/proven-status.json", import.meta.url), "utf8"));
-assert.equal(provenStatusArtifact.status, "proof-core-ready-product-blocked");
-assert.equal(provenStatusArtifact.currentPercent, "47-50%");
+assert.equal(provenStatusArtifact.status, "tn12-demo-proof-ready-mainnet-deferred");
+assert.equal(provenStatusArtifact.currentPercent, "53-58%");
 const rollupScoutFixture = JSON.parse(await readFile(new URL("../fixtures/BasedRollupScout.json", import.meta.url), "utf8"));
 const rollupScout = buildBasedRollupScout(rollupScoutFixture);
 assert.equal(rollupScout.status, "scouting-not-deployment");
@@ -945,18 +947,18 @@ const auctionCustodyReview = buildAuctionCustodyReview({
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(auctionCustodyReview.status, "auction-custody-review-ready");
-assert.equal(auctionCustodyReview.summary.custodyEvidenceRows, 1);
-assert.equal(auctionCustodyReview.summary.amountMatchedRows, 0);
-assert.equal(auctionCustodyReview.summary.custodyReadyRows, 0);
+assert.equal(auctionCustodyReview.summary.custodyEvidenceRows, 2);
+assert.equal(auctionCustodyReview.summary.amountMatchedRows, 2);
+assert.equal(auctionCustodyReview.summary.custodyReadyRows, 2);
 assert.ok(auctionCustodyReview.rows.some((row) =>
   row.id === "auction-pass-001:winner-release:bid-pass-002"
   && row.custodySourcePresent
-  && !row.amountMatched
-  && row.status === "custody-evidence-present-not-matched"
+  && row.amountMatched
+  && row.status === "custody-source-ready-needs-wallet"
 ));
 const auctionCustodyReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/auction-custody-review.json", import.meta.url), "utf8"));
 assert.equal(auctionCustodyReviewArtifact.status, "auction-custody-review-ready");
-assert.equal(auctionCustodyReviewArtifact.summary.custodyEvidenceRows, 1);
+assert.equal(auctionCustodyReviewArtifact.summary.custodyReadyRows, 2);
 const defiFixture = JSON.parse(await readFile(new URL("../fixtures/DefiResearchBacklog.json", import.meta.url), "utf8"));
 const defiBacklog = buildDefiResearchBacklog(defiFixture);
 assert.equal(defiBacklog.status, "research-backlog-not-live-defi");
@@ -1068,24 +1070,29 @@ assert.equal(agentSettlementDrafts.summary.autonomousPayouts, 0);
 const agentSettlementDraftsArtifact = JSON.parse(await readFile(new URL("../artifacts/agent-settlement-drafts.json", import.meta.url), "utf8"));
 assert.equal(agentSettlementDraftsArtifact.summary.drafts, 3);
 const walletStandardForAgentReview = JSON.parse(await readFile(new URL("../artifacts/wallet-standard-mapping.json", import.meta.url), "utf8"));
+const agentCustodySources = JSON.parse(await readFile(new URL("../fixtures/AgentCustodySources.json", import.meta.url), "utf8"));
 const agentSettlementReview = buildAgentSettlementReview({
   settlementDrafts: agentSettlementDraftsArtifact,
   walletStandardMapping: walletStandardForAgentReview,
+  custodySources: agentCustodySources,
   generatedAt: "2026-05-09T00:00:00.000Z"
 });
 assert.equal(agentSettlementReview.status, "agent-settlement-review-ready");
 assert.equal(agentSettlementReview.summary.reviewEvidenceReadyRows, 2);
 assert.equal(agentSettlementReview.summary.releaseReviewReadyRows, 1);
 assert.equal(agentSettlementReview.summary.holdReviewReadyRows, 1);
-assert.equal(agentSettlementReview.summary.custodyReadyRows, 0);
+assert.equal(agentSettlementReview.summary.custodyEvidenceRows, 2);
+assert.equal(agentSettlementReview.summary.amountMatchedRows, 2);
+assert.equal(agentSettlementReview.summary.custodyReadyRows, 2);
 assert.ok(agentSettlementReview.rows.some((row) =>
   row.id === "agent-task-invoice-001:release"
   && row.reviewEvidenceReady
-  && row.status === "release-review-evidence-ready-needs-custody"
+  && row.status === "custody-source-ready-needs-wallet"
 ));
 const agentSettlementReviewArtifact = JSON.parse(await readFile(new URL("../artifacts/agent-settlement-review.json", import.meta.url), "utf8"));
 assert.equal(agentSettlementReviewArtifact.status, "agent-settlement-review-ready");
 assert.equal(agentSettlementReviewArtifact.summary.reviewEvidenceReadyRows, 2);
+assert.equal(agentSettlementReviewArtifact.summary.custodyReadyRows, 2);
 const buildStatusFixture = JSON.parse(await readFile(new URL("../fixtures/BuildStatus.json", import.meta.url), "utf8"));
 const projectStatus = buildProjectStatus(buildStatusFixture);
 assert.equal(projectStatus.status, "active-build-map");
@@ -2238,6 +2245,8 @@ const files = [
   "fixtures/AccessPassPlanner.json",
   "fixtures/MainnetReadiness.json",
   "fixtures/SimpleAssetPolicies.json",
+  "fixtures/AuctionCustodySources.json",
+  "fixtures/AgentCustodySources.json",
   "fixtures/StableValuePaths.json",
   "fixtures/StableIssuerRedemptions.json",
   "fixtures/BuildStatus.json",

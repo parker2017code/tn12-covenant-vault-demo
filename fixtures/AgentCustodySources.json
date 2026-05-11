@@ -1,0 +1,35 @@
+{
+  "schema": "kaspa-agent-custody-sources/v1",
+  "network": "kaspa-testnet-12",
+  "sources": [
+    {
+      "id": "agent-task-invoice-001:release:local-custody",
+      "taskId": "agent-task-invoice-001",
+      "kind": "release",
+      "sourceType": "local-testnet-custody-source",
+      "fundingTxid": "78bdc0a6483c71557735d847b284901220d65faea4bbc49656f6d7f3b53fe4e8",
+      "settlementTxid": "",
+      "amountTkas": 75,
+      "recipient": "agent:indexer-auditor",
+      "status": "amount-matched-local-source",
+      "note": "Amount and recipient match the release draft. This is demo custody review, not autonomous payout."
+    },
+    {
+      "id": "agent-task-escrow-001:hold:local-custody",
+      "taskId": "agent-task-escrow-001",
+      "kind": "hold",
+      "sourceType": "local-testnet-custody-source",
+      "fundingTxid": "040759dd36a61395f6a721263ba8c8aa08d595f5e18d84faa1c61de0bb43a755",
+      "settlementTxid": "",
+      "amountTkas": 160,
+      "recipient": "",
+      "status": "amount-matched-local-source",
+      "note": "Amount and hold state match the disputed-task draft. This keeps funds held pending review."
+    }
+  ],
+  "boundaries": [
+    "These rows are demo custody sources, not external signer proof.",
+    "A row becomes custody-ready only when task id, kind, amount, and recipient match the settlement draft.",
+    "Autonomous payout still requires wallet signing, policy review, and accepted replay."
+  ]
+}
