@@ -11,24 +11,24 @@ import {
   signTransaction
 } from "kaspa-wasm";
 import { buildSubmitPayload } from "../src/submitPayload.mjs";
+import { decimalTkasToSompi } from "../src/amounts.mjs";
+import { assertSameTn12Address } from "../src/validation/address.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 const funding = await readJson("fixtures/FundedWalletOutpoint.json");
 const wallet = await readJson(".local/tn12-wallet.json");
-const vaultBucketTkas = Number(process.env.VAULT_BUCKET_TKAS || "100");
-const assuranceBucketTkas = Number(process.env.ASSURANCE_BUCKET_TKAS || "500");
+const vaultBucketTkas = String(process.env.VAULT_BUCKET_TKAS || "100");
+const assuranceBucketTkas = String(process.env.ASSURANCE_BUCKET_TKAS || "500");
 const minerFeeSompi = BigInt(process.env.MINER_FEE_SOMPI || "5000");
-const vaultSompi = tkasToSompi(vaultBucketTkas);
-const assuranceSompi = tkasToSompi(assuranceBucketTkas);
+const vaultSompi = decimalTkasToSompi(vaultBucketTkas);
+const assuranceSompi = decimalTkasToSompi(assuranceBucketTkas);
 const fundingSompi = BigInt(funding.raw.utxoEntry.amount);
 const changeSompi = fundingSompi - vaultSompi - assuranceSompi - minerFeeSompi;
 
-if (wallet.address !== funding.address || !wallet.address.startsWith("kaspatest:")) {
-  throw new Error("Wallet and funding outpoint must use the same TN12 kaspatest: address.");
-}
+assertSameTn12Address(wallet.address, funding.address, "Wallet and funding outpoint addresses");
 
 if (changeSompi <= 0n) {
-  throw new Error(`Split buckets plus miner fee exceed the fetched UTXO. Current fixture has ${sompiToTkas(fundingSompi)} TKAS; requested ${vaultBucketTkas + assuranceBucketTkas} TKAS plus ${minerFeeSompi} sompi fee. Lower VAULT_BUCKET_TKAS/ASSURANCE_BUCKET_TKAS or refresh fixtures with npm run utxos:fetch.`);
+  throw new Error(`Split buckets plus miner fee exceed the fetched UTXO. Current fixture has ${sompiToTkas(fundingSompi)} TKAS; requested ${vaultBucketTkas} + ${assuranceBucketTkas} TKAS plus ${minerFeeSompi} sompi fee. Lower VAULT_BUCKET_TKAS/ASSURANCE_BUCKET_TKAS or refresh fixtures with npm run utxos:fetch.`);
 }
 
 const sourceScript = scriptPublicKeyFromHex(funding.raw.utxoEntry.scriptPublicKey.scriptPublicKey);
@@ -95,10 +95,6 @@ console.log(`artifacts/signed-drafts/split-funding.json transactionId=${artifact
 
 async function readJson(path) {
   return JSON.parse(await readFile(path, "utf8"));
-}
-
-function tkasToSompi(value) {
-  return BigInt(Math.round(Number(value) * Number(SOMPI_PER_TKAS)));
 }
 
 function sompiToTkas(sompi) {

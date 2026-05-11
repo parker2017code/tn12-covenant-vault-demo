@@ -19,6 +19,7 @@ import {
   buildSignalPayloadArtifact,
   encodeSignalPayloadBytes
 } from "../src/signalPayload.mjs";
+import { assertSameTn12Address } from "../src/validation/address.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 const fundingOutpointPath = process.env.FUNDING_OUTPOINT || "fixtures/FundedWalletOutpoint.json";
@@ -38,9 +39,7 @@ const receipt = buildSignalPayloadArtifact({
 });
 const payloadBytes = encodeSignalPayloadBytes(receipt.payload);
 
-if (wallet.address !== funding.address || !wallet.address.startsWith("kaspatest:")) {
-  throw new Error("Wallet and funding outpoint must use the same TN12 kaspatest: address.");
-}
+assertSameTn12Address(wallet.address, funding.address, "Wallet and funding outpoint addresses");
 
 const address = new Address(wallet.address);
 const fundingSompi = BigInt(funding.raw.utxoEntry.amount);

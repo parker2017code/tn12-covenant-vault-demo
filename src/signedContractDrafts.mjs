@@ -11,6 +11,7 @@ import {
 } from "kaspa-wasm";
 import { blake2b } from "blakejs";
 import { decimalTkasToSompi, sompiToTkas as formatSompiToTkas } from "./amounts.mjs";
+import { assertSameTn12Address } from "./validation/address.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 
@@ -22,9 +23,7 @@ export function buildSignedContractFundingDraft({
   amountTkas,
   minerFeeSompi = 5000n
 }) {
-  if (wallet.address !== funding.address || !wallet.address.startsWith("kaspatest:")) {
-    throw new Error("Wallet and funding outpoint must use the same TN12 kaspatest: address.");
-  }
+  assertSameTn12Address(wallet.address, funding.address, "Wallet and funding outpoint addresses");
 
   const amountSompi = tkasToSompi(amountTkas);
   const fundingSompi = BigInt(funding.raw.utxoEntry.amount);

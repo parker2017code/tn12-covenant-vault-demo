@@ -12,6 +12,7 @@ import {
   signTransaction
 } from "kaspa-wasm";
 import { buildSubmitPayload } from "../src/submitPayload.mjs";
+import { assertSameTn12Address } from "../src/validation/address.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 const sourcePath = process.env.BATCH_PLEDGE_FUNDING_SOURCE || "fixtures/FundedWalletOutpoint.json";
@@ -27,9 +28,7 @@ const requirements = await readJson(requirementsPath);
 const requiredOutputs = requirements.requirements || [];
 const pledgeWallets = await loadOrCreatePledgeWallets(requiredOutputs);
 
-if (sourceWallet.address !== funding.address || !sourceWallet.address.startsWith("kaspatest:")) {
-  throw new Error("Wallet and funding outpoint must use the same TN12 kaspatest: address.");
-}
+assertSameTn12Address(sourceWallet.address, funding.address, "Wallet and funding outpoint addresses");
 if (requiredOutputs.length === 0) {
   throw new Error("No batch-assurance custody requirements found.");
 }

@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { PrivateKey, Keypair } from "kaspa-wasm";
+import { assertSameTn12Address } from "../src/validation/address.mjs";
 
 const walletPath = ".local/tn12-wallet.json";
 const wallet = JSON.parse(await readFile(walletPath, "utf8"));
@@ -7,9 +8,7 @@ const privateKey = new PrivateKey(wallet.privateKey);
 const keypair = Keypair.fromPrivateKey(privateKey);
 const address = String(keypair.toAddress("testnet"));
 
-if (address !== wallet.address || !address.startsWith("kaspatest:")) {
-  throw new Error("Saved wallet is not the expected TN12/testnet wallet.");
-}
+assertSameTn12Address(address, wallet.address, "Derived and saved wallet addresses");
 
 const xOnlyPublicKey = String(keypair.xOnlyPublicKey);
 const publicKeyArg = hexToByteArrayArg(xOnlyPublicKey);

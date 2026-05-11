@@ -1,6 +1,6 @@
 # Audit Map
 
-Short path for an independent reviewer. This is the canonical claim file. It maps public claims to evidence, commands, status labels, and enforcement class.
+Short path for an independent reviewer. This is the canonical claim file. It maps public claims to evidence, commands, status labels, and enforcement class. See `docs/CLAIM_VOCABULARY.md` for label definitions.
 
 ## Reviewer Commands
 

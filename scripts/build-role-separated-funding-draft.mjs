@@ -12,6 +12,7 @@ import {
 } from "kaspa-wasm";
 import { blake2b } from "blakejs";
 import { buildSubmitPayload } from "../src/submitPayload.mjs";
+import { assertSameTn12Address } from "../src/validation/address.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 const sourcePath = process.env.ROLE_FUNDING_SOURCE || "fixtures/FundedWalletOutpoint.json";
@@ -41,9 +42,7 @@ const contracts = [
 ];
 const minerFeeSompi = BigInt(process.env.MINER_FEE_SOMPI || "5000");
 
-if (wallet.address !== funding.address || !wallet.address.startsWith("kaspatest:")) {
-  throw new Error("Wallet and funding outpoint must use the same TN12 kaspatest: address.");
-}
+assertSameTn12Address(wallet.address, funding.address, "Wallet and funding outpoint addresses");
 
 const fundingSompi = BigInt(funding.raw.utxoEntry.amount);
 const outputSpecs = contracts.map((contract) => {

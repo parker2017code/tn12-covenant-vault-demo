@@ -7,7 +7,7 @@
     "check": "node scripts/check.mjs",
     "check:ui": "node scripts/check-ui.mjs",
     "check:negative": "node scripts/check-negative.mjs",
-    "check:focused": "node tests/core/amounts.test.mjs && node tests/proof/proof-records.test.mjs",
+    "check:focused": "node tests/core/amounts.test.mjs && node tests/core/address.test.mjs && node tests/proof/proof-records.test.mjs && node scripts/check-counts.mjs",
     "check:all": "npm run check:focused && npm run check && npm run check:negative && npm run check:ui",
     "check:tn12": "npm run tx:verify && npm run proof:evidence && npm run tx:roles:verify && npm run roles:proof:evidence && npm run proof:records && npm run payload:verify:events && npm run indexer:checkpoint && npm run indexer:persist",
     "demo:operator-refresh": "npm run check:tn12 && npm run indexer:replay-plan && npm run indexer:schema && npm run indexer:replay && npm run indexer:virtual-chain-run && npm run indexer:virtual-chain-adapter && npm run indexer:endpoint-runbook && npm run defi:v1-loop && npm run project:proven-status && npm run project:operator-pack && npm run check:all",
@@ -155,11 +155,14 @@
     "serve": "python3 -m http.server 4176"
   },
   "dependencies": {
-    "blakejs": "^1.2.1",
-    "isomorphic-ws": "^5.0.0",
-    "kaspa-wasm": "^0.13.0"
+    "blakejs": "1.2.1",
+    "isomorphic-ws": "5.0.0",
+    "kaspa-wasm": "0.13.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.59.1"
+    "@playwright/test": "1.59.1"
+  },
+  "engines": {
+    "node": ">=20.19.0 <25"
   }
 }

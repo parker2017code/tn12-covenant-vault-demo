@@ -1,3 +1,5 @@
+import { validateTn12Address } from "./validation/address.mjs";
+
 export const DEFAULT_ASSURANCE = Object.freeze({
   projectName: "TN12 public goods sprint",
   recipientAddress: "kaspatest:",
@@ -26,12 +28,12 @@ export function normalizeAssurance(input) {
 export function validateAssurance(contract) {
   const issues = [];
 
-  if (!contract.recipientAddress.startsWith("kaspatest:")) {
-    issues.push("Recipient should be a TN12/testnet kaspatest: address.");
+  if (!validateTn12Address(contract.recipientAddress).ok) {
+    issues.push("Recipient should be a valid TN12/testnet kaspatest address.");
   }
 
-  if (!contract.refundAddress.startsWith("kaspatest:")) {
-    issues.push("Refund address should be a TN12/testnet kaspatest: address.");
+  if (!validateTn12Address(contract.refundAddress).ok) {
+    issues.push("Refund address should be a valid TN12/testnet kaspatest address.");
   }
 
   if (contract.recipientAddress && contract.recipientAddress === contract.refundAddress) {

@@ -12,6 +12,7 @@ import {
 } from "kaspa-wasm";
 import { buildSubmitPayload } from "../src/submitPayload.mjs";
 import { decimalTkasToSompi } from "../src/amounts.mjs";
+import { assertSameTn12Address } from "../src/validation/address.mjs";
 
 const SOMPI_PER_TKAS = 100000000n;
 const fundingOutpointPath = process.env.FUNDING_OUTPOINT || "fixtures/FundedWalletOutpoint.json";
@@ -24,9 +25,7 @@ const amountSompi = decimalTkasToSompi(amountTkas);
 const funding = JSON.parse(await readFile(fundingOutpointPath, "utf8"));
 const wallet = JSON.parse(await readFile(walletPath, "utf8"));
 
-if (wallet.address !== funding.address || !wallet.address.startsWith("kaspatest:")) {
-  throw new Error("Wallet and funding outpoint must use the same TN12 kaspatest: address.");
-}
+assertSameTn12Address(wallet.address, funding.address, "Wallet and funding outpoint addresses");
 
 const address = new Address(wallet.address);
 const destinationAddress = process.env.DESTINATION_ADDRESS || wallet.address;

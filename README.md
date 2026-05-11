@@ -12,6 +12,7 @@ Start here:
 - `artifacts/proven-status.json`: compact current counts, percent, and deferred rails.
 - `artifacts/operator-receipt-pack.json`: accepted evidence plus the local-wallet command path.
 - `docs/AUDIT_MAP.md`: canonical claim, status, and enforcement-class map.
+- `docs/CLAIM_VOCABULARY.md`: short definitions for `SCRIPT_ENFORCED`, `PLANNER_ONLY`, `INDEXER_DERIVED`, and related labels.
 - `MAINNET_READINESS.md`: deployment-readiness gaps only.
 - `docs/NEXT_STEPS.md`: short current execution queue.
 - `docs/PROOF_INDEX.md` and `docs/TN12_TEST_MATRIX.md`: txid-level evidence.

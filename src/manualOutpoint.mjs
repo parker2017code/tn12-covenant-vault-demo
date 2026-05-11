@@ -1,3 +1,5 @@
+import { validateTn12Address } from "./validation/address.mjs";
+
 export const FUNDED_TN12_ADDRESS = "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt";
 
 export const DEFAULT_MANUAL_OUTPOINT = Object.freeze({
@@ -27,8 +29,8 @@ export function normalizeManualOutpoint(input = {}) {
 export function validateManualOutpoint(outpoint) {
   const issues = [];
 
-  if (!outpoint.address.startsWith("kaspatest:")) {
-    issues.push("Manual funding address must be a TN12/testnet kaspatest: address.");
+  if (!validateTn12Address(outpoint.address).ok) {
+    issues.push("Manual funding address must be a valid TN12/testnet kaspatest address.");
   }
 
   if (outpoint.txid && !/^[a-fA-F0-9]{32,128}$/.test(outpoint.txid)) {

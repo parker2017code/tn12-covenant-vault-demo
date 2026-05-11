@@ -133,8 +133,8 @@ import { buildOperatorReceiptPack } from "../src/operatorReceiptPack.mjs";
 
 const policy = normalizePolicy({
   ...DEFAULT_POLICY,
-  ownerAddress: "kaspatest:owner",
-  recoveryAddress: "kaspatest:recovery",
+  ownerAddress: DEFAULT_MANUAL_OUTPOINT.address,
+  recoveryAddress: "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
   withdrawalDelayHours: "48",
   dailyLimitTkas: "250.5",
   guardianThreshold: "2",
@@ -155,8 +155,8 @@ assert.equal(buildLifecycle(policy).length, 5);
 
 const assurancePolicy = normalizeAssurance({
   ...DEFAULT_ASSURANCE,
-  recipientAddress: "kaspatest:recipient",
-  refundAddress: "kaspatest:refund",
+  recipientAddress: DEFAULT_MANUAL_OUTPOINT.address,
+  refundAddress: "kaspatest:qqr8fl2xuwu9fu2l5j4d0jtzqpdtzxeqyaelcty0l9xeshfnwwhdus566pnyy",
   targetTkas: "1000",
   pledgedTkas: "250",
   minimumPledgeTkas: "100",

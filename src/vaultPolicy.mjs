@@ -1,3 +1,5 @@
+import { validateTn12Address } from "./validation/address.mjs";
+
 export const DEFAULT_POLICY = Object.freeze({
   ownerAddress: "kaspatest:",
   recoveryAddress: "kaspatest:",
@@ -31,12 +33,12 @@ export function normalizePolicy(input) {
 export function validatePolicy(policy) {
   const issues = [];
 
-  if (!policy.ownerAddress.startsWith("kaspatest:")) {
-    issues.push("Owner address should be a TN12/testnet kaspatest: address.");
+  if (!validateTn12Address(policy.ownerAddress).ok) {
+    issues.push("Owner address should be a valid TN12/testnet kaspatest address.");
   }
 
-  if (!policy.recoveryAddress.startsWith("kaspatest:")) {
-    issues.push("Recovery address should be a TN12/testnet kaspatest: address.");
+  if (!validateTn12Address(policy.recoveryAddress).ok) {
+    issues.push("Recovery address should be a valid TN12/testnet kaspatest address.");
   }
 
   if (policy.ownerAddress && policy.ownerAddress === policy.recoveryAddress) {
