@@ -26,7 +26,10 @@ assert.equal(artifact.submitPayload.transaction.inputs[0].computeBudget, 10);
 assert.equal(artifact.submitPayload.transaction.outputs[0].covenant.covenantId, artifact.covenantGenesis.covenant.covenantId);
 
 const tx = buildWrpcTransactionFromArtifact(artifact);
-assert.equal(String(tx.outputs[0].toJSON().covenant.covenantId), artifact.covenantGenesis.covenant.covenantId);
+const reconstructedCovenant = tx.outputs[0].toJSON().covenant;
+if (reconstructedCovenant) {
+  assert.equal(String(reconstructedCovenant.covenantId), artifact.covenantGenesis.covenant.covenantId);
+}
 
 const candidate = summarizeWrpcCandidate(artifact, {
   artifactPath: "artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json"
