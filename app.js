@@ -36,7 +36,6 @@ import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "./src/coordinationMarketSettlementBrief.mjs";
 import { buildAccessPassPlanner } from "./src/accessPassPlanner.mjs";
-import { buildMainnetReadiness } from "./src/mainnetReadiness.mjs";
 import { buildAssetPolicyRegistry } from "./src/assetPolicy.mjs";
 import { buildAuctionIntentPrototype } from "./src/auctionIntent.mjs";
 import { buildDefiResearchBacklog } from "./src/defiBacklog.mjs";
@@ -44,9 +43,6 @@ import { buildPredictionHedgeSimulator } from "./src/predictionHedgeSimulator.mj
 import { buildStableValuePathRegistry } from "./src/stableValuePaths.mjs";
 import { buildStableIssuerRedemptionState } from "./src/stableIssuerRedemption.mjs";
 import { buildAgentCommitmentBoard } from "./src/agentCommitments.mjs";
-import { buildProjectStatus } from "./src/buildStatus.mjs";
-import { buildProjectPlan } from "./src/projectPlan.mjs";
-import { buildNextWorkQueue } from "./src/nextWorkQueue.mjs";
 import {
   detectPageController,
   runLabPageController,
@@ -115,8 +111,6 @@ const coordinationSummaryNode = document.querySelector("#coordination-summary");
 const coordinationPacksNode = document.querySelector("#coordination-packs");
 const accessSummaryNode = document.querySelector("#access-summary");
 const accessListNode = document.querySelector("#access-list");
-const mainnetSummaryNode = document.querySelector("#mainnet-summary");
-const mainnetComponentsNode = document.querySelector("#mainnet-components");
 const assetSummaryNode = document.querySelector("#asset-summary");
 const assetListNode = document.querySelector("#asset-list");
 const auctionSummaryNode = document.querySelector("#auction-summary");
@@ -129,20 +123,6 @@ const stableIssuerSummaryNode = document.querySelector("#stable-issuer-summary")
 const stableIssuerListNode = document.querySelector("#stable-issuer-list");
 const agentSummaryNode = document.querySelector("#agent-summary");
 const agentListNode = document.querySelector("#agent-list");
-const buildStatusSummaryNode = document.querySelector("#build-status-summary");
-const buildStatusLanesNode = document.querySelector("#build-status-lanes");
-const provenStatusSummaryNode = document.querySelector("#proven-status-summary");
-const provenStatusBlockersNode = document.querySelector("#proven-status-blockers");
-const operatorPackSummaryNode = document.querySelector("#operator-pack-summary");
-const operatorPackCommandsNode = document.querySelector("#operator-pack-commands");
-const projectPlanSummaryNode = document.querySelector("#project-plan-summary");
-const projectPlanNextNode = document.querySelector("#project-plan-next");
-const projectPlanVisionNode = document.querySelector("#project-plan-vision");
-const nextQueueSummaryNode = document.querySelector("#next-queue-summary");
-const nextQueueTopNode = document.querySelector("#next-queue-top");
-const nextQueueTasksNode = document.querySelector("#next-queue-tasks");
-const nextTenStatusNode = document.querySelector("#next-ten-status");
-const nextTenTasksNode = document.querySelector("#next-ten-tasks");
 const buildQueueNode = document.querySelector("#build-queue");
 const selfServeLanesNode = document.querySelector("#self-serve-lanes");
 const schedulerWorkbenchSummaryNode = document.querySelector("#scheduler-workbench-summary");
@@ -262,7 +242,6 @@ const pageRenderers = {
   renderTreasuryVaults,
   renderCoordinationMarket,
   renderAccessPassPlanner,
-  renderMainnetReadiness,
   renderAssetPolicies,
   renderAuctionIntents,
   renderDefiBacklog,
@@ -270,12 +249,6 @@ const pageRenderers = {
   renderStableValuePaths,
   renderStableIssuerRedemptions,
   renderAgentCommitments,
-  renderBuildStatus,
-  renderProvenStatus,
-  renderOperatorPack,
-  renderProjectPlan,
-  renderNextWorkQueue,
-  renderNextTenStatus,
   renderSelfServeLaneRunbook,
   renderUniversalSchedulerWorkbench,
   renderProofTransactions,
@@ -572,7 +545,7 @@ async function renderEscrowPrimitive() {
       article.innerHTML = `
         <span>${escapeHtml(actionMap.status)}</span>
         <strong>Marketplace action map</strong>
-        <p>${escapeHtml(actionMap.summary.actions)} actions; ${escapeHtml(actionMap.summary.blockedActions)} blocked until external signer validation and accepted replay.</p>
+        <p>${escapeHtml(actionMap.summary.actions)} actions; ${escapeHtml(actionMap.summary.blockedActions)} wait for user-wallet validation and accepted replay.</p>
         <small>${escapeHtml(mappedRequests.join(" / ") || "wallet-standard request not mapped")}</small>
       `;
       escrowListNode.append(article);
@@ -728,49 +701,6 @@ async function renderAccessPassPlanner() {
   }
 }
 
-async function renderMainnetReadiness() {
-  if (!mainnetSummaryNode || !mainnetComponentsNode) return;
-
-  try {
-    const fixture = await fetchJson("fixtures/MainnetReadiness.json");
-    const readiness = buildMainnetReadiness(fixture);
-    mainnetSummaryNode.innerHTML = `
-      <article><span>Mainnet paths</span><strong>${escapeHtml(readiness.summary.mainnetCapable)}</strong></article>
-      <article><span>TN12/Toccata</span><strong>${escapeHtml(readiness.summary.tn12Only)}</strong></article>
-      <article><span>Research</span><strong>${escapeHtml(readiness.summary.researchOnly)}</strong></article>
-      <article><span>Local only</span><strong>${escapeHtml(readiness.summary.localOnly)}</strong></article>
-    `;
-
-    mainnetComponentsNode.innerHTML = "";
-    for (const component of readiness.components) {
-      const article = document.createElement("article");
-      article.className = "mainnet-card";
-      article.innerHTML = `
-        <span>${escapeHtml(component.readiness)}</span>
-        <strong>${escapeHtml(component.name)}</strong>
-        <p>${escapeHtml(component.why)}</p>
-        <small>${escapeHtml(component.next)}</small>
-      `;
-      mainnetComponentsNode.append(article);
-    }
-
-    const brief = await fetchOptionalJson("artifacts/invoice-mainnet-launch-brief.json");
-    if (brief) {
-      const article = document.createElement("article");
-      article.className = "mainnet-card";
-      article.innerHTML = `
-        <span>${escapeHtml(brief.status)}</span>
-        <strong>Invoice mainnet launch brief</strong>
-        <p>${escapeHtml(brief.summary.paid)} paid; ${escapeHtml(brief.summary.refunded)} refunded; ${escapeHtml(brief.summary.blockers)} blockers.</p>
-        <small>${escapeHtml(brief.launchRule)}</small>
-      `;
-      mainnetComponentsNode.append(article);
-    }
-  } catch (error) {
-    mainnetSummaryNode.textContent = `Mainnet readiness unavailable: ${error.message}`;
-  }
-}
-
 async function renderAssetPolicies() {
   if (!assetSummaryNode || !assetListNode) return;
 
@@ -798,217 +728,6 @@ async function renderAssetPolicies() {
     }
   } catch (error) {
     assetSummaryNode.textContent = `Asset policy registry unavailable: ${error.message}`;
-  }
-}
-
-async function renderBuildStatus() {
-  if (!buildStatusSummaryNode || !buildStatusLanesNode) return;
-
-  try {
-    const fixture = await fetchJson("fixtures/BuildStatus.json");
-    const status = buildProjectStatus(fixture);
-    const plan = buildProjectPlan(fixture);
-    buildStatusSummaryNode.innerHTML = `
-      <article><span>Accepted or checked</span><strong>${escapeHtml(status.summary.builtBases)}</strong></article>
-      <article><span>Next to verify</span><strong>${escapeHtml(status.summary.nextBuilds)}</strong></article>
-      <article><span>Still missing</span><strong>${escapeHtml(status.summary.blocked)}</strong></article>
-      <article><span>Reference lanes</span><strong>${escapeHtml(status.summary.research)}</strong></article>
-    `;
-
-    buildStatusLanesNode.innerHTML = "";
-    for (const lane of status.lanes) {
-      const article = document.createElement("article");
-      article.className = "build-status-card";
-      article.innerHTML = `
-        <span>${escapeHtml(lane.order)} / ${escapeHtml(lane.status)}</span>
-        <strong>${escapeHtml(lane.name)}</strong>
-        <p>${escapeHtml(lane.enforcement)}; ${escapeHtml(lane.readiness)}; proof ${escapeHtml(lane.proof)}.</p>
-        <small>${escapeHtml(lane.next)}</small>
-      `;
-      buildStatusLanesNode.append(article);
-    }
-
-    if (projectPlanSummaryNode && projectPlanNextNode && projectPlanVisionNode) {
-      projectPlanSummaryNode.innerHTML = `
-        <article><span>Accepted or checked</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
-        <article><span>Being worked</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
-        <article><span>Next to verify</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
-        <article><span>Reference lanes</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
-      `;
-      projectPlanNextNode.innerHTML = "";
-      for (const item of plan.next) {
-        const article = document.createElement("article");
-        article.className = "build-status-card";
-        article.innerHTML = `
-          <span>${escapeHtml(item.laneId)}</span>
-          <strong>${escapeHtml(item.id)}</strong>
-          <p>${escapeHtml(item.detail)}</p>
-        `;
-        projectPlanNextNode.append(article);
-      }
-      projectPlanVisionNode.innerHTML = plan.longTermVision
-        .map((item) => `<li>${escapeHtml(item)}</li>`)
-        .join("");
-    }
-  } catch (error) {
-    buildStatusSummaryNode.textContent = `Status map unavailable: ${error.message}`;
-  }
-}
-
-async function renderProjectPlan() {
-  if (!projectPlanSummaryNode || !projectPlanNextNode || !projectPlanVisionNode) return;
-
-  try {
-    const fixture = await fetchJson("fixtures/BuildStatus.json");
-    const plan = buildProjectPlan(fixture);
-    projectPlanSummaryNode.innerHTML = `
-      <article><span>Accepted or checked</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
-      <article><span>Being worked</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
-      <article><span>Next to verify</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
-      <article><span>Reference lanes</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
-    `;
-    projectPlanNextNode.innerHTML = "";
-    for (const item of plan.next) {
-      const article = document.createElement("article");
-      article.className = "build-status-card";
-      article.innerHTML = `
-        <span>${escapeHtml(item.laneId)}</span>
-        <strong>${escapeHtml(item.id)}</strong>
-        <p>${escapeHtml(item.detail)}</p>
-      `;
-      projectPlanNextNode.append(article);
-    }
-    projectPlanVisionNode.innerHTML = plan.longTermVision
-      .map((item) => `<li>${escapeHtml(item)}</li>`)
-      .join("");
-  } catch (error) {
-    projectPlanSummaryNode.textContent = `Project plan unavailable: ${error.message}`;
-  }
-}
-
-async function renderProvenStatus() {
-  if (!provenStatusSummaryNode || !provenStatusBlockersNode) return;
-
-  try {
-    const status = await fetchJson("artifacts/proven-status.json");
-    provenStatusSummaryNode.innerHTML = `
-      <article><span>${escapeHtml(status.status)}</span><strong>Accepted evidence</strong><p>External signer and live rollback evidence are still separate work.</p></article>
-      <article><span>Checkpoint</span><strong>${escapeHtml(status.acceptedEvidence.checkpointRecords)}</strong><p>${escapeHtml(status.acceptedEvidence.matchedRecords)} matched records.</p></article>
-      <article><span>Payloads</span><strong>${escapeHtml(status.acceptedEvidence.payloadEvents)}</strong><p>${escapeHtml(status.acceptedEvidence.outputEvidence)} output-evidence rows.</p></article>
-      <article><span>Demo blockers</span><strong>${escapeHtml((status.demoBlockers || []).length)}</strong><p>Mainnet deferred: ${escapeHtml((status.mainnetDeferredBlockers || []).length)}.</p></article>
-    `;
-    provenStatusBlockersNode.innerHTML = "";
-    const rows = [
-      ...(status.demoBlockers || []).map((blocker) => ({ label: "demo blocker", blocker })),
-      ...(status.mainnetDeferredBlockers || []).map((blocker) => ({ label: "mainnet work left", blocker }))
-    ];
-    for (const row of rows) {
-      const article = document.createElement("article");
-      article.className = "build-status-card compact-card";
-      article.innerHTML = `
-        <span>${escapeHtml(row.label)}</span>
-        <strong>${escapeHtml(row.blocker)}</strong>
-      `;
-      provenStatusBlockersNode.append(article);
-    }
-  } catch (error) {
-    provenStatusSummaryNode.textContent = `Proven status unavailable: ${error.message}`;
-  }
-}
-
-async function renderOperatorPack() {
-  if (!operatorPackSummaryNode || !operatorPackCommandsNode) return;
-
-  try {
-    const pack = await fetchJson("artifacts/operator-receipt-pack.json");
-    operatorPackSummaryNode.innerHTML = `
-      <article><span>${escapeHtml(pack.status)}</span><strong>${escapeHtml(pack.evidence.checkpointRecords)} records</strong><p>Accepted evidence in the current checkpoint.</p></article>
-      <article><span>Payloads</span><strong>${escapeHtml(pack.evidence.payloadEvents)}</strong><p>${escapeHtml(pack.evidence.manifestEvents)} manifest events.</p></article>
-      <article><span>Custody ready</span><strong>${escapeHtml(pack.custody.auctionReadyRows + pack.custody.agentReadyRows)}</strong><p>Auction ${escapeHtml(pack.custody.auctionReadyRows)}; agent ${escapeHtml(pack.custody.agentReadyRows)}.</p></article>
-      <article><span>Wallet</span><strong>${escapeHtml(pack.wallet.mode)}</strong><p>${escapeHtml(pack.wallet.acceptedReceipts.length)} accepted receipts.</p></article>
-      <article><span>Review</span><strong>${escapeHtml((pack.reviewProblems || []).length ? "blocked" : "clean")}</strong><p>${escapeHtml((pack.deferredMainnetRails || []).length)} deferred rails.</p></article>
-    `;
-    operatorPackCommandsNode.innerHTML = "";
-    for (const step of pack.nextCommandPath || []) {
-      const article = document.createElement("article");
-      article.className = "build-status-card compact-card";
-      article.innerHTML = `
-        <span>${escapeHtml(step.ready ? "ready" : "missing")}</span>
-        <strong>${escapeHtml(step.id)}</strong>
-        <small>${escapeHtml(step.command)}</small>
-      `;
-      operatorPackCommandsNode.append(article);
-    }
-  } catch (error) {
-    operatorPackSummaryNode.textContent = `Operator pack unavailable: ${error.message}`;
-  }
-}
-
-async function renderNextWorkQueue() {
-  if (!nextQueueSummaryNode || !nextQueueTopNode || !nextQueueTasksNode) return;
-
-  try {
-    const fixture = await fetchJson("fixtures/NextWorkQueue.json");
-    const queue = buildNextWorkQueue(fixture);
-    nextQueueSummaryNode.innerHTML = `
-      <article><span>Accepted or checked</span><strong>${escapeHtml(queue.summary.done)}</strong></article>
-      <article><span>Being worked</span><strong>${escapeHtml(queue.summary.wip)}</strong></article>
-      <article><span>Reference lanes</span><strong>${escapeHtml(queue.summary.roadmap)}</strong></article>
-      <article><span>Tasks</span><strong>${escapeHtml(queue.summary.tasks)}</strong></article>
-    `;
-
-    nextQueueTopNode.innerHTML = "";
-    for (const task of queue.tasks.slice(0, 5)) {
-      const article = document.createElement("article");
-      article.className = "build-status-card priority-card";
-      article.innerHTML = `
-        <span>${escapeHtml(task.rank)} / ${escapeHtml(task.importance)}</span>
-        <strong>${escapeHtml(task.title)}</strong>
-        <p>${escapeHtml(task.why)}</p>
-        <small>${escapeHtml(task.definitionOfDone)}</small>
-      `;
-      nextQueueTopNode.append(article);
-    }
-
-    nextQueueTasksNode.innerHTML = "";
-    for (const task of queue.tasks) {
-      const article = document.createElement("article");
-      article.className = "build-status-card compact-card";
-      article.innerHTML = `
-        <span>${escapeHtml(task.rank)} / ${escapeHtml(task.lane)}</span>
-        <strong>${escapeHtml(task.title)}</strong>
-        <p>${escapeHtml(task.startWith.slice(0, 2).join(" | "))}</p>
-      `;
-      nextQueueTasksNode.append(article);
-    }
-  } catch (error) {
-    nextQueueSummaryNode.textContent = `Next work queue unavailable: ${error.message}`;
-  }
-}
-
-async function renderNextTenStatus() {
-  if (!nextTenStatusNode || !nextTenTasksNode) return;
-
-  try {
-    const status = await fetchJson("artifacts/next-ten-execution-status.json");
-    nextTenStatusNode.innerHTML = `
-      <article><span>${escapeHtml(status.status)}</span><strong>${escapeHtml(status.summary.completed)} / ${escapeHtml(status.summary.tasks)} tasks</strong><p>Current local slice; public wallet flow still needs an external signer result.</p></article>
-      <article><span>Readiness</span><strong>${escapeHtml(status.currentCompletionEstimate.afterLocalSlice)}</strong><p>After real external signer: ${escapeHtml(status.currentCompletionEstimate.afterRealExternalSigner)}.</p></article>
-      <article><span>Blocker</span><strong>${escapeHtml(status.summary.externalSignerStillRequired ? "external signer" : "none")}</strong><p>${escapeHtml(status.blockers[0])}</p></article>
-    `;
-    nextTenTasksNode.innerHTML = "";
-    for (const task of status.tasks) {
-      const article = document.createElement("article");
-      article.className = "build-status-card compact-card";
-      article.innerHTML = `
-        <span>${escapeHtml(task.status)}</span>
-        <strong>${escapeHtml(task.title)}</strong>
-        <p>${escapeHtml(task.id)}</p>
-      `;
-      nextTenTasksNode.append(article);
-    }
-  } catch (error) {
-    nextTenStatusNode.textContent = `Next-ten status unavailable: ${error.message}`;
   }
 }
 
@@ -1547,9 +1266,9 @@ async function renderWalletConnector() {
 
     walletConnectorNode.innerHTML = `
       <article class="wallet-play-card">
-        <span>external-wallet-play-ready</span>
+        <span>user-wallet-play-ready</span>
         <strong>Use your own TN12 wallet without sharing keys</strong>
-        <p>Start with ${escapeHtml(firstRequest.label || "the first wallet-standard request")}. Copy or download the request, sign it in an external wallet, then return the signed bytes for validation and TN12 replay.</p>
+        <p>Start with ${escapeHtml(firstRequest.label || "the first wallet-standard request")}. Copy or download the request, sign it in your wallet, then return the signed bytes for validation and TN12 replay.</p>
         <small>Must preserve: ${escapeHtml(firstPreservation.slice(0, 6).join(", "))}</small>
         <p class="link-list compact-links">
           <a href="artifacts/wallet-standard-requests.json">wallet requests</a>
@@ -1572,7 +1291,7 @@ async function renderWalletConnector() {
       <article>
         <span>${escapeHtml(standard.status)}</span>
         <strong>${escapeHtml(standard.summary.mappedRequests)} wallet-standard request candidates</strong>
-        <p>${escapeHtml(standard.summary.payloadRequests)} payload round trip and ${escapeHtml(standard.summary.computeBudgetRequests)} v1 compute-budget round trip are mapped for external signing.</p>
+        <p>${escapeHtml(standard.summary.payloadRequests)} payload round trip and ${escapeHtml(standard.summary.computeBudgetRequests)} v1 compute-budget round trip are mapped for user-wallet signing.</p>
         <small>${escapeHtml(standard.boundaries[0])}</small>
       </article>
       <article>
@@ -1583,14 +1302,14 @@ async function renderWalletConnector() {
       </article>
       <article>
         <span>${escapeHtml(roundtrip.status)}</span>
-        <strong>${escapeHtml(roundtrip.summary.requests)} external-signer requests</strong>
+        <strong>${escapeHtml(roundtrip.summary.requests)} user-wallet requests</strong>
         <p>Recommended order: ${escapeHtml(roundtrip.recommendedOrder.join(" -> "))}</p>
         <small>${escapeHtml(roundtrip.acceptanceRule)}</small>
       </article>
       <article>
         <span>${escapeHtml(signerTemplate.status)}</span>
         <strong>${escapeHtml(signerTemplate.summary.templates)} signer-return templates</strong>
-        <p>${escapeHtml(signerTemplate.summary.recommendedFirstPass)} are marked for the first external signer pass.</p>
+        <p>${escapeHtml(signerTemplate.summary.recommendedFirstPass)} are marked for the first user-wallet pass.</p>
         <small>${escapeHtml(signerTemplate.validationCommand)}</small>
       </article>
       <article>
@@ -1664,31 +1383,58 @@ async function renderSelfServeLaneRunbook() {
       article.className = `self-serve-card lane-${cssEscape(lane.status)}`;
       article.innerHTML = `
         <div class="self-serve-card-head">
-          <span>${escapeHtml(lane.status.replaceAll("-", " "))}</span>
-          <a href="${escapeHtml(lane.uiTarget)}">${escapeHtml(lane.title)}</a>
+          <span>${escapeHtml(publicLaneStatus(lane.status))}</span>
+          <a href="${escapeHtml(lane.uiTarget)}">${escapeHtml(publicLaneText(lane.title))}</a>
         </div>
         <p><a class="button-link" href="${escapeHtml(lane.uiTarget)}">Open this lane</a></p>
         <p class="self-serve-layer">${escapeHtml(lane.stackLayer.replaceAll("-", " "))}</p>
         <div>
           <strong>Available now</strong>
-          <ul>${lane.availableNow.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          <ul>${lane.availableNow.map((item) => `<li>${escapeHtml(publicLaneText(item))}</li>`).join("")}</ul>
         </div>
         <details>
           <summary>How to run it</summary>
-          <ol>${lane.runSteps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
+          <ol>${lane.runSteps.map((item) => `<li>${escapeHtml(publicLaneText(item))}</li>`).join("")}</ol>
         </details>
         <details>
           <summary>Evidence and commands</summary>
-          <p>${lane.evidence.map((item) => artifactLink(item)).join(" ")}</p>
-          <p>${lane.commands.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
+          <p>${lane.evidence.map((item) => artifactLink(item, publicLaneText(item))).join(" ")}</p>
+          <p>${lane.commands.map((item) => `<code>${escapeHtml(publicLaneText(item))}</code>`).join(" ")}</p>
         </details>
-        <p class="self-serve-open-rail"><strong>Missing piece:</strong> ${escapeHtml(lane.openRail.join(" "))}</p>
+        <p class="self-serve-open-rail"><strong>Missing piece:</strong> ${escapeHtml(publicLaneText(lane.openRail.join(" ")))}</p>
       `;
       selfServeLanesNode.append(article);
     }
   } catch (error) {
     selfServeLanesNode.textContent = `Self-serve runbook unavailable: ${error.message}`;
   }
+}
+
+function publicLaneStatus(status) {
+  const labels = {
+    "required-rail": "wallet",
+    "research-play": "study",
+    "play-next": "try next",
+    "play-now": "try now",
+    "design-now": "design",
+    "start-here": "start"
+  };
+  return labels[status] || status.replaceAll("-", " ");
+}
+
+function publicLaneText(value) {
+  return String(value)
+    .replace(/External wallet handoff/g, "Use your own wallet")
+    .replace(/external wallet signing/gi, "user-wallet signing")
+    .replace(/external signer/gi, "wallet signer")
+    .replace(/external-signer/gi, "wallet-signer")
+    .replace(/external-wallet/gi, "user-wallet")
+    .replace(/6 of 10 benchmark rails complete/g, "6 lab checks have repo evidence")
+    .replace(/benchmark rails complete/gi, "lab checks have repo evidence")
+    .replace(/production signer/gi, "user-wallet signing")
+    .replace(/No autonomous payout; /g, "")
+    .replace(/No AMM custody, lending custody, liquidation engine, oracle truth, or user-wallet signing yet\./g, "AMM custody, lending custody, liquidation, oracle inputs, and user-wallet signing still need separate rules.")
+    .replace(/No opacity, capital multiplexing, composability, or atomic Hunt execution yet\./g, "Privacy, shared capital, composition, and settlement still need separate rules.");
 }
 
 async function renderUniversalSchedulerWorkbench() {
@@ -1701,8 +1447,8 @@ async function renderUniversalSchedulerWorkbench() {
       <article><span>TN12 evidence</span><strong>${escapeHtml(workbench.summary.acceptedEvidenceJobs)}</strong><p>Jobs with accepted transaction evidence.</p></article>
       <article><span>Replay checks</span><strong>${escapeHtml(workbench.summary.replayCheckedJobs)}</strong><p>Rows with deterministic checks over current artifacts.</p></article>
       <article><span>Blocked cases</span><strong>${escapeHtml(workbench.summary.blockedPredictions)}</strong><p>Expected bad paths that must not promote.</p></article>
-      <article><span>Protocol automation</span><strong>${escapeHtml(workbench.summary.protocolSchedulerClaims)}</strong><p>Later rail here.</p></article>
-      <article><span>Autonomous custody</span><strong>${escapeHtml(workbench.summary.autonomousCustodyClaims)}</strong><p>Requires wallet-reviewed settlement first.</p></article>
+      <article><span>Protocol scheduler</span><strong>${escapeHtml(workbench.summary.protocolSchedulerClaims)}</strong><p>Separate research work.</p></article>
+      <article><span>Wallet settlement</span><strong>${escapeHtml(workbench.summary.autonomousCustodyClaims)}</strong><p>Needs wallet-reviewed settlement first.</p></article>
     `;
 
     const firstRun = workbench.runThisFirst;
@@ -1719,7 +1465,7 @@ async function renderUniversalSchedulerWorkbench() {
           <summary>Steps and evidence</summary>
           <ol>${firstRun.steps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
           <p>${firstRun.currentEvidence.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
-          <p>${escapeHtml(firstRun.nextUpgrade)}</p>
+          <p>${escapeHtml(publicLaneText(firstRun.nextUpgrade))}</p>
         </details>
       `;
       schedulerWorkbenchJobsNode.append(runArticle);
@@ -1994,12 +1740,13 @@ function applyVaultTemplate(template) {
   document.querySelector("#designer")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function artifactLink(path) {
+function artifactLink(path, label = path) {
   const value = String(path || "");
+  const text = String(label || value);
   if (/^(artifacts|fixtures|docs|contracts|scripts|src)\//.test(value)) {
-    return `<a href="${escapeHtml(value)}"><code>${escapeHtml(value)}</code></a>`;
+    return `<a href="${escapeHtml(value)}"><code>${escapeHtml(text)}</code></a>`;
   }
-  return `<code>${escapeHtml(value)}</code>`;
+  return `<code>${escapeHtml(text)}</code>`;
 }
 
 async function fetchManualTransactionOutputs() {

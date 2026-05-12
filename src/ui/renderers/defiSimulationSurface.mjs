@@ -19,24 +19,24 @@ export async function renderDefiSimulationSurface(documentRef = document) {
     ]);
 
     summaryNode.innerHTML = `
-      <article><span>Manifest</span><strong>${escapeHtml(manifest.summary.readyArtifacts)}/${escapeHtml(manifest.summary.artifacts)}</strong></article>
-      <article><span>Planner lanes</span><strong>${escapeHtml(planner.summary.lanes)}</strong></article>
+      <article><span>Checks</span><strong>${escapeHtml(manifest.summary.readyArtifacts)}/${escapeHtml(manifest.summary.artifacts)}</strong></article>
+      <article><span>Market models</span><strong>${escapeHtml(planner.summary.lanes)}</strong></article>
       <article><span>Scenario refs</span><strong>${escapeHtml(scenario.summary.acceptedReferencesIndexed)}/${escapeHtml(scenario.summary.acceptedReferences)}</strong></article>
-      <article><span>Reducer state</span><strong>${escapeHtml(reducer.summary.promotedReviewRows)} review</strong></article>
+      <article><span>Replay state</span><strong>${escapeHtml(reducer.summary.promotedReviewRows)} rows</strong></article>
       <article><span>Advanced blocks</span><strong>${escapeHtml(advanced.summary.ammBlockedActions + advanced.summary.oracleBlockedCases + advanced.summary.lendingBlocked)}</strong></article>
       <article><span>Accepted transfers</span><strong>${escapeHtml(acceptedActivity.summary.acceptedTransferRows)}</strong></article>
       <article><span>Scheduler intents</span><strong>${escapeHtml(scheduler.summary.acceptedIntents)}</strong></article>
       <article><span>Pool net</span><strong>${escapeHtml(acceptedActivity.summary.poolNetTkas)} TKAS</strong></article>
       <article><span>Wallet roles</span><strong>${escapeHtml(multiWallet.summary.roles)}</strong></article>
-      <article><span>External wallet results</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
+      <article><span>User-wallet results</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
     `;
 
     listNode.innerHTML = "";
     const cards = [
       {
         status: manifest.status,
-        title: "DeFi artifact manifest",
-        body: `${manifest.summary.readyArtifacts}/${manifest.summary.artifacts} artifacts ready; ${manifest.summary.problems} problems; ${manifest.summary.secretFindings} secret findings.`,
+        title: "DeFi check set",
+        body: `${manifest.summary.readyArtifacts}/${manifest.summary.artifacts} checks pass; ${manifest.summary.problems} problems; ${manifest.summary.secretFindings} secret findings.`,
         foot: "npm run defi:manifest"
       },
       {
@@ -53,7 +53,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       },
       {
         status: planner.status,
-        title: "Planner-only market logic",
+        title: "Market model checks",
         body: `${planner.summary.simulationReadyLanes} lanes checked; ${planner.summary.blockedLiveLanes} product-execution lanes blocked.`,
         foot: "npm run defi:simulation"
       },
@@ -65,8 +65,8 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       },
       {
         status: reducer.status,
-        title: "Reducer promotion guard",
-        body: `${reducer.summary.promotedReviewRows} review rows promoted; ${reducer.summary.blockedScenarioRows} scenario rows blocked; ${reducer.summary.custodyPromotions} custody promotions.`,
+        title: "Replay guard",
+        body: `${reducer.summary.promotedReviewRows} rows accepted for review; ${reducer.summary.blockedScenarioRows} scenario rows blocked; ${reducer.summary.custodyPromotions} custody promotions.`,
         foot: "npm run defi:reducer"
       },
       {
@@ -78,7 +78,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       {
         status: multiWallet.status,
         title: "Multi-wallet scenario pack",
-        body: `${multiWallet.summary.acceptedIndexedRoles}/${multiWallet.summary.roles} roles indexed; ${multiWallet.summary.actualWalletAddresses} observed wallet addresses; external signer result still needed.`,
+        body: `${multiWallet.summary.acceptedIndexedRoles}/${multiWallet.summary.roles} roles indexed; ${multiWallet.summary.actualWalletAddresses} observed wallet addresses; user-wallet result still needed.`,
         foot: "npm run defi:multi-wallet"
       }
     ];

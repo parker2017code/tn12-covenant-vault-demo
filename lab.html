@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TN12 Covenant Lab Workbench</title>
-  <meta name="description" content="Kaspa TN12 covenant proof notes, accepted testnet transactions, and app-rail build status.">
+  <meta name="description" content="Kaspa TN12 covenant workbench for accepted testnet transactions, wallet handoff, and app-state replay.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="theme.js"></script>
@@ -43,15 +43,15 @@
         <p>Start with the stack: fast testnet money, constrained covenant spends, then app-specific state anchored to Kaspa ordering, receipts, proofs, or settlement. ZK is one verification path, not the definition of every app.</p>
       </div>
       <aside class="facts">
-        <span>Proof core</span>
-        <strong>7 core + 2 auction + 7 role-separated + 53 indexed records</strong>
-        <p>Vault, assurance, escrow, payload receipts, and batch-assurance outputs have accepted TN12 evidence.</p>
+        <span>Accepted proof set</span>
+        <strong>Proofs, receipts, and replay</strong>
+        <p>Vault, assurance, escrow, payload receipts, and batch-assurance outputs are backed by TN12 records.</p>
       </aside>
     </section>
 
     <section id="product-map" class="panel product-map">
       <div class="section-title">
-        <p class="eyebrow">Product status map</p>
+        <p class="eyebrow">Workbench map</p>
         <h2>What people can try.</h2>
         <p>Start with accepted TN12 evidence, then separate wallet signing, covenant spend rules, and app-state replay. The product stack is money movement first, covenant spend rules second, and app-specific state only where the product needs richer shared state.</p>
         <p class="note"><a href="docs/PRODUCT_EXECUTION_PLAN.md">Read the product execution plan</a></p>
@@ -66,9 +66,9 @@
         <a href="#auction-intents"><span>accepted bids</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Settlement spends still need review</small></a>
         <a href="#defi-backlog"><span>lab status</span><strong>DeFi checks</strong><p>Accepted receipts, pool transfers, reducers, and spend checks.</p><small>Open DeFi checks</small></a>
         <a href="#scheduler-workbench"><span>app jobs</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App job routing over TN12 evidence</small></a>
-        <a href="#coordination"><span>research status</span><strong>Coordination / Stag</strong><p>Transparent intents, packs, solver, settlement brief.</p><small>Private Hunt execution is later</small></a>
-        <a href="#agent-commitments"><span>wallet review</span><strong>Agent commitments</strong><p>Task offers, completion proofs, disputes, release/refund review.</p><small>Wallet review before payout</small></a>
-        <a href="#submit"><span>bring wallet</span><strong>External wallet handoff</strong><p>Review unsigned requests, sign outside repo, validate return.</p><small>No private key sharing</small></a>
+        <a href="#coordination"><span>model</span><strong>Coordination / Stag</strong><p>Transparent intents, packs, solver, settlement brief.</p><small>Public commitment model first</small></a>
+        <a href="#agent-commitments"><span>wallet</span><strong>Agent commitments</strong><p>Task offers, proof rows, disputes, release/refund steps.</p><small>Wallet approval before payout</small></a>
+        <a href="#submit"><span>bring wallet</span><strong>Use your own wallet</strong><p>Review a request, sign outside the repo, validate return.</p><small>Keep keys in your wallet</small></a>
         <a href="#funding"><span>start here</span><strong>Get and verify tKAS</strong><p>Use faucet, paste outpoint, verify amount and output index.</p><small>TN12 only</small></a>
       </div>
     </section>
@@ -99,13 +99,13 @@
         <article>
           <span>3</span>
           <strong>Use your own wallet</strong>
-          <p>Export a wallet-standard request, review exact fields, sign outside the repo, return signed bytes, then run validation.</p>
+          <p>Export a request, review the fields, sign outside the repo, return signed bytes, then run validation.</p>
           <a href="#submit">Open wallet handoff</a>
         </article>
         <article>
           <span>4</span>
           <strong>Replay before believing it</strong>
-          <p>Promote app state only after accepted txid, payload/output match, duplicate guard, and replay checks pass.</p>
+          <p>Trust the screen only after the txid is accepted, the payload or output matches, and replay checks pass.</p>
           <a href="#indexer">Open indexer replay</a>
         </article>
       </div>
@@ -113,35 +113,35 @@
         <article>
           <span>DeFi</span>
           <strong>Available now</strong>
-          <p>Accepted local-key funding, deposits, payouts, scheduler receipts, reducer replay, duplicate guards, and blocked withdrawals.</p>
-          <small>Next rails: AMM custody, lending custody, liquidation, oracle inputs, production signer.</small>
+          <p>Accepted funding, deposits, payouts, scheduler receipts, replay, duplicate checks, and blocked withdrawals.</p>
+          <small>Next: real wallet signing, oracle inputs, and settlement rules.</small>
         </article>
         <article>
           <span>Assurance</span>
           <strong>Available now</strong>
-          <p>Individual pledge release/refund proof, batch pledge records, release-ready planner state, and accepted release evidence.</p>
+          <p>Individual pledge release/refund proof, batch pledge records, and accepted release evidence.</p>
           <small>Next rail: pooled campaign enforcement as one native contract.</small>
         </article>
         <article>
           <span>Escrow</span>
           <strong>Available now</strong>
           <p>Accepted release, DAA refund, mutual cancel proofs, marketplace action map, and wallet-standard request candidates.</p>
-          <small>Next rails: live external-wallet submit and dispute workflow.</small>
+          <small>Next: wallet signing and dispute UX.</small>
         </article>
         <article>
           <span>Coordination</span>
           <strong>Lab model</strong>
           <p>Transparent Stag/Intendo/Pack/Solver model and settlement brief for one satisfiable pack.</p>
-          <small>Next rails: opacity, capital multiplexing, composability, atomic Hunt execution.</small>
+          <small>Next: privacy, shared capital, composition, and settlement.</small>
         </article>
       </div>
     </section>
 
     <details id="lane-runbook" class="panel lane-runbook-panel section-drawer">
-      <summary>Detailed status guide</summary>
+      <summary>Detailed lane guide</summary>
       <div class="section-title">
-        <p class="eyebrow">Detailed status guide</p>
-        <h2>Accepted now, next to verify, or research.</h2>
+        <p class="eyebrow">Detailed lane guide</p>
+        <h2>What can be opened, repeated, or studied.</h2>
         <p>This detailed guide is available for builders. The product map above is the shorter route.</p>
       </div>
       <div id="self-serve-lanes" class="self-serve-lanes" aria-live="polite"></div>
@@ -153,11 +153,11 @@
         <h2>Use the right surface.</h2>
       </div>
       <div class="journey-grid">
-        <a href="#product-map"><span>Start</span><strong>Product map</strong><p>Pick the lane before opening generated detail.</p></a>
+        <a href="#product-map"><span>Start</span><strong>Workbench map</strong><p>Pick the lane before opening detail.</p></a>
         <a href="#runbook"><span>Run</span><strong>Self-serve path</strong><p>Get tKAS, pick a lane, sign externally, replay.</p></a>
         <a href="playground.html"><span>Watch</span><strong>Real TN12 play</strong><p>Open funding, deposits, payout, and replay.</p></a>
-        <a href="#designer"><span>Create</span><strong>Vault policy</strong><p>Owner, recovery, delay, and policy artifact.</p></a>
-        <a href="#submit"><span>Review</span><strong>Wallet handoff</strong><p>Unsigned requests, external signing, validation.</p></a>
+        <a href="#designer"><span>Create</span><strong>Vault policy</strong><p>Owner, recovery, delay, and policy JSON.</p></a>
+        <a href="#submit"><span>Wallet</span><strong>Use your own wallet</strong><p>Unsigned requests, outside signing, validation.</p></a>
       </div>
     </section>
 
@@ -180,7 +180,7 @@
         <article>
           <span>Verifier command</span>
           <strong>evidence refresh</strong>
-          <p><code>npm run demo:operator-refresh</code> verifies TN12 evidence, rebuilds derived artifacts, and reruns local checks.</p>
+          <p><code>npm run demo:operator-refresh</code> verifies TN12 evidence and reruns local checks.</p>
         </article>
       </div>
       <p class="note">Read <code>docs/PROOF_INDEX.md</code> and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
@@ -211,10 +211,10 @@
         <article>
           <span>Full refresh</span>
           <strong>evidence refresh</strong>
-          <p>Runs <code>npm run demo:operator-refresh</code> and rebuilds the current status artifacts.</p>
+          <p>Runs <code>npm run demo:operator-refresh</code> and refreshes local evidence files.</p>
         </article>
       </div>
-      <p class="note"><a href="docs/AUDIT_MAP.md">Evidence map</a> and <a href="docs/SCRIPT_INDEX.md">script groups</a> are available when you need the full detail.</p>
+      <p class="note"><a href="docs/AUDIT_MAP.md">Proof docs</a> and <a href="docs/SCRIPT_INDEX.md">script groups</a> are available when you need the full detail.</p>
     </section>
 
     <details class="lab-drawer" open>
@@ -277,7 +277,7 @@
 
       <section class="panel output" aria-live="polite">
         <div class="section-title">
-          <p class="eyebrow">Generated artifact</p>
+          <p class="eyebrow">Generated policy JSON</p>
           <h2>Policy ID <code id="policy-id">...</code></h2>
         </div>
 
@@ -288,18 +288,16 @@
 
     <section id="next-ten" class="panel">
       <div class="section-title">
-        <p class="eyebrow">Next 10</p>
-        <h2>Next verification work.</h2>
+        <p class="eyebrow">Build next</p>
+        <h2>Three practical gaps.</h2>
+        <p>Keep the public path simple: sign with a real wallet, replay accepted txids, then settle one user flow end to end.</p>
       </div>
       <div class="claim-grid">
-        <article><strong>Wallet</strong><p>Map unsigned templates into the selected wallet standard, then round-trip one payload receipt through an external signer.</p></article>
-        <article><strong>Indexer</strong><p>Configure a TN12 virtual-chain endpoint, run preflight, then promote app state only after accepted replay matches.</p></article>
-        <article><strong>Settlement</strong><p>Review one batch-assurance release or refund path; keep mutually exclusive spends explicit before submit.</p></article>
+        <article><strong>Wallet handoff</strong><p>Export a request, sign outside the repo, return signed bytes, submit, and replay.</p></article>
+        <article><strong>Indexer replay</strong><p>Read accepted transactions continuously and handle removed blocks before updating app state.</p></article>
+        <article><strong>Settlement flow</strong><p>Pick one payout/refund path and show the exact spend evidence.</p></article>
       </div>
-      <div id="next-ten-status" class="claim-grid" aria-live="polite"></div>
-      <div id="next-ten-tasks" class="build-status-list" aria-live="polite"></div>
-      <pre>npm run project:next-ten
-npm run project:next-ten-status</pre>
+      <p class="note">Long task queues stay in repo files.</p>
     </section>
 
     <section class="grid">
@@ -404,7 +402,7 @@ npm run project:next-ten-status</pre>
       <div class="section-title">
         <p class="eyebrow">Batch assurance campaigns</p>
         <h2>Many pledge outputs, one campaign state.</h2>
-        <p>Planner/indexer aggregation over multiple pledge records. Accepted outputs count toward release readiness; signed-only or draft pledges can show planned progress but cannot unlock the campaign.</p>
+        <p>The app groups multiple accepted pledge records. Draft pledges can be shown, but they cannot unlock a campaign.</p>
       </div>
       <div id="campaign-summary" class="campaign-summary" aria-live="polite"></div>
       <div id="campaign-plans" class="campaign-plans" aria-live="polite"></div>
@@ -418,7 +416,7 @@ npm run campaign:custody</pre>
       <div class="section-title">
         <p class="eyebrow">Enforcement matrix</p>
         <h2>What scripts enforce and what the app tracks.</h2>
-        <p>Use this to see which behavior is enforced by Silverscript and which behavior is wallet, indexer, or planner state.</p>
+        <p>Use this to see which behavior is enforced by Silverscript and which behavior still needs wallet or app checks.</p>
       </div>
       <div id="enforcement-summary" class="enforcement-summary" aria-live="polite"></div>
       <div id="enforcement-features" class="enforcement-features" aria-live="polite"></div>
@@ -448,7 +446,7 @@ npm run campaign:custody</pre>
       <div class="section-title">
         <p class="eyebrow">Treasury / team vaults</p>
         <h2>Spend caps, delayed large withdrawals, recovery, payroll templates.</h2>
-        <p>Safe-style treasury UX translated into Kaspa vault policy. Current script proof covers delayed withdrawal and recovery primitives; payroll and caps remain planner/wallet policy until hardened.</p>
+        <p>Team-vault patterns translated into Kaspa vault policy. The current proof covers delayed withdrawal and recovery; payroll and caps still need stronger rules.</p>
       </div>
       <div id="treasury-summary" class="treasury-summary" aria-live="polite"></div>
       <div id="treasury-list" class="treasury-list" aria-live="polite"></div>
@@ -471,7 +469,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">Universal scheduler workbench</p>
         <h2>Small version first.</h2>
-        <p>This maps the scheduler idea into rows we can test: accepted trigger receipts, executor bids, execution receipts, coordination packs, auction settlement, and agent-task settlement. Protocol-level automation is separate research work.</p>
+        <p>This maps scheduled jobs into rows we can test: accepted triggers, bids, execution receipts, coordination packs, auction settlement, and agent-task settlement.</p>
       </div>
       <div id="scheduler-workbench-summary" class="results-summary" aria-live="polite"></div>
       <div id="scheduler-workbench-jobs" class="scheduler-workbench-jobs" aria-live="polite"></div>
@@ -484,24 +482,13 @@ npm run coordination:settlement-brief</pre>
 
     <section id="access-passes" class="panel access-passes">
       <div class="section-title">
-        <p class="eyebrow">KRC / access pass planner</p>
+        <p class="eyebrow">Access passes</p>
         <h2>Coupons, memberships, tickets, redeemable claims.</h2>
         <p>Issuer and indexer state for passes and redemptions. It is useful now as accepted payload/app-state UX, but it is not native ticket enforcement.</p>
       </div>
       <div id="access-summary" class="access-summary" aria-live="polite"></div>
       <div id="access-list" class="access-list" aria-live="polite"></div>
       <pre>npm run access:passes</pre>
-    </section>
-
-    <section id="mainnet-readiness" class="panel mainnet-readiness">
-      <div class="section-title">
-        <p class="eyebrow">Mainnet readiness map</p>
-        <h2>Payment/indexer paths versus TN12 covenant paths.</h2>
-        <p>Some app layers can become mainnet products with wallet, node, and indexer hardening. Covenant/Silverscript proof paths remain TN12/Toccata-only until final mainnet activation and compatible tooling.</p>
-      </div>
-      <div id="mainnet-summary" class="mainnet-summary" aria-live="polite"></div>
-      <div id="mainnet-components" class="mainnet-components" aria-live="polite"></div>
-      <pre>npm run mainnet:readiness</pre>
     </section>
 
     <section id="asset-policies" class="panel asset-policies">
@@ -515,44 +502,11 @@ npm run coordination:settlement-brief</pre>
       <pre>npm run asset:policies</pre>
     </section>
 
-    <section id="build-status" class="panel build-status">
-      <div class="section-title">
-        <p class="eyebrow">Status map</p>
-        <h2>Accepted evidence and next work.</h2>
-        <p>Repo status from generated artifacts.</p>
-      </div>
-      <div id="build-status-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="build-status-lanes" class="build-status-lanes" aria-live="polite"></div>
-      <pre>npm run build:status</pre>
-    </section>
-
-    <section id="proven-status" class="panel build-status">
-      <div class="section-title">
-        <p class="eyebrow">Proven status</p>
-        <h2>What is actually accepted.</h2>
-        <p>Accepted TN12 evidence, current blockers, and readiness.</p>
-      </div>
-      <div id="proven-status-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="proven-status-blockers" class="build-status-lanes" aria-live="polite"></div>
-      <pre>npm run project:proven-status</pre>
-    </section>
-
-    <section id="operator-pack" class="panel build-status">
-      <div class="section-title">
-        <p class="eyebrow">Operator pack</p>
-        <h2>One path to run.</h2>
-        <p>Accepted evidence, local-wallet receipts, custody readiness, and the single refresh command path.</p>
-      </div>
-      <div id="operator-pack-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="operator-pack-commands" class="build-status-lanes" aria-live="polite"></div>
-      <pre>npm run demo:operator-refresh</pre>
-    </section>
-
     <section id="auction-intents" class="panel auction-intents">
       <div class="section-title">
         <p class="eyebrow">Auction / intent prototype</p>
         <h2>Accepted bid payloads, winner rule, refund planning.</h2>
-        <p>Accepted bid payloads and planner state. Custody settlement and atomic exchange still need explicit spends.</p>
+        <p>Accepted bid payloads and winner state. Settlement and refunds still need explicit spends.</p>
       </div>
       <div id="auction-summary" class="auction-summary" aria-live="polite"></div>
       <div id="auction-list" class="auction-list" aria-live="polite"></div>
@@ -563,15 +517,15 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">DeFi checks</p>
         <h2>Accepted activity plus blocked execution.</h2>
-        <p>Accepted TN12 receipts and transfers feed reducers. Custody, signer, oracle, and settlement execution stay separate until built.</p>
+        <p>Accepted TN12 receipts and transfers feed replayed state. Oracles and settlement execution still need separate rules.</p>
       </div>
       <div id="defi-summary" class="defi-summary" aria-live="polite"></div>
       <div id="defi-list" class="defi-list" aria-live="polite"></div>
-      <pre>npm run defi:backlog</pre>
+      <pre>npm run defi:refresh</pre>
       <div class="section-title compact-title">
         <p class="eyebrow">DeFi accepted activity hardening</p>
         <h3>Accepted TN12 activity, reducers, and bounded market logic.</h3>
-        <p>Local-key users and pool wallets execute funding, deposits, and payouts on TN12. Market pricing, oracle inputs, liquidation, production custody, and external signing are separate rails.</p>
+        <p>Session wallets execute funding, deposits, and payouts on TN12. Market pricing, oracle inputs, liquidation, and user-wallet signing are separate work.</p>
       </div>
       <div id="defi-simulation-summary" class="defi-summary" aria-live="polite"></div>
       <details class="evidence-drawer">
@@ -605,8 +559,8 @@ npm run defi:accepted-activity</pre>
     <section id="agent-commitments" class="panel agent-commitments">
       <div class="section-title">
         <p class="eyebrow">AI-agent commitment board</p>
-        <h2>Task offers, deposits, completion proofs, disputes, refunds.</h2>
-        <p>Accepted payload commitments plus wallet review. Payout still needs an explicit wallet action.</p>
+        <h2>Task offers, deposits, proofs, disputes, refunds.</h2>
+        <p>Accepted payload commitments plus wallet approval. Payout still needs an explicit wallet action.</p>
       </div>
       <div id="agent-summary" class="agent-summary" aria-live="polite"></div>
       <div id="agent-list" class="agent-list" aria-live="polite"></div>
@@ -617,8 +571,8 @@ npm run defi:accepted-activity</pre>
 
     <details class="lab-drawer">
       <summary>
-        <span>Proof, replay, invoices, and wallet review</span>
-        <small>Accepted tx evidence, indexer rows, payload receipts, and submit-review surfaces.</small>
+        <span>Proof, replay, invoices, and wallet use</span>
+        <small>Accepted tx evidence, replay rows, payload receipts, and submit surfaces.</small>
       </summary>
 
     <section id="proofs" class="panel proofs">
@@ -671,8 +625,8 @@ npm run tx:payload</pre>
     <section id="submit" class="panel submit-console">
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
-        <h2>Review signed drafts before any testnet broadcast.</h2>
-        <p>Exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. The external-wallet path is: review an unsigned request, sign outside the repo, return signed bytes, then submit and replay.</p>
+        <h2>Review before any testnet broadcast.</h2>
+        <p>Check inputs, outputs, fees, payload state, and submit commands before signing. The user-wallet path is: review a request, sign outside the repo, return signed bytes, then submit and replay.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
@@ -692,8 +646,8 @@ npm run wallet:adapter-run</pre>
 
     <details class="lab-drawer">
       <summary>
-        <span>Research, signals, and funding tools</span>
-        <small>Reference lanes, app maps, attestations, signal payloads, and manual outpoint import.</small>
+        <span>Signals and funding tools</span>
+        <small>App maps, attestations, signal payloads, and manual outpoint import.</small>
       </summary>
 
     <section id="roadmap" class="panel roadmap">
@@ -711,13 +665,13 @@ npm run wallet:adapter-run</pre>
 
     <section id="research-library" class="panel research-library">
       <div class="section-title">
-        <p class="eyebrow">Cross-chain research library</p>
+        <p class="eyebrow">Reference library</p>
         <h2>PMF, failure modes, and Kaspa mapping.</h2>
         <p>External examples are reference material. Repo evidence is linked separately.</p>
       </div>
       <div id="research-summary" class="research-summary" aria-live="polite"></div>
       <details class="evidence-drawer">
-        <summary>Show research reference rows</summary>
+        <summary>Show reference rows</summary>
         <div id="research-candidates" class="research-candidates" aria-live="polite"></div>
       </details>
       <pre>npm run research:library</pre>
@@ -727,7 +681,7 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Kaspa app stack</p>
         <h2>What this naturally grows into next.</h2>
-        <p>The queue starts with covenant products this repo can test on TN12, then moves outward to infrastructure and later proof-backed apps.</p>
+        <p>Start with covenant products this repo can test on TN12, then move outward to infrastructure and later proof-backed apps.</p>
       </div>
       <div id="build-queue" class="build-queue" aria-live="polite"></div>
     </section>
@@ -736,7 +690,7 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Kaspa app lab</p>
         <h2>Base work from the application layer map.</h2>
-        <p>These are the app paths from the Kaspa Explained map: build money movement, covenant spend rules, and small Kaspa-anchored app-state prototypes now; keep full vProgs and deeper RTD designs in research until evidence changes.</p>
+        <p>These app paths start with money movement, covenant spend rules, and small Kaspa-anchored state prototypes.</p>
       </div>
       <div id="app-lanes" class="app-lanes" aria-live="polite"></div>
     </section>
@@ -763,7 +717,7 @@ npm run wallet:adapter-run</pre>
 
     <section id="prediction-hedge" class="panel prediction-hedge">
       <div class="section-title">
-        <p class="eyebrow">Prediction hedge simulator</p>
+        <p class="eyebrow">Event signal simulator</p>
         <h2>Attestation-fed review prompts, no trading.</h2>
         <p>Verified accepted payload signals can move simulated event probabilities. Draft signals remain context only. The output is a review prompt, not settlement, advice, or automated execution.</p>
       </div>
@@ -809,9 +763,9 @@ npm run wallet:adapter-run</pre>
 
       <section class="panel output" aria-live="polite">
         <div class="section-title">
-          <p class="eyebrow">Miner signal research</p>
+        <p class="eyebrow">Signal channels</p>
           <h2>Do not overload block headers.</h2>
-          <p>Miner incentives can be explored, but app-specific data should start with transaction payloads and accepted transaction indexing. Coinbase payload and pool support are later mining-software research surfaces.</p>
+        <p>App-specific data should start with transaction payloads and accepted transaction replay. Coinbase payload and pool support are later mining-software work.</p>
         </div>
         <div id="signal-channels" class="signal-channels"></div>
         <div id="payload-draft-status" class="payload-draft-status"></div>
@@ -853,8 +807,8 @@ npm run wallet:adapter-run</pre>
       </article>
 
       <article class="panel output" aria-live="polite">
-        <p class="eyebrow">Funding artifact</p>
-        <h2>Ready for planner</h2>
+        <p class="eyebrow">Funding JSON</p>
+        <h2>Ready for transaction builder</h2>
         <ul id="manual-issues" class="issues"></ul>
         <pre id="manual-artifact"></pre>
       </article>
@@ -869,6 +823,7 @@ npm run wallet:adapter-run</pre>
         <p>The command prints a `kaspatest:` address and stores testnet-only wallet material in `.local/tn12-wallet.json`. Paste that address into the faucet.</p>
         <p>Use fresh testnet-only wallet material for new attempts, and keep private keys out of committed files.</p>
         <div class="link-list">
+          <a href="docs/CLI_FROM_ZERO.md">Start from zero</a>
           <a href="docs/COMMAND_RUNBOOK.md">Command runbook</a>
           <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
           <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">TN12 explorer</a>
@@ -878,7 +833,7 @@ npm run wallet:adapter-run</pre>
       <article class="panel">
         <p class="eyebrow">Open gaps</p>
         <h2>What still needs proof.</h2>
-        <p>The main open gaps are external signing, live rollback evidence, and one concrete settlement path that a user can run end to end.</p>
+        <p>The main open gaps are user-wallet signing, live rollback evidence, and one concrete settlement path that a user can run end to end.</p>
         <pre>docs/PROGRESS.md</pre>
       </article>
     </section>
@@ -888,8 +843,8 @@ npm run wallet:adapter-run</pre>
       <h2>Status labels</h2>
       <div class="claim-grid">
         <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
-        <article><strong>Open gaps</strong><p>Mainnet covenant tooling, app-state prototypes, wallet safety, live indexer behavior, and production wallet integration are tracked separately.</p></article>
-        <article><strong>Build focus</strong><p>External signing, live rollback evidence, durable payload indexing, and one concrete settlement vertical.</p></article>
+        <article><strong>Open gaps</strong><p>Mainnet covenant tooling, user-wallet signing, live replay behavior, and production wallet integration are tracked separately.</p></article>
+        <article><strong>Build focus</strong><p>User-wallet signing, live rollback evidence, durable payload replay, and one concrete settlement flow.</p></article>
       </div>
     </section>
     </details>

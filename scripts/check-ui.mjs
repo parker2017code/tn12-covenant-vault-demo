@@ -47,7 +47,7 @@ try {
   assert.match(html, /id="proof-status"/);
   assert.match(html, /id="receipt-events"/);
   assert.match(html, /id="wallet-connector"/);
-  assert.match(html, /The intended product path is external signing/);
+  assert.match(html, /The user-wallet path is:/);
   assert.match(html, /id="defi-receipt-guard"/);
   assert.match(html, /id="defi-simulation-summary"/);
   assert.match(html, /id="defi-simulation-list"/);
@@ -104,21 +104,28 @@ async function checkRenderedPages(url) {
   const browser = await chromium.launch({ headless: true });
   try {
     for (const path of ["index.html", "lab.html", "results.html", "playground.html"]) {
-      const page = await browser.newPage();
-      const errors = [];
-      page.on("pageerror", (error) => errors.push(error.message));
-      page.on("console", (message) => {
-        if (["error", "warning"].includes(message.type())) errors.push(message.text());
-      });
-      const response = await page.goto(`${url}${path}`, { waitUntil: "networkidle" });
-      assert.equal(response?.ok(), true, `${path} did not return 200`);
-      assert.deepEqual(errors, [], `${path} had browser errors: ${errors.join("; ")}`);
-      const emptyLiveRegions = await page.locator("[aria-live]").evaluateAll((nodes) => nodes
-        .filter((node) => !node.textContent.trim() && node.children.length === 0)
-        .map((node) => node.id || node.className || node.tagName));
-      assert.deepEqual(emptyLiveRegions, [], `${path} has empty live regions`);
-      await assertLocalLinks(page, path);
-      await page.close();
+      for (const viewport of [
+        { name: "desktop", width: 1280, height: 900 },
+        { name: "mobile", width: 390, height: 844 },
+      ]) {
+        const page = await browser.newPage({ viewport });
+        const errors = [];
+        page.on("pageerror", (error) => errors.push(error.message));
+        page.on("console", (message) => {
+          if (["error", "warning"].includes(message.type())) errors.push(message.text());
+        });
+        const response = await page.goto(`${url}${path}`, { waitUntil: "networkidle" });
+        assert.equal(response?.ok(), true, `${path} did not return 200`);
+        assert.deepEqual(errors, [], `${path} had browser errors: ${errors.join("; ")}`);
+        await assertNoViewportOverflow(page, `${path} ${viewport.name}`);
+        if (viewport.name === "mobile") await assertMobileControls(page, path);
+        const emptyLiveRegions = await page.locator("[aria-live]").evaluateAll((nodes) => nodes
+          .filter((node) => !node.textContent.trim() && node.children.length === 0)
+          .map((node) => node.id || node.className || node.tagName));
+        assert.deepEqual(emptyLiveRegions, [], `${path} has empty live regions`);
+        await assertLocalLinks(page, path);
+        await page.close();
+      }
     }
 
     const page = await browser.newPage();
@@ -146,6 +153,7 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator("#playground-quickstart a").count(), 4);
     assert.ok(await page.locator('#playground-quickstart a[href="#activity"]').count() === 1);
     assert.ok(await page.locator('#playground-quickstart a[href="lab.html#product-map"]').count() === 1);
+    assert.ok(await page.locator('a[href="docs/CLI_FROM_ZERO.md"]').count() >= 1);
     assert.ok(await page.locator('#wallet a[href="lab.html#submit"]').count() === 1);
     assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/transactions/"]').count(), 4);
     assert.equal(await page.locator('#playground-tx-map article').count(), 5);
@@ -169,12 +177,12 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator("#product-map .product-grid a").count(), 13);
     const productMapText = await page.locator("#product-map").innerText();
     assert.match(productMapText, /What people can try/);
-    assert.match(productMapText, /External wallet handoff/);
+    assert.match(productMapText, /Use your own wallet/);
     assert.match(productMapText, /Get and verify tKAS/);
     assert.match(productMapText, /Scheduler workbench/);
     const runbookText = await page.locator("#runbook").innerText();
     assert.match(runbookText, /Run it yourself/);
-    assert.match(runbookText, /Next rails: AMM custody/);
+    assert.match(runbookText, /Next: real wallet signing/);
     assert.match(runbookText, /Replay before believing it/);
     await page.locator("#lane-runbook").evaluate((node) => {
       node.open = true;
@@ -185,7 +193,7 @@ async function checkRenderedPages(url) {
     assert.match(laneRunbookText, /DeFi lab/);
     assert.match(laneRunbookText, /Coordination \/ Stag/);
     assert.match(laneRunbookText, /based app prototype/i);
-    assert.match(laneRunbookText, /External wallet handoff/);
+    assert.match(laneRunbookText, /Use your own wallet/);
     assert.match(laneRunbookText, /AMM custody/);
     assert.match(laneRunbookText, /npm run defi:refresh/);
     assert.equal(await page.locator("details.lab-drawer").count(), 6);
@@ -200,7 +208,8 @@ async function checkRenderedPages(url) {
     assert.match(schedulerText, /Replay the accepted scheduler trigger/);
     assert.match(schedulerText, /Accepted trigger/);
     assert.match(schedulerText, /Transparent coordination pack/);
-    assert.match(schedulerText, /Protocol-level automation is separate research work/);
+    assert.match(schedulerText, /Protocol scheduler/i);
+    assert.match(schedulerText, /Separate research work/i);
     assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 7);
     await page.goto(`${url}lab.html#coordination`, { waitUntil: "networkidle" });
     await page.waitForSelector(".coordination-run-card", { timeout: 5000 });
@@ -245,6 +254,54 @@ async function assertLocalLinks(page, path) {
     }
   }
   assert.deepEqual(problems, [], `${path} has broken local links`);
+}
+
+async function assertNoViewportOverflow(page, label) {
+  const result = await page.evaluate(() => {
+    const doc = document.documentElement;
+    const problems = [];
+    const allowance = 2;
+    if (doc.scrollWidth > window.innerWidth + allowance) {
+      problems.push(`document ${doc.scrollWidth}px > viewport ${window.innerWidth}px`);
+    }
+
+    for (const element of document.querySelectorAll("body *")) {
+      if (element.closest(".skip-link")) continue;
+      const style = window.getComputedStyle(element);
+      if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) continue;
+      const rect = element.getBoundingClientRect();
+      if (rect.width < 1 || rect.height < 1) continue;
+      if (rect.left < -allowance || rect.right > window.innerWidth + allowance) {
+        const name = [
+          element.tagName.toLowerCase(),
+          element.id ? `#${element.id}` : "",
+          typeof element.className === "string" && element.className ? `.${element.className.trim().split(/\s+/).join(".")}` : "",
+        ].join("");
+        problems.push(`${name || element.tagName} [${Math.round(rect.left)}, ${Math.round(rect.right)}]`);
+      }
+    }
+    return problems.slice(0, 12);
+  });
+
+  assert.deepEqual(result, [], `${label} has horizontal overflow: ${result.join("; ")}`);
+}
+
+async function assertMobileControls(page, path) {
+  const problems = await page.evaluate(() => {
+    const selectors = [".theme-toggle", ".nav-menu-button", ".nav-cta", ".nav a", ".button", "summary", "button"];
+    return selectors.flatMap((selector) => Array.from(document.querySelectorAll(selector)).flatMap((element) => {
+      const style = window.getComputedStyle(element);
+      if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return [];
+      const rect = element.getBoundingClientRect();
+      if (rect.width < 1 || rect.height < 1) return [];
+      if (rect.right > window.innerWidth + 2 || rect.left < -2) {
+        return [`${selector} outside viewport`];
+      }
+      return [];
+    }));
+  });
+
+  assert.deepEqual(problems, [], `${path} has mobile controls outside viewport`);
 }
 
 function createStaticServer(rootDir) {

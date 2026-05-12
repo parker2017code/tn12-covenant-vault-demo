@@ -13,9 +13,10 @@ This is an internal working note for product cleanup. Keep the public site focus
 - The first screen should route to three jobs: see the proof, try the playground, inspect technical evidence.
 - Treat one reported issue as a class until proven otherwise. One confusing command means audit all visible commands; one fake-clickable card means audit all similar cards; one bad mobile control means inspect the whole mobile chrome.
 - Treat cringey language as a product bug: vague roadmap fog, fake-official labels, repeated defensive disclaimers, unexplained jargon, internal planning language, and claims bigger than the evidence.
+- Keep visual weight restrained: hero text, cards, labels, colors, and decoration should create hierarchy without becoming theatrical or oversized.
 - Write like the site should read. No vague process labels. Say the job plainly: shorten the page, link the card, remove the fake button, move the detail to docs, explain the command prereq, or show what the app does.
 - For broad cleanup, use read-only parallel agents to search faster: clickable-looking elements, cringey copy, mobile layout, source/reference issues, command issues, and strong-site patterns. The main agent owns edits and checks.
-- Audit words like accepted evidence, indexer-derived, local-key custody, external signer, durable replay, and promotion guard are correct but too dense for the default path.
+- Audit words like accepted evidence, indexer-derived, local-key custody, signer handoff, durable replay, and promotion guard are correct but too dense for the default path.
 - Generated artifact sections should be collapsed by default and renamed by user job, not internal script role.
 - Public planning sections should be collapsed by default. Keep active build plans and artifact work orders available in Lab Tools, not exposed as first-level proof content.
 - Package scripts, large `app.js`, large `scripts/check.mjs`, and artifact count make the repo hard to review. Keep splitting renderers and checks.
@@ -32,7 +33,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 
 - Make the proof home answer: funds moved, covenant spends accepted, payload receipts accepted, replay state derived.
 - Move operator/reviewer/build-status material behind technical drawers.
-- Keep playground self-serve: faucet, role wallets, external wallet handoff, replay.
+- Keep playground self-serve: faucet, role wallets, user-wallet handoff, replay.
 - Keep Lab Tools for determined builders, not first-time readers.
 - Reduce visible percentages and score language; use concrete counts and missing pieces.
 - Use a three-door homepage:
@@ -43,7 +44,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 
 ## Real product gaps
 
-- External signer round trip: real wallet signs, submit succeeds, replay sees accepted txid.
+- User-wallet signing round trip: real wallet signs, submit succeeds, replay sees accepted txid.
 - Live removed-block rollback evidence.
 - Rendered browser review on mobile and desktop.
 - More code splitting around generated manifests, renderers, and check groups.
@@ -83,7 +84,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 6. Steal structure from strong sites: simple hero, few routes, docs carry depth, no matrix homepage.
 7. Recheck Vite, Astro, Docusaurus/Starlight, docs.page, and Kaspa.org source.
 8. Split `app.js`, `styles.css`, `scripts/check.mjs`, and package scripts.
-9. Get one real external-signer payload receipt.
+9. Get one real user-wallet payload receipt.
 10. Capture live removed-block rollback behavior.
 11. Build one concrete settlement lane end to end.
 

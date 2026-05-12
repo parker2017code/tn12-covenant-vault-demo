@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TN12 Covenant Proof Page</title>
-  <meta name="description" content="Kaspa TN12 covenant proof evidence, verifier path, and mainnet-readiness boundaries.">
+  <meta name="description" content="Kaspa TN12 covenant proof evidence, verifier path, wallet handoff, and replay boundaries.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f0e'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='%2389c7b9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="theme.js"></script>
@@ -102,7 +102,7 @@
       <div class="section-title">
         <p class="eyebrow">Run locally</p>
         <h2>Run the checks when you need them.</h2>
-        <p>The short version is <code>npm ci</code>, <code>npm run check:all</code>, <code>npm run check:tn12</code>, then <code>npm run operator:refresh</code>. Read <a href="docs/COMMAND_RUNBOOK.md">the command runbook</a> before wallet, faucet, or submit commands.</p>
+        <p>The short version is <code>npm ci</code>, <code>npm run check:all</code>, <code>npm run check:tn12</code>, then <code>npm run operator:refresh</code>. If you are starting from a blank terminal, read <a href="docs/CLI_FROM_ZERO.md">the from-zero CLI guide</a>. Use <a href="docs/COMMAND_RUNBOOK.md">the command runbook</a> before wallet, faucet, or submit commands.</p>
       </div>
       <details class="evidence-drawer">
         <summary>Show exact route</summary>
@@ -110,7 +110,7 @@
           <article>
             <span>Install</span>
             <strong>npm ci</strong>
-            <p>Use the lockfile; avoid ad hoc dependency drift.</p>
+            <p>Use the lockfile so local checks run with the expected dependencies.</p>
           </article>
           <article>
             <span>Local gate</span>
@@ -128,7 +128,7 @@
             <p>Runs <code>npm run operator:refresh</code> and rebuilds the current status artifacts.</p>
           </article>
         </div>
-        <p class="note">Evidence mapping lives in <a href="docs/AUDIT_MAP.md"><code>docs/AUDIT_MAP.md</code></a>. Script groups live in <a href="docs/SCRIPT_INDEX.md"><code>docs/SCRIPT_INDEX.md</code></a>.</p>
+        <p class="note">Proof details live in <a href="docs/AUDIT_MAP.md"><code>docs/AUDIT_MAP.md</code></a>. Script groups live in <a href="docs/SCRIPT_INDEX.md"><code>docs/SCRIPT_INDEX.md</code></a>.</p>
       </details>
     </details>
 
@@ -162,9 +162,9 @@
         <div id="defi-receipt-guard" class="receipt-events" aria-live="polite"></div>
       </details>
       <div class="section-title compact-title">
-        <p class="eyebrow">DeFi accepted activity lane</p>
-        <h3>Accepted TN12 receipts, local-key custody transfers, reducers, and bounded market logic.</h3>
-        <p>Local users and pool/operator wallets now execute real TN12 funding, deposits, and payouts. AMM pricing, oracle inputs, liquidation, production custody, and external signing still need their own rails.</p>
+        <p class="eyebrow">DeFi replay checks</p>
+        <h3>Accepted TN12 receipts, transfers, and reducer checks.</h3>
+        <p>Session users and pool wallets execute funding, deposits, and payouts on TN12. Pricing, oracle inputs, liquidation, production custody, and user-wallet signing still need their own rules.</p>
       </div>
       <div id="defi-simulation-summary" class="defi-summary" aria-live="polite"></div>
       <details class="evidence-drawer">
@@ -179,9 +179,9 @@ npm run indexer:virtual-chain-run</pre>
     <details id="submit" class="panel submit-console section-drawer">
       <summary>Open wallet handoff and draft review</summary>
       <div class="section-title">
-        <p class="eyebrow">Wallet-facing submit console</p>
-        <h2>Review signed drafts before any testnet broadcast.</h2>
-        <p>This is a review surface for exact inputs, outputs, fees, payload state, and submit commands. The intended product path is external signing: review an unsigned request, sign outside the repo, return signed bytes, then submit and replay after acceptance.</p>
+        <p class="eyebrow">Wallet handoff</p>
+        <h2>Review before any testnet broadcast.</h2>
+        <p>Check inputs, outputs, fees, payload state, and submit commands before signing. The user-wallet path is: review a request, sign outside the repo, return signed bytes, then submit and replay after acceptance.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
@@ -211,10 +211,10 @@ npm run wallet:connector</pre>
       <article class="panel">
         <p class="eyebrow">Build and verify</p>
         <h2>Open the deeper workbench.</h2>
-        <p>Lab Tools holds enforcement rows, readiness maps, app lanes, wallet handoff, and research panels so this page can stay focused on the proof.</p>
+        <p>Lab Tools holds enforcement rows, app lanes, wallet handoff, and reference panels so this page can stay focused on the proof.</p>
         <div class="link-list">
           <a href="lab.html">Open lab workbench</a>
-          <a href="docs/AUDIT_MAP.md">Read evidence map</a>
+          <a href="docs/AUDIT_MAP.md">Read proof docs</a>
         </div>
       </article>
     </section>

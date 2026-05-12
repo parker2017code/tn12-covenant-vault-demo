@@ -153,6 +153,7 @@ node scripts/submit-signed-draft.mjs .local/playground/funding-draft.json --subm
       </details>
       <p class="note">If you just want to observe, skip the commands and click the txids above. If you want to run it, generate fresh roles, fund them with faucet tKAS or your own TN12 wallet, then replay the artifacts.</p>
       <div class="link-list">
+        <a href="docs/CLI_FROM_ZERO.md">Start from zero</a>
         <a href="docs/COMMAND_RUNBOOK.md">Read command runbook</a>
         <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">Open TN12 faucet</a>
         <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">Open TN12 explorer</a>
@@ -163,13 +164,13 @@ node scripts/submit-signed-draft.mjs .local/playground/funding-draft.json --subm
       <div class="section-title">
         <p class="eyebrow">Your wallet</p>
         <h2>Play without sharing keys.</h2>
-        <p>The target product path is external signing: the repo prepares reviewable requests, your wallet signs, the repo validates the returned bytes, and app state moves only after accepted replay.</p>
+        <p>The target product path is simple: the repo prepares a request, your wallet signs, the repo validates the returned bytes, and app state moves only after accepted replay.</p>
       </div>
       <div id="playground-wallet-flow" class="results-flow" aria-live="polite"></div>
       <div class="link-list">
         <a href="lab.html#submit">Open wallet handoff</a>
         <a href="artifacts/wallet-standard-requests.json">Open request candidates</a>
-        <a href="artifacts/wallet-external-signer-result-template.json">Open signer return template</a>
+        <a href="artifacts/wallet-external-signer-result-template.json">Open signed-return template</a>
       </div>
     </section>
 
