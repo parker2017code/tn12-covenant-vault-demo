@@ -6,7 +6,9 @@ This file is the short queue. It does not replace generated artifacts; it points
 
 ## Current Position
 
-- TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
+- TN12 proof core is strong as an end-to-end evidence workflow: simple covenant primitives, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
+- The next technical jump is contract depth, not another shallow product lane. Recurring caps are the active rail, and DECL support now has a checked compiler probe.
+- KIP-20, Silverscript DECL, ICC, multiplexor routing, and KIP-21 lane commitments are now the vocabulary for new work. Do not invent product copy around them until a repo artifact, script, or test exists.
 - Mainnet deployment readiness percentages belong in `MAINNET_READINESS.md`, not public page copy.
 - The next useful work is not another app idea. It is one end-to-end wallet, replay, and settlement slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
@@ -32,8 +34,9 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 2 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
 | 3 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 4 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or wallet signing is needed |
-| 5 | Wallet-vault feature rails. | Dynamic whitelist, recurring cap, partial unvault, policy update, and guardian recovery are split into script, wallet-policy, and local-model tasks. | No |
-| 6 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
+| 5 | Recurring-cap contract depth. | The current local-wallet cap evidence turns into one deeper `.sil` primitive with accepted positive path and negative map. | No |
+| 6 | DECL/stateful covenant probe. | `contracts/probes/RecurringTreasuryDeclProbe.sil` compiles, `artifacts/silverscript-decl-support.json` records support, and focused tests assert the result. | No |
+| 7 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
 
 ## Next Defined Work
 
@@ -57,11 +60,17 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - What it is: turn the missing vault-product features into separate rails instead of one vague "vaults later" bucket.
    - Default path: local-wallet TN12 flow first. That proves address setup, transaction construction, accepted txid, replay, UI evidence, and negative guards with minimal overhead.
    - Dynamic whitelist: local-wallet destination-set artifact first; promote only after a script or wallet proves destination-set enforcement.
-   - Recurring cap: local-wallet treasury cap fixture first; promote after accepted positive and over-cap negative TN12 evidence.
+   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, and cumulative over-window block are built; next is one deeper `.sil` path that enforces cap amount and required destination.
    - Partial unvault: local-wallet contract fixture that spends part of an output while relocking the remainder.
    - Policy update: local-wallet delayed admin/recovery update path with accepted update and early-update rejection evidence.
    - Guardian recovery: local-wallet m-of-n guardian path with accepted quorum spend and too-few/wrong-guardian negative evidence.
    - Done when each feature has a status label, artifact path, test, and UI boundary.
+6. Covenant examples worth building after recurring caps.
+   - ICC ownership demo: one covenant-owned action or token branch is authorized by a sibling covenant input.
+   - Multiplexor demo: one router hands state to worker A or worker B, then the worker returns to the router.
+   - Challenge/timeout demo: an invalid or stalled transition is settled by a timeout path.
+   - KIP-21 lane replay: accepted app activity is grouped into a lane and replayed into a compact state proof.
+   - Done when the example has a contract or explicit compiler blocker, an artifact, a negative case, and a UI line.
 
 ## Where Older Queues Went
 
@@ -71,7 +80,8 @@ Older broad queues were folded into the active todo above. Historical planning n
 
 - Do not buy signer hardware just to move the repo forward.
 - Do not submit non-selected batch refund paths for already spent pledge outputs.
-- Do not add AMM, lending, liquidation, oracle, or bridge claims until there is a narrower accepted custody/indexer path.
+- Do not add AMM, lending, liquidation, oracle, bridge, or another broad app lane until one deeper contract primitive has an accepted positive path and a negative map.
+- Do not call ICC, multiplexor routing, KIP-20 state, or KIP-21 lane proof "built" until the repo has a contract, generated artifact, and test for that exact claim.
 - Use `npm run defi:accepted-activity` for real local-key TN12 DeFi activity: user funding, pool deposits, pool payouts, and reduced balances.
 - Use `npm run defi:simulation` only for market logic that is not yet script-enforced: AMM math, lending health, liquidation review, oracle assumptions, and settlement planner checks over accepted receipt/indexer inputs, with live-product promotion blocked.
 - Use `npm run defi:scenario` for deterministic AMM output, min-output rejection, oracle freshness, lending health-factor, and liquidation-review simulations over accepted TN12 receipt references.

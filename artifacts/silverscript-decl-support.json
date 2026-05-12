@@ -1,0 +1,19 @@
+{
+  "schema": "tn12-silverscript-decl-support/v1",
+  "reviewedAt": "2026-05-12",
+  "source": "contracts/probes/RecurringTreasuryDeclProbe.sil",
+  "compiler": "/home/parker2017/silverscript-tools/target/release/silverc",
+  "status": "decl-covenant-probe-compiled",
+  "compiledOutput": "artifacts/RecurringTreasuryDeclProbe.json",
+  "compiledBytes": 46639,
+  "supportedSignals": {
+    "covenantMacro": true,
+    "covBinding": true,
+    "stateArrayParameters": true,
+    "generatedLeaderDelegateWrappers": true,
+    "opCovLowering": true
+  },
+  "nextRail": "Build RecurringTreasuryVault.sil around explicit cap, spentInWindow, windowStart, required destination, continuation output, and negative candidates.",
+  "stderr": "",
+  "stdout": ""
+}

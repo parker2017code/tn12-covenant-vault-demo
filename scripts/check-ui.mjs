@@ -38,8 +38,8 @@ try {
     assert.match(publicPageHtml, /class="brand-home" href="index\.html"/);
     assert.match(publicPageHtml, /rel="apple-touch-icon" href="apple-touch-icon\.png"/);
     assert.match(publicPageHtml, /rel="manifest" href="site\.webmanifest"/);
-    assert.match(publicPageHtml, /property="og:image" content="og-tn12-proof-lab\.png"/);
-    assert.match(publicPageHtml, /name="twitter:image" content="og-tn12-proof-lab\.png"/);
+    assert.match(publicPageHtml, new RegExp('property="og:image" content="https://parker2017code.github.io/tn12-covenant-vault-demo/og-tn12-proof-lab\\.png(\\?[^"]*)?"'));
+    assert.match(publicPageHtml, new RegExp('name="twitter:image" content="https://parker2017code.github.io/tn12-covenant-vault-demo/og-tn12-proof-lab\\.png(\\?[^"]*)?"'));
   }
   const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
   const checkpoint = JSON.parse(await readFile("artifacts/checkpointed-accepted-index.json", "utf8"));

@@ -1,0 +1,59 @@
+{
+  "schema": "tn12-treasury-recurring-caps/v1",
+  "network": "kaspa-testnet-12",
+  "status": "local-wallet-recurring-cap-evidence-ready",
+  "summary": {
+    "dailyCapTkas": 75,
+    "spentAfterTkas": 25,
+    "remainingAfterTkas": 50,
+    "acceptedUnderCapTxs": 1,
+    "blockedOverCapRows": 1,
+    "blockedCumulativeRows": 1,
+    "scriptEnforcedRows": 0,
+    "walletPolicyRows": 3
+  },
+  "window": {
+    "id": "treasury-core-team:2026-05-12",
+    "status": "cap-window-policy-ready",
+    "dailyCapTkas": 75,
+    "spentBeforeTkas": 0,
+    "acceptedSpendTkas": 25,
+    "spentAfterTkas": 25,
+    "remainingAfterTkas": 50,
+    "proposedSecondSpendTkas": 60,
+    "secondSpendAllowed": false,
+    "secondSpendStatus": "blocked-by-cumulative-window"
+  },
+  "positive": {
+    "label": "under-cap payroll spend",
+    "amountTkas": 25,
+    "capTkas": 75,
+    "status": "accepted-on-tn12-under-cap",
+    "txid": "d9eba84e7565ba28e5631c4a3b914da93b68e77daf9279a435f9303eeb63cf65",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/d9eba84e7565ba28e5631c4a3b914da93b68e77daf9279a435f9303eeb63cf65",
+    "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "to": "kaspatest:qzduxrf2fjf92d8ntj4wy9sj2dfjf3ndv27ztluhtfempk68sn7fgukrh3a87",
+    "acceptingBlockBlueScore": 9899578
+  },
+  "negative": {
+    "label": "over-cap payroll draft",
+    "amountTkas": 100,
+    "capTkas": 75,
+    "status": "blocked-by-wallet-policy",
+    "reason": "The draft fits source balance but exceeds the daily cap."
+  },
+  "cumulativeNegative": {
+    "label": "second spend in same window",
+    "amountTkas": 60,
+    "spentAfterAcceptedTkas": 25,
+    "capTkas": 75,
+    "status": "blocked-by-cumulative-window",
+    "reason": "The first accepted spend leaves too little room for the proposed second spend."
+  },
+  "promotionRule": "Promote recurring caps only after the accepted spend, cap window state, and blocked over-cap row are checked together.",
+  "boundaries": [
+    "This proves a local-wallet TN12 under-cap spend and a blocked over-cap policy row.",
+    "It does not prove script-enforced recurring limits yet.",
+    "The next hardening step is an active cap-window artifact that prevents multiple accepted spends from exceeding the window."
+  ]
+}

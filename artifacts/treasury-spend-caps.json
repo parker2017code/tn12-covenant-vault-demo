@@ -9,9 +9,17 @@
     "delayedWithdrawalDrafts": 1,
     "blockedDrafts": 0
   },
+  "windowState": {
+    "vaultId": "treasury-core-team",
+    "windowId": "treasury-core-team:2026-05-12",
+    "dailyCapTkas": 75,
+    "spentBeforeTkas": 0,
+    "proposedSecondSpendTkas": 60
+  },
   "scenarios": [
     {
       "label": "baseline",
+      "dailyCapTkas": 75,
       "coreTeam": {
         "payrollTotal": 40,
         "payrollWithinBalance": true,

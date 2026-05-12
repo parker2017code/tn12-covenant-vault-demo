@@ -1,0 +1,26 @@
+pragma silverscript ^0.1.0;
+
+contract RecurringTreasuryDeclProbe() {
+    int amount = 100;
+    int spentInWindow = 0;
+    int windowStart = 0;
+
+    #[covenant(binding = cov, from = 2, to = 2, mode = verification)]
+    function spend_window(State[] prev_states, State[] new_states) {
+        require(new_states.length > 0);
+
+        int in_sum = 0;
+        for(i, 0, prev_states.length, 2) {
+            in_sum = in_sum + prev_states[i].amount;
+        }
+
+        int out_sum = 0;
+        for(i, 0, new_states.length, 2) {
+            out_sum = out_sum + new_states[i].amount;
+            require(new_states[i].windowStart == prev_states[0].windowStart);
+            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);
+        }
+
+        require(in_sum >= out_sum);
+    }
+}

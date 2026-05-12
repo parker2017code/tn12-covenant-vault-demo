@@ -40,9 +40,17 @@ const artifact = {
     delayedWithdrawalDrafts: baselineDrafts.summary.delayedWithdrawalDrafts,
     blockedDrafts: baselineDrafts.summary.blockedDrafts
   },
+  windowState: {
+    vaultId: "treasury-core-team",
+    windowId: "treasury-core-team:2026-05-12",
+    dailyCapTkas: 75,
+    spentBeforeTkas: 0,
+    proposedSecondSpendTkas: 60
+  },
   scenarios: [
     {
       label: "baseline",
+      dailyCapTkas: baselineRegistry.vaults.find((vault) => vault.vaultId === "treasury-core-team")?.dailyCapTkas || 0,
       coreTeam: baselineRegistry.vaults.find((vault) => vault.vaultId === "treasury-core-team")?.checks || {},
       grantsRound: baselineRegistry.vaults.find((vault) => vault.vaultId === "treasury-grants-round")?.checks || {}
     },

@@ -1,0 +1,2042 @@
+{
+  "contract_name": "RecurringTreasuryDeclProbe",
+  "script": [
+    107,
+    8,
+    100,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    108,
+    118,
+    0,
+    156,
+    99,
+    117,
+    185,
+    207,
+    118,
+    0,
+    209,
+    185,
+    156,
+    105,
+    118,
+    208,
+    118,
+    82,
+    161,
+    105,
+    120,
+    210,
+    0,
+    0,
+    0,
+    0,
+    85,
+    121,
+    0,
+    148,
+    82,
+    161,
+    105,
+    118,
+    86,
+    121,
+    159,
+    99,
+    118,
+    87,
+    121,
+    120,
+    209,
+    88,
+    121,
+    82,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    82,
+    147,
+    89,
+    121,
+    83,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    82,
+    147,
+    88,
+    147,
+    188,
+    88,
+    121,
+    82,
+    121,
+    209,
+    89,
+    121,
+    83,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    91,
+    147,
+    90,
+    121,
+    84,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    91,
+    147,
+    88,
+    147,
+    188,
+    89,
+    121,
+    83,
+    121,
+    209,
+    90,
+    121,
+    84,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    1,
+    20,
+    147,
+    91,
+    121,
+    85,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    1,
+    20,
+    147,
+    88,
+    147,
+    188,
+    87,
+    121,
+    83,
+    121,
+    88,
+    205,
+    126,
+    88,
+    122,
+    117,
+    87,
+    121,
+    83,
+    121,
+    88,
+    205,
+    126,
+    88,
+    122,
+    117,
+    87,
+    121,
+    83,
+    121,
+    88,
+    205,
+    126,
+    88,
+    122,
+    117,
+    86,
+    121,
+    81,
+    147,
+    88,
+    122,
+    117,
+    84,
+    122,
+    117,
+    84,
+    122,
+    117,
+    84,
+    122,
+    117,
+    84,
+    122,
+    117,
+    104,
+    118,
+    86,
+    121,
+    159,
+    99,
+    118,
+    87,
+    121,
+    120,
+    209,
+    88,
+    121,
+    82,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    82,
+    147,
+    89,
+    121,
+    83,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    82,
+    147,
+    88,
+    147,
+    188,
+    88,
+    121,
+    82,
+    121,
+    209,
+    89,
+    121,
+    83,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    91,
+    147,
+    90,
+    121,
+    84,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    91,
+    147,
+    88,
+    147,
+    188,
+    89,
+    121,
+    83,
+    121,
+    209,
+    90,
+    121,
+    84,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    1,
+    20,
+    147,
+    91,
+    121,
+    85,
+    121,
+    209,
+    201,
+    2,
+    230,
+    3,
+    148,
+    1,
+    20,
+    147,
+    88,
+    147,
+    188,
+    87,
+    121,
+    83,
+    121,
+    88,
+    205,
+    126,
+    88,
+    122,
+    117,
+    87,
+    121,
+    83,
+    121,
+    88,
+    205,
+    126,
+    88,
+    122,
+    117,
+    87,
+    121,
+    83,
+    121,
+    88,
+    205,
+    126,
+    88,
+    122,
+    117,
+    86,
+    121,
+    81,
+    147,
+    88,
+    122,
+    117,
+    84,
+    122,
+    117,
+    84,
+    122,
+    117,
+    84,
+    122,
+    117,
+    84,
+    122,
+    117,
+    104,
+    83,
+    121,
+    83,
+    121,
+    83,
+    121,
+    95,
+    121,
+    95,
+    121,
+    95,
+    121,
+    82,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    0,
+    160,
+    105,
+    0,
+    0,
+    87,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    0,
+    148,
+    82,
+    161,
+    105,
+    118,
+    88,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    159,
+    99,
+    118,
+    82,
+    121,
+    89,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    147,
+    83,
+    122,
+    117,
+    120,
+    81,
+    147,
+    83,
+    122,
+    117,
+    123,
+    117,
+    104,
+    118,
+    88,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    159,
+    99,
+    118,
+    82,
+    121,
+    89,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    147,
+    83,
+    122,
+    117,
+    120,
+    81,
+    147,
+    83,
+    122,
+    117,
+    123,
+    117,
+    104,
+    0,
+    0,
+    86,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    0,
+    148,
+    82,
+    161,
+    105,
+    118,
+    87,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    159,
+    99,
+    118,
+    82,
+    121,
+    88,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    147,
+    83,
+    122,
+    117,
+    85,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    89,
+    121,
+    0,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    156,
+    105,
+    86,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    90,
+    121,
+    0,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    162,
+    105,
+    120,
+    81,
+    147,
+    83,
+    122,
+    117,
+    123,
+    117,
+    104,
+    118,
+    87,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    159,
+    99,
+    118,
+    82,
+    121,
+    88,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    147,
+    83,
+    122,
+    117,
+    85,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    89,
+    121,
+    0,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    156,
+    105,
+    86,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    90,
+    121,
+    0,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    162,
+    105,
+    120,
+    81,
+    147,
+    83,
+    122,
+    117,
+    123,
+    117,
+    104,
+    83,
+    121,
+    82,
+    121,
+    162,
+    105,
+    94,
+    121,
+    82,
+    161,
+    105,
+    94,
+    121,
+    1,
+    23,
+    121,
+    130,
+    124,
+    117,
+    88,
+    150,
+    156,
+    105,
+    0,
+    95,
+    121,
+    0,
+    148,
+    82,
+    161,
+    105,
+    118,
+    96,
+    121,
+    159,
+    99,
+    118,
+    1,
+    18,
+    121,
+    120,
+    211,
+    1,
+    25,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    1,
+    25,
+    121,
+    83,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    1,
+    25,
+    121,
+    84,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    126,
+    185,
+    118,
+    201,
+    2,
+    230,
+    3,
+    148,
+    118,
+    81,
+    147,
+    188,
+    124,
+    126,
+    185,
+    118,
+    201,
+    118,
+    2,
+    230,
+    3,
+    148,
+    1,
+    28,
+    147,
+    124,
+    188,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    120,
+    195,
+    135,
+    105,
+    120,
+    81,
+    147,
+    83,
+    122,
+    117,
+    119,
+    119,
+    104,
+    118,
+    96,
+    121,
+    159,
+    99,
+    118,
+    1,
+    18,
+    121,
+    120,
+    211,
+    1,
+    25,
+    121,
+    82,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    1,
+    25,
+    121,
+    83,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    1,
+    25,
+    121,
+    84,
+    121,
+    88,
+    149,
+    118,
+    88,
+    147,
+    127,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    126,
+    185,
+    118,
+    201,
+    2,
+    230,
+    3,
+    148,
+    118,
+    81,
+    147,
+    188,
+    124,
+    126,
+    185,
+    118,
+    201,
+    118,
+    2,
+    230,
+    3,
+    148,
+    1,
+    28,
+    147,
+    124,
+    188,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    120,
+    195,
+    135,
+    105,
+    120,
+    81,
+    147,
+    83,
+    122,
+    117,
+    119,
+    119,
+    104,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    81,
+    103,
+    118,
+    81,
+    156,
+    99,
+    117,
+    185,
+    207,
+    0,
+    209,
+    185,
+    158,
+    105,
+    117,
+    117,
+    117,
+    81,
+    103,
+    117,
+    0,
+    105,
+    104,
+    104
+  ],
+  "ast": {
+    "pragma": {
+      "name": "silverscript",
+      "value": "^0.1.0",
+      "span": "pragma silverscript ^0.1.0;",
+      "name_span": "silverscript",
+      "value_span": "^0.1.0"
+    },
+    "name": "RecurringTreasuryDeclProbe",
+    "params": [],
+    "fields": [
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "amount",
+        "expr": {
+          "kind": "int",
+          "data": 100,
+          "span": "100"
+        },
+        "span": "int amount = 100;",
+        "type_span": "int ",
+        "name_span": "amount"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "spentInWindow",
+        "expr": {
+          "kind": "int",
+          "data": 0,
+          "span": "0"
+        },
+        "span": "int spentInWindow = 0;",
+        "type_span": "int ",
+        "name_span": "spentInWindow"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "windowStart",
+        "expr": {
+          "kind": "int",
+          "data": 0,
+          "span": "0"
+        },
+        "span": "int windowStart = 0;",
+        "type_span": "int ",
+        "name_span": "windowStart"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "__covenant_policy_spend_window",
+        "params": [
+          {
+            "type_ref": {
+              "base": "State",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "prev_states",
+            "span": "State[] prev_states",
+            "type_span": "State[]",
+            "name_span": "prev_states"
+          },
+          {
+            "type_ref": {
+              "base": "State",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "new_states",
+            "span": "State[] new_states",
+            "type_span": "State[]",
+            "name_span": "new_states"
+          }
+        ],
+        "entrypoint": false,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "gt",
+                  "left": {
+                    "kind": "unary_suffix",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "new_states",
+                        "span": "new_states"
+                      },
+                      "kind": "length",
+                      "span": ".length"
+                    },
+                    "span": "new_states.length"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "new_states.length > 0"
+              },
+              "message": null,
+              "span": "require(new_states.length > 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "in_sum",
+              "expr": {
+                "kind": "int",
+                "data": 0,
+                "span": "0"
+              },
+              "span": "int in_sum = 0;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "in_sum"
+            }
+          },
+          {
+            "kind": "for",
+            "data": {
+              "ident": "i",
+              "start": {
+                "kind": "int",
+                "data": 0,
+                "span": "0"
+              },
+              "end": {
+                "kind": "unary_suffix",
+                "data": {
+                  "source": {
+                    "kind": "identifier",
+                    "data": "prev_states",
+                    "span": "prev_states"
+                  },
+                  "kind": "length",
+                  "span": ".length"
+                },
+                "span": "prev_states.length"
+              },
+              "max_iterations": {
+                "kind": "int",
+                "data": 2,
+                "span": "2"
+              },
+              "body": [
+                {
+                  "kind": "assign",
+                  "data": {
+                    "name": "in_sum",
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "add",
+                        "left": {
+                          "kind": "identifier",
+                          "data": "in_sum",
+                          "span": "in_sum"
+                        },
+                        "right": {
+                          "kind": "field_access",
+                          "data": {
+                            "source": {
+                              "kind": "array_index",
+                              "data": {
+                                "source": {
+                                  "kind": "identifier",
+                                  "data": "prev_states",
+                                  "span": "prev_states"
+                                },
+                                "index": {
+                                  "kind": "identifier",
+                                  "data": "i",
+                                  "span": "i"
+                                }
+                              },
+                              "span": "prev_states[i]"
+                            },
+                            "field": "amount",
+                            "field_span": "amount"
+                          },
+                          "span": "prev_states[i].amount"
+                        }
+                      },
+                      "span": "in_sum + prev_states[i].amount"
+                    },
+                    "span": "in_sum = in_sum + prev_states[i].amount;",
+                    "name_span": "in_sum"
+                  }
+                }
+              ],
+              "span": "for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }",
+              "ident_span": "i",
+              "body_span": "in_sum = in_sum + prev_states[i].amount;"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "out_sum",
+              "expr": {
+                "kind": "int",
+                "data": 0,
+                "span": "0"
+              },
+              "span": "int out_sum = 0;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "out_sum"
+            }
+          },
+          {
+            "kind": "for",
+            "data": {
+              "ident": "i",
+              "start": {
+                "kind": "int",
+                "data": 0,
+                "span": "0"
+              },
+              "end": {
+                "kind": "unary_suffix",
+                "data": {
+                  "source": {
+                    "kind": "identifier",
+                    "data": "new_states",
+                    "span": "new_states"
+                  },
+                  "kind": "length",
+                  "span": ".length"
+                },
+                "span": "new_states.length"
+              },
+              "max_iterations": {
+                "kind": "int",
+                "data": 2,
+                "span": "2"
+              },
+              "body": [
+                {
+                  "kind": "assign",
+                  "data": {
+                    "name": "out_sum",
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "add",
+                        "left": {
+                          "kind": "identifier",
+                          "data": "out_sum",
+                          "span": "out_sum"
+                        },
+                        "right": {
+                          "kind": "field_access",
+                          "data": {
+                            "source": {
+                              "kind": "array_index",
+                              "data": {
+                                "source": {
+                                  "kind": "identifier",
+                                  "data": "new_states",
+                                  "span": "new_states"
+                                },
+                                "index": {
+                                  "kind": "identifier",
+                                  "data": "i",
+                                  "span": "i"
+                                }
+                              },
+                              "span": "new_states[i]"
+                            },
+                            "field": "amount",
+                            "field_span": "amount"
+                          },
+                          "span": "new_states[i].amount"
+                        }
+                      },
+                      "span": "out_sum + new_states[i].amount"
+                    },
+                    "span": "out_sum = out_sum + new_states[i].amount;",
+                    "name_span": "out_sum"
+                  }
+                },
+                {
+                  "kind": "require",
+                  "data": {
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "eq",
+                        "left": {
+                          "kind": "field_access",
+                          "data": {
+                            "source": {
+                              "kind": "array_index",
+                              "data": {
+                                "source": {
+                                  "kind": "identifier",
+                                  "data": "new_states",
+                                  "span": "new_states"
+                                },
+                                "index": {
+                                  "kind": "identifier",
+                                  "data": "i",
+                                  "span": "i"
+                                }
+                              },
+                              "span": "new_states[i]"
+                            },
+                            "field": "windowStart",
+                            "field_span": "windowStart"
+                          },
+                          "span": "new_states[i].windowStart"
+                        },
+                        "right": {
+                          "kind": "field_access",
+                          "data": {
+                            "source": {
+                              "kind": "array_index",
+                              "data": {
+                                "source": {
+                                  "kind": "identifier",
+                                  "data": "prev_states",
+                                  "span": "prev_states"
+                                },
+                                "index": {
+                                  "kind": "int",
+                                  "data": 0,
+                                  "span": "0"
+                                }
+                              },
+                              "span": "prev_states[0]"
+                            },
+                            "field": "windowStart",
+                            "field_span": "windowStart"
+                          },
+                          "span": "prev_states[0].windowStart"
+                        }
+                      },
+                      "span": "new_states[i].windowStart == prev_states[0].windowStart"
+                    },
+                    "message": null,
+                    "span": "require(new_states[i].windowStart == prev_states[0].windowStart);",
+                    "message_span": null
+                  }
+                },
+                {
+                  "kind": "require",
+                  "data": {
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "ge",
+                        "left": {
+                          "kind": "field_access",
+                          "data": {
+                            "source": {
+                              "kind": "array_index",
+                              "data": {
+                                "source": {
+                                  "kind": "identifier",
+                                  "data": "new_states",
+                                  "span": "new_states"
+                                },
+                                "index": {
+                                  "kind": "identifier",
+                                  "data": "i",
+                                  "span": "i"
+                                }
+                              },
+                              "span": "new_states[i]"
+                            },
+                            "field": "spentInWindow",
+                            "field_span": "spentInWindow"
+                          },
+                          "span": "new_states[i].spentInWindow"
+                        },
+                        "right": {
+                          "kind": "field_access",
+                          "data": {
+                            "source": {
+                              "kind": "array_index",
+                              "data": {
+                                "source": {
+                                  "kind": "identifier",
+                                  "data": "prev_states",
+                                  "span": "prev_states"
+                                },
+                                "index": {
+                                  "kind": "int",
+                                  "data": 0,
+                                  "span": "0"
+                                }
+                              },
+                              "span": "prev_states[0]"
+                            },
+                            "field": "spentInWindow",
+                            "field_span": "spentInWindow"
+                          },
+                          "span": "prev_states[0].spentInWindow"
+                        }
+                      },
+                      "span": "new_states[i].spentInWindow >= prev_states[0].spentInWindow"
+                    },
+                    "message": null,
+                    "span": "require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);",
+                    "message_span": null
+                  }
+                }
+              ],
+              "span": "for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }",
+              "ident_span": "i",
+              "body_span": "out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "ge",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "in_sum",
+                    "span": "in_sum"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "out_sum",
+                    "span": "out_sum"
+                  }
+                },
+                "span": "in_sum >= out_sum"
+              },
+              "message": null,
+              "span": "require(in_sum >= out_sum);",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "#[covenant(binding = cov, from = 2, to = 2, mode = verification)]\n    function spend_window(State[] prev_states, State[] new_states) {\n        require(new_states.length > 0);\n\n        int in_sum = 0;\n        for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }\n\n        int out_sum = 0;\n        for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }\n\n        require(in_sum >= out_sum);\n    }",
+        "name_span": "spend_window",
+        "body_span": "require(new_states.length > 0);\n\n        int in_sum = 0;\n        for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }\n\n        int out_sum = 0;\n        for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }\n\n        require(in_sum >= out_sum);"
+      },
+      {
+        "name": "__leader_spend_window",
+        "params": [
+          {
+            "type_ref": {
+              "base": "State",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "new_states",
+            "span": "State[] new_states",
+            "type_span": "State[]",
+            "name_span": "new_states"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 32
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "__cov_id",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpInputCovenantId",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "call",
+                    "data": {
+                      "name": "OpCovInputIdx",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "__cov_id",
+                          "span": "<synthetic>"
+                        },
+                        {
+                          "kind": "int",
+                          "data": 0,
+                          "span": "<synthetic>"
+                        }
+                      ],
+                      "name_span": "<synthetic>"
+                    },
+                    "span": "<synthetic>"
+                  },
+                  "right": {
+                    "kind": "nullary",
+                    "data": "active_input_index",
+                    "span": "<synthetic>"
+                  }
+                },
+                "span": "<synthetic>"
+              },
+              "message": null,
+              "span": "<synthetic>",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "__cov_in_count",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpCovInputCount",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "__cov_id",
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "le",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "__cov_in_count",
+                    "span": "<synthetic>"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 2,
+                    "span": "2"
+                  }
+                },
+                "span": "<synthetic>"
+              },
+              "message": null,
+              "span": "<synthetic>",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "__cov_out_count",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpCovOutputCount",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "__cov_id",
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "State",
+                "array_dims": [
+                  {
+                    "kind": "dynamic"
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "prev_states",
+              "expr": null,
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "for",
+            "data": {
+              "ident": "__cov_in_k",
+              "start": {
+                "kind": "int",
+                "data": 0,
+                "span": "<synthetic>"
+              },
+              "end": {
+                "kind": "identifier",
+                "data": "__cov_in_count",
+                "span": "<synthetic>"
+              },
+              "max_iterations": {
+                "kind": "int",
+                "data": 2,
+                "span": "2"
+              },
+              "body": [
+                {
+                  "kind": "assign",
+                  "data": {
+                    "name": "prev_states",
+                    "expr": {
+                      "kind": "append",
+                      "data": {
+                        "source": {
+                          "kind": "identifier",
+                          "data": "prev_states",
+                          "span": "<synthetic>"
+                        },
+                        "args": [
+                          {
+                            "kind": "call",
+                            "data": {
+                              "name": "readInputState",
+                              "args": [
+                                {
+                                  "kind": "call",
+                                  "data": {
+                                    "name": "OpCovInputIdx",
+                                    "args": [
+                                      {
+                                        "kind": "identifier",
+                                        "data": "__cov_id",
+                                        "span": "<synthetic>"
+                                      },
+                                      {
+                                        "kind": "identifier",
+                                        "data": "__cov_in_k",
+                                        "span": "<synthetic>"
+                                      }
+                                    ],
+                                    "name_span": "<synthetic>"
+                                  },
+                                  "span": "<synthetic>"
+                                }
+                              ],
+                              "name_span": "<synthetic>"
+                            },
+                            "span": "<synthetic>"
+                          }
+                        ],
+                        "span": "<synthetic>"
+                      },
+                      "span": "<synthetic>"
+                    },
+                    "span": "<synthetic>",
+                    "name_span": "<synthetic>"
+                  }
+                }
+              ],
+              "span": "<synthetic>",
+              "ident_span": "<synthetic>",
+              "body_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "__covenant_policy_spend_window",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "prev_states",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "new_states",
+                  "span": "<synthetic>"
+                }
+              ],
+              "span": "<synthetic>",
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "le",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "__cov_out_count",
+                    "span": "<synthetic>"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 2,
+                    "span": "2"
+                  }
+                },
+                "span": "<synthetic>"
+              },
+              "message": null,
+              "span": "<synthetic>",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "__cov_out_count",
+                    "span": "<synthetic>"
+                  },
+                  "right": {
+                    "kind": "unary_suffix",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "new_states",
+                        "span": "<synthetic>"
+                      },
+                      "kind": "length",
+                      "span": "<synthetic>"
+                    },
+                    "span": "<synthetic>"
+                  }
+                },
+                "span": "<synthetic>"
+              },
+              "message": null,
+              "span": "<synthetic>",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "for",
+            "data": {
+              "ident": "__cov_k",
+              "start": {
+                "kind": "int",
+                "data": 0,
+                "span": "<synthetic>"
+              },
+              "end": {
+                "kind": "identifier",
+                "data": "__cov_out_count",
+                "span": "<synthetic>"
+              },
+              "max_iterations": {
+                "kind": "int",
+                "data": 2,
+                "span": "2"
+              },
+              "body": [
+                {
+                  "kind": "variable_definition",
+                  "data": {
+                    "type_ref": {
+                      "base": "int"
+                    },
+                    "modifiers": [],
+                    "name": "__cov_out_idx",
+                    "expr": {
+                      "kind": "call",
+                      "data": {
+                        "name": "OpCovOutputIdx",
+                        "args": [
+                          {
+                            "kind": "identifier",
+                            "data": "__cov_id",
+                            "span": "<synthetic>"
+                          },
+                          {
+                            "kind": "identifier",
+                            "data": "__cov_k",
+                            "span": "<synthetic>"
+                          }
+                        ],
+                        "name_span": "<synthetic>"
+                      },
+                      "span": "<synthetic>"
+                    },
+                    "span": "<synthetic>",
+                    "type_span": "<synthetic>",
+                    "modifier_spans": [],
+                    "name_span": "<synthetic>"
+                  }
+                },
+                {
+                  "kind": "function_call",
+                  "data": {
+                    "name": "validateOutputState",
+                    "args": [
+                      {
+                        "kind": "identifier",
+                        "data": "__cov_out_idx",
+                        "span": "<synthetic>"
+                      },
+                      {
+                        "kind": "array_index",
+                        "data": {
+                          "source": {
+                            "kind": "identifier",
+                            "data": "new_states",
+                            "span": "<synthetic>"
+                          },
+                          "index": {
+                            "kind": "identifier",
+                            "data": "__cov_k",
+                            "span": "<synthetic>"
+                          }
+                        },
+                        "span": "<synthetic>"
+                      }
+                    ],
+                    "span": "<synthetic>",
+                    "name_span": "<synthetic>"
+                  }
+                }
+              ],
+              "span": "<synthetic>",
+              "ident_span": "<synthetic>",
+              "body_span": "<synthetic>"
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "#[covenant(binding = cov, from = 2, to = 2, mode = verification)]\n    function spend_window(State[] prev_states, State[] new_states) {\n        require(new_states.length > 0);\n\n        int in_sum = 0;\n        for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }\n\n        int out_sum = 0;\n        for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }\n\n        require(in_sum >= out_sum);\n    }",
+        "name_span": "spend_window",
+        "body_span": "require(new_states.length > 0);\n\n        int in_sum = 0;\n        for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }\n\n        int out_sum = 0;\n        for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }\n\n        require(in_sum >= out_sum);"
+      },
+      {
+        "name": "__delegate_spend_window",
+        "params": [],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 32
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "__cov_id",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpInputCovenantId",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "ne",
+                  "left": {
+                    "kind": "call",
+                    "data": {
+                      "name": "OpCovInputIdx",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "__cov_id",
+                          "span": "<synthetic>"
+                        },
+                        {
+                          "kind": "int",
+                          "data": 0,
+                          "span": "<synthetic>"
+                        }
+                      ],
+                      "name_span": "<synthetic>"
+                    },
+                    "span": "<synthetic>"
+                  },
+                  "right": {
+                    "kind": "nullary",
+                    "data": "active_input_index",
+                    "span": "<synthetic>"
+                  }
+                },
+                "span": "<synthetic>"
+              },
+              "message": null,
+              "span": "<synthetic>",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "#[covenant(binding = cov, from = 2, to = 2, mode = verification)]\n    function spend_window(State[] prev_states, State[] new_states) {\n        require(new_states.length > 0);\n\n        int in_sum = 0;\n        for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }\n\n        int out_sum = 0;\n        for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }\n\n        require(in_sum >= out_sum);\n    }",
+        "name_span": "spend_window",
+        "body_span": "require(new_states.length > 0);\n\n        int in_sum = 0;\n        for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }\n\n        int out_sum = 0;\n        for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }\n\n        require(in_sum >= out_sum);"
+      }
+    ],
+    "span": "contract RecurringTreasuryDeclProbe() {\n    int amount = 100;\n    int spentInWindow = 0;\n    int windowStart = 0;\n\n    #[covenant(binding = cov, from = 2, to = 2, mode = verification)]\n    function spend_window(State[] prev_states, State[] new_states) {\n        require(new_states.length > 0);\n\n        int in_sum = 0;\n        for(i, 0, prev_states.length, 2) {\n            in_sum = in_sum + prev_states[i].amount;\n        }\n\n        int out_sum = 0;\n        for(i, 0, new_states.length, 2) {\n            out_sum = out_sum + new_states[i].amount;\n            require(new_states[i].windowStart == prev_states[0].windowStart);\n            require(new_states[i].spentInWindow >= prev_states[0].spentInWindow);\n        }\n\n        require(in_sum >= out_sum);\n    }\n}",
+    "name_span": "RecurringTreasuryDeclProbe"
+  },
+  "abi": [
+    {
+      "name": "__leader_spend_window",
+      "inputs": [
+        {
+          "name": "new_states",
+          "type_name": "State[]"
+        }
+      ]
+    },
+    {
+      "name": "__delegate_spend_window",
+      "inputs": []
+    }
+  ],
+  "without_selector": false,
+  "state_layout": {
+    "start": 1,
+    "len": 27
+  },
+  "debug_info": null
+}

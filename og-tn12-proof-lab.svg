@@ -1,40 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="TN12 proof lab social preview">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#090d0c"/>
-      <stop offset=".55" stop-color="#131816"/>
-      <stop offset="1" stop-color="#070909"/>
+      <stop offset="0" stop-color="#07110f"/>
+      <stop offset=".58" stop-color="#111816"/>
+      <stop offset="1" stop-color="#090d0c"/>
     </linearGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#8ee6d1"/>
-      <stop offset="1" stop-color="#f5a15a"/>
-    </linearGradient>
+    <radialGradient id="glow" cx="23%" cy="47%" r="55%">
+      <stop offset="0" stop-color="#76d8ca" stop-opacity=".34"/>
+      <stop offset=".55" stop-color="#76d8ca" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#76d8ca" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#000000" flood-opacity=".34"/>
+    </filter>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <g opacity=".14" fill="none" stroke="#8ee6d1" stroke-width="2">
-    <path d="M790 120h116l58 58v116l-58 58H790l-58-58V178z"/>
-    <path d="M956 208h116l58 58v116l-58 58H956l-58-58V266z"/>
-    <path d="M786 384h116l58 58v116l-58 58H786l-58-58V442z"/>
-    <path d="M906 178l50 30M906 352l50-144M902 442l54-60"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g opacity=".13" fill="none" stroke="#78d7ca" stroke-width="2">
+    <path d="M764 84h122l68 68v122l-68 68H764l-68-68V152z"/>
+    <path d="M948 150h122l68 68v122l-68 68H948l-68-68V218z"/>
+    <path d="M800 342h122l68 68v122l-68 68H800l-68-68V410z"/>
+    <path d="M886 152l62-2M886 342l62-2M922 410l26-70"/>
   </g>
-  <g>
-    <rect x="90" y="122" width="252" height="252" rx="30" fill="#0b0f0e" stroke="url(#mark)" stroke-width="8"/>
-    <path d="M148 194h136" fill="none" stroke="#edf8f5" stroke-width="34" stroke-linecap="round"/>
-    <path d="M216 194v116" fill="none" stroke="#edf8f5" stroke-width="34" stroke-linecap="round"/>
-    <path d="M262 246 216 292l-46-46" fill="none" stroke="url(#mark)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(54 124) scale(2.35)" filter="url(#shadow)">
+    <circle cx="98.52" cy="98.43" r="41.03" fill="#fff"/>
+    <path fill="#6fc7ba" d="m149.42,76.34c-2.8-6.76-7.22-13.03-12.32-18.12-5.08-5.1-11.61-8.91-18.38-11.71-6.51-2.71-13.78-4.07-21.28-4.07s-15.21.27-21.72,2.98c-6.76,2.8-12.42,8.12-17.51,13.22-5.1,5.1-11.02,10.51-13.82,17.26-2.71,6.53-1.83,14.48-1.83,21.99s.55,14.85,3.26,21.38c2.8,6.76,8.52,11.54,13.6,16.64,5.1,5.1,9.71,11.18,16.47,13.98,6.53,2.71,14.04,4.55,21.54,4.55s14.87-2.22,21.4-4.94c6.75-2.8,12.86-7.18,17.96-12.27,5.1-5.1,9.19-11.32,12.01-18.08,2.7-6.51,5.79-13.76,5.79-21.26s-2.48-15-5.19-21.53Zm-36.26,53.49l-11.88-1.75,3.39-23-24.87,19.16-7.32-9.56,21.82-16.8-21.82-16.81,7.32-9.56,24.87,19.16-3.39-22.99,11.88-1.77,4.73,31.98-4.73,31.96Z"/>
+    <circle cx="142" cy="55" r="12" fill="#f2a65a" stroke="#07110f" stroke-width="5"/>
   </g>
   <g font-family="Aptos, Segoe UI, Helvetica, Arial, sans-serif">
-    <text x="402" y="178" fill="#f4fffb" font-size="76" font-weight="850">TN12 Proof Lab</text>
-    <text x="408" y="246" fill="#d9e7e2" font-size="34" font-weight="650">Accepted txids, replayed state, clear blockers</text>
-    <text x="408" y="314" fill="#a9bbb5" font-size="28">A Kaspa testnet evidence surface for covenant app paths.</text>
-    <g transform="translate(408 394)" font-size="22" font-weight="800" letter-spacing=".04em">
-      <rect x="0" y="-31" width="148" height="48" rx="10" fill="#111d1a" stroke="#8ee6d1" stroke-opacity=".36"/>
-      <text x="20" y="0" fill="#8ee6d1">PROOF</text>
-      <rect x="176" y="-31" width="156" height="48" rx="10" fill="#111d1a" stroke="#8ee6d1" stroke-opacity=".36"/>
-      <text x="196" y="0" fill="#8ee6d1">REPLAY</text>
-      <rect x="360" y="-31" width="176" height="48" rx="10" fill="#111d1a" stroke="#f5a15a" stroke-opacity=".36"/>
-      <text x="382" y="0" fill="#f5a15a">BLOCKERS</text>
+    <text x="476" y="186" fill="#f3fffb" font-size="76" font-weight="850">TN12 Proof Lab</text>
+    <text x="480" y="257" fill="#dbe8e4" font-size="31" font-weight="650">Accepted txids. Replayed state. Clear blockers.</text>
+    <text x="480" y="323" fill="#aabbb6" font-size="25">Kaspa testnet evidence for covenant and wallet-policy paths.</text>
+    <g transform="translate(480 404)" font-size="22" font-weight="800" letter-spacing=".04em">
+      <rect x="0" y="-32" width="124" height="48" rx="10" fill="#12231f" stroke="#7bd7c8" stroke-opacity=".36"/>
+      <text x="20" y="0" fill="#91dfd2">PROOF</text>
+      <rect x="152" y="-32" width="142" height="48" rx="10" fill="#12231f" stroke="#7bd7c8" stroke-opacity=".36"/>
+      <text x="172" y="0" fill="#91dfd2">REPLAY</text>
+      <rect x="322" y="-32" width="168" height="48" rx="10" fill="#1e1a12" stroke="#f2a65a" stroke-opacity=".42"/>
+      <text x="342" y="0" fill="#f2a65a">TESTNET</text>
     </g>
-    <text x="92" y="532" fill="#859792" font-size="24">parker2017code.github.io/tn12-covenant-vault-demo</text>
+    <text x="92" y="548" fill="#879995" font-size="24">parker2017code.github.io/tn12-covenant-vault-demo</text>
   </g>
 </svg>

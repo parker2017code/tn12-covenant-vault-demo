@@ -1,6 +1,9 @@
 # TN12 Covenant Lab
 
-Kaspa testnet-12 repo for covenant proof spends, payload receipts, app-state prototypes, and replay guards. Scope: testnet-only evidence lab. Mainnet wallet, mainnet activation, and audited custody claims need separate evidence.
+Kaspa testnet-12 repo for simple covenant primitives exercised end to end,
+payload receipts, app-state prototypes, and replay guards. Scope: testnet-only
+evidence lab. Mainnet wallet, mainnet activation, and audited custody claims
+need separate evidence.
 
 No independent security audit has been completed. Mainnet funds are out of scope.
 
@@ -19,6 +22,8 @@ Start here:
 - `docs/CLI_FROM_ZERO.md`: blank-terminal path from install to TN12 playground, wallet drafts, submit boundaries, and DeFi-style replay.
 - `docs/PROOF_CORE_RELEASE_CANDIDATE.md`: pinned proof-core release-candidate note with txids, counts, hashes, commands, and boundaries.
 - `docs/COVENANT_FEATURE_COVERAGE.md`: covenant feature coverage: tested, local-only, missing, and out of scope.
+- `docs/CONTRACT_DEPTH_MAP.md`: what each `.sil` file enforces, what stays planner/indexer/wallet-policy, and the active deeper-contract rail.
+- `artifacts/silverscript-decl-support.json`: checked compiler probe for DECL-style covenant state arrays and `binding = cov`.
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
 - `docs/COPY_CLEANUP_PLAN.md`: public wording standard for pages and handoff docs.
@@ -42,6 +47,8 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 | 40 accepted local-key TN12 transfer rows across funded users, pool deposits, pool payouts, playground roles, fresh role funding, and scheduler execution payout | `LOCAL_KEY_CUSTODY_TEST` | `artifacts/defi-accepted-activity-ledger.json` |
 | 1 scheduler-intent payload, 3 scheduler-bid receipts, 1 scheduler-execution receipt, and 1 local-key payout reduced as executed trigger state | `TN12_ACCEPTED` / `INDEXER_DERIVED` / `LOCAL_KEY_CUSTODY_TEST` | `artifacts/scheduler-intent-registry.json` |
 | 1 scheduler-covenant-binding receipt references an accepted vault recovery proof row | `TN12_ACCEPTED` / `INDEXER_DERIVED` / `SCRIPT_ENFORCED` reference | `artifacts/scheduler-covenant-binding.json` |
+| 1 recurring-cap under-cap spend accepted on TN12, with cap-window and over-cap wallet-policy blocks | `TN12_ACCEPTED` / `WALLET_POLICY` | `artifacts/treasury-recurring-caps.json` |
+| DECL-style covenant-state probe compiles locally through SilverScript | `COMPILER_PROBE` | `artifacts/silverscript-decl-support.json` |
 | Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |
 
 ## Current Gaps

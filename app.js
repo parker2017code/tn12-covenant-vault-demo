@@ -32,6 +32,7 @@ import { buildBatchAssuranceCustodyDrafts } from "./src/batchAssuranceCustodyDra
 import { buildEnforcementMatrix } from "./src/enforcementMatrix.mjs";
 import { buildEscrowPrimitive } from "./src/escrowPrimitive.mjs";
 import { buildTreasuryVaultRegistry } from "./src/treasuryVault.mjs";
+import { buildTreasuryRecurringCaps } from "./src/treasuryRecurringCaps.mjs";
 import { buildPayloadSubmitReadiness } from "./src/payloadSubmitReadiness.mjs";
 import { buildCoordinationMarketPrototype } from "./src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "./src/coordinationMarketSettlementBrief.mjs";
@@ -598,7 +599,17 @@ async function renderTreasuryVaults() {
     }
 
     try {
-      const review = await fetchJson("artifacts/treasury-role-review.json");
+      const {
+        review,
+        recurringCaps
+      } = await fetchJsonMap({
+        review: "artifacts/treasury-role-review.json",
+        recurringCaps: "artifacts/treasury-recurring-caps.json"
+      });
+      const capState = buildTreasuryRecurringCaps({
+        spendCaps: await fetchJson("artifacts/treasury-spend-caps.json"),
+        underCapEvidence: await fetchJson("artifacts/treasury-recurring-cap-under-001-evidence.json")
+      });
       const article = document.createElement("article");
       article.className = "treasury-card";
       article.innerHTML = `
@@ -608,6 +619,16 @@ async function renderTreasuryVaults() {
         <small>${escapeHtml(review.boundaries.join(" | "))}</small>
       `;
       treasuryListNode.append(article);
+      const capArticle = document.createElement("article");
+      capArticle.className = "treasury-card";
+      capArticle.innerHTML = `
+        <span>${escapeHtml(recurringCaps.status)}</span>
+        <strong>Recurring cap evidence</strong>
+        <p>${escapeHtml(capState.positive.amountTkas)} TKAS accepted under a ${escapeHtml(capState.positive.capTkas)} TKAS cap; ${escapeHtml(capState.window.remainingAfterTkas)} TKAS remains in the window.</p>
+        <p>${escapeHtml(capState.cumulativeNegative.amountTkas)} TKAS second spend blocked by cumulative window state.</p>
+        <small>${tn12TxLink(capState.positive.txid)} · ${escapeHtml(capState.boundaries[1])}</small>
+      `;
+      treasuryListNode.append(capArticle);
     } catch {
       // Optional derived artifact; the base treasury registry should still render.
     }

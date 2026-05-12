@@ -5,6 +5,10 @@ Reviewed: 2026-05-12
 This file answers one question: which covenant/vault features are actually
 implemented, tested, demonstrated on TN12, local-only, or missing.
 
+The current accomplishment is simple covenant primitives exercised end to end
+on TN12, not advanced covenant products. See `docs/CONTRACT_DEPTH_MAP.md` for
+the per-contract enforcement map and the active deeper-contract rail.
+
 ## External Baseline
 
 Covenants usually mean transaction rules that restrict how a coin can be spent,
@@ -56,7 +60,7 @@ Useful references:
 | Wrong amount rejected/blocked | Negative guard | `artifacts/adversarial/*wrong-amount*.json` |
 | Single-party escrow cancel blocked | Negative guard | `artifacts/adversarial/escrow-single-party-cancel.json` |
 | 32 role-separated invalid candidates | Local review map | `artifacts/role-separated-invalid-candidates.json` |
-| Treasury/team vault spend caps | Local model | `artifacts/treasury-spend-caps.json`, `npm run check:treasury` |
+| Treasury/team vault spend caps | Local model plus accepted under-cap TN12 spend | `artifacts/treasury-recurring-caps.json`, `npm run check:treasury` |
 | Access pass issuer/gate checks | Local model | `artifacts/access-pass-gates.json`, `npm run check:access-pass` |
 
 ## Demonstrated App-State Around Covenants
@@ -78,7 +82,7 @@ opcodes.
 | Feature | Current state | What would make it real |
 |---|---|---|
 | Dynamic whitelists | Not implemented as script state | A covenant or wallet policy that proves the destination set and updates it safely |
-| Recurring spend limits | Local treasury model only | Script or wallet-enforced cap with accepted positive and negative TN12 rows |
+| Recurring spend limits | Local-wallet TN12 evidence plus cap-window wallet-policy | Script-enforced cap with accepted positive and negative TN12 rows |
 | Partial unvaulting | Not implemented | Spend path that lets part of an output leave while the rest stays locked |
 | Policy update path | Not implemented | Explicit admin/recovery update transaction with delay and rejection tests |
 | Guardian quorum / social recovery | Not implemented | Multi-signer recovery path with accepted and wrong-quorum negative evidence |
@@ -90,7 +94,7 @@ opcodes.
 
 | Order | Feature | First build | Promotion target |
 |---|---|---|---|
-| 1 | Recurring spend limits | Extend treasury cap fixtures and negative over-cap tests | Accepted under-cap TN12 spend plus over-cap rejection evidence |
+| 1 | Recurring spend limits | Accepted under-cap spend, cap-window state, and cumulative over-window block are built | Deeper `.sil` path that enforces cap amount and required destination |
 | 2 | Dynamic whitelists | Wallet-policy destination-set artifact and UI check | Script or wallet-enforced destination set with off-list negative evidence |
 | 3 | Guardian recovery | New guardian vault fixture | Accepted m-of-n recovery spend plus wrong/too-few guardian negative evidence |
 | 4 | Partial unvaulting | New vault fixture with hot output plus relocked remainder | Accepted partial spend and replayed relock evidence |
@@ -103,7 +107,7 @@ user-wallet pass proves custody UX without changing the core transaction route.
 
 ## Short Verdict
 
-TN12 covers the core covenant proof shape well: signatures, destinations,
+TN12 covers the simple covenant proof shape well: signatures, destinations,
 amounts, delays, recovery, refund, cancel, role separation, batch release, and
 negative guards.
 

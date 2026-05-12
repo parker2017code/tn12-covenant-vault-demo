@@ -4,6 +4,16 @@ Reviewed: 2026-05-12
 
 This is the product plan for turning the TN12 proof lab into something people can use themselves. Accepted TN12 evidence, planner/indexer state, wallet-policy state, and blocked production rails stay visibly separate.
 
+Current contract stance: the `.sil` files are simple covenant primitives
+exercised end to end on TN12. The product value is the workflow evidence:
+compiled script, signed spend, accepted txid, replay, UI boundary, and negative
+guards. Contract depth is the next rail.
+
+Current source-driven bar: KIP-20 covenant lineage, Silverscript DECL state
+transitions, ICC, multiplexor routing, challenge/timeout paths, and KIP-21 lane
+proofs are the next implementation vocabulary. Each one needs a repo artifact
+before it becomes public product copy.
+
 ## Product Rule
 
 Every lane should eventually support the same loop:
@@ -106,7 +116,7 @@ These are possible, but they need separate evidence.
 | Feature | First useful build | Real proof |
 |---|---|---|
 | Dynamic whitelist | Wallet-policy artifact with allowed destination set, update request, and UI warning on off-list outputs. | Accepted script or wallet-signed spend that proves the selected destination was in the active set, plus off-list negative evidence. |
-| Recurring cap | Treasury cap model with per-window amount, spent-so-far state, and over-cap local negative row. | Accepted under-cap spend and rejected/blocked over-cap spend from fresh TN12 outputs. |
+| Recurring cap | Built: treasury cap model, accepted under-cap TN12 spend, cap-window state, and cumulative over-window block. | Next: deeper `.sil` path that enforces cap amount and required destination. |
 | Partial unvault | New fixture that sends one output to a hot wallet and relocks the rest. | Accepted partial spend with change locked back into the vault shape. |
 | Policy update | Delayed policy-update request that changes guardian, whitelist, or cap fields after a waiting period. | Accepted delayed update plus early-update rejection evidence. |
 | Guardian recovery | m-of-n guardian path for recovery, cancel, or large-spend approval. | Accepted quorum spend plus too-few-guardian and wrong-guardian negative evidence. |
@@ -115,6 +125,9 @@ Build order: local-wallet TN12 flow first, then user-wallet handoff later.
 The local-wallet pass proves the route, fields, txid acceptance, replay,
 negative guards, and UI evidence. The user-wallet pass proves custody UX.
 Do not call a feature script-enforced until the accepted spend path exists.
+
+Do not add another broad product lane until the recurring-cap primitive either
+has a deeper accepted `.sil` spend or is explicitly parked with the blocker.
 
 ## User-Wallet Path
 
