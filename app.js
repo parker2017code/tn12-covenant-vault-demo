@@ -145,6 +145,16 @@ const manualFields = {
   amountTkas: document.querySelector("#manual-amount"),
   explorerUrl: document.querySelector("#manual-explorer-url")
 };
+
+function publicStatusLabel(status = "") {
+  const normalized = String(status).toLowerCase();
+  if (normalized.includes("accepted")) return "Accepted on TN12";
+  if (normalized.includes("replay") || normalized.includes("indexed")) return "Replay-derived";
+  if (normalized.includes("wallet") || normalized.includes("signer") || normalized.includes("pending")) return "Wallet-blocked";
+  if (normalized.includes("mainnet") || normalized.includes("production")) return "Mainnet-blocked";
+  if (normalized.includes("ready") || normalized.includes("review")) return "Wallet-blocked";
+  return status || "Review";
+}
 const manualIssuesNode = document.querySelector("#manual-issues");
 const manualArtifactNode = document.querySelector("#manual-artifact");
 const manualOutputPickerNode = document.querySelector("#manual-output-picker");
@@ -1169,8 +1179,8 @@ async function renderPayloadSubmitReadiness() {
     const readiness = buildPayloadSubmitReadiness(artifact);
     payloadReadinessNode.innerHTML = `
       <article>
-        <span>${escapeHtml(readiness.status)}</span>
-        <strong>Payload submit readiness</strong>
+        <span>${escapeHtml(publicStatusLabel(readiness.status))}</span>
+        <strong>Payload submit status</strong>
         <p>${escapeHtml(readiness.next)}</p>
         <small>submit payload field: ${escapeHtml(readiness.checks.submitTxModelHasPayload)}; fetched tx payload field: ${escapeHtml(readiness.checks.fetchedTxModelHasPayload)}; observed preserve: ${escapeHtml(readiness.checks.restSubmitPayloadPreserved)}</small>
       </article>
@@ -1178,7 +1188,7 @@ async function renderPayloadSubmitReadiness() {
   } catch (error) {
     payloadReadinessNode.innerHTML = `
       <article>
-        <span>readiness-needed</span>
+        <span>Wallet-blocked</span>
         <strong>Run npm run payload:readiness</strong>
         <p>${escapeHtml(error.message)}</p>
       </article>
@@ -1231,8 +1241,8 @@ async function renderWalletReview() {
     const review = await fetchJson("artifacts/wallet-review-readiness.json");
     walletReviewNode.innerHTML = `
       <article>
-        <span>${escapeHtml(review.status)}</span>
-        <strong>${escapeHtml(review.summary.ready)} / ${escapeHtml(review.summary.total)} drafts ready</strong>
+        <span>${escapeHtml(publicStatusLabel(review.status))}</span>
+        <strong>${escapeHtml(review.summary.ready)} / ${escapeHtml(review.summary.total)} drafts pass review</strong>
         <p>${escapeHtml(review.summary.payloadRouteReady)} payload drafts require the payload-preserving route.</p>
         <small>${escapeHtml(review.summary.registrySecretFields)} serialized secret fields in the published registry.</small>
       </article>
@@ -1276,7 +1286,7 @@ async function renderWalletConnector() {
 
     walletConnectorNode.innerHTML = `
       <article class="wallet-play-card">
-        <span>user-wallet-play-ready</span>
+        <span>Wallet-blocked</span>
         <strong>Use your own TN12 wallet without sharing keys</strong>
         <p>Start with ${escapeHtml(firstRequest.label || "the first wallet-standard request")}. Copy or download the request, sign it in your wallet, then return the signed bytes for validation and TN12 replay.</p>
         <small>Must preserve: ${escapeHtml(firstPreservation.slice(0, 6).join(", "))}</small>
@@ -1287,43 +1297,43 @@ async function renderWalletConnector() {
         </p>
       </article>
       <article>
-        <span>${escapeHtml(readiness.status)}</span>
+        <span>${escapeHtml(publicStatusLabel(readiness.status))}</span>
         <strong>${escapeHtml(readiness.summary.drafts)} drafts, ${escapeHtml(readiness.summary.payloadDrafts)} payload drafts</strong>
-        <p>${escapeHtml(submitPackage.status)}: ${escapeHtml(submitPackage.summary.ready)} wallet-submit intents ready.</p>
+        <p>${escapeHtml(publicStatusLabel(submitPackage.status))}: ${escapeHtml(submitPackage.summary.ready)} wallet-submit intents pass local review.</p>
         <small>${escapeHtml(capabilities)}</small>
       </article>
       <article>
-        <span>${escapeHtml(adapterRun.status)}</span>
+        <span>${escapeHtml(publicStatusLabel(adapterRun.status))}</span>
         <strong>${escapeHtml(adapterRun.summary.reviewReady)} review sessions, ${escapeHtml(adapterRun.summary.submitBroadcasts)} broadcasts</strong>
         <p>${escapeHtml(requests.summary.payloadRequests)} payload requests and ${escapeHtml(requests.summary.computeBudgetRequests)} compute-budget requests must preserve exact fields.</p>
         <small>${escapeHtml(adapterRun.boundaries[1])}</small>
       </article>
       <article>
-        <span>${escapeHtml(standard.status)}</span>
+        <span>${escapeHtml(publicStatusLabel(standard.status))}</span>
         <strong>${escapeHtml(standard.summary.mappedRequests)} wallet-standard request candidates</strong>
         <p>${escapeHtml(standard.summary.payloadRequests)} payload round trip and ${escapeHtml(standard.summary.computeBudgetRequests)} v1 compute-budget round trip are mapped for user-wallet signing.</p>
         <small>${escapeHtml(standard.boundaries[0])}</small>
       </article>
       <article>
-        <span>${escapeHtml(signerValidation.status)}</span>
+        <span>${escapeHtml(publicStatusLabel(signerValidation.status))}</span>
         <strong>${escapeHtml(signerValidation.summary.pending)} pending signer returns, ${escapeHtml(signerValidation.summary.negativeCasesCaught)} negative cases caught</strong>
         <p>Returned signer rows must preserve review fingerprint, payload bytes, txid, route, explicit approval, and input budget fields.</p>
         <small>${escapeHtml(signerValidation.boundaries[0])}</small>
       </article>
       <article>
-        <span>${escapeHtml(roundtrip.status)}</span>
+        <span>${escapeHtml(publicStatusLabel(roundtrip.status))}</span>
         <strong>${escapeHtml(roundtrip.summary.requests)} user-wallet requests</strong>
         <p>Recommended order: ${escapeHtml(roundtrip.recommendedOrder.join(" -> "))}</p>
         <small>${escapeHtml(roundtrip.acceptanceRule)}</small>
       </article>
       <article>
-        <span>${escapeHtml(signerTemplate.status)}</span>
+        <span>${escapeHtml(publicStatusLabel(signerTemplate.status))}</span>
         <strong>${escapeHtml(signerTemplate.summary.templates)} signer-return templates</strong>
         <p>${escapeHtml(signerTemplate.summary.recommendedFirstPass)} are marked for the first user-wallet pass.</p>
         <small>${escapeHtml(signerTemplate.validationCommand)}</small>
       </article>
       <article>
-        <span>${escapeHtml(ledger.status)}</span>
+        <span>${escapeHtml(publicStatusLabel(ledger.status))}</span>
         <strong>${escapeHtml(ledger.summary.acceptedEvidence)} accepted evidence rows, ${escapeHtml(ledger.summary.pendingWalletSubmit)} pending wallet-submit candidates</strong>
         <p>${escapeHtml(ledger.summary.broadcastsByThisArtifact)} broadcasts by this artifact; app state still waits for virtual-chain accepted evidence.</p>
         <small>${escapeHtml(ledger.boundaries[1])}</small>
