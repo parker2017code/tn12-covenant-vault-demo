@@ -59,7 +59,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "blitz-mux-arena",
       title: "Blitz Mux Arena",
       rank: 1,
-      status: "accepted-mux-route-and-worker-return",
+      status: "accepted-mux-route-worker-return-and-timeout",
       proofTarget: "hub routes to worker, worker returns to hub, timeout escape path",
       whyItMatters: "Smallest source-faithful demo of the chess architecture without building full chess. It makes fast multi-transaction state transitions feel natural.",
       covenantPattern: "mux / worker contract family",
@@ -78,17 +78,21 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "fixtures/BlitzWorkerARouteOutpoint.json",
         "artifacts/signed-drafts/blitz-mux-worker-a-return.json",
         "fixtures/BlitzMuxReturnedOutpoint.json",
+        "artifacts/signed-drafts/blitz-mux-route-to-worker-a-timeout.json",
+        "fixtures/BlitzWorkerATimeoutRouteOutpoint.json",
+        "artifacts/signed-drafts/blitz-mux-worker-a-timeout.json",
+        "fixtures/BlitzMuxTimeoutOutpoint.json",
         "artifacts/blitz-mux-live-flow-evidence.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/ARCHITECTURE.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
       ],
       nextBuildSteps: [
-        "Add an accepted timeout path from a pending worker state.",
-        "Then add challenge/settlement rows.",
+        "Add challenge/settlement rows.",
+        "Render the route, return, route, timeout sequence as a visible arena round.",
         "Keep full game rules out until the mux flow is easy to inspect."
       ],
-      hardBoundary: "The mux genesis, route-to-worker, and worker-return spends are accepted on TN12. Timeout remains local proof only."
+      hardBoundary: "The mux genesis, route-to-worker, worker-return, second route, and timeout spends are accepted on TN12. This proves mux/worker and timeout mechanics, not full game rules or production settlement."
     }),
     experiment({
       id: "coordination-league",

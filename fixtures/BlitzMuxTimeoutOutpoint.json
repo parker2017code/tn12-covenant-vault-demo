@@ -1,0 +1,36 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "blitz-mux-timeout-return",
+  "contract": "BlitzMux",
+  "fetchedAt": "2026-05-12T23:23:20.291Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036",
+  "txid": "26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036",
+  "outputIndex": 0,
+  "amountTkas": 9.9992,
+  "amountSompi": "999920000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:prqxeytjhyhvt2kva9pp0p3cu0vx3jh5ackv9gmm4ctue5r5nwd25c9c4clnt",
+  "scriptPublicKey": "aa20c06c9172b92ec5aacce942178638e3d868caf4ee2cc2a37bae17ccd0749b9aaa87",
+  "covenantId": "df9fd6e4938398f2f16a0c35830e30d58419a7fd36cc5e4b13ced7206e590204",
+  "redeemScriptHex": "20094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb20d595af0765e145cf9415e47c87223e87c4c8265b8c7835b6eb4cd3a4a386e6aa202f3272b259d89b523279c887553e1cb9d5ffd2a61b4fb451afd362bfa3a27332080500000000000000080a0000000000000008000000000000000076009c69b9cb519c695479515a79009e635a79519c6955797b75527b7568765a795a797e53797caa8769587901207c7e587901207c7e587901207c7e587958cd01087c7e587958cd01087c7e557958cd01087c7e7e7e7e7e7e5b797c7e5a797eaa02000001aa7e01207e7c7e01877eb900ccc38769007a75007a75007a7575757575757575757551",
+  "redeemScriptBytes": 262,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 10037811,
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036",
+  "raw": {
+    "address": "kaspatest:prqxeytjhyhvt2kva9pp0p3cu0vx3jh5ackv9gmm4ctue5r5nwd25c9c4clnt",
+    "outpoint": {
+      "transactionId": "26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "999920000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20c06c9172b92ec5aacce942178638e3d868caf4ee2cc2a37bae17ccd0749b9aaa87"
+      },
+      "blockDaaScore": "10037811",
+      "isCoinbase": false
+    }
+  }
+}

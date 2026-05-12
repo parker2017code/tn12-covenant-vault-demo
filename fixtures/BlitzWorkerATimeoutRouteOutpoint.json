@@ -1,0 +1,36 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "blitz-mux-timeout-route-worker-a",
+  "contract": "BlitzWorkerA",
+  "fetchedAt": "2026-05-12T23:22:39.614Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/a2ef1f4d96354294b682e83869457ee09836e59c17c2171ad1367ea87c0bdbb3",
+  "txid": "a2ef1f4d96354294b682e83869457ee09836e59c17c2171ad1367ea87c0bdbb3",
+  "outputIndex": 0,
+  "amountTkas": 9.9994,
+  "amountSompi": "999940000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:pq7d8jgwtdp4kqlz5fqflx0l9cq9ulpmq29vqym06ltdxkxghgkyxar5urxxh",
+  "scriptPublicKey": "aa203cd3c90e5b435b03e2a2409f99ff2e005e7c3b028ac0136fd7d6d358c8ba2c4387",
+  "covenantId": "df9fd6e4938398f2f16a0c35830e30d58419a7fd36cc5e4b13ced7206e590204",
+  "redeemScriptHex": "6b20094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb20d595af0765e145cf9415e47c87223e87c4c8265b8c7835b6eb4cd3a4a386e6aa202f3272b259d89b523279c887553e1cb9d5ffd2a61b4fb451afd362bfa3a27332080500000000000000080a000000000000000801000000000000006c76009c637576519c69587900a06958795a9f69b9cb519c69577957797e56797caa8769557901207c7e557901207c7e557901207c7e55795c799358cd01087c7e557958cd01087c7e0058cd01087c7e7e7e7e7e7e58797c7e57797eaa02000001aa7e01207e7c7e01877eb900ccc38769757575757575757575516776519c637576519c6978b1b9cb519c69577957797e56797caa8769557901207c7e557901207c7e557901207c7e5579519458cd01087c7e557958cd01087c7e0058cd01087c7e7e7e7e7e7e58797c7e57797eaa02000001aa7e01207e7c7e01877eb900ccc38769757575757575757551677500696868",
+  "redeemScriptBytes": 369,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 10037383,
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/a2ef1f4d96354294b682e83869457ee09836e59c17c2171ad1367ea87c0bdbb3",
+  "raw": {
+    "address": "kaspatest:pq7d8jgwtdp4kqlz5fqflx0l9cq9ulpmq29vqym06ltdxkxghgkyxar5urxxh",
+    "outpoint": {
+      "transactionId": "a2ef1f4d96354294b682e83869457ee09836e59c17c2171ad1367ea87c0bdbb3",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "999940000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa203cd3c90e5b435b03e2a2409f99ff2e005e7c3b028ac0136fd7d6d358c8ba2c4387"
+      },
+      "blockDaaScore": "10037383",
+      "isCoinbase": false
+    }
+  }
+}

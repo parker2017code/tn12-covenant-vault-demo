@@ -198,6 +198,7 @@
     "covenant:blitz-mux-family": "node scripts/build-blitz-mux-family-artifacts.mjs",
     "covenant:blitz-mux-route": "node scripts/build-blitz-mux-route-draft.mjs",
     "covenant:blitz-mux-return": "node scripts/build-blitz-mux-worker-return-draft.mjs",
+    "covenant:blitz-mux-timeout": "node scripts/build-blitz-mux-timeout-draft.mjs",
     "covenant:blitz-mux-live-flow": "node scripts/build-blitz-mux-live-flow-evidence.mjs",
     "covenant:recurring-vault-genesis-funding": "node scripts/build-recurring-treasury-vault-genesis-funding-draft.mjs",
     "covenant:recurring-vault-live-spend-draft": "node scripts/build-recurring-treasury-vault-live-spend-draft.mjs",

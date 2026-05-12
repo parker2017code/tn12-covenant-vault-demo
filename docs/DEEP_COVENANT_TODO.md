@@ -53,17 +53,12 @@ until these move.
 - `artifacts/blitz-mux-family-artifacts.json` records the real template-hash
   family used for live routing.
 - `artifacts/blitz-mux-live-flow-evidence.json` records the accepted TN12 mux
-  route to Worker A and accepted Worker A return to mux.
+  route to Worker A, accepted Worker A return to mux, accepted second route to
+  Worker A, and accepted Worker A timeout return to mux.
 
 ## Next Exact Tasks
 
-1. Build the Blitz Mux live timeout path.
-   - The route/return path is accepted.
-   - Start from a fresh pending-worker output or create a second mux route.
-   - Submit a timeout transition only when the DAA age is high enough.
-   - Keep challenge/settlement rows behind the timeout proof.
-
-2. Add Covenant-Owned Asset Duel live negative evidence.
+1. Add Covenant-Owned Asset Duel live negative evidence.
    - Pattern: ICC / sibling-input authorization.
    - Accepted path is recorded in
      `artifacts/covenant-owned-asset-duel-live-strike-evidence.json`.
@@ -73,10 +68,14 @@ until these move.
      candidates.
    - Do not fake nested execution; the point is sibling authority.
 
-3. Add recurring-vault window reset behavior.
+2. Add recurring-vault window reset behavior.
    - The accepted cumulative path proves one cap window.
    - Window reset needs its own accepted positive path and early/stale reset
      negative candidates.
+
+3. Add Blitz Mux challenge/settlement rows.
+   - The route, return, second route, and timeout path are accepted.
+   - Keep full game rules out until this small flow is easy to inspect.
 
 ## Lessons To Apply
 

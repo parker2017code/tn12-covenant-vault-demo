@@ -333,8 +333,17 @@ async function waitForDynamicContent(page, path) {
   }[path] || [];
 
   for (const selector of selectors) {
-    await page.waitForFunction((targetSelector) => document.querySelectorAll(targetSelector).length > 0, selector, { timeout: 7000 });
+    await waitForSelectorCount(page, selector, path);
   }
+}
+
+async function waitForSelectorCount(page, selector, path) {
+  const deadline = Date.now() + 12000;
+  while (Date.now() < deadline) {
+    if (await page.locator(selector).count() > 0) return;
+    await page.waitForTimeout(100);
+  }
+  assert.fail(`${path} did not render required selector ${selector}`);
 }
 
 async function assertLocalLinks(page, path) {

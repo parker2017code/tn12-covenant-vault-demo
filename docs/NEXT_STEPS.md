@@ -31,9 +31,9 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Build Blitz Mux timeout spend. | A pending worker output times out back to mux on TN12 after the delay condition is valid. | No |
-| 2 | Add Asset Duel live negative evidence. | Missing sibling, wrong witness, and wrong sibling covenant-id candidates are recorded against the accepted live strike path. | No |
-| 3 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
+| 1 | Add Asset Duel live negative evidence. | Missing sibling, wrong witness, and wrong sibling covenant-id candidates are recorded against the accepted live strike path. | No |
+| 2 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
+| 3 | Add Blitz Mux challenge/settlement rows. | The accepted mux/worker/timeout path has a bounded next reviewer step instead of becoming a full game claim. | No |
 | 4 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 6 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
