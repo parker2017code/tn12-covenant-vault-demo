@@ -13,22 +13,25 @@ This file is the short queue. It does not replace generated artifacts; it points
 - The DeFi repo-local benchmark stays in generated artifacts. Public pages should use concrete counts and missing rails instead of score language.
 - The current playground run has four accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, User A pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, User B pool deposit `3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d`, and pool-to-User B payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
 
+## Completed In Current Cleanup Pass
+
+- Public-language sweep and public guard expansion are committed.
+- Command-path audit is committed: public command snippets now route through `docs/COMMAND_RUNBOOK.md` command classes.
+- Clickable-affordance sweep has started: action-looking claim links now advertise `Open`, passive claim cards are visually quieter, and UI smoke tests assert the distinction.
+- Rendered layout checks now cover desktop and mobile pages, horizontal overflow, mobile controls, local links, dynamic content, and empty live regions.
+
 ## Active Todo
 
 Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Public-language sweep. | `index.html`, `results.html`, `playground.html`, and `lab.html` avoid internal notes, completion scores, status dumps, and over-technical labels. | No |
-| 2 | Public guard expansion. | Checks fail if public pages expose internal-note phrases, public completion/percent score language, or docs-only status-map labels. | No |
-| 3 | Clickable-affordance sweep. | Every visible txid opens TN12 explorer; every action-looking card links or is restyled as passive. | No |
-| 4 | Command-path audit. | Every public command names prerequisites, writes/broadcasts behavior, expected output, and the next page or artifact to inspect. | No |
-| 5 | Rendered layout check. | Mobile and desktop UI smoke checks catch horizontal overflow, clipped controls, and awkward theme/menu placement. | No |
-| 6 | Stale-completion cleanup. | Old `100%`, `complete`, `production-ready`, and similar artifacts are archived or renamed so normal repo search does not surface stale claims as current truth. | No |
-| 7 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
-| 8 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
-| 9 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
-| 10 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or wallet signing is needed |
+| 1 | Stale-completion cleanup. | Old `100%`, `complete`, `production-ready`, and similar artifacts are archived or renamed so normal repo search does not surface stale claims as current truth. | No |
+| 2 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
+| 3 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
+| 4 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
+| 5 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or wallet signing is needed |
+| 6 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
 
 ## Where Older Queues Went
 
