@@ -10,6 +10,7 @@ const artifact = buildRecurringTreasuryVaultLiveSpendPreflight({
   contractOutpoint,
   ownerSigProof: await readJson("artifacts/recurring-treasury-vault-owner-sig-proof.json"),
   rustSubmitRouteProbe: await readJson("artifacts/recurring-treasury-vault-rust-submit-route-probe.json"),
+  rpcDataRoute: await readOptionalJson("artifacts/recurring-treasury-vault-rpc-data-route.json"),
   liveUtxos
 });
 
@@ -18,6 +19,14 @@ console.log(`artifacts/recurring-treasury-vault-live-spend-preflight.json ${arti
 
 async function readJson(path) {
   return JSON.parse(await readFile(path, "utf8"));
+}
+
+async function readOptionalJson(path) {
+  try {
+    return await readJson(path);
+  } catch {
+    return null;
+  }
 }
 
 async function fetchLiveUtxos(address) {

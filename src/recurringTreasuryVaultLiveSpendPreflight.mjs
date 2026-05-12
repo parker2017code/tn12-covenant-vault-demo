@@ -6,6 +6,7 @@ export function buildRecurringTreasuryVaultLiveSpendPreflight({
   contractOutpoint = {},
   ownerSigProof = {},
   rustSubmitRouteProbe = {},
+  rpcDataRoute = null,
   liveUtxos = [],
   checkedAt = new Date().toISOString()
 } = {}) {
@@ -19,6 +20,8 @@ export function buildRecurringTreasuryVaultLiveSpendPreflight({
   const ownerSigPassed = ownerSigProof.status === "local-owner-sig-covenant-proof-passed";
   const rustRouteReady = rustSubmitRouteProbe.status === "rust-submit-route-preserves-covenant-binding";
   const fundingUnspent = Boolean(matchingLiveUtxo);
+  const rpcDataRouteChecked = Boolean(rpcDataRoute?.schema);
+  const fundedOutputCovenantBound = rpcDataRoute?.status === "rpc-data-route-covenant-id-found";
   const constructorState = readConstructorState(constructorArgs);
 
   const blockers = [];
@@ -27,11 +30,14 @@ export function buildRecurringTreasuryVaultLiveSpendPreflight({
   if (!ownerSigPassed) blockers.push(blocker("owner-sig-proof-missing", "Local ownerSig proof is not passing."));
   if (!rustRouteReady) blockers.push(blocker("rust-submit-route-unproven", "Rust submit route has not proven covenant binding preservation."));
   if (!fundingUnspent) blockers.push(blocker("funded-output-not-live", "The funded contract output was not found in the live UTXO response."));
+  if (rpcDataRouteChecked && !fundedOutputCovenantBound) blockers.push(blocker("funded-output-not-covenant-bound", "wRPC found the funded output and funding transaction, but the output is not covenant-bound."));
   if (!liveCovenantId) blockers.push(blocker("live-covenant-id-unavailable", "The public REST UTXO response does not expose covenant_id for the funded output."));
 
   const status = blockers.length === 0
     ? "ready-for-guarded-live-submit"
-    : blockers.some((item) => item.id === "live-covenant-id-unavailable")
+    : blockers.some((item) => item.id === "funded-output-not-covenant-bound")
+      ? "blocked-non-covenant-funded-output"
+      : blockers.some((item) => item.id === "live-covenant-id-unavailable")
       ? "blocked-covenant-id-unavailable"
       : "blocked-before-live-submit";
 
@@ -54,8 +60,16 @@ export function buildRecurringTreasuryVaultLiveSpendPreflight({
       ownerSigProofPassed: ownerSigPassed,
       rustSubmitRoutePreservesCovenantBinding: rustRouteReady,
       fundedOutputStillUnspent: fundingUnspent,
+      rpcDataRouteChecked,
+      fundedOutputCovenantBound,
       liveUtxoCovenantIdAvailable: Boolean(liveCovenantId)
     },
+    rpcDataRoute: rpcDataRouteChecked ? {
+      status: rpcDataRoute.status,
+      fundingTransactionVersion: rpcDataRoute.checks?.fundingTransactionVersion ?? null,
+      fundingOutputHasCovenantBinding: Boolean(rpcDataRoute.checks?.fundingOutputHasCovenantBinding),
+      wrpcUtxoCovenantIdAvailable: Boolean(rpcDataRoute.checks?.wrpcUtxoCovenantIdAvailable)
+    } : null,
     liveUtxo: matchingLiveUtxo ? {
       amount: matchingLiveUtxo.utxoEntry?.amount || null,
       blockDaaScore: matchingLiveUtxo.utxoEntry?.blockDaaScore || null,
@@ -65,6 +79,8 @@ export function buildRecurringTreasuryVaultLiveSpendPreflight({
     blockers,
     allowedNextAction: status === "ready-for-guarded-live-submit"
       ? "Build the signed Rust live-spend candidate and submit only with an explicit --submit flag."
+      : status === "blocked-non-covenant-funded-output"
+        ? "Create a new covenant-bound funded output through the KIP-20/DECL genesis path before attempting a live recurring-vault spend."
       : "Fetch the funded UTXO through RPC/data verbosity that exposes covenant_id, then re-run this preflight before building a live spend candidate.",
     safetyRule: "Do not broadcast the recurring-vault spend until the funded input covenant_id and continuation output covenant binding are both known."
   };

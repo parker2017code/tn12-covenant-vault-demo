@@ -1,7 +1,7 @@
 {
   "schema": "tn12-recurring-treasury-vault-live-spend-preflight/v1",
-  "checkedAt": "2026-05-12T21:27:17.981Z",
-  "status": "blocked-covenant-id-unavailable",
+  "checkedAt": "2026-05-12T21:51:49.345Z",
+  "status": "blocked-non-covenant-funded-output",
   "target": "Spend the funded RecurringTreasuryVault output through a route that preserves the covenant-bound continuation output.",
   "fundingOutpoint": {
     "txid": "72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4",
@@ -24,7 +24,15 @@
     "ownerSigProofPassed": true,
     "rustSubmitRoutePreservesCovenantBinding": true,
     "fundedOutputStillUnspent": true,
+    "rpcDataRouteChecked": true,
+    "fundedOutputCovenantBound": false,
     "liveUtxoCovenantIdAvailable": false
+  },
+  "rpcDataRoute": {
+    "status": "funded-output-not-covenant-bound",
+    "fundingTransactionVersion": 0,
+    "fundingOutputHasCovenantBinding": false,
+    "wrpcUtxoCovenantIdAvailable": false
   },
   "liveUtxo": {
     "amount": "15000000000",
@@ -34,11 +42,16 @@
   },
   "blockers": [
     {
+      "id": "funded-output-not-covenant-bound",
+      "status": "hard-blocker",
+      "detail": "wRPC found the funded output and funding transaction, but the output is not covenant-bound."
+    },
+    {
       "id": "live-covenant-id-unavailable",
       "status": "hard-blocker",
       "detail": "The public REST UTXO response does not expose covenant_id for the funded output."
     }
   ],
-  "allowedNextAction": "Fetch the funded UTXO through RPC/data verbosity that exposes covenant_id, then re-run this preflight before building a live spend candidate.",
+  "allowedNextAction": "Create a new covenant-bound funded output through the KIP-20/DECL genesis path before attempting a live recurring-vault spend.",
   "safetyRule": "Do not broadcast the recurring-vault spend until the funded input covenant_id and continuation output covenant binding are both known."
 }
