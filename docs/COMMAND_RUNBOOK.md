@@ -4,6 +4,8 @@ Use this before running commands copied from public pages. Commands have differe
 
 ## Start Here
 
+Prerequisite: Node.js `>=20.19.0 <25` and npm. Then install exactly from the lockfile:
+
 ```sh
 npm ci
 npm run check:all
@@ -47,6 +49,18 @@ What must happen first:
 - The draft must spend only intended testnet UTXOs and fund only public `kaspatest:` role addresses.
 - The submit step must be an explicit action; it broadcasts a signed testnet transaction.
 - After submit, verify the accepted txid in the TN12 explorer and rerun replay/indexer checks before trusting app state.
+
+Fresh-session check without touching the default `.local/playground/` directory:
+
+```sh
+PLAYGROUND_DIR=.local/command-check/playground npm run playground:wallets -- --force
+PLAYGROUND_WALLETS_PUBLIC=.local/command-check/playground/wallets.public.json \
+OUT=.local/command-check/playground/funding-draft.json \
+PLAYGROUND_FUNDING_PLAN_OUT=.local/command-check/playground/funding-plan.public.json \
+npm run playground:funding-draft
+```
+
+This writes throwaway testnet files under `.local/command-check/playground/`.
 
 ## Payload Receipt Route
 

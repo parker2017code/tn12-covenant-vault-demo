@@ -57,6 +57,8 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 
 ## Independent Verification
 
+Prerequisite: Node.js `>=20.19.0 <25` and npm.
+
 ```sh
 npm ci
 npm run check:focused
