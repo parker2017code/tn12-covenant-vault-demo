@@ -14,6 +14,7 @@ These are the durable rules from the escrow cancel fix. They are for future TN12
 - The npm `kaspa-wasm@0.13.0` constructor can create a local object, but it does not preserve the v1 `computeBudget` field. That made the earlier cancel draft look better than it was.
 - The same npm route does not preserve `output.covenant` in the recurring-vault live-submit probe. Do not use it to broadcast a covenant transition that needs a covenant-bound continuation output.
 - The Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget` in the recurring-vault route probe. That makes Rust the next live-submit route to harden.
+- A live covenant spend needs the input `covenant_id`. The public REST UTXO response can prove the output is still unspent, but if it does not expose `covenant_id`, submit stays blocked until an RPC/data-verbosity path provides it.
 - The local TN12 `kaspa-wasm 1.1.1-toc.1` constructor still needs a compatibility `sigOpCount` property, but the correct v1 shape is `sigOpCount: 0` plus `computeBudget: 30`.
 - Public REST can lag protocol shape. In this case REST demanded `sigOpCount`, then rejected non-zero `sigOpCount` for tx version 1. The working route was JSON wRPC with the matching TN12 SDK.
 
@@ -44,3 +45,4 @@ When a protocol result looks impossible, widen the search before escalating:
 - Record endpoint/server version, network id, SDK version, tx version, and input mass field for every surprising result.
 - Treat stale tooling as a first-class failure mode, not an afterthought.
 - Prove stateful `.sil` in layers: compile, local state/output debugger, full signature-script Rust proof, then live submit only through a route that preserves every covenant binding field.
+- Add a preflight before live covenant submits: script hash matches funded output, funded output is still unspent, route preserves covenant binding, and input `covenant_id` is known.

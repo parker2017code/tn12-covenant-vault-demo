@@ -86,6 +86,13 @@ Rust RPC `SubmitTransactionRequest` model preserves output covenant binding and
 tx v1 `computeBudget`. It does not prove broadcast, mempool acceptance, or an
 accepted TN12 recurring-vault spend.
 
+The live-spend preflight is
+`artifacts/recurring-treasury-vault-live-spend-preflight.json`. It matches the
+compiled `RecurringTreasuryVault.sil` script to the accepted funded output and
+confirms the output is still unspent by the public REST UTXO endpoint. It still
+blocks submit because that REST UTXO response does not expose the input
+`covenant_id`, which the continuation output must carry.
+
 ## Next Build Order
 
 1. Recurring treasury vault.
@@ -99,8 +106,11 @@ accepted TN12 recurring-vault spend.
      because output covenant binding is dropped.
    - Rust route probe: local RPC request model preserves covenant-bound
      continuation outputs.
-   - Next: convert the Rust-shaped request into a guarded submit and record
-     accepted TN12 evidence if the network accepts it.
+   - Preflight: compiled script and funded output match; funded output is still
+     unspent; submit is blocked until the input `covenant_id` is available.
+   - Next: fetch `covenant_id` through RPC/data verbosity, convert the
+     Rust-shaped request into a guarded submit, and record accepted TN12
+     evidence if the network accepts it.
 2. ICC ownership demo.
    - One action/asset branch accepts authorization from a sibling covenant input.
    - Use witness hints; do not scan every input if a direct witness index works.

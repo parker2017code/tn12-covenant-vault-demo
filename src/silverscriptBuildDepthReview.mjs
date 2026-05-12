@@ -6,6 +6,7 @@ export function buildSilverscriptBuildDepthReview({
   ownerSigProof = {},
   liveSubmitReadiness = {},
   rustSubmitRouteProbe = {},
+  liveSpendPreflight = {},
   jsWasm = {}
 } = {}) {
   const acceptedFunding = status.currentEvidence?.acceptedContractFunding || contractOutpoint;
@@ -43,6 +44,7 @@ export function buildSilverscriptBuildDepthReview({
       } : null,
       liveSubmitReadiness: liveSubmitReadiness.status || null,
       rustSubmitRouteProbe: rustSubmitRouteProbe.status || null,
+      liveSpendPreflight: liveSpendPreflight.status || null,
       negativeCandidates: status.negativeCandidates?.map((item) => item.id) || []
     },
     localSourceFindings: [
@@ -64,6 +66,13 @@ export function buildSilverscriptBuildDepthReview({
           : "Rust submit-route covenant-binding probe has not passed yet."
       },
       {
+        id: "funded-output-live-spend-preflight",
+        status: liveSpendPreflight.status === "ready-for-guarded-live-submit" ? "ready" : liveSpendPreflight.status || "not-run",
+        evidence: liveSpendPreflight.status
+          ? "The live-spend preflight matches the compiled script to the funded output, checks the live UTXO, and blocks submit until the funded input covenant_id is available."
+          : "Live-spend preflight has not run yet."
+      },
+      {
         id: "state-transition-proof",
         status: stateProof.status === "local-state-transition-proof-passed" ? "supported-locally" : "not-run",
         evidence: stateProof.status === "local-state-transition-proof-passed"
@@ -82,6 +91,7 @@ export function buildSilverscriptBuildDepthReview({
       "Do not call the recurring cap SCRIPT_ENFORCED because the compiled contract and accepted funding are not an accepted spend.",
       "Use the Rust debugger/test path for covenant-state mechanics before trying JS live submit.",
       "Use the Rust RPC submit route first because local probing shows it preserves covenant output binding.",
+      "Do not sign or submit from the funded recurring-vault output until the live input covenant_id is available.",
       "Treat JS live submit as blocked until output covenant binding and signature-script construction are proven with the exact SDK route.",
       "A serious next proof needs one positive under-cap spend and negative cases for over cap, wrong destination, missing continuation, and wrong owner."
     ],
@@ -92,14 +102,18 @@ export function buildSilverscriptBuildDepthReview({
       },
       {
         order: 2,
-        task: "Convert the local Rust proof into a TN12 spend from the funded RecurringTreasuryVault output."
+        task: "Fetch the funded input covenant_id through RPC/data verbosity, then re-run the recurring-vault live-spend preflight."
       },
       {
         order: 3,
-        task: "Keep JS submit blocked unless kaspa-wasm exposes or accepts the exact covenant binding fields."
+        task: "Convert the local Rust proof into a TN12 spend from the funded RecurringTreasuryVault output."
       },
       {
         order: 4,
+        task: "Keep JS submit blocked unless kaspa-wasm exposes or accepts the exact covenant binding fields."
+      },
+      {
+        order: 5,
         task: "Promote the UI label from WALLET_POLICY only after an accepted spend from the funded RecurringTreasuryVault output exists."
       }
     ]

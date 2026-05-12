@@ -13,12 +13,14 @@ assert.equal(artifact.currentEvidence.stateProof.status, "local-state-transition
 assert.equal(artifact.currentEvidence.ownerSigProof.status, "local-owner-sig-covenant-proof-passed");
 assert.equal(artifact.currentEvidence.liveSubmitReadiness, "blocked-before-live-submit");
 assert.equal(artifact.currentEvidence.rustSubmitRouteProbe, "rust-submit-route-preserves-covenant-binding");
+assert.equal(artifact.currentEvidence.liveSpendPreflight, "blocked-covenant-id-unavailable");
 assert.ok(artifact.localSourceFindings.some((item) => item.id === "js-wasm-output-binding-gap" && item.status === "blocks-js-live-submit"));
 assert.ok(artifact.localSourceFindings.some((item) => item.id === "rust-rpc-submit-route-preserves-covenant-binding" && item.status === "supported-locally"));
+assert.ok(artifact.localSourceFindings.some((item) => item.id === "funded-output-live-spend-preflight" && item.status === "blocked-covenant-id-unavailable"));
 assert.ok(artifact.localSourceFindings.some((item) => item.id === "rust-debugger-can-model-covenant-bindings"));
 assert.ok(artifact.localSourceFindings.some((item) => item.id === "state-transition-proof" && item.status === "supported-locally"));
 assert.ok(artifact.localSourceFindings.some((item) => item.id === "owner-sig-proof" && item.status === "supported-locally"));
 assert.ok(artifact.buildRulesForAgents.some((rule) => /Do not call the recurring cap SCRIPT_ENFORCED/.test(rule)));
-assert.ok(artifact.nextSteps.some((step) => /Rust submit route/.test(step.task)));
+assert.ok(artifact.nextSteps.some((step) => /covenant_id/.test(step.task)));
 
 console.log("SilverScript build-depth review tests passed.");

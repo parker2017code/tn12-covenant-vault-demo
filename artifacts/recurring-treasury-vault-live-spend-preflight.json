@@ -1,0 +1,44 @@
+{
+  "schema": "tn12-recurring-treasury-vault-live-spend-preflight/v1",
+  "checkedAt": "2026-05-12T21:27:17.981Z",
+  "status": "blocked-covenant-id-unavailable",
+  "target": "Spend the funded RecurringTreasuryVault output through a route that preserves the covenant-bound continuation output.",
+  "fundingOutpoint": {
+    "txid": "72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4",
+    "outputIndex": 0,
+    "amountSompi": "15000000000",
+    "address": "kaspatest:pqrts43fqgkdzxdp8lga9nm3sr9lqrqh2zn0s0hyyk39hux8qfrdsfkw4ur3p",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4"
+  },
+  "constructorState": {
+    "ownerXOnlyPublicKey": "d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e794439",
+    "destinationXOnlyPublicKey": "1dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700",
+    "capSompi": "7500000000",
+    "windowStart": "9899000",
+    "spentInWindowSompi": "0",
+    "minerFeeSompi": "10000"
+  },
+  "checks": {
+    "compiledScriptMatchesFundedRedeemScript": true,
+    "compiledP2shMatchesFundedScriptPublicKey": true,
+    "ownerSigProofPassed": true,
+    "rustSubmitRoutePreservesCovenantBinding": true,
+    "fundedOutputStillUnspent": true,
+    "liveUtxoCovenantIdAvailable": false
+  },
+  "liveUtxo": {
+    "amount": "15000000000",
+    "blockDaaScore": "10062857",
+    "hasCovenantId": false,
+    "covenantId": null
+  },
+  "blockers": [
+    {
+      "id": "live-covenant-id-unavailable",
+      "status": "hard-blocker",
+      "detail": "The public REST UTXO response does not expose covenant_id for the funded output."
+    }
+  ],
+  "allowedNextAction": "Fetch the funded UTXO through RPC/data verbosity that exposes covenant_id, then re-run this preflight before building a live spend candidate.",
+  "safetyRule": "Do not broadcast the recurring-vault spend until the funded input covenant_id and continuation output covenant binding are both known."
+}

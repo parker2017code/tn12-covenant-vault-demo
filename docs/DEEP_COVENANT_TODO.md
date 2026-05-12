@@ -19,12 +19,18 @@ until these move.
 - `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` proves the
   Rust RPC `SubmitTransactionRequest` model preserves output covenant binding
   and tx v1 `computeBudget`. It does not broadcast.
+- `artifacts/recurring-treasury-vault-live-spend-preflight.json` matches the
+  compiled script to the funded output and verifies the funded output is still
+  live. It blocks submit because the public REST UTXO response does not expose
+  the input `covenant_id`.
 
 ## Next Exact Tasks
 
-1. Try live TN12 spend only after the submit route preserves covenant binding.
+1. Try live TN12 spend only after the preflight is submit-ready.
    - Use the Rust-shaped route first; local probing shows it preserves
      `TransactionOutput.covenant`.
+   - Fetch the funded input through an RPC/data path that exposes
+     `covenant_id`; the public REST UTXO response is not enough.
    - Spend the funded recurring-vault output only after the constructed
      transaction keeps the covenant-bound continuation output.
    - Record accepted txid, continuation state, explorer/API response, and replay
@@ -56,6 +62,8 @@ until these move.
   the same thing as a successful state transition.
 - For serious examples, prove in layers: compile, local state proof, full
   signature-script proof, live submit, replay.
+- REST-visible UTXO existence is not enough for covenant spends. The live input
+  `covenant_id` must be known before signing a continuation transition.
 - ICC means sibling authorization. One covenant can accept another input as
   authority without executing that other covenant inside itself.
 - Mux/worker examples need an escape path. If a two-transaction route can get

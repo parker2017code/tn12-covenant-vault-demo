@@ -14,15 +14,18 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/recurring-treasury-vault-status.json",
         "artifacts/treasury-recurring-caps.json",
         "artifacts/recurring-treasury-vault-owner-sig-proof.json",
-        "artifacts/recurring-treasury-vault-live-submit-readiness.json"
+        "artifacts/recurring-treasury-vault-live-submit-readiness.json",
+        "artifacts/recurring-treasury-vault-rust-submit-route-probe.json",
+        "artifacts/recurring-treasury-vault-live-spend-preflight.json"
       ],
       nextBuildSteps: [
-        "Use a Rust submit route or JS SDK route that preserves output covenant binding.",
-        "Spend the funded RecurringTreasuryVault output on TN12 only through that route.",
+        "Fetch the funded input covenant_id through RPC/data verbosity.",
+        "Re-run the live-spend preflight until it is ready for guarded submit.",
+        "Spend the funded RecurringTreasuryVault output on TN12 only through the Rust route.",
         "Record the new state and relocked change output.",
         "Turn the over-cap negative map into the opponent's blocked move."
       ],
-      hardBoundary: "The ownerSig covenant path is locally proven, but script-enforced recurring caps require an accepted spend from the funded contract output."
+      hardBoundary: "The ownerSig covenant path is locally proven and the Rust route preserves covenant binding, but script-enforced recurring caps require an accepted spend from the funded contract output."
     }),
     experiment({
       id: "covenant-heist",

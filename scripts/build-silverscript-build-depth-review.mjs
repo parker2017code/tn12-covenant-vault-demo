@@ -18,6 +18,7 @@ const stateProof = await readJson("artifacts/recurring-treasury-vault-state-proo
 const ownerSigProof = await readJson("artifacts/recurring-treasury-vault-owner-sig-proof.json");
 const liveSubmitReadiness = await readJson("artifacts/recurring-treasury-vault-live-submit-readiness.json");
 const rustSubmitRouteProbe = await readJson("artifacts/recurring-treasury-vault-rust-submit-route-probe.json");
+const liveSpendPreflight = await readJson("artifacts/recurring-treasury-vault-live-spend-preflight.json");
 
 const artifact = buildSilverscriptBuildDepthReview({
   status,
@@ -27,6 +28,7 @@ const artifact = buildSilverscriptBuildDepthReview({
   ownerSigProof,
   liveSubmitReadiness,
   rustSubmitRouteProbe,
+  liveSpendPreflight,
   jsWasm: {
     transactionOutputConstructor: "constructor(value: bigint, script_public_key: ScriptPublicKey)"
   }
