@@ -37,7 +37,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Payload events available", plan.summary.acceptedPayloadEventsAvailable, "Current accepted receipt evidence.")}
       ${metric("Transfer rows available", plan.summary.acceptedTransferRowsAvailable, "Current local-key custody movement evidence.")}
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}
-      ${metric("DeFi lab", `${plan.summary.benchmarkRails || "6 / 10"} rails`, "Detailed benchmark lives in Lab Tools.")}
+      ${metric("DeFi checks", `${plan.summary.benchmarkRails || "6 / 10"} rails`, "Detailed rail evidence lives in Lab Tools.")}
     `;
     if (quickstartNode) renderQuickstart(quickstartNode, plan);
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });
@@ -239,7 +239,7 @@ function renderReplay({ replaySummaryNode, sessionBalancesNode, balancesNode, bl
     ${metric("Balance rows", reducer.summary.balanceRows, "Address-level net deltas from selected transfers.")}
     ${metric("Blocked withdrawals", reducer.negativeRows.filter((row) => row.kind === "withdrawal-candidate").length, "Over-balance or unsigned withdrawal attempts.")}
     ${metric("Ready actions", actions.summary.readyActions, "Guided actions with current public prerequisites.")}
-    ${metric("Production actions", actions.summary.liveProductClaims, "None from this replay alone.")}
+    ${metric("Live product actions", actions.summary.liveProductClaims, "None from this replay alone.")}
   `;
   if (sessionBalancesNode) {
     const sessionAddresses = [

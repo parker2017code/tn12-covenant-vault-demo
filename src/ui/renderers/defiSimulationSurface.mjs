@@ -28,7 +28,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       <article><span>Scheduler intents</span><strong>${escapeHtml(scheduler.summary.acceptedIntents)}</strong></article>
       <article><span>Pool net</span><strong>${escapeHtml(acceptedActivity.summary.poolNetTkas)} TKAS</strong></article>
       <article><span>Wallet roles</span><strong>${escapeHtml(multiWallet.summary.roles)}</strong></article>
-      <article><span>External signer results</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
+      <article><span>External wallet results</span><strong>${escapeHtml(multiWallet.summary.externalSignerClaims)}</strong></article>
     `;
 
     listNode.innerHTML = "";
@@ -54,7 +54,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       {
         status: planner.status,
         title: "Planner-only market logic",
-        body: `${planner.summary.simulationReadyLanes} lanes checked; ${planner.summary.blockedLiveLanes} live-product lanes blocked.`,
+        body: `${planner.summary.simulationReadyLanes} lanes checked; ${planner.summary.blockedLiveLanes} product-execution lanes blocked.`,
         foot: "npm run defi:simulation"
       },
       {

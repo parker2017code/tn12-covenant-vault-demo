@@ -40,7 +40,7 @@ function renderSummary(node, { proven, benchmark, index, activity, scheduler, bi
     ${metric("Accepted proof txs", proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions, "Covenant proof spends and role-separated repeats.")}
     ${metric("Payload events", proven.acceptedEvidence.payloadEvents, "Accepted app-state receipts replayed from TN12.")}
     ${metric("Indexed records", index.summary.total, "Proof, payload, and output evidence in one checkpoint.")}
-    ${metric("DeFi lab rails", `${benchmark.summary.completedRails} / ${benchmark.summary.rails}`, "Repo-local rail detail lives in Lab Tools.")}
+    ${metric("DeFi checks", `${benchmark.summary.completedRails} / ${benchmark.summary.rails}`, "Repo-local rail detail lives in Lab Tools.")}
     ${metric("Accepted transfers", activity.summary.acceptedTransferRows, "Local-key custody movement across pool and user roles.")}
     ${metric("Scheduler rows", scheduler.summary.acceptedBids + scheduler.summary.executedTriggers + binding.summary.readyBindings, "Intent, bids, execution, and covenant-binding rows.")}
   `;

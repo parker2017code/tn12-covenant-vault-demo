@@ -809,10 +809,10 @@ async function renderBuildStatus() {
     const status = buildProjectStatus(fixture);
     const plan = buildProjectPlan(fixture);
     buildStatusSummaryNode.innerHTML = `
-      <article><span>Evidence</span><strong>${escapeHtml(status.summary.builtBases)}</strong></article>
-      <article><span>Queued</span><strong>${escapeHtml(status.summary.nextBuilds)}</strong></article>
-      <article><span>Missing</span><strong>${escapeHtml(status.summary.blocked)}</strong></article>
-      <article><span>Research</span><strong>${escapeHtml(status.summary.research)}</strong></article>
+      <article><span>Accepted or checked</span><strong>${escapeHtml(status.summary.builtBases)}</strong></article>
+      <article><span>Next to verify</span><strong>${escapeHtml(status.summary.nextBuilds)}</strong></article>
+      <article><span>Still missing</span><strong>${escapeHtml(status.summary.blocked)}</strong></article>
+      <article><span>Reference lanes</span><strong>${escapeHtml(status.summary.research)}</strong></article>
     `;
 
     buildStatusLanesNode.innerHTML = "";
@@ -830,10 +830,10 @@ async function renderBuildStatus() {
 
     if (projectPlanSummaryNode && projectPlanNextNode && projectPlanVisionNode) {
       projectPlanSummaryNode.innerHTML = `
-        <article><span>Accepted</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
-        <article><span>Active</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
-        <article><span>Queued</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
-        <article><span>Research</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
+        <article><span>Accepted or checked</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
+        <article><span>Being worked</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
+        <article><span>Next to verify</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
+        <article><span>Reference lanes</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
       `;
       projectPlanNextNode.innerHTML = "";
       for (const item of plan.next) {
@@ -851,7 +851,7 @@ async function renderBuildStatus() {
         .join("");
     }
   } catch (error) {
-    buildStatusSummaryNode.textContent = `Artifact map unavailable: ${error.message}`;
+    buildStatusSummaryNode.textContent = `Status map unavailable: ${error.message}`;
   }
 }
 
@@ -862,10 +862,10 @@ async function renderProjectPlan() {
     const fixture = await fetchJson("fixtures/BuildStatus.json");
     const plan = buildProjectPlan(fixture);
     projectPlanSummaryNode.innerHTML = `
-      <article><span>Accepted</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
-      <article><span>Active</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
-      <article><span>Queued</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
-      <article><span>Research</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
+      <article><span>Accepted or checked</span><strong>${escapeHtml(plan.summary.done)}</strong></article>
+      <article><span>Being worked</span><strong>${escapeHtml(plan.summary.wip)}</strong></article>
+      <article><span>Next to verify</span><strong>${escapeHtml(plan.summary.next)}</strong></article>
+      <article><span>Reference lanes</span><strong>${escapeHtml(plan.summary.later)}</strong></article>
     `;
     projectPlanNextNode.innerHTML = "";
     for (const item of plan.next) {
@@ -951,9 +951,9 @@ async function renderNextWorkQueue() {
     const fixture = await fetchJson("fixtures/NextWorkQueue.json");
     const queue = buildNextWorkQueue(fixture);
     nextQueueSummaryNode.innerHTML = `
-      <article><span>Accepted</span><strong>${escapeHtml(queue.summary.done)}</strong></article>
-      <article><span>Active</span><strong>${escapeHtml(queue.summary.wip)}</strong></article>
-      <article><span>Research</span><strong>${escapeHtml(queue.summary.roadmap)}</strong></article>
+      <article><span>Accepted or checked</span><strong>${escapeHtml(queue.summary.done)}</strong></article>
+      <article><span>Being worked</span><strong>${escapeHtml(queue.summary.wip)}</strong></article>
+      <article><span>Reference lanes</span><strong>${escapeHtml(queue.summary.roadmap)}</strong></article>
       <article><span>Tasks</span><strong>${escapeHtml(queue.summary.tasks)}</strong></article>
     `;
 
@@ -1064,9 +1064,9 @@ async function renderDefiBacklog() {
     const backlog = buildDefiResearchBacklog(fixture);
     defiSummaryNode.innerHTML = `
       <article><span>Briefs</span><strong>${escapeHtml(backlog.summary.total)}</strong></article>
-      <article><span>Research</span><strong>${escapeHtml(backlog.summary.researchOnly)}</strong></article>
-      <article><span>Queued</span><strong>${escapeHtml(backlog.summary.prototypeLater)}</strong></article>
-      <article><span>Missing</span><strong>${escapeHtml(backlog.summary.missingRailCount)}</strong></article>
+      <article><span>Reference only</span><strong>${escapeHtml(backlog.summary.researchOnly)}</strong></article>
+      <article><span>Prototype later</span><strong>${escapeHtml(backlog.summary.prototypeLater)}</strong></article>
+      <article><span>Missing rails</span><strong>${escapeHtml(backlog.summary.missingRailCount)}</strong></article>
     `;
 
     defiListNode.innerHTML = "";
@@ -1095,8 +1095,8 @@ async function renderStableValuePaths() {
     stableSummaryNode.innerHTML = `
       <article><span>Paths</span><strong>${escapeHtml(registry.summary.total)}</strong></article>
       <article><span>Build now</span><strong>${escapeHtml(registry.summary.buildableNow)}</strong></article>
-      <article><span>Research</span><strong>${escapeHtml(registry.summary.researchOnly)}</strong></article>
-      <article><span>Missing</span><strong>${escapeHtml(registry.summary.missingRailCount)}</strong></article>
+      <article><span>Reference only</span><strong>${escapeHtml(registry.summary.researchOnly)}</strong></article>
+      <article><span>Missing rails</span><strong>${escapeHtml(registry.summary.missingRailCount)}</strong></article>
     `;
 
     stableListNode.innerHTML = "";
