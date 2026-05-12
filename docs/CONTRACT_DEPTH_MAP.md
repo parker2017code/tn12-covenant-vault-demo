@@ -43,30 +43,30 @@ Done now:
   rejection;
 - one local Rust proof for the full `RecurringTreasuryVault.sil` ownerSig path
   with the same positive and negative cases;
-- one live-submit readiness artifact showing the current JS route is blocked
-  before broadcast because it drops output covenant binding;
+- one live-spend evidence artifact showing an accepted TN12 under-cap spend
+  from a covenant-bound output;
 - one Rust submit-route probe showing the Rust RPC request model preserves
   covenant binding and tx v1 `computeBudget` before broadcast;
-- UI and tests that keep the label at wallet-policy/local-wallet.
+- UI and tests that label only this under-cap path as script-enforced.
 
 Next:
 
-1. Review the compiled `RecurringTreasuryVault.sil` draft against actual spend
-   construction.
+1. Record the continuation output from the accepted spend as the next active
+   state.
 2. Add or preserve negative cases for wrong role, wrong output, over cap, and
    missing continuation.
-3. Submit one accepted under-cap script spend after the submit route preserves
-   covenant binding fields.
-4. Only then move that exact path from wallet-policy to script-enforced.
+3. Build the next spend from the continuation output.
+4. Prove cumulative cap behavior before claiming a full recurring-window
+   product.
 
-Current live-submit rule: do not use npm `kaspa-wasm@0.13.0` for the
-recurring-vault transition. It does not preserve `output.covenant` for the
-continuation output in the checked route. Use a Rust submit route or a JS SDK
-that preserves output covenant binding.
+Current live-submit rule: use the TN12 `1.1.1-toc.1` WASM/wRPC path that
+preserves tx v1 `computeBudget` and `output.covenant`. The accepted spend is
+`029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f`.
 
-Current Rust route status: the request model preserves the fields. It still
-needs the real funded output, exact signed spend transaction, guarded submit,
-fetch, and replay before the feature can move to script-enforced.
+Current funding status: the active accepted covenant-genesis funding tx is
+`d7ebd8cd74cc9ef967db94066deada04df68334b5b4783cdb9c70e333fea6d54`.
+Earlier attempts are useful failure evidence: one used the wrong owner key,
+and one embedded too small a contract fee for mempool standardness.
 
 ## Source-Driven Design Notes
 

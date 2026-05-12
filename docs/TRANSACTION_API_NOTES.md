@@ -25,6 +25,7 @@ The initial implementation path has moved beyond local construction: the repo no
 - Older SDK signing uses `signScriptHash` over the sighash from `SignableTransaction.getScriptHashes()`. The TN12 SDK path used for tx version 1 signs with `createInputSignature` against a `Transaction` that carries the input UTXO reference.
 - The public TN12 REST endpoint accepts submit payloads at `https://api-tn12.kaspa.org/transactions`.
 - Contract spend fee must be embedded high enough in the constructor. A 1000-sompi vault recovery failed because TN12 required 1784 sompi; 5000 sompi worked.
+- RecurringTreasuryVault repeated the same lesson at larger script size: a 10000-sompi constructor fee passed local script checks but TN12 rejected it as under the 11393-sompi standardness minimum. The accepted recurring-vault spend uses a 20000-sompi constructor fee.
 - DAA-score lock times worked for delayed withdrawal and refund testing. Seconds-based lock times hit finalization ambiguity through the public submit route.
 - Official builder docs now include accepted-transaction ingestion patterns. This repo uses a lightweight REST verification command first: `npm run tx:verify`.
 - For a production-grade accepted transaction indexer, the official docs point to checkpointed `getVirtualChainFromBlockV2` with high data verbosity. Use that later through a node/RPC backend; do not reintroduce local node work in this repo unless the user asks.

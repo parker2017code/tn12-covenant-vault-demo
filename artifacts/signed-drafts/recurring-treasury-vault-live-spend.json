@@ -1,0 +1,80 @@
+{
+  "schema": "tn12-recurring-treasury-vault-live-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-local-engine-passed-not-broadcast",
+  "warning": "Signed TN12 covenant-spend draft. Submit only once; it spends the current RecurringTreasuryVault covenant output.",
+  "source": {
+    "contractOutpoint": {
+      "txid": "d7ebd8cd74cc9ef967db94066deada04df68334b5b4783cdb9c70e333fea6d54",
+      "outputIndex": 0,
+      "amountSompi": "15000000000",
+      "amountTkas": 150
+    },
+    "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0"
+  },
+  "state": {
+    "capSompi": 7500000000,
+    "minerFeeSompi": 20000,
+    "nextSpentSompi": 2500000000,
+    "prevSpentSompi": 0,
+    "spendAmountSompi": 2500000000,
+    "windowStart": 9899000
+  },
+  "localChecks": {
+    "engineAcceptedGeneratedSigScript": true,
+    "inputCovenantIdKnown": true,
+    "output1ContinuationCovenantMatchesInput": true,
+    "output0AmountMatchesSpend": true
+  },
+  "transactionId": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+  "submitPayload": {
+    "transaction": {
+      "version": 1,
+      "inputs": [
+        {
+          "computeBudget": 100,
+          "previousOutpoint": {
+            "index": 0,
+            "transactionId": "d7ebd8cd74cc9ef967db94066deada04df68334b5b4783cdb9c70e333fea6d54"
+          },
+          "sequence": 0,
+          "sigOpCount": 0,
+          "signatureScript": "0500f902950004f80b970041175c87bb01002141be30dafd5f7b6af17b337681e8f4a2d290b6d020f14bc714b4c6a3fd610aad900028bdef0f76a66cc1223095da5bc8d2c84a8154ee9a8a27010500f90295004d220108000000000000000008f80b97000000000078567956795579577920d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697600a069537978930500eb08bf01a169527954795279939c697855799c69b9be789402204e947600a06900c3201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700030000207c7e01ac7e876900c252799c69537958cd01087c7e537958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877e51c3876951c2789c69b9cb519c695a7958cd01087c7e5a7958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769007a75007a75007a75007a75007a7575757575757551"
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 2500000000,
+          "scriptPublicKey": {
+            "scriptPublicKey": "201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700ac",
+            "version": 0
+          }
+        },
+        {
+          "amount": 12499980000,
+          "covenant": {
+            "authorizingInput": 0,
+            "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0"
+          },
+          "scriptPublicKey": {
+            "scriptPublicKey": "aa202d99a56e6c23e03de7234f088d074330e8f146185196102f0926ac5b205d104887",
+            "version": 0
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "scriptEvidence": {
+    "rustHarness": "scripts/rust/recurring_treasury_vault_live_spend_draft.rs",
+    "inputRedeemScriptHex": "08000000000000000008f80b97000000000078567956795579577920d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697600a069537978930500eb08bf01a169527954795279939c697855799c69b9be789402204e947600a06900c3201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700030000207c7e01ac7e876900c252799c69537958cd01087c7e537958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877e51c3876951c2789c69b9cb519c695a7958cd01087c7e5a7958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769007a75007a75007a75007a75007a7575757575757551",
+    "nextRedeemScriptHex": "0800f902950000000008f80b97000000000078567956795579577920d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697600a069537978930500eb08bf01a169527954795279939c697855799c69b9be789402204e947600a06900c3201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700030000207c7e01ac7e876900c252799c69537958cd01087c7e537958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877e51c3876951c2789c69b9cb519c695a7958cd01087c7e5a7958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769007a75007a75007a75007a75007a7575757575757551"
+  },
+  "submit": {
+    "dryRunCommand": "node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/recurring-treasury-vault-live-spend.json",
+    "probeCommand": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 KASPA_WRPC_ENCODING=borsh KASPA_WRPC_NETWORK_ID=testnet-12 node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/recurring-treasury-vault-live-spend.json --probe",
+    "submitCommand": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 KASPA_WRPC_ENCODING=borsh KASPA_WRPC_NETWORK_ID=testnet-12 node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/recurring-treasury-vault-live-spend.json --submit"
+  }
+}

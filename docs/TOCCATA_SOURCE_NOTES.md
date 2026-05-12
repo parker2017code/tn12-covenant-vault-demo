@@ -89,9 +89,16 @@ accepted TN12 recurring-vault spend.
 The live-spend preflight is
 `artifacts/recurring-treasury-vault-live-spend-preflight.json`. It matches the
 compiled `RecurringTreasuryVault.sil` script to the accepted funded output and
-confirms the output is still unspent by the public REST UTXO endpoint. It still
-blocks submit because that REST UTXO response does not expose the input
-`covenant_id`, which the continuation output must carry.
+confirms the output is still unspent by the public REST UTXO endpoint. It now
+blocks submit because the accepted funded output is ordinary P2SH funding, not
+covenant-genesis funding.
+
+The covenant-genesis funding draft is
+`artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json`. It is
+a signed v1 TN12 draft that creates output 0 with `TransactionOutput.covenant`
+set through `populateGenesisCovenants`. It is not broadcast. If submitted and
+accepted, output 0 becomes the active input for the next under-cap
+RecurringTreasuryVault spend attempt.
 
 ## Next Build Order
 
@@ -107,10 +114,11 @@ blocks submit because that REST UTXO response does not expose the input
    - Rust route probe: local RPC request model preserves covenant-bound
      continuation outputs.
    - Preflight: compiled script and funded output match; funded output is still
-     unspent; submit is blocked until the input `covenant_id` is available.
-   - Next: fetch `covenant_id` through RPC/data verbosity, convert the
-     Rust-shaped request into a guarded submit, and record accepted TN12
-     evidence if the network accepts it.
+     unspent; submit is blocked because the funded output is not covenant-bound.
+   - Genesis funding: signed v1 covenant-genesis funding draft exists.
+   - Next: submit the covenant-genesis funding draft through a covenant-preserving
+     wRPC route, fetch accepted output 0, and only then attempt the under-cap
+     spend.
 2. ICC ownership demo.
    - One action/asset branch accepts authorization from a sibling covenant input.
    - Use witness hints; do not scan every input if a direct witness index works.

@@ -30,8 +30,8 @@ try {
   const matchingUtxo = findMatchingUtxo(utxos?.entries || [], contractOutpoint);
   const fundingTx = await fetchFundingTx(rpc, contractOutpoint);
   const fundingOutput = fundingTx?.outputs?.[Number(contractOutpoint.outputIndex)] || null;
-  const outputCovenant = fundingOutput?.covenant || fundingOutput?.covenantBinding || null;
-  const utxoCovenant = matchingUtxo?.covenant || matchingUtxo?.covenantId || matchingUtxo?.entry?.covenant || matchingUtxo?.entry?.covenantId || null;
+  const outputCovenant = normalizeCovenant(fundingOutput?.covenant || fundingOutput?.covenantBinding || null);
+  const utxoCovenant = normalizeCovenant(matchingUtxo?.covenant || matchingUtxo?.covenantId || matchingUtxo?.entry?.covenant || matchingUtxo?.entry?.covenantId || null);
 
   artifact = {
     schema: "tn12-recurring-treasury-vault-rpc-data-route/v1",
@@ -61,7 +61,9 @@ try {
       utxoEntryKeys: matchingUtxo?.entry ? Object.keys(matchingUtxo.entry).sort() : [],
       fundingOutputKeys: fundingOutput ? Object.keys(fundingOutput).sort() : [],
       fundingOutputScriptPublicKey: normalizeScriptPublicKey(fundingOutput?.scriptPublicKey),
-      fundingOutputValue: fundingOutput?.value?.toString?.() || fundingOutput?.value || null
+      fundingOutputValue: fundingOutput?.value?.toString?.() || fundingOutput?.value || null,
+      fundingOutputCovenant: outputCovenant,
+      wrpcUtxoCovenant: utxoCovenant
     },
     blockers: outputCovenant || utxoCovenant ? [] : [
       {
@@ -100,6 +102,16 @@ function findMatchingUtxo(entries, outpoint) {
 function normalizeScriptPublicKey(spk) {
   if (!spk) return null;
   return typeof spk === "string" ? spk : spk.script || null;
+}
+
+function normalizeCovenant(value) {
+  if (!value) return null;
+  if (typeof value === "string") return { authorizingInput: null, covenantId: value };
+  const json = value.toJSON?.() || value;
+  return {
+    authorizingInput: json.authorizingInput ?? null,
+    covenantId: json.covenantId?.toString?.() || json.covenantId || json.toString?.() || null
+  };
 }
 
 function bigintReplacer(_key, value) {

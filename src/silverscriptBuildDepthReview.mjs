@@ -68,7 +68,9 @@ export function buildSilverscriptBuildDepthReview({
       {
         id: "funded-output-live-spend-preflight",
         status: liveSpendPreflight.status === "ready-for-guarded-live-submit" ? "ready" : liveSpendPreflight.status || "not-run",
-        evidence: liveSpendPreflight.status
+        evidence: liveSpendPreflight.status === "accepted-script-enforced-under-cap-spend"
+          ? "The live-spend path has accepted TN12 evidence for the under-cap spend, required destination, and continuation output."
+          : liveSpendPreflight.status
           ? "The live-spend preflight matches the compiled script to the funded output, checks the live UTXO, and blocks submit until the funded input covenant_id is available."
           : "Live-spend preflight has not run yet."
       },
@@ -88,12 +90,12 @@ export function buildSilverscriptBuildDepthReview({
       }
     ],
     buildRulesForAgents: [
-      "Do not call the recurring cap SCRIPT_ENFORCED because the compiled contract and accepted funding are not an accepted spend.",
+      "The recurring cap has one accepted SCRIPT_ENFORCED under-cap spend on TN12.",
       "Use the Rust debugger/test path for covenant-state mechanics before trying JS live submit.",
       "Use the Rust RPC submit route first because local probing shows it preserves covenant output binding.",
       "Do not sign or submit from the funded recurring-vault output until the live input covenant_id is available.",
       "Treat JS live submit as blocked until output covenant binding and signature-script construction are proven with the exact SDK route.",
-      "A serious next proof needs one positive under-cap spend and negative cases for over cap, wrong destination, missing continuation, and wrong owner."
+      "The next serious proof is cumulative-window behavior from the continuation output plus negative cases for over cap, wrong destination, missing continuation, and wrong owner."
     ],
     nextSteps: [
       {
@@ -106,7 +108,7 @@ export function buildSilverscriptBuildDepthReview({
       },
       {
         order: 3,
-        task: "Convert the local Rust proof into a TN12 spend from the funded RecurringTreasuryVault output."
+        task: "Record the accepted recurring-vault spend and build the next spend from the continuation output."
       },
       {
         order: 4,
@@ -114,7 +116,7 @@ export function buildSilverscriptBuildDepthReview({
       },
       {
         order: 5,
-        task: "Promote the UI label from WALLET_POLICY only after an accepted spend from the funded RecurringTreasuryVault output exists."
+        task: "Keep the UI label at script-enforced for the accepted under-cap path, and separate cumulative-window work as the next proof."
       }
     ]
   };

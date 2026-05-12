@@ -15,6 +15,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - The DeFi repo-local benchmark stays in generated artifacts. Public pages should use concrete counts and missing rails instead of score language.
 - The current playground run has four accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, User A pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, User B pool deposit `3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d`, and pool-to-User B payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
 - Live virtual-chain smoke check, 2026-05-12: current-tip read works with the local TN12 SDK and public wRPC endpoint. The old historical overlap start hash is no longer available from the public node, so keep the checked-in rich live-window artifact unless a new reachable historical start hash is captured.
+- Recurring vault update, 2026-05-12: the old 150 tKAS funded output is live but not covenant-bound. A new signed v1 covenant-genesis funding draft exists at `artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json`; it carries output covenant binding and must be submitted through a covenant-preserving wRPC route before any live recurring-vault spend attempt.
 
 ## Completed In Current Cleanup Pass
 
@@ -30,8 +31,8 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Close recurring-vault live-submit boundary. | `artifacts/recurring-treasury-vault-live-submit-readiness.json` records whether the current route preserves output covenant binding, and focused tests enforce the answer. | No |
-| 2 | Harden Rust live submit for recurring-vault spend. | The Rust route builds the exact funded-output spend, preserves the continuation output covenant binding, broadcasts the under-cap transition, and TN12 accepts the spend. | No |
+| 1 | Submit recurring-vault covenant-genesis funding. | The signed v1 draft is submitted through a route that preserves `output.covenant`, TN12 accepts it, and output 0 becomes the active covenant-bound RecurringTreasuryVault outpoint. | No |
+| 2 | Harden live submit for recurring-vault spend. | The guarded route spends the covenant-bound output, preserves the continuation output covenant binding, broadcasts the under-cap transition, and TN12 accepts the spend. | No |
 | 3 | Decide whether Covenant-Owned Asset Duel gets funded TN12 preflight. | Local ICC proof is built; next step is either park it as local proof or fund one output and prove a guarded live-spend preflight. | No |
 | 4 | Decide whether Blitz Mux Arena gets funded TN12 preflight. | Local mux/worker/timeout proof is built; next step is either park it as local proof or fund one mux output and prove route/return preflight. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
@@ -60,7 +61,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - What it is: turn the missing vault-product features into separate rails instead of one vague "vaults later" bucket.
    - Default path: local-wallet TN12 flow first. That proves address setup, transaction construction, accepted txid, replay, UI evidence, and negative guards with minimal overhead.
    - Dynamic whitelist: local-wallet destination-set artifact first; promote only after a script or wallet proves destination-set enforcement.
-   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, cumulative over-window block, DECL probe, and compiled `RecurringTreasuryVault.sil` draft are built; next is negative candidates plus one accepted script spend.
+   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, cumulative over-window block, DECL probe, compiled `RecurringTreasuryVault.sil`, owner-signature proof, accepted covenant-genesis funding, and one accepted script-enforced under-cap spend are built; next is continuation-state recording plus cumulative-window proof.
    - Partial unvault: local-wallet contract fixture that spends part of an output while relocking the remainder.
    - Policy update: local-wallet delayed admin/recovery update path with accepted update and early-update rejection evidence.
    - Guardian recovery: local-wallet m-of-n guardian path with accepted quorum spend and too-few/wrong-guardian negative evidence.

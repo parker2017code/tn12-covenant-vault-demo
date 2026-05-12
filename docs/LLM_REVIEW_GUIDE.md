@@ -153,9 +153,11 @@ Avoid these labels:
 - `artifacts/recurring-treasury-vault-owner-sig-proof.json` proves the full local `ownerSig` covenant path. It still does not prove live TN12 submission.
 - `artifacts/recurring-treasury-vault-live-submit-readiness.json` blocks the live spend through the current JS route because npm `kaspa-wasm@0.13.0` drops output covenant binding.
 - `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` shows the Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget`; it is not a broadcast.
+- `artifacts/recurring-treasury-vault-rpc-data-route.json` shows the first live 150 tKAS output is not covenant-bound. Do not try to spend it as a stateful covenant input.
+- `artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json` is the next live candidate: a signed v1 covenant-genesis funding draft. It still needs guarded wRPC submit and accepted-output verification.
 - Study `/home/parker2017/michaelsutton-silverscript-chess/examples/chess` before designing complex examples. The useful pattern is mux/worker routing, shared state layout, template identity, challenge paths, and settlement, not "make a game" as a product idea.
 - Built local deep examples: Covenant-Owned Asset Duel for ICC sibling-input authorization, and Blitz Mux Arena for mux/worker routing plus timeout.
-- Next exact tasks are: decide whether either local proof should get a funded TN12 output, then build guarded live-spend preflights that preserve the required `covenant_id`; keep live recurring-vault spend blocked until the input `covenant_id` is available.
+- Next exact tasks are: submit the recurring-vault covenant-genesis funding draft through a covenant-preserving route, fetch the accepted covenant-bound output, then attempt the under-cap spend. After that, decide whether Asset Duel or Blitz Mux gets funded TN12 preflight.
 
 Accurate label:
 

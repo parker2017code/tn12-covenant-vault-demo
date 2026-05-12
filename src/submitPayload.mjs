@@ -10,7 +10,11 @@ export function buildSubmitPayload(signedTransaction) {
     version: tx.version,
     inputs: tx.inputs.map((input) => {
       const inner = input.inner || input;
-      const previous = inner.previousOutpoint.inner || inner.previousOutpoint;
+      const previousOutpoint = inner.previousOutpoint || {
+        transactionId: inner.transactionId,
+        index: inner.index
+      };
+      const previous = previousOutpoint.inner || previousOutpoint;
       return {
         previousOutpoint: {
           transactionId: previous.transactionId,
@@ -18,14 +22,16 @@ export function buildSubmitPayload(signedTransaction) {
         },
         signatureScript: bytesToHex(inner.signatureScript || []),
         sequence: inner.sequence,
-        sigOpCount: inner.sigOpCount
+        sigOpCount: inner.sigOpCount,
+        ...(inner.computeBudget != null ? { computeBudget: inner.computeBudget } : {})
       };
     }),
     outputs: tx.outputs.map((output) => {
       const inner = output.inner || output;
       return {
         amount: sompiToSafeJsonNumber(inner.value ?? inner.amount),
-        scriptPublicKey: splitScriptPublicKey(inner.scriptPublicKey)
+        scriptPublicKey: splitScriptPublicKey(inner.scriptPublicKey),
+        ...(inner.covenant ? { covenant: normalizeCovenant(inner.covenant) } : {})
       };
     }),
     lockTime: tx.lockTime || 0,
@@ -62,6 +68,14 @@ function splitScriptPublicKey(scriptPublicKey) {
   return {
     version: Number.parseInt(normalized.slice(0, 4), 16),
     scriptPublicKey: normalized.slice(4)
+  };
+}
+
+function normalizeCovenant(covenant) {
+  const inner = covenant.inner || covenant;
+  return {
+    authorizingInput: Number(inner.authorizingInput),
+    covenantId: String(inner.covenantId)
   };
 }
 

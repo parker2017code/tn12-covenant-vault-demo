@@ -4,7 +4,7 @@ import { normalizePayloadBytes } from "./submitPayload.mjs";
 const ZERO_TXID = "0000000000000000000000000000000000000000000000000000000000000000";
 
 export function buildWrpcTransactionFromArtifact(artifact = {}) {
-  const { Transaction } = getKaspaWasmRuntime().module;
+  const { Transaction, TransactionOutput, ScriptPublicKey, CovenantBinding, Hash } = getKaspaWasmRuntime().module;
   const submit = artifact.submitPayload?.transaction;
   if (!submit) {
     throw new Error("Signed artifact is missing submitPayload.transaction.");
@@ -14,10 +14,7 @@ export function buildWrpcTransactionFromArtifact(artifact = {}) {
   const tx = new Transaction({
     version: submit.version,
     inputs: submit.inputs.map((input) => buildRuntimeInput(input, txVersion)),
-    outputs: submit.outputs.map((output) => ({
-      value: output.amount,
-      scriptPublicKey: `${Number(output.scriptPublicKey.version).toString(16).padStart(4, "0")}${output.scriptPublicKey.scriptPublicKey}`
-    })),
+    outputs: submit.outputs.map((output) => buildRuntimeOutput(output, { TransactionOutput, ScriptPublicKey, CovenantBinding, Hash })),
     lockTime: normalizeUint64(submit.lockTime || 0),
     subnetworkId: submit.subnetworkId || "0000000000000000000000000000000000000000",
     gas: 0n,
@@ -25,6 +22,26 @@ export function buildWrpcTransactionFromArtifact(artifact = {}) {
   });
   tx.finalize();
   return tx;
+}
+
+function buildRuntimeOutput(output, { TransactionOutput, ScriptPublicKey, CovenantBinding, Hash }) {
+  const script = `${Number(output.scriptPublicKey.version).toString(16).padStart(4, "0")}${output.scriptPublicKey.scriptPublicKey}`;
+  const scriptPublicKey = new ScriptPublicKey(
+    Number(output.scriptPublicKey.version),
+    Uint8Array.from(output.scriptPublicKey.scriptPublicKey.match(/../g).map((chunk) => Number.parseInt(chunk, 16)))
+  );
+  const covenant = output.covenant && typeof CovenantBinding === "function" && typeof Hash === "function"
+    ? new CovenantBinding(Number(output.covenant.authorizingInput), new Hash(output.covenant.covenantId))
+    : null;
+  try {
+    return new TransactionOutput(BigInt(output.amount), scriptPublicKey, covenant);
+  } catch {
+    return {
+      value: output.amount,
+      scriptPublicKey: script,
+      ...(output.covenant ? { covenant: output.covenant } : {})
+    };
+  }
 }
 
 export function summarizeWrpcCandidate(artifact = {}, options = {}) {

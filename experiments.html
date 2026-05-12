@@ -47,12 +47,12 @@
       <div>
         <p class="status">Experiment map. TN12/testnet only.</p>
         <h2>Small games that expose the covenant model.</h2>
-        <p>These are not product claims. Each idea has to show accepted TN12 evidence, script enforcement, wallet policy, or reducer state before the UI promotes it.</p>
+        <p>Each row says what is built, what is live on TN12, and what still needs a covenant-bound output or accepted spend.</p>
       </div>
       <aside class="facts">
-        <span>Show Michael first</span>
+        <span>Current spotlight</span>
         <strong>Blitz Mux Arena. Treasury Wars. Covenant-Owned Asset Duel.</strong>
-        <p>The fourth mode, Covenant Heist, is the adversarial reviewer view.</p>
+        <p>The fourth mode, Covenant Heist, shows the blocked paths and negative guards.</p>
       </aside>
     </section>
 
@@ -75,11 +75,11 @@
         <article>
           <span>2</span>
           <strong>Treasury Wars</strong>
-          <p>Players spend from capped treasuries. The local owner-signature path enforces amount, destination, continuation state, and relocked change.</p>
+          <p>Players spend from capped treasuries. The accepted TN12 path enforces amount, destination, continuation state, and relocked change.</p>
           <ul>
             <li>Active <code>RecurringTreasuryVault.sil</code> rail.</li>
-            <li>150 tKAS funding output is live.</li>
-            <li>Next target: covenant-bound funding output.</li>
+            <li>Accepted covenant-genesis funding output.</li>
+            <li>Accepted under-cap covenant spend.</li>
           </ul>
         </article>
         <article>
@@ -122,8 +122,8 @@
             <tr>
               <td>Treasury Wars</td>
               <td>stateful singleton vault</td>
-              <td>blocked-non-covenant-funded-output</td>
-              <td>new covenant-bound funding output before live spend</td>
+              <td>accepted-script-enforced-under-cap-spend</td>
+              <td>record continuation state, then prove cumulative cap behavior</td>
             </tr>
             <tr>
               <td>Covenant-Owned Asset Duel</td>
@@ -180,7 +180,7 @@
         <article>
           <span>Do next</span>
           <ul>
-            <li>Create a covenant-bound recurring vault funding output.</li>
+            <li>Submit the covenant-bound recurring vault funding draft.</li>
             <li>Decide whether Blitz Mux gets a funded TN12 preflight.</li>
             <li>Decide whether Asset Duel gets a funded TN12 preflight.</li>
           </ul>

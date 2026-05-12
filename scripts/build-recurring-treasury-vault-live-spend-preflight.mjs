@@ -11,6 +11,7 @@ const artifact = buildRecurringTreasuryVaultLiveSpendPreflight({
   ownerSigProof: await readJson("artifacts/recurring-treasury-vault-owner-sig-proof.json"),
   rustSubmitRouteProbe: await readJson("artifacts/recurring-treasury-vault-rust-submit-route-probe.json"),
   rpcDataRoute: await readOptionalJson("artifacts/recurring-treasury-vault-rpc-data-route.json"),
+  liveSpendEvidence: await readOptionalJson("artifacts/recurring-treasury-vault-live-spend-evidence.json"),
   liveUtxos
 });
 

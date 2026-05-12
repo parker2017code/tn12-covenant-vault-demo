@@ -1,7 +1,7 @@
 {
   "schema": "tn12-recurring-treasury-vault-rpc-data-route/v1",
-  "checkedAt": "2026-05-12T21:51:48.260Z",
-  "status": "funded-output-not-covenant-bound",
+  "checkedAt": "2026-05-12T22:21:57.535Z",
+  "status": "rpc-data-route-covenant-id-found",
   "endpoint": {
     "url": "ws://tn12-node.kaspa.com:17210",
     "encoding": "borsh",
@@ -9,17 +9,17 @@
   },
   "target": "Find whether the funded RecurringTreasuryVault output carries a live covenant_id through wRPC block or UTXO data.",
   "fundingOutpoint": {
-    "txid": "72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4",
+    "txid": "d7ebd8cd74cc9ef967db94066deada04df68334b5b4783cdb9c70e333fea6d54",
     "outputIndex": 0,
-    "address": "kaspatest:pqrts43fqgkdzxdp8lga9nm3sr9lqrqh2zn0s0hyyk39hux8qfrdsfkw4ur3p"
+    "address": "kaspatest:pzy2fknhc99tlzn9lszp4jpjt7sll3pry2q5607ednpqsp98jjva7vww0d8eq"
   },
   "checks": {
     "wrpcUtxoFound": true,
-    "wrpcUtxoCovenantIdAvailable": false,
+    "wrpcUtxoCovenantIdAvailable": true,
     "fundingTransactionFetched": true,
-    "fundingTransactionVersion": 0,
+    "fundingTransactionVersion": 1,
     "fundingOutputFound": true,
-    "fundingOutputHasCovenantBinding": false
+    "fundingOutputHasCovenantBinding": true
   },
   "observed": {
     "utxoKeys": [
@@ -34,15 +34,17 @@
       "value",
       "verboseData"
     ],
-    "fundingOutputScriptPublicKey": "0000aa2006b85629022cd119a13fd1d2cf7180cbf00c1750a6f83ee425a25bf0c70246d887",
-    "fundingOutputValue": "15000000000"
-  },
-  "blockers": [
-    {
-      "id": "funded-output-not-covenant-bound",
-      "status": "hard-blocker",
-      "detail": "The current funded output is visible through wRPC, but neither the UTXO row nor the funding transaction output exposes a covenant binding. The funding transaction is not a covenant-genesis output."
+    "fundingOutputScriptPublicKey": "0000aa2088a4da77c14abf8a65fc041ac8325fa1ffc42322814d3fd96cc20804a79499df87",
+    "fundingOutputValue": "15000000000",
+    "fundingOutputCovenant": {
+      "authorizingInput": 0,
+      "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0"
+    },
+    "wrpcUtxoCovenant": {
+      "authorizingInput": null,
+      "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0"
     }
-  ],
-  "allowedNextAction": "Create a new covenant-bound funded output through the KIP-20/DECL genesis path before attempting a live recurring-vault spend."
+  },
+  "blockers": [],
+  "allowedNextAction": "Use the discovered covenant id in the guarded Rust live-spend candidate."
 }

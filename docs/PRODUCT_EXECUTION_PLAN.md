@@ -116,7 +116,7 @@ These are possible, but they need separate evidence.
 | Feature | First useful build | Real proof |
 |---|---|---|
 | Dynamic whitelist | Wallet-policy artifact with allowed destination set, update request, and UI warning on off-list outputs. | Accepted script or wallet-signed spend that proves the selected destination was in the active set, plus off-list negative evidence. |
-| Recurring cap | Built: treasury cap model, accepted under-cap TN12 spend, cap-window state, and cumulative over-window block. | Next: deeper `.sil` path that enforces cap amount and required destination. |
+| Recurring cap | Built: treasury cap model, accepted local-key under-cap TN12 spend, cap-window state, cumulative over-window block, local full-contract ownerSig proof, accepted covenant-genesis funding, and accepted script-enforced under-cap spend with continuation state. | Next: record the continuation output as active state, then prove cumulative-window behavior from that continuation. |
 | Partial unvault | New fixture that sends one output to a hot wallet and relocks the rest. | Accepted partial spend with change locked back into the vault shape. |
 | Policy update | Delayed policy-update request that changes guardian, whitelist, or cap fields after a waiting period. | Accepted delayed update plus early-update rejection evidence. |
 | Guardian recovery | m-of-n guardian path for recovery, cancel, or large-spend approval. | Accepted quorum spend plus too-few-guardian and wrong-guardian negative evidence. |
@@ -129,14 +129,18 @@ Do not call a feature script-enforced until the accepted spend path exists.
 Do not add another broad product lane until the recurring-cap primitive either
 has a deeper accepted `.sil` spend or is explicitly parked with the blocker.
 
-Current recurring-cap blocker: the full `ownerSig` covenant path is locally
-proven, but the current npm JS transaction route drops output covenant binding
-for the continuation output. The next live spend must use a Rust submit route
-or an SDK route that preserves `TransactionOutput.covenant`.
+Current recurring-cap blocker: the first live 150 tKAS output was ordinary
+P2SH funding, not covenant-genesis funding. The repo now has a signed v1
+covenant-genesis funding draft at
+`artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json`. The
+next step is to submit that draft through a route that preserves
+`TransactionOutput.covenant`, then fetch the accepted output before attempting
+the under-cap spend.
 
-Current Rust route status: the pre-broadcast probe preserves output covenant
-binding and tx v1 `computeBudget` inside a submit request. It still needs the
-real funded output spend, guarded broadcast, fetch, and replay.
+Current route status: the local TN12 WASM path can build and sign a v1 genesis
+funding draft with output covenant binding. It still needs guarded broadcast,
+fetch, and replay. The older npm route remains blocked for continuation
+spends that need output covenant binding.
 
 ## Next Deep Demos
 

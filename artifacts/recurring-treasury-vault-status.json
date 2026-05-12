@@ -9,11 +9,11 @@
     "walletPolicyStatus": "local-wallet-recurring-cap-evidence-ready",
     "capWindowStatus": "cap-window-policy-ready",
     "acceptedContractFunding": {
-      "txid": "72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4",
+      "txid": "03ea0465a08457ed560b80b20a467a5dc44a11d49385c33872008ba54b6c7e3c",
       "outputIndex": 0,
       "amountTkas": 150,
       "status": "accepted",
-      "explorerUrl": "https://tn12.kaspa.stream/transactions/72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4"
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/03ea0465a08457ed560b80b20a467a5dc44a11d49385c33872008ba54b6c7e3c"
     }
   },
   "scriptIntendedEnforcement": [

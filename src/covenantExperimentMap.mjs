@@ -4,7 +4,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "treasury-wars",
       title: "Treasury Wars",
       rank: 2,
-      status: "blocked-before-live-submit",
+      status: "accepted-script-enforced-under-cap-spend",
       proofTarget: "accepted recurring-vault spend, continuation state, blocked over-cap attempt",
       whyItMatters: "Turns the active recurring cap rail into a simple strategy loop: each player has money, a cap window, allowed destinations, and relocked state.",
       covenantPattern: "stateful singleton vault",
@@ -16,16 +16,17 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/recurring-treasury-vault-owner-sig-proof.json",
         "artifacts/recurring-treasury-vault-live-submit-readiness.json",
         "artifacts/recurring-treasury-vault-rust-submit-route-probe.json",
-        "artifacts/recurring-treasury-vault-live-spend-preflight.json"
+        "artifacts/recurring-treasury-vault-live-spend-preflight.json",
+        "artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json",
+        "artifacts/signed-drafts/recurring-treasury-vault-live-spend.json",
+        "artifacts/recurring-treasury-vault-live-spend-evidence.json"
       ],
       nextBuildSteps: [
-        "Fetch the funded input covenant_id through RPC/data verbosity.",
-        "Re-run the live-spend preflight until it is ready for guarded submit.",
-        "Spend the funded RecurringTreasuryVault output on TN12 only through the Rust route.",
         "Record the new state and relocked change output.",
-        "Turn the over-cap negative map into the opponent's blocked move."
+        "Turn the over-cap negative map into the opponent's blocked move.",
+        "Build a second spend attempt from the continuation output to prove cumulative cap behavior."
       ],
-      hardBoundary: "The ownerSig covenant path is locally proven and the Rust route preserves covenant binding, but script-enforced recurring caps require an accepted spend from the funded contract output."
+      hardBoundary: "The accepted TN12 spend proves the under-cap amount, required destination, and continuation output for this state. It does not yet prove window reset behavior or user-wallet signing."
     }),
     experiment({
       id: "covenant-heist",
@@ -151,11 +152,12 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       spotlight: experiments.filter((item) => item.rank <= 3).length,
       buildFirst: experiments.filter((item) => item.status === "build-first").length,
       blockedBeforeLiveSubmit: experiments.filter((item) => item.status === "blocked-before-live-submit").length,
+      genesisFundingDrafts: experiments.filter((item) => item.status === "genesis-funding-draft-ready").length,
       localProofs: experiments.filter((item) => item.status === "local-proof-passed").length,
-      scriptEnforcedClaims: 0
+      scriptEnforcedClaims: experiments.filter((item) => item.status.startsWith("accepted-script-enforced")).length
     },
     rule: "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",
-    showMichaelFirst: ["blitz-mux-arena", "treasury-wars", "covenant-owned-asset-game"],
+    spotlight: ["blitz-mux-arena", "treasury-wars", "covenant-owned-asset-game"],
     experiments
   };
 }

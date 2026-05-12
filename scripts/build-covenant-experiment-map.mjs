@@ -9,4 +9,4 @@ await writeFile(outPath, `${JSON.stringify(map, null, 2)}\n`);
 
 console.log(outPath);
 console.log(`experiments=${map.summary.experiments}`);
-console.log(`spotlight=${map.showMichaelFirst.join(",")}`);
+console.log(`spotlight=${map.spotlight.join(",")}`);

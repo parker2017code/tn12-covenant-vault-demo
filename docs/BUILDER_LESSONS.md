@@ -15,6 +15,8 @@ These are the durable rules from the escrow cancel fix. They are for future TN12
 - The same npm route does not preserve `output.covenant` in the recurring-vault live-submit probe. Do not use it to broadcast a covenant transition that needs a covenant-bound continuation output.
 - The Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget` in the recurring-vault route probe. That makes Rust the next live-submit route to harden.
 - A live covenant spend needs the input `covenant_id`. The public REST UTXO response can prove the output is still unspent, but if it does not expose `covenant_id`, submit stays blocked until an RPC/data-verbosity path provides it.
+- A script-hash funding output is not automatically a covenant output. For a KIP-20/DECL stateful spend, the funding transaction must be a covenant-genesis transaction that carries output covenant binding.
+- The local TN12 `kaspa-wasm 1.1.1-toc.1` route can build a signed v1 covenant-genesis funding draft with `populateGenesisCovenants`. The draft is not proof until TN12 accepts it and the output is fetched back with covenant binding.
 - The local TN12 `kaspa-wasm 1.1.1-toc.1` constructor still needs a compatibility `sigOpCount` property, but the correct v1 shape is `sigOpCount: 0` plus `computeBudget: 30`.
 - Public REST can lag protocol shape. In this case REST demanded `sigOpCount`, then rejected non-zero `sigOpCount` for tx version 1. The working route was JSON wRPC with the matching TN12 SDK.
 
@@ -46,4 +48,5 @@ When a protocol result looks impossible, widen the search before escalating:
 - Treat stale tooling as a first-class failure mode, not an afterthought.
 - Prove stateful `.sil` in layers: compile, local state/output debugger, full signature-script Rust proof, then live submit only through a route that preserves every covenant binding field.
 - Add a preflight before live covenant submits: script hash matches funded output, funded output is still unspent, route preserves covenant binding, and input `covenant_id` is known.
+- For genesis funding, add a separate draft/probe before spend preflight. The first accepted output must be covenant-bound before any continuation spend can be meaningful.
 - For ICC, do not describe it as nested execution. The useful proof is sibling-input authorization: the asset/action covenant checks a witness input's script hash or `covenant_id`, then enforces its own transition.
