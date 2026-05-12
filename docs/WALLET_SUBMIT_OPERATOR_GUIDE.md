@@ -6,6 +6,13 @@ Reviewed: 2026-05-10
 
 This lane reviews exact inputs, outputs, payload bytes, and submit routes before a transaction leaves the repo.
 
+## Before Running Commands
+
+- Run `npm ci` first.
+- These commands build or validate review artifacts unless the command name or flags explicitly say submit.
+- They do not connect to a public wallet or broadcast a transaction by themselves.
+- A wallet result becomes live only after an external signer returns approved signed bytes, the submit route preserves required fields, and replay observes the accepted txid.
+
 ## Current Commands
 
 - `npm run wallet:review`

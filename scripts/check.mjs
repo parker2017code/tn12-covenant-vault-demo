@@ -2468,6 +2468,21 @@ assert.match(labNotebook, /npm run check:tn12/);
 
 const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const labHtml = await readFile(new URL("../lab.html", import.meta.url), "utf8");
+const resultsHtml = await readFile(new URL("../results.html", import.meta.url), "utf8");
+const playgroundHtml = await readFile(new URL("../playground.html", import.meta.url), "utf8");
+const publicHtml = [
+  ["index.html", html],
+  ["results.html", resultsHtml],
+  ["playground.html", playgroundHtml],
+  ["lab.html", labHtml]
+];
+for (const [name, content] of publicHtml) {
+  assert.doesNotMatch(content, /What should be clickable/, `${name} exposes internal clickable-source notes`);
+  assert.doesNotMatch(content, /Source map/, `${name} exposes internal source-map notes`);
+  assert.doesNotMatch(content, /reviewer:/i, `${name} exposes reviewer-note language`);
+  assert.doesNotMatch(content, /Technical:/, `${name} exposes technical-note drawer language`);
+  assert.doesNotMatch(content, /What Claude/i, `${name} exposes agent-planning language`);
+}
 assert.match(html, /TN12 configured\. Proof transactions accepted\./);
 assert.match(html, /TN12 faucet/);
 assert.match(html, /npm run address/);

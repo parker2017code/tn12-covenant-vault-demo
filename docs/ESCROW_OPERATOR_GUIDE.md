@@ -6,6 +6,13 @@ Reviewed: 2026-05-10
 
 Escrow funds a buyer-seller covenant flow with release, refund, and cancel paths.
 
+## Before Running Commands
+
+- Run `npm ci` first.
+- Builder commands may write draft artifacts under `artifacts/signed-drafts/`.
+- Any submit command with `--submit` is a real TN12 broadcast; use testnet-only funds and keys.
+- Local signed drafts are useful test evidence, but they are not an external-wallet result.
+
 ## Current Commands
 
 - `npm run escrow:registry`

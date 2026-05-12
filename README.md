@@ -14,6 +14,7 @@ Start here:
 - `docs/AUDIT_MAP.md`: canonical claim, status, and enforcement-class map.
 - `docs/CLAIM_VOCABULARY.md`: short definitions for `SCRIPT_ENFORCED`, `PLANNER_ONLY`, `INDEXER_DERIVED`, and related labels.
 - `docs/COMMAND_RUNBOOK.md`: command prerequisites, safety classes, and fresh playground route.
+- `docs/CLI_FROM_ZERO.md`: blank-terminal path from install to TN12 playground, wallet drafts, submit boundaries, and DeFi-style replay.
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
 - `docs/COPY_CLEANUP_PLAN.md`: public wording standard for pages and handoff docs.
@@ -72,6 +73,8 @@ npm run demo:operator-refresh
 
 Read `docs/COMMAND_RUNBOOK.md` before running wallet, faucet, or submit commands. Some snippets only rebuild local artifacts; others write testnet wallet material under `.local/` or broadcast TN12 transactions.
 
+If you are starting from a blank terminal, use `docs/CLI_FROM_ZERO.md` first. It explains installation, local checks, fresh playground wallets, faucet funding, submit boundaries, replay, and which DeFi-style actions are real accepted TN12 transfers versus reducer or planner state.
+
 ## Useful Artifacts
 
 | Need | Artifact |
@@ -79,6 +82,7 @@ Read `docs/COMMAND_RUNBOOK.md` before running wallet, faucet, or submit commands
 | Evidence map | `docs/AUDIT_MAP.md` |
 | Script groups | `docs/SCRIPT_INDEX.md` |
 | Command runbook | `docs/COMMAND_RUNBOOK.md` |
+| Blank-terminal CLI path | `docs/CLI_FROM_ZERO.md` |
 | TangVM / scheduler boundary | `docs/TANGVM_UNISC_BOUNDARY.md` |
 | Tidying map | `docs/REPO_TIDYING.md` |
 | Next steps | `docs/NEXT_STEPS.md` |
