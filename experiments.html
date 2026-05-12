@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TN12 Covenant Experiments</title>
+  <meta name="description" content="Kaspa TN12 covenant experiment map for mux workers, recurring vaults, ICC assets, and adversarial vault checks.">
+  <link rel="icon" href="favicon.svg?v=20260512-kaspa" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="application-name" content="TN12 Proof Lab">
+  <meta name="apple-mobile-web-app-title" content="TN12 Proof Lab">
+  <meta name="theme-color" content="#090d0c">
+  <meta property="og:image" content="https://parker2017code.github.io/tn12-covenant-vault-demo/og-tn12-proof-lab.png?v=20260512-brand">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://parker2017code.github.io/tn12-covenant-vault-demo/og-tn12-proof-lab.png?v=20260512-brand">
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand-home" href="index.html" aria-label="TN12 Proof Lab home">
+      <p class="eyebrow">Kaspa TN12 experiments</p>
+      <h1>Covenant experiment map</h1>
+    </a>
+    <nav class="site-nav" aria-label="Site navigation">
+      <div class="nav-group nav-pages" aria-label="Pages">
+        <a href="index.html">Proof Home</a>
+        <a href="results.html">Results</a>
+        <a href="playground.html">Live Play</a>
+        <a href="experiments.html" aria-current="page">Experiments</a>
+        <a href="lab.html">Lab Tools</a>
+      </div>
+      <div class="nav-group nav-local" aria-label="This page">
+        <a href="#spotlight">Spotlight</a>
+        <a href="#queue">Queue</a>
+        <a href="#rules">Rules</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero results-hero">
+      <div>
+        <p class="status">Experiment map. TN12/testnet only.</p>
+        <h2>Small games that expose the covenant model.</h2>
+        <p>These are not product claims. Each idea has to show accepted TN12 evidence, script enforcement, wallet policy, or reducer state before the UI promotes it.</p>
+      </div>
+      <aside class="facts">
+        <span>Show Michael first</span>
+        <strong>Blitz Mux Arena. Treasury Wars. Covenant-Owned Asset Duel.</strong>
+        <p>The fourth mode, Covenant Heist, is the adversarial reviewer view.</p>
+      </aside>
+    </section>
+
+    <section id="spotlight" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Three strongest demos</p>
+        <h2>Best fit for Kaspa's edge.</h2>
+      </div>
+      <div class="experiment-grid spotlight-grid">
+        <article>
+          <span>1</span>
+          <strong>Blitz Mux Arena</strong>
+          <p>A hub covenant routes a move to a worker. The worker returns state before the timeout. This shows why fast multi-transaction flows matter.</p>
+          <ul>
+            <li>Mux / worker contract family.</li>
+            <li>Template routing.</li>
+            <li>Timeout escape path.</li>
+          </ul>
+        </article>
+        <article>
+          <span>2</span>
+          <strong>Treasury Wars</strong>
+          <p>Players spend from capped treasuries. The covenant should enforce amount, destination, continuation state, and relocked change.</p>
+          <ul>
+            <li>Active <code>RecurringTreasuryVault.sil</code> rail.</li>
+            <li>Accepted 150 tKAS contract funding.</li>
+            <li>Next target: accepted script spend.</li>
+          </ul>
+        </article>
+        <article>
+          <span>3</span>
+          <strong>Covenant-Owned Asset Duel</strong>
+          <p>A game covenant owns an asset. Moving the asset requires the game input in the same transaction instead of nested contract execution.</p>
+          <ul>
+            <li>ICC / sibling-input authorization.</li>
+            <li>Asset state plus game authority.</li>
+            <li>Missing sibling input becomes the negative case.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="queue" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Full queue</p>
+        <h2>Build one vertical at a time.</h2>
+        <p>The artifact is the source of truth for status, evidence paths, and boundaries.</p>
+        <p class="note"><a href="artifacts/covenant-experiment-map.json">Open experiment artifact</a></p>
+      </div>
+      <div class="experiment-table-wrap">
+        <table class="proof-table experiment-table">
+          <thead>
+            <tr>
+              <th>Experiment</th>
+              <th>Pattern</th>
+              <th>Status</th>
+              <th>Next proof</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Blitz Mux Arena</td>
+              <td>mux / worker contract family</td>
+              <td>research-build</td>
+              <td>hub routes to worker, worker returns to hub, timeout escape</td>
+            </tr>
+            <tr>
+              <td>Treasury Wars</td>
+              <td>stateful singleton vault</td>
+              <td>build-first</td>
+              <td>accepted recurring-vault spend with continuation state</td>
+            </tr>
+            <tr>
+              <td>Covenant-Owned Asset Duel</td>
+              <td>ICC / covenant-owned asset</td>
+              <td>later</td>
+              <td>asset move authorized by sibling covenant input</td>
+            </tr>
+            <tr>
+              <td>Covenant Heist</td>
+              <td>guarded vault plus challenge rows</td>
+              <td>design-next</td>
+              <td>wrong signer, wrong destination, over-cap, stale-window, missing-relock checks</td>
+            </tr>
+            <tr>
+              <td>Coordination League</td>
+              <td>assurance plus coordination receipts</td>
+              <td>later</td>
+              <td>threshold commitments, release/refund, replayed settlement rows</td>
+            </tr>
+            <tr>
+              <td>Scheduler Duel</td>
+              <td>based-app scheduler with covenant settlement target</td>
+              <td>later</td>
+              <td>eligible trigger, executor receipt, blocked stale action</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="rules" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Promotion rules</p>
+        <h2>No vague demo language.</h2>
+      </div>
+      <div class="work-map">
+        <article>
+          <span>Show</span>
+          <ul>
+            <li>Accepted TN12 txids.</li>
+            <li>Compiled scripts.</li>
+            <li>Replay rows.</li>
+            <li>Exact negative guards.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Label</span>
+          <ul>
+            <li><code>SCRIPT_ENFORCED</code> only after the script path enforces it.</li>
+            <li><code>WALLET_POLICY</code> for local-wallet refusal.</li>
+            <li><code>INDEXER_DERIVED</code> for replay state.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Do next</span>
+          <ul>
+            <li>Finish the funded recurring vault spend.</li>
+            <li>Build one mux/worker toy.</li>
+            <li>Build one ICC asset authorization toy.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
