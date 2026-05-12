@@ -34,7 +34,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 2 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
 | 3 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 4 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or wallet signing is needed |
-| 5 | Recurring-cap contract depth. | The current local-wallet cap evidence turns into one deeper `.sil` primitive with accepted positive path and negative map. | No |
+| 5 | Recurring-cap contract depth. | `RecurringTreasuryVault.sil` compiles, then gains negative candidates and one accepted script spend. | No |
 | 6 | DECL/stateful covenant probe. | `contracts/probes/RecurringTreasuryDeclProbe.sil` compiles, `artifacts/silverscript-decl-support.json` records support, and focused tests assert the result. | No |
 | 7 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
 
@@ -60,7 +60,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - What it is: turn the missing vault-product features into separate rails instead of one vague "vaults later" bucket.
    - Default path: local-wallet TN12 flow first. That proves address setup, transaction construction, accepted txid, replay, UI evidence, and negative guards with minimal overhead.
    - Dynamic whitelist: local-wallet destination-set artifact first; promote only after a script or wallet proves destination-set enforcement.
-   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, and cumulative over-window block are built; next is one deeper `.sil` path that enforces cap amount and required destination.
+   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, cumulative over-window block, DECL probe, and compiled `RecurringTreasuryVault.sil` draft are built; next is negative candidates plus one accepted script spend.
    - Partial unvault: local-wallet contract fixture that spends part of an output while relocking the remainder.
    - Policy update: local-wallet delayed admin/recovery update path with accepted update and early-update rejection evidence.
    - Guardian recovery: local-wallet m-of-n guardian path with accepted quorum spend and too-few/wrong-guardian negative evidence.

@@ -33,19 +33,19 @@ Done now:
   spend would exceed the 75 TKAS window;
 - one checked compiler probe for DECL-style covenant state arrays and
   `binding = cov` lowering;
+- one compiled `RecurringTreasuryVault.sil` draft that attempts cap, required
+  destination, and continuation-state enforcement;
 - UI and tests that keep the label at wallet-policy/local-wallet.
 
 Next:
 
-1. Turn `contracts/probes/RecurringTreasuryDeclProbe.sil` into a real
-   `RecurringTreasuryVault.sil` with cap amount, spent-in-window, window start,
-   required destination, and continuation state.
-2. Add relocked change output if the contract shape can express it cleanly.
-3. Add negative candidates for wrong role, wrong output, over cap, early spend,
-   and missing relock.
-4. Fund a fresh TN12 output.
-5. Submit one accepted under-cap script spend.
-6. Only then move that exact path from wallet-policy to script-enforced.
+1. Review the compiled `RecurringTreasuryVault.sil` draft against actual spend
+   construction.
+2. Build negative candidates for wrong role, wrong output, over cap, and
+   missing continuation.
+3. Fund a fresh TN12 contract output.
+4. Submit one accepted under-cap script spend.
+5. Only then move that exact path from wallet-policy to script-enforced.
 
 ## Source-Driven Design Notes
 

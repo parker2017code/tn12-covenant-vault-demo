@@ -1,0 +1,44 @@
+{
+  "schema": "tn12-recurring-treasury-vault-status/v1",
+  "reviewedAt": "2026-05-12",
+  "contract": "contracts/RecurringTreasuryVault.sil",
+  "compiledArtifact": "artifacts/RecurringTreasuryVault.json",
+  "status": "script-compiled-not-submitted",
+  "currentEvidence": {
+    "acceptedWalletPolicyTxid": "d9eba84e7565ba28e5631c4a3b914da93b68e77daf9279a435f9303eeb63cf65",
+    "walletPolicyStatus": "local-wallet-recurring-cap-evidence-ready",
+    "capWindowStatus": "cap-window-policy-ready"
+  },
+  "scriptIntendedEnforcement": [
+    "owner signature",
+    "positive spend amount",
+    "amount plus prior window spend cannot exceed cap",
+    "continuation state increments spent amount",
+    "destination output must match required destination pubkey",
+    "remaining value must relock through validateOutputState"
+  ],
+  "negativeCandidates": [
+    {
+      "id": "wrong-owner-signature",
+      "status": "candidate"
+    },
+    {
+      "id": "wrong-destination",
+      "status": "candidate"
+    },
+    {
+      "id": "over-cap",
+      "status": "candidate"
+    },
+    {
+      "id": "missing-continuation",
+      "status": "candidate"
+    },
+    {
+      "id": "bad-window-state",
+      "status": "candidate"
+    }
+  ],
+  "promotionRule": "Do not label recurring caps SCRIPT_ENFORCED until a spend from this compiled contract is accepted on TN12 and the negative map is checked.",
+  "compiledBytes": 15825
+}
