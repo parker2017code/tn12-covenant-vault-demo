@@ -4,6 +4,17 @@ This guide is for someone starting with a terminal and no repo context.
 
 TN12 is Kaspa testnet-12. The commands here are for testnet proof work, local review artifacts, and replay checks. They are not mainnet wallet commands.
 
+If your goal is mainnet Kaspa terminal work, use public Kaspa node, wallet, SDK,
+and explorer documentation. This repo can teach the pattern of verify, draft,
+submit, and replay on testnet. It should not be copied into mainnet unless the
+same command path exists in production tooling and you understand the key and
+network boundaries.
+
+The larger goal is not to make everyone depend on this repo or one explorer. It
+is to make the verification path legible: run checks, inspect txids, compare
+explorer data with local replay, and know when a full node or RPC query is the
+next source of truth.
+
 ## What You Need
 
 - A terminal.
@@ -57,26 +68,6 @@ What these do:
 - `check:tn12` reads public TN12 evidence and verifies accepted txids, payload events, proof records, and checkpoint artifacts.
 - Neither command needs private keys or tKAS.
 - Both commands should pass before you trust the repo state.
-
-## Open The Local Site
-
-```sh
-npm run serve
-```
-
-Open:
-
-```txt
-http://127.0.0.1:4176/
-```
-
-Useful pages:
-
-- `results.html`: the cleanest “what happened on TN12” page.
-- `playground.html`: role wallets, funding, deposits, payout, and replay.
-- `lab.html`: deeper builder and audit workbench.
-
-Stop the server with `Ctrl+C` in the terminal that started it.
 
 ## Make Fresh Testnet Role Wallets
 
@@ -192,7 +183,111 @@ For mainnet use, the required product path is:
 6. Submit through the correct route.
 7. Promote app state only after accepted mainnet replay evidence.
 
-That full external-signer path is still a readiness gap here.
+That full user-wallet path is still a readiness gap here.
+
+## Toccata And Mainnet Commands
+
+TN12 is the place to practice covenant-shaped flows before mainnet activation
+and production tooling are ready.
+
+After Toccata or later protocol work is live, the command-line path should be
+rebuilt from public release notes, official node/wallet/SDK docs, and accepted
+mainnet evidence. Until then:
+
+- TN12 commands prove testnet behavior.
+- `.local/` wallet files are throwaway testnet material.
+- wRPC payload routes here are testnet routes.
+- Mainnet instructions must come from production wallet/node tooling.
+- Any app state should still be promoted only after accepted transaction replay.
+
+## Public Kaspa Command Reference
+
+Use this as the bridge from TN12 practice to real Kaspa infrastructure.
+
+### Current mainnet node path
+
+Kaspa.org Build lists the Rusty Kaspa Docker quickstart:
+
+```sh
+docker run -d --name kaspad -p 16110:16110 kaspanet/rusty-kaspad:latest
+```
+
+Rusty Kaspa's README lists source-build mainnet commands:
+
+```sh
+git clone https://github.com/kaspanet/rusty-kaspa
+cd rusty-kaspa
+cargo run --release --bin kaspad
+cargo run --release --bin kaspad -- --utxoindex
+```
+
+Use `--utxoindex` when wallet or UTXO queries need indexed UTXO state.
+
+### Current terminal wallet/RPC entry
+
+Rusty Kaspa documents `kaspa-cli` as the terminal RPC and wallet runtime:
+
+```sh
+cd cli
+cargo run --release
+```
+
+Before creating wallets or signing transactions, inspect the CLI help, confirm
+the selected network, confirm wallet file locations, and test with tiny amounts.
+
+### Current generic testnet node path
+
+Rusty Kaspa's README lists:
+
+```sh
+cargo run --release --bin kaspad -- --testnet
+```
+
+Older public hard-fork testnet guides used explicit suffixes, for example:
+
+```sh
+kaspad --testnet --netsuffix=10 --utxoindex
+cargo run --bin kaspad --release -- --testnet --netsuffix=10 --utxoindex
+```
+
+For TN12/Toccata work, verify the current netsuffix, release, endpoint, and
+flags from the active public Toccata/TN12 docs before running.
+
+### wRPC JSON endpoint
+
+Rusty Kaspa documents wRPC as optional and disabled by default. For JSON wRPC:
+
+```sh
+cargo run --release --bin kaspad -- --utxoindex --rpclisten-json=default
+```
+
+Use careful bind addresses on public machines. A public RPC endpoint is
+infrastructure, not a wallet safety boundary.
+
+### Sources
+
+- Kaspa.org Build: node, SDK, query, explorer, and testnet resource map.
+- `docs.kaspa.org`: integration docs for RPC, payloads, accepted transactions,
+  and running node infrastructure.
+- `kaspanet/rusty-kaspa`: current node, wallet, CLI, Docker, and wRPC commands.
+- Kaspa.org hard-fork testnet posts: historical examples of netsuffix-specific
+  testnet commands.
+
+Useful source URLs:
+
+- `https://kaspa.org/build`
+- `https://docs.kaspa.org/`
+- `https://github.com/kaspanet/rusty-kaspa`
+- `https://github.com/kaspanet/rusty-kaspa/releases`
+- `https://explorer.kaspa.org/`
+- `https://faucet-testnet.kaspanet.io/`
+
+### Maintainer reminder
+
+When Toccata becomes mainnet behavior, update this file and the Kaspa Explained
+command/status/source pages from public activation evidence, Rusty Kaspa
+releases, official docs, and working tool commands. Until then, keep TN12
+commands labeled as testnet practice.
 
 ## Safe Mental Model
 
@@ -224,18 +319,8 @@ What you learn:
 - `defi:manifest` checks that the current DeFi artifacts exist and have no secret findings.
 - No wallet funds move in this step.
 
-Open the site:
-
-```sh
-npm run serve
-```
-
-Then read:
-
-```txt
-http://127.0.0.1:4176/playground.html
-http://127.0.0.1:4176/results.html
-```
+To compare terminal output with the public walkthrough, open `playground.html`
+and `results.html` from the repo or hosted page.
 
 ### 2. Create Testnet Wallets
 
@@ -250,7 +335,7 @@ This creates local testnet role wallets:
 - user-a
 - user-b
 - executor
-- reviewer
+- observer
 
 The private testnet keys stay under `.local/playground/`. The public addresses are what you fund.
 
@@ -290,7 +375,7 @@ What this means:
 - Funding drafts move testnet money between role wallets when submitted.
 - Accepted-activity/reducer commands replay evidence.
 - Multi-wallet artifacts show which roles and wallets are involved.
-- AMM, lending, liquidation, oracle truth, and autonomous pool custody are still blocked product rails.
+- AMM, lending, liquidation, oracle truth, and app-controlled pool custody still need separate product rails.
 
 ### 5. Submit Only Explicit Drafts
 
@@ -350,4 +435,4 @@ Not built as app-controlled custody:
 - production wallet signing;
 - public-user wallet signing round trip.
 
-So the CLI can take you from blank terminal to real TN12 wallet movement and replayed DeFi-style state. It does not yet take you to a production DeFi product that autonomously controls user funds.
+So the CLI can take you from blank terminal to real TN12 wallet movement and replayed DeFi-style state. It does not yet take you to a production DeFi product that controls user funds.

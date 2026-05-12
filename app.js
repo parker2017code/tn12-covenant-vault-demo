@@ -51,7 +51,6 @@ import {
 import {
   cssEscape,
   escapeHtml,
-  publicLaneText,
   shortAddress,
   shortTxid,
   sompiToTkas
@@ -71,6 +70,7 @@ import { renderResultsExplorer } from "./src/ui/renderers/resultsExplorer.mjs";
 import { renderSelfServeLaneRunbook } from "./src/ui/renderers/selfServeLaneRunbook.mjs";
 import { renderBuildQueue } from "./src/ui/renderers/buildQueue.mjs";
 import { renderPayloadDraftStatus } from "./src/ui/renderers/payloadDraftStatus.mjs";
+import { renderUniversalSchedulerWorkbench } from "./src/ui/renderers/universalSchedulerWorkbench.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -127,9 +127,6 @@ const stableIssuerSummaryNode = document.querySelector("#stable-issuer-summary")
 const stableIssuerListNode = document.querySelector("#stable-issuer-list");
 const agentSummaryNode = document.querySelector("#agent-summary");
 const agentListNode = document.querySelector("#agent-list");
-const schedulerWorkbenchSummaryNode = document.querySelector("#scheduler-workbench-summary");
-const schedulerWorkbenchJobsNode = document.querySelector("#scheduler-workbench-jobs");
-const schedulerWorkbenchPredictionsNode = document.querySelector("#scheduler-workbench-predictions");
 const masterRoadmapNode = document.querySelector("#master-roadmap");
 const vaultTemplatesNode = document.querySelector("#vault-templates");
 const appLanesNode = document.querySelector("#app-lanes");
@@ -1322,65 +1319,6 @@ async function renderWalletConnector() {
     `;
   } catch (error) {
     walletConnectorNode.textContent = `Wallet connector readiness unavailable: ${error.message}`;
-  }
-}
-
-async function renderUniversalSchedulerWorkbench() {
-  if (!schedulerWorkbenchSummaryNode || !schedulerWorkbenchJobsNode || !schedulerWorkbenchPredictionsNode) return;
-
-  try {
-    const workbench = await fetchJson("artifacts/universal-scheduler-workbench.json");
-    schedulerWorkbenchSummaryNode.innerHTML = `
-      <article><span>Jobs</span><strong>${escapeHtml(workbench.summary.jobs)}</strong><p>Trigger, bid, binding, coordination, auction, and agent rows.</p></article>
-      <article><span>TN12 evidence</span><strong>${escapeHtml(workbench.summary.acceptedEvidenceJobs)}</strong><p>Jobs with accepted transaction evidence.</p></article>
-      <article><span>Replay checks</span><strong>${escapeHtml(workbench.summary.replayCheckedJobs)}</strong><p>Rows with deterministic checks over current artifacts.</p></article>
-      <article><span>Blocked cases</span><strong>${escapeHtml(workbench.summary.blockedPredictions)}</strong><p>Expected bad paths that must not promote.</p></article>
-      <article><span>Protocol scheduler</span><strong>${escapeHtml(workbench.summary.protocolSchedulerClaims)}</strong><p>Separate research work.</p></article>
-      <article><span>Wallet settlement</span><strong>${escapeHtml(workbench.summary.autonomousCustodyClaims)}</strong><p>Needs wallet-reviewed settlement first.</p></article>
-    `;
-
-    const firstRun = workbench.runThisFirst;
-    schedulerWorkbenchJobsNode.innerHTML = "";
-    if (firstRun) {
-      const runArticle = document.createElement("article");
-      runArticle.className = "scheduler-job scheduler-run-first";
-      runArticle.innerHTML = `
-        <span>run first</span>
-        <strong>${escapeHtml(firstRun.title)}</strong>
-        <p>${escapeHtml(firstRun.userGoal)}</p>
-        <p class="scheduler-observed">${escapeHtml(firstRun.expectedResult)}</p>
-        <details open>
-          <summary>Steps and evidence</summary>
-          <ol>${firstRun.steps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
-          <p>${firstRun.currentEvidence.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
-          <p>${escapeHtml(publicLaneText(firstRun.nextUpgrade))}</p>
-        </details>
-      `;
-      schedulerWorkbenchJobsNode.append(runArticle);
-    }
-    for (const job of workbench.jobs) {
-      const article = document.createElement("article");
-      article.className = `scheduler-job scheduler-${cssEscape(job.replayCheck)}`;
-      article.innerHTML = `
-        <span>${escapeHtml(job.lane)} · ${escapeHtml(job.tn12Reality)}</span>
-        <strong>${escapeHtml(job.title)}</strong>
-        <p>${escapeHtml(job.expected)}</p>
-        <p class="scheduler-observed">${escapeHtml(job.observed)}</p>
-        <details>
-          <summary>Evidence and blocked cases</summary>
-          <p>${job.evidence.map((item) => `<code>${escapeHtml(item)}</code>`).join(" ")}</p>
-          <ul>${job.blockedCases.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-        </details>
-      `;
-      schedulerWorkbenchJobsNode.append(article);
-    }
-
-    schedulerWorkbenchPredictionsNode.innerHTML = `
-      <article><span>Expected behavior</span><strong>What should happen</strong><ul>${workbench.expectedBehavior.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></article>
-      <article><span>Next tests</span><strong>Predictions to break</strong><ul>${workbench.predictionsToTestNext.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></article>
-    `;
-  } catch (error) {
-    schedulerWorkbenchSummaryNode.textContent = `Scheduler workbench unavailable: ${error.message}`;
   }
 }
 

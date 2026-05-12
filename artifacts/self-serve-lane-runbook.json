@@ -2,7 +2,7 @@
   "schema": "tn12-self-serve-lane-runbook/v1",
   "network": "kaspa-testnet-12",
   "status": "self-serve-lane-runbook-ready",
-  "generatedAt": "2026-05-11T22:40:03.898Z",
+  "generatedAt": "2026-05-12T03:49:45.268Z",
   "summary": {
     "lanes": 12,
     "playNow": 4,
@@ -71,7 +71,7 @@
       ],
       "openRail": [
         "Public REST submit did not preserve payload bytes in this test.",
-        "External wallet signing is the next public-user submit rail."
+        "User-wallet signing is the next public-user submit rail."
       ],
       "commands": [
         "npm run invoice:registry",
@@ -235,7 +235,7 @@
       "stackLayer": "based-app-prototype",
       "uiTarget": "lab.html#defi-backlog",
       "availableNow": [
-        "6 of 10 benchmark rails complete",
+        "6 of 10 lab rails have repo evidence",
         "10 pool deposits and 4 payouts accepted",
         "replay guards and blocked custody rows"
       ],
@@ -250,7 +250,7 @@
         "artifacts/defi-scenario-reducer.json"
       ],
       "openRail": [
-        "No AMM custody, lending custody, liquidation engine, oracle truth, or production signer yet."
+        "AMM custody, lending custody, liquidation, oracle inputs, and user-wallet signing still need separate rules."
       ],
       "commands": [
         "npm run defi:refresh",
@@ -279,7 +279,7 @@
         "artifacts/coordination-market-settlement-brief.json"
       ],
       "openRail": [
-        "No opacity, capital multiplexing, composability, or atomic Hunt execution yet."
+        "Privacy, shared capital, composition, and settlement still need separate rules."
       ],
       "commands": [
         "npm run coordination:market",
@@ -308,7 +308,7 @@
         "artifacts/agent-settlement-review.json"
       ],
       "openRail": [
-        "No autonomous payout; settlement needs explicit sponsor/wallet action."
+        "Settlement needs explicit sponsor or wallet action."
       ],
       "commands": [
         "npm run agent:commitments",
@@ -317,8 +317,8 @@
       ]
     },
     {
-      "id": "external-wallet-handoff",
-      "title": "External wallet handoff",
+      "id": "user-wallet-handoff",
+      "title": "Use your own wallet",
       "status": "required-rail",
       "stackLayer": "product-rail",
       "uiTarget": "lab.html#submit",
@@ -329,7 +329,7 @@
       ],
       "runSteps": [
         "Open wallet-standard requests.",
-        "Review exact fields in an external signer.",
+        "Review exact fields in your wallet.",
         "Return signed bytes and validate fingerprint, payload, route, and approval."
       ],
       "evidence": [

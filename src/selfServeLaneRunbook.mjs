@@ -62,7 +62,7 @@ export function buildSelfServeLaneRunbook({
       ],
       openRail: [
         "Public REST submit did not preserve payload bytes in this test.",
-        "External wallet signing is the next public-user submit rail."
+        "User-wallet signing is the next public-user submit rail."
       ],
       commands: ["npm run invoice:registry", "npm run payload:readiness", "npm run indexer:checkpoint"]
     }),
@@ -203,7 +203,7 @@ export function buildSelfServeLaneRunbook({
       stackLayer: "based-app-prototype",
       uiTarget: "lab.html#defi-backlog",
       availableNow: [
-        `${num(benchmark?.summary?.completedRails)} of ${num(benchmark?.summary?.rails)} benchmark rails complete`,
+        `${num(benchmark?.summary?.completedRails)} of ${num(benchmark?.summary?.rails)} lab rails have repo evidence`,
         `${num(acceptedActivity?.summary?.poolDeposits)} pool deposits and ${num(acceptedActivity?.summary?.poolPayouts)} payouts accepted`,
         "replay guards and blocked custody rows"
       ],
@@ -218,7 +218,7 @@ export function buildSelfServeLaneRunbook({
         "artifacts/defi-scenario-reducer.json"
       ],
       openRail: [
-        "No AMM custody, lending custody, liquidation engine, oracle truth, or production signer yet."
+        "AMM custody, lending custody, liquidation, oracle inputs, and user-wallet signing still need separate rules."
       ],
       commands: ["npm run defi:refresh", "npm run defi:accepted-activity", "npm run defi:reducer"]
     }),
@@ -243,7 +243,7 @@ export function buildSelfServeLaneRunbook({
         "artifacts/coordination-market-settlement-brief.json"
       ],
       openRail: [
-        "No opacity, capital multiplexing, composability, or atomic Hunt execution yet."
+        "Privacy, shared capital, composition, and settlement still need separate rules."
       ],
       commands: ["npm run coordination:market", "npm run coordination:settlement-brief"]
     }),
@@ -269,13 +269,13 @@ export function buildSelfServeLaneRunbook({
         "artifacts/agent-settlement-review.json"
       ],
       openRail: [
-        "No autonomous payout; settlement needs explicit sponsor/wallet action."
+        "Settlement needs explicit sponsor or wallet action."
       ],
       commands: ["npm run agent:commitments", "npm run agent:settlement-drafts", "npm run agent:settlement-review"]
     }),
     lane({
-      id: "external-wallet-handoff",
-      title: "External wallet handoff",
+      id: "user-wallet-handoff",
+      title: "Use your own wallet",
       status: "required-rail",
       stackLayer: "product-rail",
       uiTarget: "lab.html#submit",
@@ -286,7 +286,7 @@ export function buildSelfServeLaneRunbook({
       ],
       runSteps: [
         "Open wallet-standard requests.",
-        "Review exact fields in an external signer.",
+        "Review exact fields in your wallet.",
         "Return signed bytes and validate fingerprint, payload, route, and approval."
       ],
       evidence: [

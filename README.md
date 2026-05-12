@@ -125,7 +125,7 @@ If you are starting from a blank terminal, use `docs/CLI_FROM_ZERO.md` first. It
 npm run serve
 ```
 
-Open `index.html` for the proof/reviewer page. Open `results.html` for the artifact-backed results explainer. Open `playground.html` for the role/faucet playground plan. Open `lab.html` for the full builder workbench.
+Open `index.html` for the proof page. Open `results.html` for the artifact-backed results explainer. Open `playground.html` for the role/faucet playground plan. Open `lab.html` for the full builder workbench.
 
 To create fresh local playground role wallets:
 

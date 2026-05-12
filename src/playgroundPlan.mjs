@@ -10,7 +10,7 @@ export function buildPlaygroundPlan({
     role("user-a", "User A / swapper", "10", "Funds a deposit and receives a payout."),
     role("user-b", "User B / lender", "10", "Funds a deposit and requests a withdrawal review."),
     role("executor", "Executor / scheduler bidder", "2", "Submits bid and execution receipts."),
-    role("reviewer", "Reviewer / oracle reporter", "2", "Submits review-only oracle or risk rows.")
+    role("reviewer", "Observer / risk reporter", "2", "Submits review-only oracle or risk rows.")
   ];
   const actions = [
     action("generate-session-wallets", "Create fresh TN12 role wallets", "LOCAL_ONLY", "Generate new kaspatest addresses; never commit private keys."),
@@ -62,7 +62,7 @@ export function buildPlaygroundPlan({
       ),
       quickstart(
         "own-wallet",
-        "Bring your own external wallet",
+        "Use your own wallet",
         "No repo private keys.",
         "Export a request, review exact fields in your wallet, return signed bytes, validate the fingerprint, submit, then replay.",
         "#wallet",
@@ -80,7 +80,7 @@ export function buildPlaygroundPlan({
     ownWalletFlow: [
       "Pick a lane and export the unsigned wallet-standard request.",
       "Review network, inputs, outputs, fees, payload bytes, compute budget, and human intent.",
-      "Sign outside the repo with a TN12-capable wallet or signer.",
+      "Sign outside the repo with a TN12-capable wallet.",
       "Return the signed transaction or signer-result artifact.",
       "Run signer validation before any submit.",
       "Submit through the field-preserving route required by that lane.",
@@ -98,7 +98,7 @@ export function buildPlaygroundPlan({
       "Keep session wallet secrets, mnemonics, seeds, and private keys out of commits.",
       "When tooling allows a positive app action, back it with an accepted TN12 txid.",
       "Label reducer-only rows as indexer-derived or planner-only.",
-      "Treat mainnet, production custody, external signing, AMMs, lending, liquidation, and oracle truth as separate rails."
+      "Treat mainnet, production custody, user-wallet signing, AMMs, lending, liquidation, and oracle truth as separate rails."
     ],
     nextImplementation: [
       "Add playground.html with role wallet generation and faucet checklist.",

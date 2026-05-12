@@ -138,7 +138,9 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /3bfca807/);
     assert.match(playgroundText, /4 accepted txs/);
     assert.match(playgroundText, /Open lab tools/);
-    assert.match(playgroundText, /Bring your own external wallet/);
+    assert.match(playgroundText, /Use your own wallet/);
+    assert.doesNotMatch(playgroundText, /Bring your own external wallet/);
+    assert.doesNotMatch(playgroundText, /TN12_ACCEPTED_TARGET|LOCAL_KEY_CUSTODY_TEST|INDEXER_DERIVED|REJECTED_BY_REDUCER/);
     assert.match(playgroundText, /Sign outside the repo/);
     assert.match(playgroundText, /Build a based-app lane/);
     assert.equal(await page.locator("details.section-drawer").count(), 2);
@@ -171,6 +173,8 @@ async function checkRenderedPages(url) {
     assert.match(resultsText, /future adapter/i);
     assert.match(resultsText, /Accepted transfers/i);
     assert.match(resultsText, /25/);
+    assert.doesNotMatch(resultsText, /TN12_ACCEPTED|LOCAL_KEY_CUSTODY_TEST|INDEXER_DERIVED|MAINNET_BLOCKED|PLANNER_ONLY/);
+    assert.doesNotMatch(resultsText, /External signer|autonomous pool custody|production custody readiness/i);
     assert.doesNotMatch(resultsText, /Draft post|X post/);
     assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
     assert.ok(await page.locator('#results-feed a[href*="tn12.kaspa.stream/transactions/"]').count() >= 6);
@@ -212,7 +216,7 @@ async function checkRenderedPages(url) {
     })));
     assert.deepEqual(passiveClaimCards.filter((item) => item.cursor === "pointer"), [], "passive claim cards must not look clickable");
     assert.deepEqual(passiveClaimCards.filter((item) => /Open/.test(item.after)), [], "passive claim cards must not show Open affordance");
-    assert.equal(await page.locator("details.lab-drawer").count(), 6);
+    assert.equal(await page.locator("details.lab-drawer").count(), 7);
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 1);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
     assert.equal(firstPanelId, "product-map");

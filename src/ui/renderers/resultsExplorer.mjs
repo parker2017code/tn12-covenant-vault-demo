@@ -13,7 +13,7 @@ export async function renderResultsExplorer(documentRef = document) {
   try {
     const artifacts = await fetchJsonMap({
       proven: "artifacts/proven-status.json",
-      benchmark: "artifacts/full-defi-benchmark.json",
+      labChecks: "artifacts/full-defi-benchmark.json",
       index: "artifacts/checkpointed-accepted-index.json",
       activity: "artifacts/defi-accepted-activity-ledger.json",
       scheduler: "artifacts/scheduler-intent-registry.json",
@@ -25,7 +25,7 @@ export async function renderResultsExplorer(documentRef = document) {
 
     renderSummary(summaryNode, artifacts);
     renderKnowledgeLevels(levelNode);
-    renderRails(railNode, artifacts.benchmark);
+    renderRails(railNode, artifacts.labChecks);
     renderFeed(feedNode, recentEvents);
     renderFlow(flowNode, artifacts);
     if (standardsNode) renderStandards(standardsNode, artifacts.standards);
@@ -35,12 +35,12 @@ export async function renderResultsExplorer(documentRef = document) {
   }
 }
 
-function renderSummary(node, { proven, benchmark, index, activity, scheduler, binding }) {
+function renderSummary(node, { proven, labChecks, index, activity, scheduler, binding }) {
   node.innerHTML = `
     ${metric("Accepted proof txs", proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions, "Covenant proof spends and role-separated repeats.")}
     ${metric("Payload events", proven.acceptedEvidence.payloadEvents, "Accepted app-state receipts replayed from TN12.")}
     ${metric("Indexed records", index.summary.total, "Proof, payload, and output evidence in one checkpoint.")}
-    ${metric("DeFi checks", `${benchmark.summary.completedRails} / ${benchmark.summary.rails}`, "Repo-local rail detail lives in Lab Tools.")}
+    ${metric("DeFi checks", `${labChecks.summary.completedRails} / ${labChecks.summary.rails} lab rails`, "Detailed rail evidence lives in Lab Tools.")}
     ${metric("Accepted transfers", activity.summary.acceptedTransferRows, "Local-key custody movement across pool and user roles.")}
     ${metric("Scheduler rows", scheduler.summary.acceptedBids + scheduler.summary.executedTriggers + binding.summary.readyBindings, "Intent, bids, execution, and covenant-binding rows.")}
   `;
@@ -68,8 +68,8 @@ function renderKnowledgeLevels(node) {
     <article class="level-card hidden" data-level-panel="builder">
       <span>Builder</span>
       <h3>Open txids, then run the gates.</h3>
-      <p>Use <code>npm run check:all</code>, <code>npm run check:tn12</code>, and <code>npm run operator:refresh</code>. Install with <code>npm ci</code> first. These commands verify or rebuild local evidence; they do not broadcast. The proof docs are <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code>. DeFi lab checks live in <code>artifacts/full-defi-benchmark.json</code>.</p>
-      <p>Look for the enforcement label on each rail: <code>TN12_ACCEPTED</code>, <code>LOCAL_KEY_CUSTODY_TEST</code>, <code>INDEXER_DERIVED</code>, <code>PLANNER_ONLY</code>, or <code>MAINNET_BLOCKED</code>.</p>
+      <p>Use <code>npm run check:all</code>, <code>npm run check:tn12</code>, and <code>npm run demo:operator-refresh</code>. Install with <code>npm ci</code> first. These commands verify or rebuild local evidence; they do not broadcast. The proof docs are <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code>. DeFi lab details live in <code>artifacts/full-defi-benchmark.json</code>.</p>
+      <p>The public page keeps labels plain. The artifact files keep the exact enforcement classes for builders.</p>
     </article>
   `;
 }
@@ -77,9 +77,9 @@ function renderKnowledgeLevels(node) {
 function renderRails(node, benchmark) {
   node.innerHTML = benchmark.rails.map((rail) => `
     <article class="${rail.done ? "rail-done" : "rail-open"}">
-      <span>${escapeHtml(rail.label)}</span>
-      <strong>${escapeHtml(rail.done ? "accepted evidence" : "next work")}: ${escapeHtml(rail.title)}</strong>
-      <p>${escapeHtml(rail.evidence)}</p>
+      <span>${escapeHtml(publicRailLabel(rail.label, rail.done))}</span>
+      <strong>${escapeHtml(rail.done ? "Verified" : "Next piece")}: ${escapeHtml(publicRailTitle(rail.title))}</strong>
+      <p>${escapeHtml(publicRailEvidence(rail.evidence))}</p>
     </article>
   `).join("");
 }
@@ -94,13 +94,13 @@ function renderFeed(node, events) {
   `).join("");
 }
 
-function renderFlow(node, { proven, activity, scheduler, benchmark }) {
+function renderFlow(node, { proven, activity, scheduler, labChecks }) {
   const steps = [
     ["1", "Covenant proof spend", `${proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions} accepted proof transactions across core and role-separated paths.`],
     ["2", "Payload receipt", `${proven.acceptedEvidence.payloadEvents} accepted payload events record app intent and status.`],
     ["3", "Custody-adjacent movement", `${activity.summary.acceptedTransferRows} accepted local-key transfers move tKAS across user, pool, and operator roles.`],
     ["4", "Reducer/indexer state", `${scheduler.summary.acceptedIntents} accepted scheduler intent and ${scheduler.summary.acceptedBids} accepted bids feed deterministic state.`],
-    ["5", "Lab boundary", `${benchmark.summary.completedRails} of ${benchmark.summary.rails} DeFi lab rails have repo evidence; the rest stay in Lab Tools.`]
+    ["5", "Lab boundary", `${labChecks.summary.completedRails} of ${labChecks.summary.rails} DeFi lab rails have repo evidence; the rest stays in Lab Tools.`]
   ];
   node.innerHTML = steps.map(([num, title, body]) => `
     <article>
@@ -111,16 +111,77 @@ function renderFlow(node, { proven, activity, scheduler, benchmark }) {
   `).join("");
 }
 
+function publicRailLabel(label, done) {
+  const labels = {
+    TN12_ACCEPTED: "accepted on TN12",
+    LOCAL_KEY_CUSTODY_TEST: "accepted testnet transfers",
+    INDEXER_DERIVED: "replayed from accepted records",
+    MAINNET_BLOCKED: "not mainnet-ready",
+    PLANNER_ONLY: "lab model only"
+  };
+  return labels[label] || (done ? "verified" : "next");
+}
+
+function publicRailTitle(title) {
+  return String(title)
+    .replace("Covenant primitives accepted on TN12", "Covenant spend examples")
+    .replace("Accepted app-state payload ledger", "App receipts")
+    .replace("Multi-wallet local-key custody movement", "Multi-wallet testnet transfers")
+    .replace("Scheduler intent, bids, and execution receipts", "Scheduler receipts")
+    .replace("Scheduler-to-covenant proof binding", "Scheduler proof reference")
+    .replace("Deterministic indexer replay and duplicate guards", "Replay and duplicate checks")
+    .replace("External signer round trip", "User-wallet signing")
+    .replace("Live removed-block rollback evidence", "Live rollback check")
+    .replace("AMM/lending/liquidation custody execution", "AMM, lending, and liquidation settlement")
+    .replace("Mainnet covenant activation and production wallet/indexer review", "Mainnet activation and production review");
+}
+
+function publicRailEvidence(evidence) {
+  return String(evidence)
+    .replace("Vault, pledge, escrow, auction, and role-separated proof rows are accepted.", "Vault, pledge, escrow, auction, and role-separated examples have accepted TN12 records.")
+    .replace("40 payload events are accepted and replayed.", "40 app receipt events are accepted and replayed.")
+    .replace("25 accepted transfer rows cover deposits, payouts, and user roles.", "25 accepted transfer rows cover deposits, payouts, and user roles.")
+    .replace("Accepted scheduler payloads feed deterministic trigger and bid reducers.", "Accepted scheduler receipts feed deterministic trigger and bid state.")
+    .replace("Accepted binding payload references an accepted covenant proof row.", "One accepted binding receipt references an accepted covenant proof row.")
+    .replace("Fixture replay, overlap, duplicate, and rollback-match guards pass locally.", "Replay, duplicate, overlap, and rollback-match checks pass locally.")
+    .replace("A real wallet must sign bytes and return a verifiable accepted txid.", "A user wallet still needs to sign a request, submit it, and return an accepted txid.")
+    .replace("Promotion stays blocked until live removed-block evidence is captured.", "Live removed-block evidence still needs to be captured before this is treated as production replay behavior.")
+    .replace("Pricing, oracle truth, autonomous pool custody, liquidations, and risk engine execution are not script-enforced.", "Pricing, oracle inputs, pool custody, liquidations, and risk execution still need separate settlement rules.")
+    .replace("TN12 evidence does not prove mainnet activation or production custody readiness.", "TN12 evidence does not prove mainnet activation or production custody.");
+}
+
 function renderStandards(node, standards) {
   node.innerHTML = standards.lanes.map((lane) => `
     <article class="rail-open">
-      <span>${escapeHtml(lane.status)} · future adapter · ${escapeHtml(lane.standard)}</span>
-      <strong>${escapeHtml(lane.label)}</strong>
-      <p>${escapeHtml(lane.fit)}</p>
-      <p><small>Next: ${escapeHtml(lane.next)}</small></p>
+      <span>${escapeHtml(publicAdapterStatus(lane.status))} · adapter idea · ${escapeHtml(publicAdapterText(lane.standard))}</span>
+      <strong>${escapeHtml(publicAdapterText(lane.label))}</strong>
+      <p>${escapeHtml(publicAdapterText(lane.fit))}</p>
+      <p><small>Next: ${escapeHtml(publicAdapterText(lane.next))}</small></p>
       ${sourceLink(lane.source)}
     </article>
   `).join("");
+}
+
+function publicAdapterStatus(status) {
+  const labels = {
+    BUILDABLE_NEXT: "buildable next",
+    ADAPTER_ONLY: "metadata mapping",
+    TOCCATA_TRACK: "future protocol track",
+    MAINNET_READINESS_BLOCKER: "needs wallet signing"
+  };
+  return labels[status] || String(status).toLowerCase().replaceAll("_", " ");
+}
+
+function publicAdapterText(value) {
+  return String(value || "")
+    .replace(/Unsigned request \/ external signer convention/gi, "User-wallet request convention")
+    .replace(/External signer round trip/gi, "User-wallet signing")
+    .replace(/external signer/gi, "user wallet")
+    .replace(/external wallet/gi, "user wallet")
+    .replace(/external signing/gi, "user-wallet signing")
+    .replace(/Mainnet readiness blocker/gi, "needs wallet signing")
+    .replace(/real user wallet signs/gi, "a user wallet signs")
+    .replace(/real wallet signs/gi, "a user wallet signs");
 }
 
 async function loadRecentEvents(events) {

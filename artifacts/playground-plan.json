@@ -1,7 +1,7 @@
 {
   "schema": "tn12-playground-plan/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T02:04:48.335Z",
+  "generatedAt": "2026-05-12T03:48:44.085Z",
   "status": "playground-plan-ready",
   "target": "real-tn12-session-playground",
   "summary": {
@@ -59,7 +59,7 @@
     },
     {
       "id": "reviewer",
-      "label": "Reviewer / oracle reporter",
+      "label": "Observer / risk reporter",
       "network": "kaspa-testnet-12",
       "suggestedFundingTkas": "2",
       "purpose": "Submits review-only oracle or risk rows.",
@@ -129,7 +129,7 @@
     },
     {
       "id": "own-wallet",
-      "title": "Bring your own external wallet",
+      "title": "Use your own wallet",
       "requirement": "No repo private keys.",
       "detail": "Export a request, review exact fields in your wallet, return signed bytes, validate the fingerprint, submit, then replay.",
       "href": "#wallet",
@@ -147,7 +147,7 @@
   "ownWalletFlow": [
     "Pick a lane and export the unsigned wallet-standard request.",
     "Review network, inputs, outputs, fees, payload bytes, compute budget, and human intent.",
-    "Sign outside the repo with a TN12-capable wallet or signer.",
+    "Sign outside the repo with a TN12-capable wallet.",
     "Return the signed transaction or signer-result artifact.",
     "Run signer validation before any submit.",
     "Submit through the field-preserving route required by that lane.",
@@ -165,7 +165,7 @@
     "Keep session wallet secrets, mnemonics, seeds, and private keys out of commits.",
     "When tooling allows a positive app action, back it with an accepted TN12 txid.",
     "Label reducer-only rows as indexer-derived or planner-only.",
-    "Treat mainnet, production custody, external signing, AMMs, lending, liquidation, and oracle truth as separate rails."
+    "Treat mainnet, production custody, user-wallet signing, AMMs, lending, liquidation, and oracle truth as separate rails."
   ],
   "nextImplementation": [
     "Add playground.html with role wallet generation and faucet checklist.",

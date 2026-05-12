@@ -4,6 +4,15 @@ Use this before running commands copied from public pages. Commands have differe
 
 ## Start Here
 
+If you are starting from a blank terminal, read `docs/CLI_FROM_ZERO.md` first.
+This file is the command safety table; the zero guide explains the full path
+from install, to local checks, to fresh testnet wallets, to replay.
+
+Maintainer note: when Toccata becomes mainnet behavior, refresh
+`docs/CLI_FROM_ZERO.md` and the Kaspa Explained command/status/source pages from
+public activation evidence, Rusty Kaspa releases, official docs, and working
+tool commands before changing public status language.
+
 Prerequisite: Node.js `>=20.19.0 <25` and npm. Then install exactly from the lockfile:
 
 ```sh
@@ -36,7 +45,7 @@ If a command is shown on a public page but you cannot classify it with this tabl
 
 ## Public Page Command Rule
 
-- `index.html` should show only the shortest reviewer path.
+- `index.html` should show only the shortest verification path.
 - `results.html` should show proof-check commands, not local signing flows.
 - `playground.html` may show wallet generation, funding draft, and explicit submit commands only with `.local/` and `--submit` warnings nearby.
 - `lab.html` may show many artifact builders, but the page must link back to this runbook before the command wall.

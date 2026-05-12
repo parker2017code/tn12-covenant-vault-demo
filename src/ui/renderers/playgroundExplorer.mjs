@@ -37,7 +37,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Payload events available", plan.summary.acceptedPayloadEventsAvailable, "Current accepted receipt evidence.")}
       ${metric("Transfer rows available", plan.summary.acceptedTransferRowsAvailable, "Current local-key custody movement evidence.")}
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}
-      ${metric("DeFi checks", `${plan.summary.benchmarkRails || "6 / 10"} rails`, "Detailed rail evidence lives in Lab Tools.")}
+      ${metric("DeFi checks", `${plan.summary.benchmarkRails || "6 / 10"} lab rails`, "Detailed rail evidence lives in Lab Tools.")}
     `;
     if (quickstartNode) renderQuickstart(quickstartNode, plan);
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });
@@ -48,7 +48,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       const address = role.address || sessionRole.address || "";
       return `
       <article>
-        <span>${escapeHtml(role.id)} · ${escapeHtml(role.suggestedFundingTkas)} tKAS</span>
+        <span>${escapeHtml(publicRoleId(role.id))} · ${escapeHtml(role.suggestedFundingTkas)} tKAS</span>
         <strong>${escapeHtml(role.label)}</strong>
         <p>${escapeHtml(role.purpose)}</p>
         ${addressChip(address)}
@@ -94,7 +94,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
     wireCopyButtons(documentRef);
     actionsNode.innerHTML = actions.actionRows.map((action) => `
       <article>
-        <span>${escapeHtml(action.enforcement)} · ${escapeHtml(action.ready ? "ready" : "needs funding")}</span>
+        <span>${escapeHtml(publicActionLabel(action.enforcement))} · ${escapeHtml(action.ready ? "ready" : "needs funding")}</span>
         <strong>${escapeHtml(action.label)}</strong>
         <p>${escapeHtml(action.detail)}</p>
       </article>
@@ -119,6 +119,22 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   } catch (error) {
     summaryNode.innerHTML = `<article><span>Load error</span><strong>Playground plan unavailable</strong><p>${escapeHtml(error.message)}</p></article>`;
   }
+}
+
+function publicRoleId(id) {
+  return id === "reviewer" ? "observer" : id;
+}
+
+function publicActionLabel(enforcement) {
+  const labels = {
+    TN12_ACCEPTED_TARGET: "accepted tx target",
+    LOCAL_KEY_CUSTODY_TEST: "testnet transfer",
+    INDEXER_DERIVED: "replay check",
+    REJECTED_BY_REDUCER: "blocked by replay",
+    USER_FUNDED_TN12: "user-funded testnet",
+    LOCAL_ONLY: "local setup"
+  };
+  return labels[enforcement] || String(enforcement).toLowerCase().replaceAll("_", " ");
 }
 
 function renderQuickstart(node, plan) {

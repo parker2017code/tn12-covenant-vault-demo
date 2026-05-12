@@ -67,7 +67,7 @@ function organizeLabPage(documentRef = document) {
 
   const drawers = [
     ["core-notes", "Proof core notes", "Accepted counts, verifier command, and first docs."],
-    ["reviewer-path", "Verification route", "Install, local gate, TN12 gate, and refresh command."],
+    ["check-path", "Verification route", "Install, local gate, TN12 gate, and refresh command."],
     ["next-ten", "Build next", "Wallet handoff, indexer replay, and one settlement flow."],
     ["templates", "Vault templates", "Recovery, delayed withdrawal, spending cap, and escrow presets."],
     ["campaigns", "Batch assurance", "Pledge aggregation and release/refund planning."],
