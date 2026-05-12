@@ -182,11 +182,12 @@ async function checkRenderedPages(url) {
     assert.match(laneRunbookText, /External wallet handoff/);
     assert.match(laneRunbookText, /AMM custody/);
     assert.match(laneRunbookText, /npm run defi:refresh/);
-    assert.ok(await page.locator("details.lab-drawer").count() >= 20);
-    assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
+    assert.equal(await page.locator("details.lab-drawer").count(), 6);
+    assert.equal(await page.locator("details.lab-drawer[open]").count(), 1);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
     assert.equal(firstPanelId, "product-map");
     await page.goto(`${url}lab.html#scheduler-workbench`, { waitUntil: "networkidle" });
+    assert.equal(await page.locator("#scheduler-workbench").evaluate((node) => node.closest("details.lab-drawer")?.open), true);
     await page.waitForSelector("#scheduler-workbench-jobs article", { timeout: 5000 });
     const schedulerText = await page.locator("#scheduler-workbench").innerText();
     assert.match(schedulerText, /Small version first/);
