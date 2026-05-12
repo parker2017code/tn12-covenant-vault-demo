@@ -44,7 +44,7 @@
 - Treat user examples as class signals unless the user explicitly says one instance only. If the user points at one command, fake-clickable card, crowded mobile control, copy button, source link, or status label, audit the whole class of similar patterns.
 - For broad cleanup work, use read-only parallel agents for audits and research when available. Assign them search/review tasks, keep edits local to the main agent, and use their findings to avoid narrow one-off fixes.
 - Treat agent-written code as suspect around adjacent assumptions: check existing artifact shapes, field names, negative cases, and security-sensitive paths before extending a pattern.
-- Treat invoice, payload, receipt, and wallet work as rails, not as a generic merchant-payment adoption thesis. Current strategic framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
+- Treat invoice, payload, receipt, and wallet work as rails, not as a generic merchant-payment adoption thesis. Current product framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
 - Treat the current version as a TN12-configured proof app. The browser builds policy/control artifacts, while scripts compile, sign, submit, verify, and index accepted testnet transactions.
 - Public TN12 APIs, manual explorer data, and local fixtures are the default. Bring back local node work only on direct request.
 - Payload/miner-signal work starts with transaction payload receipts and accepted-transaction indexing. Coinbase payload or pool policy is a later mining-software lane.
