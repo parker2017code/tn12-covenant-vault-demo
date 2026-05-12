@@ -53,21 +53,21 @@
       <div class="section-title">
         <p class="eyebrow">Product status map</p>
         <h2>What people can try.</h2>
-        <p>Each lane should become self-serve: get tKAS, connect or use an external TN12 wallet, review exact bytes, submit, then replay accepted evidence. The product stack is money rails first, covenant spend rules second, and app-specific state only where the product needs richer shared state.</p>
+        <p>Start with accepted TN12 evidence, then separate wallet signing, covenant spend rules, and app-state replay by status. The product stack is money movement first, covenant spend rules second, and app-specific state only where the product needs richer shared state.</p>
         <p class="note"><a href="docs/PRODUCT_EXECUTION_PLAN.md">Read the product execution plan</a></p>
       </div>
       <div class="product-grid">
-        <a href="playground.html"><span>play now</span><strong>Live TN12 money flow</strong><p>Role wallets, deposits, payout, replay, copyable addresses.</p><small>Accepted TN12 transfers</small></a>
-        <a href="#invoices"><span>play now</span><strong>Payload receipt invoices</strong><p>Accepted app receipts become invoice state.</p><small>Needs payload-preserving submit route</small></a>
+        <a href="playground.html"><span>accepted run</span><strong>Live TN12 money flow</strong><p>Role wallets, deposits, payout, replay, copyable addresses.</p><small>Accepted TN12 transfers</small></a>
+        <a href="#invoices"><span>accepted receipts</span><strong>Payload receipt invoices</strong><p>Accepted app receipts become invoice state.</p><small>Needs payload-preserving submit route</small></a>
         <a href="#designer"><span>design now</span><strong>Vault policy</strong><p>Owner, recovery, delay, caps, guardian policy fields.</p><small>Guardian policy needs a guardian script</small></a>
-        <a href="#assurance"><span>try next</span><strong>Assurance funding</strong><p>Pledge, release/refund, batch campaign state.</p><small>Accepted pledge evidence plus settlement review</small></a>
-        <a href="#escrow"><span>try next</span><strong>Escrow / freelance</strong><p>Buyer fund, seller release, timeout refund, mutual cancel.</p><small>Accepted TN12 proof paths</small></a>
-        <a href="#access-passes"><span>play now</span><strong>Access passes</strong><p>Tickets, coupons, memberships with issuer review.</p><small>Issuer/indexer state</small></a>
-        <a href="#auction-intents"><span>play now</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Settlement spends still need review</small></a>
-        <a href="#defi-backlog"><span>lab mode</span><strong>DeFi lab</strong><p>Accepted receipts, pool transfers, reducers, and spend checks.</p><small>AMM and lending custody are next rails</small></a>
-        <a href="#scheduler-workbench"><span>try next</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App job routing over TN12 evidence</small></a>
-        <a href="#coordination"><span>lab mode</span><strong>Coordination / Stag</strong><p>Transparent intendos, packs, solver, settlement brief.</p><small>Private Hunt execution is later</small></a>
-        <a href="#agent-commitments"><span>try next</span><strong>Agent commitments</strong><p>Task offers, completion proofs, disputes, release/refund review.</p><small>Wallet review before payout</small></a>
+        <a href="#assurance"><span>proof path</span><strong>Assurance funding</strong><p>Pledge, release/refund, batch campaign state.</p><small>Accepted pledge evidence plus settlement review</small></a>
+        <a href="#escrow"><span>proof path</span><strong>Escrow / freelance</strong><p>Buyer fund, seller release, timeout refund, mutual cancel.</p><small>Accepted TN12 proof paths</small></a>
+        <a href="#access-passes"><span>issuer state</span><strong>Access passes</strong><p>Tickets, coupons, memberships with issuer review.</p><small>Issuer/indexer state</small></a>
+        <a href="#auction-intents"><span>accepted bids</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Settlement spends still need review</small></a>
+        <a href="#defi-backlog"><span>research status</span><strong>DeFi lab</strong><p>Accepted receipts, pool transfers, reducers, and spend checks.</p><small>AMM and lending custody are next work</small></a>
+        <a href="#scheduler-workbench"><span>app jobs</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App job routing over TN12 evidence</small></a>
+        <a href="#coordination"><span>research status</span><strong>Coordination / Stag</strong><p>Transparent intents, packs, solver, settlement brief.</p><small>Private Hunt execution is later</small></a>
+        <a href="#agent-commitments"><span>wallet review</span><strong>Agent commitments</strong><p>Task offers, completion proofs, disputes, release/refund review.</p><small>Wallet review before payout</small></a>
         <a href="#submit"><span>bring wallet</span><strong>External wallet handoff</strong><p>Review unsigned requests, sign outside repo, validate return.</p><small>No private key sharing</small></a>
         <a href="#funding"><span>start here</span><strong>Get and verify tKAS</strong><p>Use faucet, paste outpoint, verify amount and output index.</p><small>TN12 only</small></a>
       </div>
@@ -390,7 +390,7 @@ npm run project:next-ten-status</pre>
       <div class="section-title">
         <p class="eyebrow">Batch assurance campaigns</p>
         <h2>Many pledge outputs, one campaign state.</h2>
-        <p>This is lane 3: planner/indexer aggregation over multiple pledge records. Accepted outputs count toward release readiness; signed-only or draft pledges can show planned progress but cannot unlock the campaign.</p>
+        <p>Planner/indexer aggregation over multiple pledge records. Accepted outputs count toward release readiness; signed-only or draft pledges can show planned progress but cannot unlock the campaign.</p>
       </div>
       <div id="campaign-summary" class="campaign-summary" aria-live="polite"></div>
       <div id="campaign-plans" class="campaign-plans" aria-live="polite"></div>
@@ -415,7 +415,7 @@ npm run campaign:custody</pre>
       <div class="section-title">
         <p class="eyebrow">Escrow primitive</p>
         <h2>Buyer fund, seller release, timeout refund, mutual cancel.</h2>
-        <p>This is lane 4: a commerce escrow primitive with accepted TN12 funding, release, DAA-refund, and mutual-cancel proof. Cancel is accepted on a separate funded output through the local TN12 compute-budget route; older bad-submit attempts are historical evidence.</p>
+        <p>Commerce escrow primitive with accepted TN12 funding, release, DAA-refund, and mutual-cancel proof. Cancel is accepted on a separate funded output through the local TN12 compute-budget route; older bad-submit attempts are historical evidence.</p>
       </div>
       <div id="escrow-summary" class="escrow-summary" aria-live="polite"></div>
       <div id="escrow-list" class="escrow-list" aria-live="polite"></div>
@@ -426,7 +426,7 @@ npm run campaign:custody</pre>
       <div class="section-title">
         <p class="eyebrow">Treasury / team vaults</p>
         <h2>Spend caps, delayed large withdrawals, recovery, payroll templates.</h2>
-        <p>This is lane 5: Safe-style treasury UX translated into Kaspa vault policy. Current script proof covers delayed withdrawal and recovery primitives; payroll and caps remain planner/wallet policy until hardened.</p>
+        <p>Safe-style treasury UX translated into Kaspa vault policy. Current script proof covers delayed withdrawal and recovery primitives; payroll and caps remain planner/wallet policy until hardened.</p>
       </div>
       <div id="treasury-summary" class="treasury-summary" aria-live="polite"></div>
       <div id="treasury-list" class="treasury-list" aria-live="polite"></div>
@@ -464,7 +464,7 @@ npm run coordination:settlement-brief</pre>
       <div class="section-title">
         <p class="eyebrow">KRC / access pass planner</p>
         <h2>Coupons, memberships, tickets, redeemable claims.</h2>
-        <p>This is lane 6: issuer and indexer state for passes and redemptions. It is useful now as accepted payload/app-state UX, but it is not native ticket enforcement.</p>
+        <p>Issuer and indexer state for passes and redemptions. It is useful now as accepted payload/app-state UX, but it is not native ticket enforcement.</p>
       </div>
       <div id="access-summary" class="access-summary" aria-live="polite"></div>
       <div id="access-list" class="access-list" aria-live="polite"></div>
@@ -564,7 +564,7 @@ npm run coordination:settlement-brief</pre>
     <section id="defi-backlog" class="panel defi-backlog">
       <div class="section-title">
         <p class="eyebrow">Basic DeFi research backlog</p>
-        <h2>Missing pieces.</h2>
+        <h2>Next work.</h2>
         <p>Keep DeFi public-facing as a lab until custody, signer, oracle, and settlement paths are built.</p>
       </div>
       <div id="defi-summary" class="defi-summary" aria-live="polite"></div>
@@ -651,7 +651,7 @@ npm run indexer:virtual-chain-run</pre>
       <div class="section-title">
         <p class="eyebrow">Payload receipt app</p>
         <h2>Invoices become app state after accepted payload receipts.</h2>
-        <p>This is lane 1: payment plus app data. The invoice is not considered paid by local JSON alone; it becomes app state only when an accepted TN12 transaction carries the matching payload receipt.</p>
+        <p>Payment plus app data. The invoice is not considered paid by local JSON alone; it becomes app state only when an accepted TN12 transaction carries the matching payload receipt.</p>
       </div>
       <div id="invoice-summary" class="invoice-summary" aria-live="polite"></div>
       <div id="invoice-list" class="invoice-list" aria-live="polite"></div>
@@ -666,7 +666,7 @@ npm run tx:payload</pre>
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
         <h2>Review signed drafts before any testnet broadcast.</h2>
-        <p>This is lane 2: exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. External wallet play is the goal: users should review an unsigned request, sign outside the repo, return signed bytes, and only then submit/replay.</p>
+        <p>Exact inputs, outputs, fees, payload state, and submit commands without exposing private keys. The external-wallet path is: review an unsigned request, sign outside the repo, return signed bytes, then submit and replay.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
@@ -685,7 +685,7 @@ npm run wallet:adapter-run</pre>
     <section id="roadmap" class="panel roadmap">
       <div class="section-title">
         <p class="eyebrow">App map</p>
-        <h2>Status-labeled lanes.</h2>
+        <h2>App paths by evidence.</h2>
         <p>Accepted evidence first. Early ideas stay in the lab until they have proof.</p>
       </div>
       <details class="evidence-drawer">
@@ -722,7 +722,7 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Kaspa app lab</p>
         <h2>Base work from the application layer map.</h2>
-        <p>These are the app paths from the Kaspa Explained framing: build money rails, covenant spend rules, and small Kaspa-anchored app-state prototypes now; keep full vProgs and deeper RTD designs in research until evidence changes.</p>
+        <p>These are the app paths from the Kaspa Explained map: build money movement, covenant spend rules, and small Kaspa-anchored app-state prototypes now; keep full vProgs and deeper RTD designs in research until evidence changes.</p>
       </div>
       <div id="app-lanes" class="app-lanes" aria-live="polite"></div>
     </section>
@@ -874,7 +874,7 @@ npm run wallet:adapter-run</pre>
       <h2>Status labels</h2>
       <div class="claim-grid">
         <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
-        <article><strong>Missing pieces</strong><p>Mainnet covenant tooling, app-state prototypes, wallet safety, live indexer behavior, and production wallet integration are tracked separately.</p></article>
+        <article><strong>Next work</strong><p>Mainnet covenant tooling, app-state prototypes, wallet safety, live indexer behavior, and production wallet integration are tracked separately.</p></article>
         <article><strong>Build focus</strong><p>External signing, live rollback evidence, durable payload indexing, and one concrete settlement vertical.</p></article>
       </div>
     </section>

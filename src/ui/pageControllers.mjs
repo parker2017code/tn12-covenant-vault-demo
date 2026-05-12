@@ -75,7 +75,7 @@ function organizeLabPage(documentRef = document) {
 
   const drawers = [
     ["core-notes", "Proof core notes", "Accepted counts, verifier command, and first docs."],
-    ["reviewer-path", "Technical route", "Install, local gate, TN12 gate, and refresh command."],
+    ["reviewer-path", "Verification route", "Install, local gate, TN12 gate, and refresh command."],
     ["next-ten", "Current build slice", "The active wallet, indexer, and settlement blockers."],
     ["templates", "Vault templates", "Recovery, delayed withdrawal, spending cap, and escrow presets."],
     ["campaigns", "Batch assurance", "Pledge aggregation and release/refund planning."],
@@ -87,7 +87,7 @@ function organizeLabPage(documentRef = document) {
     ["access-passes", "Access passes", "Issuer/indexer coupons, tickets, and memberships."],
     ["mainnet-readiness", "Mainnet readiness", "Mainnet-capable app layers versus TN12-only proofs."],
     ["asset-policies", "Asset policies", "Issuer-indexed and future covenant-native policy shapes."],
-    ["build-status", "Artifact map", "Accepted evidence, missing pieces, and research rows."],
+    ["build-status", "Artifact map", "Accepted evidence, next work, and research rows."],
     ["proven-status", "Proven status", "Accepted evidence and mainnet-deferred blockers."],
     ["operator-pack", "Refresh pack", "Single refresh path and commands."],
     ["project-plan", "Active build plan", "Accepted evidence, active work, queued work, and research."],

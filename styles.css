@@ -2459,18 +2459,16 @@ progress::-moz-progress-bar {
 
 .activity-card {
   position: relative;
-  min-height: 180px;
-  border: 1px solid rgba(118, 167, 158, .25);
-  border-radius: 18px;
+  min-height: 150px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   padding: 18px;
   overflow: visible;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(245, 194, 126, .22), transparent 34%),
-    linear-gradient(135deg, rgba(118, 167, 158, .12), rgba(15, 22, 21, .92));
+  background: var(--surface-soft);
 }
 
 .activity-card + .activity-card::after {
-  content: "";
+  content: none;
   position: absolute;
   left: -18px;
   top: 50%;
@@ -2480,7 +2478,7 @@ progress::-moz-progress-bar {
 }
 
 .activity-card::before {
-  content: "";
+  content: none;
   position: absolute;
   inset: auto -20% -40% 25%;
   height: 110px;

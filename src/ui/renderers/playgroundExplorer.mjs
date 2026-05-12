@@ -149,7 +149,7 @@ function renderLevels(node, { activity, session, funding, deposit, secondDeposit
       <p>The chain supplies ordering and accepted transaction evidence. The repo layers role labels, receipts, reducers, and promotion checks on top.</p>
     </article>
     <article>
-      <span>Technical</span>
+      <span>Builder</span>
       <strong>${escapeHtml(session.summary.acceptedTxids)} accepted session txs, ${escapeHtml(activity.summary.acceptedTransferRows)} transfer rows.</strong>
       <p>Check ${txLink(funding.txid)}, ${txLink(deposit.txid)}, ${txLink(secondDeposit.txid)}, and ${txLink(payout.txid)} directly on the TN12 explorer.</p>
     </article>

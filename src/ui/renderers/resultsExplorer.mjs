@@ -55,7 +55,7 @@ function renderKnowledgeLevels(node) {
     </div>
     <article class="level-card" data-level-panel="beginner">
       <span>Plain English</span>
-      <h3>Real testnet actions become a replayable app story.</h3>
+      <h3>Accepted testnet actions become replayable app state.</h3>
       <p>Money moved between TN12 wallets. App receipts landed on TN12. The repo reads those accepted records and shows who funded, who deposited, who got paid, and what actions were blocked.</p>
       <p>That is the interesting part: fast public ordering plus small proofs lets an app explain itself without asking you to trust one private database.</p>
     </article>
@@ -66,7 +66,7 @@ function renderKnowledgeLevels(node) {
       <p>AMM pricing, oracle inputs, liquidation authority, and production custody are separate rails.</p>
     </article>
     <article class="level-card hidden" data-level-panel="builder">
-      <span>Builder / reviewer</span>
+      <span>Builder</span>
       <h3>Click txids, then run the gates.</h3>
       <p>Use <code>npm run check:all</code>, <code>npm run check:tn12</code>, and <code>npm run operator:refresh</code>. The canonical maps are <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, <code>docs/TN12_TEST_MATRIX.md</code>, and <code>artifacts/full-defi-benchmark.json</code>.</p>
       <p>Look for the enforcement label on each rail: <code>TN12_ACCEPTED</code>, <code>LOCAL_KEY_CUSTODY_TEST</code>, <code>INDEXER_DERIVED</code>, <code>PLANNER_ONLY</code>, or <code>MAINNET_BLOCKED</code>.</p>
@@ -78,7 +78,7 @@ function renderRails(node, benchmark) {
   node.innerHTML = benchmark.rails.map((rail) => `
     <article class="${rail.done ? "rail-done" : "rail-open"}">
       <span>${escapeHtml(rail.label)}</span>
-      <strong>${escapeHtml(rail.done ? "accepted evidence" : "missing piece")}: ${escapeHtml(rail.title)}</strong>
+      <strong>${escapeHtml(rail.done ? "accepted evidence" : "next work")}: ${escapeHtml(rail.title)}</strong>
       <p>${escapeHtml(rail.evidence)}</p>
     </article>
   `).join("");
