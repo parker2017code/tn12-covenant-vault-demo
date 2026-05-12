@@ -36,6 +36,7 @@
       </div>
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#spotlight">Spotlight</a>
+        <a href="#treasury-track">Treasury</a>
         <a href="#queue">Queue</a>
         <a href="#rules">Rules</a>
       </div>
@@ -126,6 +127,65 @@
             <li>Live-id local rejects for wrong witness, missing sibling, and wrong sibling id.</li>
           </ul>
         </article>
+      </div>
+    </section>
+
+    <section id="treasury-track" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Treasury Wars track</p>
+        <h2>One budget window, one reset, three blocked resets.</h2>
+        <p>The simple story is allowance with rules attached to the funds. The technical story is stateful covenant continuation: spend under cap, carry state forward, reject the over-cap move, then open a new window through a reset branch.</p>
+        <p class="note"><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Open reset proof artifact</a></p>
+      </div>
+      <div class="experiment-table-wrap">
+        <table class="proof-table experiment-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Evidence</th>
+              <th>What it proves</th>
+              <th>Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Genesis</td>
+              <td><code>a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580</code></td>
+              <td>TN12 covenant-bound treasury output exists.</td>
+              <td>The budget starts as money locked to a rule, not only app state.</td>
+            </tr>
+            <tr>
+              <td>Spend 1</td>
+              <td><code>029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f</code></td>
+              <td>25 tKAS spend accepted and relocked.</td>
+              <td>Money can move while carrying the cap state forward.</td>
+            </tr>
+            <tr>
+              <td>Spend 2</td>
+              <td><code>2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae</code></td>
+              <td>Cumulative 65 tKAS spend remains under the 75 tKAS window cap.</td>
+              <td>The rule survives more than one transaction.</td>
+            </tr>
+            <tr>
+              <td>Blocked</td>
+              <td><code>recurring-treasury-vault-cumulative-over-cap.json</code></td>
+              <td>80 tKAS attempted window spend fails locally.</td>
+              <td>The bad move is visible before anyone calls it a product feature.</td>
+            </tr>
+            <tr>
+              <td>Reset</td>
+              <td><code>f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759</code></td>
+              <td>New window accepted; spent-in-window resets to the current 40 tKAS spend.</td>
+              <td>Recurring budgets can reopen without trusting an operator to reset a database row.</td>
+            </tr>
+            <tr>
+              <td>Reset guards</td>
+              <td><code>early-reset</code>, <code>stale-reset</code>, <code>over-cap-reset</code></td>
+              <td>Early reset, old-window reset, and over-cap reset fail locally.</td>
+              <td>The real-world promise is easier to review when both allowed and refused paths are shown.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 

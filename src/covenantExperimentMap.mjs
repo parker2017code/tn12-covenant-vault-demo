@@ -43,8 +43,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/recurring-treasury-vault-window-reset-proof.json"
       ],
       nextBuildSteps: [
-        "Render the continuation chain as a playable Treasury Wars track.",
         "Add user-wallet handoff for the same path.",
+        "Turn the visible track into an interactive local-wallet round.",
         "Keep user-wallet signing out of the claim until a wallet-standard handoff signs the same path."
       ],
       hardBoundary: "The accepted TN12 spends prove cumulative under-cap behavior and a reset-window primitive. They do not yet prove user-wallet signing, audited custody, or production calendar accounting."
