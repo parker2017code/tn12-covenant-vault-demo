@@ -1893,6 +1893,31 @@ progress::-moz-progress-bar {
   text-decoration: none;
 }
 
+.claim-grid article {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--surface-soft) 68%, transparent);
+}
+
+.claim-grid a {
+  position: relative;
+  padding-bottom: 36px;
+}
+
+.claim-grid a::after {
+  content: "Open";
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  border-radius: 999px;
+  padding: 2px 7px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+
 .claim-grid a:hover {
   border-color: var(--accent);
   transform: translateY(-1px);

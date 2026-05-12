@@ -117,6 +117,7 @@ async function checkRenderedPages(url) {
         const response = await page.goto(`${url}${path}`, { waitUntil: "networkidle" });
         assert.equal(response?.ok(), true, `${path} did not return 200`);
         assert.deepEqual(errors, [], `${path} had browser errors: ${errors.join("; ")}`);
+        await waitForDynamicContent(page, path);
         await assertNoViewportOverflow(page, `${path} ${viewport.name}`);
         if (viewport.name === "mobile") await assertMobileControls(page, path);
         const emptyLiveRegions = await page.locator("[aria-live]").evaluateAll((nodes) => nodes
@@ -173,6 +174,15 @@ async function checkRenderedPages(url) {
     assert.doesNotMatch(resultsText, /Draft post|X post/);
     assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
     assert.ok(await page.locator('#results-feed a[href*="tn12.kaspa.stream/transactions/"]').count() >= 6);
+    const claimLinkAffordances = await page.locator(".claim-grid a").evaluateAll((links) => links.map((link) => ({
+      text: link.textContent,
+      after: window.getComputedStyle(link, "::after").content,
+      cursor: window.getComputedStyle(link).cursor,
+      href: link.getAttribute("href")
+    })));
+    assert.ok(claimLinkAffordances.length >= 3, "results claim links should stay real links");
+    assert.deepEqual(claimLinkAffordances.filter((item) => !item.href), [], "claim-grid links need href targets");
+    assert.deepEqual(claimLinkAffordances.filter((item) => !/Open/.test(item.after)), [], "claim-grid links need visible Open affordance");
     await page.goto(`${url}lab.html`, { waitUntil: "networkidle" });
     assert.equal(await page.locator("#product-map .product-grid a").count(), 13);
     const productMapText = await page.locator("#product-map").innerText();
@@ -196,6 +206,12 @@ async function checkRenderedPages(url) {
     assert.match(laneRunbookText, /Use your own wallet/);
     assert.match(laneRunbookText, /AMM custody/);
     assert.match(laneRunbookText, /npm run defi:refresh/);
+    const passiveClaimCards = await page.locator(".claim-grid article").evaluateAll((cards) => cards.map((card) => ({
+      cursor: window.getComputedStyle(card).cursor,
+      after: window.getComputedStyle(card, "::after").content
+    })));
+    assert.deepEqual(passiveClaimCards.filter((item) => item.cursor === "pointer"), [], "passive claim cards must not look clickable");
+    assert.deepEqual(passiveClaimCards.filter((item) => /Open/.test(item.after)), [], "passive claim cards must not show Open affordance");
     assert.equal(await page.locator("details.lab-drawer").count(), 6);
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 1);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
@@ -225,6 +241,19 @@ async function checkRenderedPages(url) {
     await page.close();
   } finally {
     await browser.close();
+  }
+}
+
+async function waitForDynamicContent(page, path) {
+  const selectors = {
+    "index.html": ["#proof-list article", "#submit-summary article"],
+    "lab.html": ["#self-serve-lanes article", "#invoice-summary article", "#submit-summary article"],
+    "results.html": ["#results-summary article", "#results-feed article"],
+    "playground.html": ["#playground-quickstart a", "#playground-session article"],
+  }[path] || [];
+
+  for (const selector of selectors) {
+    await page.waitForSelector(selector, { state: "attached", timeout: 7000 });
   }
 }
 
