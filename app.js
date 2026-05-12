@@ -70,6 +70,7 @@ import { renderPlaygroundExplorer } from "./src/ui/renderers/playgroundExplorer.
 import { renderResultsExplorer } from "./src/ui/renderers/resultsExplorer.mjs";
 import { renderSelfServeLaneRunbook } from "./src/ui/renderers/selfServeLaneRunbook.mjs";
 import { renderBuildQueue } from "./src/ui/renderers/buildQueue.mjs";
+import { renderPayloadDraftStatus } from "./src/ui/renderers/payloadDraftStatus.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -140,7 +141,6 @@ const predictionMarketsNode = document.querySelector("#prediction-markets");
 const predictionSuggestionsNode = document.querySelector("#prediction-suggestions");
 const signalChannelsNode = document.querySelector("#signal-channels");
 const signalArtifactNode = document.querySelector("#signal-artifact");
-const payloadDraftStatusNode = document.querySelector("#payload-draft-status");
 const manualFields = {
   address: document.querySelector("#manual-address"),
   txid: document.querySelector("#manual-txid"),
@@ -1322,30 +1322,6 @@ async function renderWalletConnector() {
     `;
   } catch (error) {
     walletConnectorNode.textContent = `Wallet connector readiness unavailable: ${error.message}`;
-  }
-}
-
-async function renderPayloadDraftStatus() {
-  if (!payloadDraftStatusNode) return;
-
-  try {
-    const draft = await fetchJson("artifacts/signed-drafts/payload-receipt-self-send.json");
-    payloadDraftStatusNode.innerHTML = `
-      <article>
-        <span>${escapeHtml(draft.status)}</span>
-        <strong>${escapeHtml(shortTxid(draft.transactionId))}</strong>
-        <p>${escapeHtml(draft.receipt.encoded.bytes)} payload bytes; accepted through TN12 JSON wRPC. Public REST submit did not preserve payload bytes in this test.</p>
-        <small>${escapeHtml(draft.receipt.payload.kind)} / ${escapeHtml(draft.receipt.payload.subject)}</small>
-      </article>
-    `;
-  } catch (error) {
-    payloadDraftStatusNode.innerHTML = `
-      <article>
-        <span>draft-needed</span>
-        <strong>Run npm run tx:payload</strong>
-        <p>${escapeHtml(error.message)}</p>
-      </article>
-    `;
   }
 }
 
