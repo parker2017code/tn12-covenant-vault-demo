@@ -102,6 +102,70 @@
       <pre>npm run proof:verify</pre>
     </section>
 
+    <section id="multi-wallet" class="panel evidence-strip-panel">
+      <div class="section-title">
+        <h2>Multi-wallet TN12 evidence is live.</h2>
+        <p>Fresh role wallets were funded from the local TN12 source wallet. The public txid shows six role outputs and change back to the source address.</p>
+      </div>
+      <div class="evidence-strip">
+        <a href="https://tn12.kaspa.stream/transactions/42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5" target="_blank" rel="noreferrer">
+          <span>Accepted funding tx</span>
+          <strong><code>42e14cf1...bad8a5b5</code></strong>
+          <p>2 + 25 + 10 + 10 + 2 + 2 tKAS to operator, pool, users, executor, and reviewer.</p>
+        </a>
+        <a href="playground.html">
+          <span>Playground</span>
+          <strong>4 accepted session txs</strong>
+          <p>Funding, two user deposits, pool payout, and replayed balances.</p>
+        </a>
+        <a href="artifacts/playground-funding-20260512-evidence.json">
+          <span>Evidence file</span>
+          <strong>output matched</strong>
+          <p>Amounts and addresses matched the public TN12 API response.</p>
+        </a>
+        <a href="artifacts/reviewer-settlement-flow.json">
+          <span>Reviewer run</span>
+          <strong>repeatable command path</strong>
+          <p>Install, verify, rebuild fresh role wallets, review, submit, then replay.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="work-map" class="panel work-map-panel">
+      <div class="section-title">
+        <h2>Done, WIP, future.</h2>
+      </div>
+      <div class="work-map">
+        <article>
+          <span>Done</span>
+          <ul>
+            <li>Accepted proof txids.</li>
+            <li>Accepted payload receipts.</li>
+            <li>Checkpointed replay records.</li>
+            <li>Local-key multi-wallet TN12 funding.</li>
+            <li>Reviewer settlement command package.</li>
+          </ul>
+        </article>
+        <article>
+          <span>WIP</span>
+          <ul>
+            <li>User-wallet signing request and return format.</li>
+            <li>Live removed-block rollback evidence.</li>
+            <li>Production replay service.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Future</span>
+          <ul>
+            <li>Mainnet wallet support.</li>
+            <li>Audit.</li>
+            <li>Production indexer and rollback handling.</li>
+            <li>Mainnet activation decision.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
     <section id="routes" class="panel">
       <div class="section-title">
         <h2>Three routes after the proof table.</h2>

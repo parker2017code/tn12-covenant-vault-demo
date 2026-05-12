@@ -39,6 +39,7 @@ const rpc = RpcClient.length <= 1
 let probe;
 let request;
 let response;
+let readError = null;
 try {
   await rpc.connect({});
   const [serverInfo, currentNetwork, info, blockDagInfo] = await Promise.all([
@@ -56,7 +57,12 @@ try {
     minConfirmationCount,
     dataVerbosityLevel: "High"
   };
-  response = await rpc.getVirtualChainFromBlockV2(request);
+  try {
+    response = await rpc.getVirtualChainFromBlockV2(request);
+  } catch (error) {
+    readError = error;
+    response = {};
+  }
 } finally {
   await rpc.disconnect();
 }
@@ -71,6 +77,7 @@ const artifact = summarizeVirtualChainLiveWindow({
   endpointProbe,
   request,
   response,
+  error: readError,
   sdk: runtime.metadata
 });
 await writeArtifact(outPath, artifact);
@@ -79,6 +86,7 @@ console.log(outPath);
 console.log(`status=${artifact.status}`);
 console.log(`acceptedTransactions=${artifact.summary.acceptedTransactions}`);
 console.log(`computeBudgetInputs=${artifact.summary.computeBudgetInputs}`);
+if (artifact.error) console.log(`error=${artifact.error.message}`);
 
 async function callRpc(fn) {
   try {

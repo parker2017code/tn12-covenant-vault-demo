@@ -7,6 +7,7 @@ import { buildIndexerReplayRun } from "../../src/indexerReplayRun.mjs";
 import { buildVirtualChainIngestionPlan } from "../../src/virtualChainIngestion.mjs";
 import { buildVirtualChainIngestionRun } from "../../src/virtualChainIngestionRun.mjs";
 import { buildVirtualChainReaderAdapter } from "../../src/virtualChainReaderAdapter.mjs";
+import { summarizeVirtualChainLiveWindow } from "../../src/virtualChainLiveWindow.mjs";
 
 const proofFixture = await readJson("fixtures/AcceptedProofTransactions.json");
 const payloadEventManifest = await readJson("fixtures/PayloadEventEvidence.json");
@@ -230,6 +231,23 @@ const readerAdapterArtifact = await readJson("artifacts/virtual-chain-reader-ada
 assert.equal(readerAdapterArtifact.status, "virtual-chain-reader-adapter-ready");
 assert.equal(readerAdapterArtifact.summary.virtualChainRows, checkpoint.summary.total);
 assert.equal(readerAdapterArtifact.summary.localNodeRequired, false);
+
+const unavailableHistoricalWindow = summarizeVirtualChainLiveWindow({
+  endpointProbe: { observed: { dagNetwork: "testnet-12" } },
+  request: {
+    startHash: "historical-start-hash",
+    startHashSource: "env:TN12_VIRTUAL_CHAIN_START_HASH",
+    minConfirmationCount: 0,
+    dataVerbosityLevel: "High"
+  },
+  response: {},
+  error: new Error("cannot find header historical-start-hash"),
+  generatedAt: "2026-05-12T00:00:00.000Z"
+});
+assert.equal(unavailableHistoricalWindow.status, "virtual-chain-live-window-start-hash-unavailable");
+assert.equal(unavailableHistoricalWindow.error.startHashUnavailable, true);
+assert.match(unavailableHistoricalWindow.error.handling, /Keep the existing rich artifact/);
+assert.equal(unavailableHistoricalWindow.summary.acceptedTransactions, 0);
 
 console.log("Indexer replay tests passed.");
 

@@ -870,6 +870,100 @@ progress::-moz-progress-bar {
   color: var(--text);
 }
 
+.evidence-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.evidence-strip a,
+.work-map article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-soft);
+  padding: 14px;
+}
+
+.evidence-strip a {
+  display: grid;
+  gap: 8px;
+}
+
+.evidence-strip a:hover {
+  border-color: var(--line-bright);
+  text-decoration: none;
+}
+
+.evidence-strip span,
+.work-map span {
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.evidence-strip strong {
+  color: var(--text);
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.evidence-strip p,
+.work-map li {
+  color: var(--muted);
+}
+
+.work-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.work-map ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.work-map li + li {
+  margin-top: 6px;
+}
+
+.defi-flow-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.defi-flow-map article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-soft);
+  padding: 14px;
+}
+
+.defi-flow-map .defi-flow-wide {
+  grid-column: span 3;
+}
+
+.defi-flow-map span {
+  color: var(--accent-strong);
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.defi-flow-map strong {
+  display: block;
+  font-size: 22px;
+  overflow-wrap: anywhere;
+}
+
+.defi-flow-map p {
+  color: var(--muted);
+}
+
 .proof-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -3020,6 +3114,9 @@ progress::-moz-progress-bar {
   .app-lanes,
   .signal-channels,
   .stat-grid,
+  .evidence-strip,
+  .work-map,
+  .defi-flow-map,
   .claim-grid,
   .results-summary,
   .results-rails,
@@ -3033,6 +3130,10 @@ progress::-moz-progress-bar {
   .session-balance-strip,
   .journey-grid {
     grid-template-columns: 1fr;
+  }
+
+  .defi-flow-map .defi-flow-wide {
+    grid-column: auto;
   }
 
   .product-grid {

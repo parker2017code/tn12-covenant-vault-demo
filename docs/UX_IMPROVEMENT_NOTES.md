@@ -33,6 +33,11 @@ This is an internal working note for product cleanup. Keep the public site focus
 
 ## Near-term product cleanup
 
+- Public language rule: affirmative first, caveat second. Say what happened, then label the boundary.
+- Use status labels instead of defensive loops: TN12 accepted, testnet evidence, wallet blocked, mainnet blocked, research.
+- Qualify every public "live" claim as TN12/testnet unless it is mainnet.
+- Do not add first-page sections unless they prove something a reviewer needs before routing deeper.
+- Cards are for choices or repeated evidence. Prose explains. Tables prove.
 - Make the proof home answer: funds moved, covenant spends accepted, payload receipts accepted, replay state derived.
 - Move operator/reviewer/build-status material behind technical drawers.
 - Keep playground self-serve: faucet, role wallets, user-wallet handoff, replay.

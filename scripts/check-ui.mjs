@@ -53,6 +53,10 @@ try {
   assert.match(html, /TN12 configured\. Proof transactions accepted\./);
   assert.match(html, /Money moved\. Proofs accepted\. State replayed\./);
   assert.match(html, /Accepted payload events[\s\S]*<strong>40<\/strong>/);
+  assert.match(html, /Multi-wallet TN12 evidence is live\./);
+  assert.match(html, /42e14cf1\.\.\.bad8a5b5/);
+  assert.match(html, /reviewer-settlement-flow\.json/);
+  assert.match(html, /Done, WIP, future\./);
   assert.match(html, /npm run proof:records/);
   assert.doesNotMatch(html, /id="check-path"/);
   assert.match(html, /docs\/AUDIT_MAP\.md/);
@@ -91,6 +95,7 @@ try {
   assert.doesNotMatch(playgroundHtml, /src="app\.js"/);
   assert.match(playgroundHtml, /id="playground-activity-strip"/);
   assert.match(playgroundHtml, /id="playground-quickstart"/);
+  assert.match(playgroundHtml, /id="defi-flow-map"/);
   assert.match(playgroundHtml, /id="playground-wallet-flow"/);
   assert.match(playgroundHtml, /id="playground-summary"/);
   assert.match(playgroundHtml, /id="playground-roles"/);
@@ -153,6 +158,12 @@ async function checkRenderedPages(url) {
     }
 
     const page = await browser.newPage();
+    await page.goto(`${url}index.html`, { waitUntil: "domcontentloaded" });
+    assert.equal(await page.locator("#multi-wallet .evidence-strip a").count(), 4);
+    const proofHomeText = await page.locator("body").innerText();
+    assert.match(proofHomeText, /Reviewer settlement command package/);
+    assert.doesNotMatch(proofHomeText, /One repeatable settlement flow a reviewer can run/);
+
     await page.goto(`${url}playground.html`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector("#playground-session article", { timeout: 5000 });
     const playgroundText = await page.locator("body").innerText();
@@ -160,6 +171,8 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /User B -> Pool/);
     assert.match(playgroundText, /3bfca807/);
     assert.match(playgroundText, /4 accepted txs/);
+    assert.match(playgroundText, /DeFi multi-wallet flow/);
+    assert.match(playgroundText, /custody promotions/i);
     assert.match(playgroundText, /Open lab tools/);
     assert.match(playgroundText, /Use your own wallet/);
     assert.doesNotMatch(playgroundText, /Bring your own external wallet/);
@@ -183,6 +196,8 @@ async function checkRenderedPages(url) {
     assert.ok(await page.locator('#wallet a[href="lab.html#submit"]').count() === 1);
     assert.equal(await page.locator('#playground-activity-strip a[href*="tn12.kaspa.stream/transactions/"]').count(), 4);
     assert.equal(await page.locator('#playground-tx-map article').count(), 5);
+    assert.equal(await page.locator('#defi-flow-map article').count(), 6);
+    assert.ok(await page.locator('#defi-flow-map a[href*="tn12.kaspa.stream/transactions/42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5"]').count() === 1);
     assert.ok(await page.locator('#playground-roles [data-copy^="kaspatest:"]').count() >= 6);
     assert.ok(await page.locator('#playground-balances details.full-ledger').count() >= 1);
 

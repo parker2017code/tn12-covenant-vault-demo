@@ -8,6 +8,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   const rolesNode = documentRef.querySelector("#playground-roles");
   const sessionNode = documentRef.querySelector("#playground-session");
   const activityStripNode = documentRef.querySelector("#playground-activity-strip");
+  const defiFlowNode = documentRef.querySelector("#defi-flow-map");
   const txMapNode = documentRef.querySelector("#playground-tx-map");
   const actionsNode = documentRef.querySelector("#playground-actions");
   const rulesNode = documentRef.querySelector("#playground-rules");
@@ -20,13 +21,14 @@ export async function renderPlaygroundExplorer(documentRef = document) {
   if (!summaryNode || !rolesNode || !actionsNode || !rulesNode || !flowNode) return;
 
   try {
-    const [plan, actions, reducer, activity, session, funding, deposit, secondDeposit, payout] = await Promise.all([
+    const [plan, actions, reducer, activity, session, funding, freshFunding, deposit, secondDeposit, payout] = await Promise.all([
       fetchJson("artifacts/playground-plan.json"),
       fetchJson("artifacts/playground-actions.json"),
       fetchJson("artifacts/defi-scenario-reducer.json"),
       fetchJson("artifacts/defi-accepted-activity-ledger.json"),
       fetchJson("artifacts/playground-session.example.json"),
       fetchJson("artifacts/playground-funding-evidence.json"),
+      fetchJson("artifacts/playground-funding-20260512-evidence.json"),
       fetchJson("artifacts/playground-user-a-pool-deposit-evidence.json"),
       fetchJson("artifacts/playground-user-b-pool-deposit-evidence.json"),
       fetchJson("artifacts/playground-pool-user-b-payout-evidence.json")
@@ -42,6 +44,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
     if (quickstartNode) renderQuickstart(quickstartNode, plan);
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });
     if (activityStripNode) renderActivityStrip(activityStripNode, { funding, deposit, secondDeposit, payout, reducer, activity });
+    if (defiFlowNode) renderDefiFlow(defiFlowNode, { activity, reducer, freshFunding, deposit, secondDeposit, payout });
     const sessionRoleMap = new Map((session.roles || []).map((role) => [role.id, role]));
     rolesNode.innerHTML = plan.roles.map((role) => {
       const sessionRole = sessionRoleMap.get(role.id) || {};
@@ -227,6 +230,44 @@ function renderActivityStrip(node, { funding, deposit, secondDeposit, payout, re
       </a>
     `;
   }).join("");
+}
+
+function renderDefiFlow(node, { activity, reducer, freshFunding, deposit, secondDeposit, payout }) {
+  const promotedBalances = (reducer.state?.balances || []).filter((row) => row.promotionState === "review-state-promoted");
+  const blockedRows = reducer.negativeRows || [];
+  const poolAddress = activity.pool?.addresses?.[0] || payout.source.address;
+  node.innerHTML = `
+    <article class="defi-flow-card defi-flow-wide">
+      <span>Role funding</span>
+      <strong>${escapeHtml(freshFunding.outputs?.filter((row) => row.matches).length || 0)} matched outputs</strong>
+      <p>${txLink(freshFunding.txid)} funded operator, pool, users, executor, and observer roles.</p>
+    </article>
+    <article>
+      <span>Deposits</span>
+      <strong>${escapeHtml(activity.summary.poolDeposits)} accepted rows</strong>
+      <p>${txLink(deposit.txid)} and ${txLink(secondDeposit.txid)} are the current walkthrough deposits.</p>
+    </article>
+    <article>
+      <span>Payouts</span>
+      <strong>${escapeHtml(activity.summary.poolPayouts)} accepted rows</strong>
+      <p>${txLink(payout.txid)} pays a user from the pool role.</p>
+    </article>
+    <article>
+      <span>Pool net</span>
+      <strong>${escapeHtml(activity.pool?.netTkas || activity.summary.poolNetTkas)} tKAS</strong>
+      <p>${addressChip(poolAddress)} ${escapeHtml(activity.summary.acceptedTransferRows)} accepted transfer rows feed this ledger.</p>
+    </article>
+    <article>
+      <span>Replay state</span>
+      <strong>${escapeHtml(promotedBalances.length)} promoted balance rows</strong>
+      <p>${escapeHtml(reducer.summary.swapRows)} swap rows, ${escapeHtml(reducer.summary.oracleRows)} oracle rows, and ${escapeHtml(reducer.summary.lendingRows)} lending rows are review state.</p>
+    </article>
+    <article>
+      <span>Blocked</span>
+      <strong>${escapeHtml(blockedRows.length)} rejected rows</strong>
+      <p>${escapeHtml(reducer.summary.custodyPromotions)} custody promotions. Withdrawals stay blocked without signer/spend evidence.</p>
+    </article>
+  `;
 }
 
 function renderTxMap(node, { funding, deposit, secondDeposit, payout }) {

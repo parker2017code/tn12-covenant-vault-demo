@@ -1,0 +1,87 @@
+{
+  "schema": "tn12-reviewer-settlement-flow/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-12T18:41:13.274Z",
+  "status": "reviewer-settlement-flow-ready",
+  "summary": {
+    "freshFundingAccepted": true,
+    "matchedFundingOutputs": 7,
+    "acceptedSessionTxids": 4,
+    "replayedBalanceRows": 22,
+    "blockedNegativeRows": 6,
+    "historicalStartHashGuarded": true,
+    "userWalletRequired": false,
+    "privateKeysIncluded": 0
+  },
+  "reviewerRun": [
+    {
+      "step": 1,
+      "label": "Install",
+      "command": "npm ci",
+      "writes": []
+    },
+    {
+      "step": 2,
+      "label": "Verify accepted proof and replay fixtures",
+      "command": "npm run check:tn12 && npm run defi:accepted-activity && npm run defi:reducer",
+      "writes": [
+        "artifacts/checkpointed-accepted-index.json",
+        "artifacts/defi-accepted-activity-ledger.json",
+        "artifacts/defi-scenario-reducer.json"
+      ]
+    },
+    {
+      "step": 3,
+      "label": "Review live multi-wallet evidence",
+      "command": "open artifacts/playground-funding-20260512-evidence.json",
+      "writes": []
+    },
+    {
+      "step": 4,
+      "label": "Repeat with fresh tKAS",
+      "command": "PLAYGROUND_DIR=.local/reviewer-playground npm run playground:wallets -- --force && PLAYGROUND_DIR=.local/reviewer-playground npm run playground:funding-draft",
+      "writes": [
+        ".local/reviewer-playground/wallets.public.json",
+        ".local/reviewer-playground/wallets.private.json",
+        ".local/reviewer-playground/funding-draft.json"
+      ]
+    },
+    {
+      "step": 5,
+      "label": "Submit only after review",
+      "command": "node scripts/submit-signed-draft.mjs .local/reviewer-playground/funding-draft.json --submit",
+      "writes": [
+        "TN12 txid"
+      ]
+    }
+  ],
+  "acceptedEvidence": {
+    "fundingTxid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+    "fundingExplorerUrl": "https://tn12.kaspa.stream/transactions/42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+    "sessionTxids": [
+      {
+        "label": "playground role funding",
+        "txid": "85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5"
+      },
+      {
+        "label": "playground user-a pool deposit",
+        "txid": "83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c"
+      },
+      {
+        "label": "playground user-b pool deposit",
+        "txid": "3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d"
+      },
+      {
+        "label": "playground pool user-b payout",
+        "txid": "8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78"
+      }
+    ]
+  },
+  "promotionRule": "A reviewer flow is usable when the funding tx is accepted, outputs match role addresses, replay reduces accepted rows into balances, and invalid withdrawal rows stay blocked.",
+  "boundaries": [
+    "This is a testnet reviewer run.",
+    "It uses local throwaway keys unless a user-wallet signer is plugged in later.",
+    "No mainnet funds, custody claim, or audit claim is made.",
+    "A submit command broadcasts real TN12 testnet money."
+  ]
+}
