@@ -58,7 +58,7 @@ const requiredSnippets = [
     [
       `${expectedPayloadEvents}</strong>`,
       "Money moved. Proofs accepted. State replayed.",
-      "Technical proof counts and commands"
+      "Proof counts and commands"
     ]
   ],
   ["docs/PROGRESS.md", progress, [[`${expectedPayloadEvents} accepted payload events`, `${expectedPayloadEvents} payload events accepted`]]],

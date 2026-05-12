@@ -2496,7 +2496,7 @@ assert.match(labHtml, /KRC \/ access pass planner/);
 assert.match(labHtml, /Simple asset policy/);
 assert.match(labHtml, /Stable-value paths/);
 assert.match(labHtml, /Issuer redemption state/);
-assert.match(labHtml, /Handoff plan/);
+assert.match(labHtml, /Active build plan/);
 assert.match(labHtml, /npm run project:plan/);
 assert.match(labHtml, /Cross-chain research library/);
 assert.match(labHtml, /App map/);

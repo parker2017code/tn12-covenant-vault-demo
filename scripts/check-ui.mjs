@@ -34,7 +34,7 @@ try {
   assert.match(html, /Money moved\. Proofs accepted\. State replayed\./);
   assert.match(html, /Accepted payload events[\s\S]*<strong>40<\/strong>/);
   assert.match(html, /npm run operator:refresh/);
-  assert.match(html, /id="reviewer-path"/);
+  assert.match(html, /id="check-path"/);
   assert.match(html, /docs\/AUDIT_MAP\.md/);
   assert.doesNotMatch(html, /href="#prediction-hedge"/);
   assert.match(html, /href="lab\.html"/);
@@ -47,7 +47,7 @@ try {
   assert.match(html, /id="proof-status"/);
   assert.match(html, /id="receipt-events"/);
   assert.match(html, /id="wallet-connector"/);
-  assert.match(html, /External wallets should be able to play/);
+  assert.match(html, /The intended product path is external signing/);
   assert.match(html, /id="defi-receipt-guard"/);
   assert.match(html, /id="defi-simulation-summary"/);
   assert.match(html, /id="defi-simulation-list"/);
@@ -168,7 +168,7 @@ async function checkRenderedPages(url) {
     assert.match(productMapText, /Scheduler workbench/);
     const runbookText = await page.locator("#runbook").innerText();
     assert.match(runbookText, /Run it yourself/);
-    assert.match(runbookText, /Missing pieces: AMM custody/);
+    assert.match(runbookText, /Next rails: AMM custody/);
     assert.match(runbookText, /Replay before believing it/);
     await page.locator("#lane-runbook").evaluate((node) => {
       node.open = true;

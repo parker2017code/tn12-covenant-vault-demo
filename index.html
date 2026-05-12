@@ -43,7 +43,7 @@
       <aside class="facts">
         <span>Short version</span>
         <strong>Money moved. Proofs accepted. State replayed.</strong>
-        <p>The interesting claim is simple: public TN12 txids back the demo state instead of a private-only database.</p>
+        <p>Public TN12 txids back the demo state instead of a private-only database.</p>
       </aside>
     </section>
 
@@ -77,10 +77,10 @@
     </section>
 
     <details id="core-notes" class="panel section-drawer">
-      <summary>Technical proof counts and commands</summary>
+      <summary>Proof counts and commands</summary>
       <div class="section-title">
         <p class="eyebrow">Proof counts</p>
-        <h2>Open this when you want the audit route.</h2>
+        <h2>Open this when you want the exact checks.</h2>
       </div>
       <div class="stat-grid">
         <article>
@@ -95,22 +95,22 @@
         </article>
         <article>
           <span>Verifier command</span>
-          <strong>operator refresh</strong>
+          <strong>evidence refresh</strong>
           <p><code>npm run operator:refresh</code> verifies TN12 evidence, rebuilds derived artifacts, and reruns local checks.</p>
         </article>
       </div>
       <p class="note">Read <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
     </details>
 
-    <details id="reviewer-path" class="panel build-status section-drawer">
-      <summary>Technical checks and docs</summary>
+    <details id="check-path" class="panel build-status section-drawer">
+      <summary>Checks and docs</summary>
       <div class="section-title">
-        <p class="eyebrow">Technical path</p>
+        <p class="eyebrow">Run locally</p>
         <h2>Run the checks when you need them.</h2>
         <p>The short version is <code>npm ci</code>, <code>npm run check:all</code>, <code>npm run check:tn12</code>, then <code>npm run operator:refresh</code>. Read <a href="docs/COMMAND_RUNBOOK.md">the command runbook</a> before wallet, faucet, or submit commands.</p>
       </div>
       <details class="evidence-drawer">
-        <summary>Show reviewer route</summary>
+        <summary>Show exact route</summary>
         <div class="stat-grid">
           <article>
             <span>Install</span>
@@ -129,7 +129,7 @@
           </article>
           <article>
             <span>Full refresh</span>
-            <strong>operator refresh</strong>
+            <strong>evidence refresh</strong>
             <p>Runs <code>npm run operator:refresh</code> and rebuilds the current status artifacts.</p>
           </article>
         </div>
@@ -186,7 +186,7 @@ npm run indexer:virtual-chain-run</pre>
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
         <h2>Review signed drafts before any testnet broadcast.</h2>
-        <p>This is a review surface for exact inputs, outputs, fees, payload state, and submit commands. External wallets should be able to play by signing reviewable requests without sharing private keys; the remaining readiness gap is one live accepted external-signer result.</p>
+        <p>This is a review surface for exact inputs, outputs, fees, payload state, and submit commands. The intended product path is external signing: review an unsigned request, sign outside the repo, return signed bytes, then submit and replay after acceptance.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
@@ -214,12 +214,12 @@ npm run wallet:connector</pre>
         </div>
       </article>
       <article class="panel">
-        <p class="eyebrow">Build and audit</p>
+        <p class="eyebrow">Build and verify</p>
         <h2>Open the deeper workbench.</h2>
         <p>Lab Tools holds enforcement rows, readiness maps, app lanes, wallet handoff, and research panels so this page can stay focused on the proof.</p>
         <div class="link-list">
           <a href="lab.html">Open lab workbench</a>
-          <a href="docs/AUDIT_MAP.md">Read audit map</a>
+          <a href="docs/AUDIT_MAP.md">Read evidence map</a>
           <a href="docs/UX_IMPROVEMENT_NOTES.md">Read improvement notes</a>
         </div>
       </article>

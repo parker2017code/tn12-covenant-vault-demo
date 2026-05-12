@@ -90,7 +90,7 @@ function organizeLabPage(documentRef = document) {
     ["build-status", "Artifact map", "Accepted evidence, missing pieces, and research rows."],
     ["proven-status", "Proven status", "Accepted evidence and mainnet-deferred blockers."],
     ["operator-pack", "Refresh pack", "Single refresh path and commands."],
-    ["project-plan", "Handoff plan", "Accepted evidence, active work, queued work, and research."],
+    ["project-plan", "Active build plan", "Accepted evidence, active work, queued work, and research."],
     ["next-queue", "Priority queue", "Generated work order and source artifacts."],
     ["auction-intents", "Auction intents", "Accepted bids, winner selection, and refund planning."],
     ["defi-backlog", "DeFi backlog", "Research-only rails and accepted-activity hardening."],

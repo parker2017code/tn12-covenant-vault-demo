@@ -1,6 +1,6 @@
 # TN12 Covenant Lab
 
-Kaspa testnet-12 repo for money rails, covenant proof spends, payload receipts, based-app prototypes, and replay guards. Testnet-only. It is not a mainnet wallet or mainnet activation record.
+Kaspa testnet-12 repo for covenant proof spends, payload receipts, app-state prototypes, and replay guards. Testnet-only. It is not a mainnet wallet or mainnet activation record.
 
 Percentages in this repo mean mainnet deployment readiness unless a line explicitly says TN12/demo progress.
 
@@ -47,11 +47,11 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 - Pooled threshold enforcement: current batch target aggregation is planner/indexer logic.
 - Production indexer reliability: local replay guards pass, but live removed-block rollback evidence is still useful.
 
-## Deferred Mainnet-Readiness Rails
+## Deferred Mainnet-Readiness Work
 
 | Rail | Current state | Clears when |
 |---|---|---|
-| External signer | `artifacts/external-signer-path-research.json` and 4 request templates are ready | A real wallet returns signed tx bytes, submit succeeds, replay sees the accepted txid |
+| External signer | `artifacts/external-signer-path-research.json` and 4 request templates are ready | An external wallet returns signed transaction bytes, submit succeeds, and replay sees the accepted txid |
 | Live rollback evidence | `artifacts/durable-replay-promotion-guard.json` passes local rollback matching | A live TN12 removed-block window is captured and matched |
 | Batch-assurance settlement | Release path is accepted and indexed; refund path is now the non-selected alternate | Post-submit alternate-path status stays explicit |
 
@@ -97,7 +97,7 @@ Read `docs/COMMAND_RUNBOOK.md` before running wallet, faucet, or submit commands
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | Scheduler workbench | `artifacts/universal-scheduler-workbench.json` |
 | Full DeFi benchmark | `artifacts/full-defi-benchmark.json` |
-| Real TN12 playground plan | `artifacts/playground-plan.json` |
+| Accepted TN12 playground plan | `artifacts/playground-plan.json` |
 | Accepted playground funding | `artifacts/playground-funding-evidence.json` |
 | Accepted playground User A deposit | `artifacts/playground-user-a-pool-deposit-evidence.json` |
 | Accepted playground User B deposit | `artifacts/playground-user-b-pool-deposit-evidence.json` |

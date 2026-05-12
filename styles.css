@@ -41,6 +41,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background:
@@ -219,6 +224,7 @@ main {
   gap: 24px;
   align-items: start;
   margin-top: 24px;
+  min-width: 0;
 }
 
 .grid {
@@ -230,6 +236,7 @@ main {
 
 .panel {
   padding: 24px;
+  min-width: 0;
 }
 
 .section-title {
@@ -332,6 +339,7 @@ code {
 
 pre {
   overflow: auto;
+  max-width: 100%;
   max-height: 520px;
   padding: 16px;
   border-radius: 7px;
@@ -416,7 +424,7 @@ pre {
 
 .theme-toggle {
   position: fixed;
-  right: 14px;
+  right: max(10px, calc(100vw - 100% + 10px));
   bottom: 14px;
   z-index: 30;
   min-width: 42px;
@@ -436,6 +444,12 @@ pre {
   color: var(--text);
   background: var(--accent-soft);
   opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .theme-toggle {
+    right: 52px;
+  }
 }
 
 :root[data-theme="light"] .topbar,
@@ -2410,7 +2424,7 @@ progress::-moz-progress-bar {
 }
 
 .playground-flow-card::after {
-  content: "->";
+  content: none;
   position: absolute;
   top: 18px;
   right: 14px;
@@ -2424,7 +2438,7 @@ progress::-moz-progress-bar {
 }
 
 .playground-flow-card.flow-wide::after {
-  content: "replay";
+  content: none;
 }
 
 .playground-level-grid,

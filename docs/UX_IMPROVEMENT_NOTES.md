@@ -12,6 +12,9 @@ This is an internal working note for product cleanup. Keep the public site focus
 - The front door still feels like a lab notebook. Compress around one question: what was proven on TN12?
 - The first screen should route to three jobs: see the proof, try the playground, inspect technical evidence.
 - Treat one reported issue as a class until proven otherwise. One confusing command means audit all visible commands; one fake-clickable card means audit all similar cards; one bad mobile control means inspect the whole mobile chrome.
+- Treat cringey language as a product bug: vague roadmap fog, fake-official labels, repeated defensive disclaimers, unexplained jargon, internal planning language, and claims bigger than the evidence.
+- Write like the site should read. No vague process labels. Say the job plainly: shorten the page, link the card, remove the fake button, move the detail to docs, explain the command prereq, or show what the app does.
+- For broad cleanup, use read-only parallel agents to search faster: clickable-looking elements, cringey copy, mobile layout, source/reference issues, command issues, and strong-site patterns. The main agent owns edits and checks.
 - Audit words like accepted evidence, indexer-derived, local-key custody, external signer, durable replay, and promotion guard are correct but too dense for the default path.
 - Generated artifact sections should be collapsed by default and renamed by user job, not internal script role.
 - Package scripts, large `app.js`, large `scripts/check.mjs`, and artifact count make the repo hard to review. Keep splitting renderers and checks.
@@ -67,6 +70,20 @@ This is an internal working note for product cleanup. Keep the public site focus
 2. Archive or rename old `100% / complete / production-ready` artifacts and docs.
 3. Split large UI/check files and reduce package script sprawl.
 4. Replace more proof text with clearer user journeys.
+
+## Next work
+
+1. Put money rails first, covenant spend rules second, app-state prototypes third, vProgs later.
+2. Make every card, chip, source row, and command block either do something or look like plain text.
+3. Shorten lab, results, and playground by user job.
+4. Make four routes obvious: observe, repeat with faucet tKAS, use your wallet, build/audit.
+5. Keep `docs/COMMAND_RUNBOOK.md` current and test visible commands.
+6. Steal structure from strong sites: simple hero, few routes, docs carry depth, no matrix homepage.
+7. Recheck Vite, Astro, Docusaurus/Starlight, docs.page, and Kaspa.org source.
+8. Split `app.js`, `styles.css`, `scripts/check.mjs`, and package scripts.
+9. Get one real external-signer payload receipt.
+10. Capture live removed-block rollback behavior.
+11. Build one concrete settlement lane end to end.
 
 ## Priority queue
 

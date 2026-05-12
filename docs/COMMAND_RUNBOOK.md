@@ -1,6 +1,6 @@
 # Command Runbook
 
-Use this before running commands copied from the public pages. Commands in this repo fall into different safety classes; do not treat every snippet as a one-click product action.
+Use this before running commands copied from public pages. Commands have different safety classes; do not treat every snippet as safe to run without review.
 
 ## Start Here
 
@@ -22,7 +22,7 @@ Expected result:
 |---|---|---|---|
 | Local check | `npm run check:all`, `npm run check:ui` | Node.js, `npm ci` | tKAS, private keys, submit endpoint |
 | Public evidence refresh | `npm run check:tn12`, `npm run proof:verify` | Node.js, `npm ci`, internet access to TN12 APIs | local wallet keys |
-| Artifact builder | `npm run project:queue`, `npm run defi:accepted-activity` | Node.js, `npm ci`, repo fixtures | tKAS unless the script says otherwise |
+| Artifact refresh | `npm run project:queue`, `npm run defi:accepted-activity` | Node.js, `npm ci`, repo fixtures | tKAS unless the script says otherwise |
 | Fresh testnet wallet | `npm run address`, `npm run playground:wallets` | Node.js, `npm ci`; writes testnet-only material under `.local/` | mainnet keys |
 | Faucet-funded run | `npm run playground:funding-draft` | Fresh playground wallet outputs, faucet or user-funded TN12 tKAS, selected UTXOs | shared or committed private keys |
 | Submit/broadcast | `node scripts/submit-signed-draft.mjs ... --submit` or `node scripts/submit-signed-draft-wrpc.mjs ... --submit` | signed draft, funded UTXO, explicit user intent, correct TN12 endpoint/config | mainnet keys or blind signing |
@@ -74,4 +74,3 @@ KASPA_WASM_MODULE=<path-to-tn12-kaspa-wasm>
 - Treat `.local` wallet files as throwaway testnet-only material.
 - Do not call a locally signed draft an external-wallet result.
 - Promote UI/app state only after accepted txid, output or payload match, duplicate guard, and replay checks pass.
-
