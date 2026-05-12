@@ -64,7 +64,7 @@
         <a href="#escrow"><span>proof path</span><strong>Escrow / freelance</strong><p>Buyer fund, seller release, timeout refund, mutual cancel.</p><small>Accepted TN12 proof paths</small></a>
         <a href="#access-passes"><span>issuer state</span><strong>Access passes</strong><p>Tickets, coupons, memberships with issuer review.</p><small>Issuer/indexer state</small></a>
         <a href="#auction-intents"><span>accepted bids</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Settlement spends still need review</small></a>
-        <a href="#defi-backlog"><span>research status</span><strong>DeFi lab</strong><p>Accepted receipts, pool transfers, reducers, and spend checks.</p><small>AMM and lending custody are next work</small></a>
+        <a href="#defi-backlog"><span>lab status</span><strong>DeFi checks</strong><p>Accepted receipts, pool transfers, reducers, and spend checks.</p><small>Open DeFi checks</small></a>
         <a href="#scheduler-workbench"><span>app jobs</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App job routing over TN12 evidence</small></a>
         <a href="#coordination"><span>research status</span><strong>Coordination / Stag</strong><p>Transparent intents, packs, solver, settlement brief.</p><small>Private Hunt execution is later</small></a>
         <a href="#agent-commitments"><span>wallet review</span><strong>Agent commitments</strong><p>Task offers, completion proofs, disputes, release/refund review.</p><small>Wallet review before payout</small></a>
@@ -526,32 +526,6 @@ npm run coordination:settlement-brief</pre>
       <pre>npm run demo:operator-refresh</pre>
     </section>
 
-    <details id="project-plan" class="panel build-status section-drawer">
-      <summary>Show active build plan</summary>
-      <div class="section-title">
-        <p class="eyebrow">Active build plan</p>
-        <h2>Current build path.</h2>
-        <p>Accepted evidence, active blocker, and queued work.</p>
-      </div>
-      <div id="project-plan-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="project-plan-next" class="build-status-lanes" aria-live="polite"></div>
-      <ul id="project-plan-vision" class="issues"></ul>
-      <pre>npm run project:plan</pre>
-    </details>
-
-    <details id="next-queue" class="panel build-status section-drawer">
-      <summary>Show artifact work order</summary>
-      <div class="section-title">
-        <p class="eyebrow">Artifact work order</p>
-        <h2>Ordered work.</h2>
-        <p>Ordered from current artifacts. Detailed planning remains in linked files.</p>
-      </div>
-      <div id="next-queue-summary" class="build-status-summary" aria-live="polite"></div>
-      <div id="next-queue-top" class="build-status-lanes priority-grid" aria-live="polite"></div>
-      <div id="next-queue-tasks" class="build-status-lanes compact-grid" aria-live="polite"></div>
-      <pre>npm run project:queue</pre>
-    </details>
-
     <section id="auction-intents" class="panel auction-intents">
       <div class="section-title">
         <p class="eyebrow">Auction / intent prototype</p>
@@ -565,9 +539,9 @@ npm run coordination:settlement-brief</pre>
 
     <section id="defi-backlog" class="panel defi-backlog">
       <div class="section-title">
-        <p class="eyebrow">Basic DeFi research backlog</p>
-        <h2>Next work.</h2>
-        <p>Keep DeFi public-facing as a lab until custody, signer, oracle, and settlement paths are built.</p>
+        <p class="eyebrow">DeFi checks</p>
+        <h2>Accepted activity plus blocked execution.</h2>
+        <p>Accepted TN12 receipts and transfers feed reducers. Custody, signer, oracle, and settlement execution stay separate until built.</p>
       </div>
       <div id="defi-summary" class="defi-summary" aria-live="polite"></div>
       <div id="defi-list" class="defi-list" aria-live="polite"></div>
@@ -864,9 +838,9 @@ npm run wallet:adapter-run</pre>
         </div>
       </article>
       <article class="panel">
-        <p class="eyebrow">Build plan</p>
-        <h2>Next build</h2>
-        <p>The vault, assurance, escrow, role-separated, payload, auction, access-pass, and batch-assurance release rails have TN12 evidence. Next build work is external signing, live rollback evidence, and one more concrete settlement vertical.</p>
+        <p class="eyebrow">Open gaps</p>
+        <h2>What still needs proof.</h2>
+        <p>The main open gaps are external signing, live rollback evidence, and one concrete settlement path that a user can run end to end.</p>
         <pre>docs/PROGRESS.md</pre>
       </article>
     </section>
@@ -876,7 +850,7 @@ npm run wallet:adapter-run</pre>
       <h2>Status labels</h2>
       <div class="claim-grid">
         <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
-        <article><strong>Next work</strong><p>Mainnet covenant tooling, app-state prototypes, wallet safety, live indexer behavior, and production wallet integration are tracked separately.</p></article>
+        <article><strong>Open gaps</strong><p>Mainnet covenant tooling, app-state prototypes, wallet safety, live indexer behavior, and production wallet integration are tracked separately.</p></article>
         <article><strong>Build focus</strong><p>External signing, live rollback evidence, durable payload indexing, and one concrete settlement vertical.</p></article>
       </div>
     </section>
