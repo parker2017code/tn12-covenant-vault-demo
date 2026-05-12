@@ -88,5 +88,5 @@ KASPA_WASM_MODULE=<path-to-tn12-kaspa-wasm>
 - Never commit `.local/`.
 - Never paste or use mainnet private keys.
 - Treat `.local` wallet files as throwaway testnet-only material.
-- Do not call a locally signed draft an external-wallet result.
+- Do not call a locally signed draft a user-wallet result.
 - Promote UI/app state only after accepted txid, output or payload match, duplicate guard, and replay checks pass.

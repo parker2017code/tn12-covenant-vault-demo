@@ -45,14 +45,14 @@ artifacts/next-ten-execution-status.json
 
 ## Current Blockers
 
-- External signer: request templates exist; no real user-approved signed return yet.
+- User-wallet signing: request templates exist; no real user-approved signed return yet.
 - Live rollback: local replay/rollback fixtures pass; live removed-block evidence is still missing.
 - Product hardening: wallet UX, monitoring, recovery, index storage, and operator controls are not production-grade.
 - Full DeFi: no AMM, lending, liquidation, oracle, bridge, or production custody rail.
 
 ## Build Order
 
-1. External signer round trip.
+1. User-wallet signing round trip.
 2. Live virtual-chain rollback evidence.
 3. Auction custody settlement/refund vertical.
 4. Agent task release/refund vertical.

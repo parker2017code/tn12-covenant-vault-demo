@@ -4,7 +4,7 @@ Reviewed: 2026-05-09
 
 ## Why This Exists
 
-The repo's wallet-submit lane is not a wallet. It is a review and handoff surface for exact transaction drafts. KasSigner/KasSee is useful because it is a live public reference for the missing external-signer boundary:
+The repo's wallet-submit lane is not a wallet. It is a review and handoff surface for exact transaction drafts. KasSigner/KasSee is useful because it is a live public reference for the missing user-wallet signing boundary:
 
 - a watch-only companion builds unsigned transactions from public wallet data;
 - the signer keeps private keys off the networked device;
@@ -37,14 +37,14 @@ Current read:
 What overlaps:
 
 - `npm run wallet:submit-package` builds the exact transaction handoff package this repo wants a signer or wallet to review.
-- `npm run wallet:connector-requests` produces request-shaped data for an external submit path.
+- `npm run wallet:connector-requests` produces request-shaped data for a wallet submit path.
 - `npm run wallet:adapter-run` proves review-session shape without signing or broadcasting.
 - `npm run wallet:submit-ledger` keeps pending wallet-submit rows separate from already accepted JSON wRPC evidence.
 - `npm run wallet:result-validation` checks returned txids/routes against fingerprints, payload bytes, v1 compute budget fields, explicit user action, and accepted evidence.
 
 What KasSigner/KasSee does that this repo does not:
 
-- real external private-key custody;
+- real private-key custody outside this repo;
 - QR-based offline signing;
 - kpub/watch-only address derivation;
 - PSKB/KSPT parsing and signing;
@@ -60,7 +60,7 @@ What this repo does that KasSigner/KasSee does not try to do:
 
 ## Direction
 
-Do not compete with KasSigner. Use it as a reference for the external signer boundary.
+Do not compete with KasSigner. Use it as a reference for the user-wallet signing boundary.
 
 Near-term wallet-submit requirements should move toward:
 
@@ -69,6 +69,6 @@ Near-term wallet-submit requirements should move toward:
 3. Explicit review of network, inputs, outputs, fee, payload bytes, tx version, lock fields, and compute budget fields.
 4. A route label for payload-preserving submit versus known bad submit routes.
 5. Accepted-transaction verification before the repo promotes a wallet-submitted result.
-6. Reproducible-build and signer-version metadata when an external signer becomes part of a proof claim.
+6. Reproducible-build and signer-version metadata when a wallet signer becomes part of a proof claim.
 
-Keep the current status honest: this repo has wallet-review artifacts, not a live external signer integration.
+Keep the current status honest: this repo has wallet-review artifacts, not a live user-wallet integration.

@@ -52,7 +52,7 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 
 | Rail | Current state | Clears when |
 |---|---|---|
-| External signer | `artifacts/external-signer-path-research.json` and 4 request templates are ready | An external wallet returns signed transaction bytes, submit succeeds, and replay sees the accepted txid |
+| User-wallet signing | `artifacts/external-signer-path-research.json` and 4 request templates are ready | A user wallet returns signed transaction bytes, submit succeeds, and replay sees the accepted txid |
 | Live rollback evidence | `artifacts/durable-replay-promotion-guard.json` passes local rollback matching | A live TN12 removed-block window is captured and matched |
 | Batch-assurance settlement | Release path is accepted and indexed; refund path is now the non-selected alternate | Post-submit alternate-path status stays explicit |
 
@@ -79,7 +79,7 @@ If you are starting from a blank terminal, use `docs/CLI_FROM_ZERO.md` first. It
 
 | Need | Artifact |
 |---|---|
-| Evidence map | `docs/AUDIT_MAP.md` |
+| Proof docs | `docs/AUDIT_MAP.md` |
 | Script groups | `docs/SCRIPT_INDEX.md` |
 | Command runbook | `docs/COMMAND_RUNBOOK.md` |
 | Blank-terminal CLI path | `docs/CLI_FROM_ZERO.md` |
@@ -90,9 +90,9 @@ If you are starting from a blank terminal, use `docs/CLI_FROM_ZERO.md` first. It
 | Proof index | `docs/PROOF_INDEX.md` |
 | Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
 | Mainnet readiness | `MAINNET_READINESS.md` |
-| Current 10-task slice | `artifacts/next-ten-execution-status.json` |
-| Proven status boundary | `artifacts/proven-status.json` |
-| Operator receipt pack | `artifacts/operator-receipt-pack.json` |
+| Detailed task slice | `artifacts/next-ten-execution-status.json` |
+| Proof boundary artifact | `artifacts/proven-status.json` |
+| Receipt pack artifact | `artifacts/operator-receipt-pack.json` |
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | DeFi planner simulation | `artifacts/defi-planner-simulation.json` |
 | DeFi scenario simulation | `artifacts/defi-scenario-simulation.json` |
@@ -102,18 +102,18 @@ If you are starting from a blank terminal, use `docs/CLI_FROM_ZERO.md` first. It
 | DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | Scheduler workbench | `artifacts/universal-scheduler-workbench.json` |
-| Full DeFi benchmark | `artifacts/full-defi-benchmark.json` |
+| DeFi lab checks | `artifacts/full-defi-benchmark.json` |
 | Accepted TN12 playground plan | `artifacts/playground-plan.json` |
 | Accepted playground funding | `artifacts/playground-funding-evidence.json` |
 | Accepted playground User A deposit | `artifacts/playground-user-a-pool-deposit-evidence.json` |
 | Accepted playground User B deposit | `artifacts/playground-user-b-pool-deposit-evidence.json` |
 | Accepted playground payout | `artifacts/playground-pool-user-b-payout-evidence.json` |
 | Current playground session | `artifacts/playground-session.example.json` |
-| Standards/adapters backlog | `artifacts/standards-adapter-backlog.json` |
+| Adapter ideas | `artifacts/standards-adapter-backlog.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
-| External signer path | `artifacts/external-signer-path-research.json` |
-| External signer payload request | `artifacts/external-signer-payload-request.json` |
+| User-wallet path | `artifacts/external-signer-path-research.json` |
+| User-wallet payload request | `artifacts/external-signer-payload-request.json` |
 | Full lab notebook | `docs/LAB_NOTEBOOK.md` |
 | Product execution plan | `docs/PRODUCT_EXECUTION_PLAN.md` |
 | Copy cleanup plan | `docs/COPY_CLEANUP_PLAN.md` |

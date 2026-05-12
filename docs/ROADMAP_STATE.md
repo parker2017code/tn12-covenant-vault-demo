@@ -1,6 +1,6 @@
 # Roadmap State
 
-Reviewed: 2026-05-10
+Reviewed: 2026-05-12
 
 The repo should read as proof-first, not plan-first. Use generated artifacts for broad planning; keep prose short.
 
@@ -8,12 +8,12 @@ The repo should read as proof-first, not plan-first. Use generated artifacts for
 
 | Rail | Current state | Next proof |
 |---|---|---|
-| Covenants | Vault, assurance, escrow, and role-separated paths accepted on TN12 | Fresh external-signer covenant spend |
-| Payload receipts | 40 accepted payload events, including seven DeFi v1 receipts, one scheduler-intent receipt, three scheduler-bid receipts, one scheduler-execution receipt, one scheduler-covenant-binding receipt, and one agent release wallet-review event | External-signer payload receipt |
+| Covenants | Vault, assurance, escrow, and role-separated paths accepted on TN12 | Fresh user-wallet covenant spend |
+| Payload receipts | 40 accepted payload events, including seven DeFi v1 receipts, one scheduler-intent receipt, three scheduler-bid receipts, one scheduler-execution receipt, one scheduler-covenant-binding receipt, and one agent release wallet-review event | User-wallet payload receipt |
 | Batch assurance | Accepted pledge outputs and accepted release | Keep refund alternates non-selected; next signer work uses fresh requests |
 | Replay/indexer | Checkpoint, live overlap, durable promotion guard | Live removed-block rollback evidence |
 | Wallet submit | Review package, request templates, result validation | Real wallet-approved signed tx |
-| Full DeFi benchmark | 60% by repo-local benchmark; 6/10 rails complete | External signer, live rollback evidence, AMM/lending/liquidation custody execution |
+| DeFi lab checks | Six repo-local rails have evidence | User-wallet signing, live rollback evidence, AMM/lending/liquidation custody execution |
 
 ## Research Rails
 
@@ -30,8 +30,8 @@ Keep these out of proof language until they get accepted evidence or a working c
 Use artifacts instead of prose plans:
 
 - `artifacts/next-work-queue.json`: ordered broad queue.
-- `artifacts/next-ten-execution-status.json`: current 10-task slice.
-- `artifacts/proven-status.json`: compact accepted-evidence, blocker, and percent boundary.
+- `artifacts/next-ten-execution-status.json`: detailed task slice.
+- `artifacts/proven-status.json`: compact accepted-evidence and blocker boundary.
 - `artifacts/operator-receipt-pack.json`: accepted evidence plus local-wallet command path.
 - `artifacts/missing-rails-matrix.json`: missing DeFi/product rails.
 - `artifacts/rail-research-triggers.json`: when to do deeper research.

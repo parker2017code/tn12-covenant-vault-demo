@@ -222,7 +222,7 @@ artifacts/persisted-checkpoint-guard.json
 
 ## Next Work
 
-1. Real external signer round trip.
+1. Real user-wallet signing round trip.
 2. Live removed-block rollback evidence.
 3. Auction or agent-task settlement/refund vertical.
 4. Continued prose cleanup: proof-first, fewer roadmap claims, fewer repeated caveats.

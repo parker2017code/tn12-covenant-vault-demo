@@ -1,6 +1,6 @@
 # TN12 Product Execution Plan
 
-Reviewed: 2026-05-11
+Reviewed: 2026-05-12
 
 This is the product plan for turning the TN12 proof lab into something people can use themselves. It does not upgrade any claim. Accepted TN12 evidence, planner/indexer state, wallet-policy state, and blocked production rails must stay visibly separate.
 
@@ -9,7 +9,7 @@ This is the product plan for turning the TN12 proof lab into something people ca
 Every lane should eventually support the same loop:
 
 1. Get TN12 tKAS.
-2. Use a fresh `kaspatest:` wallet or external wallet.
+2. Use a fresh `kaspatest:` wallet.
 3. Review exact inputs, outputs, payload bytes, fees, and route.
 4. Sign outside the repo when custody is involved.
 5. Submit through a route that preserves the required transaction fields.
@@ -44,13 +44,13 @@ So yes: this repo should build based-app prototypes. We have already started: De
 |---|---|---|
 | 1 | Public UX and source discipline | Pages are navigable, source links are correctly typed, bad TN12 explorer routes fail UI checks, bulky panels are collapsible. |
 | 2 | Self-serve lane map | Lab starts with product map and runbook before generated details. Each lane says playable now, play next, research playable, or blocked. |
-| 3 | External wallet handoff | Browser exposes wallet-standard request artifacts, return template, validation rules, and no-private-key language. |
+| 3 | User-wallet handoff | Browser exposes wallet-standard request artifacts, return template, validation rules, and no-private-key language. |
 | 4 | DeFi self-serve walkthrough | Users can follow funding -> role wallet -> deposit/payout -> replay -> blocked action checks from UI instructions and artifacts. |
 | 5 | Assurance self-serve walkthrough | Users can inspect pledge/release/refund state, know what is accepted, and know what remains planner/indexer. |
 | 6 | Escrow self-serve walkthrough | Users can inspect buyer/seller/release/refund/cancel paths and map actions to wallet-standard request candidates. |
 | 7 | Based-app prototype walkthroughs | DeFi reducers, auction/intents, coordination/Stag, and agent commitments show app state anchored to accepted evidence, then add wallet handoff and settlement where each product needs it. |
 | 8 | Access pass and issuer/indexer walkthroughs | Issuer/indexer and planner states are visible with accepted payload receipts and settlement boundaries. |
-| 9 | Real external signer round trip | A user-approved external wallet signs one payload and one covenant-style request; returned bytes validate, submit succeeds, replay matches. |
+| 9 | Real user-wallet signing round trip | A user-approved wallet signs one payload and one covenant-style request; returned bytes validate, submit succeeds, replay matches. |
 | 10 | Durable live indexer promotion | New accepted transactions are discovered from a live virtual-chain feed, rollback behavior is handled, and promotion is deterministic. |
 
 ## Coordination Markets And Scheduling
@@ -75,16 +75,16 @@ Universal scheduler means the reusable execution layer for these app jobs. It sh
 
 | Lane | Usable Now | Still Missing |
 |---|---|---|
-| Live TN12 money flow | Accepted role funding, two deposits, one payout, replay balances, copyable addresses. | External-wallet repeat of the same flow. |
+| Live TN12 money flow | Accepted role funding, two deposits, one payout, replay balances, copyable addresses. | User-wallet repeat of the same flow. |
 | Payload receipt invoices | Accepted payload receipts and invoice state replay. | Production wallet/indexer flow and duplicate/refund policy hardening. |
 | Vault policy | Browser artifact, accepted owner/recovery proof paths, policy labels. | Guardian/cap/request lifecycle script enforcement. |
 | Assurance | Individual pledge release/refund proof and batch campaign state. | Full pooled campaign enforcement as one native contract. |
-| Escrow | Accepted release, DAA refund, mutual cancel proof paths and marketplace action map. | Live external-wallet submit and production dispute workflow. |
+| Escrow | Accepted release, DAA refund, mutual cancel proof paths and marketplace action map. | Live user-wallet submit and production dispute workflow. |
 | Access passes | Issuer/indexer pass and redemption state. | Native ticket enforcement claim. |
 | Auction/intents | Accepted bid payloads and planner winner/refund state. | Atomic custody settlement and delivery enforcement. |
-| DeFi lab | Accepted local-key funding/deposits/payouts, scheduler receipts, reducers, duplicate guards, blocked withdrawals. | AMM custody, lending custody, liquidation, oracle truth, production signer. |
+| DeFi lab | Accepted local-key funding/deposits/payouts, scheduler receipts, reducers, duplicate guards, blocked withdrawals. | AMM custody, lending custody, liquidation, oracle truth, user-wallet signing. |
 | Coordination/Stag | Transparent intendos, packs, solver, and settlement brief. | Opacity, capital multiplexing, composability, atomic Hunt execution. |
-| Agent commitments | Task offers, accepted payloads, disputes, release/refund review. | Autonomous payout and live wallet-reviewed settlement. |
+| Agent commitments | Task offers, accepted payloads, disputes, release/refund review. | Live wallet-reviewed settlement. |
 
 ## Guardian Enforcement Path
 
@@ -99,7 +99,7 @@ Minimum credible build:
 5. Submit one accepted guardian path.
 6. Update the UI label from `planner-only` to `script-enforced` only for that exact path.
 
-## External Wallet Path
+## User-Wallet Path
 
 People should be able to use their own wallets without sharing secrets. The repo should never require a private key paste for a public playground.
 
@@ -107,7 +107,7 @@ Minimum credible build:
 
 1. Export unsigned/reviewable request JSON.
 2. Display exact transaction fields and payload bytes.
-3. Require external signing.
+3. Require wallet signing outside the repo.
 4. Validate returned signed bytes against review fingerprint, output scripts, payload, computeBudget, network, and txid expectations.
 5. Submit through the correct route.
 6. Replay accepted evidence before app-state promotion.

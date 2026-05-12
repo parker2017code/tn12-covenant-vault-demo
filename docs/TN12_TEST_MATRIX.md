@@ -90,7 +90,7 @@ These should not be called complete until a safe TN12 transaction or accepted pr
 - role-separated covenant TN12 rejection attempts from fresh expendable outputs,
 - batch assurance refund submission for the already released pledge set,
 - auction custody settlement/refund transaction, atomic exchange, and asset delivery,
-- agent task custody release/refund transactions and autonomous payout lifecycle,
+- agent task custody release/refund transactions and wallet-reviewed payout lifecycle,
 - treasury/team-vault constrained spend drafts,
 - prediction/hedge settlement, real odds, custody, or automatic execution.
 

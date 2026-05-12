@@ -26,7 +26,7 @@ Read this first when resuming TN12 work. Keep it short. Details belong in artifa
 
 ## Current Blockers
 
-1. External signer: four request templates exist, but no real user-approved signature yet.
+1. User-wallet signing: four request templates exist, but no real user-approved signature yet.
 2. Live removed-block rollback evidence: local rollback matching passes, but full promotion stays blocked until a live removed-block window is captured.
 3. Batch-assurance alternate path: release is accepted; do not submit refund paths for the spent pledge set.
 4. Product hardening: wallet/indexer/recovery/monitoring are not production-grade.
@@ -51,8 +51,8 @@ npm run wallet:external-signer-research
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | Scheduler workbench | `artifacts/universal-scheduler-workbench.json` |
 | Durable replay guard | `artifacts/durable-replay-promotion-guard.json` |
-| External signer path | `artifacts/external-signer-path-research.json` |
-| Next-ten status | `artifacts/next-ten-execution-status.json` |
+| User-wallet path | `artifacts/external-signer-path-research.json` |
+| Detailed task status | `artifacts/next-ten-execution-status.json` |
 | Mainnet readiness | `MAINNET_READINESS.md` |
 | Compact progress | `docs/PROGRESS.md` |
 
@@ -60,7 +60,7 @@ npm run wallet:external-signer-research
 
 - Never print or commit `.local/*` private keys.
 - Do not use mainnet keys.
-- Do not call local-signer output external-wallet evidence.
+- Do not call local-signer output user-wallet evidence.
 - Treat user examples as a class signal unless explicitly scoped to one item. A command, card, source link, copy button, or status label complaint means check the whole similar surface.
 - Positive app-state labels should say exactly what backs them: accepted TN12 evidence, local-key TN12 activity, planner/indexer replay, or research prototype.
 - Do not use public TN12 REST submit for payload receipts; it previously dropped payload bytes.
@@ -70,7 +70,7 @@ npm run wallet:external-signer-research
 
 1. Make the self-serve lane runbook the public route into money rails, covenant products, and based-app prototypes.
 2. Use the scheduler workbench to turn DeFi, coordination, auction, and agent rows into user-run job flows.
-3. Real external signer round trip for one payload receipt.
-4. Real external signer round trip for one covenant spend.
+3. Real user-wallet signing round trip for one payload receipt.
+4. Real user-wallet signing round trip for one covenant spend.
 5. Turn one based-app prototype into a user-run vertical: fund, submit, replay, block invalid action.
 6. Capture live removed-block rollback evidence when available.

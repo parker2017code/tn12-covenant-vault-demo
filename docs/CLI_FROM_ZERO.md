@@ -341,13 +341,13 @@ Built enough to inspect:
 - reducer balances and blocked withdrawal attempts;
 - AMM/lending/oracle/liquidation simulations and failure cases.
 
-Not built as autonomous custody:
+Not built as app-controlled custody:
 
 - AMM pool custody;
 - lending custody;
 - liquidation execution;
 - oracle truth;
 - production wallet signing;
-- public-user external signer round trip.
+- public-user wallet signing round trip.
 
 So the CLI can take you from blank terminal to real TN12 wallet movement and replayed DeFi-style state. It does not yet take you to a production DeFi product that autonomously controls user funds.

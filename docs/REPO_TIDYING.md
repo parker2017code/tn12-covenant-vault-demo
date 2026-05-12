@@ -57,7 +57,7 @@ Prefer this vocabulary:
 - payload receipt;
 - checkpoint index;
 - operator pack;
-- external signer;
+- user-wallet signing;
 - live rollback evidence;
 - planner or research lane.
 
@@ -100,4 +100,4 @@ The remaining cleanup is ongoing maintenance:
 - keep live Pages, README, and generated artifacts synchronized after each proof;
 - reduce old aliases only after a release window where docs no longer reference them;
 - keep the proof page and lab workbench split if the UI grows again;
-- keep external signer and live rollback evidence as named blockers until they are actually cleared.
+- keep user-wallet signing and live rollback evidence as named blockers until they are actually cleared.

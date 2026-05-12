@@ -2577,7 +2577,7 @@ assert.match(sources, /KasSigner\/KasSee/);
 
 const walletSignerReferences = await readFile(new URL("../docs/WALLET_SIGNER_REFERENCES.md", import.meta.url), "utf8");
 assert.match(walletSignerReferences, /PSKB\/KSPT/);
-assert.match(walletSignerReferences, /not a live external signer integration/);
+assert.match(walletSignerReferences, /not a live user-wallet integration/);
 
 const masterPlan = await readFile(new URL("../docs/MASTER_APP_PLAN.md", import.meta.url), "utf8");
 assert.match(masterPlan, /Payload Receipt \/ Invoice App/);

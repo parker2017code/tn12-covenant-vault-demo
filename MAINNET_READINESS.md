@@ -1,13 +1,13 @@
 # Mainnet Readiness
 
-Reviewed: 2026-05-11
+Reviewed: 2026-05-12
 
 This file is about deployment readiness, not TN12 proof-core progress.
 
 ## Estimate
 
 - Current mainnet deployment readiness: about 58-62%.
-- After real external signer: about 65-70%.
+- After real user-wallet signing: about 65-70%.
 - After production wallet/indexer hardening: about 72-78%.
 
 ## Proven On TN12
@@ -17,21 +17,21 @@ This file is about deployment readiness, not TN12 proof-core progress.
 - Local-key DeFi custody/activity: 25 accepted TN12 transfer rows cover user funding, pool deposits, pool payouts, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
 - Batch assurance: accepted pledge outputs and accepted 3-pledge release tx `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`.
 - Live replay: public TN12 wRPC reads work, checkpoint overlap is recorded, and `artifacts/durable-replay-promotion-guard.json` passes deterministic replay plus local rollback matching.
-- DeFi planner/indexer lane: deterministic planner, scenario, reducer, advanced, multi-wallet, and accepted-activity artifacts are guarded by `artifacts/defi-artifact-manifest.json`. The local-key custody transfers are real TN12 activity; AMM pricing, oracle truth, autonomous custody, and liquidation execution are not script-enforced.
+- DeFi planner/indexer lane: deterministic planner, scenario, reducer, advanced, multi-wallet, and accepted-activity artifacts are guarded by `artifacts/defi-artifact-manifest.json`. The local-key custody transfers are real TN12 activity; AMM pricing, oracle truth, app-controlled custody, and liquidation execution are not script-enforced.
 
 ## Still Not Mainnet-Ready
 
 | Gap | Why it matters | Current artifact |
 |---|---|---|
-| External signer | Users must sign without this repo holding keys | `artifacts/external-signer-path-research.json`; unsigned request in `artifacts/external-signer-payload-request.json` |
+| User-wallet signing | Users must sign without this repo holding keys | `artifacts/external-signer-path-research.json`; unsigned request in `artifacts/external-signer-payload-request.json` |
 | Live removed-block evidence | Local rollback matching is not the same as observing a live rollback window | `artifacts/durable-replay-promotion-guard.json` |
 | Batch settlement follow-through | Release is accepted; alternate refund path must remain non-selected | `artifacts/batch-assurance-operator-decision.json` |
 | Wallet/indexer hardening | Product state needs operational reliability | `artifacts/wallet-submit-result-validation.json`; focused tests now cover signer-return validation, submit-result promotion rules, rollback-by-missing-txid, blue-score regression, and virtual-chain rollback rows |
-| DeFi product readiness | Current DeFi lane includes real local-key TN12 custody/activity transfers, but no autonomous AMM, oracle, liquidation, production custody, or external signer | `artifacts/defi-accepted-activity-ledger.json`; `artifacts/defi-artifact-manifest.json` |
+| DeFi product readiness | Current DeFi lane includes real local-key TN12 custody/activity transfers, but no autonomous AMM, oracle, liquidation, production custody, or user-wallet signing | `artifacts/defi-accepted-activity-ledger.json`; `artifacts/defi-artifact-manifest.json` |
 
 ## Next Order
 
-1. Run one real external signer round trip.
+1. Run one real user-wallet signing round trip.
 2. Keep batch-assurance refund paths marked non-selected after the accepted release.
 3. Capture live removed-block rollback evidence when TN12 provides it.
 4. Keep dashboard/docs proof-first: accepted evidence, gate output, blocker.

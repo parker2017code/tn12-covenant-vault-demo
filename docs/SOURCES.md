@@ -46,9 +46,9 @@ The new official builder docs are useful to this repo in three ways:
 - The Based Apps, full vProgs, and Inline ZK pages shape the build split: based apps are the richer-state app lane, Inline ZK is a specialized proving path, and full vProgs are the later atomic-composition direction.
 - Aspectron's `RpcClient` docs confirmed the current object-style constructor and request-style submit wrapper: `new RpcClient({ url, networkId })` and `submitTransaction({ transaction, allowOrphan })`.
 - Aspectron's signing guide confirmed the same submit wrapper after SDK signing. TN12-specific `computeBudget` behavior still had to be verified against Rusty Kaspa TN12 source/tests and the local TN12 WASM build.
-- KasSigner/KasSee is the best current public reference for this repo's missing external-signer boundary: watch-only transaction construction, offline signing, PSKB/KSPT-style handoff, and accepted-state promotion after broadcast. It is not evidence that this repo has a live wallet connector.
+- KasSigner/KasSee is the best current public reference for this repo's missing user-wallet signing boundary: watch-only transaction construction, offline signing, PSKB/KSPT-style handoff, and accepted-state promotion after broadcast. It is not evidence that this repo has a live wallet connector.
 
-## External Signer / Wallet-Submit References
+## Wallet Signing / Wallet-Submit References
 
 Use `docs/WALLET_SIGNER_REFERENCES.md` before changing wallet-submit direction.
 

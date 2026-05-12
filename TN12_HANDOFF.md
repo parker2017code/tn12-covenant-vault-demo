@@ -1,6 +1,6 @@
 # TN12 Handoff
 
-Reviewed: 2026-05-11
+Reviewed: 2026-05-12
 
 Current readiness: about 58-62% mainnet deployment readiness.
 
@@ -13,15 +13,15 @@ What changed in this pass:
 - Live TN12 replay overlap now exists from a chain-block anchor inside the checkpoint band.
 - Batch-assurance release is accepted and indexed; refund paths remain non-selected for that spent pledge set.
 - Mainnet readiness docs now separate proof-core progress from deployment readiness.
-- The current next-ten execution status is artifact-backed: 5/10 local tasks complete, duplicate/stale DeFi receipt replay guard ready, and external signer tasks still blocked on a real wallet signature.
+- The detailed task status is artifact-backed: 5/10 local tasks were completed in that slice, duplicate/stale DeFi receipt replay guard is ready, and user-wallet signing tasks still need a real wallet signature.
 - Durable replay guard has local promotion readiness, but full promotion remains blocked until live removed-block evidence exists.
-- External signer path research is now artifact-backed; real user approval remains required.
-- DeFi is now split into real accepted TN12 activity and planner/indexer-derived market logic: accepted receipts and local-key custody transfers are real TN12 evidence; AMM pricing, oracle truth, autonomous custody, and liquidation execution remain unenforced by script.
-- `npm run defi:refresh` rebuilds the DeFi suite in dependency order and `artifacts/defi-artifact-manifest.json` checks schemas, zero live-product claims, zero external-signer claims, and no secret-like fields.
+- User-wallet path research is artifact-backed; real user approval remains required.
+- DeFi is now split into real accepted TN12 activity and planner/indexer-derived market logic: accepted receipts and local-key custody transfers are real TN12 evidence; AMM pricing, oracle truth, app-controlled custody, and liquidation execution remain unenforced by script.
+- `npm run defi:refresh` rebuilds the DeFi suite in dependency order and `artifacts/defi-artifact-manifest.json` checks schemas, zero live-product claims, zero user-wallet-signing claims, and no secret-like fields.
 - TangVM / universal-scheduler language is bounded in `docs/TANGVM_UNISC_BOUNDARY.md`: the repo can prototype event receipts, trigger reducers, and local-key execution aligned with upstream vProgs concepts, but it does not implement TangVM, UniSc, miner oracle consensus, or full vProgs.
 
 Current blockers:
-- Live external signer round trip
+- Live user-wallet signing round trip
 - Live removed-block rollback evidence
 - Production custody/source-of-funds review for settlement lanes
 - Wallet/indexer hardening beyond fixture/local replay
@@ -29,8 +29,8 @@ Current blockers:
 What to do next:
 1. Keep the live replay promotion lane honest and bounded.
 2. Keep the accepted batch-assurance release and non-selected refund paths explicit.
-3. Finish the wallet/external-signer lane only if a real throwaway signer path exists.
-4. Execute anything that can safely be represented on-chain on TN12; keep only AMM pricing, oracle truth, autonomous custody, liquidation, and external-signer claims blocked until actually enforced.
+3. Finish the wallet-signing lane only if a real throwaway signer path exists.
+4. Execute anything that can safely be represented on-chain on TN12; keep AMM pricing, oracle truth, app-controlled custody, liquidation, and user-wallet-signing claims blocked until actually enforced.
 5. Add a scheduler-intent prototype only if it stays accepted-payload/indexer-derived and does not claim TangVM/UniSc implementation.
 6. Keep the readiness docs and artifacts synchronized.
 

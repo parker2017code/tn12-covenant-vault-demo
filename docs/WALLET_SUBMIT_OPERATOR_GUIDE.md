@@ -11,7 +11,7 @@ This lane reviews exact inputs, outputs, payload bytes, and submit routes before
 - Run `npm ci` first.
 - These commands build or validate review artifacts unless the command name or flags explicitly say submit.
 - They do not connect to a public wallet or broadcast a transaction by themselves.
-- A wallet result becomes live only after an external signer returns approved signed bytes, the submit route preserves required fields, and replay observes the accepted txid.
+- A wallet result becomes live only after a user-approved wallet returns signed bytes, the submit route preserves required fields, and replay observes the accepted txid.
 
 ## Current Commands
 
@@ -46,6 +46,6 @@ This lane reviews exact inputs, outputs, payload bytes, and submit routes before
 
 ## Do Not Claim
 
-- no-local-key signing is live until an external signer returns a matching transaction;
+- no-local-key signing is live until a user-approved wallet returns a matching transaction;
 - a submit ledger proves connector liveness;
 - a payload-preserving draft means the network accepted it.

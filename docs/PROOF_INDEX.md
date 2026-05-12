@@ -34,7 +34,7 @@ This is the short index for accepted TN12 proof evidence, historical rejections,
 
 | Rail | Status | Next step |
 |---|---|---|
-| Wallet connector / external signer | Open | Wire a real external signer round trip |
+| Wallet connector / user-wallet signing | Open | Wire a real user-wallet signing round trip |
 | Virtual-chain live indexer | Open | Test the bounded adapter against a configured TN12 endpoint |
 | Batch-assurance alternate-path cleanup | Open | Keep refund drafts non-selected after accepted release |
 | Escrow marketplace demo | Open | Build the concrete demo on the accepted escrow output |

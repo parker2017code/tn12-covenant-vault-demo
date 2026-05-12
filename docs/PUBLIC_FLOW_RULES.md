@@ -11,7 +11,7 @@ Show this first:
 1. What happened on TN12.
 2. What they can click.
 3. What they can try with tKAS.
-4. What needs an external wallet, indexer, oracle, or custody rail.
+4. What needs a user wallet, indexer, oracle, or custody rail.
 
 ## Page Roles
 

@@ -11,7 +11,7 @@ Escrow funds a buyer-seller covenant flow with release, refund, and cancel paths
 - Run `npm ci` first.
 - Builder commands may write draft artifacts under `artifacts/signed-drafts/`.
 - Any submit command with `--submit` is a real TN12 broadcast; use testnet-only funds and keys.
-- Local signed drafts are useful test evidence, but they are not an external-wallet result.
+- Local signed drafts are useful test evidence, but they are not a user-wallet result.
 
 ## Current Commands
 
