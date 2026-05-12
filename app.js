@@ -667,6 +667,19 @@ async function renderCoordinationMarket() {
     `;
     coordinationPacksNode.append(briefArticle);
 
+    for (const blockedPack of settlementBrief.blockedPacks || []) {
+      const blockedArticle = document.createElement("article");
+      blockedArticle.className = "coordination-card coordination-blocked-card";
+      blockedArticle.innerHTML = `
+        <span>threshold not met</span>
+        <strong>${escapeHtml(blockedPack.packId)}</strong>
+        <p>${escapeHtml(blockedPack.signedIntendos)} signed intendos; ${escapeHtml(blockedPack.committedTkas)} TKAS committed; ${escapeHtml(blockedPack.qualifyingIntendos)} qualify.</p>
+        <p>${escapeHtml(blockedPack.reviewerMeaning)}</p>
+        <small>${escapeHtml(blockedPack.nextRoute)}</small>
+      `;
+      coordinationPacksNode.append(blockedArticle);
+    }
+
     if (coordinationDossierNode && dossier) {
       coordinationDossierNode.innerHTML = `
         <article class="coordination-card coordination-run-card">

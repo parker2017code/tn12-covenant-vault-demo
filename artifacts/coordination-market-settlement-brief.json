@@ -42,6 +42,19 @@
     },
     "huntStatus": "hunt-plan-ready-not-atomic-execution"
   },
+  "blockedPacks": [
+    {
+      "packId": "pack-stag-liquidity-migration-research",
+      "stagId": "stag-liquidity-migration-research",
+      "status": "not-satisfiable",
+      "signedIntendos": 2,
+      "committedTkas": 750,
+      "qualifyingIntendos": 0,
+      "qualifyingTkas": 0,
+      "nextRoute": "refund-or-keep-accumulating",
+      "reviewerMeaning": "Threshold not met; no release route should be selected from this pack."
+    }
+  ],
   "runThisPack": {
     "id": "pack-stag-docs-sprint:run-first",
     "title": "Run a conditional commitment pack",

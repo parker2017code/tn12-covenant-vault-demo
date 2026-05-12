@@ -4,6 +4,9 @@ export function buildCoordinationMarketSettlementBrief({
 } = {}) {
   const packs = Array.isArray(coordinationPrototype.packs) ? coordinationPrototype.packs : [];
   const selectedPack = packs.find((pack) => pack.packId === fixture.selectedPackId) || null;
+  const blockedPacks = packs
+    .filter((pack) => pack.packId !== selectedPack?.packId && pack.solver?.status !== "satisfiable-transparent-pack")
+    .map(summarizeBlockedPack);
   const missingRails = (fixture.missingRails || []).map(normalizeMissingRail);
   const settlementRoutes = (fixture.settlementRoutes || []).map((route) =>
     buildSettlementRoute(route, selectedPack)
@@ -31,6 +34,7 @@ export function buildCoordinationMarketSettlementBrief({
       productionReady: false
     },
     selectedPack: selectedPack ? summarizePack(selectedPack) : null,
+    blockedPacks,
     runThisPack: selectedPack ? buildRunThisPack({
       fixture,
       selectedPack,
@@ -44,6 +48,20 @@ export function buildCoordinationMarketSettlementBrief({
       "It is a transparent app brief for wallet review and later settlement draft design."
     ],
     nextArtifact: String(fixture.nextArtifact || "define custody source before settlement drafts")
+  };
+}
+
+function summarizeBlockedPack(pack = {}) {
+  return {
+    packId: pack.packId || "",
+    stagId: pack.stagId || "",
+    status: pack.solver?.status || "missing-solver",
+    signedIntendos: pack.signedIntendoCount || 0,
+    committedTkas: pack.committedTkas || 0,
+    qualifyingIntendos: pack.solver?.qualifyingCount || 0,
+    qualifyingTkas: pack.solver?.qualifyingTkas || 0,
+    nextRoute: "refund-or-keep-accumulating",
+    reviewerMeaning: "Threshold not met; no release route should be selected from this pack."
   };
 }
 

@@ -1,10 +1,14 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { buildCoordinationMarketEvidenceDossier } from "../../src/coordinationMarketEvidenceDossier.mjs";
+import { buildCoordinationMarketPrototype } from "../../src/coordinationMarket.mjs";
+import { buildCoordinationMarketSettlementBrief } from "../../src/coordinationMarketSettlementBrief.mjs";
 
+const coordinationPrototype = await readJson("artifacts/coordination-market-prototype.json");
+const settlementBrief = await readJson("artifacts/coordination-market-settlement-brief.json");
 const dossier = buildCoordinationMarketEvidenceDossier({
-  coordinationPrototype: await readJson("artifacts/coordination-market-prototype.json"),
-  settlementBrief: await readJson("artifacts/coordination-market-settlement-brief.json"),
+  coordinationPrototype,
+  settlementBrief,
   acceptedOutputs: await readJson("fixtures/AcceptedOutputEvidence.json"),
   custodyImports: await readJson("artifacts/batch-assurance-custody-imports.json"),
   settlementDrafts: await readJson("artifacts/batch-assurance-settlement-drafts.json"),
@@ -29,6 +33,16 @@ assert.match(dossier.selectedRelease.explorerUrl, /tn12\.kaspa\.stream/);
 assert.equal(dossier.alternateRoutes.length, 3);
 assert.ok(dossier.alternateRoutes.every((route) => route.status === "non-selected-after-release"));
 assert.ok(dossier.boundaries.some((boundary) => /user-wallet signing/.test(boundary)));
+
+const livePrototype = buildCoordinationMarketPrototype(await readJson("fixtures/CoordinationMarketPrototype.json"));
+const liveBrief = buildCoordinationMarketSettlementBrief({
+  fixture: await readJson("fixtures/CoordinationMarketSettlementBrief.json"),
+  coordinationPrototype: livePrototype
+});
+assert.equal(liveBrief.blockedPacks.length, 1);
+assert.equal(liveBrief.blockedPacks[0].packId, "pack-stag-liquidity-migration-research");
+assert.equal(liveBrief.blockedPacks[0].status, "not-satisfiable");
+assert.equal(liveBrief.blockedPacks[0].nextRoute, "refund-or-keep-accumulating");
 
 const checkedIn = await readJson("artifacts/coordination-market-evidence-dossier.json");
 assert.equal(checkedIn.status, dossier.status);

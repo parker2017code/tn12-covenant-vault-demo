@@ -170,12 +170,23 @@ main {
   padding: 34px 0 56px;
 }
 
+.proof-home main {
+  padding-top: 20px;
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
   gap: 24px;
   align-items: stretch;
   margin-bottom: 24px;
+}
+
+.proof-hero {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 16px;
 }
 
 .hero > div,
@@ -191,16 +202,30 @@ main {
   padding: clamp(24px, 4vw, 42px);
 }
 
+.proof-hero > div,
+.proof-hero .facts {
+  padding: clamp(18px, 3vw, 30px);
+}
+
 .hero h2 {
   max-width: 780px;
   font-size: clamp(34px, 5vw, 62px);
   line-height: 1.03;
 }
 
+.proof-hero h2 {
+  max-width: 720px;
+  font-size: clamp(32px, 4vw, 48px);
+}
+
 .hero p:not(.status) {
   max-width: 760px;
   color: var(--muted);
   font-size: 18px;
+}
+
+.proof-hero p:not(.status) {
+  font-size: 16px;
 }
 
 .status {
@@ -233,6 +258,11 @@ main {
 .facts strong {
   display: block;
   font-size: 28px;
+}
+
+.proof-hero .facts strong {
+  font-size: 22px;
+  line-height: 1.16;
 }
 
 .facts p,
@@ -729,7 +759,7 @@ progress::-moz-progress-bar {
 }
 
 .proofs {
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .indexer {
@@ -2132,6 +2162,48 @@ progress::-moz-progress-bar {
   color: var(--muted);
 }
 
+.product-lanes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.product-lanes .product-group {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--surface-soft);
+}
+
+.product-lanes .product-group ul {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-lanes a {
+  min-height: 0;
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  color: var(--accent);
+  background: transparent;
+  overflow-wrap: anywhere;
+}
+
+.product-lanes a::after {
+  content: none;
+}
+
+.product-lanes a:hover {
+  transform: none;
+  text-decoration: underline;
+}
+
 .runbook-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2978,6 +3050,9 @@ progress::-moz-progress-bar {
   .topbar {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   .nav-group {
@@ -2986,6 +3061,27 @@ progress::-moz-progress-bar {
 
   .hero h2 {
     font-size: 38px;
+  }
+
+  .proof-home main {
+    padding-top: 16px;
+  }
+
+  .proof-hero {
+    gap: 12px;
+  }
+
+  .proof-hero h2 {
+    font-size: 34px;
+  }
+
+  .proof-hero > div,
+  .proof-hero .facts {
+    padding: 16px;
+  }
+
+  .proof-hero .facts strong {
+    font-size: 20px;
   }
 }
 

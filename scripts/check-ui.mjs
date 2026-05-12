@@ -138,6 +138,7 @@ async function checkRenderedPages(url) {
         assert.equal(response?.ok(), true, `${path} did not return 200`);
         assert.deepEqual(errors, [], `${path} had browser errors: ${errors.join("; ")}`);
         await waitForDynamicContent(page, path);
+        if (path === "index.html") await assertProofHomeDensity(page, viewport.name);
         await assertNoViewportOverflow(page, `${path} ${viewport.name}`);
         if (viewport.name === "mobile") await assertMobileControls(page, path);
         assert.equal(await page.locator('.brand-home[href="index.html"]').count(), 1, `${path} needs one header home link`);
@@ -243,7 +244,7 @@ async function checkRenderedPages(url) {
     assert.deepEqual(passiveClaimCards.filter((item) => item.cursor === "pointer"), [], "passive claim cards must not look clickable");
     assert.deepEqual(passiveClaimCards.filter((item) => /Open/.test(item.after)), [], "passive claim cards must not show Open affordance");
     assert.equal(await page.locator("details.lab-drawer").count(), 7);
-    assert.equal(await page.locator("details.lab-drawer[open]").count(), 1);
+    assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
     assert.equal(firstPanelId, "product-map");
     await page.goto(`${url}lab.html#scheduler-workbench`, { waitUntil: "domcontentloaded" });
@@ -267,6 +268,8 @@ async function checkRenderedPages(url) {
     assert.match(coordinationText, /Reviewer dossier/);
     assert.match(coordinationText, /100 TKAS/);
     assert.match(coordinationText, /4d84472e/);
+    assert.match(coordinationText, /threshold not met/i);
+    assert.match(coordinationText, /refund-or-keep-accumulating/);
     await page.goto(`${url}lab.html#submit`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
     const submitText = await page.locator("#submit").innerText();
@@ -278,6 +281,21 @@ async function checkRenderedPages(url) {
   }
 }
 
+async function assertProofHomeDensity(page, viewportName) {
+  const metrics = await page.evaluate(() => {
+    const hero = document.querySelector(".proof-hero");
+    const proofs = document.querySelector("#proofs");
+    return {
+      heroHeight: Math.round(hero?.getBoundingClientRect().height || 0),
+      proofsTop: Math.round(proofs?.getBoundingClientRect().top || 0),
+    };
+  });
+  const maxHeroHeight = viewportName === "mobile" ? 620 : 340;
+  const maxProofsTop = viewportName === "mobile" ? 850 : 520;
+  assert.ok(metrics.heroHeight > 0 && metrics.heroHeight <= maxHeroHeight, `proof home ${viewportName} hero too tall: ${metrics.heroHeight}px`);
+  assert.ok(metrics.proofsTop > 0 && metrics.proofsTop <= maxProofsTop, `proof home ${viewportName} proof table too low: ${metrics.proofsTop}px`);
+}
+
 async function waitForDynamicContent(page, path) {
   const selectors = {
     "index.html": ["#proof-list tr[data-proof-row], #proof-list article", "#reviewer article"],
@@ -287,7 +305,7 @@ async function waitForDynamicContent(page, path) {
   }[path] || [];
 
   for (const selector of selectors) {
-    await page.waitForSelector(selector, { state: "attached", timeout: 7000 });
+    await page.waitForFunction((targetSelector) => document.querySelectorAll(targetSelector).length > 0, selector, { timeout: 7000 });
   }
 }
 
