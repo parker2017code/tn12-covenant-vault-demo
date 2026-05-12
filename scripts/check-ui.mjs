@@ -141,6 +141,7 @@ async function checkRenderedPages(url) {
         await assertNoViewportOverflow(page, `${path} ${viewport.name}`);
         if (viewport.name === "mobile") await assertMobileControls(page, path);
         assert.equal(await page.locator('.brand-home[href="index.html"]').count(), 1, `${path} needs one header home link`);
+        assert.equal(await page.locator(".brand-home").evaluate((node) => getComputedStyle(node).cursor), "pointer", `${path} header home link must look clickable`);
         const emptyLiveRegions = await page.locator("[aria-live]").evaluateAll((nodes) => nodes
           .filter((node) => !node.textContent.trim() && node.children.length === 0)
           .map((node) => node.id || node.className || node.tagName));
