@@ -28,10 +28,12 @@ Show this first:
 - Avoid public notes about how the page should work.
 - Prefer "next rail" over "missing rail" when a lane is intentionally unfinished.
 - Prefer direct wording: "wallet signing is next" instead of "not production."
+- Use current Kaspa.org/docs pages for orientation, then use TN12 accepted txids, generated artifacts, KIPs, Rusty Kaspa source/tests, and release notes for proof or status changes.
 
 ## Visual Direction
 
 - Dark mode is the default.
 - Light mode must remain available.
 - Avoid terminal-dashboard overload.
-- Favor warm cards, clear actions, and short sections.
+- Favor evidence rows, clear actions, short sections, and cards only for real choices or repeated records.
+- Keep public web basics coherent on every release: favicon set, touch icon, manifest, Open Graph/Twitter preview, mobile screenshots, and HTTP-200 local preview.

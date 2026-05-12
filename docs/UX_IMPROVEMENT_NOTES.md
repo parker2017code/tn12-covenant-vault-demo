@@ -25,6 +25,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 - Proof-core shorthand such as `7 core + 2 auction + 7 role-separated + 53 indexed records` is useful for reviewers but not meaningful as the main public proof summary.
 - Repeated `Technical:` drawer labels make the page feel like an audit console. Use fewer, more natural labels: Proof details, Replay details, Wallet handoff, Build lab.
 - The results page currently has the strongest public entry: it starts with concrete activity and should be treated as the default non-builder path.
+- Before changing protocol/status language, check current Kaspa.org/docs pages for orientation, then verify with TN12 artifacts, accepted txids, Rusty Kaspa source/tests, KIPs, or releases. Do not let web search summaries become proof.
 - Mobile playground is compelling but too long. It needs a sticky or top-level `Observe / Repeat / Build` path and less visible copy-button noise.
 - The `Go` circle decoration on cards can look odd or overlap; either refine it or remove it where it harms readability.
 - The TN12 mobile theme toggle can land awkwardly; keep it smaller and less visually dominant.
@@ -102,7 +103,8 @@ This is an internal working note for product cleanup. Keep the public site focus
    - `playground:funding-draft` funds fresh role wallets from a separate source wallet/outpoint; it does not spend from the new role wallets.
 5. Keep public pages minimal by default. Long operator commands, artifact inventories, old planning notes, and generated matrices belong in docs/lab drawers.
 6. Run the public framing pass: money-first, covenants as constrained spend rules, based apps as app state anchored to Kaspa evidence, and vProgs as later architecture rather than the default product claim.
-7. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
+7. Treat web production basics as release blockers for public UI work: favicon/touch/manifest/social preview, mobile/desktop render, long-token overflow, local preview HTTP 200, and green UI smoke.
+8. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
 
 ## Current UI Rule
 

@@ -55,8 +55,12 @@
   - https://github.com/kaspanet/rusty-kaspa/tree/toccata
   - https://github.com/kaspanet/silverscript
   - https://github.com/kaspanet/vprogs
+  - https://docs.kaspa.org/
+  - https://kaspa.org/build
+  - https://kaspa.org/developments/
   - https://medium.com/@michaelsuttonil/kaspa-covenants-toccata-hard-fork-outlook-a4d81a40900c
 - Use Kaspa Explained as internal framing discipline, not protocol authority.
+- Use current Kaspa.org/docs pages for orientation and source discovery. Use TN12 artifacts, Rusty Kaspa source/tests, KIPs, releases, and accepted txids before changing proof/live status.
 - Use public AI-agent guidance and open-source repo examples as operator input only. Private company practices may be unknown; do not invent them.
 
 ## Validation
