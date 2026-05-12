@@ -51,6 +51,7 @@ import {
 import {
   cssEscape,
   escapeHtml,
+  publicLaneText,
   shortAddress,
   shortTxid,
   sompiToTkas
@@ -67,6 +68,7 @@ import {
 import { renderDefiSimulationSurface } from "./src/ui/renderers/defiSimulationSurface.mjs";
 import { renderPlaygroundExplorer } from "./src/ui/renderers/playgroundExplorer.mjs";
 import { renderResultsExplorer } from "./src/ui/renderers/resultsExplorer.mjs";
+import { renderSelfServeLaneRunbook } from "./src/ui/renderers/selfServeLaneRunbook.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -124,7 +126,6 @@ const stableIssuerListNode = document.querySelector("#stable-issuer-list");
 const agentSummaryNode = document.querySelector("#agent-summary");
 const agentListNode = document.querySelector("#agent-list");
 const buildQueueNode = document.querySelector("#build-queue");
-const selfServeLanesNode = document.querySelector("#self-serve-lanes");
 const schedulerWorkbenchSummaryNode = document.querySelector("#scheduler-workbench-summary");
 const schedulerWorkbenchJobsNode = document.querySelector("#scheduler-workbench-jobs");
 const schedulerWorkbenchPredictionsNode = document.querySelector("#scheduler-workbench-predictions");
@@ -1371,72 +1372,6 @@ async function renderBuildQueue() {
   }
 }
 
-async function renderSelfServeLaneRunbook() {
-  if (!selfServeLanesNode) return;
-
-  try {
-    const runbook = await fetchJson("artifacts/self-serve-lane-runbook.json");
-    selfServeLanesNode.innerHTML = "";
-
-    for (const lane of runbook.lanes) {
-      const article = document.createElement("article");
-      article.className = `self-serve-card lane-${cssEscape(lane.status)}`;
-      article.innerHTML = `
-        <div class="self-serve-card-head">
-          <span>${escapeHtml(publicLaneStatus(lane.status))}</span>
-          <a href="${escapeHtml(lane.uiTarget)}">${escapeHtml(publicLaneText(lane.title))}</a>
-        </div>
-        <p><a class="button-link" href="${escapeHtml(lane.uiTarget)}">Open this lane</a></p>
-        <p class="self-serve-layer">${escapeHtml(lane.stackLayer.replaceAll("-", " "))}</p>
-        <div>
-          <strong>Available now</strong>
-          <ul>${lane.availableNow.map((item) => `<li>${escapeHtml(publicLaneText(item))}</li>`).join("")}</ul>
-        </div>
-        <details>
-          <summary>How to run it</summary>
-          <ol>${lane.runSteps.map((item) => `<li>${escapeHtml(publicLaneText(item))}</li>`).join("")}</ol>
-        </details>
-        <details>
-          <summary>Evidence and commands</summary>
-          <p>${lane.evidence.map((item) => artifactLink(item, publicLaneText(item))).join(" ")}</p>
-          <p>${lane.commands.map((item) => `<code>${escapeHtml(publicLaneText(item))}</code>`).join(" ")}</p>
-        </details>
-        <p class="self-serve-open-rail"><strong>Missing piece:</strong> ${escapeHtml(publicLaneText(lane.openRail.join(" ")))}</p>
-      `;
-      selfServeLanesNode.append(article);
-    }
-  } catch (error) {
-    selfServeLanesNode.textContent = `Self-serve runbook unavailable: ${error.message}`;
-  }
-}
-
-function publicLaneStatus(status) {
-  const labels = {
-    "required-rail": "wallet",
-    "research-play": "study",
-    "play-next": "try next",
-    "play-now": "try now",
-    "design-now": "design",
-    "start-here": "start"
-  };
-  return labels[status] || status.replaceAll("-", " ");
-}
-
-function publicLaneText(value) {
-  return String(value)
-    .replace(/External wallet handoff/g, "Use your own wallet")
-    .replace(/external wallet signing/gi, "user-wallet signing")
-    .replace(/external signer/gi, "wallet signer")
-    .replace(/external-signer/gi, "wallet-signer")
-    .replace(/external-wallet/gi, "user-wallet")
-    .replace(/6 of 10 benchmark rails complete/g, "6 lab checks have repo evidence")
-    .replace(/benchmark rails complete/gi, "lab checks have repo evidence")
-    .replace(/production signer/gi, "user-wallet signing")
-    .replace(/No autonomous payout; /g, "")
-    .replace(/No AMM custody, lending custody, liquidation engine, oracle truth, or user-wallet signing yet\./g, "AMM custody, lending custody, liquidation, oracle inputs, and user-wallet signing still need separate rules.")
-    .replace(/No opacity, capital multiplexing, composability, or atomic Hunt execution yet\./g, "Privacy, shared capital, composition, and settlement still need separate rules.");
-}
-
 async function renderUniversalSchedulerWorkbench() {
   if (!schedulerWorkbenchSummaryNode || !schedulerWorkbenchJobsNode || !schedulerWorkbenchPredictionsNode) return;
 
@@ -1738,15 +1673,6 @@ function applyVaultTemplate(template) {
   }
   renderVault();
   document.querySelector("#designer")?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function artifactLink(path, label = path) {
-  const value = String(path || "");
-  const text = String(label || value);
-  if (/^(artifacts|fixtures|docs|contracts|scripts|src)\//.test(value)) {
-    return `<a href="${escapeHtml(value)}"><code>${escapeHtml(text)}</code></a>`;
-  }
-  return `<code>${escapeHtml(text)}</code>`;
 }
 
 async function fetchManualTransactionOutputs() {
