@@ -2,7 +2,7 @@
 
 Reviewed: 2026-05-12
 
-This is the product plan for turning the TN12 proof lab into something people can use themselves. It does not upgrade any claim. Accepted TN12 evidence, planner/indexer state, wallet-policy state, and blocked production rails must stay visibly separate.
+This is the product plan for turning the TN12 proof lab into something people can use themselves. Accepted TN12 evidence, planner/indexer state, wallet-policy state, and blocked production rails stay visibly separate.
 
 ## Product Rule
 
@@ -14,7 +14,7 @@ Every lane should eventually support the same loop:
 4. Sign outside the repo when custody is involved.
 5. Submit through a route that preserves the required transaction fields.
 6. Replay accepted txids before promoting app state.
-7. Show blocked actions when a rail is not actually enforced.
+7. Show blocked actions when enforcement is still missing.
 
 ## App Stack Framing
 
@@ -69,7 +69,7 @@ The current repo version is intentionally small:
 
 The full research version is hard because it wants privacy, capital multiplexing, solver incentives, censorship resistance, MEV resistance, atomic execution, and app-to-app composability. The repo can still build the first 20% now: transparent commitments, accepted payload receipts, deterministic solver output, wallet-reviewed settlement drafts, and replayed accepted evidence.
 
-Universal scheduler means the reusable execution layer for these app jobs. It should eventually schedule payload receipts, solver jobs, proof jobs, auction settlement, coordination-pack settlement, agent tasks, and DeFi reducer actions. It is not a protocol claim yet; in this repo it starts as artifact-backed job routing plus accepted replay.
+Universal scheduler means the reusable execution layer for these app jobs. It should eventually schedule payload receipts, solver jobs, proof jobs, auction settlement, coordination-pack settlement, agent tasks, and DeFi reducer actions. Current repo scope: artifact-backed job routing plus accepted replay.
 
 ## Current Lane Status
 

@@ -1,6 +1,6 @@
 # Command Runbook
 
-Use this before running commands copied from public pages. Commands have different safety classes; do not treat every snippet as safe to run without review.
+Use this before running commands copied from public pages. Commands have different safety classes; review each snippet before running it.
 
 ## Start Here
 

@@ -2,11 +2,11 @@
 
 Reviewed: 2026-05-09
 
-This repo uses AI help, but AI output is not a source of truth. The source of truth is primary documentation, implementation code, accepted TN12 transaction evidence, generated artifacts, and explicit repo status lanes.
+This repo uses AI help. Source of truth lives in primary documentation, implementation code, accepted TN12 transaction evidence, generated artifacts, and explicit repo status lanes.
 
 ## Why This Exists
 
-LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine scaffolding, and test generation. They are weak at current protocol status, exact API surfaces, security boundaries, and knowing when they are guessing. Crypto makes those weaknesses expensive because a wording mistake can become a custody claim, and a code mistake can become a signing, payload, or indexing error.
+LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine scaffolding, and test generation. Current protocol status, exact API surfaces, security boundaries, and guess detection require source checks. Crypto makes that expensive because a wording mistake can become a custody claim, and a code mistake can become a signing, payload, or indexing error.
 
 ## Hard Rules
 
@@ -71,9 +71,9 @@ Repo rule: before extending a pattern, inspect the adjacent artifact shape and t
 
 ## Kaspa Daily Q&A Guardrails
 
-- Base of Liquidity is useful narrative framing, not an app, use case, or adoption strategy by itself.
-- Generic merchant/POS payments should not be treated as the main 2026 adoption vector. Keep invoice, payload, receipt, and wallet work because those are necessary rails, not because speed alone creates adoption.
-- Coordination markets deserve higher priority because they are the founder-highlighted product category. The repo's current coordination-market artifact is still a transparent toy planner, not Staghunt/Hashdag production infrastructure.
+- Base of Liquidity is narrative framing. Adoption strategy still needs concrete apps, repeat usage, liquidity, and visible on-chain activity.
+- Generic merchant/POS payments are rails rather than the main 2026 adoption vector. Keep invoice, payload, receipt, and wallet work because those are necessary rails, not because speed alone creates adoption.
+- Coordination markets deserve higher priority because they are the founder-highlighted product category. Current repo status: transparent planner and proof-backed prototype slices; Staghunt/Hashdag production infrastructure still needs custody, privacy, solver, settlement, and wallet rails.
 - Narrative has to connect to products and visible on-chain activity. Broad marketing copy without usable artifacts should be down-ranked.
 - Keep the Kaspa app strategy L1-first. Do not default to EVM compatibility or external L2 migration unless a source and artifact make that dependency explicit.
 - Real adoption analysis should look for repeat usage, useful app activity, liquidity, durable builders, and clear on-chain metrics, not just price, campaign traffic, raw mints, or demos.

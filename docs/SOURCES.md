@@ -29,7 +29,7 @@
 
 - Web3 Festival HK 2026, Junny Ho, "Scaling Trustless Coordination": https://www.youtube.com/watch?v=b3wPZ04p410
 
-Use this as narrative context, not proof evidence. The useful claims are about framing: coordination problems as stag hunts, credible commitments, conditional participation, economic exposure, and real-time decentralized confirmation as a prerequisite for coordination markets. Do not cite it as activation evidence for Toccata, vProgs, DeFi, production coordination markets, or this repo's TN12 proof status.
+Use this for the coordination-market thesis: stag hunts, credible commitments, conditional participation, economic exposure, and real-time decentralized confirmation. It supports product direction. Keep accepted proof claims tied to accepted txids and mainnet labels tied to activation evidence.
 
 ## TN12 Public Utilities
 
@@ -102,7 +102,7 @@ Every copied idea must keep a Kaspa status lane:
 
 ## AI-Agent And Coding Practice Sources
 
-Use public agent practice as operator input, not as product truth. Some high-performing company workflows are private or only partly described publicly; record that boundary instead of inventing internal practice.
+Use public agent practice as operator input. Product truth comes from repo artifacts, accepted evidence, and source-labeled implementation.
 
 Current public sources encoded by `npm run ai:discipline`:
 
@@ -119,7 +119,7 @@ Practical rule: prefer specific repo commands, files, and failure traps over gen
 
 ## Local Finding
 
-On 2026-05-06, `curl -I -L https://faucet-tn12.kaspanet.io/` returned HTTP 403 with a Cloudflare challenge. That does not mean the faucet is down for browsers; it means this shell cannot automate the request.
+On 2026-05-06, `curl -I -L https://faucet-tn12.kaspanet.io/` returned HTTP 403 with a Cloudflare challenge. Shell automation was blocked; browser access needs separate verification.
 
 `curl -I -L https://tn12.kaspa.stream/` returned HTTP 200.
 

@@ -13,6 +13,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 - The first screen should route to three jobs: see the proof, try the playground, inspect technical evidence.
 - Treat one reported issue as a class until proven otherwise. One confusing command means audit all visible commands; one fake-clickable card means audit all similar cards; one bad mobile control means inspect the whole mobile chrome.
 - Treat cringey language as a product bug: vague roadmap fog, fake-official labels, repeated defensive disclaimers, unexplained jargon, internal planning language, and claims bigger than the evidence.
+- Apply this standard across public pages and LLM-facing files. Every touched page, repo guide, generated artifact summary, handoff note, and context file should be direct, sourced or status-labeled, necessary, and free of defensive filler.
 - Keep visual weight restrained: hero text, cards, labels, colors, and decoration should create hierarchy without becoming theatrical or oversized.
 - Write like the site should read. No vague process labels. Say the job plainly: shorten the page, link the card, remove the fake button, move the detail to docs, explain the command prereq, or show what the app does.
 - For broad cleanup, use read-only parallel agents to search faster: clickable-looking elements, cringey copy, mobile layout, source/reference issues, command issues, and strong-site patterns. The main agent owns edits and checks.

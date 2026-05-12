@@ -4,7 +4,7 @@ These are the durable rules from the escrow cancel fix. They are for future TN12
 
 ## Accepted State Beats Local Confidence
 
-- A local txid match is useful, but it is not proof that the app state changed.
+- Accepted app state starts after accepted transaction evidence.
 - After submit, fetch the transaction and record `is_accepted`, accepting block data, and expected outputs.
 - Preserve failed artifacts, but label the failure plainly: bad config, stale SDK, submit-surface mismatch, or protocol rejection.
 

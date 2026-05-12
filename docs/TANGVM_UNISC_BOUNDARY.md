@@ -2,13 +2,13 @@
 
 Reviewed: 2026-05-11
 
-This repo can prototype pieces that point toward event-driven Kaspa apps. It does not implement TangVM, a protocol universal scheduler, miner oracle consensus, or full vProgs.
+This repo prototypes pieces that point toward event-driven Kaspa apps. Current scope excludes TangVM, a protocol universal scheduler, miner oracle consensus, and full vProgs.
 
 ## Upstream Context
 
 `kaspanet/vprogs` is a real early-development Rust monorepo for based computation on Kaspa: `https://github.com/kaspanet/vprogs`. Its public README describes a transaction scheduler, execution runtime, storage management, and layers for `core`, `storage`, `state`, `scheduling`, `transaction-runtime`, `node`, and `zk`.
 
-That matters for this repo because we should align artifact shapes with scheduler/runtime concepts where useful. It does not mean this TN12 lab is itself the vProgs runtime.
+That matters for this repo because artifact shapes should align with scheduler/runtime concepts where the fit is real. Current TN12 lab scope remains separate from the vProgs runtime.
 
 ## Working Definition
 
@@ -21,7 +21,7 @@ Universal scheduler / UniSc:
 TangVM:
 - An application construct for programs whose state depends on external events or continuously updated variables.
 - The envisioned stack includes event attestations, trigger rules, scheduler economics, and automated conditional execution.
-- It is not proven here and should not be described as live in this repo.
+- Current status here: source-aligned design context, not live repo functionality.
 
 ## What This Repo Already Has
 

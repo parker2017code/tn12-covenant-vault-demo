@@ -4,14 +4,14 @@ Reviewed: 2026-05-09
 
 ## Why This Exists
 
-The repo's wallet-submit lane is not a wallet. It is a review and handoff surface for exact transaction drafts. KasSigner/KasSee is useful because it is a live public reference for the missing user-wallet signing boundary:
+The repo's wallet-submit lane is a review and handoff surface for exact transaction drafts. User-wallet signing is the missing boundary. KasSigner/KasSee is a live public reference for that shape:
 
 - a watch-only companion builds unsigned transactions from public wallet data;
 - the signer keeps private keys off the networked device;
 - signing moves through QR/partially signed transaction formats;
 - the broadcaster only promotes state after the signed transaction is submitted and accepted.
 
-That is close to the shape this repo wants, while still being different from the TN12 covenant proof work.
+That is close to the shape this repo wants, while the current TN12 covenant proof work remains a separate evidence lane.
 
 ## KasSigner / KasSee
 

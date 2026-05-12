@@ -4,9 +4,8 @@ Reviewed: 2026-05-12
 
 Evidence commit reviewed before this note: `2263da4674dc395215a65d89e564908b2e26d1a6`
 
-This is a release-candidate review note for the proof core. It is not a product
-release, not a wallet release, not a DeFi release, and not a mainnet readiness
-claim.
+This is a release-candidate review note for the proof core. Scope excludes
+product release, wallet release, DeFi release, and mainnet readiness.
 
 ## Scope
 

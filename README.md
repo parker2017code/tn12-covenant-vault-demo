@@ -1,8 +1,8 @@
 # TN12 Covenant Lab
 
-Kaspa testnet-12 repo for covenant proof spends, payload receipts, app-state prototypes, and replay guards. Testnet-only. It is not a mainnet wallet, not a mainnet activation record, and not an audited custody product.
+Kaspa testnet-12 repo for covenant proof spends, payload receipts, app-state prototypes, and replay guards. Scope: testnet-only evidence lab. Mainnet wallet, mainnet activation, and audited custody claims need separate evidence.
 
-No independent security audit has been completed. Do not use this repo with mainnet funds.
+No independent security audit has been completed. Mainnet funds are out of scope.
 
 Percentages in this repo mean mainnet deployment readiness unless a line explicitly says TN12/demo progress.
 

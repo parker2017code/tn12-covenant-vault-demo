@@ -2,13 +2,12 @@
 
 This guide is for someone starting with a terminal and no repo context.
 
-TN12 is Kaspa testnet-12. The commands here are for testnet proof work, local review artifacts, and replay checks. They are not mainnet wallet commands.
+TN12 is Kaspa testnet-12. The commands here are for testnet proof work, local review artifacts, and replay checks. Mainnet wallet commands require production tooling and mainnet-specific documentation.
 
 If your goal is mainnet Kaspa terminal work, use public Kaspa node, wallet, SDK,
-and explorer documentation. This repo can teach the pattern of verify, draft,
-submit, and replay on testnet. It should not be copied into mainnet unless the
-same command path exists in production tooling and you understand the key and
-network boundaries.
+and explorer documentation. This repo teaches the pattern of verify, draft,
+submit, and replay on testnet. Mainnet use requires the same command path in
+production tooling plus clear key and network boundaries.
 
 The larger goal is not to make everyone depend on this repo or one explorer. It
 is to make the verification path legible: run checks, inspect txids, compare
@@ -435,4 +434,4 @@ Not built as app-controlled custody:
 - production wallet signing;
 - public-user wallet signing round trip.
 
-So the CLI can take you from blank terminal to real TN12 wallet movement and replayed DeFi-style state. It does not yet take you to a production DeFi product that controls user funds.
+So the CLI can take you from blank terminal to real TN12 wallet movement and replayed DeFi-style state. Production DeFi with user funds still needs custody, wallet signing, enforcement, and audit rails.
