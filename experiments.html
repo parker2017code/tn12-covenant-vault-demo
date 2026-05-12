@@ -52,7 +52,7 @@
       <aside class="facts">
         <span>Current spotlight</span>
         <strong>Blitz Mux Arena. Treasury Wars. Covenant-Owned Asset Duel.</strong>
-        <p>The fourth mode, Covenant Heist, shows the blocked paths and negative guards.</p>
+        <p>The fourth mode, Covenant Heist, shows blocked paths and negative guards.</p>
       </aside>
     </section>
 
@@ -69,17 +69,18 @@
           <ul>
             <li>Mux / worker contract family.</li>
             <li>Template routing.</li>
-            <li>Local proof artifact built.</li>
+            <li>Accepted TN12 genesis funding output.</li>
           </ul>
         </article>
         <article>
           <span>2</span>
           <strong>Treasury Wars</strong>
-          <p>Players spend from capped treasuries. The accepted TN12 path enforces amount, destination, continuation state, and relocked change.</p>
+          <p>Players spend from capped treasuries. The accepted TN12 path now proves two cumulative spends, continuation state, and relocked change.</p>
           <ul>
             <li>Active <code>RecurringTreasuryVault.sil</code> rail.</li>
             <li>Accepted covenant-genesis funding output.</li>
-            <li>Accepted under-cap covenant spend.</li>
+            <li>Two accepted under-cap covenant spends.</li>
+            <li>Over-cap continuation candidate blocked locally.</li>
           </ul>
         </article>
         <article>
@@ -88,7 +89,7 @@
           <p>An asset move requires the owner covenant input in the same transaction. The proof uses sibling authority instead of nested execution.</p>
           <ul>
             <li>ICC / sibling-input authorization.</li>
-            <li>Local proof artifact built.</li>
+            <li>Accepted TN12 genesis funding output.</li>
             <li>Missing or wrong sibling fails.</li>
           </ul>
         </article>
@@ -116,20 +117,20 @@
             <tr>
               <td>Blitz Mux Arena</td>
               <td>mux / worker contract family</td>
-              <td>local-proof-passed</td>
-              <td>funded TN12 route/return preflight</td>
+              <td>accepted-genesis-funded-preflight</td>
+              <td>accepted mux route to worker, then accepted worker return</td>
             </tr>
             <tr>
               <td>Treasury Wars</td>
               <td>stateful singleton vault</td>
-              <td>accepted-script-enforced-under-cap-spend</td>
-              <td>record continuation state, then prove cumulative cap behavior</td>
+              <td>accepted-cumulative-cap-proof</td>
+              <td>window reset proof, then user-wallet handoff</td>
             </tr>
             <tr>
               <td>Covenant-Owned Asset Duel</td>
               <td>ICC / covenant-owned asset</td>
-              <td>local-proof-passed</td>
-              <td>funded TN12 sibling-input preflight</td>
+              <td>accepted-genesis-funded-preflight</td>
+              <td>accepted sibling-authorized strike spend</td>
             </tr>
             <tr>
               <td>Covenant Heist</td>
@@ -180,9 +181,9 @@
         <article>
           <span>Do next</span>
           <ul>
-            <li>Submit the covenant-bound recurring vault funding draft.</li>
-            <li>Decide whether Blitz Mux gets a funded TN12 preflight.</li>
-            <li>Decide whether Asset Duel gets a funded TN12 preflight.</li>
+            <li>Build the Blitz Mux route/return live spend path.</li>
+            <li>Build the Asset Duel sibling-input live spend path.</li>
+            <li>Keep the other three experiments local/design until accepted evidence exists.</li>
           </ul>
         </article>
       </div>

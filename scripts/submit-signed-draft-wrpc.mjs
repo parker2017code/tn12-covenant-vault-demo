@@ -15,6 +15,7 @@ const artifactPath = process.argv[2] || "artifacts/signed-drafts/payload-receipt
 const shouldSubmit = process.argv.includes("--submit");
 const shouldProbe = process.argv.includes("--probe");
 const shouldAllowOrphan = process.argv.includes("--allow-orphan");
+const shouldAllowBlockedLocalEngine = process.argv.includes("--allow-blocked-local-engine");
 const artifact = JSON.parse(await readFile(artifactPath, "utf8"));
 const { RpcClient } = getKaspaWasmRuntime().module;
 const url = process.env.KASPA_WRPC_URL || "";
@@ -39,6 +40,10 @@ if (!shouldSubmit && !shouldProbe) {
 
 if (!url) {
   throw new Error("KASPA_WRPC_URL is required for wRPC probe/submit. Example: KASPA_WRPC_URL=ws://127.0.0.1:18210 KASPA_WRPC_ENCODING=json KASPA_WRPC_NETWORK_ID=testnet-12 node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/payload-receipt-self-send.json --probe");
+}
+
+if (shouldSubmit) {
+  assertSubmitAllowed(artifact);
 }
 
 if (!candidate.txidMatches) {
@@ -111,4 +116,12 @@ async function callRpc(fn) {
 
 function stringifyJson(value) {
   return JSON.stringify(value, (_, item) => typeof item === "bigint" ? item.toString() : item, 2);
+}
+
+function assertSubmitAllowed(row) {
+  const status = String(row.status || "");
+  const localEngineRejected = row.localChecks?.engineAcceptedGeneratedSigScript === false;
+  if ((status.startsWith("blocked-") || localEngineRejected) && !shouldAllowBlockedLocalEngine) {
+    throw new Error(`Refusing to submit ${artifactPath}: artifact status is ${status || "missing"} and local engine check is ${row.localChecks?.engineAcceptedGeneratedSigScript}. Use --allow-blocked-local-engine only for deliberate negative-submit research.`);
+  }
 }

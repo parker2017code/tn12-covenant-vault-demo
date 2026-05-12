@@ -12,7 +12,7 @@ const { normalizeEncoding } = await import("../src/wrpcSubmitCandidate.mjs");
 
 globalThis.WebSocket = WebSocket;
 
-const contractOutpoint = await readJson("fixtures/RecurringTreasuryVaultContractOutpoint.json");
+const contractOutpoint = await readJson(process.env.CONTRACT_OUTPOINT || "fixtures/RecurringTreasuryVaultContractOutpoint.json");
 const endpoint = process.env.KASPA_WRPC_URL || process.env.TN12_VIRTUAL_CHAIN_RPC_URL || "ws://tn12-node.kaspa.com:17210";
 const encoding = normalizeEncoding(process.env.KASPA_WRPC_ENCODING || "borsh");
 const networkId = process.env.KASPA_WRPC_NETWORK_ID || "testnet-12";
@@ -42,7 +42,7 @@ try {
       encoding: encoding.label,
       networkId
     },
-    target: "Find whether the funded RecurringTreasuryVault output carries a live covenant_id through wRPC block or UTXO data.",
+    target: "Find whether the selected RecurringTreasuryVault output carries a live covenant_id through wRPC block or UTXO data.",
     fundingOutpoint: {
       txid: contractOutpoint.txid,
       outputIndex: contractOutpoint.outputIndex,

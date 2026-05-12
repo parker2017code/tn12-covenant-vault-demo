@@ -1,0 +1,50 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "recurring-treasury-vault-continuation",
+  "contract": "RecurringTreasuryVault",
+  "fetchedAt": "2026-05-12T22:39:01.463Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+  "txid": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+  "outputIndex": 1,
+  "amountTkas": 124.9998,
+  "amountSompi": "12499980000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:pqkenftwds37q008yd8s3rg8gvcw3u2xrpgevyp0pyn2ckeqt5gysfy5vfr6c",
+  "scriptPublicKey": "aa202d99a56e6c23e03de7234f088d074330e8f146185196102f0926ac5b205d104887",
+  "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0",
+  "redeemScriptHex": "0800f902950000000008f80b97000000000078567956795579577920d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac697600a069537978930500eb08bf01a169527954795279939c697855799c69b9be789402204e947600a06900c3201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700030000207c7e01ac7e876900c252799c69537958cd01087c7e537958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877e51c3876951c2789c69b9cb519c695a7958cd01087c7e5a7958cd01087c7e7eb976c976022201940112937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769007a75007a75007a75007a75007a7575757575757551",
+  "redeemScriptBytes": 290,
+  "status": "accepted-continuation-active",
+  "acceptingBlockBlueScore": 10001259,
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+  "state": {
+    "capSompi": "7500000000",
+    "windowStart": "9899000",
+    "spentInWindowSompi": "2500000000",
+    "minerFeeSompi": "20000"
+  },
+  "sourceEvidence": {
+    "draft": "artifacts/signed-drafts/recurring-treasury-vault-live-spend.json",
+    "evidence": "artifacts/recurring-treasury-vault-live-spend-evidence.json",
+    "spendTxid": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+    "output1ContinuationAmountMatchesDraft": true,
+    "output1ContinuationScriptMatchesDraft": true,
+    "output1ContinuationCovenantMatchesDraft": true
+  },
+  "raw": {
+    "address": "kaspatest:pqkenftwds37q008yd8s3rg8gvcw3u2xrpgevyp0pyn2ckeqt5gysfy5vfr6c",
+    "outpoint": {
+      "transactionId": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+      "index": 1
+    },
+    "utxoEntry": {
+      "amount": "12499980000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa202d99a56e6c23e03de7234f088d074330e8f146185196102f0926ac5b205d104887"
+      },
+      "blockDaaScore": "10001259",
+      "isCoinbase": false
+    }
+  }
+}

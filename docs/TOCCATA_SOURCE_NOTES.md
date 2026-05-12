@@ -80,25 +80,23 @@ recurring-vault spend through that route. The next live attempt needs either a
 Rust submit route or a JS SDK route that preserves `TransactionOutput.covenant`
 for the continuation output.
 
-The Rust route now has a pre-broadcast probe:
+The Rust route has a pre-broadcast probe:
 `artifacts/recurring-treasury-vault-rust-submit-route-probe.json`. It shows the
 Rust RPC `SubmitTransactionRequest` model preserves output covenant binding and
-tx v1 `computeBudget`. It does not prove broadcast, mempool acceptance, or an
-accepted TN12 recurring-vault spend.
+tx v1 `computeBudget`.
 
-The live-spend preflight is
+The first live-spend preflight is
 `artifacts/recurring-treasury-vault-live-spend-preflight.json`. It matches the
-compiled `RecurringTreasuryVault.sil` script to the accepted funded output and
-confirms the output is still unspent by the public REST UTXO endpoint. It now
-blocks submit because the accepted funded output is ordinary P2SH funding, not
-covenant-genesis funding.
+compiled `RecurringTreasuryVault.sil` script to the accepted covenant-bound
+output.
 
-The covenant-genesis funding draft is
-`artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json`. It is
-a signed v1 TN12 draft that creates output 0 with `TransactionOutput.covenant`
-set through `populateGenesisCovenants`. It is not broadcast. If submitted and
-accepted, output 0 becomes the active input for the next under-cap
-RecurringTreasuryVault spend attempt.
+The covenant-genesis funding draft
+`artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json` was
+submitted and accepted. The repo now records two accepted under-cap spends:
+`artifacts/recurring-treasury-vault-live-spend-evidence.json` and
+`artifacts/recurring-treasury-vault-cumulative-spend-evidence.json`. The active
+continuation state is
+`fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json`.
 
 ## Next Build Order
 
@@ -109,24 +107,24 @@ RecurringTreasuryVault spend attempt.
      locally proven in the state probe.
    - Owner signature: locally proven against the full contract in the Rust
      harness.
-   - Current live boundary: blocked before submit through npm `kaspa-wasm`
-     because output covenant binding is dropped.
+   - Old JS boundary: npm `kaspa-wasm@0.13.0` dropped output covenant binding.
+     Current live spends use the local TN12 `1.1.1-toc.1` WASM route.
    - Rust route probe: local RPC request model preserves covenant-bound
      continuation outputs.
-   - Preflight: compiled script and funded output match; funded output is still
-     unspent; submit is blocked because the funded output is not covenant-bound.
-   - Genesis funding: signed v1 covenant-genesis funding draft exists.
-   - Next: submit the covenant-genesis funding draft through a covenant-preserving
-     wRPC route, fetch accepted output 0, and only then attempt the under-cap
-     spend.
+   - Live evidence: covenant-genesis funding accepted, first under-cap spend
+     accepted, continuation recorded, second under-cap spend accepted, second
+     continuation recorded.
+   - Next: prove window reset behavior and keep wallet-standard signing as a
+     separate custody UX rail.
 2. ICC ownership demo.
    - One action/asset branch accepts authorization from a sibling covenant input.
    - Use witness hints; do not scan every input if a direct witness index works.
    - Current target: Covenant-Owned Asset Duel. `contracts/CovenantOwnedAssetDuel.sil`
      compiles, and `artifacts/covenant-owned-asset-duel-proof.json` locally
      proves expected sibling authorization plus missing/wrong sibling rejection.
-   - Next optional step: fund it on TN12 only after a live-spend preflight can
-     preserve the required covenant ID data.
+   - TN12 preflight: `fixtures/CovenantOwnedAssetDuelContractOutpoint.json`
+     records an accepted covenant-genesis output.
+   - Next: build and submit the sibling-authorized strike spend.
 3. Multiplexor demo.
    - One router sends state to worker A or B and the worker returns to router.
    - Add timeout or rollback path if a bad selector can stall the state.
@@ -134,7 +132,10 @@ RecurringTreasuryVault spend attempt.
      `contracts/BlitzWorkerA.sil`, `contracts/BlitzWorkerB.sil`, and
      `artifacts/blitz-mux-arena-proof.json` now prove the local mux/worker
      loop: route to A/B, worker return, bad selector reject, timeout return,
-     and too-early timeout reject. It is not a TN12 accepted mux spend yet.
+     and too-early timeout reject.
+   - TN12 preflight: `fixtures/BlitzMuxArenaContractOutpoint.json` records an
+     accepted covenant-genesis output.
+   - Next: build and submit the mux route spend, then the worker return spend.
 4. Challenge/timeout demo.
    - Claim -> challenge -> timeout/settle.
    - This is the useful pattern for rules that are expensive to prove directly.

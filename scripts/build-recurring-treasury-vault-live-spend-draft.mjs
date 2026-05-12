@@ -14,7 +14,8 @@ const contractOutpoint = await readJson(process.env.CONTRACT_OUTPOINT || "fixtur
 const rpcRoute = await readJson(process.env.RPC_DATA_ROUTE || "artifacts/recurring-treasury-vault-rpc-data-route.json");
 const constructorArgs = await readJson(process.env.CONSTRUCTOR_ARGS || "fixtures/RecurringTreasuryVault.ctor.json");
 
-const covenantId = rpcRoute.observed?.fundingOutputCovenant?.covenantId
+const covenantId = contractOutpoint.covenantId
+  || rpcRoute.observed?.fundingOutputCovenant?.covenantId
   || rpcRoute.observed?.wrpcUtxoCovenant?.covenantId;
 if (!covenantId) {
   throw new Error("RPC data route does not expose a covenant id. Run npm run covenant:recurring-vault-rpc-data-route first.");
@@ -43,8 +44,8 @@ try {
     COMPUTE_BUDGET: computeBudget,
     CAP_SOMPI: String(constructorArgs[2]?.data ?? "7500000000"),
     WINDOW_START: String(constructorArgs[3]?.data ?? "9899000"),
-    PREV_SPENT_SOMPI: String(constructorArgs[4]?.data ?? "0"),
-    MINER_FEE_SOMPI: String(constructorArgs[5]?.data ?? "20000")
+    PREV_SPENT_SOMPI: String(process.env.PREV_SPENT_SOMPI || (constructorArgs[4]?.data ?? "0")),
+    MINER_FEE_SOMPI: String(process.env.MINER_FEE_SOMPI || (constructorArgs[5]?.data ?? "20000"))
   });
   if (run.code !== 0) {
     console.error(run.stdout);

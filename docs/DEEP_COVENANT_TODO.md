@@ -13,57 +13,62 @@ until these move.
   destination, and missing continuation fail.
 - `artifacts/recurring-treasury-vault-owner-sig-proof.json` proves the full
   local `ownerSig` covenant path in Rust.
-- `artifacts/recurring-treasury-vault-live-submit-readiness.json` blocks live
-  submit through npm `kaspa-wasm@0.13.0` because the checked JS route drops
-  output covenant binding.
+- `artifacts/recurring-treasury-vault-live-submit-readiness.json` records the
+  old npm `kaspa-wasm@0.13.0` JS submit gap. Current live spends use the local
+  TN12 `1.1.1-toc.1` WASM route and wRPC.
 - `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` proves the
   Rust RPC `SubmitTransactionRequest` model preserves output covenant binding
-  and tx v1 `computeBudget`. It does not broadcast.
-- `artifacts/recurring-treasury-vault-live-spend-preflight.json` matches the
-  compiled script to the funded output and verifies the funded output is still
-  live. It blocks submit because the funded output is not covenant-bound.
-- `artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json` is a
-  signed v1 funding draft that creates a covenant-bound
-  `RecurringTreasuryVault` output. It has not been broadcast.
+  and tx v1 `computeBudget`.
+- `artifacts/recurring-treasury-vault-live-spend-preflight.json` covers the
+  first accepted under-cap spend path.
+- `artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json`
+  created the accepted covenant-bound `RecurringTreasuryVault` output.
+- `artifacts/recurring-treasury-vault-live-spend-evidence.json` records the
+  first accepted script-enforced spend.
+- `fixtures/RecurringTreasuryVaultContinuationOutpoint.json` records the first
+  continuation output as active state with 25 tKAS spent in the window.
+- `artifacts/recurring-treasury-vault-cumulative-spend-evidence.json` records a
+  second accepted script-enforced spend from that continuation.
+- `fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json` records
+  the second continuation output as active state with 65 tKAS spent in the
+  window.
+- `artifacts/recurring-treasury-vault-cumulative-cap-proof.json` ties the two
+  accepted spends to the locally rejected over-cap candidate.
 - `contracts/CovenantOwnedAssetDuel.sil` compiles.
 - `artifacts/covenant-owned-asset-duel-proof.json` proves the local ICC
   sibling-input pattern: expected sibling covenant ID authorizes an asset move;
   wrong witness, missing sibling, and wrong sibling covenant ID fail.
+- `fixtures/CovenantOwnedAssetDuelContractOutpoint.json` records an accepted
+  TN12 covenant-genesis output for the Asset Duel preflight.
 - `contracts/BlitzMux.sil`, `contracts/BlitzWorkerA.sil`, and
   `contracts/BlitzWorkerB.sil` compile.
 - `artifacts/blitz-mux-arena-proof.json` proves the local mux/worker pattern:
   mux routes to worker A or B, workers return state to mux, bad selector fails,
   timeout returns a pending worker state, and too-early timeout fails.
+- `fixtures/BlitzMuxArenaContractOutpoint.json` records an accepted TN12
+  covenant-genesis output for the Blitz Mux preflight.
 
 ## Next Exact Tasks
 
-1. Submit covenant-genesis funding before any live recurring-vault spend.
-   - The current live 150 tKAS output is ordinary P2SH funding and cannot be
-     used as the covenant input.
-   - Submit `artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json`
-     through a covenant-preserving wRPC route.
-   - Fetch the accepted output and replace the active recurring-vault outpoint
-     only after output 0 exposes a covenant binding.
-   - Spend the accepted covenant-bound recurring-vault output only after the
-     constructed transaction keeps the continuation output covenant-bound.
-   - Record accepted txid, continuation state, explorer/API response, and replay
-     result.
-   - Keep the UI label below script-enforced until that accepted spend exists.
+1. Build the Blitz Mux live route/return path.
+   - Start from `fixtures/BlitzMuxArenaContractOutpoint.json`.
+   - Route from mux to worker A or B with the same covenant family id.
+   - Spend the worker output back to mux.
+   - Keep timeout evidence local until a live pending-worker timeout path is
+     actually accepted.
 
-2. Decide whether Covenant-Owned Asset Duel should get a funded TN12 output.
+2. Build the Covenant-Owned Asset Duel live sibling-input path.
    - Pattern: ICC / sibling-input authorization.
-   - Local contract, artifact, and negative tests are built.
-   - Next optional step: fund the asset output and build the same style of
-     live-spend preflight used for `RecurringTreasuryVault`.
+   - Start from `fixtures/CovenantOwnedAssetDuelContractOutpoint.json`.
+   - Add a sibling covenant input that authorizes the strike.
+   - Keep wrong witness, missing sibling, and wrong sibling covenant id as
+     negative evidence.
    - Do not fake nested execution; the point is sibling authority.
 
-3. Decide whether Blitz Mux Arena should get a funded TN12 output.
-   - Pattern: mux/worker routing from the chess branch, reduced to the smallest
-     toy.
-   - Local contracts, artifact, and negative/liveness tests are built.
-   - Next optional step: fund one mux output and build a guarded live-spend
-     preflight that preserves the family `covenant_id`.
-   - Do not add game rules until one funded route and worker return are accepted.
+3. Add recurring-vault window reset behavior.
+   - The accepted cumulative path proves one cap window.
+   - Window reset needs its own accepted positive path and early/stale reset
+     negative candidates.
 
 ## Lessons To Apply
 

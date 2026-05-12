@@ -1,0 +1,96 @@
+{
+  "schema": "tn12-recurring-treasury-vault-cumulative-cap-proof/v1",
+  "network": "kaspa-testnet-12",
+  "checkedAt": "2026-05-12T22:44:01.703Z",
+  "status": "accepted-cumulative-under-cap-plus-local-over-cap-reject",
+  "contract": "contracts/RecurringTreasuryVault.sil",
+  "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0",
+  "capSompi": "7500000000",
+  "capTkas": 75,
+  "acceptedSpends": [
+    {
+      "id": "first-under-cap",
+      "status": "accepted-script-enforced-under-cap-spend",
+      "txid": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+      "acceptedOnTn12": true,
+      "prevSpentSompi": "0",
+      "spendAmountSompi": "2500000000",
+      "nextSpentSompi": "2500000000",
+      "continuationAmountSompi": "12499980000"
+    },
+    {
+      "id": "second-cumulative-under-cap",
+      "status": "accepted-script-enforced-under-cap-spend",
+      "txid": "2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae",
+      "acceptedOnTn12": true,
+      "prevSpentSompi": "2500000000",
+      "spendAmountSompi": "4000000000",
+      "nextSpentSompi": "6500000000",
+      "continuationAmountSompi": "8499960000"
+    }
+  ],
+  "continuationChain": [
+    {
+      "id": "after-first-spend",
+      "fixture": "fixtures/RecurringTreasuryVaultContinuationOutpoint.json",
+      "txid": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+      "outputIndex": 1,
+      "amountSompi": "12499980000",
+      "spentInWindowSompi": "2500000000"
+    },
+    {
+      "id": "after-second-spend",
+      "fixture": "fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json",
+      "txid": "2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae",
+      "outputIndex": 1,
+      "amountSompi": "8499960000",
+      "spentInWindowSompi": "6500000000"
+    }
+  ],
+  "cumulative": {
+    "firstSpendSompi": "2500000000",
+    "secondSpendSompi": "4000000000",
+    "totalAcceptedSompi": "6500000000",
+    "totalAcceptedTkas": 65,
+    "nextSpentInWindowSompi": "6500000000",
+    "underCap": true
+  },
+  "blockedCandidate": {
+    "artifact": "artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json",
+    "status": "blocked-local-engine-failed",
+    "transactionId": "1979a55559dff5fac4fe3b6d1c540b62a75cc2b5942ac548e282f0d53187744d",
+    "previousOutpoint": {
+      "txid": "2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae",
+      "outputIndex": 1,
+      "amountSompi": "8499960000",
+      "amountTkas": 84.9996
+    },
+    "prevSpentSompi": "6500000000",
+    "spendAmountSompi": "1500000000",
+    "attemptedNextSpentSompi": "8000000000",
+    "exceedsCap": true,
+    "localEngineAcceptedGeneratedSigScript": false
+  },
+  "proves": [
+    "Two sequential RecurringTreasuryVault.sil spends were accepted on TN12 from the same covenant lineage.",
+    "The second accepted spend used the first continuation output as its input state.",
+    "The cumulative accepted total is 65 tKAS under the 75 tKAS cap.",
+    "A later candidate that would move cumulative spent to 80 tKAS is rejected by the local covenant engine."
+  ],
+  "doesNotProve": [
+    "window reset behavior",
+    "mainnet activation",
+    "wallet-standard user signing",
+    "audited custody"
+  ],
+  "sourceArtifacts": {
+    "firstEvidence": "artifacts/recurring-treasury-vault-live-spend-evidence.json",
+    "firstContinuation": "fixtures/RecurringTreasuryVaultContinuationOutpoint.json",
+    "secondDraft": "artifacts/signed-drafts/recurring-treasury-vault-cumulative-spend.json",
+    "secondEvidence": "artifacts/recurring-treasury-vault-cumulative-spend-evidence.json",
+    "secondContinuation": "fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json",
+    "overCap": "artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json"
+  }
+}

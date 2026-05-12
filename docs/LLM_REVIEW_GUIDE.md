@@ -151,13 +151,13 @@ Avoid these labels:
 - Compiled stateful `.sil` and accepted funding are not enough. For recurring caps, require an actual spend from the funded contract output or keep the label at wallet-policy/local-wallet.
 - `artifacts/recurring-treasury-vault-state-proof.json` proves state/output behavior locally. It does not prove the full `ownerSig` path or a live accepted TN12 spend.
 - `artifacts/recurring-treasury-vault-owner-sig-proof.json` proves the full local `ownerSig` covenant path. It still does not prove live TN12 submission.
-- `artifacts/recurring-treasury-vault-live-submit-readiness.json` blocks the live spend through the current JS route because npm `kaspa-wasm@0.13.0` drops output covenant binding.
-- `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` shows the Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget`; it is not a broadcast.
+- `artifacts/recurring-treasury-vault-live-submit-readiness.json` records the old npm `kaspa-wasm@0.13.0` JS route gap. Current live covenant spends use the local TN12 `1.1.1-toc.1` WASM route and wRPC.
+- `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` shows the Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget`.
 - `artifacts/recurring-treasury-vault-rpc-data-route.json` shows the first live 150 tKAS output is not covenant-bound. Do not try to spend it as a stateful covenant input.
-- `artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json` is the next live candidate: a signed v1 covenant-genesis funding draft. It still needs guarded wRPC submit and accepted-output verification.
+- Recurring vault live status: covenant-genesis funding is accepted, two under-cap script-enforced spends are accepted, continuation fixtures are recorded, and the over-cap continuation candidate is locally rejected.
 - Study `/home/parker2017/michaelsutton-silverscript-chess/examples/chess` before designing complex examples. The useful pattern is mux/worker routing, shared state layout, template identity, challenge paths, and settlement, not "make a game" as a product idea.
 - Built local deep examples: Covenant-Owned Asset Duel for ICC sibling-input authorization, and Blitz Mux Arena for mux/worker routing plus timeout.
-- Next exact tasks are: submit the recurring-vault covenant-genesis funding draft through a covenant-preserving route, fetch the accepted covenant-bound output, then attempt the under-cap spend. After that, decide whether Asset Duel or Blitz Mux gets funded TN12 preflight.
+- Next exact tasks are: build the Blitz Mux live route/return spend from its accepted genesis output, build the Asset Duel sibling-input strike spend from its accepted genesis output, then add recurring-vault window reset behavior.
 
 Accurate label:
 

@@ -1,0 +1,50 @@
+{
+  "schema": "tn12-recurring-treasury-vault-rpc-data-route/v1",
+  "checkedAt": "2026-05-12T22:39:15.256Z",
+  "status": "rpc-data-route-covenant-id-found",
+  "endpoint": {
+    "url": "ws://tn12-node.kaspa.com:17210",
+    "encoding": "borsh",
+    "networkId": "testnet-12"
+  },
+  "target": "Find whether the selected RecurringTreasuryVault output carries a live covenant_id through wRPC block or UTXO data.",
+  "fundingOutpoint": {
+    "txid": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+    "outputIndex": 1,
+    "address": "kaspatest:pqkenftwds37q008yd8s3rg8gvcw3u2xrpgevyp0pyn2ckeqt5gysfy5vfr6c"
+  },
+  "checks": {
+    "wrpcUtxoFound": true,
+    "wrpcUtxoCovenantIdAvailable": true,
+    "fundingTransactionFetched": true,
+    "fundingTransactionVersion": 1,
+    "fundingOutputFound": true,
+    "fundingOutputHasCovenantBinding": true
+  },
+  "observed": {
+    "utxoKeys": [
+      "__wbg_ptr"
+    ],
+    "utxoEntryKeys": [
+      "__wbg_ptr"
+    ],
+    "fundingOutputKeys": [
+      "covenant",
+      "scriptPublicKey",
+      "value",
+      "verboseData"
+    ],
+    "fundingOutputScriptPublicKey": "0000aa202d99a56e6c23e03de7234f088d074330e8f146185196102f0926ac5b205d104887",
+    "fundingOutputValue": "12499980000",
+    "fundingOutputCovenant": {
+      "authorizingInput": 0,
+      "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0"
+    },
+    "wrpcUtxoCovenant": {
+      "authorizingInput": null,
+      "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0"
+    }
+  },
+  "blockers": [],
+  "allowedNextAction": "Use the discovered covenant id in the guarded Rust live-spend candidate."
+}

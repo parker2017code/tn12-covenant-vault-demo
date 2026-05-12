@@ -4,8 +4,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "treasury-wars",
       title: "Treasury Wars",
       rank: 2,
-      status: "accepted-script-enforced-under-cap-spend",
-      proofTarget: "accepted recurring-vault spend, continuation state, blocked over-cap attempt",
+      status: "accepted-cumulative-cap-proof",
+      proofTarget: "two accepted recurring-vault spends, continuation state, blocked over-cap attempt",
       whyItMatters: "Turns the active recurring cap rail into a simple strategy loop: each player has money, a cap window, allowed destinations, and relocked state.",
       covenantPattern: "stateful singleton vault",
       websitePitch: "Spend under your cap, relock the treasury, and block the move that tries to drain too much.",
@@ -19,14 +19,20 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/recurring-treasury-vault-live-spend-preflight.json",
         "artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json",
         "artifacts/signed-drafts/recurring-treasury-vault-live-spend.json",
-        "artifacts/recurring-treasury-vault-live-spend-evidence.json"
+        "artifacts/recurring-treasury-vault-live-spend-evidence.json",
+        "fixtures/RecurringTreasuryVaultContinuationOutpoint.json",
+        "artifacts/signed-drafts/recurring-treasury-vault-cumulative-spend.json",
+        "artifacts/recurring-treasury-vault-cumulative-spend-evidence.json",
+        "fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json",
+        "artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json",
+        "artifacts/recurring-treasury-vault-cumulative-cap-proof.json"
       ],
       nextBuildSteps: [
-        "Record the new state and relocked change output.",
-        "Turn the over-cap negative map into the opponent's blocked move.",
-        "Build a second spend attempt from the continuation output to prove cumulative cap behavior."
+        "Render the continuation chain as a playable Treasury Wars track.",
+        "Add a window-reset proof before calling this a complete recurring policy.",
+        "Keep user-wallet signing out of the claim until a wallet-standard handoff signs the same path."
       ],
-      hardBoundary: "The accepted TN12 spend proves the under-cap amount, required destination, and continuation output for this state. It does not yet prove window reset behavior or user-wallet signing."
+      hardBoundary: "The accepted TN12 spends prove cumulative under-cap behavior for one window. They do not yet prove window reset behavior or user-wallet signing."
     }),
     experiment({
       id: "covenant-heist",
@@ -53,7 +59,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "blitz-mux-arena",
       title: "Blitz Mux Arena",
       rank: 1,
-      status: "local-proof-passed",
+      status: "accepted-genesis-funded-preflight",
       proofTarget: "hub routes to worker, worker returns to hub, timeout escape path",
       whyItMatters: "Smallest source-faithful demo of the chess architecture without building full chess. It makes fast multi-transaction state transitions feel natural.",
       covenantPattern: "mux / worker contract family",
@@ -63,17 +69,19 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "contracts/BlitzWorkerA.sil",
         "contracts/BlitzWorkerB.sil",
         "artifacts/blitz-mux-arena-proof.json",
+        "artifacts/signed-drafts/blitz-mux-arena-genesis-funding.json",
+        "fixtures/BlitzMuxArenaContractOutpoint.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/ARCHITECTURE.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
       ],
       nextBuildSteps: [
-        "Decide whether this stays as a local mux proof or gets a funded TN12 output.",
-        "If funded, build a guarded live-spend preflight that preserves the family covenant_id.",
+        "Build a guarded live route from mux to worker A.",
+        "Build the worker return to mux from the accepted worker output.",
         "Extend only after one funded route and worker return are accepted.",
         "Keep timeout evidence attached before adding challenge/settlement rows."
       ],
-      hardBoundary: "Compiled and locally proven only. It is not an accepted TN12 mux/worker spend yet."
+      hardBoundary: "The mux genesis output is accepted on TN12, and local mux/worker proofs pass. It is not an accepted route/return spend yet."
     }),
     experiment({
       id: "coordination-league",
@@ -100,7 +108,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "covenant-owned-asset-game",
       title: "Covenant-Owned Asset Duel",
       rank: 3,
-      status: "local-proof-passed",
+      status: "accepted-genesis-funded-preflight",
       proofTarget: "asset UTXO owned by a covenant input through sibling-input authorization",
       whyItMatters: "Demonstrates ICC: one covenant does not execute the other, but can accept its sibling input as authority.",
       covenantPattern: "ICC / covenant-owned asset",
@@ -109,15 +117,17 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "contracts/CovenantOwnedAssetDuel.sil",
         "artifacts/CovenantOwnedAssetDuel.json",
         "artifacts/covenant-owned-asset-duel-proof.json",
+        "artifacts/signed-drafts/covenant-owned-asset-duel-genesis-funding.json",
+        "fixtures/CovenantOwnedAssetDuelContractOutpoint.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       nextBuildSteps: [
-        "Pick whether this stays as a local ICC proof or gets a funded TN12 output.",
-        "If funded, build a guarded submit preflight with the same covenant_id rule.",
+        "Build a guarded live strike preflight with the same covenant_id rule.",
+        "Submit only after the sibling-input authorization path reconstructs cleanly.",
         "Keep negative cases attached: missing sibling, wrong witness, wrong sibling covenant_id."
       ],
-      hardBoundary: "Compiled and locally proven only. It is not an accepted TN12 asset spend yet."
+      hardBoundary: "The asset-duel genesis output is accepted on TN12, and local ICC proofs pass. It is not an accepted sibling-authorized strike spend yet."
     }),
     experiment({
       id: "scheduler-duel",
@@ -154,7 +164,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       blockedBeforeLiveSubmit: experiments.filter((item) => item.status === "blocked-before-live-submit").length,
       genesisFundingDrafts: experiments.filter((item) => item.status === "genesis-funding-draft-ready").length,
       localProofs: experiments.filter((item) => item.status === "local-proof-passed").length,
-      scriptEnforcedClaims: experiments.filter((item) => item.status.startsWith("accepted-script-enforced")).length
+      acceptedGenesisPreflights: experiments.filter((item) => item.status === "accepted-genesis-funded-preflight").length,
+      scriptEnforcedClaims: experiments.filter((item) => item.status.startsWith("accepted-")).length
     },
     rule: "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",
     spotlight: ["blitz-mux-arena", "treasury-wars", "covenant-owned-asset-game"],

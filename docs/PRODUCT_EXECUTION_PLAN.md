@@ -126,21 +126,18 @@ The local-wallet pass proves the route, fields, txid acceptance, replay,
 negative guards, and UI evidence. The user-wallet pass proves custody UX.
 Do not call a feature script-enforced until the accepted spend path exists.
 
-Do not add another broad product lane until the recurring-cap primitive either
-has a deeper accepted `.sil` spend or is explicitly parked with the blocker.
+Do not add another broad product lane until the accepted deeper `.sil` spends
+are easy to inspect.
 
-Current recurring-cap blocker: the first live 150 tKAS output was ordinary
-P2SH funding, not covenant-genesis funding. The repo now has a signed v1
-covenant-genesis funding draft at
-`artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json`. The
-next step is to submit that draft through a route that preserves
-`TransactionOutput.covenant`, then fetch the accepted output before attempting
-the under-cap spend.
+Current recurring-cap status: covenant-genesis funding is accepted, two
+under-cap script-enforced spends are accepted, continuation fixtures are
+recorded, and the over-cap continuation candidate is locally rejected. The next
+recurring-vault proof is window reset behavior, not another under-cap spend.
 
-Current route status: the local TN12 WASM path can build and sign a v1 genesis
-funding draft with output covenant binding. It still needs guarded broadcast,
-fetch, and replay. The older npm route remains blocked for continuation
-spends that need output covenant binding.
+Current route status: the local TN12 WASM path can build, sign, and submit v1
+covenant drafts with output covenant binding. The submit script now refuses
+blocked local-engine artifacts unless an explicit negative-research override is
+used. The older npm route remains only a recorded compatibility gap.
 
 ## Next Deep Demos
 

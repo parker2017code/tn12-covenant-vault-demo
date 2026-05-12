@@ -1,0 +1,66 @@
+{
+  "schema": "tn12-recurring-treasury-vault-live-spend-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "checkedAt": "2026-05-12T22:40:22.521Z",
+  "status": "accepted-script-enforced-under-cap-spend",
+  "txid": "2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae",
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae",
+  "acceptingBlockBlueScore": 10011871,
+  "source": {
+    "contractOutpoint": {
+      "txid": "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+      "outputIndex": 1,
+      "amountSompi": "12499980000",
+      "amountTkas": 124.9998
+    },
+    "covenantId": "5701478803f8302964206efd917dfb25ef264fc784d8a8056fe5fa26eab03bb0"
+  },
+  "state": {
+    "capSompi": 7500000000,
+    "minerFeeSompi": 20000,
+    "nextSpentSompi": 6500000000,
+    "prevSpentSompi": 2500000000,
+    "spendAmountSompi": 4000000000,
+    "windowStart": 9899000
+  },
+  "checks": {
+    "acceptedOnTn12": true,
+    "output0AmountMatchesSpend": true,
+    "output0DestinationMatchesDraft": true,
+    "output1ContinuationAmountMatchesDraft": true,
+    "output1ContinuationScriptMatchesDraft": true,
+    "output1ContinuationCovenantMatchesDraft": true,
+    "localEngineAcceptedGeneratedSigScript": true
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "amountSompi": "4000000000",
+      "amountTkas": 40,
+      "scriptType": "pubkey",
+      "scriptPublicKeyAddress": "kaspatest:qqwmcx92f3ftdu6u4m3vy56j6fyw2cu0lt8mxza50tyvdu98jfrsqgqapztg8",
+      "scriptPublicKey": "201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700ac"
+    },
+    {
+      "index": 1,
+      "amountSompi": "8499960000",
+      "amountTkas": 84.9996,
+      "scriptType": "scripthash",
+      "scriptPublicKeyAddress": "kaspatest:pqk2ep0s5ax2s7ptlfnm5nd2jnv4xg9fd644uu476ytcs5ctmrqlv3uje3sha",
+      "scriptPublicKey": "aa202cac85f0a74ca8782bfa67ba4daa94d95320a96eab5e72bed11788530bd8c1f687"
+    }
+  ],
+  "proves": [
+    "RecurringTreasuryVault.sil under-cap spend was accepted on TN12.",
+    "The spend paid the required destination amount.",
+    "The spend relocked the remaining value into a continuation output.",
+    "The continuation output carries the same covenant id in the signed draft and wRPC submit route."
+  ],
+  "doesNotProve": [
+    "mainnet activation",
+    "audited custody",
+    "wallet-standard user signing",
+    "full recurring-window reset behavior"
+  ]
+}
