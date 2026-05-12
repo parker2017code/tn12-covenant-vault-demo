@@ -2507,6 +2507,9 @@ assert.match(labHtml, /Kaspa app lab/);
 assert.match(labHtml, /Signal channels/);
 assert.match(labHtml, /Payload receipt app/);
 assert.match(labHtml, /payload:readiness/);
+assert.match(labHtml, /Lab commands fall into classes/);
+assert.match(labHtml, /anything with <code>--submit<\/code> is a real TN12 broadcast/);
+assert.match(html, /artifact-refresh, or submit commands/);
 assert.match(labHtml, /Batch assurance campaigns/);
 assert.match(labHtml, /Escrow primitive/);
 assert.match(labHtml, /Treasury \/ team vaults/);
@@ -2578,6 +2581,13 @@ assert.match(sources, /KasSigner\/KasSee/);
 const walletSignerReferences = await readFile(new URL("../docs/WALLET_SIGNER_REFERENCES.md", import.meta.url), "utf8");
 assert.match(walletSignerReferences, /PSKB\/KSPT/);
 assert.match(walletSignerReferences, /not a live user-wallet integration/);
+
+const commandRunbook = await readFile(new URL("../docs/COMMAND_RUNBOOK.md", import.meta.url), "utf8");
+assert.match(commandRunbook, /Use this table before copying any command/);
+assert.match(commandRunbook, /\| Class \| Examples \| Needs \| Writes \| Broadcasts\? \| Expected result \|/);
+assert.match(commandRunbook, /Any command containing `--submit` is a real TN12 testnet broadcast/);
+assert.match(commandRunbook, /Any command that creates wallets must say it writes `.local\/` testnet-only material/);
+assert.match(commandRunbook, /Any command that rebuilds artifacts should say what file or page to inspect next/);
 
 const masterPlan = await readFile(new URL("../docs/MASTER_APP_PLAN.md", import.meta.url), "utf8");
 assert.match(masterPlan, /Payload Receipt \/ Invoice App/);

@@ -81,7 +81,7 @@
       </div>
       <div class="callout">
         <strong>Before copying commands</strong>
-        <p>Run <code>npm ci</code> first, then check <a href="docs/COMMAND_RUNBOOK.md">docs/COMMAND_RUNBOOK.md</a>. Some commands only rebuild artifacts; wallet and submit commands may write testnet-only files under <code>.local/</code> or broadcast to TN12.</p>
+        <p>Run <code>npm ci</code> first, then check <a href="docs/COMMAND_RUNBOOK.md">docs/COMMAND_RUNBOOK.md</a>. Lab commands fall into classes: local checks, artifact refreshes, wallet-file writers, and submit/broadcast commands. Most panels below only rebuild review artifacts; wallet commands write testnet-only files under <code>.local/</code>, and anything with <code>--submit</code> is a real TN12 broadcast.</p>
       </div>
       <div class="runbook-grid">
         <article>

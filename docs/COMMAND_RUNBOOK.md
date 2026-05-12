@@ -20,15 +20,29 @@ Expected result:
 
 ## Command Classes
 
-| Class | Examples | Needs | Does not need |
-|---|---|---|---|
-| Local check | `npm run check:all`, `npm run check:ui` | Node.js, `npm ci` | tKAS, private keys, submit endpoint |
-| Public evidence refresh | `npm run check:tn12`, `npm run proof:verify` | Node.js, `npm ci`, internet access to TN12 APIs | local wallet keys |
-| Artifact refresh | `npm run project:queue`, `npm run defi:accepted-activity` | Node.js, `npm ci`, repo fixtures | tKAS unless the script says otherwise |
-| Fresh testnet wallet | `npm run address`, `npm run playground:wallets` | Node.js, `npm ci`; writes testnet-only material under `.local/` | mainnet keys |
-| Role funding draft | `npm run playground:funding-draft` | Fresh playground wallet outputs plus a funded source wallet/outpoint. Defaults: `TN12_WALLET=.local/tn12-wallet.json`, `FUNDING_OUTPOINT=fixtures/FundedWalletOutpoint.json` | shared or committed private keys |
-| Submit/broadcast | `node scripts/submit-signed-draft.mjs ... --submit` or `node scripts/submit-signed-draft-wrpc.mjs ... --submit` | signed draft, funded UTXO, explicit user intent, correct TN12 endpoint/config | mainnet keys or blind signing |
-| Payload-preserving submit | `KASPA_WRPC_URL=... node scripts/submit-signed-draft-wrpc.mjs ... --submit` | `KASPA_WRPC_URL`, `KASPA_WRPC_ENCODING`, `KASPA_WRPC_NETWORK_ID`, `KASPA_WRPC_SUBMIT_SHAPE`, and the correct WASM route when building | public REST submit for payload receipts |
+Use this table before copying any command from `index.html`, `results.html`, `playground.html`, or `lab.html`.
+
+| Class | Examples | Needs | Writes | Broadcasts? | Expected result |
+|---|---|---|---|---|---|
+| Local check | `npm run check:all`, `npm run check:ui` | Node.js, `npm ci` | no intended state changes | No | pass/fail output in the terminal |
+| Public evidence refresh | `npm run check:tn12`, `npm run proof:verify` | Node.js, `npm ci`, internet access to TN12 APIs | no wallet files | No | verifies accepted proof and payload evidence |
+| Artifact refresh | `npm run project:queue`, `npm run defi:accepted-activity` | Node.js, `npm ci`, repo fixtures | generated files under `artifacts/` or `fixtures/` | No, unless the script says submit | rebuilt local review artifacts |
+| Fresh testnet wallet | `npm run address`, `npm run playground:wallets` | Node.js, `npm ci` | testnet-only wallet files under `.local/` | No | new public `kaspatest:` addresses |
+| Role funding draft | `npm run playground:funding-draft` | Fresh playground role wallets plus a funded source wallet/outpoint. Defaults: `TN12_WALLET=.local/tn12-wallet.json`, `FUNDING_OUTPOINT=fixtures/FundedWalletOutpoint.json` | signed draft under `.local/playground/` | No | a reviewable multi-output funding draft |
+| Submit/broadcast | `node scripts/submit-signed-draft.mjs ... --submit` or `node scripts/submit-signed-draft-wrpc.mjs ... --submit` | signed draft, funded UTXO, explicit user intent, correct TN12 endpoint/config | submit result artifact if the command is configured to write one | Yes | TN12 txid or explicit submit failure |
+| Payload-preserving submit | `KASPA_WRPC_URL=... node scripts/submit-signed-draft-wrpc.mjs ... --submit` | `KASPA_WRPC_URL`, `KASPA_WRPC_ENCODING`, `KASPA_WRPC_NETWORK_ID`, `KASPA_WRPC_SUBMIT_SHAPE`, and the correct WASM route when building | submit result artifact if configured | Yes | accepted txid whose payload bytes can be replay-checked |
+
+If a command is shown on a public page but you cannot classify it with this table, do not run it yet. Open the script in `package.json` or `scripts/` and add the missing command note first.
+
+## Public Page Command Rule
+
+- `index.html` should show only the shortest reviewer path.
+- `results.html` should show proof-check commands, not local signing flows.
+- `playground.html` may show wallet generation, funding draft, and explicit submit commands only with `.local/` and `--submit` warnings nearby.
+- `lab.html` may show many artifact builders, but the page must link back to this runbook before the command wall.
+- Any command containing `--submit` is a real TN12 testnet broadcast.
+- Any command that creates wallets must say it writes `.local/` testnet-only material.
+- Any command that rebuilds artifacts should say what file or page to inspect next.
 
 ## Fresh Playground Route
 
