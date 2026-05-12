@@ -30,7 +30,7 @@ Read this first when resuming TN12 work. Keep it short. Details belong in artifa
 2. Live removed-block rollback evidence: local rollback matching passes, but full promotion stays blocked until a live removed-block window is captured.
 3. Batch-assurance alternate path: release is accepted; do not submit refund paths for the spent pledge set.
 4. Product hardening: wallet/indexer/recovery/monitoring are not production-grade.
-5. Recurring-vault live spend: local state/output proof and full ownerSig Rust proof pass, but npm `kaspa-wasm@0.13.0` drops output covenant binding in the checked JS route. Use Rust submit or a covenant-preserving SDK route before live TN12 broadcast.
+5. Recurring-vault live spend: local state/output proof and full ownerSig Rust proof pass. npm `kaspa-wasm@0.13.0` drops output covenant binding in the checked JS route. Rust RPC submit-request probing preserves output covenant binding and tx v1 `computeBudget`, so the next live attempt should harden the Rust submit route.
 
 ## Commands
 
@@ -59,6 +59,7 @@ npm run wallet:external-signer-research
 | Recurring-vault state proof | `artifacts/recurring-treasury-vault-state-proof.json` |
 | Recurring-vault ownerSig proof | `artifacts/recurring-treasury-vault-owner-sig-proof.json` |
 | Recurring-vault live-submit readiness | `artifacts/recurring-treasury-vault-live-submit-readiness.json` |
+| Recurring-vault Rust submit-route probe | `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` |
 
 ## Rules
 
@@ -72,7 +73,7 @@ npm run wallet:external-signer-research
 
 ## Next
 
-1. Try the recurring-vault live TN12 spend only through a route that preserves the covenant-bound continuation output.
+1. Turn the recurring-vault Rust submit-route probe into a guarded live TN12 submit attempt from the funded contract output.
 2. Build Covenant-Owned Asset Duel as the ICC sibling-input demo: sibling authority, missing sibling negative, wrong sibling negative.
 3. Build Blitz Mux Arena as the mux/worker timeout demo: mux route, worker return, bad selector timeout.
 4. Capture live removed-block rollback evidence when available.

@@ -5,6 +5,7 @@ export function buildSilverscriptBuildDepthReview({
   stateProof = {},
   ownerSigProof = {},
   liveSubmitReadiness = {},
+  rustSubmitRouteProbe = {},
   jsWasm = {}
 } = {}) {
   const acceptedFunding = status.currentEvidence?.acceptedContractFunding || contractOutpoint;
@@ -41,6 +42,7 @@ export function buildSilverscriptBuildDepthReview({
         source: ownerSigProof.source
       } : null,
       liveSubmitReadiness: liveSubmitReadiness.status || null,
+      rustSubmitRouteProbe: rustSubmitRouteProbe.status || null,
       negativeCandidates: status.negativeCandidates?.map((item) => item.id) || []
     },
     localSourceFindings: [
@@ -53,6 +55,13 @@ export function buildSilverscriptBuildDepthReview({
         id: "js-wasm-output-binding-gap",
         status: "blocks-js-live-submit",
         evidence: liveSubmitReadiness.blocker?.detail || `Current kaspa-wasm TransactionOutput API exposes ${jsOutputConstructor}; no JS CovenantBinding constructor is exported in this package.`
+      },
+      {
+        id: "rust-rpc-submit-route-preserves-covenant-binding",
+        status: rustSubmitRouteProbe.status === "rust-submit-route-preserves-covenant-binding" ? "supported-locally" : "not-run",
+        evidence: rustSubmitRouteProbe.status === "rust-submit-route-preserves-covenant-binding"
+          ? "A Rust RPC SubmitTransactionRequest probe preserves output covenant binding and tx v1 computeBudget."
+          : "Rust submit-route covenant-binding probe has not passed yet."
       },
       {
         id: "state-transition-proof",
@@ -72,6 +81,7 @@ export function buildSilverscriptBuildDepthReview({
     buildRulesForAgents: [
       "Do not call the recurring cap SCRIPT_ENFORCED because the compiled contract and accepted funding are not an accepted spend.",
       "Use the Rust debugger/test path for covenant-state mechanics before trying JS live submit.",
+      "Use the Rust RPC submit route first because local probing shows it preserves covenant output binding.",
       "Treat JS live submit as blocked until output covenant binding and signature-script construction are proven with the exact SDK route.",
       "A serious next proof needs one positive under-cap spend and negative cases for over cap, wrong destination, missing continuation, and wrong owner."
     ],

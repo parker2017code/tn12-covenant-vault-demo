@@ -134,6 +134,10 @@ proven, but the current npm JS transaction route drops output covenant binding
 for the continuation output. The next live spend must use a Rust submit route
 or an SDK route that preserves `TransactionOutput.covenant`.
 
+Current Rust route status: the pre-broadcast probe preserves output covenant
+binding and tx v1 `computeBudget` inside a submit request. It still needs the
+real funded output spend, guarded broadcast, fetch, and replay.
+
 ## Next Deep Demos
 
 These are the next concrete examples after recurring-vault live submit is

@@ -28,6 +28,7 @@
       "source": "contracts/RecurringTreasuryVault.sil"
     },
     "liveSubmitReadiness": "blocked-before-live-submit",
+    "rustSubmitRouteProbe": "rust-submit-route-preserves-covenant-binding",
     "negativeCandidates": [
       "wrong-owner-signature",
       "wrong-destination",
@@ -48,6 +49,11 @@
       "evidence": "The installed kaspa-wasm runtime does not preserve output.covenant in Transaction construction. Broadcasting through this route would lose the covenant-bound continuation output."
     },
     {
+      "id": "rust-rpc-submit-route-preserves-covenant-binding",
+      "status": "supported-locally",
+      "evidence": "A Rust RPC SubmitTransactionRequest probe preserves output covenant binding and tx v1 computeBudget."
+    },
+    {
       "id": "state-transition-proof",
       "status": "supported-locally",
       "evidence": "RecurringTreasuryVaultStateProbe proves under-cap continuation and rejects over-cap, wrong destination, and missing continuation in the local SilverScript debugger."
@@ -61,6 +67,7 @@
   "buildRulesForAgents": [
     "Do not call the recurring cap SCRIPT_ENFORCED because the compiled contract and accepted funding are not an accepted spend.",
     "Use the Rust debugger/test path for covenant-state mechanics before trying JS live submit.",
+    "Use the Rust RPC submit route first because local probing shows it preserves covenant output binding.",
     "Treat JS live submit as blocked until output covenant binding and signature-script construction are proven with the exact SDK route.",
     "A serious next proof needs one positive under-cap spend and negative cases for over cap, wrong destination, missing continuation, and wrong owner."
   ],

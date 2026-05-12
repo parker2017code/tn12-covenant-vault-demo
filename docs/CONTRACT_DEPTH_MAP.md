@@ -45,6 +45,8 @@ Done now:
   with the same positive and negative cases;
 - one live-submit readiness artifact showing the current JS route is blocked
   before broadcast because it drops output covenant binding;
+- one Rust submit-route probe showing the Rust RPC request model preserves
+  covenant binding and tx v1 `computeBudget` before broadcast;
 - UI and tests that keep the label at wallet-policy/local-wallet.
 
 Next:
@@ -61,6 +63,10 @@ Current live-submit rule: do not use npm `kaspa-wasm@0.13.0` for the
 recurring-vault transition. It does not preserve `output.covenant` for the
 continuation output in the checked route. Use a Rust submit route or a JS SDK
 that preserves output covenant binding.
+
+Current Rust route status: the request model preserves the fields. It still
+needs the real funded output, exact signed spend transaction, guarded submit,
+fetch, and replay before the feature can move to script-enforced.
 
 ## Source-Driven Design Notes
 
@@ -106,4 +112,6 @@ Do not let a future agent confuse the current evidence classes:
   a live accepted spend;
 - live-submit readiness blocker: the current JS submit path drops the output
   covenant binding, so forcing a live submit would test the wrong transaction;
+- Rust submit-route probe: the request shape can preserve covenant binding, but
+  it is not a network broadcast or accepted spend;
 - accepted under-cap spend from the funded contract output: the promotion gate.

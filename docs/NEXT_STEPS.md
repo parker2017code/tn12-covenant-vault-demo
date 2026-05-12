@@ -31,7 +31,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
 | 1 | Close recurring-vault live-submit boundary. | `artifacts/recurring-treasury-vault-live-submit-readiness.json` records whether the current route preserves output covenant binding, and focused tests enforce the answer. | No |
-| 2 | Try live recurring-vault spend only through a covenant-preserving route. | A Rust submit route or updated SDK route preserves the continuation output covenant binding, broadcasts the under-cap transition, and TN12 accepts the spend. | No |
+| 2 | Harden Rust live submit for recurring-vault spend. | The Rust route builds the exact funded-output spend, preserves the continuation output covenant binding, broadcasts the under-cap transition, and TN12 accepts the spend. | No |
 | 3 | Build Covenant-Owned Asset Duel. | One ICC/sibling-input demo proves an asset or action can be authorized by a sibling covenant/script input, with missing/wrong sibling negatives. | No |
 | 4 | Build Blitz Mux Arena. | One mux routes state to worker A or B, the worker returns state, and a timeout path prevents a bad selector from trapping the flow. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |

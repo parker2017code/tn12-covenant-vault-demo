@@ -152,6 +152,7 @@ Avoid these labels:
 - `artifacts/recurring-treasury-vault-state-proof.json` proves state/output behavior locally. It does not prove the full `ownerSig` path or a live accepted TN12 spend.
 - `artifacts/recurring-treasury-vault-owner-sig-proof.json` proves the full local `ownerSig` covenant path. It still does not prove live TN12 submission.
 - `artifacts/recurring-treasury-vault-live-submit-readiness.json` blocks the live spend through the current JS route because npm `kaspa-wasm@0.13.0` drops output covenant binding.
+- `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` shows the Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget`; it is not a broadcast.
 - Study `/home/parker2017/michaelsutton-silverscript-chess/examples/chess` before designing complex examples. The useful pattern is mux/worker routing, shared state layout, template identity, challenge paths, and settlement, not "make a game" as a product idea.
 - Next exact tasks are: live recurring-vault spend through a covenant-preserving route, Covenant-Owned Asset Duel for ICC sibling-input authorization, and Blitz Mux Arena for mux/worker routing plus timeout.
 

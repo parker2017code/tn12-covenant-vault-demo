@@ -16,11 +16,14 @@ until these move.
 - `artifacts/recurring-treasury-vault-live-submit-readiness.json` blocks live
   submit through npm `kaspa-wasm@0.13.0` because the checked JS route drops
   output covenant binding.
+- `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` proves the
+  Rust RPC `SubmitTransactionRequest` model preserves output covenant binding
+  and tx v1 `computeBudget`. It does not broadcast.
 
 ## Next Exact Tasks
 
 1. Try live TN12 spend only after the submit route preserves covenant binding.
-   - Build or reuse a Rust submit route, or use a JS SDK route that preserves
+   - Use the Rust-shaped route first; local probing shows it preserves
      `TransactionOutput.covenant`.
    - Spend the funded recurring-vault output only after the constructed
      transaction keeps the covenant-bound continuation output.

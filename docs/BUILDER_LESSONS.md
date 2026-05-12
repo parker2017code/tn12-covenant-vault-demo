@@ -13,6 +13,7 @@ These are the durable rules from the escrow cancel fix. They are for future TN12
 - For TN12/Toccata tx version 1, inputs use `computeBudget`, not `sigOpCount`.
 - The npm `kaspa-wasm@0.13.0` constructor can create a local object, but it does not preserve the v1 `computeBudget` field. That made the earlier cancel draft look better than it was.
 - The same npm route does not preserve `output.covenant` in the recurring-vault live-submit probe. Do not use it to broadcast a covenant transition that needs a covenant-bound continuation output.
+- The Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget` in the recurring-vault route probe. That makes Rust the next live-submit route to harden.
 - The local TN12 `kaspa-wasm 1.1.1-toc.1` constructor still needs a compatibility `sigOpCount` property, but the correct v1 shape is `sigOpCount: 0` plus `computeBudget: 30`.
 - Public REST can lag protocol shape. In this case REST demanded `sigOpCount`, then rejected non-zero `sigOpCount` for tx version 1. The working route was JSON wRPC with the matching TN12 SDK.
 

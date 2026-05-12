@@ -1,0 +1,25 @@
+{
+  "schema": "tn12-recurring-treasury-vault-rust-submit-route-probe/v1",
+  "reviewedAt": "2026-05-12",
+  "status": "rust-submit-route-preserves-covenant-binding",
+  "rustHarness": "scripts/rust/recurring_treasury_vault_rust_submit_route_probe.rs",
+  "command": "CARGO_TARGET_DIR=/home/parker2017/silverscript-tools/target cargo run -q --manifest-path /tmp/tn12-recurring-vault-rust-submit-route-1JJPva/Cargo.toml",
+  "proves": [
+    "Rust RPC model can carry output covenant binding inside SubmitTransactionRequest",
+    "Rust RPC model preserves tx version 1 input computeBudget"
+  ],
+  "doesNotProve": [
+    "network broadcast",
+    "mempool acceptance",
+    "accepted TN12 recurring-vault spend"
+  ],
+  "fields": {
+    "rust_submit_route_preserves_output_covenant": "true",
+    "request_serialized_bytes": "216",
+    "input_compute_budget": "30",
+    "output_covenant_authorizing_input": "0",
+    "output_covenant_id": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "stdout": "rust_submit_route_preserves_output_covenant=true\nrequest_serialized_bytes=216\ninput_compute_budget=30\noutput_covenant_authorizing_input=0\noutput_covenant_id=1111111111111111111111111111111111111111111111111111111111111111",
+  "stderr": ""
+}

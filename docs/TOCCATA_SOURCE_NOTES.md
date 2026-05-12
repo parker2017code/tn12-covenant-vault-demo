@@ -80,6 +80,12 @@ recurring-vault spend through that route. The next live attempt needs either a
 Rust submit route or a JS SDK route that preserves `TransactionOutput.covenant`
 for the continuation output.
 
+The Rust route now has a pre-broadcast probe:
+`artifacts/recurring-treasury-vault-rust-submit-route-probe.json`. It shows the
+Rust RPC `SubmitTransactionRequest` model preserves output covenant binding and
+tx v1 `computeBudget`. It does not prove broadcast, mempool acceptance, or an
+accepted TN12 recurring-vault spend.
+
 ## Next Build Order
 
 1. Recurring treasury vault.
@@ -91,8 +97,10 @@ for the continuation output.
      harness.
    - Current live boundary: blocked before submit through npm `kaspa-wasm`
      because output covenant binding is dropped.
-   - Next: submit an accepted TN12 spend only through a Rust route or SDK route
-     that preserves covenant-bound continuation outputs.
+   - Rust route probe: local RPC request model preserves covenant-bound
+     continuation outputs.
+   - Next: convert the Rust-shaped request into a guarded submit and record
+     accepted TN12 evidence if the network accepts it.
 2. ICC ownership demo.
    - One action/asset branch accepts authorization from a sibling covenant input.
    - Use witness hints; do not scan every input if a direct witness index works.
