@@ -173,40 +173,52 @@ node scripts/submit-signed-draft.mjs .local/playground/funding-draft.json --subm
       </div>
     </section>
 
-    <section id="roles" class="panel results-panel">
-      <div class="section-title">
-        <p class="eyebrow">Role wallets</p>
-        <h2>Suggested testnet roles and funding.</h2>
-      </div>
-      <div id="playground-roles" class="results-rails" aria-live="polite"></div>
-    </section>
+    <details class="panel results-panel section-drawer">
+      <summary>
+        <span>Role wallets and available checks</span>
+        <small>Open when you need addresses, funding targets, and session actions.</small>
+      </summary>
+      <section id="roles" class="drawer-section">
+        <div class="section-title">
+          <p class="eyebrow">Role wallets</p>
+          <h2>Suggested testnet roles and funding.</h2>
+        </div>
+        <div id="playground-roles" class="results-rails" aria-live="polite"></div>
+      </section>
 
-    <section id="actions" class="panel results-panel">
-      <div class="section-title">
-        <p class="eyebrow">Available checks</p>
-        <h2>What this session can verify.</h2>
-      </div>
-      <div id="playground-actions" class="results-rails" aria-live="polite"></div>
-    </section>
+      <section id="actions" class="drawer-section">
+        <div class="section-title">
+          <p class="eyebrow">Available checks</p>
+          <h2>What this session can verify.</h2>
+        </div>
+        <div id="playground-actions" class="results-rails" aria-live="polite"></div>
+      </section>
+    </details>
 
-    <section id="replay" class="panel results-panel">
-      <div class="section-title">
-        <p class="eyebrow">Replay state</p>
-        <h2>What current accepted rows reduce to.</h2>
-      </div>
-      <div id="playground-replay-summary" class="results-summary" aria-live="polite"></div>
-      <div id="playground-session-balances" class="session-balance-strip" aria-live="polite"></div>
-      <div id="playground-balances" class="results-feed" aria-live="polite"></div>
-      <div id="playground-blocked" class="results-rails" aria-live="polite"></div>
-    </section>
+    <details class="panel results-panel section-drawer">
+      <summary>
+        <span>Replay output and verification rules</span>
+        <small>Open when you want reducer balances, blocked rows, and promotion rules.</small>
+      </summary>
+      <section id="replay" class="drawer-section">
+        <div class="section-title">
+          <p class="eyebrow">Replay state</p>
+          <h2>What current accepted rows reduce to.</h2>
+        </div>
+        <div id="playground-replay-summary" class="results-summary" aria-live="polite"></div>
+        <div id="playground-session-balances" class="session-balance-strip" aria-live="polite"></div>
+        <div id="playground-balances" class="results-feed" aria-live="polite"></div>
+        <div id="playground-blocked" class="results-rails" aria-live="polite"></div>
+      </section>
 
-    <section id="rules" class="panel results-panel">
-      <div class="section-title">
-        <p class="eyebrow">Verification rules</p>
-        <h2>Verify before using app state.</h2>
-      </div>
-      <ul id="playground-rules" class="issues" aria-live="polite"></ul>
-    </section>
+      <section id="rules" class="drawer-section">
+        <div class="section-title">
+          <p class="eyebrow">Verification rules</p>
+          <h2>Verify before using app state.</h2>
+        </div>
+        <ul id="playground-rules" class="issues" aria-live="polite"></ul>
+      </section>
+    </details>
   </main>
 </body>
 </html>

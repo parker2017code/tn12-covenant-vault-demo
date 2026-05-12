@@ -128,14 +128,20 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /4 TKAS second deposit/);
     assert.match(playgroundText, /User B -> Pool/);
     assert.match(playgroundText, /3bfca807/);
-    assert.match(playgroundText, /30 TKAS/);
-    assert.match(playgroundText, /User A/);
-    assert.match(playgroundText, /7 TKAS/);
     assert.match(playgroundText, /4 accepted txs/);
     assert.match(playgroundText, /Open lab tools/);
     assert.match(playgroundText, /Bring your own external wallet/);
     assert.match(playgroundText, /Sign outside the repo/);
     assert.match(playgroundText, /Build a based-app lane/);
+    assert.equal(await page.locator("details.section-drawer").count(), 2);
+    assert.equal(await page.locator("details.section-drawer[open]").count(), 0);
+    await page.locator("details.section-drawer").nth(1).evaluate((node) => {
+      node.open = true;
+    });
+    const replayText = await page.locator("#replay").innerText();
+    assert.match(replayText, /30 TKAS/);
+    assert.match(replayText, /User A/i);
+    assert.match(replayText, /7 TKAS/);
     assert.equal(await page.locator('a[href*="tn12.kaspa.stream/txs/"]').count(), 0);
     assert.equal(await page.locator("#playground-quickstart a").count(), 4);
     assert.ok(await page.locator('#playground-quickstart a[href="#activity"]').count() === 1);
