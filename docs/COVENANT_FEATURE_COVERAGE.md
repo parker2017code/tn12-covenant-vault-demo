@@ -86,6 +86,21 @@ opcodes.
 | Autonomous AMM/lending/liquidation custody | Not implemented | Script or wallet policy controls settlement, not repo-held local keys |
 | Mainnet activation | Blocked | Mainnet covenant support, review, wallet support, and production ops |
 
+## Next Rails To Build
+
+| Order | Feature | First build | Promotion target |
+|---|---|---|---|
+| 1 | Recurring spend limits | Extend treasury cap fixtures and negative over-cap tests | Accepted under-cap TN12 spend plus over-cap rejection evidence |
+| 2 | Dynamic whitelists | Wallet-policy destination-set artifact and UI check | Script or wallet-enforced destination set with off-list negative evidence |
+| 3 | Guardian recovery | New guardian vault fixture | Accepted m-of-n recovery spend plus wrong/too-few guardian negative evidence |
+| 4 | Partial unvaulting | New vault fixture with hot output plus relocked remainder | Accepted partial spend and replayed relock evidence |
+| 5 | Policy update | Delayed admin/recovery update artifact | Accepted delayed update plus early-update rejection evidence |
+
+The default first pass should use local TN12 wallets. That gives most of the
+engineering proof with low overhead: address setup, signed draft, accepted
+txid, replay, blocked bad case, UI evidence, and test coverage. The later
+user-wallet pass proves custody UX without changing the core transaction route.
+
 ## Short Verdict
 
 TN12 covers the core covenant proof shape well: signatures, destinations,

@@ -32,7 +32,8 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 2 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
 | 3 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 4 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or wallet signing is needed |
-| 5 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
+| 5 | Wallet-vault feature rails. | Dynamic whitelist, recurring cap, partial unvault, policy update, and guardian recovery are split into script, wallet-policy, and local-model tasks. | No |
+| 6 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
 
 ## Next Defined Work
 
@@ -52,6 +53,15 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 4. Live rollback evidence.
    - What it is: a live TN12 removed-block window captured from node/RPC data and matched by the replay promotion guard.
    - Done when local rollback matching is backed by a live observed rollback case.
+5. Wallet-vault feature coverage.
+   - What it is: turn the missing vault-product features into separate rails instead of one vague "vaults later" bucket.
+   - Default path: local-wallet TN12 flow first. That proves address setup, transaction construction, accepted txid, replay, UI evidence, and negative guards with minimal overhead.
+   - Dynamic whitelist: local-wallet destination-set artifact first; promote only after a script or wallet proves destination-set enforcement.
+   - Recurring cap: local-wallet treasury cap fixture first; promote after accepted positive and over-cap negative TN12 evidence.
+   - Partial unvault: local-wallet contract fixture that spends part of an output while relocking the remainder.
+   - Policy update: local-wallet delayed admin/recovery update path with accepted update and early-update rejection evidence.
+   - Guardian recovery: local-wallet m-of-n guardian path with accepted quorum spend and too-few/wrong-guardian negative evidence.
+   - Done when each feature has a status label, artifact path, test, and UI boundary.
 
 ## Where Older Queues Went
 

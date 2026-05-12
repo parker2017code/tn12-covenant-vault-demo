@@ -99,6 +99,23 @@ Minimum credible build:
 5. Submit one accepted guardian path.
 6. Update the UI label from `planner-only` to `script-enforced` only for that exact path.
 
+## Wallet-Vault Feature Rails
+
+These are possible, but they need separate evidence.
+
+| Feature | First useful build | Real proof |
+|---|---|---|
+| Dynamic whitelist | Wallet-policy artifact with allowed destination set, update request, and UI warning on off-list outputs. | Accepted script or wallet-signed spend that proves the selected destination was in the active set, plus off-list negative evidence. |
+| Recurring cap | Treasury cap model with per-window amount, spent-so-far state, and over-cap local negative row. | Accepted under-cap spend and rejected/blocked over-cap spend from fresh TN12 outputs. |
+| Partial unvault | New fixture that sends one output to a hot wallet and relocks the rest. | Accepted partial spend with change locked back into the vault shape. |
+| Policy update | Delayed policy-update request that changes guardian, whitelist, or cap fields after a waiting period. | Accepted delayed update plus early-update rejection evidence. |
+| Guardian recovery | m-of-n guardian path for recovery, cancel, or large-spend approval. | Accepted quorum spend plus too-few-guardian and wrong-guardian negative evidence. |
+
+Build order: local-wallet TN12 flow first, then user-wallet handoff later.
+The local-wallet pass proves the route, fields, txid acceptance, replay,
+negative guards, and UI evidence. The user-wallet pass proves custody UX.
+Do not call a feature script-enforced until the accepted spend path exists.
+
 ## User-Wallet Path
 
 People should be able to use their own wallets without sharing secrets. The repo should never require a private key paste for a public playground.

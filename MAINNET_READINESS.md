@@ -14,7 +14,7 @@ This file is about deployment readiness, not TN12 proof-core progress.
 
 - Covenant spends: 16 proof paths across vault recovery/withdrawal, assurance release/refund, escrow release/refund/cancel, auction settlement/refund, and all seven role-separated positive paths.
 - Payload state: 40 accepted payload events, including seven DeFi v1 receipts, one scheduler-intent receipt, three scheduler-bid receipts, one scheduler-execution receipt, one scheduler-covenant-binding receipt, and one agent release wallet-review event.
-- Local-key DeFi custody/activity: 25 accepted TN12 transfer rows cover user funding, pool deposits, pool payouts, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
+- Local-key DeFi custody/activity: 40 accepted TN12 transfer rows cover user funding, pool deposits, pool payouts, playground roles, fresh role funding, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
 - Batch assurance: accepted pledge outputs and accepted 3-pledge release tx `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`.
 - Live replay: public TN12 wRPC reads work, checkpoint overlap is recorded, and `artifacts/durable-replay-promotion-guard.json` passes deterministic replay plus local rollback matching.
 - DeFi planner/indexer lane: deterministic planner, scenario, reducer, advanced, multi-wallet, and accepted-activity artifacts are guarded by `artifacts/defi-artifact-manifest.json`. The local-key custody transfers are real TN12 activity; AMM pricing, oracle truth, app-controlled custody, and liquidation execution are not script-enforced.
@@ -28,6 +28,11 @@ This file is about deployment readiness, not TN12 proof-core progress.
 | Batch settlement follow-through | Release is accepted; alternate refund path must remain non-selected | `artifacts/batch-assurance-operator-decision.json` |
 | Wallet/indexer hardening | Product state needs operational reliability | `artifacts/wallet-submit-result-validation.json`; focused tests now cover signer-return validation, submit-result promotion rules, rollback-by-missing-txid, blue-score regression, and virtual-chain rollback rows |
 | DeFi product readiness | Current DeFi lane includes real local-key TN12 custody/activity transfers, but no AMM custody, oracle, liquidation, production custody, or user-wallet signing | `artifacts/defi-accepted-activity-ledger.json`; `artifacts/defi-artifact-manifest.json` |
+| Wallet-vault feature depth | Dynamic whitelists, recurring caps, partial unvaulting, policy updates, and guardian recovery are not yet accepted script paths | `docs/COVENANT_FEATURE_COVERAGE.md` |
+
+Local-wallet TN12 flows are the right first pass for those wallet-vault
+features. They prove the transaction and replay path. They do not prove
+user-owned custody until an external wallet signs the same kind of request.
 
 ## Next Order
 
