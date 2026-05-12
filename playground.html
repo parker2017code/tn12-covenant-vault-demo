@@ -146,7 +146,7 @@
       <div id="playground-flow" class="results-flow" aria-live="polite"></div>
       <details class="playground-command-drawer">
         <summary>Show local commands</summary>
-        <p class="note">Prereqs: run <code>npm ci</code>, use throwaway TN12 wallets only, fund generated <code>kaspatest:</code> addresses before building the funding draft, and treat <code>--submit</code> as a real testnet broadcast.</p>
+        <p class="note">Prereqs: run <code>npm ci</code>, use throwaway TN12 wallets only, and keep source funding explicit. <code>playground:wallets</code> creates fresh role addresses. <code>playground:funding-draft</code> funds those roles from <code>TN12_WALLET</code> plus <code>FUNDING_OUTPOINT</code>, defaulting to <code>.local/tn12-wallet.json</code> and <code>fixtures/FundedWalletOutpoint.json</code>. Treat <code>--submit</code> as a real testnet broadcast.</p>
         <pre>npm run playground:wallets
 npm run playground:funding-draft
 node scripts/submit-signed-draft.mjs .local/playground/funding-draft.json --submit</pre>

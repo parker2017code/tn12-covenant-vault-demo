@@ -121,12 +121,12 @@ npm run serve
 
 Open `index.html` for the proof/reviewer page. Open `results.html` for the artifact-backed results explainer. Open `playground.html` for the role/faucet playground plan. Open `lab.html` for the full builder workbench.
 
-To create fresh local playground wallets:
+To create fresh local playground role wallets:
 
 ```sh
 npm run playground:wallets
 ```
 
-The command writes private TN12 testnet keys under `.local/playground/` and prints public `kaspatest:` addresses to fund with the faucet.
-If the local operator wallet has a current funded UTXO, `npm run playground:funding-draft` builds a local-only multi-output funding draft under `.local/playground/` for those roles.
+The command writes private TN12 testnet keys under `.local/playground/` and prints public `kaspatest:` role addresses.
+If the local source wallet has a current funded UTXO, `npm run playground:funding-draft` builds a local-only multi-output funding draft under `.local/playground/` for those roles. By default it uses `TN12_WALLET=.local/tn12-wallet.json` and `FUNDING_OUTPOINT=fixtures/FundedWalletOutpoint.json`; override both when using your own funded TN12 source wallet.
 The current public session records accepted role funding, two user-to-pool deposits, and a pool-to-user payout. Start at `playground.html` for clickable txids and the visual walk-through.
