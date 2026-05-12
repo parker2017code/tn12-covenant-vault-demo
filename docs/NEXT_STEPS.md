@@ -2,7 +2,7 @@
 
 Reviewed: 2026-05-11
 
-This file is the short queue. It does not replace the generated artifacts; it points reviewers and future agents to the next concrete work without reopening broad roadmap claims.
+This file is the short queue. It does not replace generated artifacts; it points future work to the next concrete tasks without reopening old roadmap stacks.
 
 ## Current Position
 
@@ -31,82 +31,9 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 9 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 10 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or external signing is needed |
 
-## Autonomous Grand Plan Before User Input
+## Where Older Queues Went
 
-These are the highest-impact things that can be advanced without asking for a real external wallet signature:
-
-| Order | Work | Done When | Needs User? |
-|---|---|---|---|
-| 1 | DeFi scenario reducer and promotion guard. | Accepted scenario references reduce into review-only app state; duplicate, missing, stale-oracle, slippage, liquidation, and custody-promotion attempts are blocked. | No |
-| 2 | AMM hardening. | Add/remove liquidity math, LP-share accounting, invariant checks, price-impact sweeps, and invalid reserve mutation tests. | No; first pass is `artifacts/defi-advanced-simulation.json` |
-| 3 | Lending/liquidation hardening. | Collateral-ratio sweeps, liquidation threshold tests, stale/wrong oracle blocks, and no-executable-liquidation boundaries are deterministic. | No; first pass is `artifacts/defi-advanced-simulation.json` |
-| 4 | Oracle failure matrix. | Stale, conflicting, unavailable, manipulated, missing-quorum, and fresh-but-not-truth inputs are executable negative cases. | No; first pass is `artifacts/defi-advanced-simulation.json` |
-| 5 | Multi-wallet scenario pack. | Existing multi-wallet receipt references are grouped into user/operator roles with accepted-index replay and no external-signer claim. | No; first pass is `artifacts/defi-multi-wallet-scenario-pack.json` |
-| 6 | Real TN12 DeFi activity ledger. | Local users are funded on-chain, pool deposits are accepted, pool payouts are accepted, and `artifacts/defi-accepted-activity-ledger.json` reduces those txids into balances. | No; first pass is accepted |
-| 7 | Wallet/indexer hardening. | Unsigned request templates, signer-return validation, submit-result promotion, replay reducers, rollback fixtures, and no-secret checks stay green. | No |
-| 8 | Reviewer/UI cleanup. | Public surfaces show accepted activity, planner/indexer state, and blocked market execution without adding product claims. | No |
-| 9 | Scheduler/TangVM-adjacent prototype. | Accepted payloads register trigger intents and execution receipts, a reducer records executed triggers, planner-only auction rows rank candidates, and any local-key execution remains labeled `LOCAL_KEY_CUSTODY_TEST`; see `docs/TANGVM_UNISC_BOUNDARY.md`. | No |
-| 10 | External signer roundtrip. | A real wallet returns signed bytes, submit succeeds, and accepted txid replay matches. | Yes |
-
-## Expanded Active Queue
-
-This queue is intentionally larger than one commit. It is the current batch to execute in order unless a blocker changes the sequence.
-
-| Order | Work | Output | Needs User? |
-|---|---|---|---|
-| 1 | Full-DeFi benchmark artifact. | `artifacts/full-defi-benchmark.json`, `npm run defi:benchmark`, focused shape tests, and docs links. | No |
-| 2 | Artifact-backed interactive results page. | A public page that explains accepted TN12 results at beginner, crypto-native, and builder levels, using artifacts rather than hand-maintained counts. | No |
-| 3 | Public evidence showcase. | `results.html` and `playground.html` lead with accepted TN12 activity, clickable txids, role wallets, replay balances, and concise level-based explanations. | No |
-| 4 | Live TN12 playground v1. | `playground.html` shows throwaway role wallets, funding commands, accepted role funding, two accepted deposits, accepted payout, replay state, and blocked actions without committing secrets. | No |
-| 5 | Accepted/custody DeFi execution reducer hardening. | More deterministic balance, position, intent, duplicate, stale-oracle, impossible-withdrawal, and liquidation-block tests over accepted txids/receipts. | No |
-| 6 | More on-chain app actions. | Add small accepted TN12 receipts and safe local-key transfers for deposit, payout, pass, invoice, scheduler, and proof-binding flows where tooling allows. | No; ask only if wallets need more tKAS |
-| 7 | Standards/adapters backlog. | `artifacts/standards-adapter-backlog.json` tracks x402-style payment, ISO 20022-style metadata, DTI-style asset IDs, attestation, agent settlement, and wallet-signing adapter lanes without claiming certification. | No |
-| 8 | Contract/primitive binding pass. | More app-state receipts reference accepted covenant proof rows without implying those app semantics are script-enforced. | No |
-| 9 | UI/app.js split continuation. | Move more renderer/page logic into `src/ui/` modules so the proof page, lab workbench, results page, and playground are easier to audit. | No |
-| 10 | Manifest-driven inventories. | Artifact/page/script inventories catch drift in README, UI, operator pack, and proof maps. | No |
-| 11 | Kaspa Explained sync, only when public evidence changed. | Builder evidence/status copy updates for accepted-count or boundary changes; no internal TN12 roadmap spillover. | No |
-| 12 | External signer readiness pack. | Request templates, returned-bytes validators, negative cases, and replay checks remain ready for an actual wallet signing round. | Final proof needs user/wallet |
-| 13 | Actual external-wallet path. | Convert request templates into a wallet-consumable round trip, validate signed bytes, submit, and replay accepted txid. | Final proof needs user/wallet |
-
-## Current Reviewer-Hardening Queue
-
-These are the practical cleanup tasks surfaced by the latest repo reviews and GitHub surface check. They improve auditability before adding more app lanes.
-
-| Order | Task | Why It Matters | Blocked By User? |
-|---|---|---|---|
-| 1 | Keep splitting `scripts/check.mjs` into focused domain tests. | Smaller failures are easier for an outside reviewer to trust and debug. Wallet-submit, attestation/invoice/research, batch-assurance, escrow-marketplace, treasury/access, market/DeFi/stable/agent, and indexer-replay slices now have focused tests. | No |
-| 2 | Add mutation coverage to proof-record tests. | The verifier should prove it catches bad source, amount, output, fee, and timing records. | No |
-| 3 | Derive public counts from canonical artifacts. | README/UI/operator-pack count drift should fail a check instead of relying on manual updates. Payload, proof-path, role-separated, checkpoint/indexed, and operator receipt counts now have a stronger local guard. | No |
-| 4 | Split `app.js` by proof page, lab page, renderers, and data loaders. | UI changes should not affect proof verification or unrelated lab panels. Shared formatting/form/data-loading helpers are now extracted; fixture/artifact fetches now use the shared loader, and the DeFi accepted-activity/planner surface is now in `src/ui/renderers/defiSimulationSurface.mjs`. More renderer/page extraction remains next. | No |
-| 5 | Keep claim vocabulary close to public claims. | Reviewers should always know what is script-enforced, planner-only, indexer-derived, TN12-accepted, or mainnet-blocked. | No |
-| 6 | Continue exact validation for addresses, txids, amounts, artifact shapes, signer returns, and rollback promotion. | Prefix checks and loose fixtures are acceptable for drafts, not reviewer evidence. Generated public artifacts, signer-return metadata, submit-result promotion rules, and rollback cases now have focused gates; deeper per-artifact schemas remain useful. | No |
-| 7 | Keep historical reports archived and non-canonical. | The root and reviewer path should stay short enough to audit. | No |
-| 8 | Move command, artifact, and count inventories toward manifest-driven checks. | Generated indexes should prevent docs, UI, and artifact packs from drifting. | No |
-| 9 | Keep TangVM / universal-scheduler language scoped. | This repo can prototype event receipts, trigger reducers, and local-key execution aligned with upstream vProgs concepts; it cannot claim TangVM, UniSc, miner oracle consensus, or full vProgs. | No |
-
-First pass is `artifacts/project-review-manifest.json`, generated by `npm run project:review-manifest`. It checks the reviewer command path, canonical docs, and high-signal artifacts.
-
-## Next 5 Deployment-Readiness Tasks
-
-| Order | Task | Why It Matters | Blocked By User? |
-|---|---|---|---|
-| 1 | Keep `operator:refresh` green after every proof/artifact change. | This is the reviewer gate for accepted evidence plus local replay and UI checks. | No |
-| 2 | Route the next local-wallet TN12 spend through the operator receipt pack. | Proves the repo can turn a spend into a reviewer/operator receipt instead of only a raw txid. | Done for txid `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`; repeatable, not external-signer evidence |
-| 3 | Keep batch-assurance release selected and refund alternates explicitly non-selected. | Prevents accidental double-claim language around the spent pledge set. | No |
-| 4 | Prepare one unsigned external-signer payload receipt request. | Keeps the missing no-local-key signer rail concrete without pretending a wallet already signed it. | No; artifact path is `artifacts/external-signer-payload-request.json` |
-| 5 | Only promote external signer status after a real wallet returns signed tx bytes and TN12 accepts the txid. | This is the main custody boundary for mainnet-style readiness. | Yes, unless a compatible throwaway signer is available |
-
-## Next 90-95% Readiness Tasks
-
-These are not all needed for the next commit, but they are the path from proof lab toward product infrastructure:
-
-| Task | Clears |
-|---|---|
-| Real external-signer round trip | Repo no longer needs local keys for the selected demo path |
-| Production wallet/indexer hardening | Focused tests now cover signer-return validation, submit-result promotion rules, missing-txid rollback, blue-score regression, and virtual-chain rollback rows; live external signing and live rollback evidence still remain |
-| Live removed-block rollback capture | Replay promotion is backed by real TN12 rollback evidence |
-| Fresh accepted payload receipt through the operator pack | Demonstrates the current user-facing receipt loop |
-| Public docs stay proof-first after each change | Prevents roadmap/status drift |
+Older broad queues were folded into the active todo above. Historical planning notes stay in `docs/archive/` and generated artifact files; this file should stay short enough to scan before work starts.
 
 ## Do Not Do Next
 

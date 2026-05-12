@@ -76,13 +76,13 @@ Read `docs/COMMAND_RUNBOOK.md` before running wallet, faucet, or submit commands
 
 | Need | Artifact |
 |---|---|
-| Reviewer claim map | `docs/AUDIT_MAP.md` |
+| Evidence map | `docs/AUDIT_MAP.md` |
 | Script groups | `docs/SCRIPT_INDEX.md` |
 | Command runbook | `docs/COMMAND_RUNBOOK.md` |
 | TangVM / scheduler boundary | `docs/TANGVM_UNISC_BOUNDARY.md` |
 | Tidying map | `docs/REPO_TIDYING.md` |
 | Next steps | `docs/NEXT_STEPS.md` |
-| Reviewer manifest | `artifacts/project-review-manifest.json` |
+| Project manifest | `artifacts/project-review-manifest.json` |
 | Proof index | `docs/PROOF_INDEX.md` |
 | Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
 | Mainnet readiness | `MAINNET_READINESS.md` |

@@ -2,7 +2,7 @@
 
 Reviewed: 2026-05-10
 
-This is the short index for accepted TN12 proof evidence, historical rejections, and the next live rails.
+This is the short index for accepted TN12 proof evidence, historical rejections, and open rails.
 
 ## Accepted proof evidence
 
@@ -30,14 +30,14 @@ This is the short index for accepted TN12 proof evidence, historical rejections,
 | Old escrow cancel attempt | Historical rejection | `artifacts/escrow-cancel-attempt.json` |
 | Role-separated invalid candidates | Local review only | `artifacts/role-separated-invalid-candidates.json` |
 
-## Current live rails
+## Open rails
 
 | Rail | Status | Next step |
 |---|---|---|
-| Wallet connector / external signer | WIP | Wire a real external signer round trip |
-| Virtual-chain live indexer | WIP | Test the bounded adapter against a configured TN12 endpoint |
-| Batch-assurance alternate-path cleanup | WIP | Keep refund drafts non-selected after accepted release |
-| Escrow marketplace demo | WIP | Build the concrete demo on the accepted escrow output |
+| Wallet connector / external signer | Open | Wire a real external signer round trip |
+| Virtual-chain live indexer | Open | Test the bounded adapter against a configured TN12 endpoint |
+| Batch-assurance alternate-path cleanup | Open | Keep refund drafts non-selected after accepted release |
+| Escrow marketplace demo | Open | Build the concrete demo on the accepted escrow output |
 
 ## Notes
 
