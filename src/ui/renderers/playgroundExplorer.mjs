@@ -33,7 +33,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
     ]);
     summaryNode.innerHTML = `
       ${metric("Roles", plan.summary.roles, "Throwaway TN12 session roles.")}
-      ${metric("Guided actions", plan.summary.guidedActions, "Real TN12 targets where tooling allows.")}
+      ${metric("Available checks", plan.summary.guidedActions, "Session checks that are either accepted, replayable, or clearly blocked.")}
       ${metric("Payload events available", plan.summary.acceptedPayloadEventsAvailable, "Current accepted receipt evidence.")}
       ${metric("Transfer rows available", plan.summary.acceptedTransferRowsAvailable, "Current local-key custody movement evidence.")}
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}

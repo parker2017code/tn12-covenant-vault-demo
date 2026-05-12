@@ -67,7 +67,7 @@ function renderKnowledgeLevels(node) {
     </article>
     <article class="level-card hidden" data-level-panel="builder">
       <span>Builder</span>
-      <h3>Click txids, then run the gates.</h3>
+      <h3>Open txids, then run the gates.</h3>
       <p>Use <code>npm run check:all</code>, <code>npm run check:tn12</code>, and <code>npm run operator:refresh</code>. The canonical maps are <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, <code>docs/TN12_TEST_MATRIX.md</code>, and <code>artifacts/full-defi-benchmark.json</code>.</p>
       <p>Look for the enforcement label on each rail: <code>TN12_ACCEPTED</code>, <code>LOCAL_KEY_CUSTODY_TEST</code>, <code>INDEXER_DERIVED</code>, <code>PLANNER_ONLY</code>, or <code>MAINNET_BLOCKED</code>.</p>
     </article>
