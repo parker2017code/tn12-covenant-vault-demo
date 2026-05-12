@@ -1,0 +1,125 @@
+{
+  "schema": "tn12-recurring-treasury-vault-window-reset-proof/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-12T23:54:35.950Z",
+  "status": "accepted-window-reset-with-local-negatives",
+  "contract": "contracts/RecurringTreasuryVaultWindow.sil",
+  "plainPoint": "A capped treasury can start a new spending window without letting the old spent amount permanently freeze the vault.",
+  "technicalPoint": "The reset branch checks owner signature, required destination, cap amount, window age, new window state, and relocked covenant continuation output.",
+  "kaspaEdge": "Fast UTXO confirmation makes two-step covenant state flows practical: one output can carry the treasury state forward and the next spend can enforce the next rule quickly.",
+  "cryptoPoint": "The rule travels with the coin. A normal app server can promise a cap, but this path shows the spend itself must satisfy the cap and continuation rules before the transaction is accepted.",
+  "realWorldImplication": "This is the primitive behind recurring budgets, allowance wallets, team treasuries, game resources, and merchant payout limits where users want money to move without handing total discretion to one operator.",
+  "source": {
+    "fundingDraft": "artifacts/signed-drafts/recurring-treasury-vault-window-genesis-funding.json",
+    "contractOutpoint": "fixtures/RecurringTreasuryVaultWindowContractOutpoint.json",
+    "resetDraft": "artifacts/signed-drafts/recurring-treasury-vault-window-reset.json",
+    "resetEvidence": "artifacts/recurring-treasury-vault-window-reset-evidence.json",
+    "continuation": "fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json",
+    "negatives": [
+      "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json",
+      "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
+      "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json"
+    ]
+  },
+  "accepted": {
+    "genesisTxid": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
+    "resetTxid": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+    "acceptingBlockBlueScore": 10055209,
+    "continuationOutpoint": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759:1"
+  },
+  "state": {
+    "before": {
+      "windowStart": 9899000,
+      "spentInWindowSompi": 6500000000,
+      "capSompi": 7500000000
+    },
+    "reset": {
+      "lockTime": 9900000,
+      "newWindow": 9900000,
+      "amountSompi": 4000000000,
+      "nextSpentSompi": 4000000000
+    },
+    "continuation": {
+      "capSompi": "7500000000",
+      "windowStart": "9899000",
+      "spentInWindowSompi": "4000000000",
+      "minerFeeSompi": "20000"
+    }
+  },
+  "negativeCases": [
+    {
+      "id": "early-reset",
+      "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json",
+      "status": "blocked-local-engine-failed",
+      "reason": "lockTime before reset window",
+      "localEngineAcceptedGeneratedSigScript": false,
+      "transactionId": "23b9f2e75801f9edfc0e487945cf04a9332e4bddff5a04e5b2b506b7ea657bce",
+      "state": {
+        "capSompi": 7500000000,
+        "lockTime": 9899999,
+        "minerFeeSompi": 20000,
+        "nextSpentSompi": 4000000000,
+        "nextWindow": 9900000,
+        "prevSpentSompi": 6500000000,
+        "resetWindow": 9900000,
+        "spendAmountSompi": 4000000000,
+        "windowLength": 1000,
+        "windowStart": 9899000
+      }
+    },
+    {
+      "id": "stale-reset-window",
+      "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
+      "status": "blocked-local-engine-failed",
+      "reason": "new state keeps the old window",
+      "localEngineAcceptedGeneratedSigScript": false,
+      "transactionId": "a47b6d52f4c54eb57e7e089b47e8fb8c3283cd8ee4a5b35fea143720a4d394ba",
+      "state": {
+        "capSompi": 7500000000,
+        "lockTime": 9900000,
+        "minerFeeSompi": 20000,
+        "nextSpentSompi": 4000000000,
+        "nextWindow": 9899000,
+        "prevSpentSompi": 6500000000,
+        "resetWindow": 9900000,
+        "spendAmountSompi": 4000000000,
+        "windowLength": 1000,
+        "windowStart": 9899000
+      }
+    },
+    {
+      "id": "over-cap-reset",
+      "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json",
+      "status": "blocked-local-engine-failed",
+      "reason": "reset amount exceeds cap",
+      "localEngineAcceptedGeneratedSigScript": false,
+      "transactionId": "9cb4abb8e2e0e914ed599d02546eec81800ab09a95fb6c040acbc80b2643182b",
+      "state": {
+        "capSompi": 7500000000,
+        "lockTime": 9900000,
+        "minerFeeSompi": 20000,
+        "nextSpentSompi": 8000000000,
+        "nextWindow": 9900000,
+        "prevSpentSompi": 6500000000,
+        "resetWindow": 9900000,
+        "spendAmountSompi": 8000000000,
+        "windowLength": 1000,
+        "windowStart": 9899000
+      }
+    }
+  ],
+  "proves": [
+    "accepted TN12 covenant-genesis funding for RecurringTreasuryVaultWindow.sil",
+    "accepted TN12 reset-window spend through the generated __reset_window sigscript",
+    "destination amount and relocked continuation output match the signed draft",
+    "early reset, stale-window reset, and over-cap reset candidates fail local script-engine execution"
+  ],
+  "doesNotProve": [
+    "mainnet activation",
+    "audited custody",
+    "wallet-standard user signing",
+    "calendar-grade production accounting",
+    "multi-user treasury governance"
+  ],
+  "publicCopyRule": "Say this proves a TN12/testnet script-enforced reset primitive. Do not call it a production treasury product or mainnet wallet."
+}

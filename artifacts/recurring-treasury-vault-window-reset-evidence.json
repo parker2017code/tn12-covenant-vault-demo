@@ -1,0 +1,71 @@
+{
+  "schema": "tn12-recurring-treasury-vault-live-spend-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "checkedAt": "2026-05-12T23:52:42.980Z",
+  "status": "accepted-script-enforced-window-reset",
+  "txid": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+  "acceptingBlockBlueScore": 10055209,
+  "source": {
+    "contract": "contracts/RecurringTreasuryVaultWindow.sil",
+    "contractOutpoint": {
+      "txid": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
+      "outputIndex": 0,
+      "amountSompi": "8500000000",
+      "amountTkas": 85
+    },
+    "covenantId": "a4f8b4650bf7d8599bb64e5016b7644a2b4a0625189943f0c6c03db2fb6572c4"
+  },
+  "state": {
+    "capSompi": 7500000000,
+    "lockTime": 9900000,
+    "minerFeeSompi": 20000,
+    "nextSpentSompi": 4000000000,
+    "nextWindow": 9900000,
+    "prevSpentSompi": 6500000000,
+    "resetWindow": 9900000,
+    "spendAmountSompi": 4000000000,
+    "windowLength": 1000,
+    "windowStart": 9899000
+  },
+  "checks": {
+    "acceptedOnTn12": true,
+    "output0AmountMatchesSpend": true,
+    "output0DestinationMatchesDraft": true,
+    "output1ContinuationAmountMatchesDraft": true,
+    "output1ContinuationScriptMatchesDraft": true,
+    "output1ContinuationCovenantMatchesDraft": true,
+    "localEngineAcceptedGeneratedSigScript": true
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "amountSompi": "4000000000",
+      "amountTkas": 40,
+      "scriptType": "pubkey",
+      "scriptPublicKeyAddress": "kaspatest:qqwmcx92f3ftdu6u4m3vy56j6fyw2cu0lt8mxza50tyvdu98jfrsqgqapztg8",
+      "scriptPublicKey": "201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700ac"
+    },
+    {
+      "index": 1,
+      "amountSompi": "4499980000",
+      "amountTkas": 44.9998,
+      "scriptType": "scripthash",
+      "scriptPublicKeyAddress": "kaspatest:prquq7cmhqpru9cdzq5rynxcgjrjdyp72um86np9klgf82cvladljs73xzahl",
+      "scriptPublicKey": "aa20c1c07b1bb8023e170d1028324cd8448726903e57367d4c25b7d093ab0cff5bf987"
+    }
+  ],
+  "proves": [
+    "contracts/RecurringTreasuryVaultWindow.sil reset-window spend was accepted on TN12.",
+    "The reset paid the required destination amount.",
+    "The reset advanced the window and set spent-in-window to the current spend amount.",
+    "The reset relocked the remaining value into a continuation output with the same covenant id."
+  ],
+  "doesNotProve": [
+    "mainnet activation",
+    "audited custody",
+    "wallet-standard user signing",
+    "calendar-grade production period accounting"
+  ]
+}

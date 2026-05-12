@@ -1,0 +1,141 @@
+{
+  "schema": "tn12-covenant-experiment-genesis-funding-draft/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "recurring-treasury-vault-window",
+  "contract": "RecurringTreasuryVaultWindow",
+  "status": "signed-covenant-genesis-not-broadcast",
+  "warning": "Signed TN12 draft. Submit only after checking the source UTXO is still unspent.",
+  "sdk": {
+    "package": "kaspa-wasm",
+    "version": "1.1.1-toc.1",
+    "source": "/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa"
+  },
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+    "outputIndex": 1,
+    "amountTkas": 19032.8745
+  },
+  "covenantGenesis": {
+    "contract": "RecurringTreasuryVaultWindow",
+    "authorizingInput": 0,
+    "outputIndex": 0,
+    "amountTkas": "85",
+    "amountSompi": "8500000000",
+    "redeemScriptBytes": 639,
+    "redeemScriptHash": "68b4e9e56b1a630a9a84216dca1993d937db785f23f2c2e451e531b333ab9abf",
+    "scriptPublicKey": "aa2068b4e9e56b1a630a9a84216dca1993d937db785f23f2c2e451e531b333ab9abf87",
+    "covenant": {
+      "authorizingInput": 0,
+      "covenantId": "a4f8b4650bf7d8599bb64e5016b7644a2b4a0625189943f0c6c03db2fb6572c4"
+    }
+  },
+  "change": {
+    "outputIndex": 1,
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": "18947.87445",
+    "amountSompi": "1894787445000"
+  },
+  "budget": {
+    "sourceInputComputeBudget": 10,
+    "reason": "Version-1 P2PK source input needs enough script units for one signature check; 10 compute-budget units covers the 100000 script-unit check plus free per-input allowance."
+  },
+  "transactionId": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
+  "signedTransaction": {
+    "id": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
+    "version": 1,
+    "inputs": [
+      {
+        "transactionId": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+        "index": 1,
+        "sequence": "0",
+        "sigOpCount": 1,
+        "computeBudget": 10,
+        "signatureScript": "4188d2dfe5b6c509dd5a22f11f72b202220e37510069583dfc8ada877f78c5d67cf4c3201a0bfebe16ef75d54cac6cc1baa310c086822cfacf946ed517a1ab7c5801",
+        "utxo": {
+          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "amount": "1903287450000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+          "blockDaaScore": "10174518",
+          "isCoinbase": false,
+          "covenantId": null
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "value": "8500000000",
+        "scriptPublicKey": "0000aa2068b4e9e56b1a630a9a84216dca1993d937db785f23f2c2e451e531b333ab9abf87",
+        "covenant": {
+          "authorizingInput": 0,
+          "covenantId": "a4f8b4650bf7d8599bb64e5016b7644a2b4a0625189943f0c6c03db2fb6572c4"
+        }
+      },
+      {
+        "value": "1894787445000",
+        "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+        "covenant": null
+      }
+    ],
+    "subnetworkId": "0000000000000000000000000000000000000000",
+    "lockTime": "0",
+    "gas": "0",
+    "mass": "0",
+    "payload": ""
+  },
+  "submitPayload": {
+    "transaction": {
+      "version": 1,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+            "index": 1
+          },
+          "signatureScript": "4188d2dfe5b6c509dd5a22f11f72b202220e37510069583dfc8ada877f78c5d67cf4c3201a0bfebe16ef75d54cac6cc1baa310c086822cfacf946ed517a1ab7c5801",
+          "sequence": "0",
+          "sigOpCount": 1,
+          "computeBudget": 10
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 8500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "aa2068b4e9e56b1a630a9a84216dca1993d937db785f23f2c2e451e531b333ab9abf87"
+          },
+          "covenant": {
+            "authorizingInput": 0,
+            "covenantId": "a4f8b4650bf7d8599bb64e5016b7644a2b4a0625189943f0c6c03db2fb6572c4"
+          }
+        },
+        {
+          "amount": 1894787445000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "checks": {
+    "transactionVersionIsV1": true,
+    "output0HasCovenantBinding": true,
+    "output0AuthorizingInputIsSourceInput": true,
+    "sourceInputComputeBudgetCoversP2pkSignature": true,
+    "output0AmountMatchesRequest": true,
+    "sourceWalletMatchesFundingAddress": true,
+    "signatureScriptPresent": true
+  },
+  "nextAfterAccepted": [
+    "Submit through the covenant-preserving wRPC route, not REST.",
+    "Fetch the accepted tx and record output 0 as the experiment contract outpoint.",
+    "Rerun the RPC data route; the funding output must expose a covenant binding.",
+    "Only then attempt the experiment-specific live spend."
+  ]
+}

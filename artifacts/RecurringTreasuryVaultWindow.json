@@ -1,0 +1,2262 @@
+{
+  "contract_name": "RecurringTreasuryVaultWindow",
+  "script": [
+    107,
+    8,
+    0,
+    33,
+    110,
+    131,
+    1,
+    0,
+    0,
+    0,
+    8,
+    248,
+    11,
+    151,
+    0,
+    0,
+    0,
+    0,
+    0,
+    108,
+    118,
+    0,
+    156,
+    99,
+    117,
+    120,
+    86,
+    121,
+    86,
+    121,
+    85,
+    121,
+    87,
+    121,
+    32,
+    215,
+    57,
+    222,
+    75,
+    59,
+    97,
+    168,
+    148,
+    240,
+    25,
+    136,
+    182,
+    207,
+    208,
+    150,
+    61,
+    67,
+    209,
+    180,
+    10,
+    120,
+    116,
+    19,
+    102,
+    97,
+    34,
+    164,
+    241,
+    46,
+    11,
+    96,
+    213,
+    172,
+    105,
+    118,
+    0,
+    160,
+    105,
+    83,
+    121,
+    120,
+    147,
+    5,
+    0,
+    235,
+    8,
+    191,
+    1,
+    161,
+    105,
+    82,
+    121,
+    84,
+    121,
+    82,
+    121,
+    147,
+    156,
+    105,
+    120,
+    85,
+    121,
+    156,
+    105,
+    185,
+    190,
+    120,
+    148,
+    2,
+    32,
+    78,
+    148,
+    118,
+    0,
+    160,
+    105,
+    0,
+    195,
+    32,
+    29,
+    188,
+    24,
+    170,
+    76,
+    82,
+    182,
+    243,
+    92,
+    174,
+    226,
+    194,
+    83,
+    82,
+    210,
+    72,
+    229,
+    99,
+    143,
+    250,
+    207,
+    179,
+    11,
+    180,
+    122,
+    200,
+    198,
+    240,
+    167,
+    146,
+    71,
+    0,
+    3,
+    0,
+    0,
+    32,
+    124,
+    126,
+    1,
+    172,
+    126,
+    135,
+    105,
+    0,
+    194,
+    82,
+    121,
+    156,
+    105,
+    83,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    83,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    185,
+    118,
+    201,
+    2,
+    127,
+    2,
+    148,
+    118,
+    81,
+    147,
+    188,
+    124,
+    126,
+    185,
+    118,
+    201,
+    118,
+    2,
+    127,
+    2,
+    148,
+    1,
+    19,
+    147,
+    124,
+    188,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    81,
+    195,
+    135,
+    105,
+    81,
+    194,
+    120,
+    156,
+    105,
+    185,
+    203,
+    81,
+    156,
+    105,
+    90,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    90,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    185,
+    118,
+    201,
+    2,
+    127,
+    2,
+    148,
+    118,
+    81,
+    147,
+    188,
+    124,
+    126,
+    185,
+    118,
+    201,
+    118,
+    2,
+    127,
+    2,
+    148,
+    1,
+    19,
+    147,
+    124,
+    188,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    185,
+    0,
+    204,
+    195,
+    135,
+    105,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    81,
+    103,
+    118,
+    81,
+    156,
+    99,
+    117,
+    118,
+    86,
+    121,
+    86,
+    121,
+    85,
+    121,
+    87,
+    121,
+    32,
+    215,
+    57,
+    222,
+    75,
+    59,
+    97,
+    168,
+    148,
+    240,
+    25,
+    136,
+    182,
+    207,
+    208,
+    150,
+    61,
+    67,
+    209,
+    180,
+    10,
+    120,
+    116,
+    19,
+    102,
+    97,
+    34,
+    164,
+    241,
+    46,
+    11,
+    96,
+    213,
+    172,
+    105,
+    118,
+    0,
+    160,
+    105,
+    83,
+    121,
+    2,
+    232,
+    3,
+    147,
+    176,
+    118,
+    5,
+    0,
+    235,
+    8,
+    191,
+    1,
+    161,
+    105,
+    82,
+    121,
+    120,
+    156,
+    105,
+    120,
+    84,
+    121,
+    2,
+    232,
+    3,
+    147,
+    162,
+    105,
+    120,
+    176,
+    185,
+    190,
+    120,
+    148,
+    2,
+    32,
+    78,
+    148,
+    118,
+    0,
+    160,
+    105,
+    0,
+    195,
+    32,
+    29,
+    188,
+    24,
+    170,
+    76,
+    82,
+    182,
+    243,
+    92,
+    174,
+    226,
+    194,
+    83,
+    82,
+    210,
+    72,
+    229,
+    99,
+    143,
+    250,
+    207,
+    179,
+    11,
+    180,
+    122,
+    200,
+    198,
+    240,
+    167,
+    146,
+    71,
+    0,
+    3,
+    0,
+    0,
+    32,
+    124,
+    126,
+    1,
+    172,
+    126,
+    135,
+    105,
+    0,
+    194,
+    82,
+    121,
+    156,
+    105,
+    83,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    83,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    185,
+    118,
+    201,
+    2,
+    127,
+    2,
+    148,
+    118,
+    81,
+    147,
+    188,
+    124,
+    126,
+    185,
+    118,
+    201,
+    118,
+    2,
+    127,
+    2,
+    148,
+    1,
+    19,
+    147,
+    124,
+    188,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    81,
+    195,
+    135,
+    105,
+    81,
+    194,
+    120,
+    156,
+    105,
+    185,
+    203,
+    81,
+    156,
+    105,
+    90,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    90,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    185,
+    118,
+    201,
+    2,
+    127,
+    2,
+    148,
+    118,
+    81,
+    147,
+    188,
+    124,
+    126,
+    185,
+    118,
+    201,
+    118,
+    2,
+    127,
+    2,
+    148,
+    1,
+    19,
+    147,
+    124,
+    188,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    185,
+    0,
+    204,
+    195,
+    135,
+    105,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    81,
+    103,
+    117,
+    0,
+    105,
+    104,
+    104
+  ],
+  "ast": {
+    "pragma": {
+      "name": "silverscript",
+      "value": "^0.1.0",
+      "span": "pragma silverscript ^0.1.0;",
+      "name_span": "silverscript",
+      "value_span": "^0.1.0"
+    },
+    "name": "RecurringTreasuryVaultWindow",
+    "params": [
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "owner",
+        "span": "pubkey owner",
+        "type_span": "pubkey ",
+        "name_span": "owner"
+      },
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "destination",
+        "span": "pubkey destination",
+        "type_span": "pubkey ",
+        "name_span": "destination"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "cap",
+        "span": "int cap",
+        "type_span": "int ",
+        "name_span": "cap"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "windowStart",
+        "span": "int windowStart",
+        "type_span": "int ",
+        "name_span": "windowStart"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "spentInWindow",
+        "span": "int spentInWindow",
+        "type_span": "int ",
+        "name_span": "spentInWindow"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "windowLength",
+        "span": "int windowLength",
+        "type_span": "int ",
+        "name_span": "windowLength"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "minerFee",
+        "span": "int minerFee",
+        "type_span": "int ",
+        "name_span": "minerFee"
+      }
+    ],
+    "fields": [
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "spent",
+        "expr": {
+          "kind": "identifier",
+          "data": "spentInWindow",
+          "span": "spentInWindow"
+        },
+        "span": "int spent = spentInWindow;",
+        "type_span": "int ",
+        "name_span": "spent"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "window",
+        "expr": {
+          "kind": "identifier",
+          "data": "windowStart",
+          "span": "windowStart"
+        },
+        "span": "int window = windowStart;",
+        "type_span": "int ",
+        "name_span": "window"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "__covenant_policy_spend",
+        "params": [
+          {
+            "type_ref": {
+              "base": "State"
+            },
+            "name": "prevState",
+            "span": "State prevState",
+            "type_span": "State ",
+            "name_span": "prevState"
+          },
+          {
+            "type_ref": {
+              "base": "State"
+            },
+            "name": "newState",
+            "span": "State newState",
+            "type_span": "State ",
+            "name_span": "newState"
+          },
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "ownerSig",
+            "span": "sig ownerSig",
+            "type_span": "sig ",
+            "name_span": "ownerSig"
+          },
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "amount",
+            "span": "int amount",
+            "type_span": "int ",
+            "name_span": "amount"
+          }
+        ],
+        "entrypoint": false,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "checkSig",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "ownerSig",
+                      "span": "ownerSig"
+                    },
+                    {
+                      "kind": "identifier",
+                      "data": "owner",
+                      "span": "owner"
+                    }
+                  ],
+                  "name_span": "checkSig"
+                },
+                "span": "checkSig(ownerSig, owner)"
+              },
+              "message": null,
+              "span": "require(checkSig(ownerSig, owner));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "gt",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "amount > 0"
+              },
+              "message": null,
+              "span": "require(amount > 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "le",
+                  "left": {
+                    "kind": "binary",
+                    "data": {
+                      "op": "add",
+                      "left": {
+                        "kind": "field_access",
+                        "data": {
+                          "source": {
+                            "kind": "identifier",
+                            "data": "prevState",
+                            "span": "prevState"
+                          },
+                          "field": "spent",
+                          "field_span": "spent"
+                        },
+                        "span": "prevState.spent"
+                      },
+                      "right": {
+                        "kind": "identifier",
+                        "data": "amount",
+                        "span": "amount"
+                      }
+                    },
+                    "span": "prevState.spent + amount"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "cap",
+                    "span": "cap"
+                  }
+                },
+                "span": "prevState.spent + amount <= cap"
+              },
+              "message": null,
+              "span": "require(prevState.spent + amount <= cap);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "field_access",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "newState",
+                        "span": "newState"
+                      },
+                      "field": "spent",
+                      "field_span": "spent"
+                    },
+                    "span": "newState.spent"
+                  },
+                  "right": {
+                    "kind": "binary",
+                    "data": {
+                      "op": "add",
+                      "left": {
+                        "kind": "field_access",
+                        "data": {
+                          "source": {
+                            "kind": "identifier",
+                            "data": "prevState",
+                            "span": "prevState"
+                          },
+                          "field": "spent",
+                          "field_span": "spent"
+                        },
+                        "span": "prevState.spent"
+                      },
+                      "right": {
+                        "kind": "identifier",
+                        "data": "amount",
+                        "span": "amount"
+                      }
+                    },
+                    "span": "prevState.spent + amount"
+                  }
+                },
+                "span": "newState.spent == prevState.spent + amount"
+              },
+              "message": null,
+              "span": "require(newState.spent == prevState.spent + amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "field_access",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "newState",
+                        "span": "newState"
+                      },
+                      "field": "window",
+                      "field_span": "window"
+                    },
+                    "span": "newState.window"
+                  },
+                  "right": {
+                    "kind": "field_access",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "prevState",
+                        "span": "prevState"
+                      },
+                      "field": "window",
+                      "field_span": "window"
+                    },
+                    "span": "prevState.window"
+                  }
+                },
+                "span": "newState.window == prevState.window"
+              },
+              "message": null,
+              "span": "require(newState.window == prevState.window);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "inputValue",
+              "expr": {
+                "kind": "introspection",
+                "data": {
+                  "kind": "input_value",
+                  "index": {
+                    "kind": "nullary",
+                    "data": "active_input_index",
+                    "span": "this.activeInputIndex"
+                  },
+                  "field_span": ".value"
+                },
+                "span": "tx.inputs[this.activeInputIndex].value"
+              },
+              "span": "int inputValue = tx.inputs[this.activeInputIndex].value;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "inputValue"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "changeValue",
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "sub",
+                  "left": {
+                    "kind": "binary",
+                    "data": {
+                      "op": "sub",
+                      "left": {
+                        "kind": "identifier",
+                        "data": "inputValue",
+                        "span": "inputValue"
+                      },
+                      "right": {
+                        "kind": "identifier",
+                        "data": "amount",
+                        "span": "amount"
+                      }
+                    },
+                    "span": "inputValue - amount"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "minerFee",
+                    "span": "minerFee"
+                  }
+                },
+                "span": "inputValue - amount - minerFee"
+              },
+              "span": "int changeValue = inputValue - amount - minerFee;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "changeValue"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "gt",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "changeValue",
+                    "span": "changeValue"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "changeValue > 0"
+              },
+              "message": null,
+              "span": "require(changeValue > 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 34
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "destinationLock",
+              "expr": {
+                "kind": "new",
+                "data": {
+                  "name": "ScriptPubKeyP2PK",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "destination",
+                      "span": "destination"
+                    }
+                  ],
+                  "name_span": "ScriptPubKeyP2PK"
+                },
+                "span": "new ScriptPubKeyP2PK(destination)"
+              },
+              "span": "byte[34] destinationLock = new ScriptPubKeyP2PK(destination);",
+              "type_span": "byte[34]",
+              "modifier_spans": [],
+              "name_span": "destinationLock"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_script_pub_key",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".scriptPubKey"
+                    },
+                    "span": "tx.outputs[0].scriptPubKey"
+                  },
+                  "right": {
+                    "kind": "call",
+                    "data": {
+                      "name": "byte[]",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "destinationLock",
+                          "span": "destinationLock"
+                        }
+                      ],
+                      "name_span": "byte[]"
+                    },
+                    "span": "byte[](destinationLock)"
+                  }
+                },
+                "span": "tx.outputs[0].scriptPubKey == byte[](destinationLock)"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].scriptPubKey == byte[](destinationLock));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[0].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  }
+                },
+                "span": "tx.outputs[0].value == amount"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].value == amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputState",
+              "args": [
+                {
+                  "kind": "int",
+                  "data": 1,
+                  "span": "1"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "newState",
+                  "span": "newState"
+                }
+              ],
+              "span": "validateOutputState(1, newState);",
+              "name_span": "validateOutputState"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 1,
+                        "span": "1"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[1].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "changeValue",
+                    "span": "changeValue"
+                  }
+                },
+                "span": "tx.outputs[1].value == changeValue"
+              },
+              "message": null,
+              "span": "require(tx.outputs[1].value == changeValue);",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "#[covenant.singleton]\n    function spend(State prevState, State newState, sig ownerSig, int amount) {\n        require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(prevState.spent + amount <= cap);\n        require(newState.spent == prevState.spent + amount);\n        require(newState.window == prevState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);\n    }",
+        "name_span": "spend",
+        "body_span": "require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(prevState.spent + amount <= cap);\n        require(newState.spent == prevState.spent + amount);\n        require(newState.window == prevState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);"
+      },
+      {
+        "name": "__spend",
+        "params": [
+          {
+            "type_ref": {
+              "base": "State"
+            },
+            "name": "newState",
+            "span": "State newState",
+            "type_span": "State ",
+            "name_span": "newState"
+          },
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "ownerSig",
+            "span": "sig ownerSig",
+            "type_span": "sig ",
+            "name_span": "ownerSig"
+          },
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "amount",
+            "span": "int amount",
+            "type_span": "int ",
+            "name_span": "amount"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "__cov_out_count",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputCount",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "State"
+              },
+              "modifiers": [],
+              "name": "prevState",
+              "expr": {
+                "kind": "state_object",
+                "data": [
+                  {
+                    "name": "spent",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "spent",
+                      "span": "<synthetic>"
+                    },
+                    "span": "<synthetic>",
+                    "name_span": "<synthetic>"
+                  },
+                  {
+                    "name": "window",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "window",
+                      "span": "<synthetic>"
+                    },
+                    "span": "<synthetic>",
+                    "name_span": "<synthetic>"
+                  }
+                ],
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "__covenant_policy_spend",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "prevState",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "newState",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "ownerSig",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "amount",
+                  "span": "<synthetic>"
+                }
+              ],
+              "span": "<synthetic>",
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "__cov_out_count",
+                    "span": "<synthetic>"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "<synthetic>"
+                  }
+                },
+                "span": "<synthetic>"
+              },
+              "message": null,
+              "span": "<synthetic>",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "__cov_out_idx",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputIdx",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "<synthetic>"
+                    },
+                    {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputState",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "__cov_out_idx",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "newState",
+                  "span": "<synthetic>"
+                }
+              ],
+              "span": "<synthetic>",
+              "name_span": "<synthetic>"
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "#[covenant.singleton]\n    function spend(State prevState, State newState, sig ownerSig, int amount) {\n        require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(prevState.spent + amount <= cap);\n        require(newState.spent == prevState.spent + amount);\n        require(newState.window == prevState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);\n    }",
+        "name_span": "spend",
+        "body_span": "require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(prevState.spent + amount <= cap);\n        require(newState.spent == prevState.spent + amount);\n        require(newState.window == prevState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);"
+      },
+      {
+        "name": "__covenant_policy_reset_window",
+        "params": [
+          {
+            "type_ref": {
+              "base": "State"
+            },
+            "name": "prevState",
+            "span": "State prevState",
+            "type_span": "State ",
+            "name_span": "prevState"
+          },
+          {
+            "type_ref": {
+              "base": "State"
+            },
+            "name": "newState",
+            "span": "State newState",
+            "type_span": "State ",
+            "name_span": "newState"
+          },
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "ownerSig",
+            "span": "sig ownerSig",
+            "type_span": "sig ",
+            "name_span": "ownerSig"
+          },
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "amount",
+            "span": "int amount",
+            "type_span": "int ",
+            "name_span": "amount"
+          }
+        ],
+        "entrypoint": false,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "checkSig",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "ownerSig",
+                      "span": "ownerSig"
+                    },
+                    {
+                      "kind": "identifier",
+                      "data": "owner",
+                      "span": "owner"
+                    }
+                  ],
+                  "name_span": "checkSig"
+                },
+                "span": "checkSig(ownerSig, owner)"
+              },
+              "message": null,
+              "span": "require(checkSig(ownerSig, owner));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "gt",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "amount > 0"
+              },
+              "message": null,
+              "span": "require(amount > 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "time_op",
+            "data": {
+              "tx_var": "tx_time",
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "add",
+                  "left": {
+                    "kind": "field_access",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "prevState",
+                        "span": "prevState"
+                      },
+                      "field": "window",
+                      "field_span": "window"
+                    },
+                    "span": "prevState.window"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "windowLength",
+                    "span": "windowLength"
+                  }
+                },
+                "span": "prevState.window + windowLength"
+              },
+              "message": null,
+              "span": "require(tx.time >= prevState.window + windowLength);",
+              "tx_var_span": "tx.time",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "le",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "cap",
+                    "span": "cap"
+                  }
+                },
+                "span": "amount <= cap"
+              },
+              "message": null,
+              "span": "require(amount <= cap);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "field_access",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "newState",
+                        "span": "newState"
+                      },
+                      "field": "spent",
+                      "field_span": "spent"
+                    },
+                    "span": "newState.spent"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  }
+                },
+                "span": "newState.spent == amount"
+              },
+              "message": null,
+              "span": "require(newState.spent == amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "ge",
+                  "left": {
+                    "kind": "field_access",
+                    "data": {
+                      "source": {
+                        "kind": "identifier",
+                        "data": "newState",
+                        "span": "newState"
+                      },
+                      "field": "window",
+                      "field_span": "window"
+                    },
+                    "span": "newState.window"
+                  },
+                  "right": {
+                    "kind": "binary",
+                    "data": {
+                      "op": "add",
+                      "left": {
+                        "kind": "field_access",
+                        "data": {
+                          "source": {
+                            "kind": "identifier",
+                            "data": "prevState",
+                            "span": "prevState"
+                          },
+                          "field": "window",
+                          "field_span": "window"
+                        },
+                        "span": "prevState.window"
+                      },
+                      "right": {
+                        "kind": "identifier",
+                        "data": "windowLength",
+                        "span": "windowLength"
+                      }
+                    },
+                    "span": "prevState.window + windowLength"
+                  }
+                },
+                "span": "newState.window >= prevState.window + windowLength"
+              },
+              "message": null,
+              "span": "require(newState.window >= prevState.window + windowLength);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "time_op",
+            "data": {
+              "tx_var": "tx_time",
+              "expr": {
+                "kind": "field_access",
+                "data": {
+                  "source": {
+                    "kind": "identifier",
+                    "data": "newState",
+                    "span": "newState"
+                  },
+                  "field": "window",
+                  "field_span": "window"
+                },
+                "span": "newState.window"
+              },
+              "message": null,
+              "span": "require(tx.time >= newState.window);",
+              "tx_var_span": "tx.time",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "inputValue",
+              "expr": {
+                "kind": "introspection",
+                "data": {
+                  "kind": "input_value",
+                  "index": {
+                    "kind": "nullary",
+                    "data": "active_input_index",
+                    "span": "this.activeInputIndex"
+                  },
+                  "field_span": ".value"
+                },
+                "span": "tx.inputs[this.activeInputIndex].value"
+              },
+              "span": "int inputValue = tx.inputs[this.activeInputIndex].value;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "inputValue"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "changeValue",
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "sub",
+                  "left": {
+                    "kind": "binary",
+                    "data": {
+                      "op": "sub",
+                      "left": {
+                        "kind": "identifier",
+                        "data": "inputValue",
+                        "span": "inputValue"
+                      },
+                      "right": {
+                        "kind": "identifier",
+                        "data": "amount",
+                        "span": "amount"
+                      }
+                    },
+                    "span": "inputValue - amount"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "minerFee",
+                    "span": "minerFee"
+                  }
+                },
+                "span": "inputValue - amount - minerFee"
+              },
+              "span": "int changeValue = inputValue - amount - minerFee;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "changeValue"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "gt",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "changeValue",
+                    "span": "changeValue"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "changeValue > 0"
+              },
+              "message": null,
+              "span": "require(changeValue > 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 34
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "destinationLock",
+              "expr": {
+                "kind": "new",
+                "data": {
+                  "name": "ScriptPubKeyP2PK",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "destination",
+                      "span": "destination"
+                    }
+                  ],
+                  "name_span": "ScriptPubKeyP2PK"
+                },
+                "span": "new ScriptPubKeyP2PK(destination)"
+              },
+              "span": "byte[34] destinationLock = new ScriptPubKeyP2PK(destination);",
+              "type_span": "byte[34]",
+              "modifier_spans": [],
+              "name_span": "destinationLock"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_script_pub_key",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".scriptPubKey"
+                    },
+                    "span": "tx.outputs[0].scriptPubKey"
+                  },
+                  "right": {
+                    "kind": "call",
+                    "data": {
+                      "name": "byte[]",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "destinationLock",
+                          "span": "destinationLock"
+                        }
+                      ],
+                      "name_span": "byte[]"
+                    },
+                    "span": "byte[](destinationLock)"
+                  }
+                },
+                "span": "tx.outputs[0].scriptPubKey == byte[](destinationLock)"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].scriptPubKey == byte[](destinationLock));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[0].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "amount",
+                    "span": "amount"
+                  }
+                },
+                "span": "tx.outputs[0].value == amount"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].value == amount);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputState",
+              "args": [
+                {
+                  "kind": "int",
+                  "data": 1,
+                  "span": "1"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "newState",
+                  "span": "newState"
+                }
+              ],
+              "span": "validateOutputState(1, newState);",
+              "name_span": "validateOutputState"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 1,
+                        "span": "1"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[1].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "changeValue",
+                    "span": "changeValue"
+                  }
+                },
+                "span": "tx.outputs[1].value == changeValue"
+              },
+              "message": null,
+              "span": "require(tx.outputs[1].value == changeValue);",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "#[covenant.singleton]\n    function reset_window(State prevState, State newState, sig ownerSig, int amount) {\n        require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(tx.time >= prevState.window + windowLength);\n        require(amount <= cap);\n        require(newState.spent == amount);\n        require(newState.window >= prevState.window + windowLength);\n        require(tx.time >= newState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);\n    }",
+        "name_span": "reset_window",
+        "body_span": "require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(tx.time >= prevState.window + windowLength);\n        require(amount <= cap);\n        require(newState.spent == amount);\n        require(newState.window >= prevState.window + windowLength);\n        require(tx.time >= newState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);"
+      },
+      {
+        "name": "__reset_window",
+        "params": [
+          {
+            "type_ref": {
+              "base": "State"
+            },
+            "name": "newState",
+            "span": "State newState",
+            "type_span": "State ",
+            "name_span": "newState"
+          },
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "ownerSig",
+            "span": "sig ownerSig",
+            "type_span": "sig ",
+            "name_span": "ownerSig"
+          },
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "amount",
+            "span": "int amount",
+            "type_span": "int ",
+            "name_span": "amount"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "__cov_out_count",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputCount",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "State"
+              },
+              "modifiers": [],
+              "name": "prevState",
+              "expr": {
+                "kind": "state_object",
+                "data": [
+                  {
+                    "name": "spent",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "spent",
+                      "span": "<synthetic>"
+                    },
+                    "span": "<synthetic>",
+                    "name_span": "<synthetic>"
+                  },
+                  {
+                    "name": "window",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "window",
+                      "span": "<synthetic>"
+                    },
+                    "span": "<synthetic>",
+                    "name_span": "<synthetic>"
+                  }
+                ],
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "__covenant_policy_reset_window",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "prevState",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "newState",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "ownerSig",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "amount",
+                  "span": "<synthetic>"
+                }
+              ],
+              "span": "<synthetic>",
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "__cov_out_count",
+                    "span": "<synthetic>"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "<synthetic>"
+                  }
+                },
+                "span": "<synthetic>"
+              },
+              "message": null,
+              "span": "<synthetic>",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "__cov_out_idx",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputIdx",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "<synthetic>"
+                    },
+                    {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "<synthetic>"
+                    }
+                  ],
+                  "name_span": "<synthetic>"
+                },
+                "span": "<synthetic>"
+              },
+              "span": "<synthetic>",
+              "type_span": "<synthetic>",
+              "modifier_spans": [],
+              "name_span": "<synthetic>"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputState",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "__cov_out_idx",
+                  "span": "<synthetic>"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "newState",
+                  "span": "<synthetic>"
+                }
+              ],
+              "span": "<synthetic>",
+              "name_span": "<synthetic>"
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "#[covenant.singleton]\n    function reset_window(State prevState, State newState, sig ownerSig, int amount) {\n        require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(tx.time >= prevState.window + windowLength);\n        require(amount <= cap);\n        require(newState.spent == amount);\n        require(newState.window >= prevState.window + windowLength);\n        require(tx.time >= newState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);\n    }",
+        "name_span": "reset_window",
+        "body_span": "require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(tx.time >= prevState.window + windowLength);\n        require(amount <= cap);\n        require(newState.spent == amount);\n        require(newState.window >= prevState.window + windowLength);\n        require(tx.time >= newState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);"
+      }
+    ],
+    "span": "contract RecurringTreasuryVaultWindow(pubkey owner, pubkey destination, int cap, int windowStart, int spentInWindow, int windowLength, int minerFee) {\n    int spent = spentInWindow;\n    int window = windowStart;\n\n    #[covenant.singleton]\n    function spend(State prevState, State newState, sig ownerSig, int amount) {\n        require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(prevState.spent + amount <= cap);\n        require(newState.spent == prevState.spent + amount);\n        require(newState.window == prevState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);\n    }\n\n    #[covenant.singleton]\n    function reset_window(State prevState, State newState, sig ownerSig, int amount) {\n        require(checkSig(ownerSig, owner));\n        require(amount > 0);\n        require(tx.time >= prevState.window + windowLength);\n        require(amount <= cap);\n        require(newState.spent == amount);\n        require(newState.window >= prevState.window + windowLength);\n        require(tx.time >= newState.window);\n\n        int inputValue = tx.inputs[this.activeInputIndex].value;\n        int changeValue = inputValue - amount - minerFee;\n        require(changeValue > 0);\n\n        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);\n        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));\n        require(tx.outputs[0].value == amount);\n\n        validateOutputState(1, newState);\n        require(tx.outputs[1].value == changeValue);\n    }\n}",
+    "name_span": "RecurringTreasuryVaultWindow"
+  },
+  "abi": [
+    {
+      "name": "__spend",
+      "inputs": [
+        {
+          "name": "newState",
+          "type_name": "State"
+        },
+        {
+          "name": "ownerSig",
+          "type_name": "sig"
+        },
+        {
+          "name": "amount",
+          "type_name": "int"
+        }
+      ]
+    },
+    {
+      "name": "__reset_window",
+      "inputs": [
+        {
+          "name": "newState",
+          "type_name": "State"
+        },
+        {
+          "name": "ownerSig",
+          "type_name": "sig"
+        },
+        {
+          "name": "amount",
+          "type_name": "int"
+        }
+      ]
+    }
+  ],
+  "without_selector": false,
+  "state_layout": {
+    "start": 1,
+    "len": 18
+  },
+  "debug_info": null
+}

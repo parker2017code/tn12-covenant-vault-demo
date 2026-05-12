@@ -143,6 +143,7 @@ Avoid these labels:
 ## SilverScript Lessons Already Learned
 
 - State is the point. Recurring caps, assets, and game state should use explicit state, continuation outputs, and `validateOutputState` where tooling supports it.
+- Each feature needs five answers: what it proves, what it makes possible, why Kaspa's fast UTXO/covenant model matters, why crypto is needed instead of a normal server, and what is still not proven.
 - Covenant IDs track lineage. Use template hashes and state fields for role identity inside a closed contract system.
 - Mux/worker beats one giant script. A hub can route to small worker contracts, workers can return state, and fast multi-transaction flow is part of the Kaspa edge.
 - ICC uses sibling authority instead of nested execution. Let sibling inputs prove that another covenant or script authorized the transaction.
@@ -154,10 +155,10 @@ Avoid these labels:
 - `artifacts/recurring-treasury-vault-live-submit-readiness.json` records the old npm `kaspa-wasm@0.13.0` JS route gap. Current live covenant spends use the local TN12 `1.1.1-toc.1` WASM route and wRPC.
 - `artifacts/recurring-treasury-vault-rust-submit-route-probe.json` shows the Rust RPC submit-request model preserves output covenant binding and tx v1 `computeBudget`.
 - `artifacts/recurring-treasury-vault-rpc-data-route.json` shows the first live 150 tKAS output is not covenant-bound. Do not try to spend it as a stateful covenant input.
-- Recurring vault live status: covenant-genesis funding is accepted, two under-cap script-enforced spends are accepted, continuation fixtures are recorded, and the over-cap continuation candidate is locally rejected.
+- Recurring vault live status: covenant-genesis funding is accepted, two under-cap script-enforced spends are accepted, reset-window genesis and reset spend are accepted, continuation fixtures are recorded, and over-cap/early-reset/stale-window candidates are locally rejected.
 - Study `/home/parker2017/michaelsutton-silverscript-chess/examples/chess` before designing complex examples. The useful pattern is mux/worker routing, shared state layout, template identity, challenge paths, and settlement, not "make a game" as a product idea.
 - Built deep examples: Covenant-Owned Asset Duel has local ICC sibling-input proof plus accepted TN12 owner-marker, asset genesis, sibling-authorized strike spend, and live-id local negative candidates; Blitz Mux Arena has local mux/worker/timeout proof plus accepted TN12 route, worker-return, second route, and timeout spends.
-- Next exact tasks are: add recurring-vault window reset behavior, render Asset Duel as a visible duel round, then add bounded Blitz challenge or settlement rows.
+- Next exact tasks are: render Treasury Wars as a visible track, render Asset Duel as a visible duel round, then add bounded Blitz challenge or settlement rows.
 
 Accurate label:
 

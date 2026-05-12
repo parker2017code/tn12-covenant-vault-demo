@@ -24,12 +24,16 @@ const outputs = (tx.outputs || []).map((output) => ({
 const continuation = outputs.find((output) => output.index === 1) || null;
 const expectedContinuation = draft.submitPayload.transaction.outputs[1];
 const expectedSpend = draft.submitPayload.transaction.outputs[0];
+const isReset = draft.mode === "reset";
+const contractLabel = draft.source?.contract || "contracts/RecurringTreasuryVault.sil";
 
 const artifact = {
   schema: "tn12-recurring-treasury-vault-live-spend-evidence/v1",
   network: "kaspa-testnet-12",
   checkedAt: new Date().toISOString(),
-  status: tx.is_accepted ? "accepted-script-enforced-under-cap-spend" : "submitted-not-yet-accepted",
+  status: tx.is_accepted
+    ? (isReset ? "accepted-script-enforced-window-reset" : "accepted-script-enforced-under-cap-spend")
+    : "submitted-not-yet-accepted",
   txid,
   endpoint,
   explorerUrl: `https://tn12.kaspa.stream/transactions/${txid}`,
@@ -46,18 +50,32 @@ const artifact = {
     localEngineAcceptedGeneratedSigScript: draft.localChecks.engineAcceptedGeneratedSigScript === true
   },
   outputs,
-  proves: [
-    "RecurringTreasuryVault.sil under-cap spend was accepted on TN12.",
-    "The spend paid the required destination amount.",
-    "The spend relocked the remaining value into a continuation output.",
-    "The continuation output carries the same covenant id in the signed draft and wRPC submit route."
-  ],
-  doesNotProve: [
-    "mainnet activation",
-    "audited custody",
-    "wallet-standard user signing",
-    "full recurring-window reset behavior"
-  ]
+  proves: isReset
+    ? [
+        `${contractLabel} reset-window spend was accepted on TN12.`,
+        "The reset paid the required destination amount.",
+        "The reset advanced the window and set spent-in-window to the current spend amount.",
+        "The reset relocked the remaining value into a continuation output with the same covenant id."
+      ]
+    : [
+        `${contractLabel} under-cap spend was accepted on TN12.`,
+        "The spend paid the required destination amount.",
+        "The spend relocked the remaining value into a continuation output.",
+        "The continuation output carries the same covenant id in the signed draft and wRPC submit route."
+      ],
+  doesNotProve: isReset
+    ? [
+        "mainnet activation",
+        "audited custody",
+        "wallet-standard user signing",
+        "calendar-grade production period accounting"
+      ]
+    : [
+        "mainnet activation",
+        "audited custody",
+        "wallet-standard user signing",
+        "full recurring-window reset behavior"
+      ]
 };
 
 await writeFile(outPath, `${JSON.stringify(artifact, null, 2)}\n`);

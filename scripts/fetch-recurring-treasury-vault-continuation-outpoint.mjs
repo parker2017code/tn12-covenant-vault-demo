@@ -32,7 +32,7 @@ const artifact = {
   schema: "tn12-contract-outpoint/v1",
   network: "kaspa-testnet-12",
   lane: "recurring-treasury-vault-continuation",
-  contract: "RecurringTreasuryVault",
+  contract: process.env.CONTRACT_NAME || draft.source?.contract?.replace(/^contracts\//, "").replace(/\.sil$/, "") || "RecurringTreasuryVault",
   fetchedAt: new Date().toISOString(),
   endpoint,
   txid,

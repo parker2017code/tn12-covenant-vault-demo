@@ -15,7 +15,8 @@ This file is the short queue. It does not replace generated artifacts; it points
 - The DeFi repo-local benchmark stays in generated artifacts. Public pages should use concrete counts and missing rails instead of score language.
 - The current playground run has four accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, User A pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, User B pool deposit `3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d`, and pool-to-User B payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
 - Live virtual-chain smoke check, 2026-05-12: current-tip read works with the local TN12 SDK and public wRPC endpoint. The old historical overlap start hash is no longer available from the public node, so keep the checked-in rich live-window artifact unless a new reachable historical start hash is captured.
-- Recurring vault update, 2026-05-12: covenant-genesis funding and two script-enforced under-cap spends are accepted on TN12. The active continuation fixture is `fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json`; the cumulative accepted spend is 65 tKAS under the 75 tKAS cap, and `artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json` is locally rejected at 80 tKAS attempted window spend.
+- Recurring vault update, 2026-05-12: covenant-genesis funding and two script-enforced under-cap spends are accepted on TN12. The active one-window continuation fixture is `fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json`; the cumulative accepted spend is 65 tKAS under the 75 tKAS cap, and `artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json` is locally rejected at 80 tKAS attempted window spend.
+- Recurring vault window-reset update, 2026-05-12: `contracts/RecurringTreasuryVaultWindow.sil` adds a `reset_window` branch, accepted TN12 genesis funding, accepted TN12 reset spend `f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759`, active reset continuation fixture `fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json`, and local rejects for early reset, stale-window reset, and over-cap reset.
 
 ## Completed In Current Cleanup Pass
 
@@ -31,7 +32,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
+| 1 | Render Treasury Wars as a visible track. | Cumulative cap and reset-window spends are readable without opening raw JSON. | No |
 | 2 | Render Asset Duel as a visible duel round. | The accepted owner marker, asset genesis, strike, and live-id local negative rows are readable without opening raw JSON. | No |
 | 3 | Add Blitz Mux challenge/settlement rows. | The accepted mux/worker/timeout path has a bounded next reviewer step instead of becoming a full game claim. | No |
 | 4 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
@@ -61,7 +62,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - What it is: turn the missing vault-product features into separate rails instead of one vague "vaults later" bucket.
    - Default path: local-wallet TN12 flow first. That proves address setup, transaction construction, accepted txid, replay, UI evidence, and negative guards with minimal overhead.
    - Dynamic whitelist: local-wallet destination-set artifact first; promote only after a script or wallet proves destination-set enforcement.
-   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, cumulative over-window block, DECL probe, compiled `RecurringTreasuryVault.sil`, owner-signature proof, accepted covenant-genesis funding, two accepted script-enforced under-cap spends, continuation fixtures, and a local over-cap reject are built; next is window reset behavior and wallet-standard signing.
+   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, cumulative over-window block, DECL probe, compiled `RecurringTreasuryVault.sil`, owner-signature proof, accepted covenant-genesis funding, two accepted script-enforced under-cap spends, accepted `RecurringTreasuryVaultWindow.sil` reset-window spend, continuation fixtures, and local over-cap/early-reset/stale-reset rejects are built; next is visible Treasury Wars rendering and wallet-standard signing.
    - Partial unvault: local-wallet contract fixture that spends part of an output while relocking the remainder.
    - Policy update: local-wallet delayed admin/recovery update path with accepted update and early-update rejection evidence.
    - Guardian recovery: local-wallet m-of-n guardian path with accepted quorum spend and too-few/wrong-guardian negative evidence.

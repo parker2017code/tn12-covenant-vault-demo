@@ -47,13 +47,35 @@
       <div>
         <p class="status">Experiment map. TN12/testnet only.</p>
         <h2>Small games that expose the covenant model.</h2>
-        <p>Each row says what is built, what is live on TN12, and what still needs a covenant-bound output or accepted spend.</p>
+        <p>Each row says what is built, why it matters outside the lab, what is live on TN12, and what still needs a covenant-bound output or accepted spend.</p>
       </div>
       <aside class="facts">
         <span>Current spotlight</span>
         <strong>Blitz Mux Arena. Treasury Wars. Covenant-Owned Asset Duel.</strong>
         <p>The fourth mode, Covenant Heist, shows blocked paths and negative guards.</p>
       </aside>
+    </section>
+
+    <section class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Why this is useful</p>
+        <h2>The point is money with visible rules.</h2>
+        <p>A normal server can track a game, budget, or payout rule. These experiments ask a harder question: can the spend itself carry the rule so the money only moves through accepted, replayable paths?</p>
+      </div>
+      <div class="work-map">
+        <article>
+          <span>Plain level</span>
+          <p>Budgets, games, assets, and group payments become easier to trust when users can see which moves worked and which moves were refused.</p>
+        </article>
+        <article>
+          <span>Technical level</span>
+          <p>Covenant IDs, continuation outputs, sibling inputs, mux routing, and timeout paths let small UTXO scripts compose without one shared app database.</p>
+        </article>
+        <article>
+          <span>Kaspa angle</span>
+          <p>Fast TN12 UTXO flow makes multi-transaction state machines practical enough to inspect as workflows, not only as slow settlement events.</p>
+        </article>
+      </div>
     </section>
 
     <section id="spotlight" class="panel experiments-panel">
@@ -66,6 +88,7 @@
           <span>1</span>
           <strong>Blitz Mux Arena</strong>
           <p>A hub covenant routes state to Worker A, Worker A returns state to the hub, then a fresh pending worker times out back to the hub.</p>
+          <p>This points toward turn-based games, disputes, staged approvals, and workflows where each step chooses the next bounded role.</p>
           <ul>
             <li>Mux / worker contract family.</li>
             <li>Template routing.</li>
@@ -78,18 +101,23 @@
         <article>
           <span>2</span>
           <strong>Treasury Wars</strong>
-          <p>Players spend from capped treasuries. The accepted TN12 path now proves two cumulative spends, continuation state, and relocked change.</p>
+          <p>Players spend from capped treasuries. The accepted TN12 path now proves two cumulative spends, a reset-window spend, continuation state, and relocked change.</p>
+          <p>This points toward allowance wallets, team treasuries, merchant payout limits, grant streams, and app resources where rules travel with the funds.</p>
           <ul>
             <li>Active <code>RecurringTreasuryVault.sil</code> rail.</li>
+            <li>Reset branch in <code>RecurringTreasuryVaultWindow.sil</code>.</li>
             <li>Accepted covenant-genesis funding output.</li>
             <li>Two accepted under-cap covenant spends.</li>
+            <li>Accepted reset-window covenant spend.</li>
             <li>Over-cap continuation candidate blocked locally.</li>
+            <li>Early, stale-window, and over-cap reset candidates blocked locally.</li>
           </ul>
         </article>
         <article>
           <span>3</span>
           <strong>Covenant-Owned Asset Duel</strong>
           <p>An asset move requires the owner-marker covenant input in the same transaction. The accepted strike uses sibling authority instead of nested execution.</p>
+          <p>This points toward tickets, passes, game items, licenses, and app-owned assets that move only when the controller path is present.</p>
           <ul>
             <li>ICC / sibling-input authorization.</li>
             <li>Accepted owner-marker covenant output.</li>
@@ -128,8 +156,8 @@
             <tr>
               <td>Treasury Wars</td>
               <td>stateful singleton vault</td>
-              <td>accepted-cumulative-cap-proof</td>
-              <td>window reset proof, then user-wallet handoff</td>
+              <td>accepted-window-reset-proof</td>
+              <td>visible Treasury Wars track, then user-wallet handoff</td>
             </tr>
             <tr>
               <td>Covenant-Owned Asset Duel</td>

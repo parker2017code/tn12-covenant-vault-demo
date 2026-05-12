@@ -34,6 +34,12 @@ until these move.
   window.
 - `artifacts/recurring-treasury-vault-cumulative-cap-proof.json` ties the two
   accepted spends to the locally rejected over-cap candidate.
+- `contracts/RecurringTreasuryVaultWindow.sil` compiles and adds a reset
+  branch instead of retrofitting reset behavior into the original same-window
+  contract.
+- `artifacts/recurring-treasury-vault-window-reset-proof.json` records the
+  accepted TN12 reset-window spend, the reset continuation fixture, and local
+  rejects for early reset, stale-window reset, and over-cap reset.
 - `contracts/CovenantOwnedAssetDuel.sil` compiles.
 - `artifacts/covenant-owned-asset-duel-proof.json` proves the local ICC
   sibling-input pattern: expected sibling covenant ID authorizes an asset move;
@@ -61,10 +67,13 @@ until these move.
 
 ## Next Exact Tasks
 
-1. Add recurring-vault window reset behavior.
+1. Render Treasury Wars as a visible track.
    - The accepted cumulative path proves one cap window.
-   - Window reset needs its own accepted positive path and early/stale reset
-     negative candidates.
+   - `RecurringTreasuryVaultWindow.sil` proves an accepted reset-window branch
+     plus early/stale/over-cap local rejects.
+   - The public page should show the plain point, technical point, Kaspa edge,
+     crypto point, and real-world implication without turning it into a
+     production wallet claim.
 
 2. Render Asset Duel as a visible duel round.
    - Use the accepted owner marker, asset genesis, strike, and live-id local
@@ -77,6 +86,13 @@ until these move.
 
 ## Lessons To Apply
 
+- Keep a clean loop while iterating: update this file, build the artifact,
+  add/adjust the focused test, run the focused gate, then commit/push only a
+  coherent proof slice.
+- Every feature needs five plain answers: what it proves, what it makes
+  possible, why Kaspa's fast UTXO/covenant model matters, why crypto is needed
+  instead of a normal server, and what is still not proven. Keep those answers
+  close to the public artifact or page, not buried only in chat.
 - Covenant IDs track lineage; template hashes or state fields identify roles
   inside a contract family.
 - Stateful examples need continuation outputs. Funding a contract output is not
