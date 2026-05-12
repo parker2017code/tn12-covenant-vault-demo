@@ -69,6 +69,7 @@ import { renderDefiSimulationSurface } from "./src/ui/renderers/defiSimulationSu
 import { renderPlaygroundExplorer } from "./src/ui/renderers/playgroundExplorer.mjs";
 import { renderResultsExplorer } from "./src/ui/renderers/resultsExplorer.mjs";
 import { renderSelfServeLaneRunbook } from "./src/ui/renderers/selfServeLaneRunbook.mjs";
+import { renderBuildQueue } from "./src/ui/renderers/buildQueue.mjs";
 
 const form = document.querySelector("#policy-form");
 const assuranceForm = document.querySelector("#assurance-form");
@@ -125,7 +126,6 @@ const stableIssuerSummaryNode = document.querySelector("#stable-issuer-summary")
 const stableIssuerListNode = document.querySelector("#stable-issuer-list");
 const agentSummaryNode = document.querySelector("#agent-summary");
 const agentListNode = document.querySelector("#agent-list");
-const buildQueueNode = document.querySelector("#build-queue");
 const schedulerWorkbenchSummaryNode = document.querySelector("#scheduler-workbench-summary");
 const schedulerWorkbenchJobsNode = document.querySelector("#scheduler-workbench-jobs");
 const schedulerWorkbenchPredictionsNode = document.querySelector("#scheduler-workbench-predictions");
@@ -1346,29 +1346,6 @@ async function renderPayloadDraftStatus() {
         <p>${escapeHtml(error.message)}</p>
       </article>
     `;
-  }
-}
-
-async function renderBuildQueue() {
-  if (!buildQueueNode) return;
-
-  try {
-    const data = await fetchJson("fixtures/EcosystemBuildQueue.json");
-    buildQueueNode.innerHTML = "";
-
-    for (const item of data.items) {
-      const article = document.createElement("article");
-      article.className = "queue-card";
-      article.innerHTML = `
-        <span>${escapeHtml(item.lane)}</span>
-        <strong>${escapeHtml(item.title)}</strong>
-        <p>${escapeHtml(item.why)}</p>
-        <small>${escapeHtml(item.next)}</small>
-      `;
-      buildQueueNode.append(article);
-    }
-  } catch (error) {
-    buildQueueNode.textContent = `Build queue unavailable: ${error.message}`;
   }
 }
 
