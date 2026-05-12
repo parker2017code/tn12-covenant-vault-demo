@@ -526,7 +526,8 @@ npm run coordination:settlement-brief</pre>
       <pre>npm run demo:operator-refresh</pre>
     </section>
 
-    <section id="project-plan" class="panel build-status">
+    <details id="project-plan" class="panel build-status section-drawer">
+      <summary>Show active build plan</summary>
       <div class="section-title">
         <p class="eyebrow">Active build plan</p>
         <h2>Current build path.</h2>
@@ -536,19 +537,20 @@ npm run coordination:settlement-brief</pre>
       <div id="project-plan-next" class="build-status-lanes" aria-live="polite"></div>
       <ul id="project-plan-vision" class="issues"></ul>
       <pre>npm run project:plan</pre>
-    </section>
+    </details>
 
-    <section id="next-queue" class="panel build-status">
+    <details id="next-queue" class="panel build-status section-drawer">
+      <summary>Show artifact work order</summary>
       <div class="section-title">
-        <p class="eyebrow">Priority queue</p>
-        <h2>Priority queue.</h2>
+        <p class="eyebrow">Artifact work order</p>
+        <h2>Ordered work.</h2>
         <p>Ordered from current artifacts. Detailed planning remains in linked files.</p>
       </div>
       <div id="next-queue-summary" class="build-status-summary" aria-live="polite"></div>
       <div id="next-queue-top" class="build-status-lanes priority-grid" aria-live="polite"></div>
       <div id="next-queue-tasks" class="build-status-lanes compact-grid" aria-live="polite"></div>
       <pre>npm run project:queue</pre>
-    </section>
+    </details>
 
     <section id="auction-intents" class="panel auction-intents">
       <div class="section-title">
