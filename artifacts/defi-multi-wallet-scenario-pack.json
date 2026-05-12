@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-multi-wallet-scenario-pack/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:04:13.650Z",
+  "generatedAt": "2026-05-12T18:26:21.677Z",
   "status": "multi-wallet-scenario-pack-ready-local-keys",
   "enforcement": "INDEXER_DERIVED",
   "summary": {

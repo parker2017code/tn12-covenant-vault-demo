@@ -75,6 +75,7 @@ const defiArtifacts = [
   ["artifacts/self-serve-lane-runbook.json", "tn12-self-serve-lane-runbook/v1"],
   ["artifacts/playground-session.example.json", "tn12-playground-session/v1"],
   ["artifacts/playground-funding-evidence.json", "tn12-multi-p2pk-transfer-evidence/v1"],
+  ["artifacts/playground-funding-20260512-evidence.json", "tn12-multi-p2pk-transfer-evidence/v1"],
   ["artifacts/playground-user-a-pool-deposit-evidence.json", "tn12-p2pk-transfer-evidence/v1"],
   ["artifacts/playground-user-b-pool-deposit-evidence.json", "tn12-p2pk-transfer-evidence/v1"],
   ["artifacts/playground-pool-user-b-payout-evidence.json", "tn12-p2pk-transfer-evidence/v1"],

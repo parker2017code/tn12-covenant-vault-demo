@@ -2,7 +2,7 @@
   "schema": "tn12-self-serve-lane-runbook/v1",
   "network": "kaspa-testnet-12",
   "status": "self-serve-lane-runbook-ready",
-  "generatedAt": "2026-05-12T03:49:45.268Z",
+  "generatedAt": "2026-05-12T18:26:23.104Z",
   "summary": {
     "lanes": 12,
     "playNow": 4,
@@ -27,7 +27,7 @@
       "availableNow": [
         "6 fresh role wallets",
         "7 guided actions",
-        "25 accepted transfer rows"
+        "31 accepted transfer rows"
       ],
       "runSteps": [
         "Open Live Play.",

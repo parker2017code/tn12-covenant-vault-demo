@@ -140,7 +140,7 @@ function publicRailEvidence(evidence) {
   return String(evidence)
     .replace("Vault, pledge, escrow, auction, and role-separated proof rows are accepted.", "Vault, pledge, escrow, auction, and role-separated examples have accepted TN12 records.")
     .replace("40 payload events are accepted and replayed.", "40 app receipt events are accepted and replayed.")
-    .replace("25 accepted transfer rows cover deposits, payouts, and user roles.", "25 accepted transfer rows cover deposits, payouts, and user roles.")
+    .replace("31 accepted transfer rows cover deposits, payouts, and user roles.", "31 accepted transfer rows cover deposits, payouts, and user roles.")
     .replace("Accepted scheduler payloads feed deterministic trigger and bid reducers.", "Accepted scheduler receipts feed deterministic trigger and bid state.")
     .replace("Accepted binding payload references an accepted covenant proof row.", "One accepted binding receipt references an accepted covenant proof row.")
     .replace("Fixture replay, overlap, duplicate, and rollback-match guards pass locally.", "Replay, duplicate, overlap, and rollback-match checks pass locally.")

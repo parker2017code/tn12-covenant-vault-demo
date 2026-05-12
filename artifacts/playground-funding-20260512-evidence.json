@@ -1,0 +1,131 @@
+{
+  "schema": "tn12-multi-p2pk-transfer-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-12T18:20:58.797Z",
+  "status": "accepted-transfer-matched",
+  "txid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+  "accepted": true,
+  "acceptingBlockBlueScore": 9855917,
+  "acceptingBlockTime": 1778609995508,
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "dcd580d40d7a493947bb8c5acf709a3091cb751763c55fde9059e1dcebeb5f97",
+    "outputIndex": 1,
+    "amountTkas": 693.3995
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "label": "playground:operator",
+      "expected": {
+        "amountSompi": "200000000",
+        "address": "kaspatest:qr438lwkelpagjy50h90qawhxpw2gjla55w4j0urf4yxmcs6m2jsjy830dqpa"
+      },
+      "observed": {
+        "amountSompi": "200000000",
+        "address": "kaspatest:qr438lwkelpagjy50h90qawhxpw2gjla55w4j0urf4yxmcs6m2jsjy830dqpa",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 1,
+      "label": "playground:pool",
+      "expected": {
+        "amountSompi": "2500000000",
+        "address": "kaspatest:qq6a0p9z2njruwwudfze42nvvfkemne5nu2andt9zdl3cslrvjukuj7edk9vn"
+      },
+      "observed": {
+        "amountSompi": "2500000000",
+        "address": "kaspatest:qq6a0p9z2njruwwudfze42nvvfkemne5nu2andt9zdl3cslrvjukuj7edk9vn",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 2,
+      "label": "playground:user-a",
+      "expected": {
+        "amountSompi": "1000000000",
+        "address": "kaspatest:qrhxl0v504f8hwjmn0nkuqw5q7vtwedwd0xjqpzt7l6wgld5a582uf0m6qws8"
+      },
+      "observed": {
+        "amountSompi": "1000000000",
+        "address": "kaspatest:qrhxl0v504f8hwjmn0nkuqw5q7vtwedwd0xjqpzt7l6wgld5a582uf0m6qws8",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 3,
+      "label": "playground:user-b",
+      "expected": {
+        "amountSompi": "1000000000",
+        "address": "kaspatest:qrem86ycchn2yf8927w8zapx49ys0fufa4v89t4nla84w0eqs73luftf686dh"
+      },
+      "observed": {
+        "amountSompi": "1000000000",
+        "address": "kaspatest:qrem86ycchn2yf8927w8zapx49ys0fufa4v89t4nla84w0eqs73luftf686dh",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 4,
+      "label": "playground:executor",
+      "expected": {
+        "amountSompi": "200000000",
+        "address": "kaspatest:qz7wgh9elejlfr49cxk084v2zpvalqfn4jsl222kr5jrcyftehxhjv5zg8umg"
+      },
+      "observed": {
+        "amountSompi": "200000000",
+        "address": "kaspatest:qz7wgh9elejlfr49cxk084v2zpvalqfn4jsl222kr5jrcyftehxhjv5zg8umg",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 5,
+      "label": "playground:reviewer",
+      "expected": {
+        "amountSompi": "200000000",
+        "address": "kaspatest:qpmkeexttpernuet5sd9ant63c7znp2v7u078v9c8ss6yuvs7yewul2aq96ep"
+      },
+      "observed": {
+        "amountSompi": "200000000",
+        "address": "kaspatest:qpmkeexttpernuet5sd9ant63c7znp2v7u078v9c8ss6yuvs7yewul2aq96ep",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    },
+    {
+      "index": 6,
+      "label": "change",
+      "expected": {
+        "amountSompi": "64239945000",
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+      },
+      "observed": {
+        "amountSompi": "64239945000",
+        "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "type": "pubkey"
+      },
+      "amountMatches": true,
+      "addressMatches": true,
+      "matches": true
+    }
+  ],
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5"
+}

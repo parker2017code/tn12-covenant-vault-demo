@@ -56,7 +56,7 @@ assert.equal(reducer.summary.blockedScenarioRows, 4);
 assert.equal(reducer.summary.swapRows, 2);
 assert.equal(reducer.summary.oracleRows, 2);
 assert.equal(reducer.summary.lendingRows, 3);
-assert.equal(reducer.summary.balanceRows, 16);
+assert.equal(reducer.summary.balanceRows, 22);
 assert.equal(reducer.summary.blockedBalanceRows, 4);
 assert.equal(reducer.summary.negativeRows, 6);
 assert.equal(reducer.summary.blockedNegativeRows, 6);
@@ -96,7 +96,9 @@ assert.equal(poolBalance.balanceTkas, "56");
 assert.equal(poolBalance.custodyAction, false);
 assert.equal(poolBalance.promotionState, "review-state-promoted");
 
-const partialFundingDelta = reducer.state.balances.find((row) => row.balanceTkas === "-125");
+const partialFundingDelta = reducer.state.balances.find((row) =>
+  row.address === "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt"
+);
 assert.equal(partialFundingDelta.promotionState, "blocked-review");
 assert.ok(partialFundingDelta.problems.includes("negative net delta from selected transfer rows"));
 

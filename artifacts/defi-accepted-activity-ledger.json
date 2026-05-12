@@ -1,15 +1,15 @@
 {
   "schema": "tn12-defi-accepted-activity-ledger/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T18:53:31.011Z",
+  "generatedAt": "2026-05-12T18:24:54.148Z",
   "status": "accepted-activity-ledger-ready",
   "enforcement": "LOCAL_KEY_CUSTODY_TEST",
   "summary": {
     "acceptedReceiptRows": 7,
-    "acceptedTransferRows": 25,
+    "acceptedTransferRows": 31,
     "poolDeposits": 10,
     "poolPayouts": 4,
-    "participantAddresses": 16,
+    "participantAddresses": 22,
     "poolNetTkas": "61",
     "liveProductClaims": 0,
     "externalSignerClaims": 0,
@@ -393,6 +393,84 @@
       "acceptingBlockBlueScore": 8996361
     },
     {
+      "path": "artifacts/playground-funding-20260512-evidence.json",
+      "label": "playground:operator",
+      "kind": "user-funding",
+      "txid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qr438lwkelpagjy50h90qawhxpw2gjla55w4j0urf4yxmcs6m2jsjy830dqpa",
+      "amountTkas": "2",
+      "amountSompi": "200000000",
+      "acceptingBlockBlueScore": 9855917
+    },
+    {
+      "path": "artifacts/playground-funding-20260512-evidence.json",
+      "label": "playground:pool",
+      "kind": "user-funding",
+      "txid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qq6a0p9z2njruwwudfze42nvvfkemne5nu2andt9zdl3cslrvjukuj7edk9vn",
+      "amountTkas": "25",
+      "amountSompi": "2500000000",
+      "acceptingBlockBlueScore": 9855917
+    },
+    {
+      "path": "artifacts/playground-funding-20260512-evidence.json",
+      "label": "playground:user-a",
+      "kind": "user-funding",
+      "txid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qrhxl0v504f8hwjmn0nkuqw5q7vtwedwd0xjqpzt7l6wgld5a582uf0m6qws8",
+      "amountTkas": "10",
+      "amountSompi": "1000000000",
+      "acceptingBlockBlueScore": 9855917
+    },
+    {
+      "path": "artifacts/playground-funding-20260512-evidence.json",
+      "label": "playground:user-b",
+      "kind": "user-funding",
+      "txid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qrem86ycchn2yf8927w8zapx49ys0fufa4v89t4nla84w0eqs73luftf686dh",
+      "amountTkas": "10",
+      "amountSompi": "1000000000",
+      "acceptingBlockBlueScore": 9855917
+    },
+    {
+      "path": "artifacts/playground-funding-20260512-evidence.json",
+      "label": "playground:executor",
+      "kind": "user-funding",
+      "txid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qz7wgh9elejlfr49cxk084v2zpvalqfn4jsl222kr5jrcyftehxhjv5zg8umg",
+      "amountTkas": "2",
+      "amountSompi": "200000000",
+      "acceptingBlockBlueScore": 9855917
+    },
+    {
+      "path": "artifacts/playground-funding-20260512-evidence.json",
+      "label": "playground:reviewer",
+      "kind": "user-funding",
+      "txid": "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qpmkeexttpernuet5sd9ant63c7znp2v7u078v9c8ss6yuvs7yewul2aq96ep",
+      "amountTkas": "2",
+      "amountSompi": "200000000",
+      "acceptingBlockBlueScore": 9855917
+    },
+    {
       "path": "artifacts/playground-user-a-pool-deposit-evidence.json",
       "label": "playground-user-a-pool-deposit-evidence",
       "kind": "pool-deposit",
@@ -435,8 +513,8 @@
   "balances": [
     {
       "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "netTkas": "-125",
-      "netSompi": "-12500000000"
+      "netTkas": "-176",
+      "netSompi": "-17600000000"
     },
     {
       "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -510,6 +588,36 @@
     },
     {
       "address": "kaspatest:qqvlrrl0x85f5v8sstqrjwwteynkaddad45jn9kezcq7lxd7lmnf584f4652p",
+      "netTkas": "2",
+      "netSompi": "200000000"
+    },
+    {
+      "address": "kaspatest:qr438lwkelpagjy50h90qawhxpw2gjla55w4j0urf4yxmcs6m2jsjy830dqpa",
+      "netTkas": "2",
+      "netSompi": "200000000"
+    },
+    {
+      "address": "kaspatest:qq6a0p9z2njruwwudfze42nvvfkemne5nu2andt9zdl3cslrvjukuj7edk9vn",
+      "netTkas": "25",
+      "netSompi": "2500000000"
+    },
+    {
+      "address": "kaspatest:qrhxl0v504f8hwjmn0nkuqw5q7vtwedwd0xjqpzt7l6wgld5a582uf0m6qws8",
+      "netTkas": "10",
+      "netSompi": "1000000000"
+    },
+    {
+      "address": "kaspatest:qrem86ycchn2yf8927w8zapx49ys0fufa4v89t4nla84w0eqs73luftf686dh",
+      "netTkas": "10",
+      "netSompi": "1000000000"
+    },
+    {
+      "address": "kaspatest:qz7wgh9elejlfr49cxk084v2zpvalqfn4jsl222kr5jrcyftehxhjv5zg8umg",
+      "netTkas": "2",
+      "netSompi": "200000000"
+    },
+    {
+      "address": "kaspatest:qpmkeexttpernuet5sd9ant63c7znp2v7u078v9c8ss6yuvs7yewul2aq96ep",
       "netTkas": "2",
       "netSompi": "200000000"
     }

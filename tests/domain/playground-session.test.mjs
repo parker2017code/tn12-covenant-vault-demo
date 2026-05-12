@@ -42,6 +42,12 @@ assert.equal(fundingEvidence.status, "accepted-transfer-matched");
 assert.equal(fundingEvidence.accepted, true);
 assert.ok(fundingEvidence.outputs.every((row) => row.matches));
 
+const freshFundingEvidence = await readJson("artifacts/playground-funding-20260512-evidence.json");
+assert.equal(freshFundingEvidence.status, "accepted-transfer-matched");
+assert.equal(freshFundingEvidence.accepted, true);
+assert.equal(freshFundingEvidence.txid, "42e14cf17dba547e228729e048d2efc9ed70505b874a7ae9e32dafcdbad8a5b5");
+assert.ok(freshFundingEvidence.outputs.every((row) => row.matches));
+
 const depositEvidence = await readJson("artifacts/playground-user-a-pool-deposit-evidence.json");
 assert.equal(depositEvidence.status, "accepted-transfer-matched");
 assert.equal(depositEvidence.accepted, true);

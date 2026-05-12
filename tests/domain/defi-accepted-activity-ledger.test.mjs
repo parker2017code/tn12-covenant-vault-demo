@@ -21,6 +21,7 @@ const transferPaths = [
   "artifacts/tn12-defi-pool-withdraw-payout-user-02-evidence.json",
   "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json",
   "artifacts/playground-funding-evidence.json",
+  "artifacts/playground-funding-20260512-evidence.json",
   "artifacts/playground-user-a-pool-deposit-evidence.json",
   "artifacts/playground-user-b-pool-deposit-evidence.json",
   "artifacts/playground-pool-user-b-payout-evidence.json"
@@ -44,7 +45,7 @@ assert.equal(ledger.schema, "tn12-defi-accepted-activity-ledger/v1");
 assert.equal(ledger.status, "accepted-activity-ledger-ready");
 assert.equal(ledger.enforcement, "LOCAL_KEY_CUSTODY_TEST");
 assert.ok(ledger.summary.acceptedReceiptRows >= 7);
-assert.equal(ledger.summary.acceptedTransferRows, 25);
+assert.equal(ledger.summary.acceptedTransferRows, 31);
 assert.equal(ledger.summary.poolDeposits, 10);
 assert.equal(ledger.summary.poolPayouts, 4);
 assert.equal(ledger.summary.externalSignerClaims, 0);
