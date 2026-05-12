@@ -2,12 +2,13 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-12T21:29:10.810Z",
+  "generatedAt": "2026-05-12T21:35:36.136Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
     "buildFirst": 0,
     "blockedBeforeLiveSubmit": 1,
+    "localProofs": 1,
     "scriptEnforcedClaims": 0
   },
   "rule": "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",
@@ -112,22 +113,24 @@
       "id": "covenant-owned-asset-game",
       "title": "Covenant-Owned Asset Duel",
       "rank": 3,
-      "status": "second-next",
+      "status": "local-proof-passed",
       "proofTarget": "asset UTXO owned by a covenant input through sibling-input authorization",
       "whyItMatters": "Demonstrates ICC: one covenant does not execute the other, but can accept its sibling input as authority.",
       "covenantPattern": "ICC / covenant-owned asset",
       "websitePitch": "A game contract owns an asset. Moving the asset requires the game covenant input in the same transaction.",
       "currentRepoEvidence": [
+        "contracts/CovenantOwnedAssetDuel.sil",
+        "artifacts/CovenantOwnedAssetDuel.json",
+        "artifacts/covenant-owned-asset-duel-proof.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       "nextBuildSteps": [
-        "Build a tiny asset-state contract.",
-        "Let a covenant input authorize one asset move.",
-        "Show the missing-sibling-input negative.",
-        "Show the wrong-sibling-input negative."
+        "Pick whether this stays as a local ICC proof or gets a funded TN12 output.",
+        "If funded, build a guarded submit preflight with the same covenant_id rule.",
+        "Keep negative cases attached: missing sibling, wrong witness, wrong sibling covenant_id."
       ],
-      "hardBoundary": "This is only worth showing after the sibling-input authorization is compiled and tested."
+      "hardBoundary": "Compiled and locally proven only. It is not an accepted TN12 asset spend yet."
     },
     {
       "id": "scheduler-duel",

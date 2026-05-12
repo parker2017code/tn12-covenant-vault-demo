@@ -23,6 +23,10 @@ until these move.
   compiled script to the funded output and verifies the funded output is still
   live. It blocks submit because the public REST UTXO response does not expose
   the input `covenant_id`.
+- `contracts/CovenantOwnedAssetDuel.sil` compiles.
+- `artifacts/covenant-owned-asset-duel-proof.json` proves the local ICC
+  sibling-input pattern: expected sibling covenant ID authorizes an asset move;
+  wrong witness, missing sibling, and wrong sibling covenant ID fail.
 
 ## Next Exact Tasks
 
@@ -37,12 +41,11 @@ until these move.
      result.
    - Keep the UI label below script-enforced until that accepted spend exists.
 
-2. Build Covenant-Owned Asset Duel.
+2. Decide whether Covenant-Owned Asset Duel should get a funded TN12 output.
    - Pattern: ICC / sibling-input authorization.
-   - Minimal contract shape: one tiny asset/action covenant and one sibling
-     authority input.
-   - Positive case: sibling input authorizes the asset/action transition.
-   - Negative cases: missing sibling input and wrong sibling input.
+   - Local contract, artifact, and negative tests are built.
+   - Next optional step: fund the asset output and build the same style of
+     live-spend preflight used for `RecurringTreasuryVault`.
    - Do not fake nested execution; the point is sibling authority.
 
 3. Build Blitz Mux Arena.

@@ -1,0 +1,18 @@
+contract CovenantOwnedAssetDuel(byte[32] initOwnerCovenantId, int initPower) {
+    byte[32] ownerCovenantId = initOwnerCovenantId;
+    int power = initPower;
+
+    entrypoint function strike(int witnessInput, byte[32] nextOwnerCovenantId, int spendPower) {
+        require(spendPower > 0);
+        require(spendPower <= power);
+        require(OpInputCovenantId(witnessInput) == ownerCovenantId);
+        require(OpAuthOutputCount(this.activeInputIndex) == 1);
+
+        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);
+        State nextState = {
+            ownerCovenantId: nextOwnerCovenantId,
+            power: power - spendPower
+        };
+        validateOutputState(output_idx, nextState);
+    }
+}

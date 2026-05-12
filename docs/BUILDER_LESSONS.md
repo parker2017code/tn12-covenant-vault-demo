@@ -46,3 +46,4 @@ When a protocol result looks impossible, widen the search before escalating:
 - Treat stale tooling as a first-class failure mode, not an afterthought.
 - Prove stateful `.sil` in layers: compile, local state/output debugger, full signature-script Rust proof, then live submit only through a route that preserves every covenant binding field.
 - Add a preflight before live covenant submits: script hash matches funded output, funded output is still unspent, route preserves covenant binding, and input `covenant_id` is known.
+- For ICC, do not describe it as nested execution. The useful proof is sibling-input authorization: the asset/action covenant checks a witness input's script hash or `covenant_id`, then enforces its own transition.

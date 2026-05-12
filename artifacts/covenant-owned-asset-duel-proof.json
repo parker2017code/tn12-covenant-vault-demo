@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-covenant-owned-asset-duel-proof/v1",
+  "reviewedAt": "2026-05-12",
+  "status": "local-icc-sibling-proof-passed",
+  "source": "contracts/CovenantOwnedAssetDuel.sil",
+  "rustHarness": "scripts/rust/covenant_owned_asset_duel_proof.rs",
+  "command": "TN12_REPO_ROOT=/home/parker2017/tn12-covenant-vault-demo CARGO_TARGET_DIR=/home/parker2017/silverscript-tools/target cargo run -q --manifest-path /tmp/tn12-covenant-owned-asset-duel-GnK4Fj/Cargo.toml",
+  "pattern": "ICC sibling-input authorization",
+  "cases": [
+    {
+      "name": "sibling_covenant_authorizes_asset_move",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "wrong_witness_rejects_asset_move",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    },
+    {
+      "name": "missing_sibling_rejects_asset_move",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    },
+    {
+      "name": "wrong_sibling_covenant_rejects_asset_move",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    }
+  ],
+  "proves": [
+    "a covenant-owned asset transition can be authorized by a sibling input with the expected covenant_id",
+    "wrong witness index is rejected",
+    "missing sibling input is rejected",
+    "wrong sibling covenant_id is rejected"
+  ],
+  "doesNotProve": [
+    "accepted TN12 broadcast",
+    "nested execution of another covenant",
+    "fungible token standard completeness"
+  ],
+  "stdout": "sibling_covenant_authorizes_asset_move got=true expected=true\nwrong_witness_rejects_asset_move got=false expected=false\nmissing_sibling_rejects_asset_move got=false expected=false\nwrong_sibling_covenant_rejects_asset_move got=false expected=false",
+  "stderr": ""
+}

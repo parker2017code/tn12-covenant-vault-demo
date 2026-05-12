@@ -114,9 +114,11 @@ blocks submit because that REST UTXO response does not expose the input
 2. ICC ownership demo.
    - One action/asset branch accepts authorization from a sibling covenant input.
    - Use witness hints; do not scan every input if a direct witness index works.
-   - First target: Covenant-Owned Asset Duel. One covenant-owned asset/action
-     accepts a sibling input as authority, then rejects missing or wrong sibling
-     authorization.
+   - Current target: Covenant-Owned Asset Duel. `contracts/CovenantOwnedAssetDuel.sil`
+     compiles, and `artifacts/covenant-owned-asset-duel-proof.json` locally
+     proves expected sibling authorization plus missing/wrong sibling rejection.
+   - Next optional step: fund it on TN12 only after a live-spend preflight can
+     preserve the required covenant ID data.
 3. Multiplexor demo.
    - One router sends state to worker A or B and the worker returns to router.
    - Add timeout or rollback path if a bad selector can stall the state.

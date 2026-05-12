@@ -15,7 +15,8 @@ assert.deepEqual(map.showMichaelFirst, ["blitz-mux-arena", "treasury-wars", "cov
 assert.ok(map.experiments.some((item) => item.id === "treasury-wars" && item.status === "blocked-before-live-submit"));
 assert.ok(map.experiments.some((item) => item.id === "covenant-heist" && /wrong signer/.test(item.websitePitch)));
 assert.ok(map.experiments.some((item) => item.id === "blitz-mux-arena" && /fast multi-transaction/.test(item.whyItMatters)));
-assert.ok(map.experiments.some((item) => item.id === "covenant-owned-asset-game" && /ICC/.test(item.covenantPattern) && item.status === "second-next"));
+assert.equal(map.summary.localProofs, 1);
+assert.ok(map.experiments.some((item) => item.id === "covenant-owned-asset-game" && /ICC/.test(item.covenantPattern) && item.status === "local-proof-passed"));
 assert.ok(map.experiments.every((item) => item.currentRepoEvidence.length > 0));
 assert.ok(map.experiments.every((item) => item.hardBoundary.length > 20));
 

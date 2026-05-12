@@ -95,22 +95,24 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "covenant-owned-asset-game",
       title: "Covenant-Owned Asset Duel",
       rank: 3,
-      status: "second-next",
+      status: "local-proof-passed",
       proofTarget: "asset UTXO owned by a covenant input through sibling-input authorization",
       whyItMatters: "Demonstrates ICC: one covenant does not execute the other, but can accept its sibling input as authority.",
       covenantPattern: "ICC / covenant-owned asset",
       websitePitch: "A game contract owns an asset. Moving the asset requires the game covenant input in the same transaction.",
       currentRepoEvidence: [
+        "contracts/CovenantOwnedAssetDuel.sil",
+        "artifacts/CovenantOwnedAssetDuel.json",
+        "artifacts/covenant-owned-asset-duel-proof.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       nextBuildSteps: [
-        "Build a tiny asset-state contract.",
-        "Let a covenant input authorize one asset move.",
-        "Show the missing-sibling-input negative.",
-        "Show the wrong-sibling-input negative."
+        "Pick whether this stays as a local ICC proof or gets a funded TN12 output.",
+        "If funded, build a guarded submit preflight with the same covenant_id rule.",
+        "Keep negative cases attached: missing sibling, wrong witness, wrong sibling covenant_id."
       ],
-      hardBoundary: "This is only worth showing after the sibling-input authorization is compiled and tested."
+      hardBoundary: "Compiled and locally proven only. It is not an accepted TN12 asset spend yet."
     }),
     experiment({
       id: "scheduler-duel",
@@ -145,6 +147,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       spotlight: experiments.filter((item) => item.rank <= 3).length,
       buildFirst: experiments.filter((item) => item.status === "build-first").length,
       blockedBeforeLiveSubmit: experiments.filter((item) => item.status === "blocked-before-live-submit").length,
+      localProofs: experiments.filter((item) => item.status === "local-proof-passed").length,
       scriptEnforcedClaims: 0
     },
     rule: "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",
