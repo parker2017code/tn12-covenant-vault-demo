@@ -21,6 +21,9 @@ try {
   const playgroundResponse = await fetch(`${url}playground.html`);
   assert.equal(playgroundResponse.ok, true, "Failed to load playground.html");
   const playgroundHtml = await playgroundResponse.text();
+  const experimentsResponse = await fetch(`${url}experiments.html`);
+  assert.equal(experimentsResponse.ok, true, "Failed to load experiments.html");
+  const experimentsHtml = await experimentsResponse.text();
   for (const asset of [
     "favicon.svg",
     "favicon.png",
@@ -34,7 +37,7 @@ try {
     const assetResponse = await fetch(`${url}${asset}`);
     assert.equal(assetResponse.ok, true, `Failed to load ${asset}`);
   }
-  for (const publicPageHtml of [html, resultsHtml, playgroundHtml, await readFile("lab.html", "utf8")]) {
+  for (const publicPageHtml of [html, resultsHtml, playgroundHtml, experimentsHtml, await readFile("lab.html", "utf8")]) {
     assert.match(publicPageHtml, /class="brand-home" href="index\.html"/);
     assert.match(publicPageHtml, /rel="apple-touch-icon" href="apple-touch-icon\.png"/);
     assert.match(publicPageHtml, /rel="manifest" href="site\.webmanifest"/);
@@ -116,6 +119,10 @@ try {
   assert.match(await readFile("lab.html", "utf8"), /id="runbook"/);
   assert.match(await readFile("lab.html", "utf8"), /id="lane-runbook"/);
   assert.match(await readFile("lab.html", "utf8"), /docs\/PRODUCT_EXECUTION_PLAN\.md/);
+  assert.match(experimentsHtml, /Blitz Mux Arena/);
+  assert.match(experimentsHtml, /Treasury Wars/);
+  assert.match(experimentsHtml, /Covenant-Owned Asset Duel/);
+  assert.match(experimentsHtml, /artifacts\/covenant-experiment-map\.json/);
 
   await checkRenderedPages(url);
 
@@ -128,7 +135,7 @@ try {
 async function checkRenderedPages(url) {
   const browser = await chromium.launch({ headless: true });
   try {
-    for (const path of ["index.html", "lab.html", "results.html", "playground.html"]) {
+    for (const path of ["index.html", "lab.html", "results.html", "playground.html", "experiments.html"]) {
       for (const viewport of [
         { name: "desktop", width: 1280, height: 900 },
         { name: "mobile", width: 390, height: 844 },
@@ -326,7 +333,7 @@ async function waitForDynamicContent(page, path) {
 
 async function assertLocalLinks(page, path) {
   const linksToCheck = await page.locator("a[href]").evaluateAll((links) => {
-    const pageNames = new Set(["index.html", "lab.html", "results.html", "playground.html"]);
+    const pageNames = new Set(["index.html", "lab.html", "results.html", "playground.html", "experiments.html"]);
     return links.flatMap((link) => {
       const href = link.getAttribute("href") || "";
       if (/^(https?:|mailto:)/.test(href)) return [];

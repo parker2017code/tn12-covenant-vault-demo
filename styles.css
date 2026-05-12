@@ -939,6 +939,55 @@ progress::-moz-progress-bar {
   margin-top: 6px;
 }
 
+.experiment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.experiment-grid article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-soft);
+  padding: 14px;
+}
+
+.experiment-grid span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 50%;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.experiment-grid strong {
+  display: block;
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.experiment-grid p,
+.experiment-grid li {
+  color: var(--muted);
+}
+
+.experiment-grid ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.experiment-table-wrap {
+  overflow-x: auto;
+}
+
+.experiment-table td:last-child {
+  min-width: 260px;
+}
+
 .defi-flow-map {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3127,6 +3176,7 @@ progress::-moz-progress-bar {
   .stat-grid,
   .evidence-strip,
   .work-map,
+  .experiment-grid,
   .defi-flow-map,
   .claim-grid,
   .results-summary,

@@ -3,11 +3,18 @@
   "reviewedAt": "2026-05-12",
   "contract": "contracts/RecurringTreasuryVault.sil",
   "compiledArtifact": "artifacts/RecurringTreasuryVault.json",
-  "status": "script-compiled-not-submitted",
+  "status": "script-funded-not-spent",
   "currentEvidence": {
     "acceptedWalletPolicyTxid": "d9eba84e7565ba28e5631c4a3b914da93b68e77daf9279a435f9303eeb63cf65",
     "walletPolicyStatus": "local-wallet-recurring-cap-evidence-ready",
-    "capWindowStatus": "cap-window-policy-ready"
+    "capWindowStatus": "cap-window-policy-ready",
+    "acceptedContractFunding": {
+      "txid": "72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4",
+      "outputIndex": 0,
+      "amountTkas": 150,
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/72a2632c8bb9278cb2a78a9a4d9ab33eee5cea0bdc5789487267ac6d31e4cac4"
+    }
   },
   "scriptIntendedEnforcement": [
     "owner signature",

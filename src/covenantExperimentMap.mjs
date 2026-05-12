@@ -1,0 +1,161 @@
+export function buildCovenantExperimentMap({ generatedAt = new Date().toISOString() } = {}) {
+  const experiments = [
+    experiment({
+      id: "treasury-wars",
+      title: "Treasury Wars",
+      rank: 2,
+      status: "build-first",
+      proofTarget: "accepted recurring-vault spend, continuation state, blocked over-cap attempt",
+      whyItMatters: "Turns the active recurring cap rail into a simple strategy loop: each player has money, a cap window, allowed destinations, and relocked state.",
+      covenantPattern: "stateful singleton vault",
+      websitePitch: "Spend under your cap, relock the treasury, and block the move that tries to drain too much.",
+      currentRepoEvidence: [
+        "contracts/RecurringTreasuryVault.sil",
+        "artifacts/recurring-treasury-vault-status.json",
+        "artifacts/treasury-recurring-caps.json"
+      ],
+      nextBuildSteps: [
+        "Spend the funded RecurringTreasuryVault output on TN12.",
+        "Record the new state and relocked change output.",
+        "Turn the over-cap negative map into the opponent's blocked move."
+      ],
+      hardBoundary: "Current recurring cap evidence is wallet-policy/local-wallet until the compiled vault spend is accepted."
+    }),
+    experiment({
+      id: "covenant-heist",
+      title: "Covenant Heist",
+      rank: 4,
+      status: "design-next",
+      proofTarget: "negative candidate suite with one or more accepted defenses",
+      whyItMatters: "Makes the adversarial side visible. The game is a vault attack/defense loop where the interesting evidence is what cannot be spent.",
+      covenantPattern: "guarded vault plus challenge rows",
+      websitePitch: "Try the wrong signer, wrong destination, stale window, over-cap spend, or missing relock. The vault should refuse the bad path.",
+      currentRepoEvidence: [
+        "artifacts/recurring-treasury-vault-negative-map.json",
+        "scripts/build-recurring-treasury-vault-negatives.mjs",
+        "tests/domain/recurring-treasury-vault-negatives.test.mjs"
+      ],
+      nextBuildSteps: [
+        "Render each negative as a heist attempt.",
+        "Attach the exact rule that blocks it.",
+        "Promote rows only when the candidate maps to a local reject or TN12 rejected spend attempt."
+      ],
+      hardBoundary: "Do not fake rejection evidence. Candidate rows must stay candidates until a builder or node rejects a concrete spend."
+    }),
+    experiment({
+      id: "blitz-mux-arena",
+      title: "Blitz Mux Arena",
+      rank: 1,
+      status: "research-build",
+      proofTarget: "hub routes to worker, worker returns to hub, timeout escape path",
+      whyItMatters: "Smallest source-faithful demo of the chess architecture without building full chess. It makes fast multi-transaction state transitions feel natural.",
+      covenantPattern: "mux / worker contract family",
+      websitePitch: "A hub sends the turn to one worker contract. The worker returns valid state before the clock runs out.",
+      currentRepoEvidence: [
+        "docs/TOCCATA_SOURCE_NOTES.md",
+        "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/ARCHITECTURE.md",
+        "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
+      ],
+      nextBuildSteps: [
+        "Create a two-worker Silverscript toy family.",
+        "Inject template hashes at genesis.",
+        "Show one good route and one stuck route with timeout recovery."
+      ],
+      hardBoundary: "This should stay a toy contract-family proof until a real worker spend is accepted."
+    }),
+    experiment({
+      id: "coordination-league",
+      title: "Coordination League",
+      rank: 4,
+      status: "later",
+      proofTarget: "threshold commitments, batch release/refund, replayed settlement rows",
+      whyItMatters: "Directly maps the Stag Hunt talk into repo evidence: commit only when enough compatible commitments also exist.",
+      covenantPattern: "assurance plus coordination receipts",
+      websitePitch: "Players pledge to a group objective. If enough compatible pledges appear, the group path opens; otherwise refund stays explicit.",
+      currentRepoEvidence: [
+        "artifacts/coordination-market-prototype.json",
+        "artifacts/coordination-market-settlement-brief.json",
+        "artifacts/batch-assurance-campaign.json"
+      ],
+      nextBuildSteps: [
+        "Pick one transparent pack.",
+        "Attach pledge outputs and release/refund status.",
+        "Keep privacy and pooled custody out of scope."
+      ],
+      hardBoundary: "Coordination receipts are not private commitments and not pooled custody."
+    }),
+    experiment({
+      id: "covenant-owned-asset-game",
+      title: "Covenant-Owned Asset Duel",
+      rank: 3,
+      status: "later",
+      proofTarget: "asset UTXO owned by a covenant input through sibling-input authorization",
+      whyItMatters: "Demonstrates ICC: one covenant does not execute the other, but can accept its sibling input as authority.",
+      covenantPattern: "ICC / covenant-owned asset",
+      websitePitch: "A game contract owns an asset. Moving the asset requires the game covenant input in the same transaction.",
+      currentRepoEvidence: [
+        "docs/TOCCATA_SOURCE_NOTES.md",
+        "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
+      ],
+      nextBuildSteps: [
+        "Build a tiny asset-state contract.",
+        "Let a covenant input authorize one asset move.",
+        "Show the missing-sibling-input negative."
+      ],
+      hardBoundary: "This is only worth showing after the sibling-input authorization is compiled and tested."
+    }),
+    experiment({
+      id: "scheduler-duel",
+      title: "Scheduler Duel",
+      rank: 6,
+      status: "later",
+      proofTarget: "accepted scheduler intents, eligible trigger, executor receipt, blocked stale action",
+      whyItMatters: "Uses current scheduler evidence to show conditional actions without pretending they are autonomous custody.",
+      covenantPattern: "based-app scheduler with covenant settlement target",
+      websitePitch: "Write a conditional move. Executors compete to fire it only when the replayed state says it is eligible.",
+      currentRepoEvidence: [
+        "artifacts/universal-scheduler-workbench.json",
+        "artifacts/scheduler-intent-registry.json",
+        "artifacts/scheduler-covenant-binding.json"
+      ],
+      nextBuildSteps: [
+        "Choose two trigger templates.",
+        "Bind one trigger to accepted covenant evidence.",
+        "Show stale or duplicate execution blocked by replay."
+      ],
+      hardBoundary: "Executor receipts are replay evidence, not proof of autonomous on-chain execution."
+    })
+  ];
+
+  return {
+    schema: "tn12-covenant-experiment-map/v1",
+    network: "kaspa-testnet-12",
+    status: "experiment-map-ready",
+    generatedAt,
+    summary: {
+      experiments: experiments.length,
+      spotlight: experiments.filter((item) => item.rank <= 3).length,
+      buildFirst: experiments.filter((item) => item.status === "build-first").length,
+      scriptEnforcedClaims: 0
+    },
+    rule: "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",
+    showMichaelFirst: ["blitz-mux-arena", "treasury-wars", "covenant-owned-asset-game"],
+    experiments
+  };
+}
+
+function experiment({ id, title, rank, status, proofTarget, whyItMatters, covenantPattern, websitePitch, currentRepoEvidence, nextBuildSteps, hardBoundary }) {
+  return {
+    id,
+    title,
+    rank,
+    status,
+    proofTarget,
+    whyItMatters,
+    covenantPattern,
+    websitePitch,
+    currentRepoEvidence,
+    nextBuildSteps,
+    hardBoundary
+  };
+}
