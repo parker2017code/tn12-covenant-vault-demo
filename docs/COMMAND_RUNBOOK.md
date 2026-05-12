@@ -106,6 +106,41 @@ Some build steps also require:
 KASPA_WASM_MODULE=<path-to-tn12-kaspa-wasm>
 ```
 
+## Virtual-Chain Live Read Route
+
+The checked-in live-window artifacts are large because they preserve a historical
+TN12 virtual-chain window with accepted transactions and checkpoint overlap.
+Do not replace them with a near-tip empty sample unless that is the intended
+review artifact.
+
+The public npm `kaspa-wasm` package does not expose `getVirtualChainFromBlockV2`
+for this repo's live-window script. Use the local TN12 SDK build when running
+`npm run indexer:live-window`:
+
+```sh
+KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa \
+KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 \
+KASPA_WRPC_ENCODING=borsh \
+npm run indexer:live-window
+```
+
+For a current-tip smoke check, omit `TN12_VIRTUAL_CHAIN_START_HASH`. That proves
+the endpoint and SDK path work, but it may not overlap old proof txids.
+
+For checkpoint-overlap review, provide a reachable historical start hash:
+
+```sh
+TN12_VIRTUAL_CHAIN_START_HASH=<reachable-block-hash> \
+KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa \
+KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 \
+KASPA_WRPC_ENCODING=borsh \
+npm run indexer:live-window
+```
+
+If the node returns `cannot find header`, the historical start hash is outside
+the node's available window. Restore the previous rich artifact and record the
+blocker instead of committing a weaker near-tip sample.
+
 ## Safety Rules
 
 - Never commit `.local/`.

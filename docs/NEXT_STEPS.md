@@ -12,6 +12,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 - The DeFi repo-local benchmark stays in generated artifacts. Public pages should use concrete counts and missing rails instead of score language.
 - The current playground run has four accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, User A pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, User B pool deposit `3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d`, and pool-to-User B payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
+- Live virtual-chain smoke check, 2026-05-12: current-tip read works with the local TN12 SDK and public wRPC endpoint. The old historical overlap start hash is no longer available from the public node, so keep the checked-in rich live-window artifact unless a new reachable historical start hash is captured.
 
 ## Completed In Current Cleanup Pass
 

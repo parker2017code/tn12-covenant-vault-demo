@@ -2608,6 +2608,9 @@ assert.match(commandRunbook, /\| Class \| Examples \| Needs \| Writes \| Broadca
 assert.match(commandRunbook, /Any command containing `--submit` is a real TN12 testnet broadcast/);
 assert.match(commandRunbook, /Any command that creates wallets must say it writes `.local\/` testnet-only material/);
 assert.match(commandRunbook, /Any command that rebuilds artifacts should say what file or page to inspect next/);
+assert.match(commandRunbook, /Virtual-Chain Live Read Route/);
+assert.match(commandRunbook, /KASPA_WASM_MODULE=\/home\/parker2017\/kaspa-node\/rusty-kaspa-tn12-inspect\/wasm\/nodejs\/kaspa/);
+assert.match(commandRunbook, /cannot find header/);
 
 const masterPlan = await readFile(new URL("../docs/MASTER_APP_PLAN.md", import.meta.url), "utf8");
 assert.match(masterPlan, /Payload Receipt \/ Invoice App/);
