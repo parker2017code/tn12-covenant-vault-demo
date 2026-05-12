@@ -49,28 +49,32 @@ export function buildPlaygroundPlan({
         "Watch accepted TN12 money move",
         "No wallet needed.",
         "Open the four txids, compare the explorer records to the replay balances, then inspect blocked withdrawals.",
-        "#activity"
+        "#activity",
+        "Open accepted txs"
       ),
       quickstart(
         "faucet",
         "Run with fresh faucet wallets",
         "Needs TN12 tKAS.",
         "Generate session wallets, fund only public kaspatest addresses, submit tiny transfers, then replay the accepted txids.",
-        "#flow"
+        "#flow",
+        "Open run path"
       ),
       quickstart(
         "own-wallet",
         "Bring your own external wallet",
         "No repo private keys.",
         "Export a request, review exact fields in your wallet, return signed bytes, validate the fingerprint, submit, then replay.",
-        "#wallet"
+        "#wallet",
+        "Open wallet handoff"
       ),
       quickstart(
         "extend",
         "Build a based-app lane",
         "Start from accepted evidence.",
         "Use the same loop for DeFi reducers, coordination packs, auctions, access passes, or agent commitments.",
-        "lab.html#product-map"
+        "lab.html#product-map",
+        "Open builder map"
       )
     ],
     ownWalletFlow: [
@@ -121,6 +125,6 @@ function action(id, label, enforcement, detail) {
   return { id, label, enforcement, detail };
 }
 
-function quickstart(id, title, requirement, detail, href) {
-  return { id, title, requirement, detail, href };
+function quickstart(id, title, requirement, detail, href, cta) {
+  return { id, title, requirement, detail, href, cta };
 }

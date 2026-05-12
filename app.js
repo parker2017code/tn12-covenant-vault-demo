@@ -367,6 +367,11 @@ function renderAssurance() {
   }
 }
 
+function tn12TxLink(txid) {
+  const value = String(txid || "");
+  return `<a href="https://tn12.kaspa.stream/transactions/${escapeHtml(value)}" target="_blank" rel="noreferrer">${escapeHtml(shortTxid(value))}</a>`;
+}
+
 function renderManualOutpoint() {
   if (!manualFields.address || !manualFields.txid || !manualFields.outputIndex || !manualFields.amountTkas || !manualFields.explorerUrl || !manualArtifactNode || !manualIssuesNode) return;
   const artifact = buildManualOutpointArtifact(normalizeManualOutpoint({
@@ -1313,7 +1318,7 @@ async function renderAcceptedAppState() {
         <span>${escapeHtml(event.lane)}</span>
         <strong>${escapeHtml(payload.kind || event.lane)} / ${escapeHtml(payload.value || event.status)}</strong>
         <p>${escapeHtml(payload.subject || event.label)}</p>
-        <small>${escapeHtml(shortTxid(event.txid))}</small>
+        <small>${tn12TxLink(event.txid)}</small>
       `;
       receiptEventsNode.append(article);
     }
@@ -1335,7 +1340,7 @@ async function renderAcceptedAppState() {
           <span>DeFi v1 receipt</span>
           <strong>${escapeHtml(receipt.subject)} / ${escapeHtml(receipt.value)}</strong>
           <p>${escapeHtml(shortAddress(receipt.walletAddress))}</p>
-          <small>${escapeHtml(shortTxid(receipt.txid))}</small>
+          <small>${tn12TxLink(receipt.txid)}</small>
         `;
         defiReceiptGuardNode.append(article);
       }
@@ -1365,7 +1370,7 @@ async function renderDefiReceiptGuard() {
         <span>DeFi v1 receipt</span>
         <strong>${escapeHtml(receipt.subject)} / ${escapeHtml(receipt.value)}</strong>
         <p>${escapeHtml(shortAddress(receipt.walletAddress))}</p>
-        <small>${escapeHtml(shortTxid(receipt.txid))}</small>
+        <small>${tn12TxLink(receipt.txid)}</small>
       `;
       defiReceiptGuardNode.append(article);
     }

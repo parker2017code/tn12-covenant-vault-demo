@@ -127,6 +127,7 @@ function renderQuickstart(node, plan) {
       <span>${escapeHtml(String(index + 1))} · ${escapeHtml(step.requirement)}</span>
       <strong>${escapeHtml(step.title)}</strong>
       <p>${escapeHtml(step.detail)}</p>
+      <small>${escapeHtml(step.cta || "Open")}</small>
     </a>
   `).join("");
 }

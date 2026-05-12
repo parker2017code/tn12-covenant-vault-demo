@@ -2336,7 +2336,7 @@ progress::-moz-progress-bar {
   min-height: 190px;
   border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   border-radius: 22px;
-  padding: 18px 18px 42px;
+  padding: 18px;
   overflow-wrap: anywhere;
   background:
     linear-gradient(145deg, color-mix(in srgb, var(--accent) 12%, transparent), var(--panel-strong)),
@@ -2344,19 +2344,12 @@ progress::-moz-progress-bar {
   color: var(--text);
 }
 
-.playground-quickstart a::after {
-  content: "Go";
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
-  border-radius: 999px;
-  padding: 3px 8px;
+.playground-quickstart a small {
+  align-self: end;
+  margin-top: auto;
   color: var(--accent);
-  background: color-mix(in srgb, var(--bg) 55%, transparent);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
-  pointer-events: none;
 }
 
 .playground-quickstart a:hover {

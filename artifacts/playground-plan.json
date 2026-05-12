@@ -1,7 +1,7 @@
 {
   "schema": "tn12-playground-plan/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T22:41:58.969Z",
+  "generatedAt": "2026-05-12T02:04:48.335Z",
   "status": "playground-plan-ready",
   "target": "real-tn12-session-playground",
   "summary": {
@@ -116,28 +116,32 @@
       "title": "Watch accepted TN12 money move",
       "requirement": "No wallet needed.",
       "detail": "Open the four txids, compare the explorer records to the replay balances, then inspect blocked withdrawals.",
-      "href": "#activity"
+      "href": "#activity",
+      "cta": "Open accepted txs"
     },
     {
       "id": "faucet",
       "title": "Run with fresh faucet wallets",
       "requirement": "Needs TN12 tKAS.",
       "detail": "Generate session wallets, fund only public kaspatest addresses, submit tiny transfers, then replay the accepted txids.",
-      "href": "#flow"
+      "href": "#flow",
+      "cta": "Open run path"
     },
     {
       "id": "own-wallet",
       "title": "Bring your own external wallet",
       "requirement": "No repo private keys.",
       "detail": "Export a request, review exact fields in your wallet, return signed bytes, validate the fingerprint, submit, then replay.",
-      "href": "#wallet"
+      "href": "#wallet",
+      "cta": "Open wallet handoff"
     },
     {
       "id": "extend",
       "title": "Build a based-app lane",
       "requirement": "Start from accepted evidence.",
       "detail": "Use the same loop for DeFi reducers, coordination packs, auctions, access passes, or agent commitments.",
-      "href": "lab.html#product-map"
+      "href": "lab.html#product-map",
+      "cta": "Open builder map"
     }
   ],
   "ownWalletFlow": [
