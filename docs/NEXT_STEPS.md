@@ -33,6 +33,25 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 4 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or wallet signing is needed |
 | 5 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
 
+## Next Defined Work
+
+1. TN12 proof-core release candidate.
+   - What it is: a tagged evidence snapshot for the proof core, not a product release.
+   - It should include the exact commit hash, canonical proof count, txid list, fixture/artifact hashes, commands run, expected gate output, known blockers, and a clear "testnet only / no audit / no mainnet funds" boundary.
+   - Done when the release notes can be reviewed without reading the whole repo.
+2. TN12 public UI split.
+   - What it is: separate the current broad lab surface into three reader jobs: Proof, Product Ideas, and Mainnet Readiness.
+   - Proof should show accepted txids, scripts, verifier commands, and enforcement labels.
+   - Product Ideas should hold vault, escrow, assurance, DeFi, scheduler, agents, auctions, and coordination concepts.
+   - Mainnet Readiness should hold wallet signing, production indexer, rollback evidence, audit, and activation blockers.
+   - Done when a normal reader can find "what is proven" without scrolling through app-lab concepts.
+3. User-wallet signing round trip.
+   - What it is: one real wallet or compatible throwaway signer returns transaction bytes, submit succeeds, and replay observes the accepted txid.
+   - Done when the repo no longer has to describe user-wallet signing only as a request/template gap.
+4. Live rollback evidence.
+   - What it is: a live TN12 removed-block window captured from node/RPC data and matched by the replay promotion guard.
+   - Done when local rollback matching is backed by a live observed rollback case.
+
 ## Where Older Queues Went
 
 Older broad queues were folded into the active todo above. Historical planning notes stay in `docs/archive/` and generated artifact files; this file should stay short enough to scan before work starts.

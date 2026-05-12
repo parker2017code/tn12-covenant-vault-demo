@@ -27,7 +27,7 @@ This file is about deployment readiness, not TN12 proof-core progress.
 | Live removed-block evidence | Local rollback matching is not the same as observing a live rollback window | `artifacts/durable-replay-promotion-guard.json` |
 | Batch settlement follow-through | Release is accepted; alternate refund path must remain non-selected | `artifacts/batch-assurance-operator-decision.json` |
 | Wallet/indexer hardening | Product state needs operational reliability | `artifacts/wallet-submit-result-validation.json`; focused tests now cover signer-return validation, submit-result promotion rules, rollback-by-missing-txid, blue-score regression, and virtual-chain rollback rows |
-| DeFi product readiness | Current DeFi lane includes real local-key TN12 custody/activity transfers, but no autonomous AMM, oracle, liquidation, production custody, or user-wallet signing | `artifacts/defi-accepted-activity-ledger.json`; `artifacts/defi-artifact-manifest.json` |
+| DeFi product readiness | Current DeFi lane includes real local-key TN12 custody/activity transfers, but no AMM custody, oracle, liquidation, production custody, or user-wallet signing | `artifacts/defi-accepted-activity-ledger.json`; `artifacts/defi-artifact-manifest.json` |
 
 ## Next Order
 
