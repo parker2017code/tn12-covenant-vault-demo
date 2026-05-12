@@ -14,6 +14,23 @@ This file is the short queue. It does not replace the generated artifacts; it po
 - The current full-DeFi repo-local benchmark is `60%`: six of ten rails are complete, with external signer, live rollback evidence, AMM/lending/liquidation custody execution, and mainnet activation still incomplete.
 - The current playground run has four accepted TN12 txs: role funding `85b5c6dcd537982812bd5c50e433c53d13d87f6d887e06e164e63a3b40a4f6e5`, User A pool deposit `83eae5c10342cf23095aa51875ce927671b1ae02336a756bac4a9d561525501c`, User B pool deposit `3bfca807f4402941a47135f3d7929301cdfdff07c0e271610e39744c777f759d`, and pool-to-User B payout `8e9d1134e22cbef141d74efad074723c300419c0e844484f37653d92044b9f78`.
 
+## Active Todo
+
+Work in this order unless a gate or visible UI regression changes the sequence:
+
+| Order | Task | Done When | Needs User? |
+|---|---|---|---|
+| 1 | Public front-door compression. | `index.html` routes clearly to `results.html`, `playground.html`, and `lab.html` without proof-count walls above the fold. | No |
+| 2 | Results/playground page pruning. | Long generated sections are collapsed by user job: observe, repeat with faucet, bring wallet, audit/build. | No |
+| 3 | Clickable-affordance sweep. | Every visible txid opens TN12 explorer; every action-looking card links or is restyled as passive. | No |
+| 4 | Command-path audit. | Every public command names prerequisites, writes/broadcasts behavior, expected output, and the next page or artifact to inspect. | No |
+| 5 | Stale-completion cleanup. | Old `100%`, `complete`, `production-ready`, and similar artifacts are archived or renamed so normal repo search does not surface stale claims as current truth. | No |
+| 6 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
+| 7 | Manifest-driven inventory. | Counts, page links, command groups, and high-signal artifact lists are generated or checked from one source instead of manually duplicated. | No |
+| 8 | External-signer payload receipt. | A real wallet or throwaway external signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
+| 9 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
+| 10 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or external signing is needed |
+
 ## Autonomous Grand Plan Before User Input
 
 These are the highest-impact things that can be advanced without asking for a real external wallet signature:
