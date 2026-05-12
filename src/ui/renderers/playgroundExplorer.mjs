@@ -196,15 +196,20 @@ function renderActivityStrip(node, { funding, deposit, secondDeposit, payout, re
       tone: "cool"
     }
   ];
-  node.innerHTML = rows.map((row, index) => `
-    <article class="activity-card activity-${escapeHtml(row.tone)}">
-      <span>${escapeHtml(String(index + 1))}</span>
-      <strong>${escapeHtml(row.label)}</strong>
-      <p class="activity-amount">${escapeHtml(row.amount)}</p>
-      <p>${escapeHtml(row.detail)}</p>
-      ${row.txid ? `<p>${txLink(row.txid)}</p>` : "<p>Reducer state below.</p>"}
-    </article>
-  `).join("");
+  node.innerHTML = rows.map((row, index) => {
+    const href = row.txid ? `https://tn12.kaspa.stream/transactions/${escapeHtml(row.txid)}` : "#replay";
+    const target = row.txid ? ` target="_blank" rel="noreferrer"` : "";
+    const action = row.txid ? "Open txid" : "Open replay";
+    return `
+      <a class="activity-card activity-${escapeHtml(row.tone)}" href="${href}"${target}>
+        <span>${escapeHtml(String(index + 1))}</span>
+        <strong>${escapeHtml(row.label)}</strong>
+        <p class="activity-amount">${escapeHtml(row.amount)}</p>
+        <p>${escapeHtml(row.detail)}</p>
+        <small>${escapeHtml(action)}</small>
+      </a>
+    `;
+  }).join("");
 }
 
 function renderTxMap(node, { funding, deposit, secondDeposit, payout }) {

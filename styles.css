@@ -1927,8 +1927,7 @@ progress::-moz-progress-bar {
     linear-gradient(145deg, rgba(118, 167, 158, .13), rgba(15, 22, 25, .95));
 }
 
-.product-grid a::after,
-.journey-grid a::before {
+.product-grid a::after {
   content: "Open";
   position: absolute;
   right: 14px;
@@ -2459,33 +2458,28 @@ progress::-moz-progress-bar {
 
 .activity-card {
   position: relative;
+  display: block;
   min-height: 150px;
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 18px;
   overflow: visible;
   background: var(--surface-soft);
+  color: var(--text);
+  text-decoration: none;
 }
 
 .activity-card + .activity-card::after {
   content: none;
-  position: absolute;
-  left: -18px;
-  top: 50%;
-  width: 24px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(118, 167, 158, .75));
 }
 
 .activity-card::before {
   content: none;
-  position: absolute;
-  inset: auto -20% -40% 25%;
-  height: 110px;
-  border-radius: 999px;
-  filter: blur(4px);
-  background: rgba(118, 167, 158, .18);
-  transform: rotate(-8deg);
+}
+
+.activity-card:hover {
+  border-color: var(--accent);
+  text-decoration: none;
 }
 
 .activity-card span {
@@ -2510,6 +2504,14 @@ progress::-moz-progress-bar {
 
 .activity-card p {
   position: relative;
+}
+
+.activity-card small {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .activity-card a,
