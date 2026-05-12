@@ -2,7 +2,7 @@
   "schema": "tn12-self-serve-lane-runbook/v1",
   "network": "kaspa-testnet-12",
   "status": "self-serve-lane-runbook-ready",
-  "generatedAt": "2026-05-12T18:52:44.946Z",
+  "generatedAt": "2026-05-12T19:04:46.998Z",
   "summary": {
     "lanes": 12,
     "playNow": 4,
@@ -27,7 +27,7 @@
       "availableNow": [
         "6 fresh role wallets",
         "7 guided actions",
-        "37 accepted transfer rows"
+        "40 accepted transfer rows"
       ],
       "runSteps": [
         "Open Live Play.",
@@ -236,7 +236,7 @@
       "uiTarget": "lab.html#defi-backlog",
       "availableNow": [
         "6 of 10 lab rails have repo evidence",
-        "11 pool deposits and 4 payouts accepted",
+        "13 pool deposits and 5 payouts accepted",
         "replay guards and blocked custody rows"
       ],
       "runSteps": [

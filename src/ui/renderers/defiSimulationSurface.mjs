@@ -42,7 +42,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       {
         status: acceptedActivity.status,
         title: "Accepted TN12 activity ledger",
-        body: `${acceptedActivity.summary.acceptedTransferRows} accepted transfer rows; ${acceptedActivity.summary.poolDeposits} pool deposits; ${acceptedActivity.summary.poolPayouts} pool payouts; pool net ${acceptedActivity.summary.poolNetTkas} TKAS.`,
+        body: `${acceptedActivity.summary.acceptedTransferRows} accepted TN12 transfer rows; ${acceptedActivity.summary.poolDeposits} pool deposits; ${acceptedActivity.summary.poolPayouts} pool payouts; replay-derived pool net ${acceptedActivity.summary.poolNetTkas} TKAS.`,
         foot: "npm run defi:accepted-activity"
       },
       {

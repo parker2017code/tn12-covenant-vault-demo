@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-scenario-reducer/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:51:14.919Z",
+  "generatedAt": "2026-05-12T19:04:44.821Z",
   "status": "scenario-reducer-ready-not-custody",
   "enforcement": "INDEXER_DERIVED",
   "summary": {
@@ -143,8 +143,8 @@
       {
         "address": "kaspatest:qp4ku339nccxkvjxxstkhqwayxe9qr4v9wvzmlzawa7q5xs7nhakzsqam2rhj",
         "kind": "accepted-transfer-net-balance",
-        "balanceSompi": "3375000000",
-        "balanceTkas": "33.75",
+        "balanceSompi": "2125000000",
+        "balanceTkas": "21.25",
         "promotionState": "review-state-promoted",
         "custodyAction": false,
         "problems": []
@@ -253,8 +253,8 @@
       {
         "address": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
         "kind": "accepted-transfer-net-balance",
-        "balanceSompi": "2112500000",
-        "balanceTkas": "21.125",
+        "balanceSompi": "1862500000",
+        "balanceTkas": "18.625",
         "promotionState": "review-state-promoted",
         "custodyAction": false,
         "problems": []
@@ -262,8 +262,8 @@
       {
         "address": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
         "kind": "accepted-transfer-net-balance",
-        "balanceSompi": "25050000000",
-        "balanceTkas": "250.5",
+        "balanceSompi": "26550000000",
+        "balanceTkas": "265.5",
         "promotionState": "review-state-promoted",
         "custodyAction": false,
         "problems": []

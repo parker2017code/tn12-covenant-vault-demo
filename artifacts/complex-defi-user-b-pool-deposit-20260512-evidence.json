@@ -1,0 +1,35 @@
+{
+  "schema": "tn12-p2pk-transfer-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "verifiedAt": "2026-05-12T19:03:53.909Z",
+  "status": "accepted-transfer-matched",
+  "txid": "dc731166e89a554af3ace8bedb07f79e11d1e81665dbf74930051e0e645f6b77",
+  "accepted": true,
+  "acceptingBlockBlueScore": 9882428,
+  "acceptingBlockTime": 1778612615451,
+  "source": {
+    "address": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
+    "txid": "b7cdbb3de4b3e50717e337de33965ddfc680b18a5fd04ca77466a09bf5452116",
+    "outputIndex": 3,
+    "amountTkas": 21.125
+  },
+  "payment": {
+    "to": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+    "amountTkas": "8.25",
+    "amountSompi": "825000000",
+    "changeTkas": "12.87495",
+    "changeSompi": "1287495000",
+    "minerFeeSompi": "5000"
+  },
+  "output": {
+    "observed": {
+      "index": 0,
+      "amountSompi": "825000000",
+      "address": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+      "type": "pubkey"
+    },
+    "amountMatches": true,
+    "addressMatches": true
+  },
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/dc731166e89a554af3ace8bedb07f79e11d1e81665dbf74930051e0e645f6b77"
+}

@@ -10,7 +10,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 - Seven role-separated positive paths accepted on TN12.
 - Batch-assurance pledge outputs and 3-pledge release accepted on TN12.
 - 40 payload events accepted on TN12, including seven DeFi v1 receipts, one scheduler-intent receipt, three scheduler-bid receipts, one scheduler-execution receipt, one scheduler-covenant-binding receipt, and one agent release wallet-review event.
-- 31 accepted local-key DeFi custody/activity transfer rows are recorded across user funding, pool deposits, pool payouts, fresh playground role funding, and scheduler execution payout.
+- 40 accepted local-key TN12 transfer rows are recorded across user funding, pool deposits, pool payouts, fresh playground role funding, and scheduler execution payout.
 - One scheduler-intent payload, three scheduler-bid receipts, one scheduler-execution receipt, one scheduler-covenant-binding receipt, and one local-key payout are accepted on TN12 and reduced as executed trigger state.
 - Adversarial rejection evidence exists for wrong signer, wrong selector, wrong output lock, wrong amount, and single-party cancel.
 - Local gates cover proof evidence, payload matching, wallet review, signer-result validation, replay rows, duplicate/stale receipt guards, DeFi scenario/reducer/advanced simulation, artifact manifest guards, and UI smoke.
@@ -26,6 +26,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Checkpoint index | `artifacts/checkpointed-accepted-index.json` |
 | DeFi receipt guard | `artifacts/defi-receipt-replay-guard.json` |
 | DeFi accepted activity ledger | `artifacts/defi-accepted-activity-ledger.json` |
+| Covenant feature coverage | `docs/COVENANT_FEATURE_COVERAGE.md` |
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | Scheduler covenant binding | `artifacts/scheduler-covenant-binding.json` |
 | DeFi lab checks | `artifacts/full-defi-benchmark.json` |

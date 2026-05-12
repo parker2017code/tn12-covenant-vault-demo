@@ -1,16 +1,16 @@
 {
   "schema": "tn12-defi-accepted-activity-ledger/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:51:14.566Z",
+  "generatedAt": "2026-05-12T19:04:44.511Z",
   "status": "accepted-activity-ledger-ready",
   "enforcement": "LOCAL_KEY_CUSTODY_TEST",
   "summary": {
     "acceptedReceiptRows": 7,
-    "acceptedTransferRows": 37,
-    "poolDeposits": 11,
-    "poolPayouts": 4,
+    "acceptedTransferRows": 40,
+    "poolDeposits": 13,
+    "poolPayouts": 5,
     "participantAddresses": 28,
-    "poolNetTkas": "311.5",
+    "poolNetTkas": "326.5",
     "liveProductClaims": 0,
     "externalSignerClaims": 0,
     "autonomousCustodyClaims": 0,
@@ -24,9 +24,9 @@
       "kaspatest:qq6a0p9z2njruwwudfze42nvvfkemne5nu2andt9zdl3cslrvjukuj7edk9vn",
       "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl"
     ],
-    "depositsTkas": "327.5",
-    "payoutsTkas": "16",
-    "netTkas": "311.5"
+    "depositsTkas": "348.25",
+    "payoutsTkas": "21.75",
+    "netTkas": "326.5"
   },
   "receiptRows": [
     {
@@ -551,6 +551,45 @@
       "acceptingBlockBlueScore": 9874410
     },
     {
+      "path": "artifacts/complex-defi-user-a-pool-deposit-20260512-evidence.json",
+      "label": "complex-defi-user-a-pool-deposit-20260512-evidence",
+      "kind": "pool-deposit",
+      "txid": "3626169a0f3fdb575ecf3e9545702ecea8475035cf56642663b019ae6c3e6520",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qp4ku339nccxkvjxxstkhqwayxe9qr4v9wvzmlzawa7q5xs7nhakzsqam2rhj",
+      "to": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+      "amountTkas": "12.5",
+      "amountSompi": "1250000000",
+      "acceptingBlockBlueScore": 9882421
+    },
+    {
+      "path": "artifacts/complex-defi-user-b-pool-deposit-20260512-evidence.json",
+      "label": "complex-defi-user-b-pool-deposit-20260512-evidence",
+      "kind": "pool-deposit",
+      "txid": "dc731166e89a554af3ace8bedb07f79e11d1e81665dbf74930051e0e645f6b77",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
+      "to": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+      "amountTkas": "8.25",
+      "amountSompi": "825000000",
+      "acceptingBlockBlueScore": 9882428
+    },
+    {
+      "path": "artifacts/complex-defi-pool-user-b-payout-20260512-evidence.json",
+      "label": "complex-defi-pool-user-b-payout-20260512-evidence",
+      "kind": "pool-payout",
+      "txid": "2f6de3c06f5e228ad4b950c1a2e2598fd892d6b9802a70e3344ea7231d6c2c59",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+      "to": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
+      "amountTkas": "5.75",
+      "amountSompi": "575000000",
+      "acceptingBlockBlueScore": 9882435
+    },
+    {
       "path": "artifacts/playground-user-a-pool-deposit-evidence.json",
       "label": "playground-user-a-pool-deposit-evidence",
       "kind": "pool-deposit",
@@ -708,18 +747,18 @@
     },
     {
       "address": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
-      "netTkas": "250.5",
-      "netSompi": "25050000000"
+      "netTkas": "265.5",
+      "netSompi": "26550000000"
     },
     {
       "address": "kaspatest:qp4ku339nccxkvjxxstkhqwayxe9qr4v9wvzmlzawa7q5xs7nhakzsqam2rhj",
-      "netTkas": "33.75",
-      "netSompi": "3375000000"
+      "netTkas": "21.25",
+      "netSompi": "2125000000"
     },
     {
       "address": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
-      "netTkas": "21.125",
-      "netSompi": "2112500000"
+      "netTkas": "18.625",
+      "netSompi": "1862500000"
     },
     {
       "address": "kaspatest:qzuvk4vc46ukhz70h0t87h53mmyfgtcl95z7wnrg55xj28s6339vjxj7l0lut",

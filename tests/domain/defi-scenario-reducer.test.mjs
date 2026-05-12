@@ -115,12 +115,16 @@ assert.equal(playgroundUserA.balanceTkas, "7");
 assert.equal(playgroundUserA.promotionState, "review-state-promoted");
 
 const complexPoolBalance = reducer.state.balances.find((row) => row.address === "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl");
-assert.equal(complexPoolBalance.balanceTkas, "250.5");
+assert.equal(complexPoolBalance.balanceTkas, "265.5");
 assert.equal(complexPoolBalance.promotionState, "review-state-promoted");
 
 const complexUserA = reducer.state.balances.find((row) => row.address === "kaspatest:qp4ku339nccxkvjxxstkhqwayxe9qr4v9wvzmlzawa7q5xs7nhakzsqam2rhj");
-assert.equal(complexUserA.balanceTkas, "33.75");
+assert.equal(complexUserA.balanceTkas, "21.25");
 assert.equal(complexUserA.promotionState, "review-state-promoted");
+
+const complexUserB = reducer.state.balances.find((row) => row.address === "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5");
+assert.equal(complexUserB.balanceTkas, "18.625");
+assert.equal(complexUserB.promotionState, "review-state-promoted");
 
 assert.ok(reducer.negativeRows.some((row) => row.kind === "duplicate-candidate" && row.status === "blocked"));
 assert.ok(reducer.negativeRows.some((row) => row.kind === "missing-reference-candidate" && row.status === "blocked"));

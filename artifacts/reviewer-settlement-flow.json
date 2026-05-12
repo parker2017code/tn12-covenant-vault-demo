@@ -1,7 +1,7 @@
 {
   "schema": "tn12-reviewer-settlement-flow/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:51:15.723Z",
+  "generatedAt": "2026-05-12T19:04:45.536Z",
   "status": "reviewer-settlement-flow-ready",
   "summary": {
     "freshFundingAccepted": true,

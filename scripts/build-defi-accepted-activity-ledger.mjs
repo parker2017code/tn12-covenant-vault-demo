@@ -23,6 +23,9 @@ const transferPaths = [
   "artifacts/playground-funding-evidence.json",
   "artifacts/playground-funding-20260512-evidence.json",
   "artifacts/complex-defi-multi-wallet-20260512-evidence.json",
+  "artifacts/complex-defi-user-a-pool-deposit-20260512-evidence.json",
+  "artifacts/complex-defi-user-b-pool-deposit-20260512-evidence.json",
+  "artifacts/complex-defi-pool-user-b-payout-20260512-evidence.json",
   "artifacts/playground-user-a-pool-deposit-evidence.json",
   "artifacts/playground-user-b-pool-deposit-evidence.json",
   "artifacts/playground-pool-user-b-payout-evidence.json"

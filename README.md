@@ -18,6 +18,7 @@ Start here:
 - `docs/COMMAND_RUNBOOK.md`: command prerequisites, safety classes, and fresh playground route.
 - `docs/CLI_FROM_ZERO.md`: blank-terminal path from install to TN12 playground, wallet drafts, submit boundaries, and DeFi-style replay.
 - `docs/PROOF_CORE_RELEASE_CANDIDATE.md`: pinned proof-core release-candidate note with txids, counts, hashes, commands, and boundaries.
+- `docs/COVENANT_FEATURE_COVERAGE.md`: covenant feature coverage: tested, local-only, missing, and out of scope.
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
 - `docs/COPY_CLEANUP_PLAN.md`: public wording standard for pages and handoff docs.
@@ -38,7 +39,7 @@ Older session/status reports are historical notes under `docs/archive/`, not can
 | Role-separated positive paths, all 7 | `TN12_ACCEPTED` | `artifacts/role-separated-proof-evidence.json` |
 | Batch-assurance 3-pledge release | `TN12_ACCEPTED` | `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801` |
 | 40 payload events, including 7 DeFi v1 receipts, 1 scheduler-intent receipt, 3 scheduler-bid receipts, 1 scheduler-execution receipt, 1 scheduler-covenant-binding receipt, and 1 agent release wallet-review event | `TN12_ACCEPTED` | `fixtures/PayloadEventEvidence.json` |
-| 31 accepted local-key DeFi custody/activity transfer rows across funded users, pool deposits, pool payouts, playground roles, fresh role funding, and scheduler execution payout | `LOCAL_KEY_CUSTODY_TEST` | `artifacts/defi-accepted-activity-ledger.json` |
+| 40 accepted local-key TN12 transfer rows across funded users, pool deposits, pool payouts, playground roles, fresh role funding, and scheduler execution payout | `LOCAL_KEY_CUSTODY_TEST` | `artifacts/defi-accepted-activity-ledger.json` |
 | 1 scheduler-intent payload, 3 scheduler-bid receipts, 1 scheduler-execution receipt, and 1 local-key payout reduced as executed trigger state | `TN12_ACCEPTED` / `INDEXER_DERIVED` / `LOCAL_KEY_CUSTODY_TEST` | `artifacts/scheduler-intent-registry.json` |
 | 1 scheduler-covenant-binding receipt references an accepted vault recovery proof row | `TN12_ACCEPTED` / `INDEXER_DERIVED` / `SCRIPT_ENFORCED` reference | `artifacts/scheduler-covenant-binding.json` |
 | Adversarial wrong-signer/selector/output/amount/cancel cases | `TN12_REJECTED` | `artifacts/adversarial/adversarial-summary.json` |

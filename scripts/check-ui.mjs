@@ -210,7 +210,7 @@ async function checkRenderedPages(url) {
     assert.match(resultsText, /x402-style HTTP payment adapter/);
     assert.match(resultsText, /future adapter/i);
     assert.match(resultsText, /Accepted transfers/i);
-    assert.match(resultsText, /37/);
+    assert.match(resultsText, /40/);
     assert.doesNotMatch(resultsText, /TN12_ACCEPTED|LOCAL_KEY_CUSTODY_TEST|INDEXER_DERIVED|MAINNET_BLOCKED|PLANNER_ONLY/);
     assert.doesNotMatch(resultsText, /External signer|autonomous pool custody|production custody readiness/i);
     assert.doesNotMatch(resultsText, /Draft post|X post/);
