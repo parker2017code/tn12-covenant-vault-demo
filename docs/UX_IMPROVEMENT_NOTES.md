@@ -17,8 +17,10 @@ This is an internal working note for product cleanup. Keep the public site focus
 - For broad cleanup, use read-only parallel agents to search faster: clickable-looking elements, cringey copy, mobile layout, source/reference issues, command issues, and strong-site patterns. The main agent owns edits and checks.
 - Audit words like accepted evidence, indexer-derived, local-key custody, external signer, durable replay, and promotion guard are correct but too dense for the default path.
 - Generated artifact sections should be collapsed by default and renamed by user job, not internal script role.
+- Public planning sections should be collapsed by default. Keep active build plans and artifact work orders available in Lab Tools, not exposed as first-level proof content.
 - Package scripts, large `app.js`, large `scripts/check.mjs`, and artifact count make the repo hard to review. Keep splitting renderers and checks.
 - Clickable affordances must be honest: if a card reads like an action, make it a link or change the styling/copy.
+- Timeline/action cards should link to explorer evidence or an in-page destination. The playground activity cards now open txids or replay state.
 - Proof-core shorthand such as `7 core + 2 auction + 7 role-separated + 53 indexed records` is useful for reviewers but not meaningful as the main public proof summary.
 - Repeated `Technical:` drawer labels make the page feel like an audit console. Use fewer, more natural labels: Proof details, Replay details, Wallet handoff, Build lab.
 - The results page currently has the strongest public entry: it starts with concrete activity and should be treated as the default non-builder path.
@@ -96,6 +98,7 @@ This is an internal working note for product cleanup. Keep the public site focus
    - `.local` testnet wallet material required only for local signing flows.
    - `KASPA_WASM_MODULE`, `KASPA_WRPC_URL`, encoding, network id, and submit shape required for payload-preserving submit flows.
    - Explorer verification required before app state promotion.
+   - `playground:funding-draft` funds fresh role wallets from a separate source wallet/outpoint; it does not spend from the new role wallets.
 5. Keep public pages minimal by default. Long operator commands, artifact inventories, old planning notes, and generated matrices belong in docs/lab drawers.
 6. Run the public framing pass: money-first, covenants as constrained spend rules, based apps as app state anchored to Kaspa evidence, and vProgs as later architecture rather than the default product claim.
 7. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
