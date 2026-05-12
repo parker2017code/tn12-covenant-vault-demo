@@ -371,6 +371,11 @@ async function renderProofTransactions() {
   if (!proofListNode) return;
 
   try {
+    if (proofListNode.dataset.static === "true") {
+      verifyProofTransactions({ forceRemote: false });
+      return;
+    }
+
     const data = await fetchJson("fixtures/AcceptedProofTransactions.json");
     proofListNode.innerHTML = "";
 
@@ -911,12 +916,19 @@ async function verifyProofTransactions({ forceRemote }) {
   if (!proofListNode) return;
 
   try {
-    const data = await fetchJson("fixtures/AcceptedProofTransactions.json");
+    const [baseProofs, roleProofs] = await Promise.all([
+      fetchJson("fixtures/AcceptedProofTransactions.json"),
+      fetchJson("fixtures/RoleSeparatedAcceptedProofTransactions.json").catch(() => ({ transactions: [] }))
+    ]);
+    const transactions = [
+      ...(baseProofs.transactions || []),
+      ...(roleProofs.transactions || [])
+    ];
     if (proofStatusNode) {
       proofStatusNode.textContent = forceRemote ? "Checking TN12 API..." : "Checking accepted status...";
     }
 
-    for (const proof of data.transactions) {
+    for (const proof of transactions) {
       const status = proofListNode.querySelector(`[data-proof-status="${cssEscape(proof.txid)}"]`);
       if (status) status.textContent = "Checking...";
       const tx = await fetchTn12Transaction(proof.txid);

@@ -188,9 +188,13 @@ async function checkRenderedPages(url) {
     assert.deepEqual(claimLinkAffordances.filter((item) => !item.href), [], "claim-grid links need href targets");
     assert.deepEqual(claimLinkAffordances.filter((item) => !/Open/.test(item.after)), [], "claim-grid links need visible Open affordance");
     await page.goto(`${url}lab.html`, { waitUntil: "networkidle" });
-    assert.equal(await page.locator("#product-map .product-grid a").count(), 13);
+    assert.equal(await page.locator("#product-map .product-group").count(), 3);
+    assert.equal(await page.locator("#product-map .product-group a").count(), 15);
     const productMapText = await page.locator("#product-map").innerText();
     assert.match(productMapText, /What people can try/);
+    assert.match(productMapText, /Proof products/i);
+    assert.match(productMapText, /Product ideas/i);
+    assert.match(productMapText, /Mainnet blockers/i);
     assert.match(productMapText, /Use your own wallet/);
     assert.match(productMapText, /Get and verify tKAS/);
     assert.match(productMapText, /Scheduler workbench/);
@@ -250,7 +254,7 @@ async function checkRenderedPages(url) {
 
 async function waitForDynamicContent(page, path) {
   const selectors = {
-    "index.html": ["#proof-list article", "#submit-summary article"],
+    "index.html": ["#proof-list tr[data-proof-row], #proof-list article", "#submit-summary article"],
     "lab.html": ["#self-serve-lanes article", "#invoice-summary article", "#submit-summary article"],
     "results.html": ["#results-summary article", "#results-feed article"],
     "playground.html": ["#playground-quickstart a", "#playground-session article"],

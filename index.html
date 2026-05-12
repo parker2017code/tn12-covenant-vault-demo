@@ -37,21 +37,68 @@
     <section class="hero">
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
-        <h2>What was proven on TN12.</h2>
-        <p>Start with the public run: money moved, proof spends accepted, payload receipts landed, and replay state was derived from txids. Deeper checks stay below the fold.</p>
+        <h2>Money moved. Proofs accepted. State replayed.</h2>
+        <p>Public TN12 txids back the demo state. Start with the accepted proof rows, then open product ideas or mainnet blockers only when you need that layer.</p>
       </div>
       <aside class="facts">
         <span>Short version</span>
-        <strong>Money moved. Proofs accepted. State replayed.</strong>
+        <strong>16 proof txs. 40 payload events. 53 checkpointed records.</strong>
         <p>Public TN12 txids back the demo state instead of a private-only database.</p>
         <p><strong>No audit. No mainnet funds.</strong> This is a testnet evidence lab, not a custody product.</p>
       </aside>
     </section>
 
+    <section id="proofs" class="panel proofs">
+      <div class="section-title">
+        <p class="eyebrow">Accepted TN12 proofs</p>
+        <h2>Vault, assurance, escrow, role, and auction paths.</h2>
+      </div>
+      <div class="proof-toolbar">
+        <button type="button" id="refresh-proofs">Refresh from TN12 API</button>
+        <span id="proof-status">Loaded from inline txid table.</span>
+      </div>
+      <div class="status-legend" aria-label="Proof status legend">
+        <span><strong>Fixture loaded</strong> Inline txid from repo fixture.</span>
+        <span><strong>Accepted</strong> TN12 API accepted, amount, and destination match.</span>
+        <span><strong>Mismatch</strong> Inspect API response before using the row.</span>
+      </div>
+      <div id="proof-list" class="proof-list proof-table-wrap" data-static="true" aria-live="polite">
+        <table class="proof-table">
+          <thead>
+            <tr>
+              <th>Path</th>
+              <th>Script route</th>
+              <th>Txid</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-proof-row><td>Vault recovery</td><td>vault / recover</td><td><a href="https://tn12.kaspa.stream/transactions/b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391" target="_blank" rel="noreferrer"><code>b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391</code></a></td><td data-proof-status="b76cc933b97a0bdb901ffae27a517a52577c27297c70be343dc6cab734ba1391">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Vault delayed withdrawal</td><td>vault / withdraw</td><td><a href="https://tn12.kaspa.stream/transactions/9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710" target="_blank" rel="noreferrer"><code>9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710</code></a></td><td data-proof-status="9bc524406f3d311d16e5c8c115a9d8f044ab83659a24c744b152a90f8b3aa710">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Assurance release</td><td>assurance / release</td><td><a href="https://tn12.kaspa.stream/transactions/80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f" target="_blank" rel="noreferrer"><code>80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f</code></a></td><td data-proof-status="80be77c594bf73dc9a4cb5d3c65152095df6cdfc869e95ea7b94d96262e3fd2f">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Assurance refund</td><td>assurance / refund</td><td><a href="https://tn12.kaspa.stream/transactions/faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61" target="_blank" rel="noreferrer"><code>faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61</code></a></td><td data-proof-status="faacfee4c4e790e4f36870f78cdb0d151b5a8c5c9356bf55269a78631c4c4d61">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Escrow release</td><td>escrow / release</td><td><a href="https://tn12.kaspa.stream/transactions/825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d" target="_blank" rel="noreferrer"><code>825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d</code></a></td><td data-proof-status="825a9b9f7194d7741136b4be9817d052c9055893e007ef027b92b03d6e425c5d">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Escrow DAA refund</td><td>escrow / refund</td><td><a href="https://tn12.kaspa.stream/transactions/6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d" target="_blank" rel="noreferrer"><code>6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d</code></a></td><td data-proof-status="6731423fa5b600a7ac14ef83aa13a3acc810fdec29f91c02262b67c88eec5f4d">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Escrow mutual cancel</td><td>escrow / cancel</td><td><a href="https://tn12.kaspa.stream/transactions/14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c" target="_blank" rel="noreferrer"><code>14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c</code></a></td><td data-proof-status="14d43df2ef63dbc42c8b9ee8362894cb16225f8001234a67b63b127c0e8d289c">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Auction settlement funding</td><td>auction / funding</td><td><a href="https://tn12.kaspa.stream/transactions/6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea" target="_blank" rel="noreferrer"><code>6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea</code></a></td><td data-proof-status="6d663293ccbebddddf81e14146c13ac4039fe3047d6d429043d57d5c9717fbea">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Auction settlement</td><td>auction / settle</td><td><a href="https://tn12.kaspa.stream/transactions/523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236" target="_blank" rel="noreferrer"><code>523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236</code></a></td><td data-proof-status="523ce10f82f353fc9e9a1c5ac330efde376024491e5baf0eec4f9b0ec6faa236">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Role-separated vault recovery</td><td>role-vault / recover</td><td><a href="https://tn12.kaspa.stream/transactions/dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0" target="_blank" rel="noreferrer"><code>dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0</code></a></td><td data-proof-status="dbe2c3ea5cf7e93031db468a8906be16fdc1a2e4b6382d14d7d01e67e71274e0">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Role-separated assurance release</td><td>role-assurance / release</td><td><a href="https://tn12.kaspa.stream/transactions/fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32" target="_blank" rel="noreferrer"><code>fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32</code></a></td><td data-proof-status="fe2fba8819f3022f62892215b1bc4316377ffb7e54f833549d30bd247d8fda32">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Role-separated escrow release</td><td>role-escrow / release</td><td><a href="https://tn12.kaspa.stream/transactions/4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382" target="_blank" rel="noreferrer"><code>4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382</code></a></td><td data-proof-status="4f882d934700667819a4c7ad84f51a63e9db4e7b8989bfd65089410051f47382">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Role-separated escrow cancel</td><td>role-escrow / cancel</td><td><a href="https://tn12.kaspa.stream/transactions/677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa" target="_blank" rel="noreferrer"><code>677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa</code></a></td><td data-proof-status="677b9c3925c3e9fa6b8c62a3db5c44587a21b2951006395f827574dff7c7bdfa">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Role-separated DAA vault withdrawal</td><td>role-vault / withdraw</td><td><a href="https://tn12.kaspa.stream/transactions/cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11" target="_blank" rel="noreferrer"><code>cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11</code></a></td><td data-proof-status="cb7da9329250a82bfbe53ce6a25855402de1dc9fdc5d856daa25576088b90b11">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Role-separated DAA assurance refund</td><td>role-assurance / refund</td><td><a href="https://tn12.kaspa.stream/transactions/a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa" target="_blank" rel="noreferrer"><code>a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa</code></a></td><td data-proof-status="a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa">Fixture loaded</td></tr>
+            <tr data-proof-row><td>Role-separated DAA escrow refund</td><td>role-escrow / refund</td><td><a href="https://tn12.kaspa.stream/transactions/7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0" target="_blank" rel="noreferrer"><code>7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0</code></a></td><td data-proof-status="7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0">Fixture loaded</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre>npm run proof:verify</pre>
+    </section>
+
     <section class="panel">
       <div class="section-title">
-        <p class="eyebrow">Start here</p>
-        <h2>Three useful paths.</h2>
+        <p class="eyebrow">Routes</p>
+        <h2>Proof, product ideas, blockers.</h2>
       </div>
       <div class="journey-grid">
         <a href="results.html">
@@ -72,11 +119,10 @@
       </div>
     </section>
 
-    <details id="core-notes" class="panel section-drawer">
-      <summary>Proof counts and commands</summary>
+    <section id="core-notes" class="panel">
       <div class="section-title">
         <p class="eyebrow">Proof counts</p>
-        <h2>Open this when you want the exact checks.</h2>
+        <h2>Proof counts and commands.</h2>
       </div>
       <div class="stat-grid">
         <article>
@@ -96,7 +142,7 @@
         </article>
       </div>
       <p class="note">Read <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
-    </details>
+    </section>
 
     <details id="check-path" class="panel build-status section-drawer">
       <summary>Checks and docs</summary>
@@ -131,20 +177,6 @@
         </div>
         <p class="note">Proof details live in <a href="docs/AUDIT_MAP.md"><code>docs/AUDIT_MAP.md</code></a>. Script groups live in <a href="docs/SCRIPT_INDEX.md"><code>docs/SCRIPT_INDEX.md</code></a>.</p>
       </details>
-    </details>
-
-    <details id="proofs" class="panel proofs section-drawer">
-      <summary>Open accepted proof txids</summary>
-      <div class="section-title">
-        <p class="eyebrow">Accepted TN12 proofs</p>
-        <h2>Vault, assurance, escrow, role, and auction paths verified on testnet.</h2>
-      </div>
-      <div class="proof-toolbar">
-        <button type="button" id="refresh-proofs">Refresh from TN12 API</button>
-        <span id="proof-status">Loaded from local fixture.</span>
-      </div>
-      <div id="proof-list" class="proof-list" aria-live="polite"></div>
-      <pre>npm run proof:verify</pre>
     </details>
 
     <details id="indexer" class="panel indexer section-drawer">

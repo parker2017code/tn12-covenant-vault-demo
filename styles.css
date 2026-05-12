@@ -797,11 +797,102 @@ progress::-moz-progress-bar {
   font-size: 14px;
 }
 
+.status-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.status-legend span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--panel-strong) 72%, transparent);
+  font-size: 12px;
+}
+
+.status-legend strong {
+  margin-right: 4px;
+  color: var(--text);
+}
+
 .proof-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 16px;
+}
+
+.proof-table-wrap {
+  display: block;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--panel-strong) 82%, transparent);
+}
+
+.proof-table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.proof-table th,
+.proof-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.proof-table th {
+  color: var(--muted);
+  background: color-mix(in srgb, var(--bg) 48%, transparent);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.proof-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.proof-table code {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.proof-table th:nth-child(1),
+.proof-table td:nth-child(1) {
+  width: 24%;
+}
+
+.proof-table th:nth-child(2),
+.proof-table td:nth-child(2) {
+  width: 17%;
+}
+
+.proof-table th:nth-child(3),
+.proof-table td:nth-child(3) {
+  width: 42%;
+}
+
+.proof-table th:nth-child(4),
+.proof-table td:nth-child(4) {
+  width: 17%;
+}
+
+.proof-table .ok {
+  color: var(--accent);
+}
+
+.proof-table .bad {
+  color: var(--danger);
 }
 
 .indexer-summary {

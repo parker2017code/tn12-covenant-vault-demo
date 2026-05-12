@@ -56,20 +56,43 @@
         <p>Start with accepted TN12 evidence, then separate wallet signing, covenant spend rules, and app-state replay. The product stack is money movement first, covenant spend rules second, and app-specific state only where the product needs richer shared state.</p>
         <p class="note"><a href="docs/PRODUCT_EXECUTION_PLAN.md">Read the product execution plan</a></p>
       </div>
-      <div class="product-grid">
-        <a href="playground.html"><span>accepted run</span><strong>Live TN12 money flow</strong><p>Role wallets, deposits, payout, replay, copyable addresses.</p><small>Accepted TN12 transfers</small></a>
-        <a href="#invoices"><span>accepted receipts</span><strong>Payload receipt invoices</strong><p>Accepted app receipts become invoice state.</p><small>Needs payload-preserving submit route</small></a>
-        <a href="#designer"><span>design now</span><strong>Vault policy</strong><p>Owner, recovery, delay, caps, guardian policy fields.</p><small>Guardian policy needs a guardian script</small></a>
-        <a href="#assurance"><span>proof path</span><strong>Assurance funding</strong><p>Pledge, release/refund, batch campaign state.</p><small>Accepted pledge evidence plus settlement review</small></a>
-        <a href="#escrow"><span>proof path</span><strong>Escrow / freelance</strong><p>Buyer fund, seller release, timeout refund, mutual cancel.</p><small>Accepted TN12 proof paths</small></a>
-        <a href="#access-passes"><span>issuer state</span><strong>Access passes</strong><p>Tickets, coupons, memberships with issuer review.</p><small>Issuer/indexer state</small></a>
-        <a href="#auction-intents"><span>accepted bids</span><strong>Auction and intents</strong><p>Accepted bids, winner selection, refund planning.</p><small>Settlement spends still need review</small></a>
-        <a href="#defi-backlog"><span>lab status</span><strong>DeFi checks</strong><p>Accepted receipts, pool transfers, reducers, and spend checks.</p><small>Open DeFi checks</small></a>
-        <a href="#scheduler-workbench"><span>app jobs</span><strong>Scheduler workbench</strong><p>Trigger, bid, execution, solver, and settlement jobs over accepted evidence.</p><small>App job routing over TN12 evidence</small></a>
-        <a href="#coordination"><span>model</span><strong>Coordination / Stag</strong><p>Transparent intents, packs, solver, settlement brief.</p><small>Public commitment model first</small></a>
-        <a href="#agent-commitments"><span>wallet</span><strong>Agent commitments</strong><p>Task offers, proof rows, disputes, release/refund steps.</p><small>Wallet approval before payout</small></a>
-        <a href="#submit"><span>bring wallet</span><strong>Use your own wallet</strong><p>Review a request, sign outside the repo, validate return.</p><small>Keep keys in your wallet</small></a>
-        <a href="#funding"><span>start here</span><strong>Get and verify tKAS</strong><p>Use faucet, paste outpoint, verify amount and output index.</p><small>TN12 only</small></a>
+      <div class="product-grid product-lanes">
+        <article class="product-group">
+          <span>Proof products</span>
+          <strong>Accepted paths first</strong>
+          <p>Start with lanes that already have TN12 proof or payload evidence.</p>
+          <ul>
+            <li><a href="playground.html">Live TN12 money flow</a></li>
+            <li><a href="#invoices">Payload receipt invoices</a></li>
+            <li><a href="#designer">Vault policy</a></li>
+            <li><a href="#assurance">Assurance funding</a></li>
+            <li><a href="#escrow">Escrow / freelance</a></li>
+          </ul>
+        </article>
+        <article class="product-group">
+          <span>Product ideas</span>
+          <strong>Replay and review state</strong>
+          <p>These need wallet, custody, or app-state work before they become user products.</p>
+          <ul>
+            <li><a href="#access-passes">Access passes</a></li>
+            <li><a href="#auction-intents">Auction and intents</a></li>
+            <li><a href="#defi-backlog">DeFi checks</a></li>
+            <li><a href="#scheduler-workbench">Scheduler workbench</a></li>
+            <li><a href="#coordination">Coordination / Stag</a></li>
+            <li><a href="#agent-commitments">Agent commitments</a></li>
+          </ul>
+        </article>
+        <article class="product-group">
+          <span>Mainnet blockers</span>
+          <strong>Bring real users later</strong>
+          <p>The public demo stays testnet-only until signing, replay, and custody are hardened.</p>
+          <ul>
+            <li><a href="#submit">Use your own wallet</a></li>
+            <li><a href="#funding">Get and verify tKAS</a></li>
+            <li><a href="docs/COMMAND_RUNBOOK.md">Command runbook</a></li>
+            <li><a href="MAINNET_READINESS.md">Deployment blockers</a></li>
+          </ul>
+        </article>
       </div>
     </section>
 
