@@ -1,7 +1,7 @@
 {
   "schema": "tn12-full-defi-benchmark/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:26:22.070Z",
+  "generatedAt": "2026-05-12T18:52:44.027Z",
   "status": "full-defi-benchmark-review",
   "currentPercent": 60,
   "completedWeight": 60,
@@ -39,7 +39,7 @@
       "label": "LOCAL_KEY_CUSTODY_TEST",
       "weight": 10,
       "done": true,
-      "evidence": "31 accepted transfer rows cover deposits, payouts, and user roles."
+      "evidence": "37 accepted transfer rows cover deposits, payouts, and user roles."
     },
     {
       "id": "scheduler-intent-bid-execution",

@@ -1,13 +1,13 @@
 {
   "schema": "tn12-reviewer-settlement-flow/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:41:13.274Z",
+  "generatedAt": "2026-05-12T18:51:15.723Z",
   "status": "reviewer-settlement-flow-ready",
   "summary": {
     "freshFundingAccepted": true,
     "matchedFundingOutputs": 7,
     "acceptedSessionTxids": 4,
-    "replayedBalanceRows": 22,
+    "replayedBalanceRows": 28,
     "blockedNegativeRows": 6,
     "historicalStartHashGuarded": true,
     "userWalletRequired": false,

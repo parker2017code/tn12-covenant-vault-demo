@@ -1,7 +1,7 @@
 {
   "schema": "tn12-standards-adapter-backlog/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:26:23.482Z",
+  "generatedAt": "2026-05-12T18:52:44.473Z",
   "status": "standards-adapter-backlog-ready",
   "summary": {
     "lanes": 7,

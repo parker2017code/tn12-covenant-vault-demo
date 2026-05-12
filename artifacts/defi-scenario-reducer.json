@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-scenario-reducer/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:26:21.335Z",
+  "generatedAt": "2026-05-12T18:51:14.919Z",
   "status": "scenario-reducer-ready-not-custody",
   "enforcement": "INDEXER_DERIVED",
   "summary": {
@@ -11,7 +11,7 @@
     "swapRows": 2,
     "oracleRows": 2,
     "lendingRows": 3,
-    "balanceRows": 22,
+    "balanceRows": 28,
     "blockedBalanceRows": 4,
     "duplicateCandidateRows": 1,
     "missingCandidateRows": 1,
@@ -141,6 +141,15 @@
     ],
     "balances": [
       {
+        "address": "kaspatest:qp4ku339nccxkvjxxstkhqwayxe9qr4v9wvzmlzawa7q5xs7nhakzsqam2rhj",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "3375000000",
+        "balanceTkas": "33.75",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
         "address": "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg",
         "kind": "accepted-transfer-net-balance",
         "balanceSompi": "3000000000",
@@ -242,6 +251,24 @@
         "problems": []
       },
       {
+        "address": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "2112500000",
+        "balanceTkas": "21.125",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "25050000000",
+        "balanceTkas": "250.5",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
         "address": "kaspatest:qr438lwkelpagjy50h90qawhxpw2gjla55w4j0urf4yxmcs6m2jsjy830dqpa",
         "kind": "accepted-transfer-net-balance",
         "balanceSompi": "200000000",
@@ -291,13 +318,22 @@
       {
         "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
         "kind": "accepted-transfer-net-balance",
-        "balanceSompi": "-17600000000",
-        "balanceTkas": "-176",
+        "balanceSompi": "-50212500000",
+        "balanceTkas": "-502.125",
         "promotionState": "blocked-review",
         "custodyAction": false,
         "problems": [
           "negative net delta from selected transfer rows"
         ]
+      },
+      {
+        "address": "kaspatest:qrut0y2jqyh3pstct9lpcklzpejt22pn3vxsmrx26cpe0sdr2e3ac6muqh4pn",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "462500000",
+        "balanceTkas": "4.625",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
       },
       {
         "address": "kaspatest:qz2cgcm73ej5l72g9zxkk44rxz4au35fmrg49xdurnr9ca63dzyuu9fn3atvh",
@@ -342,6 +378,24 @@
         "kind": "accepted-transfer-net-balance",
         "balanceSompi": "1500000000",
         "balanceTkas": "15",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qzduxrf2fjf92d8ntj4wy9sj2dfjf3ndv27ztluhtfempk68sn7fgukrh3a87",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "725000000",
+        "balanceTkas": "7.25",
+        "promotionState": "review-state-promoted",
+        "custodyAction": false,
+        "problems": []
+      },
+      {
+        "address": "kaspatest:qzuvk4vc46ukhz70h0t87h53mmyfgtcl95z7wnrg55xj28s6339vjxj7l0lut",
+        "kind": "accepted-transfer-net-balance",
+        "balanceSompi": "887500000",
+        "balanceTkas": "8.875",
         "promotionState": "review-state-promoted",
         "custodyAction": false,
         "problems": []

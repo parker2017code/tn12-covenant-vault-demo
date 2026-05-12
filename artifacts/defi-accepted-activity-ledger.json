@@ -1,16 +1,16 @@
 {
   "schema": "tn12-defi-accepted-activity-ledger/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:24:54.148Z",
+  "generatedAt": "2026-05-12T18:51:14.566Z",
   "status": "accepted-activity-ledger-ready",
   "enforcement": "LOCAL_KEY_CUSTODY_TEST",
   "summary": {
     "acceptedReceiptRows": 7,
-    "acceptedTransferRows": 31,
-    "poolDeposits": 10,
+    "acceptedTransferRows": 37,
+    "poolDeposits": 11,
     "poolPayouts": 4,
-    "participantAddresses": 22,
-    "poolNetTkas": "61",
+    "participantAddresses": 28,
+    "poolNetTkas": "311.5",
     "liveProductClaims": 0,
     "externalSignerClaims": 0,
     "autonomousCustodyClaims": 0,
@@ -20,11 +20,13 @@
     "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
     "addresses": [
       "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
-      "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg"
+      "kaspatest:qpa69mcl63hffd8lral24ycnzt8spvdxr8wxvaxh0m52rhtzwfq5vythc2ehg",
+      "kaspatest:qq6a0p9z2njruwwudfze42nvvfkemne5nu2andt9zdl3cslrvjukuj7edk9vn",
+      "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl"
     ],
-    "depositsTkas": "77",
+    "depositsTkas": "327.5",
     "payoutsTkas": "16",
-    "netTkas": "61"
+    "netTkas": "311.5"
   },
   "receiptRows": [
     {
@@ -471,6 +473,84 @@
       "acceptingBlockBlueScore": 9855917
     },
     {
+      "path": "artifacts/complex-defi-multi-wallet-20260512-evidence.json",
+      "label": "complex-defi:operator",
+      "kind": "transfer",
+      "txid": "b7cdbb3de4b3e50717e337de33965ddfc680b18a5fd04ca77466a09bf5452116",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qzduxrf2fjf92d8ntj4wy9sj2dfjf3ndv27ztluhtfempk68sn7fgukrh3a87",
+      "amountTkas": "7.25",
+      "amountSompi": "725000000",
+      "acceptingBlockBlueScore": 9874410
+    },
+    {
+      "path": "artifacts/complex-defi-multi-wallet-20260512-evidence.json",
+      "label": "complex-defi:pool",
+      "kind": "pool-deposit",
+      "txid": "b7cdbb3de4b3e50717e337de33965ddfc680b18a5fd04ca77466a09bf5452116",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+      "amountTkas": "250.5",
+      "amountSompi": "25050000000",
+      "acceptingBlockBlueScore": 9874410
+    },
+    {
+      "path": "artifacts/complex-defi-multi-wallet-20260512-evidence.json",
+      "label": "complex-defi:user-a",
+      "kind": "transfer",
+      "txid": "b7cdbb3de4b3e50717e337de33965ddfc680b18a5fd04ca77466a09bf5452116",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qp4ku339nccxkvjxxstkhqwayxe9qr4v9wvzmlzawa7q5xs7nhakzsqam2rhj",
+      "amountTkas": "33.75",
+      "amountSompi": "3375000000",
+      "acceptingBlockBlueScore": 9874410
+    },
+    {
+      "path": "artifacts/complex-defi-multi-wallet-20260512-evidence.json",
+      "label": "complex-defi:user-b",
+      "kind": "transfer",
+      "txid": "b7cdbb3de4b3e50717e337de33965ddfc680b18a5fd04ca77466a09bf5452116",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
+      "amountTkas": "21.125",
+      "amountSompi": "2112500000",
+      "acceptingBlockBlueScore": 9874410
+    },
+    {
+      "path": "artifacts/complex-defi-multi-wallet-20260512-evidence.json",
+      "label": "complex-defi:executor",
+      "kind": "transfer",
+      "txid": "b7cdbb3de4b3e50717e337de33965ddfc680b18a5fd04ca77466a09bf5452116",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qzuvk4vc46ukhz70h0t87h53mmyfgtcl95z7wnrg55xj28s6339vjxj7l0lut",
+      "amountTkas": "8.875",
+      "amountSompi": "887500000",
+      "acceptingBlockBlueScore": 9874410
+    },
+    {
+      "path": "artifacts/complex-defi-multi-wallet-20260512-evidence.json",
+      "label": "complex-defi:reviewer",
+      "kind": "transfer",
+      "txid": "b7cdbb3de4b3e50717e337de33965ddfc680b18a5fd04ca77466a09bf5452116",
+      "accepted": true,
+      "matches": true,
+      "from": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "to": "kaspatest:qrut0y2jqyh3pstct9lpcklzpejt22pn3vxsmrx26cpe0sdr2e3ac6muqh4pn",
+      "amountTkas": "4.625",
+      "amountSompi": "462500000",
+      "acceptingBlockBlueScore": 9874410
+    },
+    {
       "path": "artifacts/playground-user-a-pool-deposit-evidence.json",
       "label": "playground-user-a-pool-deposit-evidence",
       "kind": "pool-deposit",
@@ -513,8 +593,8 @@
   "balances": [
     {
       "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-      "netTkas": "-176",
-      "netSompi": "-17600000000"
+      "netTkas": "-502.125",
+      "netSompi": "-50212500000"
     },
     {
       "address": "kaspatest:qqpgfuzxvt7vtud4qv5aklpe5z0kd27j4pw33x33t3ya3ya95ffrymd0gntt4",
@@ -620,6 +700,36 @@
       "address": "kaspatest:qpmkeexttpernuet5sd9ant63c7znp2v7u078v9c8ss6yuvs7yewul2aq96ep",
       "netTkas": "2",
       "netSompi": "200000000"
+    },
+    {
+      "address": "kaspatest:qzduxrf2fjf92d8ntj4wy9sj2dfjf3ndv27ztluhtfempk68sn7fgukrh3a87",
+      "netTkas": "7.25",
+      "netSompi": "725000000"
+    },
+    {
+      "address": "kaspatest:qr33jruy97wa08dwv5ee809gnv6h33ryev3r7pnsx75ngtgzalfz2ahzwt2pl",
+      "netTkas": "250.5",
+      "netSompi": "25050000000"
+    },
+    {
+      "address": "kaspatest:qp4ku339nccxkvjxxstkhqwayxe9qr4v9wvzmlzawa7q5xs7nhakzsqam2rhj",
+      "netTkas": "33.75",
+      "netSompi": "3375000000"
+    },
+    {
+      "address": "kaspatest:qqzuwuetnje9ggq58jxtse2zhef2yjywy2wz8vf94u95kd73jyrswe84ex8c5",
+      "netTkas": "21.125",
+      "netSompi": "2112500000"
+    },
+    {
+      "address": "kaspatest:qzuvk4vc46ukhz70h0t87h53mmyfgtcl95z7wnrg55xj28s6339vjxj7l0lut",
+      "netTkas": "8.875",
+      "netSompi": "887500000"
+    },
+    {
+      "address": "kaspatest:qrut0y2jqyh3pstct9lpcklzpejt22pn3vxsmrx26cpe0sdr2e3ac6muqh4pn",
+      "netTkas": "4.625",
+      "netSompi": "462500000"
     }
   ],
   "problems": [],

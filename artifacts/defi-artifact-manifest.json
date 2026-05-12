@@ -1,7 +1,7 @@
 {
   "schema": "tn12-defi-artifact-manifest/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T18:24:55.470Z",
+  "generatedAt": "2026-05-12T18:52:43.483Z",
   "status": "defi-artifact-manifest-ready",
   "summary": {
     "artifacts": 7,
