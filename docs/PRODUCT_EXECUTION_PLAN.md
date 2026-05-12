@@ -140,16 +140,17 @@ real funded output spend, guarded broadcast, fetch, and replay.
 
 ## Next Deep Demos
 
-These are the next concrete examples after recurring-vault live submit is
-unblocked or explicitly parked:
+These local examples are built. The next decision is whether to keep them as
+local covenant proofs or fund one TN12 output for each and build guarded
+live-spend preflights.
 
 | Demo | Kaspa Pattern | Minimal Proof |
 |---|---|---|
-| Covenant-Owned Asset Duel | ICC / sibling-input authorization. | One asset/action branch accepts a sibling covenant/script input as authority, then rejects missing or wrong sibling input. |
-| Blitz Mux Arena | Mux/worker routing. | One mux sends state to worker A or B, a worker returns state, and timeout handles a bad selector or stalled worker path. |
+| Covenant-Owned Asset Duel | ICC / sibling-input authorization. | Local proof built: expected sibling passes; wrong witness, missing sibling, and wrong sibling covenant ID fail. |
+| Blitz Mux Arena | Mux/worker routing. | Local proof built: route A/B, worker return, bad selector reject, timeout return, and too-early timeout reject. |
 
-Do not turn either demo into product copy until it has a contract or explicit
-compiler blocker, artifact, focused test, and one UI line.
+Do not turn either demo into accepted-TN12 product copy until it has a funded
+output, guarded preflight, accepted spend, replay row, and UI line.
 
 ## User-Wallet Path
 

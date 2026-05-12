@@ -32,8 +32,8 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 |---|---|---|---|
 | 1 | Close recurring-vault live-submit boundary. | `artifacts/recurring-treasury-vault-live-submit-readiness.json` records whether the current route preserves output covenant binding, and focused tests enforce the answer. | No |
 | 2 | Harden Rust live submit for recurring-vault spend. | The Rust route builds the exact funded-output spend, preserves the continuation output covenant binding, broadcasts the under-cap transition, and TN12 accepts the spend. | No |
-| 3 | Build Covenant-Owned Asset Duel. | One ICC/sibling-input demo proves an asset or action can be authorized by a sibling covenant/script input, with missing/wrong sibling negatives. | No |
-| 4 | Build Blitz Mux Arena. | One mux routes state to worker A or B, the worker returns state, and a timeout path prevents a bad selector from trapping the flow. | No |
+| 3 | Decide whether Covenant-Owned Asset Duel gets funded TN12 preflight. | Local ICC proof is built; next step is either park it as local proof or fund one output and prove a guarded live-spend preflight. | No |
+| 4 | Decide whether Blitz Mux Arena gets funded TN12 preflight. | Local mux/worker/timeout proof is built; next step is either park it as local proof or fund one mux output and prove route/return preflight. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 6 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
 | 7 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
@@ -65,9 +65,9 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - Policy update: local-wallet delayed admin/recovery update path with accepted update and early-update rejection evidence.
    - Guardian recovery: local-wallet m-of-n guardian path with accepted quorum spend and too-few/wrong-guardian negative evidence.
    - Done when each feature has a status label, artifact path, test, and UI boundary.
-6. Covenant examples worth building after recurring caps.
-   - ICC ownership demo: one covenant-owned action or token branch is authorized by a sibling covenant input.
-   - Multiplexor demo: one router hands state to worker A or worker B, then the worker returns to the router.
+6. Covenant examples worth funding or extending after recurring caps.
+   - ICC ownership demo: local contract, artifact, and negative tests are built.
+   - Multiplexor demo: local contracts, artifact, worker return tests, and timeout tests are built.
    - Challenge/timeout demo: an invalid or stalled transition is settled by a timeout path.
    - KIP-21 lane replay: accepted app activity is grouped into a lane and replayed into a compact state proof.
    - Done when the example has a contract or explicit compiler blocker, an artifact, a negative case, and a UI line.
