@@ -59,7 +59,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "blitz-mux-arena",
       title: "Blitz Mux Arena",
       rank: 1,
-      status: "accepted-genesis-funded-preflight",
+      status: "accepted-mux-route-and-worker-return",
       proofTarget: "hub routes to worker, worker returns to hub, timeout escape path",
       whyItMatters: "Smallest source-faithful demo of the chess architecture without building full chess. It makes fast multi-transaction state transitions feel natural.",
       covenantPattern: "mux / worker contract family",
@@ -71,17 +71,24 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/blitz-mux-arena-proof.json",
         "artifacts/signed-drafts/blitz-mux-arena-genesis-funding.json",
         "fixtures/BlitzMuxArenaContractOutpoint.json",
+        "artifacts/blitz-mux-family-artifacts.json",
+        "artifacts/signed-drafts/blitz-mux-family-genesis-funding.json",
+        "fixtures/BlitzMuxFamilyContractOutpoint.json",
+        "artifacts/signed-drafts/blitz-mux-route-to-worker-a.json",
+        "fixtures/BlitzWorkerARouteOutpoint.json",
+        "artifacts/signed-drafts/blitz-mux-worker-a-return.json",
+        "fixtures/BlitzMuxReturnedOutpoint.json",
+        "artifacts/blitz-mux-live-flow-evidence.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/ARCHITECTURE.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
       ],
       nextBuildSteps: [
-        "Build a guarded live route from mux to worker A.",
-        "Build the worker return to mux from the accepted worker output.",
-        "Extend only after one funded route and worker return are accepted.",
-        "Keep timeout evidence attached before adding challenge/settlement rows."
+        "Add an accepted timeout path from a pending worker state.",
+        "Then add challenge/settlement rows.",
+        "Keep full game rules out until the mux flow is easy to inspect."
       ],
-      hardBoundary: "The mux genesis output is accepted on TN12, and local mux/worker proofs pass. It is not an accepted route/return spend yet."
+      hardBoundary: "The mux genesis, route-to-worker, and worker-return spends are accepted on TN12. Timeout remains local proof only."
     }),
     experiment({
       id: "coordination-league",

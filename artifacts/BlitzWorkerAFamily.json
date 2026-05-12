@@ -1,0 +1,1196 @@
+{
+  "contract_name": "BlitzWorkerA",
+  "script": [
+    107,
+    32,
+    9,
+    75,
+    146,
+    202,
+    69,
+    34,
+    160,
+    3,
+    86,
+    218,
+    231,
+    23,
+    221,
+    157,
+    149,
+    115,
+    40,
+    60,
+    134,
+    93,
+    130,
+    47,
+    195,
+    244,
+    102,
+    244,
+    155,
+    89,
+    155,
+    137,
+    138,
+    187,
+    32,
+    213,
+    149,
+    175,
+    7,
+    101,
+    225,
+    69,
+    207,
+    148,
+    21,
+    228,
+    124,
+    135,
+    34,
+    62,
+    135,
+    196,
+    200,
+    38,
+    91,
+    140,
+    120,
+    53,
+    182,
+    235,
+    76,
+    211,
+    164,
+    163,
+    134,
+    230,
+    170,
+    32,
+    47,
+    50,
+    114,
+    178,
+    89,
+    216,
+    155,
+    82,
+    50,
+    121,
+    200,
+    135,
+    85,
+    62,
+    28,
+    185,
+    213,
+    255,
+    210,
+    166,
+    27,
+    79,
+    180,
+    81,
+    175,
+    211,
+    98,
+    191,
+    163,
+    162,
+    115,
+    50,
+    8,
+    5,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8,
+    10,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    108,
+    118,
+    0,
+    156,
+    99,
+    117,
+    118,
+    81,
+    156,
+    105,
+    88,
+    121,
+    0,
+    160,
+    105,
+    88,
+    121,
+    90,
+    159,
+    105,
+    185,
+    203,
+    81,
+    156,
+    105,
+    87,
+    121,
+    87,
+    121,
+    126,
+    86,
+    121,
+    124,
+    170,
+    135,
+    105,
+    85,
+    121,
+    1,
+    32,
+    124,
+    126,
+    85,
+    121,
+    1,
+    32,
+    124,
+    126,
+    85,
+    121,
+    1,
+    32,
+    124,
+    126,
+    85,
+    121,
+    92,
+    121,
+    147,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    85,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    0,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    126,
+    126,
+    126,
+    126,
+    88,
+    121,
+    124,
+    126,
+    87,
+    121,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    185,
+    0,
+    204,
+    195,
+    135,
+    105,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    81,
+    103,
+    118,
+    81,
+    156,
+    99,
+    117,
+    118,
+    81,
+    156,
+    105,
+    120,
+    177,
+    185,
+    203,
+    81,
+    156,
+    105,
+    87,
+    121,
+    87,
+    121,
+    126,
+    86,
+    121,
+    124,
+    170,
+    135,
+    105,
+    85,
+    121,
+    1,
+    32,
+    124,
+    126,
+    85,
+    121,
+    1,
+    32,
+    124,
+    126,
+    85,
+    121,
+    1,
+    32,
+    124,
+    126,
+    85,
+    121,
+    81,
+    148,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    85,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    0,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    126,
+    126,
+    126,
+    126,
+    88,
+    121,
+    124,
+    126,
+    87,
+    121,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    185,
+    0,
+    204,
+    195,
+    135,
+    105,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    81,
+    103,
+    117,
+    0,
+    105,
+    104,
+    104
+  ],
+  "ast": {
+    "name": "BlitzWorkerA",
+    "params": [
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "init_mux_template",
+        "span": "byte[32] init_mux_template",
+        "type_span": "byte[32]",
+        "name_span": "init_mux_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "init_a_template",
+        "span": "byte[32] init_a_template",
+        "type_span": "byte[32]",
+        "name_span": "init_a_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "init_b_template",
+        "span": "byte[32] init_b_template",
+        "type_span": "byte[32]",
+        "name_span": "init_b_template"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "init_value",
+        "span": "int init_value",
+        "type_span": "int ",
+        "name_span": "init_value"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "init_timeout",
+        "span": "int init_timeout",
+        "type_span": "int ",
+        "name_span": "init_timeout"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "init_pending",
+        "span": "int init_pending",
+        "type_span": "int ",
+        "name_span": "init_pending"
+      }
+    ],
+    "fields": [
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "mux_template",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_mux_template",
+          "span": "init_mux_template"
+        },
+        "span": "byte[32] mux_template = init_mux_template;",
+        "type_span": "byte[32]",
+        "name_span": "mux_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "a_template",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_a_template",
+          "span": "init_a_template"
+        },
+        "span": "byte[32] a_template = init_a_template;",
+        "type_span": "byte[32]",
+        "name_span": "a_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "b_template",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_b_template",
+          "span": "init_b_template"
+        },
+        "span": "byte[32] b_template = init_b_template;",
+        "type_span": "byte[32]",
+        "name_span": "b_template"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "value",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_value",
+          "span": "init_value"
+        },
+        "span": "int value = init_value;",
+        "type_span": "int ",
+        "name_span": "value"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "move_timeout",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_timeout",
+          "span": "init_timeout"
+        },
+        "span": "int move_timeout = init_timeout;",
+        "type_span": "int ",
+        "name_span": "move_timeout"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "pending",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_pending",
+          "span": "init_pending"
+        },
+        "span": "int pending = init_pending;",
+        "type_span": "int ",
+        "name_span": "pending"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "apply",
+        "params": [
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "reward",
+            "span": "int reward",
+            "type_span": "int ",
+            "name_span": "reward"
+          },
+          {
+            "type_ref": {
+              "base": "byte",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "mux_prefix",
+            "span": "byte[] mux_prefix",
+            "type_span": "byte[]",
+            "name_span": "mux_prefix"
+          },
+          {
+            "type_ref": {
+              "base": "byte",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "mux_suffix",
+            "span": "byte[] mux_suffix",
+            "type_span": "byte[]",
+            "name_span": "mux_suffix"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "pending",
+                    "span": "pending"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "1"
+                  }
+                },
+                "span": "pending == 1"
+              },
+              "message": null,
+              "span": "require(pending == 1);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "gt",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "reward",
+                    "span": "reward"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "reward > 0"
+              },
+              "message": null,
+              "span": "require(reward > 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "lt",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "reward",
+                    "span": "reward"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 10,
+                    "span": "10"
+                  }
+                },
+                "span": "reward < 10"
+              },
+              "message": null,
+              "span": "require(reward < 10);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "call",
+                    "data": {
+                      "name": "OpAuthOutputCount",
+                      "args": [
+                        {
+                          "kind": "nullary",
+                          "data": "active_input_index",
+                          "span": "this.activeInputIndex"
+                        }
+                      ],
+                      "name_span": "OpAuthOutputCount"
+                    },
+                    "span": "OpAuthOutputCount(this.activeInputIndex)"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "1"
+                  }
+                },
+                "span": "OpAuthOutputCount(this.activeInputIndex) == 1"
+              },
+              "message": null,
+              "span": "require(OpAuthOutputCount(this.activeInputIndex) == 1);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "output_idx",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputIdx",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "this.activeInputIndex"
+                    },
+                    {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "0"
+                    }
+                  ],
+                  "name_span": "OpAuthOutputIdx"
+                },
+                "span": "OpAuthOutputIdx(this.activeInputIndex, 0)"
+              },
+              "span": "int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "output_idx"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "State"
+              },
+              "modifiers": [],
+              "name": "state",
+              "expr": {
+                "kind": "state_object",
+                "data": [
+                  {
+                    "name": "mux_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "mux_template",
+                      "span": "mux_template"
+                    },
+                    "span": "mux_template: mux_template",
+                    "name_span": "mux_template"
+                  },
+                  {
+                    "name": "a_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "a_template",
+                      "span": "a_template"
+                    },
+                    "span": "a_template: a_template",
+                    "name_span": "a_template"
+                  },
+                  {
+                    "name": "b_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "b_template",
+                      "span": "b_template"
+                    },
+                    "span": "b_template: b_template",
+                    "name_span": "b_template"
+                  },
+                  {
+                    "name": "value",
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "add",
+                        "left": {
+                          "kind": "identifier",
+                          "data": "value",
+                          "span": "value"
+                        },
+                        "right": {
+                          "kind": "identifier",
+                          "data": "reward",
+                          "span": "reward"
+                        }
+                      },
+                      "span": "value + reward"
+                    },
+                    "span": "value: value + reward",
+                    "name_span": "value"
+                  },
+                  {
+                    "name": "move_timeout",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "move_timeout",
+                      "span": "move_timeout"
+                    },
+                    "span": "move_timeout: move_timeout",
+                    "name_span": "move_timeout"
+                  },
+                  {
+                    "name": "pending",
+                    "expr": {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "0\n        "
+                    },
+                    "span": "pending: 0\n        ",
+                    "name_span": "pending"
+                  }
+                ],
+                "span": "{\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value + reward,\n            move_timeout: move_timeout,\n            pending: 0\n        }"
+              },
+              "span": "State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value + reward,\n            move_timeout: move_timeout,\n            pending: 0\n        };",
+              "type_span": "State ",
+              "modifier_spans": [],
+              "name_span": "state"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputStateWithTemplate",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "output_idx",
+                  "span": "output_idx"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "state",
+                  "span": "state"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "mux_prefix",
+                  "span": "mux_prefix"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "mux_suffix",
+                  "span": "mux_suffix"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "mux_template",
+                  "span": "mux_template"
+                }
+              ],
+              "span": "validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);",
+              "name_span": "validateOutputStateWithTemplate"
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function apply(int reward, byte[] mux_prefix, byte[] mux_suffix) {\n        require(pending == 1);\n        require(reward > 0);\n        require(reward < 10);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value + reward,\n            move_timeout: move_timeout,\n            pending: 0\n        };\n        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);\n    }",
+        "name_span": "apply",
+        "body_span": "require(pending == 1);\n        require(reward > 0);\n        require(reward < 10);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value + reward,\n            move_timeout: move_timeout,\n            pending: 0\n        };\n        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);"
+      },
+      {
+        "name": "timeout",
+        "params": [
+          {
+            "type_ref": {
+              "base": "byte",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "mux_prefix",
+            "span": "byte[] mux_prefix",
+            "type_span": "byte[]",
+            "name_span": "mux_prefix"
+          },
+          {
+            "type_ref": {
+              "base": "byte",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "mux_suffix",
+            "span": "byte[] mux_suffix",
+            "type_span": "byte[]",
+            "name_span": "mux_suffix"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "pending",
+                    "span": "pending"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "1"
+                  }
+                },
+                "span": "pending == 1"
+              },
+              "message": null,
+              "span": "require(pending == 1);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "time_op",
+            "data": {
+              "tx_var": "this_age",
+              "expr": {
+                "kind": "identifier",
+                "data": "move_timeout",
+                "span": "move_timeout"
+              },
+              "message": null,
+              "span": "require(this.age >= move_timeout);",
+              "tx_var_span": "this.age",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "call",
+                    "data": {
+                      "name": "OpAuthOutputCount",
+                      "args": [
+                        {
+                          "kind": "nullary",
+                          "data": "active_input_index",
+                          "span": "this.activeInputIndex"
+                        }
+                      ],
+                      "name_span": "OpAuthOutputCount"
+                    },
+                    "span": "OpAuthOutputCount(this.activeInputIndex)"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "1"
+                  }
+                },
+                "span": "OpAuthOutputCount(this.activeInputIndex) == 1"
+              },
+              "message": null,
+              "span": "require(OpAuthOutputCount(this.activeInputIndex) == 1);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "output_idx",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputIdx",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "this.activeInputIndex"
+                    },
+                    {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "0"
+                    }
+                  ],
+                  "name_span": "OpAuthOutputIdx"
+                },
+                "span": "OpAuthOutputIdx(this.activeInputIndex, 0)"
+              },
+              "span": "int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "output_idx"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "State"
+              },
+              "modifiers": [],
+              "name": "state",
+              "expr": {
+                "kind": "state_object",
+                "data": [
+                  {
+                    "name": "mux_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "mux_template",
+                      "span": "mux_template"
+                    },
+                    "span": "mux_template: mux_template",
+                    "name_span": "mux_template"
+                  },
+                  {
+                    "name": "a_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "a_template",
+                      "span": "a_template"
+                    },
+                    "span": "a_template: a_template",
+                    "name_span": "a_template"
+                  },
+                  {
+                    "name": "b_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "b_template",
+                      "span": "b_template"
+                    },
+                    "span": "b_template: b_template",
+                    "name_span": "b_template"
+                  },
+                  {
+                    "name": "value",
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "sub",
+                        "left": {
+                          "kind": "identifier",
+                          "data": "value",
+                          "span": "value"
+                        },
+                        "right": {
+                          "kind": "int",
+                          "data": 1,
+                          "span": "1"
+                        }
+                      },
+                      "span": "value - 1"
+                    },
+                    "span": "value: value - 1",
+                    "name_span": "value"
+                  },
+                  {
+                    "name": "move_timeout",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "move_timeout",
+                      "span": "move_timeout"
+                    },
+                    "span": "move_timeout: move_timeout",
+                    "name_span": "move_timeout"
+                  },
+                  {
+                    "name": "pending",
+                    "expr": {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "0\n        "
+                    },
+                    "span": "pending: 0\n        ",
+                    "name_span": "pending"
+                  }
+                ],
+                "span": "{\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value - 1,\n            move_timeout: move_timeout,\n            pending: 0\n        }"
+              },
+              "span": "State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value - 1,\n            move_timeout: move_timeout,\n            pending: 0\n        };",
+              "type_span": "State ",
+              "modifier_spans": [],
+              "name_span": "state"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputStateWithTemplate",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "output_idx",
+                  "span": "output_idx"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "state",
+                  "span": "state"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "mux_prefix",
+                  "span": "mux_prefix"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "mux_suffix",
+                  "span": "mux_suffix"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "mux_template",
+                  "span": "mux_template"
+                }
+              ],
+              "span": "validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);",
+              "name_span": "validateOutputStateWithTemplate"
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function timeout(byte[] mux_prefix, byte[] mux_suffix) {\n        require(pending == 1);\n        require(this.age >= move_timeout);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value - 1,\n            move_timeout: move_timeout,\n            pending: 0\n        };\n        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);\n    }",
+        "name_span": "timeout",
+        "body_span": "require(pending == 1);\n        require(this.age >= move_timeout);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value - 1,\n            move_timeout: move_timeout,\n            pending: 0\n        };\n        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);"
+      }
+    ],
+    "span": "contract BlitzWorkerA(byte[32] init_mux_template, byte[32] init_a_template, byte[32] init_b_template, int init_value, int init_timeout, int init_pending) {\n    byte[32] mux_template = init_mux_template;\n    byte[32] a_template = init_a_template;\n    byte[32] b_template = init_b_template;\n\n    int value = init_value;\n    int move_timeout = init_timeout;\n    int pending = init_pending;\n\n    entrypoint function apply(int reward, byte[] mux_prefix, byte[] mux_suffix) {\n        require(pending == 1);\n        require(reward > 0);\n        require(reward < 10);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value + reward,\n            move_timeout: move_timeout,\n            pending: 0\n        };\n        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);\n    }\n\n    entrypoint function timeout(byte[] mux_prefix, byte[] mux_suffix) {\n        require(pending == 1);\n        require(this.age >= move_timeout);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value - 1,\n            move_timeout: move_timeout,\n            pending: 0\n        };\n        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);\n    }\n}",
+    "name_span": "BlitzWorkerA"
+  },
+  "abi": [
+    {
+      "name": "apply",
+      "inputs": [
+        {
+          "name": "reward",
+          "type_name": "int"
+        },
+        {
+          "name": "mux_prefix",
+          "type_name": "byte[]"
+        },
+        {
+          "name": "mux_suffix",
+          "type_name": "byte[]"
+        }
+      ]
+    },
+    {
+      "name": "timeout",
+      "inputs": [
+        {
+          "name": "mux_prefix",
+          "type_name": "byte[]"
+        },
+        {
+          "name": "mux_suffix",
+          "type_name": "byte[]"
+        }
+      ]
+    }
+  ],
+  "without_selector": false,
+  "state_layout": {
+    "start": 1,
+    "len": 126
+  },
+  "debug_info": null
+}

@@ -31,10 +31,10 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Build Blitz Mux route spend. | The accepted mux genesis output routes to worker A or B, the route output keeps the family covenant id, and TN12 accepts the route spend. | No |
-| 2 | Build Blitz worker return spend. | The accepted worker output returns state to the mux, and TN12 accepts the return spend. | No |
-| 3 | Build Asset Duel sibling-input spend. | The accepted asset-duel output is spent only with the expected sibling covenant input, and TN12 accepts the guarded strike spend. | No |
-| 4 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
+| 1 | Build Blitz Mux timeout spend. | A pending worker output times out back to mux on TN12 after the delay condition is valid. | No |
+| 2 | Build Asset Duel sibling-input spend. | The accepted asset-duel output is spent only with the expected sibling covenant input, and TN12 accepts the guarded strike spend. | No |
+| 3 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
+| 4 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 6 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
 | 7 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
@@ -68,7 +68,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - Done when each feature has a status label, artifact path, test, and UI boundary.
 6. Covenant examples worth funding or extending after recurring caps.
    - ICC ownership demo: local contract, artifact, and negative tests are built.
-   - Multiplexor demo: local contracts, artifact, worker return tests, and timeout tests are built.
+   - Multiplexor demo: local contracts, artifact, worker return tests, timeout tests, accepted route spend, and accepted worker-return spend are built.
    - Challenge/timeout demo: an invalid or stalled transition is settled by a timeout path.
    - KIP-21 lane replay: accepted app activity is grouped into a lane and replayed into a compact state proof.
    - Done when the example has a contract or explicit compiler blocker, an artifact, a negative case, and a UI line.

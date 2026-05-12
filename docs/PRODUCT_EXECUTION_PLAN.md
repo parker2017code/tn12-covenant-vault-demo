@@ -147,8 +147,8 @@ live-spend preflights.
 
 | Demo | Kaspa Pattern | Minimal Proof |
 |---|---|---|
-| Covenant-Owned Asset Duel | ICC / sibling-input authorization. | Local proof built: expected sibling passes; wrong witness, missing sibling, and wrong sibling covenant ID fail. |
-| Blitz Mux Arena | Mux/worker routing. | Local proof built: route A/B, worker return, bad selector reject, timeout return, and too-early timeout reject. |
+| Covenant-Owned Asset Duel | ICC / sibling-input authorization. | Local proof built and TN12 genesis output accepted; next is sibling-authorized strike spend. |
+| Blitz Mux Arena | Mux/worker routing. | Local proof built; TN12 genesis, route to Worker A, and Worker A return are accepted; next is timeout. |
 
 Do not turn either demo into accepted-TN12 product copy until it has a funded
 output, guarded preflight, accepted spend, replay row, and UI line.

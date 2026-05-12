@@ -47,15 +47,18 @@ until these move.
   timeout returns a pending worker state, and too-early timeout fails.
 - `fixtures/BlitzMuxArenaContractOutpoint.json` records an accepted TN12
   covenant-genesis output for the Blitz Mux preflight.
+- `artifacts/blitz-mux-family-artifacts.json` records the real template-hash
+  family used for live routing.
+- `artifacts/blitz-mux-live-flow-evidence.json` records the accepted TN12 mux
+  route to Worker A and accepted Worker A return to mux.
 
 ## Next Exact Tasks
 
-1. Build the Blitz Mux live route/return path.
-   - Start from `fixtures/BlitzMuxArenaContractOutpoint.json`.
-   - Route from mux to worker A or B with the same covenant family id.
-   - Spend the worker output back to mux.
-   - Keep timeout evidence local until a live pending-worker timeout path is
-     actually accepted.
+1. Build the Blitz Mux live timeout path.
+   - The route/return path is accepted.
+   - Start from a fresh pending-worker output or create a second mux route.
+   - Submit a timeout transition only when the DAA age is high enough.
+   - Keep challenge/settlement rows behind the timeout proof.
 
 2. Build the Covenant-Owned Asset Duel live sibling-input path.
    - Pattern: ICC / sibling-input authorization.

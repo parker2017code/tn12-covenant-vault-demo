@@ -135,7 +135,9 @@ continuation state is
      and too-early timeout reject.
    - TN12 preflight: `fixtures/BlitzMuxArenaContractOutpoint.json` records an
      accepted covenant-genesis output.
-   - Next: build and submit the mux route spend, then the worker return spend.
+   - Live flow: `artifacts/blitz-mux-live-flow-evidence.json` records accepted
+     mux route to Worker A and accepted Worker A return to mux.
+   - Next: build an accepted timeout path from a pending worker state.
 4. Challenge/timeout demo.
    - Claim -> challenge -> timeout/settle.
    - This is the useful pattern for rules that are expensive to prove directly.

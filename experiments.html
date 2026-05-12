@@ -65,11 +65,13 @@
         <article>
           <span>1</span>
           <strong>Blitz Mux Arena</strong>
-          <p>A hub covenant routes state to worker A or B. Workers return state to the hub, bad selectors fail, and timeout handles a stalled branch.</p>
+          <p>A hub covenant routes state to Worker A, then Worker A returns state to the hub. The local proof also covers bad selectors and timeout behavior.</p>
           <ul>
             <li>Mux / worker contract family.</li>
             <li>Template routing.</li>
-            <li>Accepted TN12 genesis funding output.</li>
+            <li>Accepted TN12 family genesis output.</li>
+            <li>Accepted route to Worker A.</li>
+            <li>Accepted Worker A return to mux.</li>
           </ul>
         </article>
         <article>
@@ -117,8 +119,8 @@
             <tr>
               <td>Blitz Mux Arena</td>
               <td>mux / worker contract family</td>
-              <td>accepted-genesis-funded-preflight</td>
-              <td>accepted mux route to worker, then accepted worker return</td>
+              <td>accepted-mux-route-and-worker-return</td>
+              <td>accepted timeout path from a pending worker state</td>
             </tr>
             <tr>
               <td>Treasury Wars</td>
@@ -181,7 +183,7 @@
         <article>
           <span>Do next</span>
           <ul>
-            <li>Build the Blitz Mux route/return live spend path.</li>
+            <li>Build the Blitz Mux timeout live spend path.</li>
             <li>Build the Asset Duel sibling-input live spend path.</li>
             <li>Keep the other three experiments local/design until accepted evidence exists.</li>
           </ul>

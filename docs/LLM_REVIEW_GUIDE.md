@@ -156,8 +156,8 @@ Avoid these labels:
 - `artifacts/recurring-treasury-vault-rpc-data-route.json` shows the first live 150 tKAS output is not covenant-bound. Do not try to spend it as a stateful covenant input.
 - Recurring vault live status: covenant-genesis funding is accepted, two under-cap script-enforced spends are accepted, continuation fixtures are recorded, and the over-cap continuation candidate is locally rejected.
 - Study `/home/parker2017/michaelsutton-silverscript-chess/examples/chess` before designing complex examples. The useful pattern is mux/worker routing, shared state layout, template identity, challenge paths, and settlement, not "make a game" as a product idea.
-- Built local deep examples: Covenant-Owned Asset Duel for ICC sibling-input authorization, and Blitz Mux Arena for mux/worker routing plus timeout.
-- Next exact tasks are: build the Blitz Mux live route/return spend from its accepted genesis output, build the Asset Duel sibling-input strike spend from its accepted genesis output, then add recurring-vault window reset behavior.
+- Built deep examples: Covenant-Owned Asset Duel has local ICC sibling-input proof plus an accepted TN12 genesis output; Blitz Mux Arena has local mux/worker/timeout proof plus accepted TN12 route and worker-return spends.
+- Next exact tasks are: build a Blitz Mux timeout spend from a pending worker state, build the Asset Duel sibling-input strike spend from its accepted genesis output, then add recurring-vault window reset behavior.
 
 Accurate label:
 

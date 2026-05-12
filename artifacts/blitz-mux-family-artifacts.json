@@ -1,0 +1,31 @@
+{
+  "schema": "tn12-blitz-mux-family-artifacts/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-12T22:55:25.862Z",
+  "status": "family-template-artifacts-built",
+  "templates": {
+    "mux": "094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb",
+    "a": "d595af0765e145cf9415e47c87223e87c4c8265b8c7835b6eb4cd3a4a386e6aa",
+    "b": "2f3272b259d89b523279c887553e1cb9d5ffd2a61b4fb451afd362bfa3a27332"
+  },
+  "members": [
+    {
+      "id": "mux",
+      "source": "contracts/BlitzMux.sil",
+      "fixture": "fixtures/BlitzMuxFamily.ctor.json",
+      "artifact": "artifacts/BlitzMuxFamily.json"
+    },
+    {
+      "id": "a",
+      "source": "contracts/BlitzWorkerA.sil",
+      "fixture": "fixtures/BlitzWorkerAFamily.ctor.json",
+      "artifact": "artifacts/BlitzWorkerAFamily.json"
+    },
+    {
+      "id": "b",
+      "source": "contracts/BlitzWorkerB.sil",
+      "fixture": "fixtures/BlitzWorkerBFamily.ctor.json",
+      "artifact": "artifacts/BlitzWorkerBFamily.json"
+    }
+  ]
+}
