@@ -1,0 +1,36 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "covenant-owned-asset-duel-live-strike",
+  "contract": "CovenantOwnedAssetDuel",
+  "fetchedAt": "2026-05-12T23:13:28.736Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+  "txid": "f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+  "outputIndex": 0,
+  "amountTkas": 9.9998,
+  "amountSompi": "999980000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:pznc2svhhrfuwzcpgw9wu5vpt0ek33fn2fzpdvutjeksy27e7hecg4497tjaw",
+  "scriptPublicKey": "aa20a7854197b8d3c70b01438aee51815bf368c533524416b38b966d022bd9f5f38487",
+  "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+  "redeemScriptHex": "208669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053085802000000000000527900a069527978a1695479cf52798769b9cb519c69537901207c7e7854799458cd01087c7e7eb976c976017994012a937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769757575757551",
+  "redeemScriptBytes": 121,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 10031273,
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+  "raw": {
+    "address": "kaspatest:pznc2svhhrfuwzcpgw9wu5vpt0ek33fn2fzpdvutjeksy27e7hecg4497tjaw",
+    "outpoint": {
+      "transactionId": "f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "999980000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20a7854197b8d3c70b01438aee51815bf368c533524416b38b966d022bd9f5f38487"
+      },
+      "blockDaaScore": "10031273",
+      "isCoinbase": false
+    }
+  }
+}

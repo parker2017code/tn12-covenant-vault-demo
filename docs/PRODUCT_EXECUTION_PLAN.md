@@ -147,11 +147,11 @@ live-spend preflights.
 
 | Demo | Kaspa Pattern | Minimal Proof |
 |---|---|---|
-| Covenant-Owned Asset Duel | ICC / sibling-input authorization. | Local proof built and TN12 genesis output accepted; next is sibling-authorized strike spend. |
+| Covenant-Owned Asset Duel | ICC / sibling-input authorization. | Accepted TN12 owner-marker, live asset genesis, and sibling-authorized strike spend; next is live negative evidence. |
 | Blitz Mux Arena | Mux/worker routing. | Local proof built; TN12 genesis, route to Worker A, and Worker A return are accepted; next is timeout. |
 
-Do not turn either demo into accepted-TN12 product copy until it has a funded
-output, guarded preflight, accepted spend, replay row, and UI line.
+Do not turn either demo into product copy. Accepted TN12 evidence belongs in the
+proof map; wallet UX, production custody, and mainnet activation stay separate.
 
 ## User-Wallet Path
 

@@ -1,0 +1,118 @@
+{
+  "schema": "tn12-asset-duel-owner-marker-genesis-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-covenant-genesis-not-broadcast",
+  "warning": "Signed TN12 owner-marker draft. It creates a one-time wallet P2PK sibling covenant input for Asset Duel.",
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "080661533ef398afa450ccecc2428c7ebe4f633b259d84f7437cb3a4d783cd53",
+    "outputIndex": 1,
+    "amountTkas": 19043.8746
+  },
+  "ownerMarker": {
+    "outputIndex": 0,
+    "amountTkas": "1",
+    "amountSompi": "100000000",
+    "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "covenant": {
+      "authorizingInput": 0,
+      "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053"
+    }
+  },
+  "change": {
+    "outputIndex": 1,
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": "19042.87455",
+    "amountSompi": "1904287455000"
+  },
+  "transactionId": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+  "signedTransaction": {
+    "id": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+    "version": 1,
+    "inputs": [
+      {
+        "transactionId": "080661533ef398afa450ccecc2428c7ebe4f633b259d84f7437cb3a4d783cd53",
+        "index": 1,
+        "sequence": "0",
+        "sigOpCount": 1,
+        "computeBudget": 10,
+        "signatureScript": "4199645b7d7d99cbfd0ad2bc9c20a63c8608ace17dd411cf0160b8b619bb89fbe806f5f2c191a0c929b1396247bdf8644e7d8b5861b3150ba23873ea59623fcfdc01",
+        "utxo": {
+          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "amount": "1904387460000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+          "blockDaaScore": "10166525",
+          "isCoinbase": false,
+          "covenantId": null
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "value": "100000000",
+        "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+        "covenant": {
+          "authorizingInput": 0,
+          "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053"
+        }
+      },
+      {
+        "value": "1904287455000",
+        "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+        "covenant": null
+      }
+    ],
+    "subnetworkId": "0000000000000000000000000000000000000000",
+    "lockTime": "0",
+    "gas": "0",
+    "mass": "0",
+    "payload": ""
+  },
+  "submitPayload": {
+    "transaction": {
+      "version": 1,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "080661533ef398afa450ccecc2428c7ebe4f633b259d84f7437cb3a4d783cd53",
+            "index": 1
+          },
+          "signatureScript": "4199645b7d7d99cbfd0ad2bc9c20a63c8608ace17dd411cf0160b8b619bb89fbe806f5f2c191a0c929b1396247bdf8644e7d8b5861b3150ba23873ea59623fcfdc01",
+          "sequence": "0",
+          "sigOpCount": 1,
+          "computeBudget": 10
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 100000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          },
+          "covenant": {
+            "authorizingInput": 0,
+            "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053"
+          }
+        },
+        {
+          "amount": 1904287455000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "checks": {
+    "transactionVersionIsV1": true,
+    "output0HasCovenantBinding": true,
+    "output0ScriptMatchesWalletP2pk": true,
+    "signatureScriptPresent": true
+  }
+}

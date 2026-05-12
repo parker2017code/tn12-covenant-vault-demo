@@ -1,0 +1,94 @@
+{
+  "schema": "tn12-covenant-owned-asset-duel-live-strike-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-local-engine-passed-not-broadcast",
+  "source": {
+    "assetOutpoint": {
+      "txid": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+      "outputIndex": 0,
+      "amountSompi": "1000000000",
+      "amountTkas": 10,
+      "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a"
+    },
+    "ownerMarkerOutpoint": {
+      "txid": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+      "outputIndex": 0,
+      "amountSompi": "100000000",
+      "amountTkas": 1,
+      "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053"
+    }
+  },
+  "pattern": {
+    "name": "ICC sibling-input authorization",
+    "rule": "Asset Duel strike is valid only when input 1 carries the configured owner covenant id.",
+    "nestedExecution": false
+  },
+  "localChecks": {
+    "engineAcceptedGeneratedSigScript": true,
+    "assetContractAccepted": true,
+    "ownerMarkerP2pkAccepted": true,
+    "output0CovenantMatchesAssetInput": true,
+    "ownerMarkerInputPresent": true
+  },
+  "transactionId": "f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+  "submitPayload": {
+    "transaction": {
+      "version": 1,
+      "inputs": [
+        {
+          "computeBudget": 60,
+          "previousOutpoint": {
+            "index": 0,
+            "transactionId": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165"
+          },
+          "sequence": 0,
+          "sigOpCount": 0,
+          "signatureScript": "51208669415a642659790ae5e1810021d7ccaa572f3580e39278396a5265646850530296004c79208669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053085802000000000000527900a069527978a1695479cf52798769b9cb519c69537901207c7e7854799458cd01087c7e7eb976c976017994012a937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769757575757551"
+        },
+        {
+          "computeBudget": 10,
+          "previousOutpoint": {
+            "index": 0,
+            "transactionId": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f"
+          },
+          "sequence": 0,
+          "sigOpCount": 1,
+          "signatureScript": "41ab07f2b189d709cfe1f629997aec83356f11db1c08573463f77519fdf81bf4950f62a0032ba14b853c54db449d16a2506c5f1315f09c2cb89fe73e136a5e3d4f01"
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 999980000,
+          "covenant": {
+            "authorizingInput": 0,
+            "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a"
+          },
+          "scriptPublicKey": {
+            "scriptPublicKey": "aa20a7854197b8d3c70b01438aee51815bf368c533524416b38b966d022bd9f5f38487",
+            "version": 0
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "scriptEvidence": {
+    "inputRedeemScriptHex": "208669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053085802000000000000527900a069527978a1695479cf52798769b9cb519c69537901207c7e7854799458cd01087c7e7eb976c976017994012a937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769757575757551",
+    "nextRedeemScriptHex": "208669415a642659790ae5e1810021d7ccaa572f3580e39278396a52656468505308c201000000000000527900a069527978a1695479cf52798769b9cb519c69537901207c7e7854799458cd01087c7e7eb976c976017994012a937cbc7eaa02000001aa7e01207e7c7e01877eb900ccc38769757575757551",
+    "ownerMarkerScriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+  },
+  "state": {
+    "minerFeeSompi": 20000,
+    "ownerCovenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+    "powerAfter": 450,
+    "powerBefore": 600,
+    "spendPower": 150,
+    "witnessInput": 1
+  },
+  "submit": {
+    "dryRunCommand": "node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/covenant-owned-asset-duel-live-strike.json",
+    "submitCommand": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 KASPA_WRPC_ENCODING=borsh KASPA_WRPC_NETWORK_ID=testnet-12 node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/covenant-owned-asset-duel-live-strike.json --submit"
+  }
+}

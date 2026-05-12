@@ -20,6 +20,9 @@ if (!response.ok) {
 
 const tx = await response.json();
 const output = tx.outputs.find((item) => Number(item.index) === outputIndex);
+const covenantId = fundingDraft.covenantGenesis?.covenant?.covenantId
+  || fundingDraft.submitPayload?.transaction?.outputs?.[outputIndex]?.covenant?.covenantId
+  || null;
 
 if (!output) {
   throw new Error(`Funding tx ${txid} is missing output ${outputIndex}.`);
@@ -39,6 +42,7 @@ const fixture = {
   scriptType: output.script_public_key_type,
   scriptPublicKeyAddress: output.script_public_key_address,
   scriptPublicKey: output.script_public_key,
+  ...(covenantId ? { covenantId } : {}),
   redeemScriptHex: bytesToHex(artifact.script || []),
   redeemScriptBytes: artifact.script.length,
   status: tx.is_accepted ? "accepted" : "not-accepted",

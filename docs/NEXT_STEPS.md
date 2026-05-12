@@ -32,7 +32,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
 | 1 | Build Blitz Mux timeout spend. | A pending worker output times out back to mux on TN12 after the delay condition is valid. | No |
-| 2 | Build Asset Duel sibling-input spend. | The accepted asset-duel output is spent only with the expected sibling covenant input, and TN12 accepts the guarded strike spend. | No |
+| 2 | Add Asset Duel live negative evidence. | Missing sibling, wrong witness, and wrong sibling covenant-id candidates are recorded against the accepted live strike path. | No |
 | 3 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
 | 4 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |

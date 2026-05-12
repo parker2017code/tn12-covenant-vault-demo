@@ -88,11 +88,12 @@
         <article>
           <span>3</span>
           <strong>Covenant-Owned Asset Duel</strong>
-          <p>An asset move requires the owner covenant input in the same transaction. The proof uses sibling authority instead of nested execution.</p>
+          <p>An asset move requires the owner-marker covenant input in the same transaction. The accepted strike uses sibling authority instead of nested execution.</p>
           <ul>
             <li>ICC / sibling-input authorization.</li>
-            <li>Accepted TN12 genesis funding output.</li>
-            <li>Missing or wrong sibling fails.</li>
+            <li>Accepted owner-marker covenant output.</li>
+            <li>Accepted live asset-duel covenant output.</li>
+            <li>Accepted two-input sibling-authorized strike.</li>
           </ul>
         </article>
       </div>
@@ -131,8 +132,8 @@
             <tr>
               <td>Covenant-Owned Asset Duel</td>
               <td>ICC / covenant-owned asset</td>
-              <td>accepted-genesis-funded-preflight</td>
-              <td>accepted sibling-authorized strike spend</td>
+              <td>accepted-sibling-input-strike</td>
+              <td>live negative cases for missing sibling and wrong sibling covenant id</td>
             </tr>
             <tr>
               <td>Covenant Heist</td>
@@ -184,7 +185,7 @@
           <span>Do next</span>
           <ul>
             <li>Build the Blitz Mux timeout live spend path.</li>
-            <li>Build the Asset Duel sibling-input live spend path.</li>
+            <li>Add Asset Duel live negative candidate rows.</li>
             <li>Keep the other three experiments local/design until accepted evidence exists.</li>
           </ul>
         </article>

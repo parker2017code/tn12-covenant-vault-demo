@@ -40,6 +40,9 @@ until these move.
   wrong witness, missing sibling, and wrong sibling covenant ID fail.
 - `fixtures/CovenantOwnedAssetDuelContractOutpoint.json` records an accepted
   TN12 covenant-genesis output for the Asset Duel preflight.
+- `artifacts/covenant-owned-asset-duel-live-strike-evidence.json` records the
+  accepted TN12 owner-marker output, live asset-duel genesis output, and
+  two-input sibling-authorized strike spend.
 - `contracts/BlitzMux.sil`, `contracts/BlitzWorkerA.sil`, and
   `contracts/BlitzWorkerB.sil` compile.
 - `artifacts/blitz-mux-arena-proof.json` proves the local mux/worker pattern:
@@ -60,12 +63,14 @@ until these move.
    - Submit a timeout transition only when the DAA age is high enough.
    - Keep challenge/settlement rows behind the timeout proof.
 
-2. Build the Covenant-Owned Asset Duel live sibling-input path.
+2. Add Covenant-Owned Asset Duel live negative evidence.
    - Pattern: ICC / sibling-input authorization.
-   - Start from `fixtures/CovenantOwnedAssetDuelContractOutpoint.json`.
-   - Add a sibling covenant input that authorizes the strike.
-   - Keep wrong witness, missing sibling, and wrong sibling covenant id as
-     negative evidence.
+   - Accepted path is recorded in
+     `artifacts/covenant-owned-asset-duel-live-strike-evidence.json`.
+   - The live strike consumed the Asset Duel input plus the owner-marker sibling
+     input and reduced power from 600 to 450.
+   - Next: wrong witness, missing sibling, and wrong sibling covenant id
+     candidates.
    - Do not fake nested execution; the point is sibling authority.
 
 3. Add recurring-vault window reset behavior.

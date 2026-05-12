@@ -122,9 +122,12 @@ continuation state is
    - Current target: Covenant-Owned Asset Duel. `contracts/CovenantOwnedAssetDuel.sil`
      compiles, and `artifacts/covenant-owned-asset-duel-proof.json` locally
      proves expected sibling authorization plus missing/wrong sibling rejection.
-   - TN12 preflight: `fixtures/CovenantOwnedAssetDuelContractOutpoint.json`
-     records an accepted covenant-genesis output.
-   - Next: build and submit the sibling-authorized strike spend.
+   - Live TN12 path:
+     `artifacts/covenant-owned-asset-duel-live-strike-evidence.json` records an
+     accepted owner-marker covenant output, accepted live asset-duel genesis,
+     and accepted sibling-authorized strike spend.
+   - Next: add live negative candidates for wrong witness, missing sibling, and
+     wrong sibling covenant id.
 3. Multiplexor demo.
    - One router sends state to worker A or B and the worker returns to router.
    - Add timeout or rollback path if a bad selector can stall the state.

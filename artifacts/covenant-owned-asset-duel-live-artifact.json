@@ -1,0 +1,9 @@
+{
+  "schema": "tn12-covenant-owned-asset-duel-live-artifact/v1",
+  "network": "kaspa-testnet-12",
+  "status": "live-owner-covenant-artifact-built",
+  "ownerMarker": "fixtures/AssetDuelOwnerMarkerOutpoint.json",
+  "ownerCovenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+  "fixture": "fixtures/CovenantOwnedAssetDuelLive.ctor.json",
+  "artifact": "artifacts/CovenantOwnedAssetDuelLive.json"
+}

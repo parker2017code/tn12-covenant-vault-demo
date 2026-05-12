@@ -1,0 +1,36 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "asset-duel-owner-marker",
+  "contract": "P2pkOwnerMarker",
+  "fetchedAt": "2026-05-12T23:08:31.818Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+  "txid": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+  "outputIndex": 0,
+  "amountTkas": 1,
+  "amountSompi": "100000000",
+  "scriptType": "pubkey",
+  "scriptPublicKeyAddress": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+  "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+  "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+  "redeemScriptHex": null,
+  "redeemScriptBytes": 0,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 10028863,
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+  "raw": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "outpoint": {
+      "transactionId": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "100000000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+      },
+      "blockDaaScore": "10028863",
+      "isCoinbase": false
+    }
+  }
+}

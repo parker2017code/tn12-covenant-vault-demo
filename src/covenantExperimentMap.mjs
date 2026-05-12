@@ -115,7 +115,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "covenant-owned-asset-game",
       title: "Covenant-Owned Asset Duel",
       rank: 3,
-      status: "accepted-genesis-funded-preflight",
+      status: "accepted-sibling-input-strike",
       proofTarget: "asset UTXO owned by a covenant input through sibling-input authorization",
       whyItMatters: "Demonstrates ICC: one covenant does not execute the other, but can accept its sibling input as authority.",
       covenantPattern: "ICC / covenant-owned asset",
@@ -126,15 +126,24 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/covenant-owned-asset-duel-proof.json",
         "artifacts/signed-drafts/covenant-owned-asset-duel-genesis-funding.json",
         "fixtures/CovenantOwnedAssetDuelContractOutpoint.json",
+        "artifacts/signed-drafts/asset-duel-owner-marker-genesis.json",
+        "fixtures/AssetDuelOwnerMarkerOutpoint.json",
+        "artifacts/CovenantOwnedAssetDuelLive.json",
+        "artifacts/covenant-owned-asset-duel-live-artifact.json",
+        "artifacts/signed-drafts/covenant-owned-asset-duel-live-genesis-funding.json",
+        "fixtures/CovenantOwnedAssetDuelLiveContractOutpoint.json",
+        "artifacts/signed-drafts/covenant-owned-asset-duel-live-strike.json",
+        "fixtures/CovenantOwnedAssetDuelStrikeOutpoint.json",
+        "artifacts/covenant-owned-asset-duel-live-strike-evidence.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       nextBuildSteps: [
-        "Build a guarded live strike preflight with the same covenant_id rule.",
-        "Submit only after the sibling-input authorization path reconstructs cleanly.",
-        "Keep negative cases attached: missing sibling, wrong witness, wrong sibling covenant_id."
+        "Add live negative candidates: missing sibling, wrong witness, wrong sibling covenant_id.",
+        "Turn the strike into a visible duel round on the experiments page.",
+        "Keep user-wallet signing out of the claim until the same path signs through wallet-standard handoff."
       ],
-      hardBoundary: "The asset-duel genesis output is accepted on TN12, and local ICC proofs pass. It is not an accepted sibling-authorized strike spend yet."
+      hardBoundary: "The owner-marker genesis, live asset-duel genesis, and sibling-authorized strike spend are accepted on TN12. This proves sibling-input authorization, not nested contract execution or a production asset standard."
     }),
     experiment({
       id: "scheduler-duel",

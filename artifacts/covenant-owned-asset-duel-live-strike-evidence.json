@@ -1,0 +1,76 @@
+{
+  "schema": "tn12-covenant-owned-asset-duel-live-strike-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "checkedAt": "2026-05-12T23:14:20.119Z",
+  "status": "accepted-sibling-input-strike",
+  "pattern": {
+    "name": "ICC sibling-input authorization",
+    "description": "The asset covenant accepts an owner covenant id present on input 1. It does not nest or execute the owner covenant."
+  },
+  "acceptedFlow": [
+    {
+      "step": "owner-marker-genesis",
+      "txid": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+      "outputIndex": 0,
+      "amountSompi": "100000000",
+      "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f"
+    },
+    {
+      "step": "asset-duel-genesis",
+      "txid": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+      "outputIndex": 0,
+      "amountSompi": "1000000000",
+      "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+      "ownerCovenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165"
+    },
+    {
+      "step": "sibling-authorized-strike",
+      "txid": "f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+      "outputIndex": 0,
+      "amountSompi": "999980000",
+      "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+      "state": {
+        "minerFeeSompi": 20000,
+        "ownerCovenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+        "powerAfter": 450,
+        "powerBefore": 600,
+        "spendPower": 150,
+        "witnessInput": 1
+      }
+    }
+  ],
+  "localChecks": {
+    "strikeEngineAcceptedGeneratedSigScript": true,
+    "assetContractAccepted": true,
+    "ownerMarkerP2pkAccepted": true,
+    "outputCovenantMatchesAssetInput": true,
+    "ownerMarkerInputPresent": true
+  },
+  "proves": [
+    "A standard P2PK owner-marker covenant output was accepted on TN12.",
+    "The live Asset Duel covenant was compiled with that owner covenant id and accepted on TN12.",
+    "A two-input strike spend was accepted on TN12 with the asset input plus owner-marker sibling input.",
+    "The strike continuation reduced power from 600 to 450 and preserved the asset covenant id."
+  ],
+  "doesNotProve": [
+    "nested contract execution",
+    "mainnet activation",
+    "production asset standard",
+    "user-wallet signing"
+  ],
+  "sourceArtifacts": {
+    "ownerDraft": "artifacts/signed-drafts/asset-duel-owner-marker-genesis.json",
+    "ownerOutpoint": "fixtures/AssetDuelOwnerMarkerOutpoint.json",
+    "liveArtifact": "artifacts/covenant-owned-asset-duel-live-artifact.json",
+    "liveGenesisDraft": "artifacts/signed-drafts/covenant-owned-asset-duel-live-genesis-funding.json",
+    "liveGenesisOutpoint": "fixtures/CovenantOwnedAssetDuelLiveContractOutpoint.json",
+    "strikeDraft": "artifacts/signed-drafts/covenant-owned-asset-duel-live-strike.json",
+    "strikeOutpoint": "fixtures/CovenantOwnedAssetDuelStrikeOutpoint.json"
+  }
+}

@@ -1,0 +1,493 @@
+{
+  "contract_name": "CovenantOwnedAssetDuel",
+  "script": [
+    32,
+    134,
+    105,
+    65,
+    90,
+    100,
+    38,
+    89,
+    121,
+    10,
+    229,
+    225,
+    129,
+    0,
+    33,
+    215,
+    204,
+    170,
+    87,
+    47,
+    53,
+    128,
+    227,
+    146,
+    120,
+    57,
+    106,
+    82,
+    101,
+    100,
+    104,
+    80,
+    83,
+    8,
+    88,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    82,
+    121,
+    0,
+    160,
+    105,
+    82,
+    121,
+    120,
+    161,
+    105,
+    84,
+    121,
+    207,
+    82,
+    121,
+    135,
+    105,
+    185,
+    203,
+    81,
+    156,
+    105,
+    83,
+    121,
+    1,
+    32,
+    124,
+    126,
+    120,
+    84,
+    121,
+    148,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    185,
+    118,
+    201,
+    118,
+    1,
+    121,
+    148,
+    1,
+    42,
+    147,
+    124,
+    188,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    185,
+    0,
+    204,
+    195,
+    135,
+    105,
+    117,
+    117,
+    117,
+    117,
+    117,
+    81
+  ],
+  "ast": {
+    "name": "CovenantOwnedAssetDuel",
+    "params": [
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "initOwnerCovenantId",
+        "span": "byte[32] initOwnerCovenantId",
+        "type_span": "byte[32]",
+        "name_span": "initOwnerCovenantId"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "initPower",
+        "span": "int initPower",
+        "type_span": "int ",
+        "name_span": "initPower"
+      }
+    ],
+    "fields": [
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "ownerCovenantId",
+        "expr": {
+          "kind": "identifier",
+          "data": "initOwnerCovenantId",
+          "span": "initOwnerCovenantId"
+        },
+        "span": "byte[32] ownerCovenantId = initOwnerCovenantId;",
+        "type_span": "byte[32]",
+        "name_span": "ownerCovenantId"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "power",
+        "expr": {
+          "kind": "identifier",
+          "data": "initPower",
+          "span": "initPower"
+        },
+        "span": "int power = initPower;",
+        "type_span": "int ",
+        "name_span": "power"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "strike",
+        "params": [
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "witnessInput",
+            "span": "int witnessInput",
+            "type_span": "int ",
+            "name_span": "witnessInput"
+          },
+          {
+            "type_ref": {
+              "base": "byte",
+              "array_dims": [
+                {
+                  "kind": "fixed",
+                  "value": 32
+                }
+              ]
+            },
+            "name": "nextOwnerCovenantId",
+            "span": "byte[32] nextOwnerCovenantId",
+            "type_span": "byte[32]",
+            "name_span": "nextOwnerCovenantId"
+          },
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "spendPower",
+            "span": "int spendPower",
+            "type_span": "int ",
+            "name_span": "spendPower"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "gt",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "spendPower",
+                    "span": "spendPower"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "spendPower > 0"
+              },
+              "message": null,
+              "span": "require(spendPower > 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "le",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "spendPower",
+                    "span": "spendPower"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "power",
+                    "span": "power"
+                  }
+                },
+                "span": "spendPower <= power"
+              },
+              "message": null,
+              "span": "require(spendPower <= power);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "call",
+                    "data": {
+                      "name": "OpInputCovenantId",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "witnessInput",
+                          "span": "witnessInput"
+                        }
+                      ],
+                      "name_span": "OpInputCovenantId"
+                    },
+                    "span": "OpInputCovenantId(witnessInput)"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "ownerCovenantId",
+                    "span": "ownerCovenantId"
+                  }
+                },
+                "span": "OpInputCovenantId(witnessInput) == ownerCovenantId"
+              },
+              "message": null,
+              "span": "require(OpInputCovenantId(witnessInput) == ownerCovenantId);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "call",
+                    "data": {
+                      "name": "OpAuthOutputCount",
+                      "args": [
+                        {
+                          "kind": "nullary",
+                          "data": "active_input_index",
+                          "span": "this.activeInputIndex"
+                        }
+                      ],
+                      "name_span": "OpAuthOutputCount"
+                    },
+                    "span": "OpAuthOutputCount(this.activeInputIndex)"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "1"
+                  }
+                },
+                "span": "OpAuthOutputCount(this.activeInputIndex) == 1"
+              },
+              "message": null,
+              "span": "require(OpAuthOutputCount(this.activeInputIndex) == 1);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "output_idx",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputIdx",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "this.activeInputIndex"
+                    },
+                    {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "0"
+                    }
+                  ],
+                  "name_span": "OpAuthOutputIdx"
+                },
+                "span": "OpAuthOutputIdx(this.activeInputIndex, 0)"
+              },
+              "span": "int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "output_idx"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "State"
+              },
+              "modifiers": [],
+              "name": "nextState",
+              "expr": {
+                "kind": "state_object",
+                "data": [
+                  {
+                    "name": "ownerCovenantId",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "nextOwnerCovenantId",
+                      "span": "nextOwnerCovenantId"
+                    },
+                    "span": "ownerCovenantId: nextOwnerCovenantId",
+                    "name_span": "ownerCovenantId"
+                  },
+                  {
+                    "name": "power",
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "sub",
+                        "left": {
+                          "kind": "identifier",
+                          "data": "power",
+                          "span": "power"
+                        },
+                        "right": {
+                          "kind": "identifier",
+                          "data": "spendPower",
+                          "span": "spendPower"
+                        }
+                      },
+                      "span": "power - spendPower"
+                    },
+                    "span": "power: power - spendPower\n        ",
+                    "name_span": "power"
+                  }
+                ],
+                "span": "{\n            ownerCovenantId: nextOwnerCovenantId,\n            power: power - spendPower\n        }"
+              },
+              "span": "State nextState = {\n            ownerCovenantId: nextOwnerCovenantId,\n            power: power - spendPower\n        };",
+              "type_span": "State ",
+              "modifier_spans": [],
+              "name_span": "nextState"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputState",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "output_idx",
+                  "span": "output_idx"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "nextState",
+                  "span": "nextState"
+                }
+              ],
+              "span": "validateOutputState(output_idx, nextState);",
+              "name_span": "validateOutputState"
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function strike(int witnessInput, byte[32] nextOwnerCovenantId, int spendPower) {\n        require(spendPower > 0);\n        require(spendPower <= power);\n        require(OpInputCovenantId(witnessInput) == ownerCovenantId);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n        State nextState = {\n            ownerCovenantId: nextOwnerCovenantId,\n            power: power - spendPower\n        };\n        validateOutputState(output_idx, nextState);\n    }",
+        "name_span": "strike",
+        "body_span": "require(spendPower > 0);\n        require(spendPower <= power);\n        require(OpInputCovenantId(witnessInput) == ownerCovenantId);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n        State nextState = {\n            ownerCovenantId: nextOwnerCovenantId,\n            power: power - spendPower\n        };\n        validateOutputState(output_idx, nextState);"
+      }
+    ],
+    "span": "contract CovenantOwnedAssetDuel(byte[32] initOwnerCovenantId, int initPower) {\n    byte[32] ownerCovenantId = initOwnerCovenantId;\n    int power = initPower;\n\n    entrypoint function strike(int witnessInput, byte[32] nextOwnerCovenantId, int spendPower) {\n        require(spendPower > 0);\n        require(spendPower <= power);\n        require(OpInputCovenantId(witnessInput) == ownerCovenantId);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n        State nextState = {\n            ownerCovenantId: nextOwnerCovenantId,\n            power: power - spendPower\n        };\n        validateOutputState(output_idx, nextState);\n    }\n}",
+    "name_span": "CovenantOwnedAssetDuel"
+  },
+  "abi": [
+    {
+      "name": "strike",
+      "inputs": [
+        {
+          "name": "witnessInput",
+          "type_name": "int"
+        },
+        {
+          "name": "nextOwnerCovenantId",
+          "type_name": "byte[32]"
+        },
+        {
+          "name": "spendPower",
+          "type_name": "int"
+        }
+      ]
+    }
+  ],
+  "without_selector": true,
+  "state_layout": {
+    "start": 0,
+    "len": 42
+  },
+  "debug_info": null
+}
