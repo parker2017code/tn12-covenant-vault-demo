@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-12T23:25:11.309Z",
+  "generatedAt": "2026-05-12T23:37:09.228Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -159,15 +159,16 @@
         "artifacts/signed-drafts/covenant-owned-asset-duel-live-strike.json",
         "fixtures/CovenantOwnedAssetDuelStrikeOutpoint.json",
         "artifacts/covenant-owned-asset-duel-live-strike-evidence.json",
+        "artifacts/covenant-owned-asset-duel-live-negative-evidence.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       "nextBuildSteps": [
-        "Add live negative candidates: missing sibling, wrong witness, wrong sibling covenant_id.",
         "Turn the strike into a visible duel round on the experiments page.",
+        "Only attempt broadcast-rejected negative rows if there is a safe non-spending route.",
         "Keep user-wallet signing out of the claim until the same path signs through wallet-standard handoff."
       ],
-      "hardBoundary": "The owner-marker genesis, live asset-duel genesis, and sibling-authorized strike spend are accepted on TN12. This proves sibling-input authorization, not nested contract execution or a production asset standard."
+      "hardBoundary": "The owner-marker genesis, live asset-duel genesis, and sibling-authorized strike spend are accepted on TN12. Negative candidates use the same live ids locally and are not broadcast-rejection records."
     },
     {
       "id": "scheduler-duel",

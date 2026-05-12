@@ -31,8 +31,8 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Add Asset Duel live negative evidence. | Missing sibling, wrong witness, and wrong sibling covenant-id candidates are recorded against the accepted live strike path. | No |
-| 2 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
+| 1 | Add recurring-vault window reset proof. | A continuation after the cap window resets spent-in-window state, with early/stale reset candidates blocked. | No |
+| 2 | Render Asset Duel as a visible duel round. | The accepted owner marker, asset genesis, strike, and live-id local negative rows are readable without opening raw JSON. | No |
 | 3 | Add Blitz Mux challenge/settlement rows. | The accepted mux/worker/timeout path has a bounded next reviewer step instead of becoming a full game claim. | No |
 | 4 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |

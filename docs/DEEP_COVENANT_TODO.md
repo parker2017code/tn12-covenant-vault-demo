@@ -43,6 +43,9 @@ until these move.
 - `artifacts/covenant-owned-asset-duel-live-strike-evidence.json` records the
   accepted TN12 owner-marker output, live asset-duel genesis output, and
   two-input sibling-authorized strike spend.
+- `artifacts/covenant-owned-asset-duel-live-negative-evidence.json` records
+  local script-engine rejects for wrong witness, missing sibling, and wrong
+  sibling covenant id using the accepted live owner/asset covenant ids.
 - `contracts/BlitzMux.sil`, `contracts/BlitzWorkerA.sil`, and
   `contracts/BlitzWorkerB.sil` compile.
 - `artifacts/blitz-mux-arena-proof.json` proves the local mux/worker pattern:
@@ -58,20 +61,15 @@ until these move.
 
 ## Next Exact Tasks
 
-1. Add Covenant-Owned Asset Duel live negative evidence.
-   - Pattern: ICC / sibling-input authorization.
-   - Accepted path is recorded in
-     `artifacts/covenant-owned-asset-duel-live-strike-evidence.json`.
-   - The live strike consumed the Asset Duel input plus the owner-marker sibling
-     input and reduced power from 600 to 450.
-   - Next: wrong witness, missing sibling, and wrong sibling covenant id
-     candidates.
-   - Do not fake nested execution; the point is sibling authority.
-
-2. Add recurring-vault window reset behavior.
+1. Add recurring-vault window reset behavior.
    - The accepted cumulative path proves one cap window.
    - Window reset needs its own accepted positive path and early/stale reset
      negative candidates.
+
+2. Render Asset Duel as a visible duel round.
+   - Use the accepted owner marker, asset genesis, strike, and live-id local
+     negatives.
+   - Do not fake nested execution; the point is sibling authority.
 
 3. Add Blitz Mux challenge/settlement rows.
    - The route, return, second route, and timeout path are accepted.

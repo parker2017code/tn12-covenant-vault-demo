@@ -126,8 +126,11 @@ continuation state is
      `artifacts/covenant-owned-asset-duel-live-strike-evidence.json` records an
      accepted owner-marker covenant output, accepted live asset-duel genesis,
      and accepted sibling-authorized strike spend.
-   - Next: add live negative candidates for wrong witness, missing sibling, and
-     wrong sibling covenant id.
+   - Live-id negative path:
+     `artifacts/covenant-owned-asset-duel-live-negative-evidence.json` records
+     local rejects for wrong witness, missing sibling, and wrong sibling
+     covenant id using the same live ids. These are not broadcast rejection
+     records.
 3. Multiplexor demo.
    - One router sends state to worker A or B and the worker returns to router.
    - Add timeout or rollback path if a bad selector can stall the state.

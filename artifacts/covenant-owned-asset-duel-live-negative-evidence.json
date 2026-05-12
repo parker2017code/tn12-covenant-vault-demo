@@ -1,0 +1,89 @@
+{
+  "schema": "tn12-covenant-owned-asset-duel-live-negative-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "checkedAt": "2026-05-12T23:34:50.971Z",
+  "status": "local-live-id-negative-candidates-passed",
+  "acceptedPositivePath": {
+    "ownerMarker": {
+      "step": "owner-marker-genesis",
+      "txid": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+      "outputIndex": 0,
+      "amountSompi": "100000000",
+      "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f"
+    },
+    "assetGenesis": {
+      "step": "asset-duel-genesis",
+      "txid": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+      "outputIndex": 0,
+      "amountSompi": "1000000000",
+      "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+      "ownerCovenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165"
+    },
+    "siblingAuthorizedStrike": {
+      "step": "sibling-authorized-strike",
+      "txid": "f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+      "outputIndex": 0,
+      "amountSompi": "999980000",
+      "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+      "state": {
+        "minerFeeSompi": 20000,
+        "ownerCovenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+        "powerAfter": 450,
+        "powerBefore": 600,
+        "spendPower": 150,
+        "witnessInput": 1
+      }
+    }
+  },
+  "candidateScope": "Local script-engine candidates using the same live owner and asset covenant ids as the accepted strike path. These rows were not broadcast.",
+  "cases": [
+    {
+      "name": "sibling_covenant_authorizes_asset_move",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "wrong_witness_rejects_asset_move",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    },
+    {
+      "name": "missing_sibling_rejects_asset_move",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    },
+    {
+      "name": "wrong_sibling_covenant_rejects_asset_move",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    }
+  ],
+  "proves": [
+    "the live owner covenant id authorizes the local strike candidate",
+    "wrong witness index is rejected",
+    "missing sibling input is rejected",
+    "wrong sibling covenant id is rejected"
+  ],
+  "doesNotProve": [
+    "TN12 rejected-mempool records for the negative candidates",
+    "nested covenant execution",
+    "production asset standard",
+    "user-wallet signing"
+  ],
+  "sourceArtifacts": {
+    "liveStrikeEvidence": "artifacts/covenant-owned-asset-duel-live-strike-evidence.json",
+    "rustHarness": "scripts/rust/covenant_owned_asset_duel_proof.rs"
+  },
+  "stdout": "sibling_covenant_authorizes_asset_move got=true expected=true\nwrong_witness_rejects_asset_move got=false expected=false\nmissing_sibling_rejects_asset_move got=false expected=false\nwrong_sibling_covenant_rejects_asset_move got=false expected=false",
+  "stderr": ""
+}
