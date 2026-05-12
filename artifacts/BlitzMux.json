@@ -1,0 +1,860 @@
+{
+  "contract_name": "BlitzMux",
+  "script": [
+    32,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    17,
+    32,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    32,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    49,
+    8,
+    5,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8,
+    10,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    118,
+    0,
+    156,
+    105,
+    185,
+    203,
+    81,
+    156,
+    105,
+    84,
+    121,
+    81,
+    90,
+    121,
+    0,
+    158,
+    99,
+    90,
+    121,
+    81,
+    156,
+    105,
+    85,
+    121,
+    123,
+    117,
+    82,
+    123,
+    117,
+    104,
+    118,
+    90,
+    121,
+    90,
+    121,
+    126,
+    83,
+    121,
+    124,
+    170,
+    135,
+    105,
+    88,
+    121,
+    1,
+    32,
+    124,
+    126,
+    88,
+    121,
+    1,
+    32,
+    124,
+    126,
+    88,
+    121,
+    1,
+    32,
+    124,
+    126,
+    88,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    88,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    85,
+    121,
+    88,
+    205,
+    1,
+    8,
+    124,
+    126,
+    126,
+    126,
+    126,
+    126,
+    126,
+    91,
+    121,
+    124,
+    126,
+    90,
+    121,
+    126,
+    170,
+    2,
+    0,
+    0,
+    1,
+    170,
+    126,
+    1,
+    32,
+    126,
+    124,
+    126,
+    1,
+    135,
+    126,
+    185,
+    0,
+    204,
+    195,
+    135,
+    105,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    0,
+    122,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    81
+  ],
+  "ast": {
+    "name": "BlitzMux",
+    "params": [
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "init_mux_template",
+        "span": "byte[32] init_mux_template",
+        "type_span": "byte[32]",
+        "name_span": "init_mux_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "init_a_template",
+        "span": "byte[32] init_a_template",
+        "type_span": "byte[32]",
+        "name_span": "init_a_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "init_b_template",
+        "span": "byte[32] init_b_template",
+        "type_span": "byte[32]",
+        "name_span": "init_b_template"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "init_value",
+        "span": "int init_value",
+        "type_span": "int ",
+        "name_span": "init_value"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "init_timeout",
+        "span": "int init_timeout",
+        "type_span": "int ",
+        "name_span": "init_timeout"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "init_pending",
+        "span": "int init_pending",
+        "type_span": "int ",
+        "name_span": "init_pending"
+      }
+    ],
+    "fields": [
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "mux_template",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_mux_template",
+          "span": "init_mux_template"
+        },
+        "span": "byte[32] mux_template = init_mux_template;",
+        "type_span": "byte[32]",
+        "name_span": "mux_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "a_template",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_a_template",
+          "span": "init_a_template"
+        },
+        "span": "byte[32] a_template = init_a_template;",
+        "type_span": "byte[32]",
+        "name_span": "a_template"
+      },
+      {
+        "type_ref": {
+          "base": "byte",
+          "array_dims": [
+            {
+              "kind": "fixed",
+              "value": 32
+            }
+          ]
+        },
+        "name": "b_template",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_b_template",
+          "span": "init_b_template"
+        },
+        "span": "byte[32] b_template = init_b_template;",
+        "type_span": "byte[32]",
+        "name_span": "b_template"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "value",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_value",
+          "span": "init_value"
+        },
+        "span": "int value = init_value;",
+        "type_span": "int ",
+        "name_span": "value"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "move_timeout",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_timeout",
+          "span": "init_timeout"
+        },
+        "span": "int move_timeout = init_timeout;",
+        "type_span": "int ",
+        "name_span": "move_timeout"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "pending",
+        "expr": {
+          "kind": "identifier",
+          "data": "init_pending",
+          "span": "init_pending"
+        },
+        "span": "int pending = init_pending;",
+        "type_span": "int ",
+        "name_span": "pending"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "route",
+        "params": [
+          {
+            "type_ref": {
+              "base": "int"
+            },
+            "name": "selector",
+            "span": "int selector",
+            "type_span": "int ",
+            "name_span": "selector"
+          },
+          {
+            "type_ref": {
+              "base": "byte",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "target_prefix",
+            "span": "byte[] target_prefix",
+            "type_span": "byte[]",
+            "name_span": "target_prefix"
+          },
+          {
+            "type_ref": {
+              "base": "byte",
+              "array_dims": [
+                {
+                  "kind": "dynamic"
+                }
+              ]
+            },
+            "name": "target_suffix",
+            "span": "byte[] target_suffix",
+            "type_span": "byte[]",
+            "name_span": "target_suffix"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "pending",
+                    "span": "pending"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "pending == 0"
+              },
+              "message": null,
+              "span": "require(pending == 0);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "call",
+                    "data": {
+                      "name": "OpAuthOutputCount",
+                      "args": [
+                        {
+                          "kind": "nullary",
+                          "data": "active_input_index",
+                          "span": "this.activeInputIndex"
+                        }
+                      ],
+                      "name_span": "OpAuthOutputCount"
+                    },
+                    "span": "OpAuthOutputCount(this.activeInputIndex)"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "1"
+                  }
+                },
+                "span": "OpAuthOutputCount(this.activeInputIndex) == 1"
+              },
+              "message": null,
+              "span": "require(OpAuthOutputCount(this.activeInputIndex) == 1);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "output_idx",
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "OpAuthOutputIdx",
+                  "args": [
+                    {
+                      "kind": "nullary",
+                      "data": "active_input_index",
+                      "span": "this.activeInputIndex"
+                    },
+                    {
+                      "kind": "int",
+                      "data": 0,
+                      "span": "0"
+                    }
+                  ],
+                  "name_span": "OpAuthOutputIdx"
+                },
+                "span": "OpAuthOutputIdx(this.activeInputIndex, 0)"
+              },
+              "span": "int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "output_idx"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 32
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "target_template",
+              "expr": {
+                "kind": "identifier",
+                "data": "a_template",
+                "span": "a_template"
+              },
+              "span": "byte[32] target_template = a_template;",
+              "type_span": "byte[32]",
+              "modifier_spans": [],
+              "name_span": "target_template"
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "int"
+              },
+              "modifiers": [],
+              "name": "next_pending",
+              "expr": {
+                "kind": "int",
+                "data": 1,
+                "span": "1"
+              },
+              "span": "int next_pending = 1;",
+              "type_span": "int ",
+              "modifier_spans": [],
+              "name_span": "next_pending"
+            }
+          },
+          {
+            "kind": "if",
+            "data": {
+              "condition": {
+                "kind": "binary",
+                "data": {
+                  "op": "ne",
+                  "left": {
+                    "kind": "identifier",
+                    "data": "selector",
+                    "span": "selector"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 0,
+                    "span": "0"
+                  }
+                },
+                "span": "selector != 0"
+              },
+              "then_branch": [
+                {
+                  "kind": "require",
+                  "data": {
+                    "expr": {
+                      "kind": "binary",
+                      "data": {
+                        "op": "eq",
+                        "left": {
+                          "kind": "identifier",
+                          "data": "selector",
+                          "span": "selector"
+                        },
+                        "right": {
+                          "kind": "int",
+                          "data": 1,
+                          "span": "1"
+                        }
+                      },
+                      "span": "selector == 1"
+                    },
+                    "message": null,
+                    "span": "require(selector == 1);",
+                    "message_span": null
+                  }
+                },
+                {
+                  "kind": "assign",
+                  "data": {
+                    "name": "target_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "b_template",
+                      "span": "b_template"
+                    },
+                    "span": "target_template = b_template;",
+                    "name_span": "target_template"
+                  }
+                },
+                {
+                  "kind": "assign",
+                  "data": {
+                    "name": "next_pending",
+                    "expr": {
+                      "kind": "int",
+                      "data": 2,
+                      "span": "2"
+                    },
+                    "span": "next_pending = 2;",
+                    "name_span": "next_pending"
+                  }
+                }
+              ],
+              "else_branch": null,
+              "span": "if (selector != 0) {\n            require(selector == 1);\n            target_template = b_template;\n            next_pending = 2;\n        }\n\n        ",
+              "then_span": "require(selector == 1);\n            target_template = b_template;\n            next_pending = 2;",
+              "else_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "State"
+              },
+              "modifiers": [],
+              "name": "state",
+              "expr": {
+                "kind": "state_object",
+                "data": [
+                  {
+                    "name": "mux_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "mux_template",
+                      "span": "mux_template"
+                    },
+                    "span": "mux_template: mux_template",
+                    "name_span": "mux_template"
+                  },
+                  {
+                    "name": "a_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "a_template",
+                      "span": "a_template"
+                    },
+                    "span": "a_template: a_template",
+                    "name_span": "a_template"
+                  },
+                  {
+                    "name": "b_template",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "b_template",
+                      "span": "b_template"
+                    },
+                    "span": "b_template: b_template",
+                    "name_span": "b_template"
+                  },
+                  {
+                    "name": "value",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "value",
+                      "span": "value"
+                    },
+                    "span": "value: value",
+                    "name_span": "value"
+                  },
+                  {
+                    "name": "move_timeout",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "move_timeout",
+                      "span": "move_timeout"
+                    },
+                    "span": "move_timeout: move_timeout",
+                    "name_span": "move_timeout"
+                  },
+                  {
+                    "name": "pending",
+                    "expr": {
+                      "kind": "identifier",
+                      "data": "next_pending",
+                      "span": "next_pending"
+                    },
+                    "span": "pending: next_pending\n        ",
+                    "name_span": "pending"
+                  }
+                ],
+                "span": "{\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value,\n            move_timeout: move_timeout,\n            pending: next_pending\n        }"
+              },
+              "span": "State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value,\n            move_timeout: move_timeout,\n            pending: next_pending\n        };",
+              "type_span": "State ",
+              "modifier_spans": [],
+              "name_span": "state"
+            }
+          },
+          {
+            "kind": "function_call",
+            "data": {
+              "name": "validateOutputStateWithTemplate",
+              "args": [
+                {
+                  "kind": "identifier",
+                  "data": "output_idx",
+                  "span": "output_idx"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "state",
+                  "span": "state"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "target_prefix",
+                  "span": "target_prefix"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "target_suffix",
+                  "span": "target_suffix"
+                },
+                {
+                  "kind": "identifier",
+                  "data": "target_template",
+                  "span": "target_template"
+                }
+              ],
+              "span": "validateOutputStateWithTemplate(output_idx, state, target_prefix, target_suffix, target_template);",
+              "name_span": "validateOutputStateWithTemplate"
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function route(int selector, byte[] target_prefix, byte[] target_suffix) {\n        require(pending == 0);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        byte[32] target_template = a_template;\n        int next_pending = 1;\n        if (selector != 0) {\n            require(selector == 1);\n            target_template = b_template;\n            next_pending = 2;\n        }\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value,\n            move_timeout: move_timeout,\n            pending: next_pending\n        };\n        validateOutputStateWithTemplate(output_idx, state, target_prefix, target_suffix, target_template);\n    }",
+        "name_span": "route",
+        "body_span": "require(pending == 0);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        byte[32] target_template = a_template;\n        int next_pending = 1;\n        if (selector != 0) {\n            require(selector == 1);\n            target_template = b_template;\n            next_pending = 2;\n        }\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value,\n            move_timeout: move_timeout,\n            pending: next_pending\n        };\n        validateOutputStateWithTemplate(output_idx, state, target_prefix, target_suffix, target_template);"
+      }
+    ],
+    "span": "contract BlitzMux(byte[32] init_mux_template, byte[32] init_a_template, byte[32] init_b_template, int init_value, int init_timeout, int init_pending) {\n    byte[32] mux_template = init_mux_template;\n    byte[32] a_template = init_a_template;\n    byte[32] b_template = init_b_template;\n\n    int value = init_value;\n    int move_timeout = init_timeout;\n    int pending = init_pending;\n\n    entrypoint function route(int selector, byte[] target_prefix, byte[] target_suffix) {\n        require(pending == 0);\n        require(OpAuthOutputCount(this.activeInputIndex) == 1);\n        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);\n\n        byte[32] target_template = a_template;\n        int next_pending = 1;\n        if (selector != 0) {\n            require(selector == 1);\n            target_template = b_template;\n            next_pending = 2;\n        }\n\n        State state = {\n            mux_template: mux_template,\n            a_template: a_template,\n            b_template: b_template,\n            value: value,\n            move_timeout: move_timeout,\n            pending: next_pending\n        };\n        validateOutputStateWithTemplate(output_idx, state, target_prefix, target_suffix, target_template);\n    }\n}",
+    "name_span": "BlitzMux"
+  },
+  "abi": [
+    {
+      "name": "route",
+      "inputs": [
+        {
+          "name": "selector",
+          "type_name": "int"
+        },
+        {
+          "name": "target_prefix",
+          "type_name": "byte[]"
+        },
+        {
+          "name": "target_suffix",
+          "type_name": "byte[]"
+        }
+      ]
+    }
+  ],
+  "without_selector": true,
+  "state_layout": {
+    "start": 0,
+    "len": 126
+  },
+  "debug_info": null
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "tn12-blitz-mux-arena-proof/v1",
+  "reviewedAt": "2026-05-12",
+  "status": "local-mux-worker-timeout-proof-passed",
+  "sources": [
+    "contracts/BlitzMux.sil",
+    "contracts/BlitzWorkerA.sil",
+    "contracts/BlitzWorkerB.sil"
+  ],
+  "rustHarness": "scripts/rust/blitz_mux_arena_proof.rs",
+  "command": "TN12_REPO_ROOT=/home/parker2017/tn12-covenant-vault-demo CARGO_TARGET_DIR=/home/parker2017/silverscript-tools/target cargo run -q --manifest-path /tmp/tn12-blitz-mux-arena-eOUzfr/Cargo.toml",
+  "pattern": "mux/worker routing with timeout escape",
+  "cases": [
+    {
+      "name": "mux_routes_to_worker_a",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "mux_routes_to_worker_b",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "mux_bad_selector_rejects",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    },
+    {
+      "name": "worker_a_returns_to_mux",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "worker_b_returns_to_mux",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "worker_a_timeout_returns_to_mux",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "worker_a_timeout_too_early_rejects",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    }
+  ],
+  "proves": [
+    "mux routes shared state to worker A or B through template identity",
+    "worker A and worker B can return updated state to the mux",
+    "bad selector is rejected",
+    "timeout can recover a pending worker state after the move clock",
+    "too-early timeout is rejected"
+  ],
+  "doesNotProve": [
+    "accepted TN12 broadcast",
+    "full chess rules",
+    "production game settlement",
+    "mainnet activation"
+  ],
+  "stdout": "mux_routes_to_worker_a got=true expected=true\nmux_routes_to_worker_b got=true expected=true\nmux_bad_selector_rejects got=false expected=false\nworker_a_returns_to_mux got=true expected=true\nworker_b_returns_to_mux got=true expected=true\nworker_a_timeout_returns_to_mux got=true expected=true\nworker_a_timeout_too_early_rejects got=false expected=false",
+  "stderr": ""
+}

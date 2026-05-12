@@ -122,8 +122,11 @@ blocks submit because that REST UTXO response does not expose the input
 3. Multiplexor demo.
    - One router sends state to worker A or B and the worker returns to router.
    - Add timeout or rollback path if a bad selector can stall the state.
-   - First target: Blitz Mux Arena. Keep it small: mux, two workers, return
-     state, bad selector timeout.
+   - First target: Blitz Mux Arena. `contracts/BlitzMux.sil`,
+     `contracts/BlitzWorkerA.sil`, `contracts/BlitzWorkerB.sil`, and
+     `artifacts/blitz-mux-arena-proof.json` now prove the local mux/worker
+     loop: route to A/B, worker return, bad selector reject, timeout return,
+     and too-early timeout reject. It is not a TN12 accepted mux spend yet.
 4. Challenge/timeout demo.
    - Claim -> challenge -> timeout/settle.
    - This is the useful pattern for rules that are expensive to prove directly.

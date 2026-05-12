@@ -1,0 +1,44 @@
+contract BlitzWorkerA(byte[32] init_mux_template, byte[32] init_a_template, byte[32] init_b_template, int init_value, int init_timeout, int init_pending) {
+    byte[32] mux_template = init_mux_template;
+    byte[32] a_template = init_a_template;
+    byte[32] b_template = init_b_template;
+
+    int value = init_value;
+    int move_timeout = init_timeout;
+    int pending = init_pending;
+
+    entrypoint function apply(int reward, byte[] mux_prefix, byte[] mux_suffix) {
+        require(pending == 1);
+        require(reward > 0);
+        require(reward < 10);
+        require(OpAuthOutputCount(this.activeInputIndex) == 1);
+        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);
+
+        State state = {
+            mux_template: mux_template,
+            a_template: a_template,
+            b_template: b_template,
+            value: value + reward,
+            move_timeout: move_timeout,
+            pending: 0
+        };
+        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);
+    }
+
+    entrypoint function timeout(byte[] mux_prefix, byte[] mux_suffix) {
+        require(pending == 1);
+        require(this.age >= move_timeout);
+        require(OpAuthOutputCount(this.activeInputIndex) == 1);
+        int output_idx = OpAuthOutputIdx(this.activeInputIndex, 0);
+
+        State state = {
+            mux_template: mux_template,
+            a_template: a_template,
+            b_template: b_template,
+            value: value - 1,
+            move_timeout: move_timeout,
+            pending: 0
+        };
+        validateOutputStateWithTemplate(output_idx, state, mux_prefix, mux_suffix, mux_template);
+    }
+}

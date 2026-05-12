@@ -27,6 +27,11 @@ until these move.
 - `artifacts/covenant-owned-asset-duel-proof.json` proves the local ICC
   sibling-input pattern: expected sibling covenant ID authorizes an asset move;
   wrong witness, missing sibling, and wrong sibling covenant ID fail.
+- `contracts/BlitzMux.sil`, `contracts/BlitzWorkerA.sil`, and
+  `contracts/BlitzWorkerB.sil` compile.
+- `artifacts/blitz-mux-arena-proof.json` proves the local mux/worker pattern:
+  mux routes to worker A or B, workers return state to mux, bad selector fails,
+  timeout returns a pending worker state, and too-early timeout fails.
 
 ## Next Exact Tasks
 
@@ -48,14 +53,13 @@ until these move.
      live-spend preflight used for `RecurringTreasuryVault`.
    - Do not fake nested execution; the point is sibling authority.
 
-3. Build Blitz Mux Arena.
+3. Decide whether Blitz Mux Arena should get a funded TN12 output.
    - Pattern: mux/worker routing from the chess branch, reduced to the smallest
      toy.
-   - Minimal contract shape: one mux, two workers, shared state layout, template
-     identity, worker return path.
-   - Positive case: mux routes to worker, worker returns valid state.
-   - Negative/liveness case: bad selector or stalled worker path resolves by
-     timeout.
+   - Local contracts, artifact, and negative/liveness tests are built.
+   - Next optional step: fund one mux output and build a guarded live-spend
+     preflight that preserves the family `covenant_id`.
+   - Do not add game rules until one funded route and worker return are accepted.
 
 ## Lessons To Apply
 

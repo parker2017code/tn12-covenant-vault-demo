@@ -52,23 +52,27 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "blitz-mux-arena",
       title: "Blitz Mux Arena",
       rank: 1,
-      status: "third-next",
+      status: "local-proof-passed",
       proofTarget: "hub routes to worker, worker returns to hub, timeout escape path",
       whyItMatters: "Smallest source-faithful demo of the chess architecture without building full chess. It makes fast multi-transaction state transitions feel natural.",
       covenantPattern: "mux / worker contract family",
       websitePitch: "A hub sends the turn to one worker contract. The worker returns valid state before the clock runs out.",
       currentRepoEvidence: [
+        "contracts/BlitzMux.sil",
+        "contracts/BlitzWorkerA.sil",
+        "contracts/BlitzWorkerB.sil",
+        "artifacts/blitz-mux-arena-proof.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/ARCHITECTURE.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
       ],
       nextBuildSteps: [
-        "Study the local chess branch mux/worker source before writing the toy.",
-        "Create a two-worker Silverscript toy family.",
-        "Inject template hashes at genesis.",
-        "Show one good route and one stuck route with timeout recovery."
+        "Decide whether this stays as a local mux proof or gets a funded TN12 output.",
+        "If funded, build a guarded live-spend preflight that preserves the family covenant_id.",
+        "Extend only after one funded route and worker return are accepted.",
+        "Keep timeout evidence attached before adding challenge/settlement rows."
       ],
-      hardBoundary: "This should stay a toy contract-family proof until a real worker spend is accepted."
+      hardBoundary: "Compiled and locally proven only. It is not an accepted TN12 mux/worker spend yet."
     }),
     experiment({
       id: "coordination-league",
