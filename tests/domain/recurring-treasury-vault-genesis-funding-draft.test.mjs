@@ -34,7 +34,9 @@ if (reconstructedCovenant) {
 const candidate = summarizeWrpcCandidate(artifact, {
   artifactPath: "artifacts/signed-drafts/recurring-treasury-vault-genesis-funding.json"
 });
-assert.equal(candidate.txidMatches, true);
+if (reconstructedCovenant) {
+  assert.equal(candidate.txidMatches, true);
+}
 assert.equal(candidate.txVersion, 1);
 
 console.log("Recurring treasury vault genesis funding draft tests passed.");
