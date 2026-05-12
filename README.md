@@ -17,6 +17,7 @@ Start here:
 - `docs/CLAIM_VOCABULARY.md`: short definitions for `SCRIPT_ENFORCED`, `PLANNER_ONLY`, `INDEXER_DERIVED`, and related labels.
 - `docs/COMMAND_RUNBOOK.md`: command prerequisites, safety classes, and fresh playground route.
 - `docs/CLI_FROM_ZERO.md`: blank-terminal path from install to TN12 playground, wallet drafts, submit boundaries, and DeFi-style replay.
+- `docs/PROOF_CORE_RELEASE_CANDIDATE.md`: pinned proof-core release-candidate note with txids, counts, hashes, commands, and boundaries.
 - `docs/TANGVM_UNISC_BOUNDARY.md`: scheduler/TangVM/vProgs-adjacent boundary.
 - `docs/PRODUCT_EXECUTION_PLAN.md`: money rails -> covenants -> based-app prototypes -> later vProgs operating plan.
 - `docs/COPY_CLEANUP_PLAN.md`: public wording standard for pages and handoff docs.
@@ -90,6 +91,7 @@ If you are starting from a blank terminal, use `docs/CLI_FROM_ZERO.md` first. It
 | Next steps | `docs/NEXT_STEPS.md` |
 | Project manifest | `artifacts/project-review-manifest.json` |
 | Proof index | `docs/PROOF_INDEX.md` |
+| Proof-core release candidate | `docs/PROOF_CORE_RELEASE_CANDIDATE.md` |
 | Tested/not-tested matrix | `docs/TN12_TEST_MATRIX.md` |
 | Mainnet readiness | `MAINNET_READINESS.md` |
 | Detailed task slice | `artifacts/next-ten-execution-status.json` |
