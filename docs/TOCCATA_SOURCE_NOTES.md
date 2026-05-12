@@ -43,13 +43,31 @@ SilverScript compiler.
 That means the next step can be a real recurring treasury covenant attempt,
 not another planning artifact.
 
+`contracts/RecurringTreasuryVault.sil` now also compiles and the contract
+output has accepted TN12 funding. That is still not enough to call recurring
+caps script-enforced. The current source review found two practical blockers:
+
+- the JS `kaspa-wasm` package used by this repo exposes
+  `TransactionOutput(value, script_public_key)` and no exported
+  `CovenantBinding` constructor, so the browser/Node submit path cannot yet
+  build a covenant-bound continuation output;
+- the Rust debugger can model `CovenantBinding` for local tests, but the
+  current recurring-vault positive path still needs a typed `ownerSig` /
+  redeem-script route for the generated DECL entrypoint.
+
+The build-depth artifact is
+`artifacts/silverscript-build-depth-review.json`; rebuild it with
+`npm run covenant:build-depth`.
+
 ## Next Build Order
 
 1. Recurring treasury vault.
    - State: `amount`, `spentInWindow`, `windowStart`, required destination.
    - Positive: under-cap continuation.
    - Negative: over cap, wrong destination, missing continuation, wrong role.
-   - Keep local-wallet cap evidence separate until accepted script spend exists.
+   - First prove locally with the Rust debugger or a Rust harness that can
+     construct covenant-bound outputs. Keep local-wallet cap evidence separate
+     until accepted script spend exists.
 2. ICC ownership demo.
    - One action/asset branch accepts authorization from a sibling covenant input.
    - Use witness hints; do not scan every input if a direct witness index works.

@@ -35,16 +35,22 @@ Done now:
   `binding = cov` lowering;
 - one compiled `RecurringTreasuryVault.sil` draft that attempts cap, required
   destination, and continuation-state enforcement;
+- one accepted funding output for that compiled contract;
+- one build-depth review artifact that records why JS live submit is blocked
+  until covenant output binding and signature-script construction are proven;
 - UI and tests that keep the label at wallet-policy/local-wallet.
 
 Next:
 
 1. Review the compiled `RecurringTreasuryVault.sil` draft against actual spend
    construction.
-2. Build negative candidates for wrong role, wrong output, over cap, and
+2. Prove the state transition through the Rust debugger or a Rust harness,
+   because the current JS `kaspa-wasm` output builder does not expose covenant
+   binding fields.
+3. Build negative candidates for wrong role, wrong output, over cap, and
    missing continuation.
-3. Fund a fresh TN12 contract output.
-4. Submit one accepted under-cap script spend.
+4. Submit one accepted under-cap script spend after the submit route preserves
+   covenant binding fields.
 5. Only then move that exact path from wallet-policy to script-enforced.
 
 ## Source-Driven Design Notes
@@ -78,3 +84,13 @@ The examples worth building, in order:
 
 Do not add another broad app lane until one deeper contract primitive has an
 accepted positive path and a negative map.
+
+Do not let a future agent confuse the current evidence classes:
+
+- compiled `.sil`: useful, not a spend;
+- accepted funding: money reached a contract script output, not a successful
+  covenant transition;
+- local wallet-policy cap: useful custody/operator evidence, not script
+  enforcement;
+- Rust debugger covenant binding: the right local proof route before JS submit;
+- accepted under-cap spend from the funded contract output: the promotion gate.

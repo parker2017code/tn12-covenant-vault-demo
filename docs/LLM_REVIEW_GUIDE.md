@@ -148,6 +148,8 @@ Avoid these labels:
 - ICC uses sibling authority instead of nested execution. Let sibling inputs prove that another covenant or script authorized the transaction.
 - Challenge/timeout paths beat expensive global scans. Let one party make a claim, give the other party a bounded challenge path, and use timeouts for liveness.
 - Negative cases make examples serious: wrong signer, wrong destination, over cap, missing continuation, stale window, and missing sibling input.
+- Compiled stateful `.sil` and accepted funding are not enough. For recurring caps, require an actual spend from the funded contract output or keep the label at wallet-policy/local-wallet.
+- Study `/home/parker2017/michaelsutton-silverscript-chess/examples/chess` before designing complex examples. The useful pattern is mux/worker routing, shared state layout, template identity, challenge paths, and settlement, not "make a game" as a product idea.
 
 Accurate label:
 
