@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-recurring-treasury-vault-negative-map/v1",
+  "reviewedAt": "2026-05-12",
+  "contract": "contracts/RecurringTreasuryVault.sil",
+  "status": "negative-candidate-map-ready",
+  "sourceEvidence": {
+    "walletPolicyTxid": "d9eba84e7565ba28e5631c4a3b914da93b68e77daf9279a435f9303eeb63cf65",
+    "compiledArtifact": "artifacts/RecurringTreasuryVault.json"
+  },
+  "rows": [
+    {
+      "id": "wrong-owner-signature",
+      "mutation": "replace ownerSig with a non-owner signature",
+      "expectedFailure": "checkSig(ownerSig, owner)",
+      "status": "blocked-candidate"
+    },
+    {
+      "id": "wrong-destination",
+      "mutation": "change output 0 scriptPublicKey away from destination",
+      "expectedFailure": "destination output must equal new ScriptPubKeyP2PK(destination)",
+      "status": "blocked-candidate"
+    },
+    {
+      "id": "over-cap",
+      "mutation": "set amount so prevState.spent + amount exceeds cap",
+      "expectedFailure": "prevState.spent + amount <= cap",
+      "status": "blocked-candidate"
+    },
+    {
+      "id": "missing-continuation",
+      "mutation": "remove output 1 or make it a non-continuation output",
+      "expectedFailure": "validateOutputState(1, newState)",
+      "status": "blocked-candidate"
+    },
+    {
+      "id": "bad-window-state",
+      "mutation": "emit a continuation state where spent/window do not match the spend",
+      "expectedFailure": "newState.spent increments by amount and window stays constant",
+      "status": "blocked-candidate"
+    }
+  ],
+  "summary": {
+    "candidates": 5,
+    "blockedCandidates": 5,
+    "submittedRejections": 0
+  },
+  "nextStep": "Build signed invalid drafts only from fresh expendable contract outputs; do not submit invalid candidates against the only good proof output."
+}
