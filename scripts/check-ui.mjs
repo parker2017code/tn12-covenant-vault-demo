@@ -24,6 +24,9 @@ try {
   const experimentsResponse = await fetch(`${url}experiments.html`);
   assert.equal(experimentsResponse.ok, true, "Failed to load experiments.html");
   const experimentsHtml = await experimentsResponse.text();
+  const aiReviewResponse = await fetch(`${url}ai-review.html`);
+  assert.equal(aiReviewResponse.ok, true, "Failed to load ai-review.html");
+  const aiReviewHtml = await aiReviewResponse.text();
   for (const asset of [
     "favicon.svg",
     "favicon.png",
@@ -37,7 +40,7 @@ try {
     const assetResponse = await fetch(`${url}${asset}`);
     assert.equal(assetResponse.ok, true, `Failed to load ${asset}`);
   }
-  for (const publicPageHtml of [html, resultsHtml, playgroundHtml, experimentsHtml, await readFile("lab.html", "utf8")]) {
+  for (const publicPageHtml of [html, resultsHtml, playgroundHtml, experimentsHtml, aiReviewHtml, await readFile("lab.html", "utf8")]) {
     assert.match(publicPageHtml, /class="brand-home" href="index\.html"/);
     assert.match(publicPageHtml, /rel="apple-touch-icon" href="apple-touch-icon\.png"/);
     assert.match(publicPageHtml, /rel="manifest" href="site\.webmanifest"/);
@@ -123,6 +126,9 @@ try {
   assert.match(experimentsHtml, /Treasury Wars/);
   assert.match(experimentsHtml, /Covenant-Owned Asset Duel/);
   assert.match(experimentsHtml, /artifacts\/covenant-experiment-map\.json/);
+  assert.match(aiReviewHtml, /Wallet policy is not script enforcement/);
+  assert.match(aiReviewHtml, /TN12_ACCEPTED/);
+  assert.match(aiReviewHtml, /docs\/LLM_REVIEW_GUIDE\.md/);
 
   await checkRenderedPages(url);
 
@@ -135,7 +141,7 @@ try {
 async function checkRenderedPages(url) {
   const browser = await chromium.launch({ headless: true });
   try {
-    for (const path of ["index.html", "lab.html", "results.html", "playground.html", "experiments.html"]) {
+    for (const path of ["index.html", "lab.html", "results.html", "playground.html", "experiments.html", "ai-review.html"]) {
       for (const viewport of [
         { name: "desktop", width: 1280, height: 900 },
         { name: "mobile", width: 390, height: 844 },
@@ -234,7 +240,7 @@ async function checkRenderedPages(url) {
     assert.deepEqual(claimLinkAffordances.filter((item) => !/Open/.test(item.after)), [], "claim-grid links need visible Open affordance");
     await page.goto(`${url}lab.html`, { waitUntil: "domcontentloaded" });
     assert.equal(await page.locator("#product-map .product-group").count(), 3);
-    assert.equal(await page.locator("#product-map .product-group a").count(), 10);
+    assert.equal(await page.locator("#product-map .product-group a").count(), 11);
     const productMapText = await page.locator("#product-map").innerText();
     assert.match(productMapText, /Pick one lane/);
     assert.match(productMapText, /Proof products/i);
@@ -333,7 +339,7 @@ async function waitForDynamicContent(page, path) {
 
 async function assertLocalLinks(page, path) {
   const linksToCheck = await page.locator("a[href]").evaluateAll((links) => {
-    const pageNames = new Set(["index.html", "lab.html", "results.html", "playground.html", "experiments.html"]);
+    const pageNames = new Set(["index.html", "lab.html", "results.html", "playground.html", "experiments.html", "ai-review.html"]);
     return links.flatMap((link) => {
       const href = link.getAttribute("href") || "";
       if (/^(https?:|mailto:)/.test(href)) return [];

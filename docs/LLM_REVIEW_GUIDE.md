@@ -16,6 +16,7 @@ Useful public links:
 ```txt
 Repo: https://github.com/parker2017code/tn12-covenant-vault-demo
 Pages: https://parker2017code.github.io/tn12-covenant-vault-demo/
+AI review rules: https://parker2017code.github.io/tn12-covenant-vault-demo/ai-review.html
 TN12 tx API: https://api-tn12.kaspa.org/transactions/{txid}
 Proof evidence: https://parker2017code.github.io/tn12-covenant-vault-demo/artifacts/proof-evidence.json
 Build status: https://parker2017code.github.io/tn12-covenant-vault-demo/artifacts/build-status.json
@@ -138,6 +139,15 @@ Avoid these labels:
 - a full Hashdag/Staghunt coordination market implementation;
 - live DeFi;
 - arbitrary block-header data insertion.
+
+## SilverScript Lessons Already Learned
+
+- State is the point. Recurring caps, assets, and game state should use explicit state, continuation outputs, and `validateOutputState` where tooling supports it.
+- Covenant IDs track lineage. Use template hashes and state fields for role identity inside a closed contract system.
+- Mux/worker beats one giant script. A hub can route to small worker contracts, workers can return state, and fast multi-transaction flow is part of the Kaspa edge.
+- ICC uses sibling authority instead of nested execution. Let sibling inputs prove that another covenant or script authorized the transaction.
+- Challenge/timeout paths beat expensive global scans. Let one party make a claim, give the other party a bounded challenge path, and use timeouts for liveness.
+- Negative cases make examples serious: wrong signer, wrong destination, over cap, missing continuation, stale window, and missing sibling input.
 
 Accurate label:
 
