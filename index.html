@@ -24,11 +24,9 @@
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
-        <a href="#core-notes">Details</a>
         <a href="#proofs">Proofs</a>
-        <a href="#indexer">Indexer</a>
-        <a href="#submit">Submit</a>
-        <a href="#technical-links">Build</a>
+        <a href="#reviewer">Verify</a>
+        <a href="#routes">Routes</a>
       </div>
     </nav>
   </header>
@@ -95,34 +93,33 @@
       <pre>npm run proof:verify</pre>
     </section>
 
-    <section class="panel">
+    <section id="routes" class="panel">
       <div class="section-title">
-        <p class="eyebrow">Routes</p>
-        <h2>Proof, product ideas, blockers.</h2>
+        <h2>Three routes after the proof table.</h2>
       </div>
       <div class="journey-grid">
         <a href="results.html">
           <span>Proof</span>
           <strong>What is proven?</strong>
-          <p>Accepted txids, proof records, replay state, and verifier commands.</p>
+          <p>Accepted txids, proof records, replay rows, and the shortest reviewer story.</p>
         </a>
         <a href="playground.html">
           <span>Product ideas</span>
           <strong>What can I try?</strong>
-          <p>Role wallets, faucet flow, deposits, payout, and replayed app state.</p>
+          <p>Role wallets, faucet flow, deposits, payout, and replayed state.</p>
         </a>
         <a href="lab.html">
           <span>Mainnet blockers</span>
           <strong>What is still missing?</strong>
-          <p>Wallet signing, production indexer behavior, audit, and activation blockers.</p>
+          <p>Wallet signing, production replay behavior, audit, and activation blockers.</p>
         </a>
       </div>
     </section>
 
-    <section id="core-notes" class="panel">
+    <section id="reviewer" class="panel">
       <div class="section-title">
-        <p class="eyebrow">Proof counts</p>
         <h2>Proof counts and commands.</h2>
+        <p>These commands are the public proof path. Product maps, wallet drafts, DeFi reducers, scheduler work, and generated artifact inventories live in Lab Tools.</p>
       </div>
       <div class="stat-grid">
         <article>
@@ -133,123 +130,26 @@
         <article>
           <span>Accepted payload events</span>
           <strong>40</strong>
-          <p>JSON wRPC payload receipts include DeFi, scheduler intent/bid/execution/binding, and agent release events; the public REST route is kept as a no-payload negative result.</p>
+          <p>Payload receipts are accepted and replayable. The detailed app categories stay out of the default proof path.</p>
         </article>
         <article>
           <span>Verifier command</span>
-          <strong>evidence refresh</strong>
-          <p><code>npm run operator:refresh</code> verifies TN12 evidence, rebuilds derived artifacts, and reruns local checks.</p>
+          <strong>proof records</strong>
+          <p><code>npm run proof:records</code> checks the canonical proof-record fixture.</p>
+        </article>
+        <article>
+          <span>Fresh testnet address</span>
+          <strong>npm run address</strong>
+          <p>Creates a local TN12 address for faucet use. Testnet wallet material stays under <code>.local/</code>.</p>
         </article>
       </div>
-      <p class="note">Read <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code> before broader app notes.</p>
-    </section>
-
-    <details id="check-path" class="panel build-status section-drawer">
-      <summary>Checks and docs</summary>
-      <div class="section-title">
-        <p class="eyebrow">Run locally</p>
-        <h2>Run the checks when you need them.</h2>
-        <p>The short version is <code>npm ci</code>, <code>npm run check:all</code>, <code>npm run check:tn12</code>, then <code>npm run operator:refresh</code>. If you are starting from a blank terminal, read <a href="docs/CLI_FROM_ZERO.md">the from-zero CLI guide</a>. Use <a href="docs/COMMAND_RUNBOOK.md">the command runbook</a> before wallet, faucet, artifact-refresh, or submit commands.</p>
+      <div class="link-list">
+        <a href="docs/AUDIT_MAP.md">Audit map</a>
+        <a href="docs/PROOF_INDEX.md">Proof index</a>
+        <a href="docs/TN12_TEST_MATRIX.md">Test matrix</a>
+        <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
+        <a href="lab.html">Open the deeper workbench</a>
       </div>
-      <details class="evidence-drawer">
-        <summary>Show exact route</summary>
-        <div class="stat-grid">
-          <article>
-            <span>Install</span>
-            <strong>npm ci</strong>
-            <p>Use the lockfile so local checks run with the expected dependencies.</p>
-          </article>
-          <article>
-            <span>Local gate</span>
-            <strong>check:all</strong>
-            <p>Runs script checks, negative checks, and UI smoke checks.</p>
-          </article>
-          <article>
-            <span>TN12 gate</span>
-            <strong>check:tn12</strong>
-            <p>Verifies public TN12 proof and payload evidence.</p>
-          </article>
-          <article>
-            <span>Full refresh</span>
-            <strong>evidence refresh</strong>
-            <p>Runs <code>npm run operator:refresh</code> and rebuilds the current status artifacts.</p>
-          </article>
-        </div>
-        <p class="note">Proof details live in <a href="docs/AUDIT_MAP.md"><code>docs/AUDIT_MAP.md</code></a>. Script groups live in <a href="docs/SCRIPT_INDEX.md"><code>docs/SCRIPT_INDEX.md</code></a>.</p>
-      </details>
-    </details>
-
-    <details id="indexer" class="panel indexer section-drawer">
-      <summary>Open replay and indexer state</summary>
-      <div class="section-title">
-        <p class="eyebrow">Accepted transaction indexer</p>
-        <h2>App state derived from TN12 reads.</h2>
-        <p>This checkpoint turns accepted proof spends and payload events into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should pass through replay before the UI updates app state.</p>
-      </div>
-      <div id="indexer-summary" class="indexer-summary" aria-live="polite"></div>
-      <div id="indexer-persistence" class="indexer-persistence" aria-live="polite"></div>
-      <details class="evidence-drawer">
-        <summary>Show indexed proof and payload rows</summary>
-        <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
-        <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
-        <div id="defi-receipt-guard" class="receipt-events" aria-live="polite"></div>
-      </details>
-      <div class="section-title compact-title">
-        <p class="eyebrow">DeFi replay checks</p>
-        <h3>Accepted TN12 receipts, transfers, and reducer checks.</h3>
-        <p>Session users and pool wallets execute funding, deposits, and payouts on TN12. Pricing, oracle inputs, liquidation, wallet signing, and custody rules remain wallet-blocked or mainnet-blocked.</p>
-      </div>
-      <div id="defi-simulation-summary" class="defi-summary" aria-live="polite"></div>
-      <details class="evidence-drawer">
-        <summary>Show DeFi reducer checks</summary>
-        <div id="defi-simulation-list" class="defi-list" aria-live="polite"></div>
-      </details>
-      <pre>npm run indexer:checkpoint
-npm run indexer:persist
-npm run indexer:virtual-chain-run</pre>
-    </details>
-
-    <details id="submit" class="panel submit-console section-drawer">
-      <summary>Open wallet handoff and draft review</summary>
-      <div class="section-title">
-        <p class="eyebrow">Wallet handoff</p>
-        <h2>Review before any testnet broadcast.</h2>
-        <p>Check inputs, outputs, fees, payload state, and submit commands before signing. The user-wallet path is: review a request, sign outside the repo, return signed bytes, then submit and replay after acceptance.</p>
-      </div>
-      <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
-      <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
-      <div id="wallet-connector" class="wallet-connector" aria-live="polite"></div>
-      <details class="evidence-drawer">
-        <summary>Show signed draft registry</summary>
-        <div id="submit-drafts" class="submit-drafts" aria-live="polite"></div>
-      </details>
-      <pre>npm run submit:registry
-npm run wallet:review
-npm run wallet:connector</pre>
-    </details>
-
-    <section id="technical-links" class="grid">
-      <article id="setup" class="panel">
-        <p class="eyebrow">TN12 setup</p>
-        <h2>Get test tokens</h2>
-        <p>Use the faucet in a browser, then verify accepted outputs through the TN12 explorer before building new spends.</p>
-        <pre>npm run address</pre>
-        <p>The command prints a <code>kaspatest:</code> address and stores testnet-only wallet material in <code>.local/tn12-wallet.json</code>. Paste that address into the faucet.</p>
-        <div class="link-list">
-          <a href="https://faucet-tn12.kaspanet.io/" target="_blank" rel="noreferrer">TN12 faucet</a>
-          <a href="https://tn12.kaspa.stream/" target="_blank" rel="noreferrer">TN12 explorer</a>
-          <a href="https://github.com/kaspanet/silverscript" target="_blank" rel="noreferrer">Silverscript</a>
-        </div>
-      </article>
-      <article class="panel">
-        <p class="eyebrow">Build and verify</p>
-        <h2>Open the deeper workbench.</h2>
-        <p>Lab Tools holds enforcement rows, app lanes, wallet handoff, and reference panels so this page can stay focused on the proof.</p>
-        <div class="link-list">
-          <a href="lab.html">Open lab workbench</a>
-          <a href="docs/AUDIT_MAP.md">Read proof docs</a>
-        </div>
-      </article>
     </section>
   </main>
 </body>

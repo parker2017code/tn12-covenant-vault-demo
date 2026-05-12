@@ -33,8 +33,8 @@ try {
   assert.match(html, /TN12 configured\. Proof transactions accepted\./);
   assert.match(html, /Money moved\. Proofs accepted\. State replayed\./);
   assert.match(html, /Accepted payload events[\s\S]*<strong>40<\/strong>/);
-  assert.match(html, /npm run operator:refresh/);
-  assert.match(html, /id="check-path"/);
+  assert.match(html, /npm run proof:records/);
+  assert.doesNotMatch(html, /id="check-path"/);
   assert.match(html, /docs\/AUDIT_MAP\.md/);
   assert.doesNotMatch(html, /href="#prediction-hedge"/);
   assert.match(html, /href="lab\.html"/);
@@ -45,12 +45,12 @@ try {
   assert.match(pageControllers, /detectPageController/);
   assert.doesNotMatch(html, /<form id="assurance-form"/);
   assert.match(html, /id="proof-status"/);
-  assert.match(html, /id="receipt-events"/);
-  assert.match(html, /id="wallet-connector"/);
-  assert.match(html, /The user-wallet path is:/);
-  assert.match(html, /id="defi-receipt-guard"/);
-  assert.match(html, /id="defi-simulation-summary"/);
-  assert.match(html, /id="defi-simulation-list"/);
+  assert.doesNotMatch(html, /id="receipt-events"/);
+  assert.doesNotMatch(html, /id="wallet-connector"/);
+  assert.doesNotMatch(html, /The user-wallet path is:/);
+  assert.doesNotMatch(html, /id="defi-receipt-guard"/);
+  assert.doesNotMatch(html, /id="defi-simulation-summary"/);
+  assert.doesNotMatch(html, /id="defi-simulation-list"/);
   assert.match(html, /href="results\.html"/);
   assert.match(resultsHtml, /id="results-summary"/);
   assert.match(resultsHtml, /id="knowledge-levels"/);
@@ -254,8 +254,8 @@ async function checkRenderedPages(url) {
 
 async function waitForDynamicContent(page, path) {
   const selectors = {
-    "index.html": ["#proof-list tr[data-proof-row], #proof-list article", "#submit-summary article"],
-    "lab.html": ["#self-serve-lanes article", "#invoice-summary article", "#submit-summary article"],
+    "index.html": ["#proof-list tr[data-proof-row], #proof-list article", "#reviewer article"],
+    "lab.html": ["#product-map .product-group", "#invoice-summary article", "#submit-summary article"],
     "results.html": ["#results-summary article", "#results-feed article"],
     "playground.html": ["#playground-quickstart a", "#playground-session article"],
   }[path] || [];
