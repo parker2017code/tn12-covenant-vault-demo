@@ -38,20 +38,29 @@ Done now:
 - one accepted funding output for that compiled contract;
 - one build-depth review artifact that records why JS live submit is blocked
   until covenant output binding and signature-script construction are proven;
+- one local SilverScript debugger state proof for under-cap continuation,
+  over-cap rejection, wrong-destination rejection, and missing-continuation
+  rejection;
+- one local Rust proof for the full `RecurringTreasuryVault.sil` ownerSig path
+  with the same positive and negative cases;
+- one live-submit readiness artifact showing the current JS route is blocked
+  before broadcast because it drops output covenant binding;
 - UI and tests that keep the label at wallet-policy/local-wallet.
 
 Next:
 
 1. Review the compiled `RecurringTreasuryVault.sil` draft against actual spend
    construction.
-2. Prove the state transition through the Rust debugger or a Rust harness,
-   because the current JS `kaspa-wasm` output builder does not expose covenant
-   binding fields.
-3. Build negative candidates for wrong role, wrong output, over cap, and
+2. Add or preserve negative cases for wrong role, wrong output, over cap, and
    missing continuation.
-4. Submit one accepted under-cap script spend after the submit route preserves
+3. Submit one accepted under-cap script spend after the submit route preserves
    covenant binding fields.
-5. Only then move that exact path from wallet-policy to script-enforced.
+4. Only then move that exact path from wallet-policy to script-enforced.
+
+Current live-submit rule: do not use npm `kaspa-wasm@0.13.0` for the
+recurring-vault transition. It does not preserve `output.covenant` for the
+continuation output in the checked route. Use a Rust submit route or a JS SDK
+that preserves output covenant binding.
 
 ## Source-Driven Design Notes
 
@@ -93,4 +102,8 @@ Do not let a future agent confuse the current evidence classes:
 - local wallet-policy cap: useful custody/operator evidence, not script
   enforcement;
 - Rust debugger covenant binding: the right local proof route before JS submit;
+- local Rust ownerSig proof: the contract path is locally valid, but still not
+  a live accepted spend;
+- live-submit readiness blocker: the current JS submit path drops the output
+  covenant binding, so forcing a live submit would test the wrong transaction;
 - accepted under-cap spend from the funded contract output: the promotion gate.

@@ -1,0 +1,25 @@
+pragma silverscript ^0.1.0;
+
+contract RecurringTreasuryVaultStateProbe(pubkey destination, int cap, int windowStart, int spentInWindow, int minerFee) {
+    int spent = spentInWindow;
+    int window = windowStart;
+
+    #[covenant.singleton]
+    function spend(State prevState, State newState, int amount) {
+        require(amount > 0);
+        require(prevState.spent + amount <= cap);
+        require(newState.spent == prevState.spent + amount);
+        require(newState.window == prevState.window);
+
+        int inputValue = tx.inputs[this.activeInputIndex].value;
+        int changeValue = inputValue - amount - minerFee;
+        require(changeValue > 0);
+
+        byte[34] destinationLock = new ScriptPubKeyP2PK(destination);
+        require(tx.outputs[0].scriptPubKey == byte[](destinationLock));
+        require(tx.outputs[0].value == amount);
+
+        validateOutputState(1, newState);
+        require(tx.outputs[1].value == changeValue);
+    }
+}

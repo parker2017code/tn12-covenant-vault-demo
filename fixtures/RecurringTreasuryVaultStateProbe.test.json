@@ -1,0 +1,143 @@
+{
+  "tests": [
+    {
+      "name": "under_cap_continuation_pass",
+      "function": "spend",
+      "constructor_args": [
+        "0xc6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5",
+        7500000000,
+        9899000,
+        0,
+        10000
+      ],
+      "args": [2500000000],
+      "expect": "pass",
+      "tx": {
+        "inputs": [
+          {
+            "utxo_value": 15000000000,
+            "covenant_id": "0x1111111111111111111111111111111111111111111111111111111111111111",
+            "state": { "spent": 0, "window": 9899000 }
+          }
+        ],
+        "outputs": [
+          {
+            "value": 2500000000,
+            "authorizing_input": 99,
+            "script_hex": "20c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5ac"
+          },
+          {
+            "value": 12499990000,
+            "covenant_id": "0x1111111111111111111111111111111111111111111111111111111111111111",
+            "authorizing_input": 0,
+            "state": { "spent": 2500000000, "window": 9899000 }
+          }
+        ]
+      }
+    },
+    {
+      "name": "over_cap_fails",
+      "function": "spend",
+      "constructor_args": [
+        "0xc6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5",
+        7500000000,
+        9899000,
+        6000000000,
+        10000
+      ],
+      "args": [2500000000],
+      "expect": "fail",
+      "tx": {
+        "inputs": [
+          {
+            "utxo_value": 15000000000,
+            "covenant_id": "0x1111111111111111111111111111111111111111111111111111111111111111",
+            "state": { "spent": 6000000000, "window": 9899000 }
+          }
+        ],
+        "outputs": [
+          {
+            "value": 2500000000,
+            "authorizing_input": 99,
+            "script_hex": "20c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5ac"
+          },
+          {
+            "value": 12499990000,
+            "covenant_id": "0x1111111111111111111111111111111111111111111111111111111111111111",
+            "authorizing_input": 0,
+            "state": { "spent": 8500000000, "window": 9899000 }
+          }
+        ]
+      }
+    },
+    {
+      "name": "wrong_destination_fails",
+      "function": "spend",
+      "constructor_args": [
+        "0xc6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5",
+        7500000000,
+        9899000,
+        0,
+        10000
+      ],
+      "args": [2500000000],
+      "expect": "fail",
+      "tx": {
+        "inputs": [
+          {
+            "utxo_value": 15000000000,
+            "covenant_id": "0x1111111111111111111111111111111111111111111111111111111111111111",
+            "state": { "spent": 0, "window": 9899000 }
+          }
+        ],
+        "outputs": [
+          {
+            "value": 2500000000,
+            "authorizing_input": 99,
+            "script_hex": "201111111111111111111111111111111111111111111111111111111111111111ac"
+          },
+          {
+            "value": 12499990000,
+            "covenant_id": "0x1111111111111111111111111111111111111111111111111111111111111111",
+            "authorizing_input": 0,
+            "state": { "spent": 2500000000, "window": 9899000 }
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing_continuation_fails",
+      "function": "spend",
+      "constructor_args": [
+        "0xc6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5",
+        7500000000,
+        9899000,
+        0,
+        10000
+      ],
+      "args": [2500000000],
+      "expect": "fail",
+      "tx": {
+        "inputs": [
+          {
+            "utxo_value": 15000000000,
+            "covenant_id": "0x1111111111111111111111111111111111111111111111111111111111111111",
+            "state": { "spent": 0, "window": 9899000 }
+          }
+        ],
+        "outputs": [
+          {
+            "value": 2500000000,
+            "authorizing_input": 99,
+            "script_hex": "20c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5ac"
+          },
+          {
+            "value": 12499990000,
+            "authorizing_input": 0,
+            "state": { "spent": 2500000000, "window": 9899000 }
+          }
+        ]
+      }
+    }
+  ]
+}

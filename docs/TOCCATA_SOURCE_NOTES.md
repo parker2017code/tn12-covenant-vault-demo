@@ -59,21 +59,51 @@ The build-depth artifact is
 `artifacts/silverscript-build-depth-review.json`; rebuild it with
 `npm run covenant:build-depth`.
 
+The state/output portion has a local SilverScript debugger proof:
+`artifacts/recurring-treasury-vault-state-proof.json`. It proves under-cap
+continuation and rejects over-cap, wrong destination, and missing continuation
+for `contracts/probes/RecurringTreasuryVaultStateProbe.sil`. It deliberately
+does not prove the full `ownerSig` path or live TN12 spend.
+
+The full `ownerSig` path now has a local Rust proof:
+`artifacts/recurring-treasury-vault-owner-sig-proof.json`. It signs the
+transaction hash, builds the generated `__spend` sigscript, appends the redeem
+script, and runs the txscript engine with covenant context. It proves valid
+owner-signed under-cap continuation and rejects over-cap, wrong destination,
+and missing continuation. It still does not prove live TN12 submission.
+
+Live submit readiness is recorded in
+`artifacts/recurring-treasury-vault-live-submit-readiness.json`. Current status
+is `blocked-before-live-submit`: the installed npm `kaspa-wasm@0.13.0`
+transaction constructor drops the output covenant binding. Do not broadcast a
+recurring-vault spend through that route. The next live attempt needs either a
+Rust submit route or a JS SDK route that preserves `TransactionOutput.covenant`
+for the continuation output.
+
 ## Next Build Order
 
 1. Recurring treasury vault.
    - State: `amount`, `spentInWindow`, `windowStart`, required destination.
-   - Positive: under-cap continuation.
-   - Negative: over cap, wrong destination, missing continuation, wrong role.
-   - First prove locally with the Rust debugger or a Rust harness that can
-     construct covenant-bound outputs. Keep local-wallet cap evidence separate
-     until accepted script spend exists.
+   - Positive: under-cap continuation is locally proven in the state probe.
+   - Negative: over cap, wrong destination, and missing continuation are
+     locally proven in the state probe.
+   - Owner signature: locally proven against the full contract in the Rust
+     harness.
+   - Current live boundary: blocked before submit through npm `kaspa-wasm`
+     because output covenant binding is dropped.
+   - Next: submit an accepted TN12 spend only through a Rust route or SDK route
+     that preserves covenant-bound continuation outputs.
 2. ICC ownership demo.
    - One action/asset branch accepts authorization from a sibling covenant input.
    - Use witness hints; do not scan every input if a direct witness index works.
+   - First target: Covenant-Owned Asset Duel. One covenant-owned asset/action
+     accepts a sibling input as authority, then rejects missing or wrong sibling
+     authorization.
 3. Multiplexor demo.
    - One router sends state to worker A or B and the worker returns to router.
    - Add timeout or rollback path if a bad selector can stall the state.
+   - First target: Blitz Mux Arena. Keep it small: mux, two workers, return
+     state, bad selector timeout.
 4. Challenge/timeout demo.
    - Claim -> challenge -> timeout/settle.
    - This is the useful pattern for rules that are expensive to prove directly.

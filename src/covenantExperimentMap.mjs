@@ -4,7 +4,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "treasury-wars",
       title: "Treasury Wars",
       rank: 2,
-      status: "build-first",
+      status: "blocked-before-live-submit",
       proofTarget: "accepted recurring-vault spend, continuation state, blocked over-cap attempt",
       whyItMatters: "Turns the active recurring cap rail into a simple strategy loop: each player has money, a cap window, allowed destinations, and relocked state.",
       covenantPattern: "stateful singleton vault",
@@ -12,14 +12,17 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       currentRepoEvidence: [
         "contracts/RecurringTreasuryVault.sil",
         "artifacts/recurring-treasury-vault-status.json",
-        "artifacts/treasury-recurring-caps.json"
+        "artifacts/treasury-recurring-caps.json",
+        "artifacts/recurring-treasury-vault-owner-sig-proof.json",
+        "artifacts/recurring-treasury-vault-live-submit-readiness.json"
       ],
       nextBuildSteps: [
-        "Spend the funded RecurringTreasuryVault output on TN12.",
+        "Use a Rust submit route or JS SDK route that preserves output covenant binding.",
+        "Spend the funded RecurringTreasuryVault output on TN12 only through that route.",
         "Record the new state and relocked change output.",
         "Turn the over-cap negative map into the opponent's blocked move."
       ],
-      hardBoundary: "Current recurring cap evidence is wallet-policy/local-wallet until the compiled vault spend is accepted."
+      hardBoundary: "The ownerSig covenant path is locally proven, but script-enforced recurring caps require an accepted spend from the funded contract output."
     }),
     experiment({
       id: "covenant-heist",
@@ -46,7 +49,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "blitz-mux-arena",
       title: "Blitz Mux Arena",
       rank: 1,
-      status: "research-build",
+      status: "third-next",
       proofTarget: "hub routes to worker, worker returns to hub, timeout escape path",
       whyItMatters: "Smallest source-faithful demo of the chess architecture without building full chess. It makes fast multi-transaction state transitions feel natural.",
       covenantPattern: "mux / worker contract family",
@@ -57,6 +60,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
       ],
       nextBuildSteps: [
+        "Study the local chess branch mux/worker source before writing the toy.",
         "Create a two-worker Silverscript toy family.",
         "Inject template hashes at genesis.",
         "Show one good route and one stuck route with timeout recovery."
@@ -88,7 +92,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "covenant-owned-asset-game",
       title: "Covenant-Owned Asset Duel",
       rank: 3,
-      status: "later",
+      status: "second-next",
       proofTarget: "asset UTXO owned by a covenant input through sibling-input authorization",
       whyItMatters: "Demonstrates ICC: one covenant does not execute the other, but can accept its sibling input as authority.",
       covenantPattern: "ICC / covenant-owned asset",
@@ -100,7 +104,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       nextBuildSteps: [
         "Build a tiny asset-state contract.",
         "Let a covenant input authorize one asset move.",
-        "Show the missing-sibling-input negative."
+        "Show the missing-sibling-input negative.",
+        "Show the wrong-sibling-input negative."
       ],
       hardBoundary: "This is only worth showing after the sibling-input authorization is compiled and tested."
     }),
@@ -136,6 +141,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       experiments: experiments.length,
       spotlight: experiments.filter((item) => item.rank <= 3).length,
       buildFirst: experiments.filter((item) => item.status === "build-first").length,
+      blockedBeforeLiveSubmit: experiments.filter((item) => item.status === "blocked-before-live-submit").length,
       scriptEnforcedClaims: 0
     },
     rule: "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",

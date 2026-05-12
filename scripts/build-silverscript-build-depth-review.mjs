@@ -14,11 +14,17 @@ async function readJson(path, fallback = {}) {
 const status = await readJson("artifacts/recurring-treasury-vault-status.json");
 const contractOutpoint = await readJson("fixtures/RecurringTreasuryVaultContractOutpoint.json");
 const compiledArtifact = await readJson("artifacts/RecurringTreasuryVault.json");
+const stateProof = await readJson("artifacts/recurring-treasury-vault-state-proof.json");
+const ownerSigProof = await readJson("artifacts/recurring-treasury-vault-owner-sig-proof.json");
+const liveSubmitReadiness = await readJson("artifacts/recurring-treasury-vault-live-submit-readiness.json");
 
 const artifact = buildSilverscriptBuildDepthReview({
   status,
   contractOutpoint,
   compiledArtifact,
+  stateProof,
+  ownerSigProof,
+  liveSubmitReadiness,
   jsWasm: {
     transactionOutputConstructor: "constructor(value: bigint, script_public_key: ScriptPublicKey)"
   }

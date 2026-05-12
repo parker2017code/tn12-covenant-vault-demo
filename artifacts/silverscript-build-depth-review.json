@@ -17,6 +17,17 @@
       "status": "accepted"
     },
     "walletPolicyUnderCapTxid": "d9eba84e7565ba28e5631c4a3b914da93b68e77daf9279a435f9303eeb63cf65",
+    "stateProof": {
+      "status": "local-state-transition-proof-passed",
+      "cases": 4,
+      "source": "contracts/probes/RecurringTreasuryVaultStateProbe.sil"
+    },
+    "ownerSigProof": {
+      "status": "local-owner-sig-covenant-proof-passed",
+      "cases": 4,
+      "source": "contracts/RecurringTreasuryVault.sil"
+    },
+    "liveSubmitReadiness": "blocked-before-live-submit",
     "negativeCandidates": [
       "wrong-owner-signature",
       "wrong-destination",
@@ -34,12 +45,17 @@
     {
       "id": "js-wasm-output-binding-gap",
       "status": "blocks-js-live-submit",
-      "evidence": "Current kaspa-wasm TransactionOutput API exposes constructor(value: bigint, script_public_key: ScriptPublicKey); no JS CovenantBinding constructor is exported in this package."
+      "evidence": "The installed kaspa-wasm runtime does not preserve output.covenant in Transaction construction. Broadcasting through this route would lose the covenant-bound continuation output."
     },
     {
-      "id": "debugger-sig-arg-gap",
-      "status": "blocks-current-recurring-vault-positive-debugger-run",
-      "evidence": "The CLI test harness can synthesize DECL state arguments, but the current recurring-vault path still needs a typed ownerSig/redeem-script route for a positive script run."
+      "id": "state-transition-proof",
+      "status": "supported-locally",
+      "evidence": "RecurringTreasuryVaultStateProbe proves under-cap continuation and rejects over-cap, wrong destination, and missing continuation in the local SilverScript debugger."
+    },
+    {
+      "id": "owner-sig-proof",
+      "status": "supported-locally",
+      "evidence": "A Rust harness signs the transaction hash, builds the generated __spend sigscript, appends the redeem script, and proves the full RecurringTreasuryVault.sil ownerSig path locally."
     }
   ],
   "buildRulesForAgents": [
@@ -51,15 +67,15 @@
   "nextSteps": [
     {
       "order": 1,
-      "task": "Create a minimal Rust or debugger fixture that proves RecurringTreasuryVault state transition without relying on JS output construction."
+      "task": "Use a Rust submit route or a JS SDK that preserves output covenant bindings."
     },
     {
       "order": 2,
-      "task": "Patch or wrap signature-script construction so ownerSig is typed correctly for the generated DECL entrypoint."
+      "task": "Convert the local Rust proof into a TN12 spend from the funded RecurringTreasuryVault output."
     },
     {
       "order": 3,
-      "task": "Only after local positive and negative covenant tests pass, build a live TN12 submit route that preserves covenant binding fields."
+      "task": "Keep JS submit blocked unless kaspa-wasm exposes or accepts the exact covenant binding fields."
     },
     {
       "order": 4,

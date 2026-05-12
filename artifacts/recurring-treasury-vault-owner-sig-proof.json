@@ -1,0 +1,47 @@
+{
+  "schema": "tn12-recurring-treasury-vault-owner-sig-proof/v1",
+  "reviewedAt": "2026-05-12",
+  "status": "local-owner-sig-covenant-proof-passed",
+  "source": "contracts/RecurringTreasuryVault.sil",
+  "rustHarness": "scripts/rust/recurring_treasury_vault_owner_sig_proof.rs",
+  "command": "TN12_REPO_ROOT=/home/parker2017/tn12-covenant-vault-demo CARGO_TARGET_DIR=/home/parker2017/silverscript-tools/target cargo run -q --manifest-path /tmp/tn12-recurring-vault-owner-sig-JEBsDk/Cargo.toml",
+  "cases": [
+    {
+      "name": "under_cap_owner_sig_continuation_pass",
+      "got": true,
+      "expected": true,
+      "status": "passed"
+    },
+    {
+      "name": "over_cap_owner_sig_fails",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    },
+    {
+      "name": "wrong_destination_owner_sig_fails",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    },
+    {
+      "name": "missing_continuation_owner_sig_fails",
+      "got": false,
+      "expected": false,
+      "status": "passed"
+    }
+  ],
+  "proves": [
+    "owner signature is checked on the full RecurringTreasuryVault.sil path",
+    "under-cap spend can pay the required destination and relock continuation state",
+    "over-cap spend is rejected",
+    "wrong destination is rejected",
+    "missing continuation is rejected"
+  ],
+  "doesNotProve": [
+    "accepted TN12 spend from the funded contract output",
+    "JS submit support for covenant-bound continuation outputs"
+  ],
+  "stdout": "under_cap_owner_sig_continuation_pass got=true expected=true\nover_cap_owner_sig_fails got=false expected=false\nwrong_destination_owner_sig_fails got=false expected=false\nmissing_continuation_owner_sig_fails got=false expected=false",
+  "stderr": ""
+}

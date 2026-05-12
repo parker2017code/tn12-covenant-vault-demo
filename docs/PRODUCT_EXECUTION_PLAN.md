@@ -129,6 +129,24 @@ Do not call a feature script-enforced until the accepted spend path exists.
 Do not add another broad product lane until the recurring-cap primitive either
 has a deeper accepted `.sil` spend or is explicitly parked with the blocker.
 
+Current recurring-cap blocker: the full `ownerSig` covenant path is locally
+proven, but the current npm JS transaction route drops output covenant binding
+for the continuation output. The next live spend must use a Rust submit route
+or an SDK route that preserves `TransactionOutput.covenant`.
+
+## Next Deep Demos
+
+These are the next concrete examples after recurring-vault live submit is
+unblocked or explicitly parked:
+
+| Demo | Kaspa Pattern | Minimal Proof |
+|---|---|---|
+| Covenant-Owned Asset Duel | ICC / sibling-input authorization. | One asset/action branch accepts a sibling covenant/script input as authority, then rejects missing or wrong sibling input. |
+| Blitz Mux Arena | Mux/worker routing. | One mux sends state to worker A or B, a worker returns state, and timeout handles a bad selector or stalled worker path. |
+
+Do not turn either demo into product copy until it has a contract or explicit
+compiler blocker, artifact, focused test, and one UI line.
+
 ## User-Wallet Path
 
 People should be able to use their own wallets without sharing secrets. The repo should never require a private key paste for a public playground.

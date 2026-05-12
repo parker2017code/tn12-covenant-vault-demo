@@ -1,0 +1,43 @@
+{
+  "schema": "tn12-recurring-treasury-vault-state-proof/v1",
+  "reviewedAt": "2026-05-12",
+  "status": "local-state-transition-proof-passed",
+  "source": "contracts/probes/RecurringTreasuryVaultStateProbe.sil",
+  "testFile": "fixtures/RecurringTreasuryVaultStateProbe.test.json",
+  "command": "cargo run -q --manifest-path /home/parker2017/silverscript-tools/Cargo.toml -p cli-debugger -- contracts/probes/RecurringTreasuryVaultStateProbe.sil --run-all --test-file fixtures/RecurringTreasuryVaultStateProbe.test.json",
+  "cases": [
+    {
+      "name": "under_cap_continuation_pass",
+      "expected": "pass",
+      "status": "passed"
+    },
+    {
+      "name": "over_cap_fails",
+      "expected": "fail",
+      "status": "passed"
+    },
+    {
+      "name": "wrong_destination_fails",
+      "expected": "fail",
+      "status": "passed"
+    },
+    {
+      "name": "missing_continuation_fails",
+      "expected": "fail",
+      "status": "passed"
+    }
+  ],
+  "proves": [
+    "under-cap spend can preserve destination and relocked continuation state",
+    "over-cap spend is rejected",
+    "wrong destination is rejected",
+    "missing continuation is rejected"
+  ],
+  "doesNotProve": [
+    "ownerSig path on the full RecurringTreasuryVault.sil",
+    "accepted TN12 spend from the funded contract output",
+    "JS submit support for covenant-bound continuation outputs"
+  ],
+  "stdout": "RUN   under_cap_continuation_pass\n  PASS  under_cap_continuation_pass\n  RUN   over_cap_fails\n  PASS  over_cap_fails\n  RUN   wrong_destination_fails\n  PASS  wrong_destination_fails\n  RUN   missing_continuation_fails\n  PASS  missing_continuation_fails\n\n4 tests: 4 passed, 0 failed",
+  "stderr": ""
+}

@@ -30,13 +30,13 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
-| 2 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
-| 3 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
-| 4 | One concrete settlement vertical. | One narrow escrow/assurance/agent/invoice path moves from accepted evidence to user-run request, submit, replay, and blocked invalid action. | Maybe, only if fresh tKAS or wallet signing is needed |
-| 5 | Recurring-cap contract depth. | `RecurringTreasuryVault.sil` compiles, then gains negative candidates and one accepted script spend. | No |
-| 6 | DECL/stateful covenant probe. | `contracts/probes/RecurringTreasuryDeclProbe.sil` compiles, `artifacts/silverscript-decl-support.json` records support, and focused tests assert the result. | No |
-| 7 | Continue clickable-affordance coverage. | Remaining generated cards that look actionable are either real links/buttons or visually passive, with rendered checks. | No |
+| 1 | Close recurring-vault live-submit boundary. | `artifacts/recurring-treasury-vault-live-submit-readiness.json` records whether the current route preserves output covenant binding, and focused tests enforce the answer. | No |
+| 2 | Try live recurring-vault spend only through a covenant-preserving route. | A Rust submit route or updated SDK route preserves the continuation output covenant binding, broadcasts the under-cap transition, and TN12 accepts the spend. | No |
+| 3 | Build Covenant-Owned Asset Duel. | One ICC/sibling-input demo proves an asset or action can be authorized by a sibling covenant/script input, with missing/wrong sibling negatives. | No |
+| 4 | Build Blitz Mux Arena. | One mux routes state to worker A or B, the worker returns state, and a timeout path prevents a bad selector from trapping the flow. | No |
+| 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
+| 6 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
+| 7 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
 
 ## Next Defined Work
 

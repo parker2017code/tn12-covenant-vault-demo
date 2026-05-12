@@ -2,6 +2,9 @@ export function buildSilverscriptBuildDepthReview({
   status = {},
   contractOutpoint = {},
   compiledArtifact = {},
+  stateProof = {},
+  ownerSigProof = {},
+  liveSubmitReadiness = {},
   jsWasm = {}
 } = {}) {
   const acceptedFunding = status.currentEvidence?.acceptedContractFunding || contractOutpoint;
@@ -27,6 +30,17 @@ export function buildSilverscriptBuildDepthReview({
         status: acceptedFunding.status || "accepted"
       } : null,
       walletPolicyUnderCapTxid: status.currentEvidence?.acceptedWalletPolicyTxid || null,
+      stateProof: stateProof.status ? {
+        status: stateProof.status,
+        cases: stateProof.cases?.length || 0,
+        source: stateProof.source
+      } : null,
+      ownerSigProof: ownerSigProof.status ? {
+        status: ownerSigProof.status,
+        cases: ownerSigProof.cases?.length || 0,
+        source: ownerSigProof.source
+      } : null,
+      liveSubmitReadiness: liveSubmitReadiness.status || null,
       negativeCandidates: status.negativeCandidates?.map((item) => item.id) || []
     },
     localSourceFindings: [
@@ -38,12 +52,21 @@ export function buildSilverscriptBuildDepthReview({
       {
         id: "js-wasm-output-binding-gap",
         status: "blocks-js-live-submit",
-        evidence: `Current kaspa-wasm TransactionOutput API exposes ${jsOutputConstructor}; no JS CovenantBinding constructor is exported in this package.`
+        evidence: liveSubmitReadiness.blocker?.detail || `Current kaspa-wasm TransactionOutput API exposes ${jsOutputConstructor}; no JS CovenantBinding constructor is exported in this package.`
       },
       {
-        id: "debugger-sig-arg-gap",
-        status: "blocks-current-recurring-vault-positive-debugger-run",
-        evidence: "The CLI test harness can synthesize DECL state arguments, but the current recurring-vault path still needs a typed ownerSig/redeem-script route for a positive script run."
+        id: "state-transition-proof",
+        status: stateProof.status === "local-state-transition-proof-passed" ? "supported-locally" : "not-run",
+        evidence: stateProof.status === "local-state-transition-proof-passed"
+          ? "RecurringTreasuryVaultStateProbe proves under-cap continuation and rejects over-cap, wrong destination, and missing continuation in the local SilverScript debugger."
+          : "State-transition proof artifact has not passed yet."
+      },
+      {
+        id: "owner-sig-proof",
+        status: ownerSigProof.status === "local-owner-sig-covenant-proof-passed" ? "supported-locally" : "not-run",
+        evidence: ownerSigProof.status === "local-owner-sig-covenant-proof-passed"
+          ? "A Rust harness signs the transaction hash, builds the generated __spend sigscript, appends the redeem script, and proves the full RecurringTreasuryVault.sil ownerSig path locally."
+          : "Full ownerSig covenant proof has not passed yet."
       }
     ],
     buildRulesForAgents: [
@@ -55,15 +78,15 @@ export function buildSilverscriptBuildDepthReview({
     nextSteps: [
       {
         order: 1,
-        task: "Create a minimal Rust or debugger fixture that proves RecurringTreasuryVault state transition without relying on JS output construction."
+        task: "Use a Rust submit route or a JS SDK that preserves output covenant bindings."
       },
       {
         order: 2,
-        task: "Patch or wrap signature-script construction so ownerSig is typed correctly for the generated DECL entrypoint."
+        task: "Convert the local Rust proof into a TN12 spend from the funded RecurringTreasuryVault output."
       },
       {
         order: 3,
-        task: "Only after local positive and negative covenant tests pass, build a live TN12 submit route that preserves covenant binding fields."
+        task: "Keep JS submit blocked unless kaspa-wasm exposes or accepts the exact covenant binding fields."
       },
       {
         order: 4,
