@@ -101,7 +101,7 @@
         "artifacts/coordination-market-settlement-brief.json"
       ],
       "expected": "Signed compatible intendos should form a pack only when threshold conditions are satisfied.",
-      "observed": "3 qualifying intendos; 75 TKAS route amount.",
+      "observed": "3 qualifying intendos; 100 TKAS route amount.",
       "blockedCases": [
         "accumulation opacity",
         "capital multiplexing",

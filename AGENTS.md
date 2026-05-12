@@ -33,6 +33,7 @@
 - Start with safe money rules users can understand: delayed withdrawal, recovery path, spend limit, escrow, bounty, and treasury controls.
 - Explain the action before the abstraction. Say "funds can only leave after a delay" before "covenant policy."
 - Keep writing concrete and necessary. Avoid repeated "not X but Y" frames, "if this then that" filler, and polished LLM cadence words such as "seamless," "robust," "unlock," "empower," "transform," or "game-changing."
+- Avoid corporate abstraction unless the sentence cashes it out. Do not leave terms like "institutional readiness," "ecosystem maturity," "enterprise adoption," "strategic," or "platform unlock" standing alone. Name the actor and requirement: an exchange needs node stability, wallet integration, liquidity, legal review, and support; a payments company needs payment APIs, refunds, accounting, uptime, and support; builders need docs, SDKs, indexers, and working examples.
 - Avoid clever authority voice: no dramatic adjective piles, faux-bold certainty, invented slogans, or lines that sound written to impress the writer rather than help the builder.
 - Do not write cringey internal-process language in public copy or durable notes. Avoid vague words like "framing pass," "status theater," "polish pass," "move the narrative," and "unlock." Say the concrete task: shorten the page, link the card, move details to docs, show the command prereqs, or explain the app path.
 - Use one clear status label or source link instead of long defensive caveat stacks.

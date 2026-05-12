@@ -40,7 +40,7 @@
       "user": "docs-backer-alpha",
       "committedAction": "pledge-to-docs-sprint",
       "thresholdCondition": 3,
-      "amountTkas": 25,
+      "amountTkas": 45,
       "capitalReference": "pledge-docs-001",
       "expiryIso": "2026-05-21T00:00:00.000Z",
       "cancelRule": "cancel-before-hunt",
@@ -54,7 +54,7 @@
       "user": "wallet-builder-beta",
       "committedAction": "pledge-to-docs-sprint",
       "thresholdCondition": 3,
-      "amountTkas": 20,
+      "amountTkas": 35,
       "capitalReference": "pledge-docs-002",
       "expiryIso": "2026-05-21T00:00:00.000Z",
       "cancelRule": "cancel-before-hunt",
@@ -68,7 +68,7 @@
       "user": "pool-tooling-gamma",
       "committedAction": "pledge-to-docs-sprint",
       "thresholdCondition": 3,
-      "amountTkas": 30,
+      "amountTkas": 20,
       "capitalReference": "pledge-docs-003",
       "expiryIso": "2026-05-21T00:00:00.000Z",
       "cancelRule": "cancel-before-hunt",
@@ -112,7 +112,7 @@
       "status": "transparent-pack-not-opaque",
       "intendoCount": 3,
       "signedIntendoCount": 3,
-      "committedTkas": 75,
+      "committedTkas": 100,
       "solver": {
         "status": "satisfiable-transparent-pack",
         "algorithm": "transparent-count-threshold-filter",
@@ -122,7 +122,7 @@
           "intendo-docs-gamma"
         ],
         "qualifyingCount": 3,
-        "qualifyingTkas": 75,
+        "qualifyingTkas": 100,
         "note": "This toy solver handles transparent count thresholds only; it is not the monotone fixed-point solver described for full coordination markets."
       },
       "hunt": {

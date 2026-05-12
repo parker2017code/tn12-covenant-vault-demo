@@ -64,6 +64,7 @@ import { buildBatchAssuranceSubmitRunbook } from "../src/batchAssuranceSubmitRun
 import { buildBatchAssuranceOperatorDecision } from "../src/batchAssuranceOperatorDecision.mjs";
 import { buildCoordinationMarketPrototype } from "../src/coordinationMarket.mjs";
 import { buildCoordinationMarketSettlementBrief } from "../src/coordinationMarketSettlementBrief.mjs";
+import { buildCoordinationMarketEvidenceDossier } from "../src/coordinationMarketEvidenceDossier.mjs";
 import { buildAccessPassPlanner } from "../src/accessPassPlanner.mjs";
 import { buildAccessPassIssuerReview } from "../src/accessPassIssuerReview.mjs";
 import { buildMainnetReadiness } from "../src/mainnetReadiness.mjs";
@@ -827,7 +828,7 @@ const coordinationSettlementBrief = buildCoordinationMarketSettlementBrief({
 assert.equal(coordinationSettlementBrief.status, "transparent-settlement-brief-ready-not-production");
 assert.equal(coordinationSettlementBrief.summary.productionReady, false);
 assert.equal(coordinationSettlementBrief.summary.qualifyingIntendos, 3);
-assert.equal(coordinationSettlementBrief.summary.qualifyingTkas, 75);
+assert.equal(coordinationSettlementBrief.summary.qualifyingTkas, 100);
 assert.equal(coordinationSettlementBrief.summary.missingRails, 4);
 assert.equal(coordinationSettlementBrief.runThisPack.id, "pack-stag-docs-sprint:run-first");
 assert.match(coordinationSettlementBrief.runThisPack.expectedResult, /3 commitments qualify/);
@@ -839,6 +840,20 @@ assert.ok(coordinationSettlementBrief.nonProductionBoundary.some((boundary) => /
 const coordinationSettlementArtifact = JSON.parse(await readFile(new URL("../artifacts/coordination-market-settlement-brief.json", import.meta.url), "utf8"));
 assert.equal(coordinationSettlementArtifact.status, "transparent-settlement-brief-ready-not-production");
 assert.equal(coordinationSettlementArtifact.summary.productionReady, false);
+const coordinationEvidenceDossier = buildCoordinationMarketEvidenceDossier({
+  coordinationPrototype,
+  settlementBrief: coordinationSettlementBrief,
+  acceptedOutputs: JSON.parse(await readFile(new URL("../fixtures/AcceptedOutputEvidence.json", import.meta.url), "utf8")),
+  custodyImports: JSON.parse(await readFile(new URL("../artifacts/batch-assurance-custody-imports.json", import.meta.url), "utf8")),
+  settlementDrafts: JSON.parse(await readFile(new URL("../artifacts/batch-assurance-settlement-drafts.json", import.meta.url), "utf8")),
+  checkpoint: JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8")),
+  generatedAt: "2026-05-12T00:00:00.000Z"
+});
+assert.equal(coordinationEvidenceDossier.status, "transparent-coordination-evidence-ready");
+assert.equal(coordinationEvidenceDossier.summary.qualifyingIntendos, 3);
+assert.equal(coordinationEvidenceDossier.summary.releaseAccepted, true);
+const coordinationEvidenceDossierArtifact = JSON.parse(await readFile(new URL("../artifacts/coordination-market-evidence-dossier.json", import.meta.url), "utf8"));
+assert.equal(coordinationEvidenceDossierArtifact.status, coordinationEvidenceDossier.status);
 const aiDisciplineFixture = JSON.parse(await readFile(new URL("../fixtures/AiCodingSourceDiscipline.json", import.meta.url), "utf8"));
 const aiDiscipline = buildAiCodingSourceDiscipline(aiDisciplineFixture);
 assert.equal(aiDiscipline.status, "ai-source-discipline-ready");
@@ -2021,6 +2036,7 @@ const files = [
   "scripts/verify-payload-events.mjs",
   "scripts/build-coordination-market.mjs",
   "scripts/build-coordination-market-settlement-brief.mjs",
+  "scripts/build-coordination-market-evidence-dossier.mjs",
   "scripts/build-access-pass-planner.mjs",
   "scripts/build-access-pass-issuer-review.mjs",
   "scripts/build-mainnet-readiness.mjs",
@@ -2167,6 +2183,7 @@ const files = [
   "artifacts/durable-replay-promotion-guard.json",
   "artifacts/coordination-market-prototype.json",
   "artifacts/coordination-market-settlement-brief.json",
+  "artifacts/coordination-market-evidence-dossier.json",
   "artifacts/access-pass-planner.json",
   "artifacts/access-pass-issuer-review.json",
   "artifacts/mainnet-readiness.json",

@@ -35,6 +35,7 @@ try {
     assert.equal(assetResponse.ok, true, `Failed to load ${asset}`);
   }
   for (const publicPageHtml of [html, resultsHtml, playgroundHtml, await readFile("lab.html", "utf8")]) {
+    assert.match(publicPageHtml, /class="brand-home" href="index\.html"/);
     assert.match(publicPageHtml, /rel="apple-touch-icon" href="apple-touch-icon\.png"/);
     assert.match(publicPageHtml, /rel="manifest" href="site\.webmanifest"/);
     assert.match(publicPageHtml, /property="og:image" content="og-tn12-proof-lab\.png"/);
@@ -139,6 +140,7 @@ async function checkRenderedPages(url) {
         await waitForDynamicContent(page, path);
         await assertNoViewportOverflow(page, `${path} ${viewport.name}`);
         if (viewport.name === "mobile") await assertMobileControls(page, path);
+        assert.equal(await page.locator('.brand-home[href="index.html"]').count(), 1, `${path} needs one header home link`);
         const emptyLiveRegions = await page.locator("[aria-live]").evaluateAll((nodes) => nodes
           .filter((node) => !node.textContent.trim() && node.children.length === 0)
           .map((node) => node.id || node.className || node.tagName));
@@ -256,10 +258,14 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 7);
     await page.goto(`${url}lab.html#coordination`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector(".coordination-run-card", { timeout: 5000 });
+    await page.waitForSelector("#coordination-dossier article", { state: "attached", timeout: 5000 });
     const coordinationText = await page.locator("#coordination").innerText();
     assert.match(coordinationText, /Run a conditional commitment pack/);
     assert.match(coordinationText, /Backers commit only if enough compatible backers also commit/);
     assert.match(coordinationText, /3 commitments qualify/);
+    assert.match(coordinationText, /Reviewer dossier/);
+    assert.match(coordinationText, /100 TKAS/);
+    assert.match(coordinationText, /4d84472e/);
     await page.goto(`${url}lab.html#submit`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
     const submitText = await page.locator("#submit").innerText();

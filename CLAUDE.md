@@ -21,3 +21,4 @@
 - See `docs/LLM_REVIEW_GUIDE.md` for claim boundaries (what NOT to assert as proven)
 - See `docs/AI_CODING_SOURCE_DISCIPLINE.md` for source discipline rules
 - Never state a txid as accepted without verifying via `npm run tx:verify`
+- No corporate abstraction in public copy or handoff notes. If a term like institutional readiness, ecosystem maturity, enterprise adoption, robust, seamless, unlock, or enable appears, replace it or define the actor, the job, and the concrete requirement.

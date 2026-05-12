@@ -1,0 +1,132 @@
+{
+  "schema": "tn12-coordination-market-evidence-dossier/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-12T17:29:51.775Z",
+  "status": "transparent-coordination-evidence-ready",
+  "sourceArtifacts": [
+    "artifacts/coordination-market-prototype.json",
+    "artifacts/coordination-market-settlement-brief.json",
+    "artifacts/batch-assurance-custody-imports.json",
+    "artifacts/batch-assurance-settlement-drafts.json",
+    "fixtures/AcceptedOutputEvidence.json",
+    "artifacts/checkpointed-accepted-index.json"
+  ],
+  "thesis": "A reviewer can inspect who committed, what condition they accepted, where the TN12 evidence lives, and which release path was selected.",
+  "summary": {
+    "selectedPackId": "pack-stag-docs-sprint",
+    "qualifyingIntendos": 3,
+    "qualifyingTkas": 100,
+    "participantEvidenceReady": true,
+    "releaseAccepted": true,
+    "releaseTxid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "releaseOutputTkas": "99.99995",
+    "acceptedCheckpointRows": 53,
+    "mainnetClaims": 0,
+    "productionCustodyClaims": 0,
+    "opaqueExecutionClaims": 0
+  },
+  "reviewerPath": [
+    "Read the selected Stag and Pack.",
+    "Inspect each qualifying Intendo and its threshold condition.",
+    "Open the accepted payload receipt for each pledge.",
+    "Compare the custody outpoint and amount against accepted output evidence.",
+    "Open the selected release txid.",
+    "Confirm refund alternates are non-selected for the spent pledge outputs."
+  ],
+  "participants": [
+    {
+      "intendoId": "intendo-docs-alpha",
+      "participant": "docs-backer-alpha",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 45,
+      "pledgeId": "pledge-docs-001",
+      "signatureStatus": "signed",
+      "acceptedPayloadTxid": "10d9ba2bf43182014b84fa0e20fb47ede10776860e6e4e940f315fa1e59fcca1",
+      "acceptedPayloadEvidencePath": "artifacts/payload-batch-pledge-docs-001-evidence.json",
+      "acceptedCustodyOutpoint": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a:0",
+      "acceptedCustodyDestination": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz",
+      "acceptedCustodyBlueScore": 7042656,
+      "custodyImportStatus": "custody-import-ready",
+      "amountMatches": true,
+      "evidenceStatus": "accepted-payload-and-custody"
+    },
+    {
+      "intendoId": "intendo-docs-beta",
+      "participant": "wallet-builder-beta",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 35,
+      "pledgeId": "pledge-docs-002",
+      "signatureStatus": "signed",
+      "acceptedPayloadTxid": "9bd53c2708486a21cf8225d08e8a949bcfd603848794dadceb9f6c0bff5b3a86",
+      "acceptedPayloadEvidencePath": "artifacts/payload-batch-pledge-docs-002-evidence.json",
+      "acceptedCustodyOutpoint": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a:1",
+      "acceptedCustodyDestination": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9",
+      "acceptedCustodyBlueScore": 7042656,
+      "custodyImportStatus": "custody-import-ready",
+      "amountMatches": true,
+      "evidenceStatus": "accepted-payload-and-custody"
+    },
+    {
+      "intendoId": "intendo-docs-gamma",
+      "participant": "pool-tooling-gamma",
+      "committedAction": "pledge-to-docs-sprint",
+      "thresholdCondition": 3,
+      "amountTkas": 20,
+      "pledgeId": "pledge-docs-003",
+      "signatureStatus": "signed",
+      "acceptedPayloadTxid": "fb9f97d04f92f6ea0537e33e89531f4184336f29a33ef8d5ce3f0247a7a6a04d",
+      "acceptedPayloadEvidencePath": "artifacts/payload-batch-pledge-docs-003-evidence.json",
+      "acceptedCustodyOutpoint": "0b8196957a09832bc4469237ac75f315eba9c2f22678030eef92816a4e5cd69a:2",
+      "acceptedCustodyDestination": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn",
+      "acceptedCustodyBlueScore": 7042656,
+      "custodyImportStatus": "custody-import-ready",
+      "amountMatches": true,
+      "evidenceStatus": "accepted-payload-and-custody"
+    }
+  ],
+  "selectedRelease": {
+    "routeId": "docs-sprint-release",
+    "status": "accepted-on-tn12",
+    "txid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "outputTkas": "99.99995",
+    "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "draftPath": "artifacts/signed-drafts/batch-assurance-release.json",
+    "inputCount": 3
+  },
+  "alternateRoutes": [
+    {
+      "kind": "refund",
+      "pledgeId": "pledge-docs-001",
+      "status": "non-selected-after-release",
+      "draftPath": "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-001.json",
+      "transactionId": "d3162da114013bfabf918f6f0f25091942cb8a87e3580af585399482a2397999",
+      "reason": "Non-selected after accepted release for the same pledge set."
+    },
+    {
+      "kind": "refund",
+      "pledgeId": "pledge-docs-002",
+      "status": "non-selected-after-release",
+      "draftPath": "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-002.json",
+      "transactionId": "a5f07faab17cd16f8849a85c69c068bfe89e0ee77c5909aa0df4a9a842e08382",
+      "reason": "Non-selected after accepted release for the same pledge set."
+    },
+    {
+      "kind": "refund",
+      "pledgeId": "pledge-docs-003",
+      "status": "non-selected-after-release",
+      "draftPath": "artifacts/signed-drafts/batch-assurance-refund-pledge-docs-003.json",
+      "transactionId": "9bfc17c1ab73a7ed740f0f95220e65dff7930a1f499fa62b3bb7200b5ae1781c",
+      "reason": "Non-selected after accepted release for the same pledge set."
+    }
+  ],
+  "boundaries": [
+    "This proves a transparent coordination slice, not private Staghunt/Hashdag infrastructure.",
+    "Each participant has one visible capital source; capital multiplexing is still missing.",
+    "Release was accepted through local testnet signing; user-wallet signing remains a separate rail.",
+    "Atomic Hunt execution across independent private commitments is still missing."
+  ],
+  "nextUpgrade": "Turn the selected release route into a user-wallet request, run it with fresh TN12 participant wallets, then replay the accepted txid before promoting a public playground flow."
+}

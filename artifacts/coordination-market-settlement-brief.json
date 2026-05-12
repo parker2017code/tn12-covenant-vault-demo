@@ -16,7 +16,7 @@
     "packFound": true,
     "selectedSolverStatus": "satisfiable-transparent-pack",
     "qualifyingIntendos": 3,
-    "qualifyingTkas": 75,
+    "qualifyingTkas": 100,
     "selectedReleaseRoute": "docs-sprint-release",
     "selectedRefundRoute": "docs-sprint-refund",
     "settlementRoutes": 2,
@@ -27,7 +27,7 @@
     "packId": "pack-stag-docs-sprint",
     "stagId": "stag-docs-sprint",
     "status": "transparent-pack-not-opaque",
-    "committedTkas": 75,
+    "committedTkas": 100,
     "solver": {
       "status": "satisfiable-transparent-pack",
       "algorithm": "transparent-count-threshold-filter",
@@ -37,7 +37,7 @@
         "intendo-docs-gamma"
       ],
       "qualifyingCount": 3,
-      "qualifyingTkas": 75,
+      "qualifyingTkas": 100,
       "note": "This toy solver handles transparent count thresholds only; it is not the monotone fixed-point solver described for full coordination markets."
     },
     "huntStatus": "hunt-plan-ready-not-atomic-execution"
@@ -46,7 +46,7 @@
     "id": "pack-stag-docs-sprint:run-first",
     "title": "Run a conditional commitment pack",
     "userGoal": "Backers commit only if enough compatible backers also commit.",
-    "plainLanguage": "3 signed commitments meet the threshold, so the app selects the release route for 75 TKAS instead of the refund route.",
+    "plainLanguage": "3 signed commitments meet the threshold, so the app selects the release route for 100 TKAS instead of the refund route.",
     "selectedReleaseRoute": "docs-sprint-release",
     "alternateRefundRoute": "docs-sprint-refund",
     "walletRequestNext": {
@@ -66,7 +66,7 @@
       "Export one wallet request for the selected route.",
       "Replay accepted evidence before marking the pack settled."
     ],
-    "expectedResult": "3 commitments qualify for 75 TKAS of transparent route amount.",
+    "expectedResult": "3 commitments qualify for 100 TKAS of transparent route amount.",
     "nextUpgrade": "Turn this route into a wallet-standard settlement request, then require accepted replay before marking settlement complete."
   },
   "settlementRoutes": [
@@ -83,7 +83,7 @@
         "intendo-docs-beta",
         "intendo-docs-gamma"
       ],
-      "amountTkas": 75,
+      "amountTkas": 100,
       "walletReview": [
         "show selected Stag and Pack",
         "show each qualifying Intendo",

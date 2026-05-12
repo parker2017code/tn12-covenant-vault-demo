@@ -40,6 +40,7 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 - Txid-only reasoning: UTXO work must key by full outpoint. A single accepted transaction can carry several distinct outputs.
 - Planning before proof: when a lane has an obvious next transaction or negative test, build that before adding another matrix, queue, or status page.
 - Public copy over-explaining itself: external readers should see what landed, how to verify it, what broke, and what is next.
+- Corporate abstraction replacing requirements: terms like "institutional readiness," "ecosystem maturity," "enterprise adoption," "strategic," "robust," "seamless," "unlock," and "enable" hide the work. Name the actor and requirement instead: exchange integration, wallet signing, custody, accounting, refunds, indexers, docs, support, liquidity, or legal review.
 
 ## AI / Agent Coding Failure Modes
 

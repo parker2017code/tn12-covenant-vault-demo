@@ -113,6 +113,7 @@ const treasurySummaryNode = document.querySelector("#treasury-summary");
 const treasuryListNode = document.querySelector("#treasury-list");
 const coordinationSummaryNode = document.querySelector("#coordination-summary");
 const coordinationPacksNode = document.querySelector("#coordination-packs");
+const coordinationDossierNode = document.querySelector("#coordination-dossier");
 const accessSummaryNode = document.querySelector("#access-summary");
 const accessListNode = document.querySelector("#access-list");
 const assetSummaryNode = document.querySelector("#asset-summary");
@@ -628,6 +629,7 @@ async function renderCoordinationMarket() {
     });
     const prototype = buildCoordinationMarketPrototype(fixture);
     const settlementBrief = buildCoordinationMarketSettlementBrief({ fixture: briefFixture, coordinationPrototype: prototype });
+    const dossier = await fetchOptionalJson("artifacts/coordination-market-evidence-dossier.json");
     coordinationSummaryNode.innerHTML = `
       <article><span>Stags</span><strong>${escapeHtml(prototype.summary.stags)}</strong></article>
       <article><span>Intendos</span><strong>${escapeHtml(prototype.summary.intendos)}</strong></article>
@@ -664,6 +666,28 @@ async function renderCoordinationMarket() {
       </details>
     `;
     coordinationPacksNode.append(briefArticle);
+
+    if (coordinationDossierNode && dossier) {
+      coordinationDossierNode.innerHTML = `
+        <article class="coordination-card coordination-run-card">
+          <span>${escapeHtml(publicStatusLabel(dossier.status))}</span>
+          <strong>Reviewer dossier</strong>
+          <p>${escapeHtml(dossier.summary.qualifyingIntendos)} participant commitments, ${escapeHtml(dossier.summary.qualifyingTkas)} TKAS, release accepted: ${escapeHtml(dossier.summary.releaseAccepted ? "yes" : "no")}.</p>
+          <p><a href="${escapeHtml(dossier.selectedRelease.explorerUrl)}" target="_blank" rel="noreferrer"><code>${escapeHtml(shortTxid(dossier.selectedRelease.txid))}</code></a> ${escapeHtml(dossier.selectedRelease.outputTkas)} TKAS to ${escapeHtml(shortAddress(dossier.selectedRelease.destination))}</p>
+          <details open>
+            <summary>Participants</summary>
+            <ol>${dossier.participants.map((row) => `
+              <li>
+                <strong>${escapeHtml(row.participant)}</strong>
+                ${escapeHtml(row.amountTkas)} TKAS,
+                <code>${escapeHtml(shortTxid(row.acceptedPayloadTxid))}</code>,
+                <code>${escapeHtml(row.acceptedCustodyOutpoint)}</code>
+              </li>
+            `).join("")}</ol>
+          </details>
+        </article>
+      `;
+    }
   } catch (error) {
     coordinationSummaryNode.textContent = `Coordination market prototype unavailable: ${error.message}`;
   }
