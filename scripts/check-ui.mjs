@@ -21,6 +21,25 @@ try {
   const playgroundResponse = await fetch(`${url}playground.html`);
   assert.equal(playgroundResponse.ok, true, "Failed to load playground.html");
   const playgroundHtml = await playgroundResponse.text();
+  for (const asset of [
+    "favicon.svg",
+    "favicon.png",
+    "favicon.ico",
+    "apple-touch-icon.png",
+    "icon-192.png",
+    "icon-512.png",
+    "site.webmanifest",
+    "og-tn12-proof-lab.png",
+  ]) {
+    const assetResponse = await fetch(`${url}${asset}`);
+    assert.equal(assetResponse.ok, true, `Failed to load ${asset}`);
+  }
+  for (const publicPageHtml of [html, resultsHtml, playgroundHtml, await readFile("lab.html", "utf8")]) {
+    assert.match(publicPageHtml, /rel="apple-touch-icon" href="apple-touch-icon\.png"/);
+    assert.match(publicPageHtml, /rel="manifest" href="site\.webmanifest"/);
+    assert.match(publicPageHtml, /property="og:image" content="og-tn12-proof-lab\.png"/);
+    assert.match(publicPageHtml, /name="twitter:image" content="og-tn12-proof-lab\.png"/);
+  }
   const proofFixture = JSON.parse(await readFile("fixtures/AcceptedProofTransactions.json", "utf8"));
   const checkpoint = JSON.parse(await readFile("artifacts/checkpointed-accepted-index.json", "utf8"));
   const selfServeRunbook = JSON.parse(await readFile("artifacts/self-serve-lane-runbook.json", "utf8"));

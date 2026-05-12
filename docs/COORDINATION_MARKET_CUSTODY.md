@@ -8,6 +8,8 @@ This document keeps the coordination-market lane below the current proof boundar
 
 Keep custody and settlement explicit before any Stag / Intendo / Pack / Solver claim.
 
+The user-provided Web3 Festival HK 2026 Junny Ho transcript is useful framing for this lane: stag-hunt coordination fails when participants cannot observe credible commitments from others quickly enough. A coordination-market prototype should therefore show conditional participation, observable thresholds, and economic exposure before it claims to solve coordination. In this repo, that framing is not proof that the lane is live.
+
 ## Candidate Custody Models
 
 1. Escrow-based custody.

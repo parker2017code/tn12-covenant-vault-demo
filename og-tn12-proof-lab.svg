@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="TN12 proof lab social preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#090d0c"/>
+      <stop offset=".55" stop-color="#131816"/>
+      <stop offset="1" stop-color="#070909"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8ee6d1"/>
+      <stop offset="1" stop-color="#f5a15a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity=".14" fill="none" stroke="#8ee6d1" stroke-width="2">
+    <path d="M790 120h116l58 58v116l-58 58H790l-58-58V178z"/>
+    <path d="M956 208h116l58 58v116l-58 58H956l-58-58V266z"/>
+    <path d="M786 384h116l58 58v116l-58 58H786l-58-58V442z"/>
+    <path d="M906 178l50 30M906 352l50-144M902 442l54-60"/>
+  </g>
+  <g>
+    <rect x="90" y="122" width="252" height="252" rx="30" fill="#0b0f0e" stroke="url(#mark)" stroke-width="8"/>
+    <path d="M148 194h136" fill="none" stroke="#edf8f5" stroke-width="34" stroke-linecap="round"/>
+    <path d="M216 194v116" fill="none" stroke="#edf8f5" stroke-width="34" stroke-linecap="round"/>
+    <path d="M262 246 216 292l-46-46" fill="none" stroke="url(#mark)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g font-family="Aptos, Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="402" y="178" fill="#f4fffb" font-size="76" font-weight="850">TN12 Proof Lab</text>
+    <text x="408" y="246" fill="#d9e7e2" font-size="34" font-weight="650">Accepted txids, replayed state, clear blockers</text>
+    <text x="408" y="314" fill="#a9bbb5" font-size="28">A Kaspa testnet evidence surface for covenant app paths.</text>
+    <g transform="translate(408 394)" font-size="22" font-weight="800" letter-spacing=".04em">
+      <rect x="0" y="-31" width="148" height="48" rx="10" fill="#111d1a" stroke="#8ee6d1" stroke-opacity=".36"/>
+      <text x="20" y="0" fill="#8ee6d1">PROOF</text>
+      <rect x="176" y="-31" width="156" height="48" rx="10" fill="#111d1a" stroke="#8ee6d1" stroke-opacity=".36"/>
+      <text x="196" y="0" fill="#8ee6d1">REPLAY</text>
+      <rect x="360" y="-31" width="176" height="48" rx="10" fill="#111d1a" stroke="#f5a15a" stroke-opacity=".36"/>
+      <text x="382" y="0" fill="#f5a15a">BLOCKERS</text>
+    </g>
+    <text x="92" y="532" fill="#859792" font-size="24">parker2017code.github.io/tn12-covenant-vault-demo</text>
+  </g>
+</svg>

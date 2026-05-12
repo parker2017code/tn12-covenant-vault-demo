@@ -25,6 +25,12 @@
 - Michael Sutton Toccata outlook: https://medium.com/@michaelsuttonil/kaspa-covenants-toccata-hard-fork-outlook-a4d81a40900c
 - Kaspa Daily Yonatan Q&A Part 1: https://x.com/DailyKaspa/status/2052716697262374936
 
+## User-Provided Context
+
+- Web3 Festival HK 2026, Junny Ho, "Scaling Trustless Coordination": https://www.youtube.com/watch?v=b3wPZ04p410
+
+Use this as narrative context, not proof evidence. The useful claims are about framing: coordination problems as stag hunts, credible commitments, conditional participation, economic exposure, and real-time decentralized confirmation as a prerequisite for coordination markets. Do not cite it as activation evidence for Toccata, vProgs, DeFi, production coordination markets, or this repo's TN12 proof status.
+
 ## TN12 Public Utilities
 
 - Faucet: https://faucet-tn12.kaspanet.io/

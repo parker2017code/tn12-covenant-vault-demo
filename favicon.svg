@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TN12 proof lab">
+  <defs>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8ee6d1"/>
+      <stop offset="1" stop-color="#f5a15a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="10" fill="#0b0f0e"/>
+  <rect x="6" y="6" width="52" height="52" rx="8" fill="none" stroke="url(#mark)" stroke-width="3"/>
+  <path d="M16 19h32" fill="none" stroke="#edf8f5" stroke-width="8" stroke-linecap="round"/>
+  <path d="M32 19v27" fill="none" stroke="#edf8f5" stroke-width="8" stroke-linecap="round"/>
+  <path d="M43 31 32 42l-11-11" fill="none" stroke="url(#mark)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
