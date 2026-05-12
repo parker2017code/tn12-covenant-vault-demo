@@ -1883,11 +1883,19 @@ progress::-moz-progress-bar {
   gap: 14px;
 }
 
-.claim-grid article {
+.claim-grid article,
+.claim-grid a {
   border: 1px solid var(--line);
   border-radius: 7px;
   background: var(--surface-soft);
   padding: 14px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.claim-grid a:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .claim-grid strong {
