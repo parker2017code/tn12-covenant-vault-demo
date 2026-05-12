@@ -1,7 +1,7 @@
 {
   "schema": "tn12-next-ten-execution-status/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-10T23:15:14.344Z",
+  "generatedAt": "2026-05-12T02:21:47.842Z",
   "status": "next-ten-execution-status-review",
   "summary": {
     "tasks": 10,
@@ -76,7 +76,7 @@
   "currentCompletionEstimate": {
     "before": "42-45%",
     "afterLocalSlice": "47-50%",
-    "afterRealExternalSigner": "57-62%"
+    "afterRealExternalSigner": "65-70%"
   },
   "blockers": [
     "A real no-local-key external wallet signature is still required before external-signer tasks can be marked completed.",

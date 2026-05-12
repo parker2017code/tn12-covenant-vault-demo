@@ -1,9 +1,9 @@
 {
   "schema": "tn12-operator-receipt-pack/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T17:46:07.615Z",
+  "generatedAt": "2026-05-12T02:21:48.687Z",
   "status": "operator-receipt-pack-ready",
-  "currentPercent": "53-58%",
+  "currentPercent": "58-62%",
   "evidence": {
     "checkpointRecords": 53,
     "matchedRecords": 53,

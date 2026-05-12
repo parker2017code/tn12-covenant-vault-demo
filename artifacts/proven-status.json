@@ -1,10 +1,10 @@
 {
   "schema": "tn12-proven-status/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-11T17:46:07.292Z",
+  "generatedAt": "2026-05-12T02:21:48.268Z",
   "status": "tn12-demo-proof-ready-mainnet-deferred",
-  "currentPercent": "53-58%",
-  "afterExternalSignerPercent": "57-62%",
+  "currentPercent": "58-62%",
+  "afterExternalSignerPercent": "65-70%",
   "acceptedEvidence": {
     "checkpointRecords": 53,
     "matchedRecords": 53,

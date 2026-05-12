@@ -7,7 +7,7 @@ Current readiness: about 58-62% mainnet deployment readiness.
 What changed in this pass:
 - Added one local-wallet operator-pack payload receipt accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 - Payload evidence is now 40 accepted events and 53 checkpointed records.
-- DeFi accepted activity now includes 16 accepted local-key transfer rows: user funding, pool deposits, pool payouts, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
+- DeFi accepted activity now includes 25 accepted local-key transfer rows: user funding, pool deposits, pool payouts, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
 - Scheduler evidence now includes one accepted intent payload, three accepted bid receipts, one accepted execution receipt, and one accepted local-key payout reduced into executed trigger state in `artifacts/scheduler-intent-registry.json`.
 - Scheduler covenant binding now includes one accepted payload receipt that references the accepted vault recovery proof row in `artifacts/scheduler-covenant-binding.json`.
 - Live TN12 replay overlap now exists from a chain-block anchor inside the checkpoint band.
@@ -26,7 +26,7 @@ Current blockers:
 - Production custody/source-of-funds review for settlement lanes
 - Wallet/indexer hardening beyond fixture/local replay
 
-What Claude should do next:
+What to do next:
 1. Keep the live replay promotion lane honest and bounded.
 2. Keep the accepted batch-assurance release and non-selected refund paths explicit.
 3. Finish the wallet/external-signer lane only if a real throwaway signer path exists.
@@ -49,4 +49,4 @@ Files to read first:
 - `artifacts/batch-assurance-operator-decision.json`
 - `docs/TANGVM_UNISC_BOUNDARY.md`
 
-This handoff is for the next Codex/Claude pass. It is not a claim that mainnet is ready.
+This handoff is for the next work pass. It is not a claim that mainnet is ready.

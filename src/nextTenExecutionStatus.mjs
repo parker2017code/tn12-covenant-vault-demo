@@ -48,7 +48,7 @@ export function buildNextTenExecutionStatus({
     currentCompletionEstimate: {
       before: "42-45%",
       afterLocalSlice: durablePromotionReady ? "50-53%" : "47-50%",
-      afterRealExternalSigner: "57-62%"
+      afterRealExternalSigner: "65-70%"
     },
     blockers: [
       "A real no-local-key external wallet signature is still required before external-signer tasks can be marked completed.",

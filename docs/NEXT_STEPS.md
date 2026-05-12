@@ -7,7 +7,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 ## Current Position
 
 - TN12 proof core is strong: base covenant spends, role-separated paths, batch-assurance release, payload events, replay guards, and adversarial rejections are represented in artifacts and checks.
-- Mainnet deployment readiness is still about `55-60%`. The playground funding tx improves testnet execution evidence, not no-local-key signing or mainnet activation.
+- Mainnet deployment readiness is still about `58-62%`. The playground funding tx improves testnet execution evidence, not no-local-key signing or mainnet activation.
 - Proof-lab auditability is roughly `95%`: accepted covenant proofs, role-separated paths, payload events, replay guards, adversarial rejections, full-DeFi benchmark artifacts, results/playground pages, and focused tests are now in place.
 - The next useful work is not another app idea. It is one end-to-end custody/indexer/operator slice.
 - The latest local-wallet operator-pack receipt is accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.

@@ -19,7 +19,7 @@ export function buildProvenStatus({
   ].filter(Boolean);
   const blockers = [...demoBlockers, ...mainnetDeferredBlockers];
   const currentPercent = demoBlockers.length === 0
-    ? "53-58%"
+    ? "58-62%"
     : nextTenStatus.currentCompletionEstimate?.afterLocalSlice || "47-50%";
 
   return {
@@ -28,7 +28,7 @@ export function buildProvenStatus({
     generatedAt,
     status: demoBlockers.length === 0 ? "tn12-demo-proof-ready-mainnet-deferred" : "proof-core-ready-product-blocked",
     currentPercent,
-    afterExternalSignerPercent: nextTenStatus.currentCompletionEstimate?.afterRealExternalSigner || "57-62%",
+    afterExternalSignerPercent: nextTenStatus.currentCompletionEstimate?.afterRealExternalSigner || "65-70%",
     acceptedEvidence: {
       checkpointRecords: Number(checkpoint.summary?.total || 0),
       matchedRecords: Number(checkpoint.summary?.matched || 0),

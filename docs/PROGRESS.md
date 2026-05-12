@@ -10,7 +10,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 - Seven role-separated positive paths accepted on TN12.
 - Batch-assurance pledge outputs and 3-pledge release accepted on TN12.
 - 40 payload events accepted on TN12, including seven DeFi v1 receipts, one scheduler-intent receipt, three scheduler-bid receipts, one scheduler-execution receipt, one scheduler-covenant-binding receipt, and one agent release wallet-review event.
-- 16 accepted local-key DeFi custody/activity transfer rows are recorded across user funding, pool deposits, pool payouts, and scheduler execution payout.
+- 25 accepted local-key DeFi custody/activity transfer rows are recorded across user funding, pool deposits, pool payouts, and scheduler execution payout.
 - One scheduler-intent payload, three scheduler-bid receipts, one scheduler-execution receipt, one scheduler-covenant-binding receipt, and one local-key payout are accepted on TN12 and reduced as executed trigger state.
 - Adversarial rejection evidence exists for wrong signer, wrong selector, wrong output lock, wrong amount, and single-party cancel.
 - Local gates cover proof evidence, payload matching, wallet review, signer-result validation, replay rows, duplicate/stale receipt guards, DeFi scenario/reducer/advanced simulation, artifact manifest guards, and UI smoke.

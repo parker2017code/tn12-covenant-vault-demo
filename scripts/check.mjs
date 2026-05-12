@@ -436,7 +436,7 @@ const provenStatus = buildProvenStatus({
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
 assert.equal(provenStatus.status, "tn12-demo-proof-ready-mainnet-deferred");
-assert.equal(provenStatus.currentPercent, "53-58%");
+assert.equal(provenStatus.currentPercent, "58-62%");
 assert.equal(provenStatus.acceptedEvidence.checkpointRecords, 53);
 assert.equal(provenStatus.acceptedEvidence.payloadEvents, 40);
 assert.equal(provenStatus.readiness.durablePromotionReady, false);
@@ -445,7 +445,7 @@ assert.ok(provenStatus.mainnetDeferredBlockers.includes("external signer accepte
 assert.ok(provenStatus.mainnetDeferredBlockers.includes("live removed-block rollback evidence missing"));
 const provenStatusArtifact = JSON.parse(await readFile(new URL("../artifacts/proven-status.json", import.meta.url), "utf8"));
 assert.equal(provenStatusArtifact.status, "tn12-demo-proof-ready-mainnet-deferred");
-assert.equal(provenStatusArtifact.currentPercent, "53-58%");
+assert.equal(provenStatusArtifact.currentPercent, "58-62%");
 const operatorReceiptPack = buildOperatorReceiptPack({
   provenStatus: provenStatusArtifact,
   checkpoint: JSON.parse(await readFile(new URL("../artifacts/checkpointed-accepted-index.json", import.meta.url), "utf8")),
@@ -459,7 +459,7 @@ const operatorReceiptPack = buildOperatorReceiptPack({
   generatedAt: "2026-05-10T00:00:00.000Z"
 });
 assert.equal(operatorReceiptPack.status, "operator-receipt-pack-ready");
-assert.equal(operatorReceiptPack.currentPercent, "53-58%");
+assert.equal(operatorReceiptPack.currentPercent, "58-62%");
 assert.equal(operatorReceiptPack.evidence.checkpointRecords, 53);
 assert.equal(operatorReceiptPack.evidence.payloadEvents, 40);
 assert.equal(operatorReceiptPack.custody.auctionReadyRows, 2);
