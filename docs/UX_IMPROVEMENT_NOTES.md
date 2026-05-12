@@ -103,6 +103,14 @@ This is an internal working note for product cleanup. Keep the public site focus
 6. Run the public framing pass: money-first, covenants as constrained spend rules, based apps as app state anchored to Kaspa evidence, and vProgs as later architecture rather than the default product claim.
 7. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
 
+## Current UI Rule
+
+- Quickstart cards must show their destination in real text, not a decorative pseudo-button.
+- Explorer evidence should be a real explorer link wherever a txid is visible.
+- Command snippets should name Node/npm prerequisites and whether they write `.local` files or broadcast to TN12.
+- For playground commands, keep the source-wallet rule explicit: `playground:funding-draft` funds fresh role wallets from a separate `TN12_WALLET` plus `FUNDING_OUTPOINT`.
+- Keep the small theme toggle out of the primary proof path; it should not compete with the journey cards.
+
 ## Lessons from strong open-source websites
 
 - Homepage sells the shape; docs prove the details.
