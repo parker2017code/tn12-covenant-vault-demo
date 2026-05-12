@@ -2,7 +2,8 @@
 
 This file defines the cleanup standard for the repo. It is not a roadmap for new features.
 
-Current tidying state after the May 2026 cleanup: about 90-95%.
+Current tidying state after the May 2026 cleanup: mature, with a few code-surface
+and wallet/replay rails still open.
 
 ## Canonical Surface
 
@@ -31,6 +32,9 @@ Archive candidates:
 - one-off execution notes.
 
 Archived files live under `docs/archive/` and must not be cited as current evidence.
+They are excluded from normal `rg` searches through `.ignore`; use
+`rg --no-ignore "pattern" docs/archive` only when intentionally reviewing old
+session history.
 
 ## Public UI Policy
 
@@ -93,7 +97,7 @@ Low-signal artifact changes:
 
 Do not make a proof claim from low-signal diffs.
 
-## Remaining 5-10%
+## Remaining Maintenance
 
 The remaining cleanup is ongoing maintenance:
 

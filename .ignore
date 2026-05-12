@@ -1,0 +1,3 @@
+# Historical/non-canonical reports. Use `rg --no-ignore docs/archive`
+# only when intentionally reviewing old session history.
+docs/archive/

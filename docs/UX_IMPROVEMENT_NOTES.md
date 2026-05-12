@@ -51,9 +51,9 @@ This is an internal working note for product cleanup. Keep the public site focus
 
 ## Repo hygiene and stale-claim cleanup
 
-- Archive and rename old `100%`, `complete`, `production-ready`, and similar artifacts so repo search does not surface stale overconfidence.
-- Current risky names to review include `tn12-system-complete-status.json`, `tn12-100-percent-validation.json`, and `contract-validation-complete.json`.
-- Keep historical material clearly non-canonical, or move it deeper into archive paths that do not pollute normal contributor search.
+- Keep old overcompletion and launch-readiness language out of normal repo search.
+- Current archive files are historical only and should stay outside the default contributor path.
+- Keep historical material clearly non-canonical and opt-in for deliberate archive review.
 - Quarantine local/testnet signing scripts and private-key handling as local-only test tooling.
 - Reduce `package.json` script sprawl with grouped command docs and a smaller public command path.
 - Split `app.js`, `scripts/check.mjs`, and `styles.css` further as part of normal feature work.
@@ -61,7 +61,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 ## Classic LLM smells to remove
 
 - Coverage inflation: too many artifacts, lanes, statuses, and generated outputs.
-- Completion-language residue: `90%`, `100%`, `complete`, `production-ready` in old or generated files.
+- Completion-language residue: old percentage-style or launch-ready claims in historical/generated files.
 - Matrix addiction: tables and status grids replacing a clean user path.
 - Defensive copy loops: repeating what the project is not instead of showing what happened.
 - Label churn: reviewer, technical, evidence, artifact, readiness, missing pieces all appearing too often.
@@ -70,7 +70,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 ## Improvement order
 
 1. Make `results.html` the public front door, or make proof home a very light router to results, playground, and lab.
-2. Archive or rename old `100% / complete / production-ready` artifacts and docs.
+2. Keep old overcompletion artifacts and docs outside normal search.
 3. Split large UI/check files and reduce package script sprawl.
 4. Replace more proof text with clearer user journeys.
 
