@@ -2,13 +2,17 @@
 
 Reviewed: 2026-05-12
 
+Evidence commit reviewed before this note: `2263da4674dc395215a65d89e564908b2e26d1a6`
+
 This is a release-candidate review note for the proof core. It is not a product
 release, not a wallet release, not a DeFi release, and not a mainnet readiness
 claim.
 
 ## Scope
 
-This snapshot packages the evidence a reviewer should check first:
+This snapshot packages the evidence a reviewer should check first. The GitHub
+release tag should target the commit whose gates and hashes are rechecked after
+any edits to this note.
 
 - accepted TN12 proof transactions,
 - accepted payload receipt evidence,
@@ -96,8 +100,8 @@ npm run demo:operator-refresh
 
 This note can become a tagged proof-core release note after:
 
-1. the commit hash is inserted,
-2. `npm run check:all` and `npm run check:tn12` pass on that commit,
+1. the reviewed evidence commit is inserted,
+2. `npm run check:all` and `npm run check:tn12` pass before tagging,
 3. txids and hashes are rechecked after any artifact refresh,
 4. the GitHub release repeats the boundary above.
 

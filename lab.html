@@ -39,8 +39,8 @@
     <section class="hero">
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
-        <h2>Mainnet blockers and builder workbench.</h2>
-        <p>This is the readiness route: wallet signing, production indexer behavior, audit status, and activation blockers stay visible while builders explore deeper TN12 app ideas.</p>
+        <h2>Proof first, lab detail behind drawers.</h2>
+        <p>Review accepted proof, replay, and payload receipt evidence first. Product ideas and mainnet blockers stay separated behind their own routes.</p>
       </div>
       <aside class="facts">
         <span>Accepted proof set</span>
@@ -52,8 +52,8 @@
     <section id="product-map" class="panel product-map">
       <div class="section-title">
         <p class="eyebrow">Workbench map</p>
-        <h2>What people can try.</h2>
-        <p>Start with accepted TN12 evidence, then separate wallet signing, covenant spend rules, and app-state replay. The product stack is money movement first, covenant spend rules second, and app-specific state only where the product needs richer shared state.</p>
+        <h2>Pick one lane.</h2>
+        <p>Start with accepted TN12 evidence. Open product ideas or blockers only after the proof set is clear.</p>
         <p class="note"><a href="docs/PRODUCT_EXECUTION_PLAN.md">Read the product execution plan</a></p>
       </div>
       <div class="product-grid product-lanes">
@@ -62,11 +62,10 @@
           <strong>Accepted paths first</strong>
           <p>Start with lanes that already have TN12 proof or payload evidence.</p>
           <ul>
-            <li><a href="playground.html">Live TN12 money flow</a></li>
+            <li><a href="#proofs">Accepted proof txids</a></li>
+            <li><a href="#indexer">Replay and checkpoint</a></li>
             <li><a href="#invoices">Payload receipt invoices</a></li>
-            <li><a href="#designer">Vault policy</a></li>
-            <li><a href="#assurance">Assurance funding</a></li>
-            <li><a href="#escrow">Escrow / freelance</a></li>
+            <li><a href="playground.html">Live TN12 money flow</a></li>
           </ul>
         </article>
         <article class="product-group">
@@ -74,12 +73,9 @@
           <strong>Replay and review state</strong>
           <p>These need wallet, custody, or app-state work before they become user products.</p>
           <ul>
-            <li><a href="#access-passes">Access passes</a></li>
-            <li><a href="#auction-intents">Auction and intents</a></li>
-            <li><a href="#defi-backlog">DeFi checks</a></li>
-            <li><a href="#scheduler-workbench">Scheduler workbench</a></li>
-            <li><a href="#coordination">Coordination / Stag</a></li>
-            <li><a href="#agent-commitments">Agent commitments</a></li>
+            <li><a href="#vault-proof-lanes">Vault and assurance lanes</a></li>
+            <li><a href="#settlement-app-lanes">Settlement and app lanes</a></li>
+            <li><a href="#signals-funding">Signals and funding tools</a></li>
           </ul>
         </article>
         <article class="product-group">
@@ -87,10 +83,9 @@
           <strong>Bring real users later</strong>
           <p>The public demo stays testnet-only until signing, replay, and custody are hardened.</p>
           <ul>
-            <li><a href="#submit">Use your own wallet</a></li>
-            <li><a href="#funding">Get and verify tKAS</a></li>
-            <li><a href="docs/COMMAND_RUNBOOK.md">Command runbook</a></li>
             <li><a href="MAINNET_READINESS.md">Deployment blockers</a></li>
+            <li><a href="#submit">Wallet handoff</a></li>
+            <li><a href="docs/COMMAND_RUNBOOK.md">Command runbook</a></li>
           </ul>
         </article>
       </div>
@@ -132,32 +127,6 @@
           <a href="#indexer">Open indexer replay</a>
         </article>
       </div>
-      <div class="runbook-grid lane-runbook">
-        <article>
-          <span>DeFi</span>
-          <strong>Available now</strong>
-          <p>Accepted funding, deposits, payouts, scheduler receipts, replay, duplicate checks, and blocked withdrawals.</p>
-          <small>Next: real wallet signing, oracle inputs, and settlement rules.</small>
-        </article>
-        <article>
-          <span>Assurance</span>
-          <strong>Available now</strong>
-          <p>Individual pledge release/refund proof, batch pledge records, and accepted release evidence.</p>
-          <small>Next rail: pooled campaign enforcement as one native contract.</small>
-        </article>
-        <article>
-          <span>Escrow</span>
-          <strong>Available now</strong>
-          <p>Accepted release, DAA refund, mutual cancel proofs, marketplace action map, and wallet-standard request candidates.</p>
-          <small>Next: wallet signing and dispute UX.</small>
-        </article>
-        <article>
-          <span>Coordination</span>
-          <strong>Lab model</strong>
-          <p>Transparent Stag/Intendo/Pack/Solver model and settlement brief for one satisfiable pack.</p>
-          <small>Next: privacy, shared capital, composition, and settlement.</small>
-        </article>
-      </div>
     </section>
 
     <details id="lane-runbook" class="panel lane-runbook-panel section-drawer">
@@ -169,20 +138,6 @@
       </div>
       <div id="self-serve-lanes" class="self-serve-lanes" aria-live="polite"></div>
     </details>
-
-    <section class="panel workbench-routes">
-      <div class="section-title">
-        <p class="eyebrow">Workbench routes</p>
-        <h2>Use the right surface.</h2>
-      </div>
-      <div class="journey-grid">
-        <a href="#product-map"><span>Start</span><strong>Workbench map</strong><p>Pick the lane before opening detail.</p></a>
-        <a href="#runbook"><span>Run</span><strong>Self-serve path</strong><p>Get tKAS, pick a lane, sign externally, replay.</p></a>
-        <a href="playground.html"><span>Watch</span><strong>Real TN12 play</strong><p>Open funding, deposits, payout, and replay.</p></a>
-        <a href="#designer"><span>Create</span><strong>Vault policy</strong><p>Owner, recovery, delay, and policy JSON.</p></a>
-        <a href="#submit"><span>Wallet</span><strong>Use your own wallet</strong><p>Unsigned requests, outside signing, validation.</p></a>
-      </div>
-    </section>
 
     <section id="core-notes" class="panel">
       <div class="section-title">
@@ -240,7 +195,7 @@
       <p class="note"><a href="docs/AUDIT_MAP.md">Proof docs</a> and <a href="docs/SCRIPT_INDEX.md">script groups</a> are available when you need the full detail.</p>
     </section>
 
-    <details class="lab-drawer" open>
+    <details id="vault-proof-lanes" class="lab-drawer">
       <summary>
         <span>Vault and proof setup</span>
         <small>Policy builder, next verification work, lifecycle, and templates.</small>
@@ -349,7 +304,7 @@
 
     </details>
 
-    <details class="lab-drawer">
+    <details id="settlement-app-lanes" class="lab-drawer">
       <summary>
         <span>Assurance funding</span>
         <small>Individual pledge rules, batch campaign state, and script/app boundaries.</small>
@@ -448,7 +403,7 @@ npm run campaign:custody</pre>
 
     </details>
 
-    <details class="lab-drawer">
+    <details class="lab-drawer" open>
       <summary>
         <span>Settlement and app lanes</span>
         <small>Escrow, treasury, commitments, scheduler, passes, assets, auctions, DeFi, and agents.</small>
@@ -592,7 +547,7 @@ npm run defi:accepted-activity</pre>
 
     </details>
 
-    <details class="lab-drawer">
+    <details id="signals-funding" class="lab-drawer">
       <summary>
         <span>Proof, replay, invoices, and wallet use</span>
         <small>Accepted tx evidence, replay rows, payload receipts, and submit surfaces.</small>

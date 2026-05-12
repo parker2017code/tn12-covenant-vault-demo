@@ -114,7 +114,7 @@ async function checkRenderedPages(url) {
         page.on("console", (message) => {
           if (["error", "warning"].includes(message.type())) errors.push(message.text());
         });
-        const response = await page.goto(`${url}${path}`, { waitUntil: "networkidle" });
+        const response = await page.goto(`${url}${path}`, { waitUntil: "domcontentloaded" });
         assert.equal(response?.ok(), true, `${path} did not return 200`);
         assert.deepEqual(errors, [], `${path} had browser errors: ${errors.join("; ")}`);
         await waitForDynamicContent(page, path);
@@ -130,7 +130,7 @@ async function checkRenderedPages(url) {
     }
 
     const page = await browser.newPage();
-    await page.goto(`${url}playground.html`, { waitUntil: "networkidle" });
+    await page.goto(`${url}playground.html`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector("#playground-session article", { timeout: 5000 });
     const playgroundText = await page.locator("body").innerText();
     assert.match(playgroundText, /4 TKAS second deposit/);
@@ -163,7 +163,7 @@ async function checkRenderedPages(url) {
     assert.ok(await page.locator('#playground-roles [data-copy^="kaspatest:"]').count() >= 6);
     assert.ok(await page.locator('#playground-balances details.full-ledger').count() >= 1);
 
-    await page.goto(`${url}results.html`, { waitUntil: "networkidle" });
+    await page.goto(`${url}results.html`, { waitUntil: "domcontentloaded" });
     await page.locator("#standards details.evidence-drawer").evaluate((node) => {
       node.open = true;
     });
@@ -187,21 +187,21 @@ async function checkRenderedPages(url) {
     assert.ok(claimLinkAffordances.length >= 3, "results claim links should stay real links");
     assert.deepEqual(claimLinkAffordances.filter((item) => !item.href), [], "claim-grid links need href targets");
     assert.deepEqual(claimLinkAffordances.filter((item) => !/Open/.test(item.after)), [], "claim-grid links need visible Open affordance");
-    await page.goto(`${url}lab.html`, { waitUntil: "networkidle" });
+    await page.goto(`${url}lab.html`, { waitUntil: "domcontentloaded" });
     assert.equal(await page.locator("#product-map .product-group").count(), 3);
-    assert.equal(await page.locator("#product-map .product-group a").count(), 15);
+    assert.equal(await page.locator("#product-map .product-group a").count(), 10);
     const productMapText = await page.locator("#product-map").innerText();
-    assert.match(productMapText, /What people can try/);
+    assert.match(productMapText, /Pick one lane/);
     assert.match(productMapText, /Proof products/i);
     assert.match(productMapText, /Product ideas/i);
     assert.match(productMapText, /Mainnet blockers/i);
-    assert.match(productMapText, /Use your own wallet/);
-    assert.match(productMapText, /Get and verify tKAS/);
-    assert.match(productMapText, /Scheduler workbench/);
+    assert.match(productMapText, /Accepted proof txids/);
+    assert.match(productMapText, /Wallet handoff/);
+    assert.match(productMapText, /Settlement and app lanes/);
     const runbookText = await page.locator("#runbook").innerText();
     assert.match(runbookText, /Run it yourself/);
-    assert.match(runbookText, /Next: real wallet signing/);
     assert.match(runbookText, /Replay before believing it/);
+    assert.doesNotMatch(runbookText, /Transparent Stag\/Intendo\/Pack/);
     await page.locator("#lane-runbook").evaluate((node) => {
       node.open = true;
     });
@@ -224,7 +224,7 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 1);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
     assert.equal(firstPanelId, "product-map");
-    await page.goto(`${url}lab.html#scheduler-workbench`, { waitUntil: "networkidle" });
+    await page.goto(`${url}lab.html#scheduler-workbench`, { waitUntil: "domcontentloaded" });
     assert.equal(await page.locator("#scheduler-workbench").evaluate((node) => node.closest("details.lab-drawer")?.open), true);
     await page.waitForSelector("#scheduler-workbench-jobs article", { timeout: 5000 });
     const schedulerText = await page.locator("#scheduler-workbench").innerText();
@@ -235,13 +235,13 @@ async function checkRenderedPages(url) {
     assert.match(schedulerText, /Protocol scheduler/i);
     assert.match(schedulerText, /Separate research work/i);
     assert.equal(await page.locator("#scheduler-workbench-jobs article").count(), 7);
-    await page.goto(`${url}lab.html#coordination`, { waitUntil: "networkidle" });
+    await page.goto(`${url}lab.html#coordination`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector(".coordination-run-card", { timeout: 5000 });
     const coordinationText = await page.locator("#coordination").innerText();
     assert.match(coordinationText, /Run a conditional commitment pack/);
     assert.match(coordinationText, /Backers commit only if enough compatible backers also commit/);
     assert.match(coordinationText, /3 commitments qualify/);
-    await page.goto(`${url}lab.html#submit`, { waitUntil: "networkidle" });
+    await page.goto(`${url}lab.html#submit`, { waitUntil: "domcontentloaded" });
     await page.waitForSelector(".wallet-play-card", { timeout: 5000 });
     const submitText = await page.locator("#submit").innerText();
     assert.match(submitText, /Use your own TN12 wallet without sharing keys/);
