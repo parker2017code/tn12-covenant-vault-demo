@@ -1243,6 +1243,66 @@ progress::-moz-progress-bar {
   font-size: 13px;
 }
 
+.inspection-ledger,
+.wallet-review-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.inspection-ledger article,
+.wallet-review-board article {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 58%),
+    var(--surface-soft);
+  padding: 14px;
+  transition: border-color .18s ease, transform .18s ease;
+}
+
+.inspection-ledger article:hover,
+.wallet-review-board article:hover {
+  border-color: var(--line-bright);
+  transform: translateY(-1px);
+}
+
+.inspection-ledger span,
+.wallet-review-board span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.inspection-ledger strong,
+.wallet-review-board strong {
+  display: block;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.18;
+}
+
+.inspection-ledger p,
+.wallet-review-board p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.inspection-ledger small {
+  display: block;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .crypto-route {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -3588,6 +3648,8 @@ progress::-moz-progress-bar {
   .experiment-board,
   .proof-topology,
   .replay-pipeline,
+  .inspection-ledger,
+  .wallet-review-board,
   .crypto-route,
   .crypto-ledger,
   .artifact-link-grid,

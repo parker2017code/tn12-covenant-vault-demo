@@ -71,6 +71,36 @@
       </div>
     </section>
 
+    <section class="panel results-panel wallet-review-surface">
+      <div class="section-title">
+        <p class="eyebrow">Wallet view</p>
+        <h2>What the user should see before signing.</h2>
+        <p>The playground is useful when it turns raw transaction work into approval checks: action, amount, destination, evidence after submit, and the reason a bad path should stop.</p>
+      </div>
+      <div class="wallet-review-board" aria-label="Wallet review surface">
+        <article>
+          <span>Request</span>
+          <strong>Move testnet funds</strong>
+          <p>User A deposits 3 tKAS into the pool role on TN12.</p>
+        </article>
+        <article>
+          <span>Check</span>
+          <strong>Address and amount</strong>
+          <p>The wallet should show the source, destination, network, amount, and fee before signing.</p>
+        </article>
+        <article>
+          <span>After submit</span>
+          <strong>Open the txid</strong>
+          <p>The app state should update only after the accepted TN12 transaction is fetched and replayed.</p>
+        </article>
+        <article>
+          <span>Boundary</span>
+          <strong>Testnet walkthrough</strong>
+          <p>No mainnet funds, no audited custody, and no claim that replay-derived state controls money.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="start" class="panel results-panel playground-start">
       <div class="section-title">
         <p class="eyebrow">Start here</p>

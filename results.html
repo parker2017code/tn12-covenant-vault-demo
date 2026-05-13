@@ -35,6 +35,7 @@
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
+        <a href="#inspection">Inspect</a>
         <a href="#levels">Explain</a>
         <a href="#flow">Flow</a>
         <a href="#feed">Receipts</a>
@@ -67,6 +68,40 @@
         <article><span>App receipts</span><p>Accepted payloads record intent or status. A receipt alone is not custody settlement.</p></article>
         <article><span>Replay state</span><p>The repo reads accepted rows and calculates balances and blocked actions.</p></article>
         <article><span>Missing pieces</span><p>User-wallet signing, production replay, audit, and mainnet activation need separate evidence.</p></article>
+      </div>
+    </section>
+
+    <section id="inspection" class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">Evidence ledger</p>
+        <h2>Read the run as a trail, not a claim.</h2>
+        <p>Each row starts with something that landed on TN12, then shows what the repo can derive from it and what still stays outside the proof.</p>
+      </div>
+      <div class="inspection-ledger" aria-label="Accepted TN12 evidence ledger">
+        <article>
+          <span>Accepted tx</span>
+          <strong>Role wallets funded</strong>
+          <p>Six public testnet roles received tKAS in one accepted transaction.</p>
+          <small>Use: repeatable session setup. Boundary: testnet funds only.</small>
+        </article>
+        <article>
+          <span>Accepted tx</span>
+          <strong>Two pool deposits</strong>
+          <p>User A and User B moved tKAS into the pool role.</p>
+          <small>Use: visible contribution trail. Boundary: not AMM or lending custody.</small>
+        </article>
+        <article>
+          <span>Accepted tx</span>
+          <strong>Pool payout</strong>
+          <p>The pool role paid User B and the txid can be opened directly.</p>
+          <small>Use: settlement-style row. Boundary: no production signer yet.</small>
+        </article>
+        <article>
+          <span>Replay</span>
+          <strong>Balances and blocked actions</strong>
+          <p>The reducer turns accepted rows into readable state.</p>
+          <small>Use: inspection path. Boundary: replay explains state; it does not control funds.</small>
+        </article>
       </div>
     </section>
 
