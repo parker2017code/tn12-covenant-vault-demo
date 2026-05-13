@@ -16,7 +16,7 @@ async function renderWalletApprovalCards() {
 }
 
 function renderCard(summary) {
-  const checks = (summary.userChecks || []).slice(0, 4);
+  const checks = publicChecks(summary);
   const links = evidenceLinks(summary);
   return `
     <article class="wallet-approval-card">
@@ -24,14 +24,13 @@ function renderCard(summary) {
         <span>${escapeHtml(cardLabel(summary.experiment))}</span>
         <strong>${escapeHtml(summary.title || summary.id || "")}</strong>
       </header>
-      <p>${escapeHtml(summary.plainAction || "")}</p>
+      <p>${escapeHtml(publicAction(summary))}</p>
       <p class="wallet-approval-decision">${escapeHtml(decisionText(summary.recommendedWalletDecision))}</p>
       <p class="wallet-approval-label">What the wallet should show</p>
       <ul>
         ${checks.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
       </ul>
-      <p class="note">${escapeHtml(summary.refusalPrompts?.length || 0)} blocked cases</p>
-      ${links.length ? `<p class="note">Evidence: ${links.join(" · ")}</p>` : ""}
+      ${links.length ? `<p class="note">Evidence: ${links.slice(0, 2).join(" · ")}</p>` : ""}
     </article>
   `;
 }
@@ -46,6 +45,64 @@ function cardLabel(experiment = "") {
     "vault-negative-checks": "Blocked withdrawals"
   };
   return labels[experiment] || experiment || "Wallet review";
+}
+
+function publicChecks(summary) {
+  const experiment = summary.experiment || "";
+  const checks = summary.userChecks || [];
+  const byPrefix = (prefix) => checks.find((item) => item.startsWith(prefix));
+  const blocked = `${summary.refusalPrompts?.length || 0} blocked cases are listed in the artifact.`;
+  const publicByExperiment = {
+    "recurring-cap-proof": [
+      byPrefix("Amount:") || "Amount is shown before signing.",
+      byPrefix("Cap:") || "Budget cap is shown before signing.",
+      byPrefix("Next spent in window:") || "Next budget state is shown.",
+      blocked
+    ],
+    "sibling-authorized-asset-proof": [
+      "Required controller input is shown before signing.",
+      "Asset state change is shown before signing.",
+      "Wrong or missing controller attempts are blocked locally.",
+      blocked
+    ],
+    "mux-worker-proof": [
+      "Current step and next role are shown before signing.",
+      "Timeout and recovery path are shown before signing.",
+      "Accepted return path is linked as evidence.",
+      blocked
+    ],
+    "scheduler-receipt-evidence": [
+      byPrefix("Payout amount:") || "Payout amount is shown before signing.",
+      "Recipient is shown before signing.",
+      "Accepted intent, bid, and execution evidence are linked.",
+      blocked
+    ],
+    "coordination-release-evidence": [
+      "Release amount and recipient are shown before signing.",
+      "Release and refund evidence use separate fresh pledge sets.",
+      "Group selection remains replay-derived.",
+      blocked
+    ],
+    "vault-negative-checks": [
+      "Accepted good path is linked.",
+      "Wrong destination and missing relock attempts are blocked locally.",
+      "Over-cap and stale reset attempts are blocked locally.",
+      blocked
+    ]
+  };
+  return publicByExperiment[experiment] || checks.slice(0, 4);
+}
+
+function publicAction(summary) {
+  const labels = {
+    "recurring-cap-proof": "Spend from a capped budget, then lock the remaining money back into the next budget state.",
+    "sibling-authorized-asset-proof": "Move a controlled asset only when the required controller input is part of the same transaction.",
+    "mux-worker-proof": "Move a step through small roles, return safely, and recover if a role stalls.",
+    "scheduler-receipt-evidence": "Release a scheduled payout after the accepted evidence matches the rule.",
+    "coordination-release-evidence": "Release a group payment after enough qualifying pledges are visible.",
+    "vault-negative-checks": "Review the withdrawals this vault path refuses before treating it as safe to automate."
+  };
+  return labels[summary.experiment] || summary.plainAction || "";
 }
 
 function decisionText(decision = "") {

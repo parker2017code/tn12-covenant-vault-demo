@@ -122,10 +122,14 @@ try {
   assert.match(experimentsHtml, /Step-by-step workflow/);
   assert.match(experimentsHtml, /Budget that cannot drain at once/);
   assert.match(experimentsHtml, /Asset that needs its controller/);
+  assert.match(experimentsHtml, /Could be:/);
+  assert.match(experimentsHtml, /Why it matters:/);
+  assert.match(experimentsHtml, /docs\/EXPERIMENT_TECHNICAL_MAP\.md/);
   assert.match(experimentsHtml, /artifacts\/covenant-experiment-map\.json/);
   assert.match(experimentsHtml, /id="wallet-approval-cards"/);
   assert.match(experimentsHtml, /wallet-approval-cards\.js/);
-  assert.doesNotMatch(experimentsHtml, /User meaning|Technical meaning|product catalog|Detailed txids and proofs live/i);
+  assert.doesNotMatch(experimentsHtml, /User meaning|Technical meaning|product catalog|Detailed txids and proofs live|<table/i);
+  assert.doesNotMatch(experimentsHtml, /Technical name:/);
 
   await checkRenderedPages(url);
 
