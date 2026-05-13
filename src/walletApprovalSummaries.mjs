@@ -57,6 +57,12 @@ export function buildWalletApprovalSummaries({
           amountTkas: sompiToTkas(continuationOutput.amount || continuation.amountSompi),
           covenantId: continuationOutput.covenant?.covenantId || continuation.covenantId || "",
           scriptPublicKey: continuationOutput.scriptPublicKey?.scriptPublicKey || continuation.scriptPublicKey || ""
+        },
+        postResetSpend: {
+          txid: accepted.postResetSpendTxid || "",
+          explorerUrl: accepted.postResetSpendTxid ? `https://tn12.kaspa.stream/transactions/${accepted.postResetSpendTxid}` : "",
+          continuationOutpoint: accepted.postResetContinuationOutpoint || "",
+          nextSpentInWindow: String(resetProof.state?.postResetSpend?.nextSpentSompi ?? "")
         }
       },
       refusalPrompts: localRejects.map((item) => ({

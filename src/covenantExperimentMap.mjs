@@ -41,6 +41,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
         "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json",
         "artifacts/recurring-treasury-vault-window-reset-proof.json",
+        "artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json",
+        "fixtures/RecurringTreasuryVaultWindowPostResetContinuationOutpoint.json",
         "artifacts/wallet-approval-summaries.json"
       ],
       nextBuildSteps: [

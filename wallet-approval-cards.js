@@ -42,6 +42,9 @@ function evidenceLinks(summary) {
   if (technical.explorerUrl && technical.spendTxid) {
     links.push(link(technical.explorerUrl, technical.spendTxid));
   }
+  if (technical.postResetSpend?.explorerUrl && technical.postResetSpend?.txid) {
+    links.push(link(technical.postResetSpend.explorerUrl, technical.postResetSpend.txid, "post-reset"));
+  }
   if (technical.selectedCandidate?.explorerUrl && technical.selectedCandidate?.txid) {
     links.push(link(technical.selectedCandidate.explorerUrl, technical.selectedCandidate.txid, "owner"));
   }

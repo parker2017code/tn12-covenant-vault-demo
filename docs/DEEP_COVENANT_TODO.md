@@ -117,6 +117,12 @@ until these move.
 - `artifacts/scheduler-covenant-payout-negative-evidence.json` adds local
   script-engine rejects for wrong recipient, wrong payout amount, and wrong
   input value against the same live scheduler payout covenant parameters.
+- `artifacts/signed-drafts/recurring-treasury-vault-window-post-reset-spend.json`,
+  `artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json`,
+  and `fixtures/RecurringTreasuryVaultWindowPostResetContinuationOutpoint.json`
+  add an accepted TN12 spend from the reset continuation output. This is the
+  cleaner vault upgrade: prove the continuation keeps working after reset
+  instead of chasing ambiguous invalid-broadcast rows.
 
 ## Next Exact Tasks
 
@@ -142,7 +148,7 @@ experiment surface:
 
 | Priority | Experiment | Current level | Next upgrade |
 |---|---|---|---|
-| 1 | Recurring cap proof | Accepted TN12 covenant spends, reset-window spend, continuation state, local rejects, wallet approval summary | Extend wallet approval to real signer handoff |
+| 1 | Recurring cap proof | Accepted TN12 covenant spends, reset-window spend, accepted post-reset continuation spend, continuation state, local rejects, wallet approval summary | Extend wallet approval to real signer handoff |
 | 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery, wallet approval summary | Connect summary to an interactive review card |
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |

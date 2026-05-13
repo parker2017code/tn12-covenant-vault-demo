@@ -46,6 +46,8 @@ assert.equal(summary.technicalChecks.explorerUrl, `https://tn12.kaspa.stream/tra
 assert.equal(summary.technicalChecks.covenantId, resetDraft.source.covenantId);
 assert.equal(summary.technicalChecks.continuation.covenantId, resetDraft.source.covenantId);
 assert.equal(summary.technicalChecks.continuation.outpoint, resetProof.accepted.continuationOutpoint);
+assert.equal(summary.technicalChecks.postResetSpend.txid, resetProof.accepted.postResetSpendTxid);
+assert.equal(summary.technicalChecks.postResetSpend.continuationOutpoint, resetProof.accepted.postResetContinuationOutpoint);
 assert.match(summary.plainAction, /40 tKAS/);
 assert.ok(summary.userChecks.some((item) => /Cap: 75 tKAS/.test(item)));
 assert.ok(summary.userChecks.some((item) => /Next spent in window: 40 tKAS/.test(item)));

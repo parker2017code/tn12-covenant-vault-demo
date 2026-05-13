@@ -1,7 +1,7 @@
 {
   "schema": "tn12-recurring-treasury-vault-window-reset-proof/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T23:54:35.950Z",
+  "generatedAt": "2026-05-13T02:43:15.976Z",
   "status": "accepted-window-reset-with-local-negatives",
   "contract": "contracts/RecurringTreasuryVaultWindow.sil",
   "plainPoint": "A capped treasury can start a new spending window without letting the old spent amount permanently freeze the vault.",
@@ -15,6 +15,9 @@
     "resetDraft": "artifacts/signed-drafts/recurring-treasury-vault-window-reset.json",
     "resetEvidence": "artifacts/recurring-treasury-vault-window-reset-evidence.json",
     "continuation": "fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json",
+    "postResetSpendDraft": "artifacts/signed-drafts/recurring-treasury-vault-window-post-reset-spend.json",
+    "postResetSpendEvidence": "artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json",
+    "postResetContinuation": "fixtures/RecurringTreasuryVaultWindowPostResetContinuationOutpoint.json",
     "negatives": [
       "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json",
       "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
@@ -25,7 +28,9 @@
     "genesisTxid": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
     "resetTxid": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
     "acceptingBlockBlueScore": 10055209,
-    "continuationOutpoint": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759:1"
+    "continuationOutpoint": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759:1",
+    "postResetSpendTxid": "78bc7db10980e9a4fcbbad664f815e54cfa68e55ee83206d63e8de6e332e8e52",
+    "postResetContinuationOutpoint": "78bc7db10980e9a4fcbbad664f815e54cfa68e55ee83206d63e8de6e332e8e52:1"
   },
   "state": {
     "before": {
@@ -43,6 +48,24 @@
       "capSompi": "7500000000",
       "windowStart": "9899000",
       "spentInWindowSompi": "4000000000",
+      "minerFeeSompi": "20000"
+    },
+    "postResetSpend": {
+      "capSompi": 7500000000,
+      "lockTime": 9900000,
+      "minerFeeSompi": 20000,
+      "nextSpentSompi": 5000000000,
+      "nextWindow": 9900000,
+      "prevSpentSompi": 4000000000,
+      "resetWindow": 9900000,
+      "spendAmountSompi": 1000000000,
+      "windowLength": 1000,
+      "windowStart": 9900000
+    },
+    "postResetContinuation": {
+      "capSompi": "7500000000",
+      "windowStart": "9900000",
+      "spentInWindowSompi": "5000000000",
       "minerFeeSompi": "20000"
     }
   },
@@ -111,6 +134,7 @@
   "proves": [
     "accepted TN12 covenant-genesis funding for RecurringTreasuryVaultWindow.sil",
     "accepted TN12 reset-window spend through the generated __reset_window sigscript",
+    "accepted TN12 post-reset under-cap spend from the reset continuation output",
     "destination amount and relocked continuation output match the signed draft",
     "early reset, stale-window reset, and over-cap reset candidates fail local script-engine execution"
   ],

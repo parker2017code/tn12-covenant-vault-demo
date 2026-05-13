@@ -7,6 +7,9 @@ const contractOutpoint = await readJson("fixtures/RecurringTreasuryVaultWindowCo
 const resetDraft = await readJson("artifacts/signed-drafts/recurring-treasury-vault-window-reset.json");
 const resetEvidence = await readJson("artifacts/recurring-treasury-vault-window-reset-evidence.json");
 const continuation = await readJson("fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json");
+const postResetDraft = await readOptionalJson("artifacts/signed-drafts/recurring-treasury-vault-window-post-reset-spend.json");
+const postResetEvidence = await readOptionalJson("artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json");
+const postResetContinuation = await readOptionalJson("fixtures/RecurringTreasuryVaultWindowPostResetContinuationOutpoint.json");
 const negatives = [
   await negative("early-reset", "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json", "lockTime before reset window"),
   await negative("stale-reset-window", "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json", "new state keeps the old window"),
@@ -33,13 +36,18 @@ const artifact = {
     resetDraft: "artifacts/signed-drafts/recurring-treasury-vault-window-reset.json",
     resetEvidence: "artifacts/recurring-treasury-vault-window-reset-evidence.json",
     continuation: "fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json",
+    postResetSpendDraft: postResetDraft.transactionId ? "artifacts/signed-drafts/recurring-treasury-vault-window-post-reset-spend.json" : "",
+    postResetSpendEvidence: postResetEvidence.txid ? "artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json" : "",
+    postResetContinuation: postResetContinuation.txid ? "fixtures/RecurringTreasuryVaultWindowPostResetContinuationOutpoint.json" : "",
     negatives: negatives.map((item) => item.artifact)
   },
   accepted: {
     genesisTxid: fundingDraft.transactionId,
     resetTxid: resetEvidence.txid,
     acceptingBlockBlueScore: resetEvidence.acceptingBlockBlueScore,
-    continuationOutpoint: `${continuation.txid}:${continuation.outputIndex}`
+    continuationOutpoint: `${continuation.txid}:${continuation.outputIndex}`,
+    postResetSpendTxid: postResetEvidence.txid || "",
+    postResetContinuationOutpoint: postResetContinuation.txid ? `${postResetContinuation.txid}:${postResetContinuation.outputIndex}` : ""
   },
   state: {
     before: {
@@ -53,12 +61,17 @@ const artifact = {
       amountSompi: resetDraft.state.spendAmountSompi,
       nextSpentSompi: resetDraft.state.nextSpentSompi
     },
-    continuation: continuation.state
+    continuation: continuation.state,
+    postResetSpend: postResetDraft.state || {},
+    postResetContinuation: postResetContinuation.state || {}
   },
   negativeCases: negatives,
   proves: [
     "accepted TN12 covenant-genesis funding for RecurringTreasuryVaultWindow.sil",
     "accepted TN12 reset-window spend through the generated __reset_window sigscript",
+    ...(postResetEvidence.status === "accepted-script-enforced-under-cap-spend"
+      ? ["accepted TN12 post-reset under-cap spend from the reset continuation output"]
+      : []),
     "destination amount and relocked continuation output match the signed draft",
     "early reset, stale-window reset, and over-cap reset candidates fail local script-engine execution"
   ],
@@ -91,4 +104,13 @@ async function negative(id, artifact, reason) {
 
 async function readJson(path) {
   return JSON.parse(await readFile(path, "utf8"));
+}
+
+async function readOptionalJson(path) {
+  try {
+    return await readJson(path);
+  } catch (error) {
+    if (error.code === "ENOENT") return {};
+    throw error;
+  }
 }

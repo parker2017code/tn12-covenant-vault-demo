@@ -15,6 +15,7 @@ assert.equal(map.summary.scriptEnforcedClaims, 5);
 assert.equal(map.summary.acceptedGenesisPreflights, 0);
 assert.deepEqual(map.spotlight, ["blitz-mux-arena", "treasury-wars", "covenant-owned-asset-game"]);
 assert.ok(map.experiments.some((item) => item.id === "treasury-wars" && item.status === "accepted-window-reset-proof"));
+assert.ok(map.experiments.some((item) => item.id === "treasury-wars" && item.currentRepoEvidence.includes("artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json")));
 assert.ok(map.experiments.some((item) => item.id === "covenant-heist" && /wrong signer/.test(item.websitePitch)));
 assert.ok(map.experiments.some((item) => item.id === "blitz-mux-arena" && /fast multi-transaction/.test(item.whyItMatters)));
 assert.equal(map.summary.localProofs, 0);

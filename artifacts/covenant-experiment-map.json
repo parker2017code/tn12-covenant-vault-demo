@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-13T02:36:03.772Z",
+  "generatedAt": "2026-05-13T02:43:16.331Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -61,6 +61,8 @@
         "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
         "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json",
         "artifacts/recurring-treasury-vault-window-reset-proof.json",
+        "artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json",
+        "fixtures/RecurringTreasuryVaultWindowPostResetContinuationOutpoint.json",
         "artifacts/wallet-approval-summaries.json"
       ],
       "nextBuildSteps": [
