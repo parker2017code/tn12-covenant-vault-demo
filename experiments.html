@@ -40,6 +40,7 @@
         <a href="#treasury-track">Treasury</a>
         <a href="#asset-duel">Asset Duel</a>
         <a href="#covenant-heist">Heist</a>
+        <a href="#coordination-league">Coordination</a>
         <a href="#queue">Queue</a>
         <a href="#rules">Rules</a>
       </div>
@@ -389,6 +390,59 @@
       </div>
     </section>
 
+    <section id="coordination-league" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Coordination League</p>
+        <h2>Three pledges, one accepted release.</h2>
+        <p>The simple story is a group action that only goes forward when enough compatible commitments appear. The technical story is accepted pledge payloads, accepted custody outpoints, a selected release txid, and refund alternates marked non-selected after release.</p>
+        <p class="note"><a href="artifacts/coordination-market-evidence-dossier.json">Open coordination dossier</a></p>
+      </div>
+      <div class="experiment-table-wrap">
+        <table class="proof-table experiment-table">
+          <thead>
+            <tr>
+              <th>Row</th>
+              <th>Evidence</th>
+              <th>What it proves</th>
+              <th>Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Qualifying pack</td>
+              <td><code>pack-stag-docs-sprint</code></td>
+              <td>Three signed intendos satisfy the visible threshold.</td>
+              <td>Coordination becomes inspectable instead of hidden in a platform database.</td>
+            </tr>
+            <tr>
+              <td>Participant receipts</td>
+              <td><code>10d9ba...</code>, <code>9bd53c...</code>, <code>fb9f97...</code></td>
+              <td>Each qualifying participant has accepted TN12 payload evidence and amount-matched custody.</td>
+              <td>The release decision has visible inputs, not only a UI total.</td>
+            </tr>
+            <tr>
+              <td>Selected release</td>
+              <td><code>4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801</code></td>
+              <td>100 tKAS in qualifying commitments routes to an accepted 99.99995 tKAS release output.</td>
+              <td>The group path can settle from public TN12 evidence.</td>
+            </tr>
+            <tr>
+              <td>Refund alternates</td>
+              <td><code>non-selected-after-release</code></td>
+              <td>Refund drafts are not promoted after the same pledge outputs release.</td>
+              <td>A reviewer can see which branch won and which branch stayed inactive.</td>
+            </tr>
+            <tr>
+              <td>Boundary</td>
+              <td><code>transparent-coordination-evidence-ready</code></td>
+              <td>No private commitments, no Hashdag/Staghunt production claim, no pooled-custody product claim.</td>
+              <td>The demo shows the useful slice without pretending the harder market infrastructure is done.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="queue" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Full queue</p>
@@ -434,8 +488,8 @@
             <tr>
               <td>Coordination League</td>
               <td>assurance plus coordination receipts</td>
-              <td>later</td>
-              <td>threshold commitments, release/refund, replayed settlement rows</td>
+              <td>transparent-coordination-evidence-ready</td>
+              <td>fresh user-runnable pack with wallet handoff</td>
             </tr>
             <tr>
               <td>Scheduler Duel</td>

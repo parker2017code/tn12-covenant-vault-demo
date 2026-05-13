@@ -20,6 +20,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Blitz Mux update, 2026-05-12: accepted TN12 mux family genesis, route, worker return, second route, and timeout return are now summarized in `artifacts/blitz-mux-challenge-settlement.json` as normal worker settlement plus timeout settlement, with local bad-selector and too-early-timeout rejects.
 - Blitz Worker B update, 2026-05-12: accepted TN12 route to Worker B `de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2` and accepted Worker B gain-minus-fee return `9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2` are now part of the live flow artifact and visible experiment page.
 - Covenant Heist update, 2026-05-12: `artifacts/covenant-heist-evidence.json` and the visible experiment section now show wrong-owner, wrong-destination, missing-continuation, cumulative-over-cap, early-reset, stale-reset, and over-cap-reset local rejects over the accepted recurring-vault rail.
+- Coordination League update, 2026-05-12: `artifacts/coordination-market-evidence-dossier.json` is visible as a bounded coordination slice with three qualifying intendos, accepted payload/custody evidence, accepted release txid `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`, and non-selected refund alternates.
 
 ## Completed In Current Cleanup Pass
 
@@ -36,7 +37,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
 | 1 | Add a compact Blitz challenge variant only if it proves a new refusal path. | A new local reject or accepted/rejected TN12 row is added without pretending this is a full game. | No |
-| 2 | Build the next partial experiment as one vertical slice. | Coordination League or Scheduler Duel gets one artifact, one visible row, and one focused test. | No |
+| 2 | Build the next partial experiment as one vertical slice. | Scheduler Duel gets one visible row and keeps protocol-scheduler/autonomous-custody claims out. | No |
 | 3 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
 | 4 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 5 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |

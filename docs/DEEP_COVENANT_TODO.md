@@ -74,6 +74,10 @@ until these move.
   missing continuation, cumulative over-cap, early reset, stale reset, and
   over-cap reset all fail local script-engine checks against an accepted
   recurring-vault rail.
+- `artifacts/coordination-market-evidence-dossier.json` is now surfaced as a
+  bounded Coordination League slice: three qualifying intendos, accepted
+  payload/custody evidence, accepted release txid, and non-selected refund
+  alternates.
 
 ## Next Exact Tasks
 
@@ -84,8 +88,8 @@ until these move.
 
 2. Start the next partial experiment only as a vertical slice.
    - Covenant Heist now has a bounded local-reject artifact and visible section.
-   - Best next candidates are Coordination League replay rows or Scheduler Duel
-     duplicate/stale execution rows.
+   - Coordination League now has a bounded visible section.
+   - Best next candidate is Scheduler Duel duplicate/stale execution rows.
    - Keep the top three demos as the public proof set until the next candidate
      has accepted evidence or concrete local rejects.
 

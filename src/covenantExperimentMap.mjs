@@ -133,8 +133,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "coordination-league",
       title: "Coordination League",
       rank: 4,
-      status: "later",
-      proofTarget: "threshold commitments, batch release/refund, replayed settlement rows",
+      status: "transparent-coordination-evidence-ready",
+      proofTarget: "three qualifying intendos, accepted pledge payload/custody rows, accepted release txid, non-selected refund alternates",
       whyItMatters: "Directly maps the Stag Hunt talk into repo evidence: commit only when enough compatible commitments also exist.",
       plainPoint: "People can coordinate around shared goals without one platform deciding who gets paid after the fact.",
       technicalPoint: "Assurance pledges, coordination receipts, and replayed settlement rows separate release, refund, and threshold state.",
@@ -146,14 +146,19 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       currentRepoEvidence: [
         "artifacts/coordination-market-prototype.json",
         "artifacts/coordination-market-settlement-brief.json",
-        "artifacts/batch-assurance-campaign.json"
+        "artifacts/coordination-market-evidence-dossier.json",
+        "artifacts/batch-assurance-campaign.json",
+        "artifacts/batch-assurance-custody-imports.json",
+        "artifacts/batch-assurance-settlement-drafts.json",
+        "fixtures/AcceptedOutputEvidence.json",
+        "tests/domain/coordination-market-evidence.test.mjs"
       ],
       nextBuildSteps: [
-        "Pick one transparent pack.",
-        "Attach pledge outputs and release/refund status.",
-        "Keep privacy and pooled custody out of scope."
+        "Render one fresh user-runnable pack with wallet handoff.",
+        "Add a blocked pack row with explicit refund/keep-accumulating status.",
+        "Keep private commitments and capital multiplexing out of scope."
       ],
-      hardBoundary: "Coordination receipts are not private commitments and not pooled custody."
+      hardBoundary: "This is transparent coordination evidence with accepted TN12 receipts and release, not private Staghunt/Hashdag infrastructure or production pooled custody."
     }),
     experiment({
       id: "covenant-owned-asset-game",
