@@ -41,17 +41,18 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Add a compact Blitz challenge variant only if it proves a new refusal path. | A new local reject or accepted/rejected TN12 row is added without pretending this is a full game. | No |
-| 2 | Add new experiment evidence only when it is a real move. | New rows must be accepted evidence, safe rejection evidence, or wallet handoff evidence. | No |
-| 3 | Add wallet-readable approval summaries. | At least one experiment emits an action/amount/destination/covenant/continuation summary a wallet could render as Approve/Reject. | No |
-| 4 | Add visible approval cards for the top proof patterns. | The public UI renders the wallet summary artifact as reviewable Approve/Reject-style cards without making users read raw JSON. | No |
-| 5 | Fund fresh Coordination covenant pledge outputs. | A new pledge set is covenant-bound, locally proves release/refund, and produces accepted TN12 release/refund evidence or an exact funding/tooling blocker. | No |
-| 6 | Fund a Scheduler covenant settlement output. | One eligible trigger spends a fresh covenant output to the intended payout destination, with replay keeping stale/duplicate paths blocked. | No |
-| 7 | Harden replay-derived lanes. | Scheduler or coordination replay has a second-verifier check, mismatch proof, checkpoint, or explicit proof-system blocker. | No |
-| 8 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
-| 9 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
-| 10 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
-| 11 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
+| 1 | Rewrite toddler/notes-style public copy. | `experiments.html` and wallet approval cards read like a serious proof dashboard: compact, plain, clickable, no internal planning voice, no over-explaining, no hype. | No |
+| 2 | Make the experiment page reviewer-grade. | Top three proofs stay prominent; Vault, Coordination, and Scheduler stay secondary until stronger covenant evidence exists; raw detail stays in artifacts/docs. | No |
+| 3 | Add a restrained Kaspa Explained follow-up only after TN12 copy is cleaned. | Kaspa Explained explains what the TN12 covenant experiments imply in plain terms without importing lab names or testnet claims as product claims. | No |
+| 4 | Add a compact Blitz challenge variant only if it proves a new refusal path. | A new local reject or accepted/rejected TN12 row is added without pretending this is a full game. | No |
+| 5 | Add new experiment evidence only when it is a real move. | New rows must be accepted evidence, safe rejection evidence, or wallet handoff evidence. | No |
+| 6 | Fund fresh Coordination covenant pledge outputs. | A new pledge set is covenant-bound, locally proves release/refund, and produces accepted TN12 release/refund evidence or an exact funding/tooling blocker. | No |
+| 7 | Fund a Scheduler covenant settlement output. | One eligible trigger spends a fresh covenant output to the intended payout destination, with replay keeping stale/duplicate paths blocked. | No |
+| 8 | Harden replay-derived lanes. | Scheduler or coordination replay has a second-verifier check, mismatch proof, checkpoint, or explicit proof-system blocker. | No |
+| 9 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
+| 10 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
+| 11 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
+| 12 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
 
 ## Next Defined Work
 
@@ -94,6 +95,8 @@ Older broad queues were folded into the active todo above. Historical planning n
 ## Do Not Do Next
 
 - Do not buy signer hardware just to move the repo forward.
+- Do not add more public experiment copy before cleaning the toddler/notes-style text on `experiments.html`.
+- Do not let fun/internal experiment names be the main public labels when plain proof labels are clearer.
 - Do not submit non-selected batch refund paths for already spent pledge outputs.
 - Do not add AMM, lending, liquidation, oracle, bridge, or another broad app lane until one deeper contract primitive has an accepted positive path and a negative map.
 - Do not call ICC, multiplexor routing, KIP-20 state, or KIP-21 lane proof "built" until the repo has a contract, generated artifact, and test for that exact claim.

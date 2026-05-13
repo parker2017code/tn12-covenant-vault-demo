@@ -99,6 +99,24 @@ until these move.
 
 ## Next Exact Tasks
 
+### Public Cleanup Priority
+
+Before adding more experiment lanes or fresh TN12 funding, clean the public
+experiment surface:
+
+- Rewrite toddler/notes-style text on `experiments.html` and wallet approval
+  cards into reviewer-grade copy.
+- Keep each row/card to: what it proves, why it matters, linked evidence, and
+  next exact blocker.
+- Do not repeat "not product" caveats everywhere; put status in the evidence
+  label and artifact.
+- Keep plain proof labels primary. Fun names can stay internal or secondary
+  only when they help.
+- Keep raw txid/detail walls in artifacts and docs, not the visible page.
+- After TN12 copy is clean, add any Kaspa Explained follow-up in restrained
+  language about visible rules for money and fast UTXO workflows, not games or
+  product claims.
+
 ### Six-Experiment Priority
 
 | Priority | Experiment | Current level | Next upgrade |
@@ -167,6 +185,9 @@ exists and is tested on TN12.
 - Keep a clean loop while iterating: update this file, build the artifact,
   add/adjust the focused test, run the focused gate, then commit/push only a
   coherent proof slice.
+- Public text should not read like internal notes, toddler explanation, or
+  brainstorm scaffolding. If a line does not help a reviewer decide what is
+  proven, what is linked, or what is next, cut or move it to an artifact/doc.
 - Every feature needs five plain answers: what it proves, what it makes
   possible, why Kaspa's fast UTXO/covenant model matters, why crypto is needed
   instead of a normal server, and what is still not proven. Keep those answers
