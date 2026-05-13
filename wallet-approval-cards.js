@@ -54,6 +54,12 @@ function evidenceLinks(summary) {
       links.push(link(item.explorerUrl, item.txid, key.replace(/[A-Z]/g, (char) => ` ${char.toLowerCase()}`)));
     }
   }
+  if (technical.funding?.explorerUrl && technical.funding?.txid) {
+    links.push(link(technical.funding.explorerUrl, technical.funding.txid, "funding"));
+  }
+  if (technical.release?.explorerUrl && technical.release?.txid) {
+    links.push(link(technical.release.explorerUrl, technical.release.txid, "release"));
+  }
   return links;
 }
 

@@ -2,13 +2,15 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { buildWalletApprovalSummaries } from "../../src/walletApprovalSummaries.mjs";
 
-const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, checkedIn] = await Promise.all([
+const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, schedulerPayout, schedulerTarget, checkedIn] = await Promise.all([
   readJson("artifacts/recurring-treasury-vault-window-reset-proof.json"),
   readJson("artifacts/signed-drafts/recurring-treasury-vault-window-reset.json"),
   readJson("fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json"),
   readJson("artifacts/sibling-input-discovery.json"),
   readJson("artifacts/blitz-mux-live-flow-evidence.json"),
   readJson("artifacts/blitz-mux-challenge-settlement.json"),
+  readJson("artifacts/scheduler-covenant-payout-evidence.json"),
+  readJson("artifacts/scheduler-covenant-settlement-target.json"),
   readJson("artifacts/wallet-approval-summaries.json")
 ]);
 
@@ -19,12 +21,14 @@ const artifact = buildWalletApprovalSummaries({
   siblingDiscovery,
   muxLiveFlow,
   muxChallenge,
+  schedulerPayout,
+  schedulerTarget,
   generatedAt: "2026-05-12T00:00:00.000Z"
 });
 
 assert.equal(artifact.schema, "tn12-wallet-approval-summaries/v1");
 assert.equal(artifact.status, "wallet-approval-summary-ready");
-assert.equal(artifact.summaries.length, 3);
+assert.equal(artifact.summaries.length, 4);
 
 const summary = artifact.summaries.find((item) => item.id === "recurring-cap-reset-window");
 assert.equal(summary.id, "recurring-cap-reset-window");
@@ -64,6 +68,19 @@ assert.deepEqual(muxSummary.refusalPrompts.map((item) => item.id), [
   "bad-selector-challenge",
   "too-early-timeout-challenge"
 ]);
+
+const schedulerSummary = artifact.summaries.find((item) => item.id === "scheduler-covenant-payout");
+assert.equal(schedulerSummary.recommendedWalletDecision, "approve-if-user-initiated");
+assert.equal(schedulerSummary.technicalChecks.release.txid, schedulerPayout.release.txid);
+assert.equal(schedulerSummary.technicalChecks.release.destination, schedulerPayout.release.destination);
+assert.equal(schedulerSummary.technicalChecks.schedulerContext.intentTxid, schedulerPayout.schedulerContext.intentTxid);
+assert.ok(schedulerSummary.technicalChecks.scriptEnforces.includes("recipient destination"));
+assert.ok(schedulerSummary.technicalChecks.replayStillChecks.some((item) => /stale/.test(item)));
+assert.deepEqual(schedulerSummary.refusalPrompts.map((item) => item.id), [
+  "stale-or-duplicate-scheduler-row",
+  "wrong-scheduler-recipient"
+]);
+assert.ok(schedulerSummary.boundaries.some((item) => item.includes("replay/indexer-derived")));
 
 assert.equal(checkedIn.schema, artifact.schema);
 assert.equal(checkedIn.status, artifact.status);

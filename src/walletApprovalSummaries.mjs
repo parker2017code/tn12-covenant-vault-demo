@@ -5,6 +5,8 @@ export function buildWalletApprovalSummaries({
   siblingDiscovery = {},
   muxLiveFlow = {},
   muxChallenge = {},
+  schedulerPayout = {},
+  schedulerTarget = {},
   generatedAt = new Date().toISOString()
 } = {}) {
   const accepted = resetProof.accepted || {};
@@ -77,6 +79,10 @@ export function buildWalletApprovalSummaries({
     summaries.push(buildMuxWorkerSummary(muxLiveFlow, muxChallenge));
   }
 
+  if (schedulerPayout.status === "accepted-covenant-payout-spend") {
+    summaries.push(buildSchedulerPayoutSummary(schedulerPayout, schedulerTarget));
+  }
+
   return {
     schema: "tn12-wallet-approval-summaries/v1",
     network: "kaspa-testnet-12",
@@ -86,6 +92,51 @@ export function buildWalletApprovalSummaries({
       : "wallet-approval-summary-review",
     purpose: "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
     summaries
+  };
+}
+
+function buildSchedulerPayoutSummary(payout, target) {
+  return {
+    id: "scheduler-covenant-payout",
+    experiment: "scheduler-receipt-evidence",
+    evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_REPLAY_GUARDS",
+    recommendedWalletDecision: "approve-if-user-initiated",
+    title: "Release scheduler covenant payout",
+    plainAction: `Release ${payout.release?.amountTkas || ""} tKAS to the scheduled recipient after the accepted intent, winning bid, and execution receipt are replayed as eligible.`,
+    userChecks: [
+      `Payout amount: ${payout.release?.amountTkas || ""} tKAS`,
+      `Recipient: ${payout.release?.destination || ""}`,
+      `Funding txid: ${payout.funding?.txid || ""}`,
+      `Release txid: ${payout.release?.txid || ""}`,
+      `Intent txid: ${payout.schedulerContext?.intentTxid || ""}`,
+      `Winning bid txid: ${payout.schedulerContext?.winningBidTxid || ""}`
+    ],
+    technicalChecks: {
+      funding: payout.funding || {},
+      release: payout.release || {},
+      schedulerContext: payout.schedulerContext || {},
+      scriptEnforces: payout.summary?.scriptEnforces || [],
+      replayStillChecks: payout.summary?.replayStillChecks || target.targetV1?.replayMustStillCheck || []
+    },
+    refusalPrompts: [
+      {
+        id: "stale-or-duplicate-scheduler-row",
+        recommendedWalletDecision: "reject",
+        evidenceClass: "INDEXER_DERIVED_REJECT",
+        reason: "replay marks the trigger source stale or the execution duplicate"
+      },
+      {
+        id: "wrong-scheduler-recipient",
+        recommendedWalletDecision: "reject",
+        evidenceClass: "NEXT_LOCAL_SCRIPT_REJECT",
+        reason: "next local candidate should prove wrong destination fails against the payout covenant"
+      }
+    ],
+    boundaries: [
+      "This is a wallet-readable summary for an accepted TN12 covenant payout.",
+      "The payout spend is covenant-enforced; scheduler eligibility remains replay/indexer-derived.",
+      "This does not prove protocol scheduling, autonomous custody, wallet-standard signing, or mainnet readiness."
+    ]
   };
 }
 
