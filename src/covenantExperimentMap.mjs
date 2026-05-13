@@ -204,8 +204,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "scheduler-duel",
       title: "Scheduler Duel",
       rank: 6,
-      status: "later",
-      proofTarget: "accepted scheduler intents, eligible trigger, executor receipt, blocked stale action",
+      status: "scheduler-workbench-ready",
+      proofTarget: "accepted scheduler intent, accepted execution receipt, accepted executor bids, matched payout transfer, and blocked stale/slow/duplicate rows",
       whyItMatters: "Uses current scheduler evidence to show conditional actions without pretending they are autonomous custody.",
       plainPoint: "A user can publish an intended action, and an executor can only promote it when replayed state says it is eligible.",
       technicalPoint: "Scheduler intents, executor receipts, replay checks, and stale-action guards separate planning from settlement.",
@@ -217,14 +217,19 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       currentRepoEvidence: [
         "artifacts/universal-scheduler-workbench.json",
         "artifacts/scheduler-intent-registry.json",
-        "artifacts/scheduler-covenant-binding.json"
+        "artifacts/scheduler-covenant-binding.json",
+        "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json",
+        "artifacts/payload-scheduler-execution-receipt-001-evidence.json",
+        "artifacts/payload-scheduler-bid-fast-executor-001-evidence.json",
+        "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json",
+        "tests/domain/universal-scheduler-workbench.test.mjs"
       ],
       nextBuildSteps: [
-        "Choose two trigger templates.",
-        "Bind one trigger to accepted covenant evidence.",
-        "Show stale or duplicate execution blocked by replay."
+        "Replace local-key execution with external-wallet signing.",
+        "Bind one trigger to a fresh covenant settlement target.",
+        "Keep protocol scheduler and autonomous custody claims out of public copy."
       ],
-      hardBoundary: "Executor receipts are replay evidence, not proof of autonomous on-chain execution."
+      hardBoundary: "Executor receipts are accepted TN12 app evidence plus replay/indexer state. They are not protocol scheduling, autonomous custody, or mainnet automation."
     })
   ];
 

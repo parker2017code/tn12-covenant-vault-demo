@@ -41,6 +41,7 @@
         <a href="#asset-duel">Asset Duel</a>
         <a href="#covenant-heist">Heist</a>
         <a href="#coordination-league">Coordination</a>
+        <a href="#scheduler-duel">Scheduler</a>
         <a href="#queue">Queue</a>
         <a href="#rules">Rules</a>
       </div>
@@ -443,6 +444,65 @@
       </div>
     </section>
 
+    <section id="scheduler-duel" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Scheduler Duel</p>
+        <h2>Accepted intent, winning executor, blocked stale paths.</h2>
+        <p>The simple story is a conditional move: publish the intent, let executors bid, then promote the execution only when replayed state says it is eligible. The technical story is accepted TN12 scheduler receipts plus indexer-derived replay, not protocol automation.</p>
+        <p class="note"><a href="artifacts/universal-scheduler-workbench.json">Open scheduler workbench</a></p>
+      </div>
+      <div class="experiment-table-wrap">
+        <table class="proof-table experiment-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Evidence</th>
+              <th>What it proves</th>
+              <th>Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Accepted intent</td>
+              <td><code>185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d</code></td>
+              <td>A TN12 payload records the conditional pool-rebalance intent.</td>
+              <td>The trigger rule is public evidence, not a private automation note.</td>
+            </tr>
+            <tr>
+              <td>Executor bids</td>
+              <td><code>ab827a...</code>, <code>e9ec42...</code>, <code>0f8f5b...</code></td>
+              <td>Three accepted bid receipts exist; replay chooses the valid fast executor.</td>
+              <td>Execution rights can be reviewed by policy instead of assigned by one operator silently.</td>
+            </tr>
+            <tr>
+              <td>Execution receipt</td>
+              <td><code>d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909</code></td>
+              <td>The accepted execution receipt references the accepted intent and payout.</td>
+              <td>The action is promoted only after matching accepted evidence.</td>
+            </tr>
+            <tr>
+              <td>Payout</td>
+              <td><code>1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d</code></td>
+              <td>The local-key payout transfer matches the execution receipt.</td>
+              <td>Money movement and app-state receipts are checked together.</td>
+            </tr>
+            <tr>
+              <td>Blocked paths</td>
+              <td><code>duplicate</code>, <code>stale</code>, <code>too-slow</code></td>
+              <td>Duplicate execution, stale source, and slow bid rows stay blocked by replay policy.</td>
+              <td>Scheduling is useful only if stale or replayed actions cannot keep winning.</td>
+            </tr>
+            <tr>
+              <td>Boundary</td>
+              <td><code>INDEXER_DERIVED</code></td>
+              <td>No protocol scheduler, no autonomous custody, no mainnet automation claim.</td>
+              <td>This is app-state evidence anchored to accepted TN12 receipts.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="queue" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Full queue</p>
@@ -494,8 +554,8 @@
             <tr>
               <td>Scheduler Duel</td>
               <td>based-app scheduler with covenant settlement target</td>
-              <td>later</td>
-              <td>eligible trigger, executor receipt, blocked stale action</td>
+              <td>scheduler-workbench-ready</td>
+              <td>external-wallet execution or fresh covenant settlement target</td>
             </tr>
           </tbody>
         </table>

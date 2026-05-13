@@ -78,6 +78,10 @@ until these move.
   bounded Coordination League slice: three qualifying intendos, accepted
   payload/custody evidence, accepted release txid, and non-selected refund
   alternates.
+- `artifacts/universal-scheduler-workbench.json` is now surfaced as a bounded
+  Scheduler Duel slice: accepted intent, accepted executor bids, accepted
+  execution receipt, matched local-key payout, and replay-blocked stale,
+  duplicate, or too-slow paths.
 
 ## Next Exact Tasks
 
@@ -89,7 +93,9 @@ until these move.
 2. Start the next partial experiment only as a vertical slice.
    - Covenant Heist now has a bounded local-reject artifact and visible section.
    - Coordination League now has a bounded visible section.
-   - Best next candidate is Scheduler Duel duplicate/stale execution rows.
+   - Scheduler Duel now has a bounded visible section.
+   - Further experiment work should only add new accepted evidence, safe
+     rejection evidence, or a real user-wallet handoff.
    - Keep the top three demos as the public proof set until the next candidate
      has accepted evidence or concrete local rejects.
 
