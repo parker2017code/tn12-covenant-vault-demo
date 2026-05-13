@@ -64,6 +64,9 @@ until these move.
 - `artifacts/blitz-mux-live-flow-evidence.json` records the accepted TN12 mux
   route to Worker A, accepted Worker A return to mux, accepted second route to
   Worker A, and accepted Worker A timeout return to mux.
+- `artifacts/blitz-mux-challenge-settlement.json` summarizes the accepted
+  worker-return settlement, accepted timeout settlement, and local challenge
+  rejects for bad selector and too-early timeout.
 
 ## Next Exact Tasks
 
@@ -80,9 +83,11 @@ until these move.
      negatives.
    - Do not fake nested execution; the point is sibling authority.
 
-3. Add Blitz Mux challenge/settlement rows.
-   - The route, return, second route, and timeout path are accepted.
-   - Keep full game rules out until this small flow is easy to inspect.
+3. Add one Worker B route/return or a small challenge variant.
+   - The route, return, second route, timeout settlement, and local challenge
+     rows are visible.
+   - Keep full game rules out until each new row proves a different transition
+     shape.
 
 ## Lessons To Apply
 

@@ -17,6 +17,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Live virtual-chain smoke check, 2026-05-12: current-tip read works with the local TN12 SDK and public wRPC endpoint. The old historical overlap start hash is no longer available from the public node, so keep the checked-in rich live-window artifact unless a new reachable historical start hash is captured.
 - Recurring vault update, 2026-05-12: covenant-genesis funding and two script-enforced under-cap spends are accepted on TN12. The active one-window continuation fixture is `fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json`; the cumulative accepted spend is 65 tKAS under the 75 tKAS cap, and `artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json` is locally rejected at 80 tKAS attempted window spend.
 - Recurring vault window-reset update, 2026-05-12: `contracts/RecurringTreasuryVaultWindow.sil` adds a `reset_window` branch, accepted TN12 genesis funding, accepted TN12 reset spend `f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759`, active reset continuation fixture `fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json`, and local rejects for early reset, stale-window reset, and over-cap reset.
+- Blitz Mux update, 2026-05-12: accepted TN12 mux family genesis, route, worker return, second route, and timeout return are now summarized in `artifacts/blitz-mux-challenge-settlement.json` as normal worker settlement plus timeout settlement, with local bad-selector and too-early-timeout rejects.
 
 ## Completed In Current Cleanup Pass
 
@@ -34,7 +35,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 |---|---|---|---|
 | 1 | Render Treasury Wars as a visible track. | Cumulative cap and reset-window spends are readable without opening raw JSON. | No |
 | 2 | Render Asset Duel as a visible duel round. | The accepted owner marker, asset genesis, strike, and live-id local negative rows are readable without opening raw JSON. | No |
-| 3 | Add Blitz Mux challenge/settlement rows. | The accepted mux/worker/timeout path has a bounded next reviewer step instead of becoming a full game claim. | No |
+| 3 | Add one Worker B Blitz route/return or small challenge variant. | It proves a different transition shape without becoming a full game claim. | No |
 | 4 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
 | 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
 | 6 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |

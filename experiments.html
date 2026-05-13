@@ -36,6 +36,7 @@
       </div>
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#spotlight">Spotlight</a>
+        <a href="#blitz-round">Blitz</a>
         <a href="#treasury-track">Treasury</a>
         <a href="#asset-duel">Asset Duel</a>
         <a href="#queue">Queue</a>
@@ -128,6 +129,65 @@
             <li>Live-id local rejects for wrong witness, missing sibling, and wrong sibling id.</li>
           </ul>
         </article>
+      </div>
+    </section>
+
+    <section id="blitz-round" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Blitz Mux round</p>
+        <h2>Route, return, timeout settlement.</h2>
+        <p>The simple story is a turn that either finishes normally or times out. The technical story is a mux covenant routing state to a worker template, then accepting either a worker return or a timeout return to mux.</p>
+        <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open live flow evidence</a> · <a href="artifacts/blitz-mux-challenge-settlement.json">Open challenge artifact</a></p>
+      </div>
+      <div class="experiment-table-wrap">
+        <table class="proof-table experiment-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Evidence</th>
+              <th>What it proves</th>
+              <th>Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Family genesis</td>
+              <td><code>080661533ef398afa450ccecc2428c7ebe4f633b259d84f7437cb3a4d783cd53</code></td>
+              <td>Accepted mux-family starting output.</td>
+              <td>One covenant family can carry role templates for a bounded state machine.</td>
+            </tr>
+            <tr>
+              <td>Route</td>
+              <td><code>dfbffecdcbaaab300313aa27c1d1db78c334debc9bf673fdfd00f207dacbe065</code></td>
+              <td>Mux routes state to Worker A through template identity.</td>
+              <td>Large logic can be split into small contracts instead of one oversized script.</td>
+            </tr>
+            <tr>
+              <td>Return</td>
+              <td><code>bc51db872c8f926fb887cf150af5bf918c44cf20f72abfc3ac4620d57fa0c037</code></td>
+              <td>Worker A returns valid state to mux.</td>
+              <td>A normal turn settles by returning pending state to idle state.</td>
+            </tr>
+            <tr>
+              <td>Timeout route</td>
+              <td><code>a2ef1f4d96354294b682e83869457ee09836e59c17c2171ad1367ea87c0bdbb3</code></td>
+              <td>A fresh mux state routes to Worker A again.</td>
+              <td>The same family can keep moving through repeated bounded steps.</td>
+            </tr>
+            <tr>
+              <td>Timeout settlement</td>
+              <td><code>26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036</code></td>
+              <td>Pending Worker A state returns to mux after the timeout threshold.</td>
+              <td>A stalled participant cannot freeze the flow forever.</td>
+            </tr>
+            <tr>
+              <td>Local challenges</td>
+              <td><code>mux_bad_selector</code>, <code>too_early_timeout</code></td>
+              <td>Bad selector and too-early timeout fail locally.</td>
+              <td>The reviewer sees both accepted paths and refused paths before any full-game claim.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -270,8 +330,8 @@
             <tr>
               <td>Blitz Mux Arena</td>
               <td>mux / worker contract family</td>
-              <td>accepted-mux-route-worker-return-and-timeout</td>
-              <td>challenge or settlement rows</td>
+              <td>accepted-timeout-settlement-with-local-challenges</td>
+              <td>optional Worker B route/return or a small challenge variant</td>
             </tr>
             <tr>
               <td>Treasury Wars</td>
