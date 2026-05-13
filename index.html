@@ -35,6 +35,7 @@
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
+        <a href="#aha">Why</a>
         <a href="#proofs">Proofs</a>
         <a href="#reviewer">Verify</a>
         <a href="#routes">Routes</a>
@@ -47,7 +48,7 @@
       <div>
         <p class="status">Kaspa TN12 testnet proof lab.</p>
         <h2>Testnet transactions landed. The repo replays them.</h2>
-        <p>Start with accepted TN12 records: proof transactions, app receipts, role funding, deposits, payout, replayed balances, and blocked actions. Product ideas and mainnet blockers stay separate.</p>
+        <p>Start with the useful part: accepted records can be replayed into balances, receipts, payouts, and blocked actions. The raw txids are still here, but they are reviewer detail.</p>
       </div>
       <aside class="facts">
         <span>Short version</span>
@@ -56,35 +57,59 @@
       </aside>
     </section>
 
+    <section id="aha" class="panel evidence-strip-panel">
+      <div class="section-title">
+        <p class="eyebrow">Why this is interesting</p>
+        <h2>The money movement can explain the rule.</h2>
+      </div>
+      <div class="work-map">
+        <article>
+          <span>For users</span>
+          <p>A wallet should eventually show: this spend is under the cap, this controller is present, this payout matched the evidence, or this withdrawal is blocked.</p>
+        </article>
+        <article>
+          <span>For builders</span>
+          <p>The app can start from public records instead of asking users to trust a private database row.</p>
+        </article>
+        <article>
+          <span>For Kaspa</span>
+          <p>Fast UTXO ordering makes multi-step rule flows practical to inspect as workflows, not only as isolated settlement records.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="panel evidence-strip-panel">
       <div class="section-title">
         <p class="eyebrow">Read the evidence correctly</p>
         <h2>Accepted, replayed, and blocked are different claims.</h2>
       </div>
       <div class="work-map">
-        <article><span>Accepted TN12 tx</span><p>A transaction landed on testnet and can be opened by txid.</p></article>
-        <article><span>App receipt</span><p>App data landed inside an accepted transaction. Payload alone is not custody settlement; it still needs matching replay or spend evidence for a product claim.</p></article>
-        <article><span>Replay-derived</span><p>The repo reads accepted rows and calculates balances, receipts, payouts, or blocked actions.</p></article>
-        <article><span>Local or wallet block</span><p>A local engine or wallet policy refused a candidate. That is not the same as a broadcast rejection.</p></article>
+        <article><span>Money moved</span><p>Accepted testnet transactions show funds moving through specific paths.</p></article>
+        <article><span>Receipts landed</span><p>Accepted payloads record app intent or status. A receipt alone is not custody settlement.</p></article>
+        <article><span>State replayed</span><p>The repo reads accepted rows and reconstructs balances, payouts, and blocked actions.</p></article>
+        <article><span>Bad moves blocked</span><p>Some bad candidates fail locally or by wallet policy before they should be trusted.</p></article>
       </div>
     </section>
 
     <section id="proofs" class="panel proofs">
       <div class="section-title">
         <p class="eyebrow">Accepted TN12 proofs</p>
-        <h2>Vault, assurance, escrow, role, and auction paths.</h2>
+        <h2>Reviewer txid table.</h2>
+        <p>The table is for verification. The public story is the rule, replay, and blocked-path behavior above.</p>
       </div>
-      <div class="proof-toolbar">
-        <button type="button" id="refresh-proofs">Refresh from TN12 API</button>
-        <span id="proof-status">Loaded from inline txid table.</span>
-      </div>
-      <div class="status-legend" aria-label="Proof status legend">
-        <span><strong>Fixture loaded</strong> Inline txid from repo fixture.</span>
-        <span><strong>Accepted</strong> TN12 API accepted, amount, and destination match.</span>
-        <span><strong>Mismatch</strong> Inspect API response before using the row.</span>
-      </div>
-      <div id="proof-list" class="proof-list proof-table-wrap" data-static="true" aria-live="polite">
-        <table class="proof-table">
+      <details class="evidence-drawer">
+        <summary>Open accepted proof txids</summary>
+        <div class="proof-toolbar">
+          <button type="button" id="refresh-proofs">Refresh from TN12 API</button>
+          <span id="proof-status">Loaded from inline txid table.</span>
+        </div>
+        <div class="status-legend" aria-label="Proof status legend">
+          <span><strong>Fixture loaded</strong> Inline txid from repo fixture.</span>
+          <span><strong>Accepted</strong> TN12 API accepted, amount, and destination match.</span>
+          <span><strong>Mismatch</strong> Inspect API response before using the row.</span>
+        </div>
+        <div id="proof-list" class="proof-list proof-table-wrap" data-static="true" aria-live="polite">
+          <table class="proof-table">
           <thead>
             <tr>
               <th>Path</th>
@@ -111,9 +136,10 @@
             <tr data-proof-row><td>Role-separated DAA assurance refund</td><td>role-assurance / refund</td><td><a href="https://tn12.kaspa.stream/transactions/a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa" target="_blank" rel="noreferrer"><code>a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa</code></a></td><td data-proof-status="a35937e44d0b517020f19aa3b7908b9f6f7c47c4bd4222ecf5cddc72a6b411fa">Fixture loaded</td></tr>
             <tr data-proof-row><td>Role-separated DAA escrow refund</td><td>role-escrow / refund</td><td><a href="https://tn12.kaspa.stream/transactions/7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0" target="_blank" rel="noreferrer"><code>7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0</code></a></td><td data-proof-status="7ac59de80c482402dd0d97e135ad8064e6ac237bcaab0191ea1bef8faa4735c0">Fixture loaded</td></tr>
           </tbody>
-        </table>
-      </div>
-      <pre>npm run proof:verify</pre>
+          </table>
+        </div>
+        <pre>npm run proof:verify</pre>
+      </details>
     </section>
 
     <section id="multi-wallet" class="panel evidence-strip-panel">
@@ -189,13 +215,13 @@
 
     <section id="routes" class="panel">
       <div class="section-title">
-        <h2>Three routes after the proof table.</h2>
+        <h2>Where to go next.</h2>
       </div>
       <div class="journey-grid">
         <a href="results.html">
           <span>Proof</span>
           <strong>What is proven?</strong>
-          <p>Accepted txids, proof records, replay rows, and the shortest reviewer story.</p>
+          <p>Accepted records, replay rows, and the shortest reviewer story.</p>
         </a>
         <a href="playground.html">
           <span>Product ideas</span>
@@ -205,7 +231,7 @@
         <a href="experiments.html">
           <span>Experiments</span>
           <strong>What should we build?</strong>
-          <p>Blitz mux, recurring vault games, and covenant-owned assets.</p>
+          <p>Budgets, controlled assets, staged workflows, blocked withdrawals, group payments, and scheduled payouts.</p>
         </a>
         <a href="lab.html">
           <span>Mainnet blockers</span>

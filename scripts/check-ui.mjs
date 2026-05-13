@@ -313,16 +313,24 @@ async function checkRenderedPages(url) {
 async function assertProofHomeDensity(page, viewportName) {
   const metrics = await page.evaluate(() => {
     const hero = document.querySelector(".proof-hero");
+    const aha = document.querySelector("#aha");
     const proofs = document.querySelector("#proofs");
     return {
       heroHeight: Math.round(hero?.getBoundingClientRect().height || 0),
+      ahaTop: Math.round(aha?.getBoundingClientRect().top || 0),
       proofsTop: Math.round(proofs?.getBoundingClientRect().top || 0),
+      proofDrawerOpen: document.querySelector("#proofs details")?.open || false,
+      proofRows: document.querySelectorAll("#proof-list tr[data-proof-row]").length,
     };
   });
   const maxHeroHeight = viewportName === "mobile" ? 660 : 340;
-  const maxProofsTop = viewportName === "mobile" ? 1900 : 980;
+  const maxAhaTop = viewportName === "mobile" ? 1500 : 760;
+  const maxProofsTop = viewportName === "mobile" ? 2600 : 1450;
   assert.ok(metrics.heroHeight > 0 && metrics.heroHeight <= maxHeroHeight, `proof home ${viewportName} hero too tall: ${metrics.heroHeight}px`);
-  assert.ok(metrics.proofsTop > 0 && metrics.proofsTop <= maxProofsTop, `proof home ${viewportName} proof table too low: ${metrics.proofsTop}px`);
+  assert.ok(metrics.ahaTop > 0 && metrics.ahaTop <= maxAhaTop, `proof home ${viewportName} aha section too low: ${metrics.ahaTop}px`);
+  assert.ok(metrics.proofsTop > 0 && metrics.proofsTop <= maxProofsTop, `proof home ${viewportName} proof drawer too low: ${metrics.proofsTop}px`);
+  assert.equal(metrics.proofDrawerOpen, false, `proof home ${viewportName} proof drawer should start closed`);
+  assert.equal(metrics.proofRows, 16, `proof home ${viewportName} should keep reviewer proof rows in the drawer`);
 }
 
 async function waitForDynamicContent(page, path) {
