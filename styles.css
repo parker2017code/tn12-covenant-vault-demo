@@ -1004,6 +1004,11 @@ progress::-moz-progress-bar {
   background: var(--surface-soft);
 }
 
+.wallet-approval-card header {
+  display: grid;
+  gap: 6px;
+}
+
 .wallet-approval-card span {
   color: var(--muted);
   font-size: 12px;
@@ -1026,6 +1031,21 @@ progress::-moz-progress-bar {
 .wallet-approval-card ul {
   margin: 0;
   padding-left: 18px;
+}
+
+.wallet-approval-decision,
+.wallet-approval-label {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.wallet-approval-decision {
+  color: var(--accent) !important;
+}
+
+.wallet-approval-label {
+  color: var(--text) !important;
 }
 
 .defi-flow-map {

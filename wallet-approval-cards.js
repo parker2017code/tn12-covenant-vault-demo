@@ -20,14 +20,18 @@ function renderCard(summary) {
   const links = evidenceLinks(summary);
   return `
     <article class="wallet-approval-card">
-      <span>${escapeHtml(summary.experiment || "")}</span>
-      <strong>${escapeHtml(summary.title || summary.id || "")}</strong>
+      <header>
+        <span>${escapeHtml(summary.experiment || "")}</span>
+        <strong>${escapeHtml(summary.title || summary.id || "")}</strong>
+      </header>
       <p>${escapeHtml(summary.plainAction || "")}</p>
+      <p class="wallet-approval-decision">${escapeHtml(summary.recommendedWalletDecision || "")}</p>
+      <p class="wallet-approval-label">Checks</p>
       <ul>
         ${checks.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
       </ul>
-      <p class="note">${escapeHtml(summary.refusalPrompts?.length || 0)} local reject prompts · ${escapeHtml(summary.recommendedWalletDecision || "")}</p>
-      ${links.length ? `<p class="note">${links.join(" · ")}</p>` : ""}
+      <p class="note">${escapeHtml(summary.refusalPrompts?.length || 0)} reject cases</p>
+      ${links.length ? `<p class="note">Evidence: ${links.join(" · ")}</p>` : ""}
     </article>
   `;
 }

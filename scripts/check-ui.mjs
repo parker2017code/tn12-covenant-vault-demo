@@ -125,6 +125,7 @@ try {
   assert.match(experimentsHtml, /artifacts\/covenant-experiment-map\.json/);
   assert.match(experimentsHtml, /id="wallet-approval-cards"/);
   assert.match(experimentsHtml, /wallet-approval-cards\.js/);
+  assert.doesNotMatch(experimentsHtml, /User meaning|Technical meaning|product catalog|Detailed txids and proofs live/i);
 
   await checkRenderedPages(url);
 

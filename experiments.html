@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TN12 Covenant Experiments</title>
-  <meta name="description" content="Kaspa TN12 covenant experiment map for mux workers, recurring vaults, ICC assets, and adversarial vault checks.">
+  <meta name="description" content="Kaspa TN12 covenant proof map for mux workers, recurring caps, sibling assets, and settlement targets.">
   <link rel="icon" href="favicon.svg?v=20260512-kaspa" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="favicon.png" type="image/png">
@@ -47,34 +47,34 @@
     <section class="hero results-hero">
       <div>
         <p class="status">Experiment map. TN12/testnet only.</p>
-        <h2>Proof patterns for covenant state.</h2>
-        <p>A compact map of the current covenant experiments: what pattern is being tested, what evidence exists, and what is still missing.</p>
+        <h2>Covenant proofs, grouped by pattern.</h2>
+        <p>Current TN12 evidence for stateful spends, mux routing, sibling authority, local rejects, and settlement targets.</p>
       </div>
       <aside class="facts">
         <span>Current spotlight</span>
         <strong>Mux worker. Recurring cap. Sibling asset.</strong>
-        <p>These three have accepted TN12 evidence and wallet-readable summaries.</p>
+        <p>Accepted TN12 evidence plus wallet-readable review fields.</p>
       </aside>
     </section>
 
     <section id="purpose" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Purpose</p>
-        <h2>Show the rule at the spend layer.</h2>
-        <p>The page is not a product catalog. It is a reviewer map for small covenant patterns that can be replayed, checked, or challenged from TN12 evidence.</p>
+        <h2>Show which rule moved the money.</h2>
+        <p>Each pattern links to the artifact that proves the accepted path, the refused path, or the exact blocker.</p>
       </div>
       <div class="work-map">
         <article>
-          <span>User meaning</span>
-          <p>Budgets, assets, and group payments are easier to trust when the accepted and refused moves are visible.</p>
+          <span>User</span>
+          <p>Budgets, assets, and group payments become reviewable when accepted and refused moves are visible.</p>
         </article>
         <article>
-          <span>Technical meaning</span>
-          <p>Covenant IDs, continuation outputs, sibling inputs, and mux routing let small UTXO scripts compose without one app database.</p>
+          <span>Mechanism</span>
+          <p>Covenant IDs, continuation outputs, sibling inputs, and mux routing compose small UTXO scripts without one app database.</p>
         </article>
         <article>
-          <span>Kaspa angle</span>
-          <p>Fast TN12 ordering makes multi-transaction covenant flows practical to inspect as workflows, not just final settlement records.</p>
+          <span>Kaspa</span>
+          <p>Fast ordering makes multi-transaction covenant flows practical to inspect as workflows, not only settlement records.</p>
         </article>
       </div>
     </section>
@@ -88,19 +88,19 @@
         <article>
           <span>1</span>
           <strong>Mux / worker proof</strong>
-          <p>Accepted TN12 route, return, timeout, and Worker B return. Shows how one covenant family can split logic into bounded roles.</p>
+          <p>Accepted route, return, timeout, and Worker B return. One covenant family splits logic into bounded roles.</p>
           <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open flow evidence</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
         <article>
           <span>2</span>
           <strong>Recurring cap proof</strong>
-          <p>Accepted cumulative spends and reset-window spend. Shows a cap that follows continuation state instead of living only in a server row.</p>
+          <p>Accepted cumulative spends and reset-window spend. The cap follows continuation state.</p>
           <p class="note"><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Open reset proof</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
         <article>
           <span>3</span>
           <strong>Sibling-authorized asset proof</strong>
-          <p>Accepted two-input strike plus live-id local rejects. Shows ICC-style sibling authority without nested contract execution.</p>
+          <p>Accepted two-input strike plus live-id local rejects. Sibling authority replaces nested contract execution.</p>
           <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a> · <a href="artifacts/sibling-input-discovery.json">Open sibling discovery</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
       </div>
@@ -109,8 +109,8 @@
     <section id="wallet-review" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Wallet review</p>
-        <h2>Approval summaries for the top proofs.</h2>
-        <p>These cards render the same machine-readable artifact a wallet UI could use: action, covenant checks, evidence links, and local reject prompts.</p>
+        <h2>Review fields for the top proofs.</h2>
+        <p>Compact prompts from the wallet summary artifact: action, checks, reject cases, and evidence links.</p>
         <p class="note"><a href="artifacts/wallet-approval-summaries.json">Open wallet summary artifact</a></p>
       </div>
       <div id="wallet-approval-cards" class="wallet-approval-grid" aria-live="polite">
@@ -122,7 +122,7 @@
       <div class="section-title">
         <p class="eyebrow">Experiment map</p>
         <h2>Current status.</h2>
-        <p>One row per experiment. Detailed txids and proofs live in the linked artifacts.</p>
+        <p>One row per proof lane. Detailed txids stay in the linked artifacts.</p>
         <p class="note"><a href="artifacts/covenant-experiment-map.json">Open experiment artifact</a></p>
       </div>
       <div class="experiment-table-wrap">
@@ -140,7 +140,7 @@
               <td>Mux worker proof</td>
               <td>mux / worker contract family</td>
               <td>accepted-timeout-settlement-with-local-challenges</td>
-              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Accepted route, return, timeout, Worker B return, local challenge rejects.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet-readable summary.</a></td>
+              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Accepted route, return, timeout, Worker B return, and local challenge rejects.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet summary.</a></td>
             </tr>
             <tr>
               <td>Recurring cap proof</td>
@@ -152,7 +152,7 @@
               <td>Sibling-authorized asset proof</td>
               <td>ICC / covenant-owned asset</td>
               <td>accepted-sibling-input-strike</td>
-              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Accepted owner marker, asset genesis, and sibling-authorized strike.</a> <a href="artifacts/sibling-input-discovery.json">Sibling discovery.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet-readable summary.</a></td>
+              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Accepted owner marker, asset genesis, and sibling-authorized strike.</a> <a href="artifacts/sibling-input-discovery.json">Sibling discovery.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet summary.</a></td>
             </tr>
             <tr>
               <td>Vault negative checks</td>
@@ -164,7 +164,7 @@
               <td>Coordination release evidence</td>
               <td>assurance plus coordination receipts</td>
               <td>transparent-coordination-evidence-ready</td>
-              <td><a href="artifacts/coordination-market-evidence-dossier.json">Three qualifying commitments, accepted release, non-selected refund alternates.</a> <a href="artifacts/coordination-covenant-settlement-target.json">Covenant target.</a></td>
+              <td><a href="artifacts/coordination-market-evidence-dossier.json">Three qualifying commitments, accepted release, and non-selected refund alternates.</a> <a href="artifacts/coordination-covenant-settlement-target.json">Covenant target.</a></td>
             </tr>
             <tr>
               <td>Scheduler receipt evidence</td>
