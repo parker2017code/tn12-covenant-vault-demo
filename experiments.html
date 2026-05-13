@@ -36,9 +36,9 @@
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#rules">Evidence</a>
         <a href="#purpose">Meaning</a>
-        <a href="#examples">Examples</a>
+        <a href="#examples">Rules</a>
         <a href="#wallet-review">Wallet Review</a>
-        <a href="#queue">Queue</a>
+        <a href="#artifacts">Artifacts</a>
       </div>
     </nav>
   </header>
@@ -103,97 +103,46 @@
 
     <section id="examples" class="panel experiments-panel">
       <div class="section-title">
-        <p class="eyebrow">Functional examples</p>
-        <h2>Read each proof as a product job.</h2>
-        <p>The artifacts matter because they show what moved, what was refused, and what a wallet or app could explain before the user signs.</p>
+        <p class="eyebrow">Tested rules</p>
+        <h2>Read the proof from the job first.</h2>
+        <p>Each card names the useful thing first, then the covenant mechanism and evidence link.</p>
       </div>
       <div class="experiment-grid">
         <article>
           <span>Budget</span>
-          <strong>Allowance or team budget</strong>
-          <p>Money can move under a visible limit, then the remaining money is locked back into the next budget state.</p>
-          <ul>
-            <li><b>User job:</b> parent wallet, team treasury, grant stream, merchant payout limit, game resource.</li>
-            <li><b>Crypto point:</b> the bad spend is refused by the spend path where the script enforces it, not only by a dashboard.</li>
-            <li><b>Technical name:</b> recurring-cap covenant. Accepted on TN12; user-wallet signing and audit still separate.</li>
-          </ul>
+          <strong>Budget that cannot drain at once</strong>
+          <p>Under-cap spends and a reset-window spend landed on TN12. Over-cap and stale reset candidates fail locally.</p>
+          <p class="note"><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Reset proof</a> · <a href="artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json">Post-reset spend</a></p>
         </article>
         <article>
           <span>Step</span>
-          <strong>Turn or staged workflow</strong>
-          <p>One step goes to one role, returns with valid state, or recovers through timeout if it stalls.</p>
-          <ul>
-            <li><b>User job:</b> game turn, dispute step, service job, staged approval, claim/challenge flow.</li>
-            <li><b>Crypto point:</b> the accepted path becomes public evidence that a private server cannot silently rewrite.</li>
-            <li><b>Technical name:</b> mux / worker contract family. Proves routing and timeout mechanics, not full game rules.</li>
-          </ul>
+          <strong>Step-by-step workflow</strong>
+          <p>State routes to a worker, returns, can time out, then routes to another worker. This proves routing mechanics, not full game rules.</p>
+          <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Flow evidence</a> · <a href="artifacts/blitz-mux-challenge-settlement.json">Local rejects</a></p>
         </article>
         <article>
           <span>Asset</span>
-          <strong>Controlled asset move</strong>
-          <p>An asset moves only when the required controller input appears in the same transaction.</p>
-          <ul>
-            <li><b>User job:</b> ticket, access pass, game item, license, settlement right, app-owned asset.</li>
-            <li><b>Crypto point:</b> ownership follows transaction rules instead of a platform account row.</li>
-            <li><b>Technical name:</b> sibling-input authorization / ICC. Accepted strike on TN12; negative rows are local rejects.</li>
-          </ul>
+          <strong>Asset that needs its controller</strong>
+          <p>An asset move landed on TN12 only with the required controller input in the same transaction. Wrong-controller cases fail locally.</p>
+          <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Strike evidence</a> · <a href="artifacts/sibling-input-discovery.json">Sibling discovery</a></p>
         </article>
         <article>
           <span>Reject</span>
-          <strong>Vault safety review</strong>
-          <p>Negative checks show the obvious bad moves: wrong signer, wrong destination, missing relock, over cap, and stale reset.</p>
-          <ul>
-            <li><b>User job:</b> explain why a vault, escrow, or family wallet does not drain on a bad click.</li>
-            <li><b>Crypto point:</b> refusal evidence is stronger than a happy-path demo.</li>
-            <li><b>Boundary:</b> local script-engine rejects unless an artifact says TN12 accepted/rejected.</li>
-          </ul>
+          <strong>Bad withdrawal checks</strong>
+          <p>Wrong signer, wrong destination, missing relock, over-cap, early reset, and stale reset candidates fail locally.</p>
+          <p class="note"><a href="artifacts/covenant-heist-evidence.json">Reject evidence</a></p>
         </article>
         <article>
           <span>Group</span>
           <strong>Release or refund</strong>
-          <p>Coordination evidence shows fresh pledge outputs taking release paths and a separate fresh set taking refund paths.</p>
-          <ul>
-            <li><b>User job:</b> group buy, event deposit, public-goods grant, club project, cooperative funding.</li>
-            <li><b>Crypto point:</b> release/refund can be inspected from public evidence instead of only trusting a campaign database.</li>
-            <li><b>Boundary:</b> threshold selection is still transparent replay/planner logic.</li>
-          </ul>
+          <p>Fresh pledge outputs took release paths on TN12. A separate fresh set took refund paths. Threshold selection remains replay/planner logic.</p>
+          <p class="note"><a href="artifacts/coordination-covenant-release-evidence.json">Release</a> · <a href="artifacts/coordination-covenant-refund-evidence.json">Refund</a></p>
         </article>
         <article>
           <span>Pay</span>
           <strong>Conditional payout</strong>
-          <p>Scheduler receipts tie an intent, bids, execution receipt, and a guarded payout spend into one reviewable story.</p>
-          <ul>
-            <li><b>User job:</b> subscription, payroll window, recurring payout, tournament turn, stale-action guard.</li>
-            <li><b>Crypto point:</b> users can replay whether the action was eligible before trusting the payout story.</li>
-            <li><b>Technical name:</b> scheduler receipt plus covenant payout. Payout spend is accepted; trigger eligibility is still replay-derived.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="spotlight" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">Spotlight</p>
-        <h2>Three clearest app patterns.</h2>
-      </div>
-      <div class="experiment-grid spotlight-grid">
-        <article>
-          <span>1</span>
-          <strong>Step-by-step workflow</strong>
-          <p>A state moves to a worker, comes back, can time out, and can move to another worker. The technical mechanism is mux / worker routing.</p>
-          <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open flow evidence</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
-        </article>
-        <article>
-          <span>2</span>
-          <strong>Budget that cannot drain at once</strong>
-          <p>Accepted cumulative spends and a reset-window spend. The cap follows the next locked output.</p>
-          <p class="note"><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Open reset proof</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
-        </article>
-        <article>
-          <span>3</span>
-          <strong>Asset that needs its controller</strong>
-          <p>An accepted asset move requires the right controller input in the same transaction.</p>
-          <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a> · <a href="artifacts/sibling-input-discovery.json">Open sibling discovery</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
+          <p>A guarded payout spend landed on TN12. Intent, bid, and execution receipts are replay evidence; trigger eligibility is replay-derived.</p>
+          <p class="note"><a href="artifacts/scheduler-covenant-payout-evidence.json">Payout</a> · <a href="artifacts/universal-scheduler-workbench.json">Receipts</a></p>
         </article>
       </div>
     </section>
@@ -210,69 +159,19 @@
       </div>
     </section>
 
-    <section id="queue" class="panel experiments-panel">
+    <section id="artifacts" class="panel experiments-panel">
       <div class="section-title">
-        <p class="eyebrow">Experiment map</p>
-        <h2>Current status.</h2>
-        <p>One row per app pattern. Internal status slugs and detailed txids stay in the linked artifacts.</p>
-        <p class="note"><a href="artifacts/covenant-experiment-map.json">Open experiment artifact</a></p>
+        <p class="eyebrow">Artifacts</p>
+        <h2>Detailed evidence lives one click down.</h2>
+        <p>The public page stays short. Use the artifacts for full txids, internal status slugs, and replay rows.</p>
       </div>
-      <div class="experiment-table-wrap">
-        <table class="proof-table experiment-table">
-          <thead>
-            <tr>
-              <th>App pattern</th>
-              <th>Plain meaning</th>
-              <th>Accepted TN12 evidence</th>
-              <th>Negative or local checks</th>
-              <th>Practical use</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Step workflow</td>
-              <td>One locked state routes through a small worker role, returns, or recovers after timeout.</td>
-              <td><a href="artifacts/blitz-mux-live-flow-evidence.json">Route, worker return, timeout return, Worker B route, and Worker B return landed on TN12.</a></td>
-              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Bad selector and too-early timeout fail locally.</a></td>
-              <td>Game turns, disputes, service jobs, staged approvals, claim/challenge flows.</td>
-            </tr>
-            <tr>
-              <td>Budget limit</td>
-              <td>A treasury spends under a limit and carries the current window state forward.</td>
-              <td><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Two cumulative spends and a reset-window spend landed on TN12.</a> <a href="artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json">Post-reset spend evidence.</a></td>
-              <td>Over-cap, early reset, stale reset, and over-cap reset candidates fail locally.</td>
-              <td>Allowance wallets, team treasuries, grant streams, merchant payout limits.</td>
-            </tr>
-            <tr>
-              <td>Controlled asset</td>
-              <td>An asset move requires the right controller input in the same transaction.</td>
-              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Owner marker, asset genesis, and two-input strike landed on TN12.</a></td>
-              <td><a href="artifacts/sibling-input-discovery.json">Wrong witness, missing sibling, and wrong sibling id fail locally.</a></td>
-              <td>Tickets, access passes, game items, licenses, app-owned assets.</td>
-            </tr>
-            <tr>
-              <td>Bad withdrawal review</td>
-              <td>The vault rail shows why obvious wrong moves should not pass.</td>
-              <td>Uses the accepted recurring-vault rail as the good path.</td>
-              <td><a href="artifacts/covenant-heist-evidence.json">Wrong owner, wrong destination, missing relock, over cap, early reset, stale reset, and over-cap reset fail locally.</a></td>
-              <td>Vaults, family wallets, escrow safety screens, reviewer attack paths.</td>
-            </tr>
-            <tr>
-              <td>Release or refund</td>
-              <td>Pledged funds can take a release path or, on a separate fresh set, a refund path.</td>
-              <td><a href="artifacts/coordination-covenant-release-evidence.json">Fresh pledge funding and three release spends landed on TN12.</a> <a href="artifacts/coordination-covenant-refund-evidence.json">Three refund spends landed on a separate fresh pledge set.</a></td>
-              <td><a href="artifacts/coordination-market-evidence-dossier.json">Threshold selection remains transparent replay/planner logic.</a></td>
-              <td>Group buys, event deposits, club projects, public-goods funding.</td>
-            </tr>
-            <tr>
-              <td>Scheduled payout</td>
-              <td>An intent, bids, execution receipt, and payout can be reviewed together.</td>
-              <td><a href="artifacts/scheduler-covenant-payout-evidence.json">The payout spend landed on TN12.</a> <a href="artifacts/universal-scheduler-workbench.json">Intent, bids, and execution receipts also landed as accepted rows.</a></td>
-              <td><a href="artifacts/scheduler-covenant-payout-negative-evidence.json">Wrong payout candidates fail locally.</a> Trigger eligibility is replay-derived.</td>
-              <td>Subscriptions, payroll windows, tournament turns, stale-action guards.</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="artifact-link-grid">
+        <a href="artifacts/covenant-experiment-map.json">Experiment map</a>
+        <a href="artifacts/wallet-approval-summaries.json">Wallet summaries</a>
+        <a href="artifacts/blitz-mux-live-flow-evidence.json">Step workflow</a>
+        <a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Budget reset</a>
+        <a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Controlled asset</a>
+        <a href="artifacts/covenant-heist-evidence.json">Bad withdrawals</a>
       </div>
     </section>
 
