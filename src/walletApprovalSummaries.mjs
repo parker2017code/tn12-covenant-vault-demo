@@ -8,6 +8,8 @@ export function buildWalletApprovalSummaries({
   schedulerPayout = {},
   schedulerTarget = {},
   schedulerNegatives = {},
+  coordinationRelease = {},
+  heistEvidence = {},
   generatedAt = new Date().toISOString()
 } = {}) {
   const accepted = resetProof.accepted || {};
@@ -84,6 +86,14 @@ export function buildWalletApprovalSummaries({
     summaries.push(buildSchedulerPayoutSummary(schedulerPayout, schedulerTarget, schedulerNegatives));
   }
 
+  if (coordinationRelease.status === "accepted-covenant-release-spends") {
+    summaries.push(buildCoordinationReleaseSummary(coordinationRelease));
+  }
+
+  if (heistEvidence.status === "accepted-vault-rail-with-local-heist-rejects") {
+    summaries.push(buildVaultNegativeSummary(heistEvidence));
+  }
+
   return {
     schema: "tn12-wallet-approval-summaries/v1",
     network: "kaspa-testnet-12",
@@ -93,6 +103,72 @@ export function buildWalletApprovalSummaries({
       : "wallet-approval-summary-review",
     purpose: "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
     summaries
+  };
+}
+
+function buildCoordinationReleaseSummary(releaseEvidence) {
+  const releases = Array.isArray(releaseEvidence.releases) ? releaseEvidence.releases : [];
+  const totalSompi = releases.reduce((sum, row) => sum + BigInt(row.amountSompi || "0"), 0n);
+  return {
+    id: "coordination-covenant-release",
+    experiment: "coordination-release-evidence",
+    evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_REPLAY_SELECTION",
+    recommendedWalletDecision: "approve-if-user-initiated",
+    title: "Release coordination pledges",
+    plainAction: `Release ${releases.length} covenant pledges totaling ${sompiToTkas(totalSompi)} tKAS to the selected recipient after the coordination pack is selected by replay evidence.`,
+    userChecks: [
+      `Funding txid: ${releaseEvidence.funding?.txid || ""}`,
+      `Pledge outputs: ${releaseEvidence.funding?.pledgeOutputCount ?? ""}`,
+      `Accepted releases: ${releaseEvidence.summary?.acceptedReleases ?? releases.length}`,
+      `Recipient: ${releases[0]?.destination || ""}`,
+      `Total released: ${sompiToTkas(totalSompi)} tKAS`
+    ],
+    technicalChecks: {
+      funding: releaseEvidence.funding || {},
+      releases,
+      summary: releaseEvidence.summary || {}
+    },
+    refusalPrompts: [
+      {
+        id: "non-selected-refund-after-release",
+        recommendedWalletDecision: "reject",
+        evidenceClass: "REPLAY_BRANCH_REJECT",
+        reason: "refund alternates are not promoted after the pledge outputs release"
+      }
+    ],
+    boundaries: releaseEvidence.boundaries || []
+  };
+}
+
+function buildVaultNegativeSummary(heist) {
+  const rows = Array.isArray(heist.rows) ? heist.rows : [];
+  return {
+    id: "vault-negative-checks",
+    experiment: "vault-negative-checks",
+    evidenceClass: "TN12_ACCEPTED_BACKBONE_WITH_LOCAL_REJECTS",
+    recommendedWalletDecision: "reject-invalid-attempts",
+    title: "Review blocked vault attempts",
+    plainAction: `Review ${rows.length} blocked vault attempts over the accepted recurring-vault rail before treating the vault path as safe to automate.`,
+    userChecks: [
+      `Accepted reset txid: ${heist.acceptedBackbone?.resetTxid || ""}`,
+      `Blocked attempts: ${rows.length}`,
+      `Wrong destination row: ${rows.find((row) => row.id === "wrong-destination")?.status || ""}`,
+      `Missing continuation row: ${rows.find((row) => row.id === "missing-continuation")?.status || ""}`,
+      `Over-cap row: ${rows.find((row) => row.id === "cumulative-over-cap")?.status || ""}`
+    ],
+    technicalChecks: {
+      acceptedBackbone: heist.acceptedBackbone || {},
+      sourceArtifacts: heist.sourceArtifacts || {},
+      rows
+    },
+    refusalPrompts: rows.map((row) => ({
+      id: row.id,
+      recommendedWalletDecision: "reject",
+      evidenceClass: row.class || "SCRIPT_ENFORCED_LOCAL",
+      reason: row.rule,
+      artifact: row.evidence || ""
+    })),
+    boundaries: heist.doesNotProve || []
   };
 }
 

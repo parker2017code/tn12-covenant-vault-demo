@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-approval-summaries/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T02:23:19.470Z",
+  "generatedAt": "2026-05-13T02:27:01.609Z",
   "status": "wallet-approval-summary-ready",
   "purpose": "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
   "summaries": [
@@ -325,6 +325,237 @@
         "This is a wallet-readable summary for an accepted TN12 covenant payout.",
         "The payout spend is covenant-enforced; scheduler eligibility remains replay/indexer-derived.",
         "This does not prove protocol scheduling, autonomous custody, wallet-standard signing, or mainnet readiness."
+      ]
+    },
+    {
+      "id": "coordination-covenant-release",
+      "experiment": "coordination-release-evidence",
+      "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_REPLAY_SELECTION",
+      "recommendedWalletDecision": "approve-if-user-initiated",
+      "title": "Release coordination pledges",
+      "plainAction": "Release 3 covenant pledges totaling 99.99985 tKAS to the selected recipient after the coordination pack is selected by replay evidence.",
+      "userChecks": [
+        "Funding txid: 314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+        "Pledge outputs: 3",
+        "Accepted releases: 3",
+        "Recipient: kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+        "Total released: 99.99985 tKAS"
+      ],
+      "technicalChecks": {
+        "funding": {
+          "txid": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+          "status": "accepted",
+          "pledgeOutputCount": 3,
+          "allPledgeOutputsHaveCovenantBinding": true,
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc"
+        },
+        "releases": [
+          {
+            "pledgeId": "pledge-docs-001",
+            "txid": "9a3350f9c11dc9b130a76377e8ffca091f6d38cd00824306a730b6946e181977",
+            "endpoint": "https://api-tn12.kaspa.org/transactions/9a3350f9c11dc9b130a76377e8ffca091f6d38cd00824306a730b6946e181977",
+            "status": "accepted",
+            "explorerUrl": "https://tn12.kaspa.stream/transactions/9a3350f9c11dc9b130a76377e8ffca091f6d38cd00824306a730b6946e181977",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "amountTkas": "44.99995",
+            "amountSompi": "4499995000",
+            "acceptingBlockBlueScore": 10114656
+          },
+          {
+            "pledgeId": "pledge-docs-002",
+            "txid": "0a9efe559aa2e96a02e5571ee0ed76bfe329c61275fa6a7575446d271f765aab",
+            "endpoint": "https://api-tn12.kaspa.org/transactions/0a9efe559aa2e96a02e5571ee0ed76bfe329c61275fa6a7575446d271f765aab",
+            "status": "accepted",
+            "explorerUrl": "https://tn12.kaspa.stream/transactions/0a9efe559aa2e96a02e5571ee0ed76bfe329c61275fa6a7575446d271f765aab",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "amountTkas": "34.99995",
+            "amountSompi": "3499995000",
+            "acceptingBlockBlueScore": 10114693
+          },
+          {
+            "pledgeId": "pledge-docs-003",
+            "txid": "954d5aa0b17ab15fc503da769e423ecace4164a8a888d625d6ab07f2e2813a79",
+            "endpoint": "https://api-tn12.kaspa.org/transactions/954d5aa0b17ab15fc503da769e423ecace4164a8a888d625d6ab07f2e2813a79",
+            "status": "accepted",
+            "explorerUrl": "https://tn12.kaspa.stream/transactions/954d5aa0b17ab15fc503da769e423ecace4164a8a888d625d6ab07f2e2813a79",
+            "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+            "amountTkas": "19.99995",
+            "amountSompi": "1999995000",
+            "acceptingBlockBlueScore": 10114713
+          }
+        ],
+        "summary": {
+          "pledgeOutputs": 3,
+          "releaseDrafts": 3,
+          "acceptedReleases": 3
+        }
+      },
+      "refusalPrompts": [
+        {
+          "id": "non-selected-refund-after-release",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "REPLAY_BRANCH_REJECT",
+          "reason": "refund alternates are not promoted after the pledge outputs release"
+        }
+      ],
+      "boundaries": [
+        "This upgrades the pledge money movement only: fresh AssurancePledge covenant outputs release to the selected recipient.",
+        "The coordination threshold and pack selection remain transparent replay/planner evidence.",
+        "Do not describe this as private coordination, pooled custody, or protocol scheduling."
+      ]
+    },
+    {
+      "id": "vault-negative-checks",
+      "experiment": "vault-negative-checks",
+      "evidenceClass": "TN12_ACCEPTED_BACKBONE_WITH_LOCAL_REJECTS",
+      "recommendedWalletDecision": "reject-invalid-attempts",
+      "title": "Review blocked vault attempts",
+      "plainAction": "Review 7 blocked vault attempts over the accepted recurring-vault rail before treating the vault path as safe to automate.",
+      "userChecks": [
+        "Accepted reset txid: f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+        "Blocked attempts: 7",
+        "Wrong destination row: blocked-local-engine-failed",
+        "Missing continuation row: blocked-local-engine-failed",
+        "Over-cap row: blocked-local-engine-failed"
+      ],
+      "technicalChecks": {
+        "acceptedBackbone": {
+          "cumulativeSpendTxids": [
+            "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+            "2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae"
+          ],
+          "resetTxid": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+          "resetGenesisTxid": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580"
+        },
+        "sourceArtifacts": {
+          "ownerSig": "artifacts/recurring-treasury-vault-owner-sig-proof.json",
+          "cumulative": "artifacts/recurring-treasury-vault-cumulative-cap-proof.json",
+          "reset": "artifacts/recurring-treasury-vault-window-reset-proof.json",
+          "negativeMap": "artifacts/recurring-treasury-vault-negative-map.json"
+        },
+        "rows": [
+          {
+            "id": "wrong-owner-signature",
+            "status": "blocked-local-engine-failed",
+            "class": "SCRIPT_ENFORCED_LOCAL",
+            "rule": "checkSig(ownerSig, owner)",
+            "evidence": "artifacts/recurring-treasury-vault-owner-sig-proof.json:over_cap_owner_sig_fails",
+            "attack": "Spend with a signature that is not from the owner role.",
+            "point": "The vault rule starts with authority, not just amount math."
+          },
+          {
+            "id": "wrong-destination",
+            "status": "blocked-local-engine-failed",
+            "class": "SCRIPT_ENFORCED_LOCAL",
+            "rule": "destination output must equal new ScriptPubKeyP2PK(destination)",
+            "evidence": "artifacts/recurring-treasury-vault-owner-sig-proof.json:wrong_destination_owner_sig_fails",
+            "attack": "Keep the amount under cap but send it to the wrong destination.",
+            "point": "A cap alone is not enough; the destination also has to be constrained."
+          },
+          {
+            "id": "missing-continuation",
+            "status": "blocked-local-engine-failed",
+            "class": "SCRIPT_ENFORCED_LOCAL",
+            "rule": "validateOutputState(1, newState)",
+            "evidence": "artifacts/recurring-treasury-vault-owner-sig-proof.json:missing_continuation_owner_sig_fails",
+            "attack": "Take the spend output but do not relock the vault continuation.",
+            "point": "The state machine survives only if the next output carries the rules forward."
+          },
+          {
+            "id": "cumulative-over-cap",
+            "status": "blocked-local-engine-failed",
+            "class": "SCRIPT_ENFORCED_LOCAL",
+            "rule": "prevState.spent + amount <= cap",
+            "evidence": "artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json",
+            "attack": "Make a third spend that pushes the window from 65 tKAS to 80 tKAS against a 75 tKAS cap.",
+            "point": "The cap is cumulative across continuation state, not just a per-transaction ceiling."
+          },
+          {
+            "id": "early-reset",
+            "status": "blocked-local-engine-failed",
+            "class": "SCRIPT_ENFORCED_LOCAL",
+            "rule": "lockTime before reset window",
+            "evidence": "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json",
+            "attack": "Reset the window before the required lock time.",
+            "point": "Time rules matter; a reset cannot be pulled forward by the UI."
+          },
+          {
+            "id": "stale-reset-window",
+            "status": "blocked-local-engine-failed",
+            "class": "SCRIPT_ENFORCED_LOCAL",
+            "rule": "new state keeps the old window",
+            "evidence": "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
+            "attack": "Claim reset but keep the old window state.",
+            "point": "The continuation state has to advance, not merely look like a reset."
+          },
+          {
+            "id": "over-cap-reset",
+            "status": "blocked-local-engine-failed",
+            "class": "SCRIPT_ENFORCED_LOCAL",
+            "rule": "reset amount exceeds cap",
+            "evidence": "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json",
+            "attack": "Reset and immediately spend more than the cap.",
+            "point": "A new window does not remove the cap."
+          }
+        ]
+      },
+      "refusalPrompts": [
+        {
+          "id": "wrong-owner-signature",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "SCRIPT_ENFORCED_LOCAL",
+          "reason": "checkSig(ownerSig, owner)",
+          "artifact": "artifacts/recurring-treasury-vault-owner-sig-proof.json:over_cap_owner_sig_fails"
+        },
+        {
+          "id": "wrong-destination",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "SCRIPT_ENFORCED_LOCAL",
+          "reason": "destination output must equal new ScriptPubKeyP2PK(destination)",
+          "artifact": "artifacts/recurring-treasury-vault-owner-sig-proof.json:wrong_destination_owner_sig_fails"
+        },
+        {
+          "id": "missing-continuation",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "SCRIPT_ENFORCED_LOCAL",
+          "reason": "validateOutputState(1, newState)",
+          "artifact": "artifacts/recurring-treasury-vault-owner-sig-proof.json:missing_continuation_owner_sig_fails"
+        },
+        {
+          "id": "cumulative-over-cap",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "SCRIPT_ENFORCED_LOCAL",
+          "reason": "prevState.spent + amount <= cap",
+          "artifact": "artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json"
+        },
+        {
+          "id": "early-reset",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "SCRIPT_ENFORCED_LOCAL",
+          "reason": "lockTime before reset window",
+          "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json"
+        },
+        {
+          "id": "stale-reset-window",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "SCRIPT_ENFORCED_LOCAL",
+          "reason": "new state keeps the old window",
+          "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json"
+        },
+        {
+          "id": "over-cap-reset",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "SCRIPT_ENFORCED_LOCAL",
+          "reason": "reset amount exceeds cap",
+          "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json"
+        }
+      ],
+      "boundaries": [
+        "TN12 broadcast-rejected invalid candidates",
+        "mainnet activation",
+        "wallet-standard user signing",
+        "audited custody",
+        "production fraud monitoring"
       ]
     }
   ]

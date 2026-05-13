@@ -60,6 +60,15 @@ function evidenceLinks(summary) {
   if (technical.release?.explorerUrl && technical.release?.txid) {
     links.push(link(technical.release.explorerUrl, technical.release.txid, "release"));
   }
+  for (const item of (technical.releases || []).slice(0, 3)) {
+    if (item.explorerUrl && item.txid) {
+      links.push(link(item.explorerUrl, item.txid, item.pledgeId || "release"));
+    }
+  }
+  if (technical.acceptedBackbone?.resetTxid) {
+    const txid = technical.acceptedBackbone.resetTxid;
+    links.push(link(`https://tn12.kaspa.stream/transactions/${txid}`, txid, "reset"));
+  }
   return links;
 }
 
