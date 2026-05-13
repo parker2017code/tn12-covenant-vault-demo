@@ -12,6 +12,7 @@ Read this first when resuming TN12 work. Keep it short. Details belong in artifa
 - TN12 evidence gate: `npm run check:tn12`
 - Operating frame: build money rails first, covenant products second, based-app prototypes third, and treat full vProgs/synchronous composition as later architecture.
 - Style frame: use direct product labels and concrete next actions. Say what a user can do, what evidence backs it, what is missing, and what to try next. Keep the detailed wording plan in `docs/COPY_CLEANUP_PLAN.md`.
+- Public-page rule: keep non-obvious implications and examples front-facing; bury mechanical detail. Use cases, why-it-matters, wallet-visible checks, evidence class, and next blocker belong on the public page. Full txids, covenant IDs, template hashes, witness indexes, status slugs, compiler notes, and long replay rows belong in drawers, docs, artifacts, or reviewer routes.
 
 ## Proof Core
 
@@ -79,3 +80,4 @@ npm run wallet:external-signer-research
 4. Capture live removed-block rollback evidence when available.
 5. Real user-wallet signing round trip for one payload receipt.
 6. Make the self-serve lane runbook the public route into money rails, covenant products, and based-app prototypes.
+7. Continue from the cleaned public surface: wallet approval summaries cover all six experiment lanes; the next useful work is user-wallet handoff or fresh evidence that proves a new accepted/refused path, not more public copy.

@@ -28,6 +28,9 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Scheduler payout-negative update, 2026-05-12: `artifacts/scheduler-covenant-payout-negative-evidence.json` records local script-engine rejects for wrong recipient, wrong payout amount, and wrong input value against the same live payout covenant parameters.
 - Wallet approval update, 2026-05-12: `artifacts/wallet-approval-summaries.json` translates the recurring-cap reset-window proof, sibling-authorized asset proof, and mux-worker proof into wallet-readable fields, required covenant ids, state changes, explorer URLs, and local reject prompts.
 - Public experiment cleanup update, 2026-05-13: `experiments.html` keeps the public aha moments and examples on-page while moving covenant ids, status slugs, full txids, and mechanism details into artifacts and `docs/EXPERIMENT_TECHNICAL_MAP.md`. The UI check now rejects a public experiment table and `Technical name:` copy.
+- Proof home cleanup update, 2026-05-13: `index.html` now puts the "why this is interesting" section before evidence taxonomy and keeps the full accepted-proof txid table inside a closed drawer. UI checks assert the drawer starts closed, 16 reviewer rows remain available, and long hashes are not visible in normal page text.
+- Results cleanup update, 2026-05-13: `results.html` now leads with accepted money movement, app receipts, replay state, and missing pieces instead of "proof surface" or "start with txids" language. UI checks reject the old copy.
+- Kaspa Explained follow-up, 2026-05-13: `application-layer.html`, `builder-evidence.html`, and `why-kaspa-matters.html` now explain TN12/covenant implications as wallet-visible rules and money that carries a rule forward, while exact txids, payload counts, and reducer artifacts stay in the TN12 lab.
 - Sibling-input discovery update, 2026-05-12: `artifacts/sibling-input-discovery.json` explains the ICC asset proof's required owner-marker sibling input from the live owner covenant id, accepted outpoint, witness index, and negative coverage.
 
 ## Completed In Current Cleanup Pass
@@ -46,7 +49,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 |---|---|---|---|
 | 1 | Rewrite toddler/notes-style public copy. | Done in the current cleanup slice: `experiments.html` and wallet approval cards now use compact proof language and linked artifacts. | No |
 | 2 | Make the experiment page reviewer-grade. | Done for current evidence: top three proofs stay prominent, secondary lanes show current evidence class, raw detail stays in artifacts/docs. | No |
-| 3 | Add a restrained Kaspa Explained follow-up only after TN12 copy is cleaned. | Done in `kaspa-explained`: the app-layer page explains what TN12 covenant tests teach without importing lab names as product claims. | No |
+| 3 | Add a restrained Kaspa Explained follow-up only after TN12 copy is cleaned. | Done in `kaspa-explained`: app-layer, builder-evidence, and why-kaspa-matters now explain the implication before the artifact/mechanism detail. | No |
 | 4 | Add a compact Blitz challenge variant only if it proves a new refusal path. | A new local reject or accepted/rejected TN12 row is added without pretending this is a full game. | No |
 | 5 | Add new experiment evidence only when it is a real move. | New rows must be accepted evidence, safe rejection evidence, or wallet handoff evidence. | No |
 | 6 | Fund fresh Coordination covenant pledge outputs. | Done for release: fresh covenant pledge outputs and three release spends are accepted on TN12; refund-path evidence still needs fresh unspent outputs. | No |
@@ -64,11 +67,9 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - It should include the exact commit hash, canonical proof count, txid list, fixture/artifact hashes, commands run, expected gate output, known blockers, and a clear "testnet only / no audit / no mainnet funds" boundary.
    - Done when the release notes can be reviewed without reading the whole repo.
 2. TN12 public UI split.
-   - What it is: separate the current broad lab surface into three reader jobs: Proof, Product Ideas, and Mainnet Readiness.
-   - Proof should show accepted txids, scripts, verifier commands, and enforcement labels.
-   - Product Ideas should hold vault, escrow, assurance, DeFi, scheduler, agents, auctions, and coordination concepts.
-   - Mainnet Readiness should hold wallet signing, production indexer, rollback evidence, audit, and activation blockers.
-   - Done when a normal reader can find "what is proven" without scrolling through app-lab concepts.
+   - Current state: the public surface is now much closer. Proof home leads with why the evidence matters and hides the full txid table in a drawer; Results explains accepted money movement, receipts, replay, and gaps; Experiments keeps examples visible and moves technical maps to docs/artifacts.
+   - Remaining cleanup: Lab Tools can stay builder-heavy, but future public additions should keep use cases, why-it-matters, evidence class, and next blocker on-page while moving mechanical detail down.
+   - Done when a normal reader can find "what happened," "why it matters," and "what is still missing" without reading internal artifact language.
 3. User-wallet signing round trip.
    - What it is: one real wallet or compatible throwaway signer returns transaction bytes, submit succeeds, and replay observes the accepted txid.
    - Done when the repo no longer has to describe user-wallet signing only as a request/template gap.

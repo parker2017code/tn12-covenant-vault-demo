@@ -21,6 +21,10 @@ For public TN12 pages, use this order before artifact labels:
 4. Which rule is script-enforced, replay-derived, wallet policy, local-only, or future work?
 5. What remains missing before a real product claim?
 
+Public pages should keep the non-obvious implications front-facing: why a budget cap, controller input, timeout path, refund path, scheduler payout, or blocked withdrawal is interesting to a normal user or builder. Do not delete useful examples while removing technical clutter.
+
+Mechanical detail belongs one layer down: full txids, covenant IDs, template hashes, witness indexes, status slugs, compiler notes, long reducer rows, and replay internals should live in drawers, docs, artifacts, or reviewer routes unless the page is explicitly a builder workbench.
+
 ## Cut Or Rewrite
 
 - Vague roadmap fog.
@@ -45,7 +49,8 @@ For public TN12 pages, use this order before artifact labels:
 | Planner-only state must not be promoted. | Replay first. Promote only accepted, matching rows. |
 | Covenant proofs, grouped by pattern. | Show which rule moved the money. |
 | DeFi multi-wallet flow. | Pool-style testnet flow. |
-| Proof surface: accepted txids, receipts, replay rows, and remaining pieces. | Evidence in order: accepted txids first, app receipts second, replayed state third, open gaps last. |
+| Proof surface: accepted txids, receipts, replay rows, and remaining pieces. | Evidence in order: accepted money movement first, app receipts second, replayed state third, open gaps last. |
+| Long txid tables on the first screen. | Short implication cards first; reviewer txids inside a closed evidence drawer. |
 
 ## Current Framing
 
