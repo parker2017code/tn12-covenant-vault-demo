@@ -178,6 +178,7 @@
     "scheduler:intents": "node scripts/build-scheduler-intent-registry.mjs",
     "scheduler:covenant-binding": "node scripts/build-scheduler-covenant-binding.mjs",
     "scheduler:workbench": "node scripts/build-universal-scheduler-workbench.mjs",
+    "scheduler:covenant-target": "node scripts/build-scheduler-covenant-settlement-target.mjs",
     "defi:benchmark": "node scripts/build-full-defi-benchmark.mjs",
     "playground:plan": "node scripts/build-playground-plan.mjs",
     "playground:wallets": "node scripts/create-playground-wallets.mjs",

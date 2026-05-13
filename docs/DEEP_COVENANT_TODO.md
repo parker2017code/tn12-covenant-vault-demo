@@ -92,6 +92,10 @@ until these move.
   Scheduler Duel slice: accepted intent, accepted executor bids, accepted
   execution receipt, matched local-key payout, and replay-blocked stale,
   duplicate, or too-slow paths.
+- `artifacts/scheduler-covenant-settlement-target.json` records the next
+  covenant-settlement target for Scheduler: the current payout is local-key
+  P2PK evidence, so a fresh covenant settlement output is required before this
+  can be called covenant-settled.
 
 ## Next Exact Tasks
 
@@ -104,7 +108,7 @@ until these move.
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
 | 5 | Coordination release evidence | Accepted payload/custody/release receipts plus transparent replay evidence and covenant-settlement target artifact | Fund fresh covenant-bound pledge outputs and prove release/refund |
-| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts plus indexer-derived replay | Build a TN12 covenant settlement target for one eligible trigger |
+| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, and covenant-settlement target artifact | Fund a fresh covenant settlement output for one eligible trigger |
 
 Target state: all six get TN12 verticals. Current labels still matter while
 building: the first three already have accepted covenant-spend evidence,

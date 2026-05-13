@@ -223,6 +223,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       websitePitch: "Write a conditional move. Executors compete to fire it only when the replayed state says it is eligible.",
       currentRepoEvidence: [
         "artifacts/universal-scheduler-workbench.json",
+        "artifacts/scheduler-covenant-settlement-target.json",
         "artifacts/scheduler-intent-registry.json",
         "artifacts/scheduler-covenant-binding.json",
         "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json",
@@ -232,11 +233,11 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "tests/domain/universal-scheduler-workbench.test.mjs"
       ],
       nextBuildSteps: [
-        "Replace local-key execution with external-wallet signing.",
-        "Bind one trigger to a fresh covenant settlement target.",
+        "Fund a fresh covenant settlement output for the scheduler payout.",
+        "Spend that output only after replay marks the trigger eligible.",
         "Keep protocol scheduler and autonomous custody claims out of public copy."
       ],
-      hardBoundary: "Executor receipts are accepted TN12 app evidence plus replay/indexer state. They are not protocol scheduling, autonomous custody, or mainnet automation."
+      hardBoundary: "Executor receipts are accepted TN12 app evidence plus replay/indexer state, and the repo now has a covenant settlement target artifact. The current payout is local-key P2PK evidence; a fresh covenant settlement output is required before calling this covenant-settled."
     })
   ];
 

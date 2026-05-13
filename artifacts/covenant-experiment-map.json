@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-13T01:07:48.705Z",
+  "generatedAt": "2026-05-13T01:10:20.961Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -243,6 +243,7 @@
       "websitePitch": "Write a conditional move. Executors compete to fire it only when the replayed state says it is eligible.",
       "currentRepoEvidence": [
         "artifacts/universal-scheduler-workbench.json",
+        "artifacts/scheduler-covenant-settlement-target.json",
         "artifacts/scheduler-intent-registry.json",
         "artifacts/scheduler-covenant-binding.json",
         "artifacts/payload-scheduler-intent-pool-rebalance-001-evidence.json",
@@ -252,11 +253,11 @@
         "tests/domain/universal-scheduler-workbench.test.mjs"
       ],
       "nextBuildSteps": [
-        "Replace local-key execution with external-wallet signing.",
-        "Bind one trigger to a fresh covenant settlement target.",
+        "Fund a fresh covenant settlement output for the scheduler payout.",
+        "Spend that output only after replay marks the trigger eligible.",
         "Keep protocol scheduler and autonomous custody claims out of public copy."
       ],
-      "hardBoundary": "Executor receipts are accepted TN12 app evidence plus replay/indexer state. They are not protocol scheduling, autonomous custody, or mainnet automation."
+      "hardBoundary": "Executor receipts are accepted TN12 app evidence plus replay/indexer state, and the repo now has a covenant settlement target artifact. The current payout is local-key P2PK evidence; a fresh covenant settlement output is required before calling this covenant-settled."
     }
   ]
 }

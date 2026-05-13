@@ -23,6 +23,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Coordination League update, 2026-05-12: `artifacts/coordination-market-evidence-dossier.json` is visible as a bounded coordination slice with three qualifying intendos, accepted payload/custody evidence, accepted release txid `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`, and non-selected refund alternates.
 - Coordination covenant-target update, 2026-05-12: `artifacts/coordination-covenant-settlement-target.json` records why the current accepted release is not covenant settlement yet and defines the next fresh covenant-bound pledge run.
 - Scheduler Duel update, 2026-05-12: `artifacts/universal-scheduler-workbench.json` is visible as a bounded app-state slice with accepted intent, accepted executor bids, accepted execution receipt, matched payout transfer, and replay-blocked stale/duplicate/too-slow paths. It remains `INDEXER_DERIVED`, not protocol scheduling or autonomous custody.
+- Scheduler covenant-target update, 2026-05-12: `artifacts/scheduler-covenant-settlement-target.json` records the fresh covenant output needed to turn the accepted scheduler payout into covenant settlement while keeping trigger eligibility replay-derived.
 - Wallet approval update, 2026-05-12: `artifacts/wallet-approval-summaries.json` translates the recurring-cap reset-window proof, sibling-authorized asset proof, and mux-worker proof into wallet-readable fields, required covenant ids, state changes, explorer URLs, and local reject prompts.
 - Sibling-input discovery update, 2026-05-12: `artifacts/sibling-input-discovery.json` explains the ICC asset proof's required owner-marker sibling input from the live owner covenant id, accepted outpoint, witness index, and negative coverage.
 
@@ -45,7 +46,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 3 | Add wallet-readable approval summaries. | At least one experiment emits an action/amount/destination/covenant/continuation summary a wallet could render as Approve/Reject. | No |
 | 4 | Add visible approval cards for the top proof patterns. | The public UI renders the wallet summary artifact as reviewable Approve/Reject-style cards without making users read raw JSON. | No |
 | 5 | Fund fresh Coordination covenant pledge outputs. | A new pledge set is covenant-bound, locally proves release/refund, and produces accepted TN12 release/refund evidence or an exact funding/tooling blocker. | No |
-| 6 | Build the Scheduler TN12 settlement target. | One eligible trigger gets a covenant target plan, local checks, and accepted TN12 evidence or an exact blocker. | No |
+| 6 | Fund a Scheduler covenant settlement output. | One eligible trigger spends a fresh covenant output to the intended payout destination, with replay keeping stale/duplicate paths blocked. | No |
 | 7 | Harden replay-derived lanes. | Scheduler or coordination replay has a second-verifier check, mismatch proof, checkpoint, or explicit proof-system blocker. | No |
 | 8 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
 | 9 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
