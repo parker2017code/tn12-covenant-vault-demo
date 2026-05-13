@@ -89,7 +89,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
         <article class="playground-flow-card flow-wide">
           <span>What happened</span>
           <strong>fund roles -> two deposits -> payout -> replay balances</strong>
-          <p>These are accepted TN12 transfers. The reducer turns them into review state and blocks withdrawals that lack signer/spend evidence.</p>
+          <p>These are accepted TN12 transfers. Replay turns them into review state and blocks withdrawals that lack signer/spend evidence.</p>
         </article>
       `;
     }
@@ -166,7 +166,7 @@ function renderLevels(node, { activity, session, funding, deposit, secondDeposit
     <article>
       <span>Kaspa-native</span>
       <strong>Fast mined ordering plus constrained evidence.</strong>
-      <p>The chain supplies ordering and accepted transaction evidence. The repo layers role labels, receipts, reducers, and promotion checks on top.</p>
+      <p>The chain supplies ordering and accepted transaction evidence. The repo layers role labels, receipts, replay checks, and promotion checks on top.</p>
     </article>
     <article>
       <span>Builder</span>

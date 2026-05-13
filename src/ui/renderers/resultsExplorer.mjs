@@ -38,7 +38,7 @@ export async function renderResultsExplorer(documentRef = document) {
 function renderSummary(node, { proven, labChecks, index, activity, scheduler, binding }) {
   node.innerHTML = `
     ${metric("Accepted proof transactions", proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions, "Nine core proof/funding/settlement rows plus seven role-separated repeats.")}
-    ${metric("Accepted app receipts", proven.acceptedEvidence.payloadEvents, "App data written into accepted TN12 transactions. Replay can read it; the payload alone is not custody settlement.")}
+    ${metric("Accepted app receipts", proven.acceptedEvidence.payloadEvents, "App data written into accepted TN12 transactions. Replay can read it; the receipt alone is not custody settlement.")}
     ${metric("Checkpointed records", index.summary.total, "Accepted proof, output, and payload rows replayed into app state.")}
     ${metric("Pool-style lab checks", `${labChecks.summary.completedRails} / ${labChecks.summary.rails} rails`, "Research checks with repo evidence, not production DeFi.")}
     ${metric("Accepted transfers", activity.summary.acceptedTransferRows, "Local-key custody movement across pool and user roles.")}
@@ -63,7 +63,7 @@ function renderKnowledgeLevels(node) {
       <span>Crypto-native</span>
       <h3>Accepted UTXO proofs plus payload-indexed app state.</h3>
       <p>The proof core covers minimal vault, pledge, escrow, auction, and role-separated covenant spends. The app layer adds accepted payloads and real local-key UTXO transfers for deposits, payouts, scheduler intents, bids, execution, and primitive bindings.</p>
-      <p>AMM pricing, oracle inputs, liquidation authority, and production custody are separate rails.</p>
+      <p>AMM pricing, oracle inputs, liquidation authority, and production custody are separate paths.</p>
     </article>
     <article class="level-card hidden" data-level-panel="builder">
       <span>Builder</span>
@@ -99,8 +99,8 @@ function renderFlow(node, { proven, activity, scheduler, labChecks }) {
     ["1", "Covenant proof spend", `${proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions} accepted proof transactions across core and role-separated paths.`],
     ["2", "App receipt", `${proven.acceptedEvidence.payloadEvents} accepted app receipt events record app intent and status.`],
     ["3", "Custody-adjacent movement", `${activity.summary.acceptedTransferRows} accepted local-key transfers move tKAS across user, pool, and operator roles.`],
-    ["4", "Reducer/indexer state", `${scheduler.summary.acceptedIntents} accepted scheduler intent and ${scheduler.summary.acceptedBids} accepted bids feed deterministic state.`],
-    ["5", "Lab boundary", `${labChecks.summary.completedRails} of ${labChecks.summary.rails} pool-style lab rails have repo evidence; the rest stays in Lab Tools.`]
+    ["4", "Replay/indexer state", `${scheduler.summary.acceptedIntents} accepted scheduler intent and ${scheduler.summary.acceptedBids} accepted bids feed deterministic state.`],
+    ["5", "Lab boundary", `${labChecks.summary.completedRails} of ${labChecks.summary.rails} pool-style lab checks have repo evidence; the rest stays in Lab Tools.`]
   ];
   node.innerHTML = steps.map(([num, title, body]) => `
     <article>
