@@ -1,0 +1,18 @@
+pragma silverscript ^0.1.0;
+
+contract SchedulerCovenantPayout(
+    pubkey operator,
+    pubkey recipient,
+    int payout,
+    int minerFee
+) {
+    entrypoint function release(sig operatorSig) {
+        require(checkSig(operatorSig, operator));
+        require(tx.inputs[this.activeInputIndex].value == payout + minerFee);
+        require(tx.outputs.length == 1);
+        require(tx.outputs[0].value == payout);
+
+        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);
+        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));
+    }
+}

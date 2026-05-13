@@ -1,10 +1,10 @@
 {
   "schema": "tn12-scheduler-covenant-settlement-target/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T01:09:53.472Z",
-  "status": "fresh-covenant-settlement-output-required",
+  "generatedAt": "2026-05-13T01:59:58.836Z",
+  "status": "accepted-covenant-payout-spend",
   "experiment": "scheduler-receipt-evidence",
-  "purpose": "Turn the accepted scheduler receipt flow into a covenant settlement target without claiming protocol scheduling.",
+  "purpose": "Record the accepted scheduler covenant payout spend without claiming protocol scheduling.",
   "currentEvidence": {
     "intentTxid": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
     "executionReceiptTxid": "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
@@ -16,12 +16,17 @@
     "bindingPrimitive": "vault",
     "workbenchStatus": "scheduler-workbench-ready",
     "intentEnforcement": "INDEXER_DERIVED",
-    "bindingEnforcement": "INDEXER_DERIVED"
+    "bindingEnforcement": "INDEXER_DERIVED",
+    "covenantPayoutFundingTxid": "a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab",
+    "covenantPayoutReleaseTxid": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
+    "covenantPayoutDestination": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+    "covenantPayoutAmountTkas": "4",
+    "covenantPayoutStatus": "accepted-covenant-payout-spend"
   },
   "targetV1": {
     "contractPattern": "guarded payout covenant output plus scheduler replay eligibility",
-    "preferredExistingContract": "contracts/RecurringTreasuryVaultWindow.sil",
-    "route": "fund a fresh covenant output with the payout amount, then spend it only to the intended recipient while replay confirms the scheduler intent, bid, and execution receipt",
+    "preferredExistingContract": "contracts/SchedulerCovenantPayout.sil",
+    "route": "accepted covenant output spent only to the intended recipient after replay-selected scheduler evidence",
     "payout": {
       "amountTkas": "4",
       "destination": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
@@ -30,10 +35,11 @@
       "expectedWinningBid": "ab827a290bf4494fb923f6e8adb4ec5872dbd5b76d4dd586b9d1eff6f3c0cf23"
     },
     "scriptCanEnforce": [
+      "operator signature",
       "payout amount",
       "destination output",
-      "covenant continuation or terminal payout shape",
-      "owner/operator signature if the selected contract requires it"
+      "terminal payout shape",
+      "input value equals payout plus miner fee"
     ],
     "replayMustStillCheck": [
       "intent receipt was accepted",
@@ -43,27 +49,35 @@
       "execution receipt references the same intent and payout"
     ]
   },
+  "acceptedCovenantPayout": {
+    "fundingTxid": "a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab",
+    "releaseTxid": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
+    "covenantId": "0551b394b0b6ed0ca2503ff73996e9b5dbd8918941968438ecdc178c27c7aa42",
+    "destination": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+    "amountTkas": "4",
+    "scriptEnforces": [
+      "operator signature",
+      "exact payout amount",
+      "recipient destination",
+      "input value equals payout plus miner fee"
+    ]
+  },
   "localChecksNeeded": [
-    "build a fresh covenant payout output for the scheduler action",
-    "prove exact destination and amount pass",
-    "prove wrong destination, wrong amount, stale source, and duplicate execution fail",
+    "add local negative candidates for wrong destination and wrong payout amount",
     "tie the wallet approval prompt to the accepted intent, winning bid, execution receipt, and covenant output"
   ],
   "nextTn12Run": [
-    "fund a fresh covenant settlement output for the scheduler payout",
-    "build one spend candidate after replay marks the trigger eligible",
-    "submit the covenant spend and record accepted txid",
     "keep stale/duplicate/too-slow rows as blocked replay evidence",
-    "upgrade only the payout spend to covenant-settlement evidence; keep scheduling itself indexer-derived"
+    "add negative payout candidates locally before attempting broadcast-rejected rows",
+    "connect the accepted covenant payout to a wallet-readable approval summary"
   ],
   "blockers": [
-    "current payout transfer is local-key P2PK evidence, not a covenant spend",
     "scheduler eligibility remains replay/indexer-derived until a covenant, ZK proof, or protocol primitive verifies it",
     "wallet-standard signing is still separate from the local-key custody test"
   ],
   "boundaries": [
-    "This is a target artifact, not accepted scheduler covenant-settlement evidence.",
+    "This upgrades only the payout money movement to accepted covenant-settlement evidence.",
     "A covenant payout can constrain the money movement; it does not make the scheduler a protocol scheduler.",
-    "Do not call Scheduler covenant-settled until a fresh covenant settlement output is spent on TN12."
+    "Do not call scheduler trigger eligibility protocol-enforced."
   ]
 }

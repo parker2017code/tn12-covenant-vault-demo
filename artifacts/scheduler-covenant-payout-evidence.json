@@ -1,0 +1,49 @@
+{
+  "schema": "tn12-scheduler-covenant-payout-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-13T01:58:08.015Z",
+  "status": "accepted-covenant-payout-spend",
+  "funding": {
+    "txid": "a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab",
+    "outputIndex": 0,
+    "covenantId": "0551b394b0b6ed0ca2503ff73996e9b5dbd8918941968438ecdc178c27c7aa42",
+    "amountTkas": 4.00005,
+    "amountSompi": "400005000",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab"
+  },
+  "release": {
+    "txid": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
+    "status": "accepted",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
+    "amountTkas": "4",
+    "amountSompi": "400000000",
+    "destination": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+    "acceptingBlockBlueScore": 10130498
+  },
+  "schedulerContext": {
+    "intentTxid": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+    "winningBidTxid": "ab827a290bf4494fb923f6e8adb4ec5872dbd5b76d4dd586b9d1eff6f3c0cf23",
+    "executionReceiptTxid": "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
+    "previousLocalKeyPayoutTxid": "1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d"
+  },
+  "summary": {
+    "scriptEnforces": [
+      "operator signature",
+      "exact payout amount",
+      "recipient destination",
+      "input value equals payout plus miner fee"
+    ],
+    "replayStillChecks": [
+      "intent receipt was accepted",
+      "winning bid is valid under scheduler policy",
+      "trigger source is current",
+      "duplicate and stale execution rows are blocked",
+      "execution receipt references the same intent and payout"
+    ]
+  },
+  "boundaries": [
+    "This upgrades the scheduler payout money movement to an accepted covenant spend.",
+    "Scheduler trigger eligibility, winning-bid selection, and stale/duplicate blocking remain replay/indexer-derived.",
+    "This is not protocol scheduling or autonomous custody."
+  ]
+}

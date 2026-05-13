@@ -72,6 +72,7 @@ const groups = {
     "tests/domain/scheduler-covenant-binding.test.mjs",
     "tests/domain/universal-scheduler-workbench.test.mjs",
     "tests/domain/scheduler-covenant-settlement-target.test.mjs",
+    "tests/domain/scheduler-covenant-payout-evidence.test.mjs",
     "tests/domain/coordination-market-evidence.test.mjs",
     "tests/domain/coordination-covenant-settlement-target.test.mjs",
     "tests/domain/coordination-covenant-release-evidence.test.mjs",

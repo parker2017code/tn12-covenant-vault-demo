@@ -1,0 +1,59 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "scheduler-covenant-payout-release",
+  "contract": "SchedulerCovenantPayout",
+  "entrypoint": "release",
+  "warning": "This spends the scheduler covenant payout output to the intended recipient if submitted and accepted.",
+  "source": {
+    "txid": "a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab",
+    "outputIndex": 0,
+    "amountTkas": 4.00005,
+    "address": "kaspatest:pze7q2ehrd3l30wrsgjgefyke73e4rs7xuzau2r8huruv6hsjn0egyzh6ygdn"
+  },
+  "destination": {
+    "address": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+    "scriptType": "p2pk",
+    "amountSompi": "400000000",
+    "amountTkas": "4"
+  },
+  "contractFeeSompi": "5000",
+  "scriptHash": "49a929210bbd53da367d35dbf4f1c67df2547e7ddd0c9aebc822081fbd5bb7fa",
+  "transactionId": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
+  "signatureScriptHex": "41bc81041709c6e114cbdbf1ad3db16792126f013233542b1c66251022f97bff40c8a5857bf2d594045587b347661785c552cfb99d1a63bb9a6f5722610611d390014c6e7620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac69b9be040084d717028813939c69b4519c6900c2040084d7179c6900c320026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18030000207c7e01ac7e87697551",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab",
+            "index": 0
+          },
+          "signatureScript": "41bc81041709c6e114cbdbf1ad3db16792126f013233542b1c66251022f97bff40c8a5857bf2d594045587b347661785c552cfb99d1a63bb9a6f5722610611d390014c6e7620d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac69b9be040084d717028813939c69b4519c6900c2040084d7179c6900c320026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18030000207c7e01ac7e87697551",
+          "sequence": "18446744073709551615",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 400000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18ac"
+          }
+        }
+      ],
+      "lockTime": 0,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "scheduler": {
+    "intentTxid": "185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d",
+    "executionReceiptTxid": "d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909",
+    "winningBidTxid": "ab827a290bf4494fb923f6e8adb4ec5872dbd5b76d4dd586b9d1eff6f3c0cf23",
+    "replayBoundary": "Scheduler eligibility remains INDEXER_DERIVED; this draft only constrains payout money movement."
+  }
+}

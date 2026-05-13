@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-13T01:35:12.560Z",
+  "generatedAt": "2026-05-13T01:59:59.571Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -11,7 +11,7 @@
     "genesisFundingDrafts": 0,
     "localProofs": 0,
     "acceptedGenesisPreflights": 0,
-    "scriptEnforcedClaims": 4
+    "scriptEnforcedClaims": 5
   },
   "rule": "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",
   "spotlight": [
@@ -236,11 +236,11 @@
       "id": "scheduler-duel",
       "title": "Scheduler receipt evidence",
       "rank": 6,
-      "status": "scheduler-workbench-ready",
-      "proofTarget": "accepted scheduler intent, accepted execution receipt, accepted executor bids, matched payout transfer, and blocked stale/slow/duplicate rows",
+      "status": "accepted-covenant-payout-spend",
+      "proofTarget": "accepted scheduler intent, accepted execution receipt, accepted executor bids, accepted covenant payout spend, and blocked stale/slow/duplicate rows",
       "whyItMatters": "Uses current scheduler evidence to show conditional actions without pretending they are autonomous custody.",
       "plainPoint": "A user can publish an intended action, and an executor can only promote it when replayed state says it is eligible.",
-      "technicalPoint": "Scheduler intents, executor receipts, replay checks, and stale-action guards separate planning from settlement.",
+      "technicalPoint": "Scheduler intents, executor receipts, replay checks, stale-action guards, and a guarded payout covenant separate trigger eligibility from money movement.",
       "kaspaEdge": "Fast accepted receipts make conditional execution easier to monitor and less dependent on one always-online operator.",
       "cryptoPoint": "Public replay gives users a way to verify whether an action was eligible instead of trusting a private automation log.",
       "realWorldImplication": "Useful for subscriptions, payroll windows, tournament turns, alerts, recurring payouts, and any workflow where missed or stale actions are expensive.",
@@ -255,14 +255,20 @@
         "artifacts/payload-scheduler-execution-receipt-001-evidence.json",
         "artifacts/payload-scheduler-bid-fast-executor-001-evidence.json",
         "artifacts/tn12-scheduler-execution-payout-user-03-evidence.json",
+        "contracts/SchedulerCovenantPayout.sil",
+        "artifacts/SchedulerCovenantPayout.json",
+        "artifacts/signed-drafts/scheduler-covenant-payout-genesis-funding.json",
+        "fixtures/SchedulerCovenantPayoutOutpoint.json",
+        "artifacts/signed-drafts/scheduler-covenant-payout-release.json",
+        "artifacts/scheduler-covenant-payout-evidence.json",
         "tests/domain/universal-scheduler-workbench.test.mjs"
       ],
       "nextBuildSteps": [
-        "Fund a fresh covenant settlement output for the scheduler payout.",
-        "Spend that output only after replay marks the trigger eligible.",
+        "Add negative candidates for wrong destination and wrong payout amount.",
+        "Connect the accepted covenant payout to a wallet-readable approval summary.",
         "Keep protocol scheduler and autonomous custody claims out of public copy."
       ],
-      "hardBoundary": "Executor receipts are accepted TN12 app evidence plus replay/indexer state, and the repo now has a covenant settlement target artifact. The current payout is local-key P2PK evidence; a fresh covenant settlement output is required before calling this covenant-settled."
+      "hardBoundary": "The scheduler payout money movement is now an accepted TN12 covenant spend. Trigger eligibility, winning-bid selection, and stale/duplicate blocking remain replay/indexer-derived."
     }
   ]
 }

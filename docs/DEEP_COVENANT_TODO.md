@@ -84,10 +84,8 @@ until these move.
   bounded Coordination League slice: three qualifying intendos, accepted
   payload/custody evidence, accepted release txid, and non-selected refund
   alternates.
-- `artifacts/coordination-covenant-settlement-target.json` records the next
-  covenant-settlement target for Coordination: the current accepted pledge
-  outputs are P2PK and already spent, so a fresh covenant-bound pledge set is
-  required before this can be called covenant-settled.
+- `artifacts/coordination-covenant-settlement-target.json` preserves the older
+  target analysis that led to the fresh covenant-bound pledge run.
 - `artifacts/signed-drafts/coordination-covenant-pledge-funding.json`,
   `fixtures/CoordinationCovenantPledgeOutpoints.json`,
   `artifacts/signed-drafts/coordination-covenant-release-spends.json`, and
@@ -101,9 +99,15 @@ until these move.
   execution receipt, matched local-key payout, and replay-blocked stale,
   duplicate, or too-slow paths.
 - `artifacts/scheduler-covenant-settlement-target.json` records the next
-  covenant-settlement target for Scheduler: the current payout is local-key
-  P2PK evidence, so a fresh covenant settlement output is required before this
-  can be called covenant-settled.
+  scheduler settlement layer. It now references the accepted covenant payout
+  spend while keeping trigger eligibility, winning-bid selection, and
+  stale/duplicate blocking replay/indexer-derived.
+- `artifacts/signed-drafts/scheduler-covenant-payout-genesis-funding.json`,
+  `fixtures/SchedulerCovenantPayoutOutpoint.json`,
+  `artifacts/signed-drafts/scheduler-covenant-payout-release.json`, and
+  `artifacts/scheduler-covenant-payout-evidence.json` move Scheduler one layer
+  deeper: a fresh `SchedulerCovenantPayout` output and its guarded payout spend
+  are accepted on TN12.
 
 ## Next Exact Tasks
 
@@ -134,13 +138,13 @@ experiment surface:
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
 | 5 | Coordination release evidence | Accepted payload/custody/release receipts, transparent replay evidence, fresh covenant pledge outputs, and accepted covenant release spends | Add refund-path evidence only from fresh unspent pledge outputs; keep threshold selection replay-derived |
-| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, and covenant-settlement target artifact | Fund a fresh covenant settlement output for one eligible trigger |
+| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, and accepted covenant payout spend | Add wrong-destination/wrong-amount payout candidates and wallet approval summary |
 
 Target state: all six get TN12 verticals. Current labels still matter while
-building: the first three already have accepted covenant-spend evidence,
-Vault negatives are local rejects over an accepted rail, and Coordination plus
-Scheduler must not be called covenant-settlement until their settlement target
-exists and is tested on TN12.
+building: Recurring cap, Sibling asset, Mux worker, Coordination release, and
+Scheduler payout all have accepted TN12 covenant-spend evidence. Vault negatives
+are still local rejects over an accepted rail, and Coordination/Scheduler
+selection logic remains replay-derived where noted.
 
 1. Add a compact Blitz challenge variant only if it proves a new refusal path.
    - Current accepted path already covers Worker A return, Worker A timeout, and

@@ -439,6 +439,53 @@ export function buildEscrowCancelSpendDraft({
   });
 }
 
+export function buildSchedulerCovenantPayoutReleaseDraft({
+  contractOutpoint,
+  operatorWallet,
+  recipientWallet,
+  payoutSompi,
+  contractFeeSompi = 5000n
+}) {
+  const redeemScript = hexToBytes(contractOutpoint.redeemScriptHex);
+  const destinationScript = p2pkScript(recipientWallet.xOnlyPublicKey);
+  const inputSompi = BigInt(contractOutpoint.amountSompi);
+  const expectedInputSompi = BigInt(payoutSompi) + contractFeeSompi;
+
+  if (inputSompi !== expectedInputSompi) {
+    throw new Error(`Scheduler payout input ${inputSompi} does not match payout ${payoutSompi} plus fee ${contractFeeSompi}.`);
+  }
+
+  const unsigned = buildSingleInputContractSpend({
+    contractOutpoint,
+    outputSompi: BigInt(payoutSompi),
+    destinationScript
+  });
+  const scriptHash = getScriptHash(unsigned);
+  const signatureScript = buildP2shSignatureScript({
+    entrypointSigScript: signContractInput(unsigned, operatorWallet.privateKey, scriptHash),
+    redeemScript
+  });
+
+  unsigned.input.signatureScript = signatureScript;
+  unsigned.tx.finalize();
+
+  return buildSpendDraftArtifact({
+    lane: "scheduler-covenant-payout-release",
+    contract: "SchedulerCovenantPayout",
+    entrypoint: "release",
+    warning: "This spends the scheduler covenant payout output to the intended recipient if submitted and accepted.",
+    contractOutpoint,
+    wallet: recipientWallet,
+    outputSompi: BigInt(payoutSompi),
+    contractFeeSompi,
+    scriptHash,
+    tx: unsigned.tx,
+    input: unsigned.input,
+    destinationScript,
+    signatureScript
+  });
+}
+
 function buildSpendDraftArtifact({
   lane,
   contract,
@@ -452,7 +499,8 @@ function buildSpendDraftArtifact({
   tx,
   input,
   destinationScript,
-  signatureScript
+  signatureScript,
+  computeBudget = null
 }) {
   return {
     schema: "tn12-signed-contract-spend-draft/v1",
@@ -483,7 +531,8 @@ function buildSpendDraftArtifact({
       input,
       outputSompi,
       destinationScript,
-      signatureScript
+      signatureScript,
+      computeBudget
     })
   };
 }

@@ -1,0 +1,416 @@
+{
+  "contract_name": "SchedulerCovenantPayout",
+  "script": [
+    118,
+    32,
+    215,
+    57,
+    222,
+    75,
+    59,
+    97,
+    168,
+    148,
+    240,
+    25,
+    136,
+    182,
+    207,
+    208,
+    150,
+    61,
+    67,
+    209,
+    180,
+    10,
+    120,
+    116,
+    19,
+    102,
+    97,
+    34,
+    164,
+    241,
+    46,
+    11,
+    96,
+    213,
+    172,
+    105,
+    185,
+    190,
+    4,
+    0,
+    132,
+    215,
+    23,
+    2,
+    136,
+    19,
+    147,
+    156,
+    105,
+    180,
+    81,
+    156,
+    105,
+    0,
+    194,
+    4,
+    0,
+    132,
+    215,
+    23,
+    156,
+    105,
+    0,
+    195,
+    32,
+    2,
+    108,
+    56,
+    45,
+    7,
+    68,
+    100,
+    109,
+    12,
+    188,
+    149,
+    53,
+    132,
+    251,
+    97,
+    157,
+    110,
+    229,
+    110,
+    244,
+    80,
+    240,
+    140,
+    5,
+    240,
+    20,
+    195,
+    36,
+    46,
+    66,
+    157,
+    24,
+    3,
+    0,
+    0,
+    32,
+    124,
+    126,
+    1,
+    172,
+    126,
+    135,
+    105,
+    117,
+    81
+  ],
+  "ast": {
+    "pragma": {
+      "name": "silverscript",
+      "value": "^0.1.0",
+      "span": "pragma silverscript ^0.1.0;",
+      "name_span": "silverscript",
+      "value_span": "^0.1.0"
+    },
+    "name": "SchedulerCovenantPayout",
+    "params": [
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "operator",
+        "span": "pubkey operator",
+        "type_span": "pubkey ",
+        "name_span": "operator"
+      },
+      {
+        "type_ref": {
+          "base": "pubkey"
+        },
+        "name": "recipient",
+        "span": "pubkey recipient",
+        "type_span": "pubkey ",
+        "name_span": "recipient"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "payout",
+        "span": "int payout",
+        "type_span": "int ",
+        "name_span": "payout"
+      },
+      {
+        "type_ref": {
+          "base": "int"
+        },
+        "name": "minerFee",
+        "span": "int minerFee",
+        "type_span": "int ",
+        "name_span": "minerFee"
+      }
+    ],
+    "constants": [],
+    "functions": [
+      {
+        "name": "release",
+        "params": [
+          {
+            "type_ref": {
+              "base": "sig"
+            },
+            "name": "operatorSig",
+            "span": "sig operatorSig",
+            "type_span": "sig ",
+            "name_span": "operatorSig"
+          }
+        ],
+        "entrypoint": true,
+        "return_types": [],
+        "body": [
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "call",
+                "data": {
+                  "name": "checkSig",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "operatorSig",
+                      "span": "operatorSig"
+                    },
+                    {
+                      "kind": "identifier",
+                      "data": "operator",
+                      "span": "operator"
+                    }
+                  ],
+                  "name_span": "checkSig"
+                },
+                "span": "checkSig(operatorSig, operator)"
+              },
+              "message": null,
+              "span": "require(checkSig(operatorSig, operator));",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "input_value",
+                      "index": {
+                        "kind": "nullary",
+                        "data": "active_input_index",
+                        "span": "this.activeInputIndex"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.inputs[this.activeInputIndex].value"
+                  },
+                  "right": {
+                    "kind": "binary",
+                    "data": {
+                      "op": "add",
+                      "left": {
+                        "kind": "identifier",
+                        "data": "payout",
+                        "span": "payout"
+                      },
+                      "right": {
+                        "kind": "identifier",
+                        "data": "minerFee",
+                        "span": "minerFee"
+                      }
+                    },
+                    "span": "payout + minerFee"
+                  }
+                },
+                "span": "tx.inputs[this.activeInputIndex].value == payout + minerFee"
+              },
+              "message": null,
+              "span": "require(tx.inputs[this.activeInputIndex].value == payout + minerFee);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "nullary",
+                    "data": "tx_outputs_length",
+                    "span": "tx.outputs.length"
+                  },
+                  "right": {
+                    "kind": "int",
+                    "data": 1,
+                    "span": "1"
+                  }
+                },
+                "span": "tx.outputs.length == 1"
+              },
+              "message": null,
+              "span": "require(tx.outputs.length == 1);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_value",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".value"
+                    },
+                    "span": "tx.outputs[0].value"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "data": "payout",
+                    "span": "payout"
+                  }
+                },
+                "span": "tx.outputs[0].value == payout"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].value == payout);",
+              "message_span": null
+            }
+          },
+          {
+            "kind": "variable_definition",
+            "data": {
+              "type_ref": {
+                "base": "byte",
+                "array_dims": [
+                  {
+                    "kind": "fixed",
+                    "value": 34
+                  }
+                ]
+              },
+              "modifiers": [],
+              "name": "recipientLock",
+              "expr": {
+                "kind": "new",
+                "data": {
+                  "name": "ScriptPubKeyP2PK",
+                  "args": [
+                    {
+                      "kind": "identifier",
+                      "data": "recipient",
+                      "span": "recipient"
+                    }
+                  ],
+                  "name_span": "ScriptPubKeyP2PK"
+                },
+                "span": "new ScriptPubKeyP2PK(recipient)"
+              },
+              "span": "byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);",
+              "type_span": "byte[34]",
+              "modifier_spans": [],
+              "name_span": "recipientLock"
+            }
+          },
+          {
+            "kind": "require",
+            "data": {
+              "expr": {
+                "kind": "binary",
+                "data": {
+                  "op": "eq",
+                  "left": {
+                    "kind": "introspection",
+                    "data": {
+                      "kind": "output_script_pub_key",
+                      "index": {
+                        "kind": "int",
+                        "data": 0,
+                        "span": "0"
+                      },
+                      "field_span": ".scriptPubKey"
+                    },
+                    "span": "tx.outputs[0].scriptPubKey"
+                  },
+                  "right": {
+                    "kind": "call",
+                    "data": {
+                      "name": "byte[]",
+                      "args": [
+                        {
+                          "kind": "identifier",
+                          "data": "recipientLock",
+                          "span": "recipientLock"
+                        }
+                      ],
+                      "name_span": "byte[]"
+                    },
+                    "span": "byte[](recipientLock)"
+                  }
+                },
+                "span": "tx.outputs[0].scriptPubKey == byte[](recipientLock)"
+              },
+              "message": null,
+              "span": "require(tx.outputs[0].scriptPubKey == byte[](recipientLock));",
+              "message_span": null
+            }
+          }
+        ],
+        "return_type_spans": [],
+        "span": "entrypoint function release(sig operatorSig) {\n        require(checkSig(operatorSig, operator));\n        require(tx.inputs[this.activeInputIndex].value == payout + minerFee);\n        require(tx.outputs.length == 1);\n        require(tx.outputs[0].value == payout);\n\n        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);\n        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));\n    }",
+        "name_span": "release",
+        "body_span": "require(checkSig(operatorSig, operator));\n        require(tx.inputs[this.activeInputIndex].value == payout + minerFee);\n        require(tx.outputs.length == 1);\n        require(tx.outputs[0].value == payout);\n\n        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);\n        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));"
+      }
+    ],
+    "span": "contract SchedulerCovenantPayout(\n    pubkey operator,\n    pubkey recipient,\n    int payout,\n    int minerFee\n) {\n    entrypoint function release(sig operatorSig) {\n        require(checkSig(operatorSig, operator));\n        require(tx.inputs[this.activeInputIndex].value == payout + minerFee);\n        require(tx.outputs.length == 1);\n        require(tx.outputs[0].value == payout);\n\n        byte[34] recipientLock = new ScriptPubKeyP2PK(recipient);\n        require(tx.outputs[0].scriptPubKey == byte[](recipientLock));\n    }\n}",
+    "name_span": "SchedulerCovenantPayout"
+  },
+  "abi": [
+    {
+      "name": "release",
+      "inputs": [
+        {
+          "name": "operatorSig",
+          "type_name": "sig"
+        }
+      ]
+    }
+  ],
+  "without_selector": true,
+  "state_layout": {
+    "start": 0,
+    "len": 0
+  },
+  "debug_info": null
+}
