@@ -39,6 +39,7 @@
         <a href="#blitz-round">Blitz</a>
         <a href="#treasury-track">Treasury</a>
         <a href="#asset-duel">Asset Duel</a>
+        <a href="#covenant-heist">Heist</a>
         <a href="#queue">Queue</a>
         <a href="#rules">Rules</a>
       </div>
@@ -323,6 +324,71 @@
       </div>
     </section>
 
+    <section id="covenant-heist" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Covenant Heist</p>
+        <h2>Accepted good path, local refused bad paths.</h2>
+        <p>The simple story is a vault attack screen: try the obvious bad move and see which rule blocks it. The technical story is accepted TN12 recurring-vault evidence plus local script-engine rejects for mutated spends and resets.</p>
+        <p class="note"><a href="artifacts/covenant-heist-evidence.json">Open heist evidence</a></p>
+      </div>
+      <div class="experiment-table-wrap">
+        <table class="proof-table experiment-table">
+          <thead>
+            <tr>
+              <th>Attempt</th>
+              <th>Evidence</th>
+              <th>What blocks it</th>
+              <th>Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wrong owner</td>
+              <td><code>wrong-owner-signature</code></td>
+              <td>Owner signature check fails locally.</td>
+              <td>Authority stays in the spend rule, not only in the page UI.</td>
+            </tr>
+            <tr>
+              <td>Wrong destination</td>
+              <td><code>wrong-destination</code></td>
+              <td>Required destination output check fails locally.</td>
+              <td>A capped spend still cannot redirect funds to an arbitrary address.</td>
+            </tr>
+            <tr>
+              <td>Missing relock</td>
+              <td><code>missing-continuation</code></td>
+              <td>Continuation output validation fails locally.</td>
+              <td>The vault cannot be drained by dropping the next-state output.</td>
+            </tr>
+            <tr>
+              <td>Cumulative over cap</td>
+              <td><code>cumulative-over-cap</code></td>
+              <td>65 tKAS already spent plus the next spend would exceed the 75 tKAS cap.</td>
+              <td>The cap follows the continuation state across spends.</td>
+            </tr>
+            <tr>
+              <td>Early reset</td>
+              <td><code>early-reset</code></td>
+              <td>Reset before the window age fails locally.</td>
+              <td>A wallet or server cannot reopen the budget clock early.</td>
+            </tr>
+            <tr>
+              <td>Stale reset</td>
+              <td><code>stale-reset-window</code></td>
+              <td>Reset that keeps the old window state fails locally.</td>
+              <td>The next state must actually advance, not just rename the action.</td>
+            </tr>
+            <tr>
+              <td>Over-cap reset</td>
+              <td><code>over-cap-reset</code></td>
+              <td>Reset spend above the cap fails locally.</td>
+              <td>A new window does not remove the cap rule.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="queue" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Full queue</p>
@@ -362,8 +428,8 @@
             <tr>
               <td>Covenant Heist</td>
               <td>guarded vault plus challenge rows</td>
-              <td>design-next</td>
-              <td>wrong signer, wrong destination, over-cap, stale-window, missing-relock checks</td>
+              <td>local-heist-rejects-on-accepted-vault-rail</td>
+              <td>broadcast-rejected invalid rows only if fresh expendable outputs are available</td>
             </tr>
             <tr>
               <td>Coordination League</td>

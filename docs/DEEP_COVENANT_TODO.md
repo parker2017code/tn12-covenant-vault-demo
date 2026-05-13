@@ -69,6 +69,11 @@ until these move.
   worker-return settlement, accepted timeout settlement, accepted Worker B
   settlement, and local challenge rejects for bad selector and too-early
   timeout.
+- `artifacts/covenant-heist-evidence.json` turns the recurring-vault negative
+  evidence into a bounded adversarial view: wrong owner, wrong destination,
+  missing continuation, cumulative over-cap, early reset, stale reset, and
+  over-cap reset all fail local script-engine checks against an accepted
+  recurring-vault rail.
 
 ## Next Exact Tasks
 
@@ -78,8 +83,9 @@ until these move.
    - Do not add another accepted row if it is only more volume.
 
 2. Start the next partial experiment only as a vertical slice.
-   - Best candidates are Covenant Heist negative evidence or Coordination
-     League replay rows.
+   - Covenant Heist now has a bounded local-reject artifact and visible section.
+   - Best next candidates are Coordination League replay rows or Scheduler Duel
+     duplicate/stale execution rows.
    - Keep the top three demos as the public proof set until the next candidate
      has accepted evidence or concrete local rejects.
 

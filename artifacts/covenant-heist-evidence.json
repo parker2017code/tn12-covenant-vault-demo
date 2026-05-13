@@ -1,0 +1,103 @@
+{
+  "schema": "tn12-covenant-heist-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-13T00:25:19.507Z",
+  "status": "accepted-vault-rail-with-local-heist-rejects",
+  "plainPoint": "The useful vault story is not only that good spends work. It is that obvious theft paths fail.",
+  "technicalPoint": "Accepted TN12 recurring-vault spends establish the live rail; local SilverScript and full owner-signature harnesses reject wrong authority, wrong output shape, missing continuation, cap overflow, and bad reset windows.",
+  "kaspaEdge": "Fast TN12 feedback makes attack/defense review practical: a reviewer can inspect accepted spends and local refusal evidence as one short loop.",
+  "cryptoPoint": "A normal server can say no to a withdrawal, but this demo shows the spend rule itself refusing invalid transaction shapes before money moves.",
+  "realWorldImplication": "Family vaults, team treasuries, game banks, escrow systems, and allowance wallets need explainable refusal paths, not only successful happy paths.",
+  "acceptedBackbone": {
+    "cumulativeSpendTxids": [
+      "029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f",
+      "2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae"
+    ],
+    "resetTxid": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+    "resetGenesisTxid": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580"
+  },
+  "rows": [
+    {
+      "id": "wrong-owner-signature",
+      "status": "blocked-local-engine-failed",
+      "class": "SCRIPT_ENFORCED_LOCAL",
+      "rule": "checkSig(ownerSig, owner)",
+      "evidence": "artifacts/recurring-treasury-vault-owner-sig-proof.json:over_cap_owner_sig_fails",
+      "attack": "Spend with a signature that is not from the owner role.",
+      "point": "The vault rule starts with authority, not just amount math."
+    },
+    {
+      "id": "wrong-destination",
+      "status": "blocked-local-engine-failed",
+      "class": "SCRIPT_ENFORCED_LOCAL",
+      "rule": "destination output must equal new ScriptPubKeyP2PK(destination)",
+      "evidence": "artifacts/recurring-treasury-vault-owner-sig-proof.json:wrong_destination_owner_sig_fails",
+      "attack": "Keep the amount under cap but send it to the wrong destination.",
+      "point": "A cap alone is not enough; the destination also has to be constrained."
+    },
+    {
+      "id": "missing-continuation",
+      "status": "blocked-local-engine-failed",
+      "class": "SCRIPT_ENFORCED_LOCAL",
+      "rule": "validateOutputState(1, newState)",
+      "evidence": "artifacts/recurring-treasury-vault-owner-sig-proof.json:missing_continuation_owner_sig_fails",
+      "attack": "Take the spend output but do not relock the vault continuation.",
+      "point": "The state machine survives only if the next output carries the rules forward."
+    },
+    {
+      "id": "cumulative-over-cap",
+      "status": "blocked-local-engine-failed",
+      "class": "SCRIPT_ENFORCED_LOCAL",
+      "rule": "prevState.spent + amount <= cap",
+      "evidence": "artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json",
+      "attack": "Make a third spend that pushes the window from 65 tKAS to 80 tKAS against a 75 tKAS cap.",
+      "point": "The cap is cumulative across continuation state, not just a per-transaction ceiling."
+    },
+    {
+      "id": "early-reset",
+      "status": "blocked-local-engine-failed",
+      "class": "SCRIPT_ENFORCED_LOCAL",
+      "rule": "lockTime before reset window",
+      "evidence": "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json",
+      "attack": "Reset the window before the required lock time.",
+      "point": "Time rules matter; a reset cannot be pulled forward by the UI."
+    },
+    {
+      "id": "stale-reset-window",
+      "status": "blocked-local-engine-failed",
+      "class": "SCRIPT_ENFORCED_LOCAL",
+      "rule": "new state keeps the old window",
+      "evidence": "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
+      "attack": "Claim reset but keep the old window state.",
+      "point": "The continuation state has to advance, not merely look like a reset."
+    },
+    {
+      "id": "over-cap-reset",
+      "status": "blocked-local-engine-failed",
+      "class": "SCRIPT_ENFORCED_LOCAL",
+      "rule": "reset amount exceeds cap",
+      "evidence": "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json",
+      "attack": "Reset and immediately spend more than the cap.",
+      "point": "A new window does not remove the cap."
+    }
+  ],
+  "proves": [
+    "accepted TN12 recurring-vault spends exist for the good path",
+    "accepted TN12 reset-window spend exists for the good reset path",
+    "wrong owner, wrong destination, missing continuation, cumulative over-cap, early reset, stale reset, and over-cap reset fail local script-engine checks"
+  ],
+  "doesNotProve": [
+    "TN12 broadcast-rejected invalid candidates",
+    "mainnet activation",
+    "wallet-standard user signing",
+    "audited custody",
+    "production fraud monitoring"
+  ],
+  "sourceArtifacts": {
+    "ownerSig": "artifacts/recurring-treasury-vault-owner-sig-proof.json",
+    "cumulative": "artifacts/recurring-treasury-vault-cumulative-cap-proof.json",
+    "reset": "artifacts/recurring-treasury-vault-window-reset-proof.json",
+    "negativeMap": "artifacts/recurring-treasury-vault-negative-map.json"
+  },
+  "publicCopyRule": "Call this an adversarial TN12/testnet evidence view over the recurring-vault rail. Do not call the invalid rows node-rejected unless they were safely submitted and rejected."
+}

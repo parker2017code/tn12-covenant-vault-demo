@@ -53,8 +53,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       id: "covenant-heist",
       title: "Covenant Heist",
       rank: 4,
-      status: "design-next",
-      proofTarget: "negative candidate suite with one or more accepted defenses",
+      status: "local-heist-rejects-on-accepted-vault-rail",
+      proofTarget: "accepted recurring-vault rail plus local rejects for wrong signer, wrong destination, missing continuation, over cap, early reset, stale reset, and reset over cap",
       whyItMatters: "Makes the adversarial side visible. The game is a vault attack/defense loop where the interesting evidence is what cannot be spent.",
       plainPoint: "The useful story is not only 'the good spend works'; it is 'the obvious bad spends fail.'",
       technicalPoint: "Each attempted attack maps to a concrete script, planner, wallet-policy, or reducer guard.",
@@ -64,16 +64,22 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       covenantPattern: "guarded vault plus challenge rows",
       websitePitch: "Try the wrong signer, wrong destination, stale window, over-cap spend, or missing relock. The vault should refuse the bad path.",
       currentRepoEvidence: [
+        "artifacts/covenant-heist-evidence.json",
         "artifacts/recurring-treasury-vault-negative-map.json",
+        "artifacts/recurring-treasury-vault-owner-sig-proof.json",
+        "artifacts/recurring-treasury-vault-cumulative-cap-proof.json",
+        "artifacts/recurring-treasury-vault-window-reset-proof.json",
         "scripts/build-recurring-treasury-vault-negatives.mjs",
-        "tests/domain/recurring-treasury-vault-negatives.test.mjs"
+        "scripts/build-covenant-heist-evidence.mjs",
+        "tests/domain/recurring-treasury-vault-negatives.test.mjs",
+        "tests/domain/covenant-heist-evidence.test.mjs"
       ],
       nextBuildSteps: [
-        "Render each negative as a heist attempt.",
-        "Attach the exact rule that blocks it.",
-        "Promote rows only when the candidate maps to a local reject or TN12 rejected spend attempt."
+        "Only attempt broadcast-rejected invalid rows if fresh expendable covenant outputs are available.",
+        "Keep the row labels local until TN12 rejection evidence exists.",
+        "Turn the visible section into an interactive local attempt picker."
       ],
-      hardBoundary: "Do not fake rejection evidence. Candidate rows must stay candidates until a builder or node rejects a concrete spend."
+      hardBoundary: "The good recurring-vault rail is accepted on TN12. The heist rows are local script-engine rejects, not TN12 broadcast-rejected invalid transactions."
     }),
     experiment({
       id: "blitz-mux-arena",
