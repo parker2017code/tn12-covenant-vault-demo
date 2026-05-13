@@ -20,7 +20,7 @@ assert.ok(map.experiments.some((item) => item.id === "blitz-mux-arena" && /fast 
 assert.equal(map.summary.localProofs, 0);
 assert.ok(map.experiments.some((item) => item.id === "blitz-mux-arena" && item.status === "accepted-timeout-settlement-with-local-challenges" && item.currentRepoEvidence.includes("artifacts/blitz-mux-challenge-settlement.json")));
 assert.ok(map.experiments.some((item) => item.id === "covenant-owned-asset-game" && /ICC/.test(item.covenantPattern) && item.status === "accepted-sibling-input-strike" && item.currentRepoEvidence.includes("artifacts/covenant-owned-asset-duel-live-strike-evidence.json")));
-assert.ok(map.experiments.some((item) => item.id === "coordination-league" && item.status === "accepted-covenant-release-spends" && item.currentRepoEvidence.includes("artifacts/coordination-covenant-release-evidence.json")));
+assert.ok(map.experiments.some((item) => item.id === "coordination-league" && item.status === "accepted-covenant-release-and-refund-spends" && item.currentRepoEvidence.includes("artifacts/coordination-covenant-refund-evidence.json")));
 assert.ok(map.experiments.some((item) => item.id === "scheduler-duel" && item.status === "accepted-covenant-payout-spend" && item.currentRepoEvidence.includes("artifacts/scheduler-covenant-payout-evidence.json")));
 assert.ok(map.experiments.every((item) => item.currentRepoEvidence.length > 0));
 assert.ok(map.experiments.every((item) => item.hardBoundary.length > 20));

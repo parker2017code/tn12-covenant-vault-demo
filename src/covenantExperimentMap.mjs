@@ -134,10 +134,10 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
     }),
     experiment({
       id: "coordination-league",
-      title: "Coordination release evidence",
+      title: "Coordination release/refund evidence",
       rank: 4,
-      status: "accepted-covenant-release-spends",
-      proofTarget: "three qualifying intendos, accepted pledge receipts, fresh covenant pledge outputs, accepted covenant release spends, non-selected refund alternates",
+      status: "accepted-covenant-release-and-refund-spends",
+      proofTarget: "three qualifying intendos, accepted pledge receipts, fresh covenant pledge outputs, accepted covenant release spends, accepted covenant refund spends on a separate fresh pledge set",
       whyItMatters: "Directly maps the Stag Hunt talk into repo evidence: commit only when enough compatible commitments also exist.",
       plainPoint: "People can coordinate around shared goals without one platform deciding who gets paid after the fact.",
       technicalPoint: "Assurance pledges, coordination receipts, fresh covenant outputs, and replayed settlement rows separate release, refund, and threshold state.",
@@ -155,19 +155,23 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "fixtures/CoordinationCovenantPledgeOutpoints.json",
         "artifacts/signed-drafts/coordination-covenant-release-spends.json",
         "artifacts/coordination-covenant-release-evidence.json",
+        "artifacts/signed-drafts/coordination-covenant-daa-refund-pledge-funding.json",
+        "fixtures/CoordinationCovenantDaaRefundPledgeOutpoints.json",
+        "artifacts/signed-drafts/coordination-covenant-refund-spends.json",
+        "artifacts/coordination-covenant-refund-evidence.json",
         "artifacts/batch-assurance-campaign.json",
         "artifacts/batch-assurance-custody-imports.json",
         "artifacts/batch-assurance-settlement-drafts.json",
         "fixtures/AcceptedOutputEvidence.json",
         "tests/domain/coordination-covenant-release-evidence.test.mjs",
+        "tests/domain/coordination-covenant-refund-evidence.test.mjs",
         "tests/domain/coordination-market-evidence.test.mjs"
       ],
       nextBuildSteps: [
-        "Add refund-path evidence only from fresh unspent covenant pledge outputs.",
         "Add wallet approval summaries for the coordination covenant release path.",
         "Keep threshold selection replay-derived until a covenant, proof system, or protocol primitive verifies it."
       ],
-      hardBoundary: "Fresh AssurancePledge covenant outputs and three covenant release spends are accepted on TN12. The threshold pack selection is still transparent replay/planner evidence, not private coordination, pooled custody, or protocol-level coordination."
+      hardBoundary: "Fresh AssurancePledge covenant outputs, three covenant release spends, and three covenant refund spends are accepted on TN12. Release and refund use separate fresh pledge sets because each individual pledge output can only take one branch. The threshold pack selection is still transparent replay/planner evidence, not private coordination, pooled custody, or protocol-level coordination."
     }),
     experiment({
       id: "covenant-owned-asset-game",

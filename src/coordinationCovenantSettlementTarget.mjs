@@ -3,6 +3,7 @@ export function buildCoordinationCovenantSettlementTarget({
   acceptedOutputs = {},
   settlementDrafts = {},
   covenantReleaseEvidence = {},
+  covenantRefundEvidence = {},
   generatedAt = new Date().toISOString()
 } = {}) {
   const pledgeOutputs = (acceptedOutputs.outputs || [])
@@ -17,15 +18,21 @@ export function buildCoordinationCovenantSettlementTarget({
   const acceptedCovenantReleases = Number(covenantReleaseEvidence.summary?.acceptedReleases || 0);
   const covenantReleaseAccepted = covenantReleaseEvidence.status === "accepted-covenant-release-spends"
     && acceptedCovenantReleases > 0;
+  const acceptedCovenantRefunds = Number(covenantRefundEvidence.summary?.acceptedRefunds || 0);
+  const covenantRefundAccepted = covenantRefundEvidence.status === "accepted-covenant-refund-spends"
+    && acceptedCovenantRefunds > 0;
   const freshCovenantOutputsRequired = pubkeyPledgeOutputs.length > 0
     && covenantPledgeOutputs.length === 0
     && !covenantReleaseAccepted;
+  const acceptedBothPaths = covenantReleaseAccepted && covenantRefundAccepted;
 
   return {
     schema: "tn12-coordination-covenant-settlement-target/v1",
     network: dossier.network || acceptedOutputs.network || "kaspa-testnet-12",
     generatedAt,
-    status: covenantReleaseAccepted
+    status: acceptedBothPaths
+      ? "accepted-covenant-release-and-refund-spends"
+      : covenantReleaseAccepted
       ? "accepted-covenant-release-spends"
       : freshCovenantOutputsRequired
         ? "fresh-covenant-pledge-outputs-required"
@@ -43,7 +50,10 @@ export function buildCoordinationCovenantSettlementTarget({
       pledgeOutputScriptTypes: unique(pledgeOutputs.map((row) => row.scriptType || "")),
       pledgeOutputsSpentByRelease: currentReleaseAccepted,
       freshCovenantFundingTxid: covenantReleaseEvidence.funding?.txid || "",
-      acceptedCovenantReleaseSpends: acceptedCovenantReleases
+      acceptedCovenantReleaseSpends: acceptedCovenantReleases,
+      freshCovenantRefundFundingTxid: covenantRefundEvidence.funding?.txid || "",
+      acceptedCovenantRefundSpends: acceptedCovenantRefunds,
+      releaseAndRefundUseSeparateFreshOutputs: acceptedBothPaths
     },
     targetV1: {
       contractPattern: "per-pledge AssurancePledge covenant outputs plus selected release route",
@@ -72,10 +82,15 @@ export function buildCoordinationCovenantSettlementTarget({
       "create fresh throwaway participant wallets or reuse safe testnet keys",
       "fund three covenant-bound pledge outputs instead of P2PK pledge outputs",
       "submit release spends after the pack qualifies",
-      "record refund drafts as non-selected alternates for those same fresh outputs",
+      "record refund spends from a separate fresh pledge set because release/refund are mutually exclusive per pledge output",
       "replay accepted txids before upgrading the experiment status"
     ],
-    blockers: covenantReleaseAccepted
+    blockers: acceptedBothPaths
+      ? [
+          "threshold selection remains replay/planner evidence",
+          "release and refund are proven on separate fresh pledge sets, not on the same spent output"
+        ]
+      : covenantReleaseAccepted
       ? [
           "threshold selection remains replay/planner evidence",
           "refund-path evidence needs fresh unspent covenant pledge outputs"
@@ -87,7 +102,13 @@ export function buildCoordinationCovenantSettlementTarget({
           "a new TN12 pledge set is required for covenant-settlement evidence"
         ]
       : [],
-    boundaries: covenantReleaseAccepted
+    boundaries: acceptedBothPaths
+      ? [
+          "Fresh AssurancePledge covenant outputs, release spends, and refund spends are accepted on TN12.",
+          "Release and refund are mutually exclusive for a single pledge output; this proof uses separate fresh outputs to show both accepted branches.",
+          "Threshold selection remains transparent replay/planner evidence."
+        ]
+      : covenantReleaseAccepted
       ? [
           "Fresh AssurancePledge covenant outputs and release spends are accepted on TN12.",
           "Threshold selection remains transparent replay/planner evidence.",

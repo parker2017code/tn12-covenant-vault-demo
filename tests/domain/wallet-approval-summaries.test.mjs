@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { buildWalletApprovalSummaries } from "../../src/walletApprovalSummaries.mjs";
 
-const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, schedulerPayout, schedulerTarget, schedulerNegatives, coordinationRelease, heistEvidence, checkedIn] = await Promise.all([
+const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, schedulerPayout, schedulerTarget, schedulerNegatives, coordinationRelease, coordinationRefund, heistEvidence, checkedIn] = await Promise.all([
   readJson("artifacts/recurring-treasury-vault-window-reset-proof.json"),
   readJson("artifacts/signed-drafts/recurring-treasury-vault-window-reset.json"),
   readJson("fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json"),
@@ -13,6 +13,7 @@ const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxC
   readJson("artifacts/scheduler-covenant-settlement-target.json"),
   readJson("artifacts/scheduler-covenant-payout-negative-evidence.json"),
   readJson("artifacts/coordination-covenant-release-evidence.json"),
+  readJson("artifacts/coordination-covenant-refund-evidence.json"),
   readJson("artifacts/covenant-heist-evidence.json"),
   readJson("artifacts/wallet-approval-summaries.json")
 ]);
@@ -28,6 +29,7 @@ const artifact = buildWalletApprovalSummaries({
   schedulerTarget,
   schedulerNegatives,
   coordinationRelease,
+  coordinationRefund,
   heistEvidence,
   generatedAt: "2026-05-12T00:00:00.000Z"
 });
@@ -94,8 +96,11 @@ assert.ok(schedulerSummary.boundaries.some((item) => item.includes("replay/index
 const coordinationSummary = artifact.summaries.find((item) => item.id === "coordination-covenant-release");
 assert.equal(coordinationSummary.recommendedWalletDecision, "approve-if-user-initiated");
 assert.equal(coordinationSummary.technicalChecks.funding.txid, coordinationRelease.funding.txid);
+assert.equal(coordinationSummary.technicalChecks.refundFunding.txid, coordinationRefund.funding.txid);
 assert.equal(coordinationSummary.technicalChecks.releases.length, 3);
+assert.equal(coordinationSummary.technicalChecks.refunds.length, 3);
 assert.ok(coordinationSummary.userChecks.some((item) => /Total released: 99.99985 tKAS/.test(item)));
+assert.ok(coordinationSummary.userChecks.some((item) => /Accepted refunds on separate fresh pledge set: 3/.test(item)));
 assert.deepEqual(coordinationSummary.refusalPrompts.map((item) => item.id), ["non-selected-refund-after-release"]);
 
 const heistSummary = artifact.summaries.find((item) => item.id === "vault-negative-checks");

@@ -131,6 +131,8 @@
     "coordination:covenant-pledge-outpoints": "node scripts/fetch-coordination-covenant-pledge-outpoints.mjs",
     "coordination:covenant-release-drafts": "node scripts/build-coordination-covenant-release-drafts.mjs",
     "coordination:covenant-release-evidence": "node scripts/build-coordination-covenant-release-evidence.mjs",
+    "coordination:covenant-refund-drafts": "node scripts/build-coordination-covenant-refund-drafts.mjs",
+    "coordination:covenant-refund-evidence": "node scripts/build-coordination-covenant-refund-evidence.mjs",
     "access:passes": "node scripts/build-access-pass-planner.mjs",
     "access:issuer-review": "node scripts/build-access-pass-issuer-review.mjs",
     "access:gates": "node scripts/build-access-pass-gates.mjs",

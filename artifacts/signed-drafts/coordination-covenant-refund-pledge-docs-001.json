@@ -1,0 +1,57 @@
+{
+  "schema": "tn12-signed-contract-spend-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-not-broadcast",
+  "lane": "assurance-refund",
+  "contract": "AssurancePledge",
+  "entrypoint": "refund",
+  "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
+  "source": {
+    "txid": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+    "outputIndex": 0,
+    "amountTkas": 45,
+    "address": "kaspatest:pqpetf2gr8nz8cyfrqewaqna7gf67u6s8mwpk0cz6j4jd6uq7ejez0efrg8yx"
+  },
+  "destination": {
+    "address": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+    "scriptType": "p2pk",
+    "amountSompi": "4499995000",
+    "amountTkas": "44.99995"
+  },
+  "contractFeeSompi": "5000",
+  "lockTime": "7000000",
+  "scriptHash": "c7d7163b511ac23f75af741a46c7e1830aab783fb81f78c017f90929f31e8598",
+  "transactionId": "20e50b59eb0158c2123ecbe4779b7c7f513112def86b32296f01f6ca2739573e",
+  "signatureScriptHex": "41ad30e6db2c4799ada972520b70ab0245a8fabec3586bb9bbdfd89f0fc7179bbad4ac5470f96435d676463b12f2e074e3c27cfc9f5204e08a07ea1d46b93f3c5e01514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+  "submitPayload": {
+    "transaction": {
+      "version": 0,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+            "index": 0
+          },
+          "signatureScript": "41ad30e6db2c4799ada972520b70ab0245a8fabec3586bb9bbdfd89f0fc7179bbad4ac5470f96435d676463b12f2e074e3c27cfc9f5204e08a07ea1d46b93f3c5e01514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+          "sequence": "0",
+          "sigOpCount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 4499995000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "2098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac"
+          }
+        }
+      ],
+      "lockTime": 7000000,
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "pledgeId": "pledge-docs-001",
+  "sourceOutputIndex": 0,
+  "coordinationCovenantRefund": true
+}

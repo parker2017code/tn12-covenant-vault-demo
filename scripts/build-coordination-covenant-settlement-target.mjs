@@ -3,18 +3,20 @@ import { buildCoordinationCovenantSettlementTarget } from "../src/coordinationCo
 
 const outPath = process.env.OUT || "artifacts/coordination-covenant-settlement-target.json";
 
-const [dossier, acceptedOutputs, settlementDrafts, covenantReleaseEvidence] = await Promise.all([
+const [dossier, acceptedOutputs, settlementDrafts, covenantReleaseEvidence, covenantRefundEvidence] = await Promise.all([
   readJson("artifacts/coordination-market-evidence-dossier.json"),
   readJson("fixtures/AcceptedOutputEvidence.json"),
   readJson("artifacts/batch-assurance-settlement-drafts.json"),
-  readOptionalJson("artifacts/coordination-covenant-release-evidence.json")
+  readOptionalJson("artifacts/coordination-covenant-release-evidence.json"),
+  readOptionalJson("artifacts/coordination-covenant-refund-evidence.json")
 ]);
 
 const artifact = buildCoordinationCovenantSettlementTarget({
   dossier,
   acceptedOutputs,
   settlementDrafts,
-  covenantReleaseEvidence
+  covenantReleaseEvidence,
+  covenantRefundEvidence
 });
 
 await mkdir("artifacts", { recursive: true });

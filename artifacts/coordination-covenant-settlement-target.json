@@ -1,8 +1,8 @@
 {
   "schema": "tn12-coordination-covenant-settlement-target/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T01:35:12.435Z",
-  "status": "accepted-covenant-release-spends",
+  "generatedAt": "2026-05-13T02:36:03.558Z",
+  "status": "accepted-covenant-release-and-refund-spends",
   "experiment": "coordination-release-evidence",
   "purpose": "Turn the transparent coordination release into a covenant-settlement target without upgrading the existing P2PK release claim.",
   "currentEvidence": {
@@ -18,7 +18,10 @@
     ],
     "pledgeOutputsSpentByRelease": true,
     "freshCovenantFundingTxid": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
-    "acceptedCovenantReleaseSpends": 3
+    "acceptedCovenantReleaseSpends": 3,
+    "freshCovenantRefundFundingTxid": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+    "acceptedCovenantRefundSpends": 3,
+    "releaseAndRefundUseSeparateFreshOutputs": true
   },
   "targetV1": {
     "contractPattern": "per-pledge AssurancePledge covenant outputs plus selected release route",
@@ -65,16 +68,16 @@
     "create fresh throwaway participant wallets or reuse safe testnet keys",
     "fund three covenant-bound pledge outputs instead of P2PK pledge outputs",
     "submit release spends after the pack qualifies",
-    "record refund drafts as non-selected alternates for those same fresh outputs",
+    "record refund spends from a separate fresh pledge set because release/refund are mutually exclusive per pledge output",
     "replay accepted txids before upgrading the experiment status"
   ],
   "blockers": [
     "threshold selection remains replay/planner evidence",
-    "refund-path evidence needs fresh unspent covenant pledge outputs"
+    "release and refund are proven on separate fresh pledge sets, not on the same spent output"
   ],
   "boundaries": [
-    "Fresh AssurancePledge covenant outputs and release spends are accepted on TN12.",
-    "Threshold selection remains transparent replay/planner evidence.",
-    "Refund-path evidence still needs fresh unspent covenant pledge outputs."
+    "Fresh AssurancePledge covenant outputs, release spends, and refund spends are accepted on TN12.",
+    "Release and refund are mutually exclusive for a single pledge output; this proof uses separate fresh outputs to show both accepted branches.",
+    "Threshold selection remains transparent replay/planner evidence."
   ]
 }

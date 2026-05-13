@@ -1,0 +1,232 @@
+{
+  "schema": "tn12-coordination-covenant-refund-drafts/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-refund-spends-not-broadcast",
+  "source": {
+    "pledgeOutpoints": "fixtures/CoordinationCovenantDaaRefundPledgeOutpoints.json",
+    "fundingTxid": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad"
+  },
+  "contractFeeSompi": "5000",
+  "lockTime": "7000000",
+  "refunds": [
+    {
+      "pledgeId": "pledge-docs-001",
+      "sourceOutputIndex": 0,
+      "draftPath": "artifacts/signed-drafts/coordination-covenant-refund-pledge-docs-001.json",
+      "transactionId": "20e50b59eb0158c2123ecbe4779b7c7f513112def86b32296f01f6ca2739573e",
+      "amountTkas": "44.99995",
+      "amountSompi": "4499995000",
+      "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "entrypoint": "refund"
+    },
+    {
+      "pledgeId": "pledge-docs-002",
+      "sourceOutputIndex": 1,
+      "draftPath": "artifacts/signed-drafts/coordination-covenant-refund-pledge-docs-002.json",
+      "transactionId": "ffc3b755bae70008a230dbc7534d1b08660f1c559a3d9a5a57c7f4992901fde0",
+      "amountTkas": "34.99995",
+      "amountSompi": "3499995000",
+      "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "entrypoint": "refund"
+    },
+    {
+      "pledgeId": "pledge-docs-003",
+      "sourceOutputIndex": 2,
+      "draftPath": "artifacts/signed-drafts/coordination-covenant-refund-pledge-docs-003.json",
+      "transactionId": "159c22f536047cd6f8888ad017a93d84a3bc00c50f86ff3beaec3b332aec5f84",
+      "amountTkas": "19.99995",
+      "amountSompi": "1999995000",
+      "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+      "entrypoint": "refund"
+    }
+  ],
+  "signedDrafts": [
+    {
+      "pledgeId": "pledge-docs-001",
+      "sourceOutputIndex": 0,
+      "schema": "tn12-signed-contract-spend-draft/v1",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "assurance-refund",
+      "contract": "AssurancePledge",
+      "entrypoint": "refund",
+      "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
+      "source": {
+        "txid": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+        "outputIndex": 0,
+        "amountTkas": 45,
+        "address": "kaspatest:pqpetf2gr8nz8cyfrqewaqna7gf67u6s8mwpk0cz6j4jd6uq7ejez0efrg8yx"
+      },
+      "destination": {
+        "address": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+        "scriptType": "p2pk",
+        "amountSompi": "4499995000",
+        "amountTkas": "44.99995"
+      },
+      "contractFeeSompi": "5000",
+      "lockTime": "7000000",
+      "scriptHash": "c7d7163b511ac23f75af741a46c7e1830aab783fb81f78c017f90929f31e8598",
+      "transactionId": "20e50b59eb0158c2123ecbe4779b7c7f513112def86b32296f01f6ca2739573e",
+      "signatureScriptHex": "41ad30e6db2c4799ada972520b70ab0245a8fabec3586bb9bbdfd89f0fc7179bbad4ac5470f96435d676463b12f2e074e3c27cfc9f5204e08a07ea1d46b93f3c5e01514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+      "submitPayload": {
+        "transaction": {
+          "version": 0,
+          "inputs": [
+            {
+              "previousOutpoint": {
+                "transactionId": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+                "index": 0
+              },
+              "signatureScript": "41ad30e6db2c4799ada972520b70ab0245a8fabec3586bb9bbdfd89f0fc7179bbad4ac5470f96435d676463b12f2e074e3c27cfc9f5204e08a07ea1d46b93f3c5e01514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+              "sequence": "0",
+              "sigOpCount": 1
+            }
+          ],
+          "outputs": [
+            {
+              "amount": 4499995000,
+              "scriptPublicKey": {
+                "version": 0,
+                "scriptPublicKey": "2098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac"
+              }
+            }
+          ],
+          "lockTime": 7000000,
+          "subnetworkId": "0000000000000000000000000000000000000000"
+        },
+        "allowOrphan": false
+      }
+    },
+    {
+      "pledgeId": "pledge-docs-002",
+      "sourceOutputIndex": 1,
+      "schema": "tn12-signed-contract-spend-draft/v1",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "assurance-refund",
+      "contract": "AssurancePledge",
+      "entrypoint": "refund",
+      "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
+      "source": {
+        "txid": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+        "outputIndex": 1,
+        "amountTkas": 35,
+        "address": "kaspatest:pqpetf2gr8nz8cyfrqewaqna7gf67u6s8mwpk0cz6j4jd6uq7ejez0efrg8yx"
+      },
+      "destination": {
+        "address": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+        "scriptType": "p2pk",
+        "amountSompi": "3499995000",
+        "amountTkas": "34.99995"
+      },
+      "contractFeeSompi": "5000",
+      "lockTime": "7000000",
+      "scriptHash": "58c45b80ee0d272010206b68c5d0f817f83ea6f2fcc42cfdb006801e2bcdce98",
+      "transactionId": "ffc3b755bae70008a230dbc7534d1b08660f1c559a3d9a5a57c7f4992901fde0",
+      "signatureScriptHex": "41cdb2062fa026ec8287aa3a6e1cbd97cbca4699753a7b0eea02024613e52d20a7765e11c5a2e7d08902c714bc42f8cd68b655e2790f1dbd9dd97f9f5ea03e5d4001514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+      "submitPayload": {
+        "transaction": {
+          "version": 0,
+          "inputs": [
+            {
+              "previousOutpoint": {
+                "transactionId": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+                "index": 1
+              },
+              "signatureScript": "41cdb2062fa026ec8287aa3a6e1cbd97cbca4699753a7b0eea02024613e52d20a7765e11c5a2e7d08902c714bc42f8cd68b655e2790f1dbd9dd97f9f5ea03e5d4001514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+              "sequence": "0",
+              "sigOpCount": 1
+            }
+          ],
+          "outputs": [
+            {
+              "amount": 3499995000,
+              "scriptPublicKey": {
+                "version": 0,
+                "scriptPublicKey": "2098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac"
+              }
+            }
+          ],
+          "lockTime": 7000000,
+          "subnetworkId": "0000000000000000000000000000000000000000"
+        },
+        "allowOrphan": false
+      }
+    },
+    {
+      "pledgeId": "pledge-docs-003",
+      "sourceOutputIndex": 2,
+      "schema": "tn12-signed-contract-spend-draft/v1",
+      "network": "kaspa-testnet-12",
+      "status": "signed-not-broadcast",
+      "lane": "assurance-refund",
+      "contract": "AssurancePledge",
+      "entrypoint": "refund",
+      "warning": "This spends the assurance pledge P2SH output if submitted after deadline and accepted.",
+      "source": {
+        "txid": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+        "outputIndex": 2,
+        "amountTkas": 20,
+        "address": "kaspatest:pqpetf2gr8nz8cyfrqewaqna7gf67u6s8mwpk0cz6j4jd6uq7ejez0efrg8yx"
+      },
+      "destination": {
+        "address": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+        "scriptType": "p2pk",
+        "amountSompi": "1999995000",
+        "amountTkas": "19.99995"
+      },
+      "contractFeeSompi": "5000",
+      "lockTime": "7000000",
+      "scriptHash": "deec88ea249172a0280cfa51f6ffaeb75981f83e570303d6941bc819201b4719",
+      "transactionId": "159c22f536047cd6f8888ad017a93d84a3bc00c50f86ff3beaec3b332aec5f84",
+      "signatureScriptHex": "412c4af456aa7bbb77442eca8e7b759466826c78d895fe66d463f0ea9340428d0ed67d981d9e47fa90f915729603d33bde1f23b42d051101b8c8c7769dfea7c25201514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+      "submitPayload": {
+        "transaction": {
+          "version": 0,
+          "inputs": [
+            {
+              "previousOutpoint": {
+                "transactionId": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+                "index": 2
+              },
+              "signatureScript": "412c4af456aa7bbb77442eca8e7b759466826c78d895fe66d463f0ea9340428d0ed67d981d9e47fa90f915729603d33bde1f23b42d051101b8c8c7769dfea7c25201514caf6b6c76009c637500c2b9be028813949c6900c3204e55165e3e098572f4d34ec0b17a4c2347f388701385ff8d3dcf6142ca10a67b030000207c7e01ac7e8769516776519c6375762098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac6903a04c5eb000c2b9be028813949c6900c32098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880f030000207c7e01ac7e87697551677500696868",
+              "sequence": "0",
+              "sigOpCount": 1
+            }
+          ],
+          "outputs": [
+            {
+              "amount": 1999995000,
+              "scriptPublicKey": {
+                "version": 0,
+                "scriptPublicKey": "2098228ca22c95e68507a450cfc24d0f908156b33893a141f064f7a34429b3880fac"
+              }
+            }
+          ],
+          "lockTime": 7000000,
+          "subnetworkId": "0000000000000000000000000000000000000000"
+        },
+        "allowOrphan": false
+      }
+    }
+  ],
+  "submitCommands": [
+    {
+      "pledgeId": "pledge-docs-001",
+      "command": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 KASPA_WRPC_ENCODING=borsh KASPA_WRPC_NETWORK_ID=testnet-12 node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/coordination-covenant-refund-pledge-docs-001.json --submit"
+    },
+    {
+      "pledgeId": "pledge-docs-002",
+      "command": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 KASPA_WRPC_ENCODING=borsh KASPA_WRPC_NETWORK_ID=testnet-12 node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/coordination-covenant-refund-pledge-docs-002.json --submit"
+    },
+    {
+      "pledgeId": "pledge-docs-003",
+      "command": "KASPA_WASM_MODULE=/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa KASPA_WRPC_URL=ws://tn12-node.kaspa.com:17210 KASPA_WRPC_ENCODING=borsh KASPA_WRPC_NETWORK_ID=testnet-12 node scripts/submit-signed-draft-wrpc.mjs artifacts/signed-drafts/coordination-covenant-refund-pledge-docs-003.json --submit"
+    }
+  ],
+  "boundaries": [
+    "These are signed refund candidates for fresh covenant pledge outputs.",
+    "They use a separate fresh pledge funding transaction from the accepted release path, so the release/refund mutual exclusion remains explicit.",
+    "The coordination threshold remains replay/planner evidence; these drafts only prove the individual pledge refund route."
+  ]
+}

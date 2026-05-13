@@ -3,7 +3,7 @@ import { buildWalletApprovalSummaries } from "../src/walletApprovalSummaries.mjs
 
 const outPath = process.env.OUT || "artifacts/wallet-approval-summaries.json";
 
-const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, schedulerPayout, schedulerTarget, schedulerNegatives, coordinationRelease, heistEvidence] = await Promise.all([
+const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, schedulerPayout, schedulerTarget, schedulerNegatives, coordinationRelease, coordinationRefund, heistEvidence] = await Promise.all([
   readJson("artifacts/recurring-treasury-vault-window-reset-proof.json"),
   readJson("artifacts/signed-drafts/recurring-treasury-vault-window-reset.json"),
   readJson("fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json"),
@@ -14,6 +14,7 @@ const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxC
   readOptionalJson("artifacts/scheduler-covenant-settlement-target.json"),
   readOptionalJson("artifacts/scheduler-covenant-payout-negative-evidence.json"),
   readOptionalJson("artifacts/coordination-covenant-release-evidence.json"),
+  readOptionalJson("artifacts/coordination-covenant-refund-evidence.json"),
   readOptionalJson("artifacts/covenant-heist-evidence.json")
 ]);
 
@@ -28,6 +29,7 @@ const artifact = buildWalletApprovalSummaries({
   schedulerTarget,
   schedulerNegatives,
   coordinationRelease,
+  coordinationRefund,
   heistEvidence
 });
 

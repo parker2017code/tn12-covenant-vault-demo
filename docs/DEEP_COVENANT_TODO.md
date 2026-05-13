@@ -91,9 +91,15 @@ until these move.
   `artifacts/signed-drafts/coordination-covenant-release-spends.json`, and
   `artifacts/coordination-covenant-release-evidence.json` move Coordination
   one layer deeper: fresh `AssurancePledge` covenant pledge outputs and three
-  release spends are accepted on TN12. Threshold selection remains
-  replay/planner evidence, and refund evidence still needs fresh unspent pledge
-  outputs.
+  release spends are accepted on TN12.
+- `artifacts/signed-drafts/coordination-covenant-daa-refund-pledge-funding.json`,
+  `fixtures/CoordinationCovenantDaaRefundPledgeOutpoints.json`,
+  `artifacts/signed-drafts/coordination-covenant-refund-spends.json`, and
+  `artifacts/coordination-covenant-refund-evidence.json` add the separate fresh
+  pledge set for the refund branch: all three refund spends are accepted on
+  TN12. The useful lesson is explicit: release and refund are mutually
+  exclusive for one pledge output, so accepted evidence for both branches needs
+  separate fresh outputs. Threshold selection remains replay/planner evidence.
 - `artifacts/universal-scheduler-workbench.json` is now surfaced as a bounded
   Scheduler Duel slice: accepted intent, accepted executor bids, accepted
   execution receipt, matched local-key payout, and replay-blocked stale,
@@ -140,14 +146,14 @@ experiment surface:
 | 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery, wallet approval summary | Connect summary to an interactive review card |
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
-| 5 | Coordination release evidence | Accepted payload/custody/release receipts, transparent replay evidence, fresh covenant pledge outputs, and accepted covenant release spends | Add refund-path evidence only from fresh unspent pledge outputs; keep threshold selection replay-derived |
+| 5 | Coordination release/refund evidence | Accepted payload/custody/release receipts, transparent replay evidence, fresh covenant pledge outputs, accepted covenant release spends, and accepted covenant refund spends on a separate fresh pledge set | Keep threshold selection replay-derived; next useful step is wallet handoff, not another branch name |
 | 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, accepted covenant payout spend, and local payout rejects | Keep payout rejects in wallet review; do not upgrade trigger eligibility beyond replay-derived |
 
 Target state: all six get TN12 verticals. Current labels still matter while
-building: Recurring cap, Sibling asset, Mux worker, Coordination release, and
-Scheduler payout all have accepted TN12 covenant-spend evidence. Vault negatives
-are still local rejects over an accepted rail, and Coordination/Scheduler
-selection logic remains replay-derived where noted.
+building: Recurring cap, Sibling asset, Mux worker, Coordination release/refund,
+and Scheduler payout all have accepted TN12 covenant-spend evidence. Vault
+negatives are still local rejects over an accepted rail, and
+Coordination/Scheduler selection logic remains replay-derived where noted.
 
 1. Add a compact Blitz challenge variant only if it proves a new refusal path.
    - Current accepted path already covers Worker A return, Worker A timeout, and

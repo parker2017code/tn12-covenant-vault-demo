@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-approval-summaries/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T02:27:01.609Z",
+  "generatedAt": "2026-05-13T02:36:03.690Z",
   "status": "wallet-approval-summary-ready",
   "purpose": "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
   "summaries": [
@@ -338,8 +338,10 @@
         "Funding txid: 314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
         "Pledge outputs: 3",
         "Accepted releases: 3",
+        "Accepted refunds on separate fresh pledge set: 3",
         "Recipient: kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-        "Total released: 99.99985 tKAS"
+        "Total released: 99.99985 tKAS",
+        "Refund proof total: 99.99985 tKAS"
       ],
       "technicalChecks": {
         "funding": {
@@ -348,6 +350,13 @@
           "pledgeOutputCount": 3,
           "allPledgeOutputsHaveCovenantBinding": true,
           "explorerUrl": "https://tn12.kaspa.stream/transactions/314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc"
+        },
+        "refundFunding": {
+          "txid": "c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad",
+          "status": "accepted",
+          "pledgeOutputCount": 3,
+          "allPledgeOutputsHaveCovenantBinding": true,
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/c0c13ed627b8150a9099c69264ed73baa4e083400d81916f4ab933679ddf9aad"
         },
         "releases": [
           {
@@ -382,6 +391,41 @@
             "amountTkas": "19.99995",
             "amountSompi": "1999995000",
             "acceptingBlockBlueScore": 10114713
+          }
+        ],
+        "refunds": [
+          {
+            "pledgeId": "pledge-docs-001",
+            "txid": "20e50b59eb0158c2123ecbe4779b7c7f513112def86b32296f01f6ca2739573e",
+            "endpoint": "https://api-tn12.kaspa.org/transactions/20e50b59eb0158c2123ecbe4779b7c7f513112def86b32296f01f6ca2739573e",
+            "status": "accepted",
+            "explorerUrl": "https://tn12.kaspa.stream/transactions/20e50b59eb0158c2123ecbe4779b7c7f513112def86b32296f01f6ca2739573e",
+            "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+            "amountTkas": "44.99995",
+            "amountSompi": "4499995000",
+            "acceptingBlockBlueScore": 10152088
+          },
+          {
+            "pledgeId": "pledge-docs-002",
+            "txid": "ffc3b755bae70008a230dbc7534d1b08660f1c559a3d9a5a57c7f4992901fde0",
+            "endpoint": "https://api-tn12.kaspa.org/transactions/ffc3b755bae70008a230dbc7534d1b08660f1c559a3d9a5a57c7f4992901fde0",
+            "status": "accepted",
+            "explorerUrl": "https://tn12.kaspa.stream/transactions/ffc3b755bae70008a230dbc7534d1b08660f1c559a3d9a5a57c7f4992901fde0",
+            "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+            "amountTkas": "34.99995",
+            "amountSompi": "3499995000",
+            "acceptingBlockBlueScore": 10152101
+          },
+          {
+            "pledgeId": "pledge-docs-003",
+            "txid": "159c22f536047cd6f8888ad017a93d84a3bc00c50f86ff3beaec3b332aec5f84",
+            "endpoint": "https://api-tn12.kaspa.org/transactions/159c22f536047cd6f8888ad017a93d84a3bc00c50f86ff3beaec3b332aec5f84",
+            "status": "accepted",
+            "explorerUrl": "https://tn12.kaspa.stream/transactions/159c22f536047cd6f8888ad017a93d84a3bc00c50f86ff3beaec3b332aec5f84",
+            "destination": "kaspatest:qzvz9r9z9j27dpg853gvlsjdp7ggz44n8zf6zs0svnm6x3pfkwyq72q6p673n",
+            "amountTkas": "19.99995",
+            "amountSompi": "1999995000",
+            "acceptingBlockBlueScore": 10152120
           }
         ],
         "summary": {

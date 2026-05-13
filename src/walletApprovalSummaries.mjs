@@ -9,6 +9,7 @@ export function buildWalletApprovalSummaries({
   schedulerTarget = {},
   schedulerNegatives = {},
   coordinationRelease = {},
+  coordinationRefund = {},
   heistEvidence = {},
   generatedAt = new Date().toISOString()
 } = {}) {
@@ -87,7 +88,7 @@ export function buildWalletApprovalSummaries({
   }
 
   if (coordinationRelease.status === "accepted-covenant-release-spends") {
-    summaries.push(buildCoordinationReleaseSummary(coordinationRelease));
+    summaries.push(buildCoordinationReleaseSummary(coordinationRelease, coordinationRefund));
   }
 
   if (heistEvidence.status === "accepted-vault-rail-with-local-heist-rejects") {
@@ -106,9 +107,11 @@ export function buildWalletApprovalSummaries({
   };
 }
 
-function buildCoordinationReleaseSummary(releaseEvidence) {
+function buildCoordinationReleaseSummary(releaseEvidence, refundEvidence = {}) {
   const releases = Array.isArray(releaseEvidence.releases) ? releaseEvidence.releases : [];
+  const refunds = Array.isArray(refundEvidence.refunds) ? refundEvidence.refunds : [];
   const totalSompi = releases.reduce((sum, row) => sum + BigInt(row.amountSompi || "0"), 0n);
+  const refundSompi = refunds.reduce((sum, row) => sum + BigInt(row.amountSompi || "0"), 0n);
   return {
     id: "coordination-covenant-release",
     experiment: "coordination-release-evidence",
@@ -120,12 +123,16 @@ function buildCoordinationReleaseSummary(releaseEvidence) {
       `Funding txid: ${releaseEvidence.funding?.txid || ""}`,
       `Pledge outputs: ${releaseEvidence.funding?.pledgeOutputCount ?? ""}`,
       `Accepted releases: ${releaseEvidence.summary?.acceptedReleases ?? releases.length}`,
+      `Accepted refunds on separate fresh pledge set: ${refundEvidence.summary?.acceptedRefunds ?? refunds.length}`,
       `Recipient: ${releases[0]?.destination || ""}`,
-      `Total released: ${sompiToTkas(totalSompi)} tKAS`
+      `Total released: ${sompiToTkas(totalSompi)} tKAS`,
+      `Refund proof total: ${sompiToTkas(refundSompi)} tKAS`
     ],
     technicalChecks: {
       funding: releaseEvidence.funding || {},
+      refundFunding: refundEvidence.funding || {},
       releases,
+      refunds,
       summary: releaseEvidence.summary || {}
     },
     refusalPrompts: [
