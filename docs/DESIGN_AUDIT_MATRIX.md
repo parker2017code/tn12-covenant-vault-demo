@@ -71,6 +71,20 @@ Use this section when turning the design into code. TN12 pages are state-heavy p
 | Analytics, if added | Measure evidence-link clicks, playground starts, and failed/missing artifact states. | Do not add broad tracking or vanity engagement metrics. |
 | Maintainability | Large UI/check/CSS files are known debt. New work should reduce coupling or keep additions modular. | Prefer small renderers, shared class patterns, and checked docs over page-specific one-offs. |
 
+## Engineering Discipline Rules
+
+| Principle | TN12 application | Required behavior |
+|---|---|---|
+| Problem before solution | Start from the spend rule, replay invariant, wallet boundary, or reader job. | Do not add a contract lane, page, or artifact until the invariant and failure modes are named. |
+| Correctness before cleverness | State transitions and evidence classes should be explicit. | Favor readable guards and tests over compact abstractions around money movement. |
+| Security default | Assume hostile inputs, wrong networks, stale outputs, and signer mistakes. | Never trust local JSON, browser state, or wallet policy as script enforcement. |
+| Tests as specs | Tests should prove accepted paths, refused paths, and public claim boundaries. | Add or update checks when copy, artifacts, submit paths, or wallet surfaces change. |
+| Failure design | Missing, malformed, stale, duplicate, and rejected states are normal states. | Render or log the exact failure class; do not hide it as an empty panel. |
+| Observability | Evidence should explain itself later. | Preserve txids, artifact paths, command names, network IDs, endpoint class, and replay status. |
+| Data integrity | Accepted evidence and status counts are not decorative data. | Separate verify-only checks from write/refresh commands where possible. |
+| Simplicity | Fewer paths are better when they prove the same thing. | Add dependencies or pages only when they reduce audit burden. |
+| AI discipline | AI output is untrusted until checked. | Review generated code/copy against artifacts, source, tests, and repo rules before committing. |
+
 ## Content Design
 
 | Area | Decision | Current check | Next action |

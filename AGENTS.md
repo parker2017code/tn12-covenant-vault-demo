@@ -70,6 +70,15 @@
 ## Validation
 
 - Run `node scripts/check.mjs` after edits.
+- Understand the invariant before changing code. For TN12 work, name what must remain true about funds, scripts, accepted txids, app receipts, replay rows, wallet policy, and public status before editing the implementation.
+- Prefer correctness over cleverness. A smaller explicit state transition, guard, artifact shape, or check is better than a clever abstraction that hides spend rules or evidence classes.
+- Treat security as the default operating mode. Assume malformed artifacts, hostile inputs, stale txids, wrong network IDs, bad witness order, leaked local keys, replay mistakes, and signer misuse unless the code proves otherwise.
+- Tests should prove behavior, not incidental implementation. New proof paths need accepted-path checks, negative cases, artifact-shape checks, and UI/status checks when public claims change.
+- Design for failure. Missing artifacts, malformed JSON, network failure, duplicate submit, stale replay, wrong wallet, wrong output, and partial refresh must have explicit behavior.
+- Keep systems observable. Preserve txid, artifact path, command, endpoint, network, signer/wallet boundary, error class, and replay status in logs or artifacts without leaking secrets.
+- Protect data integrity above convenience. Do not mutate accepted evidence, generated ledgers, handoff docs, or status counts casually; distinguish verify-only commands from refresh/write commands where possible.
+- Keep complexity on a leash. Add dependencies, new pages, new artifact lanes, or abstractions only when they reduce real review burden or prove a concrete path.
+- Treat AI output as a fast junior contributor. Generated code, docs, and copy must be read, tested, source-checked, and reduced to repo-specific rules before it is trusted.
 - Treat UI and copy edits as implementation work, not static mockup work. A public change should account for user intent, component reuse, responsive behavior, accessibility, performance, evidence-state boundaries, security/privacy, and maintenance cost.
 - For public UI changes, verify the relevant component states: default, hover/focus, active/current, empty, loading or unavailable, error, long-content wrapping, and mobile layout.
 - Keep TN12 evidence states distinct in code and copy: accepted transaction, accepted app receipt, local reject, replay-derived state, wallet policy, planner-only state, future work, missing artifact, malformed artifact, and network failure.
