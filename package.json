@@ -126,6 +126,7 @@
     "coordination:market": "node scripts/build-coordination-market.mjs",
     "coordination:settlement-brief": "node scripts/build-coordination-market-settlement-brief.mjs",
     "coordination:evidence-dossier": "node scripts/build-coordination-market-evidence-dossier.mjs",
+    "coordination:covenant-target": "node scripts/build-coordination-covenant-settlement-target.mjs",
     "access:passes": "node scripts/build-access-pass-planner.mjs",
     "access:issuer-review": "node scripts/build-access-pass-issuer-review.mjs",
     "access:gates": "node scripts/build-access-pass-gates.mjs",

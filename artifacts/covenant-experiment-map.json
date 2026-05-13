@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-13T01:02:33.142Z",
+  "generatedAt": "2026-05-13T01:07:48.705Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -170,6 +170,7 @@
         "artifacts/coordination-market-prototype.json",
         "artifacts/coordination-market-settlement-brief.json",
         "artifacts/coordination-market-evidence-dossier.json",
+        "artifacts/coordination-covenant-settlement-target.json",
         "artifacts/batch-assurance-campaign.json",
         "artifacts/batch-assurance-custody-imports.json",
         "artifacts/batch-assurance-settlement-drafts.json",
@@ -177,11 +178,11 @@
         "tests/domain/coordination-market-evidence.test.mjs"
       ],
       "nextBuildSteps": [
-        "Render one fresh user-runnable pack with wallet handoff.",
-        "Add a blocked pack row with explicit refund/keep-accumulating status.",
-        "Keep private commitments and capital multiplexing out of scope."
+        "Fund a fresh covenant-bound pledge set instead of reusing the spent P2PK pledge outputs.",
+        "Prove release/refund locally for each fresh covenant pledge output.",
+        "Submit accepted TN12 covenant release/refund evidence before upgrading the status."
       ],
-      "hardBoundary": "This is transparent coordination evidence with accepted TN12 receipts and release, not private Staghunt/Hashdag infrastructure or production pooled custody."
+      "hardBoundary": "This is transparent coordination evidence with an accepted TN12 release and a covenant-settlement target artifact. The existing pledge outputs are P2PK and already spent, so fresh covenant pledge outputs are required before calling this covenant-settled."
     },
     {
       "id": "covenant-owned-asset-game",

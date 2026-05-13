@@ -1,0 +1,79 @@
+{
+  "schema": "tn12-coordination-covenant-settlement-target/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-13T01:07:08.699Z",
+  "status": "fresh-covenant-pledge-outputs-required",
+  "experiment": "coordination-release-evidence",
+  "purpose": "Turn the transparent coordination release into a covenant-settlement target without upgrading the existing P2PK release claim.",
+  "currentEvidence": {
+    "selectedPackId": "pack-stag-docs-sprint",
+    "qualifyingIntendos": 3,
+    "qualifyingTkas": 100,
+    "releaseAccepted": true,
+    "releaseTxid": "4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "releaseExplorerUrl": "https://tn12.kaspa.stream/transactions/4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801",
+    "releaseScriptType": "pubkey",
+    "pledgeOutputScriptTypes": [
+      "pubkey"
+    ],
+    "pledgeOutputsSpentByRelease": true
+  },
+  "targetV1": {
+    "contractPattern": "per-pledge AssurancePledge covenant outputs plus selected release route",
+    "contractSource": "contracts/AssurancePledge.sil",
+    "route": "fund fresh covenant pledge outputs, then release each qualifying pledge to the selected recipient or refund after deadline",
+    "requiredFreshOutputs": [
+      {
+        "pledgeId": "pledge-docs-001",
+        "amountSompi": "4500000000",
+        "amountTkas": "45",
+        "priorScriptType": "pubkey",
+        "targetScriptType": "covenant",
+        "contributorDestination": "kaspatest:qqhvwmzrtdfya3w8gr6w7gfed0w7em5klpgzga83mw3y7t5cngphjx7lssndz"
+      },
+      {
+        "pledgeId": "pledge-docs-002",
+        "amountSompi": "3500000000",
+        "amountTkas": "35",
+        "priorScriptType": "pubkey",
+        "targetScriptType": "covenant",
+        "contributorDestination": "kaspatest:qzcxtptqcyyx002sm3pk96pplveknajkygad5tj4m5dj05jp3e6pkljqf5sk9"
+      },
+      {
+        "pledgeId": "pledge-docs-003",
+        "amountSompi": "2000000000",
+        "amountTkas": "20",
+        "priorScriptType": "pubkey",
+        "targetScriptType": "covenant",
+        "contributorDestination": "kaspatest:qpmykjgjlh9pw3jh9e5c4727y0cfs30e0kmw38rndexjh9xzvj5cyfhg4rtkn"
+      }
+    ],
+    "selectedRecipient": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "deadlineIso": "2026-05-14T00:00:00.000Z",
+    "minimumPledgeTkas": 10
+  },
+  "localChecksNeeded": [
+    "compile AssurancePledge with each contributor and selected recipient",
+    "prove release path pays the selected recipient",
+    "prove refund path requires contributor signature and deadline",
+    "prove release/refund are mutually exclusive for each fresh covenant pledge output",
+    "prove the coordination reducer only selects release after the threshold pack qualifies"
+  ],
+  "nextTn12Run": [
+    "create fresh throwaway participant wallets or reuse safe testnet keys",
+    "fund three covenant-bound pledge outputs instead of P2PK pledge outputs",
+    "submit release spends after the pack qualifies",
+    "record refund drafts as non-selected alternates for those same fresh outputs",
+    "replay accepted txids before upgrading the experiment status"
+  ],
+  "blockers": [
+    "current accepted pledge outputs are P2PK, not covenant-bound",
+    "current accepted pledge outputs have already selected the release branch",
+    "a new TN12 pledge set is required for covenant-settlement evidence"
+  ],
+  "boundaries": [
+    "This is a target artifact, not accepted covenant-settlement evidence.",
+    "The existing coordination release remains useful accepted TN12 evidence, but it is not a covenant-bound pledge settlement.",
+    "Do not call Coordination covenant-settled until fresh covenant pledge outputs and accepted covenant release/refund evidence exist."
+  ]
+}

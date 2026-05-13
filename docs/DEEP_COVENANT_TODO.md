@@ -84,6 +84,10 @@ until these move.
   bounded Coordination League slice: three qualifying intendos, accepted
   payload/custody evidence, accepted release txid, and non-selected refund
   alternates.
+- `artifacts/coordination-covenant-settlement-target.json` records the next
+  covenant-settlement target for Coordination: the current accepted pledge
+  outputs are P2PK and already spent, so a fresh covenant-bound pledge set is
+  required before this can be called covenant-settled.
 - `artifacts/universal-scheduler-workbench.json` is now surfaced as a bounded
   Scheduler Duel slice: accepted intent, accepted executor bids, accepted
   execution receipt, matched local-key payout, and replay-blocked stale,
@@ -99,7 +103,7 @@ until these move.
 | 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery, wallet approval summary | Connect summary to an interactive review card |
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
-| 5 | Coordination release evidence | Accepted payload/custody/release receipts plus transparent replay evidence | Build a TN12 covenant settlement target for release/refund |
+| 5 | Coordination release evidence | Accepted payload/custody/release receipts plus transparent replay evidence and covenant-settlement target artifact | Fund fresh covenant-bound pledge outputs and prove release/refund |
 | 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts plus indexer-derived replay | Build a TN12 covenant settlement target for one eligible trigger |
 
 Target state: all six get TN12 verticals. Current labels still matter while
