@@ -2,7 +2,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
   const experiments = [
     experiment({
       id: "treasury-wars",
-      title: "Treasury Wars",
+      title: "Recurring cap proof",
       rank: 2,
       status: "accepted-window-reset-proof",
       proofTarget: "two accepted recurring-vault spends, accepted reset-window spend, continuation state, blocked over-cap and stale-window attempts",
@@ -51,7 +51,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
     }),
     experiment({
       id: "covenant-heist",
-      title: "Covenant Heist",
+      title: "Vault negative checks",
       rank: 4,
       status: "local-heist-rejects-on-accepted-vault-rail",
       proofTarget: "accepted recurring-vault rail plus local rejects for wrong signer, wrong destination, missing continuation, over cap, early reset, stale reset, and reset over cap",
@@ -83,7 +83,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
     }),
     experiment({
       id: "blitz-mux-arena",
-      title: "Blitz Mux Arena",
+      title: "Mux worker proof",
       rank: 1,
       status: "accepted-timeout-settlement-with-local-challenges",
       proofTarget: "hub routes to two workers, workers return to hub, timeout escape path, bad selector and too-early timeout blocked locally",
@@ -131,7 +131,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
     }),
     experiment({
       id: "coordination-league",
-      title: "Coordination League",
+      title: "Coordination release evidence",
       rank: 4,
       status: "transparent-coordination-evidence-ready",
       proofTarget: "three qualifying intendos, accepted pledge payload/custody rows, accepted release txid, non-selected refund alternates",
@@ -162,7 +162,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
     }),
     experiment({
       id: "covenant-owned-asset-game",
-      title: "Covenant-Owned Asset Duel",
+      title: "Sibling-authorized asset proof",
       rank: 3,
       status: "accepted-sibling-input-strike",
       proofTarget: "asset UTXO owned by a covenant input through sibling-input authorization",
@@ -202,7 +202,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
     }),
     experiment({
       id: "scheduler-duel",
-      title: "Scheduler Duel",
+      title: "Scheduler receipt evidence",
       rank: 6,
       status: "scheduler-workbench-ready",
       proofTarget: "accepted scheduler intent, accepted execution receipt, accepted executor bids, matched payout transfer, and blocked stale/slow/duplicate rows",

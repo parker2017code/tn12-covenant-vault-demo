@@ -91,7 +91,7 @@ until these move.
    - Do not add another accepted row if it is only more volume.
 
 2. Start the next partial experiment only as a vertical slice.
-   - Covenant Heist now has a bounded local-reject artifact and visible section.
+   - Vault negative checks now have a bounded local-reject artifact and visible section.
    - Coordination League now has a bounded visible section.
    - Scheduler Duel now has a bounded visible section.
    - Further experiment work should only add new accepted evidence, safe
@@ -102,6 +102,32 @@ until these move.
 3. Split the giant focused/check command surface.
    - The command wall is now a maintenance risk.
    - Preserve coverage while making the gate easier to read.
+
+4. Add the wallet-facing abstraction rail.
+   - End users should not need JSON artifacts to approve a covenant path.
+   - Define the minimum wallet prompt for each built pattern: action, amount,
+     destination, covenant id, continuation output, required sibling input, and
+     failure reason.
+   - Done when at least one experiment has a machine-readable approval summary
+     that a wallet UI could render as Approve/Reject.
+
+5. Add sibling-input discovery for ICC examples.
+   - The sibling-authorized asset proof now assumes the required owner-marker
+     input is known.
+   - Add an artifact that explains how the current required sibling input is
+     discovered from covenant id, outpoint, state, and replay state without
+     manual lookup.
+   - Done when the Asset proof has a "find required sibling" fixture or an
+     explicit blocker.
+
+6. Harden replay-derived lanes.
+   - Scheduler evidence is currently `INDEXER_DERIVED`; that is useful but not
+     the same as protocol scheduling or autonomous custody.
+   - Next hardening is deterministic replay checkpoints, mismatch proofs, or a
+     later ZK/state-commitment sketch if KIP-21/vProg tooling makes that route
+     realistic.
+   - Done when the scheduler page/artifact can say what a second verifier checks
+     independently of the first indexer.
 
 ## Lessons To Apply
 

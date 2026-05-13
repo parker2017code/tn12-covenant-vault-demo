@@ -16,7 +16,6 @@ Useful public links:
 ```txt
 Repo: https://github.com/parker2017code/tn12-covenant-vault-demo
 Pages: https://parker2017code.github.io/tn12-covenant-vault-demo/
-AI review rules: https://parker2017code.github.io/tn12-covenant-vault-demo/ai-review.html
 TN12 tx API: https://api-tn12.kaspa.org/transactions/{txid}
 Proof evidence: https://parker2017code.github.io/tn12-covenant-vault-demo/artifacts/proof-evidence.json
 Build status: https://parker2017code.github.io/tn12-covenant-vault-demo/artifacts/build-status.json
@@ -149,6 +148,10 @@ Avoid these labels:
 - ICC uses sibling authority instead of nested execution. Let sibling inputs prove that another covenant or script authorized the transaction.
 - Challenge/timeout paths beat expensive global scans. Let one party make a claim, give the other party a bounded challenge path, and use timeouts for liveness.
 - Negative cases make examples serious: wrong signer, wrong destination, over cap, missing continuation, stale window, and missing sibling input.
+- UX abstraction is now part of the technical work. A useful covenant demo should eventually produce a wallet-readable approval summary, not only a JSON artifact for reviewers.
+- ICC examples need sibling discovery. A sibling-authorized asset path is incomplete for users until the repo can explain which sibling input is required and how it was found.
+- Replay-derived lanes need independent verification. Scheduler evidence is useful as accepted receipts plus deterministic replay, but do not imply protocol scheduling unless the spend path or a later proof system enforces it.
+- Use "money with visible rules" as a plain framing. Avoid public claims such as "holy grail," "bleeding edge," or "if this reaches mainnet then Kaspa becomes..." unless the repo has mainnet, wallet, audit, and production evidence.
 - Compiled stateful `.sil` and accepted funding are not enough. For recurring caps, require an actual spend from the funded contract output or keep the label at wallet-policy/local-wallet.
 - `artifacts/recurring-treasury-vault-state-proof.json` proves state/output behavior locally. It does not prove the full `ownerSig` path or a live accepted TN12 spend.
 - `artifacts/recurring-treasury-vault-owner-sig-proof.json` proves the full local `ownerSig` covenant path. It still does not prove live TN12 submission.
@@ -157,7 +160,7 @@ Avoid these labels:
 - `artifacts/recurring-treasury-vault-rpc-data-route.json` shows the first live 150 tKAS output is not covenant-bound. Do not try to spend it as a stateful covenant input.
 - Recurring vault live status: covenant-genesis funding is accepted, two under-cap script-enforced spends are accepted, reset-window genesis and reset spend are accepted, continuation fixtures are recorded, and over-cap/early-reset/stale-window candidates are locally rejected.
 - Study `/home/parker2017/michaelsutton-silverscript-chess/examples/chess` before designing complex examples. The useful pattern is mux/worker routing, shared state layout, template identity, challenge paths, and settlement, not "make a game" as a product idea.
-- Built deep examples: Covenant-Owned Asset Duel has local ICC sibling-input proof plus accepted TN12 owner-marker, asset genesis, sibling-authorized strike spend, and live-id local negative candidates; Blitz Mux Arena has local mux/worker/timeout proof plus accepted TN12 route, worker-return, second route, timeout spend, and a bounded timeout-settlement/challenge artifact.
+- Built deep examples: the sibling-authorized asset proof has local ICC sibling-input proof plus accepted TN12 owner-marker, asset genesis, sibling-authorized strike spend, and live-id local negative candidates; the mux worker proof has local mux/worker/timeout proof plus accepted TN12 route, worker-return, second route, timeout spend, Worker B route/return, and a bounded timeout-settlement/challenge artifact.
 - Next exact tasks are: add one Worker B Blitz route/return or a small challenge variant, then move to the next experiment only if it proves a different transition shape.
 
 Accurate label:

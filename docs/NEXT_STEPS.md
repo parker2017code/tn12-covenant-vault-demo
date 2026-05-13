@@ -19,7 +19,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Recurring vault window-reset update, 2026-05-12: `contracts/RecurringTreasuryVaultWindow.sil` adds a `reset_window` branch, accepted TN12 genesis funding, accepted TN12 reset spend `f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759`, active reset continuation fixture `fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json`, and local rejects for early reset, stale-window reset, and over-cap reset.
 - Blitz Mux update, 2026-05-12: accepted TN12 mux family genesis, route, worker return, second route, and timeout return are now summarized in `artifacts/blitz-mux-challenge-settlement.json` as normal worker settlement plus timeout settlement, with local bad-selector and too-early-timeout rejects.
 - Blitz Worker B update, 2026-05-12: accepted TN12 route to Worker B `de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2` and accepted Worker B gain-minus-fee return `9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2` are now part of the live flow artifact and visible experiment page.
-- Covenant Heist update, 2026-05-12: `artifacts/covenant-heist-evidence.json` and the visible experiment section now show wrong-owner, wrong-destination, missing-continuation, cumulative-over-cap, early-reset, stale-reset, and over-cap-reset local rejects over the accepted recurring-vault rail.
+- Vault negative-check update, 2026-05-12: `artifacts/covenant-heist-evidence.json` and the visible experiment section now show wrong-owner, wrong-destination, missing-continuation, cumulative-over-cap, early-reset, stale-reset, and over-cap-reset local rejects over the accepted recurring-vault rail.
 - Coordination League update, 2026-05-12: `artifacts/coordination-market-evidence-dossier.json` is visible as a bounded coordination slice with three qualifying intendos, accepted payload/custody evidence, accepted release txid `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`, and non-selected refund alternates.
 - Scheduler Duel update, 2026-05-12: `artifacts/universal-scheduler-workbench.json` is visible as a bounded app-state slice with accepted intent, accepted executor bids, accepted execution receipt, matched payout transfer, and replay-blocked stale/duplicate/too-slow paths. It remains `INDEXER_DERIVED`, not protocol scheduling or autonomous custody.
 
@@ -39,10 +39,13 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 |---|---|---|---|
 | 1 | Add a compact Blitz challenge variant only if it proves a new refusal path. | A new local reject or accepted/rejected TN12 row is added without pretending this is a full game. | No |
 | 2 | Add new experiment evidence only when it is a real move. | New rows must be accepted evidence, safe rejection evidence, or wallet handoff evidence. | No |
-| 3 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
-| 4 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
-| 5 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
-| 6 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
+| 3 | Add wallet-readable approval summaries. | At least one experiment emits an action/amount/destination/covenant/continuation summary a wallet could render as Approve/Reject. | No |
+| 4 | Add sibling-input discovery for the asset proof. | The repo explains how the required sibling input is found from covenant id, outpoint, state, and replay state. | No |
+| 5 | Harden replay-derived lanes. | Scheduler or coordination replay has a second-verifier check, mismatch proof, checkpoint, or explicit proof-system blocker. | No |
+| 6 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
+| 7 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
+| 8 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
+| 9 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
 
 ## Next Defined Work
 
@@ -66,7 +69,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
    - What it is: turn the missing vault-product features into separate rails instead of one vague "vaults later" bucket.
    - Default path: local-wallet TN12 flow first. That proves address setup, transaction construction, accepted txid, replay, UI evidence, and negative guards with minimal overhead.
    - Dynamic whitelist: local-wallet destination-set artifact first; promote only after a script or wallet proves destination-set enforcement.
-   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, cumulative over-window block, DECL probe, compiled `RecurringTreasuryVault.sil`, owner-signature proof, accepted covenant-genesis funding, two accepted script-enforced under-cap spends, accepted `RecurringTreasuryVaultWindow.sil` reset-window spend, continuation fixtures, and local over-cap/early-reset/stale-reset rejects are built; next is visible Treasury Wars rendering and wallet-standard signing.
+   - Recurring cap: current active rail. Local-wallet under-cap spend, cap-window state, cumulative over-window block, DECL probe, compiled `RecurringTreasuryVault.sil`, owner-signature proof, accepted covenant-genesis funding, two accepted script-enforced under-cap spends, accepted `RecurringTreasuryVaultWindow.sil` reset-window spend, continuation fixtures, and local over-cap/early-reset/stale-reset rejects are built; next is wallet-readable approval summary and wallet-standard signing.
    - Partial unvault: local-wallet contract fixture that spends part of an output while relocking the remainder.
    - Policy update: local-wallet delayed admin/recovery update path with accepted update and early-update rejection evidence.
    - Guardian recovery: local-wallet m-of-n guardian path with accepted quorum spend and too-few/wrong-guardian negative evidence.

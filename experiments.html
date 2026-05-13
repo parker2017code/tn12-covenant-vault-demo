@@ -31,17 +31,11 @@
         <a href="results.html">Results</a>
         <a href="playground.html">Live Play</a>
         <a href="experiments.html" aria-current="page">Experiments</a>
-        <a href="ai-review.html">AI Review</a>
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#spotlight">Spotlight</a>
-        <a href="#blitz-round">Blitz</a>
-        <a href="#treasury-track">Treasury</a>
-        <a href="#asset-duel">Asset Duel</a>
-        <a href="#covenant-heist">Heist</a>
-        <a href="#coordination-league">Coordination</a>
-        <a href="#scheduler-duel">Scheduler</a>
+        <a href="#purpose">Purpose</a>
         <a href="#queue">Queue</a>
         <a href="#rules">Rules</a>
       </div>
@@ -52,462 +46,70 @@
     <section class="hero results-hero">
       <div>
         <p class="status">Experiment map. TN12/testnet only.</p>
-        <h2>Small games that expose the covenant model.</h2>
-        <p>Each row says what is built, why it matters outside the lab, what is live on TN12, and what still needs a covenant-bound output or accepted spend.</p>
+        <h2>Proof patterns for covenant state.</h2>
+        <p>A compact map of the current covenant experiments: what pattern is being tested, what evidence exists, and what is still missing.</p>
       </div>
       <aside class="facts">
         <span>Current spotlight</span>
-        <strong>Blitz Mux Arena. Treasury Wars. Covenant-Owned Asset Duel.</strong>
-        <p>The fourth mode, Covenant Heist, shows blocked paths and negative guards.</p>
+        <strong>Mux worker. Recurring cap. Sibling asset.</strong>
+        <p>These three have the strongest TN12 evidence today.</p>
       </aside>
     </section>
 
-    <section class="panel experiments-panel">
+    <section id="purpose" class="panel experiments-panel">
       <div class="section-title">
-        <p class="eyebrow">Why this is useful</p>
-        <h2>The point is money with visible rules.</h2>
-        <p>A normal server can track a game, budget, or payout rule. These experiments ask a harder question: can the spend itself carry the rule so the money only moves through accepted, replayable paths?</p>
+        <p class="eyebrow">Purpose</p>
+        <h2>Show the rule at the spend layer.</h2>
+        <p>The page is not a product catalog. It is a reviewer map for small covenant patterns that can be replayed, checked, or challenged from TN12 evidence.</p>
       </div>
       <div class="work-map">
         <article>
-          <span>Plain level</span>
-          <p>Budgets, games, assets, and group payments become easier to trust when users can see which moves worked and which moves were refused.</p>
+          <span>User meaning</span>
+          <p>Budgets, assets, and group payments are easier to trust when the accepted and refused moves are visible.</p>
         </article>
         <article>
-          <span>Technical level</span>
-          <p>Covenant IDs, continuation outputs, sibling inputs, mux routing, and timeout paths let small UTXO scripts compose without one shared app database.</p>
+          <span>Technical meaning</span>
+          <p>Covenant IDs, continuation outputs, sibling inputs, and mux routing let small UTXO scripts compose without one app database.</p>
         </article>
         <article>
           <span>Kaspa angle</span>
-          <p>Fast TN12 UTXO flow makes multi-transaction state machines practical enough to inspect as workflows, not only as slow settlement events.</p>
+          <p>Fast TN12 ordering makes multi-transaction covenant flows practical to inspect as workflows, not just final settlement records.</p>
         </article>
       </div>
     </section>
 
     <section id="spotlight" class="panel experiments-panel">
       <div class="section-title">
-        <p class="eyebrow">Three strongest demos</p>
-        <h2>Best fit for Kaspa's edge.</h2>
+        <p class="eyebrow">Spotlight</p>
+        <h2>Three strongest proof patterns.</h2>
       </div>
       <div class="experiment-grid spotlight-grid">
         <article>
           <span>1</span>
-          <strong>Blitz Mux Arena</strong>
-          <p>A hub covenant routes state to Worker A, Worker A returns state to the hub, a fresh pending worker times out, then Worker B applies a different return rule.</p>
-          <p>This points toward turn-based games, disputes, staged approvals, and workflows where each step chooses the next bounded role.</p>
-          <ul>
-            <li>Mux / worker contract family.</li>
-            <li>Template routing.</li>
-            <li>Accepted TN12 family genesis output.</li>
-            <li>Accepted route to Worker A.</li>
-            <li>Accepted Worker A return to mux.</li>
-            <li>Accepted Worker A timeout return to mux.</li>
-            <li>Accepted route to Worker B.</li>
-            <li>Accepted Worker B gain-minus-fee return.</li>
-          </ul>
+          <strong>Mux / worker proof</strong>
+          <p>Accepted TN12 route, return, timeout, and Worker B return. Shows how one covenant family can split logic into bounded roles.</p>
+          <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open flow evidence</a></p>
         </article>
         <article>
           <span>2</span>
-          <strong>Treasury Wars</strong>
-          <p>Players spend from capped treasuries. The accepted TN12 path now proves two cumulative spends, a reset-window spend, continuation state, and relocked change.</p>
-          <p>This points toward allowance wallets, team treasuries, merchant payout limits, grant streams, and app resources where rules travel with the funds.</p>
-          <ul>
-            <li>Active <code>RecurringTreasuryVault.sil</code> rail.</li>
-            <li>Reset branch in <code>RecurringTreasuryVaultWindow.sil</code>.</li>
-            <li>Accepted covenant-genesis funding output.</li>
-            <li>Two accepted under-cap covenant spends.</li>
-            <li>Accepted reset-window covenant spend.</li>
-            <li>Over-cap continuation candidate blocked locally.</li>
-            <li>Early, stale-window, and over-cap reset candidates blocked locally.</li>
-          </ul>
+          <strong>Recurring cap proof</strong>
+          <p>Accepted cumulative spends and reset-window spend. Shows a cap that follows continuation state instead of living only in a server row.</p>
+          <p class="note"><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Open reset proof</a></p>
         </article>
         <article>
           <span>3</span>
-          <strong>Covenant-Owned Asset Duel</strong>
-          <p>An asset move requires the owner-marker covenant input in the same transaction. The accepted strike uses sibling authority instead of nested execution.</p>
-          <p>This points toward tickets, passes, game items, licenses, and app-owned assets that move only when the controller path is present.</p>
-          <ul>
-            <li>ICC / sibling-input authorization.</li>
-            <li>Accepted owner-marker covenant output.</li>
-            <li>Accepted live asset-duel covenant output.</li>
-            <li>Accepted two-input sibling-authorized strike.</li>
-            <li>Live-id local rejects for wrong witness, missing sibling, and wrong sibling id.</li>
-          </ul>
+          <strong>Sibling-authorized asset proof</strong>
+          <p>Accepted two-input strike plus live-id local rejects. Shows ICC-style sibling authority without nested contract execution.</p>
+          <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a></p>
         </article>
-      </div>
-    </section>
-
-    <section id="blitz-round" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">Blitz Mux round</p>
-        <h2>Two workers, return, timeout settlement.</h2>
-        <p>The simple story is a turn that either finishes normally or times out. The technical story is a mux covenant routing state to worker templates, then accepting worker returns or a timeout return to mux.</p>
-        <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open live flow evidence</a> · <a href="artifacts/blitz-mux-challenge-settlement.json">Open challenge artifact</a></p>
-      </div>
-      <div class="experiment-table-wrap">
-        <table class="proof-table experiment-table">
-          <thead>
-            <tr>
-              <th>Step</th>
-              <th>Evidence</th>
-              <th>What it proves</th>
-              <th>Point</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Family genesis</td>
-              <td><code>080661533ef398afa450ccecc2428c7ebe4f633b259d84f7437cb3a4d783cd53</code></td>
-              <td>Accepted mux-family starting output.</td>
-              <td>One covenant family can carry role templates for a bounded state machine.</td>
-            </tr>
-            <tr>
-              <td>Route</td>
-              <td><code>dfbffecdcbaaab300313aa27c1d1db78c334debc9bf673fdfd00f207dacbe065</code></td>
-              <td>Mux routes state to Worker A through template identity.</td>
-              <td>Large logic can be split into small contracts instead of one oversized script.</td>
-            </tr>
-            <tr>
-              <td>Return</td>
-              <td><code>bc51db872c8f926fb887cf150af5bf918c44cf20f72abfc3ac4620d57fa0c037</code></td>
-              <td>Worker A returns valid state to mux.</td>
-              <td>A normal turn settles by returning pending state to idle state.</td>
-            </tr>
-            <tr>
-              <td>Timeout route</td>
-              <td><code>a2ef1f4d96354294b682e83869457ee09836e59c17c2171ad1367ea87c0bdbb3</code></td>
-              <td>A fresh mux state routes to Worker A again.</td>
-              <td>The same family can keep moving through repeated bounded steps.</td>
-            </tr>
-            <tr>
-              <td>Timeout settlement</td>
-              <td><code>26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036</code></td>
-              <td>Pending Worker A state returns to mux after the timeout threshold.</td>
-              <td>A stalled participant cannot freeze the flow forever.</td>
-            </tr>
-            <tr>
-              <td>Worker B route</td>
-              <td><code>de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2</code></td>
-              <td>Mux routes the timeout-returned state to Worker B.</td>
-              <td>The family can choose another bounded role after a timeout recovery.</td>
-            </tr>
-            <tr>
-              <td>Worker B return</td>
-              <td><code>9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2</code></td>
-              <td>Worker B returns state with a gain-minus-fee rule.</td>
-              <td>Different worker scripts can enforce different transition shapes under one covenant family.</td>
-            </tr>
-            <tr>
-              <td>Local challenges</td>
-              <td><code>mux_bad_selector</code>, <code>too_early_timeout</code></td>
-              <td>Bad selector and too-early timeout fail locally.</td>
-              <td>The reviewer sees both accepted paths and refused paths before any full-game claim.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="treasury-track" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">Treasury Wars track</p>
-        <h2>One budget window, one reset, three blocked resets.</h2>
-        <p>The simple story is allowance with rules attached to the funds. The technical story is stateful covenant continuation: spend under cap, carry state forward, reject the over-cap move, then open a new window through a reset branch.</p>
-        <p class="note"><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Open reset proof artifact</a></p>
-      </div>
-      <div class="experiment-table-wrap">
-        <table class="proof-table experiment-table">
-          <thead>
-            <tr>
-              <th>Step</th>
-              <th>Evidence</th>
-              <th>What it proves</th>
-              <th>Point</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Genesis</td>
-              <td><code>a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580</code></td>
-              <td>TN12 covenant-bound treasury output exists.</td>
-              <td>The budget starts as money locked to a rule, not only app state.</td>
-            </tr>
-            <tr>
-              <td>Spend 1</td>
-              <td><code>029eb68aec033e659cfff9615e49ac489a9d0ee4df7041507e8471215305b26f</code></td>
-              <td>25 tKAS spend accepted and relocked.</td>
-              <td>Money can move while carrying the cap state forward.</td>
-            </tr>
-            <tr>
-              <td>Spend 2</td>
-              <td><code>2185f0e53d1a5d7910106f4a101d65ca2f3af2a9369af0f2eab671a20c0ed2ae</code></td>
-              <td>Cumulative 65 tKAS spend remains under the 75 tKAS window cap.</td>
-              <td>The rule survives more than one transaction.</td>
-            </tr>
-            <tr>
-              <td>Blocked</td>
-              <td><code>recurring-treasury-vault-cumulative-over-cap.json</code></td>
-              <td>80 tKAS attempted window spend fails locally.</td>
-              <td>The bad move is visible before anyone calls it a product feature.</td>
-            </tr>
-            <tr>
-              <td>Reset</td>
-              <td><code>f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759</code></td>
-              <td>New window accepted; spent-in-window resets to the current 40 tKAS spend.</td>
-              <td>Recurring budgets can reopen without trusting an operator to reset a database row.</td>
-            </tr>
-            <tr>
-              <td>Reset guards</td>
-              <td><code>early-reset</code>, <code>stale-reset</code>, <code>over-cap-reset</code></td>
-              <td>Early reset, old-window reset, and over-cap reset fail locally.</td>
-              <td>The real-world promise is easier to review when both allowed and refused paths are shown.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="asset-duel" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">Asset Duel round</p>
-        <h2>One controlled asset, one sibling authority.</h2>
-        <p>The simple story is an asset that cannot move alone. The technical story is ICC: the asset covenant accepts the owner-marker covenant input as a sibling authority instead of trying to execute another contract inside itself.</p>
-        <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a> · <a href="artifacts/covenant-owned-asset-duel-live-negative-evidence.json">Open negative evidence</a></p>
-      </div>
-      <div class="experiment-table-wrap">
-        <table class="proof-table experiment-table">
-          <thead>
-            <tr>
-              <th>Step</th>
-              <th>Evidence</th>
-              <th>What it proves</th>
-              <th>Point</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Owner marker</td>
-              <td><code>d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f</code></td>
-              <td>Accepted TN12 covenant id used as authority.</td>
-              <td>The controller is visible as an input, not hidden in app memory.</td>
-            </tr>
-            <tr>
-              <td>Asset genesis</td>
-              <td><code>5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165</code></td>
-              <td>Accepted asset-duel output binds to the owner covenant id.</td>
-              <td>The asset carries a rule about who can authorize movement.</td>
-            </tr>
-            <tr>
-              <td>Strike</td>
-              <td><code>f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4</code></td>
-              <td>Two-input sibling-authorized strike accepted on TN12; power moves from 600 to 450.</td>
-              <td>Controlled assets can update state only when the right controller path joins the transaction.</td>
-            </tr>
-            <tr>
-              <td>Wrong witness</td>
-              <td><code>wrong_witness_rejects_asset_move</code></td>
-              <td>Local live-id candidate rejects the wrong witness index.</td>
-              <td>The witness hint is part of the rule, not a loose UI choice.</td>
-            </tr>
-            <tr>
-              <td>Missing sibling</td>
-              <td><code>missing_sibling_rejects_asset_move</code></td>
-              <td>Local live-id candidate rejects asset movement without the owner input.</td>
-              <td>The asset does not move just because the asset holder asks.</td>
-            </tr>
-            <tr>
-              <td>Wrong sibling</td>
-              <td><code>wrong_sibling_covenant_rejects_asset_move</code></td>
-              <td>Local live-id candidate rejects a sibling input from the wrong covenant id.</td>
-              <td>Composition stays bounded to the intended controller, not any nearby script.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="covenant-heist" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">Covenant Heist</p>
-        <h2>Accepted good path, local refused bad paths.</h2>
-        <p>The simple story is a vault attack screen: try the obvious bad move and see which rule blocks it. The technical story is accepted TN12 recurring-vault evidence plus local script-engine rejects for mutated spends and resets.</p>
-        <p class="note"><a href="artifacts/covenant-heist-evidence.json">Open heist evidence</a></p>
-      </div>
-      <div class="experiment-table-wrap">
-        <table class="proof-table experiment-table">
-          <thead>
-            <tr>
-              <th>Attempt</th>
-              <th>Evidence</th>
-              <th>What blocks it</th>
-              <th>Why it matters</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Wrong owner</td>
-              <td><code>wrong-owner-signature</code></td>
-              <td>Owner signature check fails locally.</td>
-              <td>Authority stays in the spend rule, not only in the page UI.</td>
-            </tr>
-            <tr>
-              <td>Wrong destination</td>
-              <td><code>wrong-destination</code></td>
-              <td>Required destination output check fails locally.</td>
-              <td>A capped spend still cannot redirect funds to an arbitrary address.</td>
-            </tr>
-            <tr>
-              <td>Missing relock</td>
-              <td><code>missing-continuation</code></td>
-              <td>Continuation output validation fails locally.</td>
-              <td>The vault cannot be drained by dropping the next-state output.</td>
-            </tr>
-            <tr>
-              <td>Cumulative over cap</td>
-              <td><code>cumulative-over-cap</code></td>
-              <td>65 tKAS already spent plus the next spend would exceed the 75 tKAS cap.</td>
-              <td>The cap follows the continuation state across spends.</td>
-            </tr>
-            <tr>
-              <td>Early reset</td>
-              <td><code>early-reset</code></td>
-              <td>Reset before the window age fails locally.</td>
-              <td>A wallet or server cannot reopen the budget clock early.</td>
-            </tr>
-            <tr>
-              <td>Stale reset</td>
-              <td><code>stale-reset-window</code></td>
-              <td>Reset that keeps the old window state fails locally.</td>
-              <td>The next state must actually advance, not just rename the action.</td>
-            </tr>
-            <tr>
-              <td>Over-cap reset</td>
-              <td><code>over-cap-reset</code></td>
-              <td>Reset spend above the cap fails locally.</td>
-              <td>A new window does not remove the cap rule.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="coordination-league" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">Coordination League</p>
-        <h2>Three pledges, one accepted release.</h2>
-        <p>The simple story is a group action that only goes forward when enough compatible commitments appear. The technical story is accepted pledge payloads, accepted custody outpoints, a selected release txid, and refund alternates marked non-selected after release.</p>
-        <p class="note"><a href="artifacts/coordination-market-evidence-dossier.json">Open coordination dossier</a></p>
-      </div>
-      <div class="experiment-table-wrap">
-        <table class="proof-table experiment-table">
-          <thead>
-            <tr>
-              <th>Row</th>
-              <th>Evidence</th>
-              <th>What it proves</th>
-              <th>Point</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Qualifying pack</td>
-              <td><code>pack-stag-docs-sprint</code></td>
-              <td>Three signed intendos satisfy the visible threshold.</td>
-              <td>Coordination becomes inspectable instead of hidden in a platform database.</td>
-            </tr>
-            <tr>
-              <td>Participant receipts</td>
-              <td><code>10d9ba...</code>, <code>9bd53c...</code>, <code>fb9f97...</code></td>
-              <td>Each qualifying participant has accepted TN12 payload evidence and amount-matched custody.</td>
-              <td>The release decision has visible inputs, not only a UI total.</td>
-            </tr>
-            <tr>
-              <td>Selected release</td>
-              <td><code>4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801</code></td>
-              <td>100 tKAS in qualifying commitments routes to an accepted 99.99995 tKAS release output.</td>
-              <td>The group path can settle from public TN12 evidence.</td>
-            </tr>
-            <tr>
-              <td>Refund alternates</td>
-              <td><code>non-selected-after-release</code></td>
-              <td>Refund drafts are not promoted after the same pledge outputs release.</td>
-              <td>A reviewer can see which branch won and which branch stayed inactive.</td>
-            </tr>
-            <tr>
-              <td>Boundary</td>
-              <td><code>transparent-coordination-evidence-ready</code></td>
-              <td>No private commitments, no Hashdag/Staghunt production claim, no pooled-custody product claim.</td>
-              <td>The demo shows the useful slice without pretending the harder market infrastructure is done.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="scheduler-duel" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">Scheduler Duel</p>
-        <h2>Accepted intent, winning executor, blocked stale paths.</h2>
-        <p>The simple story is a conditional move: publish the intent, let executors bid, then promote the execution only when replayed state says it is eligible. The technical story is accepted TN12 scheduler receipts plus indexer-derived replay, not protocol automation.</p>
-        <p class="note"><a href="artifacts/universal-scheduler-workbench.json">Open scheduler workbench</a></p>
-      </div>
-      <div class="experiment-table-wrap">
-        <table class="proof-table experiment-table">
-          <thead>
-            <tr>
-              <th>Step</th>
-              <th>Evidence</th>
-              <th>What it proves</th>
-              <th>Point</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Accepted intent</td>
-              <td><code>185d62928f5cddadafc7faf14ec7b092ea44a3ea8c08af71ac7a135032243d4d</code></td>
-              <td>A TN12 payload records the conditional pool-rebalance intent.</td>
-              <td>The trigger rule is public evidence, not a private automation note.</td>
-            </tr>
-            <tr>
-              <td>Executor bids</td>
-              <td><code>ab827a...</code>, <code>e9ec42...</code>, <code>0f8f5b...</code></td>
-              <td>Three accepted bid receipts exist; replay chooses the valid fast executor.</td>
-              <td>Execution rights can be reviewed by policy instead of assigned by one operator silently.</td>
-            </tr>
-            <tr>
-              <td>Execution receipt</td>
-              <td><code>d6008cb5e4772f9d3c3173c39ad2ef8df91dcca02d7d1d76862ec1817bf36909</code></td>
-              <td>The accepted execution receipt references the accepted intent and payout.</td>
-              <td>The action is promoted only after matching accepted evidence.</td>
-            </tr>
-            <tr>
-              <td>Payout</td>
-              <td><code>1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d</code></td>
-              <td>The local-key payout transfer matches the execution receipt.</td>
-              <td>Money movement and app-state receipts are checked together.</td>
-            </tr>
-            <tr>
-              <td>Blocked paths</td>
-              <td><code>duplicate</code>, <code>stale</code>, <code>too-slow</code></td>
-              <td>Duplicate execution, stale source, and slow bid rows stay blocked by replay policy.</td>
-              <td>Scheduling is useful only if stale or replayed actions cannot keep winning.</td>
-            </tr>
-            <tr>
-              <td>Boundary</td>
-              <td><code>INDEXER_DERIVED</code></td>
-              <td>No protocol scheduler, no autonomous custody, no mainnet automation claim.</td>
-              <td>This is app-state evidence anchored to accepted TN12 receipts.</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </section>
 
     <section id="queue" class="panel experiments-panel">
       <div class="section-title">
-        <p class="eyebrow">Full queue</p>
-        <h2>Build one vertical at a time.</h2>
-        <p>The artifact is the source of truth for status, evidence paths, and boundaries.</p>
+        <p class="eyebrow">Experiment map</p>
+        <h2>Current status.</h2>
+        <p>One row per experiment. Detailed txids and proofs live in the linked artifacts.</p>
         <p class="note"><a href="artifacts/covenant-experiment-map.json">Open experiment artifact</a></p>
       </div>
       <div class="experiment-table-wrap">
@@ -517,45 +119,45 @@
               <th>Experiment</th>
               <th>Pattern</th>
               <th>Status</th>
-              <th>Next proof</th>
+              <th>Evidence</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Blitz Mux Arena</td>
+              <td>Mux worker proof</td>
               <td>mux / worker contract family</td>
               <td>accepted-timeout-settlement-with-local-challenges</td>
-              <td>optional challenge variant only if it proves a new refusal path</td>
+              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Accepted route, return, timeout, Worker B return, local challenge rejects.</a></td>
             </tr>
             <tr>
-              <td>Treasury Wars</td>
+              <td>Recurring cap proof</td>
               <td>stateful singleton vault</td>
               <td>accepted-window-reset-proof</td>
-              <td>visible Treasury Wars track, then user-wallet handoff</td>
+              <td><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Accepted cumulative spend and reset-window proof, local reset rejects.</a></td>
             </tr>
             <tr>
-              <td>Covenant-Owned Asset Duel</td>
+              <td>Sibling-authorized asset proof</td>
               <td>ICC / covenant-owned asset</td>
               <td>accepted-sibling-input-strike</td>
-              <td>visible duel round or safe broadcast-rejected negative rows</td>
+              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Accepted owner marker, asset genesis, and sibling-authorized strike.</a></td>
             </tr>
             <tr>
-              <td>Covenant Heist</td>
+              <td>Vault negative checks</td>
               <td>guarded vault plus challenge rows</td>
               <td>local-heist-rejects-on-accepted-vault-rail</td>
-              <td>broadcast-rejected invalid rows only if fresh expendable outputs are available</td>
+              <td><a href="artifacts/covenant-heist-evidence.json">Wrong owner, wrong destination, missing relock, over-cap, and reset rejects.</a></td>
             </tr>
             <tr>
-              <td>Coordination League</td>
+              <td>Coordination release evidence</td>
               <td>assurance plus coordination receipts</td>
               <td>transparent-coordination-evidence-ready</td>
-              <td>fresh user-runnable pack with wallet handoff</td>
+              <td><a href="artifacts/coordination-market-evidence-dossier.json">Three qualifying commitments, accepted release, non-selected refund alternates.</a></td>
             </tr>
             <tr>
-              <td>Scheduler Duel</td>
+              <td>Scheduler receipt evidence</td>
               <td>based-app scheduler with covenant settlement target</td>
               <td>scheduler-workbench-ready</td>
-              <td>external-wallet execution or fresh covenant settlement target</td>
+              <td><a href="artifacts/universal-scheduler-workbench.json">Accepted intent, bids, execution receipt, payout match, and stale-path rejects.</a></td>
             </tr>
           </tbody>
         </table>
@@ -564,33 +166,21 @@
 
     <section id="rules" class="panel experiments-panel">
       <div class="section-title">
-        <p class="eyebrow">Promotion rules</p>
-        <h2>No vague demo language.</h2>
+        <p class="eyebrow">How to read it</p>
+        <h2>Status means evidence class.</h2>
       </div>
       <div class="work-map">
         <article>
-          <span>Show</span>
-          <ul>
-            <li>Accepted TN12 txids.</li>
-            <li>Compiled scripts.</li>
-            <li>Replay rows.</li>
-            <li>Exact negative guards.</li>
-          </ul>
+          <span>Accepted</span>
+          <p>A TN12 transaction or payload event landed and is linked through an artifact.</p>
         </article>
         <article>
-          <span>Label</span>
-          <ul>
-            <li><code>SCRIPT_ENFORCED</code> only after the script path enforces it.</li>
-            <li><code>WALLET_POLICY</code> for local-wallet refusal.</li>
-            <li><code>INDEXER_DERIVED</code> for replay state.</li>
-          </ul>
+          <span>Local reject</span>
+          <p>A candidate failed in the local covenant/script engine. Useful, but not a broadcast rejection.</p>
         </article>
         <article>
-          <span>Do next</span>
-          <ul>
-            <li>Add a compact Blitz challenge only if it proves a new refusal path.</li>
-            <li>Keep the other three experiments local/design until accepted evidence exists.</li>
-          </ul>
+          <span>Indexer-derived</span>
+          <p>Replay explains state from accepted rows. It does not by itself control funds.</p>
         </article>
       </div>
     </section>

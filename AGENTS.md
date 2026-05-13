@@ -71,7 +71,6 @@
 - Run `node scripts/check.mjs` after edits.
 - For UI work, serve locally and confirm the page returns HTTP 200 before sharing a link.
 - When checking public state, follow `docs/LLM_REVIEW_GUIDE.md` before summarizing what is built, live, stale, or still in limbo.
-- Public AI review rules live in `ai-review.html`; keep it aligned with `docs/LLM_REVIEW_GUIDE.md`, `docs/CLAIM_VOCABULARY.md`, and public page labels.
-- Keep the hard-earned SilverScript lessons public and LLM-facing: state is the point, covenant IDs track lineage, mux/worker beats giant scripts, ICC uses sibling authority instead of nested execution, challenge/timeout paths beat expensive global scans, and negative cases make examples serious.
+- Keep the hard-earned SilverScript lessons in repo-local docs for agents: state is the point, covenant IDs track lineage, mux/worker beats giant scripts, ICC uses sibling authority instead of nested execution, challenge/timeout paths beat expensive global scans, and negative cases make examples serious.
 - When a chain/protocol result is surprising, preserve the failed artifact as evidence, label it accurately, and exhaust the local checks above before turning uncertainty into a claim or asking for expert review.
 - For new artifact lanes, wire the builder into `npm run check:all` so future agents verify behavior rather than trusting prose.
