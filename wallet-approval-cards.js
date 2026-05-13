@@ -57,12 +57,20 @@ function evidenceLinks(summary) {
   if (technical.funding?.explorerUrl && technical.funding?.txid) {
     links.push(link(technical.funding.explorerUrl, technical.funding.txid, "funding"));
   }
+  if (technical.refundFunding?.explorerUrl && technical.refundFunding?.txid) {
+    links.push(link(technical.refundFunding.explorerUrl, technical.refundFunding.txid, "refund funding"));
+  }
   if (technical.release?.explorerUrl && technical.release?.txid) {
     links.push(link(technical.release.explorerUrl, technical.release.txid, "release"));
   }
   for (const item of (technical.releases || []).slice(0, 3)) {
     if (item.explorerUrl && item.txid) {
       links.push(link(item.explorerUrl, item.txid, item.pledgeId || "release"));
+    }
+  }
+  for (const item of (technical.refunds || []).slice(0, 3)) {
+    if (item.explorerUrl && item.txid) {
+      links.push(link(item.explorerUrl, item.txid, item.pledgeId || "refund"));
     }
   }
   if (technical.acceptedBackbone?.resetTxid) {
@@ -73,5 +81,5 @@ function evidenceLinks(summary) {
 }
 
 function link(url, txid, prefix = "tx") {
-  return `<a href="${escapeHtml(url)}">${escapeHtml(prefix)} ${escapeHtml(shortTxid(txid))}</a>`;
+  return `<a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">${escapeHtml(prefix)} ${escapeHtml(shortTxid(txid))}</a>`;
 }
