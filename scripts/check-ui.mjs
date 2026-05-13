@@ -85,6 +85,10 @@ try {
   assert.match(resultsHtml, /id="standards-adapters"/);
   assert.match(resultsHtml, /Adapter ideas stay outside the proof story/);
   assert.match(resultsHtml, /Show adapter ideas/);
+  assert.match(resultsHtml, /Start with what happened/);
+  assert.match(resultsHtml, /Money movement/);
+  assert.match(resultsHtml, /Accepted app receipts/);
+  assert.doesNotMatch(resultsHtml, /Start with the txids|App-state txids|proof surface/i);
   assert.match(resultsHtml, /docs\/PRODUCT_EXECUTION_PLAN\.md/);
   assert.match(resultsHtml, /Accepted TN12 activity/);
   assert.match(resultsHtml, /TN12 playground/);

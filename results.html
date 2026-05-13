@@ -37,7 +37,7 @@
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#levels">Explain</a>
         <a href="#flow">Flow</a>
-        <a href="#feed">Txids</a>
+        <a href="#feed">Receipts</a>
         <a href="#standards">Future</a>
       </div>
     </nav>
@@ -60,21 +60,21 @@
     <section class="panel results-panel">
       <div class="section-title">
         <p class="eyebrow">Read the evidence correctly</p>
-        <h2>Txids, receipts, and replay rows do different jobs.</h2>
+        <h2>The same run has different kinds of evidence.</h2>
       </div>
       <div class="work-map">
-        <article><span>Accepted TN12 tx</span><p>A transaction landed on testnet and can be opened in the explorer.</p></article>
-        <article><span>Payload receipt</span><p>App data was included in an accepted transaction. It records intent or status; it is not automatically custody settlement.</p></article>
-        <article><span>Replay-derived state</span><p>The repo calculates balances and blocked actions from accepted rows.</p></article>
-        <article><span>Future work</span><p>User-wallet signing, production replay, audit, and mainnet activation need separate evidence.</p></article>
+        <article><span>Money movement</span><p>Accepted TN12 transactions show role funding, user deposits, and a pool payout.</p></article>
+        <article><span>App receipts</span><p>Accepted payloads record intent or status. A receipt alone is not custody settlement.</p></article>
+        <article><span>Replay state</span><p>The repo reads accepted rows and calculates balances and blocked actions.</p></article>
+        <article><span>Missing pieces</span><p>User-wallet signing, production replay, audit, and mainnet activation need separate evidence.</p></article>
       </div>
     </section>
 
     <section class="panel results-panel">
       <div class="section-title">
         <p class="eyebrow">Fast route</p>
-        <h2>Start with the txids.</h2>
-        <p>This page shows the evidence in order: accepted txids first, app receipts second, replayed state third, open gaps last. Product ideas and readiness blockers stay on separate routes.</p>
+        <h2>Start with what happened.</h2>
+        <p>This page shows the run in order: accepted money movement first, app receipts second, replayed state third, open gaps last. Product ideas and readiness blockers stay on separate routes.</p>
       </div>
       <div class="journey-grid">
         <a href="playground.html#activity">
@@ -84,7 +84,7 @@
         </a>
         <a href="#feed">
           <span>Receipts</span>
-          <strong>App-state txids</strong>
+          <strong>Accepted app receipts</strong>
           <p>Payload rows accepted on TN12.</p>
         </a>
         <a href="#rails">
@@ -103,7 +103,7 @@
     <section class="panel results-panel">
       <div class="section-title">
         <p class="eyebrow">Current evidence summary</p>
-        <h2>Current counts.</h2>
+        <h2>What the latest run contains.</h2>
       </div>
       <div id="results-summary" class="results-summary" aria-live="polite">
         <article><span>Accepted playground txs</span><strong>4</strong><p>Role funding, two deposits, and one payout.</p></article>
@@ -137,8 +137,8 @@
     <section id="rails" class="panel results-panel">
       <div class="section-title">
         <p class="eyebrow">Proof rows</p>
-        <h2>What is proven and what is next.</h2>
-        <p>Rows summarize accepted evidence, replay state, and the remaining pieces. Open txids and artifacts where links are shown.</p>
+        <h2>What is backed by accepted records.</h2>
+        <p>Rows summarize accepted evidence, replay state, and the remaining pieces. Open explorer links and artifacts when you need the mechanical proof.</p>
       </div>
       <div id="results-rails" class="results-rails" aria-live="polite"></div>
     </section>
