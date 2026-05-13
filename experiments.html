@@ -34,6 +34,7 @@
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
+        <a href="#workbench">Workbench</a>
         <a href="#rules">How to Read</a>
         <a href="#purpose">Meaning</a>
         <a href="#examples">Examples</a>
@@ -55,6 +56,83 @@
         <strong>Not mainnet DeFi. Not audited custody.</strong>
         <p>The goal is to show which rule moved the money, which rule blocked the wrong move, and what a wallet could show before signing.</p>
       </aside>
+    </section>
+
+    <section id="workbench" class="panel experiments-panel crypto-workbench">
+      <div class="section-title">
+        <p class="eyebrow">Crypto-native workbench</p>
+        <h2>Read every example as a spend trail.</h2>
+        <p>The useful question is not whether the page has a clever contract label. It is whether a user action turns into a public spend rule, accepted evidence, replayed state, and a wallet prompt that a person can understand.</p>
+      </div>
+      <div class="proof-topology" aria-label="TN12 proof topology map">
+        <div class="topology-lane topology-dag">
+          <span>TN12 ordering</span>
+          <div class="dag-nodes" aria-hidden="true">
+            <i style="--x:8%;--y:58%"></i>
+            <i style="--x:24%;--y:32%"></i>
+            <i class="selected" style="--x:38%;--y:50%"></i>
+            <i style="--x:52%;--y:25%"></i>
+            <i class="accepted" style="--x:66%;--y:46%"></i>
+            <i style="--x:80%;--y:68%"></i>
+          </div>
+          <p>Accepted transaction lands in the testnet record.</p>
+        </div>
+        <div class="topology-lane topology-spend">
+          <span>Spend trail</span>
+          <div class="spend-path" aria-hidden="true">
+            <b>UTXO</b>
+            <em>rule</em>
+            <b>next state</b>
+          </div>
+          <p>The input is consumed and the next output must preserve the rule.</p>
+        </div>
+        <div class="topology-lane topology-ledger">
+          <span>Rule ledger</span>
+          <dl>
+            <div><dt>Expected</dt><dd>under cap</dd></div>
+            <div><dt>Observed</dt><dd>accepted</dd></div>
+            <div><dt>Boundary</dt><dd>TN12 only</dd></div>
+          </dl>
+          <p>Accepted and rejected paths stay visible together.</p>
+        </div>
+        <div class="topology-lane topology-wallet">
+          <span>Wallet prompt</span>
+          <strong>Show the reason before signing.</strong>
+          <p>Amount, controller input, continuation, timeout, refund, or blocker.</p>
+        </div>
+      </div>
+      <div class="crypto-route">
+        <article>
+          <span>1. Intent</span>
+          <strong>User asks for a move.</strong>
+          <p>Spend from a budget, move an asset, release a group payment, recover a stalled step, or execute a scheduled payout.</p>
+        </article>
+        <article>
+          <span>2. Inputs</span>
+          <strong>The transaction names the objects.</strong>
+          <p>UTXOs, controller inputs, continuation outputs, payload receipts, or pledge outputs become the thing being checked.</p>
+        </article>
+        <article>
+          <span>3. Rule</span>
+          <strong>The spend has to fit.</strong>
+          <p>The rule may be script-enforced, wallet policy, replay-derived, or local-only. The label changes what the evidence means.</p>
+        </article>
+        <article>
+          <span>4. Evidence</span>
+          <strong>The result is inspectable.</strong>
+          <p>Accepted txid, accepted payload, local reject, replay row, or blocker. If it cannot be clicked or rebuilt, it stays lower confidence.</p>
+        </article>
+        <article>
+          <span>5. Wallet</span>
+          <strong>The user should see the reason.</strong>
+          <p>Under cap, required controller present, continuation preserved, timeout available, refund path open, or payout evidence matched.</p>
+        </article>
+      </div>
+      <div class="crypto-ledger">
+        <article><span>Strong</span><p>Accepted TN12 spend plus matching artifact and plain wallet summary.</p></article>
+        <article><span>Useful</span><p>Local reject that shows the wrong move before anyone promotes the happy path.</p></article>
+        <article><span>Boundary</span><p>Replay explains accepted records. It does not become custody just because the UI renders it.</p></article>
+      </div>
     </section>
 
     <section id="rules" class="panel experiments-panel">
@@ -106,6 +184,38 @@
         <p class="eyebrow">Functional examples</p>
         <h2>Read each proof as a product job.</h2>
         <p>The artifacts matter because they show what moved, what was refused, and what a wallet or app could explain before the user signs.</p>
+      </div>
+      <div class="experiment-board" aria-label="Experiment evidence board">
+        <article>
+          <span>Budget</span>
+          <strong>Cap follows the money</strong>
+          <p>Accepted spends and reset; local over-cap rejects.</p>
+        </article>
+        <article>
+          <span>Step</span>
+          <strong>Workflow can recover</strong>
+          <p>Accepted route, return, timeout, and second role.</p>
+        </article>
+        <article>
+          <span>Asset</span>
+          <strong>Controller must join</strong>
+          <p>Accepted move; wrong-controller local rejects.</p>
+        </article>
+        <article>
+          <span>Reject</span>
+          <strong>Bad withdrawal blocked</strong>
+          <p>Wrong signer, wrong destination, missing relock, stale reset.</p>
+        </article>
+        <article>
+          <span>Group</span>
+          <strong>Release or refund</strong>
+          <p>Accepted release spends and separate refund spends.</p>
+        </article>
+        <article>
+          <span>Pay</span>
+          <strong>Payout has receipt trail</strong>
+          <p>Accepted payout spend; trigger logic remains replay-derived.</p>
+        </article>
       </div>
       <div class="experiment-grid">
         <article>

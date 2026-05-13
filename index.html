@@ -142,6 +142,21 @@
       </details>
     </section>
 
+    <section class="panel evidence-strip-panel replay-board">
+      <div class="section-title">
+        <p class="eyebrow">Replay pipeline</p>
+        <h2>From accepted txid to readable state.</h2>
+        <p>This is the core inspection path: an accepted testnet row is fetched, decoded, replayed, matched against expectations, then surfaced as a wallet or reviewer prompt.</p>
+      </div>
+      <div class="replay-pipeline" aria-label="TN12 replay pipeline">
+        <article><span>1. Accepted</span><strong>txid landed</strong><p>Public TN12 evidence exists.</p></article>
+        <article><span>2. Fetched</span><strong>node/API row</strong><p>Amount, output, or payload can be checked.</p></article>
+        <article><span>3. Replayed</span><strong>state rebuilt</strong><p>Balances, receipts, payouts, or blockers are derived.</p></article>
+        <article><span>4. Matched</span><strong>rule checked</strong><p>The observed result matches the expected path or stays blocked.</p></article>
+        <article><span>5. Shown</span><strong>wallet/reviewer view</strong><p>The user sees why the action should pass or fail.</p></article>
+      </div>
+    </section>
+
     <section id="multi-wallet" class="panel evidence-strip-panel">
       <div class="section-title">
         <h2>Multi-wallet TN12 evidence is live.</h2>

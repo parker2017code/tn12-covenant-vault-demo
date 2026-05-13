@@ -58,6 +58,16 @@ body {
   line-height: 1.5;
 }
 
+@keyframes topologyPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-strong) 14%, transparent);
+  }
+
+  50% {
+    box-shadow: 0 0 0 9px color-mix(in srgb, var(--accent-strong) 22%, transparent);
+  }
+}
+
 :root[data-theme="light"] body {
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%), var(--bg);
 }
@@ -511,7 +521,16 @@ pre {
 
 @media (max-width: 640px) {
   .theme-toggle {
-    right: 52px;
+    position: static;
+    width: fit-content;
+    margin: 14px 10px 10px auto;
+    transform: none;
+    opacity: .82;
+  }
+
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    opacity: 1;
   }
 }
 
@@ -988,6 +1007,307 @@ progress::-moz-progress-bar {
 .experiment-grid ul {
   margin: 10px 0 0;
   padding-left: 18px;
+}
+
+.experiment-board {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.experiment-board article {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent),
+    var(--surface-soft);
+  padding: 12px;
+}
+
+.experiment-board span {
+  display: block;
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.experiment-board strong {
+  display: block;
+  margin: 8px 0;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.16;
+}
+
+.experiment-board p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.proof-topology {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.topology-lane {
+  min-height: 178px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), transparent 58%),
+    var(--surface-soft);
+  padding: 14px;
+}
+
+.topology-lane > span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.topology-lane p {
+  position: relative;
+  z-index: 1;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.dag-nodes {
+  position: relative;
+  height: 78px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dag-nodes::before,
+.dag-nodes::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 10%;
+  height: 1px;
+  background: var(--line-bright);
+  transform-origin: left center;
+}
+
+.dag-nodes::before {
+  top: 42%;
+  transform: rotate(-8deg);
+}
+
+.dag-nodes::after {
+  top: 58%;
+  transform: rotate(13deg);
+  opacity: .56;
+}
+
+.dag-nodes i {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--line-bright);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--bg) 68%, var(--accent));
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.dag-nodes i.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.dag-nodes i.accepted {
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-strong) 16%, transparent);
+  animation: topologyPulse 3.6s ease-in-out infinite;
+}
+
+.spend-path {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.spend-path b,
+.spend-path em {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 12px 10px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel-strong) 62%, transparent);
+  font-size: 13px;
+  font-style: normal;
+  text-align: center;
+}
+
+.spend-path em {
+  border-color: var(--line-bright);
+  color: var(--accent);
+}
+
+.topology-ledger dl {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+}
+
+.topology-ledger div {
+  display: grid;
+  grid-template-columns: .85fr 1fr;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 7px;
+}
+
+.topology-ledger dt,
+.topology-ledger dd {
+  margin: 0;
+  font-size: 13px;
+}
+
+.topology-ledger dt {
+  color: var(--muted);
+}
+
+.topology-ledger dd {
+  color: var(--text);
+  font-weight: 750;
+}
+
+.topology-wallet strong {
+  display: block;
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.replay-pipeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.replay-pipeline article {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 11%, transparent), transparent 58%),
+    var(--surface-soft);
+  padding: 14px;
+}
+
+.replay-pipeline article:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  right: -8px;
+  width: 14px;
+  height: 1px;
+  background: var(--line-bright);
+}
+
+.replay-pipeline span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--accent-strong);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.replay-pipeline strong {
+  display: block;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.16;
+}
+
+.replay-pipeline p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.crypto-route {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.crypto-route article,
+.crypto-ledger article {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 58%),
+    var(--surface-soft);
+  padding: 14px;
+  transition: border-color .18s ease, transform .18s ease;
+}
+
+.crypto-route article:hover,
+.crypto-ledger article:hover,
+.experiment-board article:hover,
+.topology-lane:hover {
+  border-color: var(--line-bright);
+  transform: translateY(-1px);
+}
+
+.crypto-route article:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  right: -8px;
+  width: 14px;
+  height: 1px;
+  background: var(--line-bright);
+}
+
+.crypto-route span,
+.crypto-ledger span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.crypto-route strong {
+  display: block;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.crypto-route p,
+.crypto-ledger p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.crypto-ledger {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .experiment-table-wrap {
@@ -3265,6 +3585,11 @@ progress::-moz-progress-bar {
   .evidence-strip,
   .work-map,
   .experiment-grid,
+  .experiment-board,
+  .proof-topology,
+  .replay-pipeline,
+  .crypto-route,
+  .crypto-ledger,
   .artifact-link-grid,
   .wallet-approval-grid,
   .defi-flow-map,
@@ -3285,6 +3610,14 @@ progress::-moz-progress-bar {
 
   .defi-flow-map .defi-flow-wide {
     grid-column: auto;
+  }
+
+  .crypto-route article:not(:last-child)::after {
+    display: none;
+  }
+
+  .replay-pipeline article:not(:last-child)::after {
+    display: none;
   }
 
   .product-grid {
