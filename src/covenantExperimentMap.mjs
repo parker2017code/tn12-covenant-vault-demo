@@ -179,8 +179,8 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       nextBuildSteps: [
-        "Turn the strike into a visible duel round on the experiments page.",
         "Only attempt broadcast-rejected negative rows if there is a safe non-spending route.",
+        "Add one more accepted strike from the continuation when it proves a new state transition.",
         "Keep user-wallet signing out of the claim until the same path signs through wallet-standard handoff."
       ],
       hardBoundary: "The owner-marker genesis, live asset-duel genesis, and sibling-authorized strike spend are accepted on TN12. Negative candidates use the same live ids locally and are not broadcast-rejection records."

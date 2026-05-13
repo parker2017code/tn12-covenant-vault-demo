@@ -37,6 +37,7 @@
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#spotlight">Spotlight</a>
         <a href="#treasury-track">Treasury</a>
+        <a href="#asset-duel">Asset Duel</a>
         <a href="#queue">Queue</a>
         <a href="#rules">Rules</a>
       </div>
@@ -183,6 +184,65 @@
               <td><code>early-reset</code>, <code>stale-reset</code>, <code>over-cap-reset</code></td>
               <td>Early reset, old-window reset, and over-cap reset fail locally.</td>
               <td>The real-world promise is easier to review when both allowed and refused paths are shown.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="asset-duel" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Asset Duel round</p>
+        <h2>One controlled asset, one sibling authority.</h2>
+        <p>The simple story is an asset that cannot move alone. The technical story is ICC: the asset covenant accepts the owner-marker covenant input as a sibling authority instead of trying to execute another contract inside itself.</p>
+        <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a> · <a href="artifacts/covenant-owned-asset-duel-live-negative-evidence.json">Open negative evidence</a></p>
+      </div>
+      <div class="experiment-table-wrap">
+        <table class="proof-table experiment-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Evidence</th>
+              <th>What it proves</th>
+              <th>Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Owner marker</td>
+              <td><code>d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f</code></td>
+              <td>Accepted TN12 covenant id used as authority.</td>
+              <td>The controller is visible as an input, not hidden in app memory.</td>
+            </tr>
+            <tr>
+              <td>Asset genesis</td>
+              <td><code>5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165</code></td>
+              <td>Accepted asset-duel output binds to the owner covenant id.</td>
+              <td>The asset carries a rule about who can authorize movement.</td>
+            </tr>
+            <tr>
+              <td>Strike</td>
+              <td><code>f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4</code></td>
+              <td>Two-input sibling-authorized strike accepted on TN12; power moves from 600 to 450.</td>
+              <td>Controlled assets can update state only when the right controller path joins the transaction.</td>
+            </tr>
+            <tr>
+              <td>Wrong witness</td>
+              <td><code>wrong_witness_rejects_asset_move</code></td>
+              <td>Local live-id candidate rejects the wrong witness index.</td>
+              <td>The witness hint is part of the rule, not a loose UI choice.</td>
+            </tr>
+            <tr>
+              <td>Missing sibling</td>
+              <td><code>missing_sibling_rejects_asset_move</code></td>
+              <td>Local live-id candidate rejects asset movement without the owner input.</td>
+              <td>The asset does not move just because the asset holder asks.</td>
+            </tr>
+            <tr>
+              <td>Wrong sibling</td>
+              <td><code>wrong_sibling_covenant_rejects_asset_move</code></td>
+              <td>Local live-id candidate rejects a sibling input from the wrong covenant id.</td>
+              <td>Composition stays bounded to the intended controller, not any nearby script.</td>
             </tr>
           </tbody>
         </table>
