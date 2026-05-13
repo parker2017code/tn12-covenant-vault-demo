@@ -34,6 +34,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 ## Near-term product cleanup
 
 - Public language rule: affirmative first, caveat second. Say what happened, then label the boundary.
+- Translation rule: use the technical term only when it helps, then immediately say what someone is testing, building, approving, measuring, or avoiding. For example, "recurring cap" means a budget that cannot drain at once; "controller input" means an asset cannot move unless the right authority joins the transaction; "replay" means the repo reads accepted TN12 records and updates state.
 - Use status labels instead of defensive loops: TN12 accepted, testnet evidence, wallet blocked, mainnet blocked, research.
 - Qualify every public "live" claim as TN12/testnet unless it is mainnet.
 - Do not add first-page sections unless they prove something a reviewer needs before routing deeper.
@@ -48,6 +49,19 @@ This is an internal working note for product cleanup. Keep the public site focus
   - Try the TN12 playground -> `playground.html`
   - Audit/build from it -> `lab.html`
 - Keep the homepage mostly as routing. Proof counts and enforcement details are secondary.
+
+## Programmer implementation bar
+
+- Build flows and states, not static screenshots. The core flows are observe accepted evidence, repeat the TN12 path, inspect wallet review fields, and audit/build from artifacts.
+- Treat a proof card, wallet review card, rule ledger, evidence board, replay timeline, command block, drawer, and route card as component families. Each family needs consistent default, hover, focus, unavailable, error, empty, and long-content behavior.
+- Keep evidence states distinct in code and copy: accepted TN12 transaction, accepted app receipt, local reject, replay-derived state, wallet policy, planner-only state, future work, missing artifact, malformed artifact, and network failure.
+- Never let a failed fetch, missing artifact, bad JSON file, or unsupported browser path disappear as an empty panel. Show the exact class of failure in plain text.
+- Stress-test real content: full txids, long covenant IDs, long artifact filenames, large tKAS numbers, wrapped commands, missing labels, and mobile widths around 390px.
+- Use semantic HTML first. Links navigate, buttons act, headings stay ordered, drawers open by keyboard, focus is visible, and status text does not depend on color alone.
+- Keep motion functional and small. Animated maps may point to a transaction, rule, or replay step; they should not become decorative crypto effects.
+- Keep performance boring: static HTML/CSS/SVG, small vanilla JS, no new package unless it clearly improves inspection.
+- Keep wallet/security UI honest. Local keys are local test tooling, wallet prompts are review summaries, and backend/script enforcement remains separate from what a page displays.
+- Add tests or checks in proportion to risk. Public layout changes need UI smoke/screenshots; artifact or evidence-state changes need command gates; signer or submit changes need explicit negative cases.
 
 ## Real product gaps
 
@@ -83,7 +97,7 @@ This is an internal working note for product cleanup. Keep the public site focus
 
 ## Next work
 
-1. Put money rails first, covenant spend rules second, app-state prototypes third, vProgs later.
+1. Put money movement first, covenant spend rules second, app-state prototypes third, vProgs later.
 2. Make every card, chip, source row, and command block either do something or look like plain text.
 3. Shorten lab, results, and playground by user job.
 4. Make four routes obvious: observe, repeat with faucet tKAS, use your wallet, build/audit.

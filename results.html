@@ -49,7 +49,7 @@
       <div>
         <p class="status">Accepted TN12 activity. Replayed state.</p>
         <h2>Funds moved. Receipts landed. The repo replays them.</h2>
-        <p>Start with the concrete run: six role wallets funded on TN12, two user-to-pool deposits accepted, one pool-to-user payout accepted, then a reducer turns txids into balances and blocked actions.</p>
+        <p>Start with the concrete run: six role wallets funded on TN12, two user-to-pool deposits accepted, one pool-to-user payout accepted, then the repo turns txids into balances and blocked actions.</p>
       </div>
       <aside class="facts">
         <span>Current playground run</span>
@@ -99,7 +99,7 @@
         <article>
           <span>Replay</span>
           <strong>Balances and blocked actions</strong>
-          <p>The reducer turns accepted rows into readable state.</p>
+          <p>The repo turns accepted rows into readable state.</p>
           <small>Use: inspection path. Boundary: replay explains state; it does not control funds.</small>
         </article>
       </div>
@@ -159,7 +159,7 @@
       <div class="section-title">
         <p class="eyebrow">What is happening</p>
         <h2>Transaction -> receipt -> replay.</h2>
-        <p>The important state changes have public txids. The app replays accepted TN12 records and marks which parts are reducer logic rather than custody or market execution.</p>
+        <p>The important state changes have public txids. The app replays accepted TN12 records and marks which parts are replay logic rather than custody or market execution.</p>
       </div>
       <div id="results-flow" class="results-flow" aria-live="polite">
         <article><span>1</span><strong>Fund roles</strong><p>Six session wallets received tKAS in one accepted TN12 tx.</p></article>
@@ -193,7 +193,7 @@
       <div class="section-title">
         <p class="eyebrow">TN12 playground</p>
         <h2>Accepted testnet session flow.</h2>
-        <p>Open the playground for the role addresses, accepted txids, reducer output, and blocked-action view.</p>
+        <p>Open the playground for the role addresses, accepted txids, replay output, and blocked-action view.</p>
         <p class="note"><a href="docs/PRODUCT_EXECUTION_PLAN.md">Product execution plan</a></p>
       </div>
       <div class="claim-grid">

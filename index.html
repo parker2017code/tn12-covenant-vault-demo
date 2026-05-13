@@ -150,7 +150,7 @@
       </div>
       <div class="replay-pipeline" aria-label="TN12 replay pipeline">
         <article><span>1. Accepted</span><strong>txid landed</strong><p>Public TN12 evidence exists.</p></article>
-        <article><span>2. Fetched</span><strong>node/API row</strong><p>Amount, output, or payload can be checked.</p></article>
+        <article><span>2. Fetched</span><strong>node/API row</strong><p>Amount, output, or app receipt can be checked.</p></article>
         <article><span>3. Replayed</span><strong>state rebuilt</strong><p>Balances, receipts, payouts, or blockers are derived.</p></article>
         <article><span>4. Matched</span><strong>rule checked</strong><p>The observed result matches the expected path or stays blocked.</p></article>
         <article><span>5. Shown</span><strong>wallet/reviewer view</strong><p>The user sees why the action should pass or fail.</p></article>
@@ -195,7 +195,7 @@
           <span>Accepted or locally checked</span>
           <ul>
             <li>Accepted proof txids.</li>
-            <li>Accepted payload receipts.</li>
+            <li>Accepted app receipts.</li>
             <li>Checkpointed replay records.</li>
             <li>Local-key multi-wallet TN12 funding.</li>
             <li>Reviewer settlement command package.</li>
@@ -270,7 +270,7 @@
         <article>
           <span>Accepted app receipts</span>
           <strong>40</strong>
-          <p>App data was written into accepted TN12 transactions. Replay can read it; the payload alone is not custody settlement.</p>
+          <p>App data was written into accepted TN12 transactions. Replay can read it; the app receipt alone is not custody settlement.</p>
         </article>
         <article>
           <span>Verifier command</span>

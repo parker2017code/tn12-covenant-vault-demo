@@ -24,7 +24,7 @@
 
 - Live mainnet: Kaspa Proof of Work blockDAG, UTXO model, GHOSTDAG, Crescendo 10 BPS.
 - TN12 / testnet: covenant experimentation, Silverscript-facing app design, proof and sequencing experiments.
-- Roadmap: full vProgs, mature native app rails, cross-app atomic composition.
+- Roadmap: full vProgs, mature native app paths, cross-app atomic composition.
 - Research / architecture: oracle or miner-attestation flows, TangVM-style ideas, DAGKnight activation timing.
 
 ## Product Direction
@@ -32,19 +32,20 @@
 - Treat `docs/ROADMAP_STATE.md` as the durable "where we are / where we are going" map. Keep it aligned when app lanes, proof status, or research boundaries change.
 - Start with safe money rules users can understand: delayed withdrawal, recovery path, spend limit, escrow, bounty, and treasury controls.
 - Explain the action before the abstraction. Say "funds can only leave after a delay" before "covenant policy."
+- Use the industry term only when it helps, then translate it into the real thing someone is testing, buying, building, approving, measuring, or trying to avoid. For TN12, say "budget that cannot drain at once," "asset that needs its controller," "wallet shows what rule is being approved," or "bad spend blocked locally" before terms like covenant, replay, reducer, mux, ICC, or planner.
 - Keep writing concrete and necessary. Avoid repeated "not X but Y" frames, "if this then that" filler, and polished LLM cadence words such as "seamless," "robust," "unlock," "empower," "transform," or "game-changing."
 - Avoid corporate abstraction unless the sentence cashes it out. Do not leave terms like "institutional readiness," "ecosystem maturity," "enterprise adoption," "strategic," or "platform unlock" standing alone. Name the actor and requirement: an exchange needs node stability, wallet integration, liquidity, legal review, and support; a payments company needs payment APIs, refunds, accounting, uptime, and support; builders need docs, SDKs, indexers, and working examples.
 - Avoid clever authority voice: no dramatic adjective piles, faux-bold certainty, invented slogans, or lines that sound written to impress the writer rather than help the builder.
 - Do not write cringey internal-process language in public copy or durable notes. Avoid vague words like "framing pass," "status theater," "polish pass," "move the narrative," and "unlock." Say the concrete task: shorten the page, link the card, move details to docs, show the command prereqs, or explain the app path.
 - Use one clear status label or source link instead of long defensive caveat stacks.
 - Do not hedge facts the user directly provides, such as a URL, transcript, repo state, txid, artifact path, or reviewer instruction. Treat it as real input, then verify only the claims that depend on external current state.
-- Prefer plain build language: built, working, needs wallet, needs custody, needs indexer, research, roadmap, next rail. Avoid over-negative repetition when the useful point is simply what must be built next.
+- Prefer plain build language: built, working, needs wallet, needs custody, needs indexer, research, roadmap, next path. Avoid over-negative repetition when the useful point is simply what must be built next.
 - Apply the writing bar across public pages and LLM-facing files. Every touched page, repo guide, source note, generated artifact, handoff note, and context file should be direct, sourced or status-labeled, necessary, and free of defensive throat-clearing.
 - Treat text as part of the product. UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes should be scanned with the same care as code: necessary, specific, clean, and defensible.
 - Treat user examples as class signals unless the user explicitly says one instance only. If the user points at one command, fake-clickable card, crowded mobile control, copy button, source link, or status label, audit the whole class of similar patterns.
 - For broad cleanup work, use read-only parallel agents for audits and research when available. Assign them search/review tasks, keep edits local to the main agent, and use their findings to avoid narrow one-off fixes.
 - Treat agent-written code as suspect around adjacent assumptions: check existing artifact shapes, field names, negative cases, and security-sensitive paths before extending a pattern.
-- Treat invoice, payload, receipt, and wallet work as rails, not as a generic merchant-payment adoption thesis. Current product framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
+- Treat invoice, app-data, receipt, and wallet work as concrete proof paths, not as a generic merchant-payment adoption thesis. Current product framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
 - Treat the current version as a TN12-configured proof app. The browser builds policy/control artifacts, while scripts compile, sign, submit, verify, and index accepted testnet transactions.
 - Public TN12 APIs, manual explorer data, and local fixtures are the default. Bring back local node work only on direct request.
 - Payload/miner-signal work starts with transaction payload receipts and accepted-transaction indexing. Coinbase payload or pool policy is a later mining-software lane.
@@ -69,6 +70,13 @@
 ## Validation
 
 - Run `node scripts/check.mjs` after edits.
+- Treat UI and copy edits as implementation work, not static mockup work. A public change should account for user intent, component reuse, responsive behavior, accessibility, performance, evidence-state boundaries, security/privacy, and maintenance cost.
+- For public UI changes, verify the relevant component states: default, hover/focus, active/current, empty, loading or unavailable, error, long-content wrapping, and mobile layout.
+- Keep TN12 evidence states distinct in code and copy: accepted transaction, accepted app receipt, local reject, replay-derived state, wallet policy, planner-only state, future work, missing artifact, malformed artifact, and network failure.
+- Use semantic HTML first. Links navigate, buttons act, headings stay ordered, drawers remain keyboard-openable, focus stays visible, and color is never the only status signal.
+- Do not let long txids, covenant IDs, artifact names, command flags, or wallet fields break mobile layout. Wrap them, abbreviate with a full destination link, or move them behind drawers.
+- Do not add new frameworks, animation libraries, analytics scripts, wallet widgets, or external embeds for polish. Add dependencies only when they serve a specific proof inspection or wallet-review flow.
+- Wallet-facing UI must say what the user is approving, which rule is checked, what evidence backs it, and what remains outside the current proof.
 - For UI work, serve locally and confirm the page returns HTTP 200 before sharing a link.
 - When checking public state, follow `docs/LLM_REVIEW_GUIDE.md` before summarizing what is built, live, stale, or still in limbo.
 - Keep the hard-earned SilverScript lessons in repo-local docs for agents: state is the point, covenant IDs track lineage, mux/worker beats giant scripts, ICC uses sibling authority instead of nested execution, challenge/timeout paths beat expensive global scans, and negative cases make examples serious.

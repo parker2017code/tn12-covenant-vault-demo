@@ -51,12 +51,12 @@
       <div>
         <p class="status">TN12 configured. Proof transactions accepted.</p>
         <h2>Proof first, lab detail behind drawers.</h2>
-        <p>Review accepted proof, replay, and payload receipt evidence first. Product ideas and mainnet blockers stay separated behind their own routes.</p>
+        <p>Review accepted proof, replay, and app-receipt evidence first. Product ideas and mainnet blockers stay separated behind their own routes.</p>
       </div>
       <aside class="facts">
         <span>Accepted proof set</span>
         <strong>Proofs, receipts, and replay</strong>
-        <p>Vault, assurance, escrow, payload receipts, and batch-assurance outputs are backed by TN12 records.</p>
+        <p>Vault, assurance, escrow, app receipts, and batch-assurance outputs are backed by TN12 records.</p>
       </aside>
     </section>
 
@@ -64,7 +64,7 @@
       <div class="section-title">
         <p class="eyebrow">Workbench boundary</p>
         <h2>This page is for builder detail.</h2>
-        <p>Use the proof home and results pages for the public story. Lab Tools keeps artifact builders, reducer checks, payload work, and future lanes available without treating every row as a product claim.</p>
+        <p>Use the proof home and results pages for the public story. Lab Tools keeps artifact builders, replay checks, app-receipt work, and future paths available without treating every row as a product claim.</p>
       </div>
       <div class="work-map">
         <article><span>Script-enforced</span><p>The spend rule is enforced by the covenant or script path.</p></article>
@@ -84,7 +84,7 @@
         <article class="product-group">
           <span>Proof products</span>
           <strong>Accepted paths first</strong>
-          <p>Start with lanes that already have TN12 proof or payload evidence.</p>
+          <p>Start with paths that already have TN12 proof or app-receipt evidence.</p>
           <ul>
             <li><a href="#proofs">Accepted proof txids</a></li>
             <li><a href="#indexer">Replay and checkpoint</a></li>
@@ -135,7 +135,7 @@
         <article>
           <span>2</span>
           <strong>Pick a lane</strong>
-          <p>Use TN12 Playground for accepted transfers, Invoices for payload receipts, Assurance/Escrow for covenant spend rules, and pool-style lab checks for reducers and spend checks.</p>
+          <p>Use TN12 Playground for accepted transfers, Invoices for app receipts, Assurance/Escrow for covenant spend rules, and pool-style lab checks for replay and spend checks.</p>
           <a href="playground.html">Open TN12 Playground</a>
         </article>
         <article>
@@ -147,7 +147,7 @@
         <article>
           <span>4</span>
           <strong>Replay before believing it</strong>
-          <p>Trust the screen only after the txid is accepted, the payload or output matches, and replay checks pass.</p>
+          <p>Trust the screen only after the txid is accepted, the app receipt or output matches, and replay checks pass.</p>
           <a href="#indexer">Open indexer replay</a>
         </article>
       </div>
@@ -177,7 +177,7 @@
         <article>
           <span>Accepted app receipts</span>
           <strong>40</strong>
-          <p>JSON wRPC app receipts include pool-style, scheduler intent/bid/execution/binding, and agent release events; the public REST route is kept as a no-payload negative result.</p>
+          <p>JSON wRPC app receipts include pool-style, scheduler intent/bid/execution/binding, and agent release events; the public REST route is kept as a dropped-receipt negative result.</p>
         </article>
         <article>
           <span>Verifier command</span>
@@ -208,7 +208,7 @@
         <article>
           <span>TN12 gate</span>
           <strong>check:tn12</strong>
-          <p>Verifies public TN12 proof and payload evidence.</p>
+          <p>Verifies public TN12 proof and app-receipt evidence.</p>
         </article>
         <article>
           <span>Full refresh</span>
@@ -528,12 +528,12 @@ npm run coordination:evidence-dossier</pre>
       <pre>npm run defi:refresh</pre>
       <div class="section-title compact-title">
         <p class="eyebrow">Pool-style activity hardening</p>
-        <h3>Accepted TN12 activity, reducers, and bounded market logic.</h3>
+        <h3>Accepted TN12 activity, replay checks, and bounded market logic.</h3>
         <p>Session wallets execute funding, deposits, and payouts on TN12. Market pricing, oracle inputs, liquidation, and user-wallet signing are separate work.</p>
       </div>
       <div id="defi-simulation-summary" class="defi-summary" aria-live="polite"></div>
       <details class="evidence-drawer">
-        <summary>Show pool-style reducer checks</summary>
+        <summary>Show pool-style replay checks</summary>
         <div id="defi-simulation-list" class="defi-list" aria-live="polite"></div>
       </details>
       <pre>npm run defi:simulation
@@ -564,7 +564,7 @@ npm run defi:accepted-activity</pre>
       <div class="section-title">
         <p class="eyebrow">Agent commitment board</p>
         <h2>Task offers, deposits, proofs, disputes, refunds.</h2>
-        <p>Accepted payload commitments plus wallet approval. Payout still needs an explicit wallet action.</p>
+        <p>Accepted app commitments plus wallet approval. Payout still needs an explicit wallet action.</p>
       </div>
       <div id="agent-summary" class="agent-summary" aria-live="polite"></div>
       <div id="agent-list" class="agent-list" aria-live="polite"></div>
@@ -576,7 +576,7 @@ npm run defi:accepted-activity</pre>
     <details id="signals-funding" class="lab-drawer">
       <summary>
         <span>Proof, replay, invoices, and wallet use</span>
-        <small>Accepted tx evidence, replay rows, payload receipts, and submit surfaces.</small>
+        <small>Accepted tx evidence, replay rows, app receipts, and submit surfaces.</small>
       </summary>
 
     <section id="proofs" class="panel proofs">
@@ -596,12 +596,12 @@ npm run defi:accepted-activity</pre>
       <div class="section-title">
         <p class="eyebrow">Accepted transaction indexer</p>
         <h2>App state derived from TN12 reads.</h2>
-        <p>This checkpoint turns accepted proof spends and app receipt payloads into app-state records. Vaults, assurance campaigns, escrow, and receipts should pass through replay before the UI updates app state.</p>
+        <p>This checkpoint turns accepted proof spends and app receipts into app-state records. Vaults, assurance campaigns, escrow, and receipts should pass through replay before the UI updates app state.</p>
       </div>
       <div id="indexer-summary" class="indexer-summary" aria-live="polite"></div>
       <div id="indexer-persistence" class="indexer-persistence" aria-live="polite"></div>
       <details class="evidence-drawer">
-        <summary>Show indexed proof and payload rows</summary>
+        <summary>Show indexed proof and app-receipt rows</summary>
         <div id="indexer-records" class="indexer-records" aria-live="polite"></div>
         <div id="receipt-events" class="receipt-events" aria-live="polite"></div>
         <div id="defi-receipt-guard" class="receipt-events" aria-live="polite"></div>
@@ -613,9 +613,9 @@ npm run indexer:virtual-chain-run</pre>
 
     <section id="invoices" class="panel invoices">
       <div class="section-title">
-        <p class="eyebrow">Payload receipt app</p>
-        <h2>Invoices become app state after accepted payload receipts.</h2>
-        <p>Payment plus app data. The invoice is not considered paid by local JSON alone; it becomes app state only when an accepted TN12 transaction carries the matching payload receipt.</p>
+        <p class="eyebrow">App receipt path</p>
+        <h2>Invoices become app state after accepted app receipts.</h2>
+        <p>Payment plus app data. The invoice is not considered paid by local JSON alone; it becomes app state only when an accepted TN12 transaction carries the matching receipt.</p>
       </div>
       <div id="invoice-summary" class="invoice-summary" aria-live="polite"></div>
       <div id="invoice-list" class="invoice-list" aria-live="polite"></div>
@@ -630,7 +630,7 @@ npm run tx:payload</pre>
       <div class="section-title">
         <p class="eyebrow">Wallet-facing submit console</p>
         <h2>Review before any testnet broadcast.</h2>
-        <p>Check inputs, outputs, fees, payload state, and submit commands before signing. The user-wallet path is: review a request, sign outside the repo, return signed bytes, then submit and replay.</p>
+        <p>Check inputs, outputs, fees, app data, and submit commands before signing. The user-wallet path is: review a request, sign outside the repo, return signed bytes, then submit and replay.</p>
       </div>
       <div id="submit-summary" class="submit-summary" aria-live="polite"></div>
       <div id="wallet-review" class="wallet-review" aria-live="polite"></div>
@@ -703,7 +703,7 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Attestation registry</p>
         <h2>Signal incentives before prediction markets.</h2>
-        <p>RTD-style products start with signed signals, source reputation, and accepted payload receipts. Prediction markets and portfolio hedges consume this layer later; real-money settlement remains out of scope until assumptions are explicit.</p>
+        <p>RTD-style products start with signed signals, source reputation, and accepted app receipts. Prediction markets and portfolio hedges consume this layer later; real-money settlement remains out of scope until assumptions are explicit.</p>
       </div>
       <div id="attestation-summary" class="attestation-summary" aria-live="polite"></div>
       <div class="attestation-columns">
@@ -723,7 +723,7 @@ npm run wallet:adapter-run</pre>
       <div class="section-title">
         <p class="eyebrow">Event signal simulator</p>
         <h2>Attestation-fed review prompts, no trading.</h2>
-        <p>Verified accepted payload signals can move simulated event probabilities. Draft signals remain context only. The output is a review prompt, not settlement, advice, or automated execution.</p>
+        <p>Verified accepted app signals can move simulated event probabilities. Draft signals remain context only. The output is a review prompt, not settlement, advice, or automated execution.</p>
       </div>
       <div id="prediction-summary" class="prediction-summary" aria-live="polite"></div>
       <div id="prediction-markets" class="prediction-list" aria-live="polite"></div>
@@ -848,7 +848,7 @@ npm run wallet:adapter-run</pre>
       <div class="claim-grid">
         <article><strong>Accepted TN12</strong><p>Vault, assurance, escrow release, escrow DAA-refund, and escrow mutual-cancel proof transactions, covenant-shaped UX, signed/broadcast scripts, and explorer-verifiable testnet outputs.</p></article>
         <article><strong>Open gaps</strong><p>Mainnet covenant tooling, user-wallet signing, live replay behavior, and production wallet integration are tracked separately.</p></article>
-        <article><strong>Build focus</strong><p>User-wallet signing, live rollback evidence, durable payload replay, and one concrete settlement flow.</p></article>
+        <article><strong>Build focus</strong><p>User-wallet signing, live rollback evidence, durable app-receipt replay, and one concrete settlement flow.</p></article>
       </div>
     </section>
     </details>
