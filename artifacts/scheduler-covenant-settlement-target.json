@@ -1,7 +1,7 @@
 {
   "schema": "tn12-scheduler-covenant-settlement-target/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T01:59:58.836Z",
+  "generatedAt": "2026-05-13T02:23:19.055Z",
   "status": "accepted-covenant-payout-spend",
   "experiment": "scheduler-receipt-evidence",
   "purpose": "Record the accepted scheduler covenant payout spend without claiming protocol scheduling.",
@@ -21,7 +21,13 @@
     "covenantPayoutReleaseTxid": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
     "covenantPayoutDestination": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
     "covenantPayoutAmountTkas": "4",
-    "covenantPayoutStatus": "accepted-covenant-payout-spend"
+    "covenantPayoutStatus": "accepted-covenant-payout-spend",
+    "covenantPayoutNegativeStatus": "local-payout-negative-candidates-passed",
+    "covenantPayoutNegativeCases": [
+      "wrong_recipient_rejects",
+      "wrong_payout_amount_rejects",
+      "wrong_input_value_rejects"
+    ]
   },
   "targetV1": {
     "contractPattern": "guarded payout covenant output plus scheduler replay eligibility",
@@ -62,13 +68,42 @@
       "input value equals payout plus miner fee"
     ]
   },
+  "localNegativePayoutEvidence": {
+    "status": "local-payout-negative-candidates-passed",
+    "cases": [
+      {
+        "id": "valid_scheduler_payout_passes",
+        "got": true,
+        "expected": true,
+        "status": "passed"
+      },
+      {
+        "id": "wrong_recipient_rejects",
+        "got": false,
+        "expected": false,
+        "status": "passed"
+      },
+      {
+        "id": "wrong_payout_amount_rejects",
+        "got": false,
+        "expected": false,
+        "status": "passed"
+      },
+      {
+        "id": "wrong_input_value_rejects",
+        "got": false,
+        "expected": false,
+        "status": "passed"
+      }
+    ]
+  },
   "localChecksNeeded": [
-    "add local negative candidates for wrong destination and wrong payout amount",
+    "keep wrong recipient, wrong amount, and wrong input-value rows linked to wallet review",
     "tie the wallet approval prompt to the accepted intent, winning bid, execution receipt, and covenant output"
   ],
   "nextTn12Run": [
     "keep stale/duplicate/too-slow rows as blocked replay evidence",
-    "add negative payout candidates locally before attempting broadcast-rejected rows",
+    "keep wrong-recipient, wrong-amount, and wrong-input-value local payout rejects attached to review",
     "connect the accepted covenant payout to a wallet-readable approval summary"
   ],
   "blockers": [

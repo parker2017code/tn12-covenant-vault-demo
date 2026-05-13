@@ -241,14 +241,15 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "fixtures/SchedulerCovenantPayoutOutpoint.json",
         "artifacts/signed-drafts/scheduler-covenant-payout-release.json",
         "artifacts/scheduler-covenant-payout-evidence.json",
+        "artifacts/scheduler-covenant-payout-negative-evidence.json",
         "tests/domain/universal-scheduler-workbench.test.mjs"
       ],
       nextBuildSteps: [
-        "Add negative candidates for wrong destination and wrong payout amount.",
         "Connect the accepted covenant payout to a wallet-readable approval summary.",
+        "Keep wrong recipient, wrong amount, and wrong input-value local rejects attached to review.",
         "Keep protocol scheduler and autonomous custody claims out of public copy."
       ],
-      hardBoundary: "The scheduler payout money movement is now an accepted TN12 covenant spend. Trigger eligibility, winning-bid selection, and stale/duplicate blocking remain replay/indexer-derived."
+      hardBoundary: "The scheduler payout money movement is now an accepted TN12 covenant spend with local payout rejects. Trigger eligibility, winning-bid selection, and stale/duplicate blocking remain replay/indexer-derived."
     })
   ];
 

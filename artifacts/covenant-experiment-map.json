@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-13T01:59:59.571Z",
+  "generatedAt": "2026-05-13T02:23:20.016Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -261,14 +261,15 @@
         "fixtures/SchedulerCovenantPayoutOutpoint.json",
         "artifacts/signed-drafts/scheduler-covenant-payout-release.json",
         "artifacts/scheduler-covenant-payout-evidence.json",
+        "artifacts/scheduler-covenant-payout-negative-evidence.json",
         "tests/domain/universal-scheduler-workbench.test.mjs"
       ],
       "nextBuildSteps": [
-        "Add negative candidates for wrong destination and wrong payout amount.",
         "Connect the accepted covenant payout to a wallet-readable approval summary.",
+        "Keep wrong recipient, wrong amount, and wrong input-value local rejects attached to review.",
         "Keep protocol scheduler and autonomous custody claims out of public copy."
       ],
-      "hardBoundary": "The scheduler payout money movement is now an accepted TN12 covenant spend. Trigger eligibility, winning-bid selection, and stale/duplicate blocking remain replay/indexer-derived."
+      "hardBoundary": "The scheduler payout money movement is now an accepted TN12 covenant spend with local payout rejects. Trigger eligibility, winning-bid selection, and stale/duplicate blocking remain replay/indexer-derived."
     }
   ]
 }

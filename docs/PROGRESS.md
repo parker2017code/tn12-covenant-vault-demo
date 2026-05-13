@@ -30,6 +30,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | Scheduler covenant binding | `artifacts/scheduler-covenant-binding.json` |
 | Scheduler covenant payout evidence | `artifacts/scheduler-covenant-payout-evidence.json` |
+| Scheduler covenant payout rejects | `artifacts/scheduler-covenant-payout-negative-evidence.json` |
 | DeFi lab checks | `artifacts/full-defi-benchmark.json` |
 | Real TN12 playground plan | `artifacts/playground-plan.json` |
 | DeFi artifact manifest | `artifacts/defi-artifact-manifest.json` |
@@ -52,7 +53,7 @@ This repo is a TN12 proof/app-state lab. Keep the public story simple: what is a
 | Batch-assurance alternate path | Release is accepted; refund path is non-selected and must not be submitted for the spent pledge set. |
 | DeFi accepted activity | Local users, wallet A/B, and pool/operator wallets have accepted TN12 funding, pool-deposit, and pool-payout transfers. |
 | DeFi planner/indexer logic | Planner, scenario math, reducer promotion guard, AMM/liquidity hardening, lending sweeps, oracle failure cases, and multi-wallet role pack remain bounded to indexer/planner state where no script enforces the market rule. |
-| Scheduler / TangVM-adjacent logic | One accepted scheduler-intent payload, three accepted scheduler-bid receipts, one accepted execution receipt, one accepted covenant-binding receipt, one accepted local-key payout, and one accepted covenant payout spend are recorded. Trigger eligibility remains indexer-derived and aligned with upstream vProgs scheduler ideas, not TangVM/UniSc implementation. |
+| Scheduler / TangVM-adjacent logic | One accepted scheduler-intent payload, three accepted scheduler-bid receipts, one accepted execution receipt, one accepted covenant-binding receipt, one accepted local-key payout, one accepted covenant payout spend, and local payout rejects are recorded. Trigger eligibility remains indexer-derived and aligned with upstream vProgs scheduler ideas, not TangVM/UniSc implementation. |
 | Product hardening | Wallet, indexer, monitoring, and recovery paths are not production-grade. |
 
 ## Deferred Mainnet-Readiness Rails

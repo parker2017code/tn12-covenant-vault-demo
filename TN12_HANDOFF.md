@@ -8,7 +8,7 @@ What changed in this pass:
 - Added one local-wallet operator-pack payload receipt accepted on TN12: `50e8aa53fc725a6bca0b20d46c8ea521644793b741664a6decab23eb23556361`.
 - Payload evidence is now 40 accepted events and 53 checkpointed records.
 - DeFi accepted activity now includes 40 accepted local-key transfer rows: user funding, pool deposits, pool payouts, playground role funding, fresh role funding, complex multi-wallet rows, and scheduler execution payout in `artifacts/defi-accepted-activity-ledger.json`.
-- Scheduler evidence now includes one accepted intent payload, three accepted bid receipts, one accepted execution receipt, one accepted local-key payout reduced into executed trigger state in `artifacts/scheduler-intent-registry.json`, and one accepted covenant payout spend in `artifacts/scheduler-covenant-payout-evidence.json`.
+- Scheduler evidence now includes one accepted intent payload, three accepted bid receipts, one accepted execution receipt, one accepted local-key payout reduced into executed trigger state in `artifacts/scheduler-intent-registry.json`, one accepted covenant payout spend in `artifacts/scheduler-covenant-payout-evidence.json`, and local payout rejects in `artifacts/scheduler-covenant-payout-negative-evidence.json`.
 - Scheduler covenant binding now includes one accepted payload receipt that references the accepted vault recovery proof row in `artifacts/scheduler-covenant-binding.json`.
 - Live TN12 replay overlap now exists from a chain-block anchor inside the checkpoint band.
 - Batch-assurance release is accepted and indexed; refund paths remain non-selected for that spent pledge set.

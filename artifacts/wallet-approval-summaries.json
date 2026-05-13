@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-approval-summaries/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T02:06:07.183Z",
+  "generatedAt": "2026-05-13T02:23:19.470Z",
   "status": "wallet-approval-summary-ready",
   "purpose": "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
   "summaries": [
@@ -300,10 +300,25 @@
           "reason": "replay marks the trigger source stale or the execution duplicate"
         },
         {
-          "id": "wrong-scheduler-recipient",
+          "id": "wrong_recipient_rejects",
           "recommendedWalletDecision": "reject",
-          "evidenceClass": "NEXT_LOCAL_SCRIPT_REJECT",
-          "reason": "next local candidate should prove wrong destination fails against the payout covenant"
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "wrong recipient rejects",
+          "candidateTxid": "957b0e6dad53ea743653daccba224f71f07e2f994b97ba7f8b35aa543f8864b7"
+        },
+        {
+          "id": "wrong_payout_amount_rejects",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "wrong payout amount rejects",
+          "candidateTxid": "6d83dfaab60650b6d7f5527dc6339d850b7076e6691e5e2d394bb9c51bceafea"
+        },
+        {
+          "id": "wrong_input_value_rejects",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "wrong input value rejects",
+          "candidateTxid": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986"
         }
       ],
       "boundaries": [

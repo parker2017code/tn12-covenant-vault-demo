@@ -74,7 +74,7 @@ opcodes.
 | Complex DeFi role funding | TN12 accepted | `artifacts/complex-defi-multi-wallet-20260512-evidence.json` |
 | Complex user deposits and pool payout | TN12 accepted | `artifacts/complex-defi-user-a-pool-deposit-20260512-evidence.json`, `artifacts/complex-defi-user-b-pool-deposit-20260512-evidence.json`, `artifacts/complex-defi-pool-user-b-payout-20260512-evidence.json` |
 | Replay-derived balances | Indexer-derived | `artifacts/defi-scenario-reducer.json` |
-| Scheduler intent, bids, execution, covenant payout | TN12 accepted plus indexer-derived trigger state | `artifacts/scheduler-intent-registry.json`, `artifacts/scheduler-covenant-binding.json`, `artifacts/scheduler-covenant-payout-evidence.json` |
+| Scheduler intent, bids, execution, covenant payout | TN12 accepted plus indexer-derived trigger state and local payout rejects | `artifacts/scheduler-intent-registry.json`, `artifacts/scheduler-covenant-binding.json`, `artifacts/scheduler-covenant-payout-evidence.json`, `artifacts/scheduler-covenant-payout-negative-evidence.json` |
 | Coordination market dossier | Evidence dossier plus accepted covenant release spends | `artifacts/coordination-market-evidence-dossier.json`, `artifacts/coordination-covenant-release-evidence.json` |
 
 ## Missing Or Not Productized

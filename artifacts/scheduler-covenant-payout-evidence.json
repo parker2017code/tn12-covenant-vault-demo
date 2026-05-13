@@ -1,7 +1,7 @@
 {
   "schema": "tn12-scheduler-covenant-payout-evidence/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T01:58:08.015Z",
+  "generatedAt": "2026-05-13T02:22:55.181Z",
   "status": "accepted-covenant-payout-spend",
   "funding": {
     "txid": "a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab",
@@ -27,6 +27,8 @@
     "previousLocalKeyPayoutTxid": "1a486540fa324d8b4590a97a27b791eb895f32a5196e92fe0d1be584ece1ec1d"
   },
   "summary": {
+    "liveProductClaims": 0,
+    "custodyActions": 0,
     "scriptEnforces": [
       "operator signature",
       "exact payout amount",

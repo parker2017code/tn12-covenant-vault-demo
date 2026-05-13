@@ -46,6 +46,8 @@ const artifact = {
     previousLocalKeyPayoutTxid: target.currentEvidence?.executionTransferTxid || ""
   },
   summary: {
+    liveProductClaims: 0,
+    custodyActions: 0,
     scriptEnforces: [
       "operator signature",
       "exact payout amount",

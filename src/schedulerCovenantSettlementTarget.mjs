@@ -3,6 +3,7 @@ export function buildSchedulerCovenantSettlementTarget({
   intentRegistry = {},
   binding = {},
   payoutEvidence = null,
+  negativeEvidence = null,
   generatedAt = new Date().toISOString()
 } = {}) {
   const executedTrigger = (intentRegistry.triggerRows || [])
@@ -23,6 +24,7 @@ export function buildSchedulerCovenantSettlementTarget({
     .find((row) => row.status === "winner-selected") || {};
   const bindingRow = (binding.rows || [])[0] || {};
   const acceptedPayout = payoutEvidence?.status === "accepted-covenant-payout-spend";
+  const negativeRows = Array.isArray(negativeEvidence?.cases) ? negativeEvidence.cases : [];
 
   return {
     schema: "tn12-scheduler-covenant-settlement-target/v1",
@@ -49,7 +51,9 @@ export function buildSchedulerCovenantSettlementTarget({
       covenantPayoutReleaseTxid: payoutEvidence?.release?.txid || "",
       covenantPayoutDestination: payoutEvidence?.release?.destination || "",
       covenantPayoutAmountTkas: payoutEvidence?.release?.amountTkas || "",
-      covenantPayoutStatus: payoutEvidence?.status || ""
+      covenantPayoutStatus: payoutEvidence?.status || "",
+      covenantPayoutNegativeStatus: negativeEvidence?.status || "",
+      covenantPayoutNegativeCases: negativeRows.filter((row) => row.expected === false).map((row) => row.id)
     },
     targetV1: {
       contractPattern: "guarded payout covenant output plus scheduler replay eligibility",
@@ -87,8 +91,19 @@ export function buildSchedulerCovenantSettlementTarget({
       amountTkas: payoutEvidence.release.amountTkas,
       scriptEnforces: payoutEvidence.summary?.scriptEnforces || []
     } : null,
+    localNegativePayoutEvidence: negativeEvidence?.status ? {
+      status: negativeEvidence.status,
+      cases: negativeRows.map((row) => ({
+        id: row.id,
+        got: row.got,
+        expected: row.expected,
+        status: row.status
+      }))
+    } : null,
     localChecksNeeded: acceptedPayout ? [
-      "add local negative candidates for wrong destination and wrong payout amount",
+      negativeEvidence?.status === "local-payout-negative-candidates-passed"
+        ? "keep wrong recipient, wrong amount, and wrong input-value rows linked to wallet review"
+        : "add local negative candidates for wrong destination and wrong payout amount",
       "tie the wallet approval prompt to the accepted intent, winning bid, execution receipt, and covenant output"
     ] : [
       "build a fresh covenant payout output for the scheduler action",
@@ -98,7 +113,9 @@ export function buildSchedulerCovenantSettlementTarget({
     ],
     nextTn12Run: acceptedPayout ? [
       "keep stale/duplicate/too-slow rows as blocked replay evidence",
-      "add negative payout candidates locally before attempting broadcast-rejected rows",
+      negativeEvidence?.status === "local-payout-negative-candidates-passed"
+        ? "keep wrong-recipient, wrong-amount, and wrong-input-value local payout rejects attached to review"
+        : "add negative payout candidates locally before attempting broadcast-rejected rows",
       "connect the accepted covenant payout to a wallet-readable approval summary"
     ] : [
       "fund a fresh covenant settlement output for the scheduler payout",

@@ -108,6 +108,9 @@ until these move.
   `artifacts/scheduler-covenant-payout-evidence.json` move Scheduler one layer
   deeper: a fresh `SchedulerCovenantPayout` output and its guarded payout spend
   are accepted on TN12.
+- `artifacts/scheduler-covenant-payout-negative-evidence.json` adds local
+  script-engine rejects for wrong recipient, wrong payout amount, and wrong
+  input value against the same live scheduler payout covenant parameters.
 
 ## Next Exact Tasks
 
@@ -138,7 +141,7 @@ experiment surface:
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
 | 5 | Coordination release evidence | Accepted payload/custody/release receipts, transparent replay evidence, fresh covenant pledge outputs, and accepted covenant release spends | Add refund-path evidence only from fresh unspent pledge outputs; keep threshold selection replay-derived |
-| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, and accepted covenant payout spend | Add wrong-destination/wrong-amount payout candidates and wallet approval summary |
+| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, accepted covenant payout spend, and local payout rejects | Keep payout rejects in wallet review; do not upgrade trigger eligibility beyond replay-derived |
 
 Target state: all six get TN12 verticals. Current labels still matter while
 building: Recurring cap, Sibling asset, Mux worker, Coordination release, and

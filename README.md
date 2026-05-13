@@ -115,6 +115,7 @@ If you are starting from a blank terminal, use `docs/CLI_FROM_ZERO.md` first. It
 | Scheduler intent registry | `artifacts/scheduler-intent-registry.json` |
 | Scheduler workbench | `artifacts/universal-scheduler-workbench.json` |
 | Scheduler covenant payout evidence | `artifacts/scheduler-covenant-payout-evidence.json` |
+| Scheduler covenant payout rejects | `artifacts/scheduler-covenant-payout-negative-evidence.json` |
 | DeFi lab checks | `artifacts/full-defi-benchmark.json` |
 | Accepted TN12 playground plan | `artifacts/playground-plan.json` |
 | Accepted playground funding | `artifacts/playground-funding-evidence.json` |

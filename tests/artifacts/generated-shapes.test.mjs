@@ -69,6 +69,8 @@ const defiArtifacts = [
   ["artifacts/scheduler-intent-registry.json", "tn12-scheduler-intent-registry/v1"],
   ["artifacts/scheduler-covenant-binding.json", "tn12-scheduler-covenant-binding/v1"],
   ["artifacts/universal-scheduler-workbench.json", "tn12-universal-scheduler-workbench/v1"],
+  ["artifacts/scheduler-covenant-payout-evidence.json", "tn12-scheduler-covenant-payout-evidence/v1"],
+  ["artifacts/scheduler-covenant-payout-negative-evidence.json", "tn12-scheduler-covenant-payout-negative-evidence/v1"],
   ["artifacts/full-defi-benchmark.json", "tn12-full-defi-benchmark/v1"],
   ["artifacts/playground-plan.json", "tn12-playground-plan/v1"],
   ["artifacts/playground-actions.json", "tn12-playground-actions/v1"],
@@ -86,7 +88,7 @@ for (const [path, schema] of defiArtifacts) {
   const artifact = await readJson(path);
   assert.equal(artifact.schema, schema);
   assert.equal(artifact.network, "kaspa-testnet-12");
-  assert.match(artifact.status, /ready|simulation|review|plan|accepted/);
+  assert.match(artifact.status, /ready|simulation|review|plan|accepted|passed/);
   if (artifact.summary) {
     assert.equal(artifact.summary.liveProductClaims, 0);
     assert.equal(artifact.summary.custodyActions ?? artifact.summary.custodyReadyLanes ?? 0, 0);

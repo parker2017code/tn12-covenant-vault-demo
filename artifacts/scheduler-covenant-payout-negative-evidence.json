@@ -1,0 +1,97 @@
+{
+  "schema": "tn12-scheduler-covenant-payout-negative-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "checkedAt": "2026-05-13T02:23:18.382Z",
+  "status": "local-payout-negative-candidates-passed",
+  "acceptedPositivePath": {
+    "funding": {
+      "txid": "a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab",
+      "outputIndex": 0,
+      "covenantId": "0551b394b0b6ed0ca2503ff73996e9b5dbd8918941968438ecdc178c27c7aa42",
+      "amountTkas": 4.00005,
+      "amountSompi": "400005000",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/a1928dfc9434c71a759a138429dea903cc44f4df7aee61079f9b865dc4a97dab"
+    },
+    "release": {
+      "txid": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986",
+      "amountTkas": "4",
+      "amountSompi": "400000000",
+      "destination": "kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
+      "acceptingBlockBlueScore": 10130498
+    }
+  },
+  "summary": {
+    "liveProductClaims": 0,
+    "custodyActions": 0,
+    "totalCases": 4,
+    "localRejects": 3
+  },
+  "candidateScope": "Local script-engine candidates using the same live scheduler payout covenant id and contract parameters as the accepted payout path. These rows were not broadcast.",
+  "cases": [
+    {
+      "covenantId": "0551b394b0b6ed0ca2503ff73996e9b5dbd8918941968438ecdc178c27c7aa42",
+      "expected": true,
+      "got": true,
+      "id": "valid_scheduler_payout_passes",
+      "inputValueSompi": "400005000",
+      "outputAmountSompi": "400000000",
+      "recipientScriptPublicKey": "20026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18ac",
+      "status": "passed",
+      "transactionId": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986"
+    },
+    {
+      "covenantId": "0551b394b0b6ed0ca2503ff73996e9b5dbd8918941968438ecdc178c27c7aa42",
+      "expected": false,
+      "got": false,
+      "id": "wrong_recipient_rejects",
+      "inputValueSompi": "400005000",
+      "outputAmountSompi": "400000000",
+      "recipientScriptPublicKey": "209584637e8e654ff948288d6b56a330abde4689d8d15299bc1cc65c77516889ceac",
+      "status": "passed",
+      "transactionId": "957b0e6dad53ea743653daccba224f71f07e2f994b97ba7f8b35aa543f8864b7"
+    },
+    {
+      "covenantId": "0551b394b0b6ed0ca2503ff73996e9b5dbd8918941968438ecdc178c27c7aa42",
+      "expected": false,
+      "got": false,
+      "id": "wrong_payout_amount_rejects",
+      "inputValueSompi": "400005000",
+      "outputAmountSompi": "399999999",
+      "recipientScriptPublicKey": "20026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18ac",
+      "status": "passed",
+      "transactionId": "6d83dfaab60650b6d7f5527dc6339d850b7076e6691e5e2d394bb9c51bceafea"
+    },
+    {
+      "covenantId": "0551b394b0b6ed0ca2503ff73996e9b5dbd8918941968438ecdc178c27c7aa42",
+      "expected": false,
+      "got": false,
+      "id": "wrong_input_value_rejects",
+      "inputValueSompi": "400005001",
+      "outputAmountSompi": "400000000",
+      "recipientScriptPublicKey": "20026c382d0744646d0cbc953584fb619d6ee56ef450f08c05f014c3242e429d18ac",
+      "status": "passed",
+      "transactionId": "634873a5a55136d010ba9371c4a90da997755c8a31b7eca458d5f6756eddb986"
+    }
+  ],
+  "proves": [
+    "the valid scheduler payout shape passes local script execution",
+    "wrong recipient output is rejected",
+    "wrong payout amount is rejected",
+    "wrong input value is rejected"
+  ],
+  "doesNotProve": [
+    "TN12 rejected-mempool records for the negative candidates",
+    "protocol scheduler eligibility",
+    "wallet-standard signing",
+    "mainnet readiness"
+  ],
+  "sourceArtifacts": {
+    "acceptedPayoutEvidence": "artifacts/scheduler-covenant-payout-evidence.json",
+    "contractOutpoint": "fixtures/SchedulerCovenantPayoutOutpoint.json",
+    "constructorArgs": "fixtures/SchedulerCovenantPayout.ctor.json",
+    "rustHarness": "scripts/rust/scheduler_covenant_payout_negatives.rs"
+  },
+  "debug": null
+}

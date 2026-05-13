@@ -186,6 +186,7 @@
     "scheduler:covenant-payout-fixture": "node scripts/build-scheduler-covenant-payout-fixture.mjs",
     "scheduler:covenant-payout-release": "node scripts/build-scheduler-covenant-payout-release-draft.mjs",
     "scheduler:covenant-payout-evidence": "node scripts/build-scheduler-covenant-payout-evidence.mjs",
+    "scheduler:covenant-payout-negatives": "node scripts/build-scheduler-covenant-payout-negatives.mjs",
     "defi:benchmark": "node scripts/build-full-defi-benchmark.mjs",
     "playground:plan": "node scripts/build-playground-plan.mjs",
     "playground:wallets": "node scripts/create-playground-wallets.mjs",

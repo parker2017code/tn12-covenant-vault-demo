@@ -3,19 +3,22 @@ import { buildSchedulerCovenantSettlementTarget } from "../src/schedulerCovenant
 
 const outPath = process.env.OUT || "artifacts/scheduler-covenant-settlement-target.json";
 const payoutEvidencePath = process.env.SCHEDULER_PAYOUT_EVIDENCE || "artifacts/scheduler-covenant-payout-evidence.json";
+const negativeEvidencePath = process.env.SCHEDULER_PAYOUT_NEGATIVE_EVIDENCE || "artifacts/scheduler-covenant-payout-negative-evidence.json";
 
-const [workbench, intentRegistry, binding, payoutEvidence] = await Promise.all([
+const [workbench, intentRegistry, binding, payoutEvidence, negativeEvidence] = await Promise.all([
   readJson("artifacts/universal-scheduler-workbench.json"),
   readJson("artifacts/scheduler-intent-registry.json"),
   readJson("artifacts/scheduler-covenant-binding.json"),
-  readOptionalJson(payoutEvidencePath)
+  readOptionalJson(payoutEvidencePath),
+  readOptionalJson(negativeEvidencePath)
 ]);
 
 const artifact = buildSchedulerCovenantSettlementTarget({
   workbench,
   intentRegistry,
   binding,
-  payoutEvidence
+  payoutEvidence,
+  negativeEvidence
 });
 
 await mkdir("artifacts", { recursive: true });

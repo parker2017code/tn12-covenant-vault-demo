@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { buildWalletApprovalSummaries } from "../../src/walletApprovalSummaries.mjs";
 
-const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, schedulerPayout, schedulerTarget, checkedIn] = await Promise.all([
+const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxChallenge, schedulerPayout, schedulerTarget, schedulerNegatives, checkedIn] = await Promise.all([
   readJson("artifacts/recurring-treasury-vault-window-reset-proof.json"),
   readJson("artifacts/signed-drafts/recurring-treasury-vault-window-reset.json"),
   readJson("fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json"),
@@ -11,6 +11,7 @@ const [resetProof, resetDraft, continuation, siblingDiscovery, muxLiveFlow, muxC
   readJson("artifacts/blitz-mux-challenge-settlement.json"),
   readJson("artifacts/scheduler-covenant-payout-evidence.json"),
   readJson("artifacts/scheduler-covenant-settlement-target.json"),
+  readJson("artifacts/scheduler-covenant-payout-negative-evidence.json"),
   readJson("artifacts/wallet-approval-summaries.json")
 ]);
 
@@ -23,6 +24,7 @@ const artifact = buildWalletApprovalSummaries({
   muxChallenge,
   schedulerPayout,
   schedulerTarget,
+  schedulerNegatives,
   generatedAt: "2026-05-12T00:00:00.000Z"
 });
 
@@ -78,8 +80,11 @@ assert.ok(schedulerSummary.technicalChecks.scriptEnforces.includes("recipient de
 assert.ok(schedulerSummary.technicalChecks.replayStillChecks.some((item) => /stale/.test(item)));
 assert.deepEqual(schedulerSummary.refusalPrompts.map((item) => item.id), [
   "stale-or-duplicate-scheduler-row",
-  "wrong-scheduler-recipient"
+  "wrong_recipient_rejects",
+  "wrong_payout_amount_rejects",
+  "wrong_input_value_rejects"
 ]);
+assert.ok(schedulerSummary.refusalPrompts.some((item) => item.evidenceClass === "LOCAL_SCRIPT_ENGINE_REJECT"));
 assert.ok(schedulerSummary.boundaries.some((item) => item.includes("replay/indexer-derived")));
 
 assert.equal(checkedIn.schema, artifact.schema);

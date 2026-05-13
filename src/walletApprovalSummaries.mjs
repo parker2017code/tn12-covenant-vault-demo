@@ -7,6 +7,7 @@ export function buildWalletApprovalSummaries({
   muxChallenge = {},
   schedulerPayout = {},
   schedulerTarget = {},
+  schedulerNegatives = {},
   generatedAt = new Date().toISOString()
 } = {}) {
   const accepted = resetProof.accepted || {};
@@ -80,7 +81,7 @@ export function buildWalletApprovalSummaries({
   }
 
   if (schedulerPayout.status === "accepted-covenant-payout-spend") {
-    summaries.push(buildSchedulerPayoutSummary(schedulerPayout, schedulerTarget));
+    summaries.push(buildSchedulerPayoutSummary(schedulerPayout, schedulerTarget, schedulerNegatives));
   }
 
   return {
@@ -95,7 +96,10 @@ export function buildWalletApprovalSummaries({
   };
 }
 
-function buildSchedulerPayoutSummary(payout, target) {
+function buildSchedulerPayoutSummary(payout, target, negatives) {
+  const localRejects = Array.isArray(negatives?.cases)
+    ? negatives.cases.filter((row) => row.expected === false)
+    : [];
   return {
     id: "scheduler-covenant-payout",
     experiment: "scheduler-receipt-evidence",
@@ -125,12 +129,13 @@ function buildSchedulerPayoutSummary(payout, target) {
         evidenceClass: "INDEXER_DERIVED_REJECT",
         reason: "replay marks the trigger source stale or the execution duplicate"
       },
-      {
-        id: "wrong-scheduler-recipient",
+      ...localRejects.map((row) => ({
+        id: row.id,
         recommendedWalletDecision: "reject",
-        evidenceClass: "NEXT_LOCAL_SCRIPT_REJECT",
-        reason: "next local candidate should prove wrong destination fails against the payout covenant"
-      }
+        evidenceClass: "LOCAL_SCRIPT_ENGINE_REJECT",
+        reason: row.id.replaceAll("_", " "),
+        candidateTxid: row.transactionId || ""
+      }))
     ],
     boundaries: [
       "This is a wallet-readable summary for an accepted TN12 covenant payout.",
