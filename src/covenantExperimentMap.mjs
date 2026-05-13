@@ -40,10 +40,11 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json",
         "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
         "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json",
-        "artifacts/recurring-treasury-vault-window-reset-proof.json"
+        "artifacts/recurring-treasury-vault-window-reset-proof.json",
+        "artifacts/wallet-approval-summaries.json"
       ],
       nextBuildSteps: [
-        "Add user-wallet handoff for the same path.",
+        "Connect the approval summary to a user-wallet handoff for the same path.",
         "Turn the visible track into an interactive local-wallet round.",
         "Keep user-wallet signing out of the claim until a wallet-standard handoff signs the same path."
       ],

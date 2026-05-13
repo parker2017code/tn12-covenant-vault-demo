@@ -40,6 +40,8 @@ until these move.
 - `artifacts/recurring-treasury-vault-window-reset-proof.json` records the
   accepted TN12 reset-window spend, the reset continuation fixture, and local
   rejects for early reset, stale-window reset, and over-cap reset.
+- `artifacts/wallet-approval-summaries.json` turns the recurring-cap reset-window
+  proof into wallet-readable approval fields and reject prompts.
 - `contracts/CovenantOwnedAssetDuel.sil` compiles.
 - `artifacts/covenant-owned-asset-duel-proof.json` proves the local ICC
   sibling-input pattern: expected sibling covenant ID authorizes an asset move;
@@ -85,30 +87,49 @@ until these move.
 
 ## Next Exact Tasks
 
+### Six-Experiment Priority
+
+| Priority | Experiment | Current level | Next upgrade |
+|---|---|---|---|
+| 1 | Recurring cap proof | Accepted TN12 covenant spends, reset-window spend, continuation state, local rejects, first wallet approval summary | Extend wallet approval to real signer handoff |
+| 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects | Add sibling-input discovery and wallet approval summary |
+| 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects | Add wallet approval summary; add challenge only if it proves a new refusal path |
+| 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
+| 5 | Coordination release evidence | Accepted payload/custody/release receipts plus transparent replay evidence | Build a TN12 covenant settlement target for release/refund |
+| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts plus indexer-derived replay | Build a TN12 covenant settlement target for one eligible trigger |
+
+Target state: all six get TN12 verticals. Current labels still matter while
+building: the first three already have accepted covenant-spend evidence,
+Vault negatives are local rejects over an accepted rail, and Coordination plus
+Scheduler must not be called covenant-settlement until their settlement target
+exists and is tested on TN12.
+
 1. Add a compact Blitz challenge variant only if it proves a new refusal path.
    - Current accepted path already covers Worker A return, Worker A timeout, and
      Worker B return.
    - Do not add another accepted row if it is only more volume.
 
-2. Start the next partial experiment only as a vertical slice.
+2. Push the remaining experiments toward TN12 verticals one at a time.
    - Vault negative checks now have a bounded local-reject artifact and visible section.
    - Coordination League now has a bounded visible section.
    - Scheduler Duel now has a bounded visible section.
-   - Further experiment work should only add new accepted evidence, safe
-     rejection evidence, or a real user-wallet handoff.
-   - Keep the top three demos as the public proof set until the next candidate
-     has accepted evidence or concrete local rejects.
+   - Further experiment work should add accepted TN12 evidence, safe rejection
+     evidence, a real covenant settlement target, or a user-wallet handoff.
+   - Do not open a seventh experiment until all six have their best current TN12
+     vertical or an explicit tooling/funding blocker.
 
 3. Split the giant focused/check command surface.
    - The command wall is now a maintenance risk.
    - Preserve coverage while making the gate easier to read.
 
-4. Add the wallet-facing abstraction rail.
+4. Extend the wallet-facing abstraction rail.
    - End users should not need JSON artifacts to approve a covenant path.
+   - The first recurring-cap approval summary is built; extend this pattern to
+     the asset and mux examples.
    - Define the minimum wallet prompt for each built pattern: action, amount,
      destination, covenant id, continuation output, required sibling input, and
      failure reason.
-   - Done when at least one experiment has a machine-readable approval summary
+   - Done when each top proof pattern has a machine-readable approval summary
      that a wallet UI could render as Approve/Reject.
 
 5. Add sibling-input discovery for ICC examples.

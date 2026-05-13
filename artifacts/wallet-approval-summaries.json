@@ -1,0 +1,75 @@
+{
+  "schema": "tn12-wallet-approval-summaries/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-13T00:48:38.623Z",
+  "status": "wallet-approval-summary-ready",
+  "purpose": "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
+  "summaries": [
+    {
+      "id": "recurring-cap-reset-window",
+      "experiment": "recurring-cap-proof",
+      "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED",
+      "recommendedWalletDecision": "approve-if-user-initiated",
+      "title": "Reset recurring treasury window",
+      "plainAction": "Spend 40 tKAS from the capped treasury and relock 44.9998 tKAS as the next covenant state.",
+      "userChecks": [
+        "Amount: 40 tKAS",
+        "Cap: 75 tKAS",
+        "Previously spent in window: 65 tKAS",
+        "Next spent in window: 40 tKAS",
+        "New window start: 9900000",
+        "Continuation output is relocked to the same covenant id"
+      ],
+      "technicalChecks": {
+        "contract": "contracts/RecurringTreasuryVaultWindow.sil",
+        "sourceOutpoint": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580:0",
+        "spendTxid": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+        "explorerUrl": "https://tn12.kaspa.stream/transactions/f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
+        "covenantId": "a4f8b4650bf7d8599bb64e5016b7644a2b4a0625189943f0c6c03db2fb6572c4",
+        "lockTime": "9900000",
+        "resetWindow": "9900000",
+        "destination": {
+          "amountTkas": "40",
+          "scriptPublicKey": "201dbc18aa4c52b6f35caee2c25352d248e5638ffacfb30bb47ac8c6f0a7924700ac"
+        },
+        "continuation": {
+          "outpoint": "f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759:1",
+          "amountTkas": "44.9998",
+          "covenantId": "a4f8b4650bf7d8599bb64e5016b7644a2b4a0625189943f0c6c03db2fb6572c4",
+          "scriptPublicKey": "aa20c1c07b1bb8023e170d1028324cd8448726903e57367d4c25b7d093ab0cff5bf987"
+        }
+      },
+      "refusalPrompts": [
+        {
+          "id": "early-reset",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "lockTime before reset window",
+          "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-early-reset.json",
+          "candidateTxid": "23b9f2e75801f9edfc0e487945cf04a9332e4bddff5a04e5b2b506b7ea657bce"
+        },
+        {
+          "id": "stale-reset-window",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "new state keeps the old window",
+          "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-stale-reset.json",
+          "candidateTxid": "a47b6d52f4c54eb57e7e089b47e8fb8c3283cd8ee4a5b35fea143720a4d394ba"
+        },
+        {
+          "id": "over-cap-reset",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "reset amount exceeds cap",
+          "artifact": "artifacts/signed-drafts/recurring-treasury-vault-window-over-cap-reset.json",
+          "candidateTxid": "9cb4abb8e2e0e914ed599d02546eec81800ab09a95fb6c040acbc80b2643182b"
+        }
+      ],
+      "boundaries": [
+        "This is a wallet-readable summary for a TN12/testnet covenant path.",
+        "It does not prove wallet-standard signing or mainnet readiness.",
+        "Local reject rows are script-engine evidence, not broadcast-rejected TN12 invalid transactions."
+      ]
+    }
+  ]
+}

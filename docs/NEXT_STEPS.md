@@ -22,6 +22,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Vault negative-check update, 2026-05-12: `artifacts/covenant-heist-evidence.json` and the visible experiment section now show wrong-owner, wrong-destination, missing-continuation, cumulative-over-cap, early-reset, stale-reset, and over-cap-reset local rejects over the accepted recurring-vault rail.
 - Coordination League update, 2026-05-12: `artifacts/coordination-market-evidence-dossier.json` is visible as a bounded coordination slice with three qualifying intendos, accepted payload/custody evidence, accepted release txid `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`, and non-selected refund alternates.
 - Scheduler Duel update, 2026-05-12: `artifacts/universal-scheduler-workbench.json` is visible as a bounded app-state slice with accepted intent, accepted executor bids, accepted execution receipt, matched payout transfer, and replay-blocked stale/duplicate/too-slow paths. It remains `INDEXER_DERIVED`, not protocol scheduling or autonomous custody.
+- Wallet approval update, 2026-05-12: `artifacts/wallet-approval-summaries.json` translates the recurring-cap reset-window proof into wallet-readable fields: amount, cap, previous/next spent amount, covenant id, continuation output, explorer URL, and local reject prompts.
 
 ## Completed In Current Cleanup Pass
 
@@ -41,11 +42,13 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 2 | Add new experiment evidence only when it is a real move. | New rows must be accepted evidence, safe rejection evidence, or wallet handoff evidence. | No |
 | 3 | Add wallet-readable approval summaries. | At least one experiment emits an action/amount/destination/covenant/continuation summary a wallet could render as Approve/Reject. | No |
 | 4 | Add sibling-input discovery for the asset proof. | The repo explains how the required sibling input is found from covenant id, outpoint, state, and replay state. | No |
-| 5 | Harden replay-derived lanes. | Scheduler or coordination replay has a second-verifier check, mismatch proof, checkpoint, or explicit proof-system blocker. | No |
-| 6 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
-| 7 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
-| 8 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
-| 9 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
+| 5 | Build the Coordination TN12 settlement target. | Release/refund gets a covenant target plan, local checks, and accepted TN12 evidence or an exact blocker. | No |
+| 6 | Build the Scheduler TN12 settlement target. | One eligible trigger gets a covenant target plan, local checks, and accepted TN12 evidence or an exact blocker. | No |
+| 7 | Harden replay-derived lanes. | Scheduler or coordination replay has a second-verifier check, mismatch proof, checkpoint, or explicit proof-system blocker. | No |
+| 8 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
+| 9 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
+| 10 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
+| 11 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
 
 ## Next Defined Work
 
