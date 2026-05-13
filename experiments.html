@@ -29,16 +29,16 @@
       <div class="nav-group nav-pages" aria-label="Pages">
         <a href="index.html">Proof Home</a>
         <a href="results.html">Results</a>
-        <a href="playground.html">Live Play</a>
+        <a href="playground.html">TN12 Playground</a>
         <a href="experiments.html" aria-current="page">Experiments</a>
         <a href="lab.html">Lab Tools</a>
       </div>
       <div class="nav-group nav-local" aria-label="This page">
-        <a href="#spotlight">Spotlight</a>
-        <a href="#purpose">Purpose</a>
+        <a href="#rules">Evidence</a>
+        <a href="#purpose">Meaning</a>
+        <a href="#examples">Examples</a>
         <a href="#wallet-review">Wallet Review</a>
         <a href="#queue">Queue</a>
-        <a href="#rules">Rules</a>
       </div>
     </nav>
   </header>
@@ -46,35 +46,127 @@
   <main>
     <section class="hero results-hero">
       <div>
-        <p class="status">Experiment map. TN12/testnet only.</p>
-        <h2>Covenant proofs, grouped by pattern.</h2>
-        <p>Current TN12 evidence for stateful spends, mux routing, sibling authority, local rejects, and settlement targets.</p>
+        <p class="status">Kaspa TN12 covenant proof lab. Testnet only.</p>
+        <h2>Rules attached to testnet money.</h2>
+        <p>This page tracks experiments where spendable outputs carry rules. Some paths landed on TN12. Some bad paths were rejected locally. Replay artifacts explain accepted state.</p>
       </div>
       <aside class="facts">
-        <span>Current spotlight</span>
-        <strong>Mux worker. Recurring cap. Sibling asset.</strong>
-        <p>Accepted TN12 evidence plus wallet-readable review fields.</p>
+        <span>Read this first</span>
+        <strong>Not mainnet DeFi. Not audited custody.</strong>
+        <p>The goal is to show which rule moved the money, which rule blocked the wrong move, and what a wallet could show before signing.</p>
       </aside>
+    </section>
+
+    <section id="rules" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Evidence classes</p>
+        <h2>Do not read every row as the same kind of proof.</h2>
+        <p>Accepted TN12 evidence, local rejects, and replay-derived state are useful for different reasons. The page keeps them separate.</p>
+      </div>
+      <div class="work-map">
+        <article>
+          <span>Accepted TN12</span>
+          <p>A transaction or payload event landed on testnet and is linked through a txid, response, fixture, or artifact.</p>
+        </article>
+        <article>
+          <span>Local reject</span>
+          <p>A candidate failed in the local script or covenant engine. Useful for testing, but not a broadcast rejection.</p>
+        </article>
+        <article>
+          <span>Replay-derived</span>
+          <p>The repo reads accepted rows and calculates app state. Replay explains state; it does not by itself control funds.</p>
+        </article>
+      </div>
     </section>
 
     <section id="purpose" class="panel experiments-panel">
       <div class="section-title">
-        <p class="eyebrow">Purpose</p>
-        <h2>Show which rule moved the money.</h2>
-        <p>Each pattern links to the artifact that proves the accepted path, the refused path, or the exact blocker.</p>
+        <p class="eyebrow">What changes</p>
+        <h2>The spend carries more of the rule.</h2>
+        <p>A normal app can track a budget, payout, asset, or game step in a private database. These examples ask whether the spend itself can carry the rule, then let the app replay accepted records into readable state.</p>
       </div>
       <div class="work-map">
         <article>
-          <span>User</span>
-          <p>Budgets, assets, and group payments become reviewable when accepted and refused moves are visible.</p>
+          <span>Bitcoin-like</span>
+          <p>Money lives in UTXOs: spendable chunks with clear ownership.</p>
         </article>
         <article>
-          <span>Mechanism</span>
-          <p>Covenant IDs, continuation outputs, sibling inputs, and mux routing compose small UTXO scripts without one app database.</p>
+          <span>Programmable</span>
+          <p>Rules can affect how value moves, but state travels through outputs instead of one global contract account.</p>
         </article>
         <article>
           <span>Kaspa</span>
-          <p>Fast ordering makes multi-transaction covenant flows practical to inspect as workflows, not only settlement records.</p>
+          <p>Fast ordering makes multi-transaction UTXO workflows easier to inspect as workflows, not only isolated settlement records.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="examples" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Functional examples</p>
+        <h2>Read each proof as a product job.</h2>
+        <p>The artifacts matter because they show what moved, what was refused, and what a wallet or app could explain before the user signs.</p>
+      </div>
+      <div class="experiment-grid">
+        <article>
+          <span>Budget</span>
+          <strong>Allowance or team budget</strong>
+          <p>Money can move under a visible limit, then the remaining money is locked back into the next budget state.</p>
+          <ul>
+            <li><b>User job:</b> parent wallet, team treasury, grant stream, merchant payout limit, game resource.</li>
+            <li><b>Crypto point:</b> the bad spend is refused by the spend path where the script enforces it, not only by a dashboard.</li>
+            <li><b>Technical name:</b> recurring-cap covenant. Accepted on TN12; user-wallet signing and audit still separate.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Step</span>
+          <strong>Turn or staged workflow</strong>
+          <p>One step goes to one role, returns with valid state, or recovers through timeout if it stalls.</p>
+          <ul>
+            <li><b>User job:</b> game turn, dispute step, service job, staged approval, claim/challenge flow.</li>
+            <li><b>Crypto point:</b> the accepted path becomes public evidence that a private server cannot silently rewrite.</li>
+            <li><b>Technical name:</b> mux / worker contract family. Proves routing and timeout mechanics, not full game rules.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Asset</span>
+          <strong>Controlled asset move</strong>
+          <p>An asset moves only when the required controller input appears in the same transaction.</p>
+          <ul>
+            <li><b>User job:</b> ticket, access pass, game item, license, settlement right, app-owned asset.</li>
+            <li><b>Crypto point:</b> ownership follows transaction rules instead of a platform account row.</li>
+            <li><b>Technical name:</b> sibling-input authorization / ICC. Accepted strike on TN12; negative rows are local rejects.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Reject</span>
+          <strong>Vault safety review</strong>
+          <p>Negative checks show the obvious bad moves: wrong signer, wrong destination, missing relock, over cap, and stale reset.</p>
+          <ul>
+            <li><b>User job:</b> explain why a vault, escrow, or family wallet does not drain on a bad click.</li>
+            <li><b>Crypto point:</b> refusal evidence is stronger than a happy-path demo.</li>
+            <li><b>Boundary:</b> local script-engine rejects unless an artifact says TN12 accepted/rejected.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Group</span>
+          <strong>Release or refund</strong>
+          <p>Coordination evidence shows fresh pledge outputs taking release paths and a separate fresh set taking refund paths.</p>
+          <ul>
+            <li><b>User job:</b> group buy, event deposit, public-goods grant, club project, cooperative funding.</li>
+            <li><b>Crypto point:</b> release/refund can be inspected from public evidence instead of only trusting a campaign database.</li>
+            <li><b>Boundary:</b> threshold selection is still transparent replay/planner logic.</li>
+          </ul>
+        </article>
+        <article>
+          <span>Pay</span>
+          <strong>Conditional payout</strong>
+          <p>Scheduler receipts tie an intent, bids, execution receipt, and a guarded payout spend into one reviewable story.</p>
+          <ul>
+            <li><b>User job:</b> subscription, payroll window, recurring payout, tournament turn, stale-action guard.</li>
+            <li><b>Crypto point:</b> users can replay whether the action was eligible before trusting the payout story.</li>
+            <li><b>Technical name:</b> scheduler receipt plus covenant payout. Payout spend is accepted; trigger eligibility is still replay-derived.</li>
+          </ul>
         </article>
       </div>
     </section>
@@ -82,25 +174,25 @@
     <section id="spotlight" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Spotlight</p>
-        <h2>Three strongest proof patterns.</h2>
+        <h2>Three clearest app patterns.</h2>
       </div>
       <div class="experiment-grid spotlight-grid">
         <article>
           <span>1</span>
-          <strong>Mux / worker proof</strong>
-          <p>Accepted route, return, timeout, and Worker B return. One covenant family splits logic into bounded roles.</p>
+          <strong>Step-by-step workflow</strong>
+          <p>A state moves to a worker, comes back, can time out, and can move to another worker. The technical mechanism is mux / worker routing.</p>
           <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open flow evidence</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
         <article>
           <span>2</span>
-          <strong>Recurring cap proof</strong>
-          <p>Accepted cumulative spends and reset-window spend. The cap follows continuation state.</p>
+          <strong>Budget that cannot drain at once</strong>
+          <p>Accepted cumulative spends and a reset-window spend. The cap follows the next locked output.</p>
           <p class="note"><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Open reset proof</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
         <article>
           <span>3</span>
-          <strong>Sibling-authorized asset proof</strong>
-          <p>Accepted two-input strike plus live-id local rejects. Sibling authority replaces nested contract execution.</p>
+          <strong>Asset that needs its controller</strong>
+          <p>An accepted asset move requires the right controller input in the same transaction.</p>
           <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a> · <a href="artifacts/sibling-input-discovery.json">Open sibling discovery</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
       </div>
@@ -109,8 +201,8 @@
     <section id="wallet-review" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Wallet review</p>
-        <h2>Review fields for accepted proof paths.</h2>
-        <p>Compact prompts from the wallet summary artifact: action, checks, reject cases, and evidence links.</p>
+        <h2>What the wallet could show before signing.</h2>
+        <p>A useful wallet should not ask users to sign an opaque blob. It should show the action, the checks, the reject cases, and the txid or artifact that backs the prompt.</p>
         <p class="note"><a href="artifacts/wallet-approval-summaries.json">Open wallet summary artifact</a></p>
       </div>
       <div id="wallet-approval-cards" class="wallet-approval-grid" aria-live="polite">
@@ -122,81 +214,68 @@
       <div class="section-title">
         <p class="eyebrow">Experiment map</p>
         <h2>Current status.</h2>
-        <p>One row per proof lane. Detailed txids stay in the linked artifacts.</p>
+        <p>One row per app pattern. Internal status slugs and detailed txids stay in the linked artifacts.</p>
         <p class="note"><a href="artifacts/covenant-experiment-map.json">Open experiment artifact</a></p>
       </div>
       <div class="experiment-table-wrap">
         <table class="proof-table experiment-table">
           <thead>
             <tr>
-              <th>Experiment</th>
-              <th>Pattern</th>
-              <th>Status</th>
-              <th>Evidence</th>
+              <th>App pattern</th>
+              <th>Plain meaning</th>
+              <th>Accepted TN12 evidence</th>
+              <th>Negative or local checks</th>
+              <th>Practical use</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Mux worker proof</td>
-              <td>mux / worker contract family</td>
-              <td>accepted-timeout-settlement-with-local-challenges</td>
-              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Accepted route, return, timeout, Worker B return, and local challenge rejects.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet summary.</a></td>
+              <td>Step workflow</td>
+              <td>One locked state routes through a small worker role, returns, or recovers after timeout.</td>
+              <td><a href="artifacts/blitz-mux-live-flow-evidence.json">Route, worker return, timeout return, Worker B route, and Worker B return landed on TN12.</a></td>
+              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Bad selector and too-early timeout fail locally.</a></td>
+              <td>Game turns, disputes, service jobs, staged approvals, claim/challenge flows.</td>
             </tr>
             <tr>
-              <td>Recurring cap proof</td>
-              <td>stateful singleton vault</td>
-              <td>accepted-window-reset-proof</td>
-              <td><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Accepted cumulative spend, reset-window proof, and post-reset spend.</a> <a href="artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json">Post-reset spend evidence.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet-readable summary.</a></td>
+              <td>Budget limit</td>
+              <td>A treasury spends under a limit and carries the current window state forward.</td>
+              <td><a href="artifacts/recurring-treasury-vault-window-reset-proof.json">Two cumulative spends and a reset-window spend landed on TN12.</a> <a href="artifacts/recurring-treasury-vault-window-post-reset-spend-evidence.json">Post-reset spend evidence.</a></td>
+              <td>Over-cap, early reset, stale reset, and over-cap reset candidates fail locally.</td>
+              <td>Allowance wallets, team treasuries, grant streams, merchant payout limits.</td>
             </tr>
             <tr>
-              <td>Sibling-authorized asset proof</td>
-              <td>ICC / covenant-owned asset</td>
-              <td>accepted-sibling-input-strike</td>
-              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Accepted owner marker, asset genesis, and sibling-authorized strike.</a> <a href="artifacts/sibling-input-discovery.json">Sibling discovery.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet summary.</a></td>
+              <td>Controlled asset</td>
+              <td>An asset move requires the right controller input in the same transaction.</td>
+              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Owner marker, asset genesis, and two-input strike landed on TN12.</a></td>
+              <td><a href="artifacts/sibling-input-discovery.json">Wrong witness, missing sibling, and wrong sibling id fail locally.</a></td>
+              <td>Tickets, access passes, game items, licenses, app-owned assets.</td>
             </tr>
             <tr>
-              <td>Vault negative checks</td>
-              <td>guarded vault plus challenge rows</td>
-              <td>local-heist-rejects-on-accepted-vault-rail</td>
-              <td><a href="artifacts/covenant-heist-evidence.json">Wrong owner, wrong destination, missing relock, over-cap, and reset rejects.</a></td>
+              <td>Bad withdrawal review</td>
+              <td>The vault rail shows why obvious wrong moves should not pass.</td>
+              <td>Uses the accepted recurring-vault rail as the good path.</td>
+              <td><a href="artifacts/covenant-heist-evidence.json">Wrong owner, wrong destination, missing relock, over cap, early reset, stale reset, and over-cap reset fail locally.</a></td>
+              <td>Vaults, family wallets, escrow safety screens, reviewer attack paths.</td>
             </tr>
             <tr>
-              <td>Coordination release/refund evidence</td>
-              <td>assurance plus coordination receipts</td>
-              <td>accepted-covenant-release-and-refund-spends</td>
-              <td><a href="artifacts/coordination-covenant-release-evidence.json">Fresh covenant pledge funding and three accepted release spends.</a> <a href="artifacts/coordination-covenant-refund-evidence.json">Three accepted refund spends on a separate fresh pledge set.</a> <a href="artifacts/coordination-market-evidence-dossier.json">Coordination dossier.</a></td>
+              <td>Release or refund</td>
+              <td>Pledged funds can take a release path or, on a separate fresh set, a refund path.</td>
+              <td><a href="artifacts/coordination-covenant-release-evidence.json">Fresh pledge funding and three release spends landed on TN12.</a> <a href="artifacts/coordination-covenant-refund-evidence.json">Three refund spends landed on a separate fresh pledge set.</a></td>
+              <td><a href="artifacts/coordination-market-evidence-dossier.json">Threshold selection remains transparent replay/planner logic.</a></td>
+              <td>Group buys, event deposits, club projects, public-goods funding.</td>
             </tr>
             <tr>
-              <td>Scheduler receipt evidence</td>
-              <td>based-app scheduler with covenant settlement target</td>
-              <td>accepted-covenant-payout-spend</td>
-              <td><a href="artifacts/scheduler-covenant-payout-evidence.json">Accepted scheduler covenant payout spend.</a> <a href="artifacts/scheduler-covenant-payout-negative-evidence.json">Local payout rejects.</a> <a href="artifacts/universal-scheduler-workbench.json">Accepted intent, bids, execution receipt, and stale-path rejects.</a> <a href="artifacts/scheduler-covenant-settlement-target.json">Settlement target.</a></td>
+              <td>Scheduled payout</td>
+              <td>An intent, bids, execution receipt, and payout can be reviewed together.</td>
+              <td><a href="artifacts/scheduler-covenant-payout-evidence.json">The payout spend landed on TN12.</a> <a href="artifacts/universal-scheduler-workbench.json">Intent, bids, and execution receipts also landed as accepted rows.</a></td>
+              <td><a href="artifacts/scheduler-covenant-payout-negative-evidence.json">Wrong payout candidates fail locally.</a> Trigger eligibility is replay-derived.</td>
+              <td>Subscriptions, payroll windows, tournament turns, stale-action guards.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section id="rules" class="panel experiments-panel">
-      <div class="section-title">
-        <p class="eyebrow">How to read it</p>
-        <h2>Status means evidence class.</h2>
-      </div>
-      <div class="work-map">
-        <article>
-          <span>Accepted</span>
-          <p>A TN12 transaction or payload event landed and is linked through an artifact.</p>
-        </article>
-        <article>
-          <span>Local reject</span>
-          <p>A candidate failed in the local covenant/script engine. Useful, but not a broadcast rejection.</p>
-        </article>
-        <article>
-          <span>Indexer-derived</span>
-          <p>Replay explains state from accepted rows. It does not by itself control funds.</p>
-        </article>
-      </div>
-    </section>
   </main>
   <script type="module" src="wallet-approval-cards.js"></script>
 </body>

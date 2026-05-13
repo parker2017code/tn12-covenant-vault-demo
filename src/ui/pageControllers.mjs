@@ -79,7 +79,7 @@ function organizeLabPage(documentRef = document) {
     ["access-passes", "Access passes", "Issuer/indexer coupons, tickets, and memberships."],
     ["asset-policies", "Asset policies", "Issuer-indexed and future covenant-native policy shapes."],
     ["auction-intents", "Auction intents", "Accepted bids, winner selection, and refund planning."],
-    ["defi-backlog", "DeFi checks", "Accepted activity, replay-derived state, and wallet-blocked execution."],
+    ["defi-backlog", "Pool-style lab checks", "Accepted activity, replay-derived state, and wallet-blocked execution."],
     ["agent-commitments", "Agent commitments", "Task offers, proofs, disputes, and settlement review."],
     ["proofs", "Accepted proofs", "Explorer-checkable vault, assurance, escrow, and auction txids."],
     ["indexer", "Indexer records", "Checkpointed app state, payload rows, and replay guards."],

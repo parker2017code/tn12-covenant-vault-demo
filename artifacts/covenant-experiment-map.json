@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-13T02:43:16.331Z",
+  "generatedAt": "2026-05-13T04:28:49.072Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -22,7 +22,7 @@
   "experiments": [
     {
       "id": "treasury-wars",
-      "title": "Recurring cap proof",
+      "title": "Budget that cannot drain at once",
       "rank": 2,
       "status": "accepted-window-reset-proof",
       "proofTarget": "two accepted recurring-vault spends, accepted reset-window spend, continuation state, blocked over-cap and stale-window attempts",
@@ -33,7 +33,7 @@
       "cryptoPoint": "A server can track limits, but this shows the spend itself refusing the invalid path before the money moves.",
       "realWorldImplication": "Allowance wallets, team treasuries, merchant payout limits, grant streams, game resources, and parent/child budgets can use rules that travel with the funds.",
       "covenantPattern": "stateful singleton vault",
-      "websitePitch": "Spend under your cap, relock the treasury, and block the move that tries to drain too much.",
+      "websitePitch": "Spend under a visible limit, lock the remaining money back into the rule, and block the move that tries to drain too much.",
       "currentRepoEvidence": [
         "contracts/RecurringTreasuryVault.sil",
         "contracts/RecurringTreasuryVaultWindow.sil",
@@ -74,7 +74,7 @@
     },
     {
       "id": "covenant-heist",
-      "title": "Vault negative checks",
+      "title": "Bad withdrawal checks",
       "rank": 4,
       "status": "local-heist-rejects-on-accepted-vault-rail",
       "proofTarget": "accepted recurring-vault rail plus local rejects for wrong signer, wrong destination, missing continuation, over cap, early reset, stale reset, and reset over cap",
@@ -85,7 +85,7 @@
       "cryptoPoint": "Bad-path refusal matters because users should not need to trust a web server to politely decline an invalid withdrawal.",
       "realWorldImplication": "This is how family wallets, company vaults, escrow apps, and games explain safety to normal users: show the rejected moves.",
       "covenantPattern": "guarded vault plus challenge rows",
-      "websitePitch": "Try the wrong signer, wrong destination, stale window, over-cap spend, or missing relock. The vault should refuse the bad path.",
+      "websitePitch": "Try the wrong signer, wrong destination, stale window, over-cap spend, or missing relock. The bad withdrawal should fail.",
       "currentRepoEvidence": [
         "artifacts/covenant-heist-evidence.json",
         "artifacts/recurring-treasury-vault-negative-map.json",
@@ -106,7 +106,7 @@
     },
     {
       "id": "blitz-mux-arena",
-      "title": "Mux worker proof",
+      "title": "Step-by-step workflow that can recover",
       "rank": 1,
       "status": "accepted-timeout-settlement-with-local-challenges",
       "proofTarget": "hub routes to two workers, workers return to hub, timeout escape path, bad selector and too-early timeout blocked locally",
@@ -117,7 +117,7 @@
       "cryptoPoint": "The rules are attached to spendable outputs, so a player cannot just ask a private game server to rewrite the state.",
       "realWorldImplication": "The same pattern can support disputes, turn-based games, staged approvals, service jobs, and workflows where one step chooses the next bounded role.",
       "covenantPattern": "mux / worker contract family",
-      "websitePitch": "A hub sends the turn to one worker contract. The worker returns valid state before the clock runs out.",
+      "websitePitch": "One step goes to one role, comes back with valid state, or returns through a timeout if it stalls.",
       "currentRepoEvidence": [
         "contracts/BlitzMux.sil",
         "contracts/BlitzWorkerA.sil",
@@ -156,7 +156,7 @@
     },
     {
       "id": "coordination-league",
-      "title": "Coordination release/refund evidence",
+      "title": "Group payment that releases or refunds",
       "rank": 4,
       "status": "accepted-covenant-release-and-refund-spends",
       "proofTarget": "three qualifying intendos, accepted pledge receipts, fresh covenant pledge outputs, accepted covenant release spends, accepted covenant refund spends on a separate fresh pledge set",
@@ -167,7 +167,7 @@
       "cryptoPoint": "The refund/release paths can be checked from public evidence rather than trusting a campaign operator's database.",
       "realWorldImplication": "Useful for group buys, local projects, grants, event deposits, clubs, and cooperative funding where failure refunds must be credible.",
       "covenantPattern": "assurance plus coordination receipts",
-      "websitePitch": "Players pledge to a group objective. If enough compatible pledges appear, the group path opens; otherwise refund stays explicit.",
+      "websitePitch": "People pledge to a shared objective. If enough compatible pledges appear, the release path opens; otherwise refund stays explicit.",
       "currentRepoEvidence": [
         "artifacts/coordination-market-prototype.json",
         "artifacts/coordination-market-settlement-brief.json",
@@ -197,7 +197,7 @@
     },
     {
       "id": "covenant-owned-asset-game",
-      "title": "Sibling-authorized asset proof",
+      "title": "Asset that moves only with its controller",
       "rank": 3,
       "status": "accepted-sibling-input-strike",
       "proofTarget": "asset UTXO owned by a covenant input through sibling-input authorization",
@@ -208,7 +208,7 @@
       "cryptoPoint": "Ownership can be programmatic and portable: the asset follows transaction rules, not a platform account entry.",
       "realWorldImplication": "This points toward tickets, passes, game items, licenses, settlement rights, and app-owned assets that can move only under visible rules.",
       "covenantPattern": "ICC / covenant-owned asset",
-      "websitePitch": "A game contract owns an asset. Moving the asset requires the game covenant input in the same transaction.",
+      "websitePitch": "An asset can move only when the right controller input joins the same transaction.",
       "currentRepoEvidence": [
         "contracts/CovenantOwnedAssetDuel.sil",
         "artifacts/CovenantOwnedAssetDuel.json",
@@ -240,7 +240,7 @@
     },
     {
       "id": "scheduler-duel",
-      "title": "Scheduler receipt evidence",
+      "title": "Scheduled payout with replayable evidence",
       "rank": 6,
       "status": "accepted-covenant-payout-spend",
       "proofTarget": "accepted scheduler intent, accepted execution receipt, accepted executor bids, accepted covenant payout spend, and blocked stale/slow/duplicate rows",
@@ -251,7 +251,7 @@
       "cryptoPoint": "Public replay gives users a way to verify whether an action was eligible instead of trusting a private automation log.",
       "realWorldImplication": "Useful for subscriptions, payroll windows, tournament turns, alerts, recurring payouts, and any workflow where missed or stale actions are expensive.",
       "covenantPattern": "based-app scheduler with covenant settlement target",
-      "websitePitch": "Write a conditional move. Executors compete to fire it only when the replayed state says it is eligible.",
+      "websitePitch": "Publish a conditional payout, let executors compete, and release only when accepted evidence says the action is eligible.",
       "currentRepoEvidence": [
         "artifacts/universal-scheduler-workbench.json",
         "artifacts/scheduler-covenant-settlement-target.json",

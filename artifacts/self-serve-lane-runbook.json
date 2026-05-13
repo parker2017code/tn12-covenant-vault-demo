@@ -2,7 +2,7 @@
   "schema": "tn12-self-serve-lane-runbook/v1",
   "network": "kaspa-testnet-12",
   "status": "self-serve-lane-runbook-ready",
-  "generatedAt": "2026-05-12T19:04:46.998Z",
+  "generatedAt": "2026-05-13T04:30:49.657Z",
   "summary": {
     "lanes": 12,
     "playNow": 4,
@@ -20,7 +20,7 @@
   "lanes": [
     {
       "id": "live-playground",
-      "title": "Live TN12 money flow",
+      "title": "TN12 playground flow",
       "status": "play-now",
       "stackLayer": "money-rail",
       "uiTarget": "playground.html",
@@ -30,7 +30,7 @@
         "40 accepted transfer rows"
       ],
       "runSteps": [
-        "Open Live Play.",
+        "Open TN12 Playground.",
         "Copy a role address or txid.",
         "Open the explorer link and compare it to replayed balances."
       ],
@@ -55,7 +55,7 @@
       "stackLayer": "money-rail",
       "uiTarget": "lab.html#invoices",
       "availableNow": [
-        "40 accepted payload events",
+        "40 accepted app receipt events",
         "paid, refunded, and error invoice states",
         "payload byte matching through JSON wRPC evidence"
       ],
@@ -230,7 +230,7 @@
     },
     {
       "id": "defi-lab",
-      "title": "DeFi lab",
+      "title": "Pool-style lab checks",
       "status": "research-play",
       "stackLayer": "based-app-prototype",
       "uiTarget": "lab.html#defi-backlog",

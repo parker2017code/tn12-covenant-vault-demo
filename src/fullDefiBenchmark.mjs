@@ -9,7 +9,7 @@ export function buildFullDefiBenchmark({
 } = {}) {
   const rails = [
     rail("accepted-proof-core", "Covenant primitives accepted on TN12", "TN12_ACCEPTED", 12, hasProofCore(provenStatus), "Vault, pledge, escrow, auction, and role-separated proof rows are accepted."),
-    rail("accepted-receipt-ledger", "Accepted app-state payload ledger", "TN12_ACCEPTED", 10, Number(provenStatus.acceptedEvidence?.payloadEvents || 0) >= 40, `${Number(provenStatus.acceptedEvidence?.payloadEvents || 0)} payload events are accepted and replayed.`),
+    rail("accepted-receipt-ledger", "Accepted app receipt ledger", "TN12_ACCEPTED", 10, Number(provenStatus.acceptedEvidence?.payloadEvents || 0) >= 40, `${Number(provenStatus.acceptedEvidence?.payloadEvents || 0)} app receipt events are accepted and replayed.`),
     rail("multi-wallet-custody-activity", "Multi-wallet local-key custody movement", "LOCAL_KEY_CUSTODY_TEST", 10, Number(acceptedActivity.summary?.acceptedTransferRows || 0) >= 16, `${Number(acceptedActivity.summary?.acceptedTransferRows || 0)} accepted transfer rows cover deposits, payouts, and user roles.`),
     rail("scheduler-intent-bid-execution", "Scheduler intent, bids, and execution receipts", "INDEXER_DERIVED", 10, Number(schedulerRegistry.summary?.acceptedBids || 0) >= 3 && Number(schedulerRegistry.summary?.executedTriggers || 0) >= 1, "Accepted scheduler payloads feed deterministic trigger and bid reducers."),
     rail("scheduler-covenant-binding", "Scheduler-to-covenant proof binding", "INDEXER_DERIVED", 8, Number(schedulerBinding.summary?.readyBindings || 0) >= 1, "Accepted binding payload references an accepted covenant proof row."),

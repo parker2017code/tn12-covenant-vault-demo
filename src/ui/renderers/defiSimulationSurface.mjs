@@ -35,7 +35,7 @@ export async function renderDefiSimulationSurface(documentRef = document) {
     const cards = [
       {
         status: manifest.status,
-        title: "DeFi check set",
+        title: "Pool-style check set",
         body: `${manifest.summary.readyArtifacts}/${manifest.summary.artifacts} checks pass; ${manifest.summary.problems} problems; ${manifest.summary.secretFindings} secret findings.`,
         foot: "npm run defi:manifest"
       },
@@ -95,6 +95,6 @@ export async function renderDefiSimulationSurface(documentRef = document) {
       listNode.append(article);
     }
   } catch (error) {
-    summaryNode.textContent = `DeFi accepted-activity surface unavailable: ${error.message}`;
+    summaryNode.textContent = `Pool-style accepted-activity surface unavailable: ${error.message}`;
   }
 }

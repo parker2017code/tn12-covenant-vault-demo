@@ -23,14 +23,14 @@
 <body>
   <header class="topbar">
     <a class="brand-home" href="index.html" aria-label="TN12 Proof Lab home">
-      <p class="eyebrow">Real TN12 play</p>
+      <p class="eyebrow">TN12 testnet walkthrough</p>
       <h1>TN12 playground</h1>
     </a>
     <nav class="site-nav" aria-label="Site navigation">
       <div class="nav-group nav-pages" aria-label="Pages">
         <a href="index.html">Proof Home</a>
         <a href="results.html">Results</a>
-        <a href="playground.html" aria-current="page">Live Play</a>
+        <a href="playground.html" aria-current="page">TN12 Playground</a>
         <a href="experiments.html">Experiments</a>
         <a href="lab.html">Lab Tools</a>
       </div>
@@ -48,14 +48,27 @@
     <section class="hero results-hero">
       <div>
         <p class="status">Real TN12 transactions. Open the evidence.</p>
-        <h2>Fast testnet money, visible app state.</h2>
-        <p>This is the product-ideas route: fresh role wallets got funded, two users deposited to the pool, the pool paid one user back, and replay turned accepted txids into app state.</p>
+        <h2>Accepted testnet flow, replayed app state.</h2>
+        <p>Fresh role wallets got funded, two users deposited to a pool role, the pool paid one user back, and replay turned accepted txids into balances and blocked actions. This is a testnet walkthrough, not a production app.</p>
       </div>
       <aside class="facts">
         <span>Current run</span>
         <strong>4 accepted txs</strong>
         <p>Funding -> two deposits -> payout -> replay.</p>
       </aside>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-title">
+        <p class="eyebrow">How to read this walkthrough</p>
+        <h2>Accepted txids first, replay second.</h2>
+        <p>Click the testnet transactions before trusting the app state. The replay view explains balances and blocked actions from accepted records; it does not make this a production custody system.</p>
+      </div>
+      <div class="work-map">
+        <article><span>Landed</span><p>Role funding, two deposits, and one payout are accepted TN12 transactions.</p></article>
+        <article><span>Replayed</span><p>The repo turns those accepted rows into balances and blocked-action views.</p></article>
+        <article><span>Missing</span><p>Public-user wallet signing, production replay, audit, and mainnet activation remain separate work.</p></article>
+      </div>
     </section>
 
     <section id="start" class="panel results-panel playground-start">
@@ -130,8 +143,8 @@
 
     <section id="defi-flow" class="panel results-panel">
       <div class="section-title">
-        <h2>DeFi multi-wallet flow.</h2>
-        <p>One compact view of the larger flow: funded roles, pool deposits, payouts, replay balances, and blocked custody claims.</p>
+        <h2>Pool-style testnet flow.</h2>
+        <p>Users deposited into a pool role, the pool paid one user back, and replay turned the accepted txids into balances. This is not an AMM, lending market, liquidation engine, oracle system, or production custody path.</p>
       </div>
       <div id="defi-flow-map" class="defi-flow-map" aria-live="polite"></div>
     </section>

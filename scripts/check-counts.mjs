@@ -57,8 +57,8 @@ const requiredSnippets = [
     indexHtml,
     [
       `${expectedPayloadEvents}</strong>`,
-      "Money moved. Proofs accepted. State replayed.",
-      "Proof counts and commands"
+      "Testnet transactions landed. The repo replays them.",
+      "Counts with meanings"
     ]
   ],
   ["docs/PROGRESS.md", progress, [[`${expectedPayloadEvents} accepted payload events`, `${expectedPayloadEvents} payload events accepted`]]],

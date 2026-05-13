@@ -146,20 +146,23 @@ experiment surface:
 
 ### Six-Experiment Priority
 
-| Priority | Experiment | Current level | Next upgrade |
-|---|---|---|---|
-| 1 | Recurring cap proof | Accepted TN12 covenant spends, reset-window spend, accepted post-reset continuation spend, continuation state, local rejects, wallet approval summary | Extend wallet approval to real signer handoff |
-| 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery, wallet approval summary | Connect summary to an interactive review card |
-| 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
-| 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
-| 5 | Coordination release/refund evidence | Accepted payload/custody/release receipts, transparent replay evidence, fresh covenant pledge outputs, accepted covenant release spends, and accepted covenant refund spends on a separate fresh pledge set | Keep threshold selection replay-derived; next useful step is wallet handoff, not another branch name |
-| 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, accepted covenant payout spend, and local payout rejects | Keep payout rejects in wallet review; do not upgrade trigger eligibility beyond replay-derived |
+Public labels should start with the user job. Keep the covenant pattern as the
+second column so builders can still audit it.
 
-Target state: all six get TN12 verticals. Current labels still matter while
-building: Recurring cap, Sibling asset, Mux worker, Coordination release/refund,
-and Scheduler payout all have accepted TN12 covenant-spend evidence. Vault
-negatives are still local rejects over an accepted rail, and
-Coordination/Scheduler selection logic remains replay-derived where noted.
+| Priority | Public job | Covenant pattern | Current level | Next upgrade |
+|---|---|---|---|---|
+| 1 | Budget that cannot drain at once | recurring cap / continuation output | Accepted TN12 covenant spends, reset-window spend, accepted post-reset continuation spend, continuation state, local rejects, wallet approval summary | Extend wallet approval to real signer handoff |
+| 2 | Asset that moves only with its controller | sibling-input authorization / ICC | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery, wallet approval summary | Connect summary to an interactive review card |
+| 3 | Step-by-step workflow that can recover | mux / worker contract family | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
+| 4 | Bad withdrawal checks | guarded vault local rejects | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
+| 5 | Group payment that releases or refunds | assurance pledge release/refund | Accepted payload/custody/release receipts, transparent replay evidence, fresh covenant pledge outputs, accepted covenant release spends, and accepted covenant refund spends on a separate fresh pledge set | Keep threshold selection replay-derived; next useful step is wallet handoff, not another branch name |
+| 6 | Scheduled payout with replayable evidence | scheduler receipt plus covenant payout | Accepted intent/bid/execution receipts, indexer-derived replay, accepted covenant payout spend, and local payout rejects | Keep payout rejects in wallet review; do not upgrade trigger eligibility beyond replay-derived |
+
+Target state: all six get TN12 verticals that a non-builder can understand.
+Budget limits, controlled assets, step workflows, group payments, and scheduled
+payouts all have accepted TN12 covenant-spend evidence where noted. Bad
+withdrawal checks are still local rejects over an accepted rail, and group
+selection / scheduler trigger logic remains replay-derived where noted.
 
 1. Add a compact Blitz challenge variant only if it proves a new refusal path.
    - Current accepted path already covers Worker A return, Worker A timeout, and
@@ -167,9 +170,9 @@ Coordination/Scheduler selection logic remains replay-derived where noted.
    - Do not add another accepted row if it is only more volume.
 
 2. Push the remaining experiments toward TN12 verticals one at a time.
-   - Vault negative checks now have a bounded local-reject artifact and visible section.
-   - Coordination League now has a bounded visible section.
-   - Scheduler Duel now has a bounded visible section.
+   - Bad withdrawal checks now have a bounded local-reject artifact and visible section.
+   - Group release/refund now has a bounded visible section.
+   - Scheduled payout now has a bounded visible section.
    - Further experiment work should add accepted TN12 evidence, safe rejection
      evidence, a real covenant settlement target, or a user-wallet handoff.
    - Do not open a seventh experiment until all six have their best current TN12

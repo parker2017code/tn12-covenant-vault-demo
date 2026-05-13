@@ -215,7 +215,7 @@ main {
 
 .proof-hero > div,
 .proof-hero .facts {
-  padding: clamp(18px, 3vw, 30px);
+  padding: clamp(16px, 2.4vw, 24px);
 }
 
 .hero h2 {
@@ -226,7 +226,7 @@ main {
 
 .proof-hero h2 {
   max-width: 720px;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(30px, 3.4vw, 42px);
 }
 
 .hero p:not(.status) {

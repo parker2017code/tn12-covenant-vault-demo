@@ -15,7 +15,7 @@ export function buildSelfServeLaneRunbook({
   const lanes = [
     lane({
       id: "live-playground",
-      title: "Live TN12 money flow",
+      title: "TN12 playground flow",
       status: "play-now",
       stackLayer: "money-rail",
       uiTarget: "playground.html",
@@ -25,7 +25,7 @@ export function buildSelfServeLaneRunbook({
         `${num(acceptedActivity?.summary?.acceptedTransferRows)} accepted transfer rows`
       ],
       runSteps: [
-        "Open Live Play.",
+        "Open TN12 Playground.",
         "Copy a role address or txid.",
         "Open the explorer link and compare it to replayed balances."
       ],
@@ -46,7 +46,7 @@ export function buildSelfServeLaneRunbook({
       stackLayer: "money-rail",
       uiTarget: "lab.html#invoices",
       availableNow: [
-        `${num(provenStatus?.acceptedEvidence?.payloadEvents)} accepted payload events`,
+        `${num(provenStatus?.acceptedEvidence?.payloadEvents)} accepted app receipt events`,
         "paid, refunded, and error invoice states",
         "payload byte matching through JSON wRPC evidence"
       ],
@@ -198,7 +198,7 @@ export function buildSelfServeLaneRunbook({
     }),
     lane({
       id: "defi-lab",
-      title: "DeFi lab",
+      title: "Pool-style lab checks",
       status: "research-play",
       stackLayer: "based-app-prototype",
       uiTarget: "lab.html#defi-backlog",

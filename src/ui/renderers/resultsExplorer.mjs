@@ -37,10 +37,10 @@ export async function renderResultsExplorer(documentRef = document) {
 
 function renderSummary(node, { proven, labChecks, index, activity, scheduler, binding }) {
   node.innerHTML = `
-    ${metric("Accepted proof txs", proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions, "Covenant proof spends and role-separated repeats.")}
-    ${metric("Payload events", proven.acceptedEvidence.payloadEvents, "Accepted app-state receipts replayed from TN12.")}
-    ${metric("Indexed records", index.summary.total, "Proof, payload, and output evidence in one checkpoint.")}
-    ${metric("DeFi checks", `${labChecks.summary.completedRails} / ${labChecks.summary.rails} lab rails`, "Detailed rail evidence lives in Lab Tools.")}
+    ${metric("Accepted proof transactions", proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions, "Nine core proof/funding/settlement rows plus seven role-separated repeats.")}
+    ${metric("Accepted app receipts", proven.acceptedEvidence.payloadEvents, "App data written into accepted TN12 transactions. Replay can read it; the payload alone is not custody settlement.")}
+    ${metric("Checkpointed records", index.summary.total, "Accepted proof, output, and payload rows replayed into app state.")}
+    ${metric("Pool-style lab checks", `${labChecks.summary.completedRails} / ${labChecks.summary.rails} rails`, "Research checks with repo evidence, not production DeFi.")}
     ${metric("Accepted transfers", activity.summary.acceptedTransferRows, "Local-key custody movement across pool and user roles.")}
     ${metric("Scheduler rows", scheduler.summary.acceptedBids + scheduler.summary.executedTriggers + binding.summary.readyBindings, "Intent, bids, execution, and covenant-binding rows.")}
   `;
@@ -68,7 +68,7 @@ function renderKnowledgeLevels(node) {
     <article class="level-card hidden" data-level-panel="builder">
       <span>Builder</span>
       <h3>Open txids, then run the gates.</h3>
-      <p>Use <code>npm run check:all</code>, <code>npm run check:tn12</code>, and <code>npm run demo:operator-refresh</code>. Install with <code>npm ci</code> first. These commands verify or rebuild local evidence; they do not broadcast. The proof docs are <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code>. DeFi lab details live in <code>artifacts/full-defi-benchmark.json</code>.</p>
+      <p>Use <code>npm run check:all</code>, <code>npm run check:tn12</code>, and <code>npm run demo:operator-refresh</code>. Install with <code>npm ci</code> first. These commands verify or rebuild local evidence; they do not broadcast. The proof docs are <code>docs/AUDIT_MAP.md</code>, <code>docs/PROOF_INDEX.md</code>, and <code>docs/TN12_TEST_MATRIX.md</code>. Pool-style lab details live in <code>artifacts/full-defi-benchmark.json</code>.</p>
       <p>The public page keeps labels plain. The artifact files keep the exact enforcement classes for builders.</p>
     </article>
   `;
@@ -97,10 +97,10 @@ function renderFeed(node, events) {
 function renderFlow(node, { proven, activity, scheduler, labChecks }) {
   const steps = [
     ["1", "Covenant proof spend", `${proven.acceptedEvidence.proofTransactions + proven.acceptedEvidence.roleSeparatedProofTransactions} accepted proof transactions across core and role-separated paths.`],
-    ["2", "Payload receipt", `${proven.acceptedEvidence.payloadEvents} accepted payload events record app intent and status.`],
+    ["2", "App receipt", `${proven.acceptedEvidence.payloadEvents} accepted app receipt events record app intent and status.`],
     ["3", "Custody-adjacent movement", `${activity.summary.acceptedTransferRows} accepted local-key transfers move tKAS across user, pool, and operator roles.`],
     ["4", "Reducer/indexer state", `${scheduler.summary.acceptedIntents} accepted scheduler intent and ${scheduler.summary.acceptedBids} accepted bids feed deterministic state.`],
-    ["5", "Lab boundary", `${labChecks.summary.completedRails} of ${labChecks.summary.rails} DeFi lab rails have repo evidence; the rest stays in Lab Tools.`]
+    ["5", "Lab boundary", `${labChecks.summary.completedRails} of ${labChecks.summary.rails} pool-style lab rails have repo evidence; the rest stays in Lab Tools.`]
   ];
   node.innerHTML = steps.map(([num, title, body]) => `
     <article>
@@ -126,6 +126,7 @@ function publicRailTitle(title) {
   return String(title)
     .replace("Covenant primitives accepted on TN12", "Covenant spend examples")
     .replace("Accepted app-state payload ledger", "App receipts")
+    .replace("Accepted app receipt ledger", "App receipts")
     .replace("Multi-wallet local-key custody movement", "Multi-wallet testnet transfers")
     .replace("Scheduler intent, bids, and execution receipts", "Scheduler receipts")
     .replace("Scheduler-to-covenant proof binding", "Scheduler proof reference")
@@ -140,6 +141,7 @@ function publicRailEvidence(evidence) {
   return String(evidence)
     .replace("Vault, pledge, escrow, auction, and role-separated proof rows are accepted.", "Vault, pledge, escrow, auction, and role-separated examples have accepted TN12 records.")
     .replace("40 payload events are accepted and replayed.", "40 app receipt events are accepted and replayed.")
+    .replace("40 app receipt events are accepted and replayed.", "40 app receipt events are accepted and replayed.")
     .replace("Accepted scheduler payloads feed deterministic trigger and bid reducers.", "Accepted scheduler receipts feed deterministic trigger and bid state.")
     .replace("Accepted binding payload references an accepted covenant proof row.", "One accepted binding receipt references an accepted covenant proof row.")
     .replace("Fixture replay, overlap, duplicate, and rollback-match guards pass locally.", "Replay, duplicate, overlap, and rollback-match checks pass locally.")

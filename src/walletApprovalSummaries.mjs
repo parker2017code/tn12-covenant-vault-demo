@@ -30,8 +30,8 @@ export function buildWalletApprovalSummaries({
       experiment: "recurring-cap-proof",
       evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED",
       recommendedWalletDecision: "approve-if-user-initiated",
-      title: "Reset recurring treasury window",
-      plainAction: `Spend ${sompiToTkas(state.spendAmountSompi)} tKAS from the capped treasury and relock ${sompiToTkas(continuationOutput.amount)} tKAS as the next covenant state.`,
+      title: "Spend from a budget without draining it",
+      plainAction: `Spend ${sompiToTkas(state.spendAmountSompi)} tKAS from a capped treasury, then lock ${sompiToTkas(continuationOutput.amount)} tKAS back into the next budget state.`,
       userChecks: [
         `Amount: ${sompiToTkas(state.spendAmountSompi)} tKAS`,
         `Cap: ${sompiToTkas(state.capSompi)} tKAS`,
@@ -108,7 +108,7 @@ export function buildWalletApprovalSummaries({
     status: acceptedReset && localRejects.length >= 3 && summaries.length >= 3
       ? "wallet-approval-summary-ready"
       : "wallet-approval-summary-review",
-    purpose: "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
+    purpose: "Translate covenant evidence into normal wallet-review language: what the user is approving, what rule controls the money, and what bad move would be rejected.",
     summaries
   };
 }
@@ -123,8 +123,8 @@ function buildCoordinationReleaseSummary(releaseEvidence, refundEvidence = {}) {
     experiment: "coordination-release-evidence",
     evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_REPLAY_SELECTION",
     recommendedWalletDecision: "approve-if-user-initiated",
-    title: "Release coordination pledges",
-    plainAction: `Release ${releases.length} covenant pledges totaling ${sompiToTkas(totalSompi)} tKAS to the selected recipient after the coordination pack is selected by replay evidence.`,
+    title: "Release a group payment after enough pledges qualify",
+    plainAction: `Release ${releases.length} locked pledges totaling ${sompiToTkas(totalSompi)} tKAS to the selected recipient after replay evidence selects the qualifying group.`,
     userChecks: [
       `Funding txid: ${releaseEvidence.funding?.txid || ""}`,
       `Pledge outputs: ${releaseEvidence.funding?.pledgeOutputCount ?? ""}`,
@@ -160,8 +160,8 @@ function buildVaultNegativeSummary(heist) {
     experiment: "vault-negative-checks",
     evidenceClass: "TN12_ACCEPTED_BACKBONE_WITH_LOCAL_REJECTS",
     recommendedWalletDecision: "reject-invalid-attempts",
-    title: "Review blocked vault attempts",
-    plainAction: `Review ${rows.length} blocked vault attempts over the accepted recurring-vault rail before treating the vault path as safe to automate.`,
+    title: "Review the withdrawals the vault refuses",
+    plainAction: `Review ${rows.length} blocked withdrawal attempts before treating the vault path as safe to automate.`,
     userChecks: [
       `Accepted reset txid: ${heist.acceptedBackbone?.resetTxid || ""}`,
       `Blocked attempts: ${rows.length}`,
@@ -194,8 +194,8 @@ function buildSchedulerPayoutSummary(payout, target, negatives) {
     experiment: "scheduler-receipt-evidence",
     evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_REPLAY_GUARDS",
     recommendedWalletDecision: "approve-if-user-initiated",
-    title: "Release scheduler covenant payout",
-    plainAction: `Release ${payout.release?.amountTkas || ""} tKAS to the scheduled recipient after the accepted intent, winning bid, and execution receipt are replayed as eligible.`,
+    title: "Release a scheduled payout after the evidence matches",
+    plainAction: `Release ${payout.release?.amountTkas || ""} tKAS to the scheduled recipient after the accepted intent, winning bid, and execution receipt replay as eligible.`,
     userChecks: [
       `Payout amount: ${payout.release?.amountTkas || ""} tKAS`,
       `Recipient: ${payout.release?.destination || ""}`,
@@ -240,8 +240,8 @@ function buildSiblingAssetSummary(discovery) {
     experiment: "sibling-authorized-asset-proof",
     evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
     recommendedWalletDecision: "approve-if-user-initiated",
-    title: "Move asset with sibling authority",
-    plainAction: `Use owner-marker input ${discovery.selectedCandidate?.outpoint || ""} to authorize the asset strike and update power ${discovery.acceptedStrike?.powerBefore ?? ""} -> ${discovery.acceptedStrike?.powerAfter ?? ""}.`,
+    title: "Move an asset only when its controller is present",
+    plainAction: `Use controller input ${discovery.selectedCandidate?.outpoint || ""} to authorize the asset move and update power ${discovery.acceptedStrike?.powerBefore ?? ""} -> ${discovery.acceptedStrike?.powerAfter ?? ""}.`,
     userChecks: [
       `Required owner covenant id: ${discovery.requiredSibling?.covenantId || ""}`,
       `Required sibling input index: ${discovery.requiredSibling?.witnessInput ?? ""}`,
@@ -280,8 +280,8 @@ function buildMuxWorkerSummary(liveFlow, challenge) {
     experiment: "mux-worker-proof",
     evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
     recommendedWalletDecision: "approve-if-user-initiated",
-    title: "Route mux state to worker and return",
-    plainAction: `Route the covenant family through worker templates and return to mux; accepted values move ${route.state?.value ?? ""} -> ${workerReturn.state?.valueAfter ?? ""}, timeout returns ${timeout.state?.valueBefore ?? ""} -> ${timeout.state?.valueAfter ?? ""}, and Worker B returns ${workerBReturn.state?.valueBefore ?? ""} -> ${workerBReturn.state?.valueAfter ?? ""}.`,
+    title: "Move a step through one role and recover if it stalls",
+    plainAction: `Move the state through small worker roles and return it safely; accepted values move ${route.state?.value ?? ""} -> ${workerReturn.state?.valueAfter ?? ""}, timeout returns ${timeout.state?.valueBefore ?? ""} -> ${timeout.state?.valueAfter ?? ""}, and the next worker returns ${workerBReturn.state?.valueBefore ?? ""} -> ${workerBReturn.state?.valueAfter ?? ""}.`,
     userChecks: [
       `Covenant family id: ${liveFlow.contractFamily?.covenantId || challenge.contractFamily?.covenantId || ""}`,
       `Mux template: ${liveFlow.contractFamily?.templates?.mux || challenge.contractFamily?.templates?.mux || ""}`,

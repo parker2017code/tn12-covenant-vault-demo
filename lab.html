@@ -30,7 +30,7 @@
       <div class="nav-group nav-pages" aria-label="Pages">
         <a href="index.html">Proof Home</a>
         <a href="results.html">Results</a>
-        <a href="playground.html">Live Play</a>
+        <a href="playground.html">TN12 Playground</a>
         <a href="experiments.html">Experiments</a>
         <a href="lab.html" aria-current="page">Lab Tools</a>
       </div>
@@ -60,6 +60,19 @@
       </aside>
     </section>
 
+    <section id="workbench-boundary" class="panel">
+      <div class="section-title">
+        <p class="eyebrow">Workbench boundary</p>
+        <h2>This page is for builder detail.</h2>
+        <p>Use the proof home and results pages for the public story. Lab Tools keeps artifact builders, reducer checks, payload work, and future lanes available without treating every row as a product claim.</p>
+      </div>
+      <div class="work-map">
+        <article><span>Script-enforced</span><p>The spend rule is enforced by the covenant or script path.</p></article>
+        <article><span>Replay-derived</span><p>The app reads accepted rows and derives state for review.</p></article>
+        <article><span>Wallet policy</span><p>A signer or wallet should refuse or warn before broadcast; script enforcement is separate.</p></article>
+      </div>
+    </section>
+
     <section id="product-map" class="panel product-map">
       <div class="section-title">
         <p class="eyebrow">Workbench map</p>
@@ -76,7 +89,7 @@
             <li><a href="#proofs">Accepted proof txids</a></li>
             <li><a href="#indexer">Replay and checkpoint</a></li>
             <li><a href="#invoices">Payload receipt invoices</a></li>
-            <li><a href="playground.html">Live TN12 money flow</a></li>
+            <li><a href="playground.html">TN12 playground flow</a></li>
           </ul>
         </article>
         <article class="product-group">
@@ -122,8 +135,8 @@
         <article>
           <span>2</span>
           <strong>Pick a lane</strong>
-          <p>Use Live Play for accepted transfers, Invoices for payload receipts, Assurance/Escrow for covenant spend rules, and DeFi Lab for reducers and spend checks.</p>
-          <a href="playground.html">Open Live Play</a>
+          <p>Use TN12 Playground for accepted transfers, Invoices for payload receipts, Assurance/Escrow for covenant spend rules, and pool-style lab checks for reducers and spend checks.</p>
+          <a href="playground.html">Open TN12 Playground</a>
         </article>
         <article>
           <span>3</span>
@@ -157,14 +170,14 @@
       </div>
       <div class="stat-grid">
         <article>
-          <span>Accepted proof txs</span>
+          <span>Accepted proof transactions</span>
           <strong>16</strong>
           <p>Nine core proof/funding/settlement rows plus seven role-separated repeats.</p>
         </article>
         <article>
-          <span>Accepted payload events</span>
+          <span>Accepted app receipts</span>
           <strong>40</strong>
-          <p>JSON wRPC payload receipts include DeFi, scheduler intent/bid/execution/binding, and agent release events; the public REST route is kept as a no-payload negative result.</p>
+          <p>JSON wRPC app receipts include pool-style, scheduler intent/bid/execution/binding, and agent release events; the public REST route is kept as a no-payload negative result.</p>
         </article>
         <article>
           <span>Verifier command</span>
@@ -417,7 +430,7 @@ npm run campaign:custody</pre>
     <details class="lab-drawer">
       <summary>
         <span>Settlement and app lanes</span>
-        <small>Escrow, treasury, commitments, scheduler, passes, assets, auctions, DeFi, and agents.</small>
+        <small>Escrow, treasury, commitments, scheduler, passes, assets, auctions, pool-style checks, and agents.</small>
       </summary>
 
     <section id="escrow" class="panel escrow">
@@ -506,7 +519,7 @@ npm run coordination:evidence-dossier</pre>
 
     <section id="defi-backlog" class="panel defi-backlog">
       <div class="section-title">
-        <p class="eyebrow">DeFi checks</p>
+        <p class="eyebrow">Pool-style lab checks</p>
         <h2>Accepted activity plus blocked execution.</h2>
         <p>Accepted TN12 receipts and transfers feed replayed state. Oracles and settlement execution still need separate rules.</p>
       </div>
@@ -514,13 +527,13 @@ npm run coordination:evidence-dossier</pre>
       <div id="defi-list" class="defi-list" aria-live="polite"></div>
       <pre>npm run defi:refresh</pre>
       <div class="section-title compact-title">
-        <p class="eyebrow">DeFi accepted activity hardening</p>
+        <p class="eyebrow">Pool-style activity hardening</p>
         <h3>Accepted TN12 activity, reducers, and bounded market logic.</h3>
         <p>Session wallets execute funding, deposits, and payouts on TN12. Market pricing, oracle inputs, liquidation, and user-wallet signing are separate work.</p>
       </div>
       <div id="defi-simulation-summary" class="defi-summary" aria-live="polite"></div>
       <details class="evidence-drawer">
-        <summary>Show DeFi reducer checks</summary>
+        <summary>Show pool-style reducer checks</summary>
         <div id="defi-simulation-list" class="defi-list" aria-live="polite"></div>
       </details>
       <pre>npm run defi:simulation
@@ -583,7 +596,7 @@ npm run defi:accepted-activity</pre>
       <div class="section-title">
         <p class="eyebrow">Accepted transaction indexer</p>
         <h2>App state derived from TN12 reads.</h2>
-        <p>This checkpoint turns accepted proof spends and payload events into app-state records. Vaults, assurance campaigns, escrow, and payload receipts should pass through replay before the UI updates app state.</p>
+        <p>This checkpoint turns accepted proof spends and app receipt payloads into app-state records. Vaults, assurance campaigns, escrow, and receipts should pass through replay before the UI updates app state.</p>
       </div>
       <div id="indexer-summary" class="indexer-summary" aria-live="polite"></div>
       <div id="indexer-persistence" class="indexer-persistence" aria-live="polite"></div>

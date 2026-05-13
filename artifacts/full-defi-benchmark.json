@@ -1,7 +1,7 @@
 {
   "schema": "tn12-full-defi-benchmark/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-12T19:04:46.316Z",
+  "generatedAt": "2026-05-13T04:30:53.101Z",
   "status": "full-defi-benchmark-review",
   "currentPercent": 60,
   "completedWeight": 60,
@@ -27,11 +27,11 @@
     },
     {
       "id": "accepted-receipt-ledger",
-      "title": "Accepted app-state payload ledger",
+      "title": "Accepted app receipt ledger",
       "label": "TN12_ACCEPTED",
       "weight": 10,
       "done": true,
-      "evidence": "40 payload events are accepted and replayed."
+      "evidence": "40 app receipt events are accepted and replayed."
     },
     {
       "id": "multi-wallet-custody-activity",

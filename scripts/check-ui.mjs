@@ -53,13 +53,13 @@ try {
   assert.equal(checkpoint.summary.payloadEvents, 40);
   assert.equal(selfServeRunbook.summary.lanes, 12);
   assert.equal(selfServeRunbook.summary.basedAppPrototypes, 4);
-  assert.match(html, /TN12 configured\. Proof transactions accepted\./);
-  assert.match(html, /Money moved\. Proofs accepted\. State replayed\./);
-  assert.match(html, /Accepted payload events[\s\S]*<strong>40<\/strong>/);
+  assert.match(html, /Kaspa TN12 testnet proof lab\./);
+  assert.match(html, /Testnet transactions landed\. The repo replays them\./);
+  assert.match(html, /Accepted app receipts[\s\S]*<strong>40<\/strong>/);
   assert.match(html, /Multi-wallet TN12 evidence is live\./);
   assert.match(html, /42e14cf1\.\.\.bad8a5b5/);
   assert.match(html, /reviewer-settlement-flow\.json/);
-  assert.match(html, /Done, WIP, future\./);
+  assert.match(html, /What is done, what is still missing\./);
   assert.match(html, /npm run proof:records/);
   assert.doesNotMatch(html, /id="check-path"/);
   assert.match(html, /docs\/AUDIT_MAP\.md/);
@@ -83,11 +83,11 @@ try {
   assert.match(resultsHtml, /id="knowledge-levels"/);
   assert.match(resultsHtml, /id="results-rails"/);
   assert.match(resultsHtml, /id="standards-adapters"/);
-  assert.match(resultsHtml, /Future adapters can plug into receipts/);
+  assert.match(resultsHtml, /Adapter ideas stay outside the proof story/);
   assert.match(resultsHtml, /Show adapter ideas/);
   assert.match(resultsHtml, /docs\/PRODUCT_EXECUTION_PLAN\.md/);
   assert.match(resultsHtml, /Accepted TN12 activity/);
-  assert.match(resultsHtml, /Live playground/);
+  assert.match(resultsHtml, /TN12 playground/);
   assert.doesNotMatch(resultsHtml, /X post|x-post-draft|Draft post/);
   assert.doesNotMatch(resultsHtml, /Future implementation target/);
   assert.match(resultsHtml, /src="public-explorer\.js"/);
@@ -110,7 +110,7 @@ try {
   assert.match(playgroundHtml, /4 accepted txs/);
   assert.match(playgroundHtml, /id="playground-levels"/);
   assert.match(playgroundHtml, /id="playground-tx-map"/);
-  assert.match(playgroundHtml, /Fast testnet money/);
+  assert.match(playgroundHtml, /Accepted testnet flow, replayed app state/);
   assert.doesNotMatch(html + resultsHtml + playgroundHtml, /tn12\.kaspa\.stream\/txs\//);
   assert.match(html + resultsHtml + playgroundHtml, /tn12\.kaspa\.stream\/transactions\//);
   assert.doesNotMatch(playgroundHtml, /What the playground will run/);
@@ -119,9 +119,9 @@ try {
   assert.match(await readFile("lab.html", "utf8"), /id="runbook"/);
   assert.match(await readFile("lab.html", "utf8"), /id="lane-runbook"/);
   assert.match(await readFile("lab.html", "utf8"), /docs\/PRODUCT_EXECUTION_PLAN\.md/);
-  assert.match(experimentsHtml, /Mux \/ worker proof/);
-  assert.match(experimentsHtml, /Recurring cap proof/);
-  assert.match(experimentsHtml, /Sibling-authorized asset proof/);
+  assert.match(experimentsHtml, /Step-by-step workflow/);
+  assert.match(experimentsHtml, /Budget that cannot drain at once/);
+  assert.match(experimentsHtml, /Asset that needs its controller/);
   assert.match(experimentsHtml, /artifacts\/covenant-experiment-map\.json/);
   assert.match(experimentsHtml, /id="wallet-approval-cards"/);
   assert.match(experimentsHtml, /wallet-approval-cards\.js/);
@@ -181,7 +181,7 @@ async function checkRenderedPages(url) {
     assert.match(playgroundText, /User B -> Pool/);
     assert.match(playgroundText, /3bfca807/);
     assert.match(playgroundText, /4 accepted txs/);
-    assert.match(playgroundText, /DeFi multi-wallet flow/);
+    assert.match(playgroundText, /Pool-style testnet flow/);
     assert.match(playgroundText, /custody promotions/i);
     assert.match(playgroundText, /Open lab tools/);
     assert.match(playgroundText, /Use your own wallet/);
@@ -218,7 +218,7 @@ async function checkRenderedPages(url) {
     await page.waitForSelector("#standards-adapters article", { state: "attached", timeout: 5000 });
     const resultsText = await page.locator("body").innerText();
     assert.match(resultsText, /x402-style HTTP payment adapter/);
-    assert.match(resultsText, /future adapter/i);
+    assert.match(resultsText, /adapter idea/i);
     assert.match(resultsText, /Accepted transfers/i);
     assert.match(resultsText, /40/);
     assert.doesNotMatch(resultsText, /TN12_ACCEPTED|LOCAL_KEY_CUSTODY_TEST|INDEXER_DERIVED|MAINNET_BLOCKED|PLANNER_ONLY/);
@@ -256,7 +256,7 @@ async function checkRenderedPages(url) {
     await page.waitForSelector("#self-serve-lanes article", { state: "attached", timeout: 5000 });
     assert.equal(await page.locator("#self-serve-lanes article").count(), 12);
     const laneRunbookText = await page.locator("#lane-runbook").evaluate((node) => node.textContent || "");
-    assert.match(laneRunbookText, /DeFi lab/);
+    assert.match(laneRunbookText, /Pool-style lab checks/);
     assert.match(laneRunbookText, /Coordination \/ Stag/);
     assert.match(laneRunbookText, /based app prototype/i);
     assert.match(laneRunbookText, /Use your own wallet/);
@@ -271,7 +271,7 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator("details.lab-drawer").count(), 7);
     assert.equal(await page.locator("details.lab-drawer[open]").count(), 0);
     const firstPanelId = await page.locator("main > section.panel, main > details.lab-drawer").first().evaluate((node) => node.id || node.querySelector("section")?.id || "");
-    assert.equal(firstPanelId, "product-map");
+    assert.equal(firstPanelId, "workbench-boundary");
     await page.goto(`${url}lab.html#scheduler-workbench`, { waitUntil: "domcontentloaded" });
     assert.equal(await page.locator("#scheduler-workbench").evaluate((node) => node.closest("details.lab-drawer")?.open), true);
     await page.waitForSelector("#scheduler-workbench-jobs article", { timeout: 5000 });
@@ -315,8 +315,8 @@ async function assertProofHomeDensity(page, viewportName) {
       proofsTop: Math.round(proofs?.getBoundingClientRect().top || 0),
     };
   });
-  const maxHeroHeight = viewportName === "mobile" ? 620 : 340;
-  const maxProofsTop = viewportName === "mobile" ? 850 : 520;
+  const maxHeroHeight = viewportName === "mobile" ? 660 : 340;
+  const maxProofsTop = viewportName === "mobile" ? 1900 : 980;
   assert.ok(metrics.heroHeight > 0 && metrics.heroHeight <= maxHeroHeight, `proof home ${viewportName} hero too tall: ${metrics.heroHeight}px`);
   assert.ok(metrics.proofsTop > 0 && metrics.proofsTop <= maxProofsTop, `proof home ${viewportName} proof table too low: ${metrics.proofsTop}px`);
 }

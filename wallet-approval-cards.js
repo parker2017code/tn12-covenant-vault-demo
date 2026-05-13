@@ -21,19 +21,40 @@ function renderCard(summary) {
   return `
     <article class="wallet-approval-card">
       <header>
-        <span>${escapeHtml(summary.experiment || "")}</span>
+        <span>${escapeHtml(cardLabel(summary.experiment))}</span>
         <strong>${escapeHtml(summary.title || summary.id || "")}</strong>
       </header>
       <p>${escapeHtml(summary.plainAction || "")}</p>
-      <p class="wallet-approval-decision">${escapeHtml(summary.recommendedWalletDecision || "")}</p>
-      <p class="wallet-approval-label">Checks</p>
+      <p class="wallet-approval-decision">${escapeHtml(decisionText(summary.recommendedWalletDecision))}</p>
+      <p class="wallet-approval-label">What the wallet should show</p>
       <ul>
         ${checks.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
       </ul>
-      <p class="note">${escapeHtml(summary.refusalPrompts?.length || 0)} reject cases</p>
+      <p class="note">${escapeHtml(summary.refusalPrompts?.length || 0)} blocked cases</p>
       ${links.length ? `<p class="note">Evidence: ${links.join(" · ")}</p>` : ""}
     </article>
   `;
+}
+
+function cardLabel(experiment = "") {
+  const labels = {
+    "recurring-cap-proof": "Budget rule",
+    "sibling-authorized-asset-proof": "Controlled asset",
+    "mux-worker-proof": "Step workflow",
+    "scheduler-receipt-evidence": "Scheduled payout",
+    "coordination-release-evidence": "Group payment",
+    "vault-negative-checks": "Blocked withdrawals"
+  };
+  return labels[experiment] || experiment || "Wallet review";
+}
+
+function decisionText(decision = "") {
+  const labels = {
+    "approve-if-user-initiated": "Approve only if this is the action you meant to take",
+    "reject-invalid-attempts": "Reject these invalid attempts",
+    reject: "Reject"
+  };
+  return labels[decision] || decision;
 }
 
 function evidenceLinks(summary) {

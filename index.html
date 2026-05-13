@@ -30,7 +30,7 @@
       <div class="nav-group nav-pages" aria-label="Pages">
         <a href="index.html" aria-current="page">Proof Home</a>
         <a href="results.html">Results</a>
-        <a href="playground.html">Live Play</a>
+        <a href="playground.html">TN12 Playground</a>
         <a href="experiments.html">Experiments</a>
         <a href="lab.html">Lab Tools</a>
       </div>
@@ -45,15 +45,28 @@
   <main>
     <section class="hero proof-hero">
       <div>
-        <p class="status">TN12 configured. Proof transactions accepted.</p>
-        <h2>Money moved. Proofs accepted. State replayed.</h2>
-        <p>Public TN12 txids back the proof table below. Product ideas and mainnet blockers stay on separate routes.</p>
+        <p class="status">Kaspa TN12 testnet proof lab.</p>
+        <h2>Testnet transactions landed. The repo replays them.</h2>
+        <p>Start with accepted TN12 records: proof transactions, app receipts, role funding, deposits, payout, replayed balances, and blocked actions. Product ideas and mainnet blockers stay separate.</p>
       </div>
       <aside class="facts">
         <span>Short version</span>
-        <strong>16 proof txs. 40 payload events. 53 checkpointed records.</strong>
-        <p>Testnet evidence lab. No audit. No mainnet funds.</p>
+        <strong>16 proof transactions. 40 app receipts.</strong>
+        <p>The 16 proof transactions are 9 core proof/funding/settlement rows plus 7 role-separated repeats. TN12 only. No audit. No mainnet funds.</p>
       </aside>
+    </section>
+
+    <section class="panel evidence-strip-panel">
+      <div class="section-title">
+        <p class="eyebrow">Read the evidence correctly</p>
+        <h2>Accepted, replayed, and blocked are different claims.</h2>
+      </div>
+      <div class="work-map">
+        <article><span>Accepted TN12 tx</span><p>A transaction landed on testnet and can be opened by txid.</p></article>
+        <article><span>App receipt</span><p>App data landed inside an accepted transaction. Payload alone is not custody settlement; it still needs matching replay or spend evidence for a product claim.</p></article>
+        <article><span>Replay-derived</span><p>The repo reads accepted rows and calculates balances, receipts, payouts, or blocked actions.</p></article>
+        <article><span>Local or wallet block</span><p>A local engine or wallet policy refused a candidate. That is not the same as a broadcast rejection.</p></article>
+      </div>
     </section>
 
     <section id="proofs" class="panel proofs">
@@ -134,11 +147,11 @@
 
     <section id="work-map" class="panel work-map-panel">
       <div class="section-title">
-        <h2>Done, WIP, future.</h2>
+        <h2>What is done, what is still missing.</h2>
       </div>
       <div class="work-map">
         <article>
-          <span>Done</span>
+          <span>Accepted or locally checked</span>
           <ul>
             <li>Accepted proof txids.</li>
             <li>Accepted payload receipts.</li>
@@ -152,12 +165,12 @@
           </ul>
         </article>
         <article>
-          <span>WIP</span>
+          <span>Still missing</span>
           <ul>
             <li>User-wallet signing request and return format.</li>
-            <li>Recurring-cap proof track.</li>
-            <li>Blitz challenge or settlement rows.</li>
-            <li>Asset Duel visible duel round.</li>
+            <li>User-readable wallet approval flow for the covenant examples.</li>
+            <li>Fresh public-user runs with user-wallet signing.</li>
+            <li>More compact challenge rows only where they prove a new blocked path.</li>
             <li>Live removed-block rollback evidence.</li>
             <li>Production replay service.</li>
           </ul>
@@ -204,19 +217,19 @@
 
     <section id="reviewer" class="panel">
       <div class="section-title">
-        <h2>Proof counts and commands.</h2>
-        <p>These commands are the public proof path. Product maps, wallet drafts, DeFi reducers, scheduler work, and generated artifact inventories live in Lab Tools.</p>
+        <h2>Counts with meanings.</h2>
+        <p>These counts are useful only when their evidence class stays visible. Product maps, wallet drafts, pool-style reducers, scheduler work, and generated artifact inventories live in Lab Tools.</p>
       </div>
       <div class="stat-grid">
         <article>
-          <span>Accepted proof txs</span>
+          <span>Accepted proof transactions</span>
           <strong>16</strong>
-          <p>Nine core proof/funding/settlement rows plus seven role-separated repeats.</p>
+          <p>Nine core proof/funding/settlement rows plus seven role-separated repeats. The accepted covenant-spend subset is tracked separately in the artifacts.</p>
         </article>
         <article>
-          <span>Accepted payload events</span>
+          <span>Accepted app receipts</span>
           <strong>40</strong>
-          <p>Payload receipts are accepted and replayable. The detailed app categories stay out of the default proof path.</p>
+          <p>App data was written into accepted TN12 transactions. Replay can read it; the payload alone is not custody settlement.</p>
         </article>
         <article>
           <span>Verifier command</span>

@@ -1,17 +1,17 @@
 {
   "schema": "tn12-wallet-approval-summaries/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T02:43:16.141Z",
+  "generatedAt": "2026-05-13T04:28:48.593Z",
   "status": "wallet-approval-summary-ready",
-  "purpose": "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
+  "purpose": "Translate covenant evidence into normal wallet-review language: what the user is approving, what rule controls the money, and what bad move would be rejected.",
   "summaries": [
     {
       "id": "recurring-cap-reset-window",
       "experiment": "recurring-cap-proof",
       "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED",
       "recommendedWalletDecision": "approve-if-user-initiated",
-      "title": "Reset recurring treasury window",
-      "plainAction": "Spend 40 tKAS from the capped treasury and relock 44.9998 tKAS as the next covenant state.",
+      "title": "Spend from a budget without draining it",
+      "plainAction": "Spend 40 tKAS from a capped treasury, then lock 44.9998 tKAS back into the next budget state.",
       "userChecks": [
         "Amount: 40 tKAS",
         "Cap: 75 tKAS",
@@ -82,8 +82,8 @@
       "experiment": "sibling-authorized-asset-proof",
       "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
       "recommendedWalletDecision": "approve-if-user-initiated",
-      "title": "Move asset with sibling authority",
-      "plainAction": "Use owner-marker input d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f:0 to authorize the asset strike and update power 600 -> 450.",
+      "title": "Move an asset only when its controller is present",
+      "plainAction": "Use controller input d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f:0 to authorize the asset move and update power 600 -> 450.",
       "userChecks": [
         "Required owner covenant id: 8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
         "Required sibling input index: 1",
@@ -157,8 +157,8 @@
       "experiment": "mux-worker-proof",
       "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
       "recommendedWalletDecision": "approve-if-user-initiated",
-      "title": "Route mux state to worker and return",
-      "plainAction": "Route the covenant family through worker templates and return to mux; accepted values move 5 -> 8, timeout returns 8 -> 7, and Worker B returns 7 -> 11.",
+      "title": "Move a step through one role and recover if it stalls",
+      "plainAction": "Move the state through small worker roles and return it safely; accepted values move 5 -> 8, timeout returns 8 -> 7, and the next worker returns 7 -> 11.",
       "userChecks": [
         "Covenant family id: df9fd6e4938398f2f16a0c35830e30d58419a7fd36cc5e4b13ced7206e590204",
         "Mux template: 094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb",
@@ -250,8 +250,8 @@
       "experiment": "scheduler-receipt-evidence",
       "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_REPLAY_GUARDS",
       "recommendedWalletDecision": "approve-if-user-initiated",
-      "title": "Release scheduler covenant payout",
-      "plainAction": "Release 4 tKAS to the scheduled recipient after the accepted intent, winning bid, and execution receipt are replayed as eligible.",
+      "title": "Release a scheduled payout after the evidence matches",
+      "plainAction": "Release 4 tKAS to the scheduled recipient after the accepted intent, winning bid, and execution receipt replay as eligible.",
       "userChecks": [
         "Payout amount: 4 tKAS",
         "Recipient: kaspatest:qqpxcwpdqazxgmgvhj2ntp8mvxwkaetw73g0prq97q2vxfpwg2w3sv3kd5f0z",
@@ -338,8 +338,8 @@
       "experiment": "coordination-release-evidence",
       "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_REPLAY_SELECTION",
       "recommendedWalletDecision": "approve-if-user-initiated",
-      "title": "Release coordination pledges",
-      "plainAction": "Release 3 covenant pledges totaling 99.99985 tKAS to the selected recipient after the coordination pack is selected by replay evidence.",
+      "title": "Release a group payment after enough pledges qualify",
+      "plainAction": "Release 3 locked pledges totaling 99.99985 tKAS to the selected recipient after replay evidence selects the qualifying group.",
       "userChecks": [
         "Funding txid: 314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
         "Pledge outputs: 3",
@@ -459,8 +459,8 @@
       "experiment": "vault-negative-checks",
       "evidenceClass": "TN12_ACCEPTED_BACKBONE_WITH_LOCAL_REJECTS",
       "recommendedWalletDecision": "reject-invalid-attempts",
-      "title": "Review blocked vault attempts",
-      "plainAction": "Review 7 blocked vault attempts over the accepted recurring-vault rail before treating the vault path as safe to automate.",
+      "title": "Review the withdrawals the vault refuses",
+      "plainAction": "Review 7 blocked withdrawal attempts before treating the vault path as safe to automate.",
       "userChecks": [
         "Accepted reset txid: f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759",
         "Blocked attempts: 7",

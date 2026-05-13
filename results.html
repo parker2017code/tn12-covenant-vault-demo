@@ -30,7 +30,7 @@
       <div class="nav-group nav-pages" aria-label="Pages">
         <a href="index.html">Proof Home</a>
         <a href="results.html" aria-current="page">Results</a>
-        <a href="playground.html">Live Play</a>
+        <a href="playground.html">TN12 Playground</a>
         <a href="experiments.html">Experiments</a>
         <a href="lab.html">Lab Tools</a>
       </div>
@@ -59,9 +59,22 @@
 
     <section class="panel results-panel">
       <div class="section-title">
+        <p class="eyebrow">Read the evidence correctly</p>
+        <h2>Txids, receipts, and replay rows do different jobs.</h2>
+      </div>
+      <div class="work-map">
+        <article><span>Accepted TN12 tx</span><p>A transaction landed on testnet and can be opened in the explorer.</p></article>
+        <article><span>Payload receipt</span><p>App data was included in an accepted transaction. It records intent or status; it is not automatically custody settlement.</p></article>
+        <article><span>Replay-derived state</span><p>The repo calculates balances and blocked actions from accepted rows.</p></article>
+        <article><span>Future work</span><p>User-wallet signing, production replay, audit, and mainnet activation need separate evidence.</p></article>
+      </div>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-title">
         <p class="eyebrow">Fast route</p>
-        <h2>Proof first.</h2>
-        <p>This page is the proof surface: accepted txids, receipts, replay rows, and remaining pieces. Product ideas and readiness blockers stay on separate routes.</p>
+        <h2>Start with the txids.</h2>
+        <p>This page shows the evidence in order: accepted txids first, app receipts second, replayed state third, open gaps last. Product ideas and readiness blockers stay on separate routes.</p>
       </div>
       <div class="journey-grid">
         <a href="playground.html#activity">
@@ -81,8 +94,8 @@
         </a>
         <a href="#standards">
           <span>Future</span>
-          <strong>Adapter ideas</strong>
-        <p>Optional adapter ideas that could plug into accepted receipts.</p>
+          <strong>Future ideas</strong>
+        <p>Optional adapter ideas stay behind a drawer because they are not proof from the accepted run.</p>
         </a>
       </div>
     </section>
@@ -143,8 +156,8 @@
 
     <section id="playground" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">Live playground</p>
-        <h2>Real TN12 session flow.</h2>
+        <p class="eyebrow">TN12 playground</p>
+        <h2>Accepted testnet session flow.</h2>
         <p>Open the playground for the role addresses, accepted txids, reducer output, and blocked-action view.</p>
         <p class="note"><a href="docs/PRODUCT_EXECUTION_PLAN.md">Product execution plan</a></p>
       </div>
@@ -167,9 +180,9 @@
 
     <section id="standards" class="panel results-panel">
       <div class="section-title">
-        <p class="eyebrow">Integration ideas</p>
-        <h2>Future adapters can plug into receipts.</h2>
-        <p>Keep this behind the main proof story. These rows are optional shapes for builders who want standards-style payment, identity, or task metadata.</p>
+        <p class="eyebrow">Future ideas</p>
+        <h2>Adapter ideas stay outside the proof story.</h2>
+        <p>These rows are possible integration shapes. They are not current proof from the accepted TN12 run.</p>
       </div>
       <details class="evidence-drawer">
         <summary>Show adapter ideas</summary>

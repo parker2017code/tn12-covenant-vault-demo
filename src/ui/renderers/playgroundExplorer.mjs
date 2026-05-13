@@ -39,7 +39,7 @@ export async function renderPlaygroundExplorer(documentRef = document) {
       ${metric("Payload events available", plan.summary.acceptedPayloadEventsAvailable, "Current accepted receipt evidence.")}
       ${metric("Transfer rows available", plan.summary.acceptedTransferRowsAvailable, "Current local-key custody movement evidence.")}
       ${metric("Shared private keys", plan.summary.sharedWalletPrivateKeys, "Must remain zero.")}
-      ${metric("DeFi checks", `${plan.summary.benchmarkRails || "6 / 10"} lab rails`, "Detailed rail evidence lives in Lab Tools.")}
+      ${metric("Pool-style lab checks", `${plan.summary.benchmarkRails || "6 / 10"} rails`, "Research checks with repo evidence, not production DeFi.")}
     `;
     if (quickstartNode) renderQuickstart(quickstartNode, plan);
     if (levelsNode) renderLevels(levelsNode, { activity, session, funding, deposit, secondDeposit, payout });

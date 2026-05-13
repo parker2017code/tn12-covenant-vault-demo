@@ -1,7 +1,7 @@
 {
   "schema": "tn12-covenant-heist-evidence/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T02:43:16.241Z",
+  "generatedAt": "2026-05-13T04:28:48.927Z",
   "status": "accepted-vault-rail-with-local-heist-rejects",
   "plainPoint": "The useful vault story is not only that good spends work. It is that obvious theft paths fail.",
   "technicalPoint": "Accepted TN12 recurring-vault spends establish the live rail; local SilverScript and full owner-signature harnesses reject wrong authority, wrong output shape, missing continuation, cap overflow, and bad reset windows.",
