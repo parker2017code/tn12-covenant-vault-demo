@@ -976,6 +976,15 @@ progress::-moz-progress-bar {
   color: var(--muted);
 }
 
+.experiment-grid .example-line {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.experiment-grid .example-line b {
+  color: var(--accent-warm);
+}
+
 .experiment-grid ul {
   margin: 10px 0 0;
   padding-left: 18px;

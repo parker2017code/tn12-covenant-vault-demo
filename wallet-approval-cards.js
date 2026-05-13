@@ -12,11 +12,11 @@ if (node) {
 async function renderWalletApprovalCards() {
   const artifact = await fetchJson("artifacts/wallet-approval-summaries.json");
   const summaries = Array.isArray(artifact.summaries) ? artifact.summaries : [];
-  node.innerHTML = summaries.slice(0, 3).map(renderCard).join("");
+  node.innerHTML = summaries.map(renderCard).join("");
 }
 
 function renderCard(summary) {
-  const checks = (summary.userChecks || []).slice(0, 2);
+  const checks = (summary.userChecks || []).slice(0, 4);
   const links = evidenceLinks(summary);
   return `
     <article class="wallet-approval-card">
@@ -30,7 +30,8 @@ function renderCard(summary) {
       <ul>
         ${checks.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
       </ul>
-      <p class="note">${escapeHtml(summary.refusalPrompts?.length || 0)} blocked cases. ${links.length ? `Evidence: ${links.slice(0, 2).join(" · ")}` : ""}</p>
+      <p class="note">${escapeHtml(summary.refusalPrompts?.length || 0)} blocked cases</p>
+      ${links.length ? `<p class="note">Evidence: ${links.join(" · ")}</p>` : ""}
     </article>
   `;
 }
