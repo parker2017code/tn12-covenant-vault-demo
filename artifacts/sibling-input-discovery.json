@@ -1,0 +1,66 @@
+{
+  "schema": "tn12-sibling-input-discovery/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-13T00:58:33.817Z",
+  "status": "sibling-input-discovery-ready",
+  "experiment": "sibling-authorized-asset-proof",
+  "purpose": "Show how a wallet or builder discovers the required sibling input for the ICC asset move.",
+  "requiredSibling": {
+    "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+    "witnessInput": 1,
+    "role": "owner-marker-authority",
+    "reason": "The asset covenant accepts the configured owner covenant id at the witnessed sibling input instead of nesting owner-contract execution."
+  },
+  "selectedCandidate": {
+    "txid": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+    "outputIndex": 0,
+    "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+    "amountSompi": "100000000",
+    "status": "accepted",
+    "outpoint": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f:0",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f"
+  },
+  "assetInput": {
+    "txid": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+    "outputIndex": 0,
+    "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+    "status": "accepted"
+  },
+  "acceptedStrike": {
+    "txid": "f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+    "powerBefore": 600,
+    "powerAfter": 450
+  },
+  "discoverySteps": [
+    "Read the asset state or compiled artifact to get the required owner covenant id.",
+    "Find an accepted, unspent sibling candidate with that covenant id.",
+    "Place that sibling at transaction input 1.",
+    "Reject the transaction if the sibling is missing, at the wrong witness index, or from another covenant id."
+  ],
+  "localRejectCoverage": [
+    {
+      "name": "wrong_witness_rejects_asset_move",
+      "status": "passed",
+      "expected": false,
+      "got": false
+    },
+    {
+      "name": "missing_sibling_rejects_asset_move",
+      "status": "passed",
+      "expected": false,
+      "got": false
+    },
+    {
+      "name": "wrong_sibling_covenant_rejects_asset_move",
+      "status": "passed",
+      "expected": false,
+      "got": false
+    }
+  ],
+  "boundaries": [
+    "This is deterministic discovery over accepted TN12 fixture data and local negative checks.",
+    "It does not prove a production indexer, wallet UX, or mainnet asset standard.",
+    "The accepted strike proves the sibling path once; future asset moves need fresh live sibling and asset state discovery."
+  ]
+}

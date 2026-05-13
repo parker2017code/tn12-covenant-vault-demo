@@ -54,6 +54,9 @@ until these move.
 - `artifacts/covenant-owned-asset-duel-live-negative-evidence.json` records
   local script-engine rejects for wrong witness, missing sibling, and wrong
   sibling covenant id using the accepted live owner/asset covenant ids.
+- `artifacts/sibling-input-discovery.json` explains how the required ICC
+  sibling input is found from the owner covenant id, accepted owner-marker
+  outpoint, witness index, and live negative coverage.
 - `contracts/BlitzMux.sil`, `contracts/BlitzWorkerA.sil`, and
   `contracts/BlitzWorkerB.sil` compile.
 - `artifacts/blitz-mux-arena-proof.json` proves the local mux/worker pattern:
@@ -92,7 +95,7 @@ until these move.
 | Priority | Experiment | Current level | Next upgrade |
 |---|---|---|---|
 | 1 | Recurring cap proof | Accepted TN12 covenant spends, reset-window spend, continuation state, local rejects, first wallet approval summary | Extend wallet approval to real signer handoff |
-| 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects | Add sibling-input discovery and wallet approval summary |
+| 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery | Add wallet approval summary |
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects | Add wallet approval summary; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
 | 5 | Coordination release evidence | Accepted payload/custody/release receipts plus transparent replay evidence | Build a TN12 covenant settlement target for release/refund |
@@ -132,14 +135,14 @@ exists and is tested on TN12.
    - Done when each top proof pattern has a machine-readable approval summary
      that a wallet UI could render as Approve/Reject.
 
-5. Add sibling-input discovery for ICC examples.
-   - The sibling-authorized asset proof now assumes the required owner-marker
-     input is known.
-   - Add an artifact that explains how the current required sibling input is
-     discovered from covenant id, outpoint, state, and replay state without
-     manual lookup.
-   - Done when the Asset proof has a "find required sibling" fixture or an
-     explicit blocker.
+5. Extend sibling-input discovery for ICC examples.
+   - The sibling-authorized asset proof now has a first discovery artifact for
+     the current accepted owner-marker input.
+   - Next, make the same fields wallet-readable in the approval summary and
+     keep future asset moves tied to fresh live sibling and asset state.
+   - Done when the Asset proof has both a discovery artifact and an approval
+     summary that names the sibling outpoint, witness index, covenant id, and
+     failure cases.
 
 6. Harden replay-derived lanes.
    - Scheduler evidence is currently `INDEXER_DERIVED`; that is useful but not

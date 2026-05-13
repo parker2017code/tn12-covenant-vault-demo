@@ -150,6 +150,7 @@ Avoid these labels:
 - Negative cases make examples serious: wrong signer, wrong destination, over cap, missing continuation, stale window, and missing sibling input.
 - UX abstraction is now part of the technical work. A useful covenant demo should eventually produce a wallet-readable approval summary, not only a JSON artifact for reviewers.
 - ICC examples need sibling discovery. A sibling-authorized asset path is incomplete for users until the repo can explain which sibling input is required and how it was found.
+- `artifacts/sibling-input-discovery.json` is the first asset discovery artifact. Use it as the shape future ICC examples should satisfy: required covenant id, witness input, selected sibling outpoint, accepted strike, and local reject coverage.
 - Replay-derived lanes need independent verification. Scheduler evidence is useful as accepted receipts plus deterministic replay, but do not imply protocol scheduling unless the spend path or a later proof system enforces it.
 - Use "money with visible rules" as a plain framing. Avoid public claims such as "holy grail," "bleeding edge," or "if this reaches mainnet then Kaspa becomes..." unless the repo has mainnet, wallet, audit, and production evidence.
 - Compiled stateful `.sil` and accepted funding are not enough. For recurring caps, require an actual spend from the funded contract output or keep the label at wallet-policy/local-wallet.

@@ -23,6 +23,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Coordination League update, 2026-05-12: `artifacts/coordination-market-evidence-dossier.json` is visible as a bounded coordination slice with three qualifying intendos, accepted payload/custody evidence, accepted release txid `4d84472e9796b90875fb1bfbdd8a36e94e1727592247a52966f26e8ea65f6801`, and non-selected refund alternates.
 - Scheduler Duel update, 2026-05-12: `artifacts/universal-scheduler-workbench.json` is visible as a bounded app-state slice with accepted intent, accepted executor bids, accepted execution receipt, matched payout transfer, and replay-blocked stale/duplicate/too-slow paths. It remains `INDEXER_DERIVED`, not protocol scheduling or autonomous custody.
 - Wallet approval update, 2026-05-12: `artifacts/wallet-approval-summaries.json` translates the recurring-cap reset-window proof into wallet-readable fields: amount, cap, previous/next spent amount, covenant id, continuation output, explorer URL, and local reject prompts.
+- Sibling-input discovery update, 2026-05-12: `artifacts/sibling-input-discovery.json` explains the ICC asset proof's required owner-marker sibling input from the live owner covenant id, accepted outpoint, witness index, and negative coverage.
 
 ## Completed In Current Cleanup Pass
 
@@ -41,7 +42,7 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 | 1 | Add a compact Blitz challenge variant only if it proves a new refusal path. | A new local reject or accepted/rejected TN12 row is added without pretending this is a full game. | No |
 | 2 | Add new experiment evidence only when it is a real move. | New rows must be accepted evidence, safe rejection evidence, or wallet handoff evidence. | No |
 | 3 | Add wallet-readable approval summaries. | At least one experiment emits an action/amount/destination/covenant/continuation summary a wallet could render as Approve/Reject. | No |
-| 4 | Add sibling-input discovery for the asset proof. | The repo explains how the required sibling input is found from covenant id, outpoint, state, and replay state. | No |
+| 4 | Extend wallet-readable approval summaries to asset and mux proofs. | Asset and mux summaries expose the action, covenant ids, required sibling/worker state, continuation state, and reject prompts. | No |
 | 5 | Build the Coordination TN12 settlement target. | Release/refund gets a covenant target plan, local checks, and accepted TN12 evidence or an exact blocker. | No |
 | 6 | Build the Scheduler TN12 settlement target. | One eligible trigger gets a covenant target plan, local checks, and accepted TN12 evidence or an exact blocker. | No |
 | 7 | Harden replay-derived lanes. | Scheduler or coordination replay has a second-verifier check, mismatch proof, checkpoint, or explicit proof-system blocker. | No |

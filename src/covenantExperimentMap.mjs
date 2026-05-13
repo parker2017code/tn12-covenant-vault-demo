@@ -191,12 +191,14 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "fixtures/CovenantOwnedAssetDuelStrikeOutpoint.json",
         "artifacts/covenant-owned-asset-duel-live-strike-evidence.json",
         "artifacts/covenant-owned-asset-duel-live-negative-evidence.json",
+        "artifacts/sibling-input-discovery.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       nextBuildSteps: [
         "Only attempt broadcast-rejected negative rows if there is a safe non-spending route.",
-        "Add one more accepted strike from the continuation when it proves a new state transition.",
+        "Add a wallet approval summary that renders the required sibling input and strike state.",
+        "Add one more accepted strike from the continuation only if it proves a new state transition.",
         "Keep user-wallet signing out of the claim until the same path signs through wallet-standard handoff."
       ],
       hardBoundary: "The owner-marker genesis, live asset-duel genesis, and sibling-authorized strike spend are accepted on TN12. Negative candidates use the same live ids locally and are not broadcast-rejection records."

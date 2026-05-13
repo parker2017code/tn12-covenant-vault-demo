@@ -20,6 +20,9 @@ const groups = {
     "tests/domain/wallet-approval-summaries.test.mjs",
     "tests/domain/wrpc-submit-guard.test.mjs"
   ],
+  indexer: [
+    "tests/domain/indexer-replay.test.mjs"
+  ],
   covenants: [
     "tests/domain/attestation-invoice-research.test.mjs",
     "tests/domain/batch-assurance.test.mjs",
@@ -47,6 +50,7 @@ const groups = {
     "tests/domain/covenant-owned-asset-duel-proof.test.mjs",
     "tests/domain/covenant-owned-asset-duel-live-strike.test.mjs",
     "tests/domain/covenant-owned-asset-duel-live-negatives.test.mjs",
+    "tests/domain/sibling-input-discovery.test.mjs",
     "tests/domain/blitz-mux-arena-proof.test.mjs",
     "tests/domain/blitz-mux-family-artifacts.test.mjs",
     "tests/domain/blitz-mux-live-flow-evidence.test.mjs",
@@ -75,7 +79,6 @@ const groups = {
     "tests/domain/reviewer-settlement-flow.test.mjs",
     "tests/domain/standards-adapter-backlog.test.mjs",
     "tests/domain/self-serve-lane-runbook.test.mjs",
-    "tests/domain/indexer-replay.test.mjs",
     "scripts/check-counts.mjs"
   ]
 };
