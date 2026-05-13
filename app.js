@@ -623,7 +623,7 @@ async function renderTreasuryVaults() {
       capArticle.className = "treasury-card";
       capArticle.innerHTML = `
         <span>${escapeHtml(recurringCaps.status)}</span>
-        <strong>Recurring cap evidence</strong>
+        <strong>Budget cap evidence</strong>
         <p>${escapeHtml(capState.positive.amountTkas)} TKAS accepted under a ${escapeHtml(capState.positive.capTkas)} TKAS cap; ${escapeHtml(capState.window.remainingAfterTkas)} TKAS remains in the window.</p>
         <p>${escapeHtml(capState.cumulativeNegative.amountTkas)} TKAS second spend blocked by cumulative window state.</p>
         <small>${tn12TxLink(capState.positive.txid)} · ${escapeHtml(capState.boundaries[1])}</small>

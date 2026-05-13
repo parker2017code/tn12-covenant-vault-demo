@@ -129,10 +129,15 @@ function evidenceLinks(summary) {
   if (technical.acceptedStrike?.explorerUrl && technical.acceptedStrike?.txid) {
     links.push(link(technical.acceptedStrike.explorerUrl, technical.acceptedStrike.txid, "strike"));
   }
+  const workflowLabels = {
+    normalWorkerReturn: "return path",
+    timeoutSettlement: "timeout path",
+    workerBSettlement: "next role"
+  };
   for (const key of ["normalWorkerReturn", "timeoutSettlement", "workerBSettlement"]) {
     const item = technical[key] || {};
     if (item.explorerUrl && item.txid) {
-      links.push(link(item.explorerUrl, item.txid, key.replace(/[A-Z]/g, (char) => ` ${char.toLowerCase()}`)));
+      links.push(link(item.explorerUrl, item.txid, workflowLabels[key] || "workflow"));
     }
   }
   if (technical.funding?.explorerUrl && technical.funding?.txid) {
