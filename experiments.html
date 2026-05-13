@@ -90,7 +90,7 @@
         <article>
           <span>1</span>
           <strong>Blitz Mux Arena</strong>
-          <p>A hub covenant routes state to Worker A, Worker A returns state to the hub, then a fresh pending worker times out back to the hub.</p>
+          <p>A hub covenant routes state to Worker A, Worker A returns state to the hub, a fresh pending worker times out, then Worker B applies a different return rule.</p>
           <p>This points toward turn-based games, disputes, staged approvals, and workflows where each step chooses the next bounded role.</p>
           <ul>
             <li>Mux / worker contract family.</li>
@@ -99,6 +99,8 @@
             <li>Accepted route to Worker A.</li>
             <li>Accepted Worker A return to mux.</li>
             <li>Accepted Worker A timeout return to mux.</li>
+            <li>Accepted route to Worker B.</li>
+            <li>Accepted Worker B gain-minus-fee return.</li>
           </ul>
         </article>
         <article>
@@ -135,8 +137,8 @@
     <section id="blitz-round" class="panel experiments-panel">
       <div class="section-title">
         <p class="eyebrow">Blitz Mux round</p>
-        <h2>Route, return, timeout settlement.</h2>
-        <p>The simple story is a turn that either finishes normally or times out. The technical story is a mux covenant routing state to a worker template, then accepting either a worker return or a timeout return to mux.</p>
+        <h2>Two workers, return, timeout settlement.</h2>
+        <p>The simple story is a turn that either finishes normally or times out. The technical story is a mux covenant routing state to worker templates, then accepting worker returns or a timeout return to mux.</p>
         <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open live flow evidence</a> · <a href="artifacts/blitz-mux-challenge-settlement.json">Open challenge artifact</a></p>
       </div>
       <div class="experiment-table-wrap">
@@ -179,6 +181,18 @@
               <td><code>26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036</code></td>
               <td>Pending Worker A state returns to mux after the timeout threshold.</td>
               <td>A stalled participant cannot freeze the flow forever.</td>
+            </tr>
+            <tr>
+              <td>Worker B route</td>
+              <td><code>de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2</code></td>
+              <td>Mux routes the timeout-returned state to Worker B.</td>
+              <td>The family can choose another bounded role after a timeout recovery.</td>
+            </tr>
+            <tr>
+              <td>Worker B return</td>
+              <td><code>9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2</code></td>
+              <td>Worker B returns state with a gain-minus-fee rule.</td>
+              <td>Different worker scripts can enforce different transition shapes under one covenant family.</td>
             </tr>
             <tr>
               <td>Local challenges</td>
@@ -331,7 +345,7 @@
               <td>Blitz Mux Arena</td>
               <td>mux / worker contract family</td>
               <td>accepted-timeout-settlement-with-local-challenges</td>
-              <td>optional Worker B route/return or a small challenge variant</td>
+              <td>optional challenge variant only if it proves a new refusal path</td>
             </tr>
             <tr>
               <td>Treasury Wars</td>
@@ -394,8 +408,7 @@
         <article>
           <span>Do next</span>
           <ul>
-            <li>Add Blitz Mux challenge or settlement rows.</li>
-            <li>Render Asset Duel as a visible duel round.</li>
+            <li>Add a compact Blitz challenge only if it proves a new refusal path.</li>
             <li>Keep the other three experiments local/design until accepted evidence exists.</li>
           </ul>
         </article>

@@ -63,31 +63,29 @@ until these move.
   family used for live routing.
 - `artifacts/blitz-mux-live-flow-evidence.json` records the accepted TN12 mux
   route to Worker A, accepted Worker A return to mux, accepted second route to
-  Worker A, and accepted Worker A timeout return to mux.
+  Worker A, accepted Worker A timeout return to mux, accepted route to Worker B,
+  and accepted Worker B gain-minus-fee return to mux.
 - `artifacts/blitz-mux-challenge-settlement.json` summarizes the accepted
-  worker-return settlement, accepted timeout settlement, and local challenge
-  rejects for bad selector and too-early timeout.
+  worker-return settlement, accepted timeout settlement, accepted Worker B
+  settlement, and local challenge rejects for bad selector and too-early
+  timeout.
 
 ## Next Exact Tasks
 
-1. Render Treasury Wars as a visible track.
-   - The accepted cumulative path proves one cap window.
-   - `RecurringTreasuryVaultWindow.sil` proves an accepted reset-window branch
-     plus early/stale/over-cap local rejects.
-   - The public page should show the plain point, technical point, Kaspa edge,
-     crypto point, and real-world implication without turning it into a
-     production wallet claim.
+1. Add a compact Blitz challenge variant only if it proves a new refusal path.
+   - Current accepted path already covers Worker A return, Worker A timeout, and
+     Worker B return.
+   - Do not add another accepted row if it is only more volume.
 
-2. Render Asset Duel as a visible duel round.
-   - Use the accepted owner marker, asset genesis, strike, and live-id local
-     negatives.
-   - Do not fake nested execution; the point is sibling authority.
+2. Start the next partial experiment only as a vertical slice.
+   - Best candidates are Covenant Heist negative evidence or Coordination
+     League replay rows.
+   - Keep the top three demos as the public proof set until the next candidate
+     has accepted evidence or concrete local rejects.
 
-3. Add one Worker B route/return or a small challenge variant.
-   - The route, return, second route, timeout settlement, and local challenge
-     rows are visible.
-   - Keep full game rules out until each new row proves a different transition
-     shape.
+3. Split the giant focused/check command surface.
+   - The command wall is now a maintenance risk.
+   - Preserve coverage while making the gate easier to read.
 
 ## Lessons To Apply
 

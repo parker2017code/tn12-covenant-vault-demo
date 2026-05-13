@@ -23,6 +23,13 @@ const rows = [
     result: "value 8 -> 7, pending 1 -> 0"
   },
   {
+    id: "worker-b-settlement",
+    status: byStep["worker-b-return-to-mux"]?.status === "accepted" ? "accepted-on-tn12" : "missing",
+    evidence: byStep["worker-b-return-to-mux"]?.txid,
+    rule: "Worker B returns through a different transition shape: value plus gain minus worker fee.",
+    result: `value ${byStep["worker-b-return-to-mux"]?.state?.valueBefore} -> ${byStep["worker-b-return-to-mux"]?.state?.valueAfter}, gain ${byStep["worker-b-return-to-mux"]?.state?.gain}, fee ${byStep["worker-b-return-to-mux"]?.state?.workerFee}`
+  },
+  {
     id: "bad-selector-challenge",
     status: "blocked-local-engine-failed",
     evidence: "blitz-mux-arena-proof:mux_bad_selector_rejects",
@@ -55,6 +62,7 @@ const artifact = {
   proves: [
     "accepted TN12 normal worker return",
     "accepted TN12 timeout settlement from pending worker state",
+    "accepted TN12 Worker B gain-minus-fee settlement",
     "local bad-selector reject",
     "local too-early timeout reject"
   ],

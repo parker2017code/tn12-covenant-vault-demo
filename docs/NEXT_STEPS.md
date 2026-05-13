@@ -18,6 +18,7 @@ This file is the short queue. It does not replace generated artifacts; it points
 - Recurring vault update, 2026-05-12: covenant-genesis funding and two script-enforced under-cap spends are accepted on TN12. The active one-window continuation fixture is `fixtures/RecurringTreasuryVaultCumulativeContinuationOutpoint.json`; the cumulative accepted spend is 65 tKAS under the 75 tKAS cap, and `artifacts/signed-drafts/recurring-treasury-vault-cumulative-over-cap.json` is locally rejected at 80 tKAS attempted window spend.
 - Recurring vault window-reset update, 2026-05-12: `contracts/RecurringTreasuryVaultWindow.sil` adds a `reset_window` branch, accepted TN12 genesis funding, accepted TN12 reset spend `f99bb6f6552beac976b770448ef2d75748b4d7fbf66932e1156ea41493978759`, active reset continuation fixture `fixtures/RecurringTreasuryVaultWindowResetContinuationOutpoint.json`, and local rejects for early reset, stale-window reset, and over-cap reset.
 - Blitz Mux update, 2026-05-12: accepted TN12 mux family genesis, route, worker return, second route, and timeout return are now summarized in `artifacts/blitz-mux-challenge-settlement.json` as normal worker settlement plus timeout settlement, with local bad-selector and too-early-timeout rejects.
+- Blitz Worker B update, 2026-05-12: accepted TN12 route to Worker B `de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2` and accepted Worker B gain-minus-fee return `9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2` are now part of the live flow artifact and visible experiment page.
 
 ## Completed In Current Cleanup Pass
 
@@ -33,13 +34,12 @@ Work in this order unless a gate or visible UI regression changes the sequence:
 
 | Order | Task | Done When | Needs User? |
 |---|---|---|---|
-| 1 | Render Treasury Wars as a visible track. | Cumulative cap and reset-window spends are readable without opening raw JSON. | No |
-| 2 | Render Asset Duel as a visible duel round. | The accepted owner marker, asset genesis, strike, and live-id local negative rows are readable without opening raw JSON. | No |
-| 3 | Add one Worker B Blitz route/return or small challenge variant. | It proves a different transition shape without becoming a full game claim. | No |
-| 4 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
-| 5 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
-| 6 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
-| 7 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
+| 1 | Add a compact Blitz challenge variant only if it proves a new refusal path. | A new local reject or accepted/rejected TN12 row is added without pretending this is a full game. | No |
+| 2 | Build the next partial experiment as one vertical slice. | Covenant Heist or Coordination League gets one artifact, one visible row, and one focused test. | No |
+| 3 | Split the giant focused/check command surface. | The current command wall is grouped into smaller reviewable domain runners without weakening gates. | No |
+| 4 | Live rollback evidence. | A live TN12 removed-block window is captured and matched by the replay promotion guard. | No |
+| 5 | User-wallet payload receipt. | A real wallet or throwaway signer returns bytes, submit succeeds, and replay observes the accepted txid. | Yes, unless a compatible throwaway signer exists |
+| 6 | Code-surface split. | More `app.js`, `styles.css`, and `scripts/check.mjs` logic moves into smaller renderers, style sections, and focused checks without changing evidence semantics. | No |
 
 ## Next Defined Work
 

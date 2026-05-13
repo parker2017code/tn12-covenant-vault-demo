@@ -11,6 +11,10 @@ const targetDir = process.env.CARGO_TARGET_DIR || `${toolsRoot}/target`;
 const contractOutpoint = await readJson(process.env.CONTRACT_OUTPOINT || "fixtures/BlitzWorkerARouteOutpoint.json");
 const genesisDraft = await readJson(process.env.GENESIS_DRAFT || "artifacts/signed-drafts/blitz-mux-family-genesis-funding.json");
 const covenantId = contractOutpoint.covenantId || genesisDraft.covenantGenesis?.covenant?.covenantId;
+const worker = String(process.env.WORKER || "A").toUpperCase();
+if (!["A", "B"].includes(worker)) {
+  throw new Error("WORKER must be A or B.");
+}
 if (!covenantId) throw new Error("Missing Blitz Mux family covenant id.");
 
 await mkdir("artifacts/signed-drafts", { recursive: true });
@@ -28,7 +32,10 @@ try {
     COVENANT_ID: covenantId,
     COMPUTE_BUDGET: String(process.env.COMPUTE_BUDGET || "30"),
     MINER_FEE_SOMPI: String(process.env.MINER_FEE_SOMPI || "20000"),
-    GAIN: String(process.env.GAIN || "3")
+    GAIN: String(process.env.GAIN || "3"),
+    VALUE: String(process.env.VALUE || "5"),
+    WORKER: worker,
+    WORKER_FEE: String(process.env.WORKER_FEE || "1")
   });
   if (run.code !== 0) {
     console.error(run.stdout);
@@ -49,7 +56,7 @@ try {
       },
       covenantId
     },
-    route: { from: "BlitzWorkerA", to: "BlitzMux", state: built.state },
+    route: { from: `BlitzWorker${worker}`, to: "BlitzMux", state: built.state },
     localChecks: {
       engineAcceptedGeneratedSigScript: built.localEngineOk,
       output0CovenantMatchesInput: built.outputs?.[0]?.covenant?.covenantId === covenantId,

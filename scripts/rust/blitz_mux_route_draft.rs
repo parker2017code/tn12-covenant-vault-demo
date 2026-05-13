@@ -119,7 +119,7 @@ fn main() {
     let b_source = load_source(&repo_root, "BlitzWorkerB");
     let (mux_prefix, mux_suffix, mux_template) = template_parts_and_hash(&mux_source, &initial_dummy_state(0));
     let (a_prefix, a_suffix, a_template) = template_parts_and_hash(&a_source, &initial_dummy_state(1));
-    let (_b_prefix, _b_suffix, b_template) = template_parts_and_hash(&b_source, &initial_dummy_state(2));
+    let (b_prefix, b_suffix, b_template) = template_parts_and_hash(&b_source, &initial_dummy_state(2));
 
     let input_txid = std::env::var("INPUT_TXID").expect("INPUT_TXID");
     let input_index = std::env::var("INPUT_INDEX").unwrap_or_else(|_| "0".to_string()).parse::<u32>().unwrap();
@@ -128,12 +128,18 @@ fn main() {
     let covenant_id_hex = std::env::var("COVENANT_ID").expect("COVENANT_ID");
     let compute_budget = std::env::var("COMPUTE_BUDGET").unwrap_or_else(|_| "30".to_string()).parse::<u16>().unwrap();
     let value = std::env::var("VALUE").unwrap_or_else(|_| "5".to_string()).parse::<i64>().unwrap();
+    let worker = std::env::var("WORKER").unwrap_or_else(|_| "A".to_string()).to_uppercase();
+    let (selector, output_source, output_prefix, output_suffix, pending) = match worker.as_str() {
+        "A" => (0, &a_source, &a_prefix, &a_suffix, 1),
+        "B" => (1, &b_source, &b_prefix, &b_suffix, 2),
+        _ => panic!("WORKER must be A or B"),
+    };
 
     let input_contract = compile_member(&mux_source, &mux_template, &a_template, &b_template, value, 10, 0);
-    let output_contract = compile_member(&a_source, &mux_template, &a_template, &b_template, value, 10, 1);
+    let output_contract = compile_member(output_source, &mux_template, &a_template, &b_template, value, 10, pending);
     let covenant_id = Hash::from_bytes(hex_to_array_32(&covenant_id_hex));
 
-    let sigscript = p2sh_sigscript(&input_contract, "route", vec![Expr::int(0), bytes_expr(&a_prefix), bytes_expr(&a_suffix)]);
+    let sigscript = p2sh_sigscript(&input_contract, "route", vec![Expr::int(selector), bytes_expr(output_prefix), bytes_expr(output_suffix)]);
     let input = TransactionInput {
         previous_outpoint: TransactionOutpoint { transaction_id: TransactionId::from_bytes(hex_to_array_32(&input_txid)), index: input_index },
         signature_script: sigscript.clone(),
@@ -181,9 +187,11 @@ fn main() {
             "muxPrefix": bytes_to_hex(&mux_prefix),
             "muxSuffix": bytes_to_hex(&mux_suffix),
             "aPrefix": bytes_to_hex(&a_prefix),
-            "aSuffix": bytes_to_hex(&a_suffix)
+            "aSuffix": bytes_to_hex(&a_suffix),
+            "bPrefix": bytes_to_hex(&b_prefix),
+            "bSuffix": bytes_to_hex(&b_suffix)
         },
-        "state": { "value": value, "timeout": 10, "prevPending": 0, "nextPending": 1, "selectedWorker": "A", "minerFeeSompi": fee },
+        "state": { "value": value, "timeout": 10, "prevPending": 0, "nextPending": pending, "selectedWorker": worker, "selector": selector, "minerFeeSompi": fee },
         "inputRedeemScriptHex": bytes_to_hex(&input_contract.script)
     })).unwrap());
 }

@@ -12,6 +12,10 @@ const targetDir = process.env.CARGO_TARGET_DIR || `${toolsRoot}/target`;
 const contractOutpoint = await readJson(process.env.CONTRACT_OUTPOINT || "fixtures/BlitzMuxFamilyContractOutpoint.json");
 const genesisDraft = await readJson(process.env.GENESIS_DRAFT || "artifacts/signed-drafts/blitz-mux-family-genesis-funding.json");
 const covenantId = contractOutpoint.covenantId || genesisDraft.covenantGenesis?.covenant?.covenantId;
+const worker = String(process.env.WORKER || "A").toUpperCase();
+if (!["A", "B"].includes(worker)) {
+  throw new Error("WORKER must be A or B.");
+}
 if (!covenantId) {
   throw new Error("Missing Blitz Mux family covenant id.");
 }
@@ -32,7 +36,8 @@ try {
     COVENANT_ID: covenantId,
     COMPUTE_BUDGET: String(process.env.COMPUTE_BUDGET || "30"),
     MINER_FEE_SOMPI: String(process.env.MINER_FEE_SOMPI || "20000"),
-    VALUE: String(process.env.VALUE || "5")
+    VALUE: String(process.env.VALUE || "5"),
+    WORKER: worker
   });
   if (run.code !== 0) {
     console.error(run.stdout);
@@ -56,8 +61,8 @@ try {
     },
     route: {
       from: "BlitzMux",
-      to: "BlitzWorkerA",
-      selector: 0,
+      to: `BlitzWorker${worker}`,
+      selector: worker === "A" ? 0 : 1,
       state: built.state,
       templates: built.templates
     },

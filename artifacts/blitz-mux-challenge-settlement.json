@@ -1,7 +1,7 @@
 {
   "schema": "tn12-blitz-mux-challenge-settlement/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T00:04:00.443Z",
+  "generatedAt": "2026-05-13T00:11:50.819Z",
   "status": "accepted-timeout-settlement-with-local-challenges",
   "contractFamily": {
     "sources": [
@@ -37,6 +37,13 @@
       "result": "value 8 -> 7, pending 1 -> 0"
     },
     {
+      "id": "worker-b-settlement",
+      "status": "accepted-on-tn12",
+      "evidence": "9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+      "rule": "Worker B returns through a different transition shape: value plus gain minus worker fee.",
+      "result": "value 7 -> 11, gain 5, fee 1"
+    },
+    {
       "id": "bad-selector-challenge",
       "status": "blocked-local-engine-failed",
       "evidence": "blitz-mux-arena-proof:mux_bad_selector_rejects",
@@ -54,6 +61,7 @@
   "proves": [
     "accepted TN12 normal worker return",
     "accepted TN12 timeout settlement from pending worker state",
+    "accepted TN12 Worker B gain-minus-fee settlement",
     "local bad-selector reject",
     "local too-early timeout reject"
   ],

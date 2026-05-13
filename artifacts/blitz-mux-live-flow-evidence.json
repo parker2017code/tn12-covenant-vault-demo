@@ -1,7 +1,7 @@
 {
   "schema": "tn12-blitz-mux-live-flow-evidence/v1",
   "network": "kaspa-testnet-12",
-  "checkedAt": "2026-05-12T23:23:59.827Z",
+  "checkedAt": "2026-05-13T00:11:50.622Z",
   "status": "accepted-mux-route-worker-return-and-timeout",
   "contractFamily": {
     "sources": [
@@ -39,6 +39,7 @@
         "nextPending": 1,
         "prevPending": 0,
         "selectedWorker": "A",
+        "selector": 0,
         "timeout": 10,
         "value": 5
       }
@@ -95,6 +96,44 @@
         "valueAfter": 7,
         "valueBefore": 8
       }
+    },
+    {
+      "step": "route-to-worker-b",
+      "contract": "BlitzWorkerB",
+      "txid": "de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2",
+      "outputIndex": 0,
+      "amountSompi": "999900000",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2",
+      "state": {
+        "minerFeeSompi": 20000,
+        "nextPending": 2,
+        "prevPending": 0,
+        "selectedWorker": "B",
+        "selector": 1,
+        "timeout": 10,
+        "value": 7
+      }
+    },
+    {
+      "step": "worker-b-return-to-mux",
+      "contract": "BlitzMux",
+      "txid": "9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+      "outputIndex": 0,
+      "amountSompi": "999880000",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+      "state": {
+        "gain": 5,
+        "minerFeeSompi": 20000,
+        "nextPending": 0,
+        "prevPending": 2,
+        "timeout": 10,
+        "valueAfter": 11,
+        "valueBefore": 7,
+        "worker": "B",
+        "workerFee": 1
+      }
     }
   ],
   "localChecks": {
@@ -106,13 +145,18 @@
     "returnCovenantMatchesInput": true,
     "timeoutRouteCovenantMatchesInput": true,
     "timeoutCovenantMatchesInput": true,
-    "timeoutSequenceMeetsThreshold": true
+    "timeoutSequenceMeetsThreshold": true,
+    "workerBRouteEngineAcceptedGeneratedSigScript": true,
+    "workerBReturnEngineAcceptedGeneratedSigScript": true,
+    "workerBRouteCovenantMatchesInput": true,
+    "workerBReturnCovenantMatchesInput": true
   },
   "proves": [
     "A BlitzMux family genesis output was accepted on TN12.",
     "The mux routed accepted state to Worker A through template identity.",
     "Worker A returned accepted state to the mux.",
     "A fresh mux state routed to Worker A again, then the Worker A timeout path returned state to mux.",
+    "The timeout-returned mux state then routed to Worker B, and Worker B returned state with its gain-minus-fee rule.",
     "Both spends preserved the same covenant family id."
   ],
   "doesNotProve": [
@@ -131,6 +175,10 @@
     "timeoutRouteDraft": "artifacts/signed-drafts/blitz-mux-route-to-worker-a-timeout.json",
     "timeoutRouteOutpoint": "fixtures/BlitzWorkerATimeoutRouteOutpoint.json",
     "timeoutDraft": "artifacts/signed-drafts/blitz-mux-worker-a-timeout.json",
-    "timeoutOutpoint": "fixtures/BlitzMuxTimeoutOutpoint.json"
+    "timeoutOutpoint": "fixtures/BlitzMuxTimeoutOutpoint.json",
+    "workerBRouteDraft": "artifacts/signed-drafts/blitz-mux-route-to-worker-b.json",
+    "workerBRouteOutpoint": "fixtures/BlitzWorkerBRouteOutpoint.json",
+    "workerBReturnDraft": "artifacts/signed-drafts/blitz-mux-worker-b-return.json",
+    "workerBReturnedOutpoint": "fixtures/BlitzMuxWorkerBReturnedOutpoint.json"
   }
 }

@@ -13,6 +13,10 @@ const timeoutRouteDraft = await readJson("artifacts/signed-drafts/blitz-mux-rout
 const timeoutRouteOutpoint = await readJson("fixtures/BlitzWorkerATimeoutRouteOutpoint.json");
 const timeoutDraft = await readJson("artifacts/signed-drafts/blitz-mux-worker-a-timeout.json");
 const timeoutOutpoint = await readJson("fixtures/BlitzMuxTimeoutOutpoint.json");
+const workerBRouteDraft = await readJson("artifacts/signed-drafts/blitz-mux-route-to-worker-b.json");
+const workerBRouteOutpoint = await readJson("fixtures/BlitzWorkerBRouteOutpoint.json");
+const workerBReturnDraft = await readJson("artifacts/signed-drafts/blitz-mux-worker-b-return.json");
+const workerBReturnedOutpoint = await readJson("fixtures/BlitzMuxWorkerBReturnedOutpoint.json");
 
 const artifact = {
   schema: "tn12-blitz-mux-live-flow-evidence/v1",
@@ -73,6 +77,26 @@ const artifact = {
       status: timeoutOutpoint.status,
       explorerUrl: timeoutOutpoint.explorerUrl,
       state: timeoutDraft.route.state
+    },
+    {
+      step: "route-to-worker-b",
+      contract: "BlitzWorkerB",
+      txid: workerBRouteOutpoint.txid,
+      outputIndex: workerBRouteOutpoint.outputIndex,
+      amountSompi: workerBRouteOutpoint.amountSompi,
+      status: workerBRouteOutpoint.status,
+      explorerUrl: workerBRouteOutpoint.explorerUrl,
+      state: workerBRouteDraft.route.state
+    },
+    {
+      step: "worker-b-return-to-mux",
+      contract: "BlitzMux",
+      txid: workerBReturnedOutpoint.txid,
+      outputIndex: workerBReturnedOutpoint.outputIndex,
+      amountSompi: workerBReturnedOutpoint.amountSompi,
+      status: workerBReturnedOutpoint.status,
+      explorerUrl: workerBReturnedOutpoint.explorerUrl,
+      state: workerBReturnDraft.route.state
     }
   ],
   localChecks: {
@@ -84,13 +108,18 @@ const artifact = {
     returnCovenantMatchesInput: returnDraft.localChecks.output0CovenantMatchesInput,
     timeoutRouteCovenantMatchesInput: timeoutRouteDraft.localChecks.output0CovenantMatchesInput,
     timeoutCovenantMatchesInput: timeoutDraft.localChecks.output0CovenantMatchesInput,
-    timeoutSequenceMeetsThreshold: timeoutDraft.localChecks.sequenceMeetsTimeout
+    timeoutSequenceMeetsThreshold: timeoutDraft.localChecks.sequenceMeetsTimeout,
+    workerBRouteEngineAcceptedGeneratedSigScript: workerBRouteDraft.localChecks.engineAcceptedGeneratedSigScript,
+    workerBReturnEngineAcceptedGeneratedSigScript: workerBReturnDraft.localChecks.engineAcceptedGeneratedSigScript,
+    workerBRouteCovenantMatchesInput: workerBRouteDraft.localChecks.output0CovenantMatchesInput,
+    workerBReturnCovenantMatchesInput: workerBReturnDraft.localChecks.output0CovenantMatchesInput
   },
   proves: [
     "A BlitzMux family genesis output was accepted on TN12.",
     "The mux routed accepted state to Worker A through template identity.",
     "Worker A returned accepted state to the mux.",
     "A fresh mux state routed to Worker A again, then the Worker A timeout path returned state to mux.",
+    "The timeout-returned mux state then routed to Worker B, and Worker B returned state with its gain-minus-fee rule.",
     "Both spends preserved the same covenant family id."
   ],
   doesNotProve: [
@@ -109,7 +138,11 @@ const artifact = {
     timeoutRouteDraft: "artifacts/signed-drafts/blitz-mux-route-to-worker-a-timeout.json",
     timeoutRouteOutpoint: "fixtures/BlitzWorkerATimeoutRouteOutpoint.json",
     timeoutDraft: "artifacts/signed-drafts/blitz-mux-worker-a-timeout.json",
-    timeoutOutpoint: "fixtures/BlitzMuxTimeoutOutpoint.json"
+    timeoutOutpoint: "fixtures/BlitzMuxTimeoutOutpoint.json",
+    workerBRouteDraft: "artifacts/signed-drafts/blitz-mux-route-to-worker-b.json",
+    workerBRouteOutpoint: "fixtures/BlitzWorkerBRouteOutpoint.json",
+    workerBReturnDraft: "artifacts/signed-drafts/blitz-mux-worker-b-return.json",
+    workerBReturnedOutpoint: "fixtures/BlitzMuxWorkerBReturnedOutpoint.json"
   }
 };
 

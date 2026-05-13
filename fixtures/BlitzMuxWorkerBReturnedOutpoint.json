@@ -1,0 +1,48 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "blitz-mux-worker-b-return",
+  "contract": "BlitzMux",
+  "fetchedAt": "2026-05-13T00:09:55.711Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+  "txid": "9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+  "outputIndex": 0,
+  "amountTkas": 9.9988,
+  "amountSompi": "999880000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:pr0vm4rehkpd5t3dcsm5sw6nt9f5w5ed2uajamhqlphqdkm5359rcyrzj2kgz",
+  "scriptPublicKey": "aa20decdd479bd82da2e2dc437483b53595347532d573b2eeee0f86e06db748d0a3c87",
+  "covenantId": "df9fd6e4938398f2f16a0c35830e30d58419a7fd36cc5e4b13ced7206e590204",
+  "redeemScriptHex": "20094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb20d595af0765e145cf9415e47c87223e87c4c8265b8c7835b6eb4cd3a4a386e6aa202f3272b259d89b523279c887553e1cb9d5ffd2a61b4fb451afd362bfa3a27332080b00000000000000080a0000000000000008000000000000000076009c69b9cb519c695479515a79009e635a79519c6955797b75527b7568765a795a797e53797caa8769587901207c7e587901207c7e587901207c7e587958cd01087c7e587958cd01087c7e557958cd01087c7e7e7e7e7e7e5b797c7e5a797eaa02000001aa7e01207e7c7e01877eb900ccc38769007a75007a75007a7575757575757575757551",
+  "redeemScriptBytes": 262,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 10065626,
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+  "state": {
+    "gain": 5,
+    "minerFeeSompi": 20000,
+    "nextPending": 0,
+    "prevPending": 2,
+    "timeout": 10,
+    "valueAfter": 11,
+    "valueBefore": 7,
+    "worker": "B",
+    "workerFee": 1
+  },
+  "sourceDraft": "artifacts/signed-drafts/blitz-mux-worker-b-return.json",
+  "raw": {
+    "address": "kaspatest:pr0vm4rehkpd5t3dcsm5sw6nt9f5w5ed2uajamhqlphqdkm5359rcyrzj2kgz",
+    "outpoint": {
+      "transactionId": "9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "999880000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20decdd479bd82da2e2dc437483b53595347532d573b2eeee0f86e06db748d0a3c87"
+      },
+      "blockDaaScore": "10065626",
+      "isCoinbase": false
+    }
+  }
+}

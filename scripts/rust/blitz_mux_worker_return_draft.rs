@@ -83,11 +83,29 @@ fn main() {
     let covenant_id_hex = std::env::var("COVENANT_ID").expect("COVENANT_ID");
     let compute_budget = std::env::var("COMPUTE_BUDGET").unwrap_or_else(|_| "30".to_string()).parse::<u16>().unwrap();
     let gain = std::env::var("GAIN").unwrap_or_else(|_| "3".to_string()).parse::<i64>().unwrap();
+    let value_before = std::env::var("VALUE").unwrap_or_else(|_| "5".to_string()).parse::<i64>().unwrap();
+    let worker = std::env::var("WORKER").unwrap_or_else(|_| "A".to_string()).to_uppercase();
+    let worker_fee = std::env::var("WORKER_FEE").unwrap_or_else(|_| "1".to_string()).parse::<i64>().unwrap();
 
-    let input_contract = compile_member(&a_source, &mux_template, &a_template, &b_template, 5, 10, 1);
-    let output_contract = compile_member(&mux_source, &mux_template, &a_template, &b_template, 5 + gain, 10, 0);
+    let (input_source, pending, args, value_after) = match worker.as_str() {
+        "A" => (
+            &a_source,
+            1,
+            vec![Expr::int(gain), bytes_expr(&mux_prefix), bytes_expr(&mux_suffix)],
+            value_before + gain,
+        ),
+        "B" => (
+            &b_source,
+            2,
+            vec![Expr::int(gain), Expr::int(worker_fee), bytes_expr(&mux_prefix), bytes_expr(&mux_suffix)],
+            value_before + gain - worker_fee,
+        ),
+        _ => panic!("WORKER must be A or B"),
+    };
+    let input_contract = compile_member(input_source, &mux_template, &a_template, &b_template, value_before, 10, pending);
+    let output_contract = compile_member(&mux_source, &mux_template, &a_template, &b_template, value_after, 10, 0);
     let covenant_id = Hash::from_bytes(hex_to_array_32(&covenant_id_hex));
-    let sigscript = p2sh_sigscript(&input_contract, "apply", vec![Expr::int(gain), bytes_expr(&mux_prefix), bytes_expr(&mux_suffix)]);
+    let sigscript = p2sh_sigscript(&input_contract, "apply", args);
     let input = TransactionInput {
         previous_outpoint: TransactionOutpoint { transaction_id: TransactionId::from_bytes(hex_to_array_32(&input_txid)), index: input_index },
         signature_script: sigscript.clone(),
@@ -118,7 +136,7 @@ fn main() {
             "covenant": { "authorizingInput": 0, "covenantId": covenant_id_hex },
             "nextRedeemScriptHex": bytes_to_hex(&output_contract.script)
         }],
-        "state": { "valueBefore": 5, "gain": gain, "valueAfter": 5 + gain, "timeout": 10, "prevPending": 1, "nextPending": 0, "minerFeeSompi": fee },
+        "state": { "worker": worker, "valueBefore": value_before, "gain": gain, "workerFee": worker_fee, "valueAfter": value_after, "timeout": 10, "prevPending": pending, "nextPending": 0, "minerFeeSompi": fee },
         "inputRedeemScriptHex": bytes_to_hex(&input_contract.script)
     })).unwrap());
 }

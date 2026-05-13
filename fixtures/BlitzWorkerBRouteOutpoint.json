@@ -1,0 +1,46 @@
+{
+  "schema": "tn12-contract-outpoint/v1",
+  "network": "kaspa-testnet-12",
+  "lane": "blitz-mux-worker-b-route",
+  "contract": "BlitzWorkerB",
+  "fetchedAt": "2026-05-13T00:09:08.769Z",
+  "endpoint": "https://api-tn12.kaspa.org/transactions/de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2",
+  "txid": "de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2",
+  "outputIndex": 0,
+  "amountTkas": 9.999,
+  "amountSompi": "999900000",
+  "scriptType": "scripthash",
+  "scriptPublicKeyAddress": "kaspatest:pqn8kgnff54uyqqxsdmtrwszzgnaureu64vf75g0kpas9vtglfn0538stan63",
+  "scriptPublicKey": "aa20267b22694d2bc200068376b1ba021227de0f3cd5589f510fb07b02b168fa66fa87",
+  "covenantId": "df9fd6e4938398f2f16a0c35830e30d58419a7fd36cc5e4b13ced7206e590204",
+  "redeemScriptHex": "6b20094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb20d595af0765e145cf9415e47c87223e87c4c8265b8c7835b6eb4cd3a4a386e6aa202f3272b259d89b523279c887553e1cb9d5ffd2a61b4fb451afd362bfa3a27332080700000000000000080a000000000000000802000000000000006c76009c637576529c6959795979a069b9cb519c69577957797e56797caa8769557901207c7e557901207c7e557901207c7e55795d79935c799458cd01087c7e557958cd01087c7e0058cd01087c7e7e7e7e7e7e58797c7e57797eaa02000001aa7e01207e7c7e01877eb900ccc3876975757575757575757575516776519c637576529c6978b1b9cb519c69577957797e56797caa8769557901207c7e557901207c7e557901207c7e5579519458cd01087c7e557958cd01087c7e0058cd01087c7e7e7e7e7e7e58797c7e57797eaa02000001aa7e01207e7c7e01877eb900ccc38769757575757575757551677500696868",
+  "redeemScriptBytes": 369,
+  "status": "accepted",
+  "acceptingBlockBlueScore": 10064892,
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2",
+  "state": {
+    "minerFeeSompi": 20000,
+    "nextPending": 2,
+    "prevPending": 0,
+    "selectedWorker": "B",
+    "selector": 1,
+    "timeout": 10,
+    "value": 7
+  },
+  "sourceDraft": "artifacts/signed-drafts/blitz-mux-route-to-worker-b.json",
+  "raw": {
+    "address": "kaspatest:pqn8kgnff54uyqqxsdmtrwszzgnaureu64vf75g0kpas9vtglfn0538stan63",
+    "outpoint": {
+      "transactionId": "de614f26563bcedca34063dc2d1bb0532f1dfc0b1274d64870a6d4e36bd745f2",
+      "index": 0
+    },
+    "utxoEntry": {
+      "amount": "999900000",
+      "scriptPublicKey": {
+        "scriptPublicKey": "aa20267b22694d2bc200068376b1ba021227de0f3cd5589f510fb07b02b168fa66fa87"
+      },
+      "blockDaaScore": "10064892",
+      "isCoinbase": false
+    }
+  }
+}

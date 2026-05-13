@@ -80,7 +80,7 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
       title: "Blitz Mux Arena",
       rank: 1,
       status: "accepted-timeout-settlement-with-local-challenges",
-      proofTarget: "hub routes to worker, worker returns to hub, timeout escape path, bad selector and too-early timeout blocked locally",
+      proofTarget: "hub routes to two workers, workers return to hub, timeout escape path, bad selector and too-early timeout blocked locally",
       whyItMatters: "Smallest source-faithful demo of the chess architecture without building full chess. It makes fast multi-transaction state transitions feel natural.",
       plainPoint: "A complex rule system can be split into small roles instead of one huge contract.",
       technicalPoint: "A mux covenant routes state to a worker template, the worker returns state, and timeout returns a stuck pending state to a safe path.",
@@ -107,6 +107,10 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "fixtures/BlitzWorkerATimeoutRouteOutpoint.json",
         "artifacts/signed-drafts/blitz-mux-worker-a-timeout.json",
         "fixtures/BlitzMuxTimeoutOutpoint.json",
+        "artifacts/signed-drafts/blitz-mux-route-to-worker-b.json",
+        "fixtures/BlitzWorkerBRouteOutpoint.json",
+        "artifacts/signed-drafts/blitz-mux-worker-b-return.json",
+        "fixtures/BlitzMuxWorkerBReturnedOutpoint.json",
         "artifacts/blitz-mux-live-flow-evidence.json",
         "artifacts/blitz-mux-challenge-settlement.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
@@ -114,10 +118,10 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
       ],
       nextBuildSteps: [
-        "Add one Worker B accepted route/return if it proves a different transition shape.",
+        "Add a compact challenge variant only if it proves a new refusal path.",
         "Keep full game rules out until the mux flow is easy to inspect."
       ],
-      hardBoundary: "The mux genesis, route-to-worker, worker-return, second route, and timeout spends are accepted on TN12. This proves mux/worker, timeout mechanics, and a bounded timeout-settlement row, not full game rules or production game settlement."
+      hardBoundary: "The mux genesis, Worker A route/return, timeout route/return, and Worker B route/return spends are accepted on TN12. This proves mux/worker, timeout mechanics, and a bounded timeout-settlement row, not full game rules or production game settlement."
     }),
     experiment({
       id: "coordination-league",
