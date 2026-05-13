@@ -1,0 +1,207 @@
+{
+  "schema": "tn12-coordination-covenant-pledge-funding-draft/v1",
+  "network": "kaspa-testnet-12",
+  "status": "signed-covenant-pledges-not-broadcast",
+  "warning": "Signed TN12 draft. Submit only after checking the source UTXO is still unspent.",
+  "sdk": {
+    "package": "kaspa-wasm",
+    "version": "1.1.1-toc.1",
+    "source": "/home/parker2017/kaspa-node/rusty-kaspa-tn12-inspect/wasm/nodejs/kaspa"
+  },
+  "source": {
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "txid": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
+    "outputIndex": 1,
+    "amountTkas": 18947.87445
+  },
+  "contract": {
+    "name": "AssurancePledge",
+    "artifactPath": "artifacts/AssurancePledge.json",
+    "redeemScriptBytes": 176,
+    "redeemScriptHash": "b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce0",
+    "scriptPublicKey": "aa20b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce087"
+  },
+  "outputs": [
+    {
+      "index": 0,
+      "pledgeId": "pledge-docs-001",
+      "amountTkas": "45",
+      "amountSompi": "4500000000",
+      "priorScriptType": "pubkey",
+      "targetScriptType": "covenant",
+      "covenant": {
+        "authorizingInput": 0,
+        "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+      }
+    },
+    {
+      "index": 1,
+      "pledgeId": "pledge-docs-002",
+      "amountTkas": "35",
+      "amountSompi": "3500000000",
+      "priorScriptType": "pubkey",
+      "targetScriptType": "covenant",
+      "covenant": {
+        "authorizingInput": 0,
+        "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+      }
+    },
+    {
+      "index": 2,
+      "pledgeId": "pledge-docs-003",
+      "amountTkas": "20",
+      "amountSompi": "2000000000",
+      "priorScriptType": "pubkey",
+      "targetScriptType": "covenant",
+      "covenant": {
+        "authorizingInput": 0,
+        "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+      }
+    }
+  ],
+  "change": {
+    "outputIndex": 3,
+    "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+    "amountTkas": "18847.8744",
+    "amountSompi": "1884787440000"
+  },
+  "budget": {
+    "sourceInputComputeBudget": 10,
+    "reason": "Version-1 P2PK source input needs compute budget for one signature check."
+  },
+  "minerFeeSompi": "5000",
+  "transactionId": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+  "signedTransaction": {
+    "id": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+    "version": 1,
+    "inputs": [
+      {
+        "transactionId": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
+        "index": 1,
+        "sequence": "0",
+        "sigOpCount": 1,
+        "computeBudget": 10,
+        "signatureScript": "41bd9506678a5395c75eb0f267546ccfe0d1ddee8f564c6552255b5f589467eb9ac815b55f580d4189766db1461b4c92ca43347eeba2583718f723d9e7bb4398a801",
+        "utxo": {
+          "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+          "amount": "1894787445000",
+          "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+          "blockDaaScore": "10199655",
+          "isCoinbase": false,
+          "covenantId": null
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "value": "4500000000",
+        "scriptPublicKey": "0000aa20b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce087",
+        "covenant": {
+          "authorizingInput": 0,
+          "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+        }
+      },
+      {
+        "value": "3500000000",
+        "scriptPublicKey": "0000aa20b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce087",
+        "covenant": {
+          "authorizingInput": 0,
+          "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+        }
+      },
+      {
+        "value": "2000000000",
+        "scriptPublicKey": "0000aa20b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce087",
+        "covenant": {
+          "authorizingInput": 0,
+          "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+        }
+      },
+      {
+        "value": "1884787440000",
+        "scriptPublicKey": "000020d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac",
+        "covenant": null
+      }
+    ],
+    "subnetworkId": "0000000000000000000000000000000000000000",
+    "lockTime": "0",
+    "gas": "0",
+    "mass": "0",
+    "payload": ""
+  },
+  "submitPayload": {
+    "transaction": {
+      "version": 1,
+      "inputs": [
+        {
+          "previousOutpoint": {
+            "transactionId": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
+            "index": 1
+          },
+          "signatureScript": "41bd9506678a5395c75eb0f267546ccfe0d1ddee8f564c6552255b5f589467eb9ac815b55f580d4189766db1461b4c92ca43347eeba2583718f723d9e7bb4398a801",
+          "sequence": "0",
+          "sigOpCount": 1,
+          "computeBudget": 10
+        }
+      ],
+      "outputs": [
+        {
+          "amount": 4500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "aa20b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce087"
+          },
+          "covenant": {
+            "authorizingInput": 0,
+            "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+          }
+        },
+        {
+          "amount": 3500000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "aa20b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce087"
+          },
+          "covenant": {
+            "authorizingInput": 0,
+            "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+          }
+        },
+        {
+          "amount": 2000000000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "aa20b4d49a5b653f99c0b703deba1992554f7eb5a186e4cdb49b9d4e0ed93d9d5ce087"
+          },
+          "covenant": {
+            "authorizingInput": 0,
+            "covenantId": "03dea63d0c5ce606cf3a3d267e13b0b201b6bbaa6bb3d3528c07b9c024be14f9"
+          }
+        },
+        {
+          "amount": 1884787440000,
+          "scriptPublicKey": {
+            "version": 0,
+            "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
+          }
+        }
+      ],
+      "lockTime": "0",
+      "subnetworkId": "0000000000000000000000000000000000000000"
+    },
+    "allowOrphan": false
+  },
+  "checks": {
+    "transactionVersionIsV1": true,
+    "allPledgeOutputsHaveCovenantBinding": true,
+    "pledgeOutputCount": 3,
+    "sourceWalletMatchesFundingAddress": true,
+    "signatureScriptPresent": true
+  },
+  "nextAfterAccepted": [
+    "Submit through the covenant-preserving wRPC route.",
+    "Fetch outputs 0, 1, and 2 as the fresh coordination covenant pledge outpoints.",
+    "Build release spends from those outpoints.",
+    "Record accepted release evidence before upgrading Coordination beyond target status."
+  ]
+}

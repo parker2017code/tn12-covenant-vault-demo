@@ -1,8 +1,8 @@
 {
   "schema": "tn12-coordination-covenant-settlement-target/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T01:07:08.699Z",
-  "status": "fresh-covenant-pledge-outputs-required",
+  "generatedAt": "2026-05-13T01:35:12.435Z",
+  "status": "accepted-covenant-release-spends",
   "experiment": "coordination-release-evidence",
   "purpose": "Turn the transparent coordination release into a covenant-settlement target without upgrading the existing P2PK release claim.",
   "currentEvidence": {
@@ -16,7 +16,9 @@
     "pledgeOutputScriptTypes": [
       "pubkey"
     ],
-    "pledgeOutputsSpentByRelease": true
+    "pledgeOutputsSpentByRelease": true,
+    "freshCovenantFundingTxid": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+    "acceptedCovenantReleaseSpends": 3
   },
   "targetV1": {
     "contractPattern": "per-pledge AssurancePledge covenant outputs plus selected release route",
@@ -67,13 +69,12 @@
     "replay accepted txids before upgrading the experiment status"
   ],
   "blockers": [
-    "current accepted pledge outputs are P2PK, not covenant-bound",
-    "current accepted pledge outputs have already selected the release branch",
-    "a new TN12 pledge set is required for covenant-settlement evidence"
+    "threshold selection remains replay/planner evidence",
+    "refund-path evidence needs fresh unspent covenant pledge outputs"
   ],
   "boundaries": [
-    "This is a target artifact, not accepted covenant-settlement evidence.",
-    "The existing coordination release remains useful accepted TN12 evidence, but it is not a covenant-bound pledge settlement.",
-    "Do not call Coordination covenant-settled until fresh covenant pledge outputs and accepted covenant release/refund evidence exist."
+    "Fresh AssurancePledge covenant outputs and release spends are accepted on TN12.",
+    "Threshold selection remains transparent replay/planner evidence.",
+    "Refund-path evidence still needs fresh unspent covenant pledge outputs."
   ]
 }

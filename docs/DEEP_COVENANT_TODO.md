@@ -88,6 +88,14 @@ until these move.
   covenant-settlement target for Coordination: the current accepted pledge
   outputs are P2PK and already spent, so a fresh covenant-bound pledge set is
   required before this can be called covenant-settled.
+- `artifacts/signed-drafts/coordination-covenant-pledge-funding.json`,
+  `fixtures/CoordinationCovenantPledgeOutpoints.json`,
+  `artifacts/signed-drafts/coordination-covenant-release-spends.json`, and
+  `artifacts/coordination-covenant-release-evidence.json` move Coordination
+  one layer deeper: fresh `AssurancePledge` covenant pledge outputs and three
+  release spends are accepted on TN12. Threshold selection remains
+  replay/planner evidence, and refund evidence still needs fresh unspent pledge
+  outputs.
 - `artifacts/universal-scheduler-workbench.json` is now surfaced as a bounded
   Scheduler Duel slice: accepted intent, accepted executor bids, accepted
   execution receipt, matched local-key payout, and replay-blocked stale,
@@ -125,7 +133,7 @@ experiment surface:
 | 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery, wallet approval summary | Connect summary to an interactive review card |
 | 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
-| 5 | Coordination release evidence | Accepted payload/custody/release receipts plus transparent replay evidence and covenant-settlement target artifact | Fund fresh covenant-bound pledge outputs and prove release/refund |
+| 5 | Coordination release evidence | Accepted payload/custody/release receipts, transparent replay evidence, fresh covenant pledge outputs, and accepted covenant release spends | Add refund-path evidence only from fresh unspent pledge outputs; keep threshold selection replay-derived |
 | 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts, indexer-derived replay, and covenant-settlement target artifact | Fund a fresh covenant settlement output for one eligible trigger |
 
 Target state: all six get TN12 verticals. Current labels still matter while

@@ -1,7 +1,7 @@
 {
   "schema": "tn12-sibling-input-discovery/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T00:58:33.817Z",
+  "generatedAt": "2026-05-13T01:35:12.484Z",
   "status": "sibling-input-discovery-ready",
   "experiment": "sibling-authorized-asset-proof",
   "purpose": "Show how a wallet or builder discovers the required sibling input for the ICC asset move.",

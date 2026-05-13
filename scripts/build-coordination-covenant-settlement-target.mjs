@@ -3,16 +3,18 @@ import { buildCoordinationCovenantSettlementTarget } from "../src/coordinationCo
 
 const outPath = process.env.OUT || "artifacts/coordination-covenant-settlement-target.json";
 
-const [dossier, acceptedOutputs, settlementDrafts] = await Promise.all([
+const [dossier, acceptedOutputs, settlementDrafts, covenantReleaseEvidence] = await Promise.all([
   readJson("artifacts/coordination-market-evidence-dossier.json"),
   readJson("fixtures/AcceptedOutputEvidence.json"),
-  readJson("artifacts/batch-assurance-settlement-drafts.json")
+  readJson("artifacts/batch-assurance-settlement-drafts.json"),
+  readOptionalJson("artifacts/coordination-covenant-release-evidence.json")
 ]);
 
 const artifact = buildCoordinationCovenantSettlementTarget({
   dossier,
   acceptedOutputs,
-  settlementDrafts
+  settlementDrafts,
+  covenantReleaseEvidence
 });
 
 await mkdir("artifacts", { recursive: true });
@@ -22,4 +24,12 @@ console.log(`${outPath} ${artifact.status}`);
 
 async function readJson(path) {
   return JSON.parse(await readFile(path, "utf8"));
+}
+
+async function readOptionalJson(path) {
+  try {
+    return await readJson(path);
+  } catch {
+    return {};
+  }
 }

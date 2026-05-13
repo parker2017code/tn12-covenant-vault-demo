@@ -2,6 +2,7 @@ export function buildCoordinationCovenantSettlementTarget({
   dossier = {},
   acceptedOutputs = {},
   settlementDrafts = {},
+  covenantReleaseEvidence = {},
   generatedAt = new Date().toISOString()
 } = {}) {
   const pledgeOutputs = (acceptedOutputs.outputs || [])
@@ -13,16 +14,22 @@ export function buildCoordinationCovenantSettlementTarget({
   const selectedRelease = dossier.selectedRelease || {};
   const currentReleaseAccepted = selectedRelease.status === "accepted-on-tn12"
     || settlementDrafts.status === "release-accepted-tn12";
+  const acceptedCovenantReleases = Number(covenantReleaseEvidence.summary?.acceptedReleases || 0);
+  const covenantReleaseAccepted = covenantReleaseEvidence.status === "accepted-covenant-release-spends"
+    && acceptedCovenantReleases > 0;
   const freshCovenantOutputsRequired = pubkeyPledgeOutputs.length > 0
-    && covenantPledgeOutputs.length === 0;
+    && covenantPledgeOutputs.length === 0
+    && !covenantReleaseAccepted;
 
   return {
     schema: "tn12-coordination-covenant-settlement-target/v1",
     network: dossier.network || acceptedOutputs.network || "kaspa-testnet-12",
     generatedAt,
-    status: freshCovenantOutputsRequired
-      ? "fresh-covenant-pledge-outputs-required"
-      : "covenant-pledge-target-review",
+    status: covenantReleaseAccepted
+      ? "accepted-covenant-release-spends"
+      : freshCovenantOutputsRequired
+        ? "fresh-covenant-pledge-outputs-required"
+        : "covenant-pledge-target-review",
     experiment: "coordination-release-evidence",
     purpose: "Turn the transparent coordination release into a covenant-settlement target without upgrading the existing P2PK release claim.",
     currentEvidence: {
@@ -34,7 +41,9 @@ export function buildCoordinationCovenantSettlementTarget({
       releaseExplorerUrl: selectedRelease.explorerUrl || "",
       releaseScriptType: releaseOutput.scriptType || "",
       pledgeOutputScriptTypes: unique(pledgeOutputs.map((row) => row.scriptType || "")),
-      pledgeOutputsSpentByRelease: currentReleaseAccepted
+      pledgeOutputsSpentByRelease: currentReleaseAccepted,
+      freshCovenantFundingTxid: covenantReleaseEvidence.funding?.txid || "",
+      acceptedCovenantReleaseSpends: acceptedCovenantReleases
     },
     targetV1: {
       contractPattern: "per-pledge AssurancePledge covenant outputs plus selected release route",
@@ -66,18 +75,29 @@ export function buildCoordinationCovenantSettlementTarget({
       "record refund drafts as non-selected alternates for those same fresh outputs",
       "replay accepted txids before upgrading the experiment status"
     ],
-    blockers: freshCovenantOutputsRequired
+    blockers: covenantReleaseAccepted
+      ? [
+          "threshold selection remains replay/planner evidence",
+          "refund-path evidence needs fresh unspent covenant pledge outputs"
+        ]
+      : freshCovenantOutputsRequired
       ? [
           "current accepted pledge outputs are P2PK, not covenant-bound",
           "current accepted pledge outputs have already selected the release branch",
           "a new TN12 pledge set is required for covenant-settlement evidence"
         ]
       : [],
-    boundaries: [
-      "This is a target artifact, not accepted covenant-settlement evidence.",
-      "The existing coordination release remains useful accepted TN12 evidence, but it is not a covenant-bound pledge settlement.",
-      "Do not call Coordination covenant-settled until fresh covenant pledge outputs and accepted covenant release/refund evidence exist."
-    ]
+    boundaries: covenantReleaseAccepted
+      ? [
+          "Fresh AssurancePledge covenant outputs and release spends are accepted on TN12.",
+          "Threshold selection remains transparent replay/planner evidence.",
+          "Refund-path evidence still needs fresh unspent covenant pledge outputs."
+        ]
+      : [
+          "This is a target artifact, not accepted covenant-settlement evidence.",
+          "The existing coordination release remains useful accepted TN12 evidence, but it is not a covenant-bound pledge settlement.",
+          "Do not call Coordination covenant-settled until fresh covenant pledge outputs and accepted covenant release/refund evidence exist."
+        ]
   };
 }
 

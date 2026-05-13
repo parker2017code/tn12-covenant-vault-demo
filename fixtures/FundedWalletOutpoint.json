@@ -1,28 +1,28 @@
 {
   "schema": "tn12-manual-outpoint/v1",
   "network": "kaspa-testnet-12",
-  "fetchedAt": "2026-05-12T23:57:00.933Z",
-  "endpoint": "https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
-  "label": "Fetched funded TN12 wallet UTXO",
+  "fetchedAt": "2026-05-13T01:48:17.031Z",
+  "endpoint": "manual-from-accepted-coordination-covenant-pledge-funding",
+  "label": "Accepted coordination covenant pledge funding change output",
   "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
-  "txid": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
-  "outputIndex": 1,
-  "amountTkas": 18947.87445,
+  "txid": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+  "outputIndex": 3,
+  "amountTkas": 18847.8744,
   "scriptType": "p2pk",
-  "explorerUrl": "https://tn12.kaspa.stream/transactions/a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
-  "note": "Fetched from https://api-tn12.kaspa.org/addresses/kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt/utxos",
+  "explorerUrl": "https://tn12.kaspa.stream/transactions/314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+  "note": "REST UTXO refresh hit transient DNS after submission; this change output is derived from the accepted funding transaction artifact and fetched pledge outpoint blue score.",
   "raw": {
     "address": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
     "outpoint": {
-      "transactionId": "a04e23b177c98e0908b3d6004419f1d330b4bcdb3458e282509992fe35406580",
-      "index": 1
+      "transactionId": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+      "index": 3
     },
     "utxoEntry": {
-      "amount": "1894787445000",
+      "amount": "1884787440000",
       "scriptPublicKey": {
         "scriptPublicKey": "20d739de4b3b61a894f01988b6cfd0963d43d1b40a787413666122a4f12e0b60d5ac"
       },
-      "blockDaaScore": "10199655",
+      "blockDaaScore": "10114373",
       "isCoinbase": false
     }
   }

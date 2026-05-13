@@ -2,7 +2,7 @@
   "schema": "tn12-covenant-experiment-map/v1",
   "network": "kaspa-testnet-12",
   "status": "experiment-map-ready",
-  "generatedAt": "2026-05-13T01:10:20.961Z",
+  "generatedAt": "2026-05-13T01:35:12.560Z",
   "summary": {
     "experiments": 6,
     "spotlight": 3,
@@ -11,7 +11,7 @@
     "genesisFundingDrafts": 0,
     "localProofs": 0,
     "acceptedGenesisPreflights": 0,
-    "scriptEnforcedClaims": 3
+    "scriptEnforcedClaims": 4
   },
   "rule": "Each experiment must say what is accepted on TN12, what is script-enforced, what is wallet-policy, and what is only reducer/indexer state.",
   "spotlight": [
@@ -156,11 +156,11 @@
       "id": "coordination-league",
       "title": "Coordination release evidence",
       "rank": 4,
-      "status": "transparent-coordination-evidence-ready",
-      "proofTarget": "three qualifying intendos, accepted pledge payload/custody rows, accepted release txid, non-selected refund alternates",
+      "status": "accepted-covenant-release-spends",
+      "proofTarget": "three qualifying intendos, accepted pledge receipts, fresh covenant pledge outputs, accepted covenant release spends, non-selected refund alternates",
       "whyItMatters": "Directly maps the Stag Hunt talk into repo evidence: commit only when enough compatible commitments also exist.",
       "plainPoint": "People can coordinate around shared goals without one platform deciding who gets paid after the fact.",
-      "technicalPoint": "Assurance pledges, coordination receipts, and replayed settlement rows separate release, refund, and threshold state.",
+      "technicalPoint": "Assurance pledges, coordination receipts, fresh covenant outputs, and replayed settlement rows separate release, refund, and threshold state.",
       "kaspaEdge": "Fast visible receipts make coordination feel closer to live group action than slow escrow paperwork.",
       "cryptoPoint": "The refund/release paths can be checked from public evidence rather than trusting a campaign operator's database.",
       "realWorldImplication": "Useful for group buys, local projects, grants, event deposits, clubs, and cooperative funding where failure refunds must be credible.",
@@ -171,18 +171,23 @@
         "artifacts/coordination-market-settlement-brief.json",
         "artifacts/coordination-market-evidence-dossier.json",
         "artifacts/coordination-covenant-settlement-target.json",
+        "artifacts/signed-drafts/coordination-covenant-pledge-funding.json",
+        "fixtures/CoordinationCovenantPledgeOutpoints.json",
+        "artifacts/signed-drafts/coordination-covenant-release-spends.json",
+        "artifacts/coordination-covenant-release-evidence.json",
         "artifacts/batch-assurance-campaign.json",
         "artifacts/batch-assurance-custody-imports.json",
         "artifacts/batch-assurance-settlement-drafts.json",
         "fixtures/AcceptedOutputEvidence.json",
+        "tests/domain/coordination-covenant-release-evidence.test.mjs",
         "tests/domain/coordination-market-evidence.test.mjs"
       ],
       "nextBuildSteps": [
-        "Fund a fresh covenant-bound pledge set instead of reusing the spent P2PK pledge outputs.",
-        "Prove release/refund locally for each fresh covenant pledge output.",
-        "Submit accepted TN12 covenant release/refund evidence before upgrading the status."
+        "Add refund-path evidence only from fresh unspent covenant pledge outputs.",
+        "Add wallet approval summaries for the coordination covenant release path.",
+        "Keep threshold selection replay-derived until a covenant, proof system, or protocol primitive verifies it."
       ],
-      "hardBoundary": "This is transparent coordination evidence with an accepted TN12 release and a covenant-settlement target artifact. The existing pledge outputs are P2PK and already spent, so fresh covenant pledge outputs are required before calling this covenant-settled."
+      "hardBoundary": "Fresh AssurancePledge covenant outputs and three covenant release spends are accepted on TN12. The threshold pack selection is still transparent replay/planner evidence, not private coordination, pooled custody, or protocol-level coordination."
     },
     {
       "id": "covenant-owned-asset-game",

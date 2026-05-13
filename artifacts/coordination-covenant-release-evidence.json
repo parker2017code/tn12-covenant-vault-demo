@@ -1,0 +1,58 @@
+{
+  "schema": "tn12-coordination-covenant-release-evidence/v1",
+  "network": "kaspa-testnet-12",
+  "generatedAt": "2026-05-13T01:32:10.527Z",
+  "status": "accepted-covenant-release-spends",
+  "funding": {
+    "txid": "314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc",
+    "status": "accepted",
+    "pledgeOutputCount": 3,
+    "allPledgeOutputsHaveCovenantBinding": true,
+    "explorerUrl": "https://tn12.kaspa.stream/transactions/314ddccb993892c8bed919590f8675d2d3e208060a3c3b32300d4e4da30464fc"
+  },
+  "releases": [
+    {
+      "pledgeId": "pledge-docs-001",
+      "txid": "9a3350f9c11dc9b130a76377e8ffca091f6d38cd00824306a730b6946e181977",
+      "endpoint": "https://api-tn12.kaspa.org/transactions/9a3350f9c11dc9b130a76377e8ffca091f6d38cd00824306a730b6946e181977",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/9a3350f9c11dc9b130a76377e8ffca091f6d38cd00824306a730b6946e181977",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": "44.99995",
+      "amountSompi": "4499995000",
+      "acceptingBlockBlueScore": 10114656
+    },
+    {
+      "pledgeId": "pledge-docs-002",
+      "txid": "0a9efe559aa2e96a02e5571ee0ed76bfe329c61275fa6a7575446d271f765aab",
+      "endpoint": "https://api-tn12.kaspa.org/transactions/0a9efe559aa2e96a02e5571ee0ed76bfe329c61275fa6a7575446d271f765aab",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/0a9efe559aa2e96a02e5571ee0ed76bfe329c61275fa6a7575446d271f765aab",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": "34.99995",
+      "amountSompi": "3499995000",
+      "acceptingBlockBlueScore": 10114693
+    },
+    {
+      "pledgeId": "pledge-docs-003",
+      "txid": "954d5aa0b17ab15fc503da769e423ecace4164a8a888d625d6ab07f2e2813a79",
+      "endpoint": "https://api-tn12.kaspa.org/transactions/954d5aa0b17ab15fc503da769e423ecace4164a8a888d625d6ab07f2e2813a79",
+      "status": "accepted",
+      "explorerUrl": "https://tn12.kaspa.stream/transactions/954d5aa0b17ab15fc503da769e423ecace4164a8a888d625d6ab07f2e2813a79",
+      "destination": "kaspatest:qrtnnhjt8ds6398srxytdn7sjc7585d5pfu8gymxvy32fufwpdsd22432yamt",
+      "amountTkas": "19.99995",
+      "amountSompi": "1999995000",
+      "acceptingBlockBlueScore": 10114713
+    }
+  ],
+  "summary": {
+    "pledgeOutputs": 3,
+    "releaseDrafts": 3,
+    "acceptedReleases": 3
+  },
+  "boundaries": [
+    "This upgrades the pledge money movement only: fresh AssurancePledge covenant outputs release to the selected recipient.",
+    "The coordination threshold and pack selection remain transparent replay/planner evidence.",
+    "Do not describe this as private coordination, pooled custody, or protocol scheduling."
+  ]
+}
