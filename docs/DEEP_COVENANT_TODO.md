@@ -40,8 +40,9 @@ until these move.
 - `artifacts/recurring-treasury-vault-window-reset-proof.json` records the
   accepted TN12 reset-window spend, the reset continuation fixture, and local
   rejects for early reset, stale-window reset, and over-cap reset.
-- `artifacts/wallet-approval-summaries.json` turns the recurring-cap reset-window
-  proof into wallet-readable approval fields and reject prompts.
+- `artifacts/wallet-approval-summaries.json` turns the recurring-cap
+  reset-window proof, sibling-authorized asset strike, and mux-worker flow into
+  wallet-readable approval fields and reject prompts.
 - `contracts/CovenantOwnedAssetDuel.sil` compiles.
 - `artifacts/covenant-owned-asset-duel-proof.json` proves the local ICC
   sibling-input pattern: expected sibling covenant ID authorizes an asset move;
@@ -94,9 +95,9 @@ until these move.
 
 | Priority | Experiment | Current level | Next upgrade |
 |---|---|---|---|
-| 1 | Recurring cap proof | Accepted TN12 covenant spends, reset-window spend, continuation state, local rejects, first wallet approval summary | Extend wallet approval to real signer handoff |
-| 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery | Add wallet approval summary |
-| 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects | Add wallet approval summary; add challenge only if it proves a new refusal path |
+| 1 | Recurring cap proof | Accepted TN12 covenant spends, reset-window spend, continuation state, local rejects, wallet approval summary | Extend wallet approval to real signer handoff |
+| 2 | Sibling-authorized asset proof | Accepted TN12 owner marker, asset genesis, sibling-authorized strike, live-id local rejects, sibling-input discovery, wallet approval summary | Connect summary to an interactive review card |
+| 3 | Mux worker proof | Accepted TN12 family genesis, route/return, timeout return, Worker B route/return, local challenge rejects, wallet approval summary | Connect summary to an interactive review card; add challenge only if it proves a new refusal path |
 | 4 | Vault negative checks | Local script-engine rejects over accepted recurring-vault rail | Add TN12-safe invalid/rejection evidence or a fresh accepted challenge path with expendable outputs |
 | 5 | Coordination release evidence | Accepted payload/custody/release receipts plus transparent replay evidence | Build a TN12 covenant settlement target for release/refund |
 | 6 | Scheduler receipt evidence | Accepted intent/bid/execution receipts plus indexer-derived replay | Build a TN12 covenant settlement target for one eligible trigger |
@@ -127,19 +128,19 @@ exists and is tested on TN12.
 
 4. Extend the wallet-facing abstraction rail.
    - End users should not need JSON artifacts to approve a covenant path.
-   - The first recurring-cap approval summary is built; extend this pattern to
-     the asset and mux examples.
+   - The recurring-cap, asset, and mux approval summaries are built; next wire
+     them into a visible review card.
    - Define the minimum wallet prompt for each built pattern: action, amount,
      destination, covenant id, continuation output, required sibling input, and
      failure reason.
-   - Done when each top proof pattern has a machine-readable approval summary
-     that a wallet UI could render as Approve/Reject.
+   - Done when each top proof pattern has a visible approval card and a
+     machine-readable summary that a wallet UI could render as Approve/Reject.
 
 5. Extend sibling-input discovery for ICC examples.
    - The sibling-authorized asset proof now has a first discovery artifact for
      the current accepted owner-marker input.
-   - Next, make the same fields wallet-readable in the approval summary and
-     keep future asset moves tied to fresh live sibling and asset state.
+   - The same fields are now wallet-readable in the approval summary.
+   - Keep future asset moves tied to fresh live sibling and asset state.
    - Done when the Asset proof has both a discovery artifact and an approval
      summary that names the sibling outpoint, witness index, covenant id, and
      failure cases.

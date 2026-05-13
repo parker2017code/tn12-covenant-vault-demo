@@ -36,6 +36,7 @@
       <div class="nav-group nav-local" aria-label="This page">
         <a href="#spotlight">Spotlight</a>
         <a href="#purpose">Purpose</a>
+        <a href="#wallet-review">Wallet Review</a>
         <a href="#queue">Queue</a>
         <a href="#rules">Rules</a>
       </div>
@@ -52,7 +53,7 @@
       <aside class="facts">
         <span>Current spotlight</span>
         <strong>Mux worker. Recurring cap. Sibling asset.</strong>
-        <p>These three have the strongest TN12 evidence today.</p>
+        <p>These three have accepted TN12 evidence and wallet-readable summaries.</p>
       </aside>
     </section>
 
@@ -88,7 +89,7 @@
           <span>1</span>
           <strong>Mux / worker proof</strong>
           <p>Accepted TN12 route, return, timeout, and Worker B return. Shows how one covenant family can split logic into bounded roles.</p>
-          <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open flow evidence</a></p>
+          <p class="note"><a href="artifacts/blitz-mux-live-flow-evidence.json">Open flow evidence</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
         <article>
           <span>2</span>
@@ -100,8 +101,20 @@
           <span>3</span>
           <strong>Sibling-authorized asset proof</strong>
           <p>Accepted two-input strike plus live-id local rejects. Shows ICC-style sibling authority without nested contract execution.</p>
-          <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a> · <a href="artifacts/sibling-input-discovery.json">Open sibling discovery</a></p>
+          <p class="note"><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Open strike evidence</a> · <a href="artifacts/sibling-input-discovery.json">Open sibling discovery</a> · <a href="artifacts/wallet-approval-summaries.json">Open wallet summary</a></p>
         </article>
+      </div>
+    </section>
+
+    <section id="wallet-review" class="panel experiments-panel">
+      <div class="section-title">
+        <p class="eyebrow">Wallet review</p>
+        <h2>Approval summaries for the top proofs.</h2>
+        <p>These cards render the same machine-readable artifact a wallet UI could use: action, covenant checks, evidence links, and local reject prompts.</p>
+        <p class="note"><a href="artifacts/wallet-approval-summaries.json">Open wallet summary artifact</a></p>
+      </div>
+      <div id="wallet-approval-cards" class="wallet-approval-grid" aria-live="polite">
+        <p class="note">Loading wallet summaries...</p>
       </div>
     </section>
 
@@ -127,7 +140,7 @@
               <td>Mux worker proof</td>
               <td>mux / worker contract family</td>
               <td>accepted-timeout-settlement-with-local-challenges</td>
-              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Accepted route, return, timeout, Worker B return, local challenge rejects.</a></td>
+              <td><a href="artifacts/blitz-mux-challenge-settlement.json">Accepted route, return, timeout, Worker B return, local challenge rejects.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet-readable summary.</a></td>
             </tr>
             <tr>
               <td>Recurring cap proof</td>
@@ -139,7 +152,7 @@
               <td>Sibling-authorized asset proof</td>
               <td>ICC / covenant-owned asset</td>
               <td>accepted-sibling-input-strike</td>
-              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Accepted owner marker, asset genesis, and sibling-authorized strike.</a> <a href="artifacts/sibling-input-discovery.json">Sibling discovery.</a></td>
+              <td><a href="artifacts/covenant-owned-asset-duel-live-strike-evidence.json">Accepted owner marker, asset genesis, and sibling-authorized strike.</a> <a href="artifacts/sibling-input-discovery.json">Sibling discovery.</a> <a href="artifacts/wallet-approval-summaries.json">Wallet-readable summary.</a></td>
             </tr>
             <tr>
               <td>Vault negative checks</td>
@@ -185,5 +198,6 @@
       </div>
     </section>
   </main>
+  <script type="module" src="wallet-approval-cards.js"></script>
 </body>
 </html>

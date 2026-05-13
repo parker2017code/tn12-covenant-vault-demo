@@ -988,6 +988,46 @@ progress::-moz-progress-bar {
   min-width: 260px;
 }
 
+.wallet-approval-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.wallet-approval-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-soft);
+}
+
+.wallet-approval-card span {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.wallet-approval-card strong {
+  color: var(--text);
+  font-size: 17px;
+}
+
+.wallet-approval-card p,
+.wallet-approval-card li {
+  color: var(--muted);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.wallet-approval-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
 .defi-flow-map {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3177,6 +3217,7 @@ progress::-moz-progress-bar {
   .evidence-strip,
   .work-map,
   .experiment-grid,
+  .wallet-approval-grid,
   .defi-flow-map,
   .claim-grid,
   .results-summary,

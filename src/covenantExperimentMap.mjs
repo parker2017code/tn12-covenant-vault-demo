@@ -120,11 +120,13 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "fixtures/BlitzMuxWorkerBReturnedOutpoint.json",
         "artifacts/blitz-mux-live-flow-evidence.json",
         "artifacts/blitz-mux-challenge-settlement.json",
+        "artifacts/wallet-approval-summaries.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/ARCHITECTURE.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/webinar_mux.md"
       ],
       nextBuildSteps: [
+        "Connect the wallet-readable summary to an interactive review card.",
         "Add a compact challenge variant only if it proves a new refusal path.",
         "Keep full game rules out until the mux flow is easy to inspect."
       ],
@@ -192,12 +194,13 @@ export function buildCovenantExperimentMap({ generatedAt = new Date().toISOStrin
         "artifacts/covenant-owned-asset-duel-live-strike-evidence.json",
         "artifacts/covenant-owned-asset-duel-live-negative-evidence.json",
         "artifacts/sibling-input-discovery.json",
+        "artifacts/wallet-approval-summaries.json",
         "docs/TOCCATA_SOURCE_NOTES.md",
         "/home/parker2017/michaelsutton-silverscript-chess/examples/chess/book/src/patterns.md"
       ],
       nextBuildSteps: [
+        "Connect the wallet-readable summary to an interactive review card.",
         "Only attempt broadcast-rejected negative rows if there is a safe non-spending route.",
-        "Add a wallet approval summary that renders the required sibling input and strike state.",
         "Add one more accepted strike from the continuation only if it proves a new state transition.",
         "Keep user-wallet signing out of the claim until the same path signs through wallet-standard handoff."
       ],

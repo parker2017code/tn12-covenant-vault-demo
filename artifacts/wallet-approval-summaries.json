@@ -1,7 +1,7 @@
 {
   "schema": "tn12-wallet-approval-summaries/v1",
   "network": "kaspa-testnet-12",
-  "generatedAt": "2026-05-13T00:48:38.623Z",
+  "generatedAt": "2026-05-13T01:01:34.973Z",
   "status": "wallet-approval-summary-ready",
   "purpose": "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
   "summaries": [
@@ -69,6 +69,174 @@
         "This is a wallet-readable summary for a TN12/testnet covenant path.",
         "It does not prove wallet-standard signing or mainnet readiness.",
         "Local reject rows are script-engine evidence, not broadcast-rejected TN12 invalid transactions."
+      ]
+    },
+    {
+      "id": "sibling-asset-strike",
+      "experiment": "sibling-authorized-asset-proof",
+      "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
+      "recommendedWalletDecision": "approve-if-user-initiated",
+      "title": "Move asset with sibling authority",
+      "plainAction": "Use owner-marker input d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f:0 to authorize the asset strike and update power 600 -> 450.",
+      "userChecks": [
+        "Required owner covenant id: 8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+        "Required sibling input index: 1",
+        "Selected sibling outpoint: d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f:0",
+        "Asset input covenant id: 1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+        "Accepted strike txid: f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4"
+      ],
+      "technicalChecks": {
+        "requiredSibling": {
+          "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+          "witnessInput": 1,
+          "role": "owner-marker-authority",
+          "reason": "The asset covenant accepts the configured owner covenant id at the witnessed sibling input instead of nesting owner-contract execution."
+        },
+        "selectedCandidate": {
+          "txid": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f",
+          "outputIndex": 0,
+          "covenantId": "8669415a642659790ae5e1810021d7ccaa572f3580e39278396a526564685053",
+          "amountSompi": "100000000",
+          "status": "accepted",
+          "outpoint": "d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f:0",
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/d36a6247945bf24aaee0f3c80aa43d410c9ecd0ab8159c0ea3c85feff0ec576f"
+        },
+        "assetInput": {
+          "txid": "5152c9c3cdde61a24fbcc0d21855a1474b435d9a502a836c3b7bac7eceab3165",
+          "outputIndex": 0,
+          "covenantId": "1e2ede72835fb25092c43818c299864a6df710918dbd202f7bfc684690bf741a",
+          "status": "accepted"
+        },
+        "acceptedStrike": {
+          "txid": "f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/f452b6f4d2fbf688f25f20658226f585e589e01a73aef5e8ef72f0e7b0870da4",
+          "powerBefore": 600,
+          "powerAfter": 450
+        }
+      },
+      "refusalPrompts": [
+        {
+          "id": "wrong_witness_rejects_asset_move",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "wrong witness rejects asset move",
+          "got": false,
+          "expected": false
+        },
+        {
+          "id": "missing_sibling_rejects_asset_move",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "missing sibling rejects asset move",
+          "got": false,
+          "expected": false
+        },
+        {
+          "id": "wrong_sibling_covenant_rejects_asset_move",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "wrong sibling covenant rejects asset move",
+          "got": false,
+          "expected": false
+        }
+      ],
+      "boundaries": [
+        "This is deterministic discovery over accepted TN12 fixture data and local negative checks.",
+        "It does not prove a production indexer, wallet UX, or mainnet asset standard.",
+        "The accepted strike proves the sibling path once; future asset moves need fresh live sibling and asset state discovery."
+      ]
+    },
+    {
+      "id": "mux-worker-route-timeout",
+      "experiment": "mux-worker-proof",
+      "evidenceClass": "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
+      "recommendedWalletDecision": "approve-if-user-initiated",
+      "title": "Route mux state to worker and return",
+      "plainAction": "Route the covenant family through worker templates and return to mux; accepted values move 5 -> 8, timeout returns 8 -> 7, and Worker B returns 7 -> 11.",
+      "userChecks": [
+        "Covenant family id: df9fd6e4938398f2f16a0c35830e30d58419a7fd36cc5e4b13ced7206e590204",
+        "Mux template: 094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb",
+        "Worker A template: d595af0765e145cf9415e47c87223e87c4c8265b8c7835b6eb4cd3a4a386e6aa",
+        "Worker B template: 2f3272b259d89b523279c887553e1cb9d5ffd2a61b4fb451afd362bfa3a27332",
+        "Accepted route txid: dfbffecdcbaaab300313aa27c1d1db78c334debc9bf673fdfd00f207dacbe065",
+        "Accepted timeout txid: 26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036"
+      ],
+      "technicalChecks": {
+        "family": {
+          "sources": [
+            "contracts/BlitzMux.sil",
+            "contracts/BlitzWorkerA.sil",
+            "contracts/BlitzWorkerB.sil"
+          ],
+          "templates": {
+            "mux": "094b92ca4522a00356dae717dd9d9573283c865d822fc3f466f49b599b898abb",
+            "a": "d595af0765e145cf9415e47c87223e87c4c8265b8c7835b6eb4cd3a4a386e6aa",
+            "b": "2f3272b259d89b523279c887553e1cb9d5ffd2a61b4fb451afd362bfa3a27332"
+          },
+          "covenantId": "df9fd6e4938398f2f16a0c35830e30d58419a7fd36cc5e4b13ced7206e590204"
+        },
+        "normalWorkerReturn": {
+          "txid": "bc51db872c8f926fb887cf150af5bf918c44cf20f72abfc3ac4620d57fa0c037",
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/bc51db872c8f926fb887cf150af5bf918c44cf20f72abfc3ac4620d57fa0c037",
+          "state": {
+            "gain": 3,
+            "minerFeeSompi": 20000,
+            "nextPending": 0,
+            "prevPending": 1,
+            "timeout": 10,
+            "valueAfter": 8,
+            "valueBefore": 5
+          }
+        },
+        "timeoutSettlement": {
+          "txid": "26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036",
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/26be92cbbde3673e2ba539412b981655693ed3f4a08c8ad9f7ce3b2e47aef036",
+          "state": {
+            "minerFeeSompi": 20000,
+            "nextPending": 0,
+            "prevPending": 1,
+            "sequence": 10,
+            "timeout": 10,
+            "valueAfter": 7,
+            "valueBefore": 8
+          }
+        },
+        "workerBSettlement": {
+          "txid": "9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+          "explorerUrl": "https://tn12.kaspa.stream/transactions/9985e4e92d5e877b1530ae00625be29429350bb6393c9da1ee5a9d92c9fa9eb2",
+          "state": {
+            "gain": 5,
+            "minerFeeSompi": 20000,
+            "nextPending": 0,
+            "prevPending": 2,
+            "timeout": 10,
+            "valueAfter": 11,
+            "valueBefore": 7,
+            "worker": "B",
+            "workerFee": 1
+          }
+        }
+      },
+      "refusalPrompts": [
+        {
+          "id": "bad-selector-challenge",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "Mux only routes selector 0 or 1.",
+          "result": "got=false expected=false"
+        },
+        {
+          "id": "too-early-timeout-challenge",
+          "recommendedWalletDecision": "reject",
+          "evidenceClass": "LOCAL_SCRIPT_ENGINE_REJECT",
+          "reason": "Worker timeout cannot settle before the move clock.",
+          "result": "got=false expected=false"
+        }
+      ],
+      "boundaries": [
+        "This is a wallet-readable summary for a TN12/testnet mux-worker primitive.",
+        "It does not prove full game rules or production settlement.",
+        "Local challenge rows are script-engine evidence, not broadcast-rejected TN12 invalid transactions."
       ]
     }
   ]

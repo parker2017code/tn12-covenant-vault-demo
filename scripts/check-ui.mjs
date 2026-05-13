@@ -123,6 +123,8 @@ try {
   assert.match(experimentsHtml, /Recurring cap proof/);
   assert.match(experimentsHtml, /Sibling-authorized asset proof/);
   assert.match(experimentsHtml, /artifacts\/covenant-experiment-map\.json/);
+  assert.match(experimentsHtml, /id="wallet-approval-cards"/);
+  assert.match(experimentsHtml, /wallet-approval-cards\.js/);
 
   await checkRenderedPages(url);
 
@@ -324,6 +326,7 @@ async function waitForDynamicContent(page, path) {
     "lab.html": ["#product-map .product-group", "#invoice-summary article", "#submit-summary article"],
     "results.html": ["#results-summary article", "#results-feed article"],
     "playground.html": ["#playground-quickstart a", "#playground-session article"],
+    "experiments.html": ["#wallet-approval-cards .wallet-approval-card"],
   }[path] || [];
 
   for (const selector of selectors) {

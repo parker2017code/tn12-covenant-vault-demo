@@ -2,6 +2,9 @@ export function buildWalletApprovalSummaries({
   resetProof = {},
   resetDraft = {},
   continuation = {},
+  siblingDiscovery = {},
+  muxLiveFlow = {},
+  muxChallenge = {},
   generatedAt = new Date().toISOString()
 } = {}) {
   const accepted = resetProof.accepted || {};
@@ -15,63 +18,164 @@ export function buildWalletApprovalSummaries({
     && resetDraft.transactionId === accepted.resetTxid;
   const localRejects = Array.isArray(resetProof.negativeCases) ? resetProof.negativeCases : [];
 
+  const summaries = [
+    {
+      id: "recurring-cap-reset-window",
+      experiment: "recurring-cap-proof",
+      evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED",
+      recommendedWalletDecision: "approve-if-user-initiated",
+      title: "Reset recurring treasury window",
+      plainAction: `Spend ${sompiToTkas(state.spendAmountSompi)} tKAS from the capped treasury and relock ${sompiToTkas(continuationOutput.amount)} tKAS as the next covenant state.`,
+      userChecks: [
+        `Amount: ${sompiToTkas(state.spendAmountSompi)} tKAS`,
+        `Cap: ${sompiToTkas(state.capSompi)} tKAS`,
+        `Previously spent in window: ${sompiToTkas(state.prevSpentSompi)} tKAS`,
+        `Next spent in window: ${sompiToTkas(state.nextSpentSompi)} tKAS`,
+        `New window start: ${state.nextWindow}`,
+        "Continuation output is relocked to the same covenant id"
+      ],
+      technicalChecks: {
+        contract: source.contract || resetProof.contract || "",
+        sourceOutpoint: `${source.contractOutpoint?.txid || ""}:${source.contractOutpoint?.outputIndex ?? ""}`,
+        spendTxid: accepted.resetTxid || resetDraft.transactionId || "",
+        explorerUrl: accepted.resetTxid ? `https://tn12.kaspa.stream/transactions/${accepted.resetTxid}` : "",
+        covenantId: source.covenantId || continuation.covenantId || "",
+        lockTime: String(state.lockTime ?? ""),
+        resetWindow: String(state.resetWindow ?? ""),
+        destination: {
+          amountTkas: sompiToTkas(destinationOutput.amount),
+          scriptPublicKey: destinationOutput.scriptPublicKey?.scriptPublicKey || ""
+        },
+        continuation: {
+          outpoint: accepted.continuationOutpoint || `${continuation.txid || ""}:${continuation.outputIndex ?? ""}`,
+          amountTkas: sompiToTkas(continuationOutput.amount || continuation.amountSompi),
+          covenantId: continuationOutput.covenant?.covenantId || continuation.covenantId || "",
+          scriptPublicKey: continuationOutput.scriptPublicKey?.scriptPublicKey || continuation.scriptPublicKey || ""
+        }
+      },
+      refusalPrompts: localRejects.map((item) => ({
+        id: item.id,
+        recommendedWalletDecision: "reject",
+        evidenceClass: "LOCAL_SCRIPT_ENGINE_REJECT",
+        reason: item.reason,
+        artifact: item.artifact,
+        candidateTxid: item.transactionId || ""
+      })),
+      boundaries: [
+        "This is a wallet-readable summary for a TN12/testnet covenant path.",
+        "It does not prove wallet-standard signing or mainnet readiness.",
+        "Local reject rows are script-engine evidence, not broadcast-rejected TN12 invalid transactions."
+      ]
+    }
+  ];
+
+  if (siblingDiscovery.status) {
+    summaries.push(buildSiblingAssetSummary(siblingDiscovery));
+  }
+
+  if (muxLiveFlow.status || muxChallenge.status) {
+    summaries.push(buildMuxWorkerSummary(muxLiveFlow, muxChallenge));
+  }
+
   return {
     schema: "tn12-wallet-approval-summaries/v1",
     network: "kaspa-testnet-12",
     generatedAt,
-    status: acceptedReset && localRejects.length >= 3
+    status: acceptedReset && localRejects.length >= 3 && summaries.length >= 3
       ? "wallet-approval-summary-ready"
       : "wallet-approval-summary-review",
     purpose: "Translate covenant evidence into fields a wallet could show before Approve/Reject.",
-    summaries: [
-      {
-        id: "recurring-cap-reset-window",
-        experiment: "recurring-cap-proof",
-        evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED",
-        recommendedWalletDecision: "approve-if-user-initiated",
-        title: "Reset recurring treasury window",
-        plainAction: `Spend ${sompiToTkas(state.spendAmountSompi)} tKAS from the capped treasury and relock ${sompiToTkas(continuationOutput.amount)} tKAS as the next covenant state.`,
-        userChecks: [
-          `Amount: ${sompiToTkas(state.spendAmountSompi)} tKAS`,
-          `Cap: ${sompiToTkas(state.capSompi)} tKAS`,
-          `Previously spent in window: ${sompiToTkas(state.prevSpentSompi)} tKAS`,
-          `Next spent in window: ${sompiToTkas(state.nextSpentSompi)} tKAS`,
-          `New window start: ${state.nextWindow}`,
-          "Continuation output is relocked to the same covenant id"
-        ],
-        technicalChecks: {
-          contract: source.contract || resetProof.contract || "",
-          sourceOutpoint: `${source.contractOutpoint?.txid || ""}:${source.contractOutpoint?.outputIndex ?? ""}`,
-          spendTxid: accepted.resetTxid || resetDraft.transactionId || "",
-          explorerUrl: accepted.resetTxid ? `https://tn12.kaspa.stream/transactions/${accepted.resetTxid}` : "",
-          covenantId: source.covenantId || continuation.covenantId || "",
-          lockTime: String(state.lockTime ?? ""),
-          resetWindow: String(state.resetWindow ?? ""),
-          destination: {
-            amountTkas: sompiToTkas(destinationOutput.amount),
-            scriptPublicKey: destinationOutput.scriptPublicKey?.scriptPublicKey || ""
-          },
-          continuation: {
-            outpoint: accepted.continuationOutpoint || `${continuation.txid || ""}:${continuation.outputIndex ?? ""}`,
-            amountTkas: sompiToTkas(continuationOutput.amount || continuation.amountSompi),
-            covenantId: continuationOutput.covenant?.covenantId || continuation.covenantId || "",
-            scriptPublicKey: continuationOutput.scriptPublicKey?.scriptPublicKey || continuation.scriptPublicKey || ""
-          }
-        },
-        refusalPrompts: localRejects.map((item) => ({
-          id: item.id,
-          recommendedWalletDecision: "reject",
-          evidenceClass: "LOCAL_SCRIPT_ENGINE_REJECT",
-          reason: item.reason,
-          artifact: item.artifact,
-          candidateTxid: item.transactionId || ""
-        })),
-        boundaries: [
-          "This is a wallet-readable summary for a TN12/testnet covenant path.",
-          "It does not prove wallet-standard signing or mainnet readiness.",
-          "Local reject rows are script-engine evidence, not broadcast-rejected TN12 invalid transactions."
-        ]
+    summaries
+  };
+}
+
+function buildSiblingAssetSummary(discovery) {
+  return {
+    id: "sibling-asset-strike",
+    experiment: "sibling-authorized-asset-proof",
+    evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
+    recommendedWalletDecision: "approve-if-user-initiated",
+    title: "Move asset with sibling authority",
+    plainAction: `Use owner-marker input ${discovery.selectedCandidate?.outpoint || ""} to authorize the asset strike and update power ${discovery.acceptedStrike?.powerBefore ?? ""} -> ${discovery.acceptedStrike?.powerAfter ?? ""}.`,
+    userChecks: [
+      `Required owner covenant id: ${discovery.requiredSibling?.covenantId || ""}`,
+      `Required sibling input index: ${discovery.requiredSibling?.witnessInput ?? ""}`,
+      `Selected sibling outpoint: ${discovery.selectedCandidate?.outpoint || ""}`,
+      `Asset input covenant id: ${discovery.assetInput?.covenantId || ""}`,
+      `Accepted strike txid: ${discovery.acceptedStrike?.txid || ""}`
+    ],
+    technicalChecks: {
+      requiredSibling: discovery.requiredSibling || {},
+      selectedCandidate: discovery.selectedCandidate || {},
+      assetInput: discovery.assetInput || {},
+      acceptedStrike: discovery.acceptedStrike || {}
+    },
+    refusalPrompts: (discovery.localRejectCoverage || []).map((item) => ({
+      id: item.name,
+      recommendedWalletDecision: "reject",
+      evidenceClass: "LOCAL_SCRIPT_ENGINE_REJECT",
+      reason: item.name.replaceAll("_", " "),
+      got: item.got,
+      expected: item.expected
+    })),
+    boundaries: discovery.boundaries || []
+  };
+}
+
+function buildMuxWorkerSummary(liveFlow, challenge) {
+  const acceptedFlow = Array.isArray(liveFlow.acceptedFlow) ? liveFlow.acceptedFlow : [];
+  const route = acceptedFlow.find((item) => item.step === "route-to-worker-a") || {};
+  const workerReturn = acceptedFlow.find((item) => item.step === "worker-a-return-to-mux") || {};
+  const timeout = acceptedFlow.find((item) => item.step === "worker-a-timeout-to-mux") || {};
+  const workerBReturn = acceptedFlow.find((item) => item.step === "worker-b-return-to-mux") || {};
+  const challengeRows = Array.isArray(challenge.rows) ? challenge.rows : [];
+
+  return {
+    id: "mux-worker-route-timeout",
+    experiment: "mux-worker-proof",
+    evidenceClass: "TN12_ACCEPTED_SCRIPT_ENFORCED_WITH_LOCAL_REJECTS",
+    recommendedWalletDecision: "approve-if-user-initiated",
+    title: "Route mux state to worker and return",
+    plainAction: `Route the covenant family through worker templates and return to mux; accepted values move ${route.state?.value ?? ""} -> ${workerReturn.state?.valueAfter ?? ""}, timeout returns ${timeout.state?.valueBefore ?? ""} -> ${timeout.state?.valueAfter ?? ""}, and Worker B returns ${workerBReturn.state?.valueBefore ?? ""} -> ${workerBReturn.state?.valueAfter ?? ""}.`,
+    userChecks: [
+      `Covenant family id: ${liveFlow.contractFamily?.covenantId || challenge.contractFamily?.covenantId || ""}`,
+      `Mux template: ${liveFlow.contractFamily?.templates?.mux || challenge.contractFamily?.templates?.mux || ""}`,
+      `Worker A template: ${liveFlow.contractFamily?.templates?.a || challenge.contractFamily?.templates?.a || ""}`,
+      `Worker B template: ${liveFlow.contractFamily?.templates?.b || challenge.contractFamily?.templates?.b || ""}`,
+      `Accepted route txid: ${route.txid || ""}`,
+      `Accepted timeout txid: ${timeout.txid || ""}`
+    ],
+    technicalChecks: {
+      family: liveFlow.contractFamily || challenge.contractFamily || {},
+      normalWorkerReturn: {
+        txid: workerReturn.txid || "",
+        explorerUrl: workerReturn.explorerUrl || "",
+        state: workerReturn.state || {}
+      },
+      timeoutSettlement: {
+        txid: timeout.txid || "",
+        explorerUrl: timeout.explorerUrl || "",
+        state: timeout.state || {}
+      },
+      workerBSettlement: {
+        txid: workerBReturn.txid || "",
+        explorerUrl: workerBReturn.explorerUrl || "",
+        state: workerBReturn.state || {}
       }
+    },
+    refusalPrompts: challengeRows
+      .filter((row) => row.status === "blocked-local-engine-failed")
+      .map((row) => ({
+        id: row.id,
+        recommendedWalletDecision: "reject",
+        evidenceClass: "LOCAL_SCRIPT_ENGINE_REJECT",
+        reason: row.rule,
+        result: row.result
+      })),
+    boundaries: [
+      "This is a wallet-readable summary for a TN12/testnet mux-worker primitive.",
+      "It does not prove full game rules or production settlement.",
+      "Local challenge rows are script-engine evidence, not broadcast-rejected TN12 invalid transactions."
     ]
   };
 }
