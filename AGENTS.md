@@ -34,6 +34,7 @@
 - Explain the action before the abstraction. Say "funds can only leave after a delay" before "covenant policy."
 - Use the industry term only when it helps, then translate it into the real thing someone is testing, buying, building, approving, measuring, or trying to avoid. For TN12, say "budget that cannot drain at once," "asset that needs its controller," "wallet shows what rule is being approved," or "bad spend blocked locally" before terms like covenant, replay, reducer, mux, ICC, or planner.
 - Keep writing concrete and necessary. Avoid repeated "not X but Y" frames, "if this then that" filler, and polished LLM cadence words such as "seamless," "robust," "unlock," "empower," "transform," or "game-changing."
+- Do not use rhetorical contrast patterns unless quoting source text: `not X but Y`, `not just X but Y`, `not only X but also Y`, `more than X`, `isn't merely X`, `goes beyond X`, or `rather than X, Y`. Rewrite matches as direct positive sentences.
 - Avoid corporate abstraction unless the sentence cashes it out. Do not leave terms like "institutional readiness," "ecosystem maturity," "enterprise adoption," "strategic," or "platform unlock" standing alone. Name the actor and requirement: an exchange needs node stability, wallet integration, liquidity, legal review, and support; a payments company needs payment APIs, refunds, accounting, uptime, and support; builders need docs, SDKs, indexers, and working examples.
 - Avoid clever authority voice: no dramatic adjective piles, faux-bold certainty, invented slogans, or lines that sound written to impress the writer rather than help the builder.
 - Do not write cringey internal-process language in public copy or durable notes. Avoid vague words like "framing pass," "status theater," "polish pass," "move the narrative," and "unlock." Say the concrete task: shorten the page, link the card, move details to docs, show the command prereqs, or explain the app path.
@@ -71,6 +72,7 @@
 
 ## Validation
 
+- Run `npm run lint:copy` before finalizing prose changes. If it fails, rewrite the flagged copy and run it again.
 - Run `node scripts/check.mjs` after edits.
 - Understand the invariant before changing code. For TN12 work, name what must remain true about funds, scripts, accepted txids, app receipts, replay rows, wallet policy, and public status before editing the implementation.
 - Prefer correctness over cleverness. A smaller explicit state transition, guard, artifact shape, or check is better than a clever abstraction that hides spend rules or evidence classes.

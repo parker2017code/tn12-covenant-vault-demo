@@ -122,7 +122,7 @@ This is an internal working note for product cleanup. Keep the public site focus
    - Explorer verification required before app state promotion.
    - `playground:funding-draft` funds fresh role wallets from a separate source wallet/outpoint; it does not spend from the new role wallets.
 5. Keep public pages minimal by default. Long operator commands, artifact inventories, old planning notes, and generated matrices belong in docs/lab drawers.
-6. Run the public framing pass: money-first, covenants as constrained spend rules, based apps as app state anchored to Kaspa evidence, and vProgs as later architecture rather than the default product claim.
+6. Run the public framing pass: money-first, covenants as constrained spend rules, based apps as app state anchored to Kaspa evidence, and vProgs as later architecture.
 7. Treat web production basics as release blockers for public UI work: favicon/touch/manifest/social preview, mobile/desktop render, long-token overflow, local preview HTTP 200, and green UI smoke.
 8. Then split large code surfaces: `app.js`, `styles.css`, `scripts/check.mjs`, and package script groups.
 

@@ -21,7 +21,7 @@ Keep these files current:
 
 ## Archive Policy
 
-Archive rather than delete when a file is useful history but not current truth.
+Archive useful history that no longer represents current truth.
 
 Archive candidates:
 

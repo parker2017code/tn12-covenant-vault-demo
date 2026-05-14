@@ -231,7 +231,8 @@
     "covenant:recurring-vault-live-spend-evidence": "node scripts/fetch-recurring-treasury-vault-live-spend-evidence.mjs",
     "covenant:recurring-vault-continuation": "node scripts/fetch-recurring-treasury-vault-continuation-outpoint.mjs",
     "covenant:recurring-vault-cumulative-cap": "node scripts/build-recurring-treasury-vault-cumulative-cap-proof.mjs",
-    "covenant:heist-evidence": "node scripts/build-covenant-heist-evidence.mjs"
+    "covenant:heist-evidence": "node scripts/build-covenant-heist-evidence.mjs",
+    "lint:copy": "node scripts/lint-copy.mjs"
   },
   "dependencies": {
     "blakejs": "1.2.1",

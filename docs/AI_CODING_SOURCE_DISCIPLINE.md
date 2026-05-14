@@ -23,7 +23,7 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 - Prefer executable proof over verbal confidence. Add or update scripts and checks when a new lane matters.
 - Explore, plan, code, verify. For large work, name the file set and gates before editing; for small work, still inspect nearby patterns first.
 - Use one coherent review unit per commit: fixture, builder, generated artifact, docs, and check assertions should move together when they represent one lane.
-- Treat public company and open-source agent practices as evidence only when they are public. Internal/private company practices may exist but should be recorded as unknown rather than invented.
+- Treat public company and open-source agent practices as evidence only when they are public. Internal/private company practices may exist and should be recorded as unknown unless public evidence exists.
 - For state transitions and external IO, observability is part of the feature: output txids, endpoints, network IDs, payload hashes, rollback status, and review states where relevant.
 - When asked to continue, keep moving through the repo queue until the user says stop/pause or a real blocker needs input. Do not spend turns asking whether to proceed after each small step.
 - Treat code quality as behavior plus checks, not prose quality. A good feature has an input/event source, state transition, user/operator review surface, validation gate, and a handoff note.
@@ -73,7 +73,7 @@ Repo rule: before extending a pattern, inspect the adjacent artifact shape and t
 ## Kaspa Daily Q&A Guardrails
 
 - Base of Liquidity is narrative framing. Adoption strategy still needs concrete apps, repeat usage, liquidity, and visible on-chain activity.
-- Generic merchant/POS payments are rails rather than the main 2026 adoption vector. Keep invoice, payload, receipt, and wallet work because those are necessary rails, not because speed alone creates adoption.
+- Generic merchant/POS payments are rails. They are not the main 2026 adoption vector. Keep invoice, payload, receipt, and wallet work because those are necessary rails, not because speed alone creates adoption.
 - Coordination markets deserve higher priority because they are the founder-highlighted product category. Current repo status: transparent planner and proof-backed prototype slices; Staghunt/Hashdag production infrastructure still needs custody, privacy, solver, settlement, and wallet rails.
 - Narrative has to connect to products and visible on-chain activity. Broad marketing copy without usable artifacts should be down-ranked.
 - Keep the Kaspa app strategy L1-first. Do not default to EVM compatibility or external L2 migration unless a source and artifact make that dependency explicit.

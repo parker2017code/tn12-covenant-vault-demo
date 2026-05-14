@@ -40,7 +40,7 @@ The initial implementation path has moved beyond local construction: the repo no
 
 Snapshot date: 2026-05-08.
 
-- The recent `rusty-kaspa` Toccata engine-flag work makes script construction fork-aware on the `toccata` branch. For post-activation Toccata script construction, builders may need an explicit post-activation flag path such as `ScriptBuilder::with_flags` rather than assuming the default builder emits post-activation-compatible scripts.
+- The recent `rusty-kaspa` Toccata engine-flag work makes script construction fork-aware on the `toccata` branch. For post-activation Toccata script construction, builders may need an explicit post-activation flag path such as `ScriptBuilder::with_flags` instead of assuming the default builder emits post-activation-compatible scripts.
 - That fork-aware change was not merged to the `tn12` branch in the discussion snapshot. Treat TN12 as the post-activation-engine test surface, but do not assume the same default builder/API behavior when moving examples between `tn12`, `toccata`, and future master.
 - WASM exposure can lag Rust APIs. If a Rust API exists for fork-aware script construction but is not exposed through WASM yet, JavaScript examples should stay TN12-specific or carry a clear tooling caveat.
 - The open DAA-score keyed UTXO-index pagination work is relevant to the durable indexer plan. If it lands, the likely sync shape is: subscribe to UTXO changes, capture the first response DAA score, buffer later subscription messages, paginate UTXOs up to that DAA score, drain buffered adds/removes, then continue from live subscription messages.

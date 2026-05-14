@@ -120,7 +120,7 @@ KASPA_WRPC_ENCODING=borsh
 KASPA_WASM_MODULE=/home/parker2017/...
 ```
 
-**Why:** Not a private key leak, but exposes public endpoint, encoding, and local absolute path. Not portable. Trains contributors to commit .env files.
+**Why:** This exposes a public endpoint, encoding, and local absolute path. It is not portable and trains contributors to commit .env files.
 
 **Fix:**
 - Rename to .env.tn12.example
