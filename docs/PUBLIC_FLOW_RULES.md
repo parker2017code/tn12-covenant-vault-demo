@@ -29,6 +29,7 @@ Show this first:
 - Avoid public notes about how the page should work.
 - Prefer "next path" over "missing path" when a lane is intentionally unfinished.
 - Prefer direct wording: "wallet signing is next" instead of "not production."
+- Fix exact visible defects first. One bad icon, arrow, label, spacing issue, or copy line is not permission to remove unrelated design, but it also is not a reason to hold back broader cleanup when the broader page genuinely needs it.
 - Use current Kaspa.org/docs pages for orientation, then use TN12 accepted txids, generated artifacts, KIPs, Rusty Kaspa source/tests, and release notes for proof or status changes.
 
 ## Visual Direction

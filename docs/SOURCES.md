@@ -14,6 +14,8 @@
 - Kaspa transaction payload guide: https://docs.kaspa.org/integrate/transaction-payload
 - Kaspa node guide: https://docs.kaspa.org/integrate/kaspa-node
 - Kaspa references: https://docs.kaspa.org/references
+- Kaspa Developer Platform docs: https://docs.kas.fyi/
+- Kaspa Developer Platform documentation index: https://docs.kas.fyi/llms.txt
 - Aspectron Kaspa WASM SDK RpcClient docs: https://kaspa.aspectron.org/docs/classes/RpcClient.html
 - Aspectron Kaspa transaction signing guide: https://kaspa-mdbook.aspectron.com/transactions/signing.html
 - KasSigner repository: https://github.com/InKasWeRust/KasSigner
@@ -53,6 +55,14 @@ The new official builder docs are useful to this repo in three ways:
 - Aspectron's `RpcClient` docs confirmed the current object-style constructor and request-style submit wrapper: `new RpcClient({ url, networkId })` and `submitTransaction({ transaction, allowOrphan })`.
 - Aspectron's signing guide confirmed the same submit wrapper after SDK signing. TN12-specific `computeBudget` behavior still had to be verified against Rusty Kaspa TN12 source/tests and the local TN12 WASM build.
 - KasSigner/KasSee is the best current public reference for this repo's missing user-wallet signing boundary: watch-only transaction construction, offline signing, PSKB/KSPT-style handoff, and accepted-state promotion after broadcast. It is not evidence that this repo has a live wallet connector.
+
+Kaspa Developer Platform (`docs.kas.fyi`) is useful as hosted API context:
+
+- Transaction acceptance data can batch-check txids for `isAccepted`, accepting block hash, and confirmation count. This is a practical second-source check for receipt and payout proof screens.
+- Block range endpoints by blue score or DAA score are useful for dashboard reads, replay windows, and explorer-style inspection. They do not replace a node/RPC path for production indexing.
+- Address transaction history, transaction output lookup, KRC20 metadata/market data, and node RPC proxy access can help prototypes and operator dashboards.
+- Data-type notes are worth preserving in code and docs: amounts are sompi strings, `1 KAS = 100000000` sompi, hashes are 64-character hex, Kaspa addresses use the `kaspa:` prefix, and timestamps are milliseconds.
+- API keys, rate limits, request units, pricing, and provider uptime are product dependencies. Use KDP as hosted infrastructure context, not protocol activation evidence or proof that this repo has production indexer readiness.
 
 ## Wallet Signing / Wallet-Submit References
 

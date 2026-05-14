@@ -43,6 +43,7 @@
 - Apply the writing bar across public pages and LLM-facing files. Every touched page, repo guide, source note, generated artifact, handoff note, and context file should be direct, sourced or status-labeled, necessary, and free of defensive throat-clearing.
 - Treat text as part of the product. UI labels, docs, fixtures, generated artifacts, LLM context, and handoff notes should be scanned with the same care as code: necessary, specific, clean, and defensible.
 - Treat user examples as class signals unless the user explicitly says one instance only. If the user points at one command, fake-clickable card, crowded mobile control, copy button, source link, or status label, audit the whole class of similar patterns.
+- Treat pinpoint feedback as exact-defect input first, not as rollback permission. If the user points at one malformed arrow, awkward label, spacing bug, typo, or confusing command, identify and repair that element before changing unrelated parts. This does not forbid broader improvement when the task is a broader cleanup or redesign; once the defect is fixed, keep improving the surface where it makes the proof path stronger.
 - For broad cleanup work, use read-only parallel agents for audits and research when available. Assign them search/review tasks, keep edits local to the main agent, and use their findings to avoid narrow one-off fixes.
 - Treat agent-written code as suspect around adjacent assumptions: check existing artifact shapes, field names, negative cases, and security-sensitive paths before extending a pattern.
 - Treat invoice, app-data, receipt, and wallet work as concrete proof paths, not as a generic merchant-payment adoption thesis. Current product framing should prioritize usable products, visible on-chain activity, coordination-market direction, and L1-first Kaspa primitives.
@@ -60,11 +61,12 @@
   - https://github.com/kaspanet/silverscript
   - https://github.com/kaspanet/vprogs
   - https://docs.kaspa.org/
+  - https://docs.kas.fyi/
   - https://kaspa.org/build
   - https://kaspa.org/developments/
   - https://medium.com/@michaelsuttonil/kaspa-covenants-toccata-hard-fork-outlook-a4d81a40900c
 - Use Kaspa Explained as internal framing discipline, not protocol authority.
-- Use current Kaspa.org/docs pages for orientation and source discovery. Use TN12 artifacts, Rusty Kaspa source/tests, KIPs, releases, and accepted txids before changing proof/live status.
+- Use current Kaspa.org/docs pages and `docs.kas.fyi` for orientation and source discovery. Use TN12 artifacts, Rusty Kaspa source/tests, KIPs, releases, and accepted txids before changing proof/live status. Treat `docs.kas.fyi` as hosted API infrastructure context, not protocol activation evidence.
 - Use public AI-agent guidance and open-source repo examples as operator input only. Private company practices may be unknown; do not invent them.
 
 ## Validation

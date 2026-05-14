@@ -68,6 +68,7 @@ npm run wallet:external-signer-research
 - Do not use mainnet keys.
 - Do not call local-signer output user-wallet evidence.
 - Treat user examples as a class signal unless explicitly scoped to one item. A command, card, source link, copy button, or status label complaint means check the whole similar surface.
+- Treat pinpoint feedback as exact-defect input first, not as rollback permission. A single bad arrow, label, spacing issue, typo, or command bug means identify and repair that element before changing unrelated parts. Broader cleanup can continue after the defect is fixed when it strengthens the proof path.
 - Positive app-state labels should say exactly what backs them: accepted TN12 evidence, local-key TN12 activity, planner/indexer replay, or research prototype.
 - Do not use public TN12 REST submit for payload receipts; it previously dropped payload bytes.
 - Keep docs proof-first. Avoid broad future-app prose unless it points to a concrete artifact.
