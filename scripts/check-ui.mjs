@@ -83,7 +83,7 @@ try {
   assert.match(resultsHtml, /id="knowledge-levels"/);
   assert.match(resultsHtml, /id="results-rails"/);
   assert.match(resultsHtml, /id="standards-adapters"/);
-  assert.match(resultsHtml, /Adapter ideas stay outside the proof story/);
+  assert.match(resultsHtml, /Adapter ideas are sketches/);
   assert.match(resultsHtml, /Show adapter ideas/);
   assert.match(resultsHtml, /Start with what happened/);
   assert.match(resultsHtml, /Money movement/);
@@ -247,13 +247,13 @@ async function checkRenderedPages(url) {
     assert.equal(await page.locator("#product-map .product-group").count(), 3);
     assert.equal(await page.locator("#product-map .product-group a").count(), 10);
     const productMapText = await page.locator("#product-map").innerText();
-    assert.match(productMapText, /Pick one lane/);
-    assert.match(productMapText, /Proof products/i);
-    assert.match(productMapText, /Product ideas/i);
+    assert.match(productMapText, /Pick one task/);
+    assert.match(productMapText, /Accepted examples/i);
+    assert.match(productMapText, /Unfinished builds/i);
     assert.match(productMapText, /Mainnet blockers/i);
     assert.match(productMapText, /Accepted proof txids/);
     assert.match(productMapText, /Wallet handoff/);
-    assert.match(productMapText, /Settlement and app lanes/);
+    assert.match(productMapText, /Settlement and app examples/);
     const runbookText = await page.locator("#runbook").innerText();
     assert.match(runbookText, /Run it yourself/);
     assert.match(runbookText, /Replay before believing it/);

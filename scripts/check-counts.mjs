@@ -58,7 +58,7 @@ const requiredSnippets = [
     [
       `${expectedPayloadEvents}</strong>`,
       "Testnet transactions landed. The repo replays them.",
-      "Counts with meanings"
+      "Counts need evidence labels"
     ]
   ],
   ["docs/PROGRESS.md", progress, [[`${expectedPayloadEvents} accepted payload events`, `${expectedPayloadEvents} payload events accepted`]]],

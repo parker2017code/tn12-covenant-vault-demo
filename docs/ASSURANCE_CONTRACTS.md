@@ -44,7 +44,7 @@ The current dry-run transaction planner uses the first shape as an explicit boun
 
 ### 3. Silverscript Template
 
-Silverscript is the right next tool. It is experimental and TN12-only, but it is meant to make covenant scripts readable and LLM-friendly.
+Silverscript is the right next tool. It is experimental and TN12-only. It is meant to make covenant scripts readable and LLM-friendly.
 
 Relevant example patterns from `kaspanet/silverscript`:
 

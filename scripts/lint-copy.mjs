@@ -48,6 +48,14 @@ const rules = [
     pattern: /\bnot\s+(?:just|only|merely|simply)?\s*[^.!?\n]{1,120}\s+but\s+(?:also\s+)?[^.!?\n]{1,120}/gi,
   },
   {
+    name: "does-not-reframe-but",
+    pattern: /\b(?:does|do|did)\s+not\s+[^.!?\n]{1,120}\s+but\s+[^.!?\n]{1,120}/gi,
+  },
+  {
+    name: "comma-but-reframe",
+    pattern: /\b(?:this|that|it|they|we|the\s+(?:goal|point|question|claim|site|page|demo|repo|product|value|story))\s+(?:is|are|was|were)\s+[^.!?\n]{1,80},\s+but\s+[^.!?\n]{1,120}/gi,
+  },
+  {
     name: "more-than-reframe",
     pattern: /\bmore\s+than\s+[^.!?\n]{1,120}/gi,
   },
@@ -94,6 +102,7 @@ function checkFile(fullPath, relativePath) {
   for (const rule of rules) {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
+      if (isCodePropertyLine(line, rule.name)) continue;
       rule.pattern.lastIndex = 0;
       const match = rule.pattern.exec(line);
 
@@ -107,6 +116,11 @@ function checkFile(fullPath, relativePath) {
       }
     }
   }
+}
+
+function isCodePropertyLine(line, ruleName) {
+  if (ruleName !== "empty-marketing-verb") return false;
+  return /\b(?:text-)?transform\s*:/.test(line) || /\btransition\s*:[^;]*\btransform\b/.test(line);
 }
 
 walk(root);

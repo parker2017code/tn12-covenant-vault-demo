@@ -69,7 +69,7 @@ These are the shortest path to real user-facing apps because they reuse accepted
 
 ## Research But Keep In Pipeline
 
-These should stay documented and visible because they are high-impact elsewhere, but they should not be presented as ready:
+These should stay documented and visible because they are high-impact elsewhere. They should not be presented as ready:
 
 - DEX/AMM and swap routing;
 - lending and collateralized borrowing;

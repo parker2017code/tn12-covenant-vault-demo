@@ -2,7 +2,7 @@
 
 Reviewed: 2026-05-12
 
-This repo is a TN12 proof/app-state lab. Keep the public story simple: what is accepted, what is replayed, what is still blocked.
+This repo is a TN12 proof/app-state lab. Keep public pages simple: what is accepted, what is replayed, and what is still blocked.
 
 ## Done
 
