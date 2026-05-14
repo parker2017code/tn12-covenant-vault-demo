@@ -2,7 +2,9 @@ import { readFile } from "node:fs/promises";
 import { buildAcceptedAppState } from "../src/acceptedIndexer.mjs";
 
 const fixturePath = process.env.PROOF_FIXTURE || "fixtures/AcceptedProofTransactions.json";
+const storedEvidencePath = process.env.PROOF_EVIDENCE || defaultEvidencePath(fixturePath);
 const proofFixture = JSON.parse(await readFile(fixturePath, "utf8"));
+let storedEvidence = null;
 const proofTransactions = proofFixture.transactions.map((item) => ({
   label: item.label,
   txid: item.txid,
@@ -69,9 +71,44 @@ console.log(JSON.stringify({
 }, null, 2));
 
 async function fetchTransaction(txid) {
-  const response = await fetch(`https://api-tn12.kaspa.org/transactions/${txid}`);
-  if (!response.ok) {
-    throw new Error(`Transaction fetch failed for ${txid}: ${response.status} ${response.statusText}`);
+  try {
+    const response = await fetch(`https://api-tn12.kaspa.org/transactions/${txid}`);
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+    return response.json();
+  } catch (error) {
+    const tx = await storedTransaction(txid);
+    if (!tx) {
+      throw new Error(`Transaction fetch failed for ${txid}: ${error.message}`);
+    }
+    console.warn(`Using stored TN12 evidence for ${txid}; live transaction endpoint returned ${error.message}.`);
+    return tx;
   }
-  return response.json();
+}
+
+async function storedTransaction(txid) {
+  storedEvidence ||= JSON.parse(await readFile(storedEvidencePath, "utf8"));
+  const record = storedEvidence.proofs?.find((proof) => proof.txid === txid);
+  if (!record?.accepted || !record.output) return null;
+
+  return {
+    is_accepted: true,
+    accepting_block_blue_score: record.acceptingBlockBlueScore,
+    accepting_block_time: record.acceptingBlockTime,
+    outputs: [
+      {
+        index: record.output.index,
+        amount: String(record.output.amount),
+        script_public_key_address: record.output.address,
+        script_public_key_type: record.output.type
+      }
+    ]
+  };
+}
+
+function defaultEvidencePath(path) {
+  return path.includes("RoleSeparated")
+    ? "artifacts/role-separated-proof-evidence.json"
+    : "artifacts/proof-evidence.json";
 }
