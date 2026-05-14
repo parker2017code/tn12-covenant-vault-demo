@@ -148,7 +148,7 @@ Avoid these labels:
 - ICC uses sibling authority instead of nested execution. Let sibling inputs prove that another covenant or script authorized the transaction.
 - Challenge/timeout paths beat expensive global scans. Let one party make a claim, give the other party a bounded challenge path, and use timeouts for liveness.
 - Negative cases make examples serious: wrong signer, wrong destination, over cap, missing continuation, stale window, and missing sibling input.
-- UX abstraction is now part of the technical work. A useful covenant demo should produce a wallet-readable approval summary and eventually a visible review card, not only a JSON artifact for reviewers.
+- UX abstraction is now part of the technical work. A useful covenant demo should produce a wallet-readable approval summary, a visible review card, and reviewer JSON.
 - ICC examples need sibling discovery. A sibling-authorized asset path is incomplete for users until the repo can explain which sibling input is required and how it was found.
 - `artifacts/sibling-input-discovery.json` is the first asset discovery artifact. Use it as the shape future ICC examples should satisfy: required covenant id, witness input, selected sibling outpoint, accepted strike, and local reject coverage.
 - Replay-derived lanes need independent verification. Scheduler evidence is useful as accepted receipts plus deterministic replay, but do not imply protocol scheduling unless the spend path or a later proof system enforces it.

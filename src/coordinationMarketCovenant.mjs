@@ -87,7 +87,7 @@ function buildGameRules(gameType) {
         "contribute-low-contribute-high": { A: 4000000000n, B: 1000000000n },
         "contribute-low-contribute-low": { A: 2000000000n, B: 2000000000n }
       },
-      description: "Both contribute high = best; free-rider gets more than contributor"
+      description: "Both contribute high = best; free-rider gets larger payoff than contributor"
     }
   };
 

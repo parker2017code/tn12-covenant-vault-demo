@@ -11,8 +11,8 @@ the per-contract enforcement map and the active deeper-contract rail.
 
 ## External Baseline
 
-Covenants usually mean transaction rules that restrict how a coin can be spent,
-not only who can sign. Common features:
+Covenants usually mean transaction rules that restrict how a coin can be spent.
+Signature authority is one part of that rule set. Common features:
 
 - fixed destination or destination whitelist,
 - fixed amount, fee, or template shape,

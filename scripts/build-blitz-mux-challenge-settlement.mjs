@@ -56,7 +56,7 @@ const artifact = {
   plainPoint: "A routed turn can finish normally or settle by timeout if the worker path stalls.",
   technicalPoint: "The mux routes state to a worker template; the worker either applies a valid update or a timeout branch returns state to the mux after the sequence threshold.",
   kaspaEdge: "Fast UTXO flow makes a two-transaction route and a later timeout escape usable as a live workflow.",
-  cryptoPoint: "The state transition is constrained by output rules and covenant family id rather than a private game server deciding the winner.",
+  cryptoPoint: "Output rules and covenant family id constrain the state transition. A private game server cannot decide the winner by itself.",
   realWorldImplication: "The same pattern applies to games, dispute windows, staged approvals, service jobs, auctions, and workflows where a selected role must either act or time out.",
   rows,
   proves: [

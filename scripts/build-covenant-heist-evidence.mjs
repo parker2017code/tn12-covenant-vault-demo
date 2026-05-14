@@ -19,7 +19,7 @@ const rows = [
     rule: candidateRows["wrong-owner-signature"]?.expectedFailure || "checkSig(ownerSig, owner)",
     evidence: "artifacts/recurring-treasury-vault-owner-sig-proof.json:over_cap_owner_sig_fails",
     attack: "Spend with a signature that is not from the owner role.",
-    point: "The vault rule starts with authority, not just amount math."
+    point: "The vault rule starts with authority before amount math."
   },
   {
     id: "wrong-destination",
@@ -46,7 +46,7 @@ const rows = [
     rule: "prevState.spent + amount <= cap",
     evidence: cumulative.blockedCandidate?.artifact,
     attack: "Make a third spend that pushes the window from 65 tKAS to 80 tKAS against a 75 tKAS cap.",
-    point: "The cap is cumulative across continuation state, not just a per-transaction ceiling."
+    point: "The cap is cumulative across continuation state, so one spend ceiling is insufficient."
   },
   ...reset.negativeCases.map((item) => ({
     id: item.id,
@@ -66,11 +66,11 @@ const artifact = {
   status: rows.every((row) => row.status === "blocked-local-engine-failed")
     ? "accepted-vault-rail-with-local-heist-rejects"
     : "heist-evidence-needs-review",
-  plainPoint: "The useful vault story is not only that good spends work. It is that obvious theft paths fail.",
+  plainPoint: "The useful vault story has two parts: good spends work, and obvious theft paths fail.",
   technicalPoint: "Accepted TN12 recurring-vault spends establish the live rail; local SilverScript and full owner-signature harnesses reject wrong authority, wrong output shape, missing continuation, cap overflow, and bad reset windows.",
   kaspaEdge: "Fast TN12 feedback makes attack/defense review practical: a reviewer can inspect accepted spends and local refusal evidence as one short loop.",
   cryptoPoint: "A normal server can say no to a withdrawal, but this demo shows the spend rule itself refusing invalid transaction shapes before money moves.",
-  realWorldImplication: "Family vaults, team treasuries, game banks, escrow systems, and allowance wallets need explainable refusal paths, not only successful happy paths.",
+  realWorldImplication: "Family vaults, team treasuries, game banks, escrow systems, and allowance wallets need explainable refusal paths alongside successful happy paths.",
   acceptedBackbone: {
     cumulativeSpendTxids: cumulative.acceptedSpends.map((item) => item.txid),
     resetTxid: reset.accepted.resetTxid,
@@ -109,13 +109,13 @@ function localBlocked(testCase) {
 function resetAttack(id) {
   if (id === "early-reset") return "Reset the window before the required lock time.";
   if (id === "stale-reset-window") return "Claim reset but keep the old window state.";
-  if (id === "over-cap-reset") return "Reset and immediately spend more than the cap.";
+  if (id === "over-cap-reset") return "Reset and immediately spend above the cap.";
   return "Mutate the reset path.";
 }
 
 function resetPoint(id) {
   if (id === "early-reset") return "Time rules matter; a reset cannot be pulled forward by the UI.";
-  if (id === "stale-reset-window") return "The continuation state has to advance, not merely look like a reset.";
+  if (id === "stale-reset-window") return "The continuation state has to advance; a reset-looking output is insufficient.";
   if (id === "over-cap-reset") return "A new window does not remove the cap.";
   return "Reset paths need the same negative discipline as spend paths.";
 }

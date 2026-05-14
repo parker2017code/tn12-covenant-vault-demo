@@ -63,7 +63,7 @@ const summary = {
     "Release and refund paths are mutually exclusive for the same pledge outputs.",
     releaseAccepted
       ? "The release path is accepted; refund drafts are non-selected alternates for the spent pledge outputs."
-      : "Do not submit more than one mutually exclusive settlement path.",
+      : "Submit only one mutually exclusive settlement path.",
     "Generated pledge private keys stay in .local and are testnet-only."
   ],
   next: releaseAccepted

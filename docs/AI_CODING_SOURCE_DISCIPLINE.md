@@ -44,7 +44,7 @@ LLMs are useful for fast synthesis, code navigation, boilerplate, state-machine 
 
 ## AI / Agent Coding Failure Modes
 
-Current research does not just say "LLMs hallucinate." The repo should assume these concrete failure classes:
+Current research points to concrete agent failure classes this repo should assume:
 
 - Premise inheritance: agents keep extending nearby code even when the nearby code carries a bad assumption.
 - Missing corner cases: happy-path rows pass while duplicate txids, absent payloads, stale signals, wrong networks, rollbacks, or spent-output conflicts are uncovered.
@@ -77,7 +77,7 @@ Repo rule: before extending a pattern, inspect the adjacent artifact shape and t
 - Coordination markets deserve higher priority because they are the founder-highlighted product category. Current repo status: transparent planner and proof-backed prototype slices; Staghunt/Hashdag production infrastructure still needs custody, privacy, solver, settlement, and wallet rails.
 - Narrative has to connect to products and visible on-chain activity. Broad marketing copy without usable artifacts should be down-ranked.
 - Keep the Kaspa app strategy L1-first. Do not default to EVM compatibility or external L2 migration unless a source and artifact make that dependency explicit.
-- Real adoption analysis should look for repeat usage, useful app activity, liquidity, durable builders, and clear on-chain metrics, not just price, campaign traffic, raw mints, or demos.
+- Real adoption analysis should look for repeat usage, useful app activity, liquidity, durable builders, and clear on-chain metrics. Price, campaign traffic, raw mints, and demos are weak signals by themselves.
 - Universal scheduler, netsplit resistance, 100 BPS, native DAS via RTD, and semi-based models are research/watch items unless current primary sources and code say otherwise.
 
 ## What To Audit
