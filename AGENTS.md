@@ -8,6 +8,22 @@
 - Mainnet wording stays narrow: live Kaspa is PoW/blockDAG/UTXO/GHOSTDAG/Crescendo. Toccata, TN12, vProgs, native DeFi, and cross-app atomic composition stay in their own lanes.
 - Prefer simple browser-native code until a real Kaspa/Silverscript integration requires a build system.
 
+## Codex Operating Spine
+
+- Codex is the primary agent for this repo. Use `AGENTS.md`, `MEMORY.md`, `CONTEXT.md`, and the listed docs as the durable instruction source.
+- Claude Code is secondary future compatibility. `CLAUDE.md` should import this file instead of carrying a separate rule set.
+- Start substantive work by checking `git status --short`, reading `MEMORY.md`, and identifying the exact proof, artifact, wallet, indexer, UI, or documentation invariant before editing.
+- `.local/` contains live testnet private keys. Do not read it aloud, commit it, or include its content in any artifact or response.
+- Never use `--submit` unless the user explicitly asks to submit a transaction. Dry-run first by default.
+- Make the smallest coherent patch. Do not rewrite unrelated files, change public API shapes, or add dependencies without explicit approval.
+- Preserve existing proof evidence and artifact semantics unless the user explicitly asks for a migration.
+- Do not change lockfiles, package managers, auth, signing, `.local/`, submit paths, or GitHub Pages settings without calling it out before the edit.
+- For risky or broad changes, write a short plan before implementation. For narrow defect fixes, inspect first and patch directly.
+- After edits, report changed files, commands run, verification result, commit hash, push target, and any remaining risk.
+- If a check fails, report the exact command and failure. Fix only failures related to the current task unless the user expands scope.
+- For UI/layout changes, verify desktop and mobile behavior with rendered checks or screenshots when possible, and check long txids, artifact names, command blocks, source titles, and tables for overflow.
+- Before committing, run the cheap gate for the touched surface. Before pushing proof/status changes, run the relevant full gate listed below.
+
 ## General Agent Autonomy
 
 - Work end to end: inspect, install routine tooling when needed, change, verify, and report the result.
